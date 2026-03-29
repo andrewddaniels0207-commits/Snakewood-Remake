@@ -1,0 +1,6 @@
+script MyTestScript {
+    lock
+    faceplayer
+    msgbox("It works!")
+    release
+}
