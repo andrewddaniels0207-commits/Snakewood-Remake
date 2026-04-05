@@ -1,0 +1,324 @@
+// Oldale Town map scripts
+// Snakewood remake — placeholder text throughout
+
+mapscripts OldaleTown_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(Common_EventScript_SetupRivalGfxId)
+        setflag(FLAG_VISITED_OLDALE_TOWN)
+        if (!flag(FLAG_ADVENTURE_STARTED)) {
+            call(OldaleTown_EventScript_BlockWestEntrance)
+        }
+        if (!flag(FLAG_RECEIVED_POTION_OLDALE)) {
+            call(OldaleTown_EventScript_MoveMartEmployee)
+        }
+        if (flag(FLAG_ADVENTURE_STARTED)) {
+            call(OldaleTown_EventScript_SetOldaleState)
+        }
+    }
+}
+
+// Sets VAR_OLDALE_TOWN_STATE to 1 once the adventure has started
+script OldaleTown_EventScript_SetOldaleState {
+    setvar(VAR_OLDALE_TOWN_STATE, 1)
+    return
+}
+
+// Moves the Footprints Man to block the western path before adventure starts
+script OldaleTown_EventScript_BlockWestEntrance {
+    setobjectxyperm(LOCALID_FOOTPRINTS_MAN, 1, 11)
+    setobjectmovementtype(LOCALID_FOOTPRINTS_MAN, MOVEMENT_TYPE_FACE_LEFT)
+    return
+}
+
+// Moves the Mart Employee to his 'waiting outside' position
+script OldaleTown_EventScript_MoveMartEmployee {
+    setobjectxyperm(LOCALID_OLDALE_MART_EMPLOYEE, 13, 14)
+    setobjectmovementtype(LOCALID_OLDALE_MART_EMPLOYEE, MOVEMENT_TYPE_FACE_DOWN)
+    return
+}
+
+// ================================
+// Signs
+// ================================
+
+script OldaleTown_EventScript_TownSign {
+    msgbox("Placeholder: Oldale Town sign.")
+    end
+}
+
+// ================================
+// Girl NPC
+// ================================
+
+script OldaleTown_EventScript_Girl {
+    msgbox("Placeholder: Girl NPC dialogue.")
+    end
+}
+
+// ================================
+// Mart Employee
+// ================================
+
+script OldaleTown_EventScript_MartEmployee {
+    lock
+    faceplayer
+    if (flag(FLAG_RECEIVED_POTION_OLDALE) || flag(FLAG_TEMP_1)) {
+        msgbox("Placeholder: Potion explanation.")
+        release
+        end
+    }
+    setflag(FLAG_TEMP_1)
+    playbgm(MUS_FOLLOW_ME, FALSE)
+    msgbox("Placeholder: Mart employee intro dialogue.")
+    closemessage
+    switch (var(VAR_FACING)) {
+        case DIR_SOUTH: {
+            applymovement(LOCALID_OLDALE_MART_EMPLOYEE, OldaleTown_Movement_EmployeeSouth)
+            applymovement(LOCALID_PLAYER, OldaleTown_Movement_PlayerSouth)
+            waitmovement(0)
+        }
+        case DIR_NORTH: {
+            applymovement(LOCALID_OLDALE_MART_EMPLOYEE, OldaleTown_Movement_EmployeeNorth)
+            applymovement(LOCALID_PLAYER, OldaleTown_Movement_PlayerNorth)
+            waitmovement(0)
+        }
+        case DIR_EAST: {
+            applymovement(LOCALID_PLAYER, OldaleTown_Movement_PlayerEast)
+            applymovement(LOCALID_OLDALE_MART_EMPLOYEE, OldaleTown_Movement_EmployeeEast)
+            waitmovement(0)
+        }
+    }
+    msgbox("Placeholder: Pokemon Mart explanation.")
+    giveitem(ITEM_POTION)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(gText_TooBadBagIsFull)
+        fadedefaultbgm
+        release
+        end
+    }
+    msgbox("Placeholder: Potion explanation.")
+    setflag(FLAG_RECEIVED_POTION_OLDALE)
+    fadedefaultbgm
+    release
+    end
+}
+
+movement OldaleTown_Movement_EmployeeEast {
+    walk_up * 7
+    walk_in_place_faster_down
+}
+
+movement OldaleTown_Movement_EmployeeSouth {
+    walk_left
+    walk_up * 2
+    walk_right
+    walk_up * 5
+    walk_in_place_faster_down
+}
+
+movement OldaleTown_Movement_EmployeeNorth {
+    walk_up * 7
+    walk_in_place_faster_down
+}
+
+movement OldaleTown_Movement_PlayerEast {
+    walk_right
+    walk_up * 5
+}
+
+movement OldaleTown_Movement_PlayerSouth {
+    delay_16 * 4
+    walk_up * 5
+}
+
+movement OldaleTown_Movement_PlayerNorth {
+    walk_up * 7
+}
+
+// ================================
+// Footprints Man
+// ================================
+
+script OldaleTown_EventScript_FootprintsMan {
+    lock
+    faceplayer
+    if (flag(FLAG_ADVENTURE_STARTED)) {
+        msgbox("Placeholder: Finished sketching footprints.")
+        release
+        end
+    }
+    msgbox("Placeholder: Discovered rare Pokemon footprints!")
+    closemessage
+    applymovement(LOCALID_FOOTPRINTS_MAN, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+// Triggered by the coord event when player tries to walk west before adventure starts
+script OldaleTown_EventScript_BlockedPath {
+    lockall
+    applymovement(LOCALID_PLAYER, OldaleTown_Movement_PlayerStepBack)
+    applymovement(LOCALID_FOOTPRINTS_MAN, OldaleTown_Movement_BackUp)
+    waitmovement(0)
+    msgbox("Placeholder: Wait! Don't come in here!")
+    closemessage
+    applymovement(LOCALID_FOOTPRINTS_MAN, OldaleTown_Movement_ReturnToOriginalPosition)
+    waitmovement(0)
+    releaseall
+    end
+}
+
+movement OldaleTown_Movement_PlayerStepBack {
+    delay_8
+    walk_right
+}
+
+movement OldaleTown_Movement_BackUp {
+    walk_fast_up
+    walk_in_place_faster_left
+    lock_facing_direction
+    walk_right
+    unlock_facing_direction
+}
+
+movement OldaleTown_Movement_ReturnToOriginalPosition {
+    walk_down
+    walk_left
+}
+
+// ================================
+// Rival
+// ================================
+
+script OldaleTown_EventScript_Rival {
+    lockall
+    applymovement(LOCALID_OLDALE_RIVAL, Common_Movement_FacePlayer)
+    waitmovement(0)
+    setvar(VAR_0x8009, 0)
+    goto(OldaleTown_EventScript_ShowRivalMessage)
+    end
+}
+
+script OldaleTown_EventScript_RivalTrigger1 {
+    lockall
+    applymovement(LOCALID_OLDALE_RIVAL, OldaleTown_Movement_RivalApproachPlayer1)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    setvar(VAR_0x8009, 1)
+    goto(OldaleTown_EventScript_ShowRivalMessage)
+    end
+}
+
+script OldaleTown_EventScript_RivalTrigger2 {
+    lockall
+    applymovement(LOCALID_OLDALE_RIVAL, OldaleTown_Movement_RivalApproachPlayer2)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    setvar(VAR_0x8009, 1)
+    goto(OldaleTown_EventScript_ShowRivalMessage)
+    end
+}
+
+script OldaleTown_EventScript_RivalTrigger3 {
+    lockall
+    applymovement(LOCALID_OLDALE_RIVAL, OldaleTown_Movement_RivalApproachPlayer3)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    setvar(VAR_0x8009, 1)
+    goto(OldaleTown_EventScript_ShowRivalMessage)
+    end
+}
+
+script OldaleTown_EventScript_ShowRivalMessage {
+    checkplayergender
+    if (var(VAR_RESULT) == MALE) {
+        msgbox("Placeholder: Rival (May) dialogue.")
+    } else {
+        msgbox("Placeholder: Rival (Brendan) dialogue.")
+    }
+    goto(OldaleTown_EventScript_RivalFinish)
+    end
+}
+
+script OldaleTown_EventScript_RivalFinish {
+    closemessage
+    if (var(VAR_0x8009) == 0) {
+        call(OldaleTown_EventScript_DoExitMovement1)
+    }
+    if (var(VAR_0x8009) == 1) {
+        call(OldaleTown_EventScript_DoExitMovement2)
+    }
+    applymovement(LOCALID_OLDALE_RIVAL, OldaleTown_Movement_RivalExit)
+    waitmovement(0)
+    removeobject(LOCALID_OLDALE_RIVAL)
+    setvar(VAR_OLDALE_RIVAL_STATE, 2)
+    setflag(FLAG_HIDE_OLDALE_TOWN_RIVAL)
+    releaseall
+    end
+}
+
+script OldaleTown_EventScript_DoExitMovement1 {
+    if (var(VAR_FACING) != DIR_SOUTH) {
+        goto(OldaleTown_EventScript_DoExitMovement2)
+        end
+    }
+    applymovement(LOCALID_OLDALE_RIVAL, OldaleTown_Movement_RivalExit)
+    waitmovement(0)
+    return
+}
+
+script OldaleTown_EventScript_DoExitMovement2 {
+    applymovement(LOCALID_PLAYER, OldaleTown_Movement_WatchRivalExit)
+    applymovement(LOCALID_OLDALE_RIVAL, OldaleTown_Movement_RivalExit)
+    waitmovement(0)
+    return
+}
+
+movement OldaleTown_Movement_RivalApproachPlayer1 {
+    walk_left * 2
+}
+
+movement OldaleTown_Movement_RivalApproachPlayer2 {
+    walk_left
+}
+
+movement OldaleTown_Movement_RivalApproachPlayer3 {
+    face_left
+}
+
+movement OldaleTown_Movement_RivalExit {
+    walk_down * 6
+}
+
+movement OldaleTown_Movement_WatchRivalExit {
+    delay_8
+    delay_4
+    walk_in_place_faster_down
+}
+
+// ================================
+// Snakewood: Rival Alicia — Route 102 Blocker
+// ================================
+
+script OldaleTown_EventScript_RivalAlicia {
+    lock
+    faceplayer
+    if (!flag(FLAG_RECEIVED_BIRCH_EGG)) {
+        msgbox("Placeholder: You can't go that way yet!
+                Go get the egg from Birch on Route 103 first.")
+        release
+        end
+    }
+    trainerbattle_single(TRAINER_RIVAL_ALICIA_1,
+        "Placeholder: Alicia pre-battle dialogue.",
+        "Placeholder: Alicia defeat dialogue.")
+    setflag(FLAG_HIDE_OLDALE_RIVAL_ALICIA)
+    msgbox("Placeholder: Alicia post-battle dialogue.
+            Fine, you may pass.")
+    release
+    end
+}
