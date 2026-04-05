@@ -14,13 +14,11 @@ mapscripts OldaleTown_MapScripts {
     }
 }
 
-// Sets VAR_OLDALE_TOWN_STATE to 1 once the adventure has started
 script OldaleTown_EventScript_SetOldaleState {
     setvar(VAR_OLDALE_TOWN_STATE, 1)
     return
 }
 
-// Moves the Mart Employee to his 'waiting outside' position
 script OldaleTown_EventScript_MoveMartEmployee {
     setobjectxyperm(LOCALID_OLDALE_MART_EMPLOYEE, 13, 14)
     setobjectmovementtype(LOCALID_OLDALE_MART_EMPLOYEE, MOVEMENT_TYPE_FACE_DOWN)
@@ -127,69 +125,20 @@ movement OldaleTown_Movement_PlayerNorth {
 
 // ================================
 // Rival
+// Inlined to avoid cross-script goto (poryscript goto() is label-only)
 // ================================
 
 script OldaleTown_EventScript_Rival {
     lockall
     applymovement(LOCALID_OLDALE_RIVAL, Common_Movement_FacePlayer)
     waitmovement(0)
-    setvar(VAR_0x8009, 0)
-    goto(OldaleTown_EventScript_ShowRivalMessage)
-    end
-}
-
-script OldaleTown_EventScript_RivalTrigger1 {
-    lockall
-    applymovement(LOCALID_OLDALE_RIVAL, OldaleTown_Movement_RivalApproachPlayer1)
-    waitmovement(0)
-    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
-    waitmovement(0)
-    setvar(VAR_0x8009, 1)
-    goto(OldaleTown_EventScript_ShowRivalMessage)
-    end
-}
-
-script OldaleTown_EventScript_RivalTrigger2 {
-    lockall
-    applymovement(LOCALID_OLDALE_RIVAL, OldaleTown_Movement_RivalApproachPlayer2)
-    waitmovement(0)
-    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
-    waitmovement(0)
-    setvar(VAR_0x8009, 1)
-    goto(OldaleTown_EventScript_ShowRivalMessage)
-    end
-}
-
-script OldaleTown_EventScript_RivalTrigger3 {
-    lockall
-    applymovement(LOCALID_OLDALE_RIVAL, OldaleTown_Movement_RivalApproachPlayer3)
-    waitmovement(0)
-    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
-    waitmovement(0)
-    setvar(VAR_0x8009, 1)
-    goto(OldaleTown_EventScript_ShowRivalMessage)
-    end
-}
-
-script OldaleTown_EventScript_ShowRivalMessage {
     checkplayergender
     if (var(VAR_RESULT) == MALE) {
         msgbox("Placeholder: Rival (May) dialogue.")
     } else {
         msgbox("Placeholder: Rival (Brendan) dialogue.")
     }
-    goto(OldaleTown_EventScript_RivalFinish)
-    end
-}
-
-script OldaleTown_EventScript_RivalFinish {
     closemessage
-    if (var(VAR_0x8009) == 0) {
-        call(OldaleTown_EventScript_DoExitMovement1)
-    }
-    if (var(VAR_0x8009) == 1) {
-        call(OldaleTown_EventScript_DoExitMovement2)
-    }
     applymovement(LOCALID_OLDALE_RIVAL, OldaleTown_Movement_RivalExit)
     waitmovement(0)
     removeobject(LOCALID_OLDALE_RIVAL)
@@ -199,21 +148,73 @@ script OldaleTown_EventScript_RivalFinish {
     end
 }
 
-script OldaleTown_EventScript_DoExitMovement1 {
-    if (var(VAR_FACING) != DIR_SOUTH) {
-        goto(OldaleTown_EventScript_DoExitMovement2)
-        end
-    }
-    applymovement(LOCALID_OLDALE_RIVAL, OldaleTown_Movement_RivalExit)
+script OldaleTown_EventScript_RivalTrigger1 {
+    lockall
+    applymovement(LOCALID_OLDALE_RIVAL, OldaleTown_Movement_RivalApproachPlayer1)
     waitmovement(0)
-    return
-}
-
-script OldaleTown_EventScript_DoExitMovement2 {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    checkplayergender
+    if (var(VAR_RESULT) == MALE) {
+        msgbox("Placeholder: Rival (May) dialogue.")
+    } else {
+        msgbox("Placeholder: Rival (Brendan) dialogue.")
+    }
+    closemessage
     applymovement(LOCALID_PLAYER, OldaleTown_Movement_WatchRivalExit)
     applymovement(LOCALID_OLDALE_RIVAL, OldaleTown_Movement_RivalExit)
     waitmovement(0)
-    return
+    removeobject(LOCALID_OLDALE_RIVAL)
+    setvar(VAR_OLDALE_RIVAL_STATE, 2)
+    setflag(FLAG_HIDE_OLDALE_TOWN_RIVAL)
+    releaseall
+    end
+}
+
+script OldaleTown_EventScript_RivalTrigger2 {
+    lockall
+    applymovement(LOCALID_OLDALE_RIVAL, OldaleTown_Movement_RivalApproachPlayer2)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    checkplayergender
+    if (var(VAR_RESULT) == MALE) {
+        msgbox("Placeholder: Rival (May) dialogue.")
+    } else {
+        msgbox("Placeholder: Rival (Brendan) dialogue.")
+    }
+    closemessage
+    applymovement(LOCALID_PLAYER, OldaleTown_Movement_WatchRivalExit)
+    applymovement(LOCALID_OLDALE_RIVAL, OldaleTown_Movement_RivalExit)
+    waitmovement(0)
+    removeobject(LOCALID_OLDALE_RIVAL)
+    setvar(VAR_OLDALE_RIVAL_STATE, 2)
+    setflag(FLAG_HIDE_OLDALE_TOWN_RIVAL)
+    releaseall
+    end
+}
+
+script OldaleTown_EventScript_RivalTrigger3 {
+    lockall
+    applymovement(LOCALID_OLDALE_RIVAL, OldaleTown_Movement_RivalApproachPlayer3)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    checkplayergender
+    if (var(VAR_RESULT) == MALE) {
+        msgbox("Placeholder: Rival (May) dialogue.")
+    } else {
+        msgbox("Placeholder: Rival (Brendan) dialogue.")
+    }
+    closemessage
+    applymovement(LOCALID_PLAYER, OldaleTown_Movement_WatchRivalExit)
+    applymovement(LOCALID_OLDALE_RIVAL, OldaleTown_Movement_RivalExit)
+    waitmovement(0)
+    removeobject(LOCALID_OLDALE_RIVAL)
+    setvar(VAR_OLDALE_RIVAL_STATE, 2)
+    setflag(FLAG_HIDE_OLDALE_TOWN_RIVAL)
+    releaseall
+    end
 }
 
 movement OldaleTown_Movement_RivalApproachPlayer1 {
