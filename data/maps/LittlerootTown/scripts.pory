@@ -81,6 +81,19 @@ script LittlerootTown_EventScript_CantLeaveWithoutStarter {
     end
 }
 
+script LittlerootTown_EventScript_NeedPokemonTriggerRight {
+    lockall
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    msgbox("Something is moving out there\n"
+           "in the long grass.\p"
+           "I can hear it.\p"
+           "Going out there without a\n"
+           "POKéMON would be suicide.$")
+    releaseall
+    end
+}
+
 script LittlerootTown_EventScript_TownSign {
     msgbox("LITTLEROOT TOWN\n"
            "\qoA town that can't be shaded any hue.\qc\p"
