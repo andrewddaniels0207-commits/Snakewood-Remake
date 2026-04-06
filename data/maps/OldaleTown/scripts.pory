@@ -60,21 +60,18 @@ script OldaleTown_EventScript_MartEmployee {
     msgbox("Placeholder: Mart employee intro dialogue.")
     closemessage
     switch (var(VAR_FACING)) {
-        case DIR_SOUTH: {
+        case DIR_SOUTH:
             applymovement(LOCALID_OLDALE_MART_EMPLOYEE, OldaleTown_Movement_EmployeeSouth)
             applymovement(LOCALID_PLAYER, OldaleTown_Movement_PlayerSouth)
             waitmovement(0)
-        }
-        case DIR_NORTH: {
+        case DIR_NORTH:
             applymovement(LOCALID_OLDALE_MART_EMPLOYEE, OldaleTown_Movement_EmployeeNorth)
             applymovement(LOCALID_PLAYER, OldaleTown_Movement_PlayerNorth)
             waitmovement(0)
-        }
-        case DIR_EAST: {
+        case DIR_EAST:
             applymovement(LOCALID_PLAYER, OldaleTown_Movement_PlayerEast)
             applymovement(LOCALID_OLDALE_MART_EMPLOYEE, OldaleTown_Movement_EmployeeEast)
             waitmovement(0)
-        }
     }
     msgbox("Placeholder: Pokemon Mart explanation.")
     giveitem(ITEM_POTION)
