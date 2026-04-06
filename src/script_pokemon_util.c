@@ -29,10 +29,26 @@
 #include "constants/abilities.h"
 #include "constants/items.h"
 #include "constants/battle_frontier.h"
+#include "naming_screen.h"
 
 static void CB2_ReturnFromChooseHalfParty(void);
 static void CB2_ReturnFromChooseBattleFrontierParty(void);
 static void HealPlayerBoxes(void);
+
+static void NicknameFirstPartyMonCallback(void)
+{
+    SetMonData(&gPlayerParty[0], MON_DATA_NICKNAME, gStringVar3);
+    SetMainCallback2(CB2_ReturnToFieldContinueScript);
+}
+
+void NicknameFirstPartyMon(void)
+{
+    u16 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES);
+    u16 gender = GetMonData(&gPlayerParty[0], MON_DATA_OT_GENDER);
+    u32 personality = GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY);
+    GetMonData(&gPlayerParty[0], MON_DATA_NICKNAME, gStringVar3);
+    DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar3, species, gender, personality, NicknameFirstPartyMonCallback);
+}
 
 void HealPlayerParty(void)
 {

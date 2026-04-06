@@ -1,0 +1,115 @@
+mapscripts Route102_MapScripts {
+}
+
+script Route102_EventScript_LittleBoy {
+    msgbox(Route102_Text_ImNotVeryTall, MSGBOX_NPC)
+}
+
+script Route102_EventScript_RouteSignOldale {
+    msgbox(Route102_Text_RouteSignOldale, MSGBOX_SIGN)
+}
+
+script Route102_EventScript_RouteSignPetalburg {
+    msgbox(Route102_Text_RouteSignPetalburg, MSGBOX_SIGN)
+}
+
+script Route102_EventScript_Boy {
+    msgbox(Route102_Text_CatchWholeBunchOfPokemon, MSGBOX_NPC)
+}
+
+script Route102_EventScript_Calvin {
+    trainerbattle_single(TRAINER_CALVIN_1, Route102_Text_CalvinIntro, Route102_Text_CalvinDefeated, Route102_EventScript_CalvinRegisterMatchCallAfterBattle)
+    msgbox(Route102_Text_CalvinPostBattle, MSGBOX_DEFAULT)
+    release
+}
+
+script Route102_EventScript_CalvinRegisterMatchCallAfterBattle {
+    special(PlayerFaceTrainerAfterBattle)
+    waitmovement(0)
+    if (flag(FLAG_HAS_MATCH_CALL) == TRUE) {
+        goto(Route102_EventScript_CalvinRegisterMatchCall)
+    }
+    release
+}
+
+script Route102_EventScript_CalvinRegisterMatchCall {
+    msgbox(Route102_Text_CalvinRegisterShort, MSGBOX_DEFAULT)
+    register_matchcall(TRAINER_CALVIN_1)
+    release
+}
+
+script Route102_EventScript_CalvinTryRegister {
+    if (flag(FLAG_HAS_MATCH_CALL) == TRUE) {
+        goto(Route102_EventScript_CalvinRegister)
+    }
+    msgbox(Route102_Text_CalvinPostBattle, MSGBOX_DEFAULT)
+    release
+}
+
+script Route102_EventScript_CalvinRegister {
+    msgbox(Route102_Text_CalvinRegister, MSGBOX_DEFAULT)
+    register_matchcall(TRAINER_CALVIN_1)
+    release
+}
+
+script Route102_EventScript_CalvinRematch {
+    trainerbattle_rematch(TRAINER_CALVIN_1, Route102_Text_CalvinRematchIntro, Route102_Text_CalvinRematchDefeated)
+    msgbox(Route102_Text_CalvinRematchPostBattle, MSGBOX_AUTOCLOSE)
+}
+
+script Route102_EventScript_Rick {
+    trainerbattle_single(TRAINER_RICK, Route102_Text_RickIntro, Route102_Text_RickDefeated)
+    msgbox(Route102_Text_RickPostBattle, MSGBOX_AUTOCLOSE)
+}
+
+script Route102_EventScript_Tiana {
+    trainerbattle_single(TRAINER_TIANA, Route102_Text_TianaIntro, Route102_Text_TianaDefeated)
+    msgbox(Route102_Text_TianaPostBattle, MSGBOX_AUTOCLOSE)
+}
+
+script Route102_EventScript_Allen {
+    trainerbattle_single(TRAINER_ALLEN, Route102_Text_AllenIntro, Route102_Text_AllenDefeated)
+    msgbox(Route102_Text_AllenPostBattle, MSGBOX_AUTOCLOSE)
+}
+
+text Route102_Text_WatchMeCatchPokemon {
+    "WALLY: {PLAYER}…\n"
+    "POKéMON hide in tall grass like this,\l"
+    "don't they?\p"
+    "Please watch me and see if I can\n"
+    "catch one properly.\p"
+    "…Whoa!$"
+}
+
+text Route102_Text_WallyIDidIt {
+    "WALLY: I did it… It's my…\n"
+    "My POKéMON!$"
+}
+
+text Route102_Text_LetsGoBack {
+    "{PLAYER}, thank you!\n"
+    "Let's go back to the GYM!$"
+}
+
+text Route102_Text_ImNotVeryTall {
+    "I'm…not very tall, so I sink right\n"
+    "into tall grass.\p"
+    "The grass goes up my nose and…\n"
+    "Fwafwafwafwafwa…\p"
+    "Fwatchoo!$"
+}
+
+text Route102_Text_CatchWholeBunchOfPokemon {
+    "I'm going to catch a whole bunch of\n"
+    "POKéMON!$"
+}
+
+text Route102_Text_RouteSignOldale {
+    "ROUTE 102\n"
+    "{RIGHT_ARROW} OLDALE TOWN$"
+}
+
+text Route102_Text_RouteSignPetalburg {
+    "ROUTE 102\n"
+    "{LEFT_ARROW} PETALBURG CITY$"
+}

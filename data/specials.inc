@@ -16,6 +16,7 @@
 		.align 2
 gSpecials::
 	def_special HealPlayerParty
+    def_special NicknameFirstPartyMon
 	def_special SetCableClubWarp
 	def_special DoCableClubWarp
 	def_special ReturnFromLinkRoom
