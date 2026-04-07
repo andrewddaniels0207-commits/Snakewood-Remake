@@ -25,16 +25,13 @@ script Route101_EventScript_StartBirchRescue {
     playbgm(MUS_HELP, TRUE)
     msgbox("Placeholder: Birch crying for help.$")
     closemessage
-    setobjectxy(LOCALID_ROUTE101_BIRCH, 5, 14)
-    setobjectxy(LOCALID_ROUTE101_ZOMBIE, 6, 14)
     applymovement(LOCALID_PLAYER, Route101_Movement_EnterScene)
+    waitmovement(0)
     applymovement(LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunAway)
     applymovement(LOCALID_ROUTE101_ZOMBIE, Route101_Movement_ZombieChase)
     waitmovement(0)
     applymovement(LOCALID_ROUTE101_ZOMBIE, Route101_Movement_ZombieChaseInCircles)
     applymovement(LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunInCircles)
-    waitmovement(0)
-    applymovement(LOCALID_ROUTE101_BIRCH, Common_Movement_WalkInPlaceFasterRight)
     waitmovement(0)
     applymovement(LOCALID_ROUTE101_ZOMBIE, Route101_Movement_ZombieFaceBirch)
     applymovement(LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchFaceZombie)
@@ -128,89 +125,86 @@ script Route101_EventScript_ZombieTrainer {
 // ------------------------------------------------------------
 
 movement Route101_Movement_EnterScene {
-    walk_fast_up
-    walk_fast_up
-    walk_fast_up
-    walk_fast_up
+    walk_in_place_faster_up
     walk_in_place_faster_left
 }
 
+// Birch starts x=5,y=14 — runs right along the bottom of the map
 movement Route101_Movement_BirchRunAway {
     walk_fast_right
     walk_fast_right
     walk_fast_right
     walk_fast_right
-    walk_fast_up
+    walk_fast_down
+    walk_fast_left
+    walk_fast_left
+    walk_fast_left
+    walk_fast_left
     walk_fast_up
 }
 
+// Zombie starts x=6,y=14 — chases Birch right then circles
 movement Route101_Movement_ZombieChase {
-    walk_fast_up
     walk_fast_right
     walk_fast_right
     walk_fast_right
     walk_fast_right
+    walk_fast_down
+    walk_fast_left
+    walk_fast_left
+    walk_fast_left
+    walk_fast_left
     walk_fast_up
 }
 
+// Zombie circles Birch horizontally — stays in y=14–16
 movement Route101_Movement_ZombieChaseInCircles {
-    walk_fast_up
-    walk_fast_up
+    walk_fast_right
+    walk_fast_right
+    walk_fast_right
+    walk_fast_down
+    walk_fast_left
+    walk_fast_left
+    walk_fast_left
     walk_fast_up
     walk_fast_right
     walk_fast_right
     walk_fast_right
     walk_fast_down
-    walk_fast_down
     walk_fast_left
     walk_fast_left
     walk_fast_left
     walk_fast_up
-    walk_fast_up
-    walk_fast_right
-    walk_fast_right
-    walk_fast_right
-    walk_fast_down
-    walk_fast_down
-    walk_fast_left
-    walk_fast_left
 }
 
+// Birch circles away from zombie — stays in y=14–16
 movement Route101_Movement_BirchRunInCircles {
-    walk_fast_up
-    walk_fast_up
-    walk_fast_right
-    walk_fast_right
-    walk_fast_right
+    walk_fast_left
+    walk_fast_left
+    walk_fast_left
     walk_fast_down
-    walk_fast_down
-    walk_fast_left
-    walk_fast_left
-    walk_fast_left
+    walk_fast_right
+    walk_fast_right
+    walk_fast_right
     walk_fast_up
+    walk_fast_left
+    walk_fast_left
+    walk_fast_left
+    walk_fast_down
+    walk_fast_right
+    walk_fast_right
+    walk_fast_right
     walk_fast_up
-    walk_fast_right
-    walk_fast_right
-    walk_fast_right
-    walk_fast_down
-    walk_fast_down
-    walk_fast_left
-    walk_fast_left
-    walk_fast_left
 }
 
+// End position: Zombie faces left toward Birch
 movement Route101_Movement_ZombieFaceBirch {
-    walk_in_place_fast_left
-    walk_in_place_fast_left
-    walk_in_place_fast_left
-    walk_in_place_fast_left
+    walk_in_place_faster_left
 }
 
+// End position: Birch faces right toward Zombie
 movement Route101_Movement_BirchFaceZombie {
-    walk_in_place_fast_right
-    walk_in_place_fast_right
-    walk_in_place_fast_right
-    walk_in_place_fast_right
+    walk_in_place_faster_right
 }
 
 movement Route101_Movement_BirchApproachPlayer {
