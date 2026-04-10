@@ -73,13 +73,14 @@ script LittlerootTown_EventScript_CantLeaveWithoutStarter {
         end
     }
     lockall
-    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown)
-    waitmovement(0)
     msgbox("Something is moving out there\n"
            "in the long grass.\p"
            "I can hear it.\p"
            "Going out there without a\n"
            "POKéMON would be suicide.$")
+    closemessage
+    applymovement(LOCALID_PLAYER, LittlerootTown_Movement_PushBackSouth)
+    waitmovement(0)
     releaseall
     end
 }
@@ -89,15 +90,21 @@ script LittlerootTown_EventScript_NeedPokemonTriggerRight {
         end
     }
     lockall
-    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown)
-    waitmovement(0)
     msgbox("Something is moving out there\n"
            "in the long grass.\p"
            "I can hear it.\p"
            "Going out there without a\n"
            "POKéMON would be suicide.$")
+    closemessage
+    applymovement(LOCALID_PLAYER, LittlerootTown_Movement_PushBackSouth)
+    waitmovement(0)
     releaseall
     end
+}
+
+movement LittlerootTown_Movement_PushBackSouth {
+    walk_down
+    walk_down
 }
 
 script LittlerootTown_EventScript_TownSign {

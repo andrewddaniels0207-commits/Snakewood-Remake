@@ -102,15 +102,16 @@ script Route101_EventScript_ZombieTrainer {
     waitmovement(0)
     msgbox("Placeholder: Zombie trainer intro.$")
     closemessage
-    trainerbattle_single(TRAINER_MAY_ROUTE_103_TREECKO, "Placeholder: Zombie intro.$", "Placeholder: Zombie defeat text.$")
+    trainerbattle_single(TRAINER_ROUTE101_ZOMBIE, "Placeholder: Zombie intro.$", "Placeholder: Zombie defeat text.$")
+    msgbox("The Zombie crumbled to dust.$")
+    closemessage
+    setflag(FLAG_HIDE_ROUTE_101_ZIGZAGOON)
     applymovement(LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchApproachPlayer)
     waitmovement(0)
-    msgbox("Thx lets go to Oldale$")
+    msgbox("Placeholder: Birch thanks player and says let's go to Oldale.$")
     closemessage
     special(HealPlayerParty)
     setflag(FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE)
-    setflag(FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG)
-    setvar(VAR_BIRCH_LAB_STATE, 2)
     setvar(VAR_ROUTE101_STATE, 3)
     setvar(VAR_SNAKEWOOD_INTRO_STATE, 2)
     clearflag(FLAG_HIDE_MAP_NAME_POPUP)
