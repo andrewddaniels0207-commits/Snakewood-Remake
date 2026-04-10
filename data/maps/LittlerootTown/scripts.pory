@@ -11,6 +11,12 @@ script LittlerootTown_OnTransition {
     setflag(FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN)
     setflag(FLAG_HIDE_LITTLEROOT_TOWN_RIVAL)
     setflag(FLAG_HIDE_LITTLEROOT_TOWN_BIRCH)
+    checkplayergender
+    if (var(VAR_RESULT) == MALE) {
+        setrespawn(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F)
+    } else {
+        setrespawn(HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F)
+    }
     end
 }
 
