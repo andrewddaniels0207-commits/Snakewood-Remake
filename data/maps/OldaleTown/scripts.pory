@@ -270,8 +270,6 @@ script OldaleTown_EventScript_RivalAlicia {
 
 script OldaleTown_EventScript_Guard1 {
     lockall
-    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
-    waitmovement(0)
     msgbox("Placeholder: Guard 1 - You can't go south from here.$")
     closemessage
     applymovement(OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PushNorth)
@@ -282,8 +280,6 @@ script OldaleTown_EventScript_Guard1 {
 
 script OldaleTown_EventScript_Guard2 {
     lockall
-    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
-    waitmovement(0)
     msgbox("Placeholder: Guard 2 - This road is blocked.$")
     closemessage
     applymovement(OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PushNorth)
@@ -305,7 +301,7 @@ movement OldaleTown_Movement_PushNorth {
 script OldaleTown_EventScript_BirchNicknameStarter {
     setvar(VAR_SNAKEWOOD_INTRO_STATE, 3)
     lockall
-    msgbox("Placeholder: Birch arrives in Oldale.\p"
+    msgbox("Placeholder: Birch arrives in Oldale.\n"
            "You handled that really well back there!\p"
            "Would you like to give your Pokémon a nickname?$")
     closemessage
