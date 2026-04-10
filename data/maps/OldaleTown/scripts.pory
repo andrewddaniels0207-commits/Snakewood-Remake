@@ -12,6 +12,9 @@ mapscripts OldaleTown_MapScripts {
             call(OldaleTown_EventScript_SetOldaleState)
         }
     }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_SNAKEWOOD_INTRO_STATE, 2: OldaleTown_EventScript_BirchNicknameStarter
+    ]
 }
 
 script OldaleTown_EventScript_SetOldaleState {
@@ -39,7 +42,7 @@ script OldaleTown_EventScript_TownSign {
 // ================================
 
 script OldaleTown_EventScript_Girl {
-    msgbox("Placeholder: Girl NPC dialogue.")
+    msgbox("Placeholder: Girl NPC dialogue.$", MSGBOX_NPC)
     end
 }
 
@@ -256,5 +259,59 @@ script OldaleTown_EventScript_RivalAlicia {
     msgbox("Placeholder: Alicia post-battle dialogue.
             Fine, you may pass.")
     release
+    end
+}
+
+// ================================
+// South Exit Guards
+// Guards at (8,20) and (11,20) block exit to Route 101.
+// Triggered by coord events at (9,20) and (10,20).
+// ================================
+
+script OldaleTown_EventScript_Guard1 {
+    lockall
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    msgbox("Placeholder: Guard 1 - You can't go south from here.$")
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PushNorth)
+    waitmovement(0)
+    releaseall
+    end
+}
+
+script OldaleTown_EventScript_Guard2 {
+    lockall
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    msgbox("Placeholder: Guard 2 - This road is blocked.$")
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PushNorth)
+    waitmovement(0)
+    releaseall
+    end
+}
+
+movement OldaleTown_Movement_PushNorth {
+    walk_up
+}
+
+// ================================
+// Birch Nickname Starter
+// Fires once in Oldale after arriving from Route 101 (VAR_SNAKEWOOD_INTRO_STATE == 2).
+// Offers to nickname the player's starter.
+// ================================
+
+script OldaleTown_EventScript_BirchNicknameStarter {
+    setvar(VAR_SNAKEWOOD_INTRO_STATE, 3)
+    lockall
+    msgbox("Placeholder: Birch arrives in Oldale.\p"
+           "You handled that really well back there!\p"
+           "Would you like to give your Pokémon a nickname?$")
+    closemessage
+    // TODO: Add proper nickname screen call here.
+    // Example flow: bufferfirstpokemon, yesnobox, nicknamespecies
+    msgbox("Placeholder: Birch - Take care of yourself out there.$")
+    releaseall
     end
 }

@@ -1,0 +1,238 @@
+mapscripts Route103_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(Common_EventScript_SetupRivalGfxId)
+        call(ProfBirch_EventScript_UpdateLocation)
+    }
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_SYS_GAME_CLEAR)) {
+            call(Route103_EventScript_OpenAlteringCave)
+        }
+    }
+}
+
+script Route103_EventScript_OpenAlteringCave {
+    setmetatile(45, 5, METATILE_General_CaveEntrance_Top, TRUE)
+    setmetatile(45, 6, METATILE_General_CaveEntrance_Bottom, FALSE)
+    return
+}
+
+// ============================================================
+// Birch Egg Event (replaces vanilla rival battle)
+// Gives the player a randomized egg and the PokéNav.
+// Sets FLAG_RECEIVED_BIRCH_EGG to allow Alicia battle in Oldale.
+// TODO: Replace SPECIES_WYNAUT with Miasby/Corrokid/Smushcum species
+//       when those Pokémon are added to the game.
+// ============================================================
+
+script Route103_EventScript_Rival {
+    lock
+    faceplayer
+    if (flag(FLAG_RECEIVED_BIRCH_EGG)) {
+        msgbox("Placeholder: I've already given you an egg.\p"
+               "Take good care of it!$")
+        release
+        end
+    }
+    msgbox("Placeholder: Birch greets the player.\p"
+           "I've been looking for you!\p"
+           "I have something important to give you.$")
+    closemessage
+    random(3)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            // TODO: Replace SPECIES_WYNAUT with Miasby
+            giveegg(SPECIES_WYNAUT)
+        case 1:
+            // TODO: Replace SPECIES_WYNAUT with Corrokid
+            giveegg(SPECIES_WYNAUT)
+        case 2:
+            // TODO: Replace SPECIES_WYNAUT with Smushcum
+            giveegg(SPECIES_WYNAUT)
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox("Placeholder: Your bag is full - come back when you have space!$")
+        release
+        end
+    }
+    msgbox("Placeholder: Birch explains the egg.\p"
+           "This egg was found near here.\p"
+           "Something is alive inside it - take good care of it.$")
+    closemessage
+    giveitem(ITEM_POKENAV)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox("Placeholder: Your bag is full - I'll hold onto the PokéNav for now.$")
+        release
+        end
+    }
+    msgbox("Placeholder: Birch explains the PokéNav and registers his number.\p"
+           "You can reach me any time on that.$")
+    closemessage
+    setflag(FLAG_RECEIVED_BIRCH_EGG)
+    msgbox("Placeholder: Good luck out there. Head back through Oldale when you're ready.$")
+    release
+    end
+}
+
+// ============================================================
+// Trainer battles (placeholder text)
+// ============================================================
+
+script Route103_EventScript_Daisy {
+    trainerbattle_single(TRAINER_DAISY, "Placeholder: Daisy intro.$", "Placeholder: Daisy defeated.$")
+    msgbox("Placeholder: Daisy post-battle.$", MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route103_EventScript_Amy {
+    trainerbattle_double(TRAINER_AMY_AND_LIV_1,
+        "Placeholder: Amy intro.$",
+        "Placeholder: Amy defeated.$",
+        "Placeholder: Amy not enough Pokémon.$",
+        Route102_EventScript_AmyRegisterMatchCallAfterBattle)
+    specialvar(VAR_RESULT, ShouldTryRematchBattle)
+    if (var(VAR_RESULT) == TRUE) {
+        call(Route102_EventScript_AmyRematch)
+        end
+    }
+    msgbox("Placeholder: Amy post-battle.$", MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route102_EventScript_AmyRegisterMatchCallAfterBattle {
+    msgbox("Placeholder: Amy & Liv register.$")
+    register_matchcall(TRAINER_AMY_AND_LIV_1)
+    release
+    end
+}
+
+script Route102_EventScript_AmyRematch {
+    trainerbattle_rematch_double(TRAINER_AMY_AND_LIV_1,
+        "Placeholder: Amy rematch intro.$",
+        "Placeholder: Amy rematch defeated.$",
+        "Placeholder: Amy rematch not enough Pokémon.$")
+    msgbox("Placeholder: Amy rematch post-battle.$", MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route103_EventScript_Liv {
+    trainerbattle_double(TRAINER_AMY_AND_LIV_1,
+        "Placeholder: Liv intro.$",
+        "Placeholder: Liv defeated.$",
+        "Placeholder: Liv not enough Pokémon.$",
+        Route102_EventScript_LivRegisterMatchCallAfterBattle)
+    specialvar(VAR_RESULT, ShouldTryRematchBattle)
+    if (var(VAR_RESULT) == TRUE) {
+        call(Route102_EventScript_LivRematch)
+        end
+    }
+    msgbox("Placeholder: Liv post-battle.$", MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route102_EventScript_LivRegisterMatchCallAfterBattle {
+    msgbox("Placeholder: Amy & Liv register.$")
+    register_matchcall(TRAINER_AMY_AND_LIV_1)
+    release
+    end
+}
+
+script Route102_EventScript_LivRematch {
+    trainerbattle_rematch_double(TRAINER_AMY_AND_LIV_1,
+        "Placeholder: Liv rematch intro.$",
+        "Placeholder: Liv rematch defeated.$",
+        "Placeholder: Liv rematch not enough Pokémon.$")
+    msgbox("Placeholder: Liv rematch post-battle.$", MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route103_EventScript_Andrew {
+    trainerbattle_single(TRAINER_ANDREW,
+        "Placeholder: Andrew intro.$",
+        "Placeholder: Andrew defeated.$")
+    msgbox("Placeholder: Andrew post-battle.$", MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route103_EventScript_Miguel {
+    trainerbattle_single(TRAINER_MIGUEL_1,
+        "Placeholder: Miguel intro.$",
+        "Placeholder: Miguel defeated.$",
+        Route102_EventScript_MiguelRegisterMatchCallAfterBattle)
+    specialvar(VAR_RESULT, ShouldTryRematchBattle)
+    if (var(VAR_RESULT) == TRUE) {
+        call(Route103_EventScript_MiguelRematch)
+        end
+    }
+    msgbox("Placeholder: Miguel post-battle.$")
+    release
+    end
+}
+
+script Route102_EventScript_MiguelRegisterMatchCallAfterBattle {
+    special(PlayerFaceTrainerAfterBattle)
+    waitmovement(0)
+    msgbox("Placeholder: Miguel register.$")
+    register_matchcall(TRAINER_MIGUEL_1)
+    release
+    end
+}
+
+script Route103_EventScript_MiguelRematch {
+    trainerbattle_rematch(TRAINER_MIGUEL_1,
+        "Placeholder: Miguel rematch intro.$",
+        "Placeholder: Miguel rematch defeated.$")
+    msgbox("Placeholder: Miguel rematch post-battle.$", MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route103_EventScript_Marcos {
+    trainerbattle_single(TRAINER_MARCOS,
+        "Placeholder: Marcos intro.$",
+        "Placeholder: Marcos defeated.$")
+    msgbox("Placeholder: Marcos post-battle.$", MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route103_EventScript_Rhett {
+    trainerbattle_single(TRAINER_RHETT,
+        "Placeholder: Rhett intro.$",
+        "Placeholder: Rhett defeated.$")
+    msgbox("Placeholder: Rhett post-battle.$", MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route103_EventScript_Pete {
+    trainerbattle_single(TRAINER_PETE,
+        "Placeholder: Pete intro.$",
+        "Placeholder: Pete defeated.$")
+    msgbox("Placeholder: Pete post-battle.$", MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route103_EventScript_Isabelle {
+    trainerbattle_single(TRAINER_ISABELLE,
+        "Placeholder: Isabelle intro.$",
+        "Placeholder: Isabelle defeated.$")
+    msgbox("Placeholder: Isabelle post-battle.$", MSGBOX_AUTOCLOSE)
+    end
+}
+
+// ============================================================
+// NPCs
+// ============================================================
+
+script Route103_EventScript_Boy {
+    msgbox("Placeholder: Boy dialogue.$", MSGBOX_NPC)
+    end
+}
+
+script Route103_EventScript_Man {
+    msgbox("Placeholder: Shortcut to Oldale across the sea.$", MSGBOX_NPC)
+    end
+}
+
+script Route103_EventScript_RouteSign {
+    msgbox("ROUTE 103\n"
+           "{DOWN_ARROW} OLDALE TOWN$", MSGBOX_SIGN)
+    end
+}
