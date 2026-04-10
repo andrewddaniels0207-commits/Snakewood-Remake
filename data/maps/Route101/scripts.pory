@@ -16,8 +16,11 @@ script Route101_EventScript_HideMapNamePopup {
 }
 
 // ------------------------------------------------------------
-// Birch Rescue Scene
-// Triggered when player walks north into the scene
+// Birch Rescue Scene → Zombie Battle → Warp to Oldale
+// Triggered by coord event when player walks north (VAR_ROUTE101_STATE == 1).
+// The entire sequence runs under a single lockall so trainerbattle_single
+// can continue the script properly — splitting it across NPC interaction
+// scripts causes the lockall state to be dropped after the battle.
 // ------------------------------------------------------------
 
 script Route101_EventScript_StartBirchRescue {
@@ -38,7 +41,27 @@ script Route101_EventScript_StartBirchRescue {
     waitmovement(0)
     msgbox("Placeholder: Birch pleads for help.$")
     closemessage
-    setvar(VAR_ROUTE101_STATE, 2)
+    // Player approaches the zombie for the battle
+    applymovement(LOCALID_PLAYER, Route101_Movement_PlayerApproachZombie)
+    applymovement(LOCALID_ROUTE101_ZOMBIE, Route101_Movement_ZombieTurnToPlayer)
+    waitmovement(0)
+    msgbox("Placeholder: Zombie trainer intro.$")
+    closemessage
+    trainerbattle_single(TRAINER_ROUTE101_ZOMBIE, "Placeholder: Zombie intro.$", "Placeholder: Zombie defeat text.$")
+    msgbox("The Zombie crumbled to dust.$")
+    closemessage
+    setflag(FLAG_HIDE_ROUTE_101_ZIGZAGOON)
+    applymovement(LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchApproachPlayer)
+    waitmovement(0)
+    msgbox("Placeholder: Birch thanks player and says let's go to Oldale.$")
+    closemessage
+    special(HealPlayerParty)
+    setflag(FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE)
+    setvar(VAR_ROUTE101_STATE, 3)
+    setvar(VAR_SNAKEWOOD_INTRO_STATE, 2)
+    clearflag(FLAG_HIDE_MAP_NAME_POPUP)
+    warp(MAP_OLDALE_TOWN, 6, 17)
+    waitstate
     releaseall
     end
 }
@@ -90,34 +113,13 @@ movement Route101_Movement_PreventExitNorth {
 }
 
 // ------------------------------------------------------------
-// Zombie Trainer Battle
-// Player interacts with zombie to trigger battle
+// Zombie Trainer (NPC interaction fallback — should never fire in
+// normal play because the zombie is hidden by FLAG_HIDE_ROUTE_101_ZIGZAGOON
+// immediately after the battle ends in StartBirchRescue)
 // ------------------------------------------------------------
 
 script Route101_EventScript_ZombieTrainer {
-    lockall
-    applymovement(LOCALID_ROUTE101_ZOMBIE, Common_Movement_WalkInPlaceFasterRight)
-    waitmovement(0)
-    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft)
-    waitmovement(0)
-    msgbox("Placeholder: Zombie trainer intro.$")
-    closemessage
-    trainerbattle_single(TRAINER_ROUTE101_ZOMBIE, "Placeholder: Zombie intro.$", "Placeholder: Zombie defeat text.$")
-    msgbox("The Zombie crumbled to dust.$")
-    closemessage
-    setflag(FLAG_HIDE_ROUTE_101_ZIGZAGOON)
-    applymovement(LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchApproachPlayer)
-    waitmovement(0)
-    msgbox("Placeholder: Birch thanks player and says let's go to Oldale.$")
-    closemessage
-    special(HealPlayerParty)
-    setflag(FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE)
-    setvar(VAR_ROUTE101_STATE, 3)
-    setvar(VAR_SNAKEWOOD_INTRO_STATE, 2)
-    clearflag(FLAG_HIDE_MAP_NAME_POPUP)
-    warp(MAP_OLDALE_TOWN, 6, 17)
-    waitstate
-    releaseall
+    msgbox("Placeholder: Zombie trainer fallback.$", MSGBOX_NPC)
     end
 }
 
@@ -205,6 +207,15 @@ movement Route101_Movement_ZombieFaceBirch {
 
 // End position: Birch faces right toward Zombie
 movement Route101_Movement_BirchFaceZombie {
+    walk_in_place_faster_right
+}
+
+movement Route101_Movement_PlayerApproachZombie {
+    walk_up * 3
+    walk_in_place_faster_left
+}
+
+movement Route101_Movement_ZombieTurnToPlayer {
     walk_in_place_faster_right
 }
 

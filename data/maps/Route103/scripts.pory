@@ -37,8 +37,11 @@ script Route103_EventScript_Rival {
            "I've been looking for you!\p"
            "I have something important to give you.$")
     closemessage
+    // Store which egg to give before the switch so VAR_RESULT is
+    // free to hold giveegg's success/fail return value.
     random(3)
-    switch (var(VAR_RESULT)) {
+    setvar(VAR_SNAKEWOOD_STARTER, var(VAR_RESULT))
+    switch (var(VAR_SNAKEWOOD_STARTER)) {
         case 0:
             // TODO: Replace SPECIES_WYNAUT with Miasby
             giveegg(SPECIES_WYNAUT)
