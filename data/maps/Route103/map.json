@@ -40,7 +40,7 @@
     },
     {
       "local_id": "LOCALID_ROUTE103_RIVAL",
-      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+      "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
       "x": 10,
       "y": 3,
       "elevation": 3,

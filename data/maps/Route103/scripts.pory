@@ -58,12 +58,11 @@ script Route103_EventScript_Rival {
            "This egg was found near here.\p"
            "Something is alive inside it - take good care of it.$")
     closemessage
-    giveitem(ITEM_POKENAV)
-    if (var(VAR_RESULT) == FALSE) {
-        msgbox("Placeholder: Your bag is full - I'll hold onto the PokéNav for now.$")
-        release
-        end
-    }
+    playfanfare(MUS_OBTAIN_ITEM)
+    msgbox("Placeholder: You received the PokéNav!$")
+    waitfanfare
+    setflag(FLAG_SYS_POKENAV_GET)
+    setflag(FLAG_RECEIVED_POKENAV)
     msgbox("Placeholder: Birch explains the PokéNav and registers his number.\p"
            "You can reach me any time on that.$")
     closemessage
