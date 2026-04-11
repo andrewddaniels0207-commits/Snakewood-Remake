@@ -40,7 +40,7 @@ script Route103_EventScript_Rival {
     // Store which egg to give before the switch so VAR_RESULT is
     // free to hold giveegg's success/fail return value.
     random(3)
-    setvar(VAR_SNAKEWOOD_STARTER, var(VAR_RESULT))
+    copyvar(VAR_SNAKEWOOD_STARTER, VAR_RESULT)
     switch (var(VAR_SNAKEWOOD_STARTER)) {
         case 0:
             // TODO: Replace SPECIES_WYNAUT with Miasby
@@ -86,11 +86,7 @@ script Route103_EventScript_Daisy {
 }
 
 script Route103_EventScript_Amy {
-    trainerbattle_double(TRAINER_AMY_AND_LIV_1,
-        "Placeholder: Amy intro.$",
-        "Placeholder: Amy defeated.$",
-        "Placeholder: Amy not enough Pokémon.$",
-        Route102_EventScript_AmyRegisterMatchCallAfterBattle)
+    trainerbattle_double(TRAINER_AMY_AND_LIV_1, "Placeholder: Amy intro.$", "Placeholder: Amy defeated.$", "Placeholder: Amy not enough Pokémon.$", Route102_EventScript_AmyRegisterMatchCallAfterBattle)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
     if (var(VAR_RESULT) == TRUE) {
         call(Route102_EventScript_AmyRematch)
@@ -108,20 +104,13 @@ script Route102_EventScript_AmyRegisterMatchCallAfterBattle {
 }
 
 script Route102_EventScript_AmyRematch {
-    trainerbattle_rematch_double(TRAINER_AMY_AND_LIV_1,
-        "Placeholder: Amy rematch intro.$",
-        "Placeholder: Amy rematch defeated.$",
-        "Placeholder: Amy rematch not enough Pokémon.$")
+    trainerbattle_rematch_double(TRAINER_AMY_AND_LIV_1, "Placeholder: Amy rematch intro.$", "Placeholder: Amy rematch defeated.$", "Placeholder: Amy rematch not enough Pokémon.$")
     msgbox("Placeholder: Amy rematch post-battle.$", MSGBOX_AUTOCLOSE)
     end
 }
 
 script Route103_EventScript_Liv {
-    trainerbattle_double(TRAINER_AMY_AND_LIV_1,
-        "Placeholder: Liv intro.$",
-        "Placeholder: Liv defeated.$",
-        "Placeholder: Liv not enough Pokémon.$",
-        Route102_EventScript_LivRegisterMatchCallAfterBattle)
+    trainerbattle_double(TRAINER_AMY_AND_LIV_1, "Placeholder: Liv intro.$", "Placeholder: Liv defeated.$", "Placeholder: Liv not enough Pokémon.$", Route102_EventScript_LivRegisterMatchCallAfterBattle)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
     if (var(VAR_RESULT) == TRUE) {
         call(Route102_EventScript_LivRematch)
@@ -139,27 +128,19 @@ script Route102_EventScript_LivRegisterMatchCallAfterBattle {
 }
 
 script Route102_EventScript_LivRematch {
-    trainerbattle_rematch_double(TRAINER_AMY_AND_LIV_1,
-        "Placeholder: Liv rematch intro.$",
-        "Placeholder: Liv rematch defeated.$",
-        "Placeholder: Liv rematch not enough Pokémon.$")
+    trainerbattle_rematch_double(TRAINER_AMY_AND_LIV_1, "Placeholder: Liv rematch intro.$", "Placeholder: Liv rematch defeated.$", "Placeholder: Liv rematch not enough Pokémon.$")
     msgbox("Placeholder: Liv rematch post-battle.$", MSGBOX_AUTOCLOSE)
     end
 }
 
 script Route103_EventScript_Andrew {
-    trainerbattle_single(TRAINER_ANDREW,
-        "Placeholder: Andrew intro.$",
-        "Placeholder: Andrew defeated.$")
+    trainerbattle_single(TRAINER_ANDREW, "Placeholder: Andrew intro.$", "Placeholder: Andrew defeated.$")
     msgbox("Placeholder: Andrew post-battle.$", MSGBOX_AUTOCLOSE)
     end
 }
 
 script Route103_EventScript_Miguel {
-    trainerbattle_single(TRAINER_MIGUEL_1,
-        "Placeholder: Miguel intro.$",
-        "Placeholder: Miguel defeated.$",
-        Route102_EventScript_MiguelRegisterMatchCallAfterBattle)
+    trainerbattle_single(TRAINER_MIGUEL_1, "Placeholder: Miguel intro.$", "Placeholder: Miguel defeated.$", Route102_EventScript_MiguelRegisterMatchCallAfterBattle)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
     if (var(VAR_RESULT) == TRUE) {
         call(Route103_EventScript_MiguelRematch)
@@ -180,41 +161,31 @@ script Route102_EventScript_MiguelRegisterMatchCallAfterBattle {
 }
 
 script Route103_EventScript_MiguelRematch {
-    trainerbattle_rematch(TRAINER_MIGUEL_1,
-        "Placeholder: Miguel rematch intro.$",
-        "Placeholder: Miguel rematch defeated.$")
+    trainerbattle_rematch(TRAINER_MIGUEL_1, "Placeholder: Miguel rematch intro.$", "Placeholder: Miguel rematch defeated.$")
     msgbox("Placeholder: Miguel rematch post-battle.$", MSGBOX_AUTOCLOSE)
     end
 }
 
 script Route103_EventScript_Marcos {
-    trainerbattle_single(TRAINER_MARCOS,
-        "Placeholder: Marcos intro.$",
-        "Placeholder: Marcos defeated.$")
+    trainerbattle_single(TRAINER_MARCOS, "Placeholder: Marcos intro.$", "Placeholder: Marcos defeated.$")
     msgbox("Placeholder: Marcos post-battle.$", MSGBOX_AUTOCLOSE)
     end
 }
 
 script Route103_EventScript_Rhett {
-    trainerbattle_single(TRAINER_RHETT,
-        "Placeholder: Rhett intro.$",
-        "Placeholder: Rhett defeated.$")
+    trainerbattle_single(TRAINER_RHETT, "Placeholder: Rhett intro.$", "Placeholder: Rhett defeated.$")
     msgbox("Placeholder: Rhett post-battle.$", MSGBOX_AUTOCLOSE)
     end
 }
 
 script Route103_EventScript_Pete {
-    trainerbattle_single(TRAINER_PETE,
-        "Placeholder: Pete intro.$",
-        "Placeholder: Pete defeated.$")
+    trainerbattle_single(TRAINER_PETE, "Placeholder: Pete intro.$", "Placeholder: Pete defeated.$")
     msgbox("Placeholder: Pete post-battle.$", MSGBOX_AUTOCLOSE)
     end
 }
 
 script Route103_EventScript_Isabelle {
-    trainerbattle_single(TRAINER_ISABELLE,
-        "Placeholder: Isabelle intro.$",
-        "Placeholder: Isabelle defeated.$")
+    trainerbattle_single(TRAINER_ISABELLE, "Placeholder: Isabelle intro.$", "Placeholder: Isabelle defeated.$")
     msgbox("Placeholder: Isabelle post-battle.$", MSGBOX_AUTOCLOSE)
     end
 }
