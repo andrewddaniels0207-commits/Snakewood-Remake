@@ -1,17 +1,34 @@
-CaveOfOrigin_1F_MapScripts::
+# 1 "data/maps/CaveOfOrigin_1F/scripts.pory"
+
 # 2 "data/maps/CaveOfOrigin_1F/scripts.pory"
+CaveOfOrigin_1F_MapScripts::
+# 3 "data/maps/CaveOfOrigin_1F/scripts.pory"
+# 2 "data/maps/CaveOfOrigin_1F/scripts.pory"
+# 4 "data/maps/CaveOfOrigin_1F/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, CaveOfOrigin_1F_OnTransition
+# 5 "data/maps/CaveOfOrigin_1F/scripts.pory"
 	.byte 0
-
-
-CaveOfOrigin_1F_OnTransition::
 # 6 "data/maps/CaveOfOrigin_1F/scripts.pory"
-	goto_if_set FLAG_UNUSED_RS_LEGENDARY_BATTLE_DONE, CaveOfOrigin_1F_OnTransition_2
-CaveOfOrigin_1F_OnTransition_1:
-	end
 
-CaveOfOrigin_1F_OnTransition_2:
 # 7 "data/maps/CaveOfOrigin_1F/scripts.pory"
-	call CaveOfOrigin_EventScript_DisableTriggers
-	goto CaveOfOrigin_1F_OnTransition_1
 
+# 8 "data/maps/CaveOfOrigin_1F/scripts.pory"
+CaveOfOrigin_1F_OnTransition::
+# 9 "data/maps/CaveOfOrigin_1F/scripts.pory"
+# 6 "data/maps/CaveOfOrigin_1F/scripts.pory"
+# 10 "data/maps/CaveOfOrigin_1F/scripts.pory"
+	goto_if_set FLAG_UNUSED_RS_LEGENDARY_BATTLE_DONE, CaveOfOrigin_1F_OnTransition_2
+# 11 "data/maps/CaveOfOrigin_1F/scripts.pory"
+CaveOfOrigin_1F_OnTransition_1:
+# 12 "data/maps/CaveOfOrigin_1F/scripts.pory"
+	end
+# 13 "data/maps/CaveOfOrigin_1F/scripts.pory"
+
+# 14 "data/maps/CaveOfOrigin_1F/scripts.pory"
+CaveOfOrigin_1F_OnTransition_2:
+# 15 "data/maps/CaveOfOrigin_1F/scripts.pory"
+# 7 "data/maps/CaveOfOrigin_1F/scripts.pory"
+# 16 "data/maps/CaveOfOrigin_1F/scripts.pory"
+	call CaveOfOrigin_EventScript_DisableTriggers
+# 17 "data/maps/CaveOfOrigin_1F/scripts.pory"
+	goto CaveOfOrigin_1F_OnTransition_1

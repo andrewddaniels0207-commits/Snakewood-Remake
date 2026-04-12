@@ -1,29 +1,58 @@
-TwoIsland_PokemonCenter_2F_Frlg_MapScripts::
+# 1 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+
 # 2 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame_Frlg
+TwoIsland_PokemonCenter_2F_Frlg_MapScripts::
 # 3 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp_Frlg
+# 2 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
 # 4 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
-	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad_Frlg
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame_Frlg
 # 5 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
-	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition_Frlg
-	.byte 0
-
-
-TwoIsland_PokemonCenter_2F_EventScript_Colosseum::
+# 3 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+# 6 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp_Frlg
+# 7 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+# 4 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+# 8 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad_Frlg
 # 9 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
-	call CableClub_EventScript_Colosseum_Frlg
-	end
+# 5 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+# 10 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition_Frlg
+# 11 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+	.byte 0
+# 12 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
 
+# 13 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
 
-TwoIsland_PokemonCenter_2F_EventScript_TradeCenter::
 # 14 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
-	call CableClub_EventScript_TradeCenter_Frlg
+TwoIsland_PokemonCenter_2F_EventScript_Colosseum::
+# 15 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+# 9 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+# 16 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+	call CableClub_EventScript_Colosseum_Frlg
+# 17 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
 	end
+# 18 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
 
-
-TwoIsland_PokemonCenter_2F_EventScript_RecordCorner::
 # 19 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
-	call CableClub_EventScript_RecordCorner_Frlg
-	end
 
+# 20 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+TwoIsland_PokemonCenter_2F_EventScript_TradeCenter::
+# 21 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+# 14 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+# 22 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+	call CableClub_EventScript_TradeCenter_Frlg
+# 23 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+	end
+# 24 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+
+# 25 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+
+# 26 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+TwoIsland_PokemonCenter_2F_EventScript_RecordCorner::
+# 27 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+# 19 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+# 28 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+	call CableClub_EventScript_RecordCorner_Frlg
+# 29 "data/maps/TwoIsland_PokemonCenter_2F_Frlg/scripts.pory"
+	end

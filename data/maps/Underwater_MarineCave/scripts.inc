@@ -1,19 +1,38 @@
-Underwater_MarineCave_MapScripts::
+# 1 "data/maps/Underwater_MarineCave/scripts.pory"
+
 # 2 "data/maps/Underwater_MarineCave/scripts.pory"
-	map_script MAP_SCRIPT_ON_RESUME, Underwater_MarineCave_OnResume
+Underwater_MarineCave_MapScripts::
 # 3 "data/maps/Underwater_MarineCave/scripts.pory"
+# 2 "data/maps/Underwater_MarineCave/scripts.pory"
+# 4 "data/maps/Underwater_MarineCave/scripts.pory"
+	map_script MAP_SCRIPT_ON_RESUME, Underwater_MarineCave_OnResume
+# 5 "data/maps/Underwater_MarineCave/scripts.pory"
+# 3 "data/maps/Underwater_MarineCave/scripts.pory"
+# 6 "data/maps/Underwater_MarineCave/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, Underwater_MarineCave_OnTransition
-	.byte 0
-
-
-Underwater_MarineCave_OnTransition::
 # 7 "data/maps/Underwater_MarineCave/scripts.pory"
-	setflag FLAG_ARRIVED_AT_MARINE_CAVE_EMERGE_SPOT
-	end
+	.byte 0
+# 8 "data/maps/Underwater_MarineCave/scripts.pory"
 
+# 9 "data/maps/Underwater_MarineCave/scripts.pory"
 
-Underwater_MarineCave_OnResume::
+# 10 "data/maps/Underwater_MarineCave/scripts.pory"
+Underwater_MarineCave_OnTransition::
+# 11 "data/maps/Underwater_MarineCave/scripts.pory"
+# 7 "data/maps/Underwater_MarineCave/scripts.pory"
 # 12 "data/maps/Underwater_MarineCave/scripts.pory"
-	setdivewarp MAP_MARINE_CAVE_ENTRANCE, 10, 17
+	setflag FLAG_ARRIVED_AT_MARINE_CAVE_EMERGE_SPOT
+# 13 "data/maps/Underwater_MarineCave/scripts.pory"
 	end
+# 14 "data/maps/Underwater_MarineCave/scripts.pory"
 
+# 15 "data/maps/Underwater_MarineCave/scripts.pory"
+
+# 16 "data/maps/Underwater_MarineCave/scripts.pory"
+Underwater_MarineCave_OnResume::
+# 17 "data/maps/Underwater_MarineCave/scripts.pory"
+# 12 "data/maps/Underwater_MarineCave/scripts.pory"
+# 18 "data/maps/Underwater_MarineCave/scripts.pory"
+	setdivewarp MAP_MARINE_CAVE_ENTRANCE, 10, 17
+# 19 "data/maps/Underwater_MarineCave/scripts.pory"
+	end

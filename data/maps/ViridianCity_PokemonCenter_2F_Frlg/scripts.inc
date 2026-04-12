@@ -1,29 +1,58 @@
-ViridianCity_PokemonCenter_2F_Frlg_MapScripts::
+# 1 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+
 # 2 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame_Frlg
+ViridianCity_PokemonCenter_2F_Frlg_MapScripts::
 # 3 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp_Frlg
+# 2 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
 # 4 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
-	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad_Frlg
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame_Frlg
 # 5 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
-	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition_Frlg
-	.byte 0
-
-
-ViridianCity_PokemonCenter_2F_EventScript_Colosseum::
+# 3 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+# 6 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp_Frlg
+# 7 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+# 4 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+# 8 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad_Frlg
 # 9 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
-	call CableClub_EventScript_Colosseum_Frlg
-	end
+# 5 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+# 10 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition_Frlg
+# 11 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+	.byte 0
+# 12 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
 
+# 13 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
 
-ViridianCity_PokemonCenter_2F_EventScript_TradeCenter::
 # 14 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
-	call CableClub_EventScript_TradeCenter_Frlg
+ViridianCity_PokemonCenter_2F_EventScript_Colosseum::
+# 15 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+# 9 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+# 16 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+	call CableClub_EventScript_Colosseum_Frlg
+# 17 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
 	end
+# 18 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
 
-
-ViridianCity_PokemonCenter_2F_EventScript_RecordCorner::
 # 19 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
-	call CableClub_EventScript_RecordCorner_Frlg
-	end
 
+# 20 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+ViridianCity_PokemonCenter_2F_EventScript_TradeCenter::
+# 21 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+# 14 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+# 22 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+	call CableClub_EventScript_TradeCenter_Frlg
+# 23 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+	end
+# 24 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+
+# 25 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+
+# 26 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+ViridianCity_PokemonCenter_2F_EventScript_RecordCorner::
+# 27 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+# 19 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+# 28 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+	call CableClub_EventScript_RecordCorner_Frlg
+# 29 "data/maps/ViridianCity_PokemonCenter_2F_Frlg/scripts.pory"
+	end

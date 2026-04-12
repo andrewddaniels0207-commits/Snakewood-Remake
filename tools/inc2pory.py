@@ -416,18 +416,15 @@ def convert_inc_to_pory(inc_path, dry_run=False):
     with open(inc_path, 'r', encoding='utf-8', errors='replace') as f:
         raw_content = f.read()
 
-    # --- Passthrough for poryscript-compiled .inc files ---
+    # --- Skip poryscript-compiled .inc files ---
     if is_compiled_pory(raw_content):
-        # Wrap verbatim in a raw block. This is a safe no-op conversion;
-        # the generated .inc will be byte-for-byte identical to the original.
-        # Individual scripts can be replaced with proper poryscript blocks later.
-        output = f'raw `\n{raw_content}\n`\n'
+        # These .inc files were already compiled from a .pory source by a
+        # previous poryscript run.  They contain auto-generated labels,
+        # poryscript constants, and assembly macros that cannot be safely
+        # reverse-engineered.  The build will use the .inc directly when no
+        # .pory exists, so the correct action is to NOT create a .pory file.
         if dry_run:
-            print(f'--- {pory_path} (passthrough raw) ---')
-            print(output[:300])
-            print()
-        else:
-            pory_path.write_text(output, encoding='utf-8')
+            print(f'  Skipping {inc_path} (already compiled from poryscript)')
         return True
 
     # --- Full conversion for hand-written .inc files ---

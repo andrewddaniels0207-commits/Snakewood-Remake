@@ -1,168 +1,338 @@
+# 1 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+
+# 2 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 SevenIsland_SevaultCanyon_Frlg_MapScripts::
+# 3 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 	.byte 0
-
-
-SevenIsland_SevaultCanyon_EventScript_RouteSign::
 # 4 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	msgbox SevenIsland_SevaultCanyon_Text_RouteSign, MSGBOX_SIGN
-	end
 
+# 5 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_CyndyIntro::
+# 6 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_EventScript_RouteSign::
+# 7 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 4 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 # 8 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "My conditioning's in top form!$"
+	msgbox SevenIsland_SevaultCanyon_Text_RouteSign, MSGBOX_SIGN
+# 9 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	end
+# 10 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_CyndyDefeat::
+# 11 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+
 # 12 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "Huh?\n"
-	.string "Something's not right…$"
+SevenIsland_SevaultCanyon_Text_CyndyIntro::
+# 13 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 8 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 14 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "My conditioning's in top form!$"
+# 15 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_CyndyPostBattle::
+# 16 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_CyndyDefeat::
 # 17 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "The way I am now, I may have to\n"
-	.string "hold off on TRAINER TOWER…$"
+# 12 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 18 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "Huh?\n"
+# 19 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "Something's not right…$"
+# 20 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_EvanIntro::
+# 21 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_CyndyPostBattle::
 # 22 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 17 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 23 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "The way I am now, I may have to\n"
+# 24 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "hold off on TRAINER TOWER…$"
+# 25 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+
+# 26 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_EvanIntro::
+# 27 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 22 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 28 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 	.string "It doesn't matter if you happen to\n"
-	.string "have the strongest POKéMON…\p"
-	.string "It doesn't mean a thing if you don't\n"
-	.string "know how to use them properly!$"
-
-SevenIsland_SevaultCanyon_Text_EvanDefeat::
 # 29 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "You're a master at this.$"
+	.string "have the strongest POKéMON…\p"
+# 30 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "It doesn't mean a thing if you don't\n"
+# 31 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "know how to use them properly!$"
+# 32 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_EvanPostBattle::
 # 33 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_EvanDefeat::
+# 34 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 29 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 35 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "You're a master at this.$"
+# 36 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+
+# 37 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_EvanPostBattle::
+# 38 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 33 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 39 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 	.string "You see them every so often,\n"
+# 40 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 	.string "TRAINERS with awesome POKéMON\l"
-	.string "who have no idea what to do.\p"
-	.string "Before training POKéMON, TRAINERS\n"
-	.string "themselves need to grow up.$"
-
-SevenIsland_SevaultCanyon_Text_JacksonIntro::
 # 41 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "I work to protect the environment.\n"
-	.string "In turn, nature protects me!$"
+	.string "who have no idea what to do.\p"
+# 42 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "Before training POKéMON, TRAINERS\n"
+# 43 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "themselves need to grow up.$"
+# 44 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_JacksonDefeat::
+# 45 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_JacksonIntro::
 # 46 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "Whoa! You're tough!\n"
-	.string "How about protecting me?$"
+# 41 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 47 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "I work to protect the environment.\n"
+# 48 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "In turn, nature protects me!$"
+# 49 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_JacksonPostBattle::
+# 50 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_JacksonDefeat::
 # 51 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 46 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 52 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "Whoa! You're tough!\n"
+# 53 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "How about protecting me?$"
+# 54 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+
+# 55 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_JacksonPostBattle::
+# 56 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 51 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 57 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 	.string "From far out among the stars, our\n"
-	.string "planet is just a drop of water.\p"
-	.string "But we want to protect that drop\n"
-	.string "of water for everyone.$"
-
-SevenIsland_SevaultCanyon_Text_KatelynIntro::
 # 58 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "Those shoes you have are pretty\n"
-	.string "snazzy.$"
+	.string "planet is just a drop of water.\p"
+# 59 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "But we want to protect that drop\n"
+# 60 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "of water for everyone.$"
+# 61 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_KatelynDefeat::
+# 62 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_KatelynIntro::
 # 63 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "You're hot stuff in spite of your\n"
-	.string "cute looks.$"
+# 58 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 64 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "Those shoes you have are pretty\n"
+# 65 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "snazzy.$"
+# 66 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_KatelynPostBattle::
+# 67 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_KatelynDefeat::
 # 68 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "Your mom bought those snazzy\n"
-	.string "RUNNING SHOES for you?\p"
-	.string "She must adore you.$"
+# 63 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 69 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "You're hot stuff in spite of your\n"
+# 70 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "cute looks.$"
+# 71 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_LeroyIntro::
+# 72 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_KatelynPostBattle::
+# 73 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 68 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 # 74 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "You look strong.\n"
-	.string "Let me battle you, please!$"
+	.string "Your mom bought those snazzy\n"
+# 75 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "RUNNING SHOES for you?\p"
+# 76 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "She must adore you.$"
+# 77 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_LeroyDefeat::
+# 78 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_LeroyIntro::
 # 79 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "I knew it!\n"
-	.string "You're as tough as I thought!$"
+# 74 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 80 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "You look strong.\n"
+# 81 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "Let me battle you, please!$"
+# 82 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_LeroyPostBattle::
+# 83 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_LeroyDefeat::
 # 84 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "The way you battle has given me\n"
-	.string "a lot of useful data.\p"
-	.string "Thanks so much!$"
+# 79 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 85 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "I knew it!\n"
+# 86 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "You're as tough as I thought!$"
+# 87 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_MichelleIntro::
+# 88 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_LeroyPostBattle::
+# 89 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 84 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 # 90 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "I was given the best possible\n"
-	.string "education to become this strong.\p"
-	.string "I don't want to lose to anyone!$"
+	.string "The way you battle has given me\n"
+# 91 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "a lot of useful data.\p"
+# 92 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "Thanks so much!$"
+# 93 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_MichelleDefeat::
+# 94 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_MichelleIntro::
+# 95 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 90 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 # 96 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "Thank you. I feel like I've been\n"
-	.string "set free by losing to you.$"
+	.string "I was given the best possible\n"
+# 97 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "education to become this strong.\p"
+# 98 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "I don't want to lose to anyone!$"
+# 99 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_MichellePostBattle::
+# 100 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_MichelleDefeat::
 # 101 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 96 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 102 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "Thank you. I feel like I've been\n"
+# 103 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "set free by losing to you.$"
+# 104 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+
+# 105 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_MichellePostBattle::
+# 106 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 101 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 107 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 	.string "For some reason, I get furious\n"
-	.string "over the slightest thing.\p"
-	.string "I'll calm myself by breathing\n"
-	.string "deeply.$"
-
-SevenIsland_SevaultCanyon_Text_LexIntro::
 # 108 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "LEX: My darling NYA, together\n"
-	.string "we could win!$"
+	.string "over the slightest thing.\p"
+# 109 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "I'll calm myself by breathing\n"
+# 110 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "deeply.$"
+# 111 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_LexDefeat::
+# 112 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_LexIntro::
 # 113 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "LEX: I seem to have been too\n"
-	.string "careless…$"
+# 108 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 114 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "LEX: My darling NYA, together\n"
+# 115 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "we could win!$"
+# 116 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_LexPostBattle::
+# 117 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_LexDefeat::
 # 118 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "LEX: I think it was a good\n"
-	.string "experience for NYA.\p"
-	.string "You have my gratitude.$"
+# 113 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 119 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "LEX: I seem to have been too\n"
+# 120 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "careless…$"
+# 121 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_LexNotEnoughMons::
+# 122 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_LexPostBattle::
+# 123 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 118 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 # 124 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "LEX: May I ask you to battle the\n"
-	.string "both of us at the same time?$"
+	.string "LEX: I think it was a good\n"
+# 125 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "experience for NYA.\p"
+# 126 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "You have my gratitude.$"
+# 127 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_NyaIntro::
+# 128 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_LexNotEnoughMons::
 # 129 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "NYA: I'll do my best so I won't\n"
-	.string "drag down my mentor, LEX!$"
+# 124 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 130 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "LEX: May I ask you to battle the\n"
+# 131 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "both of us at the same time?$"
+# 132 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_NyaDefeat::
+# 133 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_NyaIntro::
 # 134 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "NYA: Oh, no…\n"
-	.string "I'm so sorry, I…$"
+# 129 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 135 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "NYA: I'll do my best so I won't\n"
+# 136 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "drag down my mentor, LEX!$"
+# 137 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_NyaPostBattle::
+# 138 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_NyaDefeat::
 # 139 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 134 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 140 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "NYA: Oh, no…\n"
+# 141 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "I'm so sorry, I…$"
+# 142 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+
+# 143 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_NyaPostBattle::
+# 144 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 139 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 145 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 	.string "NYA: I think I'm going to need\n"
+# 146 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 	.string "much more seasoning and tutoring\l"
-	.string "under LEX…\p"
-	.string "…So, LEX, please, may I stay with\n"
-	.string "you like this?$"
-
-SevenIsland_SevaultCanyon_Text_NyaNotEnoughMons::
 # 147 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "NYA: I'm sorry, but may we battle\n"
-	.string "in two-on-two style?$"
+	.string "under LEX…\p"
+# 148 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "…So, LEX, please, may I stay with\n"
+# 149 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "you like this?$"
+# 150 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_RouteSign::
+# 151 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_NyaNotEnoughMons::
 # 152 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
-	.string "SEVAULT CANYON\n"
-	.string "TANOBY RUINS AHEAD$"
+# 147 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 153 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "NYA: I'm sorry, but may we battle\n"
+# 154 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "in two-on-two style?$"
+# 155 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 
-SevenIsland_SevaultCanyon_Text_BrunoTrainedWithBrawly::
+# 156 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_RouteSign::
 # 157 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 152 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 158 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "SEVAULT CANYON\n"
+# 159 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+	.string "TANOBY RUINS AHEAD$"
+# 160 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+
+# 161 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_Text_BrunoTrainedWithBrawly::
+# 162 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 157 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
+# 163 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 	.string "Training by oneself is certainly\n"
+# 164 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 	.string "not a bad thing.\p"
+# 165 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 	.string "But it's also not bad to aim for\n"
+# 166 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 	.string "the top with a partner.\p"
+# 167 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 	.string "Even BRUNO…\n"
+# 168 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 	.string "He trained with a fellow by the\l"
+# 169 "data/maps/SevenIsland_SevaultCanyon_Frlg/scripts.pory"
 	.string "name of BRAWLY before.$"
