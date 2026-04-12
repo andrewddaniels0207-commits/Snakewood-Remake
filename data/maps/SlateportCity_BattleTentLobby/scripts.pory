@@ -52,8 +52,10 @@ script SlateportCity_BattleTentLobby_EventScript_WonChallenge {
 script SlateportCity_BattleTentLobby_EventScript_GivePrize {
     msgbox(SlateportCity_BattleTentLobby_Text_AwardYouThisPrize, MSGBOX_DEFAULT)
     slateporttent_giveprize()
-    switch(VAR_RESULT)
-    case(FALSE, SlateportCity_BattleTentLobby_EventScript_NoRoomForPrize)
+    switch (var(VAR_RESULT)) {
+        case FALSE:
+            goto(SlateportCity_BattleTentLobby_EventScript_NoRoomForPrize)
+    }
     frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, 0)
     message(BattleFrontier_BattleTowerLobby_Text_ReceivedPrize)
     waitmessage()
@@ -113,11 +115,16 @@ script SlateportCity_BattleTentLobby_EventScript_AskEnterChallenge {
     message(SlateportCity_BattleTentLobby_Text_TakeChallenge)
     waitmessage()
     multichoice(17, 6, MULTI_CHALLENGEINFO, FALSE)
-    switch(VAR_RESULT)
-    case(0, SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge)
-    case(1, SlateportCity_BattleTentLobby_EventScript_ExplainChallenge)
-    case(2, SlateportCity_BattleTentLobby_EventScript_CancelChallenge)
-    case(MULTI_B_PRESSED, SlateportCity_BattleTentLobby_EventScript_CancelChallenge)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge)
+        case 1:
+            goto(SlateportCity_BattleTentLobby_EventScript_ExplainChallenge)
+        case 2:
+            goto(SlateportCity_BattleTentLobby_EventScript_CancelChallenge)
+        case MULTI_B_PRESSED:
+            goto(SlateportCity_BattleTentLobby_EventScript_CancelChallenge)
+    }
 }
 
 script SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge {
@@ -125,10 +132,14 @@ script SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge {
     setvar(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES)
     frontier_set(FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_TENT)
     msgbox(SlateportCity_BattleTentLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO)
-    switch(VAR_RESULT)
-    case(NO, SlateportCity_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
-    case(YES, SlateportCity_BattleTentLobby_EventScript_SaveBeforeChallenge)
-    case(MULTI_B_PRESSED, SlateportCity_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
+    switch (var(VAR_RESULT)) {
+        case NO:
+            goto(SlateportCity_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
+        case YES:
+            goto(SlateportCity_BattleTentLobby_EventScript_SaveBeforeChallenge)
+        case MULTI_B_PRESSED:
+            goto(SlateportCity_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
+    }
 }
 
 script SlateportCity_BattleTentLobby_EventScript_SaveBeforeChallenge {
@@ -275,14 +286,22 @@ script SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard {
     message(BattleFrontier_BattleFactoryLobby_Text_ReadWhichHeading)
     waitmessage()
     multichoice(17, 0, MULTI_SLATEPORT_TENT_RULES, FALSE)
-    switch(VAR_RESULT)
-    case(0, SlateportCity_BattleTentLobby_EventScript_RulesBasics)
-    case(1, SlateportCity_BattleTentLobby_EventScript_RulesSwapPartner)
-    case(2, SlateportCity_BattleTentLobby_EventScript_RulesSwapNumber)
-    case(3, SlateportCity_BattleTentLobby_EventScript_RulesSwapNotes)
-    case(4, SlateportCity_BattleTentLobby_EventScript_RulesMons)
-    case(5, SlateportCity_BattleTentLobby_EventScript_ExitRules)
-    case(MULTI_B_PRESSED, SlateportCity_BattleTentLobby_EventScript_ExitRules)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(SlateportCity_BattleTentLobby_EventScript_RulesBasics)
+        case 1:
+            goto(SlateportCity_BattleTentLobby_EventScript_RulesSwapPartner)
+        case 2:
+            goto(SlateportCity_BattleTentLobby_EventScript_RulesSwapNumber)
+        case 3:
+            goto(SlateportCity_BattleTentLobby_EventScript_RulesSwapNotes)
+        case 4:
+            goto(SlateportCity_BattleTentLobby_EventScript_RulesMons)
+        case 5:
+            goto(SlateportCity_BattleTentLobby_EventScript_ExitRules)
+        case MULTI_B_PRESSED:
+            goto(SlateportCity_BattleTentLobby_EventScript_ExitRules)
+    }
     end
 }
 

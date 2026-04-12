@@ -149,18 +149,30 @@ script BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout {
     setvar(VAR_0x8004, SCROLL_MULTI_BF_RECEPTIONIST)
     special(ShowScrollableMultichoice)
     waitstate
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_ReceptionGate_EventScript_BattleTower)
-    case(1, BattleFrontier_ReceptionGate_EventScript_BattleDome)
-    case(2, BattleFrontier_ReceptionGate_EventScript_BattlePalace)
-    case(3, BattleFrontier_ReceptionGate_EventScript_BattleArena)
-    case(4, BattleFrontier_ReceptionGate_EventScript_BattleFactory)
-    case(5, BattleFrontier_ReceptionGate_EventScript_BattlePike)
-    case(6, BattleFrontier_ReceptionGate_EventScript_BattlePyramid)
-    case(7, BattleFrontier_ReceptionGate_EventScript_RankingHall)
-    case(8, BattleFrontier_ReceptionGate_EventScript_ExchangeCorner)
-    case(9, BattleFrontier_ReceptionGate_EventScript_ExitFacilityGuide)
-    case(MULTI_B_PRESSED, BattleFrontier_ReceptionGate_EventScript_ExitFacilityGuide)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_ReceptionGate_EventScript_BattleTower)
+        case 1:
+            goto(BattleFrontier_ReceptionGate_EventScript_BattleDome)
+        case 2:
+            goto(BattleFrontier_ReceptionGate_EventScript_BattlePalace)
+        case 3:
+            goto(BattleFrontier_ReceptionGate_EventScript_BattleArena)
+        case 4:
+            goto(BattleFrontier_ReceptionGate_EventScript_BattleFactory)
+        case 5:
+            goto(BattleFrontier_ReceptionGate_EventScript_BattlePike)
+        case 6:
+            goto(BattleFrontier_ReceptionGate_EventScript_BattlePyramid)
+        case 7:
+            goto(BattleFrontier_ReceptionGate_EventScript_RankingHall)
+        case 8:
+            goto(BattleFrontier_ReceptionGate_EventScript_ExchangeCorner)
+        case 9:
+            goto(BattleFrontier_ReceptionGate_EventScript_ExitFacilityGuide)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_ReceptionGate_EventScript_ExitFacilityGuide)
+    }
     end
 }
 
@@ -236,14 +248,22 @@ script BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout {
     message(BattleFrontier_ReceptionGate_Text_LearnAboutWhat)
     waitmessage()
     multichoice(15, 0, MULTI_FRONTIER_RULES, FALSE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_ReceptionGate_EventScript_LevelMode)
-    case(1, BattleFrontier_ReceptionGate_EventScript_Level50)
-    case(2, BattleFrontier_ReceptionGate_EventScript_OpenLevel)
-    case(3, BattleFrontier_ReceptionGate_EventScript_MonEntry)
-    case(4, BattleFrontier_ReceptionGate_EventScript_HoldItems)
-    case(5, BattleFrontier_ReceptionGate_EventScript_ExitRulesGuide)
-    case(MULTI_B_PRESSED, BattleFrontier_ReceptionGate_EventScript_ExitRulesGuide)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_ReceptionGate_EventScript_LevelMode)
+        case 1:
+            goto(BattleFrontier_ReceptionGate_EventScript_Level50)
+        case 2:
+            goto(BattleFrontier_ReceptionGate_EventScript_OpenLevel)
+        case 3:
+            goto(BattleFrontier_ReceptionGate_EventScript_MonEntry)
+        case 4:
+            goto(BattleFrontier_ReceptionGate_EventScript_HoldItems)
+        case 5:
+            goto(BattleFrontier_ReceptionGate_EventScript_ExitRulesGuide)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_ReceptionGate_EventScript_ExitRulesGuide)
+    }
     end
 }
 
@@ -295,12 +315,18 @@ script BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbo
     message(BattleFrontier_ReceptionGate_Text_LearnAboutWhich1)
     waitmessage()
     multichoice(16, 4, MULTI_FRONTIER_PASS_INFO, FALSE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_ReceptionGate_EventScript_Symbols)
-    case(1, BattleFrontier_ReceptionGate_EventScript_RecordBattle)
-    case(2, BattleFrontier_ReceptionGate_EventScript_BattlePoints)
-    case(3, BattleFrontier_ReceptionGate_EventScript_ExitFrontierPassGuide)
-    case(MULTI_B_PRESSED, BattleFrontier_ReceptionGate_EventScript_ExitFrontierPassGuide)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_ReceptionGate_EventScript_Symbols)
+        case 1:
+            goto(BattleFrontier_ReceptionGate_EventScript_RecordBattle)
+        case 2:
+            goto(BattleFrontier_ReceptionGate_EventScript_BattlePoints)
+        case 3:
+            goto(BattleFrontier_ReceptionGate_EventScript_ExitFrontierPassGuide)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_ReceptionGate_EventScript_ExitFrontierPassGuide)
+    }
     end
 }
 

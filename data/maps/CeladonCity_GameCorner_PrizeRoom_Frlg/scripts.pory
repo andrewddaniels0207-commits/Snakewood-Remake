@@ -26,14 +26,22 @@ script CeladonCity_GameCorner_PrizeRoom_EventScript_ChoosePrizeMon {
     message(CeladonCity_GameCorner_PrizeRoom_Text_WhichPrize)
     waitmessage()
     multichoice(11, 0, MULTI_GAME_CORNER_POKEMON_PRIZES, FALSE)
-    switch(VAR_RESULT)
-    case(0, CeladonCity_GameCorner_PrizeRoom_EventScript_Abra)
-    case(1, CeladonCity_GameCorner_PrizeRoom_EventScript_Clefairy)
-    case(2, CeladonCity_GameCorner_PrizeRoom_EventScript_DratiniPinsir)
-    case(3, CeladonCity_GameCorner_PrizeRoom_EventScript_ScytherDratini)
-    case(4, CeladonCity_GameCorner_PrizeRoom_EventScript_Porygon)
-    case(5, CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
-    case(127, CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_Abra)
+        case 1:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_Clefairy)
+        case 2:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_DratiniPinsir)
+        case 3:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_ScytherDratini)
+        case 4:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_Porygon)
+        case 5:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+        case 127:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+    }
     end
 }
 
@@ -124,13 +132,20 @@ script CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon {
         goto(CeladonCity_GameCorner_PrizeRoom_EventScript_NotEnoughCoins)
     }
     textcolor(NPC_TEXT_COLOR_NEUTRAL)
-    switch(VAR_TEMP_1)
-    case(SPECIES_ABRA,     CeladonCity_GameCorner_PrizeRoom_EventScript_GiveAbra)
-    case(SPECIES_CLEFAIRY, CeladonCity_GameCorner_PrizeRoom_EventScript_GiveClefairy)
-    case(SPECIES_DRATINI,  CeladonCity_GameCorner_PrizeRoom_EventScript_GiveDratini)
-    case(SPECIES_SCYTHER,  CeladonCity_GameCorner_PrizeRoom_EventScript_GiveScyther)
-    case(SPECIES_PORYGON,  CeladonCity_GameCorner_PrizeRoom_EventScript_GivePorygon)
-    case(SPECIES_PINSIR,   CeladonCity_GameCorner_PrizeRoom_EventScript_GivePinsir)
+    switch (var(VAR_TEMP_1)) {
+        case SPECIES_ABRA:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_GiveAbra)
+        case SPECIES_CLEFAIRY:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_GiveClefairy)
+        case SPECIES_DRATINI:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_GiveDratini)
+        case SPECIES_SCYTHER:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_GiveScyther)
+        case SPECIES_PORYGON:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_GivePorygon)
+        case SPECIES_PINSIR:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_GivePinsir)
+    }
     end
 }
 
@@ -292,14 +307,22 @@ script CeladonCity_GameCorner_PrizeRoom_EventScript_ChoosePrizeTM {
     message(CeladonCity_GameCorner_PrizeRoom_Text_WhichPrize)
     waitmessage()
     multichoice(11, 0, MULTI_GAME_CORNER_TMPRIZES, FALSE)
-    switch(VAR_RESULT)
-    case(0, CeladonCity_GameCorner_PrizeRoom_EventScript_TM13)
-    case(1, CeladonCity_GameCorner_PrizeRoom_EventScript_TM23)
-    case(2, CeladonCity_GameCorner_PrizeRoom_EventScript_TM24)
-    case(3, CeladonCity_GameCorner_PrizeRoom_EventScript_TM30)
-    case(4, CeladonCity_GameCorner_PrizeRoom_EventScript_TM35)
-    case(5, CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
-    case(127, CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_TM13)
+        case 1:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_TM23)
+        case 2:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_TM24)
+        case 3:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_TM30)
+        case 4:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_TM35)
+        case 5:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+        case 127:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+    }
     end
 }
 
@@ -403,14 +426,22 @@ script CeladonCity_GameCorner_PrizeRoom_EventScript_ChoosePrizeItem {
     message(CeladonCity_GameCorner_PrizeRoom_Text_WhichPrize)
     waitmessage()
     multichoice(10, 0, MULTI_GAME_CORNER_BATTLE_ITEM_PRIZES, FALSE)
-    switch(VAR_RESULT)
-    case(0, CeladonCity_GameCorner_PrizeRoom_EventScript_SmokeBall)
-    case(1, CeladonCity_GameCorner_PrizeRoom_EventScript_MiracleSeed)
-    case(2, CeladonCity_GameCorner_PrizeRoom_EventScript_Charcoal)
-    case(3, CeladonCity_GameCorner_PrizeRoom_EventScript_MysticWater)
-    case(4, CeladonCity_GameCorner_PrizeRoom_EventScript_YellowFlute)
-    case(5, CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
-    case(127, CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_SmokeBall)
+        case 1:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_MiracleSeed)
+        case 2:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_Charcoal)
+        case 3:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_MysticWater)
+        case 4:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_YellowFlute)
+        case 5:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+        case 127:
+            goto(CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange)
+    }
     end
 }
 

@@ -47,10 +47,14 @@ script LilycoveCity_LilycoveMuseum_1F_EventScript_InterestedInPaintings {
     applymovement(LOCALID_MUSEUM_1F_CURATOR, LilycoveCity_LilycoveMuseum_1F_Movement_CuratorEnterStairs)
     waitmovement(0)
     removeobject(LOCALID_MUSEUM_1F_CURATOR)
-    switch(VAR_FACING)
-    case(DIR_NORTH, LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorNorth)
-    case(DIR_WEST, LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorWest)
-    case(DIR_EAST, LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorEast)
+    switch (var(VAR_FACING)) {
+        case DIR_NORTH:
+            goto(LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorNorth)
+        case DIR_WEST:
+            goto(LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorWest)
+        case DIR_EAST:
+            goto(LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorEast)
+    }
     end
 }
 

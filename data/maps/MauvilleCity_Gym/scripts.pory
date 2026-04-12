@@ -6,12 +6,18 @@ script MauvilleCity_Gym_OnLoad {
     if (flag(FLAG_DEFEATED_MAUVILLE_GYM)) {
         goto(MauvilleCity_Gym_EventScript_DeactivatePuzzle)
     }
-    switch(VAR_MAUVILLE_GYM_STATE)
-    case(0, MauvilleCity_Gym_EventScript_UpdateBarriers)
-    case(1, MauvilleCity_Gym_EventScript_Switch1Pressed)
-    case(2, MauvilleCity_Gym_EventScript_Switch2Pressed)
-    case(3, MauvilleCity_Gym_EventScript_Switch3Pressed)
-    case(4, MauvilleCity_Gym_EventScript_Switch4Pressed)
+    switch (var(VAR_MAUVILLE_GYM_STATE)) {
+        case 0:
+            goto(MauvilleCity_Gym_EventScript_UpdateBarriers)
+        case 1:
+            goto(MauvilleCity_Gym_EventScript_Switch1Pressed)
+        case 2:
+            goto(MauvilleCity_Gym_EventScript_Switch2Pressed)
+        case 3:
+            goto(MauvilleCity_Gym_EventScript_Switch3Pressed)
+        case 4:
+            goto(MauvilleCity_Gym_EventScript_Switch4Pressed)
+    }
     end
 }
 

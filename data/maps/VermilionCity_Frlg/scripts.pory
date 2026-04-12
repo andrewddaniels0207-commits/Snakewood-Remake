@@ -130,11 +130,16 @@ script VermilionCity_EventScript_HasMysticTicket {
     message(VermilionCity_Text_BoardSeagallopFerry)
     waitmessage()
     multichoice(17, 6, MULTI_SEVII_NAVEL, FALSE)
-    switch(VAR_RESULT)
-    case(0, EventScript_SeviiDestinationsPage1)
-    case(1, EventScript_SailToNavelRock)
-    case(2, EventScript_CancelSail)
-    case(127, EventScript_CancelSail)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(EventScript_SeviiDestinationsPage1)
+        case 1:
+            goto(EventScript_SailToNavelRock)
+        case 2:
+            goto(EventScript_CancelSail)
+        case 127:
+            goto(EventScript_CancelSail)
+    }
     end
 }
 
@@ -151,11 +156,16 @@ script VermilionCity_EventScript_HasAuroraTicket {
     message(VermilionCity_Text_BoardSeagallopFerry)
     waitmessage()
     multichoice(13, 6, MULTI_SEVII_BIRTH, FALSE)
-    switch(VAR_RESULT)
-    case(0, EventScript_SeviiDestinationsPage1)
-    case(1, EventScript_SailToBirthIsland)
-    case(2, EventScript_CancelSail)
-    case(127, EventScript_CancelSail)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(EventScript_SeviiDestinationsPage1)
+        case 1:
+            goto(EventScript_SailToBirthIsland)
+        case 2:
+            goto(EventScript_CancelSail)
+        case 127:
+            goto(EventScript_CancelSail)
+    }
     end
 }
 
@@ -175,12 +185,18 @@ script VermilionCity_EventScript_HasMysticAndAuroraTickets {
     message(VermilionCity_Text_BoardSeagallopFerry)
     waitmessage()
     multichoice(13, 5, MULTI_SEVII_NAVEL_BIRTH, FALSE)
-    switch(VAR_RESULT)
-    case(0, EventScript_SeviiDestinationsPage1)
-    case(1, EventScript_SailToNavelRock)
-    case(2, EventScript_SailToBirthIsland)
-    case(3, EventScript_CancelSail)
-    case(127, EventScript_CancelSail)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(EventScript_SeviiDestinationsPage1)
+        case 1:
+            goto(EventScript_SailToNavelRock)
+        case 2:
+            goto(EventScript_SailToBirthIsland)
+        case 3:
+            goto(EventScript_CancelSail)
+        case 127:
+            goto(EventScript_CancelSail)
+    }
     end
 }
 
@@ -205,12 +221,18 @@ script VermilionCity_EventScript_ChooseSeagallopDestTriPass {
     waitmessage()
     setvar(VAR_0x8004, SEAGALLOP_VERMILION_CITY)
     multichoice(19, 5, MULTI_SEAGALLOP_123, FALSE)
-    switch(VAR_RESULT)
-    case(0, EventScript_SailToOneIsland2)
-    case(1, EventScript_SailToTwoIsland2)
-    case(2, EventScript_SailToThreeIsland2)
-    case(3, EventScript_CancelSail)
-    case(127, EventScript_CancelSail)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(EventScript_SailToOneIsland2)
+        case 1:
+            goto(EventScript_SailToTwoIsland2)
+        case 2:
+            goto(EventScript_SailToThreeIsland2)
+        case 3:
+            goto(EventScript_CancelSail)
+        case 127:
+            goto(EventScript_CancelSail)
+    }
     end
 }
 

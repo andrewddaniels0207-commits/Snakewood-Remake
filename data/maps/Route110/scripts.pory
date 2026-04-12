@@ -375,18 +375,30 @@ script Route110_EventScript_CyclingChallengeEnd {
 script Route110_EventScript_CyclingChallengeResults {
     special(FinishCyclingRoadChallenge)
     msgbox(Route110_Text_CyclingChallengeResultSummary, MSGBOX_DEFAULT)
-    switch(VAR_RESULT)
-    case(10, Route110_EventScript_ChallengeReactionBest)
-    case(9, Route110_EventScript_ChallengeReactionGood)
-    case(8, Route110_EventScript_ChallengeReactionGood)
-    case(7, Route110_EventScript_ChallengeReactionGood)
-    case(6, Route110_EventScript_ChallengeReactionOk)
-    case(5, Route110_EventScript_ChallengeReactionOk)
-    case(4, Route110_EventScript_ChallengeReactionOk)
-    case(3, Route110_EventScript_ChallengeReactionBad)
-    case(2, Route110_EventScript_ChallengeReactionBad)
-    case(1, Route110_EventScript_ChallengeReactionBad)
-    case(0, Route110_EventScript_ChallengeReactionWorst)
+    switch (var(VAR_RESULT)) {
+        case 10:
+            goto(Route110_EventScript_ChallengeReactionBest)
+        case 9:
+            goto(Route110_EventScript_ChallengeReactionGood)
+        case 8:
+            goto(Route110_EventScript_ChallengeReactionGood)
+        case 7:
+            goto(Route110_EventScript_ChallengeReactionGood)
+        case 6:
+            goto(Route110_EventScript_ChallengeReactionOk)
+        case 5:
+            goto(Route110_EventScript_ChallengeReactionOk)
+        case 4:
+            goto(Route110_EventScript_ChallengeReactionOk)
+        case 3:
+            goto(Route110_EventScript_ChallengeReactionBad)
+        case 2:
+            goto(Route110_EventScript_ChallengeReactionBad)
+        case 1:
+            goto(Route110_EventScript_ChallengeReactionBad)
+        case 0:
+            goto(Route110_EventScript_ChallengeReactionWorst)
+    }
     end
 }
 
@@ -493,10 +505,14 @@ script Route110_EventScript_PlayBrendanMusic {
 
 script Route110_EventScript_MayBattle {
     msgbox(Route110_Text_MayLetsBattle, MSGBOX_DEFAULT)
-    switch(VAR_STARTER_MON)
-    case(0, Route110_EventScript_MayBattleTreecko)
-    case(1, Route110_EventScript_MayBattleTorchic)
-    case(2, Route110_EventScript_MayBattleMudkip)
+    switch (var(VAR_STARTER_MON)) {
+        case 0:
+            goto(Route110_EventScript_MayBattleTreecko)
+        case 1:
+            goto(Route110_EventScript_MayBattleTorchic)
+        case 2:
+            goto(Route110_EventScript_MayBattleMudkip)
+    }
     end
 }
 
@@ -528,10 +544,14 @@ script Route110_EventScript_MayDefeated {
 
 script Route110_EventScript_BrendanBattle {
     msgbox(Route110_Text_BrendanLetsBattle, MSGBOX_DEFAULT)
-    switch(VAR_STARTER_MON)
-    case(0, Route110_EventScript_BrendanBattleTreecko)
-    case(1, Route110_EventScript_BrendanBattleTorchic)
-    case(2, Route110_EventScript_BrendanBattleMudkip)
+    switch (var(VAR_STARTER_MON)) {
+        case 0:
+            goto(Route110_EventScript_BrendanBattleTreecko)
+        case 1:
+            goto(Route110_EventScript_BrendanBattleTorchic)
+        case 2:
+            goto(Route110_EventScript_BrendanBattleMudkip)
+    }
     end
 }
 

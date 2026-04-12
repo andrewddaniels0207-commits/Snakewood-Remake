@@ -80,9 +80,12 @@ script SafariZone_South_EventScript_GoodLuck {
 script SafariZone_South_EventScript_ExitEarly {
     msgbox(SafariZone_South_Text_ExitEarlyThankYouForPlaying, MSGBOX_DEFAULT)
     closemessage
-    switch(VAR_FACING)
-    case(DIR_NORTH, SafariZone_South_EventScript_ExitEarlyNorth)
-    case(DIR_EAST, SafariZone_South_EventScript_ExitEarlyEast)
+    switch (var(VAR_FACING)) {
+        case DIR_NORTH:
+            goto(SafariZone_South_EventScript_ExitEarlyNorth)
+        case DIR_EAST:
+            goto(SafariZone_South_EventScript_ExitEarlyEast)
+    }
     end
 }
 

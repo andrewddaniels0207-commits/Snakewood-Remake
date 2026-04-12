@@ -26,11 +26,16 @@ script Route110_TrickHouseEntrance_OnTransition {
     if (var(VAR_TRICK_HOUSE_ENTRANCE_STATE) == 0) {
         call(Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle)
     }
-    switch(VAR_TRICK_HOUSE_ENTRANCE_STATE)
-    case(0, Route110_TrickHouseEntrance_EventScript_ReadyBeingWatchedTrigger)
-    case(1, Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched1)
-    case(3, Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched2)
-    case(4, Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched3)
+    switch (var(VAR_TRICK_HOUSE_ENTRANCE_STATE)) {
+        case 0:
+            goto(Route110_TrickHouseEntrance_EventScript_ReadyBeingWatchedTrigger)
+        case 1:
+            goto(Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched1)
+        case 3:
+            goto(Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched2)
+        case 4:
+            goto(Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched3)
+    }
     end
 }
 
@@ -193,15 +198,24 @@ script Route110_TrickHouseEntrance_EventScript_TrickMasterFound {
 script Route110_TrickHouseEntrance_EventScript_SetTrickMasterHidingSpot {
     addobject(LOCALID_TRICK_MASTER)
     hideobjectat(LOCALID_TRICK_MASTER, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE)
-    switch(VAR_TRICK_HOUSE_LEVEL)
-    case(0, Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle1)
-    case(1, Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle2)
-    case(2, Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle3)
-    case(3, Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle4)
-    case(4, Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle5)
-    case(5, Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle6)
-    case(6, Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle7)
-    case(7, Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle8)
+    switch (var(VAR_TRICK_HOUSE_LEVEL)) {
+        case 0:
+            goto(Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle1)
+        case 1:
+            goto(Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle2)
+        case 2:
+            goto(Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle3)
+        case 3:
+            goto(Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle4)
+        case 4:
+            goto(Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle5)
+        case 5:
+            goto(Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle6)
+        case 6:
+            goto(Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle7)
+        case 7:
+            goto(Route110_TrickHouseEntrance_EventScript_SetHidingSpotPuzzle8)
+    }
     end
 }
 
@@ -292,11 +306,16 @@ script Route110_TrickHouseEntrance_EventScript_UnusedRelease {
 
 script Route110_TrickHouseEntrance_EventScript_TrickMaster {
     lockall
-    switch(VAR_TRICK_HOUSE_ENTRANCE_STATE)
-    case(0, Route110_TrickHouseEntrance_EventScript_FoundTrickMaster)
-    case(2, Route110_TrickHouseEntrance_EventScript_GiveReward)
-    case(3, Route110_TrickHouseEntrance_EventScript_StillMakingPuzzle)
-    case(6, Route110_TrickHouseEntrance_EventScript_MechadollReward)
+    switch (var(VAR_TRICK_HOUSE_ENTRANCE_STATE)) {
+        case 0:
+            goto(Route110_TrickHouseEntrance_EventScript_FoundTrickMaster)
+        case 2:
+            goto(Route110_TrickHouseEntrance_EventScript_GiveReward)
+        case 3:
+            goto(Route110_TrickHouseEntrance_EventScript_StillMakingPuzzle)
+        case 6:
+            goto(Route110_TrickHouseEntrance_EventScript_MechadollReward)
+    }
     end
 }
 
@@ -570,8 +589,10 @@ script Route110_TrickHouseEntrance_EventScript_MechadollReward {
 
 script Route110_TrickHouseEntrance_EventScript_ChooseTent {
     multichoice(0, 0, MULTI_TENT, TRUE)
-    switch(VAR_RESULT)
-    case(0, Route110_TrickHouseEntrance_EventScript_GiveRedTent)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route110_TrickHouseEntrance_EventScript_GiveRedTent)
+    }
     goto(Route110_TrickHouseEntrance_EventScript_GiveBlueTent)
 }
 
@@ -604,11 +625,16 @@ script Route110_TrickHouseEntrance_EventScript_ReceivedTent {
 
 script Route110_TrickHouseEntrance_EventScript_Door {
     lockall
-    switch(VAR_TRICK_HOUSE_ENTRANCE_STATE)
-    case(0, Route110_TrickHouseEntrance_EventScript_ItsAScroll)
-    case(1, Route110_TrickHouseEntrance_EventScript_GoInHolePrompt)
-    case(4, Route110_TrickHouseEntrance_EventScript_LeftOnJourneyNote)
-    case(5, Route110_TrickHouseEntrance_EventScript_CheckLevelForMessage)
+    switch (var(VAR_TRICK_HOUSE_ENTRANCE_STATE)) {
+        case 0:
+            goto(Route110_TrickHouseEntrance_EventScript_ItsAScroll)
+        case 1:
+            goto(Route110_TrickHouseEntrance_EventScript_GoInHolePrompt)
+        case 4:
+            goto(Route110_TrickHouseEntrance_EventScript_LeftOnJourneyNote)
+        case 5:
+            goto(Route110_TrickHouseEntrance_EventScript_CheckLevelForMessage)
+    }
     end
 }
 
@@ -636,15 +662,24 @@ script Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom {
     waitmovement(0)
     applymovement(LOCALID_PLAYER, Route110_TrickHouseEntrance_Movement_EnterRoom)
     waitmovement(0)
-    switch(VAR_TRICK_HOUSE_LEVEL)
-    case(0, Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom1)
-    case(1, Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom2)
-    case(2, Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom3)
-    case(3, Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom4)
-    case(4, Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom5)
-    case(5, Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom6)
-    case(6, Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom7)
-    case(7, Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom8)
+    switch (var(VAR_TRICK_HOUSE_LEVEL)) {
+        case 0:
+            goto(Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom1)
+        case 1:
+            goto(Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom2)
+        case 2:
+            goto(Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom3)
+        case 3:
+            goto(Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom4)
+        case 4:
+            goto(Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom5)
+        case 5:
+            goto(Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom6)
+        case 6:
+            goto(Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom7)
+        case 7:
+            goto(Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom8)
+    }
     end
 }
 
@@ -732,15 +767,24 @@ script Route110_TrickHouseEntrance_EventScript_LeftOnJourneyNote2 {
 
 script Route110_TrickHousePuzzle_EventScript_Door {
     lockall
-    switch(VAR_TRICK_HOUSE_LEVEL)
-    case(0, Route110_TrickHousePuzzle1_EventScript_Door)
-    case(1, Route110_TrickHousePuzzle2_EventScript_Door)
-    case(2, Route110_TrickHousePuzzle3_EventScript_Door)
-    case(3, Route110_TrickHousePuzzle4_EventScript_Door)
-    case(4, Route110_TrickHousePuzzle5_EventScript_Door)
-    case(5, Route110_TrickHousePuzzle6_EventScript_Door)
-    case(6, Route110_TrickHousePuzzle7_EventScript_Door)
-    case(7, Route110_TrickHousePuzzle8_EventScript_Door)
+    switch (var(VAR_TRICK_HOUSE_LEVEL)) {
+        case 0:
+            goto(Route110_TrickHousePuzzle1_EventScript_Door)
+        case 1:
+            goto(Route110_TrickHousePuzzle2_EventScript_Door)
+        case 2:
+            goto(Route110_TrickHousePuzzle3_EventScript_Door)
+        case 3:
+            goto(Route110_TrickHousePuzzle4_EventScript_Door)
+        case 4:
+            goto(Route110_TrickHousePuzzle5_EventScript_Door)
+        case 5:
+            goto(Route110_TrickHousePuzzle6_EventScript_Door)
+        case 6:
+            goto(Route110_TrickHousePuzzle7_EventScript_Door)
+        case 7:
+            goto(Route110_TrickHousePuzzle8_EventScript_Door)
+    }
     end
 }
 

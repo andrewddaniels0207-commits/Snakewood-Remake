@@ -24,11 +24,16 @@ script BattleFrontier_OutsideWest_EventScript_FerryAttendant {
 
 script BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination {
     multichoicedefault(18, 6, MULTI_SSTIDAL_BATTLE_FRONTIER, 2, FALSE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_OutsideWest_EventScript_FerryToSlateport)
-    case(1, BattleFrontier_OutsideWest_EventScript_FerryToLilycove)
-    case(2, BattleFrontier_OutsideWest_EventScript_CancelFerrySelect)
-    case(MULTI_B_PRESSED, BattleFrontier_OutsideWest_EventScript_CancelFerrySelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_OutsideWest_EventScript_FerryToSlateport)
+        case 1:
+            goto(BattleFrontier_OutsideWest_EventScript_FerryToLilycove)
+        case 2:
+            goto(BattleFrontier_OutsideWest_EventScript_CancelFerrySelect)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_OutsideWest_EventScript_CancelFerrySelect)
+    }
     end
 }
 

@@ -294,13 +294,20 @@ script Route25_SeaCottage_EventScript_BillsMonList {
     message(Route25_SeaCottage_Text_SeeWhichMon)
     waitmessage()
     multichoice(0, 0, MULTI_EEVEELUTIONS, FALSE)
-    switch(VAR_RESULT)
-    case(0, Route25_SeaCottage_EventScript_ViewEevee)
-    case(1, Route25_SeaCottage_EventScript_ViewFlareon)
-    case(2, Route25_SeaCottage_EventScript_ViewJolteon)
-    case(3, Route25_SeaCottage_EventScript_ViewVaporeon)
-    case(4, Route25_SeaCottage_EventScript_ExitBillsMonList)
-    case(127, Route25_SeaCottage_EventScript_ExitBillsMonList)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route25_SeaCottage_EventScript_ViewEevee)
+        case 1:
+            goto(Route25_SeaCottage_EventScript_ViewFlareon)
+        case 2:
+            goto(Route25_SeaCottage_EventScript_ViewJolteon)
+        case 3:
+            goto(Route25_SeaCottage_EventScript_ViewVaporeon)
+        case 4:
+            goto(Route25_SeaCottage_EventScript_ExitBillsMonList)
+        case 127:
+            goto(Route25_SeaCottage_EventScript_ExitBillsMonList)
+    }
     end
 }
 

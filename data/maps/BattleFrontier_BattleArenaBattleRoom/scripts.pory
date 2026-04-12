@@ -90,8 +90,10 @@ script BattleFrontier_BattleArenaBattleRoom_EventScript_AnnounceTrainers {
     msgbox(gStringVar4, MSGBOX_DEFAULT)
     waitmessage()
     call(BattleFrontier_BattleArenaBattleRoom_EventScript_DoArenaBattle)
-    switch(VAR_RESULT)
-    case(1, BattleFrontier_BattleArenaBattleRoom_EventScript_DefeatedOpponent)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_DefeatedOpponent)
+    }
 }
 
 script BattleFrontier_BattleArenaBattleRoom_EventScript_DeclareOpponentWinner {
@@ -118,8 +120,10 @@ script BattleFrontier_BattleArenaBattleRoom_EventScript_DefeatedOpponent {
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
     addvar(VAR_RESULT, 1)
     frontier_set(FRONTIER_DATA_BATTLE_NUM, VAR_RESULT)
-    switch(VAR_RESULT)
-    case(7, BattleFrontier_BattleArenaBattleRoom_EventScript_ReturnToLobbyWon)
+    switch (var(VAR_RESULT)) {
+        case 7:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_ReturnToLobbyWon)
+    }
     applymovement(LOCALID_ARENA_BATTLE_PLAYER, BattleFrontier_BattleArenaBattleRoom_Movement_PlayerWalkBackToLine)
     applymovement(LOCALID_ARENA_BATTLE_OPPONENT, BattleFrontier_BattleArenaBattleRoom_Movement_OpponentExit)
     waitmovement(0)
@@ -166,31 +170,46 @@ script BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent {
         goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponentNoRecord)
     }
     multichoice(19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, TRUE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattleArenaBattleRoom_EventScript_ContinueChallenge)
-    case(1, BattleFrontier_BattleArenaBattleRoom_EventScript_AskRecordBattle)
-    case(2, BattleFrontier_BattleArenaBattleRoom_EventScript_AskPauseChallenge)
-    case(3, BattleFrontier_BattleArenaBattleRoom_EventScript_AskRetireChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_ContinueChallenge)
+        case 1:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskRecordBattle)
+        case 2:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskPauseChallenge)
+        case 3:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskRetireChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent)
+    }
 }
 
 script BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponentNoRecord {
     multichoice(20, 6, MULTI_GO_ON_REST_RETIRE, TRUE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattleArenaBattleRoom_EventScript_ContinueChallenge)
-    case(1, BattleFrontier_BattleArenaBattleRoom_EventScript_AskPauseChallenge)
-    case(2, BattleFrontier_BattleArenaBattleRoom_EventScript_AskRetireChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_ContinueChallenge)
+        case 1:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskPauseChallenge)
+        case 2:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskRetireChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent)
+    }
 }
 
 script BattleFrontier_BattleArenaBattleRoom_EventScript_AskRecordBattle {
     message(BattleFrontier_BattleArenaBattleRoom_Text_RecordLastBattle)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
-    switch(VAR_RESULT)
-    case(1, BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent)
-    case(0, BattleFrontier_BattleArenaBattleRoom_EventScript_RecordBattle)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent)
+        case 0:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_RecordBattle)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent)
+    }
 }
 
 script BattleFrontier_BattleArenaBattleRoom_EventScript_RecordBattle {
@@ -200,20 +219,28 @@ script BattleFrontier_BattleArenaBattleRoom_EventScript_RecordBattle {
 
 script BattleFrontier_BattleArenaBattleRoom_EventScript_AskPauseChallenge {
     msgbox(BattleFrontier_BattleArenaBattleRoom_Text_SaveAndShutDown, MSGBOX_YESNO)
-    switch(VAR_RESULT)
-    case(NO, BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent)
-    case(YES, BattleFrontier_BattleArenaBattleRoom_EventScript_PauseChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent)
+    switch (var(VAR_RESULT)) {
+        case NO:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent)
+        case YES:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_PauseChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent)
+    }
 }
 
 script BattleFrontier_BattleArenaBattleRoom_EventScript_AskRetireChallenge {
     message(BattleFrontier_BattleArenaBattleRoom_Text_RetireFromChallenge)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
-    switch(VAR_RESULT)
-    case(1, BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent)
-    case(0, BattleFrontier_BattleArenaBattleRoom_EventScript_WarpToLobbyLost)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent)
+        case 0:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_WarpToLobbyLost)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent)
+    }
 }
 
 script BattleFrontier_BattleArenaBattleRoom_EventScript_ContinueChallenge {
@@ -295,21 +322,32 @@ script BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoon {
         goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoonNoRecord)
     }
     multichoice(19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, TRUE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGreta)
-    case(1, BattleFrontier_BattleArenaBattleRoom_EventScript_AskRecordBattle)
-    case(2, BattleFrontier_BattleArenaBattleRoom_EventScript_AskPauseChallenge)
-    case(3, BattleFrontier_BattleArenaBattleRoom_EventScript_AskRetireChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoon)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGreta)
+        case 1:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskRecordBattle)
+        case 2:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskPauseChallenge)
+        case 3:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskRetireChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoon)
+    }
 }
 
 script BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoonNoRecord {
     multichoice(20, 6, MULTI_GO_ON_REST_RETIRE, TRUE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGreta)
-    case(1, BattleFrontier_BattleArenaBattleRoom_EventScript_AskPauseChallenge)
-    case(2, BattleFrontier_BattleArenaBattleRoom_EventScript_AskRetireChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoon)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGreta)
+        case 1:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskPauseChallenge)
+        case 2:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskRetireChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoon)
+    }
 }
 
 script BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGreta {
@@ -336,10 +374,14 @@ script BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGreta {
     waitmovement(0)
     applymovement(LOCALID_ARENA_BATTLE_OPPONENT, BattleFrontier_BattleArenaBattleRoom_Movement_OpponentStepForward)
     waitmovement(0)
-    switch(VAR_TEMP_F)
-    case(FRONTIER_BRAIN_GOLD, BattleFrontier_BattleArenaBattleRoom_EventScript_IntroGretaGold)
-    case(FRONTIER_BRAIN_STREAK, BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGretaSilver)
-    case(FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGretaGold)
+    switch (var(VAR_TEMP_F)) {
+        case FRONTIER_BRAIN_GOLD:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_IntroGretaGold)
+        case FRONTIER_BRAIN_STREAK:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGretaSilver)
+        case FRONTIER_BRAIN_STREAK_LONG:
+            goto(BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGretaGold)
+    }
     frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
     if (var(VAR_RESULT) != FALSE) {
         goto(BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGretaSilver)

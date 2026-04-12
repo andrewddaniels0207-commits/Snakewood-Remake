@@ -109,19 +109,32 @@ script BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1 {
     special(ShowScrollableMultichoice)
     waitstate
     special(CloseFrontierExchangeCornerItemIconWindow)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_ExchangeServiceCorner_EventScript_KissPoster)
-    case(1, BattleFrontier_ExchangeServiceCorner_EventScript_KissCushion)
-    case(2, BattleFrontier_ExchangeServiceCorner_EventScript_SmoochumDoll)
-    case(3, BattleFrontier_ExchangeServiceCorner_EventScript_TogepiDoll)
-    case(4, BattleFrontier_ExchangeServiceCorner_EventScript_MeowthDoll)
-    case(5, BattleFrontier_ExchangeServiceCorner_EventScript_ClefairyDoll)
-    case(6, BattleFrontier_ExchangeServiceCorner_EventScript_DittoDoll)
-    case(7, BattleFrontier_ExchangeServiceCorner_EventScript_CyndaquilDoll)
-    case(8, BattleFrontier_ExchangeServiceCorner_EventScript_ChikoritaDoll)
-    case(9, BattleFrontier_ExchangeServiceCorner_EventScript_TotodileDoll)
-    case(10, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye)
-    case(MULTI_B_PRESSED, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_KissPoster)
+        case 1:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_KissCushion)
+        case 2:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_SmoochumDoll)
+        case 3:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_TogepiDoll)
+        case 4:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_MeowthDoll)
+        case 5:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_ClefairyDoll)
+        case 6:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_DittoDoll)
+        case 7:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_CyndaquilDoll)
+        case 8:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_ChikoritaDoll)
+        case 9:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_TotodileDoll)
+        case 10:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye)
+    }
     end
 }
 
@@ -200,14 +213,22 @@ script BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2 {
     special(ShowScrollableMultichoice)
     waitstate
     special(CloseFrontierExchangeCornerItemIconWindow)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_ExchangeServiceCorner_EventScript_LaprasDoll)
-    case(1, BattleFrontier_ExchangeServiceCorner_EventScript_SnorlaxDoll)
-    case(2, BattleFrontier_ExchangeServiceCorner_EventScript_VenusaurDoll)
-    case(3, BattleFrontier_ExchangeServiceCorner_EventScript_CharizardDoll)
-    case(4, BattleFrontier_ExchangeServiceCorner_EventScript_BlastoiseDoll)
-    case(5, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye)
-    case(MULTI_B_PRESSED, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_LaprasDoll)
+        case 1:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_SnorlaxDoll)
+        case 2:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_VenusaurDoll)
+        case 3:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_CharizardDoll)
+        case 4:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_BlastoiseDoll)
+        case 5:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye)
+    }
     end
 }
 
@@ -261,15 +282,24 @@ script BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin {
     special(ShowScrollableMultichoice)
     waitstate
     special(CloseFrontierExchangeCornerItemIconWindow)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_ExchangeServiceCorner_EventScript_Protein)
-    case(1, BattleFrontier_ExchangeServiceCorner_EventScript_Calcium)
-    case(2, BattleFrontier_ExchangeServiceCorner_EventScript_Iron)
-    case(3, BattleFrontier_ExchangeServiceCorner_EventScript_Zinc)
-    case(4, BattleFrontier_ExchangeServiceCorner_EventScript_Carbos)
-    case(5, BattleFrontier_ExchangeServiceCorner_EventScript_HPUp)
-    case(6, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye)
-    case(MULTI_B_PRESSED, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_Protein)
+        case 1:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_Calcium)
+        case 2:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_Iron)
+        case 3:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_Zinc)
+        case 4:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_Carbos)
+        case 5:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_HPUp)
+        case 6:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye)
+    }
     end
 }
 
@@ -328,18 +358,30 @@ script BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem {
     special(ShowScrollableMultichoice)
     waitstate
     special(CloseFrontierExchangeCornerItemIconWindow)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_ExchangeServiceCorner_EventScript_Leftovers)
-    case(1, BattleFrontier_ExchangeServiceCorner_EventScript_WhiteHerb)
-    case(2, BattleFrontier_ExchangeServiceCorner_EventScript_QuickClaw)
-    case(3, BattleFrontier_ExchangeServiceCorner_EventScript_MentalHerb)
-    case(4, BattleFrontier_ExchangeServiceCorner_EventScript_Brightpowder)
-    case(5, BattleFrontier_ExchangeServiceCorner_EventScript_ChoiceBand)
-    case(6, BattleFrontier_ExchangeServiceCorner_EventScript_KingsRock)
-    case(7, BattleFrontier_ExchangeServiceCorner_EventScript_FocusBand)
-    case(8, BattleFrontier_ExchangeServiceCorner_EventScript_ScopeLens)
-    case(9, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye)
-    case(MULTI_B_PRESSED, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_Leftovers)
+        case 1:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_WhiteHerb)
+        case 2:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_QuickClaw)
+        case 3:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_MentalHerb)
+        case 4:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_Brightpowder)
+        case 5:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_ChoiceBand)
+        case 6:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_KingsRock)
+        case 7:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_FocusBand)
+        case 8:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_ScopeLens)
+        case 9:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye)
+    }
     end
 }
 

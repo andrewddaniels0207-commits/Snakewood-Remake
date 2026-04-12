@@ -18,18 +18,24 @@ script MauvilleCity_GameCorner_EventScript_CoinsClerk {
 
 script MauvilleCity_GameCorner_EventScript_ChooseCoinsDefault50 {
     multichoicedefault(15, 0, MULTI_GAME_CORNER_COINS, 0, FALSE)
-    switch(VAR_RESULT)
-    case(0, MauvilleCity_GameCorner_EventScript_Buy50Coins)
-    case(1, MauvilleCity_GameCorner_EventScript_Buy500Coins)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(MauvilleCity_GameCorner_EventScript_Buy50Coins)
+        case 1:
+            goto(MauvilleCity_GameCorner_EventScript_Buy500Coins)
+    }
     goto(MauvilleCity_GameCorner_EventScript_CancelBuyCoins)
     end
 }
 
 script MauvilleCity_GameCorner_EventScript_ChooseCoinsDefault500 {
     multichoicedefault(15, 0, MULTI_GAME_CORNER_COINS, 1, FALSE)
-    switch(VAR_RESULT)
-    case(0, MauvilleCity_GameCorner_EventScript_Buy50Coins)
-    case(1, MauvilleCity_GameCorner_EventScript_Buy500Coins)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(MauvilleCity_GameCorner_EventScript_Buy50Coins)
+        case 1:
+            goto(MauvilleCity_GameCorner_EventScript_Buy500Coins)
+    }
     goto(MauvilleCity_GameCorner_EventScript_CancelBuyCoins)
     end
 }
@@ -130,11 +136,16 @@ script MauvilleCity_GameCorner_EventScript_ReturnToChooseDollPrize {
 
 script MauvilleCity_GameCorner_EventScript_ChooseDollPrize {
     multichoice(12, 0, MULTI_GAME_CORNER_DOLLS, FALSE)
-    switch(VAR_RESULT)
-    case(0, MauvilleCity_GameCorner_EventScript_TreeckoDoll)
-    case(1, MauvilleCity_GameCorner_EventScript_TorchicDoll)
-    case(2, MauvilleCity_GameCorner_EventScript_MudkipDoll)
-    case(3, MauvilleCity_GameCorner_EventScript_CancelDollSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(MauvilleCity_GameCorner_EventScript_TreeckoDoll)
+        case 1:
+            goto(MauvilleCity_GameCorner_EventScript_TorchicDoll)
+        case 2:
+            goto(MauvilleCity_GameCorner_EventScript_MudkipDoll)
+        case 3:
+            goto(MauvilleCity_GameCorner_EventScript_CancelDollSelect)
+    }
     goto(MauvilleCity_GameCorner_EventScript_CancelDollSelect)
     end
 }
@@ -162,10 +173,14 @@ script MauvilleCity_GameCorner_EventScript_ConfirmDollPrize {
     if (var(VAR_RESULT) == NO) {
         goto(MauvilleCity_GameCorner_EventScript_CancelDollSelect)
     }
-    switch(VAR_TEMP_1)
-    case(1, MauvilleCity_GameCorner_EventScript_BuyTreeckoDoll)
-    case(2, MauvilleCity_GameCorner_EventScript_BuyTorchicDoll)
-    case(3, MauvilleCity_GameCorner_EventScript_BuyMudkipDoll)
+    switch (var(VAR_TEMP_1)) {
+        case 1:
+            goto(MauvilleCity_GameCorner_EventScript_BuyTreeckoDoll)
+        case 2:
+            goto(MauvilleCity_GameCorner_EventScript_BuyTorchicDoll)
+        case 3:
+            goto(MauvilleCity_GameCorner_EventScript_BuyMudkipDoll)
+    }
     end
 }
 
@@ -273,13 +288,20 @@ script MauvilleCity_GameCorner_EventScript_ReturnToChooseTMPrize {
 
 script MauvilleCity_GameCorner_EventScript_ChooseTMPrize {
     multichoice(12, 0, MULTI_GAME_CORNER_TMS, FALSE)
-    switch(VAR_RESULT)
-    case(0, MauvilleCity_GameCorner_EventScript_TMDoubleTeam)
-    case(1, MauvilleCity_GameCorner_EventScript_TMPsychic)
-    case(2, MauvilleCity_GameCorner_EventScript_TMFlamethrower)
-    case(3, MauvilleCity_GameCorner_EventScript_TMThunderbolt)
-    case(4, MauvilleCity_GameCorner_EventScript_TMIceBeam)
-    case(5, MauvilleCity_GameCorner_EventScript_CancelTMSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(MauvilleCity_GameCorner_EventScript_TMDoubleTeam)
+        case 1:
+            goto(MauvilleCity_GameCorner_EventScript_TMPsychic)
+        case 2:
+            goto(MauvilleCity_GameCorner_EventScript_TMFlamethrower)
+        case 3:
+            goto(MauvilleCity_GameCorner_EventScript_TMThunderbolt)
+        case 4:
+            goto(MauvilleCity_GameCorner_EventScript_TMIceBeam)
+        case 5:
+            goto(MauvilleCity_GameCorner_EventScript_CancelTMSelect)
+    }
     goto(MauvilleCity_GameCorner_EventScript_CancelTMSelect)
     end
 }
@@ -325,12 +347,18 @@ script MauvilleCity_GameCorner_EventScript_ConfirmTMPrize {
     if (var(VAR_RESULT) == NO) {
         goto(MauvilleCity_GameCorner_EventScript_CancelTMSelect)
     }
-    switch(VAR_TEMP_1)
-    case(1, MauvilleCity_GameCorner_EventScript_BuyTMDoubleTeam)
-    case(2, MauvilleCity_GameCorner_EventScript_BuyTMPsychic)
-    case(3, MauvilleCity_GameCorner_EventScript_BuyTMFlamethrower)
-    case(4, MauvilleCity_GameCorner_EventScript_BuyTMThunderbolt)
-    case(5, MauvilleCity_GameCorner_EventScript_BuyTMIceBeam)
+    switch (var(VAR_TEMP_1)) {
+        case 1:
+            goto(MauvilleCity_GameCorner_EventScript_BuyTMDoubleTeam)
+        case 2:
+            goto(MauvilleCity_GameCorner_EventScript_BuyTMPsychic)
+        case 3:
+            goto(MauvilleCity_GameCorner_EventScript_BuyTMFlamethrower)
+        case 4:
+            goto(MauvilleCity_GameCorner_EventScript_BuyTMThunderbolt)
+        case 5:
+            goto(MauvilleCity_GameCorner_EventScript_BuyTMIceBeam)
+    }
     end
 }
 
@@ -463,10 +491,14 @@ script MauvilleCity_GameCorner_EventScript_Girl {
     if (var(VAR_RESULT) == NO) {
         goto(MauvilleCity_GameCorner_EventScript_DeclineStarterDoll)
     }
-    switch(VAR_STARTER_MON)
-    case(0, MauvilleCity_GameCorner_EventScript_GiveTreeckoDoll)
-    case(1, MauvilleCity_GameCorner_EventScript_GiveTorchicDoll)
-    case(2, MauvilleCity_GameCorner_EventScript_GiveMudkipDoll)
+    switch (var(VAR_STARTER_MON)) {
+        case 0:
+            goto(MauvilleCity_GameCorner_EventScript_GiveTreeckoDoll)
+        case 1:
+            goto(MauvilleCity_GameCorner_EventScript_GiveTorchicDoll)
+        case 2:
+            goto(MauvilleCity_GameCorner_EventScript_GiveMudkipDoll)
+    }
     end
 }
 

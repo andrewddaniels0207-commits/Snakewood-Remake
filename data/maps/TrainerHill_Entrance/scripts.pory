@@ -82,10 +82,14 @@ script TrainerHill_Entrance_EventScript_ExitElevator {
 script TrainerHill_Entrance_EventScript_ExitChallenge {
     setvar(VAR_TEMP_0, 1)
     trainerhill_getstatus()
-    switch(VAR_RESULT)
-    case(TRAINER_HILL_PLAYER_STATUS_LOST, TrainerHill_Entrance_EventScript_ExitChallengeLost)
-    case(TRAINER_HILL_PLAYER_STATUS_ECARD_SCANNED, TrainerHill_Entrance_EventScript_ExitChallengeECard)
-    case(TRAINER_HILL_PLAYER_STATUS_NORMAL, TrainerHill_Entrance_EventScript_EndExitChallenge)
+    switch (var(VAR_RESULT)) {
+        case TRAINER_HILL_PLAYER_STATUS_LOST:
+            goto(TrainerHill_Entrance_EventScript_ExitChallengeLost)
+        case TRAINER_HILL_PLAYER_STATUS_ECARD_SCANNED:
+            goto(TrainerHill_Entrance_EventScript_ExitChallengeECard)
+        case TRAINER_HILL_PLAYER_STATUS_NORMAL:
+            goto(TrainerHill_Entrance_EventScript_EndExitChallenge)
+    }
 }
 
 script TrainerHill_Entrance_EventScript_ExitChallengeLost {
@@ -171,11 +175,16 @@ script TrainerHill_Entrance_EventScript_AskChallengeTrainers {
     message(TrainerHill_Entrance_Text_LikeToChallengeTrainers)
     waitmessage()
     multichoice(15, 6, MULTI_YESNOINFO, FALSE)
-    switch(VAR_RESULT)
-    case(0, TrainerHill_Entrance_EventScript_ChooseChallenge)
-    case(1, TrainerHill_Entrance_EventScript_CancelEntry)
-    case(2, TrainerHill_Entrance_EventScript_Info)
-    case(MULTI_B_PRESSED, TrainerHill_Entrance_EventScript_CancelEntry)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(TrainerHill_Entrance_EventScript_ChooseChallenge)
+        case 1:
+            goto(TrainerHill_Entrance_EventScript_CancelEntry)
+        case 2:
+            goto(TrainerHill_Entrance_EventScript_Info)
+        case MULTI_B_PRESSED:
+            goto(TrainerHill_Entrance_EventScript_CancelEntry)
+    }
     end
 }
 
@@ -187,9 +196,12 @@ script TrainerHill_Entrance_EventScript_Info {
 
 script TrainerHill_Entrance_EventScript_ChooseChallenge {
     multichoice(13, 2, MULTI_TAG_MATCH_TYPE, FALSE)
-    switch(VAR_RESULT)
-    case(4, TrainerHill_Entrance_EventScript_CancelEntry)
-    case(MULTI_B_PRESSED, TrainerHill_Entrance_EventScript_CancelEntry)
+    switch (var(VAR_RESULT)) {
+        case 4:
+            goto(TrainerHill_Entrance_EventScript_CancelEntry)
+        case MULTI_B_PRESSED:
+            goto(TrainerHill_Entrance_EventScript_CancelEntry)
+    }
     trainerhill_setmode(VAR_RESULT)
     setvar(VAR_TRAINER_HILL_IS_ACTIVE, 1)
     setvar(VAR_TEMP_5, 0)

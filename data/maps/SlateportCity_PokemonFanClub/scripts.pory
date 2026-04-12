@@ -9,10 +9,14 @@ script SlateportCity_PokemonFanClub_EventScript_Chairman {
     if (!flag(FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN)) {
         call(SlateportCity_PokemonFanClub_EventScript_MeetChairman)
     }
-    switch(VAR_SLATEPORT_FAN_CLUB_STATE)
-    case(0, SlateportCity_PokemonFanClub_EventScript_ChairmanFirstAssessment)
-    case(1, SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon)
-    case(2, SlateportCity_PokemonFanClub_EventScript_NoMoreScarves)
+    switch (var(VAR_SLATEPORT_FAN_CLUB_STATE)) {
+        case 0:
+            goto(SlateportCity_PokemonFanClub_EventScript_ChairmanFirstAssessment)
+        case 1:
+            goto(SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon)
+        case 2:
+            goto(SlateportCity_PokemonFanClub_EventScript_NoMoreScarves)
+    }
     release
     end
 }
@@ -77,13 +81,20 @@ script SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon {
         call(SlateportCity_PokemonFanClub_EventScript_CheckMonCool)
     }
     bufferleadmonspeciesname(STR_VAR_1)
-    switch(VAR_TEMP_1)
-    case(0, SlateportCity_PokemonFanClub_EventScript_NoHighConditions)
-    case(1, SlateportCity_PokemonFanClub_EventScript_GiveRedScarf)
-    case(2, SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf)
-    case(3, SlateportCity_PokemonFanClub_EventScript_GivePinkScarf)
-    case(4, SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf)
-    case(5, SlateportCity_PokemonFanClub_EventScript_GiveYellowScarf)
+    switch (var(VAR_TEMP_1)) {
+        case 0:
+            goto(SlateportCity_PokemonFanClub_EventScript_NoHighConditions)
+        case 1:
+            goto(SlateportCity_PokemonFanClub_EventScript_GiveRedScarf)
+        case 2:
+            goto(SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf)
+        case 3:
+            goto(SlateportCity_PokemonFanClub_EventScript_GivePinkScarf)
+        case 4:
+            goto(SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf)
+        case 5:
+            goto(SlateportCity_PokemonFanClub_EventScript_GiveYellowScarf)
+    }
     release
     end
 }

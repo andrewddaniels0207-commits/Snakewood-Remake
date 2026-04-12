@@ -15,10 +15,14 @@ script CeruleanCity_BikeShop_EventScript_Clerk {
     multichoice(11, 0, MULTI_BIKE_SHOP, FALSE)
     hidemoneybox()
     showmoneybox(0, 0)
-    switch(VAR_RESULT)
-    case(0, CeruleanCity_BikeShop_EventScript_TryPurchaseBicycle)
-    case(1, CeruleanCity_BikeShop_EventScript_ClerkGoodbye)
-    case(127, CeruleanCity_BikeShop_EventScript_ClerkGoodbye)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CeruleanCity_BikeShop_EventScript_TryPurchaseBicycle)
+        case 1:
+            goto(CeruleanCity_BikeShop_EventScript_ClerkGoodbye)
+        case 127:
+            goto(CeruleanCity_BikeShop_EventScript_ClerkGoodbye)
+    }
     end
 }
 

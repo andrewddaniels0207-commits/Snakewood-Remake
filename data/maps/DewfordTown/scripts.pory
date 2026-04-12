@@ -16,11 +16,16 @@ script DewfordTown_EventScript_Briney {
     message(DewfordTown_Text_WhereAreWeBound)
     waitmessage()
     multichoicedefault(21, 6, MULTI_BRINEY_ON_DEWFORD, 2, FALSE)
-    switch(VAR_RESULT)
-    case(0, DewfordTown_EventScript_ChoosePetalburg)
-    case(1, DewfordTown_EventScript_ChooseSlateport)
-    case(2, DewfordTown_EventScript_CancelSailSelect)
-    case(MULTI_B_PRESSED, DewfordTown_EventScript_CancelSailSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(DewfordTown_EventScript_ChoosePetalburg)
+        case 1:
+            goto(DewfordTown_EventScript_ChooseSlateport)
+        case 2:
+            goto(DewfordTown_EventScript_CancelSailSelect)
+        case MULTI_B_PRESSED:
+            goto(DewfordTown_EventScript_CancelSailSelect)
+    }
     end
 }
 

@@ -52,15 +52,24 @@ script Route110_TrickHouseEnd_EventScript_TrickMaster {
     faceplayer
     msgbox(Route110_TrickHouseEnd_Text_YouveMadeItToMe, MSGBOX_DEFAULT)
     setvar(VAR_TEMP_2, 1)
-    switch(VAR_TRICK_HOUSE_LEVEL)
-    case(0, Route110_TrickHouseEnd_EventScript_CompletedPuzzle1)
-    case(1, Route110_TrickHouseEnd_EventScript_CompletedPuzzle2)
-    case(2, Route110_TrickHouseEnd_EventScript_CompletedPuzzle3)
-    case(3, Route110_TrickHouseEnd_EventScript_CompletedPuzzle4)
-    case(4, Route110_TrickHouseEnd_EventScript_CompletedPuzzle5)
-    case(5, Route110_TrickHouseEnd_EventScript_CompletedPuzzle6)
-    case(6, Route110_TrickHouseEnd_EventScript_CompletedPuzzle7)
-    case(7, Route110_TrickHouseEnd_EventScript_CompletedPuzzle8)
+    switch (var(VAR_TRICK_HOUSE_LEVEL)) {
+        case 0:
+            goto(Route110_TrickHouseEnd_EventScript_CompletedPuzzle1)
+        case 1:
+            goto(Route110_TrickHouseEnd_EventScript_CompletedPuzzle2)
+        case 2:
+            goto(Route110_TrickHouseEnd_EventScript_CompletedPuzzle3)
+        case 3:
+            goto(Route110_TrickHouseEnd_EventScript_CompletedPuzzle4)
+        case 4:
+            goto(Route110_TrickHouseEnd_EventScript_CompletedPuzzle5)
+        case 5:
+            goto(Route110_TrickHouseEnd_EventScript_CompletedPuzzle6)
+        case 6:
+            goto(Route110_TrickHouseEnd_EventScript_CompletedPuzzle7)
+        case 7:
+            goto(Route110_TrickHouseEnd_EventScript_CompletedPuzzle8)
+    }
     end
 }
 
@@ -205,8 +214,10 @@ script Route110_TrickHouseEnd_EventScript_CompletedPuzzle8 {
 
 script Route110_TrickHouseEnd_EventScript_ChooseTent {
     multichoice(0, 0, MULTI_TENT, TRUE)
-    switch(VAR_RESULT)
-    case(0, Route110_TrickHouseEnd_EventScript_GiveRedTent)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route110_TrickHouseEnd_EventScript_GiveRedTent)
+    }
     goto(Route110_TrickHouseEnd_EventScript_GiveBlueTent)
 }
 

@@ -23,11 +23,16 @@ script CaveOfOrigin_B1F_EventScript_Wallace {
 
 script CaveOfOrigin_B1F_EventScript_WheresRayquaza {
     multichoice(0, 0, MULTI_WHERES_RAYQUAZA, FALSE)
-    switch(VAR_RESULT)
-    case(0, CaveOfOrigin_B1F_EventScript_AtCaveOfOrigin)
-    case(1, CaveOfOrigin_B1F_EventScript_AtMtPyre)
-    case(2, CaveOfOrigin_B1F_EventScript_AtSkyPillar)
-    case(3, CaveOfOrigin_B1F_EventScript_DontRemember)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CaveOfOrigin_B1F_EventScript_AtCaveOfOrigin)
+        case 1:
+            goto(CaveOfOrigin_B1F_EventScript_AtMtPyre)
+        case 2:
+            goto(CaveOfOrigin_B1F_EventScript_AtSkyPillar)
+        case 3:
+            goto(CaveOfOrigin_B1F_EventScript_DontRemember)
+    }
     goto(CaveOfOrigin_B1F_EventScript_DontRemember)
     end
 }

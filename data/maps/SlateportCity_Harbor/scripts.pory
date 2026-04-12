@@ -207,20 +207,29 @@ script SlateportCity_Harbor_EventScript_ChooseDestination {
         goto(SlateportCity_Harbor_EventScript_ChooseDestinationWithBattleFrontier)
     }
     multichoicedefault(18, 8, MULTI_SSTIDAL_SLATEPORT_NO_BF, 2, FALSE)
-    switch(VAR_RESULT)
-    case(0, SlateportCity_Harbor_EventScript_Lilycove)
-    case(1, SlateportCity_Harbor_EventScript_CancelDestinationSelect)
-    case(MULTI_B_PRESSED, SlateportCity_Harbor_EventScript_CancelDestinationSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(SlateportCity_Harbor_EventScript_Lilycove)
+        case 1:
+            goto(SlateportCity_Harbor_EventScript_CancelDestinationSelect)
+        case MULTI_B_PRESSED:
+            goto(SlateportCity_Harbor_EventScript_CancelDestinationSelect)
+    }
     end
 }
 
 script SlateportCity_Harbor_EventScript_ChooseDestinationWithBattleFrontier {
     multichoicedefault(17, 6, MULTI_SSTIDAL_SLATEPORT_WITH_BF, 2, FALSE)
-    switch(VAR_RESULT)
-    case(0, SlateportCity_Harbor_EventScript_Lilycove)
-    case(1, SlateportCity_Harbor_EventScript_BattleFrontier)
-    case(2, SlateportCity_Harbor_EventScript_CancelDestinationSelect)
-    case(MULTI_B_PRESSED, SlateportCity_Harbor_EventScript_CancelDestinationSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(SlateportCity_Harbor_EventScript_Lilycove)
+        case 1:
+            goto(SlateportCity_Harbor_EventScript_BattleFrontier)
+        case 2:
+            goto(SlateportCity_Harbor_EventScript_CancelDestinationSelect)
+        case MULTI_B_PRESSED:
+            goto(SlateportCity_Harbor_EventScript_CancelDestinationSelect)
+    }
     end
 }
 
@@ -421,11 +430,16 @@ script SlateportCity_Harbor_EventScript_AskToTradeScanner {
 
 script SlateportCity_Harbor_EventScript_ChooseScannerTrade {
     multichoice(0, 0, MULTI_STERN_DEEPSEA, FALSE)
-    switch(VAR_RESULT)
-    case(0, SlateportCity_Harbor_EventScript_DeepSeaTooth)
-    case(1, SlateportCity_Harbor_EventScript_DeepSeaScale)
-    case(2, SlateportCity_Harbor_EventScript_DeclineTrade)
-    case(MULTI_B_PRESSED, SlateportCity_Harbor_EventScript_DeclineTrade)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(SlateportCity_Harbor_EventScript_DeepSeaTooth)
+        case 1:
+            goto(SlateportCity_Harbor_EventScript_DeepSeaScale)
+        case 2:
+            goto(SlateportCity_Harbor_EventScript_DeclineTrade)
+        case MULTI_B_PRESSED:
+            goto(SlateportCity_Harbor_EventScript_DeclineTrade)
+    }
     end
 }
 

@@ -84,173 +84,251 @@ script Route124_DivingTreasureHuntersHouse_EventScript_HasShard {
 script Route124_DivingTreasureHuntersHouse_EventScript_ShowTradeOptions {
     message(Route124_DivingTreasureHuntersHouse_Text_WhatDoYouWantToTrade)
     waitmessage()
-    switch(VAR_TEMP_1)
-    case(1,  Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsR)
-    case(2,  Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsY)
-    case(3,  Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRY)
-    case(4,  Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsB)
-    case(5,  Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRB)
-    case(6,  Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsYB)
-    case(7,  Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRYB)
-    case(8,  Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsG)
-    case(9,  Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRG)
-    case(10, Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsYG)
-    case(11, Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRYG)
-    case(12, Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsBG)
-    case(13, Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRBG)
-    case(14, Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsYBG)
-    case(15, Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRYBG)
+    switch (var(VAR_TEMP_1)) {
+        case 1:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsR)
+        case 2:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsY)
+        case 3:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRY)
+        case 4:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsB)
+        case 5:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRB)
+        case 6:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsYB)
+        case 7:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRYB)
+        case 8:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsG)
+        case 9:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRG)
+        case 10:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsYG)
+        case 11:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRYG)
+        case 12:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsBG)
+        case 13:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRBG)
+        case 14:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsYBG)
+        case 15:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRYBG)
+    }
     end
 }
 
 script Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsR {
     multichoice(0, 0, MULTI_SHARDS_R, FALSE)
-    switch(VAR_RESULT)
-    case(0, Route124_DivingTreasureHuntersHouse_EventScript_TradeRedShard)
-    case(1, Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeRedShard)
+        case 1:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    }
     goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
     end
 }
 
 script Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsY {
     multichoice(0, 0, MULTI_SHARDS_Y, FALSE)
-    switch(VAR_RESULT)
-    case(0, Route124_DivingTreasureHuntersHouse_EventScript_TradeYellowShard)
-    case(1, Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeYellowShard)
+        case 1:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    }
     goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
     end
 }
 
 script Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRY {
     multichoice(0, 0, MULTI_SHARDS_RY, FALSE)
-    switch(VAR_RESULT)
-    case(0, Route124_DivingTreasureHuntersHouse_EventScript_TradeRedShard)
-    case(1, Route124_DivingTreasureHuntersHouse_EventScript_TradeYellowShard)
-    case(2, Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeRedShard)
+        case 1:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeYellowShard)
+        case 2:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    }
     goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
     end
 }
 
 script Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsB {
     multichoice(0, 0, MULTI_SHARDS_B, FALSE)
-    switch(VAR_RESULT)
-    case(0, Route124_DivingTreasureHuntersHouse_EventScript_TradeBlueShard)
-    case(1, Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeBlueShard)
+        case 1:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    }
     goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
     end
 }
 
 script Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRB {
     multichoice(0, 0, MULTI_SHARDS_RB, FALSE)
-    switch(VAR_RESULT)
-    case(0, Route124_DivingTreasureHuntersHouse_EventScript_TradeRedShard)
-    case(1, Route124_DivingTreasureHuntersHouse_EventScript_TradeBlueShard)
-    case(2, Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeRedShard)
+        case 1:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeBlueShard)
+        case 2:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    }
     goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
     end
 }
 
 script Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsYB {
     multichoice(0, 0, MULTI_SHARDS_YB, FALSE)
-    switch(VAR_RESULT)
-    case(0, Route124_DivingTreasureHuntersHouse_EventScript_TradeYellowShard)
-    case(1, Route124_DivingTreasureHuntersHouse_EventScript_TradeBlueShard)
-    case(2, Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeYellowShard)
+        case 1:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeBlueShard)
+        case 2:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    }
     goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
     end
 }
 
 script Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRYB {
     multichoice(0, 0, MULTI_SHARDS_RYB, FALSE)
-    switch(VAR_RESULT)
-    case(0, Route124_DivingTreasureHuntersHouse_EventScript_TradeRedShard)
-    case(1, Route124_DivingTreasureHuntersHouse_EventScript_TradeYellowShard)
-    case(2, Route124_DivingTreasureHuntersHouse_EventScript_TradeBlueShard)
-    case(3, Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeRedShard)
+        case 1:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeYellowShard)
+        case 2:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeBlueShard)
+        case 3:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    }
     goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
     end
 }
 
 script Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsG {
     multichoice(0, 0, MULTI_SHARDS_G, FALSE)
-    switch(VAR_RESULT)
-    case(0, Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard)
-    case(1, Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard)
+        case 1:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    }
     goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
     end
 }
 
 script Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRG {
     multichoice(0, 0, MULTI_SHARDS_RG, FALSE)
-    switch(VAR_RESULT)
-    case(0, Route124_DivingTreasureHuntersHouse_EventScript_TradeRedShard)
-    case(1, Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard)
-    case(2, Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeRedShard)
+        case 1:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard)
+        case 2:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    }
     goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
     end
 }
 
 script Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsYG {
     multichoice(0, 0, MULTI_SHARDS_YG, FALSE)
-    switch(VAR_RESULT)
-    case(0, Route124_DivingTreasureHuntersHouse_EventScript_TradeYellowShard)
-    case(1, Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard)
-    case(2, Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeYellowShard)
+        case 1:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard)
+        case 2:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    }
     goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
     end
 }
 
 script Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRYG {
     multichoice(0, 0, MULTI_SHARDS_RYG, FALSE)
-    switch(VAR_RESULT)
-    case(0, Route124_DivingTreasureHuntersHouse_EventScript_TradeRedShard)
-    case(1, Route124_DivingTreasureHuntersHouse_EventScript_TradeYellowShard)
-    case(2, Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard)
-    case(3, Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeRedShard)
+        case 1:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeYellowShard)
+        case 2:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard)
+        case 3:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    }
     goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
     end
 }
 
 script Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsBG {
     multichoice(0, 0, MULTI_SHARDS_BG, FALSE)
-    switch(VAR_RESULT)
-    case(0, Route124_DivingTreasureHuntersHouse_EventScript_TradeBlueShard)
-    case(1, Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard)
-    case(2, Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeBlueShard)
+        case 1:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard)
+        case 2:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    }
     goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
     end
 }
 
 script Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRBG {
     multichoice(0, 0, MULTI_SHARDS_RBG, FALSE)
-    switch(VAR_RESULT)
-    case(0, Route124_DivingTreasureHuntersHouse_EventScript_TradeRedShard)
-    case(1, Route124_DivingTreasureHuntersHouse_EventScript_TradeBlueShard)
-    case(2, Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard)
-    case(3, Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeRedShard)
+        case 1:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeBlueShard)
+        case 2:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard)
+        case 3:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    }
     goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
     end
 }
 
 script Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsYBG {
     multichoice(0, 0, MULTI_SHARDS_YBG, FALSE)
-    switch(VAR_RESULT)
-    case(0, Route124_DivingTreasureHuntersHouse_EventScript_TradeYellowShard)
-    case(1, Route124_DivingTreasureHuntersHouse_EventScript_TradeBlueShard)
-    case(2, Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard)
-    case(3, Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeYellowShard)
+        case 1:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeBlueShard)
+        case 2:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard)
+        case 3:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    }
     goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
     end
 }
 
 script Route124_DivingTreasureHuntersHouse_EventScript_ShardOptionsRYBG {
     multichoice(0, 0, MULTI_SHARDS_RYBG, FALSE)
-    switch(VAR_RESULT)
-    case(0, Route124_DivingTreasureHuntersHouse_EventScript_TradeRedShard)
-    case(1, Route124_DivingTreasureHuntersHouse_EventScript_TradeYellowShard)
-    case(2, Route124_DivingTreasureHuntersHouse_EventScript_TradeBlueShard)
-    case(3, Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard)
-    case(4, Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeRedShard)
+        case 1:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeYellowShard)
+        case 2:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeBlueShard)
+        case 3:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_TradeGreenShard)
+        case 4:
+            goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
+    }
     goto(Route124_DivingTreasureHuntersHouse_EventScript_DeclineTrade)
     end
 }

@@ -145,17 +145,28 @@ script Route120_EventScript_BerryBeauty {
         call(Route120_EventScript_BerryNotLove)
     }
     specialvar(VAR_RESULT, GetPlayerTrainerIdOnesDigit)
-    switch(VAR_RESULT)
-    case(0, Route120_EventScript_GiveFigyBerry)
-    case(5, Route120_EventScript_GiveFigyBerry)
-    case(1, Route120_EventScript_GiveWikiBerry)
-    case(6, Route120_EventScript_GiveWikiBerry)
-    case(2, Route120_EventScript_GiveMagoBerry)
-    case(7, Route120_EventScript_GiveMagoBerry)
-    case(3, Route120_EventScript_GiveAguavBerry)
-    case(8, Route120_EventScript_GiveAguavBerry)
-    case(4, Route120_EventScript_GiveIapapaBerry)
-    case(9, Route120_EventScript_GiveIapapaBerry)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route120_EventScript_GiveFigyBerry)
+        case 5:
+            goto(Route120_EventScript_GiveFigyBerry)
+        case 1:
+            goto(Route120_EventScript_GiveWikiBerry)
+        case 6:
+            goto(Route120_EventScript_GiveWikiBerry)
+        case 2:
+            goto(Route120_EventScript_GiveMagoBerry)
+        case 7:
+            goto(Route120_EventScript_GiveMagoBerry)
+        case 3:
+            goto(Route120_EventScript_GiveAguavBerry)
+        case 8:
+            goto(Route120_EventScript_GiveAguavBerry)
+        case 4:
+            goto(Route120_EventScript_GiveIapapaBerry)
+        case 9:
+            goto(Route120_EventScript_GiveIapapaBerry)
+    }
     end
 }
 

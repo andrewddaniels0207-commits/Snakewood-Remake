@@ -14,20 +14,34 @@ script SilphCo_Elevator_EventScript_FloorSelect {
     specialvar(VAR_RESULT, InitElevatorFloorSelectMenuPos)
     special(ShowScrollableMultichoice)
     waitstate
-    switch(VAR_RESULT)
-    case(0, SilphCo_Elevator_EventScript_To11F)
-    case(1, SilphCo_Elevator_EventScript_To10F)
-    case(2, SilphCo_Elevator_EventScript_To9F)
-    case(3, SilphCo_Elevator_EventScript_To8F)
-    case(4, SilphCo_Elevator_EventScript_To7F)
-    case(5, SilphCo_Elevator_EventScript_To6F)
-    case(6, SilphCo_Elevator_EventScript_To5F)
-    case(7, SilphCo_Elevator_EventScript_To4F)
-    case(8, SilphCo_Elevator_EventScript_To3F)
-    case(9, SilphCo_Elevator_EventScript_To2F)
-    case(10, SilphCo_Elevator_EventScript_To1F)
-    case(11, SilphCo_Elevator_EventScript_ExitFloorSelect)
-    case(127, SilphCo_Elevator_EventScript_ExitFloorSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(SilphCo_Elevator_EventScript_To11F)
+        case 1:
+            goto(SilphCo_Elevator_EventScript_To10F)
+        case 2:
+            goto(SilphCo_Elevator_EventScript_To9F)
+        case 3:
+            goto(SilphCo_Elevator_EventScript_To8F)
+        case 4:
+            goto(SilphCo_Elevator_EventScript_To7F)
+        case 5:
+            goto(SilphCo_Elevator_EventScript_To6F)
+        case 6:
+            goto(SilphCo_Elevator_EventScript_To5F)
+        case 7:
+            goto(SilphCo_Elevator_EventScript_To4F)
+        case 8:
+            goto(SilphCo_Elevator_EventScript_To3F)
+        case 9:
+            goto(SilphCo_Elevator_EventScript_To2F)
+        case 10:
+            goto(SilphCo_Elevator_EventScript_To1F)
+        case 11:
+            goto(SilphCo_Elevator_EventScript_ExitFloorSelect)
+        case 127:
+            goto(SilphCo_Elevator_EventScript_ExitFloorSelect)
+    }
     end
 }
 

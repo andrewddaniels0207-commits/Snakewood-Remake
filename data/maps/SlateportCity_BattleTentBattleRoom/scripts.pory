@@ -64,8 +64,10 @@ script SlateportCity_BattleTentBattleRoom_EventScript_EnterRoom {
     special(HealPlayerParty)
     dofacilitytrainerbattle(FACILITY_BATTLE_FACTORY)
     waitstate
-    switch(VAR_RESULT)
-    case(1, SlateportCity_BattleTentBattleRoom_EventScript_DefeatedOpponent)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(SlateportCity_BattleTentBattleRoom_EventScript_DefeatedOpponent)
+    }
 }
 
 script SlateportCity_BattleTent_EventScript_WarpToLobbyLost {
@@ -79,8 +81,10 @@ script SlateportCity_BattleTentBattleRoom_EventScript_DefeatedOpponent {
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
     addvar(VAR_RESULT, 1)
     frontier_set(FRONTIER_DATA_BATTLE_NUM, VAR_RESULT)
-    switch(VAR_RESULT)
-    case(3, SlateportCity_BattleTentBattleRoom_EventScript_WarpToLobbyWon)
+    switch (var(VAR_RESULT)) {
+        case 3:
+            goto(SlateportCity_BattleTentBattleRoom_EventScript_WarpToLobbyWon)
+    }
     setvar(VAR_0x8006, 1)
     warp(MAP_SLATEPORT_CITY_BATTLE_TENT_CORRIDOR, 2, 3)
     waitstate

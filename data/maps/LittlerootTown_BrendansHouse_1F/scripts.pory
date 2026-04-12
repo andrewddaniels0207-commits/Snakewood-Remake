@@ -11,8 +11,12 @@ mapscripts LittlerootTown_BrendansHouse_1F_MapScripts {
 }
 
 script LittlerootTown_BrendansHouse_1F_OnLoad {
-    if (var(VAR_LITTLEROOT_INTRO_STATE) < 6) call(LittlerootTown_BrendansHouse_1F_EventScript_SetMovingBoxes)
-    if (flag(FLAG_RECEIVED_RUNNING_SHOES)) call(LittlerootTown_BrendansHouse_1F_EventScript_CheckShowShoesManual)
+    if (var(VAR_LITTLEROOT_INTRO_STATE) < 6) {
+        call(LittlerootTown_BrendansHouse_1F_EventScript_SetMovingBoxes)
+    }
+    if (flag(FLAG_RECEIVED_RUNNING_SHOES)) {
+        call(LittlerootTown_BrendansHouse_1F_EventScript_CheckShowShoesManual)
+    }
     end
 }
 
@@ -24,7 +28,9 @@ script LittlerootTown_BrendansHouse_1F_EventScript_SetMovingBoxes {
 
 script LittlerootTown_BrendansHouse_1F_EventScript_CheckShowShoesManual {
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(LittlerootTown_BrendansHouse_1F_EventScript_ShowRunningShoesManual)
+    if (var(VAR_RESULT) == MALE) {
+        goto(LittlerootTown_BrendansHouse_1F_EventScript_ShowRunningShoesManual)
+    }
     return
 }
 
@@ -34,9 +40,15 @@ script LittlerootTown_BrendansHouse_1F_EventScript_ShowRunningShoesManual {
 }
 
 script LittlerootTown_BrendansHouse_1F_OnTransition {
-    if (var(VAR_LITTLEROOT_INTRO_STATE) == 3) call(LittlerootTown_BrendansHouse_1F_EventScript_MoveMomToDoor)
-    if (var(VAR_LITTLEROOT_INTRO_STATE) == 5) call(LittlerootTown_BrendansHouse_1F_EventScript_MoveMomToStairs)
-    if (var(VAR_LITTLEROOT_INTRO_STATE) == 6) call(LittlerootTown_BrendansHouse_1F_EventScript_MoveMomToTV)
+    if (var(VAR_LITTLEROOT_INTRO_STATE) == 3) {
+        call(LittlerootTown_BrendansHouse_1F_EventScript_MoveMomToDoor)
+    }
+    if (var(VAR_LITTLEROOT_INTRO_STATE) == 5) {
+        call(LittlerootTown_BrendansHouse_1F_EventScript_MoveMomToStairs)
+    }
+    if (var(VAR_LITTLEROOT_INTRO_STATE) == 6) {
+        call(LittlerootTown_BrendansHouse_1F_EventScript_MoveMomToTV)
+    }
     end
 }
 
@@ -161,16 +173,30 @@ script LittlerootTown_BrendansHouse_1F_EventScript_MeetRival {
     waitmovement(0)
     applymovement(LOCALID_RIVALS_HOUSE_1F_RIVAL, Common_Movement_Delay48)
     waitmovement(0)
-    if (var(VAR_0x8008) != 1) call(LittlerootTown_BrendansHouse_1F_EventScript_PlayerFaceBrendan)
+    if (var(VAR_0x8008) != 1) {
+        call(LittlerootTown_BrendansHouse_1F_EventScript_PlayerFaceBrendan)
+    }
     playbgm(MUS_ENCOUNTER_BRENDAN, TRUE)
-    if (var(VAR_0x8008) == 0) call(LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer0)
-    if (var(VAR_0x8008) == 1) call(LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer1)
-    if (var(VAR_0x8008) == 2) call(LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer2)
+    if (var(VAR_0x8008) == 0) {
+        call(LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer0)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer1)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer2)
+    }
     msgbox(RivalsHouse_1F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT)
     closemessage
-    if (var(VAR_0x8008) == 0) call(LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs0)
-    if (var(VAR_0x8008) == 1) call(LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs1)
-    if (var(VAR_0x8008) == 2) call(LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs2)
+    if (var(VAR_0x8008) == 0) {
+        call(LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs0)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs1)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs2)
+    }
     playse(SE_EXIT)
     removeobject(LOCALID_RIVALS_HOUSE_1F_RIVAL)
     setflag(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN)

@@ -80,12 +80,18 @@ script CeladonCity_Condominiums_RoofRoom_EventScript_Blackboard {
     waitmessage()
     setvar(VAR_0x8004, 4)
     multichoice(0, 0, MULTI_LINKED_DIRECT_UNION, FALSE)
-    switch(VAR_RESULT)
-    case(0, CeladonCity_Condominiums_RoofRoom_EventScript_WirelessClub)
-    case(1, CeladonCity_Condominiums_RoofRoom_EventScript_DirectCorner)
-    case(2, CeladonCity_Condominiums_RoofRoom_EventScript_UnionRoom)
-    case(3, CeladonCity_Condominiums_RoofRoom_EventScript_ExitBlackboard)
-    case(127, CeladonCity_Condominiums_RoofRoom_EventScript_ExitBlackboard)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CeladonCity_Condominiums_RoofRoom_EventScript_WirelessClub)
+        case 1:
+            goto(CeladonCity_Condominiums_RoofRoom_EventScript_DirectCorner)
+        case 2:
+            goto(CeladonCity_Condominiums_RoofRoom_EventScript_UnionRoom)
+        case 3:
+            goto(CeladonCity_Condominiums_RoofRoom_EventScript_ExitBlackboard)
+        case 127:
+            goto(CeladonCity_Condominiums_RoofRoom_EventScript_ExitBlackboard)
+    }
     end
 }
 
@@ -93,12 +99,18 @@ script CeladonCity_Condominiums_RoofRoom_EventScript_ReadAnotherHeading {
     message(CeladonCity_Condominiums_RoofRoom_Text_ReadWhichHeading)
     waitmessage()
     multichoice(0, 0, MULTI_LINKED_DIRECT_UNION, FALSE)
-    switch(VAR_RESULT)
-    case(0, CeladonCity_Condominiums_RoofRoom_EventScript_WirelessClub)
-    case(1, CeladonCity_Condominiums_RoofRoom_EventScript_DirectCorner)
-    case(2, CeladonCity_Condominiums_RoofRoom_EventScript_UnionRoom)
-    case(3, CeladonCity_Condominiums_RoofRoom_EventScript_ExitBlackboard)
-    case(127, CeladonCity_Condominiums_RoofRoom_EventScript_ExitBlackboard)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CeladonCity_Condominiums_RoofRoom_EventScript_WirelessClub)
+        case 1:
+            goto(CeladonCity_Condominiums_RoofRoom_EventScript_DirectCorner)
+        case 2:
+            goto(CeladonCity_Condominiums_RoofRoom_EventScript_UnionRoom)
+        case 3:
+            goto(CeladonCity_Condominiums_RoofRoom_EventScript_ExitBlackboard)
+        case 127:
+            goto(CeladonCity_Condominiums_RoofRoom_EventScript_ExitBlackboard)
+    }
     end
 }
 

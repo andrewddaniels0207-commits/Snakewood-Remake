@@ -5,7 +5,7 @@ AbandonedShip_Deck_MapScripts::
 
 
 AbandonedShip_Deck_OnTransition::
-# 6 "data/maps/AbandonedShip_Deck/scripts.pory"
+# 7 "data/maps/AbandonedShip_Deck/scripts.pory"
 	setflag FLAG_LANDMARK_ABANDONED_SHIP
 	end
 

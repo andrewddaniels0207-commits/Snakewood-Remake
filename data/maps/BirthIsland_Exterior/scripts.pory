@@ -59,11 +59,16 @@ script BirthIsland_Exterior_EventScript_Triangle {
     faceplayer
     special(DoDeoxysRockInteraction)
     waitstate
-    switch(VAR_RESULT)
-    case(DEOXYS_ROCK_FAILED,     BirthIsland_Exterior_EventScript_Failed)
-    case(DEOXYS_ROCK_PROGRESSED, BirthIsland_Exterior_EventScript_Progressed)
-    case(DEOXYS_ROCK_SOLVED,     BirthIsland_Exterior_EventScript_Deoxys)
-    case(DEOXYS_ROCK_COMPLETE,   BirthIsland_Exterior_EventScript_Complete)
+    switch (var(VAR_RESULT)) {
+        case DEOXYS_ROCK_FAILED:
+            goto(BirthIsland_Exterior_EventScript_Failed)
+        case DEOXYS_ROCK_PROGRESSED:
+            goto(BirthIsland_Exterior_EventScript_Progressed)
+        case DEOXYS_ROCK_SOLVED:
+            goto(BirthIsland_Exterior_EventScript_Deoxys)
+        case DEOXYS_ROCK_COMPLETE:
+            goto(BirthIsland_Exterior_EventScript_Complete)
+    }
     end
 }
 

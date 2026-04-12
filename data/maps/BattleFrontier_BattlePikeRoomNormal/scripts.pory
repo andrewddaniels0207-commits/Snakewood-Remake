@@ -10,13 +10,20 @@ mapscripts BattleFrontier_BattlePikeRoomNormal_MapScripts {
 script BattleFrontier_BattlePikeRoomNormal_EventScript_EnterRoom {
     setvar(VAR_TEMP_0, 1)
     pike_getroomtype()
-    switch(VAR_RESULT)
-    case(PIKE_ROOM_SINGLE_BATTLE, BattleFrontier_BattlePikeRoomNormal_EventScript_EnterSingleBattleRoom)
-    case(PIKE_ROOM_HEAL_FULL, BattleFrontier_BattlePikeRoomNormal_EventScript_EnterFullHealRoom)
-    case(PIKE_ROOM_STATUS, BattleFrontier_BattlePikeRoomNormal_EventScript_EnterStatusRoom)
-    case(PIKE_ROOM_HARD_BATTLE, BattleFrontier_BattlePikeRoomNormal_EventScript_EnterHardBattleRoom)
-    case(PIKE_ROOM_DOUBLE_BATTLE, BattleFrontier_BattlePikeRoomNormal_EventScript_EnterDoubleBattleRoom)
-    case(PIKE_ROOM_BRAIN, BattleFrontier_BattlePikeRoomNormal_EventScript_EnterBrainRoom)
+    switch (var(VAR_RESULT)) {
+        case PIKE_ROOM_SINGLE_BATTLE:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_EnterSingleBattleRoom)
+        case PIKE_ROOM_HEAL_FULL:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_EnterFullHealRoom)
+        case PIKE_ROOM_STATUS:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_EnterStatusRoom)
+        case PIKE_ROOM_HARD_BATTLE:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_EnterHardBattleRoom)
+        case PIKE_ROOM_DOUBLE_BATTLE:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_EnterDoubleBattleRoom)
+        case PIKE_ROOM_BRAIN:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_EnterBrainRoom)
+    }
     end
 }
 
@@ -32,8 +39,10 @@ script BattleFrontier_BattlePikeRoomNormal_EventScript_EnterSingleBattleRoom {
     releaseall
     dofacilitytrainerbattle(FACILITY_BATTLE_PIKE_SINGLE)
     waitstate
-    switch(VAR_RESULT)
-    case(1, BattleFrontier_BattlePikeRoomNormal_EventScript_WonSingleBattle)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_WonSingleBattle)
+    }
 }
 
 script BattleFrontier_BattlePikeRoomNormal_EventScript_WarpToLobbyLost {
@@ -64,8 +73,10 @@ script BattleFrontier_BattlePikeRoomNormal_EventScript_EnterHardBattleRoom {
     releaseall
     dofacilitytrainerbattle(FACILITY_BATTLE_PIKE_SINGLE)
     waitstate
-    switch(VAR_RESULT)
-    case(1, BattleFrontier_BattlePikeRoomNormal_EventScript_WonHardBattle)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_WonHardBattle)
+    }
     goto(BattleFrontier_BattlePikeRoomNormal_EventScript_WarpToLobbyLost)
     end
 }
@@ -95,10 +106,14 @@ script BattleFrontier_BattlePikeRoomNormal_EventScript_EnterBrainRoom {
     applymovement(LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_PreQueenHealNPCApproachPlayer)
     waitmovement(0)
     pike_prequeenheal()
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattlePikeRoomNormal_EventScript_PreQueenNoHeal)
-    case(1, BattleFrontier_BattlePikeRoomNormal_EventScript_PreQueenHealOneMon)
-    case(2, BattleFrontier_BattlePikeRoomNormal_EventScript_PreQueenHealTwoMons)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_PreQueenNoHeal)
+        case 1:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_PreQueenHealOneMon)
+        case 2:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_PreQueenHealTwoMons)
+    }
 }
 
 script BattleFrontier_BattlePikeRoomNormal_EventScript_LucyEnter {
@@ -129,10 +144,14 @@ script BattleFrontier_BattlePikeRoomNormal_EventScript_LucyEnter {
     applymovement(LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_LucyEnter)
     waitmovement(0)
     pike_getbrainstatus()
-    switch(VAR_RESULT)
-    case(FRONTIER_BRAIN_GOLD, BattleFrontier_BattlePikeRoomNormal_EventScript_IntroLucyGold)
-    case(FRONTIER_BRAIN_STREAK, BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucySilver)
-    case(FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucyGold)
+    switch (var(VAR_RESULT)) {
+        case FRONTIER_BRAIN_GOLD:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_IntroLucyGold)
+        case FRONTIER_BRAIN_STREAK:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucySilver)
+        case FRONTIER_BRAIN_STREAK_LONG:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucyGold)
+    }
     frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
     if (var(VAR_RESULT) != FALSE) {
         goto(BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucySilver)
@@ -281,8 +300,10 @@ script BattleFrontier_BattlePikeRoomNormal_EventScript_EnterDoubleBattleRoom {
     closemessage
     dofacilitytrainerbattle(FACILITY_BATTLE_PIKE_DOUBLE)
     waitstate
-    switch(VAR_RESULT)
-    case(1, BattleFrontier_BattlePikeRoomNormal_EventScript_WonDoubleBattle)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_WonDoubleBattle)
+    }
     goto(BattleFrontier_BattlePikeRoomNormal_EventScript_WarpToLobbyLost)
     end
 }
@@ -602,10 +623,14 @@ movement BattleFrontier_BattlePikeRoomNormal_Movement_LucyMoveAside {
 
 script BattleFrontier_BattlePikeRoomNormal_EventScript_NPC {
     pike_getroomtype()
-    switch(VAR_RESULT)
-    case(PIKE_ROOM_NPC, BattleFrontier_BattlePikeRoomNormal_EventScript_NormalNPC)
-    case(PIKE_ROOM_STATUS, BattleFrontier_BattlePikeRoomNormal_EventScript_StatusNPC)
-    case(PIKE_ROOM_HEAL_PART, BattleFrontier_BattlePikeRoomNormal_EventScript_HealNPC)
+    switch (var(VAR_RESULT)) {
+        case PIKE_ROOM_NPC:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_NormalNPC)
+        case PIKE_ROOM_STATUS:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_StatusNPC)
+        case PIKE_ROOM_HEAL_PART:
+            goto(BattleFrontier_BattlePikeRoomNormal_EventScript_HealNPC)
+    }
 }
 
 script BattleFrontier_BattlePikeRoomNormal_EventScript_NormalNPC {

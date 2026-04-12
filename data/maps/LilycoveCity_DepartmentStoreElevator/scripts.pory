@@ -13,12 +13,18 @@ script LilycoveCity_DepartmentStoreElevator_EventScript_Attendant {
     waitmessage()
     setvar(VAR_0x8004, 0)
     specialvar(VAR_RESULT, GetDeptStoreDefaultFloorChoice)
-    switch(VAR_RESULT)
-    case(0, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom5th)
-    case(1, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom4th)
-    case(2, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom3rd)
-    case(3, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom2nd)
-    case(4, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom1st)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom5th)
+        case 1:
+            goto(LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom4th)
+        case 2:
+            goto(LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom3rd)
+        case 3:
+            goto(LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom2nd)
+        case 4:
+            goto(LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom1st)
+    }
     end
 }
 
@@ -53,14 +59,22 @@ script LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom1st {
 }
 
 script LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloor {
-    switch(VAR_RESULT)
-    case(0, LilycoveCity_DepartmentStoreElevator_EventScript_5thFloor)
-    case(1, LilycoveCity_DepartmentStoreElevator_EventScript_4thFloor)
-    case(2, LilycoveCity_DepartmentStoreElevator_EventScript_3rdFloor)
-    case(3, LilycoveCity_DepartmentStoreElevator_EventScript_2ndFloor)
-    case(4, LilycoveCity_DepartmentStoreElevator_EventScript_1stFloor)
-    case(5, LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect)
-    case(MULTI_B_PRESSED, LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(LilycoveCity_DepartmentStoreElevator_EventScript_5thFloor)
+        case 1:
+            goto(LilycoveCity_DepartmentStoreElevator_EventScript_4thFloor)
+        case 2:
+            goto(LilycoveCity_DepartmentStoreElevator_EventScript_3rdFloor)
+        case 3:
+            goto(LilycoveCity_DepartmentStoreElevator_EventScript_2ndFloor)
+        case 4:
+            goto(LilycoveCity_DepartmentStoreElevator_EventScript_1stFloor)
+        case 5:
+            goto(LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect)
+        case MULTI_B_PRESSED:
+            goto(LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect)
+    }
     end
 }
 

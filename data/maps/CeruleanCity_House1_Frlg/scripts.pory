@@ -14,17 +14,28 @@ script CeruleanCity_House1_EventScript_DescribeAnotherBadge {
     setvar(VAR_0x8004, SCROLL_MULTI_BADGES)
     special(ShowScrollableMultichoice)
     waitstate
-    switch(VAR_RESULT)
-    case(0, CeruleanCity_House1_EventScript_DescribeBoulderBadge)
-    case(1, CeruleanCity_House1_EventScript_DescribeCascadeBadge)
-    case(2, CeruleanCity_House1_EventScript_DescribeThunderBadge)
-    case(3, CeruleanCity_House1_EventScript_DescribeRainbowBadge)
-    case(4, CeruleanCity_House1_EventScript_DescribeSoulBadge)
-    case(5, CeruleanCity_House1_EventScript_DescribeMarshBadge)
-    case(6, CeruleanCity_House1_EventScript_DescribeVolcanoBadge)
-    case(7, CeruleanCity_House1_EventScript_DescribeEarthBadge)
-    case(8, CeruleanCity_House1_EventScript_StopDescribingBadges)
-    case(127, CeruleanCity_House1_EventScript_StopDescribingBadges)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CeruleanCity_House1_EventScript_DescribeBoulderBadge)
+        case 1:
+            goto(CeruleanCity_House1_EventScript_DescribeCascadeBadge)
+        case 2:
+            goto(CeruleanCity_House1_EventScript_DescribeThunderBadge)
+        case 3:
+            goto(CeruleanCity_House1_EventScript_DescribeRainbowBadge)
+        case 4:
+            goto(CeruleanCity_House1_EventScript_DescribeSoulBadge)
+        case 5:
+            goto(CeruleanCity_House1_EventScript_DescribeMarshBadge)
+        case 6:
+            goto(CeruleanCity_House1_EventScript_DescribeVolcanoBadge)
+        case 7:
+            goto(CeruleanCity_House1_EventScript_DescribeEarthBadge)
+        case 8:
+            goto(CeruleanCity_House1_EventScript_StopDescribingBadges)
+        case 127:
+            goto(CeruleanCity_House1_EventScript_StopDescribingBadges)
+    }
     end
 }
 

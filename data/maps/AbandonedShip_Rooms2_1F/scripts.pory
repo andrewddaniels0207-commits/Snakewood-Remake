@@ -1,61 +1,101 @@
 mapscripts AbandonedShip_Rooms2_1F_MapScripts {}
 
 script AbandonedShip_Rooms2_1F_EventScript_Dan {
+    #(4 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     trainerbattle_double(TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_DanIntro, AbandonedShip_Rooms2_1F_Text_DanDefeat, AbandonedShip_Rooms2_1F_Text_DanNotEnoughMons, AbandonedShip_Rooms2_1F_EventScript_RegisterDan)
+    #(5 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(AbandonedShip_Rooms2_1F_EventScript_DanRematch)
-    }
+    #(6 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
+    compare(VAR_RESULT, TRUE)
+    goto_if_eq(AbandonedShip_Rooms2_1F_EventScript_Dan_2)
+}
+
+script AbandonedShip_Rooms2_1F_EventScript_Dan_1 {
+    #(9 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     msgbox(AbandonedShip_Rooms2_1F_Text_DanPostBattle, MSGBOX_DEFAULT)
+    #(10 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     release
     end
 }
 
+script AbandonedShip_Rooms2_1F_EventScript_Dan_2 {
+    #(7 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
+    goto(AbandonedShip_Rooms2_1F_EventScript_DanRematch)
+    goto(AbandonedShip_Rooms2_1F_EventScript_Dan_1)
+}
+
 script AbandonedShip_Rooms2_1F_EventScript_RegisterDan {
+    #(15 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     msgbox(AbandonedShip_Rooms2_1F_Text_KiraRegister, MSGBOX_DEFAULT)
+    #(16 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     register_matchcall(TRAINER_KIRA_AND_DAN_1)
+    #(17 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     release
     end
 }
 
 script AbandonedShip_Rooms2_1F_EventScript_DanRematch {
+    #(22 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     trainerbattle_rematch_double(TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_DanRematchIntro, AbandonedShip_Rooms2_1F_Text_DanRematchDefeat, AbandonedShip_Rooms2_1F_Text_DanRematchNotEnoughMons)
+    #(23 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     msgbox(AbandonedShip_Rooms2_1F_Text_DanPostRematch, MSGBOX_AUTOCLOSE)
     end
 }
 
 script AbandonedShip_Rooms2_1F_EventScript_Kira {
+    #(28 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     trainerbattle_double(TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_KiraIntro, AbandonedShip_Rooms2_1F_Text_KiraDefeat, AbandonedShip_Rooms2_1F_Text_KiraNotEnoughMons, AbandonedShip_Rooms2_1F_EventScript_RegisterKira)
+    #(29 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(AbandonedShip_Rooms2_1F_EventScript_KiraRematch)
-    }
+    #(30 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
+    compare(VAR_RESULT, TRUE)
+    goto_if_eq(AbandonedShip_Rooms2_1F_EventScript_Kira_2)
+}
+
+script AbandonedShip_Rooms2_1F_EventScript_Kira_1 {
+    #(33 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     msgbox(AbandonedShip_Rooms2_1F_Text_KiraPostBattle, MSGBOX_DEFAULT)
+    #(34 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     release
     end
 }
 
+script AbandonedShip_Rooms2_1F_EventScript_Kira_2 {
+    #(31 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
+    goto(AbandonedShip_Rooms2_1F_EventScript_KiraRematch)
+    goto(AbandonedShip_Rooms2_1F_EventScript_Kira_1)
+}
+
 script AbandonedShip_Rooms2_1F_EventScript_RegisterKira {
+    #(39 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     msgbox(AbandonedShip_Rooms2_1F_Text_KiraRegister, MSGBOX_DEFAULT)
+    #(40 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     register_matchcall(TRAINER_KIRA_AND_DAN_1)
+    #(41 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     release
     end
 }
 
 script AbandonedShip_Rooms2_1F_EventScript_KiraRematch {
+    #(46 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     trainerbattle_rematch_double(TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_KiraRematchIntro, AbandonedShip_Rooms2_1F_Text_KiraRematchDefeat, AbandonedShip_Rooms2_1F_Text_KiraRematchNotEnoughMons)
+    #(47 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     msgbox(AbandonedShip_Rooms2_1F_Text_KiraPostRematch, MSGBOX_AUTOCLOSE)
     end
 }
 
 script AbandonedShip_Rooms2_1F_EventScript_Jani {
+    #(52 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     trainerbattle_single(TRAINER_JANI, AbandonedShip_Rooms2_1F_Text_JaniIntro, AbandonedShip_Rooms2_1F_Text_JaniDefeat)
+    #(53 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     msgbox(AbandonedShip_Rooms2_1F_Text_JaniPostBattle, MSGBOX_AUTOCLOSE)
     end
 }
 
 script AbandonedShip_Rooms2_1F_EventScript_Garrison {
+    #(58 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     trainerbattle_single(TRAINER_GARRISON, AbandonedShip_Rooms2_1F_Text_GarrisonIntro, AbandonedShip_Rooms2_1F_Text_GarrisonDefeat)
+    #(59 "data/maps/AbandonedShip_Rooms2_1F/scripts.pory")
     msgbox(AbandonedShip_Rooms2_1F_Text_GarrisonPostBattle, MSGBOX_AUTOCLOSE)
     end
 }

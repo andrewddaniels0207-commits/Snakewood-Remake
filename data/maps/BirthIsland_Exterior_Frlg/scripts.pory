@@ -59,11 +59,16 @@ script BirthIsland_Exterior_Frlg_EventScript_Triangle {
     faceplayer
     special(DoDeoxysRockInteraction)
     waitstate
-    switch(VAR_RESULT)
-    case(0, BirthIsland_Exterior_EventScript_NotSolved1)
-    case(1, BirthIsland_Exterior_EventScript_NotSolved2)
-    case(2, BirthIsland_Exterior_Frlg_EventScript_Deoxys)
-    case(3, BirthIsland_Exterior_EventScript_NotSolved3)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BirthIsland_Exterior_EventScript_NotSolved1)
+        case 1:
+            goto(BirthIsland_Exterior_EventScript_NotSolved2)
+        case 2:
+            goto(BirthIsland_Exterior_Frlg_EventScript_Deoxys)
+        case 3:
+            goto(BirthIsland_Exterior_EventScript_NotSolved3)
+    }
     end
 }
 

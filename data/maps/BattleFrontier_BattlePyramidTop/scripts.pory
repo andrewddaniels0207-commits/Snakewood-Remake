@@ -45,10 +45,14 @@ script BattleFrontier_BattlePyramidTop_OnResume {
 script BattleFrontier_BattlePyramidTop_EventScript_CheckChallengeStatus {
     copyvar(VAR_TEMP_C, VAR_RESULT)
     frontier_getstatus()
-    switch(VAR_TEMP_CHALLENGE_STATUS)
-    case(0, BattleFrontier_BattlePyramidTop_EventScript_ReadyChallenge)
-    case(CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePyramid_EventScript_WarpToLobby)
-    case(CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePyramidTop_EventScript_ReadyChallenge)
+    switch (var(VAR_TEMP_CHALLENGE_STATUS)) {
+        case 0:
+            goto(BattleFrontier_BattlePyramidTop_EventScript_ReadyChallenge)
+        case CHALLENGE_STATUS_SAVING:
+            goto(BattleFrontier_BattlePyramid_EventScript_WarpToLobby)
+        case CHALLENGE_STATUS_PAUSED:
+            goto(BattleFrontier_BattlePyramidTop_EventScript_ReadyChallenge)
+    }
     frontier_get(FRONTIER_DATA_BATTLE_OUTCOME)
     if (var(VAR_RESULT) == B_OUTCOME_LOST) {
         goto(BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost)
@@ -131,10 +135,14 @@ script BattleFrontier_BattlePyramidTop_EventScript_BrandonHereMoveAside {
 
 script BattleFrontier_BattlePyramidTop_EventScript_BattleBrandon {
     lockall
-    switch(VAR_TEMP_C)
-    case(FRONTIER_BRAIN_GOLD, BattleFrontier_BattlePyramidTop_EventScript_BrandonIntroGold)
-    case(FRONTIER_BRAIN_STREAK, BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardSilverSpeech)
-    case(FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardGoldSpeech)
+    switch (var(VAR_TEMP_C)) {
+        case FRONTIER_BRAIN_GOLD:
+            goto(BattleFrontier_BattlePyramidTop_EventScript_BrandonIntroGold)
+        case FRONTIER_BRAIN_STREAK:
+            goto(BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardSilverSpeech)
+        case FRONTIER_BRAIN_STREAK_LONG:
+            goto(BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardGoldSpeech)
+    }
     frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
     if (var(VAR_RESULT) != FALSE) {
         goto(BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardSilverSpeech)

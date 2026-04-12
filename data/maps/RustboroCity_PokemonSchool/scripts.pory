@@ -11,14 +11,22 @@ script RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic {
     message(RustboroCity_PokemonSchool_Text_ReadWhichTopic)
     waitmessage()
     multichoicegrid(8, 1, MULTI_STATUS_INFO, 3, FALSE)
-    switch(VAR_RESULT)
-    case(0, RustboroCity_PokemonSchool_EventScript_Poison)
-    case(1, RustboroCity_PokemonSchool_EventScript_Paralysis)
-    case(2, RustboroCity_PokemonSchool_EventScript_Sleep)
-    case(3, RustboroCity_PokemonSchool_EventScript_Burn)
-    case(4, RustboroCity_PokemonSchool_EventScript_Freeze)
-    case(5, RustboroCity_PokemonSchool_EventScript_ExitTopicSelect)
-    case(MULTI_B_PRESSED, RustboroCity_PokemonSchool_EventScript_ExitTopicSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(RustboroCity_PokemonSchool_EventScript_Poison)
+        case 1:
+            goto(RustboroCity_PokemonSchool_EventScript_Paralysis)
+        case 2:
+            goto(RustboroCity_PokemonSchool_EventScript_Sleep)
+        case 3:
+            goto(RustboroCity_PokemonSchool_EventScript_Burn)
+        case 4:
+            goto(RustboroCity_PokemonSchool_EventScript_Freeze)
+        case 5:
+            goto(RustboroCity_PokemonSchool_EventScript_ExitTopicSelect)
+        case MULTI_B_PRESSED:
+            goto(RustboroCity_PokemonSchool_EventScript_ExitTopicSelect)
+    }
     end
 }
 

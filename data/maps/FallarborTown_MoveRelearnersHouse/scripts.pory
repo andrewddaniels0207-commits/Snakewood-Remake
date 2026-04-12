@@ -19,8 +19,10 @@ script FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove {
         goto(FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale)
     }
     msgbox(FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove, MSGBOX_YESNO)
-    switch(VAR_RESULT)
-    case(NO, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale)
+    switch (var(VAR_RESULT)) {
+        case NO:
+            goto(FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale)
+    }
     goto(FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon)
     end
 }

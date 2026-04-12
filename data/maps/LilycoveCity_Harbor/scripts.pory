@@ -57,15 +57,24 @@ script LilycoveCity_Harbor_EventScript_FerryRegularLocationSelect {
     special(ScriptMenu_CreateLilycoveSSTidalMultichoice)
     waitstate
     special(GetLilycoveSSTidalSelection)
-    switch(VAR_RESULT)
-    case(0, LilycoveCity_Harbor_EventScript_GoToSlateport)
-    case(1, LilycoveCity_Harbor_EventScript_GoToBattleFrontier)
-    case(2, LilycoveCity_Harbor_EventScript_GoToSouthernIsland)
-    case(3, LilycoveCity_Harbor_EventScript_GoToNavelRock)
-    case(4, LilycoveCity_Harbor_EventScript_GoToBirthIsland)
-    case(5, LilycoveCity_Harbor_EventScript_GoToFarawayIsland)
-    case(6, LilycoveCity_Harbor_EventScript_ExitSailSelect)
-    case(MULTI_B_PRESSED, LilycoveCity_Harbor_EventScript_ExitSailSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(LilycoveCity_Harbor_EventScript_GoToSlateport)
+        case 1:
+            goto(LilycoveCity_Harbor_EventScript_GoToBattleFrontier)
+        case 2:
+            goto(LilycoveCity_Harbor_EventScript_GoToSouthernIsland)
+        case 3:
+            goto(LilycoveCity_Harbor_EventScript_GoToNavelRock)
+        case 4:
+            goto(LilycoveCity_Harbor_EventScript_GoToBirthIsland)
+        case 5:
+            goto(LilycoveCity_Harbor_EventScript_GoToFarawayIsland)
+        case 6:
+            goto(LilycoveCity_Harbor_EventScript_ExitSailSelect)
+        case MULTI_B_PRESSED:
+            goto(LilycoveCity_Harbor_EventScript_ExitSailSelect)
+    }
     end
 }
 
@@ -394,13 +403,20 @@ script LilycoveCity_Harbor_EventScript_MultipleEventTicketsFirstTime {
     special(ScriptMenu_CreateLilycoveSSTidalMultichoice)
     waitstate
     special(GetLilycoveSSTidalSelection)
-    switch(VAR_RESULT)
-    case(2, LilycoveCity_Harbor_EventScript_GoToSouthernIslandFirstTime)
-    case(3, LilycoveCity_Harbor_EventScript_GoToNavelRockFirstTime)
-    case(4, LilycoveCity_Harbor_EventScript_GoToBirthIslandFirstTime)
-    case(5, LilycoveCity_Harbor_EventScript_GoToFarawayIslandFirstTime)
-    case(6, LilycoveCity_Harbor_EventScript_ExitFirstTimeTicketSailSelect)
-    case(MULTI_B_PRESSED, LilycoveCity_Harbor_EventScript_ExitFirstTimeTicketSailSelect)
+    switch (var(VAR_RESULT)) {
+        case 2:
+            goto(LilycoveCity_Harbor_EventScript_GoToSouthernIslandFirstTime)
+        case 3:
+            goto(LilycoveCity_Harbor_EventScript_GoToNavelRockFirstTime)
+        case 4:
+            goto(LilycoveCity_Harbor_EventScript_GoToBirthIslandFirstTime)
+        case 5:
+            goto(LilycoveCity_Harbor_EventScript_GoToFarawayIslandFirstTime)
+        case 6:
+            goto(LilycoveCity_Harbor_EventScript_ExitFirstTimeTicketSailSelect)
+        case MULTI_B_PRESSED:
+            goto(LilycoveCity_Harbor_EventScript_ExitFirstTimeTicketSailSelect)
+    }
     release
     end
 }

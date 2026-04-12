@@ -12,15 +12,23 @@ mapscripts LittlerootTown_ProfessorBirchsLab_MapScripts {
 script LittlerootTown_ProfessorBirchsLab_OnTransition {
     call(Common_EventScript_SetupRivalGfxId)
     call(ProfBirch_EventScript_UpdateLocation)
-    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 6) goto(LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterJohtoStarterLayout)
-    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 4) goto(LittlerootTown_ProfessorBirchsLab_EventScript_SetJohtoStarterLayout)
-    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) == 3) goto(LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter)
+    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 6) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterJohtoStarterLayout)
+    }
+    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 4) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_SetJohtoStarterLayout)
+    }
+    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) == 3) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter)
+    }
     end
 }
 
 script LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter {
     specialvar(VAR_RESULT, HasAllHoennMons)
-    if (var(VAR_RESULT) == TRUE) goto(LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForJohtoStarter)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForJohtoStarter)
+    }
     setobjectmovementtype(LOCALID_BIRCHS_LAB_RIVAL, MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
     setobjectxyperm(LOCALID_BIRCHS_LAB_RIVAL, 5, 10)
     end
@@ -105,8 +113,12 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent {
     playfanfare(MUS_OBTAIN_ITEM)
     waitfanfare()
     msgbox(LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter)
-    if (var(VAR_RESULT) == NO) goto(LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival)
+    if (var(VAR_RESULT) == YES) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival)
+    }
     end
 }
 
@@ -119,8 +131,12 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter {
 
 script LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival {
     msgbox(LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival)
-    if (var(VAR_RESULT) == NO) goto(LittlerootTown_ProfessorBirchsLab_EventScript_DeclineSeeingRival)
+    if (var(VAR_RESULT) == YES) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_DeclineSeeingRival)
+    }
     end
 }
 
@@ -134,8 +150,12 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival {
 
 script LittlerootTown_ProfessorBirchsLab_EventScript_DeclineSeeingRival {
     msgbox(LittlerootTown_ProfessorBirchsLab_Text_DontBeThatWay, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival)
-    if (var(VAR_RESULT) == NO) goto(LittlerootTown_ProfessorBirchsLab_EventScript_DeclineSeeingRival)
+    if (var(VAR_RESULT) == YES) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_DeclineSeeingRival)
+    }
     end
 }
 
@@ -178,8 +198,12 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex {
     applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft)
     waitmovement(0)
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(LittlerootTown_ProfessorBirchsLab_EventScript_MayUpgradeComment)
-    if (var(VAR_RESULT) == FEMALE) call(LittlerootTown_ProfessorBirchsLab_EventScript_BrendanUpgradeComment)
+    if (var(VAR_RESULT) == MALE) {
+        call(LittlerootTown_ProfessorBirchsLab_EventScript_MayUpgradeComment)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(LittlerootTown_ProfessorBirchsLab_EventScript_BrendanUpgradeComment)
+    }
     playse(SE_PC_ON)
     waitse()
     delay(20)
@@ -276,8 +300,12 @@ movement LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarte
 script LittlerootTown_ProfessorBirchsLab_EventScript_Aide {
     lock
     faceplayer
-    if (var(VAR_BIRCH_LAB_STATE) >= 3) goto(LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter)
-    if (flag(FLAG_BIRCH_AIDE_MET)) goto(LittlerootTown_ProfessorBirchsLab_EventScript_AideAlreadyMet)
+    if (var(VAR_BIRCH_LAB_STATE) >= 3) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter)
+    }
+    if (flag(FLAG_BIRCH_AIDE_MET)) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_AideAlreadyMet)
+    }
     msgbox(LittlerootTown_ProfessorBirchsLab_Text_BirchAwayOnFieldwork, MSGBOX_DEFAULT)
     setflag(FLAG_BIRCH_AIDE_MET)
     release
@@ -298,36 +326,48 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter {
 
 script LittlerootTown_ProfessorBirchsLab_EventScript_Cyndaquil {
     release
-    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 6) goto(LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter)
+    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 6) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter)
+    }
     applymovement(LOCALID_BIRCHS_LAB_BIRCH, Common_Movement_WalkInPlaceFasterRight)
     waitmovement(0)
     showmonpic(SPECIES_CYNDAQUIL, 10, 3)
     msgbox(LittlerootTown_ProfessorBirchsLab_Text_YoullTakeCyndaquil, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime)
+    if (var(VAR_RESULT) == NO) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime)
+    }
     goto(LittlerootTown_ProfessorBirchsLab_EventScript_GiveCyndaquil)
     end
 }
 
 script LittlerootTown_ProfessorBirchsLab_EventScript_Totodile {
     release
-    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 6) goto(LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter)
+    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 6) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter)
+    }
     applymovement(LOCALID_BIRCHS_LAB_BIRCH, Common_Movement_WalkInPlaceFasterRight)
     waitmovement(0)
     showmonpic(SPECIES_TOTODILE, 10, 3)
     msgbox(LittlerootTown_ProfessorBirchsLab_Text_YoullTakeTotodile, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime)
+    if (var(VAR_RESULT) == NO) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime)
+    }
     goto(LittlerootTown_ProfessorBirchsLab_EventScript_GiveTotodile)
     end
 }
 
 script LittlerootTown_ProfessorBirchsLab_EventScript_Chikorita {
     release
-    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 6) goto(LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter)
+    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 6) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter)
+    }
     applymovement(LOCALID_BIRCHS_LAB_BIRCH, Common_Movement_WalkInPlaceFasterRight)
     waitmovement(0)
     showmonpic(SPECIES_CHIKORITA, 10, 3)
     msgbox(LittlerootTown_ProfessorBirchsLab_Text_YoullTakeChikorita, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime)
+    if (var(VAR_RESULT) == NO) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime)
+    }
     goto(LittlerootTown_ProfessorBirchsLab_EventScript_GiveChikorita)
     end
 }
@@ -349,8 +389,12 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_GiveCyndaquil {
     bufferspeciesname(STR_VAR_1, SPECIES_CYNDAQUIL)
     setvar(VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_CYNDAQUIL)
     givemon(SPECIES_CYNDAQUIL, 5)
-    if (var(VAR_RESULT) == MON_GIVEN_TO_PARTY) goto(LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToParty)
-    if (var(VAR_RESULT) == MON_GIVEN_TO_PC) goto(LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToPC)
+    if (var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToParty)
+    }
+    if (var(VAR_RESULT) == MON_GIVEN_TO_PC) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToPC)
+    }
     hidemonpic()
     goto(Common_EventScript_NoMoreRoomForPokemon)
     end
@@ -360,7 +404,9 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToParty {
     call(LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter)
     removeobject(LOCALID_BIRCHS_LAB_CYNDAQUIL_BALL)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil)
+    if (var(VAR_RESULT) == NO) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil)
+    }
     call(Common_EventScript_GetGiftMonPartySlot)
     call(Common_EventScript_NameReceivedPartyMon)
     goto(LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil)
@@ -371,7 +417,9 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToPC {
     call(LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter)
     removeobject(LOCALID_BIRCHS_LAB_CYNDAQUIL_BALL)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LittlerootTown_ProfessorBirchsLab_EventScript_CyndaquilTransferredToPC)
+    if (var(VAR_RESULT) == NO) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_CyndaquilTransferredToPC)
+    }
     call(Common_EventScript_NameReceivedBoxMon)
     goto(LittlerootTown_ProfessorBirchsLab_EventScript_CyndaquilTransferredToPC)
     end
@@ -395,8 +443,12 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_GiveTotodile {
     bufferspeciesname(STR_VAR_1, SPECIES_TOTODILE)
     setvar(VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_TOTODILE)
     givemon(SPECIES_TOTODILE, 5)
-    if (var(VAR_RESULT) == MON_GIVEN_TO_PARTY) goto(LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToParty)
-    if (var(VAR_RESULT) == MON_GIVEN_TO_PC) goto(LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToPC)
+    if (var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToParty)
+    }
+    if (var(VAR_RESULT) == MON_GIVEN_TO_PC) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToPC)
+    }
     hidemonpic()
     goto(Common_EventScript_NoMoreRoomForPokemon)
     end
@@ -406,7 +458,9 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToParty {
     call(LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter)
     removeobject(LOCALID_BIRCHS_LAB_TOTODILE_BALL)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile)
+    if (var(VAR_RESULT) == NO) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile)
+    }
     call(Common_EventScript_GetGiftMonPartySlot)
     call(Common_EventScript_NameReceivedPartyMon)
     goto(LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile)
@@ -417,7 +471,9 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToPC {
     call(LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter)
     removeobject(LOCALID_BIRCHS_LAB_TOTODILE_BALL)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LittlerootTown_ProfessorBirchsLab_EventScript_TotodileTransferredToPC)
+    if (var(VAR_RESULT) == NO) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_TotodileTransferredToPC)
+    }
     call(Common_EventScript_NameReceivedBoxMon)
     goto(LittlerootTown_ProfessorBirchsLab_EventScript_TotodileTransferredToPC)
     end
@@ -441,8 +497,12 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_GiveChikorita {
     bufferspeciesname(STR_VAR_1, SPECIES_CHIKORITA)
     setvar(VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_CHIKORITA)
     givemon(SPECIES_CHIKORITA, 5)
-    if (var(VAR_RESULT) == MON_GIVEN_TO_PARTY) goto(LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToParty)
-    if (var(VAR_RESULT) == MON_GIVEN_TO_PC) goto(LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToPC)
+    if (var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToParty)
+    }
+    if (var(VAR_RESULT) == MON_GIVEN_TO_PC) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToPC)
+    }
     hidemonpic()
     goto(Common_EventScript_NoMoreRoomForPokemon)
     end
@@ -452,7 +512,9 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToParty {
     call(LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter)
     removeobject(LOCALID_BIRCHS_LAB_CHIKORITA_BALL)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita)
+    if (var(VAR_RESULT) == NO) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita)
+    }
     call(Common_EventScript_GetGiftMonPartySlot)
     call(Common_EventScript_NameReceivedPartyMon)
     goto(LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita)
@@ -463,7 +525,9 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToPC {
     call(LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter)
     removeobject(LOCALID_BIRCHS_LAB_CHIKORITA_BALL)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LittlerootTown_ProfessorBirchsLab_EventScript_ChikoritaTransferredToPC)
+    if (var(VAR_RESULT) == NO) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_ChikoritaTransferredToPC)
+    }
     call(Common_EventScript_NameReceivedBoxMon)
     goto(LittlerootTown_ProfessorBirchsLab_EventScript_ChikoritaTransferredToPC)
     end
@@ -494,10 +558,18 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter {
 script LittlerootTown_ProfessorBirchsLab_EventScript_Birch {
     lock
     faceplayer
-    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) == 5) goto(LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon)
-    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) == 2) goto(LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting)
-    if (!flag(FLAG_HAS_MATCH_CALL)) goto(LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister)
-    if (!flag(FLAG_ENABLE_PROF_BIRCH_MATCH_CALL)) goto(EventScript_RegisterProfBirch)
+    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) == 5) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon)
+    }
+    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) == 2) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting)
+    }
+    if (!flag(FLAG_HAS_MATCH_CALL)) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister)
+    }
+    if (!flag(FLAG_ENABLE_PROF_BIRCH_MATCH_CALL)) {
+        goto(EventScript_RegisterProfBirch)
+    }
     goto(LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister)
     end
 }
@@ -515,10 +587,18 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting {
 }
 
 script LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister {
-    if (!flag(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380)) goto(ProfBirch_EventScript_RatePokedexOrRegister)
-    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) == 3) goto(ProfBirch_EventScript_RatePokedexOrRegister)
-    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 6) goto(ProfBirch_EventScript_RatePokedexOrRegister)
-    if (var(VAR_BIRCH_LAB_STATE) == 5) goto(LittlerootTown_ProfessorBirchsLab_EventScript_PokemonAwait)
+    if (!flag(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380)) {
+        goto(ProfBirch_EventScript_RatePokedexOrRegister)
+    }
+    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) == 3) {
+        goto(ProfBirch_EventScript_RatePokedexOrRegister)
+    }
+    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 6) {
+        goto(ProfBirch_EventScript_RatePokedexOrRegister)
+    }
+    if (var(VAR_BIRCH_LAB_STATE) == 5) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_PokemonAwait)
+    }
     msgbox(LittlerootTown_ProfessorBirchsLab_Text_BirchRivalGoneHome, MSGBOX_DEFAULT)
     release
     end
@@ -549,8 +629,12 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex {
     applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
     waitmovement(0)
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls)
-    if (var(VAR_RESULT) == FEMALE) call(LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls)
+    if (var(VAR_RESULT) == MALE) {
+        call(LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls)
+    }
     setvar(VAR_BIRCH_LAB_STATE, 5)
     setflag(FLAG_ADVENTURE_STARTED)
     setvar(VAR_OLDALE_TOWN_STATE, 1)
@@ -563,7 +647,9 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex {
 script LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls {
     msgbox(LittlerootTown_ProfessorBirchsLab_Text_MayGotPokedexTooTakeThese, MSGBOX_DEFAULT)
     giveitem(ITEM_POKE_BALL, 5)
-    if (var(VAR_RESULT) == FALSE) call(LittlerootTown_ProfessorBirchsLab_EventScript_MayNoRoomForPokeBalls)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LittlerootTown_ProfessorBirchsLab_EventScript_MayNoRoomForPokeBalls)
+    }
     msgbox(LittlerootTown_ProfessorBirchsLab_Text_CatchCutePokemonWithPokeBalls, MSGBOX_DEFAULT)
     setvar(VAR_RESULT, 0)
     return
@@ -572,7 +658,9 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls {
 script LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls {
     msgbox(LittlerootTown_ProfessorBirchsLab_Text_BrendanGotPokedexTooTakeThese, MSGBOX_DEFAULT)
     giveitem(ITEM_POKE_BALL, 5)
-    if (var(VAR_RESULT) == FALSE) call(LittlerootTown_ProfessorBirchsLab_EventScript_BrendanNoRoomForPokeBalls)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LittlerootTown_ProfessorBirchsLab_EventScript_BrendanNoRoomForPokeBalls)
+    }
     msgbox(LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls, MSGBOX_DEFAULT)
     setvar(VAR_RESULT, 1)
     return
@@ -619,12 +707,22 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_Machine {
 script LittlerootTown_ProfessorBirchsLab_EventScript_Rival {
     lock
     faceplayer
-    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) == 5) goto(LittlerootTown_ProfessorBirchsLab_EventScript_RivalFuturePlans)
-    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 6) goto(LittlerootTown_ProfessorBirchsLab_EventScript_RivalHaveYouGoneToBattleFrontier)
-    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 2) goto(LittlerootTown_ProfessorBirchsLab_EventScript_RivalTakeBreakFromFieldwork)
+    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) == 5) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_RivalFuturePlans)
+    }
+    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 6) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_RivalHaveYouGoneToBattleFrontier)
+    }
+    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 2) {
+        goto(LittlerootTown_ProfessorBirchsLab_EventScript_RivalTakeBreakFromFieldwork)
+    }
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(LittlerootTown_ProfessorBirchsLab_EventScript_MayWhereShouldIGoNext)
-    if (var(VAR_RESULT) == FEMALE) call(LittlerootTown_ProfessorBirchsLab_EventScript_BrendanWhereShouldIGoNext)
+    if (var(VAR_RESULT) == MALE) {
+        call(LittlerootTown_ProfessorBirchsLab_EventScript_MayWhereShouldIGoNext)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(LittlerootTown_ProfessorBirchsLab_EventScript_BrendanWhereShouldIGoNext)
+    }
     release
     end
 }
@@ -641,8 +739,12 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_BrendanWhereShouldIGoNext {
 
 script LittlerootTown_ProfessorBirchsLab_EventScript_RivalFuturePlans {
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(LittlerootTown_ProfessorBirchsLab_EventScript_MayWhatNextImStayingHere)
-    if (var(VAR_RESULT) == FEMALE) call(LittlerootTown_ProfessorBirchsLab_EventScript_BrendanPreferCollectingSlowly)
+    if (var(VAR_RESULT) == MALE) {
+        call(LittlerootTown_ProfessorBirchsLab_EventScript_MayWhatNextImStayingHere)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(LittlerootTown_ProfessorBirchsLab_EventScript_BrendanPreferCollectingSlowly)
+    }
     release
     end
 }
@@ -659,8 +761,12 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_BrendanPreferCollectingSlow
 
 script LittlerootTown_ProfessorBirchsLab_EventScript_RivalHaveYouGoneToBattleFrontier {
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(LittlerootTown_ProfessorBirchsLab_EventScript_MayHaveYouGoneToBattleFrontier)
-    if (var(VAR_RESULT) == FEMALE) call(LittlerootTown_ProfessorBirchsLab_EventScript_BrendanHaveYouGoneToBattleFrontier)
+    if (var(VAR_RESULT) == MALE) {
+        call(LittlerootTown_ProfessorBirchsLab_EventScript_MayHaveYouGoneToBattleFrontier)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(LittlerootTown_ProfessorBirchsLab_EventScript_BrendanHaveYouGoneToBattleFrontier)
+    }
     release
     end
 }
@@ -677,8 +783,12 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_BrendanHaveYouGoneToBattleF
 
 script LittlerootTown_ProfessorBirchsLab_EventScript_RivalTakeBreakFromFieldwork {
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(LittlerootTown_ProfessorBirchsLab_EventScript_MayTakeBreakFromFieldwork)
-    if (var(VAR_RESULT) == FEMALE) call(LittlerootTown_ProfessorBirchsLab_EventScript_BrendanTakeBreakFromFieldwork)
+    if (var(VAR_RESULT) == MALE) {
+        call(LittlerootTown_ProfessorBirchsLab_EventScript_MayTakeBreakFromFieldwork)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(LittlerootTown_ProfessorBirchsLab_EventScript_BrendanTakeBreakFromFieldwork)
+    }
     release
     end
 }

@@ -49,20 +49,34 @@ script CeruleanCity_House5_EventScript_ChooseExchangeItem {
     setvar(VAR_0x8004, SCROLL_MULTI_BERRY_POWDER_VENDOR)
     special(ShowScrollableMultichoice)
     waitstate
-    switch(VAR_RESULT)
-    case(0, CeruleanCity_House5_EventScript_EnergyPowder)
-    case(1, CeruleanCity_House5_EventScript_EnergyRoot)
-    case(2, CeruleanCity_House5_EventScript_HealPowder)
-    case(3, CeruleanCity_House5_EventScript_RevivalHerb)
-    case(4, CeruleanCity_House5_EventScript_Protein)
-    case(5, CeruleanCity_House5_EventScript_Iron)
-    case(6, CeruleanCity_House5_EventScript_Carbos)
-    case(7, CeruleanCity_House5_EventScript_Calcium)
-    case(8, CeruleanCity_House5_EventScript_Zinc)
-    case(9, CeruleanCity_House5_EventScript_HPUp)
-    case(10, CeruleanCity_House5_EventScript_PPUp)
-    case(11, CeruleanCity_House5_EventScript_ExitMenu)
-    case(127, CeruleanCity_House5_EventScript_ExitMenu)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CeruleanCity_House5_EventScript_EnergyPowder)
+        case 1:
+            goto(CeruleanCity_House5_EventScript_EnergyRoot)
+        case 2:
+            goto(CeruleanCity_House5_EventScript_HealPowder)
+        case 3:
+            goto(CeruleanCity_House5_EventScript_RevivalHerb)
+        case 4:
+            goto(CeruleanCity_House5_EventScript_Protein)
+        case 5:
+            goto(CeruleanCity_House5_EventScript_Iron)
+        case 6:
+            goto(CeruleanCity_House5_EventScript_Carbos)
+        case 7:
+            goto(CeruleanCity_House5_EventScript_Calcium)
+        case 8:
+            goto(CeruleanCity_House5_EventScript_Zinc)
+        case 9:
+            goto(CeruleanCity_House5_EventScript_HPUp)
+        case 10:
+            goto(CeruleanCity_House5_EventScript_PPUp)
+        case 11:
+            goto(CeruleanCity_House5_EventScript_ExitMenu)
+        case 127:
+            goto(CeruleanCity_House5_EventScript_ExitMenu)
+    }
     end
 }
 

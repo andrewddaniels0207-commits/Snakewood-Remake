@@ -80,37 +80,53 @@ script SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent {
         call(SlateportCity_BattleTentCorridor_EventScript_ReadyFor3rdOpponent)
     }
     multichoice(20, 6, MULTI_GO_ON_REST_RETIRE, TRUE)
-    switch(VAR_RESULT)
-    case(0, SlateportCity_BattleTentCorridor_EventScript_AskSwapMon)
-    case(1, SlateportCity_BattleTentCorridor_EventScript_AskPauseChallenge)
-    case(2, SlateportCity_BattleTentCorridor_EventScript_AskRetireChallenge)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(SlateportCity_BattleTentCorridor_EventScript_AskSwapMon)
+        case 1:
+            goto(SlateportCity_BattleTentCorridor_EventScript_AskPauseChallenge)
+        case 2:
+            goto(SlateportCity_BattleTentCorridor_EventScript_AskRetireChallenge)
+    }
 }
 
 script SlateportCity_BattleTentCorridor_EventScript_AskPauseChallenge {
     msgbox(BattleFrontier_BattleFactoryPreBattleRoom_Text_SaveAndQuitGame, MSGBOX_YESNO)
-    switch(VAR_RESULT)
-    case(NO, SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent)
-    case(YES, SlateportCity_BattleTentCorridor_EventScript_PauseChallenge)
-    case(MULTI_B_PRESSED, SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent)
+    switch (var(VAR_RESULT)) {
+        case NO:
+            goto(SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent)
+        case YES:
+            goto(SlateportCity_BattleTentCorridor_EventScript_PauseChallenge)
+        case MULTI_B_PRESSED:
+            goto(SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent)
+    }
 }
 
 script SlateportCity_BattleTentCorridor_EventScript_AskRetireChallenge {
     message(BattleFrontier_BattleFactoryPreBattleRoom_Text_RetireFromChallenge)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
-    switch(VAR_RESULT)
-    case(1, SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent)
-    case(0, SlateportCity_BattleTent_EventScript_WarpToLobbyLost)
-    case(MULTI_B_PRESSED, SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent)
+        case 0:
+            goto(SlateportCity_BattleTent_EventScript_WarpToLobbyLost)
+        case MULTI_B_PRESSED:
+            goto(SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent)
+    }
 }
 
 script SlateportCity_BattleTentCorridor_EventScript_AskSwapMon {
     slateporttent_generateopponentmons()
     msgbox(BattleFrontier_BattleFactoryPreBattleRoom_Text_LikeToSwapMon, MSGBOX_YESNO)
-    switch(VAR_RESULT)
-    case(NO, SlateportCity_BattleTentCorridor_EventScript_EnterBattleRoom)
-    case(YES, SlateportCity_BattleTentCorridor_EventScript_SwapMons)
-    case(MULTI_B_PRESSED, SlateportCity_BattleTentCorridor_EventScript_EnterBattleRoom)
+    switch (var(VAR_RESULT)) {
+        case NO:
+            goto(SlateportCity_BattleTentCorridor_EventScript_EnterBattleRoom)
+        case YES:
+            goto(SlateportCity_BattleTentCorridor_EventScript_SwapMons)
+        case MULTI_B_PRESSED:
+            goto(SlateportCity_BattleTentCorridor_EventScript_EnterBattleRoom)
+    }
 }
 
 script SlateportCity_BattleTentCorridor_EventScript_SwapMons {

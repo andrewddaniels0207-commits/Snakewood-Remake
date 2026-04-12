@@ -43,10 +43,14 @@ script BattleFrontier_BattlePyramidFloor_EventScript_PlayPyramidMusic {
 script BattleFrontier_BattlePyramidFloor_OnResume {
     pyramid_setfloorpal()
     frontier_getstatus()
-    switch(VAR_TEMP_CHALLENGE_STATUS)
-    case(0, BattleFrontier_BattlePyramidFloor_EventScript_ReadyChallenge)
-    case(CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePyramid_EventScript_WarpToLobby)
-    case(CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePyramidFloor_EventScript_ReadyChallenge)
+    switch (var(VAR_TEMP_CHALLENGE_STATUS)) {
+        case 0:
+            goto(BattleFrontier_BattlePyramidFloor_EventScript_ReadyChallenge)
+        case CHALLENGE_STATUS_SAVING:
+            goto(BattleFrontier_BattlePyramid_EventScript_WarpToLobby)
+        case CHALLENGE_STATUS_PAUSED:
+            goto(BattleFrontier_BattlePyramidFloor_EventScript_ReadyChallenge)
+    }
     frontier_get(FRONTIER_DATA_BATTLE_OUTCOME)
     if (var(VAR_RESULT) == B_OUTCOME_RAN) {
         goto(BattleFrontier_BattlePyramidFloor_EventScript_ResetParty)

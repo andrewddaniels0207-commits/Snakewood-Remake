@@ -4,24 +4,38 @@ mapscripts LittlerootTown_MaysHouse_2F_MapScripts {
 }
 
 script LittlerootTown_MaysHouse_2F_OnTransition {
-    if (var(VAR_LITTLEROOT_RIVAL_STATE) < 2) call(LittlerootTown_MaysHouse_2F_EventScript_CheckSetReadyToMeetMay)
-    if (var(VAR_LITTLEROOT_RIVAL_STATE) >= 3) call(LittlerootTown_MaysHouse_2F_EventScript_CheckShouldUpdateMayPos)
-    if (var(VAR_LITTLEROOT_INTRO_STATE) == 4) call(PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet)
+    if (var(VAR_LITTLEROOT_RIVAL_STATE) < 2) {
+        call(LittlerootTown_MaysHouse_2F_EventScript_CheckSetReadyToMeetMay)
+    }
+    if (var(VAR_LITTLEROOT_RIVAL_STATE) >= 3) {
+        call(LittlerootTown_MaysHouse_2F_EventScript_CheckShouldUpdateMayPos)
+    }
+    if (var(VAR_LITTLEROOT_INTRO_STATE) == 4) {
+        call(PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet)
+    }
     call(SecretBase_EventScript_SetDecorationFlags)
     setvar(VAR_SECRET_BASE_INITIALIZED, 0)
     end
 }
 
 script LittlerootTown_MaysHouse_2F_EventScript_CheckShouldUpdateMayPos {
-    if (flag(FLAG_MET_RIVAL_LILYCOVE)) goto(LittlerootTown_MaysHouse_2F_EventScript_TryUpdateMayPos)
-    if (var(VAR_BIRCH_LAB_STATE) >= 2) goto(LittlerootTown_MaysHouse_2F_EventScript_Ret)
+    if (flag(FLAG_MET_RIVAL_LILYCOVE)) {
+        goto(LittlerootTown_MaysHouse_2F_EventScript_TryUpdateMayPos)
+    }
+    if (var(VAR_BIRCH_LAB_STATE) >= 2) {
+        goto(LittlerootTown_MaysHouse_2F_EventScript_Ret)
+    }
     goto(LittlerootTown_MaysHouse_2F_EventScript_TryUpdateMayPos)
 }
 
 script LittlerootTown_MaysHouse_2F_EventScript_TryUpdateMayPos {
     checkplayergender()
-    if (var(VAR_RESULT) == FEMALE) goto(LittlerootTown_MaysHouse_2F_EventScript_Ret)
-    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 2) goto(LittlerootTown_MaysHouse_2F_EventScript_Ret)
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(LittlerootTown_MaysHouse_2F_EventScript_Ret)
+    }
+    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 2) {
+        goto(LittlerootTown_MaysHouse_2F_EventScript_Ret)
+    }
     setobjectxyperm(LOCALID_RIVALS_HOUSE_2F_RIVAL, 8, 2)
     setobjectmovementtype(LOCALID_RIVALS_HOUSE_2F_RIVAL, MOVEMENT_TYPE_FACE_UP)
     return
@@ -33,7 +47,9 @@ script LittlerootTown_MaysHouse_2F_EventScript_Ret {
 
 script LittlerootTown_MaysHouse_2F_EventScript_CheckSetReadyToMeetMay {
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(LittlerootTown_MaysHouse_2F_EventScript_SetReadyToMeetMay)
+    if (var(VAR_RESULT) == MALE) {
+        goto(LittlerootTown_MaysHouse_2F_EventScript_SetReadyToMeetMay)
+    }
     return
 }
 
@@ -51,13 +67,17 @@ LittlerootTown_MaysHouse_2F_OnWarp:
 
 script LittlerootTown_MaysHouse_2F_EventScript_CheckInitDecor {
     checkplayergender()
-    if (var(VAR_RESULT) == FEMALE) goto(SecretBase_EventScript_InitDecorations)
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(SecretBase_EventScript_InitDecorations)
+    }
     end
 }
 
 script LittlerootTown_MaysHouse_2F_EventScript_RivalsPokeBall {
     lockall
-    if (var(VAR_LITTLEROOT_RIVAL_STATE) == 2) goto(LittlerootTown_MaysHouse_2F_EventScript_MeetMay)
+    if (var(VAR_LITTLEROOT_RIVAL_STATE) == 2) {
+        goto(LittlerootTown_MaysHouse_2F_EventScript_MeetMay)
+    }
     msgbox(RivalsHouse_2F_Text_ItsRivalsPokeBall, MSGBOX_DEFAULT)
     releaseall
     end
@@ -75,10 +95,18 @@ script LittlerootTown_MaysHouse_2F_EventScript_MeetMay {
     waitmovement(0)
     delay(10)
     playbgm(MUS_ENCOUNTER_MAY, TRUE)
-    if (var(VAR_FACING) == DIR_NORTH) call(LittlerootTown_MaysHouse_2F_EventScript_MeetMayNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(LittlerootTown_MaysHouse_2F_EventScript_MeetMaySouth)
-    if (var(VAR_FACING) == DIR_WEST) call(LittlerootTown_MaysHouse_2F_EventScript_MeetMayWest)
-    if (var(VAR_FACING) == DIR_EAST) call(LittlerootTown_MaysHouse_2F_EventScript_MeetMayEast)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(LittlerootTown_MaysHouse_2F_EventScript_MeetMayNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(LittlerootTown_MaysHouse_2F_EventScript_MeetMaySouth)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(LittlerootTown_MaysHouse_2F_EventScript_MeetMayWest)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(LittlerootTown_MaysHouse_2F_EventScript_MeetMayEast)
+    }
     setvar(VAR_LITTLEROOT_RIVAL_STATE, 3)
     setflag(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL)
     clearflag(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM)
@@ -263,10 +291,16 @@ movement LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayEast {
 
 script RivalsHouse_2F_EventScript_Rival {
     lockall
-    if (flag(FLAG_MET_RIVAL_LILYCOVE)) goto(RivalsHouse_2F_EventScript_RivalPostLilycove)
+    if (flag(FLAG_MET_RIVAL_LILYCOVE)) {
+        goto(RivalsHouse_2F_EventScript_RivalPostLilycove)
+    }
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(RivalsHouse_2F_EventScript_May)
-    if (var(VAR_RESULT) == FEMALE) goto(RivalsHouse_2F_EventScript_Brendan)
+    if (var(VAR_RESULT) == MALE) {
+        goto(RivalsHouse_2F_EventScript_May)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(RivalsHouse_2F_EventScript_Brendan)
+    }
     end
 }
 
@@ -286,21 +320,29 @@ script RivalsHouse_2F_EventScript_RivalPostLilycove {
     applymovement(VAR_LAST_TALKED, Common_Movement_FacePlayer)
     waitmovement(0)
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(RivalsHouse_2F_EventScript_MayPostLilycove)
-    if (var(VAR_RESULT) == FEMALE) call(RivalsHouse_2F_EventScript_BrendanPostLilycove)
+    if (var(VAR_RESULT) == MALE) {
+        call(RivalsHouse_2F_EventScript_MayPostLilycove)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(RivalsHouse_2F_EventScript_BrendanPostLilycove)
+    }
     setflag(FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE)
     releaseall
     end
 }
 
 script RivalsHouse_2F_EventScript_MayPostLilycove {
-    if (flag(FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE)) goto(RivalsHouse_2F_EventScript_MayWhereShouldIGoNext)
+    if (flag(FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE)) {
+        goto(RivalsHouse_2F_EventScript_MayWhereShouldIGoNext)
+    }
     msgbox(RivalsHouse_2F_Text_MayJustCheckingMyPokedex, MSGBOX_DEFAULT)
     return
 }
 
 script RivalsHouse_2F_EventScript_BrendanPostLilycove {
-    if (flag(FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE)) goto(RivalsHouse_2F_EventScript_BrendanWhereShouldIGoNext)
+    if (flag(FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE)) {
+        goto(RivalsHouse_2F_EventScript_BrendanWhereShouldIGoNext)
+    }
     msgbox(RivalsHouse_2F_Text_BrendanJustCheckingMyPokedex, MSGBOX_DEFAULT)
     return
 }
@@ -318,8 +360,12 @@ script RivalsHouse_2F_EventScript_BrendanWhereShouldIGoNext {
 script LittlerootTown_MaysHouse_2F_EventScript_PC {
     lockall
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(LittlerootTown_MaysHouse_2F_EventScript_CheckRivalsPC)
-    if (var(VAR_RESULT) == FEMALE) goto(LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC)
+    if (var(VAR_RESULT) == MALE) {
+        goto(LittlerootTown_MaysHouse_2F_EventScript_CheckRivalsPC)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC)
+    }
     end
 }
 

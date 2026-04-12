@@ -114,20 +114,28 @@ script BattleFrontier_BattlePikeLobby_EventScript_AskTakeChallenge {
     message(BattleFrontier_BattlePikeLobby_Text_TakeChallenge)
     waitmessage()
     multichoice(17, 6, MULTI_CHALLENGEINFO, FALSE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattlePikeLobby_EventScript_TryEnterChallenge)
-    case(1, BattleFrontier_BattlePikeLobby_EventScript_ExplainChallenge)
-    case(2, BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattlePikeLobby_EventScript_TryEnterChallenge)
+        case 1:
+            goto(BattleFrontier_BattlePikeLobby_EventScript_ExplainChallenge)
+        case 2:
+            goto(BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge)
+    }
 }
 
 script BattleFrontier_BattlePikeLobby_EventScript_TryEnterChallenge {
     message(BattleFrontier_BattlePikeLobby_Text_WhichChallengeMode)
     waitmessage()
     multichoice(17, 6, MULTI_LEVEL_MODE, FALSE)
-    switch(VAR_RESULT)
-    case(FRONTIER_LVL_TENT, BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge)
+    switch (var(VAR_RESULT)) {
+        case FRONTIER_LVL_TENT:
+            goto(BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge)
+    }
     frontier_checkineligible()
     if (var(VAR_0x8004) == TRUE) {
         goto(BattleFrontier_BattlePikeLobby_EventScript_NotEnoughValidMons)
@@ -145,10 +153,14 @@ script BattleFrontier_BattlePikeLobby_EventScript_TryEnterChallenge {
         goto(BattleFrontier_BattlePikeLobby_EventScript_LoadPartyAndCancelChallenge)
     }
     msgbox(BattleFrontier_BattlePikeLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO)
-    switch(VAR_RESULT)
-    case(NO, BattleFrontier_BattlePikeLobby_EventScript_LoadPartyAndCancelChallenge)
-    case(YES, BattleFrontier_BattlePikeLobby_EventScript_SaveBeforeChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattlePikeLobby_EventScript_LoadPartyAndCancelChallenge)
+    switch (var(VAR_RESULT)) {
+        case NO:
+            goto(BattleFrontier_BattlePikeLobby_EventScript_LoadPartyAndCancelChallenge)
+        case YES:
+            goto(BattleFrontier_BattlePikeLobby_EventScript_SaveBeforeChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattlePikeLobby_EventScript_LoadPartyAndCancelChallenge)
+    }
 }
 
 script BattleFrontier_BattlePikeLobby_EventScript_SaveBeforeChallenge {
@@ -189,9 +201,12 @@ script BattleFrontier_BattlePikeLobby_EventScript_ExplainChallenge {
 }
 
 script BattleFrontier_BattlePikeLobby_EventScript_NotEnoughValidMons {
-    switch(VAR_RESULT)
-    case(FRONTIER_LVL_50, BattleFrontier_BattlePikeLobby_EventScript_NotEnoughValidMonsLv50)
-    case(FRONTIER_LVL_OPEN, BattleFrontier_BattlePikeLobby_EventScript_NotEnoughValidMonsLvOpen)
+    switch (var(VAR_RESULT)) {
+        case FRONTIER_LVL_50:
+            goto(BattleFrontier_BattlePikeLobby_EventScript_NotEnoughValidMonsLv50)
+        case FRONTIER_LVL_OPEN:
+            goto(BattleFrontier_BattlePikeLobby_EventScript_NotEnoughValidMonsLvOpen)
+    }
 }
 
 script BattleFrontier_BattlePikeLobby_EventScript_NotEnoughValidMonsLv50 {
@@ -280,12 +295,18 @@ script BattleFrontier_BattlePikeLobby_EventScript_ReadRulesBoard {
     message(BattleFrontier_BattlePikeLobby_Text_ReadWhichHeading)
     waitmessage()
     multichoice(16, 4, MULTI_BATTLE_PIKE_RULES, FALSE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattlePikeLobby_EventScript_RulesPokenavBag)
-    case(1, BattleFrontier_BattlePikeLobby_EventScript_RulesHeldItems)
-    case(2, BattleFrontier_BattlePikeLobby_EventScript_RulesMonOrder)
-    case(3, BattleFrontier_BattlePikeLobby_EventScript_ExitRules)
-    case(MULTI_B_PRESSED, BattleFrontier_BattlePikeLobby_EventScript_ExitRules)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattlePikeLobby_EventScript_RulesPokenavBag)
+        case 1:
+            goto(BattleFrontier_BattlePikeLobby_EventScript_RulesHeldItems)
+        case 2:
+            goto(BattleFrontier_BattlePikeLobby_EventScript_RulesMonOrder)
+        case 3:
+            goto(BattleFrontier_BattlePikeLobby_EventScript_ExitRules)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattlePikeLobby_EventScript_ExitRules)
+    }
     end
 }
 

@@ -94,10 +94,14 @@ script BattleFrontier_BattleFactoryLobby_EventScript_AskRecordBattle {
     message(BattleFrontier_BattleFactoryLobby_Text_RecordLastMatch)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
-    switch(VAR_RESULT)
-    case(1, BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle)
-    case(0, BattleFrontier_BattleFactoryLobby_EventScript_RecordBattle)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle)
+        case 0:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_RecordBattle)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle)
+    }
 }
 
 script BattleFrontier_BattleFactoryLobby_EventScript_RecordBattle {
@@ -160,26 +164,38 @@ script BattleFrontier_BattleFactoryLobby_EventScript_AskTakeChallenge {
     }
     waitmessage()
     multichoice(17, 6, MULTI_CHALLENGEINFO, FALSE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattleFactoryLobby_EventScript_TryEnterChallenge)
-    case(1, BattleFrontier_BattleFactoryLobby_EventScript_ExplainChallenge)
-    case(2, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_TryEnterChallenge)
+        case 1:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_ExplainChallenge)
+        case 2:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge)
+    }
 }
 
 script BattleFrontier_BattleFactoryLobby_EventScript_TryEnterChallenge {
     message(BattleFrontier_BattleFactoryLobby_Text_WhichLevelMode)
     waitmessage()
     multichoice(17, 6, MULTI_LEVEL_MODE, FALSE)
-    switch(VAR_RESULT)
-    case(FRONTIER_LVL_TENT, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge)
+    switch (var(VAR_RESULT)) {
+        case FRONTIER_LVL_TENT:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge)
+    }
     frontier_set(FRONTIER_DATA_LVL_MODE, VAR_RESULT)
     msgbox(BattleFrontier_BattleFactoryLobby_Text_OkayToSaveBeforeChallenge, MSGBOX_YESNO)
-    switch(VAR_RESULT)
-    case(NO, BattleFrontier_BattleFactoryLobby_EventScript_LoadPartyAndCancelChallenge)
-    case(YES, BattleFrontier_BattleFactoryLobby_EventScript_SaveBeforeChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_LoadPartyAndCancelChallenge)
+    switch (var(VAR_RESULT)) {
+        case NO:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_LoadPartyAndCancelChallenge)
+        case YES:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_SaveBeforeChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_LoadPartyAndCancelChallenge)
+    }
 }
 
 script BattleFrontier_BattleFactoryLobby_EventScript_SaveBeforeChallenge {
@@ -350,14 +366,22 @@ script BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard {
     message(BattleFrontier_BattleFactoryLobby_Text_ReadWhichHeading)
     waitmessage()
     multichoice(17, 0, MULTI_BATTLE_FACTORY_RULES, FALSE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattleFactoryLobby_EventScript_RulesBasics)
-    case(1, BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapPartner)
-    case(2, BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapNumber)
-    case(3, BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapNotes)
-    case(4, BattleFrontier_BattleFactoryLobby_EventScript_RulesOpenLv)
-    case(5, BattleFrontier_BattleFactoryLobby_EventScript_ExitRules)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_ExitRules)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_RulesBasics)
+        case 1:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapPartner)
+        case 2:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapNumber)
+        case 3:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapNotes)
+        case 4:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_RulesOpenLv)
+        case 5:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_ExitRules)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleFactoryLobby_EventScript_ExitRules)
+    }
     end
 }
 

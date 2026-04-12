@@ -94,10 +94,14 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_BattleOpponent {
     dome_initopponentparty()
     call(BattleFrontier_BattleDomeBattleRoom_EventScript_DoDomeBattle)
     setvar(VAR_TEMP_2, NO_DRAW)
-    switch(VAR_RESULT)
-    case(B_OUTCOME_WON, BattleFrontier_BattleDomeBattleRoom_EventScript_DefeatedOpponent)
-    case(B_OUTCOME_LOST, BattleFrontier_BattleDomeBattleRoom_EventScript_LostToOpponent)
-    case(B_OUTCOME_FORFEITED, BattleFrontier_BattleDomeBattleRoom_EventScript_LostToOpponent)
+    switch (var(VAR_RESULT)) {
+        case B_OUTCOME_WON:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_DefeatedOpponent)
+        case B_OUTCOME_LOST:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_LostToOpponent)
+        case B_OUTCOME_FORFEITED:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_LostToOpponent)
+    }
     setvar(VAR_TEMP_2, DRAW_TRAINER)
 }
 
@@ -118,8 +122,10 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_Draw {
         goto(BattleFrontier_BattleDomeBattleRoom_EventScript_LostToOpponent)
     }
     dome_compareseeds()
-    switch(VAR_RESULT)
-    case(1, BattleFrontier_BattleDomeBattleRoom_EventScript_DefeatedOpponent)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_DefeatedOpponent)
+    }
 }
 
 script BattleFrontier_BattleDomeBattleRoom_EventScript_LostToOpponent {
@@ -186,8 +192,10 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_DefeatedOpponent {
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
     addvar(VAR_RESULT, 1)
     frontier_set(FRONTIER_DATA_BATTLE_NUM, VAR_RESULT)
-    switch(VAR_RESULT)
-    case(DOME_ROUNDS_COUNT, BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney)
+    switch (var(VAR_RESULT)) {
+        case DOME_ROUNDS_COUNT:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney)
+    }
     setvar(VAR_0x8006, 1)
     warp(MAP_BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM, 5, 3)
     waitstate
@@ -197,8 +205,10 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney {
     applymovement(LOCALID_DOME_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerApproachAudience)
     waitmovement(0)
     frontier_get(FRONTIER_DATA_LVL_MODE)
-    switch(VAR_RESULT)
-    case(FRONTIER_LVL_OPEN, BattleFrontier_BattleDomeBattleRoom_EventScript_WonLvOpenTourney)
+    switch (var(VAR_RESULT)) {
+        case FRONTIER_LVL_OPEN:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_WonLvOpenTourney)
+    }
     msgbox(BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsLv50Champ, MSGBOX_DEFAULT)
     goto(BattleFrontier_BattleDomeBattleRoom_EventScript_CelebrateWin)
 }
@@ -245,11 +255,16 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayer {
 
 script BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerFirstAttempt {
     call(BattleFrontier_BattleDomeBattleRoom_EventScript_GetRoundNum)
-    switch(VAR_RESULT)
-    case(DOME_ROUND1, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerFirstAttemptRound1)
-    case(DOME_ROUND2, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerFirstAttemptRound2)
-    case(DOME_SEMIFINAL, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerFirstAttemptSemifinal)
-    case(DOME_FINAL, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerFirstAttemptFinal)
+    switch (var(VAR_RESULT)) {
+        case DOME_ROUND1:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerFirstAttemptRound1)
+        case DOME_ROUND2:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerFirstAttemptRound2)
+        case DOME_SEMIFINAL:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerFirstAttemptSemifinal)
+        case DOME_FINAL:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerFirstAttemptFinal)
+    }
     return
 }
 
@@ -279,11 +294,16 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerFirstAttemp
 
 script BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerNeverWon {
     call(BattleFrontier_BattleDomeBattleRoom_EventScript_GetRoundNum)
-    switch(VAR_RESULT)
-    case(DOME_ROUND1, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerNeverWonRound1)
-    case(DOME_ROUND2, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerNeverWonRound2)
-    case(DOME_SEMIFINAL, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerNeverWonSemifinal)
-    case(DOME_FINAL, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerNeverWonFinal)
+    switch (var(VAR_RESULT)) {
+        case DOME_ROUND1:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerNeverWonRound1)
+        case DOME_ROUND2:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerNeverWonRound2)
+        case DOME_SEMIFINAL:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerNeverWonSemifinal)
+        case DOME_FINAL:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerNeverWonFinal)
+    }
     return
 }
 
@@ -315,20 +335,30 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampion {
     if (var(VAR_TEMP_F) != DOME_FINAL) {
         goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampionNoTucker)
     }
-    switch(VAR_TEMP_E)
-    case(FRONTIER_BRAIN_SILVER, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerPreTuckerSilver)
-    case(FRONTIER_BRAIN_GOLD, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerPreTuckerGold)
-    case(FRONTIER_BRAIN_STREAK, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerPreTuckerSilver)
-    case(FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerPreTuckerGold)
+    switch (var(VAR_TEMP_E)) {
+        case FRONTIER_BRAIN_SILVER:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerPreTuckerSilver)
+        case FRONTIER_BRAIN_GOLD:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerPreTuckerGold)
+        case FRONTIER_BRAIN_STREAK:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerPreTuckerSilver)
+        case FRONTIER_BRAIN_STREAK_LONG:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerPreTuckerGold)
+    }
 }
 
 script BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampionNoTucker {
     call(BattleFrontier_BattleDomeBattleRoom_EventScript_GetRoundNum)
-    switch(VAR_RESULT)
-    case(DOME_ROUND1, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampionRound1)
-    case(DOME_ROUND2, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampionRound2)
-    case(DOME_SEMIFINAL, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampionSemifinal)
-    case(DOME_FINAL, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampionFinal)
+    switch (var(VAR_RESULT)) {
+        case DOME_ROUND1:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampionRound1)
+        case DOME_ROUND2:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampionRound2)
+        case DOME_SEMIFINAL:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampionSemifinal)
+        case DOME_FINAL:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampionFinal)
+    }
     return
 }
 
@@ -368,11 +398,16 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerPreTuckerGo
 
 script BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerBrokenStreak {
     call(BattleFrontier_BattleDomeBattleRoom_EventScript_GetRoundNum)
-    switch(VAR_RESULT)
-    case(DOME_ROUND1, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerBrokenStreakRound1)
-    case(DOME_ROUND2, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerBrokenStreakRound2)
-    case(DOME_SEMIFINAL, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerBrokenStreakSemifinal)
-    case(DOME_FINAL, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerBrokenStreakFinal)
+    switch (var(VAR_RESULT)) {
+        case DOME_ROUND1:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerBrokenStreakRound1)
+        case DOME_ROUND2:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerBrokenStreakRound2)
+        case DOME_SEMIFINAL:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerBrokenStreakSemifinal)
+        case DOME_FINAL:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerBrokenStreakFinal)
+    }
     return
 }
 
@@ -406,11 +441,16 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_GetRoundNum {
 }
 
 script BattleFrontier_BattleDomeBattleRoom_EventScript_AnnounceTucker {
-    switch(VAR_TEMP_E)
-    case(FRONTIER_BRAIN_SILVER, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnounceTuckerSilver)
-    case(FRONTIER_BRAIN_GOLD, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnounceTuckerGold)
-    case(FRONTIER_BRAIN_STREAK, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnounceTuckerSilver)
-    case(FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnounceTuckerGold)
+    switch (var(VAR_TEMP_E)) {
+        case FRONTIER_BRAIN_SILVER:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnounceTuckerSilver)
+        case FRONTIER_BRAIN_GOLD:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnounceTuckerGold)
+        case FRONTIER_BRAIN_STREAK:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnounceTuckerSilver)
+        case FRONTIER_BRAIN_STREAK_LONG:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnounceTuckerGold)
+    }
 }
 
 script BattleFrontier_BattleDomeBattleRoom_EventScript_AnnounceTuckerSilver {
@@ -448,10 +488,14 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerEnter {
     playse(SE_M_ENCORE2)
     call(BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround)
     waitse()
-    switch(VAR_TEMP_E)
-    case(FRONTIER_BRAIN_GOLD, BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerGoldIntro)
-    case(FRONTIER_BRAIN_STREAK, BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerSilver)
-    case(FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerGold)
+    switch (var(VAR_TEMP_E)) {
+        case FRONTIER_BRAIN_GOLD:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerGoldIntro)
+        case FRONTIER_BRAIN_STREAK:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerSilver)
+        case FRONTIER_BRAIN_STREAK_LONG:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerGold)
+    }
     frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
     if (var(VAR_RESULT) != FALSE) {
         goto(BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerSilver)
@@ -463,10 +507,14 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerEnter {
 script BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerSilver {
     msgbox(BattleFrontier_BattleDomeBattleRoom_Text_LetsSeeYourStrategy, MSGBOX_DEFAULT)
     call(BattleFrontier_BattleDomeBattleRoom_EventScript_DoTuckerBattle)
-    switch(VAR_RESULT)
-    case(B_OUTCOME_LOST, BattleFrontier_BattleDomeBattleRoom_EventScript_LostToTucker)
-    case(B_OUTCOME_FORFEITED, BattleFrontier_BattleDomeBattleRoom_EventScript_LostToTucker)
-    case(B_OUTCOME_DREW, BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerDraw)
+    switch (var(VAR_RESULT)) {
+        case B_OUTCOME_LOST:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_LostToTucker)
+        case B_OUTCOME_FORFEITED:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_LostToTucker)
+        case B_OUTCOME_DREW:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerDraw)
+    }
     msgbox(BattleFrontier_BattleDomeBattleRoom_Text_IncredibleVictorIsPlayer, MSGBOX_DEFAULT)
     dome_resolvewinners(DOME_PLAYER_WON_MATCH)
     frontier_getsymbols()
@@ -498,10 +546,14 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerGoldIntro {
 script BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerGold {
     msgbox(BattleFrontier_BattleDomeBattleRoom_Text_UnleashAllPowerIPossess, MSGBOX_DEFAULT)
     call(BattleFrontier_BattleDomeBattleRoom_EventScript_DoTuckerBattle)
-    switch(VAR_RESULT)
-    case(B_OUTCOME_LOST, BattleFrontier_BattleDomeBattleRoom_EventScript_LostToTucker)
-    case(B_OUTCOME_FORFEITED, BattleFrontier_BattleDomeBattleRoom_EventScript_LostToTucker)
-    case(B_OUTCOME_DREW, BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerDraw)
+    switch (var(VAR_RESULT)) {
+        case B_OUTCOME_LOST:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_LostToTucker)
+        case B_OUTCOME_FORFEITED:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_LostToTucker)
+        case B_OUTCOME_DREW:
+            goto(BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerDraw)
+    }
     msgbox(BattleFrontier_BattleDomeBattleRoom_Text_IncredibleVictorIsPlayer, MSGBOX_DEFAULT)
     dome_resolvewinners(DOME_PLAYER_WON_MATCH)
     frontier_getsymbols()

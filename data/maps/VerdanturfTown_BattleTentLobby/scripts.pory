@@ -53,8 +53,10 @@ script VerdanturfTown_BattleTentLobby_EventScript_WonChallenge {
 script VerdanturfTown_BattleTentLobby_EventScript_GivePrize {
     msgbox(VerdanturfTown_BattleTentLobby_Text_PresentYouWithPrize, MSGBOX_DEFAULT)
     verdanturftent_giveprize()
-    switch(VAR_RESULT)
-    case(FALSE, VerdanturfTown_BattleTentLobby_EventScript_NoRoomForPrize)
+    switch (var(VAR_RESULT)) {
+        case FALSE:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_NoRoomForPrize)
+    }
     frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, 0)
     message(BattleFrontier_BattleDomeLobby_Text_ReceivedPrize)
     waitmessage()
@@ -126,11 +128,16 @@ script VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge {
     message(VerdanturfTown_BattleTentLobby_Text_TakeChallenge)
     waitmessage()
     multichoice(17, 6, MULTI_CHALLENGEINFO, FALSE)
-    switch(VAR_RESULT)
-    case(0, VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge)
-    case(1, VerdanturfTown_BattleTentLobby_EventScript_ExplainChallenge)
-    case(2, VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge)
-    case(MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge)
+        case 1:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_ExplainChallenge)
+        case 2:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge)
+        case MULTI_B_PRESSED:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge)
+    }
 }
 
 script VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge {
@@ -152,10 +159,14 @@ script VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge {
         goto(VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
     }
     msgbox(VerdanturfTown_BattleTentLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO)
-    switch(VAR_RESULT)
-    case(NO, VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
-    case(YES, VerdanturfTown_BattleTentLobby_EventScript_SaveBeforeChallenge)
-    case(MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
+    switch (var(VAR_RESULT)) {
+        case NO:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
+        case YES:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_SaveBeforeChallenge)
+        case MULTI_B_PRESSED:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
+    }
 }
 
 script VerdanturfTown_BattleTentLobby_EventScript_SaveBeforeChallenge {
@@ -192,9 +203,12 @@ script VerdanturfTown_BattleTentLobby_EventScript_ExplainChallenge {
 }
 
 script VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMons {
-    switch(VAR_RESULT)
-    case(FRONTIER_LVL_50, VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50)
-    case(FRONTIER_LVL_OPEN, VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLvOpen)
+    switch (var(VAR_RESULT)) {
+        case FRONTIER_LVL_50:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50)
+        case FRONTIER_LVL_OPEN:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLvOpen)
+    }
 }
 
 script VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50 {
@@ -333,15 +347,24 @@ script VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard {
     setvar(VAR_0x8004, SCROLL_MULTI_BATTLE_TENT_RULES)
     special(ShowScrollableMultichoice)
     waitstate
-    switch(VAR_RESULT)
-    case(0, VerdanturfTown_BattleTentLobby_EventScript_RulesLevel)
-    case(1, VerdanturfTown_BattleTentLobby_EventScript_RulesBasics)
-    case(2, VerdanturfTown_BattleTentLobby_EventScript_RulesNature)
-    case(3, VerdanturfTown_BattleTentLobby_EventScript_RulesMoves)
-    case(4, VerdanturfTown_BattleTentLobby_EventScript_RulesUnderpowered)
-    case(5, VerdanturfTown_BattleTentLobby_EventScript_RulesWhenInDanger)
-    case(6, VerdanturfTown_BattleTentLobby_EventScript_ExitRules)
-    case(MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_ExitRules)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_RulesLevel)
+        case 1:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_RulesBasics)
+        case 2:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_RulesNature)
+        case 3:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_RulesMoves)
+        case 4:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_RulesUnderpowered)
+        case 5:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_RulesWhenInDanger)
+        case 6:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_ExitRules)
+        case MULTI_B_PRESSED:
+            goto(VerdanturfTown_BattleTentLobby_EventScript_ExitRules)
+    }
     end
 }
 

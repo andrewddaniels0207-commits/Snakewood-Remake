@@ -95,10 +95,14 @@ script BattleFrontier_BattleArenaLobby_EventScript_SaveAfterChallenge {
     message(BattleFrontier_BattleArenaLobby_Text_RecordLastMatch)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
-    switch(VAR_RESULT)
-    case(1, BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge)
-    case(0, BattleFrontier_BattleArenaLobby_EventScript_RecordMatch)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge)
+        case 0:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_RecordMatch)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge)
+    }
 }
 
 script BattleFrontier_BattleArenaLobby_EventScript_RecordMatch {
@@ -134,20 +138,28 @@ script BattleFrontier_BattleArenaLobby_EventScript_AskTakeChallenge {
     message(BattleFrontier_BattleArenaLobby_Text_WishToTakeChallenge)
     waitmessage()
     multichoice(17, 6, MULTI_CHALLENGEINFO, FALSE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattleArenaLobby_EventScript_TryEnterChallenge)
-    case(1, BattleFrontier_BattleArenaLobby_EventScript_ExplainChallenge)
-    case(2, BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_TryEnterChallenge)
+        case 1:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_ExplainChallenge)
+        case 2:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge)
+    }
 }
 
 script BattleFrontier_BattleArenaLobby_EventScript_TryEnterChallenge {
     message(BattleFrontier_BattleArenaLobby_Text_WhichLevelMode)
     waitmessage()
     multichoice(17, 6, MULTI_LEVEL_MODE, FALSE)
-    switch(VAR_RESULT)
-    case(FRONTIER_LVL_TENT, BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge)
+    switch (var(VAR_RESULT)) {
+        case FRONTIER_LVL_TENT:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge)
+    }
     frontier_checkineligible()
     if (var(VAR_0x8004) == TRUE) {
         goto(BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMons)
@@ -165,10 +177,14 @@ script BattleFrontier_BattleArenaLobby_EventScript_TryEnterChallenge {
         goto(BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge)
     }
     msgbox(BattleFrontier_BattleArenaLobby_Text_OkayToSave, MSGBOX_YESNO)
-    switch(VAR_RESULT)
-    case(NO, BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge)
-    case(YES, BattleFrontier_BattleArenaLobby_EventScript_SaveBeforeChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge)
+    switch (var(VAR_RESULT)) {
+        case NO:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge)
+        case YES:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_SaveBeforeChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge)
+    }
 }
 
 script BattleFrontier_BattleArenaLobby_EventScript_SaveBeforeChallenge {
@@ -212,9 +228,12 @@ script BattleFrontier_BattleArenaLobby_EventScript_ExplainChallenge {
 }
 
 script BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMons {
-    switch(VAR_RESULT)
-    case(FRONTIER_LVL_50, BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMonsLv50)
-    case(FRONTIER_LVL_OPEN, BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMonsLvOpen)
+    switch (var(VAR_RESULT)) {
+        case FRONTIER_LVL_50:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMonsLv50)
+        case FRONTIER_LVL_OPEN:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMonsLvOpen)
+    }
 }
 
 script BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMonsLv50 {
@@ -383,13 +402,20 @@ script BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard {
     message(BattleFrontier_BattleArenaLobby_Text_ReadWhichHeading)
     waitmessage()
     multichoice(17, 2, MULTI_BATTLE_ARENA_RULES, FALSE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattleArenaLobby_EventScript_BattleRules)
-    case(1, BattleFrontier_BattleArenaLobby_EventScript_MindRules)
-    case(2, BattleFrontier_BattleArenaLobby_EventScript_SkillRules)
-    case(3, BattleFrontier_BattleArenaLobby_EventScript_BodyRules)
-    case(4, BattleFrontier_BattleArenaLobby_EventScript_ExitRules)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_ExitRules)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_BattleRules)
+        case 1:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_MindRules)
+        case 2:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_SkillRules)
+        case 3:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_BodyRules)
+        case 4:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_ExitRules)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleArenaLobby_EventScript_ExitRules)
+    }
     end
 }
 

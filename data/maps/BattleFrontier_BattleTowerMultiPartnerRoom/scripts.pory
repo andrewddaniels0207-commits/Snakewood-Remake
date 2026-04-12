@@ -195,9 +195,12 @@ script BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_TalkToPotentialPar
     tower_dopartnermsg(PARTNER_MSGID_MON2_ASK)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
-    switch(VAR_RESULT)
-    case(1, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_RejectPartner)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_RejectPartner)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_RejectPartner)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_RejectPartner)
+    }
     tower_dopartnermsg(PARTNER_MSGID_ACCEPT)
     waitmessage()
     waitbuttonpress()

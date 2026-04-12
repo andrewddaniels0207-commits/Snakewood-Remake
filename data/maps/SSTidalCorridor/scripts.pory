@@ -82,11 +82,16 @@ script SSTidalRooms_EventScript_ArrivedInSlateport {
 }
 
 script SSTidalRooms_EventScript_ProgessCruiseAfterBed {
-    switch(VAR_SS_TIDAL_STATE)
-    case(SS_TIDAL_DEPART_SLATEPORT, SSTidalRooms_EventScript_ArrivedInLilycove)
-    case(SS_TIDAL_HALFWAY_LILYCOVE, SSTidalRooms_EventScript_ArrivedInLilycove)
-    case(SS_TIDAL_DEPART_LILYCOVE, SSTidalRooms_EventScript_HalfwayToSlateport)
-    case(SS_TIDAL_HALFWAY_SLATEPORT, SSTidalRooms_EventScript_ArrivedInSlateport)
+    switch (var(VAR_SS_TIDAL_STATE)) {
+        case SS_TIDAL_DEPART_SLATEPORT:
+            goto(SSTidalRooms_EventScript_ArrivedInLilycove)
+        case SS_TIDAL_HALFWAY_LILYCOVE:
+            goto(SSTidalRooms_EventScript_ArrivedInLilycove)
+        case SS_TIDAL_DEPART_LILYCOVE:
+            goto(SSTidalRooms_EventScript_HalfwayToSlateport)
+        case SS_TIDAL_HALFWAY_SLATEPORT:
+            goto(SSTidalRooms_EventScript_ArrivedInSlateport)
+    }
     return
 }
 

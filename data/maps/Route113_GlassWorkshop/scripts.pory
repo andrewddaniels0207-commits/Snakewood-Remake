@@ -70,16 +70,26 @@ script Route113_GlassWorkshop_EventScript_ChooseGlassItem {
     setvar(VAR_0x8004, SCROLL_MULTI_GLASS_WORKSHOP_VENDOR)
     special(ShowScrollableMultichoice)
     waitstate
-    switch(VAR_RESULT)
-    case(0, Route113_GlassWorkshop_EventScript_BlueFlute)
-    case(1, Route113_GlassWorkshop_EventScript_YellowFlute)
-    case(2, Route113_GlassWorkshop_EventScript_RedFlute)
-    case(3, Route113_GlassWorkshop_EventScript_WhiteFlute)
-    case(4, Route113_GlassWorkshop_EventScript_BlackFlute)
-    case(5, Route113_GlassWorkshop_EventScript_PrettyChair)
-    case(6, Route113_GlassWorkshop_EventScript_PrettyDesk)
-    case(7, Route113_GlassWorkshop_EventScript_CancelGlassItemSelect)
-    case(MULTI_B_PRESSED, Route113_GlassWorkshop_EventScript_CancelGlassItemSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route113_GlassWorkshop_EventScript_BlueFlute)
+        case 1:
+            goto(Route113_GlassWorkshop_EventScript_YellowFlute)
+        case 2:
+            goto(Route113_GlassWorkshop_EventScript_RedFlute)
+        case 3:
+            goto(Route113_GlassWorkshop_EventScript_WhiteFlute)
+        case 4:
+            goto(Route113_GlassWorkshop_EventScript_BlackFlute)
+        case 5:
+            goto(Route113_GlassWorkshop_EventScript_PrettyChair)
+        case 6:
+            goto(Route113_GlassWorkshop_EventScript_PrettyDesk)
+        case 7:
+            goto(Route113_GlassWorkshop_EventScript_CancelGlassItemSelect)
+        case MULTI_B_PRESSED:
+            goto(Route113_GlassWorkshop_EventScript_CancelGlassItemSelect)
+    }
     end
 }
 
@@ -285,14 +295,22 @@ script Route113_GlassWorkshop_EventScript_NoRoomForDecor {
 }
 
 script Route113_GlassWorkshop_EventScript_GiveItemAfterNoRoom {
-    switch(VAR_GLASS_WORKSHOP_STATE)
-    case(10, Route113_GlassWorkshop_EventScript_GiveBlueFlute)
-    case(11, Route113_GlassWorkshop_EventScript_GiveYellowFlute)
-    case(12, Route113_GlassWorkshop_EventScript_GiveRedFlute)
-    case(13, Route113_GlassWorkshop_EventScript_GiveWhiteFlute)
-    case(14, Route113_GlassWorkshop_EventScript_GiveBlackFlute)
-    case(15, Route113_GlassWorkshop_EventScript_GivePrettyChair)
-    case(16, Route113_GlassWorkshop_EventScript_GivePrettyDesk)
+    switch (var(VAR_GLASS_WORKSHOP_STATE)) {
+        case 10:
+            goto(Route113_GlassWorkshop_EventScript_GiveBlueFlute)
+        case 11:
+            goto(Route113_GlassWorkshop_EventScript_GiveYellowFlute)
+        case 12:
+            goto(Route113_GlassWorkshop_EventScript_GiveRedFlute)
+        case 13:
+            goto(Route113_GlassWorkshop_EventScript_GiveWhiteFlute)
+        case 14:
+            goto(Route113_GlassWorkshop_EventScript_GiveBlackFlute)
+        case 15:
+            goto(Route113_GlassWorkshop_EventScript_GivePrettyChair)
+        case 16:
+            goto(Route113_GlassWorkshop_EventScript_GivePrettyDesk)
+    }
     end
 }
 

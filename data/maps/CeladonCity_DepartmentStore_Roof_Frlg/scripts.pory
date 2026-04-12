@@ -52,82 +52,123 @@ script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveDrink {
     message(CeladonCity_DepartmentStore_Roof_Text_GiveWhichDrink)
     waitmessage()
     textcolor(NPC_TEXT_COLOR_FEMALE)
-    switch(VAR_TEMP_1)
-    case(1, CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWater)
-    case(2, CeladonCity_DepartmentStore_Roof_EventScript_AskGiveSodaPop)
-    case(3, CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWaterSodaPop)
-    case(4, CeladonCity_DepartmentStore_Roof_EventScript_AskGiveLemonade)
-    case(5, CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWaterLemonade)
-    case(6, CeladonCity_DepartmentStore_Roof_EventScript_AskGiveSodaPopLemonade)
-    case(7, CeladonCity_DepartmentStore_Roof_EventScript_AskGiveAllDrinks)
+    switch (var(VAR_TEMP_1)) {
+        case 1:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWater)
+        case 2:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_AskGiveSodaPop)
+        case 3:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWaterSodaPop)
+        case 4:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_AskGiveLemonade)
+        case 5:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWaterLemonade)
+        case 6:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_AskGiveSodaPopLemonade)
+        case 7:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_AskGiveAllDrinks)
+    }
     end
 }
 
 script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWater {
     multichoice(0, 0, MULTI_THIRSTY_GIRL_FRESH_WATER, FALSE)
-    switch(VAR_RESULT)
-    case(0, CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater)
-    case(1, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
-    case(127, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater)
+        case 1:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+        case 127:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    }
     end
 }
 
 script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveSodaPop {
     multichoice(0, 0, MULTI_THIRSTY_GIRL_SODA_POP, FALSE)
-    switch(VAR_RESULT)
-    case(0, CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop)
-    case(1, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
-    case(127, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop)
+        case 1:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+        case 127:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    }
     end
 }
 
 script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWaterSodaPop {
     multichoice(0, 0, MULTI_THIRSTY_GIRL_FRESH_WATER_SODA_POP, FALSE)
-    switch(VAR_RESULT)
-    case(0, CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater)
-    case(1, CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop)
-    case(2, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
-    case(127, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater)
+        case 1:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop)
+        case 2:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+        case 127:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    }
     end
 }
 
 script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveLemonade {
     multichoice(0, 0, MULTI_THIRSTY_GIRL_LEMONADE, FALSE)
-    switch(VAR_RESULT)
-    case(0, CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade)
-    case(1, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
-    case(127, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade)
+        case 1:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+        case 127:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    }
     end
 }
 
 script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveFreshWaterLemonade {
     multichoice(0, 0, MULTI_THIRSTY_GIRL_FRESH_WATER_LEMONADE, FALSE)
-    switch(VAR_RESULT)
-    case(0, CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater)
-    case(1, CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade)
-    case(2, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
-    case(127, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater)
+        case 1:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade)
+        case 2:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+        case 127:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    }
     end
 }
 
 script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveSodaPopLemonade {
     multichoice(0, 0, MULTI_THIRSTY_GIRL_SODA_POP_LEMONADE, FALSE)
-    switch(VAR_RESULT)
-    case(0, CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop)
-    case(1, CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade)
-    case(2, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
-    case(127, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop)
+        case 1:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade)
+        case 2:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+        case 127:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    }
     end
 }
 
 script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveAllDrinks {
     multichoice(0, 0, MULTI_THIRSTY_GIRL_FRESH_WATER_SODA_POP_LEMONADE, FALSE)
-    switch(VAR_RESULT)
-    case(0, CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater)
-    case(1, CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop)
-    case(2, CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade)
-    case(3, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
-    case(127, CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater)
+        case 1:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop)
+        case 2:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade)
+        case 3:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+        case 127:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    }
     end
 }
 
@@ -256,10 +297,14 @@ script CeladonCity_DepartmentStore_Roof_EventScript_VendingMachine {
 script CeladonCity_DepartmentStore_Roof_EventScript_ChooseDrink {
     multichoice(12, 0, MULTI_CELADON_VENDING_MACHINE, FALSE)
     copyvar(VAR_TEMP_1, VAR_RESULT)
-    switch(VAR_TEMP_1)
-    case(0, CeladonCity_DepartmentStore_Roof_EventScript_BuyFreshWater)
-    case(1, CeladonCity_DepartmentStore_Roof_EventScript_BuySodaPop)
-    case(2, CeladonCity_DepartmentStore_Roof_EventScript_BuyLemonade)
+    switch (var(VAR_TEMP_1)) {
+        case 0:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_BuyFreshWater)
+        case 1:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_BuySodaPop)
+        case 2:
+            goto(CeladonCity_DepartmentStore_Roof_EventScript_BuyLemonade)
+    }
     msgbox(CeladonCity_DepartmentStore_Roof_Text_NotThirsty)
     goto(CeladonCity_DepartmentStore_Roof_EventScript_ExitVendingMachine)
     end

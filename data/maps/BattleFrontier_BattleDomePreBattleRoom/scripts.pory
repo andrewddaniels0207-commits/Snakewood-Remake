@@ -33,41 +33,61 @@ script BattleFrontier_BattleDomePreBattleRoom_EventScript_EnterRoom {
 script BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound {
     call(BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForNextRoundMessage)
     waitmessage()
-    switch(VAR_RESULT)
+    switch (var(VAR_RESULT)) {
+    }
     call(BattleFrontier_EventScript_GetCantRecordBattle)
     if (var(VAR_RESULT) == TRUE) {
         goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRoundNoRecord)
     }
     multichoice(16, 0, MULTI_TOURNEY_WITH_RECORD, TRUE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowOpponentInfo)
-    case(1, BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowTourneyTree)
-    case(2, BattleFrontier_BattleDomePreBattleRoom_EventScript_ContinueChallenge)
-    case(3, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskRecordBattle)
-    case(4, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskPauseChallenge)
-    case(5, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskRetireChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowOpponentInfo)
+        case 1:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowTourneyTree)
+        case 2:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ContinueChallenge)
+        case 3:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskRecordBattle)
+        case 4:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskPauseChallenge)
+        case 5:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskRetireChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
+    }
 }
 
 script BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRoundNoRecord {
     multichoice(16, 2, MULTI_TOURNEY_NO_RECORD, TRUE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowOpponentInfo)
-    case(1, BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowTourneyTree)
-    case(2, BattleFrontier_BattleDomePreBattleRoom_EventScript_ContinueChallenge)
-    case(3, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskPauseChallenge)
-    case(4, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskRetireChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowOpponentInfo)
+        case 1:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowTourneyTree)
+        case 2:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ContinueChallenge)
+        case 3:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskPauseChallenge)
+        case 4:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskRetireChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
+    }
 }
 
 script BattleFrontier_BattleDomePreBattleRoom_EventScript_AskRecordBattle {
     message(BattleFrontier_BattleDomePreBattleRoom_Text_RecordLastMatch)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
-    switch(VAR_RESULT)
-    case(1, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
-    case(0, BattleFrontier_BattleDomePreBattleRoom_EventScript_RecordBattle)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
+        case 0:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_RecordBattle)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
+    }
 }
 
 script BattleFrontier_BattleDomePreBattleRoom_EventScript_RecordBattle {
@@ -77,20 +97,28 @@ script BattleFrontier_BattleDomePreBattleRoom_EventScript_RecordBattle {
 
 script BattleFrontier_BattleDomePreBattleRoom_EventScript_AskPauseChallenge {
     msgbox(BattleFrontier_BattleDomePreBattleRoom_Text_SaveAndQuitGame, MSGBOX_YESNO)
-    switch(VAR_RESULT)
-    case(NO, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
-    case(YES, BattleFrontier_BattleDomePreBattleRoom_EventScript_PauseChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
+    switch (var(VAR_RESULT)) {
+        case NO:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
+        case YES:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_PauseChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
+    }
 }
 
 script BattleFrontier_BattleDomePreBattleRoom_EventScript_AskRetireChallenge {
     message(BattleFrontier_BattleDomePreBattleRoom_Text_RetireYourChallenge)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
-    switch(VAR_RESULT)
-    case(1, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
-    case(0, BattleFrontier_BattleDomePreBattleRoom_EventScript_RetireChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
+        case 0:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_RetireChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
+    }
 }
 
 script BattleFrontier_BattleDomePreBattleRoom_EventScript_RetireChallenge {
@@ -127,11 +155,16 @@ script BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowTourneyTree {
 
 script BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowRoundMessage {
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
-    switch(VAR_RESULT)
-    case(DOME_ROUND1, BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInRound1)
-    case(DOME_ROUND2, BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInRound2)
-    case(DOME_SEMIFINAL, BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInSemifinals)
-    case(DOME_FINAL, BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInFinals)
+    switch (var(VAR_RESULT)) {
+        case DOME_ROUND1:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInRound1)
+        case DOME_ROUND2:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInRound2)
+        case DOME_SEMIFINAL:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInSemifinals)
+        case DOME_FINAL:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInFinals)
+    }
     return
 }
 
@@ -192,11 +225,16 @@ script BattleFrontier_BattleDomePreBattleRoom_EventScript_ContinueChallenge {
 
 script BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForNextRoundMessage {
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
-    switch(VAR_RESULT)
-    case(DOME_ROUND1, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForRound1)
-    case(DOME_ROUND2, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForRound2)
-    case(DOME_SEMIFINAL, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForSemifinals)
-    case(DOME_FINAL, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForFinals)
+    switch (var(VAR_RESULT)) {
+        case DOME_ROUND1:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForRound1)
+        case DOME_ROUND2:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForRound2)
+        case DOME_SEMIFINAL:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForSemifinals)
+        case DOME_FINAL:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForFinals)
+    }
     return
 }
 
@@ -217,11 +255,16 @@ script BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForSemifinals {
 
 script BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForFinals {
     frontier_getbrainstatus()
-    switch(VAR_RESULT)
-    case(FRONTIER_BRAIN_SILVER, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerSilver)
-    case(FRONTIER_BRAIN_GOLD, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerGold)
-    case(FRONTIER_BRAIN_STREAK, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerSilver)
-    case(FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerGold)
+    switch (var(VAR_RESULT)) {
+        case FRONTIER_BRAIN_SILVER:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerSilver)
+        case FRONTIER_BRAIN_GOLD:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerGold)
+        case FRONTIER_BRAIN_STREAK:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerSilver)
+        case FRONTIER_BRAIN_STREAK_LONG:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerGold)
+    }
     message(BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForFinals)
     return
 }
@@ -271,10 +314,14 @@ script BattleFrontier_BattleDomePreBattleRoom_EventScript_ReturnFromBattle {
 
 script BattleFrontier_BattleDomePreBattleRoom_EventScript_RoundCompleteMessage {
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
-    switch(VAR_RESULT)
-    case(DOME_ROUND2, BattleFrontier_BattleDomePreBattleRoom_EventScript_Round1Complete)
-    case(DOME_SEMIFINAL, BattleFrontier_BattleDomePreBattleRoom_EventScript_Round2Complete)
-    case(DOME_FINAL, BattleFrontier_BattleDomePreBattleRoom_EventScript_SemifinalsComplete)
+    switch (var(VAR_RESULT)) {
+        case DOME_ROUND2:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_Round1Complete)
+        case DOME_SEMIFINAL:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_Round2Complete)
+        case DOME_FINAL:
+            goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_SemifinalsComplete)
+    }
     return
 }
 

@@ -59,8 +59,10 @@ script FallarborTown_BattleTentBattleRoom_EventScript_NextOpponentEnter {
     msgbox(gStringVar4, MSGBOX_DEFAULT)
     waitmessage()
     call(BattleFrontier_BattleArenaBattleRoom_EventScript_DoArenaBattle)
-    switch(VAR_RESULT)
-    case(1, FallarborTown_BattleTentBattleRoom_EventScript_DefeatedOpponent)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(FallarborTown_BattleTentBattleRoom_EventScript_DefeatedOpponent)
+    }
     applymovement(LOCALID_FALLARBOR_TENT_BATTLE_ATTENDANT, FallarborTown_BattleTentBattleRoom_Movement_AttendantJump)
     playse(SE_M_SNORE)
     waitse()
@@ -89,8 +91,10 @@ script FallarborTown_BattleTentBattleRoom_EventScript_IncrementBattleNum {
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
     addvar(VAR_RESULT, 1)
     frontier_set(FRONTIER_DATA_BATTLE_NUM, VAR_RESULT)
-    switch(VAR_RESULT)
-    case(3, FallarborTown_BattleTentBattleRoom_EventScript_WarpToLobbyWon)
+    switch (var(VAR_RESULT)) {
+        case 3:
+            goto(FallarborTown_BattleTentBattleRoom_EventScript_WarpToLobbyWon)
+    }
     applymovement(LOCALID_FALLARBOR_TENT_BATTLE_OPPONENT, FallarborTown_BattleTentBattleRoom_Movement_OpponentExit)
     waitmovement(0)
     removeobject(LOCALID_FALLARBOR_TENT_BATTLE_OPPONENT)
@@ -116,28 +120,40 @@ script FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge {
         call(FallarborTown_BattleTentBattleRoom_EventScript_ReadyFor3rdOpponent)
     }
     multichoice(20, 6, MULTI_GO_ON_REST_RETIRE, TRUE)
-    switch(VAR_RESULT)
-    case(0, FallarborTown_BattleTentBattleRoom_EventScript_ContinueChallenge)
-    case(1, FallarborTown_BattleTentBattleRoom_EventScript_AskPauseChallenge)
-    case(2, FallarborTown_BattleTentBattleRoom_EventScript_AskRetireChallenge)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(FallarborTown_BattleTentBattleRoom_EventScript_ContinueChallenge)
+        case 1:
+            goto(FallarborTown_BattleTentBattleRoom_EventScript_AskPauseChallenge)
+        case 2:
+            goto(FallarborTown_BattleTentBattleRoom_EventScript_AskRetireChallenge)
+    }
 }
 
 script FallarborTown_BattleTentBattleRoom_EventScript_AskPauseChallenge {
     msgbox(BattleFrontier_BattleArenaBattleRoom_Text_SaveAndShutDown, MSGBOX_YESNO)
-    switch(VAR_RESULT)
-    case(NO, FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge)
-    case(YES, FallarborTown_BattleTentBattleRoom_EventScript_PauseChallenge)
-    case(MULTI_B_PRESSED, FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge)
+    switch (var(VAR_RESULT)) {
+        case NO:
+            goto(FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge)
+        case YES:
+            goto(FallarborTown_BattleTentBattleRoom_EventScript_PauseChallenge)
+        case MULTI_B_PRESSED:
+            goto(FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge)
+    }
 }
 
 script FallarborTown_BattleTentBattleRoom_EventScript_AskRetireChallenge {
     message(BattleFrontier_BattleArenaBattleRoom_Text_RetireFromChallenge)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
-    switch(VAR_RESULT)
-    case(1, FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge)
-    case(0, FallarborTown_BattleTentBattleRoom_EventScript_WarpToLobbyLost)
-    case(MULTI_B_PRESSED, FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge)
+        case 0:
+            goto(FallarborTown_BattleTentBattleRoom_EventScript_WarpToLobbyLost)
+        case MULTI_B_PRESSED:
+            goto(FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge)
+    }
 }
 
 script FallarborTown_BattleTentBattleRoom_EventScript_ContinueChallenge {

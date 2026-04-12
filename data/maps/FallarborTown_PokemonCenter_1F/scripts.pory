@@ -33,9 +33,12 @@ script FallarborTown_PokemonCenter_1F_EventScript_Lanette {
     faceplayer
     msgbox(FallarborTown_PokemonCenter_1F_Text_LanetteGreeting, MSGBOX_DEFAULT)
     closemessage
-    switch(VAR_FACING)
-    case(DIR_NORTH, FallarborTown_PokemonCenter_1F_EventScript_LanetteExitNorth)
-    case(DIR_WEST, FallarborTown_PokemonCenter_1F_EventScript_LanetteExitWest)
+    switch (var(VAR_FACING)) {
+        case DIR_NORTH:
+            goto(FallarborTown_PokemonCenter_1F_EventScript_LanetteExitNorth)
+        case DIR_WEST:
+            goto(FallarborTown_PokemonCenter_1F_EventScript_LanetteExitWest)
+    }
     end
 }
 

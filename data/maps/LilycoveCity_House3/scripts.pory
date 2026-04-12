@@ -46,44 +46,64 @@ script LilycoveCity_House3_EventScript_Man {
 script LilycoveCity_House3_EventScript_GameBoyKid1 {
     lock
     faceplayer
-    switch(VAR_TEMP_1)
-    case(0, LilycoveCity_House3_EventScript_WereDoingMultiBattle)
-    case(1, LilycoveCity_House3_EventScript_WereMixingRecords)
-    case(2, LilycoveCity_House3_EventScript_WereBlendingBerries)
-    case(3, LilycoveCity_House3_EventScript_WereDoingContest)
+    switch (var(VAR_TEMP_1)) {
+        case 0:
+            goto(LilycoveCity_House3_EventScript_WereDoingMultiBattle)
+        case 1:
+            goto(LilycoveCity_House3_EventScript_WereMixingRecords)
+        case 2:
+            goto(LilycoveCity_House3_EventScript_WereBlendingBerries)
+        case 3:
+            goto(LilycoveCity_House3_EventScript_WereDoingContest)
+    }
     end
 }
 
 script LilycoveCity_House3_EventScript_GameBoyKid2 {
     lock
     faceplayer
-    switch(VAR_TEMP_1)
-    case(0, LilycoveCity_House3_EventScript_WereDoingMultiBattle)
-    case(1, LilycoveCity_House3_EventScript_WereMixingRecords)
-    case(2, LilycoveCity_House3_EventScript_WereBlendingBerries)
-    case(3, LilycoveCity_House3_EventScript_WereDoingContest)
+    switch (var(VAR_TEMP_1)) {
+        case 0:
+            goto(LilycoveCity_House3_EventScript_WereDoingMultiBattle)
+        case 1:
+            goto(LilycoveCity_House3_EventScript_WereMixingRecords)
+        case 2:
+            goto(LilycoveCity_House3_EventScript_WereBlendingBerries)
+        case 3:
+            goto(LilycoveCity_House3_EventScript_WereDoingContest)
+    }
     end
 }
 
 script LilycoveCity_House3_EventScript_GameBoyKid3 {
     lock
     faceplayer
-    switch(VAR_TEMP_1)
-    case(0, LilycoveCity_House3_EventScript_WereDoingMultiBattle)
-    case(1, LilycoveCity_House3_EventScript_WereMixingRecords)
-    case(2, LilycoveCity_House3_EventScript_WereBlendingBerries)
-    case(3, LilycoveCity_House3_EventScript_WereDoingContest)
+    switch (var(VAR_TEMP_1)) {
+        case 0:
+            goto(LilycoveCity_House3_EventScript_WereDoingMultiBattle)
+        case 1:
+            goto(LilycoveCity_House3_EventScript_WereMixingRecords)
+        case 2:
+            goto(LilycoveCity_House3_EventScript_WereBlendingBerries)
+        case 3:
+            goto(LilycoveCity_House3_EventScript_WereDoingContest)
+    }
     end
 }
 
 script LilycoveCity_House3_EventScript_GameBoyKid4 {
     lock
     faceplayer
-    switch(VAR_TEMP_1)
-    case(0, LilycoveCity_House3_EventScript_WereDoingMultiBattle)
-    case(1, LilycoveCity_House3_EventScript_WereMixingRecords)
-    case(2, LilycoveCity_House3_EventScript_WereBlendingBerries)
-    case(3, LilycoveCity_House3_EventScript_WereDoingContest)
+    switch (var(VAR_TEMP_1)) {
+        case 0:
+            goto(LilycoveCity_House3_EventScript_WereDoingMultiBattle)
+        case 1:
+            goto(LilycoveCity_House3_EventScript_WereMixingRecords)
+        case 2:
+            goto(LilycoveCity_House3_EventScript_WereBlendingBerries)
+        case 3:
+            goto(LilycoveCity_House3_EventScript_WereDoingContest)
+    }
     end
 }
 

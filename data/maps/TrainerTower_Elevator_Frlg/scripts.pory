@@ -15,9 +15,12 @@ script TrainerTower_Elevator_EventScript_FloorSelect {
     waitmessage()
     setvar(VAR_0x8004, 6)
     specialvar(VAR_RESULT, InitElevatorFloorSelectMenuPos)
-    switch(VAR_RESULT)
-    case(0, TrainerTower_Elevator_EventScript_FloorSelectFromRoof)
-    case(1, TrainerTower_Elevator_EventScript_FloorSelectFromLobby)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(TrainerTower_Elevator_EventScript_FloorSelectFromRoof)
+        case 1:
+            goto(TrainerTower_Elevator_EventScript_FloorSelectFromLobby)
+    }
     end
 }
 
@@ -34,11 +37,16 @@ script TrainerTower_Elevator_EventScript_FloorSelectFromLobby {
 }
 
 script TrainerTower_Elevator_EventScript_ChooseFloor {
-    switch(VAR_RESULT)
-    case(0, TrainerTower_Elevator_EventScript_SelectRoof)
-    case(1, TrainerTower_Elevator_EventScript_SelectLobby)
-    case(2, TrainerTower_Elevator_EventScript_CloseFloorSelect)
-    case(MULTI_B_PRESSED, TrainerTower_Elevator_EventScript_CloseFloorSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(TrainerTower_Elevator_EventScript_SelectRoof)
+        case 1:
+            goto(TrainerTower_Elevator_EventScript_SelectLobby)
+        case 2:
+            goto(TrainerTower_Elevator_EventScript_CloseFloorSelect)
+        case MULTI_B_PRESSED:
+            goto(TrainerTower_Elevator_EventScript_CloseFloorSelect)
+    }
     end
 }
 

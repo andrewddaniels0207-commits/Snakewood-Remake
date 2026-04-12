@@ -55,14 +55,22 @@ script BattleFrontier_BattlePikeThreePathRoom_EventScript_ResumeChallenge {
 
 script BattleFrontier_BattlePikeThreePathRoom_EventScript_Attendant {
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
-    switch(VAR_RESULT)
-    case(1, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom1)
-    case(3, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom3)
-    case(5, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom5)
-    case(7, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom7)
-    case(9, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom9)
-    case(11, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom11)
-    case(13, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom13)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom1)
+        case 3:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom3)
+        case 5:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom5)
+        case 7:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom7)
+        case 9:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom9)
+        case 11:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom11)
+        case 13:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom13)
+    }
     end
 }
 
@@ -124,9 +132,12 @@ script BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom13 {
 
 script BattleFrontier_BattlePikeThreePathRoom_EventScript_AskContinueChallenge {
     msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_ContinueWithChallenge, MSGBOX_YESNO)
-    switch(VAR_RESULT)
-    case(NO, BattleFrontier_BattlePikeThreePathRoom_EventScript_AskSaveChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattlePikeThreePathRoom_EventScript_AskSaveChallenge)
+    switch (var(VAR_RESULT)) {
+        case NO:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AskSaveChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AskSaveChallenge)
+    }
     release
     end
 }
@@ -146,10 +157,14 @@ script BattleFrontier_BattlePikeThreePathRoom_EventScript_PauseChallenge {
 
 script BattleFrontier_BattlePikeThreePathRoom_EventScript_AskSaveChallenge {
     msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_SaveChallengeAndQuit, MSGBOX_YESNO)
-    switch(VAR_RESULT)
-    case(YES, BattleFrontier_BattlePikeThreePathRoom_EventScript_PauseChallenge)
-    case(NO, BattleFrontier_BattlePikeThreePathRoom_EventScript_AskRetireChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattlePikeThreePathRoom_EventScript_AskRetireChallenge)
+    switch (var(VAR_RESULT)) {
+        case YES:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_PauseChallenge)
+        case NO:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AskRetireChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AskRetireChallenge)
+    }
     release
     end
 }
@@ -158,8 +173,10 @@ script BattleFrontier_BattlePikeThreePathRoom_EventScript_AskRetireChallenge {
     message(BattleFrontier_BattlePikeThreePathRoom_Text_RetireFromChallenge)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattlePike_EventScript_Retire)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattlePike_EventScript_Retire)
+    }
     release
     end
 }
@@ -198,10 +215,14 @@ script BattleFrontier_BattlePikeThreePathRoom_EventScript_HintGiver {
     lock
     faceplayer
     msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_FindingItDifficultToChoose, MSGBOX_YESNO)
-    switch(VAR_RESULT)
-    case(YES, BattleFrontier_BattlePikeThreePathRoom_EventScript_AcceptHint)
-    case(NO, BattleFrontier_BattlePikeThreePathRoom_EventScript_DeclineHint)
-    case(MULTI_B_PRESSED, BattleFrontier_BattlePikeThreePathRoom_EventScript_DeclineHint)
+    switch (var(VAR_RESULT)) {
+        case YES:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AcceptHint)
+        case NO:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_DeclineHint)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_DeclineHint)
+    }
     release
     end
 }
@@ -214,10 +235,14 @@ script BattleFrontier_BattlePikeThreePathRoom_EventScript_DeclineHint {
 
 script BattleFrontier_BattlePikeThreePathRoom_EventScript_AcceptHint {
     pike_gethintroomid()
-    switch(VAR_RESULT)
-    case(PIKE_ROOM_LEFT, BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveLeftRoomHint)
-    case(PIKE_ROOM_CENTER, BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveCenterRoomHint)
-    case(PIKE_ROOM_RIGHT, BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveRightRoomHint)
+    switch (var(VAR_RESULT)) {
+        case PIKE_ROOM_LEFT:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveLeftRoomHint)
+        case PIKE_ROOM_CENTER:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveCenterRoomHint)
+        case PIKE_ROOM_RIGHT:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveRightRoomHint)
+    }
     end
 }
 
@@ -238,11 +263,16 @@ script BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveRightRoomHint {
 
 script BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveHint {
     pike_gethint()
-    switch(VAR_RESULT)
-    case(PIKE_HINT_NOSTALGIA, BattleFrontier_BattlePikeThreePathRoom_EventScript_HintNostalgia)
-    case(PIKE_HINT_WHISPERING, BattleFrontier_BattlePikeThreePathRoom_EventScript_HintWhispering)
-    case(PIKE_HINT_POKEMON, BattleFrontier_BattlePikeThreePathRoom_EventScript_HintPokemon)
-    case(PIKE_HINT_PEOPLE, BattleFrontier_BattlePikeThreePathRoom_EventScript_HintPeople)
+    switch (var(VAR_RESULT)) {
+        case PIKE_HINT_NOSTALGIA:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_HintNostalgia)
+        case PIKE_HINT_WHISPERING:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_HintWhispering)
+        case PIKE_HINT_POKEMON:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_HintPokemon)
+        case PIKE_HINT_PEOPLE:
+            goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_HintPeople)
+    }
     end
 }
 

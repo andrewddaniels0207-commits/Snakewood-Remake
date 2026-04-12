@@ -11,8 +11,12 @@ mapscripts LittlerootTown_MaysHouse_1F_MapScripts {
 }
 
 script LittlerootTown_MaysHouse_1F_OnLoad {
-    if (var(VAR_LITTLEROOT_INTRO_STATE) < 6) call(LittlerootTown_MaysHouse_1F_EventScript_SetMovingBoxes)
-    if (flag(FLAG_RECEIVED_RUNNING_SHOES)) call(LittlerootTown_MaysHouse_1F_EventScript_CheckShowShoesManual)
+    if (var(VAR_LITTLEROOT_INTRO_STATE) < 6) {
+        call(LittlerootTown_MaysHouse_1F_EventScript_SetMovingBoxes)
+    }
+    if (flag(FLAG_RECEIVED_RUNNING_SHOES)) {
+        call(LittlerootTown_MaysHouse_1F_EventScript_CheckShowShoesManual)
+    }
     end
 }
 
@@ -24,7 +28,9 @@ script LittlerootTown_MaysHouse_1F_EventScript_SetMovingBoxes {
 
 script LittlerootTown_MaysHouse_1F_EventScript_CheckShowShoesManual {
     checkplayergender()
-    if (var(VAR_RESULT) == FEMALE) goto(LittlerootTown_MaysHouse_1F_EventScript_ShowRunningShoesManual)
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(LittlerootTown_MaysHouse_1F_EventScript_ShowRunningShoesManual)
+    }
     return
 }
 
@@ -34,9 +40,15 @@ script LittlerootTown_MaysHouse_1F_EventScript_ShowRunningShoesManual {
 }
 
 script LittlerootTown_MaysHouse_1F_OnTransition {
-    if (var(VAR_LITTLEROOT_INTRO_STATE) == 3) call(LittlerootTown_MaysHouse_1F_EventScript_MoveMomToDoor)
-    if (var(VAR_LITTLEROOT_INTRO_STATE) == 5) call(LittlerootTown_MaysHouse_1F_EventScript_MoveMomToStairs)
-    if (var(VAR_LITTLEROOT_INTRO_STATE) == 6) call(LittlerootTown_MaysHouse_1F_EventScript_MoveMomToTV)
+    if (var(VAR_LITTLEROOT_INTRO_STATE) == 3) {
+        call(LittlerootTown_MaysHouse_1F_EventScript_MoveMomToDoor)
+    }
+    if (var(VAR_LITTLEROOT_INTRO_STATE) == 5) {
+        call(LittlerootTown_MaysHouse_1F_EventScript_MoveMomToStairs)
+    }
+    if (var(VAR_LITTLEROOT_INTRO_STATE) == 6) {
+        call(LittlerootTown_MaysHouse_1F_EventScript_MoveMomToTV)
+    }
     end
 }
 
@@ -123,9 +135,15 @@ movement LittlerootTown_MaysHouse_1F_Movement_RivalMomApproach {
 script RivalsHouse_1F_EventScript_RivalMom {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_RIVAL_ROUTE103)) goto(RivalsHouse_1F_EventScript_GoHomeEverySoOften)
-    if (flag(FLAG_SYS_POKEMON_GET)) goto(RivalsHouse_1F_EventScript_RivalIsOnRoute103)
-    if (var(VAR_LITTLEROOT_RIVAL_STATE) == 3) goto(RivalsHouse_1F_EventScript_RivalTooBusy)
+    if (flag(FLAG_DEFEATED_RIVAL_ROUTE103)) {
+        goto(RivalsHouse_1F_EventScript_GoHomeEverySoOften)
+    }
+    if (flag(FLAG_SYS_POKEMON_GET)) {
+        goto(RivalsHouse_1F_EventScript_RivalIsOnRoute103)
+    }
+    if (var(VAR_LITTLEROOT_RIVAL_STATE) == 3) {
+        goto(RivalsHouse_1F_EventScript_RivalTooBusy)
+    }
     special(GetRivalSonDaughterString)
     msgbox(RivalsHouse_1F_Text_LikeChildLikeFather, MSGBOX_DEFAULT)
     release
@@ -200,16 +218,30 @@ script LittlerootTown_MaysHouse_1F_EventScript_MeetRival {
     waitmovement(0)
     applymovement(LOCALID_RIVALS_HOUSE_1F_RIVAL, Common_Movement_Delay48)
     waitmovement(0)
-    if (var(VAR_0x8008) != 1) call(LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay)
+    if (var(VAR_0x8008) != 1) {
+        call(LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay)
+    }
     playbgm(MUS_ENCOUNTER_MAY, TRUE)
-    if (var(VAR_0x8008) == 0) call(LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0)
-    if (var(VAR_0x8008) == 1) call(LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1)
-    if (var(VAR_0x8008) == 2) call(LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2)
+    if (var(VAR_0x8008) == 0) {
+        call(LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2)
+    }
     msgbox(RivalsHouse_1F_Text_MayWhoAreYou, MSGBOX_DEFAULT)
     closemessage
-    if (var(VAR_0x8008) == 0) call(LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs0)
-    if (var(VAR_0x8008) == 1) call(LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs1)
-    if (var(VAR_0x8008) == 2) call(LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2)
+    if (var(VAR_0x8008) == 0) {
+        call(LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs0)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs1)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2)
+    }
     playse(SE_EXIT)
     removeobject(LOCALID_RIVALS_HOUSE_1F_RIVAL)
     setflag(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MAY)

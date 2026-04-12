@@ -17,13 +17,20 @@ script AbandonedShip_HiddenFloorRooms_EventScript_DoHiddenItemSparkle {
     if (var(VAR_TEMP_3) == 2) {
         call(AbandonedShip_HiddenFloorRooms_EventScript_InUpperRoomRow)
     }
-    switch(VAR_TEMP_4)
-    case(1, AbandonedShip_HiddenFloorRooms_EventScript_EnterRm1)
-    case(2, AbandonedShip_HiddenFloorRooms_EventScript_EnterRm2)
-    case(3, AbandonedShip_HiddenFloorRooms_EventScript_EnterRm3)
-    case(4, AbandonedShip_HiddenFloorRooms_EventScript_EnterRm4)
-    case(5, AbandonedShip_HiddenFloorRooms_EventScript_EnterRm5)
-    case(6, AbandonedShip_HiddenFloorRooms_EventScript_EnterRm6)
+    switch (var(VAR_TEMP_4)) {
+        case 1:
+            goto(AbandonedShip_HiddenFloorRooms_EventScript_EnterRm1)
+        case 2:
+            goto(AbandonedShip_HiddenFloorRooms_EventScript_EnterRm2)
+        case 3:
+            goto(AbandonedShip_HiddenFloorRooms_EventScript_EnterRm3)
+        case 4:
+            goto(AbandonedShip_HiddenFloorRooms_EventScript_EnterRm4)
+        case 5:
+            goto(AbandonedShip_HiddenFloorRooms_EventScript_EnterRm5)
+        case 6:
+            goto(AbandonedShip_HiddenFloorRooms_EventScript_EnterRm6)
+    }
     end
 }
 

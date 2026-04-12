@@ -8,10 +8,14 @@ script TrainerHill_Roof_EventScript_Owner {
     lock
     faceplayer
     trainerhill_getownerstate()
-    switch(VAR_RESULT)
-    case(0, TrainerHill_Roof_EventScript_Arrived)
-    case(1, TrainerHill_Roof_EventScript_GivePrize)
-    case(2, TrainerHill_Roof_EventScript_AlreadyReceivedPrize)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(TrainerHill_Roof_EventScript_Arrived)
+        case 1:
+            goto(TrainerHill_Roof_EventScript_GivePrize)
+        case 2:
+            goto(TrainerHill_Roof_EventScript_AlreadyReceivedPrize)
+    }
 }
 
 script TrainerHill_Roof_EventScript_Arrived {
@@ -20,10 +24,14 @@ script TrainerHill_Roof_EventScript_Arrived {
 
 script TrainerHill_Roof_EventScript_GivePrize {
     trainerhill_giveprize()
-    switch(VAR_RESULT)
-    case(0, TrainerHill_Roof_EventScript_ReceivePrize)
-    case(1, TrainerHill_Roof_EventScript_NoRoomForPrize)
-    case(2, TrainerHill_Roof_EventScript_CheckFinalTime)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(TrainerHill_Roof_EventScript_ReceivePrize)
+        case 1:
+            goto(TrainerHill_Roof_EventScript_NoRoomForPrize)
+        case 2:
+            goto(TrainerHill_Roof_EventScript_CheckFinalTime)
+    }
 }
 
 script TrainerHill_Roof_EventScript_ReceivePrize {
@@ -44,10 +52,14 @@ script TrainerHill_Roof_EventScript_NoRoomForPrize {
 
 script TrainerHill_Roof_EventScript_CheckFinalTime {
     trainerhill_finaltime()
-    switch(VAR_RESULT)
-    case(0, TrainerHill_Roof_EventScript_NewRecord)
-    case(1, TrainerHill_Roof_EventScript_NoNewRecord)
-    case(2, TrainerHill_Roof_EventScript_EndSpeakToOwner)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(TrainerHill_Roof_EventScript_NewRecord)
+        case 1:
+            goto(TrainerHill_Roof_EventScript_NoNewRecord)
+        case 2:
+            goto(TrainerHill_Roof_EventScript_EndSpeakToOwner)
+    }
 }
 
 script TrainerHill_Roof_EventScript_NewRecord {

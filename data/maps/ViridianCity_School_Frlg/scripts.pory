@@ -64,14 +64,22 @@ script ViridianCity_School_EventScript_ChooseBlackboardTopic {
     message(ViridianCity_School_Text_ReadWhichTopic)
     waitmessage()
     multichoicegrid(7, 1, MULTI_STATUS_INFO, 3, FALSE)
-    switch(VAR_RESULT)
-    case(0, ViridianCity_School_EventScript_ReadSleep)
-    case(1, ViridianCity_School_EventScript_ReadPoison)
-    case(2, ViridianCity_School_EventScript_ReadParalysis)
-    case(3, ViridianCity_School_EventScript_ReadBurn)
-    case(4, ViridianCity_School_EventScript_ReadFreeze)
-    case(5, ViridianCity_School_EventScript_ExitBlackboard)
-    case(127, ViridianCity_School_EventScript_ExitBlackboard)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(ViridianCity_School_EventScript_ReadSleep)
+        case 1:
+            goto(ViridianCity_School_EventScript_ReadPoison)
+        case 2:
+            goto(ViridianCity_School_EventScript_ReadParalysis)
+        case 3:
+            goto(ViridianCity_School_EventScript_ReadBurn)
+        case 4:
+            goto(ViridianCity_School_EventScript_ReadFreeze)
+        case 5:
+            goto(ViridianCity_School_EventScript_ExitBlackboard)
+        case 127:
+            goto(ViridianCity_School_EventScript_ExitBlackboard)
+    }
     end
 }
 

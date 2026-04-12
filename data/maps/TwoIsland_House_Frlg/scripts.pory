@@ -118,9 +118,12 @@ script TwoIsland_House_EventScript_ChooseMushroom {
     message(TwoIsland_House_Text_IllNeedMushroomOrTwo)
     waitmessage()
     multichoice(0, 0, MULTI_MUSHROOMS, TRUE)
-    switch(VAR_RESULT)
-    case(0, TwoIsland_House_EventScript_GiveTinyMushrooms)
-    case(1, TwoIsland_House_EventScript_GiveBigMushroom)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(TwoIsland_House_EventScript_GiveTinyMushrooms)
+        case 1:
+            goto(TwoIsland_House_EventScript_GiveBigMushroom)
+    }
     end
 }
 

@@ -131,10 +131,14 @@ script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix {
         goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber)
     }
     multichoice(0, 0, MULTI_HELIX, FALSE)
-    switch(VAR_RESULT)
-    case(0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil)
-    case(1, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
-    case(127, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil)
+        case 1:
+            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
+        case 127:
+            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
+    }
     end
 }
 
@@ -146,10 +150,14 @@ script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome {
         goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber)
     }
     multichoice(0, 0, MULTI_DOME, FALSE)
-    switch(VAR_RESULT)
-    case(0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil)
-    case(1, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
-    case(127, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil)
+        case 1:
+            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
+        case 127:
+            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
+    }
     end
 }
 
@@ -157,30 +165,44 @@ script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber {
     message(CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe)
     waitmessage()
     multichoice(0, 0, MULTI_AMBER, FALSE)
-    switch(VAR_RESULT)
-    case(0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber)
-    case(1, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
-    case(127, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber)
+        case 1:
+            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
+        case 127:
+            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
+    }
     end
 }
 
 script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber {
     multichoice(0, 0, MULTI_HELIX_AMBER, FALSE)
-    switch(VAR_RESULT)
-    case(0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil)
-    case(1, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber)
-    case(2, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
-    case(127, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil)
+        case 1:
+            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber)
+        case 2:
+            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
+        case 127:
+            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
+    }
     end
 }
 
 script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber {
     multichoice(0, 0, MULTI_DOME_AMBER, FALSE)
-    switch(VAR_RESULT)
-    case(0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil)
-    case(1, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber)
-    case(2, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
-    case(127, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil)
+        case 1:
+            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber)
+        case 2:
+            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
+        case 127:
+            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
+    }
     end
 }
 

@@ -15,10 +15,14 @@ script RocketHideout_Elevator_EventScript_FloorSelect {
     waitmessage()
     setvar(VAR_0x8004, 2)
     specialvar(VAR_RESULT, InitElevatorFloorSelectMenuPos)
-    switch(VAR_RESULT)
-    case(0, RocketHideout_Elevator_EventScript_FloorSelectFromB1F)
-    case(1, RocketHideout_Elevator_EventScript_FloorSelectFromB2F)
-    case(2, RocketHideout_Elevator_EventScript_FloorSelectFromB4F)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(RocketHideout_Elevator_EventScript_FloorSelectFromB1F)
+        case 1:
+            goto(RocketHideout_Elevator_EventScript_FloorSelectFromB2F)
+        case 2:
+            goto(RocketHideout_Elevator_EventScript_FloorSelectFromB4F)
+    }
     end
 }
 
@@ -41,12 +45,18 @@ script RocketHideout_Elevator_EventScript_FloorSelectFromB4F {
 }
 
 script RocketHideout_Elevator_EventScript_ChooseFloor {
-    switch(VAR_RESULT)
-    case(0, RocketHideout_Elevator_EventScript_ToB1F)
-    case(1, RocketHideout_Elevator_EventScript_ToB2F)
-    case(2, RocketHideout_Elevator_EventScript_ToB4F)
-    case(3, RocketHideout_Elevator_EventScript_ExitFloorSelect)
-    case(127, RocketHideout_Elevator_EventScript_ExitFloorSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(RocketHideout_Elevator_EventScript_ToB1F)
+        case 1:
+            goto(RocketHideout_Elevator_EventScript_ToB2F)
+        case 2:
+            goto(RocketHideout_Elevator_EventScript_ToB4F)
+        case 3:
+            goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
+        case 127:
+            goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
+    }
     end
 }
 

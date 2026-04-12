@@ -12,12 +12,18 @@ script CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect {
     waitmessage()
     setvar(VAR_0x8004, 3)
     specialvar(VAR_RESULT, InitElevatorFloorSelectMenuPos)
-    switch(VAR_RESULT)
-    case(0, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom5F)
-    case(1, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom4F)
-    case(2, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom3F)
-    case(3, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom2F)
-    case(4, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom1F)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom5F)
+        case 1:
+            goto(CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom4F)
+        case 2:
+            goto(CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom3F)
+        case 3:
+            goto(CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom2F)
+        case 4:
+            goto(CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom1F)
+    }
     end
 }
 
@@ -52,14 +58,22 @@ script CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom1F {
 }
 
 script CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor {
-    switch(VAR_RESULT)
-    case(0, CeladonCity_DepartmentStore_Elevator_EventScript_To5F)
-    case(1, CeladonCity_DepartmentStore_Elevator_EventScript_To4F)
-    case(2, CeladonCity_DepartmentStore_Elevator_EventScript_To3F)
-    case(3, CeladonCity_DepartmentStore_Elevator_EventScript_To2F)
-    case(4, CeladonCity_DepartmentStore_Elevator_EventScript_To1F)
-    case(5, CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect)
-    case(127, CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(CeladonCity_DepartmentStore_Elevator_EventScript_To5F)
+        case 1:
+            goto(CeladonCity_DepartmentStore_Elevator_EventScript_To4F)
+        case 2:
+            goto(CeladonCity_DepartmentStore_Elevator_EventScript_To3F)
+        case 3:
+            goto(CeladonCity_DepartmentStore_Elevator_EventScript_To2F)
+        case 4:
+            goto(CeladonCity_DepartmentStore_Elevator_EventScript_To1F)
+        case 5:
+            goto(CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect)
+        case 127:
+            goto(CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect)
+    }
     end
 }
 

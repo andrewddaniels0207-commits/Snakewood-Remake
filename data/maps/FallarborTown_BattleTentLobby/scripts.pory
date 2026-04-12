@@ -53,8 +53,10 @@ script FallarborTown_BattleTentLobby_EventScript_WonChallenge {
 script FallarborTown_BattleTentLobby_EventScript_GivePrize {
     msgbox(FallarborTown_BattleTentLobby_Text_PresentYouWithPrize, MSGBOX_DEFAULT)
     fallarbortent_giveprize()
-    switch(VAR_RESULT)
-    case(FALSE, FallarborTown_BattleTentLobby_EventScript_NoRoomForPrize)
+    switch (var(VAR_RESULT)) {
+        case FALSE:
+            goto(FallarborTown_BattleTentLobby_EventScript_NoRoomForPrize)
+    }
     frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, 0)
     message(FallarborTown_BattleTentLobby_Text_ReceivedPrize)
     waitmessage()
@@ -125,11 +127,16 @@ script FallarborTown_BattleTentLobby_EventScript_AskEnterChallenge {
     message(FallarborTown_BattleTentLobby_Text_TakeChallenge)
     waitmessage()
     multichoice(17, 6, MULTI_CHALLENGEINFO, FALSE)
-    switch(VAR_RESULT)
-    case(0, FallarborTown_BattleTentLobby_EventScript_TryEnterChallenge)
-    case(1, FallarborTown_BattleTentLobby_EventScript_ExplainChallenge)
-    case(2, FallarborTown_BattleTentLobby_EventScript_CancelChallenge)
-    case(MULTI_B_PRESSED, FallarborTown_BattleTentLobby_EventScript_CancelChallenge)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(FallarborTown_BattleTentLobby_EventScript_TryEnterChallenge)
+        case 1:
+            goto(FallarborTown_BattleTentLobby_EventScript_ExplainChallenge)
+        case 2:
+            goto(FallarborTown_BattleTentLobby_EventScript_CancelChallenge)
+        case MULTI_B_PRESSED:
+            goto(FallarborTown_BattleTentLobby_EventScript_CancelChallenge)
+    }
 }
 
 script FallarborTown_BattleTentLobby_EventScript_TryEnterChallenge {
@@ -151,10 +158,14 @@ script FallarborTown_BattleTentLobby_EventScript_TryEnterChallenge {
         goto(FallarborTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
     }
     msgbox(FallarborTown_BattleTentLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO)
-    switch(VAR_RESULT)
-    case(NO, FallarborTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
-    case(YES, FallarborTown_BattleTentLobby_EventScript_SaveBeforeChallenge)
-    case(MULTI_B_PRESSED, FallarborTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
+    switch (var(VAR_RESULT)) {
+        case NO:
+            goto(FallarborTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
+        case YES:
+            goto(FallarborTown_BattleTentLobby_EventScript_SaveBeforeChallenge)
+        case MULTI_B_PRESSED:
+            goto(FallarborTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
+    }
 }
 
 script FallarborTown_BattleTentLobby_EventScript_SaveBeforeChallenge {
@@ -191,9 +202,12 @@ script FallarborTown_BattleTentLobby_EventScript_ExplainChallenge {
 }
 
 script FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMons {
-    switch(VAR_RESULT)
-    case(FRONTIER_LVL_50, FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50)
-    case(FRONTIER_LVL_OPEN, FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMonsLvOpen)
+    switch (var(VAR_RESULT)) {
+        case FRONTIER_LVL_50:
+            goto(FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50)
+        case FRONTIER_LVL_OPEN:
+            goto(FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMonsLvOpen)
+    }
 }
 
 script FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50 {
@@ -310,14 +324,22 @@ script FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard {
     message(BattleFrontier_BattleArenaLobby_Text_ReadWhichHeading)
     waitmessage()
     multichoice(17, 0, MULTI_FALLARBOR_TENT_RULES, FALSE)
-    switch(VAR_RESULT)
-    case(0, FallarborTown_BattleTentLobby_EventScript_RulesLevel)
-    case(1, FallarborTown_BattleTentLobby_EventScript_RulesBattle)
-    case(2, FallarborTown_BattleTentLobby_EventScript_RulesMind)
-    case(3, FallarborTown_BattleTentLobby_EventScript_RulesSkill)
-    case(4, FallarborTown_BattleTentLobby_EventScript_RulesBody)
-    case(5, FallarborTown_BattleTentLobby_EventScript_ExitRules)
-    case(MULTI_B_PRESSED, FallarborTown_BattleTentLobby_EventScript_ExitRules)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(FallarborTown_BattleTentLobby_EventScript_RulesLevel)
+        case 1:
+            goto(FallarborTown_BattleTentLobby_EventScript_RulesBattle)
+        case 2:
+            goto(FallarborTown_BattleTentLobby_EventScript_RulesMind)
+        case 3:
+            goto(FallarborTown_BattleTentLobby_EventScript_RulesSkill)
+        case 4:
+            goto(FallarborTown_BattleTentLobby_EventScript_RulesBody)
+        case 5:
+            goto(FallarborTown_BattleTentLobby_EventScript_ExitRules)
+        case MULTI_B_PRESSED:
+            goto(FallarborTown_BattleTentLobby_EventScript_ExitRules)
+    }
     end
 }
 

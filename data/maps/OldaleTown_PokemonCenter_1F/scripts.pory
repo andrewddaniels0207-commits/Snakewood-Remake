@@ -31,7 +31,9 @@ script OldaleTown_PokemonCenter_1F_EventScript_Boy {
 script OldaleTown_PokemonCenter_1F_EventScript_Girl {
     lock
     faceplayer
-    if (flag(FLAG_SYS_POKEDEX_GET)) goto(OldaleTown_PokemonCenter_1F_EventScript_WirelessClubAvailable)
+    if (flag(FLAG_SYS_POKEDEX_GET)) {
+        goto(OldaleTown_PokemonCenter_1F_EventScript_WirelessClubAvailable)
+    }
     msgbox(OldaleTown_PokemonCenter_1F_Text_WirelessClubNotAvailable, MSGBOX_DEFAULT)
     release
     end

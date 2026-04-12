@@ -104,14 +104,22 @@ script PalletTown_RivalsHouse_EventScript_DeclineGrooming {
 script PalletTown_RivalsHouse_EventScript_RateMonFriendship {
     msgbox(PalletTown_RivalsHouse_Text_MayISeeFirstMon)
     specialvar(VAR_RESULT, GetLeadMonFriendship)
-    switch(VAR_RESULT)
-    case(0, PalletTown_RivalsHouse_EventScript_MonFriendshipLowest)
-    case(1, PalletTown_RivalsHouse_EventScript_MonFriendshipLower)
-    case(2, PalletTown_RivalsHouse_EventScript_MonFriendshipLow)
-    case(3, PalletTown_RivalsHouse_EventScript_MonFriendshipMid)
-    case(4, PalletTown_RivalsHouse_EventScript_MonFriendshipHigh)
-    case(5, PalletTown_RivalsHouse_EventScript_MonFriendshipHigher)
-    case(6, PalletTown_RivalsHouse_EventScript_MonFriendshipHighest)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(PalletTown_RivalsHouse_EventScript_MonFriendshipLowest)
+        case 1:
+            goto(PalletTown_RivalsHouse_EventScript_MonFriendshipLower)
+        case 2:
+            goto(PalletTown_RivalsHouse_EventScript_MonFriendshipLow)
+        case 3:
+            goto(PalletTown_RivalsHouse_EventScript_MonFriendshipMid)
+        case 4:
+            goto(PalletTown_RivalsHouse_EventScript_MonFriendshipHigh)
+        case 5:
+            goto(PalletTown_RivalsHouse_EventScript_MonFriendshipHigher)
+        case 6:
+            goto(PalletTown_RivalsHouse_EventScript_MonFriendshipHighest)
+    }
     end
 }
 

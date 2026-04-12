@@ -198,8 +198,10 @@ script LilycoveCity_EventScript_MotelSign {
 script LilycoveCity_EventScript_MuseumSign {
     lockall
     specialvar(VAR_0x8004, CountPlayerMuseumPaintings)
-    switch(VAR_0x8004)
-    case(0, LilycoveCity_EventScript_MuseumSignNoPaintings)
+    switch (var(VAR_0x8004)) {
+        case 0:
+            goto(LilycoveCity_EventScript_MuseumSignNoPaintings)
+    }
     msgbox(LilycoveCity_Text_MuseumSignPlayersExhibit, MSGBOX_DEFAULT)
     releaseall
     end
@@ -309,10 +311,14 @@ script LilycoveCity_EventScript_May {
         goto(LilycoveCity_EventScript_DeclineMayBattle)
     }
     msgbox(LilycoveCity_Text_MayWontBeBeaten, MSGBOX_DEFAULT)
-    switch(VAR_STARTER_MON)
-    case(0, LilycoveCity_EventScript_BattleMayTreecko)
-    case(1, LilycoveCity_EventScript_BattleMayTorchic)
-    case(2, LilycoveCity_EventScript_BattleMayMudkip)
+    switch (var(VAR_STARTER_MON)) {
+        case 0:
+            goto(LilycoveCity_EventScript_BattleMayTreecko)
+        case 1:
+            goto(LilycoveCity_EventScript_BattleMayTorchic)
+        case 2:
+            goto(LilycoveCity_EventScript_BattleMayMudkip)
+    }
     end
 }
 
@@ -347,10 +353,14 @@ script LilycoveCity_EventScript_Brendan {
         goto(LilycoveCity_EventScript_DeclineBrendanBattle)
     }
     msgbox(LilycoveCity_Text_BrendanWontBeBeaten, MSGBOX_DEFAULT)
-    switch(VAR_STARTER_MON)
-    case(0, LilycoveCity_EventScript_BattleBrendanTreecko)
-    case(1, LilycoveCity_EventScript_BattleBrendanTorchic)
-    case(2, LilycoveCity_EventScript_BattleBrendanMudkip)
+    switch (var(VAR_STARTER_MON)) {
+        case 0:
+            goto(LilycoveCity_EventScript_BattleBrendanTreecko)
+        case 1:
+            goto(LilycoveCity_EventScript_BattleBrendanTorchic)
+        case 2:
+            goto(LilycoveCity_EventScript_BattleBrendanMudkip)
+    }
     end
 }
 

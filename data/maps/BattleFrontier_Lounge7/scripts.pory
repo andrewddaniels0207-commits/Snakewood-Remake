@@ -29,19 +29,32 @@ script BattleFrontier_Lounge7_EventScript_ChooseLeftTutorMove {
     special(ShowScrollableMultichoice)
     waitstate
     copyvar(VAR_TEMP_FRONTIER_TUTOR_SELECTION, VAR_RESULT)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_Lounge7_EventScript_Softboiled)
-    case(1, BattleFrontier_Lounge7_EventScript_SeismicToss)
-    case(2, BattleFrontier_Lounge7_EventScript_DreamEater)
-    case(3, BattleFrontier_Lounge7_EventScript_MegaPunch)
-    case(4, BattleFrontier_Lounge7_EventScript_MegaKick)
-    case(5, BattleFrontier_Lounge7_EventScript_BodySlam)
-    case(6, BattleFrontier_Lounge7_EventScript_RockSlide)
-    case(7, BattleFrontier_Lounge7_EventScript_Counter)
-    case(8, BattleFrontier_Lounge7_EventScript_ThunderWave)
-    case(9, BattleFrontier_Lounge7_EventScript_SwordsDance)
-    case(10, BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect)
-    case(MULTI_B_PRESSED, BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_Lounge7_EventScript_Softboiled)
+        case 1:
+            goto(BattleFrontier_Lounge7_EventScript_SeismicToss)
+        case 2:
+            goto(BattleFrontier_Lounge7_EventScript_DreamEater)
+        case 3:
+            goto(BattleFrontier_Lounge7_EventScript_MegaPunch)
+        case 4:
+            goto(BattleFrontier_Lounge7_EventScript_MegaKick)
+        case 5:
+            goto(BattleFrontier_Lounge7_EventScript_BodySlam)
+        case 6:
+            goto(BattleFrontier_Lounge7_EventScript_RockSlide)
+        case 7:
+            goto(BattleFrontier_Lounge7_EventScript_Counter)
+        case 8:
+            goto(BattleFrontier_Lounge7_EventScript_ThunderWave)
+        case 9:
+            goto(BattleFrontier_Lounge7_EventScript_SwordsDance)
+        case 10:
+            goto(BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect)
+    }
     end
 }
 
@@ -54,19 +67,32 @@ script BattleFrontier_Lounge7_EventScript_ChooseNewLeftTutorMove {
     special(ShowScrollableMultichoice)
     waitstate
     copyvar(VAR_TEMP_FRONTIER_TUTOR_SELECTION, VAR_RESULT)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_Lounge7_EventScript_Softboiled)
-    case(1, BattleFrontier_Lounge7_EventScript_SeismicToss)
-    case(2, BattleFrontier_Lounge7_EventScript_DreamEater)
-    case(3, BattleFrontier_Lounge7_EventScript_MegaPunch)
-    case(4, BattleFrontier_Lounge7_EventScript_MegaKick)
-    case(5, BattleFrontier_Lounge7_EventScript_BodySlam)
-    case(6, BattleFrontier_Lounge7_EventScript_RockSlide)
-    case(7, BattleFrontier_Lounge7_EventScript_Counter)
-    case(8, BattleFrontier_Lounge7_EventScript_ThunderWave)
-    case(9, BattleFrontier_Lounge7_EventScript_SwordsDance)
-    case(10, BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect)
-    case(MULTI_B_PRESSED, BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_Lounge7_EventScript_Softboiled)
+        case 1:
+            goto(BattleFrontier_Lounge7_EventScript_SeismicToss)
+        case 2:
+            goto(BattleFrontier_Lounge7_EventScript_DreamEater)
+        case 3:
+            goto(BattleFrontier_Lounge7_EventScript_MegaPunch)
+        case 4:
+            goto(BattleFrontier_Lounge7_EventScript_MegaKick)
+        case 5:
+            goto(BattleFrontier_Lounge7_EventScript_BodySlam)
+        case 6:
+            goto(BattleFrontier_Lounge7_EventScript_RockSlide)
+        case 7:
+            goto(BattleFrontier_Lounge7_EventScript_Counter)
+        case 8:
+            goto(BattleFrontier_Lounge7_EventScript_ThunderWave)
+        case 9:
+            goto(BattleFrontier_Lounge7_EventScript_SwordsDance)
+        case 10:
+            goto(BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect)
+    }
     end
 }
 
@@ -169,19 +195,32 @@ script BattleFrontier_Lounge7_EventScript_ChooseRightTutorMove {
     special(ShowScrollableMultichoice)
     waitstate
     copyvar(VAR_TEMP_FRONTIER_TUTOR_SELECTION, VAR_RESULT)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_Lounge7_EventScript_DefenseCurl)
-    case(1, BattleFrontier_Lounge7_EventScript_Snore)
-    case(2, BattleFrontier_Lounge7_EventScript_MudSlap)
-    case(3, BattleFrontier_Lounge7_EventScript_Swift)
-    case(4, BattleFrontier_Lounge7_EventScript_IcyWind)
-    case(5, BattleFrontier_Lounge7_EventScript_Endure)
-    case(6, BattleFrontier_Lounge7_EventScript_PsychUp)
-    case(7, BattleFrontier_Lounge7_EventScript_IcePunch)
-    case(8, BattleFrontier_Lounge7_EventScript_ThunderPunch)
-    case(9, BattleFrontier_Lounge7_EventScript_FirePunch)
-    case(10, BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect)
-    case(MULTI_B_PRESSED, BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_Lounge7_EventScript_DefenseCurl)
+        case 1:
+            goto(BattleFrontier_Lounge7_EventScript_Snore)
+        case 2:
+            goto(BattleFrontier_Lounge7_EventScript_MudSlap)
+        case 3:
+            goto(BattleFrontier_Lounge7_EventScript_Swift)
+        case 4:
+            goto(BattleFrontier_Lounge7_EventScript_IcyWind)
+        case 5:
+            goto(BattleFrontier_Lounge7_EventScript_Endure)
+        case 6:
+            goto(BattleFrontier_Lounge7_EventScript_PsychUp)
+        case 7:
+            goto(BattleFrontier_Lounge7_EventScript_IcePunch)
+        case 8:
+            goto(BattleFrontier_Lounge7_EventScript_ThunderPunch)
+        case 9:
+            goto(BattleFrontier_Lounge7_EventScript_FirePunch)
+        case 10:
+            goto(BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect)
+    }
     end
 }
 
@@ -194,19 +233,32 @@ script BattleFrontier_Lounge7_EventScript_ChooseNewRightTutorMove {
     special(ShowScrollableMultichoice)
     waitstate
     copyvar(VAR_TEMP_FRONTIER_TUTOR_SELECTION, VAR_RESULT)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_Lounge7_EventScript_DefenseCurl)
-    case(1, BattleFrontier_Lounge7_EventScript_Snore)
-    case(2, BattleFrontier_Lounge7_EventScript_MudSlap)
-    case(3, BattleFrontier_Lounge7_EventScript_Swift)
-    case(4, BattleFrontier_Lounge7_EventScript_IcyWind)
-    case(5, BattleFrontier_Lounge7_EventScript_Endure)
-    case(6, BattleFrontier_Lounge7_EventScript_PsychUp)
-    case(7, BattleFrontier_Lounge7_EventScript_IcePunch)
-    case(8, BattleFrontier_Lounge7_EventScript_ThunderPunch)
-    case(9, BattleFrontier_Lounge7_EventScript_FirePunch)
-    case(10, BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect)
-    case(MULTI_B_PRESSED, BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_Lounge7_EventScript_DefenseCurl)
+        case 1:
+            goto(BattleFrontier_Lounge7_EventScript_Snore)
+        case 2:
+            goto(BattleFrontier_Lounge7_EventScript_MudSlap)
+        case 3:
+            goto(BattleFrontier_Lounge7_EventScript_Swift)
+        case 4:
+            goto(BattleFrontier_Lounge7_EventScript_IcyWind)
+        case 5:
+            goto(BattleFrontier_Lounge7_EventScript_Endure)
+        case 6:
+            goto(BattleFrontier_Lounge7_EventScript_PsychUp)
+        case 7:
+            goto(BattleFrontier_Lounge7_EventScript_IcePunch)
+        case 8:
+            goto(BattleFrontier_Lounge7_EventScript_ThunderPunch)
+        case 9:
+            goto(BattleFrontier_Lounge7_EventScript_FirePunch)
+        case 10:
+            goto(BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect)
+    }
     end
 }
 

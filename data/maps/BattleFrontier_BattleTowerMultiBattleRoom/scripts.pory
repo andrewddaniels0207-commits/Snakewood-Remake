@@ -109,8 +109,10 @@ script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_DoOpponentIntrosLin
 
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_DoTowerBattle {
     call(BattleFrontier_BattleTowerBattleRoom_EventScript_DoTowerBattle)
-    switch(VAR_RESULT)
-    case(B_OUTCOME_WON, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_DefeatedOpponents)
+    switch (var(VAR_RESULT)) {
+        case B_OUTCOME_WON:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_DefeatedOpponents)
+    }
 }
 
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_WarpToLobbyLost {
@@ -124,8 +126,10 @@ script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_WarpToLobbyLost {
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_DefeatedOpponents {
     call(BattleFrontier_EventScript_IncrementWinStreak)
     tower_setbattlewon()
-    switch(VAR_RESULT)
-    case(7, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_WarpToLobbyWon)
+    switch (var(VAR_RESULT)) {
+        case 7:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_WarpToLobbyWon)
+    }
     applymovement(LOCALID_TOWER_MULTI_BATTLE_OPPONENT_2, BattleFrontier_BattleTowerMultiBattleRoom_Movement_Opponent2Exit)
     applymovement(LOCALID_TOWER_MULTI_BATTLE_OPPONENT_1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_Opponent1Exit)
     waitmovement(0)
@@ -172,31 +176,46 @@ script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponent
         goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponentsNoRecord)
     }
     multichoice(19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, TRUE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallenge)
-    case(1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRecordBattle)
-    case(2, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskPauseChallenge)
-    case(3, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallenge)
+        case 1:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRecordBattle)
+        case 2:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskPauseChallenge)
+        case 3:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
+    }
 }
 
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponentsNoRecord {
     multichoice(20, 6, MULTI_GO_ON_REST_RETIRE, TRUE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallenge)
-    case(1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskPauseChallenge)
-    case(2, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallenge)
+        case 1:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskPauseChallenge)
+        case 2:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
+    }
 }
 
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRecordBattle {
     message(BattleFrontier_BattleTowerBattleRoom_Text_RecordYourBattle)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
-    switch(VAR_RESULT)
-    case(1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
-    case(0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RecordBattle)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
+        case 0:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RecordBattle)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
+    }
 }
 
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RecordBattle {
@@ -206,20 +225,28 @@ script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RecordBattle {
 
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskPauseChallenge {
     msgbox(BattleFrontier_BattleTowerBattleRoom_Text_SaveAndQuitGame, MSGBOX_YESNO)
-    switch(VAR_RESULT)
-    case(NO, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
-    case(YES, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_PauseChallenge)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
+    switch (var(VAR_RESULT)) {
+        case NO:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
+        case YES:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_PauseChallenge)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
+    }
 }
 
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallenge {
     message(BattleFrontier_BattleTowerBattleRoom_Text_CancelYourChallenge)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
-    switch(VAR_RESULT)
-    case(1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
-    case(0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_WarpToLobbyLost)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
+        case 0:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_WarpToLobbyLost)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
+    }
 }
 
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallenge {
@@ -259,13 +286,20 @@ script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyForNextOpponen
         goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyForNextOpponentSetLink)
     }
     copyvar(VAR_TEMP_F, VAR_RESULT)
-    switch(VAR_TEMP_F)
-    case(1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor2ndOpponentSet)
-    case(2, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor3rdOpponentSet)
-    case(3, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor4thOpponentSet)
-    case(4, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor5thOpponentSet)
-    case(5, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor6thOpponentSet)
-    case(6, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor7thOpponentSet)
+    switch (var(VAR_TEMP_F)) {
+        case 1:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor2ndOpponentSet)
+        case 2:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor3rdOpponentSet)
+        case 3:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor4thOpponentSet)
+        case 4:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor5thOpponentSet)
+        case 5:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor6thOpponentSet)
+        case 6:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor7thOpponentSet)
+    }
 }
 
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor2ndOpponentSet {
@@ -306,13 +340,20 @@ script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor7thOpponent
 
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyForNextOpponentSetLink {
     copyvar(VAR_TEMP_F, VAR_RESULT)
-    switch(VAR_TEMP_F)
-    case(1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor2ndOpponentSetLink)
-    case(2, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor3rdOpponentSetLink)
-    case(3, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor4thOpponentSetLink)
-    case(4, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor5thOpponentSetLink)
-    case(5, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor6thOpponentSetLink)
-    case(6, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor7thOpponentSetLink)
+    switch (var(VAR_TEMP_F)) {
+        case 1:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor2ndOpponentSetLink)
+        case 2:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor3rdOpponentSetLink)
+        case 3:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor4thOpponentSetLink)
+        case 4:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor5thOpponentSetLink)
+        case 5:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor6thOpponentSetLink)
+        case 6:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor7thOpponentSetLink)
+    }
 }
 
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor2ndOpponentSetLink {
@@ -368,20 +409,29 @@ script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponent
         goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponentsLinkNoRecord)
     }
     multichoice(19, 6, MULTI_GO_ON_RECORD_RETIRE, TRUE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallengeLink)
-    case(1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRecordBattleLink)
-    case(2, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallengeLink)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallengeLink)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallengeLink)
+        case 1:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRecordBattleLink)
+        case 2:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallengeLink)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallengeLink)
+    }
     end
 }
 
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponentsLinkNoRecord {
     multichoice(20, 8, MULTI_GO_ON_RETIRE, TRUE)
-    switch(VAR_RESULT)
-    case(0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallengeLink)
-    case(1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallengeLink)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallengeLink)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallengeLink)
+        case 1:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallengeLink)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallengeLink)
+    }
     end
 }
 
@@ -403,9 +453,12 @@ script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRecordBattleLink
     message(BattleFrontier_BattleTowerBattleRoom_Text_RecordYourBattle)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
-    switch(VAR_RESULT)
-    case(1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
-    case(MULTI_B_PRESSED, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
+        case MULTI_B_PRESSED:
+            goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
+    }
     call(BattleFrontier_EventScript_SaveBattle)
     setflag(FLAG_TEMP_2)
     goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)

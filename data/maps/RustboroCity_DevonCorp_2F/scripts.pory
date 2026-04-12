@@ -314,11 +314,16 @@ script RustboroCity_DevonCorp_2F_EventScript_ChooseFossil {
     message(RustboroCity_DevonCorp_2F_Text_TwoFossilsPickOne)
     waitmessage()
     multichoice(17, 6, MULTI_FOSSIL, FALSE)
-    switch(VAR_RESULT)
-    case(0, RustboroCity_DevonCorp_2F_EventScript_ChooseClawFossil)
-    case(1, RustboroCity_DevonCorp_2F_EventScript_ChooseRootFossil)
-    case(2, RustboroCity_DevonCorp_2F_EventScript_CancelFossilSelect)
-    case(MULTI_B_PRESSED, RustboroCity_DevonCorp_2F_EventScript_CancelFossilSelect)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(RustboroCity_DevonCorp_2F_EventScript_ChooseClawFossil)
+        case 1:
+            goto(RustboroCity_DevonCorp_2F_EventScript_ChooseRootFossil)
+        case 2:
+            goto(RustboroCity_DevonCorp_2F_EventScript_CancelFossilSelect)
+        case MULTI_B_PRESSED:
+            goto(RustboroCity_DevonCorp_2F_EventScript_CancelFossilSelect)
+    }
     end
 }
 

@@ -128,21 +128,34 @@ script PetalburgCity_Gym_EventScript_Norman {
     vsseeker_rematchid(TRAINER_NORMAN_1)
     lock
     faceplayer
-    switch(VAR_PETALBURG_GYM_STATE)
-    case(2, PetalburgCity_Gym_EventScript_NormanNoBadges)
-    case(3, PetalburgCity_Gym_EventScript_NormanOneBadge)
-    case(4, PetalburgCity_Gym_EventScript_NormanTwoBadges)
-    case(5, PetalburgCity_Gym_EventScript_NormanThreeBadges)
-    case(6, PetalburgCity_Gym_EventScript_NormanBattle)
-    case(7, PetalburgCity_Gym_EventScript_NormanPostBattle)
-    case(8, PetalburgCity_Gym_EventScript_NormanRematch)
+    switch (var(VAR_PETALBURG_GYM_STATE)) {
+        case 2:
+            goto(PetalburgCity_Gym_EventScript_NormanNoBadges)
+        case 3:
+            goto(PetalburgCity_Gym_EventScript_NormanOneBadge)
+        case 4:
+            goto(PetalburgCity_Gym_EventScript_NormanTwoBadges)
+        case 5:
+            goto(PetalburgCity_Gym_EventScript_NormanThreeBadges)
+        case 6:
+            goto(PetalburgCity_Gym_EventScript_NormanBattle)
+        case 7:
+            goto(PetalburgCity_Gym_EventScript_NormanPostBattle)
+        case 8:
+            goto(PetalburgCity_Gym_EventScript_NormanRematch)
+    }
     msgbox(PetalburgCity_Gym_Text_DadYoureHereWithYourPokemon, MSGBOX_DEFAULT)
     closemessage
-    switch(VAR_FACING)
-    case(DIR_SOUTH, PetalburgCity_Gym_EventScript_BeginWallyTutorialSouth)
-    case(DIR_NORTH, PetalburgCity_Gym_EventScript_BeginWallyTutorialNorth)
-    case(DIR_WEST, PetalburgCity_Gym_EventScript_BeginWallyTutorialWest)
-    case(DIR_EAST, PetalburgCity_Gym_EventScript_BeginWallyTutorialEast)
+    switch (var(VAR_FACING)) {
+        case DIR_SOUTH:
+            goto(PetalburgCity_Gym_EventScript_BeginWallyTutorialSouth)
+        case DIR_NORTH:
+            goto(PetalburgCity_Gym_EventScript_BeginWallyTutorialNorth)
+        case DIR_WEST:
+            goto(PetalburgCity_Gym_EventScript_BeginWallyTutorialWest)
+        case DIR_EAST:
+            goto(PetalburgCity_Gym_EventScript_BeginWallyTutorialEast)
+    }
     end
 }
 
@@ -520,10 +533,14 @@ script PetalburgCity_Gym_EventScript_NormanBattle {
     playse(SE_DOOR)
     delay(10)
     addobject(LOCALID_PETALBURG_GYM_WALLYS_DAD)
-    switch(VAR_FACING)
-    case(DIR_NORTH, PetalburgCity_Gym_EventScript_WallysDadArrivesNorth)
-    case(DIR_WEST, PetalburgCity_Gym_EventScript_WallysDadArrivesWest)
-    case(DIR_EAST, PetalburgCity_Gym_EventScript_WallysDadArrivesEast)
+    switch (var(VAR_FACING)) {
+        case DIR_NORTH:
+            goto(PetalburgCity_Gym_EventScript_WallysDadArrivesNorth)
+        case DIR_WEST:
+            goto(PetalburgCity_Gym_EventScript_WallysDadArrivesWest)
+        case DIR_EAST:
+            goto(PetalburgCity_Gym_EventScript_WallysDadArrivesEast)
+    }
     end
 }
 

@@ -231,8 +231,10 @@ script MossdeepCity_SpaceCenter_2F_EventScript_Steven {
     closemessage
     delay(30)
     playse(SE_NOT_EFFECTIVE)
-    switch(VAR_FACING)
-    case(DIR_SOUTH, MossdeepCity_SpaceCenter_2F_EventScript_StevenFightMovementSouth)
+    switch (var(VAR_FACING)) {
+        case DIR_SOUTH:
+            goto(MossdeepCity_SpaceCenter_2F_EventScript_StevenFightMovementSouth)
+    }
     applymovement(LOCALID_SPACE_CENTER_2F_STEVEN, MossdeepCity_SpaceCenter_2F_Movement_StevenFight)
     waitmovement(0)
     releaseall
@@ -303,8 +305,10 @@ script MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle {
 
 script MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle {
     multi_2_vs_2(TRAINER_MAXIE_MOSSDEEP, MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand, TRAINER_TABITHA_MOSSDEEP, MossdeepCity_SpaceCenter_Text_TabithaDefeat, PARTNER_STEVEN)
-    switch(VAR_RESULT)
-    case(1, MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            goto(MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha)
+    }
     fadescreen(FADE_TO_BLACK)
     special(SetCB2WhiteOut)
     waitstate
@@ -366,9 +370,12 @@ script MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha {
 }
 
 script MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayer {
-    switch(VAR_FACING)
-    case(DIR_SOUTH, MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayerSouth)
-    case(DIR_WEST, MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayerWest)
+    switch (var(VAR_FACING)) {
+        case DIR_SOUTH:
+            goto(MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayerSouth)
+        case DIR_WEST:
+            goto(MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayerWest)
+    }
     return
 }
 

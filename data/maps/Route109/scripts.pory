@@ -7,10 +7,14 @@ script Route109_EventScript_StartDepartForDewford {
     applymovement(LOCALID_ROUTE109_BRINEY, Route109_Movement_BrineyEnterBoat)
     waitmovement(0)
     removeobject(LOCALID_ROUTE109_BRINEY)
-    switch(VAR_FACING)
-    case(DIR_SOUTH, Route109_EventScript_EnterBoatSouth)
-    case(DIR_WEST, Route109_EventScript_EnterBoatWest)
-    case(DIR_EAST, Route109_EventScript_EnterBoatEast)
+    switch (var(VAR_FACING)) {
+        case DIR_SOUTH:
+            goto(Route109_EventScript_EnterBoatSouth)
+        case DIR_WEST:
+            goto(Route109_EventScript_EnterBoatWest)
+        case DIR_EAST:
+            goto(Route109_EventScript_EnterBoatEast)
+    }
     end
 }
 
@@ -304,10 +308,14 @@ script Route109_EventScript_DeliveredDevonGoods {
     message(Route109_Text_BrineyWhereAreWeBound)
     waitmessage()
     multichoicedefault(21, 8, MULTI_BRINEY_OFF_DEWFORD, 1, FALSE)
-    switch(VAR_RESULT)
-    case(0, Route109_EventScript_SailToDewford)
-    case(1, Route109_EventScript_ChoseNotToSail)
-    case(MULTI_B_PRESSED, Route109_EventScript_ChoseNotToSail)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Route109_EventScript_SailToDewford)
+        case 1:
+            goto(Route109_EventScript_ChoseNotToSail)
+        case MULTI_B_PRESSED:
+            goto(Route109_EventScript_ChoseNotToSail)
+    }
     end
 }
 

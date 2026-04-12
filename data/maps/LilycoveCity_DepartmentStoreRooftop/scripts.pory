@@ -74,10 +74,14 @@ script LilycoveCity_DepartmentStoreRooftop_EventScript_VendingMachine {
 script LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseDrink {
     multichoice(16, 0, MULTI_VENDING_MACHINE, FALSE)
     copyvar(VAR_TEMP_1, VAR_RESULT)
-    switch(VAR_TEMP_1)
-    case(0, LilycoveCity_DepartmentStoreRooftop_EventScript_FreshWater)
-    case(1, LilycoveCity_DepartmentStoreRooftop_EventScript_SodaPop)
-    case(2, LilycoveCity_DepartmentStoreRooftop_EventScript_Lemonade)
+    switch (var(VAR_TEMP_1)) {
+        case 0:
+            goto(LilycoveCity_DepartmentStoreRooftop_EventScript_FreshWater)
+        case 1:
+            goto(LilycoveCity_DepartmentStoreRooftop_EventScript_SodaPop)
+        case 2:
+            goto(LilycoveCity_DepartmentStoreRooftop_EventScript_Lemonade)
+    }
     msgbox(LilycoveCity_DepartmentStoreRooftop_Text_DecidedAgainstBuyingDrink, MSGBOX_DEFAULT)
     goto(LilycoveCity_DepartmentStoreRooftop_EventScript_ExitVendingMachine)
     end

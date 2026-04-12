@@ -4,68 +4,126 @@ mapscripts AbandonedShip_Corridors_B1F_MapScripts {
 }
 
 script AbandonedShip_Corridors_B1F_OnResume {
+    #(7 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     setdivewarp(MAP_ABANDONED_SHIP_UNDERWATER1, 5, 4)
     end
 }
 
 script AbandonedShip_Corridors_B1F_OnLoad {
+    #(12 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     if (!flag(FLAG_USED_STORAGE_KEY)) {
-        call(AbandonedShip_Corridors_B1F_EventScript_LockStorageRoom)
+        goto(AbandonedShip_Corridors_B1F_OnLoad_2)
     }
+}
+
+script AbandonedShip_Corridors_B1F_OnLoad_1 {
+    #(15 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     if (flag(FLAG_USED_STORAGE_KEY)) {
-        call(AbandonedShip_Corridors_B1F_EventScript_UnlockStorageRoom)
+        goto(AbandonedShip_Corridors_B1F_OnLoad_5)
     }
+}
+
+script AbandonedShip_Corridors_B1F_OnLoad_4 {
     end
 }
 
+script AbandonedShip_Corridors_B1F_OnLoad_2 {
+    #(13 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
+    call(AbandonedShip_Corridors_B1F_EventScript_LockStorageRoom)
+    goto(AbandonedShip_Corridors_B1F_OnLoad_1)
+}
+
+script AbandonedShip_Corridors_B1F_OnLoad_5 {
+    #(16 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
+    call(AbandonedShip_Corridors_B1F_EventScript_UnlockStorageRoom)
+    goto(AbandonedShip_Corridors_B1F_OnLoad_4)
+}
+
 script AbandonedShip_Corridors_B1F_EventScript_LockStorageRoom {
+    #(22 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     setmetatile(11, 4, METATILE_InsideShip_IntactDoor_Bottom_Locked, TRUE)
     return
 }
 
 script AbandonedShip_Corridors_B1F_EventScript_UnlockStorageRoom {
+    #(27 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     setmetatile(11, 4, METATILE_InsideShip_IntactDoor_Bottom_Unlocked, TRUE)
     return
 }
 
 script AbandonedShip_Corridors_B1F_EventScript_TuberM {
+    #(32 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     msgbox(AbandonedShip_Corridors_B1F_Text_YayItsAShip, MSGBOX_NPC)
     end
 }
 
 script AbandonedShip_Corridors_B1F_EventScript_StorageRoomDoor {
+    #(37 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     lockall
+    #(38 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     if (flag(FLAG_USED_STORAGE_KEY)) {
-        goto(AbandonedShip_Corridors_B1F_EventScript_DoorIsUnlocked)
+        goto(AbandonedShip_Corridors_B1F_EventScript_StorageRoomDoor_2)
     }
+}
+
+script AbandonedShip_Corridors_B1F_EventScript_StorageRoomDoor_1 {
+    #(41 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     checkitem(ITEM_STORAGE_KEY)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(AbandonedShip_Corridors_B1F_EventScript_DoorIsLocked)
-    }
+    #(42 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
+    compare(VAR_RESULT, FALSE)
+    goto_if_eq(AbandonedShip_Corridors_B1F_EventScript_StorageRoomDoor_5)
+}
+
+script AbandonedShip_Corridors_B1F_EventScript_StorageRoomDoor_4 {
+    #(45 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     msgbox(AbandonedShip_Corridors_B1F_Text_InsertedStorageKey, MSGBOX_DEFAULT)
+    #(46 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     playse(SE_PIN)
+    #(47 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     removeitem(ITEM_STORAGE_KEY)
+    #(48 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     setflag(FLAG_USED_STORAGE_KEY)
+    #(49 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     call(AbandonedShip_Corridors_B1F_EventScript_UnlockStorageRoom)
+    #(50 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     special(DrawWholeMapView)
+    #(51 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     releaseall
     end
 }
 
+script AbandonedShip_Corridors_B1F_EventScript_StorageRoomDoor_2 {
+    #(39 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
+    goto(AbandonedShip_Corridors_B1F_EventScript_DoorIsUnlocked)
+    goto(AbandonedShip_Corridors_B1F_EventScript_StorageRoomDoor_1)
+}
+
+script AbandonedShip_Corridors_B1F_EventScript_StorageRoomDoor_5 {
+    #(43 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
+    goto(AbandonedShip_Corridors_B1F_EventScript_DoorIsLocked)
+    goto(AbandonedShip_Corridors_B1F_EventScript_StorageRoomDoor_4)
+}
+
 script AbandonedShip_Corridors_B1F_EventScript_DoorIsLocked {
+    #(56 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     msgbox(AbandonedShip_Corridors_B1F_Text_DoorIsLocked, MSGBOX_DEFAULT)
+    #(57 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     releaseall
     end
 }
 
 script AbandonedShip_Corridors_B1F_EventScript_DoorIsUnlocked {
+    #(62 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     msgbox(AbandonedShip_Text_TheDoorIsOpen, MSGBOX_DEFAULT)
+    #(63 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     releaseall
     end
 }
 
 script AbandonedShip_Corridors_B1F_EventScript_Duncan {
+    #(68 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     trainerbattle_single(TRAINER_DUNCAN, AbandonedShip_Corridors_B1F_Text_DuncanIntro, AbandonedShip_Corridors_B1F_Text_DuncanDefeat)
+    #(69 "data/maps/AbandonedShip_Corridors_B1F/scripts.pory")
     msgbox(AbandonedShip_Corridors_B1F_Text_DuncanPostBattle, MSGBOX_AUTOCLOSE)
     end
 }

@@ -100,15 +100,24 @@ script DewfordTown_Hall_EventScript_Painting {
     lockall
     call(Common_EventScript_BufferTrendyPhrase)
     special(GetDewfordHallPaintingNameIndex)
-    switch(VAR_RESULT)
-    case(0, DewfordTown_Hall_EventScript_ScreamTitle)
-    case(4, DewfordTown_Hall_EventScript_ScreamTitle)
-    case(1, DewfordTown_Hall_EventScript_SmileTitle)
-    case(5, DewfordTown_Hall_EventScript_ScreamTitle)
-    case(2, DewfordTown_Hall_EventScript_LastTitle)
-    case(6, DewfordTown_Hall_EventScript_LastTitle)
-    case(3, DewfordTown_Hall_EventScript_BirthTitle)
-    case(7, DewfordTown_Hall_EventScript_LastTitle)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(DewfordTown_Hall_EventScript_ScreamTitle)
+        case 4:
+            goto(DewfordTown_Hall_EventScript_ScreamTitle)
+        case 1:
+            goto(DewfordTown_Hall_EventScript_SmileTitle)
+        case 5:
+            goto(DewfordTown_Hall_EventScript_ScreamTitle)
+        case 2:
+            goto(DewfordTown_Hall_EventScript_LastTitle)
+        case 6:
+            goto(DewfordTown_Hall_EventScript_LastTitle)
+        case 3:
+            goto(DewfordTown_Hall_EventScript_BirthTitle)
+        case 7:
+            goto(DewfordTown_Hall_EventScript_LastTitle)
+    }
     end
 }
 
@@ -153,15 +162,24 @@ script DewfordTown_Hall_EventScript_PsychicM {
 script DewfordTown_Hall_EventScript_DoTrendDebate {
     call(Common_EventScript_BufferTrendyPhrase)
     special(GetDewfordHallPaintingNameIndex)
-    switch(VAR_RESULT)
-    case(0, DewfordTown_Hall_EventScript_TrendDebate1)
-    case(1, DewfordTown_Hall_EventScript_TrendDebate1)
-    case(2, DewfordTown_Hall_EventScript_TrendDebate2)
-    case(3, DewfordTown_Hall_EventScript_TrendDebate2)
-    case(4, DewfordTown_Hall_EventScript_TrendDebate3)
-    case(5, DewfordTown_Hall_EventScript_TrendDebate3)
-    case(6, DewfordTown_Hall_EventScript_TrendDebate4)
-    case(7, DewfordTown_Hall_EventScript_TrendDebate5)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(DewfordTown_Hall_EventScript_TrendDebate1)
+        case 1:
+            goto(DewfordTown_Hall_EventScript_TrendDebate1)
+        case 2:
+            goto(DewfordTown_Hall_EventScript_TrendDebate2)
+        case 3:
+            goto(DewfordTown_Hall_EventScript_TrendDebate2)
+        case 4:
+            goto(DewfordTown_Hall_EventScript_TrendDebate3)
+        case 5:
+            goto(DewfordTown_Hall_EventScript_TrendDebate3)
+        case 6:
+            goto(DewfordTown_Hall_EventScript_TrendDebate4)
+        case 7:
+            goto(DewfordTown_Hall_EventScript_TrendDebate5)
+    }
     end
 }
 

@@ -309,23 +309,70 @@ def format_movement(label, lines):
     return result
 
 
+SWITCH_RE = re.compile(r'^switch\s+(\S+)$')
+CASE_RE = re.compile(r'^case\s+(\S+),\s+(\S+)$')
+
+
 def format_script(label, lines):
-    """Format a script block."""
+    """Format a script block.
+
+    Handles the .inc switch/case jump-table pattern:
+        switch VAR_FOO
+        case 1, Label1
+        case 2, Label2
+    →
+        switch (var(VAR_FOO)) {
+            case 1:
+                goto(Label1)
+            case 2:
+                goto(Label2)
+        }
+    """
     result = [f'script {label} {{']
+
+    # Pre-filter to only the meaningful lines so we can do lookahead
+    filtered = []
     for line in lines:
         stripped = strip_comment(line).strip()
-        if not stripped:
+        if not stripped or stripped.startswith('@') or stripped.startswith('.'):
             continue
-        if stripped.startswith('@'):
-            # Keep comments as poryscript comments
-            # result.append(f'    # {stripped[1:].strip()}')
-            continue
-        if stripped.startswith('.'):
+        filtered.append(stripped)
+
+    i = 0
+    while i < len(filtered):
+        s = filtered[i]
+
+        # Detect switch VAR — collect following case entries into a block
+        sm = SWITCH_RE.match(s)
+        if sm:
+            var_name = sm.group(1)
+            result.append(f'    switch (var({var_name})) {{')
+            i += 1
+            while i < len(filtered):
+                cm = CASE_RE.match(filtered[i])
+                if cm:
+                    val, lbl = cm.group(1), cm.group(2)
+                    result.append(f'        case {val}:')
+                    result.append(f'            goto({lbl})')
+                    i += 1
+                else:
+                    break
+            result.append('    }')
             continue
 
-        converted = convert_command(stripped)
+        # Bare case outside a switch (shouldn't normally occur, but be safe)
+        cm = CASE_RE.match(s)
+        if cm:
+            val, lbl = cm.group(1), cm.group(2)
+            result.append(f'    # orphan case {val} -> goto({lbl})')
+            i += 1
+            continue
+
+        converted = convert_command(s)
         if converted is not None:
             result.append(f'    {converted}')
+        i += 1
+
     result.append('}')
     return result
 

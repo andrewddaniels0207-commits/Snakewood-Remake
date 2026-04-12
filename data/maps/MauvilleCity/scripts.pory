@@ -133,9 +133,12 @@ script MauvilleCity_EventScript_BattleWallyPrompt {
         goto(MauvilleCity_EventScript_DeclineWallyBattle)
     }
     closemessage
-    switch(VAR_FACING)
-    case(DIR_NORTH, MauvilleCity_EventScript_WallyAndUncleExitNorth)
-    case(DIR_EAST, MauvilleCity_EventScript_WallyAndUncleExitEast)
+    switch (var(VAR_FACING)) {
+        case DIR_NORTH:
+            goto(MauvilleCity_EventScript_WallyAndUncleExitNorth)
+        case DIR_EAST:
+            goto(MauvilleCity_EventScript_WallyAndUncleExitEast)
+    }
     end
 }
 
