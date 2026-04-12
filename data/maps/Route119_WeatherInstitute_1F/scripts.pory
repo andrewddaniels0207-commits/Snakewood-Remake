@@ -3,7 +3,9 @@ mapscripts Route119_WeatherInstitute_1F_MapScripts {
 }
 
 script Route119_WeatherInstitute_1F_OnTransition {
-    if (var(VAR_WEATHER_INSTITUTE_STATE) == 0) call(Route119_WeatherInstitute_1F_EventScript_SetLittleBoyPos)
+    if (var(VAR_WEATHER_INSTITUTE_STATE) == 0) {
+        call(Route119_WeatherInstitute_1F_EventScript_SetLittleBoyPos)
+    }
     end
 }
 
@@ -17,7 +19,9 @@ script Route119_WeatherInstitute_1F_EventScript_LittleBoy {
     lock
     faceplayer
     special(GetPlayerBigGuyGirlString)
-    if (var(VAR_WEATHER_INSTITUTE_STATE) == 0) goto(Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere)
+    if (var(VAR_WEATHER_INSTITUTE_STATE) == 0) {
+        goto(Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere)
+    }
     msgbox(Route119_WeatherInstitute_1F_Text_WowYoureStrong, MSGBOX_DEFAULT)
     release
     end
@@ -32,11 +36,19 @@ script Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere {
 script Route119_WeatherInstitute_1F_EventScript_InstituteWorker1 {
     lock
     faceplayer
-    if (!flag(FLAG_SYS_GAME_CLEAR)) goto(Route119_WeatherInstitute_1F_EventScript_StudyingRain)
+    if (!flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(Route119_WeatherInstitute_1F_EventScript_StudyingRain)
+    }
     setvar(VAR_0x8004, 0)
-    if (flag(FLAG_DEFEATED_KYOGRE)) call(Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated)
-    if (flag(FLAG_DEFEATED_GROUDON)) call(Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated)
-    if (var(VAR_0x8004) == 2) goto(Route119_WeatherInstitute_1F_EventScript_StudyingRain)
+    if (flag(FLAG_DEFEATED_KYOGRE)) {
+        call(Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated)
+    }
+    if (flag(FLAG_DEFEATED_GROUDON)) {
+        call(Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated)
+    }
+    if (var(VAR_0x8004) == 2) {
+        goto(Route119_WeatherInstitute_1F_EventScript_StudyingRain)
+    }
     msgbox(Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather, MSGBOX_DEFAULT)
     release
     end

@@ -4,7 +4,9 @@ mapscripts Route113_GlassWorkshop_MapScripts {
 
 script Route113_GlassWorkshop_OnTransition {
     setflag(FLAG_LANDMARK_GLASS_WORKSHOP)
-    if (var(VAR_GLASS_WORKSHOP_STATE) == 1) call(Route113_GlassWorkshop_EventScript_ReenterWorkshopAfterSootSack)
+    if (var(VAR_GLASS_WORKSHOP_STATE) == 1) {
+        call(Route113_GlassWorkshop_EventScript_ReenterWorkshopAfterSootSack)
+    }
     end
 }
 
@@ -16,12 +18,20 @@ script Route113_GlassWorkshop_EventScript_ReenterWorkshopAfterSootSack {
 script Route113_GlassWorkshop_EventScript_GlassWorker {
     lock
     faceplayer
-    if (var(VAR_GLASS_WORKSHOP_STATE) >= 10) goto(Route113_GlassWorkshop_EventScript_GiveItemAfterNoRoom)
-    if (var(VAR_GLASS_WORKSHOP_STATE) == 2) goto(Route113_GlassWorkshop_EventScript_CheckCollectedAsh)
-    if (var(VAR_GLASS_WORKSHOP_STATE) == 1) goto(Route113_GlassWorkshop_EventScript_ExplainSootSack)
+    if (var(VAR_GLASS_WORKSHOP_STATE) >= 10) {
+        goto(Route113_GlassWorkshop_EventScript_GiveItemAfterNoRoom)
+    }
+    if (var(VAR_GLASS_WORKSHOP_STATE) == 2) {
+        goto(Route113_GlassWorkshop_EventScript_CheckCollectedAsh)
+    }
+    if (var(VAR_GLASS_WORKSHOP_STATE) == 1) {
+        goto(Route113_GlassWorkshop_EventScript_ExplainSootSack)
+    }
     msgbox(Route113_GlassWorkshop_Text_GoCollectAshWithThis, MSGBOX_DEFAULT)
     giveitem(ITEM_SOOT_SACK)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setvar(VAR_GLASS_WORKSHOP_STATE, 1)
     msgbox(Route113_GlassWorkshop_Text_ExplainSootSack, MSGBOX_DEFAULT)
     release
@@ -36,9 +46,13 @@ script Route113_GlassWorkshop_EventScript_ExplainSootSack {
 
 script Route113_GlassWorkshop_EventScript_CheckCollectedAsh {
     checkitem(ITEM_SOOT_SACK)
-    if (var(VAR_RESULT) == FALSE) goto(Route113_GlassWorkshop_EventScript_SootSackNotInBag)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route113_GlassWorkshop_EventScript_SootSackNotInBag)
+    }
     msgbox(Route113_GlassWorkshop_Text_LetsSeeCollectedAshes, MSGBOX_DEFAULT)
-    if (var(VAR_ASH_GATHER_COUNT) < LOWEST_ASH_PRICE) goto(Route113_GlassWorkshop_EventScript_NotEnoughAsh)
+    if (var(VAR_ASH_GATHER_COUNT) < LOWEST_ASH_PRICE) {
+        goto(Route113_GlassWorkshop_EventScript_NotEnoughAsh)
+    }
     message(Route113_GlassWorkshop_Text_WhichGlassItemWoudYouLike)
     waitmessage()
     goto(Route113_GlassWorkshop_EventScript_ChooseGlassItem)
@@ -73,9 +87,13 @@ script Route113_GlassWorkshop_EventScript_BlueFlute {
     setvar(VAR_0x8008, ITEM_BLUE_FLUTE)
     bufferitemname(STR_VAR_1, VAR_0x8008)
     setvar(VAR_0x800A, BLUE_FLUTE_PRICE)
-    if (var(VAR_ASH_GATHER_COUNT) < BLUE_FLUTE_PRICE) goto(Route113_GlassWorkshop_EventScript_NotEnoughAshForItem)
+    if (var(VAR_ASH_GATHER_COUNT) < BLUE_FLUTE_PRICE) {
+        goto(Route113_GlassWorkshop_EventScript_NotEnoughAshForItem)
+    }
     msgbox(Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route113_GlassWorkshop_EventScript_ChooseDifferentItem)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route113_GlassWorkshop_EventScript_ChooseDifferentItem)
+    }
     setvar(VAR_GLASS_WORKSHOP_STATE, 10)
     subvar(VAR_ASH_GATHER_COUNT, BLUE_FLUTE_PRICE)
     goto(Route113_GlassWorkshop_EventScript_MakeGlassItem)
@@ -86,9 +104,13 @@ script Route113_GlassWorkshop_EventScript_YellowFlute {
     setvar(VAR_0x8008, ITEM_YELLOW_FLUTE)
     bufferitemname(STR_VAR_1, VAR_0x8008)
     setvar(VAR_0x800A, YELLOW_FLUTE_PRICE)
-    if (var(VAR_ASH_GATHER_COUNT) < YELLOW_FLUTE_PRICE) goto(Route113_GlassWorkshop_EventScript_NotEnoughAshForItem)
+    if (var(VAR_ASH_GATHER_COUNT) < YELLOW_FLUTE_PRICE) {
+        goto(Route113_GlassWorkshop_EventScript_NotEnoughAshForItem)
+    }
     msgbox(Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route113_GlassWorkshop_EventScript_ChooseDifferentItem)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route113_GlassWorkshop_EventScript_ChooseDifferentItem)
+    }
     setvar(VAR_GLASS_WORKSHOP_STATE, 11)
     subvar(VAR_ASH_GATHER_COUNT, YELLOW_FLUTE_PRICE)
     goto(Route113_GlassWorkshop_EventScript_MakeGlassItem)
@@ -99,9 +121,13 @@ script Route113_GlassWorkshop_EventScript_RedFlute {
     setvar(VAR_0x8008, ITEM_RED_FLUTE)
     bufferitemname(STR_VAR_1, VAR_0x8008)
     setvar(VAR_0x800A, RED_FLUTE_PRICE)
-    if (var(VAR_ASH_GATHER_COUNT) < RED_FLUTE_PRICE) goto(Route113_GlassWorkshop_EventScript_NotEnoughAshForItem)
+    if (var(VAR_ASH_GATHER_COUNT) < RED_FLUTE_PRICE) {
+        goto(Route113_GlassWorkshop_EventScript_NotEnoughAshForItem)
+    }
     msgbox(Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route113_GlassWorkshop_EventScript_ChooseDifferentItem)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route113_GlassWorkshop_EventScript_ChooseDifferentItem)
+    }
     setvar(VAR_GLASS_WORKSHOP_STATE, 12)
     subvar(VAR_ASH_GATHER_COUNT, RED_FLUTE_PRICE)
     goto(Route113_GlassWorkshop_EventScript_MakeGlassItem)
@@ -112,9 +138,13 @@ script Route113_GlassWorkshop_EventScript_WhiteFlute {
     setvar(VAR_0x8008, ITEM_WHITE_FLUTE)
     bufferitemname(STR_VAR_1, VAR_0x8008)
     setvar(VAR_0x800A, WHITE_FLUTE_PRICE)
-    if (var(VAR_ASH_GATHER_COUNT) < WHITE_FLUTE_PRICE) goto(Route113_GlassWorkshop_EventScript_NotEnoughAshForItem)
+    if (var(VAR_ASH_GATHER_COUNT) < WHITE_FLUTE_PRICE) {
+        goto(Route113_GlassWorkshop_EventScript_NotEnoughAshForItem)
+    }
     msgbox(Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route113_GlassWorkshop_EventScript_ChooseDifferentItem)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route113_GlassWorkshop_EventScript_ChooseDifferentItem)
+    }
     setvar(VAR_GLASS_WORKSHOP_STATE, 13)
     subvar(VAR_ASH_GATHER_COUNT, WHITE_FLUTE_PRICE)
     goto(Route113_GlassWorkshop_EventScript_MakeGlassItem)
@@ -125,9 +155,13 @@ script Route113_GlassWorkshop_EventScript_BlackFlute {
     setvar(VAR_0x8008, ITEM_BLACK_FLUTE)
     bufferitemname(STR_VAR_1, VAR_0x8008)
     setvar(VAR_0x800A, BLACK_FLUTE_PRICE)
-    if (var(VAR_ASH_GATHER_COUNT) < BLACK_FLUTE_PRICE) goto(Route113_GlassWorkshop_EventScript_NotEnoughAshForItem)
+    if (var(VAR_ASH_GATHER_COUNT) < BLACK_FLUTE_PRICE) {
+        goto(Route113_GlassWorkshop_EventScript_NotEnoughAshForItem)
+    }
     msgbox(Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route113_GlassWorkshop_EventScript_ChooseDifferentItem)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route113_GlassWorkshop_EventScript_ChooseDifferentItem)
+    }
     setvar(VAR_GLASS_WORKSHOP_STATE, 14)
     subvar(VAR_ASH_GATHER_COUNT, BLACK_FLUTE_PRICE)
     goto(Route113_GlassWorkshop_EventScript_MakeGlassItem)
@@ -139,9 +173,13 @@ script Route113_GlassWorkshop_EventScript_PrettyChair {
     setvar(VAR_0x8008, DECOR_PRETTY_CHAIR)
     bufferdecorationname(STR_VAR_1, VAR_0x8008)
     setvar(VAR_0x800A, PRETTY_CHAIR_PRICE)
-    if (var(VAR_ASH_GATHER_COUNT) < PRETTY_CHAIR_PRICE) goto(Route113_GlassWorkshop_EventScript_NotEnoughAshForItem)
+    if (var(VAR_ASH_GATHER_COUNT) < PRETTY_CHAIR_PRICE) {
+        goto(Route113_GlassWorkshop_EventScript_NotEnoughAshForItem)
+    }
     msgbox(Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route113_GlassWorkshop_EventScript_ChooseDifferentItem)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route113_GlassWorkshop_EventScript_ChooseDifferentItem)
+    }
     setvar(VAR_GLASS_WORKSHOP_STATE, 15)
     subvar(VAR_ASH_GATHER_COUNT, PRETTY_CHAIR_PRICE)
     goto(Route113_GlassWorkshop_EventScript_MakeGlassItem)
@@ -153,9 +191,13 @@ script Route113_GlassWorkshop_EventScript_PrettyDesk {
     setvar(VAR_0x8008, DECOR_PRETTY_DESK)
     bufferdecorationname(STR_VAR_1, VAR_0x8008)
     setvar(VAR_0x800A, PRETTY_DESK_PRICE)
-    if (var(VAR_ASH_GATHER_COUNT) < PRETTY_DESK_PRICE) goto(Route113_GlassWorkshop_EventScript_NotEnoughAshForItem)
+    if (var(VAR_ASH_GATHER_COUNT) < PRETTY_DESK_PRICE) {
+        goto(Route113_GlassWorkshop_EventScript_NotEnoughAshForItem)
+    }
     msgbox(Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route113_GlassWorkshop_EventScript_ChooseDifferentItem)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route113_GlassWorkshop_EventScript_ChooseDifferentItem)
+    }
     setvar(VAR_GLASS_WORKSHOP_STATE, 16)
     subvar(VAR_ASH_GATHER_COUNT, PRETTY_DESK_PRICE)
     goto(Route113_GlassWorkshop_EventScript_MakeGlassItem)
@@ -201,8 +243,12 @@ script Route113_GlassWorkshop_EventScript_MakeGlassItem {
     delay(30)
     fadescreen(FADE_FROM_BLACK)
     msgbox(Route113_GlassWorkshop_Text_IveFinishedGlassItem, MSGBOX_DEFAULT)
-    if (var(VAR_0x8009) == 0) call(Route113_GlassWorkshop_EventScript_GiveGlassFlute)
-    if (var(VAR_0x8009) == 1) call(Route113_GlassWorkshop_EventScript_GiveGlassDecor)
+    if (var(VAR_0x8009) == 0) {
+        call(Route113_GlassWorkshop_EventScript_GiveGlassFlute)
+    }
+    if (var(VAR_0x8009) == 1) {
+        call(Route113_GlassWorkshop_EventScript_GiveGlassDecor)
+    }
     setvar(VAR_GLASS_WORKSHOP_STATE, 2)
     release
     end
@@ -210,13 +256,17 @@ script Route113_GlassWorkshop_EventScript_MakeGlassItem {
 
 script Route113_GlassWorkshop_EventScript_GiveGlassFlute {
     giveitem(VAR_0x8008)
-    if (var(VAR_RESULT) == FALSE) goto(Route113_GlassWorkshop_EventScript_NoRoomForFlute)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route113_GlassWorkshop_EventScript_NoRoomForFlute)
+    }
     return
 }
 
 script Route113_GlassWorkshop_EventScript_GiveGlassDecor {
     givedecoration(VAR_0x8008)
-    if (var(VAR_RESULT) == FALSE) goto(Route113_GlassWorkshop_EventScript_NoRoomForDecor)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route113_GlassWorkshop_EventScript_NoRoomForDecor)
+    }
     return
 }
 
@@ -304,8 +354,12 @@ script Route113_GlassWorkshop_EventScript_GivePrettyDesk {
 
 script Route113_GlassWorkshop_EventScript_TryGiveItemAgain {
     msgbox(Route113_GlassWorkshop_Text_IveFinishedGlassItem, MSGBOX_DEFAULT)
-    if (var(VAR_0x8009) == 0) call(Route113_GlassWorkshop_EventScript_GiveGlassFlute)
-    if (var(VAR_0x8009) == 1) call(Route113_GlassWorkshop_EventScript_GiveGlassDecor)
+    if (var(VAR_0x8009) == 0) {
+        call(Route113_GlassWorkshop_EventScript_GiveGlassFlute)
+    }
+    if (var(VAR_0x8009) == 1) {
+        call(Route113_GlassWorkshop_EventScript_GiveGlassDecor)
+    }
     setvar(VAR_GLASS_WORKSHOP_STATE, 2)
     release
     end

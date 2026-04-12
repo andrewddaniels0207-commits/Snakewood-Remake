@@ -5,8 +5,12 @@ script RustboroCity_Mart_EventScript_Clerk {
     faceplayer
     message(gText_HowMayIServeYou)
     waitmessage()
-    if (!flag(FLAG_MET_DEVON_EMPLOYEE)) goto(RustboroCity_Mart_EventScript_PokemartBasic)
-    if (flag(FLAG_MET_DEVON_EMPLOYEE)) goto(RustboroCity_Mart_EventScript_PokemartExpanded)
+    if (!flag(FLAG_MET_DEVON_EMPLOYEE)) {
+        goto(RustboroCity_Mart_EventScript_PokemartBasic)
+    }
+    if (flag(FLAG_MET_DEVON_EMPLOYEE)) {
+        goto(RustboroCity_Mart_EventScript_PokemartExpanded)
+    }
     end
 }
 

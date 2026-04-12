@@ -9,14 +9,30 @@ script AbandonedShip_HiddenFloorCorridors_OnResume {
 }
 
 script AbandonedShip_HiddenFloorCorridors_OnLoad {
-    if (!flag(FLAG_USED_ROOM_1_KEY)) call(AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom1)
-    if (!flag(FLAG_USED_ROOM_2_KEY)) call(AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom2)
-    if (!flag(FLAG_USED_ROOM_4_KEY)) call(AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom4)
-    if (!flag(FLAG_USED_ROOM_6_KEY)) call(AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom6)
-    if (flag(FLAG_USED_ROOM_1_KEY)) call(AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom1)
-    if (flag(FLAG_USED_ROOM_2_KEY)) call(AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom2)
-    if (flag(FLAG_USED_ROOM_4_KEY)) call(AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom4)
-    if (flag(FLAG_USED_ROOM_6_KEY)) call(AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom6)
+    if (!flag(FLAG_USED_ROOM_1_KEY)) {
+        call(AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom1)
+    }
+    if (!flag(FLAG_USED_ROOM_2_KEY)) {
+        call(AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom2)
+    }
+    if (!flag(FLAG_USED_ROOM_4_KEY)) {
+        call(AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom4)
+    }
+    if (!flag(FLAG_USED_ROOM_6_KEY)) {
+        call(AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom6)
+    }
+    if (flag(FLAG_USED_ROOM_1_KEY)) {
+        call(AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom1)
+    }
+    if (flag(FLAG_USED_ROOM_2_KEY)) {
+        call(AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom2)
+    }
+    if (flag(FLAG_USED_ROOM_4_KEY)) {
+        call(AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom4)
+    }
+    if (flag(FLAG_USED_ROOM_6_KEY)) {
+        call(AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom6)
+    }
     end
 }
 
@@ -62,9 +78,13 @@ script AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom6 {
 
 script AbandonedShip_HiddenFloorCorridors_EventScript_Room1Door {
     lockall
-    if (flag(FLAG_USED_ROOM_1_KEY)) goto(AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen)
+    if (flag(FLAG_USED_ROOM_1_KEY)) {
+        goto(AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen)
+    }
     checkitem(ITEM_KEY_TO_ROOM_1)
-    if (var(VAR_RESULT) == FALSE) goto(AbandonedShip_HiddenFloorCorridors_EventScript_Rm1IsLocked)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(AbandonedShip_HiddenFloorCorridors_EventScript_Rm1IsLocked)
+    }
     msgbox(AbandonedShip_HiddenFloorCorridors_Text_InsertedKey, MSGBOX_DEFAULT)
     playse(SE_PIN)
     removeitem(ITEM_KEY_TO_ROOM_1)
@@ -77,9 +97,13 @@ script AbandonedShip_HiddenFloorCorridors_EventScript_Room1Door {
 
 script AbandonedShip_HiddenFloorCorridors_EventScript_Room2Door {
     lockall
-    if (flag(FLAG_USED_ROOM_2_KEY)) goto(AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen)
+    if (flag(FLAG_USED_ROOM_2_KEY)) {
+        goto(AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen)
+    }
     checkitem(ITEM_KEY_TO_ROOM_2)
-    if (var(VAR_RESULT) == FALSE) goto(AbandonedShip_HiddenFloorCorridors_EventScript_Rm2IsLocked)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(AbandonedShip_HiddenFloorCorridors_EventScript_Rm2IsLocked)
+    }
     msgbox(AbandonedShip_HiddenFloorCorridors_Text_InsertedKey, MSGBOX_DEFAULT)
     playse(SE_PIN)
     removeitem(ITEM_KEY_TO_ROOM_2)
@@ -92,9 +116,13 @@ script AbandonedShip_HiddenFloorCorridors_EventScript_Room2Door {
 
 script AbandonedShip_HiddenFloorCorridors_EventScript_Room4Door {
     lockall
-    if (flag(FLAG_USED_ROOM_4_KEY)) goto(AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen)
+    if (flag(FLAG_USED_ROOM_4_KEY)) {
+        goto(AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen)
+    }
     checkitem(ITEM_KEY_TO_ROOM_4)
-    if (var(VAR_RESULT) == FALSE) goto(AbandonedShip_HiddenFloorCorridors_EventScript_Rm4IsLocked)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(AbandonedShip_HiddenFloorCorridors_EventScript_Rm4IsLocked)
+    }
     msgbox(AbandonedShip_HiddenFloorCorridors_Text_InsertedKey, MSGBOX_DEFAULT)
     playse(SE_PIN)
     removeitem(ITEM_KEY_TO_ROOM_4)
@@ -107,9 +135,13 @@ script AbandonedShip_HiddenFloorCorridors_EventScript_Room4Door {
 
 script AbandonedShip_HiddenFloorCorridors_EventScript_Room6Door {
     lockall
-    if (flag(FLAG_USED_ROOM_6_KEY)) goto(AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen)
+    if (flag(FLAG_USED_ROOM_6_KEY)) {
+        goto(AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen)
+    }
     checkitem(ITEM_KEY_TO_ROOM_6)
-    if (var(VAR_RESULT) == FALSE) goto(AbandonedShip_HiddenFloorCorridors_EventScript_Rm6IsLocked)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(AbandonedShip_HiddenFloorCorridors_EventScript_Rm6IsLocked)
+    }
     msgbox(AbandonedShip_HiddenFloorCorridors_Text_InsertedKey, MSGBOX_DEFAULT)
     playse(SE_PIN)
     removeitem(ITEM_KEY_TO_ROOM_6)

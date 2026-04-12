@@ -3,8 +3,12 @@ mapscripts Route110_SeasideCyclingRoadNorthEntrance_MapScripts {
 }
 
 script Route110_SeasideCyclingRoadNorthEntrance_OnTransition {
-    if (var(VAR_CYCLING_CHALLENGE_STATE) == 3) call(Route110_SeasideCyclingRoadNorthEntrance_EventScript_RestartChallenge)
-    if (var(VAR_CYCLING_CHALLENGE_STATE) == 2) call(Route110_SeasideCyclingRoadNorthEntrance_EventScript_RestartChallenge)
+    if (var(VAR_CYCLING_CHALLENGE_STATE) == 3) {
+        call(Route110_SeasideCyclingRoadNorthEntrance_EventScript_RestartChallenge)
+    }
+    if (var(VAR_CYCLING_CHALLENGE_STATE) == 2) {
+        call(Route110_SeasideCyclingRoadNorthEntrance_EventScript_RestartChallenge)
+    }
     end
 }
 
@@ -24,8 +28,12 @@ script Route110_SeasideCyclingRoadNorthEntrance_EventScript_Clerk {
 script Route110_SeasideCyclingRoadNorthEntrance_EventScript_BikeCheck {
     lockall
     specialvar(VAR_RESULT, GetPlayerAvatarBike)
-    if (var(VAR_RESULT) == 2) call(Route110_SeasideCyclingRoadNorthEntrance_EventScript_OnMachBike)
-    if (var(VAR_RESULT) == 0) goto(Route110_SeasideCyclingRoadNorthEntrance_EventScript_NoBike)
+    if (var(VAR_RESULT) == 2) {
+        call(Route110_SeasideCyclingRoadNorthEntrance_EventScript_OnMachBike)
+    }
+    if (var(VAR_RESULT) == 0) {
+        goto(Route110_SeasideCyclingRoadNorthEntrance_EventScript_NoBike)
+    }
     setflag(FLAG_SYS_CYCLING_ROAD)
     setvar(VAR_TEMP_1, 1)
     releaseall

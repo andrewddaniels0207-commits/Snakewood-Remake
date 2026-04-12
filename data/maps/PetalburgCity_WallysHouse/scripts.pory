@@ -32,9 +32,15 @@ script PetalburgCity_WallysHouse_EventScript_GiveHMSurf {
 script PetalburgCity_WallysHouse_EventScript_WallysDad {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_WALLY_VICTORY_ROAD)) goto(PetalburgCity_WallysHouse_EventScript_DefeatedWallyInVictoryRoad)
-    if (flag(FLAG_RECEIVED_HM_SURF)) goto(PetalburgCity_WallysHouse_EventScript_ReceievedHMSurf)
-    if (flag(FLAG_THANKED_FOR_PLAYING_WITH_WALLY)) goto(PetalburgCity_WallysHouse_EventScript_PlayedWithWally)
+    if (flag(FLAG_DEFEATED_WALLY_VICTORY_ROAD)) {
+        goto(PetalburgCity_WallysHouse_EventScript_DefeatedWallyInVictoryRoad)
+    }
+    if (flag(FLAG_RECEIVED_HM_SURF)) {
+        goto(PetalburgCity_WallysHouse_EventScript_ReceievedHMSurf)
+    }
+    if (flag(FLAG_THANKED_FOR_PLAYING_WITH_WALLY)) {
+        goto(PetalburgCity_WallysHouse_EventScript_PlayedWithWally)
+    }
     msgbox(PetalburgCity_WallysHouse_Text_ThanksForPlayingWithWally, MSGBOX_DEFAULT)
     setflag(FLAG_THANKED_FOR_PLAYING_WITH_WALLY)
     release
@@ -62,7 +68,9 @@ script PetalburgCity_WallysHouse_EventScript_PlayedWithWally {
 script PetalburgCity_WallysHouse_EventScript_WallysMom {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_HM_SURF)) goto(PetalburgCity_WallysHouse_EventScript_ReceivedHMSurf)
+    if (flag(FLAG_RECEIVED_HM_SURF)) {
+        goto(PetalburgCity_WallysHouse_EventScript_ReceivedHMSurf)
+    }
     msgbox(PetalburgCity_WallysHouse_Text_WallyWasReallyHappy, MSGBOX_DEFAULT)
     release
     end

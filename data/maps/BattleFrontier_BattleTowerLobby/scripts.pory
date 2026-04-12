@@ -19,8 +19,12 @@ script BattleFrontier_BattleTowerLobby_OnResume {
 script BattleFrontier_BattleTowerLobby_OnTransition {
     call(BattleFrontier_BattleTowerLobby_EventScript_ShowOrHideReporter)
     apprentice_shouldcheckgone()
-    if (var(VAR_0x8004) == FALSE) goto(BattleFrontier_BattleTowerLobby_EventScript_ShowApprentice)
-    if (flag(FLAG_DAILY_APPRENTICE_LEAVES)) goto(BattleFrontier_BattleTowerLobby_EventScript_HideApprentice)
+    if (var(VAR_0x8004) == FALSE) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_ShowApprentice)
+    }
+    if (flag(FLAG_DAILY_APPRENTICE_LEAVES)) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_HideApprentice)
+    }
 }
 
 script BattleFrontier_BattleTowerLobby_EventScript_ShowApprentice {
@@ -72,7 +76,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_WonChallenge {
     lock
     faceplayer
     frontier_isbrain()
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleTowerLobby_EventScript_DefeatedMaiden)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_DefeatedMaiden)
+    }
     message(BattleFrontier_BattleTowerLobby_Text_CongratsBeatenSeven)
     waitmessage()
     goto(BattleFrontier_BattleTowerLobby_EventScript_GiveRibbons)
@@ -84,7 +90,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_DefeatedMaiden {
 
 script BattleFrontier_BattleTowerLobby_EventScript_GiveRibbons {
     tower_giveribbons()
-    if (var(VAR_RESULT) == FALSE) goto(BattleFrontier_BattleTowerLobby_EventScript_GiveBattlePoints)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_GiveBattlePoints)
+    }
     message(BattleFrontier_BattleTowerLobby_Text_HereAreSomeRibbons)
     waitmessage()
     playfanfare(MUS_OBTAIN_ITEM)
@@ -98,7 +106,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_GiveBattlePoints {
     msgbox(BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS)
     call(BattleFrontier_BattleTowerLobby_EventScript_AskSaveBattle)
     tower_get(TOWER_DATA_WIN_STREAK)
-    if (var(VAR_RESULT) != 49) goto(BattleFrontier_BattleTowerLobby_EventScript_LookForwardToChallenge)
+    if (var(VAR_RESULT) != 49) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_LookForwardToChallenge)
+    }
     msgbox(BattleFrontier_BattleTowerLobby_Text_AboutToFace50thTrainer, MSGBOX_DEFAULT)
 }
 
@@ -112,10 +122,16 @@ script BattleFrontier_BattleTowerLobby_EventScript_LookForwardToChallenge {
 }
 
 script BattleFrontier_BattleTowerLobby_EventScript_LostChallenge {
-    if (var(VAR_FRONTIER_BATTLE_MODE) != FRONTIER_MODE_MULTIS) goto(BattleFrontier_BattleTowerLobby_EventScript_CancelWinStreak)
-    if (flag(FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER)) goto(BattleFrontier_BattleTowerLobby_EventScript_CancelWinStreak)
+    if (var(VAR_FRONTIER_BATTLE_MODE) != FRONTIER_MODE_MULTIS) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_CancelWinStreak)
+    }
+    if (flag(FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER)) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_CancelWinStreak)
+    }
     tower_get(TOWER_DATA_WIN_STREAK)
-    if (var(VAR_RESULT) != 0) goto(BattleFrontier_BattleTowerLobby_EventScript_LostThanksForPlaying)
+    if (var(VAR_RESULT) != 0) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_LostThanksForPlaying)
+    }
 }
 
 script BattleFrontier_BattleTowerLobby_EventScript_CancelWinStreak {
@@ -146,7 +162,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_AskSaveBattle {
     playse(SE_SAVE)
     waitse()
     call(BattleFrontier_EventScript_GetCantRecordBattle)
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleTowerLobby_EventScript_EndSaveBattle)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_EndSaveBattle)
+    }
     message(BattleFrontier_BattleTowerLobby_Text_RecordLastMatch)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
@@ -158,7 +176,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_AskSaveBattle {
 
 script BattleFrontier_EventScript_SaveBattle {
     frontier_savebattle()
-    if (var(VAR_RESULT) == FALSE) goto(BattleFrontier_EventScript_BattleSaveFailed)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(BattleFrontier_EventScript_BattleSaveFailed)
+    }
     playse(SE_SAVE)
     msgbox(BattleFrontier_BattleTowerLobby_Text_BattleRecordedOnPass, MSGBOX_DEFAULT)
     goto(BattleFrontier_BattleTowerLobby_EventScript_EndSaveBattle)
@@ -180,7 +200,9 @@ script BattleFrontier_EventScript_GetCantRecordBattle {
 script BattleFrontier_BattleTowerLobby_EventScript_ResumeChallenge {
     lock
     faceplayer
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattleTowerLobby_EventScript_SetBravoTrainerOn)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_SetBravoTrainerOn)
+    }
     message(BattleFrontier_BattleTowerLobby_Text_WeveBeenWaitingForYou)
     waitmessage()
     message(BattleFrontier_BattleTowerLobby_Text_ProgressWillBeSaved)
@@ -226,7 +248,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_TryEnterSinglesChallenge {
     case(FRONTIER_LVL_TENT, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge)
     case(MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge)
     frontier_checkineligible()
-    if (var(VAR_0x8004) == TRUE) goto(BattleFrontier_BattleTowerLobby_EventScript_NotEnoughValidMons)
+    if (var(VAR_0x8004) == TRUE) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_NotEnoughValidMons)
+    }
     frontier_set(FRONTIER_DATA_LVL_MODE, VAR_RESULT)
     msgbox(BattleFrontier_BattleTowerLobby_Text_SelectThreeMons, MSGBOX_DEFAULT)
     fadescreen(FADE_TO_BLACK)
@@ -236,7 +260,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_TryEnterSinglesChallenge {
     setvar(VAR_0x8005, FRONTIER_PARTY_SIZE)
     special(ChoosePartyForBattleFrontier)
     waitstate
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleTowerLobby_EventScript_LoadPartyCancelChallenge)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_LoadPartyCancelChallenge)
+    }
     msgbox(BattleFrontier_BattleTowerLobby_Text_OkayToSaveBeforeEntering, MSGBOX_YESNO)
     switch(VAR_RESULT)
     case(NO, BattleFrontier_BattleTowerLobby_EventScript_LoadPartyCancelChallenge)
@@ -255,7 +281,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_SaveBeforeSinglesChallenge {
     delay(2)
     call(Common_EventScript_SaveGame)
     setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleTowerLobby_EventScript_CancelChallengeSaveFailed)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_CancelChallengeSaveFailed)
+    }
     incrementgamestat(GAME_STAT_ENTERED_BATTLE_TOWER)
     setvar(VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, TRUE)
     goto(BattleFrontier_BattleTowerLobby_EventScript_EnterElevator)
@@ -296,7 +324,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_TryEnterDoublesChallenge {
     case(FRONTIER_LVL_TENT, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge)
     case(MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge)
     frontier_checkineligible()
-    if (var(VAR_0x8004) == TRUE) goto(BattleFrontier_BattleTowerLobby_EventScript_NotEnoughValidMons)
+    if (var(VAR_0x8004) == TRUE) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_NotEnoughValidMons)
+    }
     frontier_set(FRONTIER_DATA_LVL_MODE, VAR_RESULT)
     msgbox(BattleFrontier_BattleTowerLobby_Text_PleaseSelectFourMons, MSGBOX_DEFAULT)
     fadescreen(FADE_TO_BLACK)
@@ -306,7 +336,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_TryEnterDoublesChallenge {
     setvar(VAR_0x8005, FRONTIER_DOUBLES_PARTY_SIZE)
     special(ChoosePartyForBattleFrontier)
     waitstate
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleTowerLobby_EventScript_LoadPartyCancelChallenge)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_LoadPartyCancelChallenge)
+    }
     msgbox(BattleFrontier_BattleTowerLobby_Text_OkayToSaveBeforeEntering, MSGBOX_YESNO)
     switch(VAR_RESULT)
     case(NO, BattleFrontier_BattleTowerLobby_EventScript_LoadPartyCancelChallenge)
@@ -325,7 +357,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_SaveBeforeDoublesChallenge {
     delay(2)
     call(Common_EventScript_SaveGame)
     setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleTowerLobby_EventScript_CancelChallengeSaveFailed)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_CancelChallengeSaveFailed)
+    }
     incrementgamestat(GAME_STAT_ENTERED_BATTLE_TOWER)
     setvar(VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, FALSE)
     goto(BattleFrontier_BattleTowerLobby_EventScript_EnterElevator)
@@ -367,7 +401,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_TryEnterMultisChallenge {
     case(FRONTIER_LVL_TENT, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge)
     case(MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge)
     frontier_checkineligible()
-    if (var(VAR_0x8004) == TRUE) goto(BattleFrontier_BattleTowerLobby_EventScript_NotEnoughValidMons)
+    if (var(VAR_0x8004) == TRUE) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_NotEnoughValidMons)
+    }
     frontier_set(FRONTIER_DATA_LVL_MODE, VAR_RESULT)
     msgbox(BattleFrontier_BattleTowerLobby_Text_PleaseSelectTwoMons, MSGBOX_DEFAULT)
     fadescreen(FADE_TO_BLACK)
@@ -377,7 +413,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_TryEnterMultisChallenge {
     setvar(VAR_0x8005, FRONTIER_MULTI_PARTY_SIZE)
     special(ChoosePartyForBattleFrontier)
     waitstate
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleTowerLobby_EventScript_LoadPartyCancelChallenge)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_LoadPartyCancelChallenge)
+    }
     msgbox(BattleFrontier_BattleTowerLobby_Text_OkayToSaveBeforeEntering, MSGBOX_YESNO)
     switch(VAR_RESULT)
     case(NO, BattleFrontier_BattleTowerLobby_EventScript_LoadPartyCancelChallenge)
@@ -396,7 +434,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_SaveBeforeMultisChallenge {
     delay(2)
     call(Common_EventScript_SaveGame)
     setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleTowerLobby_EventScript_CancelChallengeSaveFailed)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_CancelChallengeSaveFailed)
+    }
     incrementgamestat(GAME_STAT_ENTERED_BATTLE_TOWER)
     setvar(VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, FALSE)
     goto(BattleFrontier_BattleTowerLobby_EventScript_EnterElevator)
@@ -437,7 +477,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_TryEnterLinkMultisChallenge {
     case(FRONTIER_LVL_TENT, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge)
     case(MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge)
     frontier_checkineligible()
-    if (var(VAR_0x8004) == TRUE) goto(BattleFrontier_BattleTowerLobby_EventScript_NotEnoughValidMons)
+    if (var(VAR_0x8004) == TRUE) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_NotEnoughValidMons)
+    }
     frontier_set(FRONTIER_DATA_LVL_MODE, VAR_RESULT)
     msgbox(BattleFrontier_BattleTowerLobby_Text_PleaseSelectTwoMons2, MSGBOX_DEFAULT)
     fadescreen(FADE_TO_BLACK)
@@ -447,7 +489,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_TryEnterLinkMultisChallenge {
     setvar(VAR_0x8005, FRONTIER_MULTI_PARTY_SIZE)
     special(ChoosePartyForBattleFrontier)
     waitstate
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleTowerLobby_EventScript_LoadPartyCancelChallenge)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_LoadPartyCancelChallenge)
+    }
     msgbox(BattleFrontier_BattleTowerLobby_Text_OkayToSaveBeforeEntering, MSGBOX_YESNO)
     switch(VAR_RESULT)
     case(NO, BattleFrontier_BattleTowerLobby_EventScript_LoadPartyCancelChallenge)
@@ -469,12 +513,16 @@ script BattleFrontier_BattleTowerLobby_EventScript_SaveBeforeLinkMultisChallenge
     #endif()
     call(Common_EventScript_SaveGame)
     setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleTowerLobby_EventScript_CancelChallengeSaveFailed)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_CancelChallengeSaveFailed)
+    }
     #ifndef(BUGFIX)
     incrementgamestat(GAME_STAT_ENTERED_BATTLE_TOWER)
     #endif()
     specialvar(VAR_RESULT, IsWirelessAdapterConnected)
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleTowerLobby_EventScript_TryWirelessLink)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_TryWirelessLink)
+    }
     goto(BattleFrontier_BattleTowerLobby_EventScript_TryCableLink)
     end
 }
@@ -532,8 +580,12 @@ script BattleFrontier_BattleTowerLobby_EventScript_FeelingsWontTell {
 }
 
 script BattleFrontier_BattleTowerLobby_EventScript_CheckFeelings {
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleTowerLobby_EventScript_CanceledEasyChat)
-    if (var(VAR_RESULT) == 1) goto(BattleFrontier_BattleTowerLobby_EventScript_SubmittedFeelings)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_CanceledEasyChat)
+    }
+    if (var(VAR_RESULT) == 1) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_SubmittedFeelings)
+    }
     end
 }
 
@@ -687,7 +739,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_EnterElevator {
 script BattleFrontier_BattleTowerLobby_EventScript_WaitForLinkOpponentLoad {
     tower_loadlinkopponents()
     delay(1)
-    if (var(VAR_RESULT) != 6) goto(BattleFrontier_BattleTowerLobby_EventScript_WaitForLinkOpponentLoad)
+    if (var(VAR_RESULT) != 6) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_WaitForLinkOpponentLoad)
+    }
     call(BattleFrontier_BattleTowerLobby_EventScript_ShowYouToBattleRoom)
     clearflag(FLAG_CANCEL_BATTLE_ROOM_CHALLENGE)
     warp(MAP_BATTLE_FRONTIER_BATTLE_TOWER_ELEVATOR, 1, 6)
@@ -698,7 +752,9 @@ script BattleFrontier_BattleTowerLobby_EventScript_WaitForLinkOpponentLoad {
 
 script BattleFrontier_BattleTowerLobby_EventScript_ShowYouToBattleRoom {
     call(BattleFrontier_BattleTowerLobby_EventScript_BufferModeText)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) goto(BattleFrontier_BattleTowerLobby_EventScript_ShowYouToLinkMultiBattleRoom)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_ShowYouToLinkMultiBattleRoom)
+    }
     msgbox(BattleFrontier_BattleTowerLobby_Text_ShowYouToBattleRoom, MSGBOX_DEFAULT)
     goto(BattleFrontier_BattleTowerLobby_EventScript_WalkToElevator)
 }
@@ -757,10 +813,18 @@ movement BattleFrontier_BattleTowerLobby_Movement_UnusedEnterElevator {
 }
 
 script BattleFrontier_BattleTowerLobby_EventScript_BufferModeText {
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattleTowerLobby_EventScript_BufferTextSingle)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattleTowerLobby_EventScript_BufferTextDouble)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS) call(BattleFrontier_BattleTowerLobby_EventScript_BufferTextMulti)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) call(BattleFrontier_BattleTowerLobby_EventScript_BufferTextLinkMulti)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_BufferTextSingle)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_BufferTextDouble)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_BufferTextMulti)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_BufferTextLinkMulti)
+    }
     return
 }
 
@@ -785,10 +849,18 @@ script BattleFrontier_BattleTowerLobby_EventScript_BufferTextLinkMulti {
 }
 
 script BattleFrontier_BattleTowerLobby_EventScript_SetAttendantTalkedTo {
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattleTowerLobby_EventScript_TalkedToSinglesAttendant)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattleTowerLobby_EventScript_TalkedToDoublesAttendant)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS) call(BattleFrontier_BattleTowerLobby_EventScript_TalkedToMultisAttendant)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) call(BattleFrontier_BattleTowerLobby_EventScript_TalkedToLinkMultisAttendant)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_TalkedToSinglesAttendant)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_TalkedToDoublesAttendant)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_TalkedToMultisAttendant)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_TalkedToLinkMultisAttendant)
+    }
     return
 }
 
@@ -813,10 +885,18 @@ script BattleFrontier_BattleTowerLobby_EventScript_TalkedToLinkMultisAttendant {
 }
 
 script BattleFrontier_BattleTowerLobby_EventScript_GetDoorXCoord {
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattleTowerLobby_EventScript_GetDoorXCoordSingles)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattleTowerLobby_EventScript_GetDoorXCoordDoubles)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS) call(BattleFrontier_BattleTowerLobby_EventScript_GetDoorXCoordMultis)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) call(BattleFrontier_BattleTowerLobby_EventScript_GetDoorXCoordLinkMultis)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_GetDoorXCoordSingles)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_GetDoorXCoordDoubles)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_GetDoorXCoordMultis)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_GetDoorXCoordLinkMultis)
+    }
     return
 }
 
@@ -841,10 +921,18 @@ script BattleFrontier_BattleTowerLobby_EventScript_GetDoorXCoordLinkMultis {
 }
 
 script BattleFrontier_BattleTowerLobby_EventScript_GetPartySize {
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattleTowerLobby_EventScript_GetSinglesPartySize)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattleTowerLobby_EventScript_GetDoublesPartySize)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS) call(BattleFrontier_BattleTowerLobby_EventScript_GetMultisPartySize)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) call(BattleFrontier_BattleTowerLobby_EventScript_GetLinkMultisPartySize)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_GetSinglesPartySize)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_GetDoublesPartySize)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_GetMultisPartySize)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_GetLinkMultisPartySize)
+    }
     return
 }
 
@@ -880,19 +968,35 @@ script BattleFrontier_BattleTowerLobby_EventScript_TryCableLink {
     setvar(VAR_0x8005, 0)
     special(TryBattleLinkup)
     waitstate
-    if (var(VAR_RESULT) == LINKUP_SUCCESS) goto(BattleFrontier_BattleTowerLobby_EventScript_CableLinkSuccessful)
-    if (var(VAR_RESULT) == LINKUP_SOMEONE_NOT_READY) goto(CableClub_EventScript_AbortLinkSomeoneNotReady)
-    if (var(VAR_RESULT) == LINKUP_DIFF_SELECTIONS) goto(BattleFrontier_BattleTowerLobby_EventScript_AbortLinkDifferentSelections)
-    if (var(VAR_RESULT) == LINKUP_WRONG_NUM_PLAYERS) goto(BattleFrontier_BattleTowerLobby_EventScript_AbortLinkIncorrectNumberOfPlayers)
-    if (var(VAR_RESULT) == LINKUP_FAILED) goto(BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge)
-    if (var(VAR_RESULT) == LINKUP_CONNECTION_ERROR) goto(CableClub_EventScript_AbortLinkConnectionError)
-    if (var(VAR_RESULT) == LINKUP_FAILED_BATTLE_TOWER) goto(BattleFrontier_BattleTowerLobby_EventScript_AbortLink)
+    if (var(VAR_RESULT) == LINKUP_SUCCESS) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_CableLinkSuccessful)
+    }
+    if (var(VAR_RESULT) == LINKUP_SOMEONE_NOT_READY) {
+        goto(CableClub_EventScript_AbortLinkSomeoneNotReady)
+    }
+    if (var(VAR_RESULT) == LINKUP_DIFF_SELECTIONS) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_AbortLinkDifferentSelections)
+    }
+    if (var(VAR_RESULT) == LINKUP_WRONG_NUM_PLAYERS) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_AbortLinkIncorrectNumberOfPlayers)
+    }
+    if (var(VAR_RESULT) == LINKUP_FAILED) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge)
+    }
+    if (var(VAR_RESULT) == LINKUP_CONNECTION_ERROR) {
+        goto(CableClub_EventScript_AbortLinkConnectionError)
+    }
+    if (var(VAR_RESULT) == LINKUP_FAILED_BATTLE_TOWER) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_AbortLink)
+    }
     end
 }
 
 script BattleFrontier_BattleTowerLobby_EventScript_AbortLinkDifferentSelections {
     special(CloseLink)
-    if (var(VAR_0x8005) == 3) goto(BattleFrontier_BattleTowerLobby_EventScript_FriendDifferentSelection)
+    if (var(VAR_0x8005) == 3) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_FriendDifferentSelection)
+    }
     msgbox(Text_PlayersMadeDifferentSelections, MSGBOX_DEFAULT)
     release
     end
@@ -915,9 +1019,15 @@ script BattleFrontier_BattleTowerLobby_EventScript_AbortLinkIncorrectNumberOfPla
 
 script BattleFrontier_BattleTowerLobby_EventScript_AbortLink {
     special(CloseLink)
-    if (var(VAR_0x8005) == 0) call(BattleFrontier_BattleTowerLobby_EventScript_FriendChoseDifferentLvlMode)
-    if (var(VAR_0x8005) == 1) call(BattleFrontier_BattleTowerLobby_EventScript_FriendAlsoSelectedMon)
-    if (var(VAR_0x8005) == 2) call(BattleFrontier_BattleTowerLobby_EventScript_FriendAlsoSelectedMons)
+    if (var(VAR_0x8005) == 0) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_FriendChoseDifferentLvlMode)
+    }
+    if (var(VAR_0x8005) == 1) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_FriendAlsoSelectedMon)
+    }
+    if (var(VAR_0x8005) == 2) {
+        call(BattleFrontier_BattleTowerLobby_EventScript_FriendAlsoSelectedMons)
+    }
     msgbox(BattleFrontier_BattleTowerLobby_Text_ChooseDifferentMonsMatchLvlMode, MSGBOX_DEFAULT)
     release
     end
@@ -979,20 +1089,36 @@ script BattleFrontier_BattleTowerLobby_EventScript_ChooseLeader {
 
 script BattleFrontier_BattleTowerLobby_EventScript_TryBecomeLeader {
     call(CableClub_EventScript_TryBecomeLinkLeader)
-    if (var(VAR_RESULT) == LINKUP_SUCCESS) goto(BattleFrontier_BattleTowerLobby_EventScript_WirelessLinkSuccessful)
-    if (var(VAR_RESULT) == LINKUP_FAILED) goto(BattleFrontier_BattleTowerLobby_EventScript_ChooseLeader)
-    if (var(VAR_RESULT) == LINKUP_RETRY_ROLE_ASSIGN) goto(BattleFrontier_BattleTowerLobby_EventScript_TryBecomeLeader)
-    if (var(VAR_RESULT) == LINKUP_FAILED_BATTLE_TOWER) goto(BattleFrontier_BattleTowerLobby_EventScript_AbortLink)
+    if (var(VAR_RESULT) == LINKUP_SUCCESS) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_WirelessLinkSuccessful)
+    }
+    if (var(VAR_RESULT) == LINKUP_FAILED) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_ChooseLeader)
+    }
+    if (var(VAR_RESULT) == LINKUP_RETRY_ROLE_ASSIGN) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_TryBecomeLeader)
+    }
+    if (var(VAR_RESULT) == LINKUP_FAILED_BATTLE_TOWER) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_AbortLink)
+    }
     release
     return
 }
 
 script BattleFrontier_BattleTowerLobby_EventScript_TryJoinGroup {
     call(CableClub_EventScript_TryJoinLinkGroup)
-    if (var(VAR_RESULT) == LINKUP_SUCCESS) goto(BattleFrontier_BattleTowerLobby_EventScript_WirelessLinkSuccessful)
-    if (var(VAR_RESULT) == LINKUP_FAILED) goto(BattleFrontier_BattleTowerLobby_EventScript_ChooseLeader)
-    if (var(VAR_RESULT) == LINKUP_RETRY_ROLE_ASSIGN) goto(BattleFrontier_BattleTowerLobby_EventScript_TryJoinGroup)
-    if (var(VAR_RESULT) == LINKUP_FAILED_BATTLE_TOWER) goto(BattleFrontier_BattleTowerLobby_EventScript_AbortLink)
+    if (var(VAR_RESULT) == LINKUP_SUCCESS) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_WirelessLinkSuccessful)
+    }
+    if (var(VAR_RESULT) == LINKUP_FAILED) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_ChooseLeader)
+    }
+    if (var(VAR_RESULT) == LINKUP_RETRY_ROLE_ASSIGN) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_TryJoinGroup)
+    }
+    if (var(VAR_RESULT) == LINKUP_FAILED_BATTLE_TOWER) {
+        goto(BattleFrontier_BattleTowerLobby_EventScript_AbortLink)
+    }
     release
     return
 }

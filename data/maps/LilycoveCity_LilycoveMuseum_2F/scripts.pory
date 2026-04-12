@@ -6,31 +6,41 @@ mapscripts LilycoveCity_LilycoveMuseum_2F_MapScripts {
 }
 
 script LilycoveCity_LilycoveMuseum_2F_OnLoad {
-    if (flag(FLAG_COOL_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_SetCoolPainting)
+    if (flag(FLAG_COOL_PAINTING_MADE)) {
+        goto(LilycoveCity_LilycoveMuseum_2F_EventScript_SetCoolPainting)
+    }
     goto(LilycoveCity_LilycoveMuseum_2F_EventScript_CheckBeautyPainting)
     end
 }
 
 script LilycoveCity_LilycoveMuseum_2F_EventScript_CheckBeautyPainting {
-    if (flag(FLAG_BEAUTY_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_SetBeautyPainting)
+    if (flag(FLAG_BEAUTY_PAINTING_MADE)) {
+        goto(LilycoveCity_LilycoveMuseum_2F_EventScript_SetBeautyPainting)
+    }
     goto(LilycoveCity_LilycoveMuseum_2F_EventScript_CheckCutePainting)
     end
 }
 
 script LilycoveCity_LilycoveMuseum_2F_EventScript_CheckCutePainting {
-    if (flag(FLAG_CUTE_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_SetCutePainting)
+    if (flag(FLAG_CUTE_PAINTING_MADE)) {
+        goto(LilycoveCity_LilycoveMuseum_2F_EventScript_SetCutePainting)
+    }
     goto(LilycoveCity_LilycoveMuseum_2F_EventScript_CheckSmartPainting)
     end
 }
 
 script LilycoveCity_LilycoveMuseum_2F_EventScript_CheckSmartPainting {
-    if (flag(FLAG_SMART_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_SetSmartPainting)
+    if (flag(FLAG_SMART_PAINTING_MADE)) {
+        goto(LilycoveCity_LilycoveMuseum_2F_EventScript_SetSmartPainting)
+    }
     goto(LilycoveCity_LilycoveMuseum_2F_EventScript_CheckToughPainting)
     end
 }
 
 script LilycoveCity_LilycoveMuseum_2F_EventScript_CheckToughPainting {
-    if (flag(FLAG_TOUGH_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_SetToughPainting)
+    if (flag(FLAG_TOUGH_PAINTING_MADE)) {
+        goto(LilycoveCity_LilycoveMuseum_2F_EventScript_SetToughPainting)
+    }
     end
 }
 
@@ -106,7 +116,9 @@ movement LilycoveCity_LilycoveMuseum_2F_Movement_FaceExhibitHall {
 
 script LilycoveCity_LilycoveMuseum_2F_EventScript_Curator {
     lockall
-    if (flag(FLAG_RECEIVED_GLASS_ORNAMENT)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ReceivedGlassOrnament)
+    if (flag(FLAG_RECEIVED_GLASS_ORNAMENT)) {
+        goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ReceivedGlassOrnament)
+    }
     specialvar(VAR_0x8004, CountPlayerMuseumPaintings)
     switch(VAR_0x8004)
     case(1, LilycoveCity_LilycoveMuseum_2F_EventScript_AddedPainting)
@@ -137,7 +149,9 @@ script LilycoveCity_LilycoveMuseum_2F_EventScript_GiveGlassOrnament {
     applymovement(LOCALID_MUSEUM_2F_CURATOR, Common_Movement_FacePlayer)
     msgbox(LilycoveCity_LilycoveMuseum_2F_Text_TokenOfGratitude, MSGBOX_DEFAULT)
     givedecoration(DECOR_GLASS_ORNAMENT)
-    if (var(VAR_RESULT) == FALSE) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_NoRoomForGlassOrnament)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(LilycoveCity_LilycoveMuseum_2F_EventScript_NoRoomForGlassOrnament)
+    }
     setflag(FLAG_RECEIVED_GLASS_ORNAMENT)
     closemessage
     releaseall
@@ -160,35 +174,45 @@ script LilycoveCity_LilycoveMuseum_2F_EventScript_ReceivedGlassOrnament {
 
 script LilycoveCity_LilycoveMuseum_2F_EventScript_CutePainting {
     lockall
-    if (flag(FLAG_CUTE_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCutePainting)
+    if (flag(FLAG_CUTE_PAINTING_MADE)) {
+        goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCutePainting)
+    }
     msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ItsPinkPictureFrame, MSGBOX_SIGN)
     end
 }
 
 script LilycoveCity_LilycoveMuseum_2F_EventScript_ToughPainting {
     lockall
-    if (flag(FLAG_TOUGH_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting)
+    if (flag(FLAG_TOUGH_PAINTING_MADE)) {
+        goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting)
+    }
     msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ItsYellowPictureFrame, MSGBOX_SIGN)
     end
 }
 
 script LilycoveCity_LilycoveMuseum_2F_EventScript_CoolPainting {
     lockall
-    if (flag(FLAG_COOL_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCoolPainting)
+    if (flag(FLAG_COOL_PAINTING_MADE)) {
+        goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCoolPainting)
+    }
     msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ItsRedPictureFrame, MSGBOX_SIGN)
     end
 }
 
 script LilycoveCity_LilycoveMuseum_2F_EventScript_BeautyPainting {
     lockall
-    if (flag(FLAG_BEAUTY_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ShowBeautyPainting)
+    if (flag(FLAG_BEAUTY_PAINTING_MADE)) {
+        goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ShowBeautyPainting)
+    }
     msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ItsBluePictureFrame, MSGBOX_SIGN)
     end
 }
 
 script LilycoveCity_LilycoveMuseum_2F_EventScript_SmartPainting {
     lockall
-    if (flag(FLAG_SMART_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting)
+    if (flag(FLAG_SMART_PAINTING_MADE)) {
+        goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting)
+    }
     msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ItsGreenPictureFrame, MSGBOX_SIGN)
     end
 }

@@ -46,8 +46,12 @@ script EverGrandeCity_HallOfFame_EventScript_EnterHallOfFame {
     setvar(VAR_TEMP_1, 1)
     call(EverGrandeCity_HallOfFame_EventScript_SetGameClearFlags)
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(EverGrandeCity_HallOfFame_EventScript_GameClearMale)
-    if (var(VAR_RESULT) == FEMALE) goto(EverGrandeCity_HallOfFame_EventScript_GameClearFemale)
+    if (var(VAR_RESULT) == MALE) {
+        goto(EverGrandeCity_HallOfFame_EventScript_GameClearMale)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(EverGrandeCity_HallOfFame_EventScript_GameClearFemale)
+    }
     end
 }
 

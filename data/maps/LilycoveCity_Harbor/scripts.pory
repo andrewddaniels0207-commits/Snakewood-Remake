@@ -10,25 +10,41 @@ script LilycoveCity_Harbor_OnTransition {
 script LilycoveCity_Harbor_EventScript_FerryAttendant {
     lock
     faceplayer
-    if (!flag(FLAG_SYS_GAME_CLEAR)) goto(LilycoveCity_Harbor_EventScript_FerryUnavailable)
+    if (!flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(LilycoveCity_Harbor_EventScript_FerryUnavailable)
+    }
     call(LilycoveCity_Harbor_EventScript_GetEonTicketState)
     call(LilycoveCity_Harbor_EventScript_GetAuroraTicketState)
     call(LilycoveCity_Harbor_EventScript_GetOldSeaMapState)
     call(LilycoveCity_Harbor_EventScript_GetMysticTicketState)
     call(LilycoveCity_Harbor_EventScript_GetFirstTimeShowingTicket)
     call(LilycoveCity_Harbor_EventScript_GetHasTicketsState)
-    if (var(VAR_TEMP_C) == 2) goto(LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime)
-    if (var(VAR_TEMP_B) == 1) goto(LilycoveCity_Harbor_EventScript_EonTicketFirstTime)
-    if (var(VAR_TEMP_B) == 2) goto(LilycoveCity_Harbor_EventScript_AuroraTicketFirstTime)
-    if (var(VAR_TEMP_B) == 4) goto(LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime)
-    if (var(VAR_TEMP_B) == 8) goto(LilycoveCity_Harbor_EventScript_MysticTicketFirstTime)
-    if (var(VAR_TEMP_B) != 0) goto(LilycoveCity_Harbor_EventScript_MultipleEventTicketsFirstTime)
+    if (var(VAR_TEMP_C) == 2) {
+        goto(LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime)
+    }
+    if (var(VAR_TEMP_B) == 1) {
+        goto(LilycoveCity_Harbor_EventScript_EonTicketFirstTime)
+    }
+    if (var(VAR_TEMP_B) == 2) {
+        goto(LilycoveCity_Harbor_EventScript_AuroraTicketFirstTime)
+    }
+    if (var(VAR_TEMP_B) == 4) {
+        goto(LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime)
+    }
+    if (var(VAR_TEMP_B) == 8) {
+        goto(LilycoveCity_Harbor_EventScript_MysticTicketFirstTime)
+    }
+    if (var(VAR_TEMP_B) != 0) {
+        goto(LilycoveCity_Harbor_EventScript_MultipleEventTicketsFirstTime)
+    }
     goto(LilycoveCity_Harbor_EventScript_NoFirstTimeEventTickets)
     end
 }
 
 script LilycoveCity_Harbor_EventScript_NoFirstTimeEventTickets {
-    if (var(VAR_TEMP_A) == 0) goto(LilycoveCity_Harbor_EventScript_NoEventTickets)
+    if (var(VAR_TEMP_A) == 0) {
+        goto(LilycoveCity_Harbor_EventScript_NoEventTickets)
+    }
     msgbox(LilycoveCity_Harbor_Text_MayISeeYourTicket, MSGBOX_DEFAULT)
     message(LilycoveCity_Harbor_Text_FlashTicketWhereTo)
     waitmessage()
@@ -87,7 +103,9 @@ script LilycoveCity_Harbor_EventScript_GoToFarawayIsland {
 
 script LilycoveCity_Harbor_EventScript_GoToSlateport {
     msgbox(LilycoveCity_Harbor_Text_SlateportItIs, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind)
+    if (var(VAR_RESULT) == NO) {
+        goto(LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind)
+    }
     setvar(VAR_SS_TIDAL_STATE, SS_TIDAL_BOARD_LILYCOVE)
     call(LilycoveCity_Harbor_EventScript_BoardFerry)
     warp(MAP_SS_TIDAL_CORRIDOR, 1, 10)
@@ -98,7 +116,9 @@ script LilycoveCity_Harbor_EventScript_GoToSlateport {
 
 script LilycoveCity_Harbor_EventScript_GoToBattleFrontier {
     msgbox(LilycoveCity_Harbor_Text_BattleFrontierItIs, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind)
+    if (var(VAR_RESULT) == NO) {
+        goto(LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind)
+    }
     call(LilycoveCity_Harbor_EventScript_BoardFerry)
     warp(MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 19, 67)
     waitstate
@@ -108,54 +128,86 @@ script LilycoveCity_Harbor_EventScript_GoToBattleFrontier {
 
 script LilycoveCity_Harbor_EventScript_GetEonTicketState {
     setvar(VAR_TEMP_E, 0)
-    if (!flag(FLAG_ENABLE_SHIP_SOUTHERN_ISLAND)) goto(Common_EventScript_NopReturn)
+    if (!flag(FLAG_ENABLE_SHIP_SOUTHERN_ISLAND)) {
+        goto(Common_EventScript_NopReturn)
+    }
     checkitem(ITEM_EON_TICKET)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_NopReturn)
+    }
     setvar(VAR_TEMP_E, 1)
-    if (flag(FLAG_SHOWN_EON_TICKET)) goto(Common_EventScript_NopReturn)
+    if (flag(FLAG_SHOWN_EON_TICKET)) {
+        goto(Common_EventScript_NopReturn)
+    }
     setvar(VAR_TEMP_E, 2)
     return
 }
 
 script LilycoveCity_Harbor_EventScript_GetAuroraTicketState {
     setvar(VAR_TEMP_D, 0)
-    if (!flag(FLAG_ENABLE_SHIP_BIRTH_ISLAND)) goto(Common_EventScript_NopReturn)
+    if (!flag(FLAG_ENABLE_SHIP_BIRTH_ISLAND)) {
+        goto(Common_EventScript_NopReturn)
+    }
     checkitem(ITEM_AURORA_TICKET)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_NopReturn)
+    }
     setvar(VAR_TEMP_D, 1)
-    if (flag(FLAG_SHOWN_AURORA_TICKET)) goto(Common_EventScript_NopReturn)
+    if (flag(FLAG_SHOWN_AURORA_TICKET)) {
+        goto(Common_EventScript_NopReturn)
+    }
     setvar(VAR_TEMP_D, 2)
     return
 }
 
 script LilycoveCity_Harbor_EventScript_GetOldSeaMapState {
     setvar(VAR_TEMP_C, 0)
-    if (!flag(FLAG_ENABLE_SHIP_FARAWAY_ISLAND)) goto(Common_EventScript_NopReturn)
+    if (!flag(FLAG_ENABLE_SHIP_FARAWAY_ISLAND)) {
+        goto(Common_EventScript_NopReturn)
+    }
     checkitem(ITEM_OLD_SEA_MAP)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_NopReturn)
+    }
     setvar(VAR_TEMP_C, 1)
-    if (flag(FLAG_SHOWN_OLD_SEA_MAP)) goto(Common_EventScript_NopReturn)
+    if (flag(FLAG_SHOWN_OLD_SEA_MAP)) {
+        goto(Common_EventScript_NopReturn)
+    }
     setvar(VAR_TEMP_C, 2)
     return
 }
 
 script LilycoveCity_Harbor_EventScript_GetMysticTicketState {
     setvar(VAR_TEMP_9, 0)
-    if (!flag(FLAG_ENABLE_SHIP_NAVEL_ROCK)) goto(Common_EventScript_NopReturn)
+    if (!flag(FLAG_ENABLE_SHIP_NAVEL_ROCK)) {
+        goto(Common_EventScript_NopReturn)
+    }
     checkitem(ITEM_MYSTIC_TICKET)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_NopReturn)
+    }
     setvar(VAR_TEMP_9, 1)
-    if (flag(FLAG_SHOWN_MYSTIC_TICKET)) goto(Common_EventScript_NopReturn)
+    if (flag(FLAG_SHOWN_MYSTIC_TICKET)) {
+        goto(Common_EventScript_NopReturn)
+    }
     setvar(VAR_TEMP_9, 2)
     return
 }
 
 script LilycoveCity_Harbor_EventScript_GetFirstTimeShowingTicket {
     setvar(VAR_TEMP_B, 0)
-    if (var(VAR_TEMP_E) == 2) call(LilycoveCity_Harbor_EventScript_SetFirstTimeShowingEonTicket)
-    if (var(VAR_TEMP_D) == 2) call(LilycoveCity_Harbor_EventScript_SetFirstTimeShowingAuroraTicket)
-    if (var(VAR_TEMP_C) == 2) call(LilycoveCity_Harbor_EventScript_SetFirstTimeShowingOldSeaMap)
-    if (var(VAR_TEMP_9) == 2) call(LilycoveCity_Harbor_EventScript_SetFirstTimeShowingMysticTicket)
+    if (var(VAR_TEMP_E) == 2) {
+        call(LilycoveCity_Harbor_EventScript_SetFirstTimeShowingEonTicket)
+    }
+    if (var(VAR_TEMP_D) == 2) {
+        call(LilycoveCity_Harbor_EventScript_SetFirstTimeShowingAuroraTicket)
+    }
+    if (var(VAR_TEMP_C) == 2) {
+        call(LilycoveCity_Harbor_EventScript_SetFirstTimeShowingOldSeaMap)
+    }
+    if (var(VAR_TEMP_9) == 2) {
+        call(LilycoveCity_Harbor_EventScript_SetFirstTimeShowingMysticTicket)
+    }
     return
 }
 
@@ -181,10 +233,18 @@ script LilycoveCity_Harbor_EventScript_SetFirstTimeShowingMysticTicket {
 
 script LilycoveCity_Harbor_EventScript_GetHasTicketsState {
     setvar(VAR_TEMP_A, 0)
-    if (var(VAR_TEMP_E) == 1) call(LilycoveCity_Harbor_EventScript_SetHasEonTicket)
-    if (var(VAR_TEMP_D) == 1) call(LilycoveCity_Harbor_EventScript_SetHasAuroraTicket)
-    if (var(VAR_TEMP_C) == 1) call(LilycoveCity_Harbor_EventScript_SetHasOldSeaMap)
-    if (var(VAR_TEMP_9) == 1) call(LilycoveCity_Harbor_EventScript_SetHasMysticTicket)
+    if (var(VAR_TEMP_E) == 1) {
+        call(LilycoveCity_Harbor_EventScript_SetHasEonTicket)
+    }
+    if (var(VAR_TEMP_D) == 1) {
+        call(LilycoveCity_Harbor_EventScript_SetHasAuroraTicket)
+    }
+    if (var(VAR_TEMP_C) == 1) {
+        call(LilycoveCity_Harbor_EventScript_SetHasOldSeaMap)
+    }
+    if (var(VAR_TEMP_9) == 1) {
+        call(LilycoveCity_Harbor_EventScript_SetHasMysticTicket)
+    }
     return
 }
 
@@ -260,18 +320,34 @@ script LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime {
     waitmovement(0)
     applymovement(LOCALID_LILYCOVE_HARBOR_FERRY_SAILOR, Common_Movement_Delay48)
     waitmovement(0)
-    if (var(VAR_FACING) == DIR_NORTH) call(LilycoveCity_Harbor_EventScript_MoveSailorOutOfWayNorth)
-    if (var(VAR_FACING) == DIR_EAST) call(LilycoveCity_Harbor_EventScript_MoveSailorOutOfWayEast)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(LilycoveCity_Harbor_EventScript_MoveSailorOutOfWayNorth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(LilycoveCity_Harbor_EventScript_MoveSailorOutOfWayEast)
+    }
     addobject(LOCALID_LILYCOVE_HARBOR_BRINEY)
-    if (var(VAR_FACING) == DIR_NORTH) call(LilycoveCity_Harbor_EventScript_BrineyFaceSailorNorth)
-    if (var(VAR_FACING) == DIR_EAST) call(LilycoveCity_Harbor_EventScript_BrineyFaceSailorEast)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(LilycoveCity_Harbor_EventScript_BrineyFaceSailorNorth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(LilycoveCity_Harbor_EventScript_BrineyFaceSailorEast)
+    }
     msgbox(EventTicket_Text_BrineyHoldOnASecond, MSGBOX_DEFAULT)
-    if (var(VAR_FACING) == DIR_NORTH) call(LilycoveCity_Harbor_EventScript_BrineyFacePlayerNorth)
-    if (var(VAR_FACING) == DIR_EAST) call(LilycoveCity_Harbor_EventScript_BrineyFacePlayerEast)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(LilycoveCity_Harbor_EventScript_BrineyFacePlayerNorth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(LilycoveCity_Harbor_EventScript_BrineyFacePlayerEast)
+    }
     msgbox(EventTicket_Text_BrineyLetsSail, MSGBOX_DEFAULT)
     closemessage
-    if (var(VAR_FACING) == DIR_NORTH) call(LilycoveCity_Harbor_EventScript_BoardFerryWithBrineyAndSailorNorth)
-    if (var(VAR_FACING) == DIR_EAST) call(LilycoveCity_Harbor_EventScript_BoardFerryWithBrineyAndSailorEast)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(LilycoveCity_Harbor_EventScript_BoardFerryWithBrineyAndSailorNorth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(LilycoveCity_Harbor_EventScript_BoardFerryWithBrineyAndSailorEast)
+    }
     setvar(VAR_0x8004, LOCALID_LILYCOVE_HARBOR_SS_TIDAL)
     call(Common_EventScript_FerryDepart)
     warp(MAP_FARAWAY_ISLAND_ENTRANCE, 13, 38)
@@ -364,8 +440,12 @@ script LilycoveCity_Harbor_EventScript_BoardFerryWithSailor {
     waitmovement(0)
     delay(30)
     removeobject(LOCALID_LILYCOVE_HARBOR_FERRY_SAILOR)
-    if (var(VAR_FACING) == DIR_NORTH) call(LilycoveCity_Harbor_EventScript_PlayerBoardFerryNorth)
-    if (var(VAR_FACING) == DIR_EAST) call(LilycoveCity_Harbor_EventScript_PlayerBoardFerryEast)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(LilycoveCity_Harbor_EventScript_PlayerBoardFerryNorth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(LilycoveCity_Harbor_EventScript_PlayerBoardFerryEast)
+    }
     delay(30)
     hideplayer()
     setvar(VAR_0x8004, LOCALID_LILYCOVE_HARBOR_SS_TIDAL)
@@ -395,7 +475,9 @@ script LilycoveCity_Harbor_EventScript_NoTicket {
 
 script LilycoveCity_Harbor_EventScript_GoToSlateportUnused {
     msgbox(LilycoveCity_Harbor_Text_SlateportItIs, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind)
+    if (var(VAR_RESULT) == NO) {
+        goto(LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind)
+    }
     setvar(VAR_SS_TIDAL_STATE, SS_TIDAL_BOARD_LILYCOVE)
     call(LilycoveCity_Harbor_EventScript_BoardFerry)
     warp(MAP_SS_TIDAL_CORRIDOR, 1, 10)
@@ -406,7 +488,9 @@ script LilycoveCity_Harbor_EventScript_GoToSlateportUnused {
 
 script LilycoveCity_Harbor_EventScript_GoToBattleFrontierUnused {
     msgbox(LilycoveCity_Harbor_Text_BattleFrontierItIs, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind)
+    if (var(VAR_RESULT) == NO) {
+        goto(LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind)
+    }
     call(LilycoveCity_Harbor_EventScript_BoardFerry)
     warp(MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 19, 67)
     waitstate
@@ -428,8 +512,12 @@ script LilycoveCity_Harbor_EventScript_BoardFerry {
     waitmovement(0)
     delay(30)
     hideobjectat(VAR_LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR)
-    if (var(VAR_FACING) == DIR_NORTH) call(LilycoveCity_Harbor_EventScript_PlayerBoardFerryNorth)
-    if (var(VAR_FACING) == DIR_EAST) call(LilycoveCity_Harbor_EventScript_PlayerBoardFerryEast)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(LilycoveCity_Harbor_EventScript_PlayerBoardFerryNorth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(LilycoveCity_Harbor_EventScript_PlayerBoardFerryEast)
+    }
     delay(30)
     hideplayer()
     setvar(VAR_0x8004, LOCALID_LILYCOVE_HARBOR_SS_TIDAL)
@@ -474,7 +562,9 @@ movement LilycoveCity_Harbor_Movement_UnusedBoardFerry {
 script LilycoveCity_Harbor_EventScript_Sailor {
     lock
     faceplayer
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(LilycoveCity_Harbor_EventScript_SailorFerryAvailable)
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(LilycoveCity_Harbor_EventScript_SailorFerryAvailable)
+    }
     msgbox(LilycoveCity_Harbor_Text_SailorFerryUnavailable, MSGBOX_DEFAULT)
     release
     end

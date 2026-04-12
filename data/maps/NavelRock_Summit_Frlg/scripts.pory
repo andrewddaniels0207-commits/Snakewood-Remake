@@ -4,8 +4,12 @@ mapscripts NavelRock_Summit_Frlg_MapScripts {
 }
 
 script NavelRock_Summit_OnTransition {
-    if (flag(FLAG_FOUGHT_HO_OH)) call(NavelRock_Summit_EventScript_HideHoOh)
-    if (!flag(FLAG_FOUGHT_HO_OH)) call(NavelRock_Summit_EventScript_TryShowHoOh)
+    if (flag(FLAG_FOUGHT_HO_OH)) {
+        call(NavelRock_Summit_EventScript_HideHoOh)
+    }
+    if (!flag(FLAG_FOUGHT_HO_OH)) {
+        call(NavelRock_Summit_EventScript_TryShowHoOh)
+    }
     end
 }
 
@@ -17,20 +21,26 @@ script NavelRock_Summit_EventScript_HideHoOh {
 
 script NavelRock_Summit_EventScript_TryShowHoOh {
     setvar(VAR_TEMP_1, 1)
-    if (flag(FLAG_HO_OH_FLEW_AWAY)) goto(Common_EventScript_NopReturn)
+    if (flag(FLAG_HO_OH_FLEW_AWAY)) {
+        goto(Common_EventScript_NopReturn)
+    }
     setvar(VAR_TEMP_1, 0)
     clearflag(FLAG_HIDE_HO_OH)
     return
 }
 
 script NavelRock_Summit_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(NavelRock_Summit_EventScript_TryRemoveHoOh)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(NavelRock_Summit_EventScript_TryRemoveHoOh)
+    }
     end
 }
 
 script NavelRock_Summit_EventScript_TryRemoveHoOh {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
+        goto(Common_EventScript_NopReturn)
+    }
     removeobject(LOCALID_NAVEL_ROCK_HO_OH)
     return
 }
@@ -67,9 +77,15 @@ script NavelRock_Summit_EventScript_HoOh {
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     setvar(VAR_LAST_TALKED, LOCALID_NAVEL_ROCK_HO_OH)
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(NavelRock_Summit_EventScript_DefeatedHoOh)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(NavelRock_Summit_EventScript_RanFromHoOh)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(NavelRock_Summit_EventScript_RanFromHoOh)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(NavelRock_Summit_EventScript_DefeatedHoOh)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(NavelRock_Summit_EventScript_RanFromHoOh)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(NavelRock_Summit_EventScript_RanFromHoOh)
+    }
     setflag(FLAG_FOUGHT_HO_OH)
     releaseall
     end

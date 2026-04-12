@@ -13,7 +13,9 @@ script LavenderTown_EventScript_LittleGirl {
     lock
     faceplayer
     msgbox(LavenderTown_Text_DoYouBelieveInGhosts, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(LavenderTown_EventScript_LittleGirlBelieve)
+    if (var(VAR_RESULT) == YES) {
+        goto(LavenderTown_EventScript_LittleGirlBelieve)
+    }
     msgbox(LavenderTown_Text_JustImaginingWhiteHand)
     release
     end

@@ -1,12 +1,15 @@
 mapscripts AbandonedShip_Corridors_1F_MapScripts {}
 
 script AbandonedShip_Corridors_1F_EventScript_Youngster {
+    #(4 "data/maps/AbandonedShip_Corridors_1F/scripts.pory")
     msgbox(AbandonedShip_Corridors_1F_Text_IsntItFunHere, MSGBOX_NPC)
     end
 }
 
 script AbandonedShip_Corridors_1F_EventScript_Charlie {
+    #(9 "data/maps/AbandonedShip_Corridors_1F/scripts.pory")
     trainerbattle_single(TRAINER_CHARLIE, AbandonedShip_Corridors_1F_Text_CharlieIntro, AbandonedShip_Corridors_1F_Text_CharlieDefeat)
+    #(10 "data/maps/AbandonedShip_Corridors_1F/scripts.pory")
     msgbox(AbandonedShip_Corridors_1F_Text_CharliePostBattle, MSGBOX_AUTOCLOSE)
     end
 }

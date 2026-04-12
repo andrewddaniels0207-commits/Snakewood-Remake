@@ -3,7 +3,9 @@ mapscripts Route126_MapScripts {
 }
 
 script Route126_OnTransition {
-    if (flag(FLAG_SYS_WEATHER_CTRL)) call(Common_EventScript_SetAbnormalWeather)
+    if (flag(FLAG_SYS_WEATHER_CTRL)) {
+        call(Common_EventScript_SetAbnormalWeather)
+    }
     end
 }
 
@@ -52,7 +54,9 @@ script Route126_EventScript_Sienna {
 script Route126_EventScript_Pablo {
     trainerbattle_single(TRAINER_PABLO_1, Route126_Text_PabloIntro, Route126_Text_PabloDefeat, Route126_EventScript_RegisterPablo)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route126_EventScript_RematchPablo)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route126_EventScript_RematchPablo)
+    }
     msgbox(Route126_Text_PabloPostBattle, MSGBOX_DEFAULT)
     release
     end

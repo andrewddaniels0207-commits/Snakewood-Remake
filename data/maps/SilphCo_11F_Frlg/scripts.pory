@@ -3,19 +3,29 @@ mapscripts SilphCo_11F_Frlg_MapScripts {
 }
 
 script SilphCo_11F_OnLoad {
-    if (!flag(FLAG_SILPH_11F_DOOR)) call(EventScript_Close11FDoor)
+    if (!flag(FLAG_SILPH_11F_DOOR)) {
+        call(EventScript_Close11FDoor)
+    }
     end
 }
 
 script SilphCo_11F_EventScript_President {
     lock
     faceplayer
-    if (flag(FLAG_GOT_MASTER_BALL_FROM_SILPH)) goto(SilphCo_11F_EventScript_AlreadyGotMasterBall)
+    if (flag(FLAG_GOT_MASTER_BALL_FROM_SILPH)) {
+        goto(SilphCo_11F_EventScript_AlreadyGotMasterBall)
+    }
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(SilphCo_11F_EventScript_PresidentThanksMale)
-    if (var(VAR_RESULT) == FEMALE) call(SilphCo_11F_EventScript_PresidentThanksFemale)
+    if (var(VAR_RESULT) == MALE) {
+        call(SilphCo_11F_EventScript_PresidentThanksMale)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(SilphCo_11F_EventScript_PresidentThanksFemale)
+    }
     checkitemspace(ITEM_MASTER_BALL)
-    if (var(VAR_RESULT) == FALSE) goto(SilphCo_11F_EventScript_NoRoomForMasterBall)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SilphCo_11F_EventScript_NoRoomForMasterBall)
+    }
     giveitem_msg(SilphCo_11F_Text_ObtainedMasterBallFromPresident, ITEM_MASTER_BALL, 1, MUS_RG_OBTAIN_KEY_ITEM)
     msgbox(SilphCo_11F_Text_ThatsOurSecretPrototype)
     setflag(FLAG_GOT_MASTER_BALL_FROM_SILPH)
@@ -71,8 +81,12 @@ script SilphCo_11F_EventScript_BattleGiovanni {
     delay(25)
     msgbox(SilphCo_11F_Text_GiovanniIntro)
     closemessage
-    if (var(VAR_TEMP_1) == 0) call(SilphCo_11F_EventScript_GiovanniApproachLeft)
-    if (var(VAR_TEMP_1) == 1) call(SilphCo_11F_EventScript_GiovanniApproachRight)
+    if (var(VAR_TEMP_1) == 0) {
+        call(SilphCo_11F_EventScript_GiovanniApproachLeft)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(SilphCo_11F_EventScript_GiovanniApproachRight)
+    }
     setvar(VAR_LAST_TALKED, LOCALID_SILPH_CO_GIOVANNI)
     trainerbattle_no_intro(TRAINER_BOSS_GIOVANNI_2, SilphCo_11F_Text_GiovanniDefeat)
     msgbox(SilphCo_11F_Text_GiovanniPostBattle)

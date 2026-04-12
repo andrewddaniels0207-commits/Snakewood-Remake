@@ -11,8 +11,12 @@ script LilycoveCity_LilycoveMuseum_1F_EventScript_Curator {
     message(LilycoveCity_LilycoveMuseum_1F_Text_ImCuratorHaveYouViewedOurPaintings)
     waitmessage()
     multichoice(20, 8, MULTI_VIEWED_PAINTINGS, TRUE)
-    if (var(VAR_RESULT) == 0) goto(LilycoveCity_LilycoveMuseum_1F_EventScript_SawPaintings)
-    if (var(VAR_RESULT) == 1) goto(LilycoveCity_LilycoveMuseum_1F_EventScript_NotYet)
+    if (var(VAR_RESULT) == 0) {
+        goto(LilycoveCity_LilycoveMuseum_1F_EventScript_SawPaintings)
+    }
+    if (var(VAR_RESULT) == 1) {
+        goto(LilycoveCity_LilycoveMuseum_1F_EventScript_NotYet)
+    }
     end
 }
 
@@ -23,8 +27,12 @@ script LilycoveCity_LilycoveMuseum_1F_EventScript_NotYet {
 
 script LilycoveCity_LilycoveMuseum_1F_EventScript_SawPaintings {
     msgbox(LilycoveCity_LilycoveMuseum_1F_Text_HaveYouAnInterestInPaintings, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LilycoveCity_LilycoveMuseum_1F_EventScript_NotInterested)
-    if (var(VAR_RESULT) == YES) goto(LilycoveCity_LilycoveMuseum_1F_EventScript_InterestedInPaintings)
+    if (var(VAR_RESULT) == NO) {
+        goto(LilycoveCity_LilycoveMuseum_1F_EventScript_NotInterested)
+    }
+    if (var(VAR_RESULT) == YES) {
+        goto(LilycoveCity_LilycoveMuseum_1F_EventScript_InterestedInPaintings)
+    }
     end
 }
 

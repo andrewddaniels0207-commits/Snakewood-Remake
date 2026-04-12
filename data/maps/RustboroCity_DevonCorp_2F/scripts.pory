@@ -3,7 +3,9 @@ mapscripts RustboroCity_DevonCorp_2F_MapScripts {
 }
 
 script RustboroCity_DevonCorp_2F_OnTransition {
-    if (var(VAR_FOSSIL_RESURRECTION_STATE) == 1) call(RustboroCity_DevonCorp_2F_EventScript_SetFossilReady)
+    if (var(VAR_FOSSIL_RESURRECTION_STATE) == 1) {
+        call(RustboroCity_DevonCorp_2F_EventScript_SetFossilReady)
+    }
     end
 }
 
@@ -15,7 +17,9 @@ script RustboroCity_DevonCorp_2F_EventScript_SetFossilReady {
 script RustboroCity_DevonCorp_2F_EventScript_TalkToPokemonScientist {
     lock
     faceplayer
-    if (var(VAR_FOSSIL_RESURRECTION_STATE) == 1) call(RustboroCity_DevonCorp_2F_EventScript_SetFossilReady)
+    if (var(VAR_FOSSIL_RESURRECTION_STATE) == 1) {
+        call(RustboroCity_DevonCorp_2F_EventScript_SetFossilReady)
+    }
     msgbox(RustboroCity_DevonCorp_2F_Text_DeviceForTalkingToPokemon, MSGBOX_DEFAULT)
     release
     end
@@ -24,8 +28,12 @@ script RustboroCity_DevonCorp_2F_EventScript_TalkToPokemonScientist {
 script RustboroCity_DevonCorp_2F_EventScript_BallScientist {
     lock
     faceplayer
-    if (var(VAR_FOSSIL_RESURRECTION_STATE) == 1) call(RustboroCity_DevonCorp_2F_EventScript_SetFossilReady)
-    if (flag(FLAG_MET_DEVON_EMPLOYEE)) goto(RustboroCity_DevonCorp_2F_EventScript_DevelopedBalls)
+    if (var(VAR_FOSSIL_RESURRECTION_STATE) == 1) {
+        call(RustboroCity_DevonCorp_2F_EventScript_SetFossilReady)
+    }
+    if (flag(FLAG_MET_DEVON_EMPLOYEE)) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_DevelopedBalls)
+    }
     msgbox(RustboroCity_DevonCorp_2F_Text_DevelopingNewBalls, MSGBOX_DEFAULT)
     release
     end
@@ -40,8 +48,12 @@ script RustboroCity_DevonCorp_2F_EventScript_DevelopedBalls {
 script RustboroCity_DevonCorp_2F_EventScript_PokenavScientist {
     lock
     faceplayer
-    if (var(VAR_FOSSIL_RESURRECTION_STATE) == 1) call(RustboroCity_DevonCorp_2F_EventScript_SetFossilReady)
-    if (flag(FLAG_RECEIVED_POKENAV)) goto(RustboroCity_DevonCorp_2F_EventScript_HasPokenav)
+    if (var(VAR_FOSSIL_RESURRECTION_STATE) == 1) {
+        call(RustboroCity_DevonCorp_2F_EventScript_SetFossilReady)
+    }
+    if (flag(FLAG_RECEIVED_POKENAV)) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_HasPokenav)
+    }
     msgbox(RustboroCity_DevonCorp_2F_Text_IMadePokenav, MSGBOX_DEFAULT)
     release
     end
@@ -56,7 +68,9 @@ script RustboroCity_DevonCorp_2F_EventScript_HasPokenav {
 script RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist {
     lock
     faceplayer
-    if (var(VAR_FOSSIL_RESURRECTION_STATE) == 1) call(RustboroCity_DevonCorp_2F_EventScript_SetFossilReady)
+    if (var(VAR_FOSSIL_RESURRECTION_STATE) == 1) {
+        call(RustboroCity_DevonCorp_2F_EventScript_SetFossilReady)
+    }
     msgbox(RustboroCity_DevonCorp_2F_Text_DeviceToVisualizePokemonDreams, MSGBOX_DEFAULT)
     release
     end
@@ -65,13 +79,21 @@ script RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist {
 script RustboroCity_DevonCorp_2F_EventScript_FossilScientist {
     lock
     faceplayer
-    if (var(VAR_FOSSIL_RESURRECTION_STATE) == 2) goto(RustboroCity_DevonCorp_2F_EventScript_FossilMonReady)
-    if (var(VAR_FOSSIL_RESURRECTION_STATE) == 1) goto(RustboroCity_DevonCorp_2F_EventScript_StillRegenerating)
+    if (var(VAR_FOSSIL_RESURRECTION_STATE) == 2) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_FossilMonReady)
+    }
+    if (var(VAR_FOSSIL_RESURRECTION_STATE) == 1) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_StillRegenerating)
+    }
     msgbox(RustboroCity_DevonCorp_2F_Text_DevelopDeviceToResurrectFossils, MSGBOX_DEFAULT)
     checkitem(ITEM_ROOT_FOSSIL)
-    if (var(VAR_RESULT) == TRUE) goto(RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil)
+    }
     checkitem(ITEM_CLAW_FOSSIL)
-    if (var(VAR_RESULT) == TRUE) goto(RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil)
+    }
     release
     end
 }
@@ -84,9 +106,13 @@ script RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil {
     applymovement(LOCALID_FOSSIL_SCIENTIST, Common_Movement_Delay48)
     waitmovement(0)
     msgbox(RustboroCity_DevonCorp_2F_Text_WantToBringFossilBackToLife, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(RustboroCity_DevonCorp_2F_EventScript_DeclineGiveFossil)
+    if (var(VAR_RESULT) == NO) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_DeclineGiveFossil)
+    }
     checkitem(ITEM_CLAW_FOSSIL)
-    if (var(VAR_RESULT) == TRUE) goto(RustboroCity_DevonCorp_2F_EventScript_ChooseFossil)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_ChooseFossil)
+    }
     goto(RustboroCity_DevonCorp_2F_EventScript_GiveRootFossil)
     end
 }
@@ -109,9 +135,13 @@ script RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil {
     applymovement(LOCALID_FOSSIL_SCIENTIST, Common_Movement_Delay48)
     waitmovement(0)
     msgbox(RustboroCity_DevonCorp_2F_Text_WantToBringFossilBackToLife, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(RustboroCity_DevonCorp_2F_EventScript_DeclineGiveFossil)
+    if (var(VAR_RESULT) == NO) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_DeclineGiveFossil)
+    }
     checkitem(ITEM_ROOT_FOSSIL)
-    if (var(VAR_RESULT) == TRUE) goto(RustboroCity_DevonCorp_2F_EventScript_ChooseFossil)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_ChooseFossil)
+    }
     goto(RustboroCity_DevonCorp_2F_EventScript_GiveClawFossil)
     end
 }
@@ -139,8 +169,12 @@ script RustboroCity_DevonCorp_2F_EventScript_StillRegenerating {
 }
 
 script RustboroCity_DevonCorp_2F_EventScript_FossilMonReady {
-    if (var(VAR_WHICH_FOSSIL_REVIVED) == 1) goto(RustboroCity_DevonCorp_2F_EventScript_LileepReady)
-    if (var(VAR_WHICH_FOSSIL_REVIVED) == 2) goto(RustboroCity_DevonCorp_2F_EventScript_AnorithReady)
+    if (var(VAR_WHICH_FOSSIL_REVIVED) == 1) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_LileepReady)
+    }
+    if (var(VAR_WHICH_FOSSIL_REVIVED) == 2) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_AnorithReady)
+    }
     end
 }
 
@@ -161,8 +195,12 @@ script RustboroCity_DevonCorp_2F_EventScript_AnorithReady {
 script RustboroCity_DevonCorp_2F_EventScript_ReceiveLileep {
     setvar(VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_LILEEP)
     givemon(SPECIES_LILEEP, 20)
-    if (var(VAR_RESULT) == MON_GIVEN_TO_PARTY) goto(RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepParty)
-    if (var(VAR_RESULT) == MON_GIVEN_TO_PC) goto(RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepPC)
+    if (var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepParty)
+    }
+    if (var(VAR_RESULT) == MON_GIVEN_TO_PC) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepPC)
+    }
     goto(Common_EventScript_NoMoreRoomForPokemon)
     end
 }
@@ -170,7 +208,9 @@ script RustboroCity_DevonCorp_2F_EventScript_ReceiveLileep {
 script RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepParty {
     call(RustboroCity_DevonCorp_2F_EventScript_ReceivedLileepFanfare)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(RustboroCity_DevonCorp_2F_EventScript_FinishReceivingLileep)
+    if (var(VAR_RESULT) == NO) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_FinishReceivingLileep)
+    }
     call(Common_EventScript_GetGiftMonPartySlot)
     call(Common_EventScript_NameReceivedPartyMon)
     goto(RustboroCity_DevonCorp_2F_EventScript_FinishReceivingLileep)
@@ -180,7 +220,9 @@ script RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepParty {
 script RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepPC {
     call(RustboroCity_DevonCorp_2F_EventScript_ReceivedLileepFanfare)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(RustboroCity_DevonCorp_2F_EventScript_TransferLileepToPC)
+    if (var(VAR_RESULT) == NO) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_TransferLileepToPC)
+    }
     call(Common_EventScript_NameReceivedBoxMon)
     goto(RustboroCity_DevonCorp_2F_EventScript_TransferLileepToPC)
     end
@@ -212,8 +254,12 @@ script RustboroCity_DevonCorp_2F_EventScript_FinishReceivingLileep {
 script RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorith {
     setvar(VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_ANORITH)
     givemon(SPECIES_ANORITH, 20)
-    if (var(VAR_RESULT) == MON_GIVEN_TO_PARTY) goto(RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithParty)
-    if (var(VAR_RESULT) == MON_GIVEN_TO_PC) goto(RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithPC)
+    if (var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithParty)
+    }
+    if (var(VAR_RESULT) == MON_GIVEN_TO_PC) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithPC)
+    }
     goto(Common_EventScript_NoMoreRoomForPokemon)
     end
 }
@@ -221,7 +267,9 @@ script RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorith {
 script RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithParty {
     call(RustboroCity_DevonCorp_2F_EventScript_ReceivedAnorithFanfare)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(RustboroCity_DevonCorp_2F_EventScript_FinishReceivingAnorith)
+    if (var(VAR_RESULT) == NO) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_FinishReceivingAnorith)
+    }
     call(Common_EventScript_GetGiftMonPartySlot)
     call(Common_EventScript_NameReceivedPartyMon)
     goto(RustboroCity_DevonCorp_2F_EventScript_FinishReceivingAnorith)
@@ -231,7 +279,9 @@ script RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithParty {
 script RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithPC {
     call(RustboroCity_DevonCorp_2F_EventScript_ReceivedAnorithFanfare)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(RustboroCity_DevonCorp_2F_EventScript_TransferAnorithToPC)
+    if (var(VAR_RESULT) == NO) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_TransferAnorithToPC)
+    }
     call(Common_EventScript_NameReceivedBoxMon)
     goto(RustboroCity_DevonCorp_2F_EventScript_TransferAnorithToPC)
     end
@@ -290,8 +340,12 @@ script RustboroCity_DevonCorp_2F_EventScript_CancelFossilSelect {
 script RustboroCity_DevonCorp_2F_EventScript_MatchCallScientist {
     lock
     faceplayer
-    if (var(VAR_FOSSIL_RESURRECTION_STATE) == 1) call(RustboroCity_DevonCorp_2F_EventScript_SetFossilReady)
-    if (var(VAR_RUSTBORO_CITY_STATE) >= 6) goto(RustboroCity_DevonCorp_2F_EventScript_WorkOnNext)
+    if (var(VAR_FOSSIL_RESURRECTION_STATE) == 1) {
+        call(RustboroCity_DevonCorp_2F_EventScript_SetFossilReady)
+    }
+    if (var(VAR_RUSTBORO_CITY_STATE) >= 6) {
+        goto(RustboroCity_DevonCorp_2F_EventScript_WorkOnNext)
+    }
     msgbox(RustboroCity_DevonCorp_2F_Text_DevelopNewPokenavFeature, MSGBOX_DEFAULT)
     release
     end

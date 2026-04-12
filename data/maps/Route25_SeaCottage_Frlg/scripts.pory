@@ -3,8 +3,12 @@ mapscripts Route25_SeaCottage_Frlg_MapScripts {
 }
 
 script Route25_SeaCottage_OnTransition {
-    if (!flag(FLAG_HELPED_BILL_IN_SEA_COTTAGE)) call(Route25_SeaCottage_EventScript_HideClefairyBill)
-    if (flag(FLAG_GOT_SS_TICKET)) call(Route25_SeaCottage_EventScript_SetReturnedAfterSSTicket)
+    if (!flag(FLAG_HELPED_BILL_IN_SEA_COTTAGE)) {
+        call(Route25_SeaCottage_EventScript_HideClefairyBill)
+    }
+    if (flag(FLAG_GOT_SS_TICKET)) {
+        call(Route25_SeaCottage_EventScript_SetReturnedAfterSSTicket)
+    }
     end
 }
 
@@ -22,12 +26,22 @@ script Route25_SeaCottage_EventScript_SetReturnedAfterSSTicket {
 script Route25_SeaCottage_EventScript_Bill {
     lock
     faceplayer
-    if (flag(RETURN_AFTER_SS_TICKET)) goto(Route25_SeaCottage_EventScript_BillGoLookAtPC)
-    if (flag(FLAG_GOT_SS_TICKET)) goto(Route25_SeaCottage_EventScript_BillGoToSSAnne)
-    if (flag(FLAG_HELPED_BILL_IN_SEA_COTTAGE)) goto(Route25_SeaCottage_EventScript_BillGiveSSTicket)
+    if (flag(RETURN_AFTER_SS_TICKET)) {
+        goto(Route25_SeaCottage_EventScript_BillGoLookAtPC)
+    }
+    if (flag(FLAG_GOT_SS_TICKET)) {
+        goto(Route25_SeaCottage_EventScript_BillGoToSSAnne)
+    }
+    if (flag(FLAG_HELPED_BILL_IN_SEA_COTTAGE)) {
+        goto(Route25_SeaCottage_EventScript_BillGiveSSTicket)
+    }
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(Route25_SeaCottage_EventScript_BillAskForHelpMale)
-    if (var(VAR_RESULT) == FEMALE) goto(Route25_SeaCottage_EventScript_BillAskForHelpFemale)
+    if (var(VAR_RESULT) == MALE) {
+        goto(Route25_SeaCottage_EventScript_BillAskForHelpMale)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(Route25_SeaCottage_EventScript_BillAskForHelpFemale)
+    }
     end
 }
 
@@ -44,14 +58,24 @@ script Route25_SeaCottage_EventScript_BillAskForHelpFemale {
 }
 
 script Route25_SeaCottage_EventScript_BillAskForHelp {
-    if (var(VAR_RESULT) == NO) call(Route25_SeaCottage_EventScript_DeclineHelpBill)
+    if (var(VAR_RESULT) == NO) {
+        call(Route25_SeaCottage_EventScript_DeclineHelpBill)
+    }
     msgbox(Route25_SeaCottage_Text_RunCellSeparationOnPC)
     closemessage
     delay(10)
-    if (var(VAR_FACING) == DIR_SOUTH) call(Route25_SeaCottage_EventScript_BillWalkToTeleporterSouth)
-    if (var(VAR_FACING) == DIR_NORTH) call(Route25_SeaCottage_EventScript_BillWalkToTeleporter)
-    if (var(VAR_FACING) == DIR_WEST) call(Route25_SeaCottage_EventScript_BillWalkToTeleporter)
-    if (var(VAR_FACING) == DIR_EAST) call(Route25_SeaCottage_EventScript_BillWalkToTeleporter)
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(Route25_SeaCottage_EventScript_BillWalkToTeleporterSouth)
+    }
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(Route25_SeaCottage_EventScript_BillWalkToTeleporter)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(Route25_SeaCottage_EventScript_BillWalkToTeleporter)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(Route25_SeaCottage_EventScript_BillWalkToTeleporter)
+    }
     opendoor(10, 3)
     waitdooranim()
     applymovement(LOCALID_BILL_CLEFAIRY, Route25_SeaCottage_Movement_BillEnterTeleporter)
@@ -67,8 +91,12 @@ script Route25_SeaCottage_EventScript_BillAskForHelp {
 
 script Route25_SeaCottage_EventScript_DeclineHelpBill {
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(Route25_SeaCottage_EventScript_DeclineHelpBillMale)
-    if (var(VAR_RESULT) == FEMALE) call(Route25_SeaCottage_EventScript_DeclineHelpBillFemale)
+    if (var(VAR_RESULT) == MALE) {
+        call(Route25_SeaCottage_EventScript_DeclineHelpBillMale)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(Route25_SeaCottage_EventScript_DeclineHelpBillFemale)
+    }
     return
 }
 
@@ -103,10 +131,16 @@ script Route25_SeaCottage_EventScript_BillGoToSSAnne {
 script Route25_SeaCottage_EventScript_BillGiveSSTicket {
     famechecker(FAMECHECKER_BILL, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(Route25_SeaCottage_EventScript_BillThanksMale)
-    if (var(VAR_RESULT) == FEMALE) call(Route25_SeaCottage_EventScript_BillThanksFemale)
+    if (var(VAR_RESULT) == MALE) {
+        call(Route25_SeaCottage_EventScript_BillThanksMale)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(Route25_SeaCottage_EventScript_BillThanksFemale)
+    }
     checkitemspace(ITEM_SS_TICKET)
-    if (var(VAR_RESULT) == FALSE) goto(Route25_SeaCottage_EventScript_NoRoomForSSTicket)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route25_SeaCottage_EventScript_NoRoomForSSTicket)
+    }
     giveitem_msg(Route25_SeaCottage_Text_ReceivedSSTicketFromBill, ITEM_SS_TICKET, 1, MUS_RG_OBTAIN_KEY_ITEM)
     setflag(FLAG_GOT_SS_TICKET_DUP)
     setflag(FLAG_HIDE_NUGGET_BRIDGE_ROCKET)
@@ -160,8 +194,12 @@ movement Route25_SeaCottage_Movement_BillEnterTeleporter {
 
 script Route25_SeaCottage_EventScript_Computer {
     lockall
-    if (flag(RETURN_AFTER_SS_TICKET)) goto(Route25_SeaCottage_EventScript_OpenBillsMonList)
-    if (flag(BILL_IN_TELEPORTER)) goto(Route25_SeaCottage_EventScript_RunCellSeparator)
+    if (flag(RETURN_AFTER_SS_TICKET)) {
+        goto(Route25_SeaCottage_EventScript_OpenBillsMonList)
+    }
+    if (flag(BILL_IN_TELEPORTER)) {
+        goto(Route25_SeaCottage_EventScript_RunCellSeparator)
+    }
     msgbox(Route25_SeaCottage_Text_TeleporterIsDisplayed)
     releaseall
     end

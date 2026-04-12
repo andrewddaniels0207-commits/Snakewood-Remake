@@ -43,7 +43,9 @@ script BattleFrontier_BattlePikeLobby_EventScript_QuitWithoutSaving {
 script BattleFrontier_BattlePikeLobby_EventScript_WonChallenge {
     lockall
     frontier_isbrain()
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattlePikeLobby_EventScript_DefeatedQueen)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattlePikeLobby_EventScript_DefeatedQueen)
+    }
     msgbox(BattleFrontier_BattlePikeLobby_Text_PossessLuckInAbundance, MSGBOX_DEFAULT)
     waitmessage()
     goto(BattleFrontier_BattlePikeLobby_EventScript_GiveBattlePoints)
@@ -127,7 +129,9 @@ script BattleFrontier_BattlePikeLobby_EventScript_TryEnterChallenge {
     case(FRONTIER_LVL_TENT, BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge)
     case(MULTI_B_PRESSED, BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge)
     frontier_checkineligible()
-    if (var(VAR_0x8004) == TRUE) goto(BattleFrontier_BattlePikeLobby_EventScript_NotEnoughValidMons)
+    if (var(VAR_0x8004) == TRUE) {
+        goto(BattleFrontier_BattlePikeLobby_EventScript_NotEnoughValidMons)
+    }
     frontier_set(FRONTIER_DATA_LVL_MODE, VAR_RESULT)
     msgbox(BattleFrontier_BattlePikeLobby_Text_PleaseChooseThreeMons, MSGBOX_DEFAULT)
     fadescreen(FADE_TO_BLACK)
@@ -137,7 +141,9 @@ script BattleFrontier_BattlePikeLobby_EventScript_TryEnterChallenge {
     setvar(VAR_0x8005, FRONTIER_PARTY_SIZE)
     special(ChoosePartyForBattleFrontier)
     waitstate
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattlePikeLobby_EventScript_LoadPartyAndCancelChallenge)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattlePikeLobby_EventScript_LoadPartyAndCancelChallenge)
+    }
     msgbox(BattleFrontier_BattlePikeLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO)
     switch(VAR_RESULT)
     case(NO, BattleFrontier_BattlePikeLobby_EventScript_LoadPartyAndCancelChallenge)
@@ -160,7 +166,9 @@ script BattleFrontier_BattlePikeLobby_EventScript_SaveBeforeChallenge {
     call(Common_EventScript_SaveGame)
     setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
     pike_savehelditems()
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattlePikeLobby_EventScript_CancelChallengeSaveFailed)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattlePikeLobby_EventScript_CancelChallengeSaveFailed)
+    }
     special(SavePlayerParty)
     frontier_setpartyorder(FRONTIER_PARTY_SIZE)
     msgbox(BattleFrontier_BattlePikeLobby_Text_StepThisWay, MSGBOX_DEFAULT)

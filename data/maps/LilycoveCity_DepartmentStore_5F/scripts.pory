@@ -86,8 +86,12 @@ script LilycoveCity_DepartmentStore_5F_EventScript_Woman {
     lockall
     applymovement(LOCALID_DEPARTMENT_STORE_STAIRS_WOMAN, Common_Movement_FacePlayer)
     waitmovement(0)
-    if (var(VAR_SOOTOPOLIS_CITY_STATE) == 0) goto(LilycoveCity_DepartmentStore_5F_EventScript_WomanNormal)
-    if (var(VAR_SOOTOPOLIS_CITY_STATE) >= 4) goto(LilycoveCity_DepartmentStore_5F_EventScript_WomanNormal)
+    if (var(VAR_SOOTOPOLIS_CITY_STATE) == 0) {
+        goto(LilycoveCity_DepartmentStore_5F_EventScript_WomanNormal)
+    }
+    if (var(VAR_SOOTOPOLIS_CITY_STATE) >= 4) {
+        goto(LilycoveCity_DepartmentStore_5F_EventScript_WomanNormal)
+    }
     goto(LilycoveCity_DepartmentStore_5F_EventScript_WomanLegendaryWeather)
     end
 }

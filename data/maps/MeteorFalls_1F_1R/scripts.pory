@@ -3,7 +3,9 @@ mapscripts MeteorFalls_1F_1R_MapScripts {
 }
 
 script MeteorFalls_1F_1R_OnLoad {
-    if (flag(FLAG_SYS_GAME_CLEAR)) call(MeteorFalls_1F_1R_EventScript_OpenStevensCave)
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        call(MeteorFalls_1F_1R_EventScript_OpenStevensCave)
+    }
     end
 }
 
@@ -236,7 +238,9 @@ script MeteorFalls_1F_1R_Movement_PushPlayerOutOfWay {
 script MeteorFalls_1F_1R_EventScript_ProfCozmo {
     lock
     faceplayer
-    if (flag(FLAG_MET_PROF_COZMO)) goto(MeteorFalls_1F_1R_EventScript_MetCozmo)
+    if (flag(FLAG_MET_PROF_COZMO)) {
+        goto(MeteorFalls_1F_1R_EventScript_MetCozmo)
+    }
     setflag(FLAG_MET_PROF_COZMO)
     msgbox(MeteorFalls_1F_1R_Text_MeetProfCozmo, MSGBOX_DEFAULT)
     release

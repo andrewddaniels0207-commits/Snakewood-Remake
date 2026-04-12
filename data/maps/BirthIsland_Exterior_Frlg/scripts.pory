@@ -14,8 +14,12 @@ script BirthIsland_Exterior_Frlg_OnTransition {
     setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_DEOXYS_N)
     setvar(VAR_DEOXYS_INTERACTION_STEP_COUNTER, 0)
     setvar(VAR_DEOXYS_INTERACTION_NUM, 0)
-    if (flag(FLAG_FOUGHT_DEOXYS)) call(BirthIsland_Exterior_Frlg_EventScript_HideDeoxysAndPuzzle)
-    if (!flag(FLAG_FOUGHT_DEOXYS)) call(BirthIsland_Exterior_Frlg_EventScript_TryShowDeoxysPuzzle)
+    if (flag(FLAG_FOUGHT_DEOXYS)) {
+        call(BirthIsland_Exterior_Frlg_EventScript_HideDeoxysAndPuzzle)
+    }
+    if (!flag(FLAG_FOUGHT_DEOXYS)) {
+        call(BirthIsland_Exterior_Frlg_EventScript_TryShowDeoxysPuzzle)
+    }
     end
 }
 
@@ -26,20 +30,26 @@ script BirthIsland_Exterior_Frlg_EventScript_HideDeoxysAndPuzzle {
 }
 
 script BirthIsland_Exterior_Frlg_EventScript_TryShowDeoxysPuzzle {
-    if (flag(FLAG_DEOXYS_FLEW_AWAY)) goto(Common_EventScript_NopReturn)
+    if (flag(FLAG_DEOXYS_FLEW_AWAY)) {
+        goto(Common_EventScript_NopReturn)
+    }
     clearflag(FLAG_HIDE_BIRTH_ISLAND_METEORITE)
     clearflag(FLAG_DEOXYS_ROCK_COMPLETE)
     return
 }
 
 script BirthIsland_Exterior_Frlg_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(BirthIsland_Exterior_Frlg_EventScript_TryRemoveDeoxys)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(BirthIsland_Exterior_Frlg_EventScript_TryRemoveDeoxys)
+    }
     end
 }
 
 script BirthIsland_Exterior_Frlg_EventScript_TryRemoveDeoxys {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
+        goto(Common_EventScript_NopReturn)
+    }
     removeobject(LOCALID_BIRTH_ISLAND_DEOXYS)
     return
 }
@@ -94,9 +104,15 @@ script BirthIsland_Exterior_Frlg_EventScript_Deoxys {
     waitstate
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(BirthIsland_Exterior_Frlg_EventScript_DefeatedDeoxys)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(BirthIsland_Exterior_Frlg_EventScript_RanFromDeoxys)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(BirthIsland_Exterior_Frlg_EventScript_RanFromDeoxys)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(BirthIsland_Exterior_Frlg_EventScript_DefeatedDeoxys)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(BirthIsland_Exterior_Frlg_EventScript_RanFromDeoxys)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(BirthIsland_Exterior_Frlg_EventScript_RanFromDeoxys)
+    }
     setflag(FLAG_FOUGHT_DEOXYS)
     release
     end

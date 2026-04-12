@@ -14,7 +14,9 @@ script BattleFrontier_BattleTowerMultiPartnerRoom_OnResume {
 }
 
 script BattleFrontier_BattleTowerMultiPartnerRoom_OnTransition {
-    if (flag(FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER)) goto(BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_ChosePartner)
+    if (flag(FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER)) {
+        goto(BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_ChosePartner)
+    }
     clearflag(FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_1)
     clearflag(FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_2)
     clearflag(FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_3)
@@ -94,7 +96,9 @@ script BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_Attendant {
     message(BattleFrontier_BattleTowerMultiPartnerRoom_Text_QuitLookingForPartner)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_QuitChallenge)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_QuitChallenge)
+    }
     msgbox(BattleFrontier_BattleTowerMultiPartnerRoom_Text_PleaseFindPartner2, MSGBOX_DEFAULT)
     release
     end
@@ -179,7 +183,9 @@ script BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_Partner1 {
 }
 
 script BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_TalkToPotentialPartner {
-    if (flag(FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER)) goto(BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_RejectPartner)
+    if (flag(FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER)) {
+        goto(BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_RejectPartner)
+    }
     tower_dopartnermsg(PARTNER_MSGID_INTRO)
     waitmessage()
     waitbuttonpress()
@@ -196,8 +202,12 @@ script BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_TalkToPotentialPar
     waitmessage()
     waitbuttonpress()
     closemessage
-    if (var(VAR_FACING) != DIR_SOUTH) call(BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_PartnerExit)
-    if (var(VAR_FACING) == DIR_SOUTH) call(BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_PartnerExitSouth)
+    if (var(VAR_FACING) != DIR_SOUTH) {
+        call(BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_PartnerExit)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_PartnerExitSouth)
+    }
     removeobject(VAR_LAST_TALKED)
     setflag(FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER)
     warpsilent(MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM, 10, 3)

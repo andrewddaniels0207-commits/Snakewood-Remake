@@ -2,7 +2,9 @@ mapscripts SSAnne_CaptainsOffice_Frlg_MapScripts {}
 
 script SSAnne_CaptainsOffice_EventScript_Captain {
     lock
-    if (flag(FLAG_GOT_HM01)) goto(SSAnne_CaptainsOffice_EventScript_AlreadyGotCut)
+    if (flag(FLAG_GOT_HM01)) {
+        goto(SSAnne_CaptainsOffice_EventScript_AlreadyGotCut)
+    }
     msgbox(SSAnne_CaptainsOffice_Text_CaptainIFeelSeasick)
     textcolor(NPC_TEXT_COLOR_NEUTRAL)
     message(SSAnne_CaptainsOffice_Text_RubbedCaptainsBack)

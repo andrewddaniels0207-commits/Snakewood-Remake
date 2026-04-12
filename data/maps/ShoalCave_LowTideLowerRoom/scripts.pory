@@ -8,7 +8,9 @@ script ShoalCave_LowTideLowerRoom_OnLoad {
 }
 
 script ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatiles {
-    if (flag(FLAG_RECEIVED_SHOAL_SALT_4)) goto(ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatilesEnd)
+    if (flag(FLAG_RECEIVED_SHOAL_SALT_4)) {
+        goto(ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatilesEnd)
+    }
     setmetatile(18, 2, METATILE_Cave_ShoalCave_DirtPile_Large, TRUE)
     return
 }
@@ -19,9 +21,13 @@ script ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatilesEnd {
 
 script ShoalCave_LowTideLowerRoom_EventScript_ShoalSalt4 {
     lockall
-    if (flag(FLAG_RECEIVED_SHOAL_SALT_4)) goto(ShoalCave_LowTideLowerRoom_EventScript_ReceivedShoalSalt)
+    if (flag(FLAG_RECEIVED_SHOAL_SALT_4)) {
+        goto(ShoalCave_LowTideLowerRoom_EventScript_ReceivedShoalSalt)
+    }
     giveitem(ITEM_SHOAL_SALT)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setmetatile(18, 2, METATILE_Cave_ShoalCave_DirtPile_Small, FALSE)
     special(DrawWholeMapView)
     setflag(FLAG_RECEIVED_SHOAL_SALT_4)
@@ -38,10 +44,14 @@ script ShoalCave_LowTideLowerRoom_EventScript_ReceivedShoalSalt {
 script ShoalCave_LowTideLowerRoom_EventScript_BlackBelt {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_FOCUS_BAND)) goto(ShoalCave_LowTideLowerRoom_EventScript_ReceivedFocusBand)
+    if (flag(FLAG_RECEIVED_FOCUS_BAND)) {
+        goto(ShoalCave_LowTideLowerRoom_EventScript_ReceivedFocusBand)
+    }
     msgbox(ShoalCave_LowTideLowerRoom_Text_CanOvercomeColdWithFocus, MSGBOX_DEFAULT)
     giveitem(ITEM_FOCUS_BAND)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_FOCUS_BAND)
     release
     end

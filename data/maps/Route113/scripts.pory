@@ -16,8 +16,12 @@ script Route113_OnTransition {
 
 script Route113_EventScript_CheckSetAshWeather {
     getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-    if (var(VAR_TEMP_0) < 19) goto(Route113_EventScript_DontSetAshWeather)
-    if (var(VAR_TEMP_0) > 84) goto(Route113_EventScript_DontSetAshWeather)
+    if (var(VAR_TEMP_0) < 19) {
+        goto(Route113_EventScript_DontSetAshWeather)
+    }
+    if (var(VAR_TEMP_0) > 84) {
+        goto(Route113_EventScript_DontSetAshWeather)
+    }
     setweather(WEATHER_VOLCANIC_ASH)
     return
 }
@@ -71,7 +75,9 @@ script Route113_EventScript_Dillon {
 script Route113_EventScript_Madeline {
     trainerbattle_single(TRAINER_MADELINE_1, Route113_Text_MadelineIntro, Route113_Text_MadelineDefeat, Route113_EventScript_RegisterMadeline)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route113_EventScript_RematchMadeline)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route113_EventScript_RematchMadeline)
+    }
     msgbox(Route113_Text_MadelinePostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -95,7 +101,9 @@ script Route113_EventScript_RematchMadeline {
 script Route113_EventScript_Lao {
     trainerbattle_single(TRAINER_LAO_1, Route113_Text_LaoIntro, Route113_Text_LaoDefeat, Route113_EventScript_RegisterLao)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route113_EventScript_RematchLao)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route113_EventScript_RematchLao)
+    }
     msgbox(Route113_Text_LaoPostBattle, MSGBOX_DEFAULT)
     release
     end

@@ -27,9 +27,15 @@ script SootopolisCity_Gym_1F_OnLoad {
 }
 
 script SootopolisCity_Gym_1F_EventScript_CheckSetStairMetatiles {
-    if (var(VAR_ICE_STEP_COUNT) < 8) goto(SootopolisCity_Gym_1F_EventScript_StopCheckingStairs)
-    if (var(VAR_ICE_STEP_COUNT) < 28) goto(SootopolisCity_Gym_1F_EventScript_OpenFirstStairs)
-    if (var(VAR_ICE_STEP_COUNT) < 67) goto(SootopolisCity_Gym_1F_EventScript_OpenFirstAndSecondStairs)
+    if (var(VAR_ICE_STEP_COUNT) < 8) {
+        goto(SootopolisCity_Gym_1F_EventScript_StopCheckingStairs)
+    }
+    if (var(VAR_ICE_STEP_COUNT) < 28) {
+        goto(SootopolisCity_Gym_1F_EventScript_OpenFirstStairs)
+    }
+    if (var(VAR_ICE_STEP_COUNT) < 67) {
+        goto(SootopolisCity_Gym_1F_EventScript_OpenFirstAndSecondStairs)
+    }
     setmetatile(8, 4, METATILE_SootopolisGym_Stairs, FALSE)
     setmetatile(8, 5, METATILE_SootopolisGym_Stairs, FALSE)
 }
@@ -95,9 +101,15 @@ movement SootopolisCity_Gym_1F_Movement_FallThroughIce {
 script SootopolisCity_Gym_1F_EventScript_Juan {
     trainerbattle_single(TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_JuanIntro, SootopolisCity_Gym_1F_Text_JuanDefeat, SootopolisCity_Gym_1F_EventScript_JuanDefeated, NO_MUSIC)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(SootopolisCity_Gym_1F_EventScript_JuanRematch)
-    if (!flag(FLAG_RECEIVED_TM_WATER_PULSE)) goto(SootopolisCity_Gym_1F_EventScript_GiveWaterPulse2)
-    if (!flag(FLAG_BADGE06_GET)) goto(SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(SootopolisCity_Gym_1F_EventScript_JuanRematch)
+    }
+    if (!flag(FLAG_RECEIVED_TM_WATER_PULSE)) {
+        goto(SootopolisCity_Gym_1F_EventScript_GiveWaterPulse2)
+    }
+    if (!flag(FLAG_BADGE06_GET)) {
+        goto(SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge)
+    }
     msgbox(SootopolisCity_Gym_1F_Text_JuanPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -132,7 +144,9 @@ script SootopolisCity_Gym_1F_EventScript_JuanDefeated {
 
 script SootopolisCity_Gym_1F_EventScript_GiveWaterPulse {
     giveitem(ITEM_TM_WATER_PULSE)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_BagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_BagIsFull)
+    }
     msgbox(SootopolisCity_Gym_1F_Text_ExplainWaterPulse, MSGBOX_DEFAULT)
     setflag(FLAG_RECEIVED_TM_WATER_PULSE)
     return
@@ -140,7 +154,9 @@ script SootopolisCity_Gym_1F_EventScript_GiveWaterPulse {
 
 script SootopolisCity_Gym_1F_EventScript_GiveWaterPulse2 {
     giveitem(ITEM_TM_WATER_PULSE)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     msgbox(SootopolisCity_Gym_1F_Text_ExplainWaterPulse, MSGBOX_DEFAULT)
     setflag(FLAG_RECEIVED_TM_WATER_PULSE)
     release
@@ -162,7 +178,9 @@ script SootopolisCity_Gym_1F_EventScript_JuanRematch {
 script SootopolisCity_Gym_1F_EventScript_GymGuide {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_SOOTOPOLIS_GYM)) goto(SootopolisCity_Gym_1F_EventScript_GymGuidePostVictory)
+    if (flag(FLAG_DEFEATED_SOOTOPOLIS_GYM)) {
+        goto(SootopolisCity_Gym_1F_EventScript_GymGuidePostVictory)
+    }
     msgbox(SootopolisCity_Gym_1F_Text_GymGuideAdvice, MSGBOX_DEFAULT)
     release
     end
@@ -176,14 +194,18 @@ script SootopolisCity_Gym_1F_EventScript_GymGuidePostVictory {
 
 script SootopolisCity_Gym_1F_EventScript_LeftGymStatue {
     lockall
-    if (flag(FLAG_BADGE08_GET)) goto(SootopolisCity_Gym_1F_EventScript_GymStatueCertified)
+    if (flag(FLAG_BADGE08_GET)) {
+        goto(SootopolisCity_Gym_1F_EventScript_GymStatueCertified)
+    }
     goto(SootopolisCity_Gym_1F_EventScript_GymStatue)
     end
 }
 
 script SootopolisCity_Gym_1F_EventScript_RightGymStatue {
     lockall
-    if (flag(FLAG_BADGE08_GET)) goto(SootopolisCity_Gym_1F_EventScript_GymStatueCertified)
+    if (flag(FLAG_BADGE08_GET)) {
+        goto(SootopolisCity_Gym_1F_EventScript_GymStatueCertified)
+    }
     goto(SootopolisCity_Gym_1F_EventScript_GymStatue)
     end
 }

@@ -45,7 +45,9 @@ script BattleFrontier_BattlePyramidLobby_EventScript_QuitWithoutSaving {
 script BattleFrontier_BattlePyramidLobby_EventScript_WonChallenge {
     lockall
     frontier_isbrain()
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattlePyramidLobby_EventScript_DefeatedKing)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattlePyramidLobby_EventScript_DefeatedKing)
+    }
     msgbox(BattleFrontier_BattlePyramidLobby_Text_YouveConqueredPyramid, MSGBOX_DEFAULT)
     goto(BattleFrontier_BattlePyramidLobby_EventScript_GiveBattlePoints)
 }
@@ -56,7 +58,9 @@ script BattleFrontier_BattlePyramidLobby_EventScript_DefeatedKing {
 
 script BattleFrontier_BattlePyramidLobby_EventScript_GiveBattlePoints {
     special(DoBattlePyramidMonsHaveHeldItem)
-    if (var(VAR_RESULT) == TRUE) call(BattleFrontier_BattlePyramidLobby_EventScript_StoreHeldItemsInPyramidBag)
+    if (var(VAR_RESULT) == TRUE) {
+        call(BattleFrontier_BattlePyramidLobby_EventScript_StoreHeldItemsInPyramidBag)
+    }
     clearflag(FLAG_STORING_ITEMS_IN_PYRAMID_BAG)
     frontier_checkairshow()
     special(LoadPlayerParty)
@@ -139,7 +143,9 @@ script BattleFrontier_BattlePyramidLobby_EventScript_TryEnterChallenge {
     case(FRONTIER_LVL_TENT, BattleFrontier_BattlePyramidLobby_EventScript_CancelChallenge)
     case(MULTI_B_PRESSED, BattleFrontier_BattlePyramidLobby_EventScript_CancelChallenge)
     frontier_checkineligible()
-    if (var(VAR_0x8004) == TRUE) goto(BattleFrontier_BattlePyramidLobby_EventScript_NotEnoughValidMons)
+    if (var(VAR_0x8004) == TRUE) {
+        goto(BattleFrontier_BattlePyramidLobby_EventScript_NotEnoughValidMons)
+    }
     frontier_set(FRONTIER_DATA_LVL_MODE, VAR_RESULT)
     msgbox(BattleFrontier_BattlePyramidLobby_Text_SelectThreeMons, MSGBOX_DEFAULT)
     fadescreen(FADE_TO_BLACK)
@@ -149,7 +155,9 @@ script BattleFrontier_BattlePyramidLobby_EventScript_TryEnterChallenge {
     setvar(VAR_0x8005, FRONTIER_PARTY_SIZE)
     special(ChoosePartyForBattleFrontier)
     waitstate
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattlePyramidLobby_EventScript_LoadPartyAndCancelChallenge)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattlePyramidLobby_EventScript_LoadPartyAndCancelChallenge)
+    }
     msgbox(BattleFrontier_BattlePyramidLobby_Text_OkayToSaveBeforeChallenge, MSGBOX_YESNO)
     switch(VAR_RESULT)
     case(NO, BattleFrontier_BattlePyramidLobby_EventScript_LoadPartyAndCancelChallenge)
@@ -171,7 +179,9 @@ script BattleFrontier_BattlePyramidLobby_EventScript_SaveBeforeChallenge {
     delay(2)
     call(Common_EventScript_SaveGame)
     setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattlePyramidLobby_EventScript_CancelChallengeSaveFailed)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattlePyramidLobby_EventScript_CancelChallengeSaveFailed)
+    }
 }
 
 script BattleFrontier_BattlePyramidLobby_EventScript_EnterChallenge {
@@ -261,7 +271,9 @@ script BattleFrontier_BattlePyramidLobby_EventScript_NoHint {
 script BattleFrontier_BattlePyramidLobby_EventScript_GiveHintLv50 {
     msgbox(BattleFrontier_BattlePyramidLobby_Text_Aah, MSGBOX_DEFAULT)
     pyramid_get(PYRAMID_DATA_WIN_STREAK_ACTIVE_50)
-    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattlePyramidLobby_EventScript_GiveHintGetLv50Streak)
+    if (var(VAR_RESULT) != FALSE) {
+        goto(BattleFrontier_BattlePyramidLobby_EventScript_GiveHintGetLv50Streak)
+    }
     setvar(VAR_RESULT, 0)
     goto(BattleFrontier_BattlePyramidLobby_EventScript_DoHintComment)
     return
@@ -276,7 +288,9 @@ script BattleFrontier_BattlePyramidLobby_EventScript_GiveHintGetLv50Streak {
 script BattleFrontier_BattlePyramidLobby_EventScript_GiveHintLvOpen {
     msgbox(BattleFrontier_BattlePyramidLobby_Text_Aah, MSGBOX_DEFAULT)
     pyramid_get(PYRAMID_DATA_WIN_STREAK_ACTIVE_OPEN)
-    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattlePyramidLobby_EventScript_GiveHintGetLvOpenStreak)
+    if (var(VAR_RESULT) != FALSE) {
+        goto(BattleFrontier_BattlePyramidLobby_EventScript_GiveHintGetLvOpenStreak)
+    }
     setvar(VAR_RESULT, 0)
     goto(BattleFrontier_BattlePyramidLobby_EventScript_DoHintComment)
     return
@@ -430,7 +444,9 @@ script BattleFrontier_BattlePyramidLobby_EventScript_WalkToPanelAndReceiveBag {
     waitmovement(0)
     msgbox(BattleFrontier_BattlePyramidLobby_Text_WeWillHoldBagForSafekeeping, MSGBOX_DEFAULT)
     pyramid_get(PYRAMID_DATA_WIN_STREAK)
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattlePyramidLobby_EventScript_ReceiveNewBattleBag)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattlePyramidLobby_EventScript_ReceiveNewBattleBag)
+    }
     msgbox(BattleFrontier_BattlePyramidLobby_Text_PleaseTakePreviousBattleBag, MSGBOX_DEFAULT)
     goto(BattleFrontier_BattlePyramidLobby_EventScript_ReceiveBattleBag)
 }
@@ -492,7 +508,9 @@ script BattleFrontier_BattlePyramidLobby_EventScript_StoreHeldItemsInPyramidBag 
     msgbox(BattleFrontier_BattlePyramidLobby_Text_MonHoldingItemCannotTake, MSGBOX_DEFAULT)
     setflag(FLAG_STORING_ITEMS_IN_PYRAMID_BAG)
     special(TryStoreHeldItemsInPyramidBag)
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattlePyramidLobby_EventScript_HeldItemsStoredInPyramidBag)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattlePyramidLobby_EventScript_HeldItemsStoredInPyramidBag)
+    }
     message(BattleFrontier_BattlePyramidLobby_Text_BagCannotHoldPickItemsToKeep)
     waitmessage()
     goto(BattleFrontier_BattlePyramidLobby_EventScript_PickItemsToKeep)
@@ -534,7 +552,9 @@ script BattleFrontier_BattlePyramidLobby_EventScript_PickItemsFromParty {
 
 script BattleFrontier_BattlePyramidLobby_EventScript_ExitPickItems {
     special(DoBattlePyramidMonsHaveHeldItem)
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattlePyramidLobby_EventScript_PartyStillHasHeldItems)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattlePyramidLobby_EventScript_PartyStillHasHeldItems)
+    }
     return
 }
 

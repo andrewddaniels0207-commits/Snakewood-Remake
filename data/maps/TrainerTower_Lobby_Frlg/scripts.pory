@@ -13,7 +13,9 @@ script TrainerTower_Lobby_OnResume {
     setvar(VAR_TEMP_2, 0)
     ttower_resumetimer()
     ttower_shouldexit()
-    if (var(VAR_RESULT) == FALSE) goto(TrainerTower_Lobby_OnResumeEnd)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(TrainerTower_Lobby_OnResumeEnd)
+    }
     setvar(VAR_TEMP_0, 0)
     setobjectxy(LOCALID_PLAYER, 9, 7)
     applymovement(LOCALID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist)
@@ -33,7 +35,9 @@ script TrainerTower_Lobby_OnReturnToField {
 }
 
 script TrainerTower_Lobby_OnLoad {
-    if (var(VAR_TEMP_D) == 17) call(TrainerTower_Lobby_OpenCounterBarrier)
+    if (var(VAR_TEMP_D) == 17) {
+        call(TrainerTower_Lobby_OpenCounterBarrier)
+    }
     end
 }
 
@@ -117,7 +121,9 @@ script TrainerTower_Lobby_EventScript_Receptionist {
     lock
     faceplayer
     ttower_getbeatchallenge()
-    if (var(VAR_RESULT) == TRUE) goto(TrainerTower_Lobby_EventScript_ThanksForCompeting)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(TrainerTower_Lobby_EventScript_ThanksForCompeting)
+    }
     msgbox(TrainerTower_Lobby_Text_GiveItYourBest)
     goto(TrainerTower_Lobby_EventScript_ReceptionistEnd)
 }
@@ -153,7 +159,9 @@ script TrainerTower_Lobby_EventScript_EntryTrigger {
     textcolor(NPC_TEXT_COLOR_FEMALE)
     msgbox(TrainerTower_Lobby_Text_WelcomeToTrainerTower)
     ttower_getnumfloors()
-    if (var(VAR_RESULT) == FALSE) goto(TrainerTower_Lobby_EventScript_AllFloorsUsed)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(TrainerTower_Lobby_EventScript_AllFloorsUsed)
+    }
     msgbox(TrainerTower_Lobby_Text_TrainersUpToFloorNum)
     goto(TrainerTower_Lobby_EventScript_AskEnterChallenge)
 }

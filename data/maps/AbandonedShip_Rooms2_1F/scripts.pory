@@ -3,7 +3,9 @@ mapscripts AbandonedShip_Rooms2_1F_MapScripts {}
 script AbandonedShip_Rooms2_1F_EventScript_Dan {
     trainerbattle_double(TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_DanIntro, AbandonedShip_Rooms2_1F_Text_DanDefeat, AbandonedShip_Rooms2_1F_Text_DanNotEnoughMons, AbandonedShip_Rooms2_1F_EventScript_RegisterDan)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(AbandonedShip_Rooms2_1F_EventScript_DanRematch)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(AbandonedShip_Rooms2_1F_EventScript_DanRematch)
+    }
     msgbox(AbandonedShip_Rooms2_1F_Text_DanPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -25,7 +27,9 @@ script AbandonedShip_Rooms2_1F_EventScript_DanRematch {
 script AbandonedShip_Rooms2_1F_EventScript_Kira {
     trainerbattle_double(TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_KiraIntro, AbandonedShip_Rooms2_1F_Text_KiraDefeat, AbandonedShip_Rooms2_1F_Text_KiraNotEnoughMons, AbandonedShip_Rooms2_1F_EventScript_RegisterKira)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(AbandonedShip_Rooms2_1F_EventScript_KiraRematch)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(AbandonedShip_Rooms2_1F_EventScript_KiraRematch)
+    }
     msgbox(AbandonedShip_Rooms2_1F_Text_KiraPostBattle, MSGBOX_DEFAULT)
     release
     end

@@ -4,7 +4,9 @@ mapscripts NewMauville_Entrance_MapScripts {
 }
 
 script NewMauville_Entrance_OnLoad {
-    if (var(VAR_NEW_MAUVILLE_STATE) == 0) call(NewMauville_Entrance_EventScript_CloseDoor)
+    if (var(VAR_NEW_MAUVILLE_STATE) == 0) {
+        call(NewMauville_Entrance_EventScript_CloseDoor)
+    }
     end
 }
 
@@ -29,9 +31,13 @@ script NewMauville_Entrance_EventScript_Door {
     waitmovement(0)
     msgbox(NewMauville_Entrance_Text_DoorIsLocked, MSGBOX_DEFAULT)
     checkitem(ITEM_BASEMENT_KEY)
-    if (var(VAR_RESULT) == FALSE) goto(NewMauville_Entrance_EventScript_DontOpenDoor)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(NewMauville_Entrance_EventScript_DontOpenDoor)
+    }
     msgbox(NewMauville_Entrance_Text_UseBasementKey, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(NewMauville_Entrance_EventScript_DontOpenDoor)
+    if (var(VAR_RESULT) == NO) {
+        goto(NewMauville_Entrance_EventScript_DontOpenDoor)
+    }
     msgbox(NewMauville_Entrance_Text_UsedBasementKey, MSGBOX_DEFAULT)
     setmetatile(3, 0, METATILE_Facility_NewMauvilleDoor_Open_Tile0, FALSE)
     setmetatile(4, 0, METATILE_Facility_NewMauvilleDoor_Open_Tile1, FALSE)

@@ -4,8 +4,12 @@ script SootopolisCity_House2_EventScript_ExpertF {
     lock
     faceplayer
     msgbox(SootopolisCity_House2_Text_DidYouKnowAboutMtPyreOrbs, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) call(SootopolisCity_House2_EventScript_KnowAboutOrbs)
-    if (var(VAR_RESULT) == NO) call(SootopolisCity_House2_EventScript_DontKnowAboutOrbs)
+    if (var(VAR_RESULT) == YES) {
+        call(SootopolisCity_House2_EventScript_KnowAboutOrbs)
+    }
+    if (var(VAR_RESULT) == NO) {
+        call(SootopolisCity_House2_EventScript_DontKnowAboutOrbs)
+    }
     release
     end
 }

@@ -31,21 +31,39 @@ script SSAnne_2F_Corridor_EventScript_RivalTrigger {
     applymovement(LOCALID_SS_ANNE_RIVAL, Common_Movement_WalkInPlaceFasterDown)
     waitmovement(0)
     delay(20)
-    if (var(VAR_TEMP_1) == 0) call(SSAnne_2F_Corridor_EventScript_RivalApproachLeft)
-    if (var(VAR_TEMP_1) == 1) call(SSAnne_2F_Corridor_EventScript_RivalApproachMid)
-    if (var(VAR_TEMP_1) == 2) call(SSAnne_2F_Corridor_EventScript_RivalApproachRight)
+    if (var(VAR_TEMP_1) == 0) {
+        call(SSAnne_2F_Corridor_EventScript_RivalApproachLeft)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(SSAnne_2F_Corridor_EventScript_RivalApproachMid)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(SSAnne_2F_Corridor_EventScript_RivalApproachRight)
+    }
     msgbox(SSAnne_2F_Corridor_Text_RivalIntro)
     setvar(VAR_LAST_TALKED, LOCALID_SS_ANNE_RIVAL)
-    if (var(VAR_STARTER_MON) == 2) call(SSAnne_2F_Corridor_EventScript_RivalSquirtle)
-    if (var(VAR_STARTER_MON) == 1) call(SSAnne_2F_Corridor_EventScript_RivalBulbasaur)
-    if (var(VAR_STARTER_MON) == 0) call(SSAnne_2F_Corridor_EventScript_RivalCharmander)
+    if (var(VAR_STARTER_MON) == 2) {
+        call(SSAnne_2F_Corridor_EventScript_RivalSquirtle)
+    }
+    if (var(VAR_STARTER_MON) == 1) {
+        call(SSAnne_2F_Corridor_EventScript_RivalBulbasaur)
+    }
+    if (var(VAR_STARTER_MON) == 0) {
+        call(SSAnne_2F_Corridor_EventScript_RivalCharmander)
+    }
     msgbox(SSAnne_2F_Corridor_Text_RivalPostBattle)
     closemessage
     delay(10)
     playbgm(MUS_RG_RIVAL_EXIT, 0)
-    if (var(VAR_TEMP_1) == 0) call(SSAnne_2F_Corridor_EventScript_RivalExitLeft)
-    if (var(VAR_TEMP_1) == 1) call(SSAnne_2F_Corridor_EventScript_RivalExitMid)
-    if (var(VAR_TEMP_1) == 2) call(SSAnne_2F_Corridor_EventScript_RivalExitRight)
+    if (var(VAR_TEMP_1) == 0) {
+        call(SSAnne_2F_Corridor_EventScript_RivalExitLeft)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(SSAnne_2F_Corridor_EventScript_RivalExitMid)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(SSAnne_2F_Corridor_EventScript_RivalExitRight)
+    }
     fadedefaultbgm()
     removeobject(LOCALID_SS_ANNE_RIVAL)
     setvar(VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR, 1)

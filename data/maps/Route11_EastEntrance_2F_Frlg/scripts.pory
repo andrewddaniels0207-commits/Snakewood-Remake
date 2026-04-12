@@ -2,7 +2,9 @@ mapscripts Route11_EastEntrance_2F_Frlg_MapScripts {}
 
 script Route11_EastEntrance_2F_EventScript_LeftBinoculars {
     lockall
-    if (flag(FLAG_WOKE_UP_ROUTE_12_SNORLAX)) goto(Route11_EastEntrance_2F_EventScript_LeftBinocularsSnorlaxGone)
+    if (flag(FLAG_WOKE_UP_ROUTE_12_SNORLAX)) {
+        goto(Route11_EastEntrance_2F_EventScript_LeftBinocularsSnorlaxGone)
+    }
     msgbox(Route11_EastEntrance_2F_Text_BigMonAsleepOnRoad)
     releaseall
     end
@@ -24,13 +26,21 @@ script Route11_EastEntrance_2F_EventScript_Turner {
     faceplayer
     setvar(VAR_0x8008, INGAME_TRADE_NIDORINOA)
     call(EventScript_GetInGameTradeSpeciesInfo)
-    if (flag(FLAG_DID_NINA_TRADE)) goto(Route11_EastEntrance_2F_EventScript_AlreadyTraded)
+    if (flag(FLAG_DID_NINA_TRADE)) {
+        goto(Route11_EastEntrance_2F_EventScript_AlreadyTraded)
+    }
     msgbox(Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route11_EastEntrance_2F_EventScript_DeclineTrade)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route11_EastEntrance_2F_EventScript_DeclineTrade)
+    }
     call(EventScript_ChooseMonForInGameTrade)
-    if (var(VAR_0x8004) >= PARTY_SIZE) goto(Route11_EastEntrance_2F_EventScript_DeclineTrade)
+    if (var(VAR_0x8004) >= PARTY_SIZE) {
+        goto(Route11_EastEntrance_2F_EventScript_DeclineTrade)
+    }
     call(EventScript_GetInGameTradeSpecies)
-    if (var(VAR_RESULT) != VAR_0x8009) goto(Route11_EastEntrance_2F_EventScript_NotRequestedMon)
+    if (var(VAR_RESULT) != VAR_0x8009) {
+        goto(Route11_EastEntrance_2F_EventScript_NotRequestedMon)
+    }
     call(EventScript_DoInGameTrade)
     msgbox(Trade_Text_HeyThanks)
     setflag(FLAG_DID_NINA_TRADE)
@@ -61,17 +71,25 @@ script Route11_EastEntrance_2F_EventScript_Aide {
     lock
     faceplayer
     call(Route11_EastEntrance_2F_EventScript_GetAideRequestInfo)
-    if (flag(FLAG_GOT_ITEMFINDER)) goto(Route11_EastEntrance_2F_EventScript_AlreadyGotItemfinder)
+    if (flag(FLAG_GOT_ITEMFINDER)) {
+        goto(Route11_EastEntrance_2F_EventScript_AlreadyGotItemfinder)
+    }
     msgbox(Route11_EastEntrance_2F_Text_GiveItemfinderIfCaught30, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Aide_EventScript_DeclineCheckMons)
+    if (var(VAR_RESULT) == NO) {
+        goto(Aide_EventScript_DeclineCheckMons)
+    }
     setvar(VAR_0x8004, 0)
     specialvar(VAR_RESULT, GetFrlgPokedexCount)
     buffernumberstring(STR_VAR_3, VAR_0x8006)
     call(Route11_EastEntrance_2F_EventScript_GetAideRequestInfo)
-    if (var(VAR_0x8006) < REQUIRED_CAUGHT_MONS) goto(Aide_EventScript_HaventCaughtEnough)
+    if (var(VAR_0x8006) < REQUIRED_CAUGHT_MONS) {
+        goto(Aide_EventScript_HaventCaughtEnough)
+    }
     msgbox(Route11_EastEntrance_2F_Text_GreatHereYouGo)
     checkitemspace(ITEM_ITEMFINDER)
-    if (var(VAR_RESULT) == FALSE) goto(Aide_EventScript_NoRoomForItem)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Aide_EventScript_NoRoomForItem)
+    }
     giveitem_msg(Route11_EastEntrance_2F_Text_ReceivedItemfinderFromAide, ITEM_ITEMFINDER)
     setflag(FLAG_GOT_ITEMFINDER)
     msgbox(Route11_EastEntrance_2F_Text_ExplainItemfinder)

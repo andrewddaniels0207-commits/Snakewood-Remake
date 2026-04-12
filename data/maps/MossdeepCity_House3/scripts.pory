@@ -3,12 +3,18 @@ mapscripts MossdeepCity_House3_MapScripts {}
 script MossdeepCity_House3_EventScript_SuperRodFisherman {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_SUPER_ROD)) goto(MossdeepCity_House3_EventScript_ReceivedSuperRod)
+    if (flag(FLAG_RECEIVED_SUPER_ROD)) {
+        goto(MossdeepCity_House3_EventScript_ReceivedSuperRod)
+    }
     msgbox(MossdeepCity_House3_Text_YouWantSuperRod, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(MossdeepCity_House3_EventScript_DeclineSuperRod)
+    if (var(VAR_RESULT) == NO) {
+        goto(MossdeepCity_House3_EventScript_DeclineSuperRod)
+    }
     msgbox(MossdeepCity_House3_Text_SuperRodIsSuper, MSGBOX_DEFAULT)
     giveitem(ITEM_SUPER_ROD)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_SUPER_ROD)
     msgbox(MossdeepCity_House3_Text_TryDroppingRodInWater, MSGBOX_DEFAULT)
     release

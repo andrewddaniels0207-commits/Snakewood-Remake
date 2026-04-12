@@ -21,7 +21,9 @@ script SaffronCity_Dojo_EventScript_TriggerMasterBattleRight {
 script SaffronCity_Dojo_EventScript_HitmonleeBall {
     lock
     faceplayer
-    if (flag(FLAG_GOT_HITMON_FROM_DOJO)) goto(SaffronCity_Dojo_EventScript_AlreadyGotHitmon)
+    if (flag(FLAG_GOT_HITMON_FROM_DOJO)) {
+        goto(SaffronCity_Dojo_EventScript_AlreadyGotHitmon)
+    }
     showmonpic(SPECIES_HITMONLEE, 10, 3)
     setvar(VAR_TEMP_1, SPECIES_HITMONLEE)
     applymovement(LOCALID_KARATE_MASTER, Common_Movement_WalkInPlaceFasterUp)
@@ -29,7 +31,9 @@ script SaffronCity_Dojo_EventScript_HitmonleeBall {
     textcolor(NPC_TEXT_COLOR_MALE)
     msgbox(SaffronCity_Dojo_Text_YouWantHitmonlee, MSGBOX_YESNO)
     call(EventScript_RestorePrevTextColor)
-    if (var(VAR_RESULT) == YES) goto(SaffronCity_Dojo_EventScript_GiveHitmon)
+    if (var(VAR_RESULT) == YES) {
+        goto(SaffronCity_Dojo_EventScript_GiveHitmon)
+    }
     hidemonpic()
     release
     end
@@ -44,7 +48,9 @@ script SaffronCity_Dojo_EventScript_AlreadyGotHitmon {
 script SaffronCity_Dojo_EventScript_HitmonchanBall {
     lock
     faceplayer
-    if (flag(FLAG_GOT_HITMON_FROM_DOJO)) goto(SaffronCity_Dojo_EventScript_AlreadyGotHitmon)
+    if (flag(FLAG_GOT_HITMON_FROM_DOJO)) {
+        goto(SaffronCity_Dojo_EventScript_AlreadyGotHitmon)
+    }
     showmonpic(SPECIES_HITMONCHAN, 10, 3)
     setvar(VAR_TEMP_1, SPECIES_HITMONCHAN)
     applymovement(LOCALID_KARATE_MASTER, Common_Movement_WalkInPlaceFasterUp)
@@ -52,7 +58,9 @@ script SaffronCity_Dojo_EventScript_HitmonchanBall {
     textcolor(NPC_TEXT_COLOR_MALE)
     msgbox(SaffronCity_Dojo_Text_YouWantHitmonchan, MSGBOX_YESNO)
     call(EventScript_RestorePrevTextColor)
-    if (var(VAR_RESULT) == YES) goto(SaffronCity_Dojo_EventScript_GiveHitmon)
+    if (var(VAR_RESULT) == YES) {
+        goto(SaffronCity_Dojo_EventScript_GiveHitmon)
+    }
     hidemonpic()
     release
     end
@@ -61,9 +69,15 @@ script SaffronCity_Dojo_EventScript_HitmonchanBall {
 script SaffronCity_Dojo_EventScript_GiveHitmon {
     hidemonpic()
     givemon(VAR_TEMP_1, 25)
-    if (var(VAR_RESULT) == 0) goto(SaffronCity_Dojo_EventScript_ReceivedHitmonParty)
-    if (var(VAR_RESULT) == 1) goto(SaffronCity_Dojo_EventScript_ReceivedHitmonPC)
-    if (var(VAR_RESULT) == 2) goto(Common_EventScript_NoMoreRoomForPokemon)
+    if (var(VAR_RESULT) == 0) {
+        goto(SaffronCity_Dojo_EventScript_ReceivedHitmonParty)
+    }
+    if (var(VAR_RESULT) == 1) {
+        goto(SaffronCity_Dojo_EventScript_ReceivedHitmonPC)
+    }
+    if (var(VAR_RESULT) == 2) {
+        goto(Common_EventScript_NoMoreRoomForPokemon)
+    }
     release
     end
 }
@@ -77,7 +91,9 @@ script SaffronCity_Dojo_EventScript_ReceivedHitmonParty {
     waitfanfare()
     setflag(FLAG_GOT_HITMON_FROM_DOJO)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(SaffronCity_Dojo_EventScript_EndGiveMon)
+    if (var(VAR_RESULT) == NO) {
+        goto(SaffronCity_Dojo_EventScript_EndGiveMon)
+    }
     call(Common_EventScript_GetGiftMonPartySlot)
     call(Common_EventScript_NameReceivedPartyMon)
     goto(SaffronCity_Dojo_EventScript_EndGiveMon)
@@ -93,7 +109,9 @@ script SaffronCity_Dojo_EventScript_ReceivedHitmonPC {
     waitfanfare()
     setflag(FLAG_GOT_HITMON_FROM_DOJO)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(SaffronCity_Dojo_EventScript_TransferredHitmonToPC)
+    if (var(VAR_RESULT) == NO) {
+        goto(SaffronCity_Dojo_EventScript_TransferredHitmonToPC)
+    }
     call(Common_EventScript_NameReceivedBoxMon)
     goto(SaffronCity_Dojo_EventScript_TransferredHitmonToPC)
     end
@@ -151,7 +169,9 @@ script SaffronCity_Dojo_EventScript_Mike {
 
 script SaffronCity_Dojo_EventScript_MasterKoichi {
     trainerbattle_single(TRAINER_BLACK_BELT_KOICHI, SaffronCity_Dojo_Text_MasterKoichiIntro, SaffronCity_Dojo_Text_MasterKoichiDefeat, SaffronCity_Dojo_EventScript_DefeatedMasterKoichi)
-    if (flag(FLAG_GOT_HITMON_FROM_DOJO)) goto(SaffronCity_Dojo_EventScript_MasterKoichiAlreadyGotHitmon)
+    if (flag(FLAG_GOT_HITMON_FROM_DOJO)) {
+        goto(SaffronCity_Dojo_EventScript_MasterKoichiAlreadyGotHitmon)
+    }
     msgbox(SaffronCity_Dojo_Text_ChoosePrizedFightingMon, MSGBOX_AUTOCLOSE)
     end
 }

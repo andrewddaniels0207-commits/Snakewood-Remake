@@ -16,16 +16,24 @@ script LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget {
     msgbox(LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget, MSGBOX_DEFAULT)
     chooseboxmon(SELECT_PC_MON_MOVE_DELETER)
     waitstate
-    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) goto(LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain)
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        goto(LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain)
+    }
     special(IsSelectedMonEgg)
-    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_MoveDeletersHouse_EventScript_EggCantForgetMoves)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LilycoveCity_MoveDeletersHouse_EventScript_EggCantForgetMoves)
+    }
     special(GetNumMovesSelectedMonHas)
-    if (var(VAR_RESULT) == 1) goto(LilycoveCity_MoveDeletersHouse_EventScript_MonOnlyKnowsOneMove)
+    if (var(VAR_RESULT) == 1) {
+        goto(LilycoveCity_MoveDeletersHouse_EventScript_MonOnlyKnowsOneMove)
+    }
     msgbox(LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten, MSGBOX_DEFAULT)
     fadescreen(FADE_TO_BLACK)
     special(MoveDeleterChooseMoveToForget)
     fadescreen(FADE_FROM_BLACK)
-    if (var(VAR_0x8005) == MAX_MON_MOVES) goto(LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget)
+    if (var(VAR_0x8005) == MAX_MON_MOVES) {
+        goto(LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget)
+    }
     special(BufferMoveDeleterNicknameAndMove)
     msgbox(LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten, MSGBOX_YESNO)
     switch(VAR_RESULT)
@@ -37,7 +45,9 @@ script LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget {
 
 script LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove {
     special(IsLastMonThatKnowsSurf)
-    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf)
+    }
     special(MoveDeleterForgetMove)
     playfanfare(MUS_MOVE_DELETED)
     waitfanfare()

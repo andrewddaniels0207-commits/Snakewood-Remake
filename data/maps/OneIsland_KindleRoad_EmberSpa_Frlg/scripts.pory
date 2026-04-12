@@ -32,7 +32,9 @@ script OneIsland_KindleRoad_EmberSpa_EventScript_BlackBelt {
 script OneIsland_KindleRoad_EmberSpa_EventScript_RockSmashMan {
     lock
     faceplayer
-    if (flag(FLAG_GOT_HM06)) goto(OneIsland_KindleRoad_EmberSpa_EventScript_AlreadyGotHM06)
+    if (flag(FLAG_GOT_HM06)) {
+        goto(OneIsland_KindleRoad_EmberSpa_EventScript_AlreadyGotHM06)
+    }
     msgbox(OneIsland_KindleRoad_EmberSpa_Text_UsedThisToMakeEmberSpa)
     giveitem(ITEM_HM06)
     setflag(FLAG_GOT_HM06)

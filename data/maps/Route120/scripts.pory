@@ -5,23 +5,39 @@ mapscripts Route120_MapScripts {
 }
 
 script Route120_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(Route120_EventScript_RemoveKecleonObject)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(Route120_EventScript_RemoveKecleonObject)
+    }
     end
 }
 
 script Route120_EventScript_RemoveKecleonObject {
-    if (var(VAR_0x8009) == 0) call(Route120_EventScript_RemoveBridgeKecleon)
-    if (var(VAR_0x8009) == 1) call(Route120_EventScript_RemoveKecleon)
-    if (var(VAR_0x8009) == 2) call(Route120_EventScript_RemoveKecleon)
-    if (var(VAR_0x8009) == 3) call(Route120_EventScript_RemoveKecleon)
-    if (var(VAR_0x8009) == 4) call(Route120_EventScript_RemoveKecleon)
-    if (var(VAR_0x8009) == 5) call(Route120_EventScript_RemoveKecleon)
+    if (var(VAR_0x8009) == 0) {
+        call(Route120_EventScript_RemoveBridgeKecleon)
+    }
+    if (var(VAR_0x8009) == 1) {
+        call(Route120_EventScript_RemoveKecleon)
+    }
+    if (var(VAR_0x8009) == 2) {
+        call(Route120_EventScript_RemoveKecleon)
+    }
+    if (var(VAR_0x8009) == 3) {
+        call(Route120_EventScript_RemoveKecleon)
+    }
+    if (var(VAR_0x8009) == 4) {
+        call(Route120_EventScript_RemoveKecleon)
+    }
+    if (var(VAR_0x8009) == 5) {
+        call(Route120_EventScript_RemoveKecleon)
+    }
     return
 }
 
 script Route120_EventScript_RemoveBridgeKecleon {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
+        goto(Common_EventScript_NopReturn)
+    }
     removeobject(LOCALID_BRIDGE_KECLEON)
     removeobject(LOCALID_BRIDGE_KECLEON_SHADOW)
     return
@@ -29,15 +45,23 @@ script Route120_EventScript_RemoveBridgeKecleon {
 
 script Route120_EventScript_RemoveKecleon {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
+        goto(Common_EventScript_NopReturn)
+    }
     removeobject(VAR_LAST_TALKED)
     return
 }
 
 script Route120_OnLoad {
-    if (!flag(FLAG_REGI_DOORS_OPENED)) call(Route120_EventScript_CloseAncientTomb)
-    if (flag(FLAG_RECEIVED_DEVON_SCOPE)) call(Route120_EventScript_SetBridgeClearMetatiles)
-    if (!flag(FLAG_RECEIVED_DEVON_SCOPE)) call(Route120_EventScript_SetBridgeKecleonMovement)
+    if (!flag(FLAG_REGI_DOORS_OPENED)) {
+        call(Route120_EventScript_CloseAncientTomb)
+    }
+    if (flag(FLAG_RECEIVED_DEVON_SCOPE)) {
+        call(Route120_EventScript_SetBridgeClearMetatiles)
+    }
+    if (!flag(FLAG_RECEIVED_DEVON_SCOPE)) {
+        call(Route120_EventScript_SetBridgeKecleonMovement)
+    }
     end
 }
 
@@ -68,9 +92,15 @@ script Route120_OnTransition {
 
 script Route120_EventScript_SetWeather {
     getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-    if (var(VAR_TEMP_1) <= 14) goto(Route120_EventScript_SetSunnyWeather)
-    if (var(VAR_TEMP_1) <= 60) goto(Route120_EventScript_TrySetRainyWeather)
-    if (var(VAR_TEMP_1) >= 61) goto(Route120_EventScript_SetCloudyWeather)
+    if (var(VAR_TEMP_1) <= 14) {
+        goto(Route120_EventScript_SetSunnyWeather)
+    }
+    if (var(VAR_TEMP_1) <= 60) {
+        goto(Route120_EventScript_TrySetRainyWeather)
+    }
+    if (var(VAR_TEMP_1) >= 61) {
+        goto(Route120_EventScript_SetCloudyWeather)
+    }
     return
 }
 
@@ -85,8 +115,12 @@ script Route120_EventScript_SetSunnyWeather {
 }
 
 script Route120_EventScript_TrySetRainyWeather {
-    if (var(VAR_TEMP_0) <= 7) goto(Route120_EventScript_SetRainyWeather)
-    if (var(VAR_TEMP_0) <= 19) goto(Route120_EventScript_SetSunnyWeather)
+    if (var(VAR_TEMP_0) <= 7) {
+        goto(Route120_EventScript_SetRainyWeather)
+    }
+    if (var(VAR_TEMP_0) <= 19) {
+        goto(Route120_EventScript_SetSunnyWeather)
+    }
     goto(Route120_EventScript_SetRainyWeather)
     end
 }
@@ -100,10 +134,16 @@ script Route120_EventScript_BerryBeauty {
     lock
     faceplayer
     dotimebasedevents()
-    if (flag(FLAG_DAILY_ROUTE_120_RECEIVED_BERRY)) goto(Route120_EventScript_ReceivedBerry)
+    if (flag(FLAG_DAILY_ROUTE_120_RECEIVED_BERRY)) {
+        goto(Route120_EventScript_ReceivedBerry)
+    }
     msgbox(Route120_Text_BerriesExpressionOfLoveIsntIt, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) call(Route120_EventScript_BerryLove)
-    if (var(VAR_RESULT) == NO) call(Route120_EventScript_BerryNotLove)
+    if (var(VAR_RESULT) == YES) {
+        call(Route120_EventScript_BerryLove)
+    }
+    if (var(VAR_RESULT) == NO) {
+        call(Route120_EventScript_BerryNotLove)
+    }
     specialvar(VAR_RESULT, GetPlayerTrainerIdOnesDigit)
     switch(VAR_RESULT)
     case(0, Route120_EventScript_GiveFigyBerry)
@@ -151,7 +191,9 @@ script Route120_EventScript_GiveIapapaBerry {
 
 script Route120_EventScript_GiveBerry {
     giveitem(VAR_0x8004)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_DAILY_ROUTE_120_RECEIVED_BERRY)
     msgbox(Route120_Text_BerryIsRareRaiseItWithCare, MSGBOX_DEFAULT)
     release
@@ -177,9 +219,13 @@ script Route120_EventScript_BerryNotLove {
 script Route120_EventScript_Steven {
     lock
     faceplayer
-    if (flag(FLAG_NOT_READY_FOR_BATTLE_ROUTE_120)) goto(Route120_EventScript_StevenAskReadyForBattle)
+    if (flag(FLAG_NOT_READY_FOR_BATTLE_ROUTE_120)) {
+        goto(Route120_EventScript_StevenAskReadyForBattle)
+    }
     msgbox(Route120_Text_StevenGreeting, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route120_EventScript_StevenNotReady)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route120_EventScript_StevenNotReady)
+    }
     goto(Route120_EventScript_StevenBattleKecleon)
     end
 }
@@ -193,7 +239,9 @@ script Route120_EventScript_StevenNotReady {
 
 script Route120_EventScript_StevenAskReadyForBattle {
     msgbox(Route120_Text_StevenReadyForBattle, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route120_EventScript_StevenNotReady)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route120_EventScript_StevenNotReady)
+    }
     goto(Route120_EventScript_StevenBattleKecleon)
     end
 }
@@ -201,8 +249,12 @@ script Route120_EventScript_StevenAskReadyForBattle {
 script Route120_EventScript_StevenBattleKecleon {
     msgbox(Route120_Text_StevenShowMeYourPower, MSGBOX_DEFAULT)
     closemessage
-    if (var(VAR_FACING) == DIR_NORTH) call(Route120_EventScript_PlayerApproachKecleonNorth)
-    if (var(VAR_FACING) == DIR_WEST) call(Route120_EventScript_PlayerApproachKecleonWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(Route120_EventScript_PlayerApproachKecleonNorth)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(Route120_EventScript_PlayerApproachKecleonWest)
+    }
     applymovement(LOCALID_ROUTE120_STEVEN, Common_Movement_WalkInPlaceFasterLeft)
     waitmovement(0)
     delay(20)
@@ -222,9 +274,15 @@ script Route120_EventScript_StevenBattleKecleon {
     dowildbattle()
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(Route120_EventScript_RemoveBridgeKecleonPostBattle)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(Route120_EventScript_RemoveBridgeKecleonPostBattle)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(Route120_EventScript_RemoveBridgeKecleonPostBattle)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(Route120_EventScript_RemoveBridgeKecleonPostBattle)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(Route120_EventScript_RemoveBridgeKecleonPostBattle)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(Route120_EventScript_RemoveBridgeKecleonPostBattle)
+    }
     goto(Route120_EventScript_StevenGiveDeconScope)
     end
 }
@@ -306,7 +364,9 @@ script Route120_EventScript_Colin {
 script Route120_EventScript_Robert {
     trainerbattle_single(TRAINER_ROBERT_1, Route120_Text_RobertIntro, Route120_Text_RobertDefeat, Route120_EventScript_RegisterRobert)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route120_EventScript_RematchRobert)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route120_EventScript_RematchRobert)
+    }
     msgbox(Route120_Text_RobertPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -342,7 +402,9 @@ script Route120_EventScript_Jenna {
 script Route120_EventScript_Jeffrey {
     trainerbattle_single(TRAINER_JEFFREY_1, Route120_Text_JeffreyIntro, Route120_Text_JeffreyDefeat, Route120_EventScript_RegisterJeffrey)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route120_EventScript_RematchJeffrey)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route120_EventScript_RematchJeffrey)
+    }
     msgbox(Route120_Text_JeffreyPostBattle, MSGBOX_DEFAULT)
     release
     end

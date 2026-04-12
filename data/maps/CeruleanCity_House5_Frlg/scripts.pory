@@ -3,14 +3,22 @@ mapscripts CeruleanCity_House5_Frlg_MapScripts {}
 script CeruleanCity_House5_EventScript_BerryPowderMan {
     lock
     faceplayer
-    if (flag(FLAG_GOT_POWDER_JAR)) goto(CeruleanCity_House5_EventScript_AskToExchangePowder)
+    if (flag(FLAG_GOT_POWDER_JAR)) {
+        goto(CeruleanCity_House5_EventScript_AskToExchangePowder)
+    }
     msgbox(CeruleanCity_House1_Text_AnyInterestInBerries, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(CeruleanCity_House5_EventScript_NoInterestInBerries)
-    if (!flag(FLAG_SYS_GOT_BERRY_POUCH)) goto(CeruleanCity_House5_EventScript_NoBerries)
+    if (var(VAR_RESULT) == NO) {
+        goto(CeruleanCity_House5_EventScript_NoInterestInBerries)
+    }
+    if (!flag(FLAG_SYS_GOT_BERRY_POUCH)) {
+        goto(CeruleanCity_House5_EventScript_NoBerries)
+    }
     msgbox(CeruleanCity_House1_Text_HaveJustTheThing)
     setflag(FLAG_GOT_POWDER_JAR)
     giveitem(ITEM_POWDER_JAR)
-    if (var(VAR_RESULT) == FALSE) goto(EventScript_BagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(EventScript_BagIsFull)
+    }
     msgbox(CeruleanCity_House1_Text_GoCrushBerriesAtDirectCorner)
     release
     end
@@ -155,17 +163,25 @@ script CeruleanCity_House5_EventScript_ExitMenu {
 
 script CeruleanCity_House5_EventScript_ExchangePowderForItem {
     msgbox(CeruleanCity_House1_Text_YoullExchangeBerryPowderForItem, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(CeruleanCity_House5_EventScript_ChooseExchangeItem)
+    if (var(VAR_RESULT) == NO) {
+        goto(CeruleanCity_House5_EventScript_ChooseExchangeItem)
+    }
     copyvar(VAR_0x8004, VAR_0x8009)
     specialvar(VAR_RESULT, HasEnoughBerryPowder)
-    if (var(VAR_RESULT) == FALSE) goto(CeruleanCity_House5_EventScript_NotEnoughBerryPowder)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(CeruleanCity_House5_EventScript_NotEnoughBerryPowder)
+    }
     giveitem(VAR_0x8008)
-    if (var(VAR_RESULT) == FALSE) goto(CeruleanCity_House5_EventScript_BagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(CeruleanCity_House5_EventScript_BagIsFull)
+    }
     copyvar(VAR_0x8004, VAR_0x8009)
     special(TakeBerryPowder)
     special(PrintPlayerBerryPowderAmount)
     msgbox(CeruleanCity_House1_Text_TradeMoreBerryPowder, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(CeruleanCity_House5_EventScript_ChooseExchangeItem)
+    if (var(VAR_RESULT) == YES) {
+        goto(CeruleanCity_House5_EventScript_ChooseExchangeItem)
+    }
     msgbox(CeruleanCity_House1_Text_HopeToSeeYouAgain)
     special(RemoveBerryPowderVendorMenu)
     release

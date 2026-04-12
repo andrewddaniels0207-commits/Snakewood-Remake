@@ -4,8 +4,12 @@ mapscripts VermilionCity_Gym_Frlg_MapScripts {
 }
 
 script VermilionCity_Gym_OnLoad {
-    if (flag(FOUND_FIRST_SWITCH)) call(VermilionCity_Gym_EventScript_SetOneBeamOff)
-    if (flag(FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES)) call(VermilionCity_Gym_EventScript_SetBeamsOff)
+    if (flag(FOUND_FIRST_SWITCH)) {
+        call(VermilionCity_Gym_EventScript_SetOneBeamOff)
+    }
+    if (flag(FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES)) {
+        call(VermilionCity_Gym_EventScript_SetBeamsOff)
+    }
     end
 }
 
@@ -43,7 +47,9 @@ script VermilionCity_Gym_OnTransition {
 }
 
 script VermilionCity_Gym_EventScript_InitTrashCans {
-    if (flag(FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES)) goto(Common_EventScript_NopReturn)
+    if (flag(FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES)) {
+        goto(Common_EventScript_NopReturn)
+    }
     special(SetVermilionTrashCans)
     copyvar(VAR_TEMP_0, SWITCH1_ID)
     copyvar(VAR_TEMP_1, SWITCH2_ID)
@@ -158,9 +164,15 @@ script VermilionCity_Gym_EventScript_TrashCan15 {
 script VermilionCity_Gym_EventScript_TrashCan {
     copyvar(SWITCH1_ID, VAR_TEMP_0)
     copyvar(SWITCH2_ID, VAR_TEMP_1)
-    if (flag(FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES)) goto(VermilionCity_Gym_EventScript_LocksAlreadyOpen)
-    if (flag(FOUND_FIRST_SWITCH)) goto(VermilionCity_Gym_EventScript_TrySwitchTwo)
-    if (var(SWITCH1_ID) == TRASH_CAN_ID) goto(VermilionCity_Gym_EventScript_FoundSwitchOne)
+    if (flag(FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES)) {
+        goto(VermilionCity_Gym_EventScript_LocksAlreadyOpen)
+    }
+    if (flag(FOUND_FIRST_SWITCH)) {
+        goto(VermilionCity_Gym_EventScript_TrySwitchTwo)
+    }
+    if (var(SWITCH1_ID) == TRASH_CAN_ID) {
+        goto(VermilionCity_Gym_EventScript_FoundSwitchOne)
+    }
     msgbox(VermilionCity_Gym_Text_NopeOnlyTrashHere)
     releaseall
     end
@@ -178,7 +190,9 @@ script VermilionCity_Gym_EventScript_FoundSwitchOne {
 }
 
 script VermilionCity_Gym_EventScript_TrySwitchTwo {
-    if (var(SWITCH2_ID) == TRASH_CAN_ID) goto(VermilionCity_Gym_EventScript_FoundSwitchTwo)
+    if (var(SWITCH2_ID) == TRASH_CAN_ID) {
+        goto(VermilionCity_Gym_EventScript_FoundSwitchTwo)
+    }
     msgbox(VermilionCity_Gym_Text_OnlyTrashLocksWereReset)
     clearflag(FOUND_FIRST_SWITCH)
     special(SetVermilionTrashCans)
@@ -225,7 +239,9 @@ script VermilionCity_Gym_EventScript_SetBeamsOn {
 script VermilionCity_Gym_EventScript_LtSurge {
     famechecker(FAMECHECKER_LTSURGE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
     trainerbattle_single(TRAINER_LEADER_LT_SURGE, VermilionCity_Gym_Text_LtSurgeIntro, VermilionCity_Gym_Text_LtSurgeDefeat, VermilionCity_Gym_EventScript_DefeatedLtSurge, NO_MUSIC)
-    if (!flag(FLAG_GOT_TM34_FROM_SURGE)) goto(VermilionCity_Gym_EventScript_GiveTM34)
+    if (!flag(FLAG_GOT_TM34_FROM_SURGE)) {
+        goto(VermilionCity_Gym_EventScript_GiveTM34)
+    }
     msgbox(VermilionCity_Gym_Text_LtSurgePostBattle)
     release
     end
@@ -233,7 +249,9 @@ script VermilionCity_Gym_EventScript_LtSurge {
 
 script VermilionCity_Gym_EventScript_DefeatedLtSurge {
     famechecker(FAMECHECKER_LTSURGE, 1)
-    if (!flag(FLAG_GOT_HM05)) call(VermilionCity_Gym_EventScript_ShowOaksAide)
+    if (!flag(FLAG_GOT_HM05)) {
+        call(VermilionCity_Gym_EventScript_ShowOaksAide)
+    }
     clearflag(FLAG_HIDE_FAME_CHECKER_LT_SURGE_JOURNAL)
     setflag(FLAG_DEFEATED_LT_SURGE)
     setflag(FLAG_BADGE03_GET)
@@ -250,7 +268,9 @@ script VermilionCity_Gym_EventScript_ShowOaksAide {
 script VermilionCity_Gym_EventScript_GiveTM34 {
     msgbox(VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis)
     checkitemspace(ITEM_TM34)
-    if (var(VAR_RESULT) == FALSE) goto(VermilionCity_Gym_EventScript_NoRoomForTM34)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(VermilionCity_Gym_EventScript_NoRoomForTM34)
+    }
     giveitem_msg(VermilionCity_Gym_Text_ReceivedTM34FromLtSurge, ITEM_TM34)
     setflag(FLAG_GOT_TM34_FROM_SURGE)
     msgbox(VermilionCity_Gym_Text_ExplainTM34)
@@ -293,7 +313,9 @@ script VermilionCity_Gym_EventScript_DefeatedTucker {
 script VermilionCity_Gym_EventScript_GymGuy {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_LT_SURGE)) goto(VermilionCity_Gym_EventScript_GymGuyPostVictory)
+    if (flag(FLAG_DEFEATED_LT_SURGE)) {
+        goto(VermilionCity_Gym_EventScript_GymGuyPostVictory)
+    }
     msgbox(VermilionCity_Gym_Text_GymGuyAdvice)
     release
     end
@@ -307,7 +329,9 @@ script VermilionCity_Gym_EventScript_GymGuyPostVictory {
 
 script VermilionCity_Gym_EventScript_GymStatue {
     lockall
-    if (flag(FLAG_BADGE03_GET)) goto(VermilionCity_Gym_EventScript_GymStatuePostVictory)
+    if (flag(FLAG_BADGE03_GET)) {
+        goto(VermilionCity_Gym_EventScript_GymStatuePostVictory)
+    }
     msgbox(VermilionCity_Gym_Text_GymStatue)
     releaseall
     end

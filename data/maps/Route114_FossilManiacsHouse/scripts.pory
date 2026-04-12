@@ -10,10 +10,14 @@ script Route114_FossilManiacsHouse_OnTransition {
 script Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_TM_DIG)) goto(Route114_FossilManiacsHouse_EventScript_ReceivedDig)
+    if (flag(FLAG_RECEIVED_TM_DIG)) {
+        goto(Route114_FossilManiacsHouse_EventScript_ReceivedDig)
+    }
     msgbox(Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother, MSGBOX_DEFAULT)
     giveitem(ITEM_TM_DIG)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_TM_DIG)
     release
     end

@@ -23,11 +23,21 @@ script ContestHall_OnTransition {
 script ContestHall_EventScript_ReadyContestMusic {
     call(ContestHall_EventScript_TryWaitForLink)
     special(GetContestMultiplayerId)
-    if (var(VAR_RESULT) == 0) call(ContestHall_EventScript_SaveContestMusicPlayer1)
-    if (var(VAR_RESULT) == 1) call(ContestHall_EventScript_SaveContestMusicPlayer2)
-    if (var(VAR_RESULT) == 2) call(ContestHall_EventScript_SaveContestMusicPlayer3)
-    if (var(VAR_RESULT) == 3) call(ContestHall_EventScript_SaveContestMusicPlayer4)
-    if (var(VAR_RESULT) == 4) call(ContestHall_EventScript_SaveContestMusic)
+    if (var(VAR_RESULT) == 0) {
+        call(ContestHall_EventScript_SaveContestMusicPlayer1)
+    }
+    if (var(VAR_RESULT) == 1) {
+        call(ContestHall_EventScript_SaveContestMusicPlayer2)
+    }
+    if (var(VAR_RESULT) == 2) {
+        call(ContestHall_EventScript_SaveContestMusicPlayer3)
+    }
+    if (var(VAR_RESULT) == 3) {
+        call(ContestHall_EventScript_SaveContestMusicPlayer4)
+    }
+    if (var(VAR_RESULT) == 4) {
+        call(ContestHall_EventScript_SaveContestMusic)
+    }
     return
 }
 
@@ -57,7 +67,9 @@ script ContestHall_EventScript_SaveContestMusic {
 }
 
 script ContestHall_OnResume {
-    if (var(VAR_TEMP_9) == 1) call(ContestHall_EventScript_ReShowAudience)
+    if (var(VAR_TEMP_9) == 1) {
+        call(ContestHall_EventScript_ReShowAudience)
+    }
     end
 }
 
@@ -89,7 +101,9 @@ script ContestHall_EventScript_SetContestObjects {
 script ContestHall_EventScript_AddRandomAudienceMembers {
     call(ContestHall_EventScript_GetRandomAudienceGfxId)
     call(ContestHall_EventScript_SetRandomAudienceGfx)
-    if (var(VAR_TEMP_0) < 8) goto(ContestHall_EventScript_AddRandomAudienceMembers)
+    if (var(VAR_TEMP_0) < 8) {
+        goto(ContestHall_EventScript_AddRandomAudienceMembers)
+    }
     return
 }
 
@@ -349,7 +363,9 @@ script ContestHall_EventScript_RandomAudienceScientist1 {
 
 script ContestHall_EventScript_CreateAudience {
     specialvar(VAR_RESULT, IsWirelessContest)
-    if (var(VAR_RESULT) == TRUE) goto(ContestHall_EventScript_CreateWirelessContestAudience)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(ContestHall_EventScript_CreateWirelessContestAudience)
+    }
     switch(VAR_CONTEST_TYPE)
     case(CONTEST_TYPE_NPC_NORMAL, ContestHall_EventScript_CreateNormalContestAudience)
     case(CONTEST_TYPE_NPC_SUPER, ContestHall_EventScript_CreateSuperContestAudience)
@@ -501,8 +517,12 @@ script ContestHall_EventScript_SetExitWarpLinkContest {
 
 script LilycoveCity_ContestLobby_EventScript_SetPlayerGfx {
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan)
-    if (var(VAR_RESULT) == FEMALE) goto(LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay)
+    if (var(VAR_RESULT) == MALE) {
+        goto(LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay)
+    }
     return
 }
 

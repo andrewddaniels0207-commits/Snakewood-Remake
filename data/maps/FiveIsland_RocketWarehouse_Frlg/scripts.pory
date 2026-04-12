@@ -21,7 +21,9 @@ script FiveIsland_RocketWarehouse_EventScript_SetArrowsForReEntry {
 
 script FiveIsland_RocketWarehouse_EventScript_Cage {
     lockall
-    if (flag(FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE)) goto(FiveIsland_RocketWarehouse_EventScript_CageUnlocked)
+    if (flag(FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE)) {
+        goto(FiveIsland_RocketWarehouse_EventScript_CageUnlocked)
+    }
     msgbox(FiveIsland_RocketWarehouse_Text_ManyMonsLockedInPen)
     releaseall
     end
@@ -49,7 +51,9 @@ script FiveIsland_RocketWarehouse_EventScript_Admin2Trigger {
 
 script FiveIsland_RocketWarehouse_EventScript_Gideon {
     trainerbattle_single(TRAINER_SCIENTIST_GIDEON, FiveIsland_RocketWarehouse_Text_GideonIntro, FiveIsland_RocketWarehouse_Text_GideonDefeat, FiveIsland_RocketWarehouse_EventScript_DefeatedGideon)
-    if (flag(FLAG_IS_CHAMPION)) goto(FiveIsland_RocketWarehouse_EventScript_MentionGiovannisKid)
+    if (flag(FLAG_IS_CHAMPION)) {
+        goto(FiveIsland_RocketWarehouse_EventScript_MentionGiovannisKid)
+    }
     msgbox(FiveIsland_RocketWarehouse_Text_GetLostLeaveMeBe, MSGBOX_AUTOCLOSE)
     end
 }
@@ -88,7 +92,9 @@ script FiveIsland_RocketWarehouse_EventScript_Admin2 {
 
 script FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin2 {
     getplayerxy(PLAYER_X_POS, PLAYER_Y_POS)
-    if (var(PLAYER_X_POS) <= 24) call(FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin2)
+    if (var(PLAYER_X_POS) <= 24) {
+        call(FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin2)
+    }
     msgbox(FiveIsland_RocketWarehouse_Text_Admin2PostBattle)
     closemessage
     fadescreen(FADE_TO_BLACK)
@@ -125,28 +131,48 @@ script FiveIsland_RocketWarehouse_EventScript_Admin1 {
 script FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin1 {
     getplayerxy(PLAYER_X_POS, PLAYER_Y_POS)
     specialvar(VAR_RESULT, GetPlayerFacingDirection)
-    if (var(VAR_RESULT) == DIR_NORTH) call(FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin1)
+    if (var(VAR_RESULT) == DIR_NORTH) {
+        call(FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin1)
+    }
     msgbox(FiveIsland_RocketWarehouse_Text_Admin1PostBattle)
     closemessage
-    if (var(PLAYER_X_POS) <= 24) call(FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitchFar)
-    if (var(PLAYER_X_POS) == 25) call(FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitch)
-    if (var(PLAYER_X_POS) == 26) call(FiveIsland_RocketWarehouse_EventScript_AdminFaceSwitch)
-    if (var(PLAYER_X_POS) == 27) call(FiveIsland_RocketWarehouse_EventScript_AdminFaceSwitch)
+    if (var(PLAYER_X_POS) <= 24) {
+        call(FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitchFar)
+    }
+    if (var(PLAYER_X_POS) == 25) {
+        call(FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitch)
+    }
+    if (var(PLAYER_X_POS) == 26) {
+        call(FiveIsland_RocketWarehouse_EventScript_AdminFaceSwitch)
+    }
+    if (var(PLAYER_X_POS) == 27) {
+        call(FiveIsland_RocketWarehouse_EventScript_AdminFaceSwitch)
+    }
     playse(SE_PIN)
     call(FiveIsland_RocketWarehouse_EventScript_SetArrowsForReEntry)
     special(DrawWholeMapView)
     waitse()
-    if (var(PLAYER_X_POS) <= 24) call(FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft)
-    if (var(PLAYER_X_POS) == 25) call(FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft)
-    if (var(PLAYER_X_POS) == 26) call(FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft)
-    if (var(PLAYER_X_POS) == 27) call(FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerDown)
+    if (var(PLAYER_X_POS) <= 24) {
+        call(FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft)
+    }
+    if (var(PLAYER_X_POS) == 25) {
+        call(FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft)
+    }
+    if (var(PLAYER_X_POS) == 26) {
+        call(FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft)
+    }
+    if (var(PLAYER_X_POS) == 27) {
+        call(FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerDown)
+    }
     msgbox(FiveIsland_RocketWarehouse_Text_MadeItSoYouCanComeBackThrough)
     release
     end
 }
 
 script FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin1 {
-    if (var(PLAYER_X_POS) == 27) goto(Common_EventScript_NopReturn)
+    if (var(PLAYER_X_POS) == 27) {
+        goto(Common_EventScript_NopReturn)
+    }
     applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
     waitmovement(0)
     return

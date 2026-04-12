@@ -4,14 +4,22 @@ mapscripts SilphCo_7F_Frlg_MapScripts {
 }
 
 script SilphCo_7F_OnLoad {
-    if (!flag(FLAG_SILPH_7F_DOOR_1)) call(EventScript_Close7FDoor1)
-    if (!flag(FLAG_SILPH_7F_DOOR_2)) call(EventScript_Close7FDoor2)
-    if (!flag(FLAG_SILPH_7F_DOOR_3)) call(EventScript_Close7FDoor3)
+    if (!flag(FLAG_SILPH_7F_DOOR_1)) {
+        call(EventScript_Close7FDoor1)
+    }
+    if (!flag(FLAG_SILPH_7F_DOOR_2)) {
+        call(EventScript_Close7FDoor2)
+    }
+    if (!flag(FLAG_SILPH_7F_DOOR_3)) {
+        call(EventScript_Close7FDoor3)
+    }
     end
 }
 
 script SilphCo_7F_OnTransition {
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) call(SilphCo_7F_EventScript_SetObjRocketsGone)
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
+        call(SilphCo_7F_EventScript_SetObjRocketsGone)
+    }
     end
 }
 
@@ -43,18 +51,32 @@ script SilphCo_7F_EventScript_RivalScene {
     applymovement(LOCALID_SILPH_CO_RIVAL, Common_Movement_Delay48)
     waitmovement(0)
     msgbox(SilphCo_7F_Text_RivalWhatKeptYou)
-    if (var(VAR_TEMP_1) == 0) call(SilphCo_7F_EventScript_RivalApproachTop)
-    if (var(VAR_TEMP_1) == 1) call(SilphCo_7F_EventScript_RivalApproachBottom)
+    if (var(VAR_TEMP_1) == 0) {
+        call(SilphCo_7F_EventScript_RivalApproachTop)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(SilphCo_7F_EventScript_RivalApproachBottom)
+    }
     msgbox(SilphCo_7F_Text_RivalIntro)
     setvar(VAR_LAST_TALKED, LOCALID_SILPH_CO_RIVAL)
-    if (var(VAR_STARTER_MON) == 2) call(SilphCo_7F_EventScript_RivalSquirtle)
-    if (var(VAR_STARTER_MON) == 1) call(SilphCo_7F_EventScript_RivalBulbasaur)
-    if (var(VAR_STARTER_MON) == 0) call(SilphCo_7F_EventScript_RivalCharmander)
+    if (var(VAR_STARTER_MON) == 2) {
+        call(SilphCo_7F_EventScript_RivalSquirtle)
+    }
+    if (var(VAR_STARTER_MON) == 1) {
+        call(SilphCo_7F_EventScript_RivalBulbasaur)
+    }
+    if (var(VAR_STARTER_MON) == 0) {
+        call(SilphCo_7F_EventScript_RivalCharmander)
+    }
     msgbox(SilphCo_7F_Text_RivalPostBattle)
     closemessage
     playbgm(MUS_RG_RIVAL_EXIT, 0)
-    if (var(VAR_TEMP_1) == 0) call(SilphCo_7F_EventScript_RivalExitTop)
-    if (var(VAR_TEMP_1) == 1) call(SilphCo_7F_EventScript_RivalExitBottom)
+    if (var(VAR_TEMP_1) == 0) {
+        call(SilphCo_7F_EventScript_RivalExitTop)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(SilphCo_7F_EventScript_RivalExitBottom)
+    }
     playse(SE_WARP_IN)
     fadedefaultbgm()
     removeobject(LOCALID_SILPH_CO_RIVAL)
@@ -131,13 +153,21 @@ movement SilphCo_7F_Movement_RivalExitBottom {
 script SilphCo_7F_EventScript_LaprasGuy {
     lock
     faceplayer
-    if (flag(FLAG_GOT_LAPRAS_FROM_SILPH)) goto(SilphCo_7F_EventScript_AlreadyGotLapras)
+    if (flag(FLAG_GOT_LAPRAS_FROM_SILPH)) {
+        goto(SilphCo_7F_EventScript_AlreadyGotLapras)
+    }
     msgbox(SilphCo_7F_Text_HaveMonForSavingUs)
     setvar(VAR_TEMP_1, SPECIES_LAPRAS)
     givemon(SPECIES_LAPRAS, 25)
-    if (var(VAR_RESULT) == 0) goto(SilphCo_7F_EventScript_ReceiveLaprasParty)
-    if (var(VAR_RESULT) == 1) goto(SilphCo_7F_EventScript_ReceiveLaprasPC)
-    if (var(VAR_RESULT) == 2) goto(Common_EventScript_NoMoreRoomForPokemon)
+    if (var(VAR_RESULT) == 0) {
+        goto(SilphCo_7F_EventScript_ReceiveLaprasParty)
+    }
+    if (var(VAR_RESULT) == 1) {
+        goto(SilphCo_7F_EventScript_ReceiveLaprasPC)
+    }
+    if (var(VAR_RESULT) == 2) {
+        goto(Common_EventScript_NoMoreRoomForPokemon)
+    }
     release
     end
 }
@@ -150,7 +180,9 @@ script SilphCo_7F_EventScript_ReceiveLaprasParty {
     waitfanfare()
     bufferspeciesname(STR_VAR_1, SPECIES_LAPRAS)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(SilphCo_7F_EventScript_EndReceiveLapras)
+    if (var(VAR_RESULT) == NO) {
+        goto(SilphCo_7F_EventScript_EndReceiveLapras)
+    }
     call(Common_EventScript_GetGiftMonPartySlot)
     call(Common_EventScript_NameReceivedPartyMon)
     goto(SilphCo_7F_EventScript_EndReceiveLapras)
@@ -165,7 +197,9 @@ script SilphCo_7F_EventScript_ReceiveLaprasPC {
     waitfanfare()
     bufferspeciesname(STR_VAR_1, SPECIES_LAPRAS)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(SilphCo_7F_EventScript_LaprasTransferredToPC)
+    if (var(VAR_RESULT) == NO) {
+        goto(SilphCo_7F_EventScript_LaprasTransferredToPC)
+    }
     call(Common_EventScript_NameReceivedBoxMon)
     goto(SilphCo_7F_EventScript_LaprasTransferredToPC)
     end
@@ -194,7 +228,9 @@ script SilphCo_7F_EventScript_AlreadyGotLapras {
 script SilphCo_7F_EventScript_WorkerM1 {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) goto(SilphCo_7F_EventScript_WorkerM1RocketsGone)
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
+        goto(SilphCo_7F_EventScript_WorkerM1RocketsGone)
+    }
     msgbox(SilphCo_7F_Text_RocketsAfterMasterBall)
     release
     end
@@ -209,7 +245,9 @@ script SilphCo_7F_EventScript_WorkerM1RocketsGone {
 script SilphCo_7F_EventScript_WorkerM2 {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) goto(SilphCo_7F_EventScript_WorkerM2RocketsGone)
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
+        goto(SilphCo_7F_EventScript_WorkerM2RocketsGone)
+    }
     msgbox(SilphCo_7F_Text_BadIfTeamRocketTookOver)
     release
     end
@@ -224,7 +262,9 @@ script SilphCo_7F_EventScript_WorkerM2RocketsGone {
 script SilphCo_7F_EventScript_WorkerF {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) goto(SilphCo_7F_EventScript_WorkerFRocketsGone)
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
+        goto(SilphCo_7F_EventScript_WorkerFRocketsGone)
+    }
     msgbox(SilphCo_7F_Text_ReallyDangerousHere)
     release
     end

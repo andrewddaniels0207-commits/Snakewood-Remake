@@ -13,8 +13,12 @@ script FallarborTown_BattleTentBattleRoom_OnTransition {
 
 script FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfx {
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale)
-    if (var(VAR_RESULT) == FEMALE) goto(FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale)
+    if (var(VAR_RESULT) == MALE) {
+        goto(FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale)
+    }
     return
 }
 
@@ -36,7 +40,9 @@ script FallarborTown_BattleTentBattleRoom_EventScript_EnterRoom {
     applymovement(LOCALID_FALLARBOR_TENT_BATTLE_PLAYER, FallarborTown_BattleTentBattleRoom_Movement_PlayerEnter)
     waitmovement(0)
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
-    if (var(VAR_RESULT) != 0) goto(FallarborTown_BattleTentBattleRoom_EventScript_ResumeChallenge)
+    if (var(VAR_RESULT) != 0) {
+        goto(FallarborTown_BattleTentBattleRoom_EventScript_ResumeChallenge)
+    }
 }
 
 script FallarborTown_BattleTentBattleRoom_EventScript_NextOpponentEnter {
@@ -103,8 +109,12 @@ script FallarborTown_BattleTentBattleRoom_EventScript_IncrementBattleNum {
 
 script FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge {
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
-    if (var(VAR_RESULT) == 1) call(FallarborTown_BattleTentBattleRoom_EventScript_ReadyFor2ndOpponent)
-    if (var(VAR_RESULT) == 2) call(FallarborTown_BattleTentBattleRoom_EventScript_ReadyFor3rdOpponent)
+    if (var(VAR_RESULT) == 1) {
+        call(FallarborTown_BattleTentBattleRoom_EventScript_ReadyFor2ndOpponent)
+    }
+    if (var(VAR_RESULT) == 2) {
+        call(FallarborTown_BattleTentBattleRoom_EventScript_ReadyFor3rdOpponent)
+    }
     multichoice(20, 6, MULTI_GO_ON_REST_RETIRE, TRUE)
     switch(VAR_RESULT)
     case(0, FallarborTown_BattleTentBattleRoom_EventScript_ContinueChallenge)
@@ -147,7 +157,9 @@ script FallarborTown_BattleTentBattleRoom_EventScript_WarpToLobbyWon {
     warp(MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 6, 6)
     waitstate
     arena_get(ARENA_DATA_WIN_STREAK)
-    if (var(VAR_RESULT) == MAX_STREAK) goto(FallarborTown_BattleTentBattleRoom_EventScript_IncrementBattleNum)
+    if (var(VAR_RESULT) == MAX_STREAK) {
+        goto(FallarborTown_BattleTentBattleRoom_EventScript_IncrementBattleNum)
+    }
     addvar(VAR_RESULT, 1)
     arena_set(ARENA_DATA_WIN_STREAK, VAR_RESULT)
 }

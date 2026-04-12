@@ -7,16 +7,28 @@ mapscripts Route125_MapScripts {
 }
 
 script Route125_OnTransition {
-    if (flag(FLAG_SYS_WEATHER_CTRL)) call(Common_EventScript_SetAbnormalWeather)
-    if (var(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1) call(AbnormalWeather_EventScript_HideMapNamePopup)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_125_WEST) call(AbnormalWeather_StartKyogreWeather)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_125_EAST) call(AbnormalWeather_StartKyogreWeather)
+    if (flag(FLAG_SYS_WEATHER_CTRL)) {
+        call(Common_EventScript_SetAbnormalWeather)
+    }
+    if (var(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1) {
+        call(AbnormalWeather_EventScript_HideMapNamePopup)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_125_WEST) {
+        call(AbnormalWeather_StartKyogreWeather)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_125_EAST) {
+        call(AbnormalWeather_StartKyogreWeather)
+    }
     end
 }
 
 script Route125_OnLoad {
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_125_WEST) call(AbnormalWeather_EventScript_PlaceTilesRoute125West)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_125_EAST) call(AbnormalWeather_EventScript_PlaceTilesRoute125East)
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_125_WEST) {
+        call(AbnormalWeather_EventScript_PlaceTilesRoute125West)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_125_EAST) {
+        call(AbnormalWeather_EventScript_PlaceTilesRoute125East)
+    }
     end
 }
 
@@ -47,7 +59,9 @@ script Route125_EventScript_Sharon {
 script Route125_EventScript_Ernest {
     trainerbattle_single(TRAINER_ERNEST_1, Route125_Text_ErnestIntro, Route125_Text_ErnestDefeat, Route125_EventScript_RegisterErnest)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route125_EventScript_RematchErnest)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route125_EventScript_RematchErnest)
+    }
     msgbox(Route125_Text_ErnestPostBattle, MSGBOX_DEFAULT)
     release
     end

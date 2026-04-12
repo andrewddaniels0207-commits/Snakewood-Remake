@@ -2,7 +2,9 @@ mapscripts Route110_TrickHousePuzzle8_MapScripts {}
 
 script Route110_TrickHousePuzzle8_EventScript_Scroll {
     lockall
-    if (var(VAR_TRICK_HOUSE_PUZZLE_8_STATE) == 0) goto(Route110_TrickHousePuzzle8_EventScript_FoundScroll)
+    if (var(VAR_TRICK_HOUSE_PUZZLE_8_STATE) == 0) {
+        goto(Route110_TrickHousePuzzle8_EventScript_FoundScroll)
+    }
     goto(Route110_TrickHousePuzzle_EventScript_ReadScrollAgain)
     end
 }

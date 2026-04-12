@@ -24,11 +24,17 @@ script Route4_PokemonCenter_1F_EventScript_Gentleman {
 script Route4_PokemonCenter_1F_EventScript_MagikarpSalesman {
     lock
     faceplayer
-    if (flag(FLAG_BOUGHT_MAGIKARP)) goto(Route4_PokemonCenter_1F_EventScript_AlreadyBoughtMagikarp)
+    if (flag(FLAG_BOUGHT_MAGIKARP)) {
+        goto(Route4_PokemonCenter_1F_EventScript_AlreadyBoughtMagikarp)
+    }
     showmoneybox(0, 0)
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpMale)
-    if (var(VAR_RESULT) == FEMALE) goto(Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpFemale)
+    if (var(VAR_RESULT) == MALE) {
+        goto(Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpMale)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpFemale)
+    }
     end
 }
 
@@ -45,22 +51,34 @@ script Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpFemale {
 }
 
 script Route4_PokemonCenter_1F_EventScript_TryBuyMagikarp {
-    if (var(VAR_RESULT) == NO) goto(Route4_PokemonCenter_1F_EventScript_DeclineMagikarp)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route4_PokemonCenter_1F_EventScript_DeclineMagikarp)
+    }
     checkmoney(MAGIKARP_PRICE)
-    if (var(VAR_RESULT) == FALSE) goto(Route4_PokemonCenter_1F_EventScript_NotEnoughMoney)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route4_PokemonCenter_1F_EventScript_NotEnoughMoney)
+    }
     textcolor(NPC_TEXT_COLOR_NEUTRAL)
     setvar(VAR_TEMP_1, SPECIES_MAGIKARP)
     givemon(SPECIES_MAGIKARP, 5)
-    if (var(VAR_RESULT) == 0) goto(Route4_PokemonCenter_1F_EventScript_BuyMagikarpParty)
-    if (var(VAR_RESULT) == 1) goto(Route4_PokemonCenter_1F_EventScript_BuyMagikarpPC)
-    if (var(VAR_RESULT) == 2) goto(Route4_PokemonCenter_1F_EventScript_NoRoomForMagikarp)
+    if (var(VAR_RESULT) == 0) {
+        goto(Route4_PokemonCenter_1F_EventScript_BuyMagikarpParty)
+    }
+    if (var(VAR_RESULT) == 1) {
+        goto(Route4_PokemonCenter_1F_EventScript_BuyMagikarpPC)
+    }
+    if (var(VAR_RESULT) == 2) {
+        goto(Route4_PokemonCenter_1F_EventScript_NoRoomForMagikarp)
+    }
     end
 }
 
 script Route4_PokemonCenter_1F_EventScript_BuyMagikarpParty {
     call(Route4_PokemonCenter_1F_EventScript_PayForMagikarp)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route4_PokemonCenter_1F_EventScript_EndPurchaseMagikarp)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route4_PokemonCenter_1F_EventScript_EndPurchaseMagikarp)
+    }
     call(Common_EventScript_GetGiftMonPartySlot)
     fadescreen(FADE_TO_BLACK)
     hidemoneybox()
@@ -73,7 +91,9 @@ script Route4_PokemonCenter_1F_EventScript_BuyMagikarpParty {
 script Route4_PokemonCenter_1F_EventScript_BuyMagikarpPC {
     call(Route4_PokemonCenter_1F_EventScript_PayForMagikarp)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route4_PokemonCenter_1F_EventScript_TransferMagikarpCloseMoneyBox)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route4_PokemonCenter_1F_EventScript_TransferMagikarpCloseMoneyBox)
+    }
     fadescreen(FADE_TO_BLACK)
     hidemoneybox()
     special(ChangePokemonNickname)

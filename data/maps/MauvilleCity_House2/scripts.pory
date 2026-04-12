@@ -3,10 +3,14 @@ mapscripts MauvilleCity_House2_MapScripts {}
 script MauvilleCity_House2_EventScript_Woman {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_COIN_CASE)) goto(MauvilleCity_House2_EventScript_ReceivedCoinCase)
+    if (flag(FLAG_RECEIVED_COIN_CASE)) {
+        goto(MauvilleCity_House2_EventScript_ReceivedCoinCase)
+    }
     msgbox(MauvilleCity_House2_Text_BuyHarborMailAtSlateport, MSGBOX_DEFAULT)
     checkitem(ITEM_HARBOR_MAIL)
-    if (var(VAR_RESULT) == TRUE) goto(MauvilleCity_House2_EventScript_AskToTradeForHarborMail)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(MauvilleCity_House2_EventScript_AskToTradeForHarborMail)
+    }
     release
     end
 }
@@ -18,15 +22,21 @@ script MauvilleCity_House2_EventScript_AskToTradeForHarborMail {
     applymovement(VAR_LAST_TALKED, Common_Movement_Delay48)
     waitmovement(0)
     msgbox(MauvilleCity_House2_Text_TradeHarborMailForCoinCase, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(MauvilleCity_House2_EventScript_AcceptTrade)
-    if (var(VAR_RESULT) == NO) goto(MauvilleCity_House2_EventScript_DeclineTrade)
+    if (var(VAR_RESULT) == YES) {
+        goto(MauvilleCity_House2_EventScript_AcceptTrade)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(MauvilleCity_House2_EventScript_DeclineTrade)
+    }
     end
 }
 
 script MauvilleCity_House2_EventScript_AcceptTrade {
     msgbox(MauvilleCity_House2_Text_IllTradeYouCoinCase, MSGBOX_DEFAULT)
     giveitem(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     removeitem(ITEM_HARBOR_MAIL)
     setflag(FLAG_RECEIVED_COIN_CASE)
     goto(MauvilleCity_House2_EventScript_ReceivedCoinCase)

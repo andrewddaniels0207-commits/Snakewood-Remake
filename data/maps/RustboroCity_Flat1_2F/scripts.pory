@@ -4,31 +4,47 @@ script RustboroCity_Flat1_2F_EventScript_WaldasDad {
     lock
     faceplayer
     specialvar(VAR_RESULT, TryBufferWaldaPhrase)
-    if (var(VAR_RESULT) == FALSE) goto(RustboroCity_Flat1_2F_EventScript_WaldasDadFirstPhrase)
-    if (var(VAR_RESULT) == TRUE) goto(RustboroCity_Flat1_2F_EventScript_WaldasDadNewPhrase)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(RustboroCity_Flat1_2F_EventScript_WaldasDadFirstPhrase)
+    }
+    if (var(VAR_RESULT) == TRUE) {
+        goto(RustboroCity_Flat1_2F_EventScript_WaldasDadNewPhrase)
+    }
 }
 
 script RustboroCity_Flat1_2F_EventScript_GivePhrase {
     special(DoWaldaNamingScreen)
     waitstate
-    if (var(VAR_0x8004) == 1) goto(RustboroCity_Flat1_2F_EventScript_CancelGivePhrase)
-    if (var(VAR_0x8004) == 2) goto(RustboroCity_Flat1_2F_EventScript_CancelGiveFirstPhrase)
+    if (var(VAR_0x8004) == 1) {
+        goto(RustboroCity_Flat1_2F_EventScript_CancelGivePhrase)
+    }
+    if (var(VAR_0x8004) == 2) {
+        goto(RustboroCity_Flat1_2F_EventScript_CancelGiveFirstPhrase)
+    }
     specialvar(VAR_RESULT, TryGetWallpaperWithWaldaPhrase)
-    if (var(VAR_RESULT) == TRUE) goto(RustboroCity_Flat1_2F_EventScript_WaldaLikesPhrase)
-    if (var(VAR_RESULT) == FALSE) goto(RustboroCity_Flat1_2F_EventScript_WaldaDoesntLikePhrase)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(RustboroCity_Flat1_2F_EventScript_WaldaLikesPhrase)
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        goto(RustboroCity_Flat1_2F_EventScript_WaldaDoesntLikePhrase)
+    }
     end
 }
 
 script RustboroCity_Flat1_2F_EventScript_WaldasDadFirstPhrase {
     msgbox(RustboroCity_Flat1_2F_Text_HelloDoYouKnowFunnyPhrase, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(RustboroCity_Flat1_2F_EventScript_DeclineGivePhrase)
+    if (var(VAR_RESULT) == NO) {
+        goto(RustboroCity_Flat1_2F_EventScript_DeclineGivePhrase)
+    }
     msgbox(RustboroCity_Flat1_2F_Text_WonderfulLetsHearSuggestion, MSGBOX_DEFAULT)
     goto(RustboroCity_Flat1_2F_EventScript_GivePhrase)
 }
 
 script RustboroCity_Flat1_2F_EventScript_WaldasDadNewPhrase {
     msgbox(RustboroCity_Flat1_2F_Text_BeenSayingXDoYouKnowBetterPhrase, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(RustboroCity_Flat1_2F_EventScript_DeclineGivePhrase)
+    if (var(VAR_RESULT) == NO) {
+        goto(RustboroCity_Flat1_2F_EventScript_DeclineGivePhrase)
+    }
     msgbox(RustboroCity_Flat1_2F_Text_WonderfulLetsHearSuggestion, MSGBOX_DEFAULT)
     goto(RustboroCity_Flat1_2F_EventScript_GivePhrase)
 }

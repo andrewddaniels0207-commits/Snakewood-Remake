@@ -9,7 +9,9 @@ script MauvilleCity_OnTransition {
     setflag(FLAG_SYS_TV_START)
     clearflag(FLAG_MAUVILLE_GYM_BARRIERS_STATE)
     setvar(VAR_MAUVILLE_GYM_STATE, 0)
-    if (flag(FLAG_GOT_TM_THUNDERBOLT_FROM_WATTSON)) call(MauvilleCity_EventScript_MoveWattsonBackToGym)
+    if (flag(FLAG_GOT_TM_THUNDERBOLT_FROM_WATTSON)) {
+        call(MauvilleCity_EventScript_MoveWattsonBackToGym)
+    }
     end
 }
 
@@ -63,7 +65,9 @@ script MauvilleCity_EventScript_GameCornerSign {
 script MauvilleCity_EventScript_SchoolKidM {
     lock
     faceplayer
-    if (flag(FLAG_TV_EXPLAINED)) goto(MauvilleCity_EventScript_TVExplained)
+    if (flag(FLAG_TV_EXPLAINED)) {
+        goto(MauvilleCity_EventScript_TVExplained)
+    }
     msgbox(MauvilleCity_Text_ExplainTV, MSGBOX_DEFAULT)
     setflag(FLAG_TV_EXPLAINED)
     release
@@ -79,7 +83,9 @@ script MauvilleCity_EventScript_TVExplained {
 script MauvilleCity_EventScript_WallysUncle {
     lock
     faceplayer
-    if (flag(FLAG_DECLINED_WALLY_BATTLE_MAUVILLE)) goto(MauvilleCity_EventScript_UncleAskPlayerToBattleWally)
+    if (flag(FLAG_DECLINED_WALLY_BATTLE_MAUVILLE)) {
+        goto(MauvilleCity_EventScript_UncleAskPlayerToBattleWally)
+    }
     msgbox(MauvilleCity_Text_UncleHesTooPeppy, MSGBOX_DEFAULT)
     closemessage
     applymovement(LOCALID_MAUVILLE_WALLYS_UNCLE, Common_Movement_FaceOriginalDirection)
@@ -99,7 +105,9 @@ script MauvilleCity_EventScript_UncleAskPlayerToBattleWally {
 
 script MauvilleCity_EventScript_Wally {
     lockall
-    if (flag(FLAG_DECLINED_WALLY_BATTLE_MAUVILLE)) goto(MauvilleCity_EventScript_WallyRequestBattleAgain)
+    if (flag(FLAG_DECLINED_WALLY_BATTLE_MAUVILLE)) {
+        goto(MauvilleCity_EventScript_WallyRequestBattleAgain)
+    }
     applymovement(LOCALID_MAUVILLE_WALLY, Common_Movement_WalkInPlaceFasterRight)
     waitmovement(0)
     msgbox(MauvilleCity_Text_WallyWantToChallengeGym, MSGBOX_DEFAULT)
@@ -118,8 +126,12 @@ script MauvilleCity_EventScript_Wally {
 }
 
 script MauvilleCity_EventScript_BattleWallyPrompt {
-    if (var(VAR_RESULT) == YES) call(MauvilleCity_EventScript_BattleWally)
-    if (var(VAR_RESULT) == NO) goto(MauvilleCity_EventScript_DeclineWallyBattle)
+    if (var(VAR_RESULT) == YES) {
+        call(MauvilleCity_EventScript_BattleWally)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(MauvilleCity_EventScript_DeclineWallyBattle)
+    }
     closemessage
     switch(VAR_FACING)
     case(DIR_NORTH, MauvilleCity_EventScript_WallyAndUncleExitNorth)
@@ -176,15 +188,23 @@ script MauvilleCity_EventScript_DefeatedWally {
     setflag(FLAG_DEFEATED_WALLY_MAUVILLE)
     setvar(VAR_WALLY_CALL_STEP_COUNTER, 0)
     setflag(FLAG_ENABLE_FIRST_WALLY_POKENAV_CALL)
-    if (var(VAR_FACING) == DIR_NORTH) call(MauvilleCity_EventScript_ScottApproachPlayerNorth)
-    if (var(VAR_FACING) == DIR_EAST) call(MauvilleCity_EventScript_ScottApproachPlayerEast)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(MauvilleCity_EventScript_ScottApproachPlayerNorth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(MauvilleCity_EventScript_ScottApproachPlayerEast)
+    }
     applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown)
     waitmovement(0)
     msgbox(MauvilleCity_Text_ScottYouDidntHoldBack, MSGBOX_DEFAULT)
     closemessage
     addvar(VAR_SCOTT_STATE, 1)
-    if (var(VAR_FACING) == DIR_NORTH) call(MauvilleCity_EventScript_ScottExitNorth)
-    if (var(VAR_FACING) == DIR_EAST) call(MauvilleCity_EventScript_ScottExitEast)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(MauvilleCity_EventScript_ScottExitNorth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(MauvilleCity_EventScript_ScottExitEast)
+    }
     removeobject(LOCALID_MAUVILLE_SCOTT)
     releaseall
     end
@@ -461,12 +481,20 @@ movement MauvilleCity_Movement_ScottExitEast {
 script MauvilleCity_EventScript_Wattson {
     lock
     faceplayer
-    if (flag(FLAG_GOT_TM_THUNDERBOLT_FROM_WATTSON)) goto(MauvilleCity_EventScript_ReceivedThunderbolt)
-    if (var(VAR_NEW_MAUVILLE_STATE) == 2) goto(MauvilleCity_EventScript_CompletedNewMauville)
-    if (flag(FLAG_GOT_BASEMENT_KEY_FROM_WATTSON)) goto(MauvilleCity_EventScript_BegunNewMauville)
+    if (flag(FLAG_GOT_TM_THUNDERBOLT_FROM_WATTSON)) {
+        goto(MauvilleCity_EventScript_ReceivedThunderbolt)
+    }
+    if (var(VAR_NEW_MAUVILLE_STATE) == 2) {
+        goto(MauvilleCity_EventScript_CompletedNewMauville)
+    }
+    if (flag(FLAG_GOT_BASEMENT_KEY_FROM_WATTSON)) {
+        goto(MauvilleCity_EventScript_BegunNewMauville)
+    }
     msgbox(MauvilleCity_Text_WattsonNeedFavorTakeKey, MSGBOX_DEFAULT)
     giveitem(ITEM_BASEMENT_KEY)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_GOT_BASEMENT_KEY_FROM_WATTSON)
     msgbox(MauvilleCity_Text_WattsonWontBeChallenge, MSGBOX_DEFAULT)
     release
@@ -482,7 +510,9 @@ script MauvilleCity_EventScript_BegunNewMauville {
 script MauvilleCity_EventScript_CompletedNewMauville {
     msgbox(MauvilleCity_Text_WattsonThanksTakeTM, MSGBOX_DEFAULT)
     giveitem(ITEM_TM_THUNDERBOLT)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_GOT_TM_THUNDERBOLT_FROM_WATTSON)
     msgbox(MauvilleCity_Text_WattsonYoungTakeCharge, MSGBOX_DEFAULT)
     release

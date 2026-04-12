@@ -10,31 +10,51 @@ script TwoIsland_OnTransition {
 }
 
 script TwoIsland_EventScript_SetShopState {
-    if (flag(FLAG_IS_CHAMPION)) goto(TwoIsland_EventScript_SetShopStateAfterHoennLink)
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(TwoIsland_EventScript_SetShopStateAfterChampion)
-    if (flag(FLAG_RESCUED_LOSTELLE)) goto(TwoIsland_EventScript_SetShopStateAfterLostelleRescue)
+    if (flag(FLAG_IS_CHAMPION)) {
+        goto(TwoIsland_EventScript_SetShopStateAfterHoennLink)
+    }
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(TwoIsland_EventScript_SetShopStateAfterChampion)
+    }
+    if (flag(FLAG_RESCUED_LOSTELLE)) {
+        goto(TwoIsland_EventScript_SetShopStateAfterLostelleRescue)
+    }
     goto(TwoIsland_EventScript_SetShopStateDefault)
     end
 }
 
 script TwoIsland_EventScript_SetShopStateAfterHoennLink {
-    if (!flag(FLAG_TWO_ISLAND_SHOP_INTRODUCED)) goto(TwoIsland_EventScript_SetShopInitial)
-    if (!flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_1)) goto(TwoIsland_EventScript_SetShopExpanded1)
-    if (!flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_2)) goto(TwoIsland_EventScript_SetShopExpanded2)
+    if (!flag(FLAG_TWO_ISLAND_SHOP_INTRODUCED)) {
+        goto(TwoIsland_EventScript_SetShopInitial)
+    }
+    if (!flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_1)) {
+        goto(TwoIsland_EventScript_SetShopExpanded1)
+    }
+    if (!flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_2)) {
+        goto(TwoIsland_EventScript_SetShopExpanded2)
+    }
     goto(TwoIsland_EventScript_SetShopExpanded3)
     end
 }
 
 script TwoIsland_EventScript_SetShopStateAfterChampion {
-    if (!flag(FLAG_TWO_ISLAND_SHOP_INTRODUCED)) goto(TwoIsland_EventScript_SetShopInitial)
-    if (!flag(FLAG_RESCUED_LOSTELLE)) goto(TwoIsland_EventScript_SetShopInitial)
-    if (!flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_1)) goto(TwoIsland_EventScript_SetShopExpanded1)
+    if (!flag(FLAG_TWO_ISLAND_SHOP_INTRODUCED)) {
+        goto(TwoIsland_EventScript_SetShopInitial)
+    }
+    if (!flag(FLAG_RESCUED_LOSTELLE)) {
+        goto(TwoIsland_EventScript_SetShopInitial)
+    }
+    if (!flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_1)) {
+        goto(TwoIsland_EventScript_SetShopExpanded1)
+    }
     goto(TwoIsland_EventScript_SetShopExpanded2)
     end
 }
 
 script TwoIsland_EventScript_SetShopStateAfterLostelleRescue {
-    if (!flag(FLAG_TWO_ISLAND_SHOP_INTRODUCED)) goto(TwoIsland_EventScript_SetShopInitial)
+    if (!flag(FLAG_TWO_ISLAND_SHOP_INTRODUCED)) {
+        goto(TwoIsland_EventScript_SetShopInitial)
+    }
     goto(TwoIsland_EventScript_SetShopExpanded1)
     end
 }
@@ -70,15 +90,23 @@ script TwoIsland_EventScript_SetShopExpanded3 {
 script TwoIsland_EventScript_Clerk {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 4) goto(TwoIsland_EventScript_ClerkShopExpanded3)
-    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 3) goto(TwoIsland_EventScript_ClerkShopExpanded2)
-    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 2) goto(TwoIsland_EventScript_ClerkShopExpanded1)
+    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 4) {
+        goto(TwoIsland_EventScript_ClerkShopExpanded3)
+    }
+    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 3) {
+        goto(TwoIsland_EventScript_ClerkShopExpanded2)
+    }
+    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 2) {
+        goto(TwoIsland_EventScript_ClerkShopExpanded1)
+    }
     goto(TwoIsland_EventScript_ClerkShopInitial)
     end
 }
 
 script TwoIsland_EventScript_ClerkShopExpanded3 {
-    if (flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_3)) goto(TwoIsland_EventScript_ClerkShopSkipIntro)
+    if (flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_3)) {
+        goto(TwoIsland_EventScript_ClerkShopSkipIntro)
+    }
     setflag(FLAG_TWO_ISLAND_SHOP_EXPANDED_3)
     message(TwoIsland_Text_BringingItemsFromDistantLands)
     waitmessage()
@@ -87,7 +115,9 @@ script TwoIsland_EventScript_ClerkShopExpanded3 {
 }
 
 script TwoIsland_EventScript_ClerkShopExpanded2 {
-    if (flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_2)) goto(TwoIsland_EventScript_ClerkShopSkipIntro)
+    if (flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_2)) {
+        goto(TwoIsland_EventScript_ClerkShopSkipIntro)
+    }
     setflag(FLAG_TWO_ISLAND_SHOP_EXPANDED_2)
     message(TwoIsland_Text_HopeYouGiveItYourBest)
     waitmessage()
@@ -96,7 +126,9 @@ script TwoIsland_EventScript_ClerkShopExpanded2 {
 }
 
 script TwoIsland_EventScript_ClerkShopExpanded1 {
-    if (flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_1)) goto(TwoIsland_EventScript_ClerkShopSkipIntro)
+    if (flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_1)) {
+        goto(TwoIsland_EventScript_ClerkShopSkipIntro)
+    }
     setflag(FLAG_TWO_ISLAND_SHOP_EXPANDED_1)
     message(TwoIsland_Text_AddedMerchandiseForLostelle)
     waitmessage()
@@ -105,7 +137,9 @@ script TwoIsland_EventScript_ClerkShopExpanded1 {
 }
 
 script TwoIsland_EventScript_ClerkShopInitial {
-    if (flag(FLAG_TWO_ISLAND_SHOP_INTRODUCED)) goto(TwoIsland_EventScript_ClerkShopSkipIntro)
+    if (flag(FLAG_TWO_ISLAND_SHOP_INTRODUCED)) {
+        goto(TwoIsland_EventScript_ClerkShopSkipIntro)
+    }
     setflag(FLAG_TWO_ISLAND_SHOP_INTRODUCED)
     message(TwoIsland_Text_WelcomeToShopMerchandiseLimited)
     waitmessage()
@@ -116,9 +150,15 @@ script TwoIsland_EventScript_ClerkShopInitial {
 script TwoIsland_EventScript_ClerkShopSkipIntro {
     message(gText_HowMayIServeYou)
     waitmessage()
-    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 4) goto(TwoIsland_EventScript_ShopExpanded3)
-    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 3) goto(TwoIsland_EventScript_ShopExpanded2)
-    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 2) goto(TwoIsland_EventScript_ShopExpanded1)
+    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 4) {
+        goto(TwoIsland_EventScript_ShopExpanded3)
+    }
+    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 3) {
+        goto(TwoIsland_EventScript_ShopExpanded2)
+    }
+    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 2) {
+        goto(TwoIsland_EventScript_ShopExpanded1)
+    }
     goto(TwoIsland_EventScript_ShopInitial)
     end
 }

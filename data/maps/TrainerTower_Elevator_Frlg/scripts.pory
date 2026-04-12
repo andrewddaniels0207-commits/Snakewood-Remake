@@ -6,7 +6,9 @@ mapscripts TrainerTower_Elevator_Frlg_MapScripts {
 script TrainerTower_Elevator_EventScript_FloorSelect {
     lockall
     setvar(VAR_0x8004, 6)
-    if (!flag(FLAG_TEMP_2)) call(EventScript_GetElevatorFloor)
+    if (!flag(FLAG_TEMP_2)) {
+        call(EventScript_GetElevatorFloor)
+    }
     copyvar(VAR_0x8005, VAR_ELEVATOR_FLOOR)
     special(DrawElevatorCurrentFloorWindow)
     message(gText_WantWhichFloor)
@@ -43,7 +45,9 @@ script TrainerTower_Elevator_EventScript_ChooseFloor {
 script TrainerTower_Elevator_EventScript_SelectLobby {
     setvar(VAR_0x8006, 3)
     setdynamicwarp(MAP_TRAINER_TOWER_LOBBY, 17, 8)
-    if (var(VAR_ELEVATOR_FLOOR) == 3) goto(TrainerTower_Elevator_EventScript_CloseFloorSelect)
+    if (var(VAR_ELEVATOR_FLOOR) == 3) {
+        goto(TrainerTower_Elevator_EventScript_CloseFloorSelect)
+    }
     call(TrainerTower_Elevator_EventScript_MoveElevator)
     setvar(VAR_ELEVATOR_FLOOR, 3)
     special(CloseElevatorCurrentFloorWindow)

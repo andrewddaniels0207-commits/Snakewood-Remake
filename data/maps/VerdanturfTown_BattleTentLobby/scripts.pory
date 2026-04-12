@@ -115,7 +115,9 @@ script VerdanturfTown_BattleTentLobby_EventScript_Attendant {
     lock
     faceplayer
     verdanturftent_getprize()
-    if (var(VAR_RESULT) != ITEM_NONE) goto(VerdanturfTown_BattleTentLobby_EventScript_PrizeWaiting)
+    if (var(VAR_RESULT) != ITEM_NONE) {
+        goto(VerdanturfTown_BattleTentLobby_EventScript_PrizeWaiting)
+    }
     special(SavePlayerParty)
     msgbox(VerdanturfTown_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT)
 }
@@ -136,7 +138,9 @@ script VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge {
     setvar(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES)
     setvar(VAR_RESULT, 2)
     frontier_checkineligible()
-    if (var(VAR_0x8004) == TRUE) goto(VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMons)
+    if (var(VAR_0x8004) == TRUE) {
+        goto(VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMons)
+    }
     frontier_set(FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_TENT)
     msgbox(VerdanturfTown_BattleTentLobby_Text_SelectThreeMons, MSGBOX_DEFAULT)
     fadescreen(FADE_TO_BLACK)
@@ -144,7 +148,9 @@ script VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge {
     setvar(VAR_0x8005, FRONTIER_PARTY_SIZE)
     special(ChoosePartyForBattleFrontier)
     waitstate
-    if (var(VAR_RESULT) == 0) goto(VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
+    if (var(VAR_RESULT) == 0) {
+        goto(VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
+    }
     msgbox(VerdanturfTown_BattleTentLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO)
     switch(VAR_RESULT)
     case(NO, VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
@@ -163,7 +169,9 @@ script VerdanturfTown_BattleTentLobby_EventScript_SaveBeforeChallenge {
     delay(2)
     call(Common_EventScript_SaveGame)
     setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
-    if (var(VAR_RESULT) == 0) goto(VerdanturfTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed)
+    if (var(VAR_RESULT) == 0) {
+        goto(VerdanturfTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed)
+    }
 }
 
 script VerdanturfTown_BattleTentLobby_EventScript_EnterChallenge {
@@ -254,10 +262,14 @@ movement VerdanturfTown_BattleTentLobby_Movement_PlayerEnterDoor {
 script VerdanturfTown_BattleTentLobby_EventScript_AttractGiver {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_TM_ATTRACT)) goto(VerdanturfTown_BattleTentLobby_EventScript_ReceivedAttract)
+    if (flag(FLAG_RECEIVED_TM_ATTRACT)) {
+        goto(VerdanturfTown_BattleTentLobby_EventScript_ReceivedAttract)
+    }
     msgbox(VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep, MSGBOX_DEFAULT)
     giveitem(ITEM_TM_ATTRACT)
-    if (var(VAR_RESULT) == 0) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == 0) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_TM_ATTRACT)
     msgbox(VerdanturfTown_BattleTentLobby_Text_AttractionMutual, MSGBOX_DEFAULT)
     release
@@ -285,7 +297,9 @@ script VerdanturfTown_BattleTentLobby_EventScript_Boy2 {
 script VerdanturfTown_BattleTentLobby_EventScript_Scott {
     lock
     faceplayer
-    if (flag(FLAG_MET_SCOTT_IN_VERDANTURF)) goto(VerdanturfTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo)
+    if (flag(FLAG_MET_SCOTT_IN_VERDANTURF)) {
+        goto(VerdanturfTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo)
+    }
     msgbox(VerdanturfTown_BattleTentLobby_Text_ScottCanMeetToughTrainers, MSGBOX_DEFAULT)
     addvar(VAR_SCOTT_STATE, 1)
     setflag(FLAG_MET_SCOTT_IN_VERDANTURF)

@@ -3,7 +3,9 @@ mapscripts MtMoon_B2F_Frlg_MapScripts {
 }
 
 script MtMoon_B2F_OnTransition {
-    if (!flag(FLAG_GOT_FOSSIL_FROM_MT_MOON)) call(MtMoon_B2F_EventScript_ShowFossils)
+    if (!flag(FLAG_GOT_FOSSIL_FROM_MT_MOON)) {
+        call(MtMoon_B2F_EventScript_ShowFossils)
+    }
     end
 }
 
@@ -25,7 +27,9 @@ script MtMoon_B2F_EventScript_MiguelTrigger {
 script MtMoon_B2F_EventScript_Miguel {
     lock
     faceplayer
-    if (flag(FLAG_GOT_FOSSIL_FROM_MT_MOON)) goto(MtMoon_B2F_EventScript_MiguelFossilPicked)
+    if (flag(FLAG_GOT_FOSSIL_FROM_MT_MOON)) {
+        goto(MtMoon_B2F_EventScript_MiguelFossilPicked)
+    }
     goto_if_defeated(TRAINER_SUPER_NERD_MIGUEL, MtMoon_B2F_EventScript_MiguelGoPickFossil)
     call(MtMoon_B2F_EventScript_BattleMiguel)
     release
@@ -61,7 +65,9 @@ script MtMoon_B2F_EventScript_DomeFossil {
     lock
     faceplayer
     msgbox(MtMoon_B2F_Text_YouWantDomeFossil, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(MtMoon_B2F_EventScript_DontTakeFossil)
+    if (var(VAR_RESULT) == NO) {
+        goto(MtMoon_B2F_EventScript_DontTakeFossil)
+    }
     removeobject(LOCALID_DOME_FOSSIL)
     giveitem_msg(MtMoon_B2F_Text_ObtainedDomeFossil, ITEM_DOME_FOSSIL, 1, MUS_RG_OBTAIN_KEY_ITEM)
     closemessage
@@ -93,7 +99,9 @@ script MtMoon_B2F_EventScript_HelixFossil {
     lock
     faceplayer
     msgbox(MtMoon_B2F_Text_YouWantHelixFossil, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(MtMoon_B2F_EventScript_DontTakeFossil)
+    if (var(VAR_RESULT) == NO) {
+        goto(MtMoon_B2F_EventScript_DontTakeFossil)
+    }
     removeobject(LOCALID_HELIX_FOSSIL)
     giveitem_msg(MtMoon_B2F_Text_ObtainedHelixFossil, ITEM_HELIX_FOSSIL, 1, MUS_RG_OBTAIN_KEY_ITEM)
     closemessage

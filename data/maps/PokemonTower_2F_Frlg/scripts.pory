@@ -22,22 +22,36 @@ script PokemonTower_2F_EventScript_RivalTriggerDown {
 script PokemonTower_2F_EventScript_Rival {
     textcolor(NPC_TEXT_COLOR_MALE)
     playbgm(MUS_RG_ENCOUNTER_RIVAL, 0)
-    if (var(VAR_TEMP_1) == 0) call(PokemonTower_2F_EventScript_RivalFacePlayerRight)
-    if (var(VAR_TEMP_1) == 1) call(PokemonTower_2F_EventScript_RivalFacePlayerDown)
+    if (var(VAR_TEMP_1) == 0) {
+        call(PokemonTower_2F_EventScript_RivalFacePlayerRight)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(PokemonTower_2F_EventScript_RivalFacePlayerDown)
+    }
     applymovement(LOCALID_POKEMON_TOWER_RIVAL, Common_Movement_ExclamationMark)
     waitmovement(0)
     applymovement(LOCALID_POKEMON_TOWER_RIVAL, Common_Movement_Delay48)
     waitmovement(0)
     msgbox(PokemonTower_2F_Text_RivalIntro)
     setvar(VAR_LAST_TALKED, LOCALID_POKEMON_TOWER_RIVAL)
-    if (var(VAR_STARTER_MON) == 2) call(PokemonTower_2F_EventScript_RivalSquirtle)
-    if (var(VAR_STARTER_MON) == 1) call(PokemonTower_2F_EventScript_RivalBulbasaur)
-    if (var(VAR_STARTER_MON) == 0) call(PokemonTower_2F_EventScript_RivalCharmander)
+    if (var(VAR_STARTER_MON) == 2) {
+        call(PokemonTower_2F_EventScript_RivalSquirtle)
+    }
+    if (var(VAR_STARTER_MON) == 1) {
+        call(PokemonTower_2F_EventScript_RivalBulbasaur)
+    }
+    if (var(VAR_STARTER_MON) == 0) {
+        call(PokemonTower_2F_EventScript_RivalCharmander)
+    }
     msgbox(PokemonTower_2F_Text_RivalPostBattle)
     closemessage
     playbgm(MUS_RG_RIVAL_EXIT, 0)
-    if (var(VAR_TEMP_1) == 0) call(PokemonTower_2F_EventScript_RivalExitRight)
-    if (var(VAR_TEMP_1) == 1) call(PokemonTower_2F_EventScript_RivalExitDown)
+    if (var(VAR_TEMP_1) == 0) {
+        call(PokemonTower_2F_EventScript_RivalExitRight)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(PokemonTower_2F_EventScript_RivalExitDown)
+    }
     playse(SE_EXIT)
     delay(25)
     fadedefaultbgm()

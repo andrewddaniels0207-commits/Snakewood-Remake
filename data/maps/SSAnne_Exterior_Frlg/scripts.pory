@@ -13,8 +13,12 @@ script SSAnne_Exterior_OnTransition {
 script SSAnne_Exterior_ExitSSAnne {
     lockall
     getplayerxy(VAR_0x8004, VAR_0x8005)
-    if (var(VAR_0x8005) <= 6) call(SSAnne_Exterior_WalkDown)
-    if (var(VAR_0x8005) >= 7) call(SSAnne_Exterior_WalkInPlaceDown)
+    if (var(VAR_0x8005) <= 6) {
+        call(SSAnne_Exterior_WalkDown)
+    }
+    if (var(VAR_0x8005) >= 7) {
+        call(SSAnne_Exterior_WalkInPlaceDown)
+    }
     fadenewbgm(MUS_RG_SURF)
     delay(50)
     special(DoSSAnneDepartureCutscene)

@@ -14,7 +14,9 @@ BattleFrontier_BattleFactoryPreBattleRoom_OnWarp:
 
 script BattleFrontier_BattleFactoryPreBattleRoom_EventScript_SetUpObjects {
     setvar(VAR_TEMP_1, 1)
-    if (var(VAR_0x8006) != 1) goto(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_TurnPlayerNorth)
+    if (var(VAR_0x8006) != 1) {
+        goto(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_TurnPlayerNorth)
+    }
     setobjectxy(LOCALID_FACTORY_PRE_BATTLE_ATTENDANT, 8, 7)
     turnobject(LOCALID_FACTORY_PRE_BATTLE_ATTENDANT, DIR_SOUTH)
 }
@@ -25,12 +27,16 @@ script BattleFrontier_BattleFactoryPreBattleRoom_EventScript_TurnPlayerNorth {
 }
 
 script BattleFrontier_BattleFactoryPreBattleRoom_EventScript_EnterRoom {
-    if (var(VAR_0x8006) == 1) goto(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReturnToRoomFromBattle)
+    if (var(VAR_0x8006) == 1) {
+        goto(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReturnToRoomFromBattle)
+    }
     setvar(VAR_TEMP_0, 1)
     applymovement(LOCALID_FACTORY_PRE_BATTLE_ATTENDANT, BattleFrontier_BattleFactoryPreBattleRoom_Movement_AttendantEnterRoom)
     applymovement(LOCALID_PLAYER, BattleFrontier_BattleFactoryPreBattleRoom_Movement_PlayerEnterRoom)
     waitmovement(0)
-    if (var(VAR_0x8006) == 2) goto(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ResumeChallenge)
+    if (var(VAR_0x8006) == 2) {
+        goto(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ResumeChallenge)
+    }
     factory_generaterentalmons()
     factory_generateopponentmons()
     factory_getopponentmontype()
@@ -50,8 +56,12 @@ script BattleFrontier_BattleFactoryPreBattleRoom_EventScript_EnterBattleRoom {
     msgbox(BattleFrontier_BattleFactoryPreBattleRoom_Text_RightThisWay, MSGBOX_DEFAULT)
     closemessage
     call(BattleFrontier_EventScript_GetLvlMode)
-    if (var(VAR_RESULT) == FRONTIER_LVL_50) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_WalkToBattleRoomLv50)
-    if (var(VAR_RESULT) == FRONTIER_LVL_OPEN) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_WalkToBattleRoomLvOpen)
+    if (var(VAR_RESULT) == FRONTIER_LVL_50) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_WalkToBattleRoomLv50)
+    }
+    if (var(VAR_RESULT) == FRONTIER_LVL_OPEN) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_WalkToBattleRoomLvOpen)
+    }
     waitmovement(0)
     warp(MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM, 6, 11)
     waitstate
@@ -66,7 +76,9 @@ script BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReturnToRoomFromBat
     waitfanfare()
     special(HealPlayerParty)
     frontier_getbrainstatus()
-    if (var(VAR_RESULT) == FRONTIER_BRAIN_NOT_READY) goto(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForRegularOpponent)
+    if (var(VAR_RESULT) == FRONTIER_BRAIN_NOT_READY) {
+        goto(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForRegularOpponent)
+    }
     playse(SE_POKENAV_CALL)
     waitse()
     msgbox(BattleFrontier_BattleFactoryPreBattleRoom_Text_WaitFewMoments, MSGBOX_DEFAULT)
@@ -86,19 +98,35 @@ script BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReturnToRoomFromBat
 
 script BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForOpponent {
     frontier_getbrainstatus()
-    if (var(VAR_RESULT) != FRONTIER_BRAIN_NOT_READY) goto(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForHead)
+    if (var(VAR_RESULT) != FRONTIER_BRAIN_NOT_READY) {
+        goto(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForHead)
+    }
 }
 
 script BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForRegularOpponent {
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
-    if (var(VAR_RESULT) == 1) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReadyFor2ndOpponent)
-    if (var(VAR_RESULT) == 2) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReadyFor3rdOpponent)
-    if (var(VAR_RESULT) == 3) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReadyFor4thOpponent)
-    if (var(VAR_RESULT) == 4) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReadyFor5thOpponent)
-    if (var(VAR_RESULT) == 5) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReadyFor6thOpponent)
-    if (var(VAR_RESULT) == 6) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReadyFor7thOpponent)
+    if (var(VAR_RESULT) == 1) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReadyFor2ndOpponent)
+    }
+    if (var(VAR_RESULT) == 2) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReadyFor3rdOpponent)
+    }
+    if (var(VAR_RESULT) == 3) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReadyFor4thOpponent)
+    }
+    if (var(VAR_RESULT) == 4) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReadyFor5thOpponent)
+    }
+    if (var(VAR_RESULT) == 5) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReadyFor6thOpponent)
+    }
+    if (var(VAR_RESULT) == 6) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReadyFor7thOpponent)
+    }
     call(BattleFrontier_EventScript_GetCantRecordBattle)
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForOpponentNoRecord)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForOpponentNoRecord)
+    }
     multichoice(19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, TRUE)
     switch(VAR_RESULT)
     case(0, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskSwapMon)
@@ -169,7 +197,9 @@ script BattleFrontier_BattleFactoryPreBattleRoom_EventScript_SwapMons {
     fadescreen(FADE_TO_BLACK)
     factory_swapmons()
     waitstate
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_EnterBattleRoom)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_EnterBattleRoom)
+    }
     factory_setswapped()
     msgbox(BattleFrontier_BattleFactoryPreBattleRoom_Text_YourSwapIsComplete, MSGBOX_DEFAULT)
     goto(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_EnterBattleRoom)
@@ -232,25 +262,63 @@ script BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ResumeChallenge {
 
 script BattleFrontier_BattleFactoryPreBattleRoom_EventScript_CommentOnOpponentType {
     msgbox(BattleFrontier_BattleFactoryPreBattleRoom_Text_InvestigatedUpcomingOpponent, MSGBOX_DEFAULT)
-    if (var(VAR_0x8005) == TYPE_NORMAL) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesNormal)
-    if (var(VAR_0x8005) == TYPE_FIGHTING) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesFighting)
-    if (var(VAR_0x8005) == TYPE_FLYING) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesFlying)
-    if (var(VAR_0x8005) == TYPE_POISON) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesPoison)
-    if (var(VAR_0x8005) == TYPE_GROUND) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesGround)
-    if (var(VAR_0x8005) == TYPE_ROCK) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesRock)
-    if (var(VAR_0x8005) == TYPE_BUG) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesBug)
-    if (var(VAR_0x8005) == TYPE_GHOST) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesGhost)
-    if (var(VAR_0x8005) == TYPE_STEEL) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesSteel)
-    if (var(VAR_0x8005) == TYPE_FIRE) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesFire)
-    if (var(VAR_0x8005) == TYPE_WATER) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesWater)
-    if (var(VAR_0x8005) == TYPE_GRASS) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesGrass)
-    if (var(VAR_0x8005) == TYPE_ELECTRIC) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesElectric)
-    if (var(VAR_0x8005) == TYPE_PSYCHIC) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesPsychic)
-    if (var(VAR_0x8005) == TYPE_ICE) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesIce)
-    if (var(VAR_0x8005) == TYPE_DRAGON) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesDragon)
-    if (var(VAR_0x8005) == TYPE_DARK) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesDark)
-    if (var(VAR_0x8005) == TYPE_FAIRY) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesFairy)
-    if (var(VAR_0x8005) == NUMBER_OF_MON_TYPES) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentHasNoMostCommonType)
+    if (var(VAR_0x8005) == TYPE_NORMAL) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesNormal)
+    }
+    if (var(VAR_0x8005) == TYPE_FIGHTING) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesFighting)
+    }
+    if (var(VAR_0x8005) == TYPE_FLYING) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesFlying)
+    }
+    if (var(VAR_0x8005) == TYPE_POISON) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesPoison)
+    }
+    if (var(VAR_0x8005) == TYPE_GROUND) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesGround)
+    }
+    if (var(VAR_0x8005) == TYPE_ROCK) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesRock)
+    }
+    if (var(VAR_0x8005) == TYPE_BUG) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesBug)
+    }
+    if (var(VAR_0x8005) == TYPE_GHOST) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesGhost)
+    }
+    if (var(VAR_0x8005) == TYPE_STEEL) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesSteel)
+    }
+    if (var(VAR_0x8005) == TYPE_FIRE) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesFire)
+    }
+    if (var(VAR_0x8005) == TYPE_WATER) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesWater)
+    }
+    if (var(VAR_0x8005) == TYPE_GRASS) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesGrass)
+    }
+    if (var(VAR_0x8005) == TYPE_ELECTRIC) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesElectric)
+    }
+    if (var(VAR_0x8005) == TYPE_PSYCHIC) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesPsychic)
+    }
+    if (var(VAR_0x8005) == TYPE_ICE) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesIce)
+    }
+    if (var(VAR_0x8005) == TYPE_DRAGON) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesDragon)
+    }
+    if (var(VAR_0x8005) == TYPE_DARK) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesDark)
+    }
+    if (var(VAR_0x8005) == TYPE_FAIRY) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentUsesFairy)
+    }
+    if (var(VAR_0x8005) == NUMBER_OF_MON_TYPES) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentHasNoMostCommonType)
+    }
     return
 }
 
@@ -350,15 +418,33 @@ script BattleFrontier_BattleFactoryPreBattleRoom_EventScript_OpponentHasNoMostCo
 }
 
 script BattleFrontier_BattleFactoryPreBattleRoom_EventScript_CommentOnOpponentStyle {
-    if (var(VAR_0x8006) == FACTORY_STYLE_NONE) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleUnrestrained)
-    if (var(VAR_0x8006) == FACTORY_STYLE_PREPARATION) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleTotalPreparation)
-    if (var(VAR_0x8006) == FACTORY_STYLE_SLOW_STEADY) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleSlowAndSteady)
-    if (var(VAR_0x8006) == FACTORY_STYLE_ENDURANCE) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleEndurance)
-    if (var(VAR_0x8006) == FACTORY_STYLE_HIGH_RISK) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleHighRisk)
-    if (var(VAR_0x8006) == FACTORY_STYLE_WEAKENING) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleWeakenFoe)
-    if (var(VAR_0x8006) == FACTORY_STYLE_UNPREDICTABLE) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleImpossibleToPredict)
-    if (var(VAR_0x8006) == FACTORY_STYLE_WEATHER) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleDependsOnFlow)
-    if (var(VAR_0x8006) == FACTORY_NUM_STYLES) call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleFlexible)
+    if (var(VAR_0x8006) == FACTORY_STYLE_NONE) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleUnrestrained)
+    }
+    if (var(VAR_0x8006) == FACTORY_STYLE_PREPARATION) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleTotalPreparation)
+    }
+    if (var(VAR_0x8006) == FACTORY_STYLE_SLOW_STEADY) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleSlowAndSteady)
+    }
+    if (var(VAR_0x8006) == FACTORY_STYLE_ENDURANCE) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleEndurance)
+    }
+    if (var(VAR_0x8006) == FACTORY_STYLE_HIGH_RISK) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleHighRisk)
+    }
+    if (var(VAR_0x8006) == FACTORY_STYLE_WEAKENING) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleWeakenFoe)
+    }
+    if (var(VAR_0x8006) == FACTORY_STYLE_UNPREDICTABLE) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleImpossibleToPredict)
+    }
+    if (var(VAR_0x8006) == FACTORY_STYLE_WEATHER) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleDependsOnFlow)
+    }
+    if (var(VAR_0x8006) == FACTORY_NUM_STYLES) {
+        call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleFlexible)
+    }
     return
 }
 
@@ -411,7 +497,9 @@ script BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForHead {
     message(BattleFrontier_BattleFactoryPreBattleRoom_Text_PreparedToFaceHead)
     waitmessage()
     call(BattleFrontier_EventScript_GetCantRecordBattle)
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForHeadNoRecord)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForHeadNoRecord)
+    }
     multichoice(19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, TRUE)
     switch(VAR_RESULT)
     case(0, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskSwapBeforeHead)

@@ -9,7 +9,9 @@ script MtPyre_Exterior_OnTransition {
 
 script MtPyre_Exterior_EventScript_CheckEnterFromSummit {
     getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-    if (var(VAR_TEMP_1) < 12) goto(MtPyre_Exterior_EventScript_EnterFromSummit)
+    if (var(VAR_TEMP_1) < 12) {
+        goto(MtPyre_Exterior_EventScript_EnterFromSummit)
+    }
     return
 }
 

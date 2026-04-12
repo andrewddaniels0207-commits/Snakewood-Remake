@@ -3,9 +3,13 @@ mapscripts FuchsiaCity_House2_Frlg_MapScripts {}
 script FuchsiaCity_House2_EventScript_FishingGurusBrother {
     lock
     faceplayer
-    if (flag(FLAG_GOT_GOOD_ROD)) goto(FuchsiaCity_House2_EventScript_AlreadyGotGoodRod)
+    if (flag(FLAG_GOT_GOOD_ROD)) {
+        goto(FuchsiaCity_House2_EventScript_AlreadyGotGoodRod)
+    }
     msgbox(FuchsiaCity_House2_Text_DoYouLikeToFish, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(FuchsiaCity_House2_EventScript_GiveGoodRod)
+    if (var(VAR_RESULT) == YES) {
+        goto(FuchsiaCity_House2_EventScript_GiveGoodRod)
+    }
     msgbox(FuchsiaCity_House2_Text_OhThatsDisappointing)
     release
     end
@@ -20,7 +24,9 @@ script FuchsiaCity_House2_EventScript_AlreadyGotGoodRod {
 script FuchsiaCity_House2_EventScript_GiveGoodRod {
     msgbox(FuchsiaCity_House2_Text_LikeYourStyleTakeThis)
     checkitemspace(ITEM_GOOD_ROD)
-    if (var(VAR_RESULT) == FALSE) goto(FuchsiaCity_House2_EventScript_NoRoomForGoodRod)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(FuchsiaCity_House2_EventScript_NoRoomForGoodRod)
+    }
     giveitem_msg(FuchsiaCity_House2_Text_ReceivedGoodRod, ITEM_GOOD_ROD)
     msgbox(FuchsiaCity_House2_Text_GoodRodCanCatchBetterMons)
     setflag(FLAG_GOT_GOOD_ROD)

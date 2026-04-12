@@ -5,20 +5,28 @@ mapscripts SkyPillar_Top_MapScripts {
 }
 
 script SkyPillar_Top_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(SkyPillar_Top_EventScript_TryRemoveRayquaza)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(SkyPillar_Top_EventScript_TryRemoveRayquaza)
+    }
     end
 }
 
 script SkyPillar_Top_EventScript_TryRemoveRayquaza {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
+        goto(Common_EventScript_NopReturn)
+    }
     removeobject(VAR_LAST_TALKED)
     return
 }
 
 script SkyPillar_Top_OnTransition {
-    if (var(VAR_SKY_PILLAR_STATE) < 2) call(SkyPillar_Top_EventScript_SetCleanLayout)
-    if (var(VAR_SKY_PILLAR_STATE) >= 2) call(SkyPillar_Top_EventScript_TryShowRayquaza)
+    if (var(VAR_SKY_PILLAR_STATE) < 2) {
+        call(SkyPillar_Top_EventScript_SetCleanLayout)
+    }
+    if (var(VAR_SKY_PILLAR_STATE) >= 2) {
+        call(SkyPillar_Top_EventScript_TryShowRayquaza)
+    }
     end
 }
 
@@ -29,7 +37,9 @@ script SkyPillar_Top_EventScript_SetCleanLayout {
 }
 
 script SkyPillar_Top_EventScript_TryShowRayquaza {
-    if (!flag(FLAG_DEFEATED_RAYQUAZA)) call(SkyPillar_Top_EventScript_ShowRayquaza)
+    if (!flag(FLAG_DEFEATED_RAYQUAZA)) {
+        call(SkyPillar_Top_EventScript_ShowRayquaza)
+    }
     return
 }
 
@@ -62,9 +72,15 @@ script SkyPillar_Top_EventScript_Rayquaza {
     waitstate
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(SkyPillar_Top_EventScript_DefeatedRayquaza)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(SkyPillar_Top_EventScript_RanFromRayquaza)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(SkyPillar_Top_EventScript_RanFromRayquaza)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(SkyPillar_Top_EventScript_DefeatedRayquaza)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(SkyPillar_Top_EventScript_RanFromRayquaza)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(SkyPillar_Top_EventScript_RanFromRayquaza)
+    }
     setflag(FLAG_DEFEATED_RAYQUAZA)
     releaseall
     end

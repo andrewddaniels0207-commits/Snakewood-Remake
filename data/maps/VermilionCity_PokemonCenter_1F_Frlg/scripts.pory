@@ -34,11 +34,15 @@ script VermilionCity_PokemonCenter_1F_EventScript_Youngster {
 script VermilionCity_PokemonCenter_1F_EventScript_VSSeekerWoman {
     lock
     faceplayer
-    if (flag(FLAG_GOT_VS_SEEKER)) goto(VermilionCity_PokemonCenter_1F_EventScript_ExplainVSSeeker)
+    if (flag(FLAG_GOT_VS_SEEKER)) {
+        goto(VermilionCity_PokemonCenter_1F_EventScript_ExplainVSSeeker)
+    }
     msgbox(VermilionCity_PokemonCenter_1F_Text_UrgeToBattleSomeoneAgain)
     setflag(FLAG_GOT_VS_SEEKER)
     giveitem(ITEM_VS_SEEKER)
-    if (var(VAR_RESULT) == FALSE) goto(EventScript_BagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(EventScript_BagIsFull)
+    }
     msgbox(VermilionCity_PokemonCenter_1F_Text_UseDeviceForRematches)
     release
     end

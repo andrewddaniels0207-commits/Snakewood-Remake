@@ -3,14 +3,18 @@ mapscripts SilphCo_10F_Frlg_MapScripts {
 }
 
 script SilphCo_10F_OnLoad {
-    if (!flag(FLAG_SILPH_10F_DOOR)) call(EventScript_Close10FDoor)
+    if (!flag(FLAG_SILPH_10F_DOOR)) {
+        call(EventScript_Close10FDoor)
+    }
     end
 }
 
 script SilphCo_10F_EventScript_WorkerF {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) goto(SilphCo_10F_EventScript_WorkerFRocketsGone)
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
+        goto(SilphCo_10F_EventScript_WorkerFRocketsGone)
+    }
     msgbox(SilphCo_10F_Text_WaaaImScared)
     release
     end

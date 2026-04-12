@@ -3,6 +3,7 @@ mapscripts AlteringCave_MapScripts {
 }
 
 script AlteringCave_OnTransition {
+    #(6 "data/maps/AlteringCave/scripts.pory")
     setflag(FLAG_LANDMARK_ALTERING_CAVE)
     end
 }

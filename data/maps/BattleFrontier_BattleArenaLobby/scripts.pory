@@ -42,7 +42,9 @@ script BattleFrontier_BattleArenaLobby_EventScript_QuitWithoutSaving {
 script BattleFrontier_BattleArenaLobby_EventScript_WonChallenge {
     lockall
     frontier_isbrain()
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleArenaLobby_EventScript_DefeatedTycoon)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattleArenaLobby_EventScript_DefeatedTycoon)
+    }
     msgbox(BattleFrontier_BattleArenaLobby_Text_CongratsOnSevenWins, MSGBOX_DEFAULT)
     goto(BattleFrontier_BattleArenaLobby_EventScript_GiveBattlePoints)
 }
@@ -87,7 +89,9 @@ script BattleFrontier_BattleArenaLobby_EventScript_SaveAfterChallenge {
     playse(SE_SAVE)
     waitse()
     call(BattleFrontier_EventScript_GetCantRecordBattle)
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge)
+    }
     message(BattleFrontier_BattleArenaLobby_Text_RecordLastMatch)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
@@ -145,7 +149,9 @@ script BattleFrontier_BattleArenaLobby_EventScript_TryEnterChallenge {
     case(FRONTIER_LVL_TENT, BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge)
     case(MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge)
     frontier_checkineligible()
-    if (var(VAR_0x8004) == TRUE) goto(BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMons)
+    if (var(VAR_0x8004) == TRUE) {
+        goto(BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMons)
+    }
     frontier_set(FRONTIER_DATA_LVL_MODE, VAR_RESULT)
     msgbox(BattleFrontier_BattleArenaLobby_Text_SelectThreeMons, MSGBOX_DEFAULT)
     fadescreen(FADE_TO_BLACK)
@@ -155,7 +161,9 @@ script BattleFrontier_BattleArenaLobby_EventScript_TryEnterChallenge {
     setvar(VAR_0x8005, FRONTIER_PARTY_SIZE)
     special(ChoosePartyForBattleFrontier)
     waitstate
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge)
+    }
     msgbox(BattleFrontier_BattleArenaLobby_Text_OkayToSave, MSGBOX_YESNO)
     switch(VAR_RESULT)
     case(NO, BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge)
@@ -175,7 +183,9 @@ script BattleFrontier_BattleArenaLobby_EventScript_SaveBeforeChallenge {
     delay(2)
     call(Common_EventScript_SaveGame)
     setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleArenaLobby_EventScript_CancelChallengeSaveFailed)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattleArenaLobby_EventScript_CancelChallengeSaveFailed)
+    }
 }
 
 script BattleFrontier_BattleArenaLobby_EventScript_EnterChallenge {
@@ -184,8 +194,12 @@ script BattleFrontier_BattleArenaLobby_EventScript_EnterChallenge {
     msgbox(BattleFrontier_BattleArenaLobby_Text_GuideYouToArena, MSGBOX_DEFAULT)
     closemessage
     frontier_get(FRONTIER_DATA_LVL_MODE)
-    if (var(VAR_RESULT) == FRONTIER_LVL_50) call(BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLv50)
-    if (var(VAR_RESULT) == FRONTIER_LVL_OPEN) call(BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLvOpen)
+    if (var(VAR_RESULT) == FRONTIER_LVL_50) {
+        call(BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLv50)
+    }
+    if (var(VAR_RESULT) == FRONTIER_LVL_OPEN) {
+        call(BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLvOpen)
+    }
     warp(MAP_BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR, 9, 13)
     setvar(VAR_TEMP_CHALLENGE_STATUS, 0)
     waitstate

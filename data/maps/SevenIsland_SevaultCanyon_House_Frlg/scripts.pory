@@ -2,7 +2,9 @@ mapscripts SevenIsland_SevaultCanyon_House_Frlg_MapScripts {}
 
 script SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan {
     lock
-    if (flag(DID_CHANSEY_DANCE)) goto(SevenIsland_SevaultCanyon_House_EventScript_AlreadyDanced)
+    if (flag(DID_CHANSEY_DANCE)) {
+        goto(SevenIsland_SevaultCanyon_House_EventScript_AlreadyDanced)
+    }
     playbgm(MUS_SCHOOL, 0)
     applymovement(LOCALID_CHANSEY_DANCE_MAN, SevenIsland_SevaultCanyon_House_Movement_ChanseyDance)
     waitmovement(0)
@@ -13,11 +15,15 @@ script SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan {
     msgbox(SevenIsland_SevaultCanyon_House_Text_ChanseyDanceJoinIn)
     textcolor(NPC_TEXT_COLOR_NEUTRAL)
     msgbox(SevenIsland_SevaultCanyon_House_Text_WouldYouLikeToDance, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(SevenIsland_SevaultCanyon_House_EventScript_DeclineDance)
+    if (var(VAR_RESULT) == NO) {
+        goto(SevenIsland_SevaultCanyon_House_EventScript_DeclineDance)
+    }
     msgbox(SevenIsland_SevaultCanyon_House_Text_DancedChanseyDance)
     closemessage
     call(EventScript_RestorePrevTextColor)
-    if (var(VAR_FACING) != DIR_SOUTH) call(SevenIsland_SevaultCanyon_House_EventScript_PlayerFaceDown)
+    if (var(VAR_FACING) != DIR_SOUTH) {
+        call(SevenIsland_SevaultCanyon_House_EventScript_PlayerFaceDown)
+    }
     delay(30)
     playbgm(MUS_SCHOOL, 0)
     applymovement(LOCALID_PLAYER, SevenIsland_SevaultCanyon_House_Movement_ChanseyDance)

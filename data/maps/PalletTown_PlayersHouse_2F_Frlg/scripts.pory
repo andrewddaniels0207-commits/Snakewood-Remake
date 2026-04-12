@@ -4,7 +4,9 @@ mapscripts PalletTown_PlayersHouse_2F_Frlg_MapScripts {
 }
 
 script PalletTown_PlayersHouse_2F_OnTransition {
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F) == 0) call(PalletTown_PlayersHouse_2F_EventScript_SetRespawn)
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F) == 0) {
+        call(PalletTown_PlayersHouse_2F_EventScript_SetRespawn)
+    }
     end
 }
 

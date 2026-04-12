@@ -4,19 +4,25 @@ mapscripts CeruleanCave_B1F_Frlg_MapScripts {
 }
 
 script CeruleanCave_B1F_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(CeruleanCave_B1F_EventScript_TryRemoveMewtwo)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(CeruleanCave_B1F_EventScript_TryRemoveMewtwo)
+    }
     end
 }
 
 script CeruleanCave_B1F_EventScript_TryRemoveMewtwo {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
+        goto(Common_EventScript_NopReturn)
+    }
     removeobject(VAR_LAST_TALKED)
     return
 }
 
 script CeruleanCave_B1F_OnTransition {
-    if (!flag(FLAG_FOUGHT_MEWTWO)) call(CeruleanCave_B1F_EventScript_ShowMewtwo)
+    if (!flag(FLAG_FOUGHT_MEWTWO)) {
+        call(CeruleanCave_B1F_EventScript_ShowMewtwo)
+    }
     end
 }
 
@@ -42,9 +48,15 @@ script CeruleanCave_B1F_EventScript_Mewtwo {
     waitstate
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(CeruleanCave_B1F_EventScript_DefeatedMewtwo)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(CeruleanCave_B1F_EventScript_RanFromMewtwo)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(CeruleanCave_B1F_EventScript_RanFromMewtwo)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(CeruleanCave_B1F_EventScript_DefeatedMewtwo)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(CeruleanCave_B1F_EventScript_RanFromMewtwo)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(CeruleanCave_B1F_EventScript_RanFromMewtwo)
+    }
     setflag(FLAG_FOUGHT_MEWTWO)
     release
     end

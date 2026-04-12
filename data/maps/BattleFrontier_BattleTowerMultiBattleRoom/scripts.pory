@@ -7,15 +7,21 @@ mapscripts BattleFrontier_BattleTowerMultiBattleRoom_MapScripts {
 }
 
 script BattleFrontier_BattleTowerMultiBattleRoom_OnTransition {
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS) call(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_SetObjGfx)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) call(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_SetLinkPlayerGfx)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS) {
+        call(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_SetObjGfx)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) {
+        call(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_SetLinkPlayerGfx)
+    }
     end
 }
 
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_SetObjGfx {
     tower_setpartnergfx()
     checkplayergender()
-    if (var(VAR_RESULT) == FEMALE) goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_SetPlayerGfxFemale)
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_SetPlayerGfxFemale)
+    }
     setvar(VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_BRENDAN_NORMAL)
     return
 }
@@ -48,7 +54,9 @@ script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_EnterRoom {
     applymovement(LOCALID_TOWER_MULTI_BATTLE_PARTNER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_PartnerEnterRoom)
     waitmovement(0)
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_OpponentsEnter)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_OpponentsEnter)
+    }
     applymovement(LOCALID_TOWER_MULTI_BATTLE_ATTENDANT_1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_AttendantApproachPlayer)
     applymovement(LOCALID_TOWER_MULTI_BATTLE_ATTENDANT_2, BattleFrontier_BattleTowerMultiBattleRoom_Movement_AttendantApproachPlayer)
     waitmovement(0)
@@ -66,7 +74,9 @@ script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_OpponentsEnter {
     applymovement(LOCALID_TOWER_MULTI_BATTLE_OPPONENT_1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_Opponent1Enter)
     applymovement(LOCALID_TOWER_MULTI_BATTLE_OPPONENT_2, BattleFrontier_BattleTowerMultiBattleRoom_Movement_Opponent2Enter)
     waitmovement(0)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_DoOpponentIntrosLink)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) {
+        goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_DoOpponentIntrosLink)
+    }
     tower_getopponentintro(0)
     delay(15)
     applymovement(LOCALID_TOWER_MULTI_BATTLE_OPPONENT_1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_WalkInPlaceLeft)
@@ -127,7 +137,9 @@ script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_DefeatedOpponents {
     applymovement(LOCALID_TOWER_MULTI_BATTLE_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_FaceAttendant)
     applymovement(LOCALID_TOWER_MULTI_BATTLE_PARTNER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_FaceAttendant)
     waitmovement(0)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RetorePartyMsgLink)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) {
+        goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RetorePartyMsgLink)
+    }
     msgbox(BattleFrontier_BattleTowerBattleRoom_Text_RestoreMonsToFullHealth, MSGBOX_DEFAULT)
     goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RestoreParty)
 }
@@ -141,7 +153,9 @@ script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RetorePartyMsgLink 
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RestoreParty {
     special(LoadPlayerParty)
     frontier_setpartyorder(FRONTIER_MULTI_PARTY_SIZE)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) call(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReconnectLink)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) {
+        call(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReconnectLink)
+    }
     playfanfare(MUS_HEAL)
     waitfanfare()
     special(HealPlayerParty)
@@ -150,9 +164,13 @@ script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RestoreParty {
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents {
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
     call(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyForNextOpponentSet)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallenge)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) {
+        goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallenge)
+    }
     call(BattleFrontier_EventScript_GetCantRecordBattle)
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponentsNoRecord)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponentsNoRecord)
+    }
     multichoice(19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, TRUE)
     switch(VAR_RESULT)
     case(0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallenge)
@@ -237,7 +255,9 @@ script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_PauseChallenge {
 }
 
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyForNextOpponentSet {
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyForNextOpponentSetLink)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) {
+        goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyForNextOpponentSetLink)
+    }
     copyvar(VAR_TEMP_F, VAR_RESULT)
     switch(VAR_TEMP_F)
     case(1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReadyFor2ndOpponentSet)
@@ -344,7 +364,9 @@ script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_LinkDelayForMsg {
 }
 
 script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponentsLink {
-    if (flag(FLAG_TEMP_2)) goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponentsLinkNoRecord)
+    if (flag(FLAG_TEMP_2)) {
+        goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponentsLinkNoRecord)
+    }
     multichoice(19, 6, MULTI_GO_ON_RECORD_RETIRE, TRUE)
     switch(VAR_RESULT)
     case(0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallengeLink)
@@ -370,7 +392,9 @@ script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallengeLi
     waitmessage()
     special(LinkRetireStatusWithBattleTowerPartner)
     waitstate
-    if (var(VAR_RESULT) != BATTLE_TOWER_LINKSTAT_CONTINUE) goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_WarpToLobbyLost)
+    if (var(VAR_RESULT) != BATTLE_TOWER_LINKSTAT_CONTINUE) {
+        goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_WarpToLobbyLost)
+    }
     goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_LinkDelayForMsg)
     end
 }
@@ -392,7 +416,9 @@ script BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallengeL
     message(BattleFrontier_BattleTowerBattleRoom_Text_CancelYourChallenge)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RetireChallengeLink)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RetireChallengeLink)
+    }
     goto(BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents)
     end
 }

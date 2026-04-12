@@ -3,7 +3,9 @@ mapscripts VictoryRoad_3F_Frlg_MapScripts {
 }
 
 script VictoryRoad_3F_OnLoad {
-    if (var(VAR_MAP_SCENE_VICTORY_ROAD_3F) != 100) call(VictoryRoad_3F_EventScript_SetRockBarrier)
+    if (var(VAR_MAP_SCENE_VICTORY_ROAD_3F) != 100) {
+        call(VictoryRoad_3F_EventScript_SetRockBarrier)
+    }
     end
 }
 
@@ -15,7 +17,9 @@ script VictoryRoad_3F_EventScript_SetRockBarrier {
 
 script VictoryRoad_3F_EventScript_FloorSwitch {
     lockall
-    if (var(VAR_MAP_SCENE_VICTORY_ROAD_3F) == 100) goto(VictoryRoad_3F_EventScript_FloorSwitchAlreadyPressed)
+    if (var(VAR_MAP_SCENE_VICTORY_ROAD_3F) == 100) {
+        goto(VictoryRoad_3F_EventScript_FloorSwitchAlreadyPressed)
+    }
     setmetatile(12, 12, METATILE_Cave_Floor_Ledge_Top, 0)
     setmetatile(12, 13, METATILE_Cave_Floor_Ledge_Bottom, 0)
     playse(SE_ICE_BREAK)

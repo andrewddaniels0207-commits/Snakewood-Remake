@@ -10,11 +10,15 @@ script Route114_LanettesHouse_OnTransition {
 script Route114_LanettesHouse_EventScript_Lanette {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_DOLL_LANETTE)) goto(Route114_LanettesHouse_EventScript_OfferAdvice)
+    if (flag(FLAG_RECEIVED_DOLL_LANETTE)) {
+        goto(Route114_LanettesHouse_EventScript_OfferAdvice)
+    }
     setflag(FLAG_SYS_PC_LANETTE)
     msgbox(Route114_LanettesHouse_Text_EverythingClutteredKeepThis, MSGBOX_DEFAULT)
     givedecoration(DECOR_LOTAD_DOLL)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowNoRoomForDecor)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowNoRoomForDecor)
+    }
     setflag(FLAG_RECEIVED_DOLL_LANETTE)
     release
     end
@@ -29,7 +33,9 @@ script Route114_LanettesHouse_EventScript_OfferAdvice {
 script Route114_LanettesHouse_EventScript_Notebook {
     lockall
     msgbox(Route114_LanettesHouse_Text_ResearchNotesPage1, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(Route114_LanettesHouse_EventScript_NotebookPage2)
+    if (var(VAR_RESULT) == YES) {
+        goto(Route114_LanettesHouse_EventScript_NotebookPage2)
+    }
     msgbox(Route114_LanettesHouse_Text_ClosedTheNotebook, MSGBOX_DEFAULT)
     releaseall
     end
@@ -37,7 +43,9 @@ script Route114_LanettesHouse_EventScript_Notebook {
 
 script Route114_LanettesHouse_EventScript_NotebookPage2 {
     msgbox(Route114_LanettesHouse_Text_ResearchNotesPage2, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) call(Route114_LanettesHouse_EventScript_NotebookPage3)
+    if (var(VAR_RESULT) == YES) {
+        call(Route114_LanettesHouse_EventScript_NotebookPage3)
+    }
     releaseall
     end
 }

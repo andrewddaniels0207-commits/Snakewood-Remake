@@ -8,11 +8,19 @@ script SootopolisCity_LotadAndSeedotHouse_EventScript_SeedotBrother {
     setvar(VAR_0x8009, SPECIES_SEEDOT)
     chooseboxmon(SELECT_PC_MON_TRADE)
     waitstate
-    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) goto(SootopolisCity_LotadAndSeedotHouse_EventScript_CancelShowSeedot)
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        goto(SootopolisCity_LotadAndSeedotHouse_EventScript_CancelShowSeedot)
+    }
     special(CompareSeedotSize)
-    if (var(VAR_RESULT) == 1) goto(SootopolisCity_LotadAndSeedotHouse_EventScript_NotSeedot)
-    if (var(VAR_RESULT) == 2) goto(SootopolisCity_LotadAndSeedotHouse_EventScript_SmallSeedot)
-    if (var(VAR_RESULT) == 3) goto(SootopolisCity_LotadAndSeedotHouse_EventScript_BigSeedot)
+    if (var(VAR_RESULT) == 1) {
+        goto(SootopolisCity_LotadAndSeedotHouse_EventScript_NotSeedot)
+    }
+    if (var(VAR_RESULT) == 2) {
+        goto(SootopolisCity_LotadAndSeedotHouse_EventScript_SmallSeedot)
+    }
+    if (var(VAR_RESULT) == 3) {
+        goto(SootopolisCity_LotadAndSeedotHouse_EventScript_BigSeedot)
+    }
     release
     end
 }
@@ -38,7 +46,9 @@ script SootopolisCity_LotadAndSeedotHouse_EventScript_SmallSeedot {
 script SootopolisCity_LotadAndSeedotHouse_EventScript_BigSeedot {
     msgbox(SootopolisCity_LotadAndSeedotHouse_Text_GoshMightBeBiggerThanLotad, MSGBOX_DEFAULT)
     giveitem(ITEM_ELIXIR)
-    if (var(VAR_RESULT) == FALSE) goto(SootopolisCity_LotadAndSeedotHouse_EventScript_NoRoomForElixir1)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SootopolisCity_LotadAndSeedotHouse_EventScript_NoRoomForElixir1)
+    }
     closemessage
     release
     end
@@ -58,11 +68,19 @@ script SootopolisCity_LotadAndSeedotHouse_EventScript_LotadBrother {
     setvar(VAR_0x8009, SPECIES_LOTAD)
     chooseboxmon(SELECT_PC_MON_TRADE)
     waitstate
-    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) goto(SootopolisCity_LotadAndSeedotHouse_EventScript_CancelShowLotad)
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        goto(SootopolisCity_LotadAndSeedotHouse_EventScript_CancelShowLotad)
+    }
     special(CompareLotadSize)
-    if (var(VAR_RESULT) == 1) goto(SootopolisCity_LotadAndSeedotHouse_EventScript_NotLotad)
-    if (var(VAR_RESULT) == 2) goto(SootopolisCity_LotadAndSeedotHouse_EventScript_SmallLotad)
-    if (var(VAR_RESULT) == 3) goto(SootopolisCity_LotadAndSeedotHouse_EventScript_BigLotad)
+    if (var(VAR_RESULT) == 1) {
+        goto(SootopolisCity_LotadAndSeedotHouse_EventScript_NotLotad)
+    }
+    if (var(VAR_RESULT) == 2) {
+        goto(SootopolisCity_LotadAndSeedotHouse_EventScript_SmallLotad)
+    }
+    if (var(VAR_RESULT) == 3) {
+        goto(SootopolisCity_LotadAndSeedotHouse_EventScript_BigLotad)
+    }
     release
     end
 }
@@ -88,7 +106,9 @@ script SootopolisCity_LotadAndSeedotHouse_EventScript_SmallLotad {
 script SootopolisCity_LotadAndSeedotHouse_EventScript_BigLotad {
     msgbox(SootopolisCity_LotadAndSeedotHouse_Text_WowMightBeBiggerThanSeedot, MSGBOX_DEFAULT)
     giveitem(ITEM_ELIXIR)
-    if (var(VAR_RESULT) == FALSE) goto(SootopolisCity_LotadAndSeedotHouse_EventScript_NoRoomForElixir2)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SootopolisCity_LotadAndSeedotHouse_EventScript_NoRoomForElixir2)
+    }
     closemessage
     release
     end

@@ -7,7 +7,9 @@ mapscripts FourIsland_Frlg_MapScripts {
 
 script FourIsland_OnTransition {
     setworldmapflag(FLAG_WORLD_MAP_FOUR_ISLAND)
-    if (var(VAR_MAP_SCENE_FOUR_ISLAND) == 0) call(FourIsland_EventScript_ShowRival)
+    if (var(VAR_MAP_SCENE_FOUR_ISLAND) == 0) {
+        call(FourIsland_EventScript_ShowRival)
+    }
     call(FourIsland_EventScript_TrySetDayCareManPos)
     end
 }
@@ -18,7 +20,9 @@ script FourIsland_EventScript_ShowRival {
 }
 
 script FourIsland_EventScript_TrySetDayCareManPos {
-    if (!flag(FLAG_PENDING_DAYCARE_EGG)) goto(FourIsland_EventScript_EndSetDayCareManPos)
+    if (!flag(FLAG_PENDING_DAYCARE_EGG)) {
+        goto(FourIsland_EventScript_EndSetDayCareManPos)
+    }
     setobjectxyperm(LOCALID_FOUR_ISLAND_DAYCARE_MAN, 16, 14)
 }
 
@@ -79,9 +83,15 @@ script FourIsland_EventScript_DaycareMan {
     faceplayer
     special(GetDaycareMonNicknames)
     specialvar(VAR_RESULT, GetDaycareState)
-    if (var(VAR_RESULT) == DAYCARE_EGG_WAITING) goto(FourIsland_EventScript_DaycareEggWaiting)
-    if (var(VAR_RESULT) == DAYCARE_ONE_MON) goto(FourIsland_EventScript_CheckOnOneMon)
-    if (var(VAR_RESULT) == DAYCARE_TWO_MONS) goto(FourIsland_EventScript_CheckOnTwoMons)
+    if (var(VAR_RESULT) == DAYCARE_EGG_WAITING) {
+        goto(FourIsland_EventScript_DaycareEggWaiting)
+    }
+    if (var(VAR_RESULT) == DAYCARE_ONE_MON) {
+        goto(FourIsland_EventScript_CheckOnOneMon)
+    }
+    if (var(VAR_RESULT) == DAYCARE_TWO_MONS) {
+        goto(FourIsland_EventScript_CheckOnTwoMons)
+    }
     msgbox(DayCare_Text_ImDaycareManSpeakToMyWife)
     release
     end
@@ -89,9 +99,13 @@ script FourIsland_EventScript_DaycareMan {
 
 script FourIsland_EventScript_DaycareEggWaiting {
     msgbox(DayCare_Text_DoYouWantEgg, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(FourIsland_EventScript_DaycareAcceptEgg)
+    if (var(VAR_RESULT) == YES) {
+        goto(FourIsland_EventScript_DaycareAcceptEgg)
+    }
     msgbox(DayCare_Text_IWillKeepDoYouWantIt, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(FourIsland_EventScript_DaycareAcceptEgg)
+    if (var(VAR_RESULT) == YES) {
+        goto(FourIsland_EventScript_DaycareAcceptEgg)
+    }
     msgbox(DayCare_Text_IllKeepIt)
     clearflag(FLAG_PENDING_DAYCARE_EGG)
     special(RejectEggFromDayCare)
@@ -101,7 +115,9 @@ script FourIsland_EventScript_DaycareEggWaiting {
 
 script FourIsland_EventScript_DaycareAcceptEgg {
     specialvar(VAR_RESULT, CalculatePlayerPartyCount)
-    if (var(VAR_RESULT) != PARTY_SIZE) goto(FourIsland_EventScript_DaycareReceivedEgg)
+    if (var(VAR_RESULT) != PARTY_SIZE) {
+        goto(FourIsland_EventScript_DaycareReceivedEgg)
+    }
     msgbox(DayCare_Text_YouHaveNoRoomForIt)
     release
     end
@@ -142,7 +158,9 @@ script FourIsland_EventScript_CheckOnTwoMons {
 script FourIsland_EventScript_OldWoman {
     lock
     faceplayer
-    if (flag(FLAG_IS_CHAMPION)) goto(FourIsland_EventScript_OldWomanLoreleiLeft)
+    if (flag(FLAG_IS_CHAMPION)) {
+        goto(FourIsland_EventScript_OldWomanLoreleiLeft)
+    }
     msgbox(FourIsland_Text_LoreleiHasReturned)
     release
     end

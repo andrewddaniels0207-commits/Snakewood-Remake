@@ -7,8 +7,12 @@ mapscripts SkyPillar_Outside_MapScripts {
 }
 
 script SkyPillar_Outside_OnTransition {
-    if (var(VAR_SOOTOPOLIS_CITY_STATE) == 3) call(SkyPillar_Outside_EventScript_HideMapNamePopup)
-    if (var(VAR_SOOTOPOLIS_CITY_STATE) >= 4) call(SkyPillar_Outside_EventScript_CheckSetAbnormalWeather)
+    if (var(VAR_SOOTOPOLIS_CITY_STATE) == 3) {
+        call(SkyPillar_Outside_EventScript_HideMapNamePopup)
+    }
+    if (var(VAR_SOOTOPOLIS_CITY_STATE) >= 4) {
+        call(SkyPillar_Outside_EventScript_CheckSetAbnormalWeather)
+    }
     end
 }
 
@@ -18,12 +22,16 @@ script SkyPillar_Outside_EventScript_HideMapNamePopup {
 }
 
 script SkyPillar_Outside_EventScript_CheckSetAbnormalWeather {
-    if (flag(FLAG_SYS_WEATHER_CTRL)) call(Common_EventScript_SetAbnormalWeather)
+    if (flag(FLAG_SYS_WEATHER_CTRL)) {
+        call(Common_EventScript_SetAbnormalWeather)
+    }
     return
 }
 
 script SkyPillar_Outside_OnLoad {
-    if (flag(FLAG_WALLACE_GOES_TO_SKY_PILLAR)) call(SkyPillar_Outside_EventScript_OpenDoor)
+    if (flag(FLAG_WALLACE_GOES_TO_SKY_PILLAR)) {
+        call(SkyPillar_Outside_EventScript_OpenDoor)
+    }
     end
 }
 

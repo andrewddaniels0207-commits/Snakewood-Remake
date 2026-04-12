@@ -25,8 +25,12 @@ script FortreeCity_Gym_EventScript_InitRotatingGates {
 script FortreeCity_Gym_EventScript_Winona {
     trainerbattle_single(TRAINER_WINONA_1, FortreeCity_Gym_Text_WinonaIntro, FortreeCity_Gym_Text_WinonaDefeat, FortreeCity_Gym_EventScript_WinonaDefeated, NO_MUSIC)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(FortreeCity_Gym_EventScript_WinonaRematch)
-    if (!flag(FLAG_RECEIVED_TM_AERIAL_ACE)) goto(FortreeCity_Gym_EventScript_GiveAerialAce2)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(FortreeCity_Gym_EventScript_WinonaRematch)
+    }
+    if (!flag(FLAG_RECEIVED_TM_AERIAL_ACE)) {
+        goto(FortreeCity_Gym_EventScript_GiveAerialAce2)
+    }
     msgbox(FortreeCity_Gym_Text_WinonaPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -58,7 +62,9 @@ script FortreeCity_Gym_EventScript_WinonaDefeated {
 
 script FortreeCity_Gym_EventScript_GiveAerialAce2 {
     giveitem(ITEM_TM_AERIAL_ACE)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     msgbox(FortreeCity_Gym_Text_ExplainAerialAce, MSGBOX_DEFAULT)
     setflag(FLAG_RECEIVED_TM_AERIAL_ACE)
     release
@@ -67,7 +73,9 @@ script FortreeCity_Gym_EventScript_GiveAerialAce2 {
 
 script FortreeCity_Gym_EventScript_GiveAerialAce {
     giveitem(ITEM_TM_AERIAL_ACE)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_BagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_BagIsFull)
+    }
     msgbox(FortreeCity_Gym_Text_ExplainAerialAce, MSGBOX_DEFAULT)
     setflag(FLAG_RECEIVED_TM_AERIAL_ACE)
     return
@@ -118,7 +126,9 @@ script FortreeCity_Gym_EventScript_Darius {
 script FortreeCity_Gym_EventScript_GymGuide {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_FORTREE_GYM)) goto(FortreeCity_Gym_EventScript_GymGuidePostVictory)
+    if (flag(FLAG_DEFEATED_FORTREE_GYM)) {
+        goto(FortreeCity_Gym_EventScript_GymGuidePostVictory)
+    }
     msgbox(FortreeCity_Gym_Text_GymGuideAdvice, MSGBOX_DEFAULT)
     release
     end
@@ -132,14 +142,18 @@ script FortreeCity_Gym_EventScript_GymGuidePostVictory {
 
 script FortreeCity_Gym_EventScript_LeftGymStatue {
     lockall
-    if (flag(FLAG_BADGE06_GET)) goto(FortreeCity_Gym_EventScript_GymStatueCertified)
+    if (flag(FLAG_BADGE06_GET)) {
+        goto(FortreeCity_Gym_EventScript_GymStatueCertified)
+    }
     goto(FortreeCity_Gym_EventScript_GymStatue)
     end
 }
 
 script FortreeCity_Gym_EventScript_RightGymStatue {
     lockall
-    if (flag(FLAG_BADGE06_GET)) goto(FortreeCity_Gym_EventScript_GymStatueCertified)
+    if (flag(FLAG_BADGE06_GET)) {
+        goto(FortreeCity_Gym_EventScript_GymStatueCertified)
+    }
     goto(FortreeCity_Gym_EventScript_GymStatue)
     end
 }

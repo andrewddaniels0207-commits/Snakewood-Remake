@@ -6,7 +6,9 @@ script RocketHideout_B4F_OnLoad {
     setvar(NUM_DOOR_GRUNTS_DEFEATED, 0)
     call_if_defeated(TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_EventScript_CountGruntDefeated)
     call_if_defeated(TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_EventScript_CountGruntDefeated)
-    if (var(NUM_DOOR_GRUNTS_DEFEATED) != 2) call(RocketHideout_B4F_EventScript_SetBarrier)
+    if (var(NUM_DOOR_GRUNTS_DEFEATED) != 2) {
+        call(RocketHideout_B4F_EventScript_SetBarrier)
+    }
     end
 }
 
@@ -42,7 +44,9 @@ script RocketHideout_B4F_EventScript_SilphScope {
     faceplayer
     removeobject(LOCALID_SILPH_SCOPE)
     giveitem(ITEM_SILPH_SCOPE)
-    if (var(VAR_RESULT) == FALSE) goto(EventScript_BagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(EventScript_BagIsFull)
+    }
     release
     end
 }
@@ -68,7 +72,9 @@ script RocketHideout_B4F_EventScript_LiftKey {
     setflag(FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT)
     removeobject(LOCALID_LIFT_KEY)
     giveitem(ITEM_LIFT_KEY)
-    if (var(VAR_RESULT) == FALSE) goto(EventScript_BagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(EventScript_BagIsFull)
+    }
     release
     end
 }
@@ -83,8 +89,12 @@ script RocketHideout_B4F_EventScript_DefeatedGrunt2 {
     setvar(NUM_DOOR_GRUNTS_DEFEATED, 0)
     call_if_defeated(TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_EventScript_CountGruntDefeated)
     call_if_defeated(TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_EventScript_CountGruntDefeated)
-    if (var(NUM_DOOR_GRUNTS_DEFEATED) == 2) call(RocketHideout_B4F_EventScript_RemoveBarrier)
-    if (var(NUM_DOOR_GRUNTS_DEFEATED) == 2) call(RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval)
+    if (var(NUM_DOOR_GRUNTS_DEFEATED) == 2) {
+        call(RocketHideout_B4F_EventScript_RemoveBarrier)
+    }
+    if (var(NUM_DOOR_GRUNTS_DEFEATED) == 2) {
+        call(RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval)
+    }
     release
     end
 }
@@ -99,8 +109,12 @@ script RocketHideout_B4F_EventScript_DefeatedGrunt3 {
     setvar(NUM_DOOR_GRUNTS_DEFEATED, 0)
     call_if_defeated(TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_EventScript_CountGruntDefeated)
     call_if_defeated(TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_EventScript_CountGruntDefeated)
-    if (var(NUM_DOOR_GRUNTS_DEFEATED) == 2) call(RocketHideout_B4F_EventScript_RemoveBarrier)
-    if (var(NUM_DOOR_GRUNTS_DEFEATED) == 2) call(RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval)
+    if (var(NUM_DOOR_GRUNTS_DEFEATED) == 2) {
+        call(RocketHideout_B4F_EventScript_RemoveBarrier)
+    }
+    if (var(NUM_DOOR_GRUNTS_DEFEATED) == 2) {
+        call(RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval)
+    }
     release
     end
 }

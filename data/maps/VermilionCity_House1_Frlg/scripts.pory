@@ -3,9 +3,13 @@ mapscripts VermilionCity_House1_Frlg_MapScripts {}
 script VermilionCity_House1_EventScript_FishingGuru {
     lock
     faceplayer
-    if (flag(FLAG_GOT_OLD_ROD)) goto(VermilionCity_House1_EventScript_AlreadyGotOldRod)
+    if (flag(FLAG_GOT_OLD_ROD)) {
+        goto(VermilionCity_House1_EventScript_AlreadyGotOldRod)
+    }
     msgbox(VermilionCity_House1_Text_ImFishingGuruDoYouLikeToFish, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(VermilionCity_House1_EventScript_GiveOldRod)
+    if (var(VAR_RESULT) == YES) {
+        goto(VermilionCity_House1_EventScript_GiveOldRod)
+    }
     msgbox(VermilionCity_House1_Text_OhThatsSoDisappointing)
     release
     end
@@ -19,7 +23,9 @@ script VermilionCity_House1_EventScript_AlreadyGotOldRod {
 
 script VermilionCity_House1_EventScript_GiveOldRod {
     checkitemspace(ITEM_OLD_ROD)
-    if (var(VAR_RESULT) == FALSE) goto(VermilionCity_House1_EventScript_NoRoomForOldRod)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(VermilionCity_House1_EventScript_NoRoomForOldRod)
+    }
     additem(ITEM_OLD_ROD)
     msgbox(VermilionCity_House1_Text_TakeThisAndFish)
     msgreceiveditem(VermilionCity_House1_Text_ReceivedOldRodFromFishingGuru, ITEM_OLD_ROD)

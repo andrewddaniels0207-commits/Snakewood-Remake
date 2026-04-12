@@ -7,12 +7,20 @@ mapscripts LavaridgeTown_MapScripts {
 
 script LavaridgeTown_OnTransition {
     setflag(FLAG_VISITED_LAVARIDGE_TOWN)
-    if (flag(FLAG_WHITEOUT_TO_LAVARIDGE)) call(LavaridgeTown_EventScript_ClearLavaridgeWhiteOut)
-    if (flag(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY)) call(LavaridgeTown_EventScript_ShowMtChimneyTrainers)
+    if (flag(FLAG_WHITEOUT_TO_LAVARIDGE)) {
+        call(LavaridgeTown_EventScript_ClearLavaridgeWhiteOut)
+    }
+    if (flag(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY)) {
+        call(LavaridgeTown_EventScript_ShowMtChimneyTrainers)
+    }
     call(Common_EventScript_SetupRivalGfxId)
     call(Common_EventScript_SetupRivalOnBikeGfxId)
-    if (var(VAR_LAVARIDGE_TOWN_STATE) == 1) call(LavaridgeTown_EventScript_CheckSetRivalPos)
-    if (var(VAR_LAVARIDGE_TOWN_STATE) == 1) call(LavaridgeTown_EventScript_HideMapNamePopup)
+    if (var(VAR_LAVARIDGE_TOWN_STATE) == 1) {
+        call(LavaridgeTown_EventScript_CheckSetRivalPos)
+    }
+    if (var(VAR_LAVARIDGE_TOWN_STATE) == 1) {
+        call(LavaridgeTown_EventScript_HideMapNamePopup)
+    }
     end
 }
 
@@ -23,7 +31,9 @@ script LavaridgeTown_EventScript_ClearLavaridgeWhiteOut {
 
 script LavaridgeTown_EventScript_CheckSetRivalPos {
     getplayerxy(VAR_0x8004, VAR_0x8005)
-    if (var(VAR_0x8004) == 9) goto(LavaridgeTown_EventScript_SetRivalPos)
+    if (var(VAR_0x8004) == 9) {
+        goto(LavaridgeTown_EventScript_SetRivalPos)
+    }
     return
 }
 
@@ -48,17 +58,33 @@ script LavaridgeTown_EventScript_HideMapNamePopup {
 script LavaridgeTown_EventScript_RivalGiveGoGoggles {
     lockall
     getplayerxy(VAR_0x8008, VAR_0x8009)
-    if (var(VAR_0x8008) == 9) call(LavaridgeTown_EventScript_RivalNoticePlayer)
-    if (var(VAR_0x8008) != 9) call(LavaridgeTown_EventScript_RivalExitHerbShop)
+    if (var(VAR_0x8008) == 9) {
+        call(LavaridgeTown_EventScript_RivalNoticePlayer)
+    }
+    if (var(VAR_0x8008) != 9) {
+        call(LavaridgeTown_EventScript_RivalExitHerbShop)
+    }
     delay(20)
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(LavaridgeTown_EventScript_PlayMayMusic)
-    if (var(VAR_RESULT) == FEMALE) call(LavaridgeTown_EventScript_PlayBrendanMusic)
-    if (var(VAR_0x8008) == 9) call(LavaridgeTown_EventScript_RivalApproachPlayer1)
-    if (var(VAR_0x8008) != 9) call(LavaridgeTown_EventScript_RivalApproachPlayer2)
+    if (var(VAR_RESULT) == MALE) {
+        call(LavaridgeTown_EventScript_PlayMayMusic)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(LavaridgeTown_EventScript_PlayBrendanMusic)
+    }
+    if (var(VAR_0x8008) == 9) {
+        call(LavaridgeTown_EventScript_RivalApproachPlayer1)
+    }
+    if (var(VAR_0x8008) != 9) {
+        call(LavaridgeTown_EventScript_RivalApproachPlayer2)
+    }
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(LavaridgeTown_EventScript_MayGiveGoGoggles)
-    if (var(VAR_RESULT) == FEMALE) goto(LavaridgeTown_EventScript_BrendanGiveGoGoggles)
+    if (var(VAR_RESULT) == MALE) {
+        goto(LavaridgeTown_EventScript_MayGiveGoGoggles)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(LavaridgeTown_EventScript_BrendanGiveGoGoggles)
+    }
     end
 }
 
@@ -85,8 +111,12 @@ script LavaridgeTown_EventScript_RivalExit {
     removeobject(LOCALID_LAVARIDGE_RIVAL)
     addobject(LOCALID_LAVARIDGE_RIVAL_ON_BIKE)
     delay(30)
-    if (var(VAR_0x8008) == 9) call(LavaridgeTown_EventScript_RivalExit1)
-    if (var(VAR_0x8008) != 9) call(LavaridgeTown_EventScript_RivalExit2)
+    if (var(VAR_0x8008) == 9) {
+        call(LavaridgeTown_EventScript_RivalExit1)
+    }
+    if (var(VAR_0x8008) != 9) {
+        call(LavaridgeTown_EventScript_RivalExit2)
+    }
     removeobject(LOCALID_LAVARIDGE_RIVAL_ON_BIKE)
     setvar(VAR_LAVARIDGE_TOWN_STATE, 2)
     clearflag(FLAG_HIDE_MAP_NAME_POPUP)
@@ -220,7 +250,9 @@ movement LavaridgeTown_Movement_RivalExitHerbShop {
 
 script LavaridgeTown_EventScript_HotSpringsTrigger {
     specialvar(VAR_RESULT, GetPlayerFacingDirection)
-    if (var(VAR_RESULT) == DIR_SOUTH) goto(LavaridgeTown_EventScript_EnteredHotSprings)
+    if (var(VAR_RESULT) == DIR_SOUTH) {
+        goto(LavaridgeTown_EventScript_EnteredHotSprings)
+    }
     end
 }
 
@@ -262,11 +294,17 @@ script LavaridgeTown_EventScript_ExpertF {
 script LavaridgeTown_EventScript_EggWoman {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_LAVARIDGE_EGG)) goto(LavaridgeTown_EventScript_ReceivedEgg)
+    if (flag(FLAG_RECEIVED_LAVARIDGE_EGG)) {
+        goto(LavaridgeTown_EventScript_ReceivedEgg)
+    }
     msgbox(LavaridgeTown_Text_HaveEggWillYouTakeIt, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LavaridgeTown_EventScript_DeclineEgg)
+    if (var(VAR_RESULT) == NO) {
+        goto(LavaridgeTown_EventScript_DeclineEgg)
+    }
     getpartysize()
-    if (var(VAR_RESULT) == PARTY_SIZE) goto(LavaridgeTown_EventScript_NoRoomForEgg)
+    if (var(VAR_RESULT) == PARTY_SIZE) {
+        goto(LavaridgeTown_EventScript_NoRoomForEgg)
+    }
     msgbox(LavaridgeTown_Text_HopeYoullWalkPlentyWithEgg, MSGBOX_DEFAULT)
     setflag(FLAG_RECEIVED_LAVARIDGE_EGG)
     playfanfare(MUS_OBTAIN_ITEM)

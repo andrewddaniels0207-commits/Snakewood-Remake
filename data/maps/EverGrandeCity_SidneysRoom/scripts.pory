@@ -14,8 +14,12 @@ script EverGrandeCity_SidneysRoom_OnTransition {
 }
 
 script EverGrandeCity_SidneysRoom_OnLoad {
-    if (flag(FLAG_DEFEATED_ELITE_4_SIDNEY)) call(EverGrandeCity_SidneysRoom_EventScript_ResetAdvanceToNextRoom)
-    if (var(VAR_ELITE_4_STATE) == 1) call(EverGrandeCity_SidneysRoom_EventScript_CloseDoor)
+    if (flag(FLAG_DEFEATED_ELITE_4_SIDNEY)) {
+        call(EverGrandeCity_SidneysRoom_EventScript_ResetAdvanceToNextRoom)
+    }
+    if (var(VAR_ELITE_4_STATE) == 1) {
+        call(EverGrandeCity_SidneysRoom_EventScript_CloseDoor)
+    }
     end
 }
 
@@ -52,7 +56,9 @@ script EverGrandeCity_SidneysRoom_EventScript_WalkInCloseDoor {
 script EverGrandeCity_SidneysRoom_EventScript_Sidney {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_ELITE_4_SIDNEY)) goto(EverGrandeCity_SidneysRoom_EventScript_PostBattleSpeech)
+    if (flag(FLAG_DEFEATED_ELITE_4_SIDNEY)) {
+        goto(EverGrandeCity_SidneysRoom_EventScript_PostBattleSpeech)
+    }
     playbgm(MUS_ENCOUNTER_ELITE_FOUR, FALSE)
     msgbox(EverGrandeCity_SidneysRoom_Text_IntroSpeech, MSGBOX_DEFAULT)
     trainerbattle_no_intro(TRAINER_SIDNEY, EverGrandeCity_SidneysRoom_Text_Defeat)

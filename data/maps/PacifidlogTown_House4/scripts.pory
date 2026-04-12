@@ -14,8 +14,12 @@ script PacifidlogTown_House4_EventScript_Boy {
     lock
     faceplayer
     msgbox(PacifidlogTown_House4_Text_WhereDidYouComeFrom, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PacifidlogTown_House4_EventScript_Yes)
-    if (var(VAR_RESULT) == NO) goto(PacifidlogTown_House4_EventScript_No)
+    if (var(VAR_RESULT) == YES) {
+        goto(PacifidlogTown_House4_EventScript_Yes)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PacifidlogTown_House4_EventScript_No)
+    }
     end
 }
 

@@ -3,7 +3,9 @@ mapscripts MauvilleCity_Gym_MapScripts {
 }
 
 script MauvilleCity_Gym_OnLoad {
-    if (flag(FLAG_DEFEATED_MAUVILLE_GYM)) goto(MauvilleCity_Gym_EventScript_DeactivatePuzzle)
+    if (flag(FLAG_DEFEATED_MAUVILLE_GYM)) {
+        goto(MauvilleCity_Gym_EventScript_DeactivatePuzzle)
+    }
     switch(VAR_MAUVILLE_GYM_STATE)
     case(0, MauvilleCity_Gym_EventScript_UpdateBarriers)
     case(1, MauvilleCity_Gym_EventScript_Switch1Pressed)
@@ -14,7 +16,9 @@ script MauvilleCity_Gym_OnLoad {
 }
 
 script MauvilleCity_Gym_EventScript_UpdateBarriers {
-    if (flag(FLAG_MAUVILLE_GYM_BARRIERS_STATE)) goto(MauvilleCity_Gym_EventScript_SetAltBarriers)
+    if (flag(FLAG_MAUVILLE_GYM_BARRIERS_STATE)) {
+        goto(MauvilleCity_Gym_EventScript_SetAltBarriers)
+    }
     end
 }
 
@@ -84,9 +88,15 @@ script MauvilleCity_Gym_EventScript_DeactivatePuzzle {
 script MauvilleCity_Gym_EventScript_Wattson {
     trainerbattle_single(TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(MauvilleCity_Gym_EventScript_WattsonRematch)
-    if (!flag(FLAG_RECEIVED_TM_SHOCK_WAVE)) goto(MauvilleCity_Gym_EventScript_GiveShockWave2)
-    if (var(VAR_NEW_MAUVILLE_STATE) == 2) goto(MauvilleCity_Gym_EventScript_CompletedNewMauville)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(MauvilleCity_Gym_EventScript_WattsonRematch)
+    }
+    if (!flag(FLAG_RECEIVED_TM_SHOCK_WAVE)) {
+        goto(MauvilleCity_Gym_EventScript_GiveShockWave2)
+    }
+    if (var(VAR_NEW_MAUVILLE_STATE) == 2) {
+        goto(MauvilleCity_Gym_EventScript_CompletedNewMauville)
+    }
     msgbox(MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -102,7 +112,9 @@ script MauvilleCity_Gym_EventScript_WattsonDefeated {
     setflag(FLAG_DEFEATED_MAUVILLE_GYM)
     setflag(FLAG_BADGE03_GET)
     addvar(VAR_PETALBURG_GYM_STATE, 1)
-    if (var(VAR_PETALBURG_GYM_STATE) == 6) call(Common_EventScript_ReadyPetalburgGymForBattle)
+    if (var(VAR_PETALBURG_GYM_STATE) == 6) {
+        call(Common_EventScript_ReadyPetalburgGymForBattle)
+    }
     setvar(VAR_0x8008, 3)
     call(Common_EventScript_SetGymTrainers)
     special(MauvilleGymDeactivatePuzzle)
@@ -123,7 +135,9 @@ script MauvilleCity_Gym_EventScript_WattsonDefeated {
 
 script MauvilleCity_Gym_EventScript_GiveShockWave2 {
     giveitem(ITEM_TM_SHOCK_WAVE)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     msgbox(MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT)
     setflag(FLAG_RECEIVED_TM_SHOCK_WAVE)
     release
@@ -132,7 +146,9 @@ script MauvilleCity_Gym_EventScript_GiveShockWave2 {
 
 script MauvilleCity_Gym_EventScript_GiveShockWave {
     giveitem(ITEM_TM_SHOCK_WAVE)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_BagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_BagIsFull)
+    }
     msgbox(MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT)
     setflag(FLAG_RECEIVED_TM_SHOCK_WAVE)
     return
@@ -152,8 +168,12 @@ script MauvilleCity_Gym_EventScript_WattsonRematch {
 
 script MauvilleCity_Gym_EventScript_Switch1 {
     lockall
-    if (flag(FLAG_DEFEATED_MAUVILLE_GYM)) goto(MauvilleCity_Gym_EventScript_SwitchDoNothing)
-    if (var(VAR_MAUVILLE_GYM_STATE) == 1) goto(MauvilleCity_Gym_EventScript_SwitchDoNothing)
+    if (flag(FLAG_DEFEATED_MAUVILLE_GYM)) {
+        goto(MauvilleCity_Gym_EventScript_SwitchDoNothing)
+    }
+    if (var(VAR_MAUVILLE_GYM_STATE) == 1) {
+        goto(MauvilleCity_Gym_EventScript_SwitchDoNothing)
+    }
     setvar(VAR_MAUVILLE_GYM_STATE, 1)
     setvar(VAR_0x8004, 0)
     goto(MauvilleCity_Gym_EventScript_PressFloorSwitch)
@@ -162,8 +182,12 @@ script MauvilleCity_Gym_EventScript_Switch1 {
 
 script MauvilleCity_Gym_EventScript_Switch2 {
     lockall
-    if (flag(FLAG_DEFEATED_MAUVILLE_GYM)) goto(MauvilleCity_Gym_EventScript_SwitchDoNothing)
-    if (var(VAR_MAUVILLE_GYM_STATE) == 2) goto(MauvilleCity_Gym_EventScript_SwitchDoNothing)
+    if (flag(FLAG_DEFEATED_MAUVILLE_GYM)) {
+        goto(MauvilleCity_Gym_EventScript_SwitchDoNothing)
+    }
+    if (var(VAR_MAUVILLE_GYM_STATE) == 2) {
+        goto(MauvilleCity_Gym_EventScript_SwitchDoNothing)
+    }
     setvar(VAR_MAUVILLE_GYM_STATE, 2)
     setvar(VAR_0x8004, 1)
     goto(MauvilleCity_Gym_EventScript_PressFloorSwitch)
@@ -172,8 +196,12 @@ script MauvilleCity_Gym_EventScript_Switch2 {
 
 script MauvilleCity_Gym_EventScript_Switch3 {
     lockall
-    if (flag(FLAG_DEFEATED_MAUVILLE_GYM)) goto(MauvilleCity_Gym_EventScript_SwitchDoNothing)
-    if (var(VAR_MAUVILLE_GYM_STATE) == 3) goto(MauvilleCity_Gym_EventScript_SwitchDoNothing)
+    if (flag(FLAG_DEFEATED_MAUVILLE_GYM)) {
+        goto(MauvilleCity_Gym_EventScript_SwitchDoNothing)
+    }
+    if (var(VAR_MAUVILLE_GYM_STATE) == 3) {
+        goto(MauvilleCity_Gym_EventScript_SwitchDoNothing)
+    }
     setvar(VAR_MAUVILLE_GYM_STATE, 3)
     setvar(VAR_0x8004, 2)
     goto(MauvilleCity_Gym_EventScript_PressFloorSwitch)
@@ -182,8 +210,12 @@ script MauvilleCity_Gym_EventScript_Switch3 {
 
 script MauvilleCity_Gym_EventScript_Switch4 {
     lockall
-    if (flag(FLAG_DEFEATED_MAUVILLE_GYM)) goto(MauvilleCity_Gym_EventScript_SwitchDoNothing)
-    if (var(VAR_MAUVILLE_GYM_STATE) == 4) goto(MauvilleCity_Gym_EventScript_SwitchDoNothing)
+    if (flag(FLAG_DEFEATED_MAUVILLE_GYM)) {
+        goto(MauvilleCity_Gym_EventScript_SwitchDoNothing)
+    }
+    if (var(VAR_MAUVILLE_GYM_STATE) == 4) {
+        goto(MauvilleCity_Gym_EventScript_SwitchDoNothing)
+    }
     setvar(VAR_MAUVILLE_GYM_STATE, 4)
     setvar(VAR_0x8004, 3)
     goto(MauvilleCity_Gym_EventScript_PressFloorSwitch)
@@ -195,8 +227,12 @@ script MauvilleCity_Gym_EventScript_PressFloorSwitch {
     special(MauvilleGymPressSwitch)
     special(DrawWholeMapView)
     playse(SE_UNLOCK)
-    if (flag(FLAG_MAUVILLE_GYM_BARRIERS_STATE)) goto(MauvilleCity_Gym_EventScript_ClearBarriersAltState)
-    if (!flag(FLAG_MAUVILLE_GYM_BARRIERS_STATE)) goto(MauvilleCity_Gym_EventScript_SetBarriersAltState)
+    if (flag(FLAG_MAUVILLE_GYM_BARRIERS_STATE)) {
+        goto(MauvilleCity_Gym_EventScript_ClearBarriersAltState)
+    }
+    if (!flag(FLAG_MAUVILLE_GYM_BARRIERS_STATE)) {
+        goto(MauvilleCity_Gym_EventScript_SetBarriersAltState)
+    }
     releaseall
     end
 }
@@ -251,7 +287,9 @@ script MauvilleCity_Gym_EventScript_Angelo {
 script MauvilleCity_Gym_EventScript_GymGuide {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_MAUVILLE_GYM)) goto(MauvilleCity_Gym_EventScript_GymGuidePostVictory)
+    if (flag(FLAG_DEFEATED_MAUVILLE_GYM)) {
+        goto(MauvilleCity_Gym_EventScript_GymGuidePostVictory)
+    }
     msgbox(MauvilleCity_Gym_Text_GymGuideAdvice, MSGBOX_DEFAULT)
     release
     end
@@ -265,14 +303,18 @@ script MauvilleCity_Gym_EventScript_GymGuidePostVictory {
 
 script MauvilleCity_Gym_EventScript_LeftGymStatue {
     lockall
-    if (flag(FLAG_BADGE03_GET)) goto(MauvilleCity_Gym_EventScript_GymStatueCertified)
+    if (flag(FLAG_BADGE03_GET)) {
+        goto(MauvilleCity_Gym_EventScript_GymStatueCertified)
+    }
     goto(MauvilleCity_Gym_EventScript_GymStatue)
     end
 }
 
 script MauvilleCity_Gym_EventScript_RightGymStatue {
     lockall
-    if (flag(FLAG_BADGE03_GET)) goto(MauvilleCity_Gym_EventScript_GymStatueCertified)
+    if (flag(FLAG_BADGE03_GET)) {
+        goto(MauvilleCity_Gym_EventScript_GymStatueCertified)
+    }
     goto(MauvilleCity_Gym_EventScript_GymStatue)
     end
 }

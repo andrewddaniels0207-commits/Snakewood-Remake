@@ -2,10 +2,18 @@ mapscripts SlateportCity_SternsShipyard_1F_MapScripts {}
 
 script SlateportCity_SternsShipyard_1F_EventScript_Dock {
     lockall
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(SlateportCity_SternsShipyard_1F_EventScript_FerryReady)
-    if (flag(FLAG_BADGE07_GET)) goto(SlateportCity_SternsShipyard_1F_EventScript_BrineyJoined)
-    if (flag(FLAG_DELIVERED_DEVON_GOODS)) goto(SlateportCity_SternsShipyard_1F_EventScript_NeedVeteran)
-    if (flag(FLAG_DOCK_REJECTED_DEVON_GOODS)) goto(SlateportCity_SternsShipyard_1F_EventScript_GoFindStern)
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(SlateportCity_SternsShipyard_1F_EventScript_FerryReady)
+    }
+    if (flag(FLAG_BADGE07_GET)) {
+        goto(SlateportCity_SternsShipyard_1F_EventScript_BrineyJoined)
+    }
+    if (flag(FLAG_DELIVERED_DEVON_GOODS)) {
+        goto(SlateportCity_SternsShipyard_1F_EventScript_NeedVeteran)
+    }
+    if (flag(FLAG_DOCK_REJECTED_DEVON_GOODS)) {
+        goto(SlateportCity_SternsShipyard_1F_EventScript_GoFindStern)
+    }
     msgbox(SlateportCity_SternsShipyard_1F_Text_CantMakeHeadsOrTails, MSGBOX_DEFAULT)
     applymovement(LOCALID_DOCK, Common_Movement_FacePlayer)
     waitmovement(0)

@@ -10,13 +10,19 @@ script Route123_OnTransition {
 script Route123_EventScript_GigaDrainGirl {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_TM_GIGA_DRAIN)) goto(Route123_EventScript_ReceivedGigaDrain)
+    if (flag(FLAG_RECEIVED_TM_GIGA_DRAIN)) {
+        goto(Route123_EventScript_ReceivedGigaDrain)
+    }
     msgbox(Route123_Text_LoveGrassMonsHaveAny, MSGBOX_DEFAULT)
     special(IsGrassTypeInParty)
-    if (var(VAR_RESULT) == FALSE) goto(Route123_EventScript_NoGrassMons)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route123_EventScript_NoGrassMons)
+    }
     msgbox(Route123_Text_YouLikeGrassMonsTooHaveThis, MSGBOX_DEFAULT)
     giveitem(ITEM_TM_GIGA_DRAIN)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_TM_GIGA_DRAIN)
     msgbox(Route123_Text_CheckTreesWithMyGrassMon, MSGBOX_DEFAULT)
     release
@@ -70,7 +76,9 @@ script Route123_EventScript_Violet {
 script Route123_EventScript_Cameron {
     trainerbattle_single(TRAINER_CAMERON_1, Route123_Text_CameronIntro, Route123_Text_CameronDefeat, Route123_EventScript_RegisterCameron)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route123_EventScript_RematchCameron)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route123_EventScript_RematchCameron)
+    }
     msgbox(Route123_Text_CameronPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -94,7 +102,9 @@ script Route123_EventScript_RematchCameron {
 script Route123_EventScript_Jacki {
     trainerbattle_single(TRAINER_JACKI_1, Route123_Text_JackiIntro, Route123_Text_JackiDefeat, Route123_EventScript_RegisterJacki)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route123_EventScript_RematchJacki)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route123_EventScript_RematchJacki)
+    }
     msgbox(Route123_Text_JackiPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -178,7 +188,9 @@ script Route123_EventScript_Davis {
 script Route123_EventScript_Fernando {
     trainerbattle_single(TRAINER_FERNANDO_1, Route123_Text_FernandoIntro, Route123_Text_FernandoDefeat, Route123_EventScript_RegisterFernando)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route123_EventScript_RematchFernando)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route123_EventScript_RematchFernando)
+    }
     msgbox(Route123_Text_FernandoPostBattle, MSGBOX_DEFAULT)
     release
     end

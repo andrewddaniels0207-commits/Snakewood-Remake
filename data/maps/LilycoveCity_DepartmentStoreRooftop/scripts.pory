@@ -4,8 +4,12 @@ mapscripts LilycoveCity_DepartmentStoreRooftop_MapScripts {
 
 script LilycoveCity_DepartmentStoreRooftop_OnTransition {
     getpokenewsactive(POKENEWS_LILYCOVE)
-    if (var(VAR_RESULT) == TRUE) call(LilycoveCity_DepartmentStoreRooftop_EventScript_ShowSaleWoman)
-    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_DepartmentStoreRooftop_EventScript_HideSaleWoman)
+    if (var(VAR_RESULT) == TRUE) {
+        call(LilycoveCity_DepartmentStoreRooftop_EventScript_ShowSaleWoman)
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        call(LilycoveCity_DepartmentStoreRooftop_EventScript_HideSaleWoman)
+    }
     end
 }
 
@@ -39,7 +43,9 @@ script LilycoveCity_DepartmentStoreRooftop_EventScript_Man {
     lock
     faceplayer
     getpokenewsactive(POKENEWS_LILYCOVE)
-    if (var(VAR_RESULT) == TRUE) call(LilycoveCity_DepartmentStoreRooftop_EventScript_ManClearOutSale)
+    if (var(VAR_RESULT) == TRUE) {
+        call(LilycoveCity_DepartmentStoreRooftop_EventScript_ManClearOutSale)
+    }
     msgbox(LilycoveCity_DepartmentStoreRooftop_Text_SetDatesForClearOutSales, MSGBOX_DEFAULT)
     release
     end
@@ -126,15 +132,31 @@ script LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneyLemonade {
 }
 
 script LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink {
-    if (var(VAR_TEMP_1) == 0) call(LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneyFreshWater)
-    if (var(VAR_TEMP_1) == 1) call(LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneySodaPop)
-    if (var(VAR_TEMP_1) == 2) call(LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneyLemonade)
-    if (var(VAR_RESULT) == FALSE) goto(LilycoveCity_DepartmentStoreRooftop_EventScript_NotEnoughMoneyForDrink)
+    if (var(VAR_TEMP_1) == 0) {
+        call(LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneyFreshWater)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneySodaPop)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneyLemonade)
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        goto(LilycoveCity_DepartmentStoreRooftop_EventScript_NotEnoughMoneyForDrink)
+    }
     checkitemspace(VAR_TEMP_0)
-    if (var(VAR_RESULT) == FALSE) goto(LilycoveCity_DepartmentStoreRooftop_EventScript_NoRoomForDrink)
-    if (var(VAR_TEMP_1) == 0) call(LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneyFreshWater)
-    if (var(VAR_TEMP_1) == 1) call(LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneySodaPop)
-    if (var(VAR_TEMP_1) == 2) call(LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneyLemonade)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(LilycoveCity_DepartmentStoreRooftop_EventScript_NoRoomForDrink)
+    }
+    if (var(VAR_TEMP_1) == 0) {
+        call(LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneyFreshWater)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneySodaPop)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneyLemonade)
+    }
     updatemoneybox()
     bufferitemname(STR_VAR_1, VAR_TEMP_0)
     playse(SE_VEND)
@@ -144,9 +166,13 @@ script LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink {
     bufferstdstring(STR_VAR_3, STDSTRING_ITEMS)
     msgbox(gText_PutItemInPocket, MSGBOX_DEFAULT)
     random(64)
-    if (var(VAR_RESULT) != 0) goto(LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseNewDrink)
+    if (var(VAR_RESULT) != 0) {
+        goto(LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseNewDrink)
+    }
     checkitemspace(VAR_TEMP_0)
-    if (var(VAR_RESULT) == FALSE) goto(LilycoveCity_DepartmentStoreRooftop_EventScript_NoRoomForDrink)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(LilycoveCity_DepartmentStoreRooftop_EventScript_NoRoomForDrink)
+    }
     playse(SE_VEND)
     msgbox(LilycoveCity_DepartmentStoreRooftop_Text_ExtraCanOfDrinkDroppedDown, MSGBOX_DEFAULT)
     additem(VAR_TEMP_0)
@@ -154,9 +180,13 @@ script LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink {
     bufferstdstring(STR_VAR_3, STDSTRING_ITEMS)
     msgbox(gText_PutItemInPocket, MSGBOX_DEFAULT)
     random(64)
-    if (var(VAR_RESULT) != 0) goto(LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseNewDrink)
+    if (var(VAR_RESULT) != 0) {
+        goto(LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseNewDrink)
+    }
     checkitemspace(VAR_TEMP_0)
-    if (var(VAR_RESULT) == 0) goto(LilycoveCity_DepartmentStoreRooftop_EventScript_NoRoomForDrink)
+    if (var(VAR_RESULT) == 0) {
+        goto(LilycoveCity_DepartmentStoreRooftop_EventScript_NoRoomForDrink)
+    }
     playse(SE_VEND)
     msgbox(LilycoveCity_DepartmentStoreRooftop_Text_ExtraCanOfDrinkDroppedDown, MSGBOX_DEFAULT)
     additem(VAR_TEMP_0)

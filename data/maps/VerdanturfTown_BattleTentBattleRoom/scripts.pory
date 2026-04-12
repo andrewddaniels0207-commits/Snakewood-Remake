@@ -13,8 +13,12 @@ script VerdanturfTown_BattleTentBattleRoom_OnTransition {
 
 script VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfx {
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale)
-    if (var(VAR_RESULT) == FEMALE) goto(VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale)
+    if (var(VAR_RESULT) == MALE) {
+        goto(VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale)
+    }
     return
 }
 
@@ -35,7 +39,9 @@ script VerdanturfTown_BattleTentBattleRoom_EventScript_EnterRoom {
     applymovement(LOCALID_VERDANTURF_TENT_BATTLE_PLAYER, VerdanturfTown_BattleTentBattleRoom_Movement_PlayerEnter)
     waitmovement(0)
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
-    if (var(VAR_RESULT) != 0) goto(VerdanturfTown_BattleTentBattleRoom_EventScript_AskContinueChallenge)
+    if (var(VAR_RESULT) != 0) {
+        goto(VerdanturfTown_BattleTentBattleRoom_EventScript_AskContinueChallenge)
+    }
 }
 
 script VerdanturfTown_BattleTentBattleRoom_EventScript_NextOpponentEnter {
@@ -81,8 +87,12 @@ script VerdanturfTown_BattleTentBattleRoom_EventScript_DefeatedOpponent {
 
 script VerdanturfTown_BattleTentBattleRoom_EventScript_AskContinueChallenge {
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
-    if (var(VAR_RESULT) == 1) call(VerdanturfTown_BattleTentBattleRoom_EventScript_ReadyFor2ndOpponent)
-    if (var(VAR_RESULT) == 2) call(VerdanturfTown_BattleTentBattleRoom_EventScript_ReadyFor3rdOpponent)
+    if (var(VAR_RESULT) == 1) {
+        call(VerdanturfTown_BattleTentBattleRoom_EventScript_ReadyFor2ndOpponent)
+    }
+    if (var(VAR_RESULT) == 2) {
+        call(VerdanturfTown_BattleTentBattleRoom_EventScript_ReadyFor3rdOpponent)
+    }
     multichoice(20, 6, MULTI_GO_ON_REST_RETIRE, TRUE)
     switch(VAR_RESULT)
     case(0, VerdanturfTown_BattleTentBattleRoom_EventScript_ContinueChallenge)

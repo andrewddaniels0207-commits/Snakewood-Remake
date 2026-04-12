@@ -3,8 +3,12 @@ mapscripts RustboroCity_Gym_MapScripts {}
 script RustboroCity_Gym_EventScript_Roxanne {
     trainerbattle_single(TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneIntro, RustboroCity_Gym_Text_RoxanneDefeat, RustboroCity_Gym_EventScript_RoxanneDefeated, NO_MUSIC)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(RustboroCity_Gym_EventScript_RoxanneRematch)
-    if (!flag(FLAG_RECEIVED_TM_ROCK_TOMB)) goto(RustboroCity_Gym_EventScript_GiveRockTomb)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(RustboroCity_Gym_EventScript_RoxanneRematch)
+    }
+    if (!flag(FLAG_RECEIVED_TM_ROCK_TOMB)) {
+        goto(RustboroCity_Gym_EventScript_GiveRockTomb)
+    }
     msgbox(RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -21,14 +25,18 @@ script RustboroCity_Gym_EventScript_RoxanneDefeated {
     addvar(VAR_PETALBURG_GYM_STATE, 1)
     setvar(VAR_0x8008, 1)
     call(Common_EventScript_SetGymTrainers)
-    if (var(VAR_PETALBURG_GYM_STATE) == 6) call(Common_EventScript_ReadyPetalburgGymForBattle)
+    if (var(VAR_PETALBURG_GYM_STATE) == 6) {
+        call(Common_EventScript_ReadyPetalburgGymForBattle)
+    }
     goto(RustboroCity_Gym_EventScript_GiveRockTomb)
     end
 }
 
 script RustboroCity_Gym_EventScript_GiveRockTomb {
     giveitem(ITEM_TM_ROCK_TOMB)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_TM_ROCK_TOMB)
     msgbox(RustboroCity_Gym_Text_ExplainRockTomb, MSGBOX_DEFAULT)
     release
@@ -62,7 +70,9 @@ script RustboroCity_Gym_EventScript_Marc {
 script RustboroCity_Gym_EventScript_GymGuide {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_RUSTBORO_GYM)) goto(RustboroCity_Gym_EventScript_GymGuidePostVictory)
+    if (flag(FLAG_DEFEATED_RUSTBORO_GYM)) {
+        goto(RustboroCity_Gym_EventScript_GymGuidePostVictory)
+    }
     msgbox(RustboroCity_Gym_Text_GymGuideAdvice, MSGBOX_DEFAULT)
     release
     end
@@ -76,14 +86,18 @@ script RustboroCity_Gym_EventScript_GymGuidePostVictory {
 
 script RustboroCity_Gym_EventScript_LeftGymStatue {
     lockall
-    if (flag(FLAG_BADGE01_GET)) goto(RustboroCity_Gym_EventScript_GymStatueCertified)
+    if (flag(FLAG_BADGE01_GET)) {
+        goto(RustboroCity_Gym_EventScript_GymStatueCertified)
+    }
     goto(RustboroCity_Gym_EventScript_GymStatue)
     end
 }
 
 script RustboroCity_Gym_EventScript_RightGymStatue {
     lockall
-    if (flag(FLAG_BADGE01_GET)) goto(RustboroCity_Gym_EventScript_GymStatueCertified)
+    if (flag(FLAG_BADGE01_GET)) {
+        goto(RustboroCity_Gym_EventScript_GymStatueCertified)
+    }
     goto(RustboroCity_Gym_EventScript_GymStatue)
     end
 }

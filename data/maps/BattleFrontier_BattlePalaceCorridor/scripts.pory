@@ -11,14 +11,26 @@ script BattleFrontier_BattlePalaceCorridor_EventScript_WalkThroughCorridor {
     waitmovement(0)
     lockall
     palace_getcomment()
-    if (var(VAR_RESULT) == 0) call(BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment1)
-    if (var(VAR_RESULT) == 1) call(BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment2)
-    if (var(VAR_RESULT) == 2) call(BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment3)
-    if (var(VAR_RESULT) == 3) call(BattleFrontier_BattlePalaceCorridor_EventScript_StreakComment)
-    if (var(VAR_RESULT) == 4) call(BattleFrontier_BattlePalaceCorridor_EventScript_LongStreakComment)
+    if (var(VAR_RESULT) == 0) {
+        call(BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment1)
+    }
+    if (var(VAR_RESULT) == 1) {
+        call(BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment2)
+    }
+    if (var(VAR_RESULT) == 2) {
+        call(BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment3)
+    }
+    if (var(VAR_RESULT) == 3) {
+        call(BattleFrontier_BattlePalaceCorridor_EventScript_StreakComment)
+    }
+    if (var(VAR_RESULT) == 4) {
+        call(BattleFrontier_BattlePalaceCorridor_EventScript_LongStreakComment)
+    }
     closemessage
     frontier_get(FRONTIER_DATA_LVL_MODE)
-    if (var(VAR_RESULT) == FRONTIER_LVL_OPEN) goto(BattleFrontier_BattlePalaceCorridor_EventScript_WalkToOpenBattleRoom)
+    if (var(VAR_RESULT) == FRONTIER_LVL_OPEN) {
+        goto(BattleFrontier_BattlePalaceCorridor_EventScript_WalkToOpenBattleRoom)
+    }
     applymovement(LOCALID_PALACE_CORRIDOR_ATTENDANT, BattleFrontier_BattlePalaceCorridor_Movement_AttendantWalkTo50BattleRoom)
     applymovement(LOCALID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_PlayerWalkTo50BattleRoom)
     waitmovement(0)

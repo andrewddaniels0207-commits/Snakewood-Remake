@@ -3,8 +3,12 @@ mapscripts VictoryRoad_1F_MapScripts {
 }
 
 script VictoryRoad_1F_OnTransition {
-    if (var(VAR_VICTORY_ROAD_1F_STATE) == 1) call(VictoryRoad_1F_EventScript_SetEntranceWallyPos1)
-    if (var(VAR_VICTORY_ROAD_1F_STATE) == 2) call(VictoryRoad_1F_EventScript_SetEntranceWallyPos2)
+    if (var(VAR_VICTORY_ROAD_1F_STATE) == 1) {
+        call(VictoryRoad_1F_EventScript_SetEntranceWallyPos1)
+    }
+    if (var(VAR_VICTORY_ROAD_1F_STATE) == 2) {
+        call(VictoryRoad_1F_EventScript_SetEntranceWallyPos2)
+    }
     end
 }
 
@@ -91,7 +95,9 @@ script VictoryRoad_1F_EventScript_EntranceWally {
 script VictoryRoad_1F_EventScript_ExitWally {
     trainerbattle_single(TRAINER_WALLY_VR_2, VictoryRoad_1F_Text_WallyIntro, VictoryRoad_1F_Text_WallyDefeat)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(VictoryRoad_1F_EventScript_RematchWally)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(VictoryRoad_1F_EventScript_RematchWally)
+    }
     msgbox(VictoryRoad_1F_Text_WallyPostBattle, MSGBOX_AUTOCLOSE)
     end
 }

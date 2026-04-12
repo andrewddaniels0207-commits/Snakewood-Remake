@@ -22,10 +22,16 @@ script SaffronCity_CopycatsHouse_2F_EventScript_Copycat {
     lock
     faceplayer
     checkitem(ITEM_POKE_DOLL)
-    if (var(VAR_RESULT) == TRUE) goto(EventScript_MimicTutor)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(EventScript_MimicTutor)
+    }
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(SaffronCity_CopycatsHouse_2F_EventScript_MimicPlayerMale)
-    if (var(VAR_RESULT) == FEMALE) call(SaffronCity_CopycatsHouse_2F_EventScript_MimicPlayerFemale)
+    if (var(VAR_RESULT) == MALE) {
+        call(SaffronCity_CopycatsHouse_2F_EventScript_MimicPlayerMale)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(SaffronCity_CopycatsHouse_2F_EventScript_MimicPlayerFemale)
+    }
     release
     end
 }

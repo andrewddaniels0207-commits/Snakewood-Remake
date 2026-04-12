@@ -3,19 +3,31 @@ mapscripts MauvilleCity_BikeShop_MapScripts {}
 script MauvilleCity_BikeShop_EventScript_Rydel {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_BIKE)) goto(MauvilleCity_BikeShop_EventScript_AskSwitchBikes)
-    if (flag(FLAG_DECLINED_BIKE)) goto(MauvilleCity_BikeShop_EventScript_SkipGreeting)
+    if (flag(FLAG_RECEIVED_BIKE)) {
+        goto(MauvilleCity_BikeShop_EventScript_AskSwitchBikes)
+    }
+    if (flag(FLAG_DECLINED_BIKE)) {
+        goto(MauvilleCity_BikeShop_EventScript_SkipGreeting)
+    }
     msgbox(MauvilleCity_BikeShop_Text_RydelGreeting, MSGBOX_DEFAULT)
     msgbox(MauvilleCity_BikeShop_Text_DidYouComeFromFarAway, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(MauvilleCity_BikeShop_EventScript_YesFar)
-    if (var(VAR_RESULT) == NO) goto(MauvilleCity_BikeShop_EventScript_NotFar)
+    if (var(VAR_RESULT) == YES) {
+        goto(MauvilleCity_BikeShop_EventScript_YesFar)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(MauvilleCity_BikeShop_EventScript_NotFar)
+    }
     end
 }
 
 script MauvilleCity_BikeShop_EventScript_SkipGreeting {
     msgbox(MauvilleCity_BikeShop_Text_DidYouComeFromFarAway, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(MauvilleCity_BikeShop_EventScript_YesFar)
-    if (var(VAR_RESULT) == NO) goto(MauvilleCity_BikeShop_EventScript_NotFar)
+    if (var(VAR_RESULT) == YES) {
+        goto(MauvilleCity_BikeShop_EventScript_YesFar)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(MauvilleCity_BikeShop_EventScript_NotFar)
+    }
     end
 }
 
@@ -45,7 +57,9 @@ script MauvilleCity_BikeShop_EventScript_YesFar {
 script MauvilleCity_BikeShop_EventScript_GetMachBike {
     msgbox(MauvilleCity_BikeShop_Text_ChoseMachBike, MSGBOX_DEFAULT)
     giveitem(ITEM_MACH_BIKE)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     goto(MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes)
     end
 }
@@ -53,7 +67,9 @@ script MauvilleCity_BikeShop_EventScript_GetMachBike {
 script MauvilleCity_BikeShop_EventScript_GetAcroBike {
     msgbox(MauvilleCity_BikeShop_Text_ChoseAcroBike, MSGBOX_DEFAULT)
     giveitem(ITEM_ACRO_BIKE)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     goto(MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes)
     end
 }
@@ -67,17 +83,25 @@ script MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes {
 
 script MauvilleCity_BikeShop_EventScript_AskSwitchBikes {
     msgbox(MauvilleCity_BikeShop_Text_WantToSwitchBikes, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(MauvilleCity_BikeShop_EventScript_SwitchBikes)
-    if (var(VAR_RESULT) == NO) goto(MauvilleCity_BikeShop_EventScript_KeepBike)
+    if (var(VAR_RESULT) == YES) {
+        goto(MauvilleCity_BikeShop_EventScript_SwitchBikes)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(MauvilleCity_BikeShop_EventScript_KeepBike)
+    }
     end
 }
 
 script MauvilleCity_BikeShop_EventScript_SwitchBikes {
     msgbox(MauvilleCity_BikeShop_Text_IllSwitchBikes, MSGBOX_DEFAULT)
     checkitem(ITEM_ACRO_BIKE)
-    if (var(VAR_RESULT) == TRUE) goto(MauvilleCity_BikeShop_EventScript_SwitchAcroForMach)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(MauvilleCity_BikeShop_EventScript_SwitchAcroForMach)
+    }
     checkitem(ITEM_MACH_BIKE)
-    if (var(VAR_RESULT) == TRUE) goto(MauvilleCity_BikeShop_EventScript_SwitchMachForAcro)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(MauvilleCity_BikeShop_EventScript_SwitchMachForAcro)
+    }
     msgbox(MauvilleCity_BikeShop_Text_OhYourBikeIsInPC, MSGBOX_DEFAULT)
     release
     end

@@ -10,7 +10,9 @@ script DewfordTown_OnTransition {
 script DewfordTown_EventScript_Briney {
     lock
     faceplayer
-    if (!flag(FLAG_DELIVERED_STEVEN_LETTER)) goto(DewfordTown_EventScript_ReturnToPetalburgPrompt)
+    if (!flag(FLAG_DELIVERED_STEVEN_LETTER)) {
+        goto(DewfordTown_EventScript_ReturnToPetalburgPrompt)
+    }
     message(DewfordTown_Text_WhereAreWeBound)
     waitmessage()
     multichoicedefault(21, 6, MULTI_BRINEY_ON_DEWFORD, 2, FALSE)
@@ -47,7 +49,9 @@ script DewfordTown_EventScript_CancelSailSelect {
 
 script DewfordTown_EventScript_ReturnToPetalburgPrompt {
     msgbox(DewfordTown_Text_SetSailBackToPetalburg, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(DewfordTown_EventScript_SailBackToPetalburg)
+    if (var(VAR_RESULT) == YES) {
+        goto(DewfordTown_EventScript_SailBackToPetalburg)
+    }
     msgbox(DewfordTown_Text_GoDeliverIllBeWaiting, MSGBOX_DEFAULT)
     release
     end
@@ -83,17 +87,25 @@ script DewfordTown_EventScript_HallSign {
 script DewfordTown_EventScript_OldRodFisherman {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_OLD_ROD)) goto(DewfordTown_EventScript_HowsFishing)
+    if (flag(FLAG_RECEIVED_OLD_ROD)) {
+        goto(DewfordTown_EventScript_HowsFishing)
+    }
     msgbox(DewfordTown_Text_GettingItchToFish, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(DewfordTown_EventScript_GiveOldRod)
-    if (var(VAR_RESULT) == NO) goto(DewfordTown_EventScript_NotGettingItchToFish)
+    if (var(VAR_RESULT) == YES) {
+        goto(DewfordTown_EventScript_GiveOldRod)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(DewfordTown_EventScript_NotGettingItchToFish)
+    }
     end
 }
 
 script DewfordTown_EventScript_GiveOldRod {
     msgbox(DewfordTown_Text_GiveYouOneOfMyRods, MSGBOX_DEFAULT)
     giveitem(ITEM_OLD_ROD)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_OLD_ROD)
     msgbox(DewfordTown_Text_ThrowInFishingAdvice, MSGBOX_DEFAULT)
     release
@@ -110,8 +122,12 @@ script DewfordTown_EventScript_HowsFishing {
     message(DewfordTown_Text_HowsYourFishing)
     waitmessage()
     multichoice(20, 8, MULTI_HOWS_FISHING, TRUE)
-    if (var(VAR_RESULT) == 0) goto(DewfordTown_EventScript_FishingExcellent)
-    if (var(VAR_RESULT) == 1) goto(DewfordTown_EventScript_FishingNotSoGood)
+    if (var(VAR_RESULT) == 0) {
+        goto(DewfordTown_EventScript_FishingExcellent)
+    }
+    if (var(VAR_RESULT) == 1) {
+        goto(DewfordTown_EventScript_FishingNotSoGood)
+    }
     end
 }
 
@@ -188,8 +204,12 @@ script DewfordTown_EventScript_SailToSlateport {
     clearflag(FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT)
     setflag(FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN)
     hideobjectat(LOCALID_DEWFORD_BOAT, MAP_DEWFORD_TOWN)
-    if (!flag(FLAG_DELIVERED_DEVON_GOODS)) call(DewfordTown_EventScript_LandedSlateportDeliverGoods)
-    if (flag(FLAG_DELIVERED_DEVON_GOODS)) call(DewfordTown_EventScript_LandedSlateport)
+    if (!flag(FLAG_DELIVERED_DEVON_GOODS)) {
+        call(DewfordTown_EventScript_LandedSlateportDeliverGoods)
+    }
+    if (flag(FLAG_DELIVERED_DEVON_GOODS)) {
+        call(DewfordTown_EventScript_LandedSlateport)
+    }
     closemessage
     copyvar(VAR_BRINEY_LOCATION, VAR_0x8008)
     resetobjectsubpriority(LOCALID_PLAYER, MAP_DEWFORD_TOWN)
@@ -619,8 +639,12 @@ script DewfordTown_EventScript_TrendyPhraseBoy {
     faceplayer
     call(Common_EventScript_BufferTrendyPhrase)
     msgbox(DewfordTown_Text_XIsTheBiggestHappeningThingRight, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(DewfordTown_EventScript_ConfirmTrendyPhrase)
-    if (var(VAR_RESULT) == NO) goto(DewfordTown_EventScript_RejectTrendyPhrase)
+    if (var(VAR_RESULT) == YES) {
+        goto(DewfordTown_EventScript_ConfirmTrendyPhrase)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(DewfordTown_EventScript_RejectTrendyPhrase)
+    }
     end
 }
 
@@ -636,14 +660,20 @@ script DewfordTown_EventScript_RejectTrendyPhrase {
     call(Common_ShowEasyChatScreen)
     lock
     faceplayer
-    if (var(VAR_RESULT) == TRUE) goto(DewfordTown_EventScript_GiveNewTrendyPhrase)
-    if (var(VAR_RESULT) == FALSE) goto(DewfordTown_EventScript_CancelNewTrendyPhrase)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(DewfordTown_EventScript_GiveNewTrendyPhrase)
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        goto(DewfordTown_EventScript_CancelNewTrendyPhrase)
+    }
     end
 }
 
 script DewfordTown_EventScript_GiveNewTrendyPhrase {
     incrementgamestat(GAME_STAT_STARTED_TRENDS)
-    if (var(VAR_0x8004) == FALSE) goto(DewfordTown_EventScript_PhraseNotTrendyEnough)
+    if (var(VAR_0x8004) == FALSE) {
+        goto(DewfordTown_EventScript_PhraseNotTrendyEnough)
+    }
     msgbox(DewfordTown_Text_OfCourseIKnowAboutThat, MSGBOX_DEFAULT)
     release
     end

@@ -5,19 +5,25 @@ mapscripts DesertRuins_MapScripts {
 }
 
 script DesertRuins_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(DesertRuins_EventScript_TryRemoveRegirock)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(DesertRuins_EventScript_TryRemoveRegirock)
+    }
     end
 }
 
 script DesertRuins_EventScript_TryRemoveRegirock {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
+        goto(Common_EventScript_NopReturn)
+    }
     removeobject(VAR_LAST_TALKED)
     return
 }
 
 script DesertRuins_OnLoad {
-    if (!flag(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED)) call(DesertRuins_EventScript_HideRegiEntrance)
+    if (!flag(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED)) {
+        call(DesertRuins_EventScript_HideRegiEntrance)
+    }
     end
 }
 
@@ -33,7 +39,9 @@ script DesertRuins_EventScript_HideRegiEntrance {
 
 script DesertRuins_OnTransition {
     setflag(FLAG_LANDMARK_DESERT_RUINS)
-    if (!flag(FLAG_DEFEATED_REGIROCK)) call(DesertRuins_EventScript_ShowRegirock)
+    if (!flag(FLAG_DEFEATED_REGIROCK)) {
+        call(DesertRuins_EventScript_ShowRegirock)
+    }
     end
 }
 
@@ -44,7 +52,9 @@ script DesertRuins_EventScript_ShowRegirock {
 
 script DesertRuins_EventScript_CaveEntranceMiddle {
     lockall
-    if (flag(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED)) goto(DesertRuins_EventScript_BigHoleInWall)
+    if (flag(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED)) {
+        goto(DesertRuins_EventScript_BigHoleInWall)
+    }
     braillemsgbox(DesertRuins_Braille_UseRockSmash)
     releaseall
     end
@@ -76,9 +86,15 @@ script DesertRuins_EventScript_Regirock {
     waitstate
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(DesertRuins_EventScript_DefeatedRegirock)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(DesertRuins_EventScript_RanFromRegirock)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(DesertRuins_EventScript_RanFromRegirock)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(DesertRuins_EventScript_DefeatedRegirock)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(DesertRuins_EventScript_RanFromRegirock)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(DesertRuins_EventScript_RanFromRegirock)
+    }
     setflag(FLAG_DEFEATED_REGIROCK)
     release
     end

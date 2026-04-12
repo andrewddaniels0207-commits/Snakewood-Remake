@@ -14,8 +14,12 @@ script PokemonLeague_LancesRoom_OnResume {
 }
 
 script PokemonLeague_LancesRoom_OnLoad {
-    if (var(VAR_MAP_SCENE_POKEMON_LEAGUE) == 4) call(PokemonLeague_LancesRoom_EventScript_CloseEntry)
-    if (flag(FLAG_DEFEATED_LANCE)) call(PokemonLeague_LancesRoom_EventScript_SetDoorOpen)
+    if (var(VAR_MAP_SCENE_POKEMON_LEAGUE) == 4) {
+        call(PokemonLeague_LancesRoom_EventScript_CloseEntry)
+    }
+    if (flag(FLAG_DEFEATED_LANCE)) {
+        call(PokemonLeague_LancesRoom_EventScript_SetDoorOpen)
+    }
     end
 }
 
@@ -109,15 +113,25 @@ script PokemonLeague_LancesRoom_EventScript_Lance {
     lock
     faceplayer
     famechecker(FAMECHECKER_LANCE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
-    if (flag(FLAG_DEFEATED_LANCE)) goto(PokemonLeague_LancesRoom_EventScript_PostBattle)
+    if (flag(FLAG_DEFEATED_LANCE)) {
+        goto(PokemonLeague_LancesRoom_EventScript_PostBattle)
+    }
     famechecker(FAMECHECKER_LANCE, 0)
     famechecker(FAMECHECKER_LANCE, 1)
-    if (!flag(FLAG_SYS_GAME_CLEAR)) call(PokemonLeague_LancesRoom_EventScript_Intro)
-    if (flag(FLAG_SYS_GAME_CLEAR)) call(PokemonLeague_LancesRoom_EventScript_RematchIntro)
+    if (!flag(FLAG_SYS_GAME_CLEAR)) {
+        call(PokemonLeague_LancesRoom_EventScript_Intro)
+    }
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        call(PokemonLeague_LancesRoom_EventScript_RematchIntro)
+    }
     setflag(FLAG_TEMP_3)
     setflag(FLAG_TEMP_5)
-    if (!flag(FLAG_IS_CHAMPION)) call(PokemonLeague_LancesRoom_EventScript_Battle)
-    if (flag(FLAG_IS_CHAMPION)) call(PokemonLeague_LancesRoom_EventScript_Rematch)
+    if (!flag(FLAG_IS_CHAMPION)) {
+        call(PokemonLeague_LancesRoom_EventScript_Battle)
+    }
+    if (flag(FLAG_IS_CHAMPION)) {
+        call(PokemonLeague_LancesRoom_EventScript_Rematch)
+    }
     clearflag(FLAG_TEMP_5)
     goto(PokemonLeague_LancesRoom_EventScript_DefeatedLance)
     end

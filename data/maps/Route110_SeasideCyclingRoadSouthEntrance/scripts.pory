@@ -11,7 +11,9 @@ script Route110_SeasideCyclingRoadSouthEntrance_EventScript_Clerk {
 script Route110_SeasideCyclingRoadSouthEntrance_EventScript_BikeCheck {
     lockall
     specialvar(VAR_RESULT, GetPlayerAvatarBike)
-    if (var(VAR_RESULT) == 0) goto(Route110_SeasideCyclingRoadSouthEntrance_EventScript_NoBike)
+    if (var(VAR_RESULT) == 0) {
+        goto(Route110_SeasideCyclingRoadSouthEntrance_EventScript_NoBike)
+    }
     setflag(FLAG_SYS_CYCLING_ROAD)
     setvar(VAR_TEMP_1, 1)
     releaseall

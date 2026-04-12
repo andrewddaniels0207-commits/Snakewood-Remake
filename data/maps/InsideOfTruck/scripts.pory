@@ -19,8 +19,12 @@ script InsideOfTruck_EventScript_SetIntroFlags {
     lockall
     setflag(FLAG_HIDE_MAP_NAME_POPUP)
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(InsideOfTruck_EventScript_SetIntroFlagsMale)
-    if (var(VAR_RESULT) == FEMALE) goto(InsideOfTruck_EventScript_SetIntroFlagsFemale)
+    if (var(VAR_RESULT) == MALE) {
+        goto(InsideOfTruck_EventScript_SetIntroFlagsMale)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(InsideOfTruck_EventScript_SetIntroFlagsFemale)
+    }
     end
 }
 

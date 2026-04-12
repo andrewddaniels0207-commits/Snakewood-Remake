@@ -27,8 +27,12 @@ script EverGrandeCity_PhoebesRoom_EventScript_WalkInCloseDoor {
 }
 
 script EverGrandeCity_PhoebesRoom_OnLoad {
-    if (flag(FLAG_DEFEATED_ELITE_4_PHOEBE)) call(EverGrandeCity_PhoebesRoom_EventScript_ResetAdvanceToNextRoom)
-    if (var(VAR_ELITE_4_STATE) == 2) call(EverGrandeCity_PhoebesRoom_EventScript_CloseDoor)
+    if (flag(FLAG_DEFEATED_ELITE_4_PHOEBE)) {
+        call(EverGrandeCity_PhoebesRoom_EventScript_ResetAdvanceToNextRoom)
+    }
+    if (var(VAR_ELITE_4_STATE) == 2) {
+        call(EverGrandeCity_PhoebesRoom_EventScript_CloseDoor)
+    }
     end
 }
 
@@ -45,7 +49,9 @@ script EverGrandeCity_PhoebesRoom_EventScript_CloseDoor {
 script EverGrandeCity_PhoebesRoom_EventScript_Phoebe {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_ELITE_4_PHOEBE)) goto(EverGrandeCity_PhoebesRoom_EventScript_PostBattleSpeech)
+    if (flag(FLAG_DEFEATED_ELITE_4_PHOEBE)) {
+        goto(EverGrandeCity_PhoebesRoom_EventScript_PostBattleSpeech)
+    }
     playbgm(MUS_ENCOUNTER_ELITE_FOUR, FALSE)
     msgbox(EverGrandeCity_PhoebesRoom_Text_IntroSpeech, MSGBOX_DEFAULT)
     trainerbattle_no_intro(TRAINER_PHOEBE, EverGrandeCity_PhoebesRoom_Text_Defeat)

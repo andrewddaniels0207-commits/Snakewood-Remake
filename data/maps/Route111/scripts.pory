@@ -8,8 +8,12 @@ mapscripts Route111_MapScripts {
 }
 
 script Route111_OnLoad {
-    if (!flag(FLAG_REGI_DOORS_OPENED)) call(Route111_EventScript_CloseDesertRuins)
-    if (var(VAR_MIRAGE_TOWER_STATE) == 1) call(Route111_EventScript_ShowTemporaryMirageTower)
+    if (!flag(FLAG_REGI_DOORS_OPENED)) {
+        call(Route111_EventScript_CloseDesertRuins)
+    }
+    if (var(VAR_MIRAGE_TOWER_STATE) == 1) {
+        call(Route111_EventScript_ShowTemporaryMirageTower)
+    }
     end
 }
 
@@ -44,9 +48,15 @@ script Route111_EventScript_ShowTemporaryMirageTower {
 script Route111_OnTransition {
     setvar(VAR_TRAINER_HILL_IS_ACTIVE, 0)
     special(SetMirageTowerVisibility)
-    if (!flag(FLAG_MIRAGE_TOWER_VISIBLE)) call(Route111_EventScript_SetLayoutNoMirageTower)
-    if (var(VAR_MIRAGE_TOWER_STATE) == 1) call(Route111_EventScript_SetFallingPlayerGfx)
-    if (var(VAR_MIRAGE_TOWER_STATE) == 2) call(Route111_EventScript_SetMirageTowerGone)
+    if (!flag(FLAG_MIRAGE_TOWER_VISIBLE)) {
+        call(Route111_EventScript_SetLayoutNoMirageTower)
+    }
+    if (var(VAR_MIRAGE_TOWER_STATE) == 1) {
+        call(Route111_EventScript_SetFallingPlayerGfx)
+    }
+    if (var(VAR_MIRAGE_TOWER_STATE) == 2) {
+        call(Route111_EventScript_SetMirageTowerGone)
+    }
     call(Route111_EventScript_CheckSetSandstorm)
     call(GabbyAndTy_EventScript_UpdateLocation)
     goto_if_not_defeated(TRAINER_VICKY, Route111_EventScript_SetWinstratesNotDefeated)
@@ -55,8 +65,12 @@ script Route111_OnTransition {
 
 script Route111_EventScript_SetFallingPlayerGfx {
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(Route111_EventScript_SetFallingPlayerGfxMale)
-    if (var(VAR_RESULT) == FEMALE) goto(Route111_EventScript_SetFallingPlayerGfxFemale)
+    if (var(VAR_RESULT) == MALE) {
+        goto(Route111_EventScript_SetFallingPlayerGfxMale)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(Route111_EventScript_SetFallingPlayerGfxFemale)
+    }
     return
 }
 
@@ -72,11 +86,21 @@ script Route111_EventScript_SetFallingPlayerGfxFemale {
 
 script Route111_EventScript_CheckSetSandstorm {
     getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-    if (var(VAR_TEMP_1) < 34) goto(Route111_EventScript_EndCheckSetSandstorm)
-    if (var(VAR_TEMP_1) > 107) goto(Route111_EventScript_EndCheckSetSandstorm)
-    if (var(VAR_TEMP_1) > 72) goto(Route111_EventScript_SetSandstorm)
-    if (var(VAR_TEMP_0) > 2000) goto(Route111_EventScript_EndCheckSetSandstorm)
-    if (var(VAR_TEMP_0) < 8) goto(Route111_EventScript_EndCheckSetSandstorm)
+    if (var(VAR_TEMP_1) < 34) {
+        goto(Route111_EventScript_EndCheckSetSandstorm)
+    }
+    if (var(VAR_TEMP_1) > 107) {
+        goto(Route111_EventScript_EndCheckSetSandstorm)
+    }
+    if (var(VAR_TEMP_1) > 72) {
+        goto(Route111_EventScript_SetSandstorm)
+    }
+    if (var(VAR_TEMP_0) > 2000) {
+        goto(Route111_EventScript_EndCheckSetSandstorm)
+    }
+    if (var(VAR_TEMP_0) < 8) {
+        goto(Route111_EventScript_EndCheckSetSandstorm)
+    }
 }
 
 script Route111_EventScript_SetSandstorm {
@@ -140,7 +164,9 @@ script Route111_EventScript_MirageTowerDisappear {
     waitstate
     setvar(VAR_MIRAGE_TOWER_STATE, 2)
     clearflag(FLAG_HIDE_DESERT_UNDERPASS_FOSSIL)
-    if (flag(FLAG_CHOSE_CLAW_FOSSIL)) goto(Route111_EventScript_RootFossilDisappeared)
+    if (flag(FLAG_CHOSE_CLAW_FOSSIL)) {
+        goto(Route111_EventScript_RootFossilDisappeared)
+    }
     msgbox(Route111_Text_ClawFossilDisappeared, MSGBOX_DEFAULT)
     releaseall
     end
@@ -167,10 +193,14 @@ script Route111_EventScript_Girl {
     lock
     faceplayer
     dotimebasedevents()
-    if (flag(FLAG_DAILY_ROUTE_111_RECEIVED_BERRY)) goto(Route111_EventScript_ReceivedBerry)
+    if (flag(FLAG_DAILY_ROUTE_111_RECEIVED_BERRY)) {
+        goto(Route111_EventScript_ReceivedBerry)
+    }
     msgbox(Route111_Text_WateredPlantsEveryDayTakeBerry, MSGBOX_DEFAULT)
     giveitem(ITEM_RAZZ_BERRY)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_DAILY_ROUTE_111_RECEIVED_BERRY)
     special(GetPlayerBigGuyGirlString)
     msgbox(Route111_Text_GoingToTryToMakeDifferentColorBerries, MSGBOX_DEFAULT)
@@ -214,7 +244,9 @@ script Route111_EventScript_ViciousSandstormTriggerRight {
 
 script Route111_EventScript_ViciousSandstormTrigger {
     checkitem(ITEM_GO_GOGGLES)
-    if (var(VAR_RESULT) == FALSE) goto(Route111_EventScript_PreventRouteAccess)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route111_EventScript_PreventRouteAccess)
+    }
     setvar(VAR_TEMP_3, 1)
     releaseall
     end
@@ -223,10 +255,18 @@ script Route111_EventScript_ViciousSandstormTrigger {
 script Route111_EventScript_PreventRouteAccess {
     msgbox(gText_SandstormIsVicious, MSGBOX_DEFAULT)
     closemessage
-    if (var(VAR_0x8004) == 0) call(Route111_EventScript_PushUpFromRoute)
-    if (var(VAR_0x8004) == 1) call(Route111_EventScript_PushDownFromRoute)
-    if (var(VAR_0x8004) == 2) call(Route111_EventScript_PushLeftFromRoute)
-    if (var(VAR_0x8004) == 3) call(Route111_EventScript_PushRightFromRoute)
+    if (var(VAR_0x8004) == 0) {
+        call(Route111_EventScript_PushUpFromRoute)
+    }
+    if (var(VAR_0x8004) == 1) {
+        call(Route111_EventScript_PushDownFromRoute)
+    }
+    if (var(VAR_0x8004) == 2) {
+        call(Route111_EventScript_PushLeftFromRoute)
+    }
+    if (var(VAR_0x8004) == 3) {
+        call(Route111_EventScript_PushRightFromRoute)
+    }
     releaseall
     end
 }
@@ -295,7 +335,9 @@ script Route111_EventScript_Victor {
     faceplayer
     setflag(FLAG_LANDMARK_WINSTRATE_FAMILY)
     msgbox(Route111_Text_BattleOurFamily, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(Route111_EventScript_BattleWinstrates)
+    if (var(VAR_RESULT) == YES) {
+        goto(Route111_EventScript_BattleWinstrates)
+    }
     msgbox(Route111_Text_IsThatSo, MSGBOX_DEFAULT)
     release
     end
@@ -444,9 +486,15 @@ script Route111_EventScript_Man2 {
 script Route111_EventScript_Hiker {
     lock
     faceplayer
-    if (var(VAR_MIRAGE_TOWER_STATE) == 3) goto(Route111_EventScript_HikerMirageTowerGone)
-    if (var(VAR_MIRAGE_TOWER_STATE) == 2) goto(Route111_EventScript_HikerMirageTowerDisintegrated)
-    if (flag(FLAG_MIRAGE_TOWER_VISIBLE)) goto(Route111_EventScript_HikerMirageTowerVisible)
+    if (var(VAR_MIRAGE_TOWER_STATE) == 3) {
+        goto(Route111_EventScript_HikerMirageTowerGone)
+    }
+    if (var(VAR_MIRAGE_TOWER_STATE) == 2) {
+        goto(Route111_EventScript_HikerMirageTowerDisintegrated)
+    }
+    if (flag(FLAG_MIRAGE_TOWER_VISIBLE)) {
+        goto(Route111_EventScript_HikerMirageTowerVisible)
+    }
     msgbox(Route111_Text_ShouldBeMirageTowerAroundHere, MSGBOX_DEFAULT)
     release
     end
@@ -509,7 +557,9 @@ script Route111_EventScript_Becky {
 script Route111_EventScript_Dusty {
     trainerbattle_single(TRAINER_DUSTY_1, Route111_Text_DustyIntro, Route111_Text_DustyDefeat, Route111_EventScript_RegisterDusty)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route111_EventScript_RematchDusty)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route111_EventScript_RematchDusty)
+    }
     msgbox(Route111_Text_DustyPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -551,7 +601,9 @@ script Route111_EventScript_Daisuke {
 script Route111_EventScript_Wilton {
     trainerbattle_single(TRAINER_WILTON_1, Route111_Text_WiltonIntro, Route111_Text_WiltonDefeat, Route111_EventScript_RegisterWilton)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route111_EventScript_RematchWilton)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route111_EventScript_RematchWilton)
+    }
     msgbox(Route111_Text_WiltonPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -575,7 +627,9 @@ script Route111_EventScript_RematchWilton {
 script Route111_EventScript_Brooke {
     trainerbattle_single(TRAINER_BROOKE_1, Route111_Text_BrookeIntro, Route111_Text_BrookeDefeat, Route111_EventScript_RegisterBrooke)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route111_EventScript_RematchBrooke)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route111_EventScript_RematchBrooke)
+    }
     msgbox(Route111_Text_BrookePostBattle, MSGBOX_DEFAULT)
     release
     end

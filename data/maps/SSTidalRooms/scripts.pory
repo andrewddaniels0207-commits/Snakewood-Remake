@@ -3,10 +3,14 @@ mapscripts SSTidalRooms_MapScripts {}
 script SSTidalRooms_EventScript_SnatchGiver {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_TM_SNATCH)) goto(SSTidalRooms_EventScript_ExplainSnatch)
+    if (flag(FLAG_RECEIVED_TM_SNATCH)) {
+        goto(SSTidalRooms_EventScript_ExplainSnatch)
+    }
     msgbox(SSTidalRooms_Text_NotSuspiciousTakeThis, MSGBOX_DEFAULT)
     giveitem(ITEM_TM_SNATCH)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_TM_SNATCH)
     msgbox(SSTidalRooms_Text_ExplainSnatch, MSGBOX_DEFAULT)
     release

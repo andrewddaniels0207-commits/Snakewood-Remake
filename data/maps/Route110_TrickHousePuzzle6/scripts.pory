@@ -23,7 +23,9 @@ script Route110_TrickHousePuzzle6_EventScript_InitPuzzle {
 
 script Route110_TrickHousePuzzle6_EventScript_Scroll {
     lockall
-    if (var(VAR_TRICK_HOUSE_PUZZLE_6_STATE) == 0) goto(Route110_TrickHousePuzzle6_EventScript_FoundScroll)
+    if (var(VAR_TRICK_HOUSE_PUZZLE_6_STATE) == 0) {
+        goto(Route110_TrickHousePuzzle6_EventScript_FoundScroll)
+    }
     goto(Route110_TrickHousePuzzle_EventScript_ReadScrollAgain)
     end
 }

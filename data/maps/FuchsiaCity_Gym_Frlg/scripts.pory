@@ -3,7 +3,9 @@ mapscripts FuchsiaCity_Gym_Frlg_MapScripts {}
 script FuchsiaCity_Gym_EventScript_Koga {
     famechecker(FAMECHECKER_KOGA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
     trainerbattle_single(TRAINER_LEADER_KOGA, FuchsiaCity_Gym_Text_KogaIntro, FuchsiaCity_Gym_Text_KogaDefeat, FuchsiaCity_Gym_EventScript_DefeatedKoga, NO_MUSIC)
-    if (!flag(FLAG_GOT_TM06_FROM_KOGA)) goto(FuchsiaCity_Gym_EventScript_GiveTM06)
+    if (!flag(FLAG_GOT_TM06_FROM_KOGA)) {
+        goto(FuchsiaCity_Gym_EventScript_GiveTM06)
+    }
     msgbox(FuchsiaCity_Gym_Text_KogaPostBattle)
     release
     end
@@ -22,7 +24,9 @@ script FuchsiaCity_Gym_EventScript_DefeatedKoga {
 script FuchsiaCity_Gym_EventScript_GiveTM06 {
     msgbox(FuchsiaCity_Gym_Text_KogaExplainSoulBadge)
     checkitemspace(ITEM_TM06)
-    if (var(VAR_RESULT) == FALSE) goto(FuchsiaCity_Gym_EventScript_NoRoomForTM06)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(FuchsiaCity_Gym_EventScript_NoRoomForTM06)
+    }
     giveitem_msg(FuchsiaCity_Gym_Text_ReceivedTM06FromKoga, ITEM_TM06)
     setflag(FLAG_GOT_TM06_FROM_KOGA)
     msgbox(FuchsiaCity_Gym_Text_KogaExplainTM06)
@@ -76,7 +80,9 @@ script FuchsiaCity_Gym_EventScript_Nate {
 script FuchsiaCity_Gym_EventScript_GymGuy {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_KOGA)) goto(FuchsiaCity_Gym_EventScript_GymGuyPostVictory)
+    if (flag(FLAG_DEFEATED_KOGA)) {
+        goto(FuchsiaCity_Gym_EventScript_GymGuyPostVictory)
+    }
     msgbox(FuchsiaCity_Gym_Text_GymGuyAdvice)
     release
     end
@@ -90,7 +96,9 @@ script FuchsiaCity_Gym_EventScript_GymGuyPostVictory {
 
 script FuchsiaCity_Gym_EventScript_GymStatue {
     lockall
-    if (flag(FLAG_BADGE05_GET)) goto(FuchsiaCity_Gym_EventScript_GymStatuePostVictory)
+    if (flag(FLAG_BADGE05_GET)) {
+        goto(FuchsiaCity_Gym_EventScript_GymStatuePostVictory)
+    }
     msgbox(FuchsiaCity_Gym_Text_GymStatue)
     releaseall
     end

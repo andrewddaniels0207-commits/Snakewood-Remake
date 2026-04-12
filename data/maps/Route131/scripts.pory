@@ -3,7 +3,9 @@ mapscripts Route131_MapScripts {
 }
 
 script Route131_OnTransition {
-    if (var(VAR_SOOTOPOLIS_CITY_STATE) >= 4) call(Route131_EventScript_CheckSetAbnormalWeather)
+    if (var(VAR_SOOTOPOLIS_CITY_STATE) >= 4) {
+        call(Route131_EventScript_CheckSetAbnormalWeather)
+    }
     call(Route131_EventScript_SetLayout)
     end
 }
@@ -14,7 +16,9 @@ script Route131_EventScript_SetLayout {
 }
 
 script Route131_EventScript_CheckSetAbnormalWeather {
-    if (flag(FLAG_SYS_WEATHER_CTRL)) call(Common_EventScript_SetAbnormalWeather)
+    if (flag(FLAG_SYS_WEATHER_CTRL)) {
+        call(Common_EventScript_SetAbnormalWeather)
+    }
     return
 }
 

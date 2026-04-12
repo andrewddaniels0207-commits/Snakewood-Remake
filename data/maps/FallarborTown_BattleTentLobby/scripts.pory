@@ -114,7 +114,9 @@ script FallarborTown_BattleTentLobby_EventScript_Attendant {
     lock
     faceplayer
     fallarbortent_getprize()
-    if (var(VAR_RESULT) != ITEM_NONE) goto(FallarborTown_BattleTentLobby_EventScript_PrizeWaiting)
+    if (var(VAR_RESULT) != ITEM_NONE) {
+        goto(FallarborTown_BattleTentLobby_EventScript_PrizeWaiting)
+    }
     special(SavePlayerParty)
     msgbox(FallarborTown_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT)
 }
@@ -135,7 +137,9 @@ script FallarborTown_BattleTentLobby_EventScript_TryEnterChallenge {
     setvar(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES)
     setvar(VAR_RESULT, 2)
     frontier_checkineligible()
-    if (var(VAR_0x8004) == TRUE) goto(FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMons)
+    if (var(VAR_0x8004) == TRUE) {
+        goto(FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMons)
+    }
     frontier_set(FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_TENT)
     msgbox(FallarborTown_BattleTentLobby_Text_SelectThreeMons, MSGBOX_DEFAULT)
     fadescreen(FADE_TO_BLACK)
@@ -143,7 +147,9 @@ script FallarborTown_BattleTentLobby_EventScript_TryEnterChallenge {
     setvar(VAR_0x8005, FRONTIER_PARTY_SIZE)
     special(ChoosePartyForBattleFrontier)
     waitstate
-    if (var(VAR_RESULT) == 0) goto(FallarborTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
+    if (var(VAR_RESULT) == 0) {
+        goto(FallarborTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
+    }
     msgbox(FallarborTown_BattleTentLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO)
     switch(VAR_RESULT)
     case(NO, FallarborTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge)
@@ -162,7 +168,9 @@ script FallarborTown_BattleTentLobby_EventScript_SaveBeforeChallenge {
     delay(2)
     call(Common_EventScript_SaveGame)
     setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
-    if (var(VAR_RESULT) == 0) goto(FallarborTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed)
+    if (var(VAR_RESULT) == 0) {
+        goto(FallarborTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed)
+    }
 }
 
 script FallarborTown_BattleTentLobby_EventScript_EnterChallenge {
@@ -275,7 +283,9 @@ script FallarborTown_BattleTentLobby_EventScript_Lass {
 script FallarborTown_BattleTentLobby_EventScript_Scott {
     lock
     faceplayer
-    if (flag(FLAG_MET_SCOTT_IN_FALLARBOR)) goto(FallarborTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo)
+    if (flag(FLAG_MET_SCOTT_IN_FALLARBOR)) {
+        goto(FallarborTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo)
+    }
     msgbox(FallarborTown_BattleTentLobby_Text_ScottLookingForSomeone, MSGBOX_DEFAULT)
     addvar(VAR_SCOTT_STATE, 1)
     setflag(FLAG_MET_SCOTT_IN_FALLARBOR)

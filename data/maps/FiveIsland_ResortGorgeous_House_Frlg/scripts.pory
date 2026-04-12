@@ -3,9 +3,15 @@ mapscripts FiveIsland_ResortGorgeous_House_Frlg_MapScripts {}
 script FiveIsland_ResortGorgeous_House_EventScript_Selphy {
     lock
     faceplayer
-    if (flag(SHOWN_REQUESTED_MON)) goto(FiveIsland_ResortGorgeous_House_EventScript_JustFulfilledRequest)
-    if (var(VAR_RESORT_GORGEOUS_REQUESTED_MON) == 0xFFFF) goto(FiveIsland_ResortGorgeous_House_EventScript_RequestTookTooLong)
-    if (var(VAR_RESORT_GORGEOUS_REQUESTED_MON) != SPECIES_NONE) goto(FiveIsland_ResortGorgeous_House_EventScript_CheckForRequestedMon)
+    if (flag(SHOWN_REQUESTED_MON)) {
+        goto(FiveIsland_ResortGorgeous_House_EventScript_JustFulfilledRequest)
+    }
+    if (var(VAR_RESORT_GORGEOUS_REQUESTED_MON) == 0xFFFF) {
+        goto(FiveIsland_ResortGorgeous_House_EventScript_RequestTookTooLong)
+    }
+    if (var(VAR_RESORT_GORGEOUS_REQUESTED_MON) != SPECIES_NONE) {
+        goto(FiveIsland_ResortGorgeous_House_EventScript_CheckForRequestedMon)
+    }
     msgbox(FiveIsland_ResortGorgeous_House_Text_PleaseHearMyWish)
     goto(FiveIsland_ResortGorgeous_House_EventScript_RequestMon)
     end
@@ -27,7 +33,9 @@ script FiveIsland_ResortGorgeous_House_EventScript_RequestTookTooLong {
 script FiveIsland_ResortGorgeous_House_EventScript_CheckForRequestedMon {
     copyvar(VAR_0x8004, VAR_RESORT_GORGEOUS_REQUESTED_MON)
     specialvar(VAR_RESULT, DoesPlayerPartyContainSpecies)
-    if (var(VAR_RESULT) == TRUE) goto(FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon)
+    }
     goto(FiveIsland_ResortGorgeous_House_EventScript_RequestMon)
     end
 }
@@ -47,14 +55,24 @@ script FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon {
     textcolor(NPC_TEXT_COLOR_MALE)
     msgbox(FiveIsland_ResortGorgeous_House_Text_ButlerIShallDoAsYouBid)
     closemessage
-    if (var(VAR_FACING) == DIR_NORTH) call(FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerSouth)
-    if (var(VAR_FACING) == DIR_EAST) call(FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerEast)
-    if (var(VAR_FACING) == DIR_WEST) call(FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerSouth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerEast)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerWest)
+    }
     copyobjectxytoperm(LOCALID_RESORT_GORGEOUS_HOUSE_BUTLER)
     msgbox(FiveIsland_ResortGorgeous_House_Text_ButlerPleaseAcceptThisAsHerThanks)
     giveitem(VAR_RESORT_GORGEOUS_REWARD)
-    if (var(VAR_RESULT) == FALSE) goto(FiveIsland_ResortGorgeous_House_EventScript_NoRoomForReward)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(FiveIsland_ResortGorgeous_House_EventScript_NoRoomForReward)
+    }
     setflag(SHOWN_REQUESTED_MON)
     setvar(VAR_RESORT_GORGEOUS_REQUESTED_MON, SPECIES_NONE)
     release

@@ -3,7 +3,9 @@ mapscripts CeruleanCity_Gym_Frlg_MapScripts {}
 script CeruleanCity_Gym_EventScript_Misty {
     famechecker(FAMECHECKER_MISTY, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
     trainerbattle_single(TRAINER_LEADER_MISTY, CeruleanCity_Gym_Text_MistyIntro, CeruleanCity_Gym_Text_MistyDefeat, CeruleanCity_Gym_EventScript_MistyDefeated, NO_MUSIC)
-    if (!flag(FLAG_GOT_TM03_FROM_MISTY)) goto(CeruleanCity_Gym_EventScript_GiveTM03)
+    if (!flag(FLAG_GOT_TM03_FROM_MISTY)) {
+        goto(CeruleanCity_Gym_EventScript_GiveTM03)
+    }
     msgbox(CeruleanCity_Gym_Text_ExplainTM03)
     release
     end
@@ -22,7 +24,9 @@ script CeruleanCity_Gym_EventScript_MistyDefeated {
 script CeruleanCity_Gym_EventScript_GiveTM03 {
     msgbox(CeruleanCity_Gym_Text_ExplainCascadeBadge)
     checkitemspace(ITEM_TM03)
-    if (var(VAR_RESULT) == FALSE) goto(CeruleanCity_Gym_EventScript_NoRoomForTM03)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(CeruleanCity_Gym_EventScript_NoRoomForTM03)
+    }
     giveitem_msg(CeruleanCity_Gym_Text_ReceivedTM03FromMisty, ITEM_TM03)
     setflag(FLAG_GOT_TM03_FROM_MISTY)
     msgbox(CeruleanCity_Gym_Text_ExplainTM03)
@@ -52,7 +56,9 @@ script CeruleanCity_Gym_EventScript_Luis {
 script CeruleanCity_Gym_EventScript_GymGuy {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_MISTY)) goto(CeruleanCity_Gym_EventScript_GymGuyPostVictory)
+    if (flag(FLAG_DEFEATED_MISTY)) {
+        goto(CeruleanCity_Gym_EventScript_GymGuyPostVictory)
+    }
     msgbox(CeruleanCity_Gym_Text_GymGuyAdvice)
     release
     end
@@ -66,7 +72,9 @@ script CeruleanCity_Gym_EventScript_GymGuyPostVictory {
 
 script CeruleanCity_Gym_EventScript_GymStatue {
     lockall
-    if (flag(FLAG_BADGE02_GET)) goto(CeruleanCity_Gym_EventScript_GymStatuePostVictory)
+    if (flag(FLAG_BADGE02_GET)) {
+        goto(CeruleanCity_Gym_EventScript_GymStatuePostVictory)
+    }
     msgbox(CeruleanCity_Gym_Text_GymStatue)
     releaseall
     end

@@ -3,8 +3,12 @@ mapscripts SilphCo_2F_Frlg_MapScripts {
 }
 
 script SilphCo_2F_OnLoad {
-    if (!flag(FLAG_SILPH_2F_DOOR_1)) call(EventScript_Close2FDoor1)
-    if (!flag(FLAG_SILPH_2F_DOOR_2)) call(EventScript_Close2FDoor2)
+    if (!flag(FLAG_SILPH_2F_DOOR_1)) {
+        call(EventScript_Close2FDoor1)
+    }
+    if (!flag(FLAG_SILPH_2F_DOOR_2)) {
+        call(EventScript_Close2FDoor2)
+    }
     end
 }
 

@@ -2,9 +2,13 @@ mapscripts RocketHideout_Elevator_Frlg_MapScripts {}
 
 script RocketHideout_Elevator_EventScript_FloorSelect {
     lockall
-    if (!flag(FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT)) goto(RocketHideout_Elevator_EventScript_NeedKey)
+    if (!flag(FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT)) {
+        goto(RocketHideout_Elevator_EventScript_NeedKey)
+    }
     setvar(VAR_0x8004, 2)
-    if (!flag(FLAG_TEMP_2)) call(EventScript_GetElevatorFloor)
+    if (!flag(FLAG_TEMP_2)) {
+        call(EventScript_GetElevatorFloor)
+    }
     copyvar(VAR_0x8005, VAR_ELEVATOR_FLOOR)
     special(DrawElevatorCurrentFloorWindow)
     message(gText_WantWhichFloor)
@@ -49,7 +53,9 @@ script RocketHideout_Elevator_EventScript_ChooseFloor {
 script RocketHideout_Elevator_EventScript_ToB1F {
     setvar(VAR_0x8006, 3)
     setdynamicwarp(MAP_ROCKET_HIDEOUT_B1F, 255, 24, 25)
-    if (var(VAR_ELEVATOR_FLOOR) == 3) goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
+    if (var(VAR_ELEVATOR_FLOOR) == 3) {
+        goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
+    }
     call(RocketHideout_Elevator_EventScript_MoveElevator)
     setvar(VAR_ELEVATOR_FLOOR, 3)
     goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
@@ -59,7 +65,9 @@ script RocketHideout_Elevator_EventScript_ToB1F {
 script RocketHideout_Elevator_EventScript_ToB2F {
     setvar(VAR_0x8006, 2)
     setdynamicwarp(MAP_ROCKET_HIDEOUT_B2F, 255, 28, 16)
-    if (var(VAR_ELEVATOR_FLOOR) == 2) goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
+    if (var(VAR_ELEVATOR_FLOOR) == 2) {
+        goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
+    }
     call(RocketHideout_Elevator_EventScript_MoveElevator)
     setvar(VAR_ELEVATOR_FLOOR, 2)
     goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
@@ -69,7 +77,9 @@ script RocketHideout_Elevator_EventScript_ToB2F {
 script RocketHideout_Elevator_EventScript_ToB4F {
     setvar(VAR_0x8006, 0)
     setdynamicwarp(MAP_ROCKET_HIDEOUT_B4F, 255, 20, 23)
-    if (var(VAR_ELEVATOR_FLOOR) == 0) goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
+    if (var(VAR_ELEVATOR_FLOOR) == 0) {
+        goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
+    }
     call(RocketHideout_Elevator_EventScript_MoveElevator)
     setvar(VAR_ELEVATOR_FLOOR, 0)
     goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)

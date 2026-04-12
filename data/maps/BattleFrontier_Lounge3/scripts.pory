@@ -4,9 +4,13 @@ mapscripts BattleFrontier_Lounge3_MapScripts {
 script BattleFrontier_Lounge3_EventScript_Gambler {
     lock
     faceplayer
-    if (flag(FLAG_MET_BATTLE_FRONTIER_GAMBLER)) goto(BattleFrontier_Lounge3_EventScript_AlreadyMetGambler)
+    if (flag(FLAG_MET_BATTLE_FRONTIER_GAMBLER)) {
+        goto(BattleFrontier_Lounge3_EventScript_AlreadyMetGambler)
+    }
     call(BattleFrontier_Lounge3_EventScript_CountSilverSymbols)
-    if (var(VAR_0x8004) <= 2) goto(BattleFrontier_Lounge3_EventScript_NotEnoughSilverSymbols)
+    if (var(VAR_0x8004) <= 2) {
+        goto(BattleFrontier_Lounge3_EventScript_NotEnoughSilverSymbols)
+    }
     setflag(FLAG_MET_BATTLE_FRONTIER_GAMBLER)
     msgbox(BattleFrontier_Lounge3_Text_YouLookToughExplainGambling, MSGBOX_DEFAULT)
     goto(BattleFrontier_Lounge3_EventScript_AskToEnterChallenge)
@@ -18,9 +22,13 @@ script BattleFrontier_Lounge3_EventScript_AskToEnterChallenge {
     waitmessage()
     waitbuttonpress()
     msgbox(BattleFrontier_Lounge3_Text_HowAboutEnteringEventForMe, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(BattleFrontier_Lounge3_EventScript_DeclineChallenge)
+    if (var(VAR_RESULT) == NO) {
+        goto(BattleFrontier_Lounge3_EventScript_DeclineChallenge)
+    }
     msgbox(BattleFrontier_Lounge3_Text_SpotMeSomeBattlePoints, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(BattleFrontier_Lounge3_EventScript_DeclineChallenge)
+    if (var(VAR_RESULT) == NO) {
+        goto(BattleFrontier_Lounge3_EventScript_DeclineChallenge)
+    }
     message(BattleFrontier_Lounge3_Text_HowMuchCanYouSpot)
     waitmessage()
     special(ShowBattlePointsWindow)
@@ -60,7 +68,9 @@ script BattleFrontier_Lounge3_EventScript_Bet15 {
 
 script BattleFrontier_Lounge3_EventScript_TryPlaceBet {
     specialvar(VAR_TEMP_1, GetFrontierBattlePoints)
-    if (var(VAR_TEMP_1) >= VAR_0x8008) goto(BattleFrontier_Lounge3_EventScript_PlaceBet)
+    if (var(VAR_TEMP_1) >= VAR_0x8008) {
+        goto(BattleFrontier_Lounge3_EventScript_PlaceBet)
+    }
     msgbox(BattleFrontier_Lounge3_Text_YouDontHaveEnoughPoints, MSGBOX_DEFAULT)
     message(BattleFrontier_Lounge3_Text_HowMuchCanYouSpot)
     waitmessage()
@@ -90,13 +100,27 @@ script BattleFrontier_Lounge3_EventScript_FinishBet {
 
 script BattleFrontier_Lounge3_EventScript_CountSilverSymbols {
     setvar(VAR_0x8004, 0)
-    if (flag(FLAG_SYS_TOWER_SILVER)) call(BattleFrontier_Lounge3_EventScript_AddSilverSymbolCount)
-    if (flag(FLAG_SYS_DOME_SILVER)) call(BattleFrontier_Lounge3_EventScript_AddSilverSymbolCount)
-    if (flag(FLAG_SYS_PALACE_SILVER)) call(BattleFrontier_Lounge3_EventScript_AddSilverSymbolCount)
-    if (flag(FLAG_SYS_ARENA_SILVER)) call(BattleFrontier_Lounge3_EventScript_AddSilverSymbolCount)
-    if (flag(FLAG_SYS_FACTORY_SILVER)) call(BattleFrontier_Lounge3_EventScript_AddSilverSymbolCount)
-    if (flag(FLAG_SYS_PIKE_SILVER)) call(BattleFrontier_Lounge3_EventScript_AddSilverSymbolCount)
-    if (flag(FLAG_SYS_PYRAMID_SILVER)) call(BattleFrontier_Lounge3_EventScript_AddSilverSymbolCount)
+    if (flag(FLAG_SYS_TOWER_SILVER)) {
+        call(BattleFrontier_Lounge3_EventScript_AddSilverSymbolCount)
+    }
+    if (flag(FLAG_SYS_DOME_SILVER)) {
+        call(BattleFrontier_Lounge3_EventScript_AddSilverSymbolCount)
+    }
+    if (flag(FLAG_SYS_PALACE_SILVER)) {
+        call(BattleFrontier_Lounge3_EventScript_AddSilverSymbolCount)
+    }
+    if (flag(FLAG_SYS_ARENA_SILVER)) {
+        call(BattleFrontier_Lounge3_EventScript_AddSilverSymbolCount)
+    }
+    if (flag(FLAG_SYS_FACTORY_SILVER)) {
+        call(BattleFrontier_Lounge3_EventScript_AddSilverSymbolCount)
+    }
+    if (flag(FLAG_SYS_PIKE_SILVER)) {
+        call(BattleFrontier_Lounge3_EventScript_AddSilverSymbolCount)
+    }
+    if (flag(FLAG_SYS_PYRAMID_SILVER)) {
+        call(BattleFrontier_Lounge3_EventScript_AddSilverSymbolCount)
+    }
     return
 }
 
@@ -113,23 +137,35 @@ script BattleFrontier_Lounge3_EventScript_NotEnoughSilverSymbols {
 
 script BattleFrontier_Lounge3_EventScript_AlreadyMetGambler {
     msgbox(BattleFrontier_Lounge3_Text_Oh, MSGBOX_DEFAULT)
-    if (var(VAR_FRONTIER_GAMBLER_STATE) >= FRONTIER_GAMBLER_PLACED_BET) goto(BattleFrontier_Lounge3_EventScript_CheckBetResults)
+    if (var(VAR_FRONTIER_GAMBLER_STATE) >= FRONTIER_GAMBLER_PLACED_BET) {
+        goto(BattleFrontier_Lounge3_EventScript_CheckBetResults)
+    }
     goto(BattleFrontier_Lounge3_EventScript_AskToEnterChallenge)
     end
 }
 
 script BattleFrontier_Lounge3_EventScript_CheckBetResults {
-    if (var(VAR_FRONTIER_GAMBLER_STATE) == FRONTIER_GAMBLER_PLACED_BET) goto(BattleFrontier_Lounge3_EventScript_ChallengeNotAttempted)
-    if (var(VAR_FRONTIER_GAMBLER_STATE) == FRONTIER_GAMBLER_WON) goto(BattleFrontier_Lounge3_EventScript_WonChallenge)
+    if (var(VAR_FRONTIER_GAMBLER_STATE) == FRONTIER_GAMBLER_PLACED_BET) {
+        goto(BattleFrontier_Lounge3_EventScript_ChallengeNotAttempted)
+    }
+    if (var(VAR_FRONTIER_GAMBLER_STATE) == FRONTIER_GAMBLER_WON) {
+        goto(BattleFrontier_Lounge3_EventScript_WonChallenge)
+    }
     goto(BattleFrontier_Lounge3_EventScript_LostChallenge)
     end
 }
 
 script BattleFrontier_Lounge3_EventScript_WonChallenge {
     msgbox(BattleFrontier_Lounge3_Text_HelloChampHeresYourPoints, MSGBOX_DEFAULT)
-    if (var(VAR_FRONTIER_GAMBLER_AMOUNT_BET) == FRONTIER_GAMBLER_BET_5) call(BattleFrontier_Lounge3_EventScript_RewardBet5)
-    if (var(VAR_FRONTIER_GAMBLER_AMOUNT_BET) == FRONTIER_GAMBLER_BET_10) call(BattleFrontier_Lounge3_EventScript_RewardBet10)
-    if (var(VAR_FRONTIER_GAMBLER_AMOUNT_BET) == FRONTIER_GAMBLER_BET_15) call(BattleFrontier_Lounge3_EventScript_RewardBet15)
+    if (var(VAR_FRONTIER_GAMBLER_AMOUNT_BET) == FRONTIER_GAMBLER_BET_5) {
+        call(BattleFrontier_Lounge3_EventScript_RewardBet5)
+    }
+    if (var(VAR_FRONTIER_GAMBLER_AMOUNT_BET) == FRONTIER_GAMBLER_BET_10) {
+        call(BattleFrontier_Lounge3_EventScript_RewardBet10)
+    }
+    if (var(VAR_FRONTIER_GAMBLER_AMOUNT_BET) == FRONTIER_GAMBLER_BET_15) {
+        call(BattleFrontier_Lounge3_EventScript_RewardBet15)
+    }
     msgbox(BattleFrontier_Lounge3_Text_ObtainedBattlePoints, MSGBOX_GETPOINTS)
     special(GiveFrontierBattlePoints)
     msgbox(BattleFrontier_Lounge3_Text_ThinkOfMeForAnotherChallenge, MSGBOX_DEFAULT)

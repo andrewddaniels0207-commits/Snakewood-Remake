@@ -3,7 +3,9 @@ mapscripts MauvilleCity_House1_MapScripts {}
 script MauvilleCity_House1_EventScript_RockSmashDude {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_HM_ROCK_SMASH)) goto(MauvilleCity_House1_EventScript_ReceivedRockSmash)
+    if (flag(FLAG_RECEIVED_HM_ROCK_SMASH)) {
+        goto(MauvilleCity_House1_EventScript_ReceivedRockSmash)
+    }
     msgbox(MauvilleCity_House1_Text_ImRockSmashDudeTakeThis, MSGBOX_DEFAULT)
     giveitem(ITEM_HM_ROCK_SMASH)
     setflag(FLAG_RECEIVED_HM_ROCK_SMASH)

@@ -19,7 +19,9 @@ script CeladonCity_Condominiums_3F_EventScript_Designer {
     lock
     faceplayer
     specialvar(VAR_RESULT, HasAllKantoMons)
-    if (var(VAR_RESULT) == TRUE) goto(CeladonCity_Condominiums_3F_EventScript_CompletedPokedex)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(CeladonCity_Condominiums_3F_EventScript_CompletedPokedex)
+    }
     msgbox(CeladonCity_Condominiums_3F_Text_ImGameDesignerShowMeFinishedPokedex)
     release
     end

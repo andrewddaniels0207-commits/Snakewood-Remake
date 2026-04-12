@@ -15,8 +15,12 @@ script PokemonLeague_LoreleisRoom_OnResume {
 }
 
 script PokemonLeague_LoreleisRoom_OnLoad {
-    if (flag(FLAG_DEFEATED_LORELEI)) call(PokemonLeague_LoreleisRoom_EventScript_SetDoorOpen)
-    if (var(VAR_MAP_SCENE_POKEMON_LEAGUE) == 1) call(PokemonLeague_LoreleisRoom_EventScript_CloseEntry)
+    if (flag(FLAG_DEFEATED_LORELEI)) {
+        call(PokemonLeague_LoreleisRoom_EventScript_SetDoorOpen)
+    }
+    if (var(VAR_MAP_SCENE_POKEMON_LEAGUE) == 1) {
+        call(PokemonLeague_LoreleisRoom_EventScript_CloseEntry)
+    }
     end
 }
 
@@ -59,15 +63,25 @@ script PokemonLeague_LoreleisRoom_EventScript_Lorelei {
     lock
     faceplayer
     famechecker(FAMECHECKER_LORELEI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
-    if (flag(FLAG_DEFEATED_LORELEI)) goto(PokemonLeague_LoreleisRoom_EventScript_PostBattle)
+    if (flag(FLAG_DEFEATED_LORELEI)) {
+        goto(PokemonLeague_LoreleisRoom_EventScript_PostBattle)
+    }
     famechecker(FAMECHECKER_LORELEI, 0)
     famechecker(FAMECHECKER_LORELEI, 1)
-    if (!flag(FLAG_IS_CHAMPION)) call(PokemonLeague_LoreleisRoom_EventScript_Intro)
-    if (flag(FLAG_IS_CHAMPION)) call(PokemonLeague_LoreleisRoom_EventScript_RematchIntro)
+    if (!flag(FLAG_IS_CHAMPION)) {
+        call(PokemonLeague_LoreleisRoom_EventScript_Intro)
+    }
+    if (flag(FLAG_IS_CHAMPION)) {
+        call(PokemonLeague_LoreleisRoom_EventScript_RematchIntro)
+    }
     setflag(FLAG_TEMP_3)
     setflag(FLAG_TEMP_5)
-    if (!flag(FLAG_IS_CHAMPION)) call(PokemonLeague_LoreleisRoom_EventScript_Battle)
-    if (flag(FLAG_IS_CHAMPION)) call(PokemonLeague_LoreleisRoom_EventScript_Rematch)
+    if (!flag(FLAG_IS_CHAMPION)) {
+        call(PokemonLeague_LoreleisRoom_EventScript_Battle)
+    }
+    if (flag(FLAG_IS_CHAMPION)) {
+        call(PokemonLeague_LoreleisRoom_EventScript_Rematch)
+    }
     clearflag(FLAG_TEMP_5)
     goto(PokemonLeague_LoreleisRoom_EventScript_DefeatedLorelei)
     end

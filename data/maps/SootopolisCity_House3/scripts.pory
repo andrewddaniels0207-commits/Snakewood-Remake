@@ -4,7 +4,9 @@ script SootopolisCity_House3_EventScript_Woman {
     lock
     faceplayer
     msgbox(SootopolisCity_House3_Text_JuanHasManyFansDoYou, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(SootopolisCity_House3_EventScript_HaveFans)
+    if (var(VAR_RESULT) == YES) {
+        goto(SootopolisCity_House3_EventScript_HaveFans)
+    }
     msgbox(SootopolisCity_House3_Text_LonesomeTryWorkingHarder, MSGBOX_DEFAULT)
     release
     end

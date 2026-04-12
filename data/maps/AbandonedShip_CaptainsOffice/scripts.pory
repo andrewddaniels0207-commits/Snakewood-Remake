@@ -3,10 +3,16 @@ mapscripts AbandonedShip_CaptainsOffice_MapScripts {}
 script AbandonedShip_CaptainsOffice_EventScript_CaptSternAide {
     lock
     faceplayer
-    if (flag(FLAG_EXCHANGED_SCANNER)) goto(AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus)
+    if (flag(FLAG_EXCHANGED_SCANNER)) {
+        goto(AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus)
+    }
     checkitem(ITEM_SCANNER)
-    if (var(VAR_RESULT) == TRUE) goto(AbandonedShip_CaptainsOffice_EventScript_CanYouDeliverScanner)
-    if (flag(FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_2_SCANNER)) goto(AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(AbandonedShip_CaptainsOffice_EventScript_CanYouDeliverScanner)
+    }
+    if (flag(FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_2_SCANNER)) {
+        goto(AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus)
+    }
     msgbox(AbandonedShip_CaptainsOffice_Text_NoSuccessFindingScanner, MSGBOX_DEFAULT)
     release
     end

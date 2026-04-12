@@ -4,19 +4,25 @@ mapscripts MtEmber_Summit_Frlg_MapScripts {
 }
 
 script MtEmber_Summit_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(MtEmber_Summit_EventScript_TryRemoveMoltres)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(MtEmber_Summit_EventScript_TryRemoveMoltres)
+    }
     end
 }
 
 script MtEmber_Summit_EventScript_TryRemoveMoltres {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
+        goto(Common_EventScript_NopReturn)
+    }
     removeobject(VAR_LAST_TALKED)
     return
 }
 
 script MtEmber_Summit_OnTransition {
-    if (!flag(FLAG_FOUGHT_MOLTRES)) call(MtEmber_Summit_EventScript_ShowMoltres)
+    if (!flag(FLAG_FOUGHT_MOLTRES)) {
+        call(MtEmber_Summit_EventScript_ShowMoltres)
+    }
     end
 }
 
@@ -42,9 +48,15 @@ script MtEmber_Summit_EventScript_Moltres {
     waitstate
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(MtEmber_Summit_EventScript_DefeatedMoltres)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(MtEmber_Summit_EventScript_RanFromMoltres)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(MtEmber_Summit_EventScript_RanFromMoltres)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(MtEmber_Summit_EventScript_DefeatedMoltres)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(MtEmber_Summit_EventScript_RanFromMoltres)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(MtEmber_Summit_EventScript_RanFromMoltres)
+    }
     setflag(FLAG_FOUGHT_MOLTRES)
     release
     end

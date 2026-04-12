@@ -25,9 +25,15 @@ script PokemonTower_7F_EventScript_DefeatedGrunt1 {
     msgbox(PokemonTower_7F_Text_Grunt1PostBattle)
     closemessage
     getplayerxy(VAR_0x8004, VAR_0x8005)
-    if (var(VAR_0x8004) == 10) goto(PokemonTower_7F_EventScript_Grunt1ExitMid)
-    if (var(VAR_0x8004) == 11) goto(PokemonTower_7F_EventScript_Grunt1ExitRight)
-    if (var(VAR_0x8004) == 9) goto(PokemonTower_7F_EventScript_Grunt1ExitLeft)
+    if (var(VAR_0x8004) == 10) {
+        goto(PokemonTower_7F_EventScript_Grunt1ExitMid)
+    }
+    if (var(VAR_0x8004) == 11) {
+        goto(PokemonTower_7F_EventScript_Grunt1ExitRight)
+    }
+    if (var(VAR_0x8004) == 9) {
+        goto(PokemonTower_7F_EventScript_Grunt1ExitLeft)
+    }
     applymovement(LOCALID_POKEMON_TOWER_GRUNT1, PokemonTower_7F_Movement_Grunt1Exit)
     waitmovement(0)
     goto(PokemonTower_7F_EventScript_RemoveGrunt1)
@@ -120,8 +126,12 @@ script PokemonTower_7F_EventScript_DefeatedGrunt2 {
     msgbox(PokemonTower_7F_Text_Grunt2PostBattle)
     closemessage
     getplayerxy(VAR_0x8004, VAR_0x8005)
-    if (var(VAR_0x8004) == 12) goto(PokemonTower_7F_EventScript_Grunt2ExitLeft)
-    if (var(VAR_0x8004) == 13) goto(PokemonTower_7F_EventScript_Grunt2ExitRight)
+    if (var(VAR_0x8004) == 12) {
+        goto(PokemonTower_7F_EventScript_Grunt2ExitLeft)
+    }
+    if (var(VAR_0x8004) == 13) {
+        goto(PokemonTower_7F_EventScript_Grunt2ExitRight)
+    }
     applymovement(LOCALID_POKEMON_TOWER_GRUNT2, PokemonTower_7F_Movement_Grunt2Exit)
     waitmovement(0)
     goto(PokemonTower_7F_EventScript_RemoveGrunt2)
@@ -191,8 +201,12 @@ script PokemonTower_7F_EventScript_DefeatedGrunt3 {
     msgbox(PokemonTower_7F_Text_Grunt3PostBattle)
     closemessage
     getplayerxy(VAR_0x8004, VAR_0x8005)
-    if (var(VAR_0x8004) == 10) goto(PokemonTower_7F_EventScript_Grunt3ExitRight)
-    if (var(VAR_0x8004) == 9) goto(PokemonTower_7F_EventScript_Grunt3ExitLeft)
+    if (var(VAR_0x8004) == 10) {
+        goto(PokemonTower_7F_EventScript_Grunt3ExitRight)
+    }
+    if (var(VAR_0x8004) == 9) {
+        goto(PokemonTower_7F_EventScript_Grunt3ExitLeft)
+    }
     applymovement(LOCALID_POKEMON_TOWER_GRUNT3, PokemonTower_7F_Movement_Grunt3Exit)
     waitmovement(0)
     goto(PokemonTower_7F_EventScript_RemoveGrunt3)

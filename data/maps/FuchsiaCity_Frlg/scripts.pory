@@ -4,8 +4,12 @@ mapscripts FuchsiaCity_Frlg_MapScripts {
 
 script FuchsiaCity_OnTransition {
     setworldmapflag(FLAG_WORLD_MAP_FUCHSIA_CITY)
-    if (flag(FLAG_GOT_DOME_FOSSIL)) call(FuchsiaCity_EventScript_SetOmanyteGfx)
-    if (!flag(FLAG_GOT_DOME_FOSSIL)) call(FuchsiaCity_EventScript_SetKabutoGfx)
+    if (flag(FLAG_GOT_DOME_FOSSIL)) {
+        call(FuchsiaCity_EventScript_SetOmanyteGfx)
+    }
+    if (!flag(FLAG_GOT_DOME_FOSSIL)) {
+        call(FuchsiaCity_EventScript_SetKabutoGfx)
+    }
     end
 }
 
@@ -138,7 +142,9 @@ script FuchsiaCity_EventScript_LaprasSign {
 
 script FuchsiaCity_EventScript_FossilMonSign {
     lockall
-    if (flag(FLAG_GOT_DOME_FOSSIL)) goto(FuchsiaCity_EventScript_OmanyteSign)
+    if (flag(FLAG_GOT_DOME_FOSSIL)) {
+        goto(FuchsiaCity_EventScript_OmanyteSign)
+    }
     setvar(VAR_0x8004, SPECIES_KABUTO)
     special(SetSeenMon)
     showmonpic(SPECIES_KABUTO, 10, 3)

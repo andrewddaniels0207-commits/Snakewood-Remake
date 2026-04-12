@@ -3,7 +3,9 @@ mapscripts SaffronCity_Gym_Frlg_MapScripts {}
 script SaffronCity_Gym_EventScript_Sabrina {
     famechecker(FAMECHECKER_SABRINA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
     trainerbattle_single(TRAINER_LEADER_SABRINA, SaffronCity_Gym_Text_SabrinaIntro, SaffronCity_Gym_Text_SabrinaDefeat, SaffronCity_Gym_EventScript_DefeatedSabrina, NO_MUSIC)
-    if (!flag(FLAG_GOT_TM04_FROM_SABRINA)) goto(SaffronCity_Gym_EventScript_GiveTM04)
+    if (!flag(FLAG_GOT_TM04_FROM_SABRINA)) {
+        goto(SaffronCity_Gym_EventScript_GiveTM04)
+    }
     msgbox(SaffronCity_Gym_Text_ExplainTM04)
     release
     end
@@ -23,7 +25,9 @@ script SaffronCity_Gym_EventScript_DefeatedSabrina {
 script SaffronCity_Gym_EventScript_GiveTM04 {
     msgbox(SaffronCity_Gym_Text_ExplainMarshBadgeTakeThis)
     checkitemspace(ITEM_TM04)
-    if (var(VAR_RESULT) == FALSE) goto(SaffronCity_Gym_EventScript_NoRoomForTM04)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SaffronCity_Gym_EventScript_NoRoomForTM04)
+    }
     giveitem_msg(SaffronCity_Gym_Text_ReceivedTM04FromSabrina, ITEM_TM04)
     setflag(FLAG_GOT_TM04_FROM_SABRINA)
     msgbox(SaffronCity_Gym_Text_SabrinaPostBattle)
@@ -83,7 +87,9 @@ script SaffronCity_Gym_EventScript_Tasha {
 script SaffronCity_Gym_EventScript_GymGuy {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_SABRINA)) goto(SaffronCity_Gym_EventScript_GymGuyPostVictory)
+    if (flag(FLAG_DEFEATED_SABRINA)) {
+        goto(SaffronCity_Gym_EventScript_GymGuyPostVictory)
+    }
     msgbox(SaffronCity_Gym_Text_GymGuyAdvice)
     release
     end
@@ -97,7 +103,9 @@ script SaffronCity_Gym_EventScript_GymGuyPostVictory {
 
 script SaffronCity_Gym_EventScript_GymStatue {
     lockall
-    if (flag(FLAG_BADGE06_GET)) goto(SaffronCity_Gym_EventScript_GymStatuePostVictory)
+    if (flag(FLAG_BADGE06_GET)) {
+        goto(SaffronCity_Gym_EventScript_GymStatuePostVictory)
+    }
     msgbox(SaffronCity_Gym_Text_GymStatue)
     releaseall
     end

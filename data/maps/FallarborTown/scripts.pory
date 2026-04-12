@@ -12,7 +12,9 @@ script FallarborTown_OnTransition {
 script FallarborTown_EventScript_ExpertM {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY)) goto(FallarborTown_EventScript_ExpertMNormal)
+    if (flag(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY)) {
+        goto(FallarborTown_EventScript_ExpertMNormal)
+    }
     msgbox(FallarborTown_Text_ShadyCharactersCozmosHome, MSGBOX_DEFAULT)
     release
     end

@@ -23,7 +23,9 @@ script BattleFrontier_BattleTowerBattleRoom_EventScript_EnterRoom {
     applymovement(LOCALID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerEnter)
     waitmovement(0)
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleTowerBattleRoom_EventScript_OpponentEnter)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattleTowerBattleRoom_EventScript_OpponentEnter)
+    }
     applymovement(LOCALID_TOWER_BATTLE_ATTENDANT_1, BattleFrontier_BattleTowerBattleRoom_Movement_AttendantApproachPlayer)
     waitmovement(0)
     applymovement(LOCALID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerFaceAttendant)
@@ -63,7 +65,9 @@ script BattleFrontier_BattleTowerBattleRoom_EventScript_DefeatedOpponent {
     waitmovement(0)
     removeobject(LOCALID_TOWER_BATTLE_OPPONENT)
     frontier_getbrainstatus()
-    if (var(VAR_RESULT) != FRONTIER_BRAIN_NOT_READY) call(BattleFrontier_BattleTowerBattleRoom_EventScript_SecondAttendantEnter)
+    if (var(VAR_RESULT) != FRONTIER_BRAIN_NOT_READY) {
+        call(BattleFrontier_BattleTowerBattleRoom_EventScript_SecondAttendantEnter)
+    }
     applymovement(LOCALID_TOWER_BATTLE_ATTENDANT_1, BattleFrontier_BattleTowerBattleRoom_Movement_AttendantApproachPlayer)
     waitmovement(0)
     applymovement(LOCALID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerFaceAttendant)
@@ -77,11 +81,15 @@ script BattleFrontier_BattleTowerBattleRoom_EventScript_DefeatedOpponent {
 script BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForOpponent {
     frontier_getbrainstatus()
     copyvar(VAR_TEMP_F, VAR_RESULT)
-    if (var(VAR_RESULT) != FRONTIER_BRAIN_NOT_READY) goto(BattleFrontier_BattleTowerBattleRoom_EventScript_MaidenUpNext)
+    if (var(VAR_RESULT) != FRONTIER_BRAIN_NOT_READY) {
+        goto(BattleFrontier_BattleTowerBattleRoom_EventScript_MaidenUpNext)
+    }
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
     call(BattleFrontier_BattleTowerBattleRoom_EventScript_ReadyForOpponent)
     call(BattleFrontier_EventScript_GetCantRecordBattle)
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForOpponentNoRecord)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForOpponentNoRecord)
+    }
     multichoice(19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, TRUE)
     switch(VAR_RESULT)
     case(0, BattleFrontier_BattleTowerBattleRoom_EventScript_ContinueChallenge)
@@ -232,7 +240,9 @@ script BattleFrontier_BattleTowerBattleRoom_EventScript_SecondAttendantEnter {
 }
 
 script BattleFrontier_BattleTowerBattleRoom_EventScript_MaidenUpNext {
-    if (var(VAR_TEMP_2) == 1) goto(BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForMaiden)
+    if (var(VAR_TEMP_2) == 1) {
+        goto(BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForMaiden)
+    }
     msgbox(BattleFrontier_BattleTowerBattleRoom_Text_SalonMaidenOnHerWay, MSGBOX_DEFAULT)
     setvar(VAR_TEMP_2, 1)
 }
@@ -241,7 +251,9 @@ script BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForMaiden {
     message(BattleFrontier_BattleTowerBattleRoom_Text_ReadyForSalonMaiden)
     waitmessage()
     call(BattleFrontier_EventScript_GetCantRecordBattle)
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForMaidenNoRecord)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForMaidenNoRecord)
+    }
     multichoice(19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, TRUE)
     switch(VAR_RESULT)
     case(0, BattleFrontier_BattleTowerBattleRoom_EventScript_BattleAnabel)
@@ -275,7 +287,9 @@ script BattleFrontier_BattleTowerBattleRoom_EventScript_BattleAnabel {
     case(FRONTIER_BRAIN_STREAK, BattleFrontier_BattleTowerBattleRoom_EventScript_BattleAnabelSilver)
     case(FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattleTowerBattleRoom_EventScript_BattleAnabelGold)
     frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
-    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattleTowerBattleRoom_EventScript_BattleAnabelSilver)
+    if (var(VAR_RESULT) != FALSE) {
+        goto(BattleFrontier_BattleTowerBattleRoom_EventScript_BattleAnabelSilver)
+    }
     msgbox(BattleFrontier_BattleTowerBattleRoom_Text_GreetingsImAnabel, MSGBOX_DEFAULT)
     frontier_set(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
 }
@@ -283,14 +297,18 @@ script BattleFrontier_BattleTowerBattleRoom_EventScript_BattleAnabel {
 script BattleFrontier_BattleTowerBattleRoom_EventScript_BattleAnabelSilver {
     msgbox(BattleFrontier_BattleTowerBattleRoom_Text_LetMeSeeYourTalent, MSGBOX_DEFAULT)
     call(BattleFrontier_BattleTowerBattleRoom_EventScript_DoTowerBattle)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(BattleFrontier_BattleTowerBattleRoom_EventScript_DefeatedAnabelSilver)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(BattleFrontier_BattleTowerBattleRoom_EventScript_DefeatedAnabelSilver)
+    }
     goto(BattleFrontier_BattleTower_EventScript_WarpToLobbyLost)
 }
 
 script BattleFrontier_BattleTowerBattleRoom_EventScript_DefeatedAnabelSilver {
     call(BattleFrontier_EventScript_IncrementWinStreak)
     frontier_getsymbols()
-    if (var(VAR_RESULT) != 0) goto(BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyWon)
+    if (var(VAR_RESULT) != 0) {
+        goto(BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyWon)
+    }
     msgbox(BattleFrontier_BattleTowerBattleRoom_Text_AnabelTalentShallBeRecognized, MSGBOX_DEFAULT)
     playfanfare(MUS_OBTAIN_SYMBOL)
     message(BattleFrontier_BattleTowerBattleRoom_Text_ReceivedAbilitySymbol)
@@ -303,7 +321,9 @@ script BattleFrontier_BattleTowerBattleRoom_EventScript_DefeatedAnabelSilver {
 
 script BattleFrontier_BattleTowerBattleRoom_EventScript_AnabelGoldIntro {
     frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
-    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattleTowerBattleRoom_EventScript_BattleAnabelGold)
+    if (var(VAR_RESULT) != FALSE) {
+        goto(BattleFrontier_BattleTowerBattleRoom_EventScript_BattleAnabelGold)
+    }
     msgbox(BattleFrontier_BattleTowerBattleRoom_Text_AnabelYouCameBack, MSGBOX_DEFAULT)
     frontier_set(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
 }
@@ -311,14 +331,18 @@ script BattleFrontier_BattleTowerBattleRoom_EventScript_AnabelGoldIntro {
 script BattleFrontier_BattleTowerBattleRoom_EventScript_BattleAnabelGold {
     msgbox(BattleFrontier_BattleTowerBattleRoom_Text_LetsBeginShallWe, MSGBOX_DEFAULT)
     call(BattleFrontier_BattleTowerBattleRoom_EventScript_DoTowerBattle)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(BattleFrontier_BattleTowerBattleRoom_EventScript_DefeatedAnabelGold)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(BattleFrontier_BattleTowerBattleRoom_EventScript_DefeatedAnabelGold)
+    }
     goto(BattleFrontier_BattleTower_EventScript_WarpToLobbyLost)
 }
 
 script BattleFrontier_BattleTowerBattleRoom_EventScript_DefeatedAnabelGold {
     call(BattleFrontier_EventScript_IncrementWinStreak)
     frontier_getsymbols()
-    if (var(VAR_RESULT) == 2) goto(BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyWon)
+    if (var(VAR_RESULT) == 2) {
+        goto(BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyWon)
+    }
     msgbox(BattleFrontier_BattleTowerBattleRoom_Text_AnabelCongratsYourPassPlease, MSGBOX_DEFAULT)
     playfanfare(MUS_OBTAIN_SYMBOL)
     message(BattleFrontier_BattleTowerBattleRoom_Text_AbilitySymbolTookGoldenShine)
@@ -337,7 +361,9 @@ script BattleFrontier_BattleTowerBattleRoom_EventScript_DoTowerBattle {
     dofacilitytrainerbattle(FACILITY_BATTLE_TOWER)
     waitstate
     copyvar(VAR_0x8004, VAR_FRONTIER_BATTLE_MODE)
-    if (var(VAR_0x8004) == FRONTIER_MODE_LINK_MULTIS) goto(BattleFrontier_BattleTowerBattleRoom_EventScript_EndTowerBattle)
+    if (var(VAR_0x8004) == FRONTIER_MODE_LINK_MULTIS) {
+        goto(BattleFrontier_BattleTowerBattleRoom_EventScript_EndTowerBattle)
+    }
     frontier_restorehelditems()
     special(HealPlayerParty)
     frontier_resetsketch()
@@ -458,9 +484,15 @@ movement BattleFrontier_BattleTowerBattleRoom_Movement_AnabelEnter {
 
 script BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobby {
     copyvar(VAR_RESULT, VAR_FRONTIER_BATTLE_MODE)
-    if (var(VAR_RESULT) == FRONTIER_MODE_DOUBLES) goto(BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyDoubles)
-    if (var(VAR_RESULT) == FRONTIER_MODE_MULTIS) goto(BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyMultis)
-    if (var(VAR_RESULT) == FRONTIER_MODE_LINK_MULTIS) goto(BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyLinkMultis)
+    if (var(VAR_RESULT) == FRONTIER_MODE_DOUBLES) {
+        goto(BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyDoubles)
+    }
+    if (var(VAR_RESULT) == FRONTIER_MODE_MULTIS) {
+        goto(BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyMultis)
+    }
+    if (var(VAR_RESULT) == FRONTIER_MODE_LINK_MULTIS) {
+        goto(BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyLinkMultis)
+    }
     warp(MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 6, 6)
     waitstate
     end

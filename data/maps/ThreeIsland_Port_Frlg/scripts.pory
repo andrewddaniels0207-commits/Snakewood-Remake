@@ -11,8 +11,12 @@ script ThreeIsland_Port_OnTransition {
 script ThreeIsland_Port_EventScript_Woman {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER) >= 2) goto(ThreeIsland_Port_EventScript_WomanLostelleFound)
-    if (var(VAR_MAP_SCENE_THREE_ISLAND) >= 4) goto(ThreeIsland_Port_EventScript_WomanBikersGone)
+    if (var(VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER) >= 2) {
+        goto(ThreeIsland_Port_EventScript_WomanLostelleFound)
+    }
+    if (var(VAR_MAP_SCENE_THREE_ISLAND) >= 4) {
+        goto(ThreeIsland_Port_EventScript_WomanBikersGone)
+    }
     msgbox(ThreeIsland_Port_Text_IllCallThePolice)
     release
     end

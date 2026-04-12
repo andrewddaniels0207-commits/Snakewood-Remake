@@ -4,7 +4,9 @@ script FuchsiaCity_House3_EventScript_MoveDeleter {
     lock
     faceplayer
     msgbox(FuchsiaCity_House3_Text_WouldYouLikeToForgetMove, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(FuchsiaCity_House3_EventScript_ChooseMonForMoveDeleter)
+    if (var(VAR_RESULT) == YES) {
+        goto(FuchsiaCity_House3_EventScript_ChooseMonForMoveDeleter)
+    }
     goto(FuchsiaCity_House3_EventScript_CancelForgetMove)
     end
 }
@@ -13,19 +15,29 @@ script FuchsiaCity_House3_EventScript_ChooseMonForMoveDeleter {
     msgbox(FuchsiaCity_House3_Text_WhichMonShouldForgetMove)
     special(ChoosePartyMon)
     waitstate
-    if (var(VAR_0x8004) >= PARTY_SIZE) goto(FuchsiaCity_House3_EventScript_CancelForgetMove)
+    if (var(VAR_0x8004) >= PARTY_SIZE) {
+        goto(FuchsiaCity_House3_EventScript_CancelForgetMove)
+    }
     special(IsSelectedMonEgg)
-    if (var(VAR_RESULT) == TRUE) goto(FuchsiaCity_House3_EventScript_CantForgetMoveEgg)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(FuchsiaCity_House3_EventScript_CantForgetMoveEgg)
+    }
     special(GetNumMovesSelectedMonHas)
-    if (var(VAR_RESULT) == 1) goto(FuchsiaCity_House3_EventScript_CantForgetOnlyMove)
+    if (var(VAR_RESULT) == 1) {
+        goto(FuchsiaCity_House3_EventScript_CantForgetOnlyMove)
+    }
     msgbox(FuchsiaCity_House3_Text_WhichMoveShouldBeForgotten)
     fadescreen(FADE_TO_BLACK)
     special(MoveDeleterChooseMoveToForget)
     fadescreen(FADE_FROM_BLACK)
-    if (var(VAR_0x8005) == MAX_MON_MOVES) goto(FuchsiaCity_House3_EventScript_ChooseMonForMoveDeleter)
+    if (var(VAR_0x8005) == MAX_MON_MOVES) {
+        goto(FuchsiaCity_House3_EventScript_ChooseMonForMoveDeleter)
+    }
     special(BufferMoveDeleterNicknameAndMove)
     msgbox(FuchsiaCity_House3_Text_MonsMoveShouldBeForgotten, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(FuchsiaCity_House3_EventScript_ForgetMove)
+    if (var(VAR_RESULT) == YES) {
+        goto(FuchsiaCity_House3_EventScript_ForgetMove)
+    }
     goto(FuchsiaCity_House3_EventScript_CancelForgetMove)
     end
 }

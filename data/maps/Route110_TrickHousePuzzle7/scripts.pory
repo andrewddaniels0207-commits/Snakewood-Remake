@@ -13,11 +13,21 @@ script Route110_TrickHousePuzzle7_OnResume {
 }
 
 script Route110_TrickHousePuzzle7_EventScript_UpdateSwitchMetatiles {
-    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1)) call(Route110_TrickHousePuzzle7_EventScript_SetSwitch1MetatilesOn)
-    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2)) call(Route110_TrickHousePuzzle7_EventScript_SetSwitch2MetatilesOn)
-    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3)) call(Route110_TrickHousePuzzle7_EventScript_SetSwitch3MetatilesOn)
-    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4)) call(Route110_TrickHousePuzzle7_EventScript_SetSwitch4MetatilesOn)
-    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5)) call(Route110_TrickHousePuzzle7_EventScript_SetSwitch5MetatilesOn)
+    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1)) {
+        call(Route110_TrickHousePuzzle7_EventScript_SetSwitch1MetatilesOn)
+    }
+    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2)) {
+        call(Route110_TrickHousePuzzle7_EventScript_SetSwitch2MetatilesOn)
+    }
+    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3)) {
+        call(Route110_TrickHousePuzzle7_EventScript_SetSwitch3MetatilesOn)
+    }
+    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4)) {
+        call(Route110_TrickHousePuzzle7_EventScript_SetSwitch4MetatilesOn)
+    }
+    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5)) {
+        call(Route110_TrickHousePuzzle7_EventScript_SetSwitch5MetatilesOn)
+    }
     return
 }
 
@@ -82,7 +92,9 @@ script Route110_TrickHousePuzzle7_EventScript_SetSwitch5MetatilesOff {
 }
 
 script Route110_TrickHousePuzzle7_OnTransition {
-    if (var(VAR_TRICK_HOUSE_PUZZLE_7_STATE_2) == 1) goto(Route110_TrickHousePuzzle7_EventScript_TeleportedTransition)
+    if (var(VAR_TRICK_HOUSE_PUZZLE_7_STATE_2) == 1) {
+        goto(Route110_TrickHousePuzzle7_EventScript_TeleportedTransition)
+    }
     clearflag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1)
     clearflag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2)
     clearflag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3)
@@ -96,7 +108,9 @@ script Route110_TrickHousePuzzle7_EventScript_TeleportedTransition {
 }
 
 script Route110_TrickHousePuzzle7_OnLoad {
-    if (var(VAR_TRICK_HOUSE_PUZZLE_7_STATE_2) == 1) call(Route110_TrickHousePuzzle7_EventScript_UpdateSwitchMetatiles)
+    if (var(VAR_TRICK_HOUSE_PUZZLE_7_STATE_2) == 1) {
+        call(Route110_TrickHousePuzzle7_EventScript_UpdateSwitchMetatiles)
+    }
     end
 }
 
@@ -107,7 +121,9 @@ script Route110_TrickHousePuzzle7_EventScript_ClearState2 {
 
 script Route110_TrickHousePuzzle7_EventScript_Scroll {
     lockall
-    if (var(VAR_TRICK_HOUSE_PUZZLE_7_STATE) == 0) goto(Route110_TrickHousePuzzle7_EventScript_FoundScroll)
+    if (var(VAR_TRICK_HOUSE_PUZZLE_7_STATE) == 0) {
+        goto(Route110_TrickHousePuzzle7_EventScript_FoundScroll)
+    }
     goto(Route110_TrickHousePuzzle_EventScript_ReadScrollAgain)
     end
 }
@@ -130,60 +146,100 @@ script Route110_TrickHousePuzzle7_EventScript_TeleportPad {
 script Route110_TrickHousePuzzle7_EventScript_Switch1 {
     lockall
     delay(32)
-    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1)) call(Route110_TrickHousePuzzle7_EventScript_SetSwitch1MetatilesOn)
-    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1)) call(Route110_TrickHousePuzzle7_EventScript_SetSwitch1MetatilesOff)
+    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1)) {
+        call(Route110_TrickHousePuzzle7_EventScript_SetSwitch1MetatilesOn)
+    }
+    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1)) {
+        call(Route110_TrickHousePuzzle7_EventScript_SetSwitch1MetatilesOff)
+    }
     special(DrawWholeMapView)
     playse(SE_CLICK)
-    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1)) goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch1On)
-    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1)) goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch1Off)
+    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1)) {
+        goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch1On)
+    }
+    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1)) {
+        goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch1Off)
+    }
     end
 }
 
 script Route110_TrickHousePuzzle7_EventScript_Switch2 {
     lockall
     delay(32)
-    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2)) call(Route110_TrickHousePuzzle7_EventScript_SetSwitch2MetatilesOn)
-    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2)) call(Route110_TrickHousePuzzle7_EventScript_SetSwitch2MetatilesOff)
+    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2)) {
+        call(Route110_TrickHousePuzzle7_EventScript_SetSwitch2MetatilesOn)
+    }
+    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2)) {
+        call(Route110_TrickHousePuzzle7_EventScript_SetSwitch2MetatilesOff)
+    }
     special(DrawWholeMapView)
     playse(SE_CLICK)
-    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2)) goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch2On)
-    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2)) goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch2Off)
+    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2)) {
+        goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch2On)
+    }
+    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2)) {
+        goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch2Off)
+    }
     end
 }
 
 script Route110_TrickHousePuzzle7_EventScript_Switch3 {
     lockall
     delay(32)
-    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3)) call(Route110_TrickHousePuzzle7_EventScript_SetSwitch3MetatilesOn)
-    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3)) call(Route110_TrickHousePuzzle7_EventScript_SetSwitch3MetatilesOff)
+    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3)) {
+        call(Route110_TrickHousePuzzle7_EventScript_SetSwitch3MetatilesOn)
+    }
+    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3)) {
+        call(Route110_TrickHousePuzzle7_EventScript_SetSwitch3MetatilesOff)
+    }
     special(DrawWholeMapView)
     playse(SE_CLICK)
-    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3)) goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch3On)
-    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3)) goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch3Off)
+    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3)) {
+        goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch3On)
+    }
+    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3)) {
+        goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch3Off)
+    }
     end
 }
 
 script Route110_TrickHousePuzzle7_EventScript_Switch4 {
     lockall
     delay(32)
-    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4)) call(Route110_TrickHousePuzzle7_EventScript_SetSwitch4MetatilesOn)
-    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4)) call(Route110_TrickHousePuzzle7_EventScript_SetSwitch4MetatilesOff)
+    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4)) {
+        call(Route110_TrickHousePuzzle7_EventScript_SetSwitch4MetatilesOn)
+    }
+    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4)) {
+        call(Route110_TrickHousePuzzle7_EventScript_SetSwitch4MetatilesOff)
+    }
     special(DrawWholeMapView)
     playse(SE_CLICK)
-    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4)) goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch4On)
-    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4)) goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch4Off)
+    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4)) {
+        goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch4On)
+    }
+    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4)) {
+        goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch4Off)
+    }
     end
 }
 
 script Route110_TrickHousePuzzle7_EventScript_Switch5 {
     lockall
     delay(32)
-    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5)) call(Route110_TrickHousePuzzle7_EventScript_SetSwitch5MetatilesOn)
-    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5)) call(Route110_TrickHousePuzzle7_EventScript_SetSwitch5MetatilesOff)
+    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5)) {
+        call(Route110_TrickHousePuzzle7_EventScript_SetSwitch5MetatilesOn)
+    }
+    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5)) {
+        call(Route110_TrickHousePuzzle7_EventScript_SetSwitch5MetatilesOff)
+    }
     special(DrawWholeMapView)
     playse(SE_CLICK)
-    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5)) goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch5On)
-    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5)) goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch5Off)
+    if (!flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5)) {
+        goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch5On)
+    }
+    if (flag(FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5)) {
+        goto(Route110_TrickHousePuzzle7_EventScript_SetSwitch5Off)
+    }
     end
 }
 

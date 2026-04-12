@@ -8,7 +8,9 @@ mapscripts Route110_TrickHouseEnd_MapScripts {
 }
 
 script Route110_TrickHouseEnd_OnResume {
-    if (var(VAR_TEMP_1) == 1) call(Route110_TrickHouseEnd_EventScript_SetDoorClosedMetatile)
+    if (var(VAR_TEMP_1) == 1) {
+        call(Route110_TrickHouseEnd_EventScript_SetDoorClosedMetatile)
+    }
     end
 }
 
@@ -67,7 +69,9 @@ script Route110_TrickHouseEnd_EventScript_CompletedPuzzle1 {
     msgbox(Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT)
     setvar(VAR_TRICK_HOUSE_PRIZE_PICKUP, 0)
     giveitem(ITEM_RARE_CANDY)
-    if (var(VAR_RESULT) == FALSE) call(Route110_TrickHouseEnd_EventScript_BagFull)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Route110_TrickHouseEnd_EventScript_BagFull)
+    }
     msgbox(Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT)
     closemessage
     call(Route110_TrickHouseEnd_EventScript_TrickMasterExit)
@@ -80,7 +84,9 @@ script Route110_TrickHouseEnd_EventScript_CompletedPuzzle2 {
     msgbox(Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT)
     setvar(VAR_TRICK_HOUSE_PRIZE_PICKUP, 0)
     giveitem(ITEM_TIMER_BALL)
-    if (var(VAR_RESULT) == FALSE) call(Route110_TrickHouseEnd_EventScript_BagFull)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Route110_TrickHouseEnd_EventScript_BagFull)
+    }
     msgbox(Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT)
     closemessage
     call(Route110_TrickHouseEnd_EventScript_TrickMasterExit)
@@ -93,7 +99,9 @@ script Route110_TrickHouseEnd_EventScript_CompletedPuzzle3 {
     msgbox(Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT)
     setvar(VAR_TRICK_HOUSE_PRIZE_PICKUP, 0)
     giveitem(ITEM_HARD_STONE)
-    if (var(VAR_RESULT) == FALSE) call(Route110_TrickHouseEnd_EventScript_BagFull)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Route110_TrickHouseEnd_EventScript_BagFull)
+    }
     msgbox(Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT)
     closemessage
     call(Route110_TrickHouseEnd_EventScript_TrickMasterExit)
@@ -106,7 +114,9 @@ script Route110_TrickHouseEnd_EventScript_CompletedPuzzle4 {
     msgbox(Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT)
     setvar(VAR_TRICK_HOUSE_PRIZE_PICKUP, 0)
     giveitem(ITEM_SMOKE_BALL)
-    if (var(VAR_RESULT) == FALSE) call(Route110_TrickHouseEnd_EventScript_BagFull)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Route110_TrickHouseEnd_EventScript_BagFull)
+    }
     msgbox(Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT)
     closemessage
     call(Route110_TrickHouseEnd_EventScript_TrickMasterExit)
@@ -119,7 +129,9 @@ script Route110_TrickHouseEnd_EventScript_CompletedPuzzle5 {
     msgbox(Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT)
     setvar(VAR_TRICK_HOUSE_PRIZE_PICKUP, 0)
     giveitem(ITEM_TM_TAUNT)
-    if (var(VAR_RESULT) == FALSE) call(Route110_TrickHouseEnd_EventScript_BagFull)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Route110_TrickHouseEnd_EventScript_BagFull)
+    }
     msgbox(Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT)
     closemessage
     call(Route110_TrickHouseEnd_EventScript_TrickMasterExit)
@@ -132,7 +144,9 @@ script Route110_TrickHouseEnd_EventScript_CompletedPuzzle6 {
     msgbox(Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT)
     setvar(VAR_TRICK_HOUSE_PRIZE_PICKUP, 0)
     giveitem(ITEM_MAGNET)
-    if (var(VAR_RESULT) == FALSE) call(Route110_TrickHouseEnd_EventScript_BagFull)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Route110_TrickHouseEnd_EventScript_BagFull)
+    }
     msgbox(Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT)
     closemessage
     call(Route110_TrickHouseEnd_EventScript_TrickMasterExit)
@@ -145,7 +159,9 @@ script Route110_TrickHouseEnd_EventScript_CompletedPuzzle7 {
     msgbox(Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT)
     setvar(VAR_TRICK_HOUSE_PRIZE_PICKUP, 0)
     giveitem(ITEM_PP_MAX)
-    if (var(VAR_RESULT) == FALSE) call(Route110_TrickHouseEnd_EventScript_BagFull)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Route110_TrickHouseEnd_EventScript_BagFull)
+    }
     msgbox(Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT)
     closemessage
     call(Route110_TrickHouseEnd_EventScript_TrickMasterExit)
@@ -156,10 +172,18 @@ script Route110_TrickHouseEnd_EventScript_CompletedPuzzle7 {
 script Route110_TrickHouseEnd_EventScript_CompletedPuzzle8 {
     msgbox(Route110_TrickHouseEnd_Text_AllNightPolishingFloors, MSGBOX_DEFAULT)
     closemessage
-    if (var(VAR_FACING) == DIR_SOUTH) call(Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwaySouth)
-    if (var(VAR_FACING) == DIR_NORTH) call(Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayNorth)
-    if (var(VAR_FACING) == DIR_WEST) call(Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayWest)
-    if (var(VAR_FACING) == DIR_EAST) call(Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayEast)
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwaySouth)
+    }
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayNorth)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayWest)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayEast)
+    }
     delay(30)
     msgbox(Route110_TrickHouseEnd_Text_FountainOfIdeasRunDry, MSGBOX_DEFAULT)
     closemessage
@@ -169,7 +193,9 @@ script Route110_TrickHouseEnd_EventScript_CompletedPuzzle8 {
     msgbox(Route110_TrickHouseEnd_Text_DefeatedMePreferWhichTent, MSGBOX_DEFAULT)
     setvar(VAR_TRICK_HOUSE_PRIZE_PICKUP, 0)
     call(Route110_TrickHouseEnd_EventScript_ChooseTent)
-    if (var(VAR_RESULT) == FALSE) call(Route110_TrickHouseEnd_EventScript_NoRoomForTent)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Route110_TrickHouseEnd_EventScript_NoRoomForTent)
+    }
     msgbox(Route110_TrickHouseEnd_Text_LeavingOnJourney, MSGBOX_DEFAULT)
     call(Route110_TrickHouseEnd_EventScript_TrickMasterExit)
     special(ResetTrickHouseNuggetFlag)

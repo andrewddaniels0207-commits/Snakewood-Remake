@@ -5,20 +5,26 @@ mapscripts AncientTomb_MapScripts {
 }
 
 script AncientTomb_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(AncientTomb_EventScript_TryRemoveRegisteel)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(AncientTomb_EventScript_TryRemoveRegisteel)
+    }
     end
 }
 
 script AncientTomb_EventScript_TryRemoveRegisteel {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
+        goto(Common_EventScript_NopReturn)
+    }
     removeobject(VAR_LAST_TALKED)
     return
 }
 
 script AncientTomb_OnTransition {
     setflag(FLAG_LANDMARK_ANCIENT_TOMB)
-    if (!flag(FLAG_DEFEATED_REGISTEEL)) call(AncientTomb_EventScript_ShowRegisteel)
+    if (!flag(FLAG_DEFEATED_REGISTEEL)) {
+        call(AncientTomb_EventScript_ShowRegisteel)
+    }
     end
 }
 
@@ -28,7 +34,9 @@ script AncientTomb_EventScript_ShowRegisteel {
 }
 
 script AncientTomb_OnLoad {
-    if (!flag(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED)) call(AncientTomb_EventScript_HideRegiEntrance)
+    if (!flag(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED)) {
+        call(AncientTomb_EventScript_HideRegiEntrance)
+    }
     end
 }
 
@@ -44,7 +52,9 @@ script AncientTomb_EventScript_HideRegiEntrance {
 
 script AncientTomb_EventScript_CaveEntranceMiddle {
     lockall
-    if (flag(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED)) goto(AncientTomb_EventScript_BigHoleInWall)
+    if (flag(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED)) {
+        goto(AncientTomb_EventScript_BigHoleInWall)
+    }
     braillemsgbox(AncientTomb_Braille_ShineInTheMiddle)
     releaseall
     end
@@ -76,9 +86,15 @@ script AncientTomb_EventScript_Registeel {
     waitstate
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(AncientTomb_EventScript_DefeatedRegisteel)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(AncientTomb_EventScript_RanFromRegisteel)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(AncientTomb_EventScript_RanFromRegisteel)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(AncientTomb_EventScript_DefeatedRegisteel)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(AncientTomb_EventScript_RanFromRegisteel)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(AncientTomb_EventScript_RanFromRegisteel)
+    }
     setflag(FLAG_DEFEATED_REGISTEEL)
     release
     end

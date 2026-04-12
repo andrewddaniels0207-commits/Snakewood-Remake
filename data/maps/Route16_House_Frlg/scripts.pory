@@ -3,10 +3,14 @@ mapscripts Route16_House_Frlg_MapScripts {}
 script Route16_House_EventScript_Woman {
     lock
     faceplayer
-    if (flag(FLAG_GOT_HM02)) goto(Route16_House_EventScript_AlreadyGotHM02)
+    if (flag(FLAG_GOT_HM02)) {
+        goto(Route16_House_EventScript_AlreadyGotHM02)
+    }
     msgbox(Route16_House_Text_FoundMySecretRetreat)
     checkitemspace(ITEM_HM02)
-    if (var(VAR_RESULT) == FALSE) goto(Route16_House_EventScript_NoRoomForHM02)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route16_House_EventScript_NoRoomForHM02)
+    }
     giveitem_msg(Route16_House_Text_ReceivedHM02FromGirl, ITEM_HM02)
     msgbox(Route16_House_Text_ExplainHM02)
     setflag(FLAG_GOT_HM02)

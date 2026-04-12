@@ -3,7 +3,9 @@ mapscripts PewterCity_Gym_Frlg_MapScripts {}
 script PewterCity_Gym_EventScript_Brock {
     famechecker(FAMECHECKER_BROCK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
     trainerbattle_single(TRAINER_LEADER_BROCK, PewterCity_Gym_Text_BrockIntro, PewterCity_Gym_Text_BrockDefeat, PewterCity_Gym_EventScript_DefeatedBrock, NO_MUSIC)
-    if (!flag(FLAG_GOT_TM39_FROM_BROCK)) goto(PewterCity_Gym_EventScript_GiveTM39)
+    if (!flag(FLAG_GOT_TM39_FROM_BROCK)) {
+        goto(PewterCity_Gym_EventScript_GiveTM39)
+    }
     msgbox(PewterCity_Gym_Text_BrockPostBattle)
     release
     end
@@ -24,7 +26,9 @@ script PewterCity_Gym_EventScript_DefeatedBrock {
 script PewterCity_Gym_EventScript_GiveTM39 {
     msgbox(PewterCity_Gym_Text_TakeThisWithYou)
     checkitemspace(ITEM_TM39)
-    if (var(VAR_RESULT) == FALSE) goto(PewterCity_Gym_EventScript_NoRoomForTM39)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(PewterCity_Gym_EventScript_NoRoomForTM39)
+    }
     giveitem_msg(PewterCity_Gym_Text_ReceivedTM39FromBrock, ITEM_TM39)
     setflag(FLAG_GOT_TM39_FROM_BROCK)
     msgbox(PewterCity_Gym_Text_ExplainTM39)
@@ -47,10 +51,16 @@ script PewterCity_Gym_EventScript_Liam {
 script PewterCity_Gym_EventScript_GymGuy {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_BROCK)) goto(PewterCity_Gym_EventScript_GymGuyPostVictory)
+    if (flag(FLAG_DEFEATED_BROCK)) {
+        goto(PewterCity_Gym_EventScript_GymGuyPostVictory)
+    }
     msgbox(PewterCity_Gym_Text_LetMeTakeYouToTheTop, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PewterCity_Gym_EventScript_GymGuyTakeMeToTop)
-    if (var(VAR_RESULT) == NO) goto(PewterCity_Gym_EventScript_GymGuyDontTakeMeToTop)
+    if (var(VAR_RESULT) == YES) {
+        goto(PewterCity_Gym_EventScript_GymGuyTakeMeToTop)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PewterCity_Gym_EventScript_GymGuyDontTakeMeToTop)
+    }
     end
 }
 
@@ -80,7 +90,9 @@ script PewterCity_Gym_EventScript_GymGuyAdvice {
 
 script PewterCity_Gym_EventScript_GymStatue {
     lockall
-    if (flag(FLAG_BADGE01_GET)) goto(PewterCity_Gym_EventScript_GymStatuePostVictory)
+    if (flag(FLAG_BADGE01_GET)) {
+        goto(PewterCity_Gym_EventScript_GymStatuePostVictory)
+    }
     msgbox(PewterCity_Gym_Text_GymStatue)
     releaseall
     end

@@ -8,16 +8,26 @@ mapscripts FarawayIsland_Interior_MapScripts {
 }
 
 script FarawayIsland_Interior_OnReturnToField {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(FarawayIsland_Interior_EventScript_TrySetMewAboveGrass)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(FarawayIsland_Interior_EventScript_TrySetMewAboveGrass)
+    }
     end
 }
 
 script FarawayIsland_Interior_EventScript_TrySetMewAboveGrass {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(FarawayIsland_Interior_EventScript_SetMewAboveGrass)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(FarawayIsland_Interior_EventScript_SetMewAboveGrass)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(FarawayIsland_Interior_EventScript_SetMewAboveGrass)
-    if (var(VAR_RESULT) == B_OUTCOME_MON_TELEPORTED) goto(FarawayIsland_Interior_EventScript_SetMewAboveGrass)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(FarawayIsland_Interior_EventScript_SetMewAboveGrass)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(FarawayIsland_Interior_EventScript_SetMewAboveGrass)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(FarawayIsland_Interior_EventScript_SetMewAboveGrass)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_MON_TELEPORTED) {
+        goto(FarawayIsland_Interior_EventScript_SetMewAboveGrass)
+    }
     return
 }
 
@@ -28,13 +38,17 @@ script FarawayIsland_Interior_EventScript_SetMewAboveGrass {
 }
 
 script FarawayIsland_Interior_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(FarawayIsland_Interior_EventScript_TryRemoveMew)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(FarawayIsland_Interior_EventScript_TryRemoveMew)
+    }
     end
 }
 
 script FarawayIsland_Interior_EventScript_TryRemoveMew {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
+        goto(Common_EventScript_NopReturn)
+    }
     removeobject(VAR_LAST_TALKED)
     return
 }
@@ -42,12 +56,16 @@ script FarawayIsland_Interior_EventScript_TryRemoveMew {
 script FarawayIsland_Interior_OnTransition {
     setvar(VAR_FARAWAY_ISLAND_STEP_COUNTER, 0)
     setvar(VAR_TEMP_1, 1)
-    if (!flag(FLAG_CAUGHT_MEW)) call(FarawayIsland_Interior_EventScript_TryShowMew)
+    if (!flag(FLAG_CAUGHT_MEW)) {
+        call(FarawayIsland_Interior_EventScript_TryShowMew)
+    }
     end
 }
 
 script FarawayIsland_Interior_EventScript_TryShowMew {
-    if (flag(FLAG_DEFEATED_MEW)) goto(Common_EventScript_NopReturn)
+    if (flag(FLAG_DEFEATED_MEW)) {
+        goto(Common_EventScript_NopReturn)
+    }
     clearflag(FLAG_HIDE_MEW)
     setvar(VAR_TEMP_1, 0)
     return
@@ -132,10 +150,18 @@ script FarawayIsland_Interior_EventScript_Mew {
     message(FarawayIsland_Interior_Text_Mew)
     waitse()
     playmoncry(SPECIES_MEW, CRY_MODE_ENCOUNTER)
-    if (var(VAR_FACING) == DIR_NORTH) call(FarawayIsland_Interior_EventScript_FoundMewNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(FarawayIsland_Interior_EventScript_FoundMewSouth)
-    if (var(VAR_FACING) == DIR_WEST) call(FarawayIsland_Interior_EventScript_FoundMewWest)
-    if (var(VAR_FACING) == DIR_EAST) call(FarawayIsland_Interior_EventScript_FoundMewEast)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(FarawayIsland_Interior_EventScript_FoundMewNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(FarawayIsland_Interior_EventScript_FoundMewSouth)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(FarawayIsland_Interior_EventScript_FoundMewWest)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(FarawayIsland_Interior_EventScript_FoundMewEast)
+    }
     special(DestroyMewEmergingGrassSprite)
     delay(40)
     waitmoncry()
@@ -145,10 +171,18 @@ script FarawayIsland_Interior_EventScript_Mew {
     waitstate
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(FarawayIsland_Interior_EventScript_MewDefeated)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(FarawayIsland_Interior_EventScript_PlayerOrMewRan)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(FarawayIsland_Interior_EventScript_PlayerOrMewRan)
-    if (var(VAR_RESULT) == B_OUTCOME_MON_TELEPORTED) goto(FarawayIsland_Interior_EventScript_PlayerOrMewRan)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(FarawayIsland_Interior_EventScript_MewDefeated)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(FarawayIsland_Interior_EventScript_PlayerOrMewRan)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(FarawayIsland_Interior_EventScript_PlayerOrMewRan)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_MON_TELEPORTED) {
+        goto(FarawayIsland_Interior_EventScript_PlayerOrMewRan)
+    }
     setflag(FLAG_CAUGHT_MEW)
     release
     end

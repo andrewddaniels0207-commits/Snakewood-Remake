@@ -91,7 +91,9 @@ script PetalburgWoods_EventScript_DevonResearcherPostBattle {
     waitmovement(0)
     msgbox(PetalburgWoods_Text_ThatWasAwfullyClose, MSGBOX_DEFAULT)
     giveitem(ITEM_GREAT_BALL)
-    if (var(VAR_RESULT) == FALSE) goto(PetalburgWoods_EventScript_BagFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(PetalburgWoods_EventScript_BagFull)
+    }
     goto(PetalburgWoods_EventScript_DevonResearcherFinish)
     end
 }
@@ -271,10 +273,14 @@ script PetalburgWoods_EventScript_Boy2 {
 script PetalburgWoods_EventScript_Girl {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_MIRACLE_SEED)) goto(PetalburgWoods_EventScript_ExplainMiracleSeed)
+    if (flag(FLAG_RECEIVED_MIRACLE_SEED)) {
+        goto(PetalburgWoods_EventScript_ExplainMiracleSeed)
+    }
     msgbox(PetalburgWoods_Text_TryUsingThisItem, MSGBOX_DEFAULT)
     giveitem(ITEM_MIRACLE_SEED)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_MIRACLE_SEED)
     release
     end
@@ -305,10 +311,14 @@ script PetalburgWoods_EventScript_Lyle {
 script PetalburgWoods_EventScript_James {
     trainerbattle_single(TRAINER_JAMES_1, PetalburgWoods_Text_InstantlyPopularWithBugPokemon, PetalburgWoods_Text_CantBePopularIfILose, PetalburgWoods_EventScript_TryRegisterJames)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(PetalburgWoods_EventScript_JamesRematch)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(PetalburgWoods_EventScript_JamesRematch)
+    }
     setvar(VAR_0x8004, TRAINER_JAMES_1)
     specialvar(VAR_RESULT, IsTrainerRegistered)
-    if (var(VAR_RESULT) == FALSE) goto(PetalburgWoods_EventScript_TryRegisterJames2)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(PetalburgWoods_EventScript_TryRegisterJames2)
+    }
     msgbox(PetalburgWoods_Text_PeopleRespectYou, MSGBOX_DEFAULT)
     release
     end
@@ -317,7 +327,9 @@ script PetalburgWoods_EventScript_James {
 script PetalburgWoods_EventScript_TryRegisterJames {
     special(PlayerFaceTrainerAfterBattle)
     waitmovement(0)
-    if (flag(FLAG_HAS_MATCH_CALL)) goto(PetalburgWoods_EventScript_RegisterJames)
+    if (flag(FLAG_HAS_MATCH_CALL)) {
+        goto(PetalburgWoods_EventScript_RegisterJames)
+    }
     release
     end
 }
@@ -330,7 +342,9 @@ script PetalburgWoods_EventScript_RegisterJames {
 }
 
 script PetalburgWoods_EventScript_TryRegisterJames2 {
-    if (flag(FLAG_HAS_MATCH_CALL)) goto(PetalburgWoods_EventScript_RegisterJames2)
+    if (flag(FLAG_HAS_MATCH_CALL)) {
+        goto(PetalburgWoods_EventScript_RegisterJames2)
+    }
     msgbox(PetalburgWoods_Text_PeopleRespectYou, MSGBOX_DEFAULT)
     release
     end

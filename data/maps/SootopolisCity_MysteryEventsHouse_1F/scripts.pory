@@ -9,8 +9,12 @@ mapscripts SootopolisCity_MysteryEventsHouse_1F_MapScripts {
 
 script SootopolisCity_MysteryEventsHouse_1F_OnTransition {
     frontier_checkvisittrainer()
-    if (var(VAR_RESULT) == 0) call(SootopolisCity_MysteryEventsHouse_1F_EventScript_SetTrainerVisitingLayout)
-    if (var(VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE) != 0) call(SootopolisCity_MysteryEventsHouse_1F_EventScript_MoveOldManToDoor)
+    if (var(VAR_RESULT) == 0) {
+        call(SootopolisCity_MysteryEventsHouse_1F_EventScript_SetTrainerVisitingLayout)
+    }
+    if (var(VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE) != 0) {
+        call(SootopolisCity_MysteryEventsHouse_1F_EventScript_MoveOldManToDoor)
+    }
     end
 }
 
@@ -37,9 +41,15 @@ script SootopolisCity_MysteryEventsHouse_1F_EventScript_OldManCommentOnBattle {
     copyobjectxytoperm(LOCALID_MYSTERY_EVENTS_OLD_MAN)
     applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
     waitmovement(0)
-    if (var(VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE) == 1) call(SootopolisCity_MysteryEventsHouse_1F_EventScript_BattleWonComment)
-    if (var(VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE) == 2) call(SootopolisCity_MysteryEventsHouse_1F_EventScript_BattleLostComment)
-    if (var(VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE) == 3) call(SootopolisCity_MysteryEventsHouse_1F_EventScript_BattleTiedComment)
+    if (var(VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE) == 1) {
+        call(SootopolisCity_MysteryEventsHouse_1F_EventScript_BattleWonComment)
+    }
+    if (var(VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE) == 2) {
+        call(SootopolisCity_MysteryEventsHouse_1F_EventScript_BattleLostComment)
+    }
+    if (var(VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE) == 3) {
+        call(SootopolisCity_MysteryEventsHouse_1F_EventScript_BattleTiedComment)
+    }
     special(LoadPlayerParty)
     setvar(VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 0)
     releaseall
@@ -76,8 +86,12 @@ script SootopolisCity_MysteryEventsHouse_1F_EventScript_OldMan {
     lock
     faceplayer
     frontier_checkvisittrainer()
-    if (var(VAR_RESULT) == 1) goto(SootopolisCity_MysteryEventsHouse_1F_EventScript_InvalidVisitingTrainer)
-    if (var(VAR_TEMP_1) == 1) goto(SootopolisCity_MysteryEventsHouse_1F_EventScript_TrainerVisiting)
+    if (var(VAR_RESULT) == 1) {
+        goto(SootopolisCity_MysteryEventsHouse_1F_EventScript_InvalidVisitingTrainer)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        goto(SootopolisCity_MysteryEventsHouse_1F_EventScript_TrainerVisiting)
+    }
     msgbox(SootopolisCity_MysteryEventsHouse_1F_Text_OnlyAmusementWatchingBattles, MSGBOX_DEFAULT)
     release
     end
@@ -93,21 +107,35 @@ script SootopolisCity_MysteryEventsHouse_1F_EventScript_TrainerVisiting {
     special(SavePlayerParty)
     special(BufferEReaderTrainerName)
     msgbox(SootopolisCity_MysteryEventsHouse_1F_Text_ChallengeVisitingTrainer, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(SootopolisCity_MysteryEventsHouse_1F_EventScript_DeclineBattle)
+    if (var(VAR_RESULT) == NO) {
+        goto(SootopolisCity_MysteryEventsHouse_1F_EventScript_DeclineBattle)
+    }
     call(SootopolisCity_MysteryEventsHouse_1F_EventScript_ChooseParty)
-    if (var(VAR_RESULT) == 0) goto(SootopolisCity_MysteryEventsHouse_1F_EventScript_DeclineBattle)
+    if (var(VAR_RESULT) == 0) {
+        goto(SootopolisCity_MysteryEventsHouse_1F_EventScript_DeclineBattle)
+    }
     msgbox(SootopolisCity_MysteryEventsHouse_1F_Text_SaveProgressBeforeBattle, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(SootopolisCity_MysteryEventsHouse_1F_EventScript_DeclineBattle)
+    if (var(VAR_RESULT) == NO) {
+        goto(SootopolisCity_MysteryEventsHouse_1F_EventScript_DeclineBattle)
+    }
     special(LoadPlayerParty)
     call(Common_EventScript_SaveGame)
-    if (var(VAR_RESULT) == FALSE) goto(SootopolisCity_MysteryEventsHouse_1F_EventScript_DeclineBattle)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SootopolisCity_MysteryEventsHouse_1F_EventScript_DeclineBattle)
+    }
     special(SavePlayerParty)
     special(ReducePlayerPartyToSelectedMons)
     msgbox(SootopolisCity_MysteryEventsHouse_1F_Text_HopeToSeeGoodMatch, MSGBOX_DEFAULT)
     closemessage
-    if (var(VAR_FACING) == DIR_NORTH) call(SootopolisCity_MysteryEventsHouse_1F_EventScript_EnterBasementNorth)
-    if (var(VAR_FACING) == DIR_EAST) call(SootopolisCity_MysteryEventsHouse_1F_EventScript_EnterBasementEast)
-    if (var(VAR_FACING) == DIR_WEST) call(SootopolisCity_MysteryEventsHouse_1F_EventScript_EnterBasementWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(SootopolisCity_MysteryEventsHouse_1F_EventScript_EnterBasementNorth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(SootopolisCity_MysteryEventsHouse_1F_EventScript_EnterBasementEast)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(SootopolisCity_MysteryEventsHouse_1F_EventScript_EnterBasementWest)
+    }
     warp(MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_B1F, 3, 1)
     waitstate
     release

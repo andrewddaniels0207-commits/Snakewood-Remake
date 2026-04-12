@@ -11,20 +11,26 @@ script Route123_BerryMastersHouse_EventScript_BerryMaster {
     lock
     faceplayer
     dotimebasedevents()
-    if (flag(FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY)) goto(Route123_BerryMastersHouse_EventScript_ReceivedBerryToday)
+    if (flag(FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY)) {
+        goto(Route123_BerryMastersHouse_EventScript_ReceivedBerryToday)
+    }
     msgbox(Route123_BerryMastersHouse_Text_YoureDeservingOfBerry, MSGBOX_DEFAULT)
     random(NUM_BERRY_MASTER_BERRIES)
     addvar(VAR_RESULT, NUM_BERRY_MASTER_BERRIES_SKIPPED)
     addvar(VAR_RESULT, FIRST_BERRY_INDEX)
     giveitem(VAR_RESULT)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY)
     msgbox(Route123_BerryMastersHouse_Text_WhyBeStingyTakeAnother, MSGBOX_DEFAULT)
     random(NUM_BERRY_MASTER_BERRIES)
     addvar(VAR_RESULT, NUM_BERRY_MASTER_BERRIES_SKIPPED)
     addvar(VAR_RESULT, FIRST_BERRY_INDEX)
     giveitem(VAR_RESULT)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     msgbox(Route123_BerryMastersHouse_Text_VisitPrettyPetalFlowerShop, MSGBOX_DEFAULT)
     release
     end
@@ -40,14 +46,20 @@ script Route123_BerryMastersHouse_EventScript_BerryMastersWife {
     lock
     faceplayer
     dotimebasedevents()
-    if (flag(FLAG_DAILY_BERRY_MASTERS_WIFE)) goto(Route123_BerryMastersHouse_EventScript_ReceivedWifeBerryToday)
+    if (flag(FLAG_DAILY_BERRY_MASTERS_WIFE)) {
+        goto(Route123_BerryMastersHouse_EventScript_ReceivedWifeBerryToday)
+    }
     msgbox(Route123_BerryMastersHouse_Text_HeardAGoodSayingLately, MSGBOX_DEFAULT)
     setvar(VAR_0x8004, EASY_CHAT_TYPE_GOOD_SAYING)
     call(Common_ShowEasyChatScreen)
     lock
     faceplayer
-    if (var(VAR_RESULT) == TRUE) goto(Route123_BerryMastersHouse_EventScript_GavePhrase)
-    if (var(VAR_RESULT) == FALSE) goto(Route123_BerryMastersHouse_EventScript_CancelPhrase)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route123_BerryMastersHouse_EventScript_GavePhrase)
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route123_BerryMastersHouse_EventScript_CancelPhrase)
+    }
     end
 }
 
@@ -59,12 +71,24 @@ script Route123_BerryMastersHouse_EventScript_CancelPhrase {
 }
 
 script Route123_BerryMastersHouse_EventScript_GavePhrase {
-    if (var(VAR_0x8004) == NOT_SPECIAL_PHRASE) goto(Route123_BerryMastersHouse_EventScript_GiveNormalBerry)
-    if (var(VAR_0x8004) == PHRASE_GREAT_BATTLE) goto(Route123_BerryMastersHouse_EventScript_GiveSpelonBerry)
-    if (var(VAR_0x8004) == PHRASE_CHALLENGE_CONTEST) goto(Route123_BerryMastersHouse_EventScript_GivePamtreBerry)
-    if (var(VAR_0x8004) == PHRASE_OVERWHELMING_LATIAS) goto(Route123_BerryMastersHouse_EventScript_GiveWatmelBerry)
-    if (var(VAR_0x8004) == PHRASE_COOL_LATIOS) goto(Route123_BerryMastersHouse_EventScript_GiveDurinBerry)
-    if (var(VAR_0x8004) == PHRASE_SUPER_HUSTLE) goto(Route123_BerryMastersHouse_EventScript_GiveBelueBerry)
+    if (var(VAR_0x8004) == NOT_SPECIAL_PHRASE) {
+        goto(Route123_BerryMastersHouse_EventScript_GiveNormalBerry)
+    }
+    if (var(VAR_0x8004) == PHRASE_GREAT_BATTLE) {
+        goto(Route123_BerryMastersHouse_EventScript_GiveSpelonBerry)
+    }
+    if (var(VAR_0x8004) == PHRASE_CHALLENGE_CONTEST) {
+        goto(Route123_BerryMastersHouse_EventScript_GivePamtreBerry)
+    }
+    if (var(VAR_0x8004) == PHRASE_OVERWHELMING_LATIAS) {
+        goto(Route123_BerryMastersHouse_EventScript_GiveWatmelBerry)
+    }
+    if (var(VAR_0x8004) == PHRASE_COOL_LATIOS) {
+        goto(Route123_BerryMastersHouse_EventScript_GiveDurinBerry)
+    }
+    if (var(VAR_0x8004) == PHRASE_SUPER_HUSTLE) {
+        goto(Route123_BerryMastersHouse_EventScript_GiveBelueBerry)
+    }
     end
 }
 
@@ -73,57 +97,79 @@ script Route123_BerryMastersHouse_EventScript_GiveNormalBerry {
     random(NUM_BERRY_MASTER_WIFE_BERRIES)
     addvar(VAR_RESULT, FIRST_BERRY_INDEX)
     giveitem(VAR_RESULT)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     goto(Route123_BerryMastersHouse_EventScript_GaveBerry)
     release
     end
 }
 
 script Route123_BerryMastersHouse_EventScript_GiveSpelonBerry {
-    if (flag(FLAG_RECEIVED_SPELON_BERRY)) goto(Route123_BerryMastersHouse_EventScript_GiveNormalBerry)
+    if (flag(FLAG_RECEIVED_SPELON_BERRY)) {
+        goto(Route123_BerryMastersHouse_EventScript_GiveNormalBerry)
+    }
     msgbox(Route123_BerryMastersHouse_Text_InspirationalTakeThis, MSGBOX_DEFAULT)
     giveitem(ITEM_SPELON_BERRY)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_SPELON_BERRY)
     goto(Route123_BerryMastersHouse_EventScript_GaveBerry)
     end
 }
 
 script Route123_BerryMastersHouse_EventScript_GivePamtreBerry {
-    if (flag(FLAG_RECEIVED_PAMTRE_BERRY)) goto(Route123_BerryMastersHouse_EventScript_GiveNormalBerry)
+    if (flag(FLAG_RECEIVED_PAMTRE_BERRY)) {
+        goto(Route123_BerryMastersHouse_EventScript_GiveNormalBerry)
+    }
     msgbox(Route123_BerryMastersHouse_Text_InspirationalTakeThis, MSGBOX_DEFAULT)
     giveitem(ITEM_PAMTRE_BERRY)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_PAMTRE_BERRY)
     goto(Route123_BerryMastersHouse_EventScript_GaveBerry)
     end
 }
 
 script Route123_BerryMastersHouse_EventScript_GiveWatmelBerry {
-    if (flag(FLAG_RECEIVED_WATMEL_BERRY)) goto(Route123_BerryMastersHouse_EventScript_GiveNormalBerry)
+    if (flag(FLAG_RECEIVED_WATMEL_BERRY)) {
+        goto(Route123_BerryMastersHouse_EventScript_GiveNormalBerry)
+    }
     msgbox(Route123_BerryMastersHouse_Text_InspirationalTakeThis, MSGBOX_DEFAULT)
     giveitem(ITEM_WATMEL_BERRY)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_WATMEL_BERRY)
     goto(Route123_BerryMastersHouse_EventScript_GaveBerry)
     end
 }
 
 script Route123_BerryMastersHouse_EventScript_GiveDurinBerry {
-    if (flag(FLAG_RECEIVED_DURIN_BERRY)) goto(Route123_BerryMastersHouse_EventScript_GiveNormalBerry)
+    if (flag(FLAG_RECEIVED_DURIN_BERRY)) {
+        goto(Route123_BerryMastersHouse_EventScript_GiveNormalBerry)
+    }
     msgbox(Route123_BerryMastersHouse_Text_InspirationalTakeThis, MSGBOX_DEFAULT)
     giveitem(ITEM_DURIN_BERRY)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_DURIN_BERRY)
     goto(Route123_BerryMastersHouse_EventScript_GaveBerry)
     end
 }
 
 script Route123_BerryMastersHouse_EventScript_GiveBelueBerry {
-    if (flag(FLAG_RECEIVED_BELUE_BERRY)) goto(Route123_BerryMastersHouse_EventScript_GiveNormalBerry)
+    if (flag(FLAG_RECEIVED_BELUE_BERRY)) {
+        goto(Route123_BerryMastersHouse_EventScript_GiveNormalBerry)
+    }
     msgbox(Route123_BerryMastersHouse_Text_InspirationalTakeThis, MSGBOX_DEFAULT)
     giveitem(ITEM_BELUE_BERRY)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_BELUE_BERRY)
     goto(Route123_BerryMastersHouse_EventScript_GaveBerry)
     end

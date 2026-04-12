@@ -8,12 +8,24 @@ mapscripts Route110_TrickHouseEntrance_MapScripts {
 
 script Route110_TrickHouseEntrance_OnTransition {
     setflag(FLAG_LANDMARK_TRICK_HOUSE)
-    if (var(VAR_TRICK_HOUSE_ENTER_FROM_CORRIDOR) == 1) goto(Route110_TrickHouseEntrance_EventScript_EnterFromCorridor)
-    if (var(VAR_TRICK_HOUSE_PRIZE_PICKUP) == 1) goto(Route110_TrickHouseEntrance_EventScript_SetReadyToGiveReward)
-    if (var(VAR_TRICK_HOUSE_FOUND_TRICK_MASTER) == 1) goto(Route110_TrickHouseEntrance_EventScript_MoveTrickMasterToDoor)
-    if (var(VAR_TRICK_HOUSE_ENTRANCE_STATE) == 5) call(Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle)
-    if (var(VAR_TRICK_HOUSE_ENTRANCE_STATE) == 3) call(Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle)
-    if (var(VAR_TRICK_HOUSE_ENTRANCE_STATE) == 0) call(Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle)
+    if (var(VAR_TRICK_HOUSE_ENTER_FROM_CORRIDOR) == 1) {
+        goto(Route110_TrickHouseEntrance_EventScript_EnterFromCorridor)
+    }
+    if (var(VAR_TRICK_HOUSE_PRIZE_PICKUP) == 1) {
+        goto(Route110_TrickHouseEntrance_EventScript_SetReadyToGiveReward)
+    }
+    if (var(VAR_TRICK_HOUSE_FOUND_TRICK_MASTER) == 1) {
+        goto(Route110_TrickHouseEntrance_EventScript_MoveTrickMasterToDoor)
+    }
+    if (var(VAR_TRICK_HOUSE_ENTRANCE_STATE) == 5) {
+        call(Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle)
+    }
+    if (var(VAR_TRICK_HOUSE_ENTRANCE_STATE) == 3) {
+        call(Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle)
+    }
+    if (var(VAR_TRICK_HOUSE_ENTRANCE_STATE) == 0) {
+        call(Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle)
+    }
     switch(VAR_TRICK_HOUSE_ENTRANCE_STATE)
     case(0, Route110_TrickHouseEntrance_EventScript_ReadyBeingWatchedTrigger)
     case(1, Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched1)
@@ -24,7 +36,9 @@ script Route110_TrickHouseEntrance_OnTransition {
 
 script Route110_TrickHouseEntrance_EventScript_SetReadyToGiveReward {
     setvar(VAR_TRICK_HOUSE_BEING_WATCHED_STATE, 1)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 8) goto(Route110_TrickHouseEntrance_EventScript_ReadyToGiveTentReward)
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 8) {
+        goto(Route110_TrickHouseEntrance_EventScript_ReadyToGiveTentReward)
+    }
     setvar(VAR_TRICK_HOUSE_ENTRANCE_STATE, 2)
     end
 }
@@ -43,49 +57,79 @@ script Route110_TrickHouseEntrance_EventScript_EnterFromCorridor {
 
 script Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle {
     setvar(VAR_TRICK_HOUSE_ENTRANCE_STATE, 0)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 1) call(Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle2)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 2) call(Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle3)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 3) call(Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle4)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 4) call(Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle5)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 5) call(Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle6)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 6) call(Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle7)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 7) call(Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle8)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 8) call(Route110_TrickHouseEntrance_EventScript_FinishedPuzzles)
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 1) {
+        call(Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle2)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 2) {
+        call(Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle3)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 3) {
+        call(Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle4)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 4) {
+        call(Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle5)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 5) {
+        call(Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle6)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 6) {
+        call(Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle7)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 7) {
+        call(Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle8)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 8) {
+        call(Route110_TrickHouseEntrance_EventScript_FinishedPuzzles)
+    }
     return
 }
 
 script Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle2 {
-    if (!flag(FLAG_BADGE03_GET)) call(Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle)
+    if (!flag(FLAG_BADGE03_GET)) {
+        call(Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle)
+    }
     return
 }
 
 script Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle3 {
-    if (!flag(FLAG_BADGE04_GET)) call(Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle)
+    if (!flag(FLAG_BADGE04_GET)) {
+        call(Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle)
+    }
     return
 }
 
 script Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle4 {
-    if (!flag(FLAG_BADGE05_GET)) call(Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle)
+    if (!flag(FLAG_BADGE05_GET)) {
+        call(Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle)
+    }
     return
 }
 
 script Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle5 {
-    if (!flag(FLAG_BADGE06_GET)) call(Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle)
+    if (!flag(FLAG_BADGE06_GET)) {
+        call(Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle)
+    }
     return
 }
 
 script Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle6 {
-    if (!flag(FLAG_BADGE07_GET)) call(Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle)
+    if (!flag(FLAG_BADGE07_GET)) {
+        call(Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle)
+    }
     return
 }
 
 script Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle7 {
-    if (!flag(FLAG_BADGE08_GET)) call(Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle)
+    if (!flag(FLAG_BADGE08_GET)) {
+        call(Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle)
+    }
     return
 }
 
 script Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle8 {
-    if (!flag(FLAG_SYS_GAME_CLEAR)) call(Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle)
+    if (!flag(FLAG_SYS_GAME_CLEAR)) {
+        call(Route110_TrickHouseEntrance_EventScript_NotReadyForPuzzle)
+    }
     return
 }
 
@@ -223,7 +267,9 @@ script Route110_TrickHouseEntrance_EventScript_SetTrickMasterInFrontOfDoor {
 script Route110_TrickHouseEntrance_EventScript_BeginChallenge {
     lockall
     delay(20)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 0) call(Route110_TrickHouseEntrance_EventScript_MeetTrickMaster)
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 0) {
+        call(Route110_TrickHouseEntrance_EventScript_MeetTrickMaster)
+    }
     msgbox(Route110_TrickHouseEntrance_Text_ComeToChallengeTrickHouse, MSGBOX_DEFAULT)
     closemessage
     delay(20)
@@ -260,14 +306,30 @@ script Route110_TrickHouseEntrance_EventScript_FoundTrickMaster {
     waitmovement(0)
     applymovement(LOCALID_PLAYER, Common_Movement_Delay48)
     waitmovement(0)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 0) call(Route110_TrickHouseEntrance_EventScript_FoundBeneathDesk)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 1) call(Route110_TrickHouseEntrance_EventScript_FoundBehindTree)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 2) call(Route110_TrickHouseEntrance_EventScript_FoundInDresser)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 3) call(Route110_TrickHouseEntrance_EventScript_FoundBeyondWindow)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 4) call(Route110_TrickHouseEntrance_EventScript_FoundInPlanter)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 5) call(Route110_TrickHouseEntrance_EventScript_FoundInCupboard)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 6) call(Route110_TrickHouseEntrance_EventScript_FoundBehindWindow)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 7) call(Route110_TrickHouseEntrance_EventScript_FoundBeneathCushion)
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 0) {
+        call(Route110_TrickHouseEntrance_EventScript_FoundBeneathDesk)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 1) {
+        call(Route110_TrickHouseEntrance_EventScript_FoundBehindTree)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 2) {
+        call(Route110_TrickHouseEntrance_EventScript_FoundInDresser)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 3) {
+        call(Route110_TrickHouseEntrance_EventScript_FoundBeyondWindow)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 4) {
+        call(Route110_TrickHouseEntrance_EventScript_FoundInPlanter)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 5) {
+        call(Route110_TrickHouseEntrance_EventScript_FoundInCupboard)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 6) {
+        call(Route110_TrickHouseEntrance_EventScript_FoundBehindWindow)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 7) {
+        call(Route110_TrickHouseEntrance_EventScript_FoundBeneathCushion)
+    }
     closemessage
     setvar(VAR_TRICK_HOUSE_FOUND_TRICK_MASTER, 1)
     warpsilent(MAP_ROUTE110_TRICK_HOUSE_ENTRANCE, 6, 2)
@@ -366,20 +428,38 @@ script Route110_TrickHouseEntrance_EventScript_GiveReward {
     applymovement(LOCALID_TRICK_MASTER, Common_Movement_FacePlayer)
     waitmovement(0)
     msgbox(Route110_TrickHouseEntrance_Text_YoureHereToAcceptReward, MSGBOX_DEFAULT)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 1) goto(Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 2) goto(Route110_TrickHouseEntrance_EventScript_GivePuzzle2Reward)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 3) goto(Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 4) goto(Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 5) goto(Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 6) goto(Route110_TrickHouseEntrance_EventScript_GivePuzzle6Reward)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 7) goto(Route110_TrickHouseEntrance_EventScript_GivePuzzle7Reward)
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 1) {
+        goto(Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 2) {
+        goto(Route110_TrickHouseEntrance_EventScript_GivePuzzle2Reward)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 3) {
+        goto(Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 4) {
+        goto(Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 5) {
+        goto(Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 6) {
+        goto(Route110_TrickHouseEntrance_EventScript_GivePuzzle6Reward)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 7) {
+        goto(Route110_TrickHouseEntrance_EventScript_GivePuzzle7Reward)
+    }
     end
 }
 
 script Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward {
     giveitem(ITEM_RARE_CANDY)
-    if (var(VAR_RESULT) == TRUE) goto(Route110_TrickHouseEntrance_EventScript_GotReward)
-    if (var(VAR_RESULT) == FALSE) call(Common_EventScript_BagIsFull)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route110_TrickHouseEntrance_EventScript_GotReward)
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_BagIsFull)
+    }
     msgbox(Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT)
     releaseall
     end
@@ -387,8 +467,12 @@ script Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward {
 
 script Route110_TrickHouseEntrance_EventScript_GivePuzzle2Reward {
     giveitem(ITEM_TIMER_BALL)
-    if (var(VAR_RESULT) == TRUE) goto(Route110_TrickHouseEntrance_EventScript_GotReward)
-    if (var(VAR_RESULT) == FALSE) call(Common_EventScript_BagIsFull)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route110_TrickHouseEntrance_EventScript_GotReward)
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_BagIsFull)
+    }
     msgbox(Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT)
     releaseall
     end
@@ -396,8 +480,12 @@ script Route110_TrickHouseEntrance_EventScript_GivePuzzle2Reward {
 
 script Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward {
     giveitem(ITEM_HARD_STONE)
-    if (var(VAR_RESULT) == TRUE) goto(Route110_TrickHouseEntrance_EventScript_GotReward)
-    if (var(VAR_RESULT) == FALSE) call(Common_EventScript_BagIsFull)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route110_TrickHouseEntrance_EventScript_GotReward)
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_BagIsFull)
+    }
     msgbox(Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT)
     releaseall
     end
@@ -405,8 +493,12 @@ script Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward {
 
 script Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward {
     giveitem(ITEM_SMOKE_BALL)
-    if (var(VAR_RESULT) == TRUE) goto(Route110_TrickHouseEntrance_EventScript_GotReward)
-    if (var(VAR_RESULT) == FALSE) call(Common_EventScript_BagIsFull)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route110_TrickHouseEntrance_EventScript_GotReward)
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_BagIsFull)
+    }
     msgbox(Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT)
     releaseall
     end
@@ -414,8 +506,12 @@ script Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward {
 
 script Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward {
     giveitem(ITEM_TM_TAUNT)
-    if (var(VAR_RESULT) == TRUE) goto(Route110_TrickHouseEntrance_EventScript_GotReward)
-    if (var(VAR_RESULT) == FALSE) call(Common_EventScript_BagIsFull)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route110_TrickHouseEntrance_EventScript_GotReward)
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_BagIsFull)
+    }
     msgbox(Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT)
     releaseall
     end
@@ -423,8 +519,12 @@ script Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward {
 
 script Route110_TrickHouseEntrance_EventScript_GivePuzzle6Reward {
     giveitem(ITEM_MAGNET)
-    if (var(VAR_RESULT) == TRUE) goto(Route110_TrickHouseEntrance_EventScript_GotReward)
-    if (var(VAR_RESULT) == FALSE) call(Common_EventScript_BagIsFull)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route110_TrickHouseEntrance_EventScript_GotReward)
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_BagIsFull)
+    }
     msgbox(Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT)
     releaseall
     end
@@ -432,8 +532,12 @@ script Route110_TrickHouseEntrance_EventScript_GivePuzzle6Reward {
 
 script Route110_TrickHouseEntrance_EventScript_GivePuzzle7Reward {
     giveitem(ITEM_PP_MAX)
-    if (var(VAR_RESULT) == TRUE) goto(Route110_TrickHouseEntrance_EventScript_GotReward)
-    if (var(VAR_RESULT) == FALSE) call(Common_EventScript_BagIsFull)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route110_TrickHouseEntrance_EventScript_GotReward)
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_BagIsFull)
+    }
     msgbox(Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT)
     releaseall
     end
@@ -453,8 +557,12 @@ script Route110_TrickHouseEntrance_EventScript_MechadollReward {
     waitmovement(0)
     msgbox(Route110_TrickHouseEntrance_Text_MechadollWhichTent, MSGBOX_DEFAULT)
     call(Route110_TrickHouseEntrance_EventScript_ChooseTent)
-    if (var(VAR_RESULT) == TRUE) goto(Route110_TrickHouseEntrance_EventScript_ReceivedTent)
-    if (var(VAR_RESULT) == FALSE) call(Common_EventScript_NoRoomForDecor)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route110_TrickHouseEntrance_EventScript_ReceivedTent)
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_NoRoomForDecor)
+    }
     msgbox(Route110_TrickHouseEntrance_Text_PCFullAgain, MSGBOX_DEFAULT)
     releaseall
     end
@@ -513,7 +621,9 @@ script Route110_TrickHouseEntrance_EventScript_ItsAScroll {
 script Route110_TrickHouseEntrance_EventScript_GoInHolePrompt {
     msgbox(Route110_TrickHouseEntrance_Text_GoInHoleBehindScroll, MSGBOX_YESNO)
     closemessage
-    if (var(VAR_RESULT) == YES) goto(Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom)
+    if (var(VAR_RESULT) == YES) {
+        goto(Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom)
+    }
     releaseall
     end
 }
@@ -606,7 +716,9 @@ script Route110_TrickHouseEntrance_EventScript_LeftOnJourneyNote {
 }
 
 script Route110_TrickHouseEntrance_EventScript_CheckLevelForMessage {
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 8) goto(Route110_TrickHouseEntrance_EventScript_LeftOnJourneyNote2)
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 8) {
+        goto(Route110_TrickHouseEntrance_EventScript_LeftOnJourneyNote2)
+    }
     msgbox(Route110_TrickHouseEntrance_Text_ItsAScroll, MSGBOX_DEFAULT)
     releaseall
     end
@@ -633,7 +745,9 @@ script Route110_TrickHousePuzzle_EventScript_Door {
 }
 
 script Route110_TrickHousePuzzle1_EventScript_Door {
-    if (var(VAR_TRICK_HOUSE_PUZZLE_1_STATE) == 0) goto(Route110_TrickHousePuzzle_EventScript_DoorLocked)
+    if (var(VAR_TRICK_HOUSE_PUZZLE_1_STATE) == 0) {
+        goto(Route110_TrickHousePuzzle_EventScript_DoorLocked)
+    }
     msgbox(Route110_TrickHousePuzzle1_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT)
     playse(SE_PIN)
     setvar(VAR_TRICK_HOUSE_PUZZLE_1_STATE, 2)
@@ -644,7 +758,9 @@ script Route110_TrickHousePuzzle1_EventScript_Door {
 }
 
 script Route110_TrickHousePuzzle2_EventScript_Door {
-    if (var(VAR_TRICK_HOUSE_PUZZLE_2_STATE) == 0) goto(Route110_TrickHousePuzzle_EventScript_DoorLocked)
+    if (var(VAR_TRICK_HOUSE_PUZZLE_2_STATE) == 0) {
+        goto(Route110_TrickHousePuzzle_EventScript_DoorLocked)
+    }
     msgbox(Route110_TrickHousePuzzle2_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT)
     playse(SE_PIN)
     setvar(VAR_TRICK_HOUSE_PUZZLE_2_STATE, 2)
@@ -655,7 +771,9 @@ script Route110_TrickHousePuzzle2_EventScript_Door {
 }
 
 script Route110_TrickHousePuzzle3_EventScript_Door {
-    if (var(VAR_TRICK_HOUSE_PUZZLE_3_STATE) == 0) goto(Route110_TrickHousePuzzle_EventScript_DoorLocked)
+    if (var(VAR_TRICK_HOUSE_PUZZLE_3_STATE) == 0) {
+        goto(Route110_TrickHousePuzzle_EventScript_DoorLocked)
+    }
     msgbox(Route110_TrickHousePuzzle3_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT)
     playse(SE_PIN)
     setvar(VAR_TRICK_HOUSE_PUZZLE_3_STATE, 2)
@@ -666,7 +784,9 @@ script Route110_TrickHousePuzzle3_EventScript_Door {
 }
 
 script Route110_TrickHousePuzzle4_EventScript_Door {
-    if (var(VAR_TRICK_HOUSE_PUZZLE_4_STATE) == 0) goto(Route110_TrickHousePuzzle_EventScript_DoorLocked)
+    if (var(VAR_TRICK_HOUSE_PUZZLE_4_STATE) == 0) {
+        goto(Route110_TrickHousePuzzle_EventScript_DoorLocked)
+    }
     msgbox(Route110_TrickHousePuzzle4_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT)
     playse(SE_PIN)
     setvar(VAR_TRICK_HOUSE_PUZZLE_4_STATE, 2)
@@ -677,7 +797,9 @@ script Route110_TrickHousePuzzle4_EventScript_Door {
 }
 
 script Route110_TrickHousePuzzle5_EventScript_Door {
-    if (var(VAR_TRICK_HOUSE_PUZZLE_5_STATE) == 0) goto(Route110_TrickHousePuzzle_EventScript_DoorLocked)
+    if (var(VAR_TRICK_HOUSE_PUZZLE_5_STATE) == 0) {
+        goto(Route110_TrickHousePuzzle_EventScript_DoorLocked)
+    }
     msgbox(Route110_TrickHousePuzzle5_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT)
     playse(SE_PIN)
     setvar(VAR_TRICK_HOUSE_PUZZLE_5_STATE, 2)
@@ -688,7 +810,9 @@ script Route110_TrickHousePuzzle5_EventScript_Door {
 }
 
 script Route110_TrickHousePuzzle6_EventScript_Door {
-    if (var(VAR_TRICK_HOUSE_PUZZLE_6_STATE) == 0) goto(Route110_TrickHousePuzzle_EventScript_DoorLocked)
+    if (var(VAR_TRICK_HOUSE_PUZZLE_6_STATE) == 0) {
+        goto(Route110_TrickHousePuzzle_EventScript_DoorLocked)
+    }
     msgbox(Route110_TrickHousePuzzle6_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT)
     playse(SE_PIN)
     setvar(VAR_TRICK_HOUSE_PUZZLE_6_STATE, 2)
@@ -699,7 +823,9 @@ script Route110_TrickHousePuzzle6_EventScript_Door {
 }
 
 script Route110_TrickHousePuzzle7_EventScript_Door {
-    if (var(VAR_TRICK_HOUSE_PUZZLE_7_STATE) == 0) goto(Route110_TrickHousePuzzle_EventScript_DoorLocked)
+    if (var(VAR_TRICK_HOUSE_PUZZLE_7_STATE) == 0) {
+        goto(Route110_TrickHousePuzzle_EventScript_DoorLocked)
+    }
     msgbox(Route110_TrickHousePuzzle7_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT)
     playse(SE_PIN)
     setvar(VAR_TRICK_HOUSE_PUZZLE_7_STATE, 2)
@@ -710,7 +836,9 @@ script Route110_TrickHousePuzzle7_EventScript_Door {
 }
 
 script Route110_TrickHousePuzzle8_EventScript_Door {
-    if (var(VAR_TRICK_HOUSE_PUZZLE_8_STATE) == 0) goto(Route110_TrickHousePuzzle_EventScript_DoorLocked)
+    if (var(VAR_TRICK_HOUSE_PUZZLE_8_STATE) == 0) {
+        goto(Route110_TrickHousePuzzle_EventScript_DoorLocked)
+    }
     msgbox(Route110_TrickHousePuzzle8_Text_WroteSecretCodeLockOpened, MSGBOX_DEFAULT)
     playse(SE_PIN)
     setvar(VAR_TRICK_HOUSE_PUZZLE_8_STATE, 2)
@@ -745,9 +873,15 @@ script Route110_TrickHouseEntrance_EventScript_TrickMasterHiding {
     lockall
     msgbox(Route110_TrickHouseEntrance_Text_YoureBeingWatched, MSGBOX_DEFAULT)
     releaseall
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 0) call(Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle1)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 1) call(Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle2)
-    if (var(VAR_TRICK_HOUSE_LEVEL) == 2) call(Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle3)
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 0) {
+        call(Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle1)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 1) {
+        call(Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle2)
+    }
+    if (var(VAR_TRICK_HOUSE_LEVEL) == 2) {
+        call(Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle3)
+    }
     setvar(VAR_TRICK_HOUSE_BEING_WATCHED_STATE, 1)
     end
 }

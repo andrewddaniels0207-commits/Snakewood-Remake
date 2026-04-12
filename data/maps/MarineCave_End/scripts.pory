@@ -4,19 +4,25 @@ mapscripts MarineCave_End_MapScripts {
 }
 
 script MarineCave_End_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(MarineCave_End_EventScript_TryRemoveKyogre)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(MarineCave_End_EventScript_TryRemoveKyogre)
+    }
     end
 }
 
 script MarineCave_End_EventScript_TryRemoveKyogre {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
+        goto(Common_EventScript_NopReturn)
+    }
     removeobject(LOCALID_MARINE_CAVE_KYOGRE)
     return
 }
 
 script MarineCave_End_OnTransition {
-    if (!flag(FLAG_DEFEATED_KYOGRE)) call(MarineCave_End_EventScript_ShowKyogre)
+    if (!flag(FLAG_DEFEATED_KYOGRE)) {
+        call(MarineCave_End_EventScript_ShowKyogre)
+    }
     end
 }
 
@@ -44,9 +50,15 @@ script MarineCave_End_EventScript_Kyogre {
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     setvar(VAR_TEMP_1, 0)
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(MarineCave_End_EventScript_DefeatedKyogre)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(MarineCave_End_EventScript_RanFromKyogre)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(MarineCave_End_EventScript_RanFromKyogre)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(MarineCave_End_EventScript_DefeatedKyogre)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(MarineCave_End_EventScript_RanFromKyogre)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(MarineCave_End_EventScript_RanFromKyogre)
+    }
     setvar(VAR_SHOULD_END_ABNORMAL_WEATHER, 1)
     setflag(FLAG_DEFEATED_KYOGRE)
     releaseall

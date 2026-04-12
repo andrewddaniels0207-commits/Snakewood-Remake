@@ -27,21 +27,39 @@ script Route22_EventScript_EarlyRival {
     textcolor(NPC_TEXT_COLOR_MALE)
     playbgm(MUS_RG_ENCOUNTER_RIVAL, 0)
     addobject(LOCALID_ROUTE22_RIVAL)
-    if (var(VAR_TEMP_1) == 0) call(Route22_EventScript_EarlyRivalApproach)
-    if (var(VAR_TEMP_1) == 1) call(Route22_EventScript_EarlyRivalApproach)
-    if (var(VAR_TEMP_1) == 2) call(Route22_EventScript_EarlyRivalApproachBottom)
+    if (var(VAR_TEMP_1) == 0) {
+        call(Route22_EventScript_EarlyRivalApproach)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(Route22_EventScript_EarlyRivalApproach)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(Route22_EventScript_EarlyRivalApproachBottom)
+    }
     delay(6)
     msgbox(Route22_Text_EarlyRivalIntro)
-    if (var(VAR_STARTER_MON) == 2) call(Route22_EventScript_EarlyRivalSquirtle)
-    if (var(VAR_STARTER_MON) == 1) call(Route22_EventScript_EarlyRivalBulbasaur)
-    if (var(VAR_STARTER_MON) == 0) call(Route22_EventScript_EarlyRivalCharmander)
+    if (var(VAR_STARTER_MON) == 2) {
+        call(Route22_EventScript_EarlyRivalSquirtle)
+    }
+    if (var(VAR_STARTER_MON) == 1) {
+        call(Route22_EventScript_EarlyRivalBulbasaur)
+    }
+    if (var(VAR_STARTER_MON) == 0) {
+        call(Route22_EventScript_EarlyRivalCharmander)
+    }
     msgbox(Route22_Text_EarlyRivalPostBattle)
     closemessage
     delay(10)
     playbgm(MUS_RG_RIVAL_EXIT, 0)
-    if (var(VAR_TEMP_1) == 0) call(Route22_EventScript_EarlyRivalExit)
-    if (var(VAR_TEMP_1) == 1) call(Route22_EventScript_EarlyRivalExit)
-    if (var(VAR_TEMP_1) == 2) call(Route22_EventScript_EarlyRivalExitBottom)
+    if (var(VAR_TEMP_1) == 0) {
+        call(Route22_EventScript_EarlyRivalExit)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(Route22_EventScript_EarlyRivalExit)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(Route22_EventScript_EarlyRivalExitBottom)
+    }
     fadedefaultbgm()
     removeobject(LOCALID_ROUTE22_RIVAL)
     setvar(VAR_MAP_SCENE_ROUTE22, 2)
@@ -195,14 +213,26 @@ script Route22_EventScript_LateRival {
     textcolor(NPC_TEXT_COLOR_MALE)
     playbgm(MUS_RG_ENCOUNTER_RIVAL, 0)
     addobject(LOCALID_ROUTE22_RIVAL)
-    if (var(VAR_TEMP_1) == 0) call(Route22_EventScript_LateRivalApproach)
-    if (var(VAR_TEMP_1) == 1) call(Route22_EventScript_LateRivalApproach)
-    if (var(VAR_TEMP_1) == 2) call(Route22_EventScript_LateRivalApproachBottom)
+    if (var(VAR_TEMP_1) == 0) {
+        call(Route22_EventScript_LateRivalApproach)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(Route22_EventScript_LateRivalApproach)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(Route22_EventScript_LateRivalApproachBottom)
+    }
     msgbox(Route22_Text_LateRivalIntro)
     setvar(VAR_LAST_TALKED, LOCALID_ROUTE22_RIVAL)
-    if (var(VAR_STARTER_MON) == 2) call(Route22_EventScript_LateRivalSquirtle)
-    if (var(VAR_STARTER_MON) == 1) call(Route22_EventScript_LateRivalBulbasaur)
-    if (var(VAR_STARTER_MON) == 0) call(Route22_EventScript_LateRivalCharmander)
+    if (var(VAR_STARTER_MON) == 2) {
+        call(Route22_EventScript_LateRivalSquirtle)
+    }
+    if (var(VAR_STARTER_MON) == 1) {
+        call(Route22_EventScript_LateRivalBulbasaur)
+    }
+    if (var(VAR_STARTER_MON) == 0) {
+        call(Route22_EventScript_LateRivalCharmander)
+    }
     msgbox(Route22_Text_LateRivalPostBattle)
     closemessage
     delay(10)

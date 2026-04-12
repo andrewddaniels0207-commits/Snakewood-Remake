@@ -14,8 +14,12 @@ script BattleFrontier_BattlePalaceBattleRoom_OnTransition {
 
 script BattleFrontier_BattlePalaceBattleRoom_EventScript_SetPlayerGfx {
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_SetPlayerGfxMale)
-    if (var(VAR_RESULT) == FEMALE) goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_SetPlayerGfxFemale)
+    if (var(VAR_RESULT) == MALE) {
+        goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_SetPlayerGfxMale)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_SetPlayerGfxFemale)
+    }
     return
 }
 
@@ -34,7 +38,9 @@ script BattleFrontier_BattlePalaceBattleRoom_EventScript_SetPlayerGfxFemale {
 script BattleFrontier_BattlePalaceBattleRoom_EventScript_EnterRoom {
     showobjectat(LOCALID_PALACE_BATTLE_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM)
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_BeginChallenge)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_BeginChallenge)
+    }
     applymovement(LOCALID_PALACE_BATTLE_PLAYER, BattleFrontier_BattlePalaceBattleRoom_Movement_PlayerReturnToChallenge)
     waitmovement(0)
     applymovement(LOCALID_PALACE_BATTLE_ATTENDANT, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceDown)
@@ -91,16 +97,32 @@ script BattleFrontier_BattlePalaceBattleRoom_EventScript_DefeatedOpponent {
 script BattleFrontier_BattlePalaceBattleRoom_EventScript_AskReadyForOpponent {
     frontier_getbrainstatus()
     copyvar(VAR_TEMP_F, VAR_RESULT)
-    if (var(VAR_RESULT) != FRONTIER_BRAIN_NOT_READY) goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_MavenUpNext)
+    if (var(VAR_RESULT) != FRONTIER_BRAIN_NOT_READY) {
+        goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_MavenUpNext)
+    }
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
-    if (var(VAR_RESULT) == 1) call(BattleFrontier_BattlePalaceBattleRoom_EventScript_ReadyFor2ndOpponent)
-    if (var(VAR_RESULT) == 2) call(BattleFrontier_BattlePalaceBattleRoom_EventScript_ReadyFor3rdOpponent)
-    if (var(VAR_RESULT) == 3) call(BattleFrontier_BattlePalaceBattleRoom_EventScript_ReadyFor4thOpponent)
-    if (var(VAR_RESULT) == 4) call(BattleFrontier_BattlePalaceBattleRoom_EventScript_ReadyFor5thOpponent)
-    if (var(VAR_RESULT) == 5) call(BattleFrontier_BattlePalaceBattleRoom_EventScript_ReadyFor6thOpponent)
-    if (var(VAR_RESULT) == 6) call(BattleFrontier_BattlePalaceBattleRoom_EventScript_ReadyFor7thOpponent)
+    if (var(VAR_RESULT) == 1) {
+        call(BattleFrontier_BattlePalaceBattleRoom_EventScript_ReadyFor2ndOpponent)
+    }
+    if (var(VAR_RESULT) == 2) {
+        call(BattleFrontier_BattlePalaceBattleRoom_EventScript_ReadyFor3rdOpponent)
+    }
+    if (var(VAR_RESULT) == 3) {
+        call(BattleFrontier_BattlePalaceBattleRoom_EventScript_ReadyFor4thOpponent)
+    }
+    if (var(VAR_RESULT) == 4) {
+        call(BattleFrontier_BattlePalaceBattleRoom_EventScript_ReadyFor5thOpponent)
+    }
+    if (var(VAR_RESULT) == 5) {
+        call(BattleFrontier_BattlePalaceBattleRoom_EventScript_ReadyFor6thOpponent)
+    }
+    if (var(VAR_RESULT) == 6) {
+        call(BattleFrontier_BattlePalaceBattleRoom_EventScript_ReadyFor7thOpponent)
+    }
     call(BattleFrontier_EventScript_GetCantRecordBattle)
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_AskReadyForOpponentNoRecord)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_AskReadyForOpponentNoRecord)
+    }
     multichoice(19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, TRUE)
     switch(VAR_RESULT)
     case(0, BattleFrontier_BattlePalaceBattleRoom_EventScript_ContinueChallenge)
@@ -176,7 +198,9 @@ script BattleFrontier_BattlePalaceBattleRoom_EventScript_PauseChallenge {
 }
 
 script BattleFrontier_BattlePalaceBattleRoom_EventScript_MavenUpNext {
-    if (var(VAR_TEMP_2) == 1) goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_AskReadyForMaven)
+    if (var(VAR_TEMP_2) == 1) {
+        goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_AskReadyForMaven)
+    }
     msgbox(BattleFrontier_BattlePalaceBattleRoom_Text_ChallengingPalaceMaven, MSGBOX_DEFAULT)
     setvar(VAR_TEMP_2, 1)
 }
@@ -185,7 +209,9 @@ script BattleFrontier_BattlePalaceBattleRoom_EventScript_AskReadyForMaven {
     message(BattleFrontier_BattlePalaceBattleRoom_Text_ReadyForPalaceMaven)
     waitmessage()
     call(BattleFrontier_EventScript_GetCantRecordBattle)
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_AskReadyForMavenNoRecord)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_AskReadyForMavenNoRecord)
+    }
     multichoice(19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, TRUE)
     switch(VAR_RESULT)
     case(0, BattleFrontier_BattlePalaceBattleRoom_EventScript_BattleSpenser)
@@ -224,7 +250,9 @@ script BattleFrontier_BattlePalaceBattleRoom_EventScript_BattleSpenser {
     case(FRONTIER_BRAIN_STREAK, BattleFrontier_BattlePalaceBattleRoom_EventScript_BattleSpenserSilver)
     case(FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattlePalaceBattleRoom_EventScript_BattleSpenserGold)
     frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
-    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_BattleSpenserSilver)
+    if (var(VAR_RESULT) != FALSE) {
+        goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_BattleSpenserSilver)
+    }
     msgbox(BattleFrontier_BattlePalaceBattleRoom_Text_SpenserFirstIntro, MSGBOX_DEFAULT)
     frontier_set(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
 }
@@ -232,14 +260,18 @@ script BattleFrontier_BattlePalaceBattleRoom_EventScript_BattleSpenser {
 script BattleFrontier_BattlePalaceBattleRoom_EventScript_BattleSpenserSilver {
     msgbox(BattleFrontier_BattlePalaceBattleRoom_Text_ProveYourBondWithMons, MSGBOX_DEFAULT)
     call(BattleFrontier_BattlePalaceBattleRoom_EventScript_DoPalaceBattle)
-    if (var(VAR_RESULT) == 1) goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_DefeatedSpenserSilver)
+    if (var(VAR_RESULT) == 1) {
+        goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_DefeatedSpenserSilver)
+    }
     goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobbyLost)
 }
 
 script BattleFrontier_BattlePalaceBattleRoom_EventScript_DefeatedSpenserSilver {
     palace_incrementstreak()
     frontier_getsymbols()
-    if (var(VAR_RESULT) != 0) goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobbyWon)
+    if (var(VAR_RESULT) != 0) {
+        goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobbyWon)
+    }
     msgbox(BattleFrontier_BattlePalaceBattleRoom_Text_SpenserPostSilverBattle, MSGBOX_DEFAULT)
     applymovement(LOCALID_PALACE_BATTLE_PLAYER, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceUp)
     applymovement(LOCALID_PALACE_BATTLE_ATTENDANT, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceDown)
@@ -260,7 +292,9 @@ script BattleFrontier_BattlePalaceBattleRoom_EventScript_DefeatedSpenserSilver {
 
 script BattleFrontier_BattlePalaceBattleRoom_EventScript_IntroSpenserGold {
     frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
-    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_BattleSpenserGold)
+    if (var(VAR_RESULT) != FALSE) {
+        goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_BattleSpenserGold)
+    }
     msgbox(BattleFrontier_BattlePalaceBattleRoom_Text_SpenserThisTimeWontHoldBack, MSGBOX_DEFAULT)
     frontier_set(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
 }
@@ -268,14 +302,18 @@ script BattleFrontier_BattlePalaceBattleRoom_EventScript_IntroSpenserGold {
 script BattleFrontier_BattlePalaceBattleRoom_EventScript_BattleSpenserGold {
     msgbox(BattleFrontier_BattlePalaceBattleRoom_Text_Kaaah, MSGBOX_DEFAULT)
     call(BattleFrontier_BattlePalaceBattleRoom_EventScript_DoPalaceBattle)
-    if (var(VAR_RESULT) == 1) goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_DefeatedSpenserGold)
+    if (var(VAR_RESULT) == 1) {
+        goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_DefeatedSpenserGold)
+    }
     goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobbyLost)
 }
 
 script BattleFrontier_BattlePalaceBattleRoom_EventScript_DefeatedSpenserGold {
     palace_incrementstreak()
     frontier_getsymbols()
-    if (var(VAR_RESULT) == 2) goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobbyWon)
+    if (var(VAR_RESULT) == 2) {
+        goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobbyWon)
+    }
     msgbox(BattleFrontier_BattlePalaceBattleRoom_Text_SpenserYourTeamIsAdmirable, MSGBOX_DEFAULT)
     applymovement(LOCALID_PALACE_BATTLE_PLAYER, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceUp)
     applymovement(LOCALID_PALACE_BATTLE_ATTENDANT, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceDown)
@@ -439,7 +477,9 @@ movement BattleFrontier_BattlePalaceBattleRoom_Movement_UnusedOpponentEnter3 {
 
 script BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobby {
     copyvar(VAR_RESULT, VAR_FRONTIER_BATTLE_MODE)
-    if (var(VAR_RESULT) == FRONTIER_MODE_DOUBLES) goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobbyDoubles)
+    if (var(VAR_RESULT) == FRONTIER_MODE_DOUBLES) {
+        goto(BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobbyDoubles)
+    }
     warp(MAP_BATTLE_FRONTIER_BATTLE_PALACE_LOBBY, 5, 7)
     waitstate
     end

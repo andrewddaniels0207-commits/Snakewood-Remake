@@ -11,8 +11,12 @@ script LilycoveCity_PokemonCenter_1F_OnTransition {
 
 script LilycoveCity_PokemonCenter_1F_EventScript_SetLilycoveLadyGfx {
     special(SetLilycoveLadyGfx)
-    if (var(VAR_RESULT) == FALSE) goto(LilycoveCity_PokemonCenter_1F_EventScript_HideContestLadyMon)
-    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_PokemonCenter_1F_EventScript_ShowContestLadyMon)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(LilycoveCity_PokemonCenter_1F_EventScript_HideContestLadyMon)
+    }
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LilycoveCity_PokemonCenter_1F_EventScript_ShowContestLadyMon)
+    }
     end
 }
 
@@ -43,7 +47,9 @@ script LilycoveCity_PokemonCenter_1F_EventScript_Boy {
 script LilycoveCity_PokemonCenter_1F_EventScript_Maniac {
     lock
     faceplayer
-    if (flag(FLAG_BADGE07_GET)) goto(LilycoveCity_PokemonCenter_1F_EventScript_ManiacBadTeamGone)
+    if (flag(FLAG_BADGE07_GET)) {
+        goto(LilycoveCity_PokemonCenter_1F_EventScript_ManiacBadTeamGone)
+    }
     msgbox(LilycoveCity_PokemonCenter_1F_Text_HeardAboutRottenScoundrels, MSGBOX_DEFAULT)
     release
     end

@@ -9,10 +9,18 @@ mapscripts PalletTown_ProfessorOaksLab_Frlg_MapScripts {
 
 script PalletTown_ProfessorOaksLab_OnTransition {
     setflag(FLAG_VISITED_OAKS_LAB)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 1) call(PalletTown_ProfessorOaksLab_EventScript_ReadyOakForStarterScene)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 7) call(PalletTown_ProfessorOaksLab_EventScript_ReadyOakForNationalDexScene)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 8) call(PalletTown_ProfessorOaksLab_EventScript_SetNationalDexSceneFinished)
-    if (flag(FLAG_GOT_POKEBALLS_FROM_OAK_AFTER_22_RIVAL)) call(PalletTown_ProfessorOaksLab_EventScript_SetSkipPokeBallCheck)
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 1) {
+        call(PalletTown_ProfessorOaksLab_EventScript_ReadyOakForStarterScene)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 7) {
+        call(PalletTown_ProfessorOaksLab_EventScript_ReadyOakForNationalDexScene)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 8) {
+        call(PalletTown_ProfessorOaksLab_EventScript_SetNationalDexSceneFinished)
+    }
+    if (flag(FLAG_GOT_POKEBALLS_FROM_OAK_AFTER_22_RIVAL)) {
+        call(PalletTown_ProfessorOaksLab_EventScript_SetSkipPokeBallCheck)
+    }
     end
 }
 
@@ -70,23 +78,43 @@ script PalletTown_ProfessorOaksLab_EventScript_EnterForNationalDexScene {
 script PalletTown_ProfessorOaksLab_EventScript_NationalDexScene {
     msgbox(PalletTown_ProfessorOaksLab_Text_OakSightingsOfRareMons)
     closemessage
-    if (var(VAR_FACING) == DIR_NORTH) call(PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterSouth)
-    if (var(VAR_FACING) == DIR_EAST) call(PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterEastWest)
-    if (var(VAR_FACING) == DIR_WEST) call(PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterEastWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterSouth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterEastWest)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterEastWest)
+    }
     msgbox(PalletTown_ProfessorOaksLab_Text_RivalJustLetMeHandleEverything)
     fadedefaultbgm()
     msgbox(PalletTown_ProfessorOaksLab_Text_OakNeedYourHelpTooNeedToSeePokedexes)
-    if (var(VAR_FACING) == DIR_NORTH) call(PalletTown_ProfessorOaksLab_EventScript_PlayerFaceOakNorth)
-    if (var(VAR_FACING) == DIR_WEST) call(PalletTown_ProfessorOaksLab_EventScript_PlayerFaceOakWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_PlayerFaceOakNorth)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_PlayerFaceOakWest)
+    }
     textcolor(NPC_TEXT_COLOR_NEUTRAL)
     msgbox(PalletTown_ProfessorOaksLab_Text_OakTookBothPokedexUnits)
     closemessage
     call(EventScript_RestorePrevTextColor)
-    if (var(VAR_FACING) == DIR_NORTH) call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskSouth)
-    if (var(VAR_FACING) == DIR_EAST) call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskEast)
-    if (var(VAR_FACING) == DIR_WEST) call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskSouth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskEast)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskWest)
+    }
     addobject(LOCALID_POKEDEX_1)
     addobject(LOCALID_POKEDEX_2)
     delay(30)
@@ -95,10 +123,18 @@ script PalletTown_ProfessorOaksLab_EventScript_NationalDexScene {
     removeobject(LOCALID_POKEDEX_1)
     removeobject(LOCALID_POKEDEX_2)
     delay(30)
-    if (var(VAR_FACING) == DIR_NORTH) call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverSouth)
-    if (var(VAR_FACING) == DIR_EAST) call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverEast)
-    if (var(VAR_FACING) == DIR_WEST) call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverSouth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverEast)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverWest)
+    }
     textcolor(NPC_TEXT_COLOR_NEUTRAL)
     playfanfare(MUS_RG_OBTAIN_KEY_ITEM)
     message(PalletTown_ProfessorOaksLab_Text_PlayersPokedexWasUpgraded)
@@ -110,10 +146,18 @@ script PalletTown_ProfessorOaksLab_EventScript_NationalDexScene {
     msgbox(PalletTown_ProfessorOaksLab_Text_RivalIllCompleteThePokedex)
     closemessage
     playbgm(MUS_RG_RIVAL_EXIT, 0)
-    if (var(VAR_FACING) == DIR_NORTH) call(PalletTown_ProfessorOaksLab_EventScript_RivalExitNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(PalletTown_ProfessorOaksLab_EventScript_RivalExit)
-    if (var(VAR_FACING) == DIR_EAST) call(PalletTown_ProfessorOaksLab_EventScript_RivalExit)
-    if (var(VAR_FACING) == DIR_WEST) call(PalletTown_ProfessorOaksLab_EventScript_RivalExit)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_RivalExitNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_RivalExit)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_RivalExit)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_RivalExit)
+    }
     removeobject(LOCALID_OAKS_LAB_RIVAL)
     fadedefaultbgm()
     setvar(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 8)
@@ -318,16 +362,28 @@ script PalletTown_ProfessorOaksLab_EventScript_RivalBattle {
     closemessage
     applymovement(LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_FaceDown)
     waitmovement(0)
-    if (var(VAR_STARTER_MON) == 0) goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmander)
-    if (var(VAR_STARTER_MON) == 1) goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaur)
-    if (var(VAR_STARTER_MON) == 2) goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtle)
+    if (var(VAR_STARTER_MON) == 0) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmander)
+    }
+    if (var(VAR_STARTER_MON) == 1) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaur)
+    }
+    if (var(VAR_STARTER_MON) == 2) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtle)
+    }
     end
 }
 
 script PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtle {
-    if (var(VAR_TEMP_2) == 1) goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtleLeft)
-    if (var(VAR_TEMP_2) == 2) goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtleMid)
-    if (var(VAR_TEMP_2) == 3) goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtleRight)
+    if (var(VAR_TEMP_2) == 1) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtleLeft)
+    }
+    if (var(VAR_TEMP_2) == 2) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtleMid)
+    }
+    if (var(VAR_TEMP_2) == 3) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtleRight)
+    }
     end
 }
 
@@ -386,9 +442,15 @@ movement PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleSquirtleRigh
 }
 
 script PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmander {
-    if (var(VAR_TEMP_2) == 1) goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmanderLeft)
-    if (var(VAR_TEMP_2) == 2) goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmanderMid)
-    if (var(VAR_TEMP_2) == 3) goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmanderRight)
+    if (var(VAR_TEMP_2) == 1) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmanderLeft)
+    }
+    if (var(VAR_TEMP_2) == 2) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmanderMid)
+    }
+    if (var(VAR_TEMP_2) == 3) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmanderRight)
+    }
     end
 }
 
@@ -450,9 +512,15 @@ movement PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderRight {
 }
 
 script PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaur {
-    if (var(VAR_TEMP_2) == 1) goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaurLeft)
-    if (var(VAR_TEMP_2) == 2) goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaurMid)
-    if (var(VAR_TEMP_2) == 3) goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaurRight)
+    if (var(VAR_TEMP_2) == 1) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaurLeft)
+    }
+    if (var(VAR_TEMP_2) == 2) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaurMid)
+    }
+    if (var(VAR_TEMP_2) == 3) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaurRight)
+    }
     end
 }
 
@@ -512,9 +580,15 @@ script PalletTown_ProfessorOaksLab_EventScript_EndRivalBattle {
     msgbox(PalletTown_ProfessorOaksLab_Text_RivalGoToughenMyMon)
     closemessage
     playbgm(MUS_RG_RIVAL_EXIT, 0)
-    if (var(VAR_TEMP_2) == 1) call(PalletTown_ProfessorOaksLab_EventScript_RivalExitAfterBattleLeft)
-    if (var(VAR_TEMP_2) == 2) call(PalletTown_ProfessorOaksLab_EventScript_RivalExitAfterBattleMid)
-    if (var(VAR_TEMP_2) == 3) call(PalletTown_ProfessorOaksLab_EventScript_RivalExitAfterBattleRight)
+    if (var(VAR_TEMP_2) == 1) {
+        call(PalletTown_ProfessorOaksLab_EventScript_RivalExitAfterBattleLeft)
+    }
+    if (var(VAR_TEMP_2) == 2) {
+        call(PalletTown_ProfessorOaksLab_EventScript_RivalExitAfterBattleMid)
+    }
+    if (var(VAR_TEMP_2) == 3) {
+        call(PalletTown_ProfessorOaksLab_EventScript_RivalExitAfterBattleRight)
+    }
     removeobject(LOCALID_OAKS_LAB_RIVAL)
     playse(SE_EXIT)
     fadedefaultbgm()
@@ -600,8 +674,12 @@ movement PalletTown_ProfessorOaksLab_Movement_PlayerWatchRivalExitAfterBattleRig
 script PalletTown_ProfessorOaksLab_EventScript_Rival {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 3) goto(PalletTown_ProfessorOaksLab_EventScript_RivalChoseStarter)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 2) goto(PalletTown_ProfessorOaksLab_EventScript_RivalWaitingForStarter)
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 3) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalChoseStarter)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 2) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalWaitingForStarter)
+    }
     msgbox(PalletTown_ProfessorOaksLab_Text_RivalGrampsIsntAround)
     release
     end
@@ -622,15 +700,33 @@ script PalletTown_ProfessorOaksLab_EventScript_RivalChoseStarter {
 script PalletTown_ProfessorOaksLab_EventScript_ProfOak {
     lock
     faceplayer
-    if (flag(SHOWED_OAK_COMPLETE_DEX)) goto(PalletTown_ProfessorOaksLab_EventScript_OakJustShownCompleteDex)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 9) goto(PalletTown_ProfessorOaksLab_EventScript_RatePokedex)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 8) goto(PalletTown_ProfessorOaksLab_EventScript_MonsAroundWorldWait)
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(PalletTown_ProfessorOaksLab_EventScript_TryStartNationalDexScene)
-    if (var(VAR_MAP_SCENE_CERULEAN_CITY_RIVAL) == 1) goto(PalletTown_ProfessorOaksLab_EventScript_RatePokedex)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 6) goto(PalletTown_ProfessorOaksLab_EventScript_RatePokedexOrTryGiveBalls)
-    if (var(VAR_MAP_SCENE_VIRIDIAN_CITY_MART) >= 1) goto(PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 4) goto(PalletTown_ProfessorOaksLab_EventScript_OakBattleMonForItToGrow)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 3) goto(PalletTown_ProfessorOaksLab_EventScript_OakCanReachNextTownWithMon)
+    if (flag(SHOWED_OAK_COMPLETE_DEX)) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_OakJustShownCompleteDex)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 9) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RatePokedex)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 8) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_MonsAroundWorldWait)
+    }
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_TryStartNationalDexScene)
+    }
+    if (var(VAR_MAP_SCENE_CERULEAN_CITY_RIVAL) == 1) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RatePokedex)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 6) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RatePokedexOrTryGiveBalls)
+    }
+    if (var(VAR_MAP_SCENE_VIRIDIAN_CITY_MART) >= 1) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 4) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_OakBattleMonForItToGrow)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 3) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_OakCanReachNextTownWithMon)
+    }
     msgbox(PalletTown_ProfessorOaksLab_Text_OakWhichOneWillYouChoose)
     release
     end
@@ -667,10 +763,18 @@ script PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene {
     playbgm(MUS_RG_ENCOUNTER_RIVAL, 0)
     msgbox(PalletTown_ProfessorOaksLab_Text_RivalGramps)
     closemessage
-    if (var(VAR_FACING) == DIR_NORTH) call(PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterSouth)
-    if (var(VAR_FACING) == DIR_EAST) call(PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterEastWest)
-    if (var(VAR_FACING) == DIR_WEST) call(PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterEastWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterSouth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterEastWest)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterEastWest)
+    }
     fadedefaultbgm()
     msgbox(PalletTown_ProfessorOaksLab_Text_RivalWhatDidYouCallMeFor)
     closemessage
@@ -680,16 +784,32 @@ script PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene {
     waitmovement(0)
     applymovement(LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_Delay48)
     waitmovement(0)
-    if (var(VAR_FACING) == DIR_SOUTH) call(PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalSouth)
-    if (var(VAR_FACING) == DIR_EAST) call(PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalEast)
-    if (var(VAR_FACING) == DIR_WEST) call(PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalWest)
-    if (var(VAR_FACING) == DIR_NORTH) call(PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalNorth)
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalSouth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalEast)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalWest)
+    }
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalNorth)
+    }
     msgbox(PalletTown_ProfessorOaksLab_Text_OakHaveRequestForYouTwo)
     closemessage
-    if (var(VAR_FACING) == DIR_NORTH) call(PalletTown_ProfessorOaksLab_EventScript_DexSceneOakWalkToDeskNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(PalletTown_ProfessorOaksLab_EventScript_DexSceneOakWalkToDeskSouth)
-    if (var(VAR_FACING) == DIR_EAST) call(PalletTown_ProfessorOaksLab_EventScript_DexSceneOakWalkToDeskEast)
-    if (var(VAR_FACING) == DIR_WEST) call(PalletTown_ProfessorOaksLab_EventScript_DexSceneOakWalkToDeskWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_DexSceneOakWalkToDeskNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_DexSceneOakWalkToDeskSouth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_DexSceneOakWalkToDeskEast)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_DexSceneOakWalkToDeskWest)
+    }
     msgbox(PalletTown_ProfessorOaksLab_Text_OakPokedexOnDesk)
     closemessage
     delay(40)
@@ -701,10 +821,18 @@ script PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene {
     delay(10)
     removeobject(LOCALID_POKEDEX_2)
     delay(25)
-    if (var(VAR_FACING) == DIR_NORTH) call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverSouth)
-    if (var(VAR_FACING) == DIR_EAST) call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverEast)
-    if (var(VAR_FACING) == DIR_WEST) call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverSouth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverEast)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverWest)
+    }
     delay(10)
     textcolor(NPC_TEXT_COLOR_NEUTRAL)
     playfanfare(MUS_RG_OBTAIN_KEY_ITEM)
@@ -721,17 +849,33 @@ script PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene {
     famechecker(FAMECHECKER_OAK, 1)
     msgbox(PalletTown_ProfessorOaksLab_Text_OakCompleteMonGuideWasMyDream)
     msgbox(PalletTown_ProfessorOaksLab_Text_RivalLeaveItToMeGramps)
-    if (var(VAR_FACING) == DIR_NORTH) call(PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerSouth)
-    if (var(VAR_FACING) == DIR_EAST) call(PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerEastWest)
-    if (var(VAR_FACING) == DIR_WEST) call(PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerEastWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerSouth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerEastWest)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerEastWest)
+    }
     msgbox(PalletTown_ProfessorOaksLab_Text_RivalTellSisNotToGiveYouMap)
     closemessage
     playbgm(MUS_RG_RIVAL_EXIT, 0)
-    if (var(VAR_FACING) == DIR_NORTH) call(PalletTown_ProfessorOaksLab_EventScript_RivalExitNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(PalletTown_ProfessorOaksLab_EventScript_RivalExit)
-    if (var(VAR_FACING) == DIR_EAST) call(PalletTown_ProfessorOaksLab_EventScript_RivalExit)
-    if (var(VAR_FACING) == DIR_WEST) call(PalletTown_ProfessorOaksLab_EventScript_RivalExit)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_RivalExitNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_RivalExit)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_RivalExit)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_RivalExit)
+    }
     removeobject(LOCALID_OAKS_LAB_RIVAL)
     fadedefaultbgm()
     setvar(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6)
@@ -852,14 +996,18 @@ script PalletTown_ProfessorOaksLab_EventScript_RatePokedexOrTryGiveBalls {
     copyvar(VAR_0x8009, VAR_0x8006)
     buffernumberstring(STR_VAR_1, VAR_0x8008)
     buffernumberstring(STR_VAR_2, VAR_0x8009)
-    if (var(VAR_0x8009) == 1) goto(PalletTown_ProfessorOaksLab_EventScript_CheckIfPlayerNeedsBalls)
+    if (var(VAR_0x8009) == 1) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_CheckIfPlayerNeedsBalls)
+    }
     goto(PalletTown_ProfessorOaksLab_EventScript_RatePokedex)
     end
 }
 
 script PalletTown_ProfessorOaksLab_EventScript_RatePokedex {
     call(PokedexRating_EventScript_RateInPerson)
-    if (flag(FLAG_OAK_SAW_DEX_COMPLETION)) goto(PalletTown_ProfessorOaksLab_EventScript_DexCompleted)
+    if (flag(FLAG_OAK_SAW_DEX_COMPLETION)) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_DexCompleted)
+    }
     release
     end
 }
@@ -869,10 +1017,18 @@ script PalletTown_ProfessorOaksLab_EventScript_DexCompleted {
     delay(40)
     message(PokedexRating_Text_Wroooaaarrr)
     waitmessage()
-    if (var(VAR_FACING) == DIR_NORTH) call(PalletTown_ProfessorOaksLab_EventScript_OakExcitedNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(PalletTown_ProfessorOaksLab_EventScript_OakExcitedSouth)
-    if (var(VAR_FACING) == DIR_EAST) call(PalletTown_ProfessorOaksLab_EventScript_OakExcitedEast)
-    if (var(VAR_FACING) == DIR_WEST) call(PalletTown_ProfessorOaksLab_EventScript_OakExcitedWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_OakExcitedNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(PalletTown_ProfessorOaksLab_EventScript_OakExcitedSouth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_OakExcitedEast)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(PalletTown_ProfessorOaksLab_EventScript_OakExcitedWest)
+    }
     applymovement(LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_FacePlayer)
     waitmovement(0)
     closemessage
@@ -990,8 +1146,12 @@ movement PalletTown_ProfessorOaksLab_Movement_VerticalPacing {
 script PalletTown_ProfessorOaksLab_EventScript_TryStartNationalDexScene {
     call(PokedexRating_EventScript_RateInPerson)
     closemessage
-    if (var(VAR_0x8009) < 60) goto(PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene)
-    if (!flag(FLAG_WORLD_MAP_ONE_ISLAND)) goto(PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene)
+    if (var(VAR_0x8009) < 60) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene)
+    }
+    if (!flag(FLAG_WORLD_MAP_ONE_ISLAND)) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene)
+    }
     delay(30)
     msgbox(PalletTown_ProfessorOaksLab_Text_OakFavorToAskYouPlayer)
     goto(PalletTown_ProfessorOaksLab_EventScript_NationalDexScene)
@@ -1004,16 +1164,24 @@ script PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene {
 }
 
 script PalletTown_ProfessorOaksLab_EventScript_CheckIfPlayerNeedsBalls {
-    if (flag(FLAG_OAK_SKIP_22_RIVAL_CHECK)) goto(PalletTown_ProfessorOaksLab_EventScript_MonsAroundWorldWait)
-    if (flag(FLAG_GOT_POKEBALLS_FROM_OAK_AFTER_22_RIVAL)) goto(PalletTown_ProfessorOaksLab_EventScript_PlayerAlreadyGotBalls)
+    if (flag(FLAG_OAK_SKIP_22_RIVAL_CHECK)) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_MonsAroundWorldWait)
+    }
+    if (flag(FLAG_GOT_POKEBALLS_FROM_OAK_AFTER_22_RIVAL)) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_PlayerAlreadyGotBalls)
+    }
     checkitem(ITEM_POKE_BALL)
-    if (var(VAR_RESULT) == FALSE) goto(PalletTown_ProfessorOaksLab_EventScript_PlayerOutOfBalls)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_PlayerOutOfBalls)
+    }
     goto(PalletTown_ProfessorOaksLab_EventScript_MonsAroundWorldWait)
     end
 }
 
 script PalletTown_ProfessorOaksLab_EventScript_PlayerOutOfBalls {
-    if (var(VAR_MAP_SCENE_ROUTE22) >= 2) goto(PalletTown_ProfessorOaksLab_EventScript_GivePlayerMoreBalls)
+    if (var(VAR_MAP_SCENE_ROUTE22) >= 2) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_GivePlayerMoreBalls)
+    }
     goto(PalletTown_ProfessorOaksLab_EventScript_MonsAroundWorldWait)
     end
 }
@@ -1180,8 +1348,12 @@ script PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall {
     setvar(PLAYER_STARTER_SPECIES, SPECIES_BULBASAUR)
     setvar(RIVAL_STARTER_SPECIES, SPECIES_CHARMANDER)
     setvar(RIVAL_STARTER_ID, LOCALID_CHARMANDER_BALL)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) >= 3) goto(PalletTown_ProfessorOaksLab_EventScript_LastPokeBall)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 2) goto(PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice)
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) >= 3) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_LastPokeBall)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 2) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice)
+    }
     msgbox(PalletTown_ProfessorOaksLab_Text_ThoseArePokeBalls)
     release
     end
@@ -1192,30 +1364,48 @@ script PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice {
     waitmovement(0)
     showmonpic(PLAYER_STARTER_SPECIES, 10, 3)
     textcolor(NPC_TEXT_COLOR_MALE)
-    if (var(PLAYER_STARTER_NUM) == 0) goto(PalletTown_ProfessorOaksLab_EventScript_ConfirmBulbasaur)
-    if (var(PLAYER_STARTER_NUM) == 1) goto(PalletTown_ProfessorOaksLab_EventScript_ConfirmSquirtle)
-    if (var(PLAYER_STARTER_NUM) == 2) goto(PalletTown_ProfessorOaksLab_EventScript_ConfirmCharmander)
+    if (var(PLAYER_STARTER_NUM) == 0) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_ConfirmBulbasaur)
+    }
+    if (var(PLAYER_STARTER_NUM) == 1) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_ConfirmSquirtle)
+    }
+    if (var(PLAYER_STARTER_NUM) == 2) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_ConfirmCharmander)
+    }
     end
 }
 
 script PalletTown_ProfessorOaksLab_EventScript_ConfirmBulbasaur {
     msgbox(PalletTown_ProfessorOaksLab_Text_OakChoosingBulbasaur, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PalletTown_ProfessorOaksLab_EventScript_ChoseStarter)
-    if (var(VAR_RESULT) == NO) goto(PalletTown_ProfessorOaksLab_EventScript_DeclinedStarter)
+    if (var(VAR_RESULT) == YES) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_ChoseStarter)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_DeclinedStarter)
+    }
     end
 }
 
 script PalletTown_ProfessorOaksLab_EventScript_ConfirmSquirtle {
     msgbox(PalletTown_ProfessorOaksLab_Text_OakChoosingSquirtle, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PalletTown_ProfessorOaksLab_EventScript_ChoseStarter)
-    if (var(VAR_RESULT) == NO) goto(PalletTown_ProfessorOaksLab_EventScript_DeclinedStarter)
+    if (var(VAR_RESULT) == YES) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_ChoseStarter)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_DeclinedStarter)
+    }
     end
 }
 
 script PalletTown_ProfessorOaksLab_EventScript_ConfirmCharmander {
     msgbox(PalletTown_ProfessorOaksLab_Text_OakChoosingCharmander, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PalletTown_ProfessorOaksLab_EventScript_ChoseStarter)
-    if (var(VAR_RESULT) == NO) goto(PalletTown_ProfessorOaksLab_EventScript_DeclinedStarter)
+    if (var(VAR_RESULT) == YES) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_ChoseStarter)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_DeclinedStarter)
+    }
     end
 }
 
@@ -1240,8 +1430,12 @@ script PalletTown_ProfessorOaksLab_EventScript_ChoseStarter {
     playfanfare(MUS_RG_OBTAIN_KEY_ITEM)
     waitfanfare()
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(EventScript_GiveNicknameToStarter)
-    if (var(VAR_RESULT) == NO) goto(PalletTown_ProfessorOaksLab_EventScript_RivalPicksStarter)
+    if (var(VAR_RESULT) == YES) {
+        goto(EventScript_GiveNicknameToStarter)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalPicksStarter)
+    }
     end
 }
 
@@ -1254,9 +1448,15 @@ script EventScript_GiveNicknameToStarter {
 
 script PalletTown_ProfessorOaksLab_EventScript_RivalPicksStarter {
     closemessage
-    if (var(PLAYER_STARTER_NUM) == 0) goto(PalletTown_ProfessorOaksLab_EventScript_RivalWalksToCharmander)
-    if (var(PLAYER_STARTER_NUM) == 1) goto(PalletTown_ProfessorOaksLab_EventScript_RivalWalksToBulbasaur)
-    if (var(PLAYER_STARTER_NUM) == 2) goto(PalletTown_ProfessorOaksLab_EventScript_RivalWalksToSquirtle)
+    if (var(PLAYER_STARTER_NUM) == 0) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalWalksToCharmander)
+    }
+    if (var(PLAYER_STARTER_NUM) == 1) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalWalksToBulbasaur)
+    }
+    if (var(PLAYER_STARTER_NUM) == 2) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RivalWalksToSquirtle)
+    }
     end
 }
 
@@ -1292,7 +1492,9 @@ script PalletTown_ProfessorOaksLab_EventScript_RivalTakesStarter {
     playfanfare(MUS_RG_OBTAIN_KEY_ITEM)
     waitfanfare()
     setvar(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3)
-    if (flag(FLAG_OPENED_START_MENU)) call(PalletTown_ProfessorOaksLab_EventScript_ReadyEndSignLadyScene)
+    if (flag(FLAG_OPENED_START_MENU)) {
+        call(PalletTown_ProfessorOaksLab_EventScript_ReadyEndSignLadyScene)
+    }
     release
     end
 }
@@ -1340,8 +1542,12 @@ script PalletTown_ProfessorOaksLab_EventScript_SquirtleBall {
     setvar(PLAYER_STARTER_SPECIES, SPECIES_SQUIRTLE)
     setvar(RIVAL_STARTER_SPECIES, SPECIES_BULBASAUR)
     setvar(RIVAL_STARTER_ID, LOCALID_BULBASAUR_BALL)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) >= 3) goto(PalletTown_ProfessorOaksLab_EventScript_LastPokeBall)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 2) goto(PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice)
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) >= 3) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_LastPokeBall)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 2) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice)
+    }
     msgbox(PalletTown_ProfessorOaksLab_Text_ThoseArePokeBalls)
     release
     end
@@ -1354,8 +1560,12 @@ script PalletTown_ProfessorOaksLab_EventScript_CharmanderBall {
     setvar(PLAYER_STARTER_SPECIES, SPECIES_CHARMANDER)
     setvar(RIVAL_STARTER_SPECIES, SPECIES_SQUIRTLE)
     setvar(RIVAL_STARTER_ID, LOCALID_SQUIRTLE_BALL)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) >= 3) goto(PalletTown_ProfessorOaksLab_EventScript_LastPokeBall)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 2) goto(PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice)
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) >= 3) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_LastPokeBall)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 2) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice)
+    }
     msgbox(PalletTown_ProfessorOaksLab_Text_ThoseArePokeBalls)
     release
     end
@@ -1370,7 +1580,9 @@ script PalletTown_ProfessorOaksLab_EventScript_LastPokeBall {
 script PalletTown_ProfessorOaksLab_EventScript_Aide1 {
     lock
     faceplayer
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(PalletTown_ProfessorOaksLab_EventScript_Aide1GameClear)
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_Aide1GameClear)
+    }
     msgbox(PalletTown_ProfessorOaksLab_Text_StudyAsOaksAide)
     release
     end
@@ -1386,7 +1598,9 @@ script PalletTown_ProfessorOaksLab_EventScript_Aide1GameClear {
 script PalletTown_ProfessorOaksLab_EventScript_Aide2 {
     lock
     faceplayer
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(PalletTown_ProfessorOaksLab_EventScript_Aide2GameClear)
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_Aide2GameClear)
+    }
     msgbox(PalletTown_ProfessorOaksLab_Text_StudyAsOaksAide)
     release
     end
@@ -1425,7 +1639,9 @@ script PalletTown_ProfessorOaksLab_EventScript_LeftSign {
 
 script PalletTown_ProfessorOaksLab_EventScript_RightSign {
     lockall
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) >= 6) goto(PalletTown_ProfessorOaksLab_EventScript_RightSignAlt)
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) >= 6) {
+        goto(PalletTown_ProfessorOaksLab_EventScript_RightSignAlt)
+    }
     msgbox(PalletTown_ProfessorOaksLab_Text_SaveOptionInMenu)
     releaseall
     end

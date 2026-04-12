@@ -8,8 +8,12 @@ mapscripts SlateportCity_MapScripts {
 script SlateportCity_OnTransition {
     setvar(VAR_SLATEPORT_MUSEUM_1F_STATE, 0)
     call(SlateportCity_EventScript_EnterSlateport)
-    if (var(VAR_SLATEPORT_CITY_STATE) == 1) call(SlateportCity_EventScript_MovePeopleForSternInterview)
-    if (var(VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE) == 1) call(SlateportCity_EventScript_SetReadyForScottScene)
+    if (var(VAR_SLATEPORT_CITY_STATE) == 1) {
+        call(SlateportCity_EventScript_MovePeopleForSternInterview)
+    }
+    if (var(VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE) == 1) {
+        call(SlateportCity_EventScript_SetReadyForScottScene)
+    }
     end
 }
 
@@ -41,7 +45,9 @@ script SlateportCity_EventScript_MovePeopleForSternInterview {
 script SlateportCity_EventScript_SetReadyForScottScene {
     setflag(FLAG_HIDE_MAP_NAME_POPUP)
     getplayerxy(VAR_0x8004, VAR_0x8005)
-    if (var(VAR_0x8004) == 30) goto(SlateportCity_EventScript_MoveScottLeft)
+    if (var(VAR_0x8004) == 30) {
+        goto(SlateportCity_EventScript_MoveScottLeft)
+    }
     setobjectxyperm(LOCALID_SLATEPORT_SCOTT, 23, 27)
     setobjectmovementtype(LOCALID_SLATEPORT_SCOTT, MOVEMENT_TYPE_FACE_RIGHT)
     return
@@ -141,9 +147,13 @@ script SlateportCity_EventScript_EffortRibbonWoman {
     bufferleadmonspeciesname(STR_VAR_1)
     msgbox(SlateportCity_Text_OhYourPokemon, MSGBOX_DEFAULT)
     specialvar(VAR_RESULT, LeadMonHasEffortRibbon)
-    if (var(VAR_RESULT) == TRUE) call(SlateportCity_EventScript_MonHasEffortRibbon)
+    if (var(VAR_RESULT) == TRUE) {
+        call(SlateportCity_EventScript_MonHasEffortRibbon)
+    }
     specialvar(VAR_RESULT, Special_AreLeadMonEVsMaxedOut)
-    if (var(VAR_RESULT) == FALSE) call(SlateportCity_EventScript_MonEVsNotMaxed)
+    if (var(VAR_RESULT) == FALSE) {
+        call(SlateportCity_EventScript_MonEVsNotMaxed)
+    }
     msgbox(SlateportCity_Text_PleaseGiveItThisEffortRibbon, MSGBOX_DEFAULT)
     playfanfare(MUS_OBTAIN_ITEM)
     message(SlateportCity_Text_ReceivedEffortRibbon)
@@ -169,7 +179,9 @@ script SlateportCity_EventScript_MonHasEffortRibbon {
 script SlateportCity_EventScript_Cook {
     lock
     faceplayer
-    if (var(VAR_SLATEPORT_CITY_STATE) == 1) call(SlateportCity_EventScript_CookSternInterview)
+    if (var(VAR_SLATEPORT_CITY_STATE) == 1) {
+        call(SlateportCity_EventScript_CookSternInterview)
+    }
     msgbox(SlateportCity_Text_SeaweedFullOfLife, MSGBOX_DEFAULT)
     release
     end
@@ -184,7 +196,9 @@ script SlateportCity_EventScript_CookSternInterview {
 script SlateportCity_EventScript_OldWoman {
     lock
     faceplayer
-    if (var(VAR_SLATEPORT_CITY_STATE) == 1) call(SlateportCity_EventScript_OldWomanSternInterview)
+    if (var(VAR_SLATEPORT_CITY_STATE) == 1) {
+        call(SlateportCity_EventScript_OldWomanSternInterview)
+    }
     msgbox(SlateportCity_Text_HowTownIsBornAndGrows, MSGBOX_DEFAULT)
     release
     end
@@ -199,8 +213,12 @@ script SlateportCity_EventScript_OldWomanSternInterview {
 script SlateportCity_EventScript_Girl {
     lock
     faceplayer
-    if (var(VAR_SLATEPORT_CITY_STATE) == 1) call(SlateportCity_EventScript_GirlSternInterview)
-    if (flag(FLAG_RECEIVED_SECRET_POWER)) goto(SlateportCity_EventScript_GirlSecretBase)
+    if (var(VAR_SLATEPORT_CITY_STATE) == 1) {
+        call(SlateportCity_EventScript_GirlSternInterview)
+    }
+    if (flag(FLAG_RECEIVED_SECRET_POWER)) {
+        goto(SlateportCity_EventScript_GirlSecretBase)
+    }
     msgbox(SlateportCity_Text_SlateportWonderfulPlace, MSGBOX_DEFAULT)
     release
     end
@@ -221,7 +239,9 @@ script SlateportCity_EventScript_GirlSecretBase {
 script SlateportCity_EventScript_RichBoy {
     lock
     faceplayer
-    if (var(VAR_SLATEPORT_CITY_STATE) == 1) call(SlateportCity_EventScript_RichBoySternInterview)
+    if (var(VAR_SLATEPORT_CITY_STATE) == 1) {
+        call(SlateportCity_EventScript_RichBoySternInterview)
+    }
     msgbox(SlateportCity_Text_GoingToCompeteInBattleTent, MSGBOX_DEFAULT)
     release
     end
@@ -234,7 +254,9 @@ script SlateportCity_EventScript_RichBoySternInterview {
 }
 
 script SlateportCity_EventScript_FatMan {
-    if (var(VAR_SLATEPORT_CITY_STATE) == 1) goto(SlateportCity_EventScript_FatManSternInterview)
+    if (var(VAR_SLATEPORT_CITY_STATE) == 1) {
+        goto(SlateportCity_EventScript_FatManSternInterview)
+    }
     msgbox(SlateportCity_Text_BushedHikingFromMauville, MSGBOX_NPC)
     end
 }
@@ -247,7 +269,9 @@ script SlateportCity_EventScript_FatManSternInterview {
 script SlateportCity_EventScript_Man1 {
     lock
     faceplayer
-    if (var(VAR_SLATEPORT_CITY_STATE) == 1) call(SlateportCity_EventScript_Man1SternInterview)
+    if (var(VAR_SLATEPORT_CITY_STATE) == 1) {
+        call(SlateportCity_EventScript_Man1SternInterview)
+    }
     msgbox(SlateportCity_Text_EveryoneCallsHimCaptStern, MSGBOX_DEFAULT)
     release
     end
@@ -262,7 +286,9 @@ script SlateportCity_EventScript_Man1SternInterview {
 script SlateportCity_EventScript_Woman1 {
     lock
     faceplayer
-    if (flag(FLAG_DOCK_REJECTED_DEVON_GOODS)) goto(SlateportCity_EventScript_Woman1AquaGone)
+    if (flag(FLAG_DOCK_REJECTED_DEVON_GOODS)) {
+        goto(SlateportCity_EventScript_Woman1AquaGone)
+    }
     msgbox(SlateportCity_Text_WhatsLongLineOverThere, MSGBOX_DEFAULT)
     release
     end
@@ -281,8 +307,12 @@ script SlateportCity_EventScript_BattleTentSign {
 
 script SlateportCity_EventScript_SternsShipyardSign {
     lockall
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(SlateportCity_EventScript_SternsShipyardFerryComplete)
-    if (flag(FLAG_BADGE07_GET)) goto(SlateportCity_EventScript_SternsShipyardNearsCompletion)
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(SlateportCity_EventScript_SternsShipyardFerryComplete)
+    }
+    if (flag(FLAG_BADGE07_GET)) {
+        goto(SlateportCity_EventScript_SternsShipyardNearsCompletion)
+    }
     msgbox(SlateportCity_Text_SternsShipyardWantedSign, MSGBOX_DEFAULT)
     releaseall
     end
@@ -322,7 +352,9 @@ script SlateportCity_EventScript_MarketSign {
 
 script SlateportCity_EventScript_HarborSign {
     lockall
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(SlateportCity_EventScript_HarborSignFerryComplete)
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(SlateportCity_EventScript_HarborSignFerryComplete)
+    }
     msgbox(SlateportCity_Text_HarborFerryUnderConstruction, MSGBOX_DEFAULT)
     releaseall
     end
@@ -342,7 +374,9 @@ script SlateportCity_EventScript_NameRatersHouseSign {
 script SlateportCity_EventScript_Maniac {
     lock
     faceplayer
-    if (var(VAR_SLATEPORT_CITY_STATE) == 1) call(SlateportCity_EventScript_ManiacSternInterview)
+    if (var(VAR_SLATEPORT_CITY_STATE) == 1) {
+        call(SlateportCity_EventScript_ManiacSternInterview)
+    }
     msgbox(SlateportCity_Text_GetNameRaterToHelpYou, MSGBOX_DEFAULT)
     release
     end
@@ -547,7 +581,9 @@ script SlateportCity_EventScript_ComeBackWithSecretPower {
 script SlateportCity_EventScript_DecorClerk {
     lock
     faceplayer
-    if (!flag(FLAG_RECEIVED_SECRET_POWER)) goto(SlateportCity_EventScript_ComeBackWithSecretPower)
+    if (!flag(FLAG_RECEIVED_SECRET_POWER)) {
+        goto(SlateportCity_EventScript_ComeBackWithSecretPower)
+    }
     message(gText_HowMayIServeYou)
     waitmessage()
     pokemartdecoration(SlateportCity_PokemartDecor)
@@ -752,7 +788,9 @@ script SlateportCity_EventScript_Man3 {
 script SlateportCity_EventScript_BerryPowderClerk {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_POWDER_JAR)) goto(SlateportCity_EventScript_ReceivedPowderJar)
+    if (flag(FLAG_RECEIVED_POWDER_JAR)) {
+        goto(SlateportCity_EventScript_ReceivedPowderJar)
+    }
     msgbox(SlateportCity_Text_ExplainBerries, MSGBOX_DEFAULT)
     giveitem(ITEM_POWDER_JAR)
     setflag(FLAG_RECEIVED_POWDER_JAR)
@@ -764,7 +802,9 @@ script SlateportCity_EventScript_BerryPowderClerk {
 script SlateportCity_EventScript_ReceivedPowderJar {
     setvar(VAR_0x8004, 1)
     specialvar(VAR_RESULT, HasEnoughBerryPowder)
-    if (var(VAR_RESULT) == FALSE) goto(SlateportCity_EventScript_ExplainBerryPowder)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SlateportCity_EventScript_ExplainBerryPowder)
+    }
     msgbox(SlateportCity_Text_BroughtMeSomeBerryPowder, MSGBOX_DEFAULT)
     special(DisplayBerryPowderVendorMenu)
     goto(SlateportCity_EventScript_ChooseBerryPowderItem)
@@ -897,17 +937,25 @@ script SlateportCity_EventScript_CancelPowderItemSelect {
 
 script SlateportCity_EventScript_TryBuyBerryPowderItem {
     msgbox(SlateportCity_Text_ExchangeBerryPowderForItem, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(SlateportCity_EventScript_ChooseBerryPowderItem)
+    if (var(VAR_RESULT) == NO) {
+        goto(SlateportCity_EventScript_ChooseBerryPowderItem)
+    }
     copyvar(VAR_0x8004, VAR_0x8009)
     specialvar(VAR_RESULT, HasEnoughBerryPowder)
-    if (var(VAR_RESULT) == FALSE) goto(SlateportCity_EventScript_NotEnoughBerryPowder)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SlateportCity_EventScript_NotEnoughBerryPowder)
+    }
     giveitem(VAR_0x8008)
-    if (var(VAR_RESULT) == FALSE) goto(SlateportCity_EventScript_NoRoomForBerryPowderItem)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SlateportCity_EventScript_NoRoomForBerryPowderItem)
+    }
     copyvar(VAR_0x8004, VAR_0x8009)
     special(TakeBerryPowder)
     special(PrintPlayerBerryPowderAmount)
     msgbox(SlateportCity_Text_FineBerryPowderTradeSomethingElse, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(SlateportCity_EventScript_ChooseBerryPowderItem)
+    if (var(VAR_RESULT) == YES) {
+        goto(SlateportCity_EventScript_ChooseBerryPowderItem)
+    }
     msgbox(SlateportCity_Text_WhenYouGetMoreBringItToMe, MSGBOX_DEFAULT)
     special(RemoveBerryPowderVendorMenu)
     release

@@ -10,9 +10,15 @@ script Route109_SeashoreHouse_OnTransition {
 script Route109_SeashoreHouse_EventScript_Owner {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_6_SODA_POP)) goto(Route109_SeashoreHouse_EventScript_AlreadyReceivedSodaPop)
-    if (flag(FLAG_DEFEATED_SEASHORE_HOUSE)) goto(Route109_SeashoreHouse_EventScript_DefeatedTrainers)
-    if (flag(FLAG_TEMP_2)) goto(Route109_SeashoreHouse_EventScript_AlreadyGaveIntroduction)
+    if (flag(FLAG_RECEIVED_6_SODA_POP)) {
+        goto(Route109_SeashoreHouse_EventScript_AlreadyReceivedSodaPop)
+    }
+    if (flag(FLAG_DEFEATED_SEASHORE_HOUSE)) {
+        goto(Route109_SeashoreHouse_EventScript_DefeatedTrainers)
+    }
+    if (flag(FLAG_TEMP_2)) {
+        goto(Route109_SeashoreHouse_EventScript_AlreadyGaveIntroduction)
+    }
     msgbox(Route109_SeashoreHouse_Text_SeashoreHouseIntro, MSGBOX_DEFAULT)
     setflag(FLAG_TEMP_2)
     release
@@ -28,7 +34,9 @@ script Route109_SeashoreHouse_EventScript_AlreadyGaveIntroduction {
 script Route109_SeashoreHouse_EventScript_DefeatedTrainers {
     msgbox(Route109_SeashoreHouse_Text_TakeTheseSodaPopBottles, MSGBOX_DEFAULT)
     giveitem(ITEM_SODA_POP, 6)
-    if (var(VAR_RESULT) == FALSE) goto(Route109_SeashoreHouse_EventScript_BagFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route109_SeashoreHouse_EventScript_BagFull)
+    }
     setflag(FLAG_RECEIVED_6_SODA_POP)
     release
     end
@@ -43,7 +51,9 @@ script Route109_SeashoreHouse_EventScript_BagFull {
 script Route109_SeashoreHouse_EventScript_AlreadyReceivedSodaPop {
     showmoneybox(0, 0)
     msgbox(Route109_SeashoreHouse_Text_WantToBuySodaPop, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(Route109_SeashoreHouse_EventScript_BuySodaPop)
+    if (var(VAR_RESULT) == YES) {
+        goto(Route109_SeashoreHouse_EventScript_BuySodaPop)
+    }
     msgbox(Route109_SeashoreHouse_Text_ThatsTooBad, MSGBOX_DEFAULT)
     hidemoneybox()
     release
@@ -52,9 +62,13 @@ script Route109_SeashoreHouse_EventScript_AlreadyReceivedSodaPop {
 
 script Route109_SeashoreHouse_EventScript_BuySodaPop {
     checkmoney(300)
-    if (var(VAR_RESULT) == FALSE) goto(Route109_SeashoreHouse_EventScript_NotEnoughMoney)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route109_SeashoreHouse_EventScript_NotEnoughMoney)
+    }
     checkitemspace(ITEM_SODA_POP)
-    if (var(VAR_RESULT) == FALSE) goto(Route109_SeashoreHouse_EventScript_NotEnoughSpace)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route109_SeashoreHouse_EventScript_NotEnoughSpace)
+    }
     msgbox(Route109_SeashoreHouse_Text_HereYouGo, MSGBOX_DEFAULT)
     removemoney(300)
     updatemoneybox()

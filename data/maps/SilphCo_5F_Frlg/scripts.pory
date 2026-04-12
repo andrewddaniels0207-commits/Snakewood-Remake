@@ -3,16 +3,24 @@ mapscripts SilphCo_5F_Frlg_MapScripts {
 }
 
 script SilphCo_5F_OnLoad {
-    if (!flag(FLAG_SILPH_5F_DOOR_1)) call(EventScript_Close5FDoor1)
-    if (!flag(FLAG_SILPH_5F_DOOR_2)) call(EventScript_Close5FDoor2)
-    if (!flag(FLAG_SILPH_5F_DOOR_3)) call(EventScript_Close5FDoor3)
+    if (!flag(FLAG_SILPH_5F_DOOR_1)) {
+        call(EventScript_Close5FDoor1)
+    }
+    if (!flag(FLAG_SILPH_5F_DOOR_2)) {
+        call(EventScript_Close5FDoor2)
+    }
+    if (!flag(FLAG_SILPH_5F_DOOR_3)) {
+        call(EventScript_Close5FDoor3)
+    }
     end
 }
 
 script SilphCo_5F_EventScript_WorkerM {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) goto(SilphCo_5F_EventScript_WorkerMRocketsGone)
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
+        goto(SilphCo_5F_EventScript_WorkerMRocketsGone)
+    }
     msgbox(SilphCo_5F_Text_RocketsInUproarAboutIntruder)
     release
     end

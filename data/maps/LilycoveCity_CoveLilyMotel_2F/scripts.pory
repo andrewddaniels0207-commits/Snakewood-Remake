@@ -3,10 +3,16 @@ mapscripts LilycoveCity_CoveLilyMotel_2F_MapScripts {}
 script LilycoveCity_CoveLilyMotel_2F_EventScript_GameDesigner {
     lock
     faceplayer
-    if (!flag(FLAG_TEMP_2)) call(LilycoveCity_CoveLilyMotel_2F_EventScript_ShowMeCompletedDex)
-    if (flag(FLAG_TEMP_2)) call(LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma)
+    if (!flag(FLAG_TEMP_2)) {
+        call(LilycoveCity_CoveLilyMotel_2F_EventScript_ShowMeCompletedDex)
+    }
+    if (flag(FLAG_TEMP_2)) {
+        call(LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma)
+    }
     specialvar(VAR_RESULT, HasAllHoennMons)
-    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_CoveLilyMotel_2F_EventScript_AllHoennMonsFanfare)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LilycoveCity_CoveLilyMotel_2F_EventScript_AllHoennMonsFanfare)
+    }
     release
     end
 }
@@ -62,7 +68,9 @@ script LilycoveCity_CoveLilyMotel_2F_EventScript_GameBoyKid {
 script LilycoveCity_CoveLilyMotel_2F_EventScript_Scott {
     lock
     faceplayer
-    if (flag(FLAG_MET_SCOTT_IN_LILYCOVE)) goto(LilycoveCity_CoveLilyMotel_2F_EventScript_MetScott)
+    if (flag(FLAG_MET_SCOTT_IN_LILYCOVE)) {
+        goto(LilycoveCity_CoveLilyMotel_2F_EventScript_MetScott)
+    }
     msgbox(LilycoveCity_CoveLilyMotel_2F_Text_SnoozingPreferBattles, MSGBOX_DEFAULT)
     addvar(VAR_SCOTT_STATE, 1)
     setflag(FLAG_MET_SCOTT_IN_LILYCOVE)

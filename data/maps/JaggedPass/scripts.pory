@@ -6,13 +6,17 @@ mapscripts JaggedPass_MapScripts {
 
 script JaggedPass_OnResume {
     setstepcallback(STEP_CB_ASH)
-    if (var(VAR_JAGGED_PASS_STATE) == 0) call(JaggedPass_EventScript_CheckHasMagmaEmblem)
+    if (var(VAR_JAGGED_PASS_STATE) == 0) {
+        call(JaggedPass_EventScript_CheckHasMagmaEmblem)
+    }
     end
 }
 
 script JaggedPass_EventScript_CheckHasMagmaEmblem {
     checkitem(ITEM_MAGMA_EMBLEM)
-    if (var(VAR_RESULT) == TRUE) goto(JaggedPass_EventScript_SetReadyToOpenHideout)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(JaggedPass_EventScript_SetReadyToOpenHideout)
+    }
     return
 }
 
@@ -22,7 +26,9 @@ script JaggedPass_EventScript_SetReadyToOpenHideout {
 }
 
 script JaggedPass_OnTransition {
-    if (var(VAR_JAGGED_PASS_ASH_WEATHER) == 1) call(JaggedPass_EventScript_SetWeatherAsh)
+    if (var(VAR_JAGGED_PASS_ASH_WEATHER) == 1) {
+        call(JaggedPass_EventScript_SetWeatherAsh)
+    }
     end
 }
 
@@ -33,7 +39,9 @@ script JaggedPass_EventScript_SetWeatherAsh {
 }
 
 script JaggedPass_OnLoad {
-    if (var(VAR_JAGGED_PASS_STATE) <= 1) goto(JaggedPass_EventScript_ConcealHideoutEntrance)
+    if (var(VAR_JAGGED_PASS_STATE) <= 1) {
+        goto(JaggedPass_EventScript_ConcealHideoutEntrance)
+    }
     end
 }
 
@@ -72,7 +80,9 @@ script JaggedPass_EventScript_OpenMagmaHideout {
 
 script JaggedPass_EventScript_MagmaHideoutGuard {
     lockall
-    if (flag(FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS)) goto(JaggedPass_EventScript_GuardDefeated)
+    if (flag(FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS)) {
+        goto(JaggedPass_EventScript_GuardDefeated)
+    }
     waitse()
     playse(SE_PIN)
     applymovement(LOCALID_MAGMA_HIDEOUT_GUARD, Common_Movement_ExclamationMark)
@@ -111,7 +121,9 @@ script JaggedPass_EventScript_Eric {
 script JaggedPass_EventScript_Diana {
     trainerbattle_single(TRAINER_DIANA_1, JaggedPass_Text_DianaIntro, JaggedPass_Text_DianaDefeat, JaggedPass_EventScript_RegisterDiana)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(JaggedPass_EventScript_DianaRematch)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(JaggedPass_EventScript_DianaRematch)
+    }
     msgbox(JaggedPass_Text_DianaPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -134,7 +146,9 @@ script JaggedPass_EventScript_DianaRematch {
 script JaggedPass_EventScript_Ethan {
     trainerbattle_single(TRAINER_ETHAN_1, JaggedPass_Text_EthanIntro, JaggedPass_Text_EthanDefeat, JaggedPass_EventScript_RegisterEthan)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(JaggedPass_EventScript_EthanRematch)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(JaggedPass_EventScript_EthanRematch)
+    }
     msgbox(JaggedPass_Text_EthanPostBattle, MSGBOX_DEFAULT)
     release
     end

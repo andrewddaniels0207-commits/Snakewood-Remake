@@ -65,8 +65,12 @@ movement LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlHideFromPlayer {
 
 script LilycoveCity_PokemonTrainerFanClub_OnTransition {
     call(LilycoveCity_PokemonTrainerFanClub_EventScript_HideOrShowInterviewer)
-    if (var(VAR_LILYCOVE_FAN_CLUB_STATE) == 1) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_SetFanMemberPositionsForFirstFanMeeting)
-    if (var(VAR_LILYCOVE_FAN_CLUB_STATE) == 2) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions)
+    if (var(VAR_LILYCOVE_FAN_CLUB_STATE) == 1) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_SetFanMemberPositionsForFirstFanMeeting)
+    }
+    if (var(VAR_LILYCOVE_FAN_CLUB_STATE) == 2) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions)
+    }
     end
 }
 
@@ -75,34 +79,52 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions {
     call(LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow)
     setvar(VAR_0x8004, FANCLUB_MEMBER1)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER2)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER3)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER4)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER5)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER6)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER7)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER8)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable)
+    }
     end
 }
 
 script LilycoveCity_PokemonTrainerFanClub_EventScript_HideOrShowInterviewer {
     specialvar(VAR_RESULT, ShouldHideFanClubInterviewer)
-    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_HideInterviewer)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_HideInterviewer)
+    }
     clearflag(FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER)
     clearflag(FLAG_FAN_CLUB_STRENGTH_SHARED)
     return
@@ -117,29 +139,47 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow {
     setvar(VAR_0x8005, NUM_TRAINER_FAN_CLUB_MEMBERS)
     setvar(VAR_0x8004, FANCLUB_MEMBER1)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER2)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER3)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER4)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER5)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER6)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER7)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER8)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan)
-    if (var(VAR_0x8005) >= 5) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_TrySetUpTVShow)
+    if (var(VAR_RESULT) == FALSE) {
+        call(LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan)
+    }
+    if (var(VAR_0x8005) >= 5) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_TrySetUpTVShow)
+    }
     return
 }
 
@@ -208,9 +248,13 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_Man {
     faceplayer
     setvar(VAR_0x8004, FANCLUB_MEMBER6)
     special(BufferFanClubTrainerName)
-    if (var(VAR_LILYCOVE_FAN_CLUB_STATE) == 0) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayerNotChampion)
+    if (var(VAR_LILYCOVE_FAN_CLUB_STATE) == 0) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayerNotChampion)
+    }
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayersFan)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayersFan)
+    }
     specialvar(VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub)
     goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_ManOnlyNonFan)
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_TrainersPowerIsOutOfTheOrdinary, MSGBOX_DEFAULT)
@@ -220,7 +264,9 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_Man {
 
 script LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayersFan {
     specialvar(VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub)
-    if (var(VAR_RESULT) == 1) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_ManOnlyFan)
+    if (var(VAR_RESULT) == 1) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_ManOnlyFan)
+    }
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_YoureOneWeWantToWin, MSGBOX_DEFAULT)
     release
     end
@@ -249,9 +295,13 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_Lass {
     faceplayer
     setvar(VAR_0x8004, FANCLUB_MEMBER1)
     special(BufferFanClubTrainerName)
-    if (var(VAR_LILYCOVE_FAN_CLUB_STATE) == 0) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayerNotChampion)
+    if (var(VAR_LILYCOVE_FAN_CLUB_STATE) == 0) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayerNotChampion)
+    }
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayersFan)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayersFan)
+    }
     specialvar(VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub)
     goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_LassOnlyNonFan)
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_ICantHelpLikingBrawly, MSGBOX_DEFAULT)
@@ -261,7 +311,9 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_Lass {
 
 script LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayersFan {
     specialvar(VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub)
-    if (var(VAR_RESULT) == 1) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_LassOnlyFan)
+    if (var(VAR_RESULT) == 1) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_LassOnlyFan)
+    }
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_ImPullingForYou, MSGBOX_DEFAULT)
     release
     end
@@ -290,9 +342,13 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanM {
     faceplayer
     setvar(VAR_0x8004, FANCLUB_MEMBER2)
     special(BufferFanClubTrainerName)
-    if (var(VAR_LILYCOVE_FAN_CLUB_STATE) == 0) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayerNotChampion)
+    if (var(VAR_LILYCOVE_FAN_CLUB_STATE) == 0) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayerNotChampion)
+    }
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayersFan)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayersFan)
+    }
     specialvar(VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub)
     goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMOnlyNonFan)
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_LongWayToGoComparedToNorman, MSGBOX_DEFAULT)
@@ -302,7 +358,9 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanM {
 
 script LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayersFan {
     specialvar(VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub)
-    if (var(VAR_RESULT) == 1) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMOnlyFan)
+    if (var(VAR_RESULT) == 1) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMOnlyFan)
+    }
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_YouveSurpassedYourFather, MSGBOX_DEFAULT)
     release
     end
@@ -331,9 +389,13 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirl {
     faceplayer
     setvar(VAR_0x8004, FANCLUB_MEMBER3)
     special(BufferFanClubTrainerName)
-    if (var(VAR_LILYCOVE_FAN_CLUB_STATE) == 0) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion)
+    if (var(VAR_LILYCOVE_FAN_CLUB_STATE) == 0) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion)
+    }
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan)
+    }
     specialvar(VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub)
     goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyNonFan)
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_EveryoneThinksTrainerIsCool, MSGBOX_DEFAULT)
@@ -343,7 +405,9 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirl {
 
 script LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan {
     specialvar(VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub)
-    if (var(VAR_RESULT) == 1) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan)
+    if (var(VAR_RESULT) == 1) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan)
+    }
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_OhWoweeItsPlayer, MSGBOX_DEFAULT)
     release
     end
@@ -373,7 +437,9 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoy {
     setvar(VAR_0x8004, FANCLUB_MEMBER4)
     special(BufferFanClubTrainerName)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyPlayersFan)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyPlayersFan)
+    }
     specialvar(VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub)
     goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyOnlyNonFan)
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsWickedlyCool, MSGBOX_DEFAULT)
@@ -383,7 +449,9 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoy {
 
 script LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyPlayersFan {
     specialvar(VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub)
-    if (var(VAR_RESULT) == 1) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyOnlyFan)
+    if (var(VAR_RESULT) == 1) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyOnlyFan)
+    }
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_WantToBeStrongLikeYou, MSGBOX_DEFAULT)
     release
     end
@@ -407,7 +475,9 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_Boy {
     setvar(VAR_0x8004, FANCLUB_MEMBER5)
     special(BufferFanClubTrainerName)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_BoyPlayersFan)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_BoyPlayersFan)
+    }
     specialvar(VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub)
     goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_BoyOnlyNonFan)
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_ThinkTrainerIsNumberOne, MSGBOX_DEFAULT)
@@ -417,7 +487,9 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_Boy {
 
 script LilycoveCity_PokemonTrainerFanClub_EventScript_BoyPlayersFan {
     specialvar(VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub)
-    if (var(VAR_RESULT) == 1) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_BoyOnlyFan)
+    if (var(VAR_RESULT) == 1) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_BoyOnlyFan)
+    }
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_YoureAmazingAfterAll, MSGBOX_DEFAULT)
     release
     end
@@ -441,7 +513,9 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_Woman {
     setvar(VAR_0x8004, FANCLUB_MEMBER7)
     special(BufferFanClubTrainerName)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan)
+    }
     specialvar(VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub)
     goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_WomanOnlyNonFan)
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsStandout, MSGBOX_DEFAULT)
@@ -451,7 +525,9 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_Woman {
 
 script LilycoveCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan {
     specialvar(VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub)
-    if (var(VAR_RESULT) == 1) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan)
+    if (var(VAR_RESULT) == 1) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan)
+    }
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_YouChangedMyMind, MSGBOX_DEFAULT)
     release
     end
@@ -475,7 +551,9 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertF {
     setvar(VAR_0x8004, FANCLUB_MEMBER8)
     special(BufferFanClubTrainerName)
     specialvar(VAR_RESULT, IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFPlayersFan)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFPlayersFan)
+    }
     specialvar(VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub)
     goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFOnlyNonFan)
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_HaventRealizedPotential, MSGBOX_DEFAULT)
@@ -485,7 +563,9 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertF {
 
 script LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFPlayersFan {
     specialvar(VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub)
-    if (var(VAR_RESULT) == 1) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFOnlyFan)
+    if (var(VAR_RESULT) == 1) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFOnlyFan)
+    }
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_YouImpressive, MSGBOX_DEFAULT)
     release
     end
@@ -506,15 +586,21 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFOnlyNonFan {
 script LilycoveCity_PokemonTrainerFanClub_EventScript_Interviewer {
     lock
     faceplayer
-    if (flag(FLAG_FAN_CLUB_STRENGTH_SHARED)) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed)
-    if (!flag(FLAG_FAN_CLUB_STRENGTH_SHARED)) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_Interview)
+    if (flag(FLAG_FAN_CLUB_STRENGTH_SHARED)) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed)
+    }
+    if (!flag(FLAG_FAN_CLUB_STRENGTH_SHARED)) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_Interview)
+    }
     end
 }
 
 script LilycoveCity_PokemonTrainerFanClub_EventScript_Interview {
     setvar(VAR_0x8005, TVSHOW_FAN_CLUB_SPECIAL)
     special(InterviewBefore)
-    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed2)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed2)
+    }
     copyvar(VAR_0x800A, VAR_0x8006)
     setvar(VAR_0x8004, FANCLUB_MEMBER1)
     special(BufferFanClubTrainerName)
@@ -524,8 +610,12 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_Interview {
     call(Common_ShowEasyChatScreen)
     lock
     faceplayer
-    if (var(VAR_RESULT) == 1) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_SubmitOpinion)
-    if (var(VAR_RESULT) == 0) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion)
+    if (var(VAR_RESULT) == 1) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_SubmitOpinion)
+    }
+    if (var(VAR_RESULT) == 0) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion)
+    }
     end
 }
 
@@ -539,8 +629,12 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion {
     setvar(VAR_0x8004, FANCLUB_MEMBER1)
     special(BufferFanClubTrainerName)
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_HaveYouForgottenTrainer, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_ForgetTrainer)
-    if (var(VAR_RESULT) == NO) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion)
+    if (var(VAR_RESULT) == YES) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_ForgetTrainer)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion)
+    }
     end
 }
 
@@ -553,8 +647,12 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion {
     call(Common_ShowEasyChatScreen)
     lock
     faceplayer
-    if (var(VAR_RESULT) == 1) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_SubmitOpinion)
-    if (var(VAR_RESULT) == 0) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion)
+    if (var(VAR_RESULT) == 1) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_SubmitOpinion)
+    }
+    if (var(VAR_RESULT) == 0) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion)
+    }
     end
 }
 
@@ -583,8 +681,12 @@ script LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer {
     setvar(VAR_0x8004, FANCLUB_MEMBER1)
     special(BufferFanClubTrainerName)
     msgbox(LilycoveCity_PokemonTrainerFanClub_Text_HaveYouForgottenTrainer2, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_ForgetTrainer)
-    if (var(VAR_RESULT) == NO) goto(LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer)
+    if (var(VAR_RESULT) == YES) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_ForgetTrainer)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer)
+    }
     end
 }
 

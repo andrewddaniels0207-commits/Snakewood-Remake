@@ -7,15 +7,25 @@ mapscripts PalletTown_Frlg_MapScripts {
 
 script PalletTown_OnTransition {
     setworldmapflag(FLAG_WORLD_MAP_PALLET_TOWN)
-    if (flag(FLAG_PALLET_LADY_NOT_BLOCKING_SIGN)) call(PalletTown_EventScript_TryReadySignLady)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY) == 0) call(PalletTown_EventScript_SetSignLadyPos)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY) == 1) call(PalletTown_EventScript_SetSignLadyDone)
+    if (flag(FLAG_PALLET_LADY_NOT_BLOCKING_SIGN)) {
+        call(PalletTown_EventScript_TryReadySignLady)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY) == 0) {
+        call(PalletTown_EventScript_SetSignLadyPos)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY) == 1) {
+        call(PalletTown_EventScript_SetSignLadyDone)
+    }
     end
 }
 
 script PalletTown_EventScript_TryReadySignLady {
-    if (!flag(FLAG_OPENED_START_MENU)) goto(Common_EventScript_NopReturn)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY) >= 1) goto(Common_EventScript_NopReturn)
+    if (!flag(FLAG_OPENED_START_MENU)) {
+        goto(Common_EventScript_NopReturn)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY) >= 1) {
+        goto(Common_EventScript_NopReturn)
+    }
     setvar(VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1)
     return
 }
@@ -26,7 +36,9 @@ script PalletTown_EventScript_SetSignLadyDone {
 }
 
 script PalletTown_EventScript_SetSignLadyPos {
-    if (flag(FLAG_PALLET_LADY_NOT_BLOCKING_SIGN)) goto(PalletTown_EventScript_MoveSignLadyToRouteEntrance)
+    if (flag(FLAG_PALLET_LADY_NOT_BLOCKING_SIGN)) {
+        goto(PalletTown_EventScript_MoveSignLadyToRouteEntrance)
+    }
     setobjectxyperm(LOCALID_PALLET_SIGN_LADY, 5, 15)
     setobjectmovementtype(LOCALID_PALLET_SIGN_LADY, MOVEMENT_TYPE_FACE_UP)
     return
@@ -47,7 +59,9 @@ script PalletTown_EventScript_OakRatingScene {
     addobject(LOCALID_PALLET_PROF_OAK)
     applymovement(LOCALID_PALLET_PROF_OAK, PalletTown_Movement_OakWalkToPlayersDoor)
     waitmovement(0)
-    if (!flag(FLAG_WORLD_MAP_ONE_ISLAND)) goto(PalletTown_EventScript_NotBeenToOneIslandYet)
+    if (!flag(FLAG_WORLD_MAP_ONE_ISLAND)) {
+        goto(PalletTown_EventScript_NotBeenToOneIslandYet)
+    }
     msgbox(PalletTown_Text_OakLetMeSeePokedex)
     setvar(VAR_0x8004, 0)
     specialvar(VAR_RESULT, GetFrlgPokedexCount)
@@ -55,7 +69,9 @@ script PalletTown_EventScript_OakRatingScene {
     copyvar(VAR_0x8009, VAR_0x8006)
     buffernumberstring(STR_VAR_1, VAR_0x8008)
     buffernumberstring(STR_VAR_2, VAR_0x8009)
-    if (var(VAR_0x8009) < 60) goto(PalletTown_EventScript_NotEnoughMonsForNationalDex)
+    if (var(VAR_0x8009) < 60) {
+        goto(PalletTown_EventScript_NotEnoughMonsForNationalDex)
+    }
     msgbox(PalletTown_Text_CaughtXImpressiveFollowMe)
     closemessage
     playbgm(MUS_FOLLOW_ME, 0)
@@ -204,14 +220,22 @@ script PalletTown_EventScript_OakTrigger {
     waitmovement(0)
     delay(30)
     addobject(LOCALID_PALLET_PROF_OAK)
-    if (var(VAR_TEMP_1) == 0) call(PalletTown_EventScript_OakEnterLeft)
-    if (var(VAR_TEMP_1) == 1) call(PalletTown_EventScript_OakEnterRight)
+    if (var(VAR_TEMP_1) == 0) {
+        call(PalletTown_EventScript_OakEnterLeft)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(PalletTown_EventScript_OakEnterRight)
+    }
     delay(30)
     msgbox(PalletTown_Text_OakGrassUnsafeNeedMon)
     closemessage
     delay(30)
-    if (var(VAR_TEMP_1) == 0) call(PalletTown_EventScript_OakLeadPlayerToLabLeft)
-    if (var(VAR_TEMP_1) == 1) call(PalletTown_EventScript_OakLeadPlayerToLabRight)
+    if (var(VAR_TEMP_1) == 0) {
+        call(PalletTown_EventScript_OakLeadPlayerToLabLeft)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(PalletTown_EventScript_OakLeadPlayerToLabRight)
+    }
     opendoor(16, 13)
     waitdooranim()
     applymovement(LOCALID_PALLET_PROF_OAK, PalletTown_Movement_OakEnterLab)
@@ -344,10 +368,18 @@ movement PalletTown_Movement_PlayerEnterLab {
 
 script PalletTown_EventScript_SignLady {
     lock
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY) == 2) goto(PalletTown_EventScript_SignLadyDone)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY) == 1) goto(PalletTown_EventScript_SignLadyJustShowedSign)
-    if (var(SIGN_LADY_READY) == TRUE) goto(PalletTown_EventScript_SignLadyStartShowSign)
-    if (flag(FLAG_TEMP_2)) goto(PalletTown_EventScript_SignLadyGoReadSign)
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY) == 2) {
+        goto(PalletTown_EventScript_SignLadyDone)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY) == 1) {
+        goto(PalletTown_EventScript_SignLadyJustShowedSign)
+    }
+    if (var(SIGN_LADY_READY) == TRUE) {
+        goto(PalletTown_EventScript_SignLadyStartShowSign)
+    }
+    if (flag(FLAG_TEMP_2)) {
+        goto(PalletTown_EventScript_SignLadyGoReadSign)
+    }
     msgbox(PalletTown_Text_HmmIsThatRight)
     applymovement(LOCALID_PALLET_SIGN_LADY, Common_Movement_FacePlayer)
     waitmovement(0)
@@ -358,8 +390,12 @@ script PalletTown_EventScript_SignLady {
     waitmovement(0)
     msgbox(PalletTown_Text_OhLookLook)
     closemessage
-    if (var(VAR_FACING) == DIR_EAST) call(PalletTown_EventScript_SignLadyMoveOutOfWayRight)
-    if (var(VAR_FACING) != DIR_EAST) call(PalletTown_EventScript_SignLadyMoveOutOfWayLeft)
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(PalletTown_EventScript_SignLadyMoveOutOfWayRight)
+    }
+    if (var(VAR_FACING) != DIR_EAST) {
+        call(PalletTown_EventScript_SignLadyMoveOutOfWayLeft)
+    }
     copyobjectxytoperm(LOCALID_PALLET_SIGN_LADY)
     setflag(FLAG_TEMP_2)
     release

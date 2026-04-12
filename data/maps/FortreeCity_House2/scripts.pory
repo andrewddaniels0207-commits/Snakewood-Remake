@@ -3,8 +3,12 @@ mapscripts FortreeCity_House2_MapScripts {}
 script FortreeCity_House2_EventScript_HiddenPowerGiver {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_TM_HIDDEN_POWER)) goto(FortreeCity_House2_EventScript_ExplainHiddenPower)
-    if (!flag(FLAG_MET_HIDDEN_POWER_GIVER)) call(FortreeCity_House2_EventScript_Greeting)
+    if (flag(FLAG_RECEIVED_TM_HIDDEN_POWER)) {
+        goto(FortreeCity_House2_EventScript_ExplainHiddenPower)
+    }
+    if (!flag(FLAG_MET_HIDDEN_POWER_GIVER)) {
+        call(FortreeCity_House2_EventScript_Greeting)
+    }
     msgbox(FortreeCity_House2_Text_CoinInWhichHand, MSGBOX_DEFAULT)
     multichoice(21, 8, MULTI_RIGHTLEFT, TRUE)
     switch(VAR_RESULT)
@@ -19,7 +23,9 @@ script FortreeCity_House2_EventScript_HiddenPowerGiver {
     case(0, FortreeCity_House2_EventScript_WrongGuess)
     msgbox(FortreeCity_House2_Text_YourHiddenPowerHasAwoken, MSGBOX_DEFAULT)
     giveitem(ITEM_TM_HIDDEN_POWER)
-    if (var(VAR_RESULT) == 0) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == 0) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_TM_HIDDEN_POWER)
     msgbox(FortreeCity_House2_Text_ExplainHiddenPower, MSGBOX_DEFAULT)
     release

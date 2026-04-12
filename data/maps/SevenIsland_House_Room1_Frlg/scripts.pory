@@ -9,8 +9,12 @@ mapscripts SevenIsland_House_Room1_Frlg_MapScripts {
 
 script SevenIsland_House_Room1_OnTransition {
     special(ValidateEReaderTrainer)
-    if (var(VAR_RESULT) == 0) call(SevenIsland_House_Room1_EventScript_SetTrainerVisitingLayout)
-    if (var(VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1) != 0) call(SevenIsland_House_Room1_EventScript_MoveOldWomanToDoor)
+    if (var(VAR_RESULT) == 0) {
+        call(SevenIsland_House_Room1_EventScript_SetTrainerVisitingLayout)
+    }
+    if (var(VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1) != 0) {
+        call(SevenIsland_House_Room1_EventScript_MoveOldWomanToDoor)
+    }
     end
 }
 
@@ -38,9 +42,15 @@ script SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle {
     copyobjectxytoperm(LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN)
     applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
     waitmovement(0)
-    if (var(VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1) == 1) call(SevenIsland_House_Room1_EventScript_BattleWonComment)
-    if (var(VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1) == 2) call(SevenIsland_House_Room1_EventScript_BattleLostComment)
-    if (var(VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1) == 3) call(SevenIsland_House_Room1_EventScript_BattleTiedComment)
+    if (var(VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1) == 1) {
+        call(SevenIsland_House_Room1_EventScript_BattleWonComment)
+    }
+    if (var(VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1) == 2) {
+        call(SevenIsland_House_Room1_EventScript_BattleLostComment)
+    }
+    if (var(VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1) == 3) {
+        call(SevenIsland_House_Room1_EventScript_BattleTiedComment)
+    }
     special(LoadPlayerParty)
     setvar(VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 0)
     releaseall
@@ -77,8 +87,12 @@ script SevenIsland_House_Room1_EventScript_OldWoman {
     lock
     faceplayer
     special(ValidateEReaderTrainer)
-    if (var(VAR_RESULT) == 1) call(SevenIsland_House_Room1_EventScript_InvalidVisitingTrainer)
-    if (var(TRAINER_VISITING) == TRUE) goto(SevenIsland_House_Room1_EventScript_TrainerVisiting)
+    if (var(VAR_RESULT) == 1) {
+        call(SevenIsland_House_Room1_EventScript_InvalidVisitingTrainer)
+    }
+    if (var(TRAINER_VISITING) == TRUE) {
+        goto(SevenIsland_House_Room1_EventScript_TrainerVisiting)
+    }
     msgbox(SevenIsland_House_Room1_Text_OnlyEnjoymentWatchingBattles)
     release
     end
@@ -94,21 +108,35 @@ script SevenIsland_House_Room1_EventScript_TrainerVisiting {
     special(SavePlayerParty)
     special(BufferEReaderTrainerName)
     msgbox(SevenIsland_House_Room1_Text_ChallengeVisitingTrainer, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(SevenIsland_House_Room1_EventScript_DeclineBattle)
+    if (var(VAR_RESULT) == NO) {
+        goto(SevenIsland_House_Room1_EventScript_DeclineBattle)
+    }
     call(SevenIsland_House_Room1_EventScript_ChooseParty)
-    if (var(VAR_RESULT) == 0) goto(SevenIsland_House_Room1_EventScript_DeclineBattle)
+    if (var(VAR_RESULT) == 0) {
+        goto(SevenIsland_House_Room1_EventScript_DeclineBattle)
+    }
     msgbox(SevenIsland_House_Room1_Text_SaveProgressBeforeBattle, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(SevenIsland_House_Room1_EventScript_DeclineBattle)
+    if (var(VAR_RESULT) == NO) {
+        goto(SevenIsland_House_Room1_EventScript_DeclineBattle)
+    }
     special(LoadPlayerParty)
     call(Common_EventScript_SaveGame)
-    if (var(VAR_RESULT) == 0) goto(SevenIsland_House_Room1_EventScript_DeclineBattle)
+    if (var(VAR_RESULT) == 0) {
+        goto(SevenIsland_House_Room1_EventScript_DeclineBattle)
+    }
     special(SavePlayerParty)
     special(ReducePlayerPartyToSelectedMons)
     msgbox(SevenIsland_House_Room1_Text_DontHoldAnythingBack)
     closemessage
-    if (var(VAR_FACING) == DIR_NORTH) call(SevenIsland_House_Room1_EventScript_EnterBattleRoomNorth)
-    if (var(VAR_FACING) == DIR_EAST) call(SevenIsland_House_Room1_EventScript_EnterBattleRoomEast)
-    if (var(VAR_FACING) == DIR_WEST) call(SevenIsland_House_Room1_EventScript_EnterBattleRoomWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(SevenIsland_House_Room1_EventScript_EnterBattleRoomNorth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(SevenIsland_House_Room1_EventScript_EnterBattleRoomEast)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(SevenIsland_House_Room1_EventScript_EnterBattleRoomWest)
+    }
     warp(MAP_SEVEN_ISLAND_HOUSE_ROOM2, 3, 1)
     waitstate
     release

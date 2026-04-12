@@ -3,7 +3,9 @@ mapscripts CinnabarIsland_PokemonLab_Entrance_Frlg_MapScripts {
 }
 
 script CinnabarIsland_PokemonLab_Entrance_OnTransition {
-    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE) == 1) call(CinnabarIsland_PokemonLab_Entrance_EventScript_ReadyFossil)
+    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE) == 1) {
+        call(CinnabarIsland_PokemonLab_Entrance_EventScript_ReadyFossil)
+    }
     end
 }
 

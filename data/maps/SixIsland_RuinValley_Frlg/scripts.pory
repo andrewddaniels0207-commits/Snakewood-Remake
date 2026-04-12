@@ -3,7 +3,9 @@ mapscripts SixIsland_RuinValley_Frlg_MapScripts {
 }
 
 script SixIsland_RuinValley_OnLoad {
-    if (flag(FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE)) call(SixIsland_RuinValley_EventScript_OpenDottedHoleDoor)
+    if (flag(FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE)) {
+        call(SixIsland_RuinValley_EventScript_OpenDottedHoleDoor)
+    }
     end
 }
 
@@ -26,9 +28,13 @@ script SixIsland_RuinValley_EventScript_Scientist {
 
 script SixIsland_RuinValley_EventScript_DottedHoleDoor {
     lockall
-    if (flag(FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE)) goto(SixIsland_RuinValley_EventScript_DottedHoleDoorOpen)
+    if (flag(FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE)) {
+        goto(SixIsland_RuinValley_EventScript_DottedHoleDoorOpen)
+    }
     msgbox(SixIsland_RuinValley_Text_CheckDoorMoreThoroughly, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(SixIsland_RuinValley_EventScript_IgnoreDottedHoleDoor)
+    if (var(VAR_RESULT) == NO) {
+        goto(SixIsland_RuinValley_EventScript_IgnoreDottedHoleDoor)
+    }
     msgbox(SixIsland_RuinValley_Text_SeveralDotsOnTheDoor)
     braillemsgbox(Braille_Text_Cut)
     releaseall

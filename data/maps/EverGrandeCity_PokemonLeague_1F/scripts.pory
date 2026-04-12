@@ -6,7 +6,9 @@ mapscripts EverGrandeCity_PokemonLeague_1F_MapScripts {
 script EverGrandeCity_PokemonLeague_1F_OnTransition {
     setrespawn(HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE)
     setflag(FLAG_LANDMARK_POKEMON_LEAGUE)
-    if (!flag(FLAG_ENTERED_ELITE_FOUR)) call(EverGrandeCity_PokemonLeague_1F_EventScript_GuardsBlockDoor)
+    if (!flag(FLAG_ENTERED_ELITE_FOUR)) {
+        call(EverGrandeCity_PokemonLeague_1F_EventScript_GuardsBlockDoor)
+    }
     end
 }
 
@@ -42,14 +44,22 @@ script EverGrandeCity_PokemonLeague_1F_Pokemart {
 
 script EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard {
     lockall
-    if (flag(FLAG_ENTERED_ELITE_FOUR)) goto(EverGrandeCity_PokemonLeague_1F_EventScript_GoForth)
+    if (flag(FLAG_ENTERED_ELITE_FOUR)) {
+        goto(EverGrandeCity_PokemonLeague_1F_EventScript_GoForth)
+    }
     getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-    if (var(VAR_TEMP_0) >= 11) call(EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromRight)
-    if (var(VAR_TEMP_0) <= 8) call(EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromLeft)
+    if (var(VAR_TEMP_0) >= 11) {
+        call(EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromRight)
+    }
+    if (var(VAR_TEMP_0) <= 8) {
+        call(EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromLeft)
+    }
     message(EverGrandeCity_PokemonLeague_1F_Text_MustHaveAllGymBadges)
     waitmessage()
     delay(120)
-    if (!flag(FLAG_BADGE06_GET)) goto(EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges)
+    if (!flag(FLAG_BADGE06_GET)) {
+        goto(EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges)
+    }
     closemessage
     applymovement(LOCALID_LEAGUE_GUARD_1, EverGrandeCity_PokemonLeague_1F_Movement_LeftGuardOutOfWay)
     applymovement(LOCALID_LEAGUE_GUARD_2, EverGrandeCity_PokemonLeague_1F_Movement_RightGuardOutOfWay)

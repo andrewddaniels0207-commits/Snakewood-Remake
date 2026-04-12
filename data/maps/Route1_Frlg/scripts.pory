@@ -3,11 +3,15 @@ mapscripts Route1_Frlg_MapScripts {}
 script Route1_EventScript_MartClerk {
     lock
     faceplayer
-    if (flag(FLAG_GOT_POTION_ON_ROUTE_1)) goto(Route1_EventScript_AlreadyGotPotion)
+    if (flag(FLAG_GOT_POTION_ON_ROUTE_1)) {
+        goto(Route1_EventScript_AlreadyGotPotion)
+    }
     msgbox(Route1_Text_WorkAtPokeMartTakeSample)
     textcolor(NPC_TEXT_COLOR_NEUTRAL)
     checkitemspace(ITEM_POTION)
-    if (var(VAR_RESULT) == FALSE) goto(EventScript_BagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(EventScript_BagIsFull)
+    }
     bufferitemname(STR_VAR_2, ITEM_POTION)
     playfanfare(MUS_LEVEL_UP)
     message(gText_ObtainedTheItem)

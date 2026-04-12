@@ -4,7 +4,9 @@ mapscripts Route18_Frlg_MapScripts {
 }
 
 script Route18_OnTransition {
-    if (var(VAR_MAP_SCENE_ROUTE16) == 1) call(Route18_OnTransitionCyclingRoad)
+    if (var(VAR_MAP_SCENE_ROUTE16) == 1) {
+        call(Route18_OnTransitionCyclingRoad)
+    }
     end
 }
 

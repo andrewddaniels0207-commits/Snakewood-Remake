@@ -4,13 +4,17 @@ mapscripts Route119_MapScripts {
 }
 
 script Route119_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(Route119_EventScript_TryRemoveKecleon)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(Route119_EventScript_TryRemoveKecleon)
+    }
     end
 }
 
 script Route119_EventScript_TryRemoveKecleon {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
+        goto(Common_EventScript_NopReturn)
+    }
     removeobject(VAR_LAST_TALKED)
     return
 }
@@ -18,7 +22,9 @@ script Route119_EventScript_TryRemoveKecleon {
 script Route119_OnTransition {
     call(Common_EventScript_SetupRivalGfxId)
     call(Common_EventScript_SetupRivalOnBikeGfxId)
-    if (var(VAR_WEATHER_INSTITUTE_STATE) == 1) call(Route119_EventScript_MoveInstituteWorkersDownstairs)
+    if (var(VAR_WEATHER_INSTITUTE_STATE) == 1) {
+        call(Route119_EventScript_MoveInstituteWorkersDownstairs)
+    }
     special(SetRoute119Weather)
     end
 }
@@ -46,22 +52,38 @@ script Route119_EventScript_RivalEncounter {
     lockall
     addobject(LOCALID_ROUTE119_RIVAL_ON_BIKE)
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(Route119_EventScript_PlayMayMusic)
-    if (var(VAR_RESULT) == FEMALE) call(Route119_EventScript_PlayBrendanMusic)
+    if (var(VAR_RESULT) == MALE) {
+        call(Route119_EventScript_PlayMayMusic)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(Route119_EventScript_PlayBrendanMusic)
+    }
     delay(65)
-    if (var(VAR_TEMP_1) == 1) call(Route119_EventScript_RivalEnter1)
-    if (var(VAR_TEMP_1) == 2) call(Route119_EventScript_RivalEnter2)
+    if (var(VAR_TEMP_1) == 1) {
+        call(Route119_EventScript_RivalEnter1)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(Route119_EventScript_RivalEnter2)
+    }
     applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown)
     waitmovement(0)
     delay(30)
-    if (var(VAR_TEMP_1) == 1) call(Route119_EventScript_SetRivalPos1)
-    if (var(VAR_TEMP_1) == 2) call(Route119_EventScript_SetRivalPos2)
+    if (var(VAR_TEMP_1) == 1) {
+        call(Route119_EventScript_SetRivalPos1)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(Route119_EventScript_SetRivalPos2)
+    }
     removeobject(LOCALID_ROUTE119_RIVAL_ON_BIKE)
     addobject(LOCALID_ROUTE119_RIVAL)
     delay(30)
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(Route119_EventScript_BattleMay)
-    if (var(VAR_RESULT) == FEMALE) goto(Route119_EventScript_BattleBrendan)
+    if (var(VAR_RESULT) == MALE) {
+        goto(Route119_EventScript_BattleMay)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(Route119_EventScript_BattleBrendan)
+    }
     releaseall
     end
 }
@@ -154,28 +176,44 @@ script Route119_EventScript_GiveFlyHM {
 
 script Route119_EventScript_RivalExitScottArrive {
     closemessage
-    if (var(VAR_TEMP_1) == 1) call(Route119_EventScript_SetRivalPos1)
-    if (var(VAR_TEMP_1) == 2) call(Route119_EventScript_SetRivalPos2)
+    if (var(VAR_TEMP_1) == 1) {
+        call(Route119_EventScript_SetRivalPos1)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(Route119_EventScript_SetRivalPos2)
+    }
     removeobject(LOCALID_ROUTE119_RIVAL)
     addobject(LOCALID_ROUTE119_RIVAL_ON_BIKE)
     delay(30)
-    if (var(VAR_TEMP_1) == 1) call(Route119_EventScript_RivalExit1)
-    if (var(VAR_TEMP_1) == 2) call(Route119_EventScript_RivalExit2)
+    if (var(VAR_TEMP_1) == 1) {
+        call(Route119_EventScript_RivalExit1)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(Route119_EventScript_RivalExit2)
+    }
     removeobject(LOCALID_ROUTE119_RIVAL_ON_BIKE)
     setvar(VAR_ROUTE119_STATE, 1)
     savebgm(MUS_DUMMY)
     fadedefaultbgm()
     delay(60)
-    if (var(VAR_TEMP_1) == 1) call(Route119_EventScript_SetScottPos1)
-    if (var(VAR_TEMP_1) == 2) call(Route119_EventScript_SetScottPos2)
+    if (var(VAR_TEMP_1) == 1) {
+        call(Route119_EventScript_SetScottPos1)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(Route119_EventScript_SetScottPos2)
+    }
     addobject(LOCALID_ROUTE119_SCOTT)
     applymovement(LOCALID_ROUTE119_SCOTT, Route119_Movement_ScottEnter)
     waitmovement(0)
     addvar(VAR_SCOTT_STATE, 1)
     msgbox(Route119_Text_ScottWayToGoBeSeeingYou, MSGBOX_DEFAULT)
     closemessage
-    if (var(VAR_TEMP_1) == 1) call(Route119_EventScript_ScottExit1)
-    if (var(VAR_TEMP_1) == 2) call(Route119_EventScript_ScottExit2)
+    if (var(VAR_TEMP_1) == 1) {
+        call(Route119_EventScript_ScottExit1)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(Route119_EventScript_ScottExit2)
+    }
     removeobject(LOCALID_ROUTE119_SCOTT)
     releaseall
     end
@@ -399,7 +437,9 @@ script Route119_EventScript_Kent {
 script Route119_EventScript_Jackson {
     trainerbattle_single(TRAINER_JACKSON_1, Route119_Text_JacksonIntro, Route119_Text_JacksonDefeat, Route119_EventScript_RegisterJackson)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route119_EventScript_RematchJackson)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route119_EventScript_RematchJackson)
+    }
     msgbox(Route119_Text_JacksonPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -423,7 +463,9 @@ script Route119_EventScript_RematchJackson {
 script Route119_EventScript_Catherine {
     trainerbattle_single(TRAINER_CATHERINE_1, Route119_Text_CatherineIntro, Route119_Text_CatherineDefeat, Route119_EventScript_RegisterCatherine)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route119_EventScript_RematchCatherine)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route119_EventScript_RematchCatherine)
+    }
     msgbox(Route119_Text_CatherinePostBattle, MSGBOX_DEFAULT)
     release
     end

@@ -4,8 +4,12 @@ mapscripts Route104_MrBrineysHouse_MapScripts {
 
 script Route104_MrBrineysHouse_OnTransition {
     setflag(FLAG_LANDMARK_MR_BRINEY_HOUSE)
-    if (var(VAR_BRINEY_HOUSE_STATE) == 1) call(Route104_MrBrineysHouse_EventScript_SetBrineyPeekoPos)
-    if (flag(FLAG_RECEIVED_POKENAV)) call(Route104_MrBrineysHouse_EventScript_HideRustboroRival)
+    if (var(VAR_BRINEY_HOUSE_STATE) == 1) {
+        call(Route104_MrBrineysHouse_EventScript_SetBrineyPeekoPos)
+    }
+    if (flag(FLAG_RECEIVED_POKENAV)) {
+        call(Route104_MrBrineysHouse_EventScript_HideRustboroRival)
+    }
     end
 }
 
@@ -25,9 +29,15 @@ script Route104_MrBrineysHouse_EventScript_SetBrineyPeekoPos {
 script Route104_MrBrineysHouse_EventScript_Briney {
     lock
     faceplayer
-    if (!flag(FLAG_MR_BRINEY_SAILING_INTRO)) call(Route104_MrBrineysHouse_EventScript_SailingIntro)
-    if (!flag(FLAG_DELIVERED_STEVEN_LETTER)) goto(Route104_MrBrineysHouse_EventScript_SailBothDeliveries)
-    if (!flag(FLAG_DELIVERED_DEVON_GOODS)) goto(Route104_MrBrineysHouse_EventScript_SailDeliverPackage)
+    if (!flag(FLAG_MR_BRINEY_SAILING_INTRO)) {
+        call(Route104_MrBrineysHouse_EventScript_SailingIntro)
+    }
+    if (!flag(FLAG_DELIVERED_STEVEN_LETTER)) {
+        goto(Route104_MrBrineysHouse_EventScript_SailBothDeliveries)
+    }
+    if (!flag(FLAG_DELIVERED_DEVON_GOODS)) {
+        goto(Route104_MrBrineysHouse_EventScript_SailDeliverPackage)
+    }
     goto(Route104_MrBrineysHouse_EventScript_WhereAreWeBound)
     end
 }
@@ -36,7 +46,9 @@ script Route104_MrBrineysHouse_EventScript_SailingIntro {
     setflag(FLAG_MR_BRINEY_SAILING_INTRO)
     msgbox(Route104_MrBrineysHouse_Text_WaitUpPeeko, MSGBOX_DEFAULT)
     msgbox(Route104_MrBrineysHouse_Text_ItsYouLetsSailToDewford, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing)
+    }
     goto(Route104_MrBrineysHouse_EventScript_SailToDewford)
     end
 }
@@ -54,14 +66,18 @@ script Route104_MrBrineysHouse_EventScript_WhereAreWeBound {
 
 script Route104_MrBrineysHouse_EventScript_SailBothDeliveries {
     msgbox(Route104_MrBrineysHouse_Text_NeedToMakeDeliveriesSailToDewford, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing)
+    }
     goto(Route104_MrBrineysHouse_EventScript_SailToDewford)
     end
 }
 
 script Route104_MrBrineysHouse_EventScript_SailDeliverPackage {
     msgbox(Route104_MrBrineysHouse_Text_NeedToDeliverPackageSailToDewford, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing)
+    }
     goto(Route104_MrBrineysHouse_EventScript_SailToDewford)
     end
 }

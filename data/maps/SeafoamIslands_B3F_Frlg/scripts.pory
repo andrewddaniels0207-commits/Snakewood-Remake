@@ -6,16 +6,26 @@ mapscripts SeafoamIslands_B3F_Frlg_MapScripts {
 }
 
 script SeafoamIslands_B3F_OnTransition {
-    if (!flag(FLAG_STOPPED_SEAFOAM_B3F_CURRENT)) call(SeafoamIslands_B3F_EventScript_CheckStoppedCurrent)
-    if (flag(FLAG_STOPPED_SEAFOAM_B3F_CURRENT)) call(SeafoamIslands_B3F_EventScript_SetNoCurrentLayout)
+    if (!flag(FLAG_STOPPED_SEAFOAM_B3F_CURRENT)) {
+        call(SeafoamIslands_B3F_EventScript_CheckStoppedCurrent)
+    }
+    if (flag(FLAG_STOPPED_SEAFOAM_B3F_CURRENT)) {
+        call(SeafoamIslands_B3F_EventScript_SetNoCurrentLayout)
+    }
     end
 }
 
 script SeafoamIslands_B3F_EventScript_CheckStoppedCurrent {
     setvar(NUM_BOULDERS_PRESENT, 0)
-    if (!flag(FLAG_HIDE_SEAFOAM_B3F_BOULDER_1)) call(SeafoamIslands_B3F_EventScript_AddBoulderPresent)
-    if (!flag(FLAG_HIDE_SEAFOAM_B3F_BOULDER_2)) call(SeafoamIslands_B3F_EventScript_AddBoulderPresent)
-    if (var(NUM_BOULDERS_PRESENT) == 2) call(SeafoamIslands_B3F_EventScript_StoppedCurrent)
+    if (!flag(FLAG_HIDE_SEAFOAM_B3F_BOULDER_1)) {
+        call(SeafoamIslands_B3F_EventScript_AddBoulderPresent)
+    }
+    if (!flag(FLAG_HIDE_SEAFOAM_B3F_BOULDER_2)) {
+        call(SeafoamIslands_B3F_EventScript_AddBoulderPresent)
+    }
+    if (var(NUM_BOULDERS_PRESENT) == 2) {
+        call(SeafoamIslands_B3F_EventScript_StoppedCurrent)
+    }
     return
 }
 
@@ -32,12 +42,22 @@ script SeafoamIslands_B3F_EventScript_SetNoCurrentLayout {
 script SeafoamIslands_B3F_EventScript_EnterByFalling {
     lockall
     setvar(NUM_BOULDERS_PRESENT, 0)
-    if (!flag(FLAG_HIDE_SEAFOAM_B3F_BOULDER_1)) call(SeafoamIslands_B3F_EventScript_AddBoulderPresent)
-    if (!flag(FLAG_HIDE_SEAFOAM_B3F_BOULDER_2)) call(SeafoamIslands_B3F_EventScript_AddBoulderPresent)
-    if (var(NUM_BOULDERS_PRESENT) == 2) goto(SeafoamIslands_B3F_EventScript_CurrentBlocked)
+    if (!flag(FLAG_HIDE_SEAFOAM_B3F_BOULDER_1)) {
+        call(SeafoamIslands_B3F_EventScript_AddBoulderPresent)
+    }
+    if (!flag(FLAG_HIDE_SEAFOAM_B3F_BOULDER_2)) {
+        call(SeafoamIslands_B3F_EventScript_AddBoulderPresent)
+    }
+    if (var(NUM_BOULDERS_PRESENT) == 2) {
+        goto(SeafoamIslands_B3F_EventScript_CurrentBlocked)
+    }
     getplayerxy(VAR_0x8008, VAR_0x8009)
-    if (var(VAR_0x8008) < 24) call(SeafoamIslands_B3F_EventScript_RideCurrentFar)
-    if (var(VAR_0x8008) >= 24) call(SeafoamIslands_B3F_EventScript_RideCurrentClose)
+    if (var(VAR_0x8008) < 24) {
+        call(SeafoamIslands_B3F_EventScript_RideCurrentFar)
+    }
+    if (var(VAR_0x8008) >= 24) {
+        call(SeafoamIslands_B3F_EventScript_RideCurrentClose)
+    }
     setvar(VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 1)
     warp(MAP_SEAFOAM_ISLANDS_B4F, 27, 21)
     waitstate

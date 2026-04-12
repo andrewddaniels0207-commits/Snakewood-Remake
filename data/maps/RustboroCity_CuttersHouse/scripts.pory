@@ -3,7 +3,9 @@ mapscripts RustboroCity_CuttersHouse_MapScripts {}
 script RustboroCity_CuttersHouse_EventScript_Cutter {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_HM_CUT)) goto(RustboroCity_CuttersHouse_EventScript_ExplainCut)
+    if (flag(FLAG_RECEIVED_HM_CUT)) {
+        goto(RustboroCity_CuttersHouse_EventScript_ExplainCut)
+    }
     msgbox(RustboroCity_CuttersHouse_Text_YouCanPutThisHMToGoodUse, MSGBOX_DEFAULT)
     giveitem(ITEM_HM_CUT)
     setflag(FLAG_RECEIVED_HM_CUT)

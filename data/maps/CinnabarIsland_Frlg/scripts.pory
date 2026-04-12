@@ -10,9 +10,15 @@ mapscripts CinnabarIsland_Frlg_MapScripts {
 script CinnabarIsland_OnTransition {
     setworldmapflag(FLAG_WORLD_MAP_CINNABAR_ISLAND)
     call(CinnabarIsland_EventScript_CheckUnlockGym)
-    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND) == 1) call(CinnabarIsland_EventScript_ReadyObjectsSailToOneIsland)
-    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND) == 3) call(CinnabarIsland_EventScript_ReadyObjectsReturnFromSeviiIslands)
-    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_2) == 1) call(CinnabarIsland_EventScript_ReadyObjectsSailToOneIslandFromPokeCenter)
+    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND) == 1) {
+        call(CinnabarIsland_EventScript_ReadyObjectsSailToOneIsland)
+    }
+    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND) == 3) {
+        call(CinnabarIsland_EventScript_ReadyObjectsReturnFromSeviiIslands)
+    }
+    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_2) == 1) {
+        call(CinnabarIsland_EventScript_ReadyObjectsSailToOneIslandFromPokeCenter)
+    }
     end
 }
 
@@ -27,7 +33,9 @@ script CinnabarIsland_EventScript_ReadyObjectsSailToOneIslandFromPokeCenter {
 
 script CinnabarIsland_EventScript_ReadyObjectsSailToOneIsland {
     getplayerxy(VAR_0x8004, VAR_0x8005)
-    if (var(VAR_0x8004) >= 18) goto(CinnabarIsland_EventScript_MoveSeagallopDown)
+    if (var(VAR_0x8004) >= 18) {
+        goto(CinnabarIsland_EventScript_MoveSeagallopDown)
+    }
     setflag(FLAG_TEMP_2)
     setobjectxyperm(LOCALID_CINNABAR_BILL, 18, 12)
     setobjectmovementtype(LOCALID_CINNABAR_BILL, MOVEMENT_TYPE_FACE_UP)
@@ -47,7 +55,9 @@ script CinnabarIsland_EventScript_ReadyObjectsReturnFromSeviiIslands {
 }
 
 script CinnabarIsland_EventScript_CheckUnlockGym {
-    if (flag(FLAG_HIDE_POKEMON_MANSION_B1F_SECRET_KEY)) goto(CinnabarIsland_EventScript_UnlockGym)
+    if (flag(FLAG_HIDE_POKEMON_MANSION_B1F_SECRET_KEY)) {
+        goto(CinnabarIsland_EventScript_UnlockGym)
+    }
     return
 }
 
@@ -96,19 +106,31 @@ movement CinnabarIsland_Movement_BillExit {
 script CinnabarIsland_EventScript_BillScene {
     lockall
     textcolor(NPC_TEXT_COLOR_MALE)
-    if (!flag(FLAG_TEMP_2)) call(CinnabarIsland_EventScript_BillFacePlayer1)
-    if (flag(FLAG_TEMP_2)) call(CinnabarIsland_EventScript_BillFacePlayer2)
+    if (!flag(FLAG_TEMP_2)) {
+        call(CinnabarIsland_EventScript_BillFacePlayer1)
+    }
+    if (flag(FLAG_TEMP_2)) {
+        call(CinnabarIsland_EventScript_BillFacePlayer2)
+    }
     playse(SE_PIN)
     applymovement(LOCALID_CINNABAR_BILL, Common_Movement_ExclamationMark)
     waitmovement(0)
     applymovement(LOCALID_CINNABAR_BILL, Common_Movement_Delay48)
     waitmovement(0)
-    if (!flag(FLAG_TEMP_2)) call(CinnabarIsland_EventScript_BillApproachPlayer1)
-    if (flag(FLAG_TEMP_2)) call(CinnabarIsland_EventScript_BillApproachPlayer2)
+    if (!flag(FLAG_TEMP_2)) {
+        call(CinnabarIsland_EventScript_BillApproachPlayer1)
+    }
+    if (flag(FLAG_TEMP_2)) {
+        call(CinnabarIsland_EventScript_BillApproachPlayer2)
+    }
     msgbox(CinnabarIsland_Text_HeyIfItIsntPlayer)
     msgbox(CinnabarIsland_Text_ComeWithMeToOneIsland, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(CinnabarIsland_EventScript_AgreeSailToOneIsland)
-    if (var(VAR_RESULT) == NO) goto(CinnabarIsland_EventScript_DeclineSailToOneIsland)
+    if (var(VAR_RESULT) == YES) {
+        goto(CinnabarIsland_EventScript_AgreeSailToOneIsland)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(CinnabarIsland_EventScript_DeclineSailToOneIsland)
+    }
     end
 }
 
@@ -149,8 +171,12 @@ script CinnabarIsland_EventScript_AgreeSailToOneIsland {
 script CinnabarIsland_EventScript_DeclineSailToOneIsland {
     msgbox(CinnabarIsland_Text_IllBeWaitingInPokeCenter)
     closemessage
-    if (!flag(FLAG_TEMP_2)) call(CinnabarIsland_EventScript_BillExitToPokeCenter)
-    if (flag(FLAG_TEMP_2)) call(CinnabarIsland_EventScript_BillReturnToPokeCenter)
+    if (!flag(FLAG_TEMP_2)) {
+        call(CinnabarIsland_EventScript_BillExitToPokeCenter)
+    }
+    if (flag(FLAG_TEMP_2)) {
+        call(CinnabarIsland_EventScript_BillReturnToPokeCenter)
+    }
     removeobject(LOCALID_CINNABAR_BILL)
     setvar(VAR_MAP_SCENE_CINNABAR_ISLAND, 2)
     clearflag(FLAG_HIDE_CINNABAR_POKECENTER_BILL)
@@ -209,14 +235,24 @@ movement CinnabarIsland_Movement_BillReEnterPokeCenter {
 }
 
 script CinnabarIsland_EventScript_SailToOneIsland {
-    if (flag(FLAG_TEMP_2)) call(CinnabarIsland_EventScript_ApproachShore)
+    if (flag(FLAG_TEMP_2)) {
+        call(CinnabarIsland_EventScript_ApproachShore)
+    }
     addobject(LOCALID_CINNABAR_SEAGALLOP)
-    if (!flag(FLAG_TEMP_2)) call(CinnabarIsland_EventScript_BoatArrive)
-    if (flag(FLAG_TEMP_2)) call(CinnabarIsland_EventScript_BoatArriveExitedPokeCenter)
+    if (!flag(FLAG_TEMP_2)) {
+        call(CinnabarIsland_EventScript_BoatArrive)
+    }
+    if (flag(FLAG_TEMP_2)) {
+        call(CinnabarIsland_EventScript_BoatArriveExitedPokeCenter)
+    }
     msgbox(CinnabarIsland_Text_MyPalsBoatArrived)
     closemessage
-    if (!flag(FLAG_TEMP_2)) call(CinnabarIsland_EventScript_BoardBoat)
-    if (flag(FLAG_TEMP_2)) call(CinnabarIsland_EventScript_BoardBoatExitedPokeCenter)
+    if (!flag(FLAG_TEMP_2)) {
+        call(CinnabarIsland_EventScript_BoardBoat)
+    }
+    if (flag(FLAG_TEMP_2)) {
+        call(CinnabarIsland_EventScript_BoardBoatExitedPokeCenter)
+    }
     setvar(VAR_MAP_SCENE_CINNABAR_ISLAND, 2)
     removeobject(LOCALID_CINNABAR_BILL)
     delay(40)

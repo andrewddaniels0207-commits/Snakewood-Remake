@@ -3,7 +3,9 @@ mapscripts Route12_Frlg_MapScripts {
 }
 
 script Route12_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(Route12_EventScript_TryRemoveSnorlax)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(Route12_EventScript_TryRemoveSnorlax)
+    }
     end
 }
 
@@ -15,9 +17,13 @@ script Route12_EventScript_TryRemoveSnorlax {
 script Route12_EventScript_Snorlax {
     lock
     faceplayer
-    if (!flag(FLAG_GOT_POKE_FLUTE)) goto(Route12_EventScript_SnorlaxNoPokeFlute)
+    if (!flag(FLAG_GOT_POKE_FLUTE)) {
+        goto(Route12_EventScript_SnorlaxNoPokeFlute)
+    }
     msgbox(Text_WantToUsePokeFlute, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route12_EventScript_DontUsePokeFlute)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route12_EventScript_DontUsePokeFlute)
+    }
     call(EventScript_AwakenSnorlax)
     setwildbattle(SPECIES_SNORLAX, 30)
     waitse()
@@ -30,9 +36,15 @@ script Route12_EventScript_Snorlax {
     dowildbattle()
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(Route12_EventScript_FoughtSnorlax)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(Route12_EventScript_FoughtSnorlax)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(Route12_EventScript_FoughtSnorlax)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(Route12_EventScript_FoughtSnorlax)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(Route12_EventScript_FoughtSnorlax)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(Route12_EventScript_FoughtSnorlax)
+    }
     release
     end
 }

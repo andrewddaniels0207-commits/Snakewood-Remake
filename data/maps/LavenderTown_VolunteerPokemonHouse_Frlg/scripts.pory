@@ -3,10 +3,14 @@ mapscripts LavenderTown_VolunteerPokemonHouse_Frlg_MapScripts {}
 script LavenderTown_VolunteerPokemonHouse_EventScript_MrFuji {
     lock
     faceplayer
-    if (flag(FLAG_GOT_POKE_FLUTE)) goto(LavenderTown_VolunteerPokemonHouse_EventScript_AlreadyHavePokeFlute)
+    if (flag(FLAG_GOT_POKE_FLUTE)) {
+        goto(LavenderTown_VolunteerPokemonHouse_EventScript_AlreadyHavePokeFlute)
+    }
     msgbox(LavenderTown_VolunteerPokemonHouse_Text_IdLikeYouToHaveThis)
     checkitemspace(ITEM_POKE_FLUTE)
-    if (var(VAR_RESULT) == FALSE) goto(LavenderTown_VolunteerPokemonHouse_EventScript_NoRoomForPokeFlute)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(LavenderTown_VolunteerPokemonHouse_EventScript_NoRoomForPokeFlute)
+    }
     setflag(FLAG_GOT_POKE_FLUTE)
     giveitem_msg(LavenderTown_VolunteerPokemonHouse_Text_ReceivedPokeFluteFromMrFuji, ITEM_POKE_FLUTE, 1, MUS_RG_OBTAIN_KEY_ITEM)
     msgbox(LavenderTown_VolunteerPokemonHouse_Text_ExplainPokeFlute)
@@ -43,7 +47,9 @@ script LavenderTown_VolunteerPokemonHouse_EventScript_LittleBoy {
 script LavenderTown_VolunteerPokemonHouse_EventScript_Youngster {
     lock
     faceplayer
-    if (flag(FLAG_RESCUED_MR_FUJI)) goto(LavenderTown_VolunteerPokemonHouse_EventScript_YoungsterFujiBack)
+    if (flag(FLAG_RESCUED_MR_FUJI)) {
+        goto(LavenderTown_VolunteerPokemonHouse_EventScript_YoungsterFujiBack)
+    }
     msgbox(LavenderTown_VolunteerPokemonHouse_Text_WhereDidMrFujiGo)
     release
     end

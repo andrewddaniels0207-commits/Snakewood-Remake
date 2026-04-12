@@ -4,9 +4,13 @@ script MirageTower_4F_EventScript_RootFossil {
     lock
     faceplayer
     msgbox(MirageTower_4F_Text_TakeRootFossil, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(MirageTower_4F_EventScript_LeaveRootFossil)
+    if (var(VAR_RESULT) == NO) {
+        goto(MirageTower_4F_EventScript_LeaveRootFossil)
+    }
     giveitem(ITEM_ROOT_FOSSIL)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     closemessage
     setflag(FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL)
     setflag(FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL)
@@ -27,9 +31,13 @@ script MirageTower_4F_EventScript_ClawFossil {
     lock
     faceplayer
     msgbox(MirageTower_4F_Text_TakeClawFossil, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(MirageTower_4F_EventScript_LeaveClawFossil)
+    if (var(VAR_RESULT) == NO) {
+        goto(MirageTower_4F_EventScript_LeaveClawFossil)
+    }
     giveitem(ITEM_CLAW_FOSSIL)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     closemessage
     setflag(FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL)
     setflag(FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL)

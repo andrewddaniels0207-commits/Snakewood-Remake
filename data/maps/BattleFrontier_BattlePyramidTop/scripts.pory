@@ -24,7 +24,9 @@ BattleFrontier_BattlePyramidTop_OnWarp:
 script BattleFrontier_BattlePyramidTop_EventScript_SetUpObjects {
     setvar(VAR_TEMP_1, 1)
     turnobject(LOCALID_PLAYER, DIR_NORTH)
-    if (var(VAR_TEMP_C) != 0) goto(BattleFrontier_BattlePyramidTop_EventScript_EndSetUpObjects)
+    if (var(VAR_TEMP_C) != 0) {
+        goto(BattleFrontier_BattlePyramidTop_EventScript_EndSetUpObjects)
+    }
     setobjectxyperm(LOCALID_BRANDON, 0, 0)
 }
 
@@ -34,7 +36,9 @@ script BattleFrontier_BattlePyramidTop_EventScript_EndSetUpObjects {
 
 script BattleFrontier_BattlePyramidTop_OnResume {
     frontier_getbrainstatus()
-    if (var(VAR_RESULT) == FRONTIER_BRAIN_NOT_READY) goto(BattleFrontier_BattlePyramidTop_EventScript_CheckChallengeStatus)
+    if (var(VAR_RESULT) == FRONTIER_BRAIN_NOT_READY) {
+        goto(BattleFrontier_BattlePyramidTop_EventScript_CheckChallengeStatus)
+    }
     call(BattleFrontier_EventScript_SetBrainObjectGfx)
 }
 
@@ -46,9 +50,15 @@ script BattleFrontier_BattlePyramidTop_EventScript_CheckChallengeStatus {
     case(CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePyramid_EventScript_WarpToLobby)
     case(CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePyramidTop_EventScript_ReadyChallenge)
     frontier_get(FRONTIER_DATA_BATTLE_OUTCOME)
-    if (var(VAR_RESULT) == B_OUTCOME_LOST) goto(BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost)
-    if (var(VAR_RESULT) == B_OUTCOME_DREW) goto(BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost)
-    if (var(VAR_RESULT) == B_OUTCOME_FORFEITED) goto(BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost)
+    if (var(VAR_RESULT) == B_OUTCOME_LOST) {
+        goto(BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_DREW) {
+        goto(BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_FORFEITED) {
+        goto(BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost)
+    }
     end
 }
 
@@ -77,8 +87,12 @@ script BattleFrontier_BattlePyramidTop_EventScript_ReadyChallenge {
 script BattleFrontier_BattlePyramidTop_EventScript_Attendant {
     lock
     faceplayer
-    if (var(VAR_TEMP_D) != 0) goto(BattleFrontier_BattlePyramidTop_EventScript_StepForwardWhenReady)
-    if (var(VAR_TEMP_C) != FRONTIER_BRAIN_NOT_READY) goto(BattleFrontier_BattlePyramidTop_EventScript_BrandonHereMoveAside)
+    if (var(VAR_TEMP_D) != 0) {
+        goto(BattleFrontier_BattlePyramidTop_EventScript_StepForwardWhenReady)
+    }
+    if (var(VAR_TEMP_C) != FRONTIER_BRAIN_NOT_READY) {
+        goto(BattleFrontier_BattlePyramidTop_EventScript_BrandonHereMoveAside)
+    }
     msgbox(BattleFrontier_BattlePyramidTop_Text_ReachedSummitUpYouGo, MSGBOX_DEFAULT)
     closemessage
     applymovement(LOCALID_PYRAMID_TOP_ATTENDANT, BattleFrontier_BattlePyramidTop_Movement_AttendantMoveAside)
@@ -122,7 +136,9 @@ script BattleFrontier_BattlePyramidTop_EventScript_BattleBrandon {
     case(FRONTIER_BRAIN_STREAK, BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardSilverSpeech)
     case(FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardGoldSpeech)
     frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
-    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardSilverSpeech)
+    if (var(VAR_RESULT) != FALSE) {
+        goto(BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardSilverSpeech)
+    }
     special(SpawnCameraObject)
     applymovement(LOCALID_CAMERA, BattleFrontier_BattlePyramidTop_Movement_CameraPanUp)
     waitmovement(0)
@@ -145,13 +161,17 @@ script BattleFrontier_BattlePyramidTop_EventScript_BattleBrandonSilver {
     msgbox(BattleFrontier_BattlePyramidTop_Text_BringCourageToOurBattle, MSGBOX_DEFAULT)
     call(BattleFrontier_BattlePyramidTop_EventScript_DoBrandonBattle)
     playbgm(MUS_B_PYRAMID_TOP, FALSE)
-    if (var(VAR_RESULT) == 1) goto(BattleFrontier_BattlePyramidTop_EventScript_DefeatedBrandonSilver)
+    if (var(VAR_RESULT) == 1) {
+        goto(BattleFrontier_BattlePyramidTop_EventScript_DefeatedBrandonSilver)
+    }
     goto(BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost)
 }
 
 script BattleFrontier_BattlePyramidTop_EventScript_DefeatedBrandonSilver {
     frontier_getsymbols()
-    if (var(VAR_RESULT) != 0) goto(BattleFrontier_BattlePyramidTop_EventScript_WarpToLobbyWon)
+    if (var(VAR_RESULT) != 0) {
+        goto(BattleFrontier_BattlePyramidTop_EventScript_WarpToLobbyWon)
+    }
     msgbox(BattleFrontier_BattlePyramidTop_Text_BrandonFrontierPassPlease, MSGBOX_DEFAULT)
     playfanfare(MUS_OBTAIN_SYMBOL)
     message(BattleFrontier_BattlePyramidTop_Text_ReceivedBraveSymbol)
@@ -164,7 +184,9 @@ script BattleFrontier_BattlePyramidTop_EventScript_DefeatedBrandonSilver {
 
 script BattleFrontier_BattlePyramidTop_EventScript_BrandonIntroGold {
     frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
-    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardGoldSpeech)
+    if (var(VAR_RESULT) != FALSE) {
+        goto(BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardGoldSpeech)
+    }
     special(SpawnCameraObject)
     applymovement(LOCALID_CAMERA, BattleFrontier_BattlePyramidTop_Movement_CameraPanUp)
     waitmovement(0)
@@ -187,13 +209,17 @@ script BattleFrontier_BattlePyramidTop_EventScript_BattleBrandonGold {
     msgbox(BattleFrontier_BattlePyramidTop_Text_EverythingYouHave, MSGBOX_DEFAULT)
     call(BattleFrontier_BattlePyramidTop_EventScript_DoBrandonBattle)
     playbgm(MUS_B_PYRAMID_TOP, FALSE)
-    if (var(VAR_RESULT) == 1) goto(BattleFrontier_BattlePyramidTop_EventScript_DefeatedBrandonGold)
+    if (var(VAR_RESULT) == 1) {
+        goto(BattleFrontier_BattlePyramidTop_EventScript_DefeatedBrandonGold)
+    }
     goto(BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost)
 }
 
 script BattleFrontier_BattlePyramidTop_EventScript_DefeatedBrandonGold {
     frontier_getsymbols()
-    if (var(VAR_RESULT) == 2) goto(BattleFrontier_BattlePyramidTop_EventScript_WarpToLobbyWon)
+    if (var(VAR_RESULT) == 2) {
+        goto(BattleFrontier_BattlePyramidTop_EventScript_WarpToLobbyWon)
+    }
     msgbox(BattleFrontier_BattlePyramidTop_Text_BrandonRemarkableHaveThis, MSGBOX_DEFAULT)
     playfanfare(MUS_OBTAIN_SYMBOL)
     message(BattleFrontier_BattlePyramidTop_Text_BraveSymbolTookGoldenShine)

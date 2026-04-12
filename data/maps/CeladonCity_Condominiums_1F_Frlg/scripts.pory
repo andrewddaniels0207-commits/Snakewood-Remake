@@ -3,13 +3,21 @@ mapscripts CeladonCity_Condominiums_1F_Frlg_MapScripts {}
 script CeladonCity_Condominiums_1F_EventScript_TeaWoman {
     lock
     faceplayer
-    if (flag(FLAG_TALKED_TO_TEA_LADY_AFTER_HOF)) goto(CeladonCity_Condominiums_1F_EventScript_TeaWomanAfterTea)
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(CeladonCity_Condominiums_1F_EventScript_TeaWomanMentionDaisy)
-    if (flag(FLAG_GOT_TEA)) goto(CeladonCity_Condominiums_1F_EventScript_TeaWomanAfterTea)
+    if (flag(FLAG_TALKED_TO_TEA_LADY_AFTER_HOF)) {
+        goto(CeladonCity_Condominiums_1F_EventScript_TeaWomanAfterTea)
+    }
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(CeladonCity_Condominiums_1F_EventScript_TeaWomanMentionDaisy)
+    }
+    if (flag(FLAG_GOT_TEA)) {
+        goto(CeladonCity_Condominiums_1F_EventScript_TeaWomanAfterTea)
+    }
     msgbox(CeladonCity_Condominiums_1F_Text_TryThisDrinkInstead)
     setflag(FLAG_GOT_TEA)
     giveitem(ITEM_TEA)
-    if (var(VAR_RESULT) == FALSE) goto(EventScript_BagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(EventScript_BagIsFull)
+    }
     msgbox(CeladonCity_Condominiums_1F_Text_NothingBeatsThirstLikeTea)
     release
     end

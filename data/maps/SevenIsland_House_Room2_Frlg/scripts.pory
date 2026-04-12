@@ -21,9 +21,15 @@ script SevenIsland_House_Room2_EventScript_BattleVisitingTrainer {
     setvar(VAR_0x8005, 0)
     special(DoSpecialTrainerBattle)
     waitstate
-    if (var(VAR_RESULT) == 3) call(SevenIsland_House_Room2_EventScript_BattleTie)
-    if (var(VAR_RESULT) == 1) call(SevenIsland_House_Room2_EventScript_BattleWon)
-    if (var(VAR_RESULT) == 2) call(SevenIsland_House_Room2_EventScript_BattleLost)
+    if (var(VAR_RESULT) == 3) {
+        call(SevenIsland_House_Room2_EventScript_BattleTie)
+    }
+    if (var(VAR_RESULT) == 1) {
+        call(SevenIsland_House_Room2_EventScript_BattleWon)
+    }
+    if (var(VAR_RESULT) == 2) {
+        call(SevenIsland_House_Room2_EventScript_BattleLost)
+    }
     closemessage
     special(HealPlayerParty)
     applymovement(LOCALID_PLAYER, SevenIsland_House_Room2_Movement_PlayerExitRoom)

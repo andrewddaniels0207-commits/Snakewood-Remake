@@ -64,8 +64,12 @@ script LavaridgeTown_Gym_1F_EventScript_EndCheckBuryTrainers {
 script LavaridgeTown_Gym_1F_EventScript_Flannery {
     trainerbattle_single(TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_FlanneryIntro, LavaridgeTown_Gym_1F_Text_FlanneryDefeat, LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated, NO_MUSIC)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(LavaridgeTown_Gym_1F_EventScript_FlanneryRematch)
-    if (!flag(FLAG_RECEIVED_TM_OVERHEAT)) goto(LavaridgeTown_Gym_1F_EventScript_GiveOverheat2)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LavaridgeTown_Gym_1F_EventScript_FlanneryRematch)
+    }
+    if (!flag(FLAG_RECEIVED_TM_OVERHEAT)) {
+        goto(LavaridgeTown_Gym_1F_EventScript_GiveOverheat2)
+    }
     msgbox(LavaridgeTown_Gym_1F_Text_FlanneryPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -80,7 +84,9 @@ script LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated {
     setflag(FLAG_DEFEATED_LAVARIDGE_GYM)
     setflag(FLAG_BADGE04_GET)
     addvar(VAR_PETALBURG_GYM_STATE, 1)
-    if (var(VAR_PETALBURG_GYM_STATE) == 6) call(Common_EventScript_ReadyPetalburgGymForBattle)
+    if (var(VAR_PETALBURG_GYM_STATE) == 6) {
+        call(Common_EventScript_ReadyPetalburgGymForBattle)
+    }
     setvar(VAR_0x8008, 4)
     call(Common_EventScript_SetGymTrainers)
     setflag(FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY)
@@ -100,7 +106,9 @@ script LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated {
 
 script LavaridgeTown_Gym_1F_EventScript_GiveOverheat2 {
     giveitem(ITEM_TM_OVERHEAT)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     msgbox(LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT)
     setflag(FLAG_RECEIVED_TM_OVERHEAT)
     release
@@ -109,7 +117,9 @@ script LavaridgeTown_Gym_1F_EventScript_GiveOverheat2 {
 
 script LavaridgeTown_Gym_1F_EventScript_GiveOverheat {
     giveitem(ITEM_TM_OVERHEAT)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_BagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_BagIsFull)
+    }
     msgbox(LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT)
     setflag(FLAG_RECEIVED_TM_OVERHEAT)
     return
@@ -131,7 +141,9 @@ script LavaridgeTown_Gym_EventScript_CheckTrainerScript {
     call(LavaridgeTown_Gym_1F_EventScript_SetTrainerTempVars)
     release
     special(ShouldTryGetTrainerScript)
-    if (var(VAR_RESULT) == 1) goto(EventScript_GotoTrainerScript)
+    if (var(VAR_RESULT) == 1) {
+        goto(EventScript_GotoTrainerScript)
+    }
     end
 }
 
@@ -180,7 +192,9 @@ script LavaridgeTown_Gym_B1F_EventScript_Eli {
 script LavaridgeTown_Gym_1F_EventScript_GymGuide {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_LAVARIDGE_GYM)) goto(LavaridgeTown_Gym_1F_EventScript_GymGuidePostVictory)
+    if (flag(FLAG_DEFEATED_LAVARIDGE_GYM)) {
+        goto(LavaridgeTown_Gym_1F_EventScript_GymGuidePostVictory)
+    }
     msgbox(LavaridgeTown_Gym_1F_Text_GymGuideAdvice, MSGBOX_DEFAULT)
     release
     end
@@ -194,14 +208,18 @@ script LavaridgeTown_Gym_1F_EventScript_GymGuidePostVictory {
 
 script LavaridgeTown_Gym_1F_EventScript_LeftGymStatue {
     lockall
-    if (flag(FLAG_BADGE04_GET)) goto(LavaridgeTown_Gym_1F_EventScript_GymStatueCertified)
+    if (flag(FLAG_BADGE04_GET)) {
+        goto(LavaridgeTown_Gym_1F_EventScript_GymStatueCertified)
+    }
     goto(LavaridgeTown_Gym_1F_EventScript_GymStatue)
     end
 }
 
 script LavaridgeTown_Gym_1F_EventScript_RightGymStatue {
     lockall
-    if (flag(FLAG_BADGE04_GET)) goto(LavaridgeTown_Gym_1F_EventScript_GymStatueCertified)
+    if (flag(FLAG_BADGE04_GET)) {
+        goto(LavaridgeTown_Gym_1F_EventScript_GymStatueCertified)
+    }
     goto(LavaridgeTown_Gym_1F_EventScript_GymStatue)
     end
 }

@@ -15,38 +15,78 @@ script SixIsland_DottedHole_SapphireRoom_EventScript_Sapphire {
     applymovement(LOCALID_DOTTED_HOLE_THIEF, SixIsland_DottedHole_SapphireRoom_Movement_ThiefFallIn)
     waitmovement(0)
     playse(SE_M_STRENGTH)
-    if (var(VAR_FACING) == DIR_NORTH) call(SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefLeft)
-    if (var(VAR_FACING) == DIR_SOUTH) call(SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefLeft)
-    if (var(VAR_FACING) == DIR_EAST) call(SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefDown)
-    if (var(VAR_FACING) == DIR_WEST) call(SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefDown)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefLeft)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefLeft)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefDown)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefDown)
+    }
     setvar(VAR_0x8004, 3)
     setvar(VAR_0x8005, 0)
     setvar(VAR_0x8006, 12)
     setvar(VAR_0x8007, 3)
     special(ShakeScreen)
     delay(60)
-    if (var(VAR_FACING) == DIR_NORTH) call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefLookAtSapphireNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefLookAtSapphireSouth)
-    if (var(VAR_FACING) == DIR_EAST) call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefLookAtSapphireEast)
-    if (var(VAR_FACING) == DIR_WEST) call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefLookAtSapphireWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefLookAtSapphireNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefLookAtSapphireSouth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefLookAtSapphireEast)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefLookAtSapphireWest)
+    }
     textcolor(NPC_TEXT_COLOR_MALE)
     msgbox(SixIsland_DottedHole_SapphireRoom_Text_IWasRightInTailingYou)
     closemessage
-    if (var(VAR_FACING) == DIR_NORTH) call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefGetSapphireNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefGetSapphireSouth)
-    if (var(VAR_FACING) == DIR_EAST) call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefGetSapphireEast)
-    if (var(VAR_FACING) == DIR_WEST) call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefGetSapphireWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefGetSapphireNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefGetSapphireSouth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefGetSapphireEast)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefGetSapphireWest)
+    }
     removeobject(LOCALID_SAPPHIRE)
-    if (var(VAR_FACING) == DIR_NORTH) call(SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefLeft2)
-    if (var(VAR_FACING) == DIR_SOUTH) call(SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefLeft2)
-    if (var(VAR_FACING) == DIR_EAST) call(SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefDown2)
-    if (var(VAR_FACING) == DIR_WEST) call(SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefDown2)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefLeft2)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefLeft2)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefDown2)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefDown2)
+    }
     msgbox(SixIsland_DottedHole_SapphireRoom_Text_SellToTeamRocketTellPassword)
     closemessage
-    if (var(VAR_FACING) == DIR_NORTH) call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefExitNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefExitSouth)
-    if (var(VAR_FACING) == DIR_EAST) call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefExitEast)
-    if (var(VAR_FACING) == DIR_WEST) call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefExitWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefExitNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefExitSouth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefExitEast)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(SixIsland_DottedHole_SapphireRoom_EventScript_ThiefExitWest)
+    }
     playse(SE_EXIT)
     delay(35)
     removeobject(LOCALID_DOTTED_HOLE_THIEF)

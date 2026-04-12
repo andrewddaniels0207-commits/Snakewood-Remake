@@ -14,7 +14,9 @@ script LilycoveCity_ContestLobby_OnTransition {
 
 script LilycoveCity_ContestLobby_EventScript_TryShowBlendMaster {
     getpokenewsactive(POKENEWS_BLENDMASTER)
-    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_ContestLobby_EventScript_ShowBlendMaster)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LilycoveCity_ContestLobby_EventScript_ShowBlendMaster)
+    }
     clearflag(FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_REPLACEMENT)
     setflag(FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER)
     return
@@ -27,7 +29,9 @@ script LilycoveCity_ContestLobby_EventScript_ShowBlendMaster {
 }
 
 script LilycoveCity_ContestLobby_EventScript_TryDoContestArtist {
-    if (flag(FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR)) goto(LilycoveCity_ContestLobby_EventScript_ContestArtist)
+    if (flag(FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR)) {
+        goto(LilycoveCity_ContestLobby_EventScript_ContestArtist)
+    }
     setvar(VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0)
     end
 }
@@ -45,8 +49,12 @@ script LilycoveCity_ContestLobby_EventScript_ContestArtist {
     showcontestpainting(CONTEST_WINNER_ARTIST)
     lockall
     msgbox(LilycoveCity_ContestLobby_Text_ShouldITakePaintingToMuseum, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseum)
-    if (var(VAR_RESULT) == NO) goto(LilycoveCity_ContestLobby_EventScript_ConfirmDontTakePainting)
+    if (var(VAR_RESULT) == YES) {
+        goto(LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseum)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(LilycoveCity_ContestLobby_EventScript_ConfirmDontTakePainting)
+    }
     releaseall
     end
 }
@@ -57,7 +65,9 @@ script LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseum {
     special(SaveMuseumContestPainting)
     setvar(VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0)
     specialvar(VAR_RESULT, GiveMonArtistRibbon)
-    if (var(VAR_RESULT) == TRUE) call(LilycoveCity_ContestLobby_EventScript_ReceivedArtistRibbon)
+    if (var(VAR_RESULT) == TRUE) {
+        call(LilycoveCity_ContestLobby_EventScript_ReceivedArtistRibbon)
+    }
     applymovement(LOCALID_CONTEST_LOBBY_ARTIST, LilycoveCity_ContestLobby_Movement_ArtistExit)
     waitmovement(0)
     removeobject(LOCALID_CONTEST_LOBBY_ARTIST)
@@ -69,7 +79,9 @@ script LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseum {
 
 script LilycoveCity_ContestLobby_EventScript_ConfirmDontTakePainting {
     msgbox(LilycoveCity_ContestLobby_Text_TakeHomeButIdLikeToTakeToMuseum, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseum)
+    if (var(VAR_RESULT) == YES) {
+        goto(LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseum)
+    }
     msgbox(LilycoveCity_ContestLobby_Text_FineThatsTheWayItIs, MSGBOX_DEFAULT)
     closemessage
     applymovement(LOCALID_CONTEST_LOBBY_ARTIST, LilycoveCity_ContestLobby_Movement_ArtistExit)
@@ -219,7 +231,9 @@ movement LilycoveCity_ContestLobby_Movement_ArtistReturnToPlayer {
 }
 
 script LilycoveCity_ContestLobby_EventScript_TryDoLinkContestArtist {
-    if (flag(FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR)) goto(LilycoveCity_ContestLobby_EventScript_LinkContestArtist)
+    if (flag(FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR)) {
+        goto(LilycoveCity_ContestLobby_EventScript_LinkContestArtist)
+    }
     setvar(VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0)
     end
 }
@@ -236,8 +250,12 @@ script LilycoveCity_ContestLobby_EventScript_LinkContestArtist {
     fadescreen(FADE_TO_BLACK)
     showcontestpainting(CONTEST_WINNER_ARTIST)
     msgbox(LilycoveCity_ContestLobby_Text_ShouldITakePaintingToMuseum, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseumLink)
-    if (var(VAR_RESULT) == NO) goto(LilycoveCity_ContestLobby_EventScript_ConfirmDontTakePaintingLink)
+    if (var(VAR_RESULT) == YES) {
+        goto(LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseumLink)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(LilycoveCity_ContestLobby_EventScript_ConfirmDontTakePaintingLink)
+    }
     end
 }
 
@@ -247,7 +265,9 @@ script LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseumLink {
     special(SaveMuseumContestPainting)
     setvar(VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0)
     specialvar(VAR_RESULT, GiveMonArtistRibbon)
-    if (var(VAR_RESULT) == TRUE) call(LilycoveCity_ContestLobby_EventScript_ReceivedLinkArtistRibbon)
+    if (var(VAR_RESULT) == TRUE) {
+        call(LilycoveCity_ContestLobby_EventScript_ReceivedLinkArtistRibbon)
+    }
     applymovement(LOCALID_CONTEST_LOBBY_LINK_ARTIST, LilycoveCity_ContestLobby_Movement_LinkArtistExit)
     waitmovement(0)
     removeobject(LOCALID_CONTEST_LOBBY_LINK_ARTIST)
@@ -259,7 +279,9 @@ script LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseumLink {
 
 script LilycoveCity_ContestLobby_EventScript_ConfirmDontTakePaintingLink {
     msgbox(LilycoveCity_ContestLobby_Text_TakeHomeButIdLikeToTakeToMuseum, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseumLink)
+    if (var(VAR_RESULT) == YES) {
+        goto(LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseumLink)
+    }
     msgbox(LilycoveCity_ContestLobby_Text_FineThatsTheWayItIs, MSGBOX_DEFAULT)
     closemessage
     applymovement(LOCALID_CONTEST_LOBBY_LINK_ARTIST, LilycoveCity_ContestLobby_Movement_LinkArtistExit)
@@ -342,7 +364,9 @@ movement LilycoveCity_ContestLobby_Movement_LinkArtistReturnToPlayer {
 script LilycoveCity_ContestLobby_EventScript_ContestReceptionist {
     special(ClearLinkContestFlags)
     specialvar(VAR_RESULT, IsContestDebugActive)
-    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_ContestLobby_EventScript_SetDebug)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LilycoveCity_ContestLobby_EventScript_SetDebug)
+    }
     call(LilycoveCity_ContestLobby_EventScript_SpeakToContestReceptionist)
     call(LilycoveCity_ContestLobby_EventScript_LeadToContestHall)
     special(SetContestTrainerGfxIds)
@@ -711,9 +735,13 @@ script LilycoveCity_ContestLobby_EventScript_AskEnterLinkContest {
 
 script LilycoveCity_ContestLobby_EventScript_TryEnterLinkContest {
     msgbox(LilycoveCity_ContestLobby_Text_ProgressWillBeSaved, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LilycoveCity_ContestLobby_EventScript_CancelLinkContest)
+    if (var(VAR_RESULT) == NO) {
+        goto(LilycoveCity_ContestLobby_EventScript_CancelLinkContest)
+    }
     call(Common_EventScript_SaveGame)
-    if (var(VAR_RESULT) == FALSE) goto(LilycoveCity_ContestLobby_EventScript_CancelLinkContest)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(LilycoveCity_ContestLobby_EventScript_CancelLinkContest)
+    }
     message(LilycoveCity_ContestLobby_Text_WhichContestMode)
     waitmessage()
     specialvar(VAR_TEMP_D, IsWirelessAdapterConnected)
@@ -734,7 +762,9 @@ script LilycoveCity_ContestLobby_EventScript_EmeraldMode {
 
 script LilycoveCity_ContestLobby_EventScript_GlobalMode {
     setvar(VAR_TEMP_C, 1)
-    if (var(VAR_TEMP_D) == 1) goto(LilycoveCity_ContestLobby_EventScript_CancelLinkNoWirelessGMode)
+    if (var(VAR_TEMP_D) == 1) {
+        goto(LilycoveCity_ContestLobby_EventScript_CancelLinkNoWirelessGMode)
+    }
     goto(LilycoveCity_ContestLobby_EventScript_ChooseLinkContestType)
     end
 }
@@ -793,13 +823,25 @@ script LilycoveCity_ContestLobby_EventScript_ChooseLinkContestMon {
     msgbox(LilycoveCity_ContestLobby_Text_EnterWhichPokemon3, MSGBOX_DEFAULT)
     setvar(VAR_CONTEST_RANK, 0)
     choosecontestmon()
-    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) goto(LilycoveCity_ContestLobby_EventScript_CancelLinkContest)
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        goto(LilycoveCity_ContestLobby_EventScript_CancelLinkContest)
+    }
     special(TryEnterContestMon)
-    if (var(VAR_RESULT) == CANT_ENTER_CONTEST) goto(LilycoveCity_ContestLobby_EventScript_LinkCantEnterLowRank)
-    if (var(VAR_RESULT) == CAN_ENTER_CONTEST_EQUAL_RANK) goto(LilycoveCity_ContestLobby_EventScript_EnterMonForLinkContest)
-    if (var(VAR_RESULT) == CAN_ENTER_CONTEST_HIGH_RANK) goto(LilycoveCity_ContestLobby_EventScript_EnterMonForLinkContest)
-    if (var(VAR_RESULT) == CANT_ENTER_CONTEST_EGG) goto(LilycoveCity_ContestLobby_EventScript_LinkCantEnterEgg)
-    if (var(VAR_RESULT) == CANT_ENTER_CONTEST_FAINTED) goto(LilycoveCity_ContestLobby_EventScript_LinkCantEnterFainted)
+    if (var(VAR_RESULT) == CANT_ENTER_CONTEST) {
+        goto(LilycoveCity_ContestLobby_EventScript_LinkCantEnterLowRank)
+    }
+    if (var(VAR_RESULT) == CAN_ENTER_CONTEST_EQUAL_RANK) {
+        goto(LilycoveCity_ContestLobby_EventScript_EnterMonForLinkContest)
+    }
+    if (var(VAR_RESULT) == CAN_ENTER_CONTEST_HIGH_RANK) {
+        goto(LilycoveCity_ContestLobby_EventScript_EnterMonForLinkContest)
+    }
+    if (var(VAR_RESULT) == CANT_ENTER_CONTEST_EGG) {
+        goto(LilycoveCity_ContestLobby_EventScript_LinkCantEnterEgg)
+    }
+    if (var(VAR_RESULT) == CANT_ENTER_CONTEST_FAINTED) {
+        goto(LilycoveCity_ContestLobby_EventScript_LinkCantEnterFainted)
+    }
     end
 }
 
@@ -828,19 +870,39 @@ script LilycoveCity_ContestLobby_EventScript_EnterMonForLinkContest {
 }
 
 script LilycoveCity_ContestLobby_EventScript_TrySetUpLinkContest {
-    if (var(VAR_TEMP_D) == 1) goto(LilycoveCity_ContestLobby_EventScript_SetLinkGroupType)
-    if (var(VAR_TEMP_D) >= 2) goto(LilycoveCity_ContestLobby_EventScript_CancelLinkContest)
+    if (var(VAR_TEMP_D) == 1) {
+        goto(LilycoveCity_ContestLobby_EventScript_SetLinkGroupType)
+    }
+    if (var(VAR_TEMP_D) >= 2) {
+        goto(LilycoveCity_ContestLobby_EventScript_CancelLinkContest)
+    }
     message(LilycoveCity_ContestLobby_Text_PleaseWaitBButtonCancel)
     waitmessage()
     copyvar(VAR_0x8004, VAR_RESULT)
-    if (var(VAR_TEMP_C) == 0) call(LilycoveCity_ContestLobby_EventScript_TryLinkEMode)
-    if (var(VAR_TEMP_C) == 1) call(LilycoveCity_ContestLobby_EventScript_TryLinkGMode)
-    if (var(VAR_TEMP_C) >= 2) goto(LilycoveCity_ContestLobby_EventScript_CancelLinkContest)
-    if (var(VAR_RESULT) == LINKUP_WRONG_NUM_PLAYERS) goto(LilycoveCity_ContestLobby_EventScript_CancelLinkDifferentChoices)
-    if (var(VAR_RESULT) == LINKUP_DIFF_SELECTIONS) goto(LilycoveCity_ContestLobby_EventScript_CancelLinkDifferentChoices)
-    if (var(VAR_RESULT) == LINKUP_FAILED) goto(LilycoveCity_ContestLobby_EventScript_CancelLinkContest)
-    if (var(VAR_RESULT) == LINKUP_CONNECTION_ERROR) goto(LilycoveCity_ContestLobby_EventScript_CancelLinkError)
-    if (var(VAR_RESULT) == LINKUP_FAILED_CONTEST_GMODE) goto(LilycoveCity_ContestLobby_EventScript_CancelLinkModeDifference)
+    if (var(VAR_TEMP_C) == 0) {
+        call(LilycoveCity_ContestLobby_EventScript_TryLinkEMode)
+    }
+    if (var(VAR_TEMP_C) == 1) {
+        call(LilycoveCity_ContestLobby_EventScript_TryLinkGMode)
+    }
+    if (var(VAR_TEMP_C) >= 2) {
+        goto(LilycoveCity_ContestLobby_EventScript_CancelLinkContest)
+    }
+    if (var(VAR_RESULT) == LINKUP_WRONG_NUM_PLAYERS) {
+        goto(LilycoveCity_ContestLobby_EventScript_CancelLinkDifferentChoices)
+    }
+    if (var(VAR_RESULT) == LINKUP_DIFF_SELECTIONS) {
+        goto(LilycoveCity_ContestLobby_EventScript_CancelLinkDifferentChoices)
+    }
+    if (var(VAR_RESULT) == LINKUP_FAILED) {
+        goto(LilycoveCity_ContestLobby_EventScript_CancelLinkContest)
+    }
+    if (var(VAR_RESULT) == LINKUP_CONNECTION_ERROR) {
+        goto(LilycoveCity_ContestLobby_EventScript_CancelLinkError)
+    }
+    if (var(VAR_RESULT) == LINKUP_FAILED_CONTEST_GMODE) {
+        goto(LilycoveCity_ContestLobby_EventScript_CancelLinkModeDifference)
+    }
     messageinstant(LilycoveCity_ContestLobby_Text_Transmitting)
     contestlinktransfer()
     switch(VAR_0x8004)
@@ -917,11 +979,21 @@ script LilycoveCity_ContestLobby_EventScript_StartLinkContest {
 }
 
 script LilycoveCity_ContestLobby_EventScript_SetLinkGroupType {
-    if (var(VAR_CONTEST_CATEGORY) == CONTEST_CATEGORY_COOL) call(LilycoveCity_ContestLobby_EventScript_SetLinkGroupCoolContest)
-    if (var(VAR_CONTEST_CATEGORY) == CONTEST_CATEGORY_BEAUTY) call(LilycoveCity_ContestLobby_EventScript_SetLinkGroupBeautyContest)
-    if (var(VAR_CONTEST_CATEGORY) == CONTEST_CATEGORY_CUTE) call(LilycoveCity_ContestLobby_EventScript_SetLinkGroupCuteContest)
-    if (var(VAR_CONTEST_CATEGORY) == CONTEST_CATEGORY_SMART) call(LilycoveCity_ContestLobby_EventScript_SetLinkGroupSmartContest)
-    if (var(VAR_CONTEST_CATEGORY) == CONTEST_CATEGORY_TOUGH) call(LilycoveCity_ContestLobby_EventScript_SetLinkGroupToughContest)
+    if (var(VAR_CONTEST_CATEGORY) == CONTEST_CATEGORY_COOL) {
+        call(LilycoveCity_ContestLobby_EventScript_SetLinkGroupCoolContest)
+    }
+    if (var(VAR_CONTEST_CATEGORY) == CONTEST_CATEGORY_BEAUTY) {
+        call(LilycoveCity_ContestLobby_EventScript_SetLinkGroupBeautyContest)
+    }
+    if (var(VAR_CONTEST_CATEGORY) == CONTEST_CATEGORY_CUTE) {
+        call(LilycoveCity_ContestLobby_EventScript_SetLinkGroupCuteContest)
+    }
+    if (var(VAR_CONTEST_CATEGORY) == CONTEST_CATEGORY_SMART) {
+        call(LilycoveCity_ContestLobby_EventScript_SetLinkGroupSmartContest)
+    }
+    if (var(VAR_CONTEST_CATEGORY) == CONTEST_CATEGORY_TOUGH) {
+        call(LilycoveCity_ContestLobby_EventScript_SetLinkGroupToughContest)
+    }
     goto(LilycoveCity_ContestLobby_EventScript_DecideLinkLeader)
     end
 }
@@ -965,18 +1037,30 @@ script LilycoveCity_ContestLobby_EventScript_DecideLinkLeader {
 
 script LilycoveCity_ContestLobby_EventScript_TryLeadGroup {
     call(LilycoveCity_ContestLobby_EventScript_TryBecomeLinkLeader)
-    if (var(VAR_RESULT) == LINKUP_SUCCESS) goto(LilycoveCity_ContestLobby_EventScript_LinkLeaderDecided)
-    if (var(VAR_RESULT) == LINKUP_FAILED) goto(LilycoveCity_ContestLobby_EventScript_DecideLinkLeader)
-    if (var(VAR_RESULT) == LINKUP_RETRY_ROLE_ASSIGN) goto(LilycoveCity_ContestLobby_EventScript_TryLeadGroup)
+    if (var(VAR_RESULT) == LINKUP_SUCCESS) {
+        goto(LilycoveCity_ContestLobby_EventScript_LinkLeaderDecided)
+    }
+    if (var(VAR_RESULT) == LINKUP_FAILED) {
+        goto(LilycoveCity_ContestLobby_EventScript_DecideLinkLeader)
+    }
+    if (var(VAR_RESULT) == LINKUP_RETRY_ROLE_ASSIGN) {
+        goto(LilycoveCity_ContestLobby_EventScript_TryLeadGroup)
+    }
     release
     end
 }
 
 script LilycoveCity_ContestLobby_EventScript_TryJoinGroup {
     call(LilycoveCity_ContestLobby_EventScript_TryJoinLinkGroup)
-    if (var(VAR_RESULT) == LINKUP_SUCCESS) goto(LilycoveCity_ContestLobby_EventScript_LinkLeaderDecided)
-    if (var(VAR_RESULT) == LINKUP_FAILED) goto(LilycoveCity_ContestLobby_EventScript_DecideLinkLeader)
-    if (var(VAR_RESULT) == LINKUP_RETRY_ROLE_ASSIGN) goto(LilycoveCity_ContestLobby_EventScript_TryJoinGroup)
+    if (var(VAR_RESULT) == LINKUP_SUCCESS) {
+        goto(LilycoveCity_ContestLobby_EventScript_LinkLeaderDecided)
+    }
+    if (var(VAR_RESULT) == LINKUP_FAILED) {
+        goto(LilycoveCity_ContestLobby_EventScript_DecideLinkLeader)
+    }
+    if (var(VAR_RESULT) == LINKUP_RETRY_ROLE_ASSIGN) {
+        goto(LilycoveCity_ContestLobby_EventScript_TryJoinGroup)
+    }
     release
     end
 }
@@ -1088,7 +1172,9 @@ movement LilycoveCity_ContestLobby_Movement_LinkReceptionistFacePlayer {
 script LilycoveCity_ContestLobby_EventScript_LittleGirl {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_POKEBLOCK_CASE)) goto(LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase)
+    if (flag(FLAG_RECEIVED_POKEBLOCK_CASE)) {
+        goto(LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase)
+    }
     msgbox(LilycoveCity_ContestLobby_Text_LadyGaveMePokeblockCase, MSGBOX_DEFAULT)
     release
     end

@@ -166,7 +166,9 @@ script BattleFrontier_BattlePikeThreePathRoom_EventScript_AskRetireChallenge {
 
 script BattleFrontier_BattlePikeThreePathRoom_EventScript_SetHintRoom {
     pike_sethintroom()
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_SetPikeQueenHint)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_SetPikeQueenHint)
+    }
     setvar(VAR_TEMP_5, 255)
     end
 }
@@ -190,7 +192,9 @@ script BattleFrontier_BattlePikeThreePathRoom_EventScript_GivePikeQueenHint {
 
 script BattleFrontier_BattlePikeThreePathRoom_EventScript_HintGiver {
     pike_gethint()
-    if (var(VAR_RESULT) == PIKE_HINT_BRAIN) goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveBrainHint)
+    if (var(VAR_RESULT) == PIKE_HINT_BRAIN) {
+        goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveBrainHint)
+    }
     lock
     faceplayer
     msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_FindingItDifficultToChoose, MSGBOX_YESNO)

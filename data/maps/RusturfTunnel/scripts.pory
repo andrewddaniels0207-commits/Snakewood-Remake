@@ -7,7 +7,9 @@ mapscripts RusturfTunnel_MapScripts {
 }
 
 script RusturfTunnel_OnTransition {
-    if (var(VAR_RUSTURF_TUNNEL_STATE) == 2) call(RusturfTunnel_EventScript_SetAquaGruntAndPeekoPos)
+    if (var(VAR_RUSTURF_TUNNEL_STATE) == 2) {
+        call(RusturfTunnel_EventScript_SetAquaGruntAndPeekoPos)
+    }
     end
 }
 
@@ -31,7 +33,9 @@ script RusturfTunnel_EventScript_Wanda {
 script RusturfTunnel_EventScript_WandasBoyfriend {
     lock
     faceplayer
-    if (flag(FLAG_TEMP_1)) goto(RusturfTunnel_EventScript_AlreadySpokenTo)
+    if (flag(FLAG_TEMP_1)) {
+        goto(RusturfTunnel_EventScript_AlreadySpokenTo)
+    }
     setflag(FLAG_TEMP_1)
     msgbox(RusturfTunnel_Text_WhyCantTheyKeepDigging, MSGBOX_DEFAULT)
     closemessage
@@ -52,25 +56,47 @@ script RusturfTunnel_EventScript_AlreadySpokenTo {
 
 script RusturfTunnel_EventScript_ClearTunnelScene {
     lockall
-    if (var(VAR_TEMP_1) == 1) call(RusturfTunnel_EventScript_FaceWandasBoyfriend1)
-    if (var(VAR_TEMP_1) == 2) call(RusturfTunnel_EventScript_FaceWandasBoyfriend2)
-    if (var(VAR_TEMP_1) == 3) call(RusturfTunnel_EventScript_FaceWandasBoyfriend3)
+    if (var(VAR_TEMP_1) == 1) {
+        call(RusturfTunnel_EventScript_FaceWandasBoyfriend1)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(RusturfTunnel_EventScript_FaceWandasBoyfriend2)
+    }
+    if (var(VAR_TEMP_1) == 3) {
+        call(RusturfTunnel_EventScript_FaceWandasBoyfriend3)
+    }
     call(RusturfTunnel_EventScript_WandasBoyfriendNotice)
     msgbox(RusturfTunnel_Text_YouShatteredBoulderTakeHM, MSGBOX_DEFAULT)
-    if (var(VAR_TEMP_1) == 2) call(RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer)
-    if (var(VAR_TEMP_1) == 3) call(RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer)
+    if (var(VAR_TEMP_1) == 2) {
+        call(RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer)
+    }
+    if (var(VAR_TEMP_1) == 3) {
+        call(RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer)
+    }
     giveitem(ITEM_HM_STRENGTH)
     setflag(FLAG_RECEIVED_HM_STRENGTH)
     msgbox(RusturfTunnel_Text_ExplainStrength, MSGBOX_DEFAULT)
     closemessage
-    if (var(VAR_TEMP_1) == 1) call(RusturfTunnel_EventScript_BoyfriendApproachWanda1)
-    if (var(VAR_TEMP_1) == 2) call(RusturfTunnel_EventScript_BoyfriendApproachWanda2)
-    if (var(VAR_TEMP_1) == 3) call(RusturfTunnel_EventScript_BoyfriendApproachWanda3)
+    if (var(VAR_TEMP_1) == 1) {
+        call(RusturfTunnel_EventScript_BoyfriendApproachWanda1)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(RusturfTunnel_EventScript_BoyfriendApproachWanda2)
+    }
+    if (var(VAR_TEMP_1) == 3) {
+        call(RusturfTunnel_EventScript_BoyfriendApproachWanda3)
+    }
     msgbox(RusturfTunnel_Text_WandaReunion, MSGBOX_DEFAULT)
     closemessage
-    if (var(VAR_TEMP_1) == 1) call(RusturfTunnel_EventScript_WandaAndBoyfriendExit1)
-    if (var(VAR_TEMP_1) == 2) call(RusturfTunnel_EventScript_WandaAndBoyfriendExit)
-    if (var(VAR_TEMP_1) == 3) call(RusturfTunnel_EventScript_WandaAndBoyfriendExit)
+    if (var(VAR_TEMP_1) == 1) {
+        call(RusturfTunnel_EventScript_WandaAndBoyfriendExit1)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(RusturfTunnel_EventScript_WandaAndBoyfriendExit)
+    }
+    if (var(VAR_TEMP_1) == 3) {
+        call(RusturfTunnel_EventScript_WandaAndBoyfriendExit)
+    }
     call(RusturfTunnel_EventScript_SetRusturfTunnelOpen)
     releaseall
     end

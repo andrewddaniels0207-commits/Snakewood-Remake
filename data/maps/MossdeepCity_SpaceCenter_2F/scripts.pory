@@ -6,8 +6,12 @@ mapscripts MossdeepCity_SpaceCenter_2F_MapScripts {
 }
 
 script MossdeepCity_SpaceCenter_2F_OnTransition {
-    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) call(MossdeepCity_SpaceCenter_2F_EventScript_MoveCivilians)
-    if (var(VAR_MOSSDEEP_SPACE_CENTER_STATE) == 2) call(MossdeepCity_SpaceCenter_2F_EventScript_MoveDefeatedGrunts)
+    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) {
+        call(MossdeepCity_SpaceCenter_2F_EventScript_MoveCivilians)
+    }
+    if (var(VAR_MOSSDEEP_SPACE_CENTER_STATE) == 2) {
+        call(MossdeepCity_SpaceCenter_2F_EventScript_MoveDefeatedGrunts)
+    }
     end
 }
 
@@ -36,7 +40,9 @@ script MossdeepCity_SpaceCenter_2F_EventScript_ThreeMagmaGrunts {
     applymovement(LOCALID_PLAYER, Common_Movement_Delay48)
     waitmovement(0)
     msgbox(MossdeepCity_SpaceCenter_2F_Text_YoureOutnumberedTakeUsOn, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts)
+    if (var(VAR_RESULT) == YES) {
+        goto(MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts)
+    }
     msgbox(MossdeepCity_SpaceCenter_2F_Text_GoodAnswer, MSGBOX_DEFAULT)
     closemessage
     applymovement(LOCALID_PLAYER, MossdeepCity_SpaceCenter_2F_Movement_PlayerExit)
@@ -101,9 +107,15 @@ script MossdeepCity_SpaceCenter_2F_Movement_Grunt7Defeated {
 script MossdeepCity_SpaceCenter_2F_EventScript_Scientist {
     lock
     faceplayer
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal)
-    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) goto(MossdeepCity_SpaceCenter_2F_EventScript_ScientistMagma)
-    if (var(VAR_MOSSDEEP_CITY_STATE) < 2) goto(MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal)
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal)
+    }
+    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) {
+        goto(MossdeepCity_SpaceCenter_2F_EventScript_ScientistMagma)
+    }
+    if (var(VAR_MOSSDEEP_CITY_STATE) < 2) {
+        goto(MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal)
+    }
     goto(MossdeepCity_SpaceCenter_2F_EventScript_ScientistMagma)
     end
 }
@@ -123,9 +135,15 @@ script MossdeepCity_SpaceCenter_2F_EventScript_ScientistMagma {
 script MossdeepCity_SpaceCenter_2F_EventScript_Gentleman {
     lock
     faceplayer
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(MossdeepCity_SpaceCenter_2F_EventScript_GentlemanNormal)
-    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) goto(MossdeepCity_SpaceCenter_2F_EventScript_GentlemanMagma)
-    if (var(VAR_MOSSDEEP_CITY_STATE) < 2) goto(MossdeepCity_SpaceCenter_2F_EventScript_GentlemanNormal)
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(MossdeepCity_SpaceCenter_2F_EventScript_GentlemanNormal)
+    }
+    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) {
+        goto(MossdeepCity_SpaceCenter_2F_EventScript_GentlemanMagma)
+    }
+    if (var(VAR_MOSSDEEP_CITY_STATE) < 2) {
+        goto(MossdeepCity_SpaceCenter_2F_EventScript_GentlemanNormal)
+    }
     goto(MossdeepCity_SpaceCenter_2F_EventScript_GentlemanMagma)
     end
 }
@@ -145,9 +163,15 @@ script MossdeepCity_SpaceCenter_2F_EventScript_GentlemanMagma {
 script MossdeepCity_SpaceCenter_2F_EventScript_RichBoy {
     lock
     faceplayer
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(MossdeepCity_SpaceCenter_2F_EventScript_RichBoyNormal)
-    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) goto(MossdeepCity_SpaceCenter_2F_EventScript_RichBoyMagma)
-    if (var(VAR_MOSSDEEP_CITY_STATE) < 2) goto(MossdeepCity_SpaceCenter_2F_EventScript_RichBoyNormal)
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(MossdeepCity_SpaceCenter_2F_EventScript_RichBoyNormal)
+    }
+    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) {
+        goto(MossdeepCity_SpaceCenter_2F_EventScript_RichBoyMagma)
+    }
+    if (var(VAR_MOSSDEEP_CITY_STATE) < 2) {
+        goto(MossdeepCity_SpaceCenter_2F_EventScript_RichBoyNormal)
+    }
     goto(MossdeepCity_SpaceCenter_2F_EventScript_RichBoyMagma)
     end
 }
@@ -198,7 +222,9 @@ script MossdeepCity_SpaceCenter_2F_EventScript_Maxie {
 
 script MossdeepCity_SpaceCenter_2F_EventScript_Steven {
     lockall
-    if (flag(FLAG_INTERACTED_WITH_STEVEN_SPACE_CENTER)) goto(MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt)
+    if (flag(FLAG_INTERACTED_WITH_STEVEN_SPACE_CENTER)) {
+        goto(MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt)
+    }
     setflag(FLAG_INTERACTED_WITH_STEVEN_SPACE_CENTER)
     msgbox(MossdeepCity_SpaceCenter_2F_Text_StevenWhyStealRocketFuel, MSGBOX_DEFAULT)
     msgbox(MossdeepCity_SpaceCenter_2F_Text_MaxieUseFuelToEruptVolcano, MSGBOX_DEFAULT)
@@ -250,7 +276,9 @@ script MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt {
     applymovement(VAR_LAST_TALKED, Common_Movement_FacePlayer)
     waitmovement(0)
     msgbox(MossdeepCity_SpaceCenter_2F_Text_StevenAreYouReadyToBattle, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle)
+    if (var(VAR_RESULT) == YES) {
+        goto(MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle)
+    }
     msgbox(MossdeepCity_SpaceCenter_2F_Text_StevenHurryGetReadyQuickly, MSGBOX_DEFAULT)
     closemessage
     applymovement(VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown)
@@ -266,7 +294,9 @@ script MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle {
     fadescreen(FADE_TO_BLACK)
     special(ChooseHalfPartyForBattle)
     waitstate
-    if (var(VAR_RESULT) != 0) goto(MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle)
+    if (var(VAR_RESULT) != 0) {
+        goto(MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle)
+    }
     special(LoadPlayerParty)
     goto(MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt)
 }
@@ -355,8 +385,12 @@ script MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayerWest {
 script MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall {
     lockall
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(MossdeepCity_SpaceCenter_2F_EventScript_MayRayquazaCall)
-    if (var(VAR_RESULT) == FEMALE) call(MossdeepCity_SpaceCenter_2F_EventScript_BrendanRayquazaCall)
+    if (var(VAR_RESULT) == MALE) {
+        call(MossdeepCity_SpaceCenter_2F_EventScript_MayRayquazaCall)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(MossdeepCity_SpaceCenter_2F_EventScript_BrendanRayquazaCall)
+    }
     closemessage
     clearflag(FLAG_DEFEATED_MAGMA_SPACE_CENTER)
     releaseall

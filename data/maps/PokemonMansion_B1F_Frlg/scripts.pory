@@ -3,7 +3,9 @@ mapscripts PokemonMansion_B1F_Frlg_MapScripts {
 }
 
 script PokemonMansion_B1F_OnLoad {
-    if (flag(FLAG_POKEMON_MANSION_SWITCH_STATE)) call(PokemonMansion_EventScript_PressSwitch_B1F)
+    if (flag(FLAG_POKEMON_MANSION_SWITCH_STATE)) {
+        call(PokemonMansion_EventScript_PressSwitch_B1F)
+    }
     end
 }
 

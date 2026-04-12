@@ -7,15 +7,25 @@ mapscripts Route115_MapScripts {
 }
 
 script Route115_OnLoad {
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_115_WEST) call(AbnormalWeather_EventScript_PlaceTilesRoute115West)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_115_EAST) call(AbnormalWeather_EventScript_PlaceTilesRoute115East)
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_115_WEST) {
+        call(AbnormalWeather_EventScript_PlaceTilesRoute115West)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_115_EAST) {
+        call(AbnormalWeather_EventScript_PlaceTilesRoute115East)
+    }
     end
 }
 
 script Route115_OnTransition {
-    if (var(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1) call(AbnormalWeather_EventScript_HideMapNamePopup)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_115_WEST) call(AbnormalWeather_StartGroudonWeather)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_115_EAST) call(AbnormalWeather_StartGroudonWeather)
+    if (var(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1) {
+        call(AbnormalWeather_EventScript_HideMapNamePopup)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_115_WEST) {
+        call(AbnormalWeather_StartGroudonWeather)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_115_EAST) {
+        call(AbnormalWeather_StartGroudonWeather)
+    }
     end
 }
 
@@ -37,7 +47,9 @@ script Route115_EventScript_MeteorFallsSign {
 script Route115_EventScript_Timothy {
     trainerbattle_single(TRAINER_TIMOTHY_1, Route115_Text_TimothyIntro, Route115_Text_TimothyDefeat, Route115_EventScript_RegisterTimothy)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route115_EventScript_RematchTimothy)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route115_EventScript_RematchTimothy)
+    }
     msgbox(Route115_Text_TimothyPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -67,7 +79,9 @@ script Route115_EventScript_Koichi {
 script Route115_EventScript_Nob {
     trainerbattle_single(TRAINER_NOB_1, Route115_Text_NobIntro, Route115_Text_NobDefeat, Route115_EventScript_RegisterNob)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route115_EventScript_RematchNob)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route115_EventScript_RematchNob)
+    }
     msgbox(Route115_Text_NobPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -91,7 +105,9 @@ script Route115_EventScript_RematchNob {
 script Route115_EventScript_Cyndy {
     trainerbattle_single(TRAINER_CYNDY_1, Route115_Text_CyndyIntro, Route115_Text_CyndyDefeat, Route115_EventScript_RegisterCyndy)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route115_EventScript_RematchCyndy)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route115_EventScript_RematchCyndy)
+    }
     msgbox(Route115_Text_CyndyPostBattle, MSGBOX_DEFAULT)
     release
     end

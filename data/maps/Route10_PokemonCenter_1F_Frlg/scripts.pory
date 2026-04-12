@@ -36,17 +36,25 @@ script Route10_PokemonCenter_1F_EventScript_Aide {
     lock
     faceplayer
     call(Route10_PokemonCenter_1F_EventScript_GetAideRequestInfo)
-    if (flag(FLAG_GOT_EVERSTONE_FROM_OAKS_AIDE)) goto(Route10_PokemonCenter_1F_EventScript_AlreadyGotEverstone)
+    if (flag(FLAG_GOT_EVERSTONE_FROM_OAKS_AIDE)) {
+        goto(Route10_PokemonCenter_1F_EventScript_AlreadyGotEverstone)
+    }
     msgbox(Route10_PokemonCenter_1F_Text_GiveEverstoneIfCaught20Mons, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Aide_EventScript_DeclineCheckMons)
+    if (var(VAR_RESULT) == NO) {
+        goto(Aide_EventScript_DeclineCheckMons)
+    }
     setvar(VAR_0x8004, 0)
     specialvar(VAR_RESULT, GetFrlgPokedexCount)
     buffernumberstring(STR_VAR_3, VAR_0x8006)
     call(Route10_PokemonCenter_1F_EventScript_GetAideRequestInfo)
-    if (var(VAR_0x8006) < REQUIRED_OWNED_MONS) goto(Aide_EventScript_HaventCaughtEnough)
+    if (var(VAR_0x8006) < REQUIRED_OWNED_MONS) {
+        goto(Aide_EventScript_HaventCaughtEnough)
+    }
     msgbox(Route10_PokemonCenter_1F_Text_GreatHereYouGo)
     checkitemspace(ITEM_EVERSTONE)
-    if (var(VAR_RESULT) == FALSE) goto(Aide_EventScript_NoRoomForItem)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Aide_EventScript_NoRoomForItem)
+    }
     giveitem_msg(Route10_PokemonCenter_1F_Text_ReceivedEverstoneFromAide, ITEM_EVERSTONE)
     setflag(FLAG_GOT_EVERSTONE_FROM_OAKS_AIDE)
     msgbox(Route10_PokemonCenter_1F_Text_ExplainEverstone)

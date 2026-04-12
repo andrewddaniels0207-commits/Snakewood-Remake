@@ -42,7 +42,9 @@ script BattleFrontier_BattlePalaceLobby_EventScript_QuitWithoutSaving {
 script BattleFrontier_BattlePalaceLobby_EventScript_WonChallenge {
     lockall
     frontier_isbrain()
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattlePalaceLobby_EventScript_DefeatedMaven)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattlePalaceLobby_EventScript_DefeatedMaven)
+    }
     msgbox(BattleFrontier_BattlePalaceLobby_Text_FirmTrueBondsFor7WinStreak, MSGBOX_DEFAULT)
     goto(BattleFrontier_BattlePalaceLobby_EventScript_GiveBattlePoints)
 }
@@ -87,7 +89,9 @@ script BattleFrontier_BattlePalaceLobby_EventScript_SaveAfterChallenge {
     playse(SE_SAVE)
     waitse()
     call(BattleFrontier_EventScript_GetCantRecordBattle)
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattlePalaceLobby_EventScript_EndSaveAfterChallenge)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattlePalaceLobby_EventScript_EndSaveAfterChallenge)
+    }
     message(BattleFrontier_BattlePalaceLobby_Text_LikeToRecordMatch)
     waitmessage()
     multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
@@ -138,15 +142,25 @@ script BattleFrontier_BattlePalaceLobby_EventScript_DoublesAttendant {
 
 script BattleFrontier_BattlePalaceLobby_EventScript_Attendant {
     palace_get(PALACE_DATA_PRIZE)
-    if (var(VAR_RESULT) != ITEM_NONE) goto(BattleFrontier_BattlePalaceLobby_EventScript_WonChallenge)
+    if (var(VAR_RESULT) != ITEM_NONE) {
+        goto(BattleFrontier_BattlePalaceLobby_EventScript_WonChallenge)
+    }
     special(SavePlayerParty)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattlePalaceLobby_EventScript_WelcomeForSingleBattle)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattlePalaceLobby_EventScript_WelcomeForDoubleBattle)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) {
+        call(BattleFrontier_BattlePalaceLobby_EventScript_WelcomeForSingleBattle)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) {
+        call(BattleFrontier_BattlePalaceLobby_EventScript_WelcomeForDoubleBattle)
+    }
 }
 
 script BattleFrontier_BattlePalaceLobby_EventScript_AskTakeChallenge {
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattlePalaceLobby_EventScript_AskTakeSingleBattleChallenge)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattlePalaceLobby_EventScript_AskTakeDoubleBattleChallenge)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) {
+        call(BattleFrontier_BattlePalaceLobby_EventScript_AskTakeSingleBattleChallenge)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) {
+        call(BattleFrontier_BattlePalaceLobby_EventScript_AskTakeDoubleBattleChallenge)
+    }
     waitmessage()
     multichoice(17, 6, MULTI_CHALLENGEINFO, FALSE)
     switch(VAR_RESULT)
@@ -164,7 +178,9 @@ script BattleFrontier_BattlePalaceLobby_EventScript_TryEnterChallenge {
     case(FRONTIER_LVL_TENT, BattleFrontier_BattlePalaceLobby_EventScript_CancelChallenge)
     case(MULTI_B_PRESSED, BattleFrontier_BattlePalaceLobby_EventScript_CancelChallenge)
     frontier_checkineligible()
-    if (var(VAR_0x8004) == TRUE) goto(BattleFrontier_BattlePalaceLobby_EventScript_NotEnoughValidMons)
+    if (var(VAR_0x8004) == TRUE) {
+        goto(BattleFrontier_BattlePalaceLobby_EventScript_NotEnoughValidMons)
+    }
     frontier_set(FRONTIER_DATA_LVL_MODE, VAR_RESULT)
     msgbox(BattleFrontier_BattlePalaceLobby_Text_NowSelectThreeMons, MSGBOX_DEFAULT)
     fadescreen(FADE_TO_BLACK)
@@ -174,7 +190,9 @@ script BattleFrontier_BattlePalaceLobby_EventScript_TryEnterChallenge {
     setvar(VAR_0x8005, FRONTIER_PARTY_SIZE)
     special(ChoosePartyForBattleFrontier)
     waitstate
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattlePalaceLobby_EventScript_LoadPartyAndCancelChallenge)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattlePalaceLobby_EventScript_LoadPartyAndCancelChallenge)
+    }
     msgbox(BattleFrontier_BattlePalaceLobby_Text_MustSaveBeforeChallenge2, MSGBOX_YESNO)
     switch(VAR_RESULT)
     case(NO, BattleFrontier_BattlePalaceLobby_EventScript_LoadPartyAndCancelChallenge)
@@ -194,7 +212,9 @@ script BattleFrontier_BattlePalaceLobby_EventScript_SaveBeforeChallenge {
     delay(2)
     call(Common_EventScript_SaveGame)
     setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattlePalaceLobby_EventScript_CancelChallengeSaveFailed)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattlePalaceLobby_EventScript_CancelChallengeSaveFailed)
+    }
 }
 
 script BattleFrontier_BattlePalaceLobby_EventScript_EnterChallenge {
@@ -210,7 +230,9 @@ script BattleFrontier_BattlePalaceLobby_EventScript_EnterChallenge {
 }
 
 script BattleFrontier_BattlePalaceLobby_EventScript_ExplainChallenge {
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) goto(BattleFrontier_BattlePalaceLobby_EventScript_ExplainDoublesChallenge)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) {
+        goto(BattleFrontier_BattlePalaceLobby_EventScript_ExplainDoublesChallenge)
+    }
     msgbox(BattleFrontier_BattlePalaceLobby_Text_ExplainSingleBattleChallenge, MSGBOX_DEFAULT)
     goto(BattleFrontier_BattlePalaceLobby_EventScript_AskTakeChallenge)
 }
@@ -280,19 +302,31 @@ script BattleFrontier_BattlePalaceLobby_EventScript_AskTakeDoubleBattleChallenge
 }
 
 script BattleFrontier_BattlePalaceLobby_EventScript_WalkToDoor {
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattlePalaceLobby_EventScript_TalkedToSinglesAttendant)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattlePalaceLobby_EventScript_TalkedToDoublesAttendant)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) {
+        call(BattleFrontier_BattlePalaceLobby_EventScript_TalkedToSinglesAttendant)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) {
+        call(BattleFrontier_BattlePalaceLobby_EventScript_TalkedToDoublesAttendant)
+    }
     applymovement(VAR_LAST_TALKED, BattleFrontier_BattlePalaceLobby_Movement_WalkToDoor)
     applymovement(LOCALID_PLAYER, BattleFrontier_BattlePalaceLobby_Movement_WalkToDoor)
     waitmovement(0)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattlePalaceLobby_EventScript_OpenSinglesHallDoor)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattlePalaceLobby_EventScript_OpenDoublesHallDoor)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) {
+        call(BattleFrontier_BattlePalaceLobby_EventScript_OpenSinglesHallDoor)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) {
+        call(BattleFrontier_BattlePalaceLobby_EventScript_OpenDoublesHallDoor)
+    }
     waitdooranim()
     applymovement(VAR_LAST_TALKED, BattleFrontier_BattlePalaceLobby_Movement_AttendantEnterDoor)
     applymovement(LOCALID_PLAYER, BattleFrontier_BattlePalaceLobby_Movement_PlayerEnterDoor)
     waitmovement(0)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattlePalaceLobby_EventScript_CloseSinglesHallDoor)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattlePalaceLobby_EventScript_CloseDoublesHallDoor)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) {
+        call(BattleFrontier_BattlePalaceLobby_EventScript_CloseSinglesHallDoor)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) {
+        call(BattleFrontier_BattlePalaceLobby_EventScript_CloseDoublesHallDoor)
+    }
     waitdooranim()
     return
 }

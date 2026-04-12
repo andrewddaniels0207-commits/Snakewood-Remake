@@ -79,8 +79,12 @@ movement OneIsland_Movement_BillEnterPokeCenter {
 script OneIsland_EventScript_OldMan {
     lock
     faceplayer
-    if (flag(FLAG_IS_CHAMPION)) goto(OneIsland_EventScript_OldManLinkHoenn)
-    if (flag(FLAG_SEVII_DETOUR_FINISHED)) goto(OneIsland_EventScript_OldManLinkKanto)
+    if (flag(FLAG_IS_CHAMPION)) {
+        goto(OneIsland_EventScript_OldManLinkHoenn)
+    }
+    if (flag(FLAG_SEVII_DETOUR_FINISHED)) {
+        goto(OneIsland_EventScript_OldManLinkKanto)
+    }
     msgbox(OneIsland_Text_LuckyToHaveCelioHere)
     release
     end

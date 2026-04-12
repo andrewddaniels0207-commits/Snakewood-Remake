@@ -3,39 +3,71 @@ mapscripts BattleFrontier_ScottsHouse_MapScripts {}
 script BattleFrontier_ScottsHouse_EventScript_Scott {
     lock
     faceplayer
-    if (flag(FLAG_TEMP_4)) goto(BattleFrontier_ScottsHouse_EventScript_GivenBerry)
-    if (flag(FLAG_TEMP_3)) goto(BattleFrontier_ScottsHouse_EventScript_GivenShield)
-    if (flag(FLAG_TEMP_2)) goto(BattleFrontier_ScottsHouse_EventScript_GivenBattlePoints)
+    if (flag(FLAG_TEMP_4)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_GivenBerry)
+    }
+    if (flag(FLAG_TEMP_3)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_GivenShield)
+    }
+    if (flag(FLAG_TEMP_2)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_GivenBattlePoints)
+    }
     goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveItems)
     end
 }
 
 script BattleFrontier_ScottsHouse_EventScript_CheckGiveItems {
-    if (!flag(FLAG_SCOTT_GIVES_BATTLE_POINTS)) goto(BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier)
-    if (!flag(FLAG_COLLECTED_ALL_SILVER_SYMBOLS)) goto(BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols)
-    if (!flag(FLAG_COLLECTED_ALL_GOLD_SYMBOLS)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols)
+    if (!flag(FLAG_SCOTT_GIVES_BATTLE_POINTS)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier)
+    }
+    if (!flag(FLAG_COLLECTED_ALL_SILVER_SYMBOLS)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols)
+    }
+    if (!flag(FLAG_COLLECTED_ALL_GOLD_SYMBOLS)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols)
+    }
     goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
     end
 }
 
 script BattleFrontier_ScottsHouse_EventScript_CheckGiveShield {
-    if (!flag(FLAG_RECEIVED_SILVER_SHIELD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield)
-    if (!flag(FLAG_RECEIVED_GOLD_SHIELD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield)
+    if (!flag(FLAG_RECEIVED_SILVER_SHIELD)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield)
+    }
+    if (!flag(FLAG_RECEIVED_GOLD_SHIELD)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield)
+    }
     goto(BattleFrontier_ScottsHouse_EventScript_RandomComment)
     end
 }
 
 script BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols {
-    if (!flag(FLAG_SYS_TOWER_SILVER)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
-    if (!flag(FLAG_SYS_DOME_SILVER)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
-    if (!flag(FLAG_SYS_PALACE_SILVER)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
-    if (!flag(FLAG_SYS_ARENA_SILVER)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
-    if (!flag(FLAG_SYS_FACTORY_SILVER)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
-    if (!flag(FLAG_SYS_PIKE_SILVER)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
-    if (!flag(FLAG_SYS_PYRAMID_SILVER)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    if (!flag(FLAG_SYS_TOWER_SILVER)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    }
+    if (!flag(FLAG_SYS_DOME_SILVER)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    }
+    if (!flag(FLAG_SYS_PALACE_SILVER)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    }
+    if (!flag(FLAG_SYS_ARENA_SILVER)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    }
+    if (!flag(FLAG_SYS_FACTORY_SILVER)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    }
+    if (!flag(FLAG_SYS_PIKE_SILVER)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    }
+    if (!flag(FLAG_SYS_PYRAMID_SILVER)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    }
     msgbox(BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols, MSGBOX_DEFAULT)
     giveitem(ITEM_LANSAT_BERRY)
-    if (var(VAR_RESULT) == FALSE) goto(BattleFrontier_ScottsHouse_EventScript_BerryPocketFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(BattleFrontier_ScottsHouse_EventScript_BerryPocketFull)
+    }
     setflag(FLAG_COLLECTED_ALL_SILVER_SYMBOLS)
     setflag(FLAG_TEMP_4)
     release
@@ -43,16 +75,32 @@ script BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols {
 }
 
 script BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols {
-    if (!flag(FLAG_SYS_TOWER_GOLD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
-    if (!flag(FLAG_SYS_DOME_GOLD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
-    if (!flag(FLAG_SYS_PALACE_GOLD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
-    if (!flag(FLAG_SYS_ARENA_GOLD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
-    if (!flag(FLAG_SYS_FACTORY_GOLD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
-    if (!flag(FLAG_SYS_PIKE_GOLD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
-    if (!flag(FLAG_SYS_PYRAMID_GOLD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    if (!flag(FLAG_SYS_TOWER_GOLD)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    }
+    if (!flag(FLAG_SYS_DOME_GOLD)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    }
+    if (!flag(FLAG_SYS_PALACE_GOLD)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    }
+    if (!flag(FLAG_SYS_ARENA_GOLD)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    }
+    if (!flag(FLAG_SYS_FACTORY_GOLD)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    }
+    if (!flag(FLAG_SYS_PIKE_GOLD)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    }
+    if (!flag(FLAG_SYS_PYRAMID_GOLD)) {
+        goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    }
     msgbox(BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols, MSGBOX_DEFAULT)
     giveitem(ITEM_STARF_BERRY)
-    if (var(VAR_RESULT) == FALSE) goto(BattleFrontier_ScottsHouse_EventScript_BerryPocketFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(BattleFrontier_ScottsHouse_EventScript_BerryPocketFull)
+    }
     setflag(FLAG_COLLECTED_ALL_GOLD_SYMBOLS)
     setflag(FLAG_TEMP_4)
     release
@@ -73,8 +121,12 @@ script BattleFrontier_ScottsHouse_EventScript_GivenBerry {
 
 script BattleFrontier_ScottsHouse_EventScript_RandomComment {
     random(3)
-    if (var(VAR_RESULT) == 1) goto(BattleFrontier_ScottsHouse_EventScript_FrontierBrainComment)
-    if (var(VAR_RESULT) == 2) goto(BattleFrontier_ScottsHouse_EventScript_ArtisanCaveComment)
+    if (var(VAR_RESULT) == 1) {
+        goto(BattleFrontier_ScottsHouse_EventScript_FrontierBrainComment)
+    }
+    if (var(VAR_RESULT) == 2) {
+        goto(BattleFrontier_ScottsHouse_EventScript_ArtisanCaveComment)
+    }
     msgbox(BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers, MSGBOX_DEFAULT)
     release
     end
@@ -96,10 +148,14 @@ script BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield {
     setvar(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES)
     frontier_set(FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50)
     tower_get(TOWER_DATA_WIN_STREAK)
-    if (var(VAR_RESULT) >= 50) goto(BattleFrontier_ScottsHouse_EventScript_GiveSilverShield)
+    if (var(VAR_RESULT) >= 50) {
+        goto(BattleFrontier_ScottsHouse_EventScript_GiveSilverShield)
+    }
     frontier_set(FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_OPEN)
     tower_get(TOWER_DATA_WIN_STREAK)
-    if (var(VAR_RESULT) >= 50) goto(BattleFrontier_ScottsHouse_EventScript_GiveSilverShield)
+    if (var(VAR_RESULT) >= 50) {
+        goto(BattleFrontier_ScottsHouse_EventScript_GiveSilverShield)
+    }
     goto(BattleFrontier_ScottsHouse_EventScript_RandomComment)
     end
 }
@@ -107,7 +163,9 @@ script BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield {
 script BattleFrontier_ScottsHouse_EventScript_GiveSilverShield {
     msgbox(BattleFrontier_ScottsHouse_Text_Beat50TrainersInARow, MSGBOX_DEFAULT)
     givedecoration(DECOR_SILVER_SHIELD)
-    if (var(VAR_RESULT) == FALSE) goto(BattleFrontier_ScottsHouse_EventScript_NoRoomForShield)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(BattleFrontier_ScottsHouse_EventScript_NoRoomForShield)
+    }
     setflag(FLAG_RECEIVED_SILVER_SHIELD)
     setflag(FLAG_TEMP_3)
     goto(BattleFrontier_ScottsHouse_EventScript_GivenShield)
@@ -130,10 +188,14 @@ script BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield {
     setvar(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES)
     frontier_set(FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50)
     tower_get(TOWER_DATA_WIN_STREAK)
-    if (var(VAR_RESULT) >= 100) goto(BattleFrontier_ScottsHouse_EventScript_GiveGoldShield)
+    if (var(VAR_RESULT) >= 100) {
+        goto(BattleFrontier_ScottsHouse_EventScript_GiveGoldShield)
+    }
     frontier_set(FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_OPEN)
     tower_get(TOWER_DATA_WIN_STREAK)
-    if (var(VAR_RESULT) >= 100) goto(BattleFrontier_ScottsHouse_EventScript_GiveGoldShield)
+    if (var(VAR_RESULT) >= 100) {
+        goto(BattleFrontier_ScottsHouse_EventScript_GiveGoldShield)
+    }
     goto(BattleFrontier_ScottsHouse_EventScript_RandomComment)
     end
 }
@@ -141,7 +203,9 @@ script BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield {
 script BattleFrontier_ScottsHouse_EventScript_GiveGoldShield {
     msgbox(BattleFrontier_ScottsHouse_Text_Beat100TrainersInARow, MSGBOX_DEFAULT)
     givedecoration(DECOR_GOLD_SHIELD)
-    if (var(VAR_RESULT) == FALSE) goto(BattleFrontier_ScottsHouse_EventScript_NoRoomForShield)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(BattleFrontier_ScottsHouse_EventScript_NoRoomForShield)
+    }
     setflag(FLAG_RECEIVED_GOLD_SHIELD)
     setflag(FLAG_TEMP_3)
     goto(BattleFrontier_ScottsHouse_EventScript_GivenShield)
@@ -158,17 +222,31 @@ script BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier {
     msgbox(BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier, MSGBOX_DEFAULT)
     closemessage
     delay(30)
-    if (var(VAR_FACING) == DIR_NORTH) call(BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(BattleFrontier_ScottsHouse_EventScript_ScottFaceAwaySouth)
-    if (var(VAR_FACING) == DIR_EAST) call(BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayEast)
-    if (var(VAR_FACING) == DIR_WEST) call(BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(BattleFrontier_ScottsHouse_EventScript_ScottFaceAwaySouth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayEast)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest)
+    }
     msgbox(BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal, MSGBOX_DEFAULT)
     applymovement(LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_FacePlayer)
     waitmovement(0)
     msgbox(BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing, MSGBOX_DEFAULT)
-    if (var(VAR_SCOTT_STATE) == 13) goto(BattleFrontier_ScottsHouse_EventScript_Give4BattlePoints)
-    if (var(VAR_SCOTT_STATE) >= 9) goto(BattleFrontier_ScottsHouse_EventScript_Give3BattlePoints)
-    if (var(VAR_SCOTT_STATE) >= 6) goto(BattleFrontier_ScottsHouse_EventScript_Give2BattlePoints)
+    if (var(VAR_SCOTT_STATE) == 13) {
+        goto(BattleFrontier_ScottsHouse_EventScript_Give4BattlePoints)
+    }
+    if (var(VAR_SCOTT_STATE) >= 9) {
+        goto(BattleFrontier_ScottsHouse_EventScript_Give3BattlePoints)
+    }
+    if (var(VAR_SCOTT_STATE) >= 6) {
+        goto(BattleFrontier_ScottsHouse_EventScript_Give2BattlePoints)
+    }
     goto(BattleFrontier_ScottsHouse_EventScript_Give1BattlePoint)
     end
 }

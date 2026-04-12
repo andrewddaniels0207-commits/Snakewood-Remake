@@ -7,7 +7,9 @@ mapscripts MossdeepCity_StevensHouse_MapScripts {
 }
 
 script MossdeepCity_StevensHouse_OnLoad {
-    if (!flag(FLAG_SYS_GAME_CLEAR)) call(MossdeepCity_StevensHouse_EventScript_HideStevensNote)
+    if (!flag(FLAG_SYS_GAME_CLEAR)) {
+        call(MossdeepCity_StevensHouse_EventScript_HideStevensNote)
+    }
     end
 }
 
@@ -17,7 +19,9 @@ script MossdeepCity_StevensHouse_EventScript_HideStevensNote {
 }
 
 script MossdeepCity_StevensHouse_OnTransition {
-    if (var(VAR_STEVENS_HOUSE_STATE) == 2) call(MossdeepCity_StevensHouse_EventScript_SetStevenPos)
+    if (var(VAR_STEVENS_HOUSE_STATE) == 2) {
+        call(MossdeepCity_StevensHouse_EventScript_SetStevenPos)
+    }
     end
 }
 
@@ -77,7 +81,9 @@ movement MossdeepCity_StevensHouse_Movement_StevenReturn {
 script MossdeepCity_StevensHouse_EventScript_BeldumPokeball {
     lockall
     msgbox(MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(MossdeepCity_StevensHouse_EventScript_LeaveBeldum)
+    if (var(VAR_RESULT) == NO) {
+        goto(MossdeepCity_StevensHouse_EventScript_LeaveBeldum)
+    }
     goto(MossdeepCity_StevensHouse_EventScript_GiveBeldum)
     end
 }
@@ -91,8 +97,12 @@ script MossdeepCity_StevensHouse_EventScript_LeaveBeldum {
 script MossdeepCity_StevensHouse_EventScript_GiveBeldum {
     setvar(VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_BELDUM)
     givemon(SPECIES_BELDUM, 5)
-    if (var(VAR_RESULT) == MON_GIVEN_TO_PARTY) goto(MossdeepCity_StevensHouse_EventScript_SendBeldumParty)
-    if (var(VAR_RESULT) == MON_GIVEN_TO_PC) goto(MossdeepCity_StevensHouse_EventScript_SendBeldumPC)
+    if (var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+        goto(MossdeepCity_StevensHouse_EventScript_SendBeldumParty)
+    }
+    if (var(VAR_RESULT) == MON_GIVEN_TO_PC) {
+        goto(MossdeepCity_StevensHouse_EventScript_SendBeldumPC)
+    }
     goto(Common_EventScript_NoMoreRoomForPokemon)
     end
 }
@@ -100,7 +110,9 @@ script MossdeepCity_StevensHouse_EventScript_GiveBeldum {
 script MossdeepCity_StevensHouse_EventScript_SendBeldumParty {
     call(MossdeepCity_StevensHouse_EventScript_ReceivedBeldumFanfare)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(MossdeepCity_StevensHouse_EventScript_ReceivedBeldum)
+    if (var(VAR_RESULT) == NO) {
+        goto(MossdeepCity_StevensHouse_EventScript_ReceivedBeldum)
+    }
     call(Common_EventScript_GetGiftMonPartySlot)
     call(Common_EventScript_NameReceivedPartyMon)
     goto(MossdeepCity_StevensHouse_EventScript_ReceivedBeldum)
@@ -110,7 +122,9 @@ script MossdeepCity_StevensHouse_EventScript_SendBeldumParty {
 script MossdeepCity_StevensHouse_EventScript_SendBeldumPC {
     call(MossdeepCity_StevensHouse_EventScript_ReceivedBeldumFanfare)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(MossdeepCity_StevensHouse_EventScript_BeldumTransferredToPC)
+    if (var(VAR_RESULT) == NO) {
+        goto(MossdeepCity_StevensHouse_EventScript_BeldumTransferredToPC)
+    }
     call(Common_EventScript_NameReceivedBoxMon)
     goto(MossdeepCity_StevensHouse_EventScript_BeldumTransferredToPC)
     end

@@ -7,14 +7,18 @@ script MossdeepCity_OnTransition {
     clearflag(FLAG_MOSSDEEP_GYM_SWITCH_2)
     clearflag(FLAG_MOSSDEEP_GYM_SWITCH_3)
     clearflag(FLAG_MOSSDEEP_GYM_SWITCH_4)
-    if (flag(FLAG_SYS_WEATHER_CTRL)) call(Common_EventScript_SetAbnormalWeather)
+    if (flag(FLAG_SYS_WEATHER_CTRL)) {
+        call(Common_EventScript_SetAbnormalWeather)
+    }
     end
 }
 
 script MossdeepCity_EventScript_PokefanF {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_HM_DIVE)) goto(MossdeepCity_EventScript_PokefanFMagmaGone)
+    if (flag(FLAG_RECEIVED_HM_DIVE)) {
+        goto(MossdeepCity_EventScript_PokefanFMagmaGone)
+    }
     msgbox(MossdeepCity_Text_SpaceCenterReceivedLetter, MSGBOX_DEFAULT)
     release
     end
@@ -29,7 +33,9 @@ script MossdeepCity_EventScript_PokefanFMagmaGone {
 script MossdeepCity_EventScript_Sailor {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_HM_DIVE)) goto(MossdeepCity_EventScript_SailorMagmaGone)
+    if (flag(FLAG_RECEIVED_HM_DIVE)) {
+        goto(MossdeepCity_EventScript_SailorMagmaGone)
+    }
     msgbox(MossdeepCity_Text_MossdeepTargetedByMagma, MSGBOX_DEFAULT)
     release
     end
@@ -247,12 +253,18 @@ script MossdeepCity_EventScript_Man {
 script MossdeepCity_EventScript_KingsRockBoy {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_KINGS_ROCK)) goto(MossdeepCity_EventScript_ReceivedKingsRock)
+    if (flag(FLAG_RECEIVED_KINGS_ROCK)) {
+        goto(MossdeepCity_EventScript_ReceivedKingsRock)
+    }
     msgbox(MossdeepCity_Text_WantKingsRockStevenGaveMe, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(MossdeepCity_EventScript_DeclineKingsRock)
+    if (var(VAR_RESULT) == NO) {
+        goto(MossdeepCity_EventScript_DeclineKingsRock)
+    }
     msgbox(MossdeepCity_Text_YouCanKeepIt, MSGBOX_DEFAULT)
     giveitem(ITEM_KINGS_ROCK)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_KINGS_ROCK)
     release
     end
@@ -280,8 +292,12 @@ script MossdeepCity_EventScript_Scott {
     faceplayer
     msgbox(MossdeepCity_Text_ScottSomethingWrongWithTown, MSGBOX_DEFAULT)
     closemessage
-    if (var(VAR_FACING) == DIR_NORTH) call(MossdeepCity_EventScript_ScottExitNorth)
-    if (var(VAR_FACING) == DIR_EAST) call(MossdeepCity_EventScript_ScottExitEast)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(MossdeepCity_EventScript_ScottExitNorth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(MossdeepCity_EventScript_ScottExitEast)
+    }
     addvar(VAR_SCOTT_STATE, 1)
     removeobject(LOCALID_MOSSDEEP_SCOTT)
     release

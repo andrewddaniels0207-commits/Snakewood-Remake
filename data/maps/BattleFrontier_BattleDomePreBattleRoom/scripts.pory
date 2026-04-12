@@ -19,7 +19,9 @@ script BattleFrontier_BattleDomePreBattleRoom_EventScript_TurnPlayerNorth {
 }
 
 script BattleFrontier_BattleDomePreBattleRoom_EventScript_EnterRoom {
-    if (var(VAR_0x8006) == 1) goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ReturnFromBattle)
+    if (var(VAR_0x8006) == 1) {
+        goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ReturnFromBattle)
+    }
     delay(1)
     frontier_set(FRONTIER_DATA_RECORD_DISABLED, TRUE)
     setvar(VAR_TEMP_0, 1)
@@ -33,7 +35,9 @@ script BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound {
     waitmessage()
     switch(VAR_RESULT)
     call(BattleFrontier_EventScript_GetCantRecordBattle)
-    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRoundNoRecord)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRoundNoRecord)
+    }
     multichoice(16, 0, MULTI_TOURNEY_WITH_RECORD, TRUE)
     switch(VAR_RESULT)
     case(0, BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowOpponentInfo)
@@ -162,7 +166,9 @@ script BattleFrontier_BattleDomePreBattleRoom_EventScript_ContinueChallenge {
     special(ChoosePartyForBattleFrontier)
     waitstate
     frontier_resetsketch()
-    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
+    if (var(VAR_RESULT) == 0) {
+        goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound)
+    }
     dome_set(DOME_DATA_SELECTED_MONS)
     dome_reduceparty()
     dome_setopponent()
@@ -221,14 +227,18 @@ script BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForFinals {
 }
 
 script BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerSilver {
-    if (flag(FLAG_TEMP_1)) goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerSilverShort)
+    if (flag(FLAG_TEMP_1)) {
+        goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerSilverShort)
+    }
     msgbox(BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerSilver, MSGBOX_DEFAULT)
     setflag(FLAG_TEMP_1)
     return
 }
 
 script BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerGold {
-    if (flag(FLAG_TEMP_1)) goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerGoldShort)
+    if (flag(FLAG_TEMP_1)) {
+        goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerGoldShort)
+    }
     msgbox(BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerGold, MSGBOX_DEFAULT)
     setflag(FLAG_TEMP_1)
     return

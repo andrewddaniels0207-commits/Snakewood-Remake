@@ -3,15 +3,21 @@ mapscripts SilphCo_4F_Frlg_MapScripts {
 }
 
 script SilphCo_4F_OnLoad {
-    if (!flag(FLAG_SILPH_4F_DOOR_1)) call(EventScript_Close4FDoor1)
-    if (!flag(FLAG_SILPH_4F_DOOR_2)) call(EventScript_Close4FDoor2)
+    if (!flag(FLAG_SILPH_4F_DOOR_1)) {
+        call(EventScript_Close4FDoor1)
+    }
+    if (!flag(FLAG_SILPH_4F_DOOR_2)) {
+        call(EventScript_Close4FDoor2)
+    }
     end
 }
 
 script SilphCo_4F_EventScript_WorkerM {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) goto(SilphCo_4F_EventScript_WorkerMRocketsGone)
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
+        goto(SilphCo_4F_EventScript_WorkerMRocketsGone)
+    }
     msgbox(SilphCo_4F_Text_CantYouSeeImHiding)
     release
     end

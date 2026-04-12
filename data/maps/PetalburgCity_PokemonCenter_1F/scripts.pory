@@ -33,15 +33,23 @@ script PetalburgCity_PokemonCenter_1F_EventScript_Woman {
     faceplayer
     msgbox(PetalburgCity_PokemonCenter_1F_Text_ManyTypesOfPokemon, MSGBOX_DEFAULT)
     specialvar(VAR_RESULT, IsStarterInParty)
-    if (var(VAR_RESULT) == TRUE) goto(PetalburgCity_PokemonCenter_1F_EventScript_SayStarterTypeInfo)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(PetalburgCity_PokemonCenter_1F_EventScript_SayStarterTypeInfo)
+    }
     release
     end
 }
 
 script PetalburgCity_PokemonCenter_1F_EventScript_SayStarterTypeInfo {
-    if (var(VAR_STARTER_MON) == 0) call(PetalburgCity_PokemonCenter_1F_EventScript_SayTreeckoType)
-    if (var(VAR_STARTER_MON) == 1) call(PetalburgCity_PokemonCenter_1F_EventScript_SayTorchicType)
-    if (var(VAR_STARTER_MON) == 2) call(PetalburgCity_PokemonCenter_1F_EventScript_SayMudkipType)
+    if (var(VAR_STARTER_MON) == 0) {
+        call(PetalburgCity_PokemonCenter_1F_EventScript_SayTreeckoType)
+    }
+    if (var(VAR_STARTER_MON) == 1) {
+        call(PetalburgCity_PokemonCenter_1F_EventScript_SayTorchicType)
+    }
+    if (var(VAR_STARTER_MON) == 2) {
+        call(PetalburgCity_PokemonCenter_1F_EventScript_SayMudkipType)
+    }
     release
     end
 }

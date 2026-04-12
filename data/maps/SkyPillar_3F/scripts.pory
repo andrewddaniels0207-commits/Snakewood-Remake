@@ -3,7 +3,9 @@ mapscripts SkyPillar_3F_MapScripts {
 }
 
 script SkyPillar_3F_OnTransition {
-    if (var(VAR_SKY_PILLAR_STATE) < 2) call(SkyPillar_3F_EventScript_CleanFloor)
+    if (var(VAR_SKY_PILLAR_STATE) < 2) {
+        call(SkyPillar_3F_EventScript_CleanFloor)
+    }
     end
 }
 

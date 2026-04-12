@@ -18,7 +18,9 @@ script SafariZone_South_EventScript_EnterSafariZone {
 }
 
 script SafariZone_South_OnTransition {
-    if (var(VAR_SAFARI_ZONE_STATE) == 2) call(SafariZone_South_EventScript_SetExitAttendantAside)
+    if (var(VAR_SAFARI_ZONE_STATE) == 2) {
+        call(SafariZone_South_EventScript_SetExitAttendantAside)
+    }
     end
 }
 
@@ -56,9 +58,13 @@ script SafariZone_South_EventScript_Youngster {
 script SafariZone_South_EventScript_ExitAttendant {
     lock
     faceplayer
-    if (!flag(FLAG_GOOD_LUCK_SAFARI_ZONE)) goto(SafariZone_South_EventScript_GoodLuck)
+    if (!flag(FLAG_GOOD_LUCK_SAFARI_ZONE)) {
+        goto(SafariZone_South_EventScript_GoodLuck)
+    }
     msgbox(SafariZone_South_Text_StillHaveTimeExit, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(SafariZone_South_EventScript_ExitEarly)
+    if (var(VAR_RESULT) == YES) {
+        goto(SafariZone_South_EventScript_ExitEarly)
+    }
     msgbox(SafariZone_South_Text_EnjoyTheRestOfYourAdventure, MSGBOX_DEFAULT)
     release
     end

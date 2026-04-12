@@ -6,12 +6,16 @@ mapscripts IndigoPlateau_PokemonCenter_1F_Frlg_MapScripts {
 script IndigoPlateau_PokemonCenter_1F_OnTransition {
     setrespawn(HEAL_LOCATION_INDIGO_PLATEAU)
     specialvar(VAR_RESULT, IsNationalPokedexEnabled)
-    if (var(VAR_RESULT) == TRUE) call(IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor)
+    if (var(VAR_RESULT) == TRUE) {
+        call(IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor)
+    }
     end
 }
 
 script IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor {
-    if (flag(FLAG_IS_CHAMPION)) goto(Common_EventScript_NopReturn)
+    if (flag(FLAG_IS_CHAMPION)) {
+        goto(Common_EventScript_NopReturn)
+    }
     setobjectxyperm(LOCALID_LEAGUE_DOOR_GUARD, 4, 2)
     return
 }
@@ -20,14 +24,18 @@ script IndigoPlateau_PokemonCenter_1F_EventScript_DoorGuard {
     lock
     faceplayer
     specialvar(VAR_RESULT, IsNationalPokedexEnabled)
-    if (var(VAR_RESULT) == TRUE) goto(IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete)
+    }
     msgbox(IndigoPlateau_PokemonCenter_1F_Text_FaceEliteFourGoodLuck)
     release
     end
 }
 
 script IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete {
-    if (flag(FLAG_IS_CHAMPION)) goto(IndigoPlateau_PokemonCenter_1F_EventScript_SeviiIslandComplete)
+    if (flag(FLAG_IS_CHAMPION)) {
+        goto(IndigoPlateau_PokemonCenter_1F_EventScript_SeviiIslandComplete)
+    }
     msgbox(IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing)
     release
     end

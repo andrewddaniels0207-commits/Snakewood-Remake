@@ -30,7 +30,9 @@ script Route7_EastEntrance_EventScript_GuardTrigger {
     textcolor(NPC_TEXT_COLOR_MALE)
     applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
     waitmovement(0)
-    if (flag(FLAG_GOT_TEA)) goto(Route7_EastEntrance_EventScript_GiveTea)
+    if (flag(FLAG_GOT_TEA)) {
+        goto(Route7_EastEntrance_EventScript_GiveTea)
+    }
     msgbox(Route7_EastEntrance_Text_ThirstyOnGuardDuty)
     closemessage
     applymovement(LOCALID_PLAYER, Route7_EastEntrance_Movement_BlockPlayerEntry)
@@ -48,9 +50,15 @@ script Route7_EastEntrance_EventScript_GiveTea {
 script Route7_EastEntrance_EventScript_GuardDrinkTea {
     msgbox(Route7_EastEntrance_Text_ThatTeaLooksTasty)
     closemessage
-    if (var(VAR_TEMP_1) == 0) call(Route7_EastEntrance_WalkToGuardTop)
-    if (var(VAR_TEMP_1) == 1) call(Route7_EastEntrance_WalkToGuardMid)
-    if (var(VAR_TEMP_1) == 2) call(Route7_EastEntrance_WalkToGuardBottom)
+    if (var(VAR_TEMP_1) == 0) {
+        call(Route7_EastEntrance_WalkToGuardTop)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(Route7_EastEntrance_WalkToGuardMid)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(Route7_EastEntrance_WalkToGuardBottom)
+    }
     msgbox(Route7_EastEntrance_Text_ThanksIllShareTeaWithGuards)
     setvar(VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1)
     releaseall

@@ -27,8 +27,12 @@ script EverGrandeCity_DrakesRoom_EventScript_WalkInCloseDoor {
 }
 
 script EverGrandeCity_DrakesRoom_OnLoad {
-    if (flag(FLAG_DEFEATED_ELITE_4_DRAKE)) call(EverGrandeCity_DrakesRoom_EventScript_ResetAdvanceToNextRoom)
-    if (var(VAR_ELITE_4_STATE) == 4) call(EverGrandeCity_DrakesRoom_EventScript_CloseDoor)
+    if (flag(FLAG_DEFEATED_ELITE_4_DRAKE)) {
+        call(EverGrandeCity_DrakesRoom_EventScript_ResetAdvanceToNextRoom)
+    }
+    if (var(VAR_ELITE_4_STATE) == 4) {
+        call(EverGrandeCity_DrakesRoom_EventScript_CloseDoor)
+    }
     end
 }
 
@@ -45,7 +49,9 @@ script EverGrandeCity_DrakesRoom_EventScript_CloseDoor {
 script EverGrandeCity_DrakesRoom_EventScript_Drake {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_ELITE_4_DRAKE)) goto(EverGrandeCity_DrakesRoom_EventScript_PostBattleSpeech)
+    if (flag(FLAG_DEFEATED_ELITE_4_DRAKE)) {
+        goto(EverGrandeCity_DrakesRoom_EventScript_PostBattleSpeech)
+    }
     playbgm(MUS_ENCOUNTER_ELITE_FOUR, FALSE)
     msgbox(EverGrandeCity_DrakesRoom_Text_IntroSpeech, MSGBOX_DEFAULT)
     trainerbattle_no_intro(TRAINER_DRAKE, EverGrandeCity_DrakesRoom_Text_Defeat)

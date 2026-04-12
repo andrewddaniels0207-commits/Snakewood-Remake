@@ -3,7 +3,9 @@ mapscripts EverGrandeCity_MapScripts {
 }
 
 script EverGrandeCity_OnTransition {
-    if (flag(FLAG_SYS_WEATHER_CTRL)) call(Common_EventScript_SetAbnormalWeather)
+    if (flag(FLAG_SYS_WEATHER_CTRL)) {
+        call(Common_EventScript_SetAbnormalWeather)
+    }
     end
 }
 

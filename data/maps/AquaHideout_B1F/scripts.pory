@@ -4,20 +4,28 @@ mapscripts AquaHideout_B1F_MapScripts {
 }
 
 script AquaHideout_B1F_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(AquaHideout_B1F_EventScript_TryRemoveElectrode)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(AquaHideout_B1F_EventScript_TryRemoveElectrode)
+    }
     end
 }
 
 script AquaHideout_B1F_EventScript_TryRemoveElectrode {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
+        goto(Common_EventScript_NopReturn)
+    }
     removeobject(VAR_LAST_TALKED)
     return
 }
 
 script AquaHideout_B1F_OnTransition {
-    if (!flag(FLAG_DEFEATED_ELECTRODE_1_AQUA_HIDEOUT)) call(AquaHideout_B1F_EventScript_ShowElectrode1)
-    if (!flag(FLAG_DEFEATED_ELECTRODE_2_AQUA_HIDEOUT)) call(AquaHideout_B1F_EventScript_ShowElectrode2)
+    if (!flag(FLAG_DEFEATED_ELECTRODE_1_AQUA_HIDEOUT)) {
+        call(AquaHideout_B1F_EventScript_ShowElectrode1)
+    }
+    if (!flag(FLAG_DEFEATED_ELECTRODE_2_AQUA_HIDEOUT)) {
+        call(AquaHideout_B1F_EventScript_ShowElectrode2)
+    }
     end
 }
 
@@ -43,9 +51,15 @@ script AquaHideout_B1F_EventScript_Electrode1 {
     dowildbattle()
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(AquaHideout_B1F_EventScript_DefeatedElectrode1)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(AquaHideout_B1F_EventScript_DefeatedElectrode1)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(AquaHideout_B1F_EventScript_DefeatedElectrode1)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(AquaHideout_B1F_EventScript_DefeatedElectrode1)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(AquaHideout_B1F_EventScript_DefeatedElectrode1)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(AquaHideout_B1F_EventScript_DefeatedElectrode1)
+    }
     setflag(FLAG_DEFEATED_ELECTRODE_1_AQUA_HIDEOUT)
     release
     end
@@ -69,9 +83,15 @@ script AquaHideout_B1F_EventScript_Electrode2 {
     dowildbattle()
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(AquaHideout_B1F_EventScript_DefeatedElectrode2)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(AquaHideout_B1F_EventScript_DefeatedElectrode2)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(AquaHideout_B1F_EventScript_DefeatedElectrode2)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(AquaHideout_B1F_EventScript_DefeatedElectrode2)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(AquaHideout_B1F_EventScript_DefeatedElectrode2)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(AquaHideout_B1F_EventScript_DefeatedElectrode2)
+    }
     setflag(FLAG_DEFEATED_ELECTRODE_2_AQUA_HIDEOUT)
     release
     end

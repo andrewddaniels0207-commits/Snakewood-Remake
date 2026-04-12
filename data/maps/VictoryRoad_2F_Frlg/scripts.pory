@@ -3,8 +3,12 @@ mapscripts VictoryRoad_2F_Frlg_MapScripts {
 }
 
 script VictoryRoad_2F_OnLoad {
-    if (var(VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1) != 100) call(VictoryRoad_2F_EventScript_SetRockBarrier1)
-    if (var(VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2) != 100) call(VictoryRoad_2F_EventScript_SetRockBarrier2)
+    if (var(VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1) != 100) {
+        call(VictoryRoad_2F_EventScript_SetRockBarrier1)
+    }
+    if (var(VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2) != 100) {
+        call(VictoryRoad_2F_EventScript_SetRockBarrier2)
+    }
     end
 }
 
@@ -22,7 +26,9 @@ script VictoryRoad_2F_EventScript_SetRockBarrier2 {
 
 script VictoryRoad_2F_EventScript_FloorSwitch1 {
     lockall
-    if (var(VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1) == 100) goto(VictoryRoad_2F_EventScript_FloorSwitch1AlreadyPressed)
+    if (var(VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1) == 100) {
+        goto(VictoryRoad_2F_EventScript_FloorSwitch1AlreadyPressed)
+    }
     setmetatile(13, 10, METATILE_Cave_Floor_Ledge_Top, 0)
     setmetatile(13, 11, METATILE_Cave_Floor_Ledge_Bottom, 0)
     playse(SE_ICE_BREAK)
@@ -41,7 +47,9 @@ script VictoryRoad_2F_EventScript_FloorSwitch1AlreadyPressed {
 
 script VictoryRoad_2F_EventScript_FloorSwitch2 {
     lockall
-    if (var(VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2) == 100) goto(VictoryRoad_2F_EventScript_FloorSwitch2AlreadyPressed)
+    if (var(VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2) == 100) {
+        goto(VictoryRoad_2F_EventScript_FloorSwitch2AlreadyPressed)
+    }
     setmetatile(33, 16, METATILE_Cave_Floor_Ledge_Top, 0)
     setmetatile(33, 17, METATILE_Cave_Floor_Ledge_Bottom, 0)
     playse(SE_ICE_BREAK)

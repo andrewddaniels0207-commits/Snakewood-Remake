@@ -3,7 +3,9 @@ mapscripts BattleFrontier_Lounge6_MapScripts {}
 script BattleFrontier_Lounge6_EventScript_Trader {
     lock
     faceplayer
-    if (flag(FLAG_BATTLE_FRONTIER_TRADE_DONE)) goto(BattleFrontier_Lounge6_EventScript_TradeCompleted)
+    if (flag(FLAG_BATTLE_FRONTIER_TRADE_DONE)) {
+        goto(BattleFrontier_Lounge6_EventScript_TradeCompleted)
+    }
     ingame_trade(INGAME_TRADE_MEOWTH, BattleFrontier_Lounge6_Text_WouldYouLikeToTrade, BattleFrontier_Lounge6_EventScript_DeclineTrade, BattleFrontier_Lounge6_EventScript_NotRequestedMon, BattleFrontier_Lounge6_Text_PromiseIllBeGoodToIt)
     setflag(FLAG_BATTLE_FRONTIER_TRADE_DONE)
     release

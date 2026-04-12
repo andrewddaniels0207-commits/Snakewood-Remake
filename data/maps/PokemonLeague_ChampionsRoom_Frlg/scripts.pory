@@ -9,9 +9,15 @@ mapscripts PokemonLeague_ChampionsRoom_Frlg_MapScripts {
 script PokemonLeague_ChampionsRoom_OnResume {
     setvar(VAR_0x8004, 4)
     call(PokemonLeague_EventScript_DoLightingEffect)
-    if (var(VAR_STARTER_MON) == 2) call(PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerSquirtle)
-    if (var(VAR_STARTER_MON) == 1) call(PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerBulbasaur)
-    if (var(VAR_STARTER_MON) == 0) call(PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerCharmander)
+    if (var(VAR_STARTER_MON) == 2) {
+        call(PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerSquirtle)
+    }
+    if (var(VAR_STARTER_MON) == 1) {
+        call(PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerBulbasaur)
+    }
+    if (var(VAR_STARTER_MON) == 0) {
+        call(PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerCharmander)
+    }
     end
 }
 
@@ -57,13 +63,21 @@ script PokemonLeague_ChampionsRoom_EventScript_EnterRoom {
     applymovement(LOCALID_PLAYER, PokemonLeague_ChampionsRoom_Movement_PlayerEnter)
     waitmovement(0)
     delay(20)
-    if (!flag(FLAG_SYS_GAME_CLEAR)) call(PokemonLeague_ChampionsRoom_EventScript_Intro)
-    if (flag(FLAG_SYS_GAME_CLEAR)) call(PokemonLeague_ChampionsRoom_EventScript_RematchIntro)
+    if (!flag(FLAG_SYS_GAME_CLEAR)) {
+        call(PokemonLeague_ChampionsRoom_EventScript_Intro)
+    }
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        call(PokemonLeague_ChampionsRoom_EventScript_RematchIntro)
+    }
     setflag(FLAG_TEMP_3)
     setflag(FLAG_TEMP_5)
     savebgm(MUS_VICTORY_GYM_LEADER)
-    if (!flag(FLAG_IS_CHAMPION)) call(PokemonLeague_ChampionsRoom_EventScript_Battle)
-    if (flag(FLAG_IS_CHAMPION)) call(PokemonLeague_ChampionsRoom_EventScript_Rematch)
+    if (!flag(FLAG_IS_CHAMPION)) {
+        call(PokemonLeague_ChampionsRoom_EventScript_Battle)
+    }
+    if (flag(FLAG_IS_CHAMPION)) {
+        call(PokemonLeague_ChampionsRoom_EventScript_Rematch)
+    }
     setflag(FLAG_TEMP_4)
     clearflag(FLAG_TEMP_5)
     setflag(FLAG_DEFEATED_CHAMP)
@@ -109,16 +123,28 @@ script PokemonLeague_ChampionsRoom_EventScript_QuestLogEnd {
 }
 
 script PokemonLeague_ChampionsRoom_EventScript_Battle {
-    if (var(VAR_STARTER_MON) == 2) call(PokemonLeague_ChampionsRoom_EventScript_BattleSquirtle)
-    if (var(VAR_STARTER_MON) == 1) call(PokemonLeague_ChampionsRoom_EventScript_BattleBulbasaur)
-    if (var(VAR_STARTER_MON) == 0) call(PokemonLeague_ChampionsRoom_EventScript_BattleCharmander)
+    if (var(VAR_STARTER_MON) == 2) {
+        call(PokemonLeague_ChampionsRoom_EventScript_BattleSquirtle)
+    }
+    if (var(VAR_STARTER_MON) == 1) {
+        call(PokemonLeague_ChampionsRoom_EventScript_BattleBulbasaur)
+    }
+    if (var(VAR_STARTER_MON) == 0) {
+        call(PokemonLeague_ChampionsRoom_EventScript_BattleCharmander)
+    }
     return
 }
 
 script PokemonLeague_ChampionsRoom_EventScript_Rematch {
-    if (var(VAR_STARTER_MON) == 2) call(PokemonLeague_ChampionsRoom_EventScript_RematchSquirtle)
-    if (var(VAR_STARTER_MON) == 1) call(PokemonLeague_ChampionsRoom_EventScript_RematchBulbasaur)
-    if (var(VAR_STARTER_MON) == 0) call(PokemonLeague_ChampionsRoom_EventScript_RematchCharmander)
+    if (var(VAR_STARTER_MON) == 2) {
+        call(PokemonLeague_ChampionsRoom_EventScript_RematchSquirtle)
+    }
+    if (var(VAR_STARTER_MON) == 1) {
+        call(PokemonLeague_ChampionsRoom_EventScript_RematchBulbasaur)
+    }
+    if (var(VAR_STARTER_MON) == 0) {
+        call(PokemonLeague_ChampionsRoom_EventScript_RematchCharmander)
+    }
     return
 }
 

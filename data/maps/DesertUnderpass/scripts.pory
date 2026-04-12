@@ -10,15 +10,21 @@ script DesertUnderpass_OnTransition {
 script DesertUnderpass_EventScript_Fossil {
     lock
     faceplayer
-    if (flag(FLAG_CHOSE_ROOT_FOSSIL)) goto(DesertUnderpass_EventScript_GiveClawFossil)
-    if (flag(FLAG_CHOSE_CLAW_FOSSIL)) goto(DesertUnderpass_EventScript_GiveRootFossil)
+    if (flag(FLAG_CHOSE_ROOT_FOSSIL)) {
+        goto(DesertUnderpass_EventScript_GiveClawFossil)
+    }
+    if (flag(FLAG_CHOSE_CLAW_FOSSIL)) {
+        goto(DesertUnderpass_EventScript_GiveRootFossil)
+    }
     release
     end
 }
 
 script DesertUnderpass_EventScript_GiveClawFossil {
     giveitem(ITEM_CLAW_FOSSIL)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     removeobject(LOCALID_UNDERPASS_FOSSIL)
     release
     end
@@ -26,7 +32,9 @@ script DesertUnderpass_EventScript_GiveClawFossil {
 
 script DesertUnderpass_EventScript_GiveRootFossil {
     giveitem(ITEM_ROOT_FOSSIL)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     removeobject(LOCALID_UNDERPASS_FOSSIL)
     release
     end

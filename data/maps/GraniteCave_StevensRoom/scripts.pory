@@ -9,7 +9,9 @@ script GraniteCave_StevensRoom_EventScript_Steven {
     setflag(FLAG_DELIVERED_STEVEN_LETTER)
     msgbox(GraniteCave_StevensRoom_Text_ThankYouTakeThis, MSGBOX_DEFAULT)
     giveitem(ITEM_TM_STEEL_WING)
-    if (var(VAR_RESULT) == FALSE) call(GraniteCave_StevensRoom_EventScript_BagFull)
+    if (var(VAR_RESULT) == FALSE) {
+        call(GraniteCave_StevensRoom_EventScript_BagFull)
+    }
     msgbox(GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister, MSGBOX_DEFAULT)
     closemessage
     delay(30)
@@ -21,10 +23,18 @@ script GraniteCave_StevensRoom_EventScript_Steven {
     setflag(FLAG_REGISTERED_STEVEN_POKENAV)
     msgbox(GraniteCave_StevensRoom_Text_IveGotToHurryAlong, MSGBOX_DEFAULT)
     closemessage
-    if (var(VAR_FACING) == DIR_NORTH) call(GraniteCave_StevensRoom_EventScript_StevenExitNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(GraniteCave_StevensRoom_EventScript_StevenExitSouth)
-    if (var(VAR_FACING) == DIR_WEST) call(GraniteCave_StevensRoom_EventScript_StevenExitWestEast)
-    if (var(VAR_FACING) == DIR_EAST) call(GraniteCave_StevensRoom_EventScript_StevenExitWestEast)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(GraniteCave_StevensRoom_EventScript_StevenExitNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(GraniteCave_StevensRoom_EventScript_StevenExitSouth)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(GraniteCave_StevensRoom_EventScript_StevenExitWestEast)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(GraniteCave_StevensRoom_EventScript_StevenExitWestEast)
+    }
     playse(SE_EXIT)
     removeobject(LOCALID_GRANITE_CAVE_STEVEN)
     release

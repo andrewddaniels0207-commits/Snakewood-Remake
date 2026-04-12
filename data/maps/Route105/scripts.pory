@@ -7,9 +7,15 @@ mapscripts Route105_MapScripts {
 }
 
 script Route105_OnLoad {
-    if (!flag(FLAG_REGI_DOORS_OPENED)) call(Route105_CloseRegiEntrance)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_105_NORTH) call(AbnormalWeather_EventScript_PlaceTilesRoute105North)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_105_SOUTH) call(AbnormalWeather_EventScript_PlaceTilesRoute105South)
+    if (!flag(FLAG_REGI_DOORS_OPENED)) {
+        call(Route105_CloseRegiEntrance)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_105_NORTH) {
+        call(AbnormalWeather_EventScript_PlaceTilesRoute105North)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_105_SOUTH) {
+        call(AbnormalWeather_EventScript_PlaceTilesRoute105South)
+    }
     end
 }
 
@@ -20,9 +26,15 @@ script Route105_CloseRegiEntrance {
 }
 
 script Route105_OnTransition {
-    if (var(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1) call(AbnormalWeather_EventScript_HideMapNamePopup)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_105_NORTH) call(AbnormalWeather_StartKyogreWeather)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_105_SOUTH) call(AbnormalWeather_StartKyogreWeather)
+    if (var(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1) {
+        call(AbnormalWeather_EventScript_HideMapNamePopup)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_105_NORTH) {
+        call(AbnormalWeather_StartKyogreWeather)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_105_SOUTH) {
+        call(AbnormalWeather_StartKyogreWeather)
+    }
     end
 }
 
@@ -65,7 +77,9 @@ script Route105_EventScript_Josue {
 script Route105_EventScript_Andres {
     trainerbattle_single(TRAINER_ANDRES_1, Route105_Text_AndresIntro, Route105_Text_AndresDefeated, Route105_EventScript_AndresRegisterMatchCallAfterBattle)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route105_EventScript_AndresRematch)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route105_EventScript_AndresRematch)
+    }
     msgbox(Route105_Text_AndresPostBattle, MSGBOX_DEFAULT)
     release
     end

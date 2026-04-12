@@ -80,7 +80,9 @@ script Route121_EventScript_Vanessa {
 script Route121_EventScript_Walter {
     trainerbattle_single(TRAINER_WALTER_1, Route121_Text_WalterIntro, Route121_Text_WalterDefeat, Route121_EventScript_RegisterWalter)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route121_EventScript_RematchWalter)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route121_EventScript_RematchWalter)
+    }
     msgbox(Route121_Text_WalterPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -122,7 +124,9 @@ script Route121_EventScript_Joy {
 script Route121_EventScript_Jessica {
     trainerbattle_single(TRAINER_JESSICA_1, Route121_Text_JessicaIntro, Route121_Text_JessicaDefeat, Route121_EventScript_RegisterJessica)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route121_EventScript_RematchJessica)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route121_EventScript_RematchJessica)
+    }
     msgbox(Route121_Text_JessicaPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -170,7 +174,9 @@ script Route121_EventScript_Marcel {
 script Route121_EventScript_Cristin {
     trainerbattle_single(TRAINER_CRISTIN_1, Route121_Text_CristinIntro, Route121_Text_CristinDefeat, Route121_EventScript_RegisterCristin)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route121_EventScript_RematchCristin)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route121_EventScript_RematchCristin)
+    }
     msgbox(Route121_Text_CristinPostBattle, MSGBOX_DEFAULT)
     release
     end

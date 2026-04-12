@@ -3,14 +3,18 @@ mapscripts SilphCo_6F_Frlg_MapScripts {
 }
 
 script SilphCo_6F_OnLoad {
-    if (!flag(FLAG_SILPH_6F_DOOR)) call(EventScript_Close6FDoor)
+    if (!flag(FLAG_SILPH_6F_DOOR)) {
+        call(EventScript_Close6FDoor)
+    }
     end
 }
 
 script SilphCo_6F_EventScript_WorkerM2 {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) goto(SilphCo_6F_EventScript_WorkerM2RocketsGone)
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
+        goto(SilphCo_6F_EventScript_WorkerM2RocketsGone)
+    }
     msgbox(SilphCo_6F_Text_TargetedSilphForOurMonProducts)
     release
     end
@@ -25,7 +29,9 @@ script SilphCo_6F_EventScript_WorkerM2RocketsGone {
 script SilphCo_6F_EventScript_WorkerM3 {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) goto(SilphCo_6F_EventScript_WorkerM3RocketsGone)
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
+        goto(SilphCo_6F_EventScript_WorkerM3RocketsGone)
+    }
     msgbox(SilphCo_6F_Text_RocketsTookOverBuilding)
     release
     end
@@ -40,7 +46,9 @@ script SilphCo_6F_EventScript_WorkerM3RocketsGone {
 script SilphCo_6F_EventScript_WorkerM1 {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) goto(SilphCo_6F_EventScript_WorkerM1RocketsGone)
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
+        goto(SilphCo_6F_EventScript_WorkerM1RocketsGone)
+    }
     msgbox(SilphCo_6F_Text_HelpMePlease)
     release
     end
@@ -55,7 +63,9 @@ script SilphCo_6F_EventScript_WorkerM1RocketsGone {
 script SilphCo_6F_EventScript_WorkerF1 {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) goto(SilphCo_6F_EventScript_WorkerF1RocketsGone)
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
+        goto(SilphCo_6F_EventScript_WorkerF1RocketsGone)
+    }
     msgbox(SilphCo_6F_Text_ThatManIsSuchACoward)
     release
     end
@@ -70,7 +80,9 @@ script SilphCo_6F_EventScript_WorkerF1RocketsGone {
 script SilphCo_6F_EventScript_WorkerF2 {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) goto(SilphCo_6F_EventScript_WorkerF2RocketsGone)
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
+        goto(SilphCo_6F_EventScript_WorkerF2RocketsGone)
+    }
     msgbox(SilphCo_6F_Text_RocketsTryingToConquerWorld)
     release
     end

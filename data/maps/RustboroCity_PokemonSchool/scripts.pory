@@ -90,12 +90,20 @@ script RustboroCity_PokemonSchool_EventScript_StudentNotebook {
 script RustboroCity_PokemonSchool_EventScript_Teacher {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_QUICK_CLAW)) goto(RustboroCity_PokemonSchool_EventScript_GaveQuickClaw)
-    if (var(VAR_FACING) == DIR_EAST) call(RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsEast)
-    if (var(VAR_FACING) == DIR_WEST) call(RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest)
+    if (flag(FLAG_RECEIVED_QUICK_CLAW)) {
+        goto(RustboroCity_PokemonSchool_EventScript_GaveQuickClaw)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsEast)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest)
+    }
     msgbox(RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw, MSGBOX_DEFAULT)
     giveitem(ITEM_QUICK_CLAW)
-    if (var(VAR_RESULT) == 0) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == 0) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     closemessage
     applymovement(VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown)
     waitmovement(0)
@@ -182,9 +190,15 @@ movement RustboroCity_PokemonSchool_Movement_TeacherCheckOnStudentsEast {
 script RustboroCity_PokemonSchool_EventScript_Scott {
     lock
     faceplayer
-    if (flag(FLAG_MET_SCOTT_AFTER_OBTAINING_STONE_BADGE)) goto(RustboroCity_PokemonSchool_EventScript_ScottWatchStudents)
-    if (flag(FLAG_MET_SCOTT_RUSTBORO)) goto(RustboroCity_PokemonSchool_EventScript_ScottSpokeAlready)
-    if (flag(FLAG_BADGE01_GET)) goto(RustboroCity_PokemonSchool_EventScript_ScottGreetHasBadge)
+    if (flag(FLAG_MET_SCOTT_AFTER_OBTAINING_STONE_BADGE)) {
+        goto(RustboroCity_PokemonSchool_EventScript_ScottWatchStudents)
+    }
+    if (flag(FLAG_MET_SCOTT_RUSTBORO)) {
+        goto(RustboroCity_PokemonSchool_EventScript_ScottSpokeAlready)
+    }
+    if (flag(FLAG_BADGE01_GET)) {
+        goto(RustboroCity_PokemonSchool_EventScript_ScottGreetHasBadge)
+    }
     msgbox(RustboroCity_PokemonSchool_Text_ScottMetAlreadyCut, MSGBOX_DEFAULT)
     addvar(VAR_SCOTT_STATE, 1)
     setflag(FLAG_MET_SCOTT_RUSTBORO)
@@ -193,7 +207,9 @@ script RustboroCity_PokemonSchool_EventScript_Scott {
 }
 
 script RustboroCity_PokemonSchool_EventScript_ScottSpokeAlready {
-    if (flag(FLAG_BADGE01_GET)) goto(RustboroCity_PokemonSchool_EventScript_ScottNoticeBadge)
+    if (flag(FLAG_BADGE01_GET)) {
+        goto(RustboroCity_PokemonSchool_EventScript_ScottNoticeBadge)
+    }
     msgbox(RustboroCity_PokemonSchool_Text_StudentTalentLevelUnknown, MSGBOX_DEFAULT)
     release
     end

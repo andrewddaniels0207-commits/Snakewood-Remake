@@ -3,7 +3,9 @@ mapscripts AquaHideout_B2F_MapScripts {
 }
 
 script AquaHideout_B2F_OnTransition {
-    if (flag(FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE)) call(AquaHideout_B2F_EventScript_PreventMattNoticing)
+    if (flag(FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE)) {
+        call(AquaHideout_B2F_EventScript_PreventMattNoticing)
+    }
     end
 }
 

@@ -1,6 +1,7 @@
 mapscripts AbandonedShip_Rooms2_B1F_MapScripts {}
 
 script AbandonedShip_Rooms2_B1F_EventScript_Camper {
+    #(4 "data/maps/AbandonedShip_Rooms2_B1F/scripts.pory")
     msgbox(AbandonedShip_Rooms2_B1F_Text_PerfectPlaceToGoExploring, MSGBOX_NPC)
     end
 }

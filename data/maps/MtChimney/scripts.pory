@@ -16,8 +16,12 @@ script MtChimney_OnResume {
 script MtChimney_EventScript_Archie {
     lock
     faceplayer
-    if (!flag(FLAG_EVIL_LEADER_PLEASE_STOP)) call(MtChimney_EventScript_ArchieGoStopTeamMagma)
-    if (flag(FLAG_EVIL_LEADER_PLEASE_STOP)) call(MtChimney_EventScript_ArchieBusyFighting)
+    if (!flag(FLAG_EVIL_LEADER_PLEASE_STOP)) {
+        call(MtChimney_EventScript_ArchieGoStopTeamMagma)
+    }
+    if (flag(FLAG_EVIL_LEADER_PLEASE_STOP)) {
+        call(MtChimney_EventScript_ArchieBusyFighting)
+    }
     closemessage
     applymovement(LOCALID_MT_CHIMNEY_ARCHIE, Common_Movement_FaceOriginalDirection)
     waitmovement(0)
@@ -61,14 +65,22 @@ script MtChimney_EventScript_Maxie {
     fadescreenswapbuffers(FADE_FROM_BLACK)
     setobjectxyperm(LOCALID_MT_CHIMNEY_ARCHIE, 10, 12)
     addobject(LOCALID_MT_CHIMNEY_ARCHIE)
-    if (var(VAR_FACING) == DIR_EAST) call(MtChimney_EventScript_ArchieApproachPlayerEast)
-    if (var(VAR_FACING) == DIR_NORTH) call(MtChimney_EventScript_ArchieApproachPlayerNorth)
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(MtChimney_EventScript_ArchieApproachPlayerEast)
+    }
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(MtChimney_EventScript_ArchieApproachPlayerNorth)
+    }
     applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft)
     waitmovement(0)
     msgbox(MtChimney_Text_ArchieThankYou, MSGBOX_DEFAULT)
     closemessage
-    if (var(VAR_FACING) == DIR_EAST) call(MtChimney_EventScript_ArchieExitEast)
-    if (var(VAR_FACING) == DIR_NORTH) call(MtChimney_EventScript_ArchieExitNorth)
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(MtChimney_EventScript_ArchieExitEast)
+    }
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(MtChimney_EventScript_ArchieExitNorth)
+    }
     removeobject(LOCALID_MT_CHIMNEY_ARCHIE)
     setflag(FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA)
     setflag(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY)
@@ -108,14 +120,22 @@ script MtChimney_EventScript_LavaCookieLady {
     faceplayer
     showmoneybox(0, 0)
     msgbox(MtChimney_Text_LavaCookiesJust200, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(MtChimney_EventScript_DeclineLavaCookie)
+    if (var(VAR_RESULT) == NO) {
+        goto(MtChimney_EventScript_DeclineLavaCookie)
+    }
     checkmoney(200)
-    if (var(VAR_RESULT) == FALSE) goto(MtChimney_EventScript_NotEnoughMoney)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MtChimney_EventScript_NotEnoughMoney)
+    }
     msgbox(MtChimney_Text_ThankYouDear, MSGBOX_DEFAULT)
     checkitemspace(ITEM_LAVA_COOKIE)
-    if (var(VAR_RESULT) == TRUE) call(MtChimney_EventScript_RemoveMoney)
+    if (var(VAR_RESULT) == TRUE) {
+        call(MtChimney_EventScript_RemoveMoney)
+    }
     giveitem(ITEM_LAVA_COOKIE)
-    if (var(VAR_RESULT) == FALSE) goto(MtChimney_EventScript_BagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MtChimney_EventScript_BagIsFull)
+    }
     hidemoneybox()
     release
     end
@@ -128,7 +148,9 @@ script MtChimney_EventScript_BagIsFull {
     end
     hidemoneybox()
     giveitem(ITEM_LAVA_COOKIE)
-    if (var(VAR_RESULT) == FALSE) goto(MtChimney_EventScript_BagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MtChimney_EventScript_BagIsFull)
+    }
     release
     end
 }
@@ -493,13 +515,21 @@ script MtChimney_EventScript_AquaPoochyena {
 
 script MtChimney_EventScript_MeteoriteMachine {
     lockall
-    if (!flag(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY)) goto(MtChimney_EventScript_MachineOn)
-    if (flag(FLAG_RECEIVED_METEORITE)) goto(MtChimney_EventScript_MachineOff)
+    if (!flag(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY)) {
+        goto(MtChimney_EventScript_MachineOn)
+    }
+    if (flag(FLAG_RECEIVED_METEORITE)) {
+        goto(MtChimney_EventScript_MachineOff)
+    }
     msgbox(MtChimney_Text_RemoveTheMeteorite, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(MtChimney_EventScript_LeaveMeteoriteAlone)
+    if (var(VAR_RESULT) == NO) {
+        goto(MtChimney_EventScript_LeaveMeteoriteAlone)
+    }
     msgbox(MtChimney_Text_PlayerRemovedMeteorite, MSGBOX_DEFAULT)
     giveitem(ITEM_METEORITE)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_METEORITE)
     releaseall
     end
@@ -531,7 +561,9 @@ script MtChimney_EventScript_RouteSign {
 script MtChimney_EventScript_Shelby {
     trainerbattle_single(TRAINER_SHELBY_1, MtChimney_Text_ShelbyIntro, MtChimney_Text_ShelbyDefeat, MtChimney_EventScript_DefeatedShelby)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(MtChimney_EventScript_RematchShelby)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(MtChimney_EventScript_RematchShelby)
+    }
     msgbox(MtChimney_Text_ShelbyPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -579,7 +611,9 @@ script MtChimney_EventScript_Grunt1 {
 script MtChimney_EventScript_Sawyer {
     trainerbattle_single(TRAINER_SAWYER_1, MtChimney_Text_SawyerIntro, MtChimney_Text_SawyerDefeat, MtChimney_EventScript_SawyerDefeated)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(MtChimney_EventScript_SawyerRematch)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(MtChimney_EventScript_SawyerRematch)
+    }
     msgbox(MtChimney_Text_SawyerPostBattle, MSGBOX_DEFAULT)
     release
     end

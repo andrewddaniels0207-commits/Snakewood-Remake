@@ -39,8 +39,12 @@ movement SaffronCity_PokemonTrainerFanClub_Movement_FanApproachPlayer {
 }
 
 script SaffronCity_PokemonTrainerFanClub_OnTransition {
-    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_SetMemberPosForFirstMeeting)
-    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 2) goto(SaffronCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions)
+    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 1) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_SetMemberPosForFirstMeeting)
+    }
+    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 2) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions)
+    }
     end
 }
 
@@ -48,28 +52,44 @@ script SaffronCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions {
     special(Script_TryLoseFansFromPlayTime)
     setvar(VAR_0x8004, FANCLUB_MEMBER1)
     specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable)
+    if (var(VAR_RESULT) == FALSE) {
+        call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER2)
     specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable)
+    if (var(VAR_RESULT) == FALSE) {
+        call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER3)
     specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable)
+    if (var(VAR_RESULT) == FALSE) {
+        call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER4)
     specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable)
+    if (var(VAR_RESULT) == FALSE) {
+        call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER5)
     specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable)
+    if (var(VAR_RESULT) == FALSE) {
+        call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER6)
     specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable)
+    if (var(VAR_RESULT) == FALSE) {
+        call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER7)
     specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable)
+    if (var(VAR_RESULT) == FALSE) {
+        call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable)
+    }
     setvar(VAR_0x8004, FANCLUB_MEMBER8)
     specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == FALSE) call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable)
+    if (var(VAR_RESULT) == FALSE) {
+        call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable)
+    }
     end
 }
 
@@ -135,9 +155,13 @@ script SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirl {
     faceplayer
     setvar(VAR_0x8004, FANCLUB_MEMBER1)
     special(Script_BufferFanClubTrainerName)
-    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 0) goto(SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayerNotChampion)
+    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 0) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayerNotChampion)
+    }
     specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == TRUE) goto(SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayersFan)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayersFan)
+    }
     specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
     goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyNonFan)
     msgbox(SaffronCity_PokemonTrainerFanClub_Text_WasYourFanNotAnymore)
@@ -147,7 +171,9 @@ script SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirl {
 
 script SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayersFan {
     specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
-    if (var(VAR_RESULT) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyFan)
+    if (var(VAR_RESULT) == 1) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyFan)
+    }
     msgbox(SaffronCity_PokemonTrainerFanClub_Text_AlwaysCheerForYou)
     release
     end
@@ -176,9 +202,13 @@ script SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirl {
     faceplayer
     setvar(VAR_0x8004, FANCLUB_MEMBER4)
     special(Script_BufferFanClubTrainerName)
-    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 0) goto(SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion)
+    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 0) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion)
+    }
     specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == TRUE) goto(SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan)
+    }
     specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
     goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyNonFan)
     msgbox(SaffronCity_PokemonTrainerFanClub_Text_WantToBeLikeSabrina)
@@ -188,7 +218,9 @@ script SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirl {
 
 script SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan {
     specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
-    if (var(VAR_RESULT) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan)
+    if (var(VAR_RESULT) == 1) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan)
+    }
     msgbox(SaffronCity_PokemonTrainerFanClub_Text_WantToBeLikeYouOneDay)
     release
     end
@@ -217,9 +249,13 @@ script SaffronCity_PokemonTrainerFanClub_EventScript_Youngster {
     faceplayer
     setvar(VAR_0x8004, FANCLUB_MEMBER2)
     special(Script_BufferFanClubTrainerName)
-    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 0) goto(SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayerNotChampion)
+    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 0) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayerNotChampion)
+    }
     specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == TRUE) goto(SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayersFan)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayersFan)
+    }
     specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
     goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyNonFan)
     msgbox(SaffronCity_PokemonTrainerFanClub_Text_BrocksMyHero)
@@ -229,7 +265,9 @@ script SaffronCity_PokemonTrainerFanClub_EventScript_Youngster {
 
 script SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayersFan {
     specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
-    if (var(VAR_RESULT) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyFan)
+    if (var(VAR_RESULT) == 1) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyFan)
+    }
     msgbox(SaffronCity_PokemonTrainerFanClub_Text_CanYouAutographShorts)
     release
     end
@@ -258,9 +296,13 @@ script SaffronCity_PokemonTrainerFanClub_EventScript_Gentleman {
     faceplayer
     setvar(VAR_0x8004, FANCLUB_MEMBER3)
     special(Script_BufferFanClubTrainerName)
-    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 0) goto(SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayerNotChampion)
+    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 0) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayerNotChampion)
+    }
     specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == TRUE) goto(SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayersFan)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayersFan)
+    }
     specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
     goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyNonFan)
     msgbox(SaffronCity_PokemonTrainerFanClub_Text_HmmAndYouAre)
@@ -270,7 +312,9 @@ script SaffronCity_PokemonTrainerFanClub_EventScript_Gentleman {
 
 script SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayersFan {
     specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
-    if (var(VAR_RESULT) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyFan)
+    if (var(VAR_RESULT) == 1) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyFan)
+    }
     msgbox(SaffronCity_PokemonTrainerFanClub_Text_HadPleasureOfWatchingYouBattle)
     release
     end
@@ -300,7 +344,9 @@ script SaffronCity_PokemonTrainerFanClub_EventScript_Woman {
     setvar(VAR_0x8004, FANCLUB_MEMBER6)
     special(Script_BufferFanClubTrainerName)
     specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == TRUE) goto(SaffronCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan)
+    }
     specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
     goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyNonFan)
     msgbox(SaffronCity_PokemonTrainerFanClub_Text_TrainerHasBeenOnFire)
@@ -310,7 +356,9 @@ script SaffronCity_PokemonTrainerFanClub_EventScript_Woman {
 
 script SaffronCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan {
     specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
-    if (var(VAR_RESULT) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan)
+    if (var(VAR_RESULT) == 1) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan)
+    }
     msgbox(SaffronCity_PokemonTrainerFanClub_Text_AdoreWayYouBattle)
     release
     end
@@ -334,7 +382,9 @@ script SaffronCity_PokemonTrainerFanClub_EventScript_Rocker {
     setvar(VAR_0x8004, FANCLUB_MEMBER5)
     special(Script_BufferFanClubTrainerName)
     specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == TRUE) goto(SaffronCity_PokemonTrainerFanClub_EventScript_RockerPlayersFan)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_RockerPlayersFan)
+    }
     specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
     goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyNonFan)
     msgbox(SaffronCity_PokemonTrainerFanClub_Text_LoveWayTrainerTalks)
@@ -344,7 +394,9 @@ script SaffronCity_PokemonTrainerFanClub_EventScript_Rocker {
 
 script SaffronCity_PokemonTrainerFanClub_EventScript_RockerPlayersFan {
     specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
-    if (var(VAR_RESULT) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyFan)
+    if (var(VAR_RESULT) == 1) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyFan)
+    }
     msgbox(SaffronCity_PokemonTrainerFanClub_Text_TheWayYouBattleIsCool)
     release
     end
@@ -368,7 +420,9 @@ script SaffronCity_PokemonTrainerFanClub_EventScript_Beauty {
     setvar(VAR_0x8004, FANCLUB_MEMBER7)
     special(Script_BufferFanClubTrainerName)
     specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == TRUE) goto(SaffronCity_PokemonTrainerFanClub_EventScript_BeautyPlayersFan)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_BeautyPlayersFan)
+    }
     specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
     goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyNonFan)
     msgbox(SaffronCity_PokemonTrainerFanClub_Text_WhyCantOthersSeeMastersDignity)
@@ -378,7 +432,9 @@ script SaffronCity_PokemonTrainerFanClub_EventScript_Beauty {
 
 script SaffronCity_PokemonTrainerFanClub_EventScript_BeautyPlayersFan {
     specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
-    if (var(VAR_RESULT) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyFan)
+    if (var(VAR_RESULT) == 1) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyFan)
+    }
     msgbox(SaffronCity_PokemonTrainerFanClub_Text_YouReallyAreAmazing)
     release
     end
@@ -402,7 +458,9 @@ script SaffronCity_PokemonTrainerFanClub_EventScript_BlackBelt {
     setvar(VAR_0x8004, FANCLUB_MEMBER8)
     special(Script_BufferFanClubTrainerName)
     specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
-    if (var(VAR_RESULT) == TRUE) goto(SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltPlayersFan)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltPlayersFan)
+    }
     specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
     goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyNonFan)
     msgbox(SaffronCity_PokemonTrainerFanClub_Text_OnlyMasterHasMyRespect)
@@ -412,7 +470,9 @@ script SaffronCity_PokemonTrainerFanClub_EventScript_BlackBelt {
 
 script SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltPlayersFan {
     specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
-    if (var(VAR_RESULT) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyFan)
+    if (var(VAR_RESULT) == 1) {
+        goto(SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyFan)
+    }
     msgbox(SaffronCity_PokemonTrainerFanClub_Text_YourBattleStyleIsEducational)
     release
     end

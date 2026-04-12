@@ -2,7 +2,9 @@ mapscripts MeteorFalls_StevensCave_MapScripts {}
 
 script MeteorFalls_StevensCave_EventScript_Steven {
     lock
-    if (flag(FLAG_DEFEATED_METEOR_FALLS_STEVEN)) goto(MeteorFalls_StevensCave_EventScript_Defeated)
+    if (flag(FLAG_DEFEATED_METEOR_FALLS_STEVEN)) {
+        goto(MeteorFalls_StevensCave_EventScript_Defeated)
+    }
     waitse()
     playse(SE_PIN)
     applymovement(LOCALID_METEOR_FALLS_STEVEN, Common_Movement_ExclamationMark)

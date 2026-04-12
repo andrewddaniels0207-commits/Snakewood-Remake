@@ -21,9 +21,15 @@ script SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleVisitingTrainer {
     setvar(VAR_0x8005, 0)
     special(DoSpecialTrainerBattle)
     waitstate
-    if (var(VAR_RESULT) == B_OUTCOME_DREW) call(SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleTie)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) call(SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleWon)
-    if (var(VAR_RESULT) == B_OUTCOME_LOST) call(SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleLost)
+    if (var(VAR_RESULT) == B_OUTCOME_DREW) {
+        call(SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleTie)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        call(SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleWon)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_LOST) {
+        call(SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleLost)
+    }
     closemessage
     special(HealPlayerParty)
     applymovement(LOCALID_PLAYER, SootopolisCity_MysteryEventsHouse_B1F_Movement_PlayerExitBasement)

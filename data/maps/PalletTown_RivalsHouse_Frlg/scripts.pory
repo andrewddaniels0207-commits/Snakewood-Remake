@@ -3,8 +3,12 @@ mapscripts PalletTown_RivalsHouse_Frlg_MapScripts {
 }
 
 script PalletTown_RivalsHouse_OnTransition {
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) < 2) call(PalletTown_RivalsHouse_EventScript_MoveDaisyToTable)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) >= 2) call(PalletTown_RivalsHouse_EventScript_AlreadyReceivedTownMap)
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) < 2) {
+        call(PalletTown_RivalsHouse_EventScript_MoveDaisyToTable)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) >= 2) {
+        call(PalletTown_RivalsHouse_EventScript_AlreadyReceivedTownMap)
+    }
     end
 }
 
@@ -23,11 +27,21 @@ script PalletTown_RivalsHouse_EventScript_Daisy {
     lock
     faceplayer
     famechecker(FAMECHECKER_DAISY, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(PalletTown_RivalsHouse_EventScript_GroomMon)
-    if (var(RECEIVED_TOWN_MAP) == TRUE) goto(PalletTown_RivalsHouse_EventScript_PleaseGiveMonsRest)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) == 2) goto(PalletTown_RivalsHouse_EventScript_ExplainTownMap)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) == 1) goto(PalletTown_RivalsHouse_EventScript_GiveTownMap)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) >= 1) goto(PalletTown_RivalsHouse_EventScript_HeardBattledRival)
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(PalletTown_RivalsHouse_EventScript_GroomMon)
+    }
+    if (var(RECEIVED_TOWN_MAP) == TRUE) {
+        goto(PalletTown_RivalsHouse_EventScript_PleaseGiveMonsRest)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) == 2) {
+        goto(PalletTown_RivalsHouse_EventScript_ExplainTownMap)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) == 1) {
+        goto(PalletTown_RivalsHouse_EventScript_GiveTownMap)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) >= 1) {
+        goto(PalletTown_RivalsHouse_EventScript_HeardBattledRival)
+    }
     msgbox(PalletTown_RivalsHouse_Text_HiBrothersAtLab)
     closemessage
     applymovement(LOCALID_DAISY, Common_Movement_FaceOriginalDirection)
@@ -43,17 +57,25 @@ script PalletTown_RivalsHouse_EventScript_HeardBattledRival {
 }
 
 script PalletTown_RivalsHouse_EventScript_GroomMon {
-    if (var(VAR_MASSAGE_COOLDOWN_STEP_COUNTER) < 500) goto(PalletTown_RivalsHouse_EventScript_RateMonFriendship)
+    if (var(VAR_MASSAGE_COOLDOWN_STEP_COUNTER) < 500) {
+        goto(PalletTown_RivalsHouse_EventScript_RateMonFriendship)
+    }
     msgbox(PalletTown_RivalsHouse_Text_LikeMeToGroomMon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(PalletTown_RivalsHouse_EventScript_DeclineGrooming)
+    if (var(VAR_RESULT) == NO) {
+        goto(PalletTown_RivalsHouse_EventScript_DeclineGrooming)
+    }
     msgbox(PalletTown_RivalsHouse_Text_GroomWhichOne)
     special(ChoosePartyMon)
     waitstate
     lock
     faceplayer
-    if (var(VAR_0x8004) >= PARTY_SIZE) goto(PalletTown_RivalsHouse_EventScript_DeclineGrooming)
+    if (var(VAR_0x8004) >= PARTY_SIZE) {
+        goto(PalletTown_RivalsHouse_EventScript_DeclineGrooming)
+    }
     specialvar(VAR_RESULT, ScriptGetPartyMonSpecies)
-    if (var(VAR_RESULT) == SPECIES_EGG) goto(PalletTown_RivalsHouse_EventScript_CantGroomEgg)
+    if (var(VAR_RESULT) == SPECIES_EGG) {
+        goto(PalletTown_RivalsHouse_EventScript_CantGroomEgg)
+    }
     msgbox(PalletTown_RivalsHouse_Text_LookingNiceInNoTime)
     closemessage
     fadescreen(FADE_TO_BLACK)
@@ -145,7 +167,9 @@ script PalletTown_RivalsHouse_EventScript_GiveTownMap {
     msgbox(PalletTown_RivalsHouse_Text_ErrandForGrandpaThisWillHelp)
     closemessage
     checkitemspace(ITEM_TOWN_MAP)
-    if (var(VAR_RESULT) == FALSE) goto(PalletTown_RivalsHouse_EventScript_NoRoomForTownMap)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(PalletTown_RivalsHouse_EventScript_NoRoomForTownMap)
+    }
     applymovement(LOCALID_DAISY, Common_Movement_WalkInPlaceFasterRight)
     waitmovement(0)
     removeobject(LOCALID_TOWN_MAP)

@@ -14,7 +14,9 @@ script PewterCity_EventScript_GymGuide {
     msgbox(PewterCity_Text_BrocksLookingForChallengersFollowMe)
     closemessage
     playbgm(MUS_FOLLOW_ME, 0)
-    if (var(VAR_FACING) == DIR_EAST) call(PewterCity_EventScript_WalkToGymEast)
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(PewterCity_EventScript_WalkToGymEast)
+    }
     msgbox(PewterCity_Text_GoTakeOnBrock)
     closemessage
     applymovement(LOCALID_PEWTER_GYM_GUIDE, PewterCity_Movement_GymGuideExit)
@@ -294,9 +296,15 @@ script PewterCity_EventScript_GymGuideTrigger {
     msgbox(PewterCity_Text_BrocksLookingForChallengersFollowMe)
     closemessage
     playbgm(MUS_FOLLOW_ME, 0)
-    if (var(VAR_TEMP_1) == 0) call(PewterCity_EventScript_WalkToGymTop)
-    if (var(VAR_TEMP_1) == 1) call(PewterCity_EventScript_WalkToGymMid)
-    if (var(VAR_TEMP_1) == 2) call(PewterCity_EventScript_WalkToGymBottom)
+    if (var(VAR_TEMP_1) == 0) {
+        call(PewterCity_EventScript_WalkToGymTop)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(PewterCity_EventScript_WalkToGymMid)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(PewterCity_EventScript_WalkToGymBottom)
+    }
     msgbox(PewterCity_Text_GoTakeOnBrock)
     closemessage
     applymovement(LOCALID_PEWTER_GYM_GUIDE, PewterCity_Movement_GymGuideExit)
@@ -460,15 +468,25 @@ script PewterCity_EventScript_MuseumGuide {
     lock
     faceplayer
     msgbox(PewterCity_Text_DidYouCheckOutMuseum, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PewterCity_EventScript_CheckedOutMuseum)
+    if (var(VAR_RESULT) == YES) {
+        goto(PewterCity_EventScript_CheckedOutMuseum)
+    }
     msgbox(PewterCity_Text_ReallyYouHaveToGo)
     closemessage
     delay(10)
     playbgm(MUS_FOLLOW_ME, 0)
-    if (var(VAR_FACING) == DIR_NORTH) call(PewterCity_EventScript_LeadToMuseumNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) call(PewterCity_EventScript_LeadToMuseumSouth)
-    if (var(VAR_FACING) == DIR_WEST) call(PewterCity_EventScript_LeadToMuseumWest)
-    if (var(VAR_FACING) == DIR_EAST) call(PewterCity_EventScript_LeadToMuseumEast)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(PewterCity_EventScript_LeadToMuseumNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(PewterCity_EventScript_LeadToMuseumSouth)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(PewterCity_EventScript_LeadToMuseumWest)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(PewterCity_EventScript_LeadToMuseumEast)
+    }
     msgbox(PewterCity_Text_ThisIsTheMuseum)
     closemessage
     delay(10)
@@ -656,7 +674,9 @@ script PewterCity_EventScript_BugCatcher {
     lock
     faceplayer
     msgbox(PewterCity_Text_DoYouKnowWhatImDoing, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PewterCity_EventScript_KnowWhatTheyreDoing)
+    if (var(VAR_RESULT) == YES) {
+        goto(PewterCity_EventScript_KnowWhatTheyreDoing)
+    }
     msgbox(PewterCity_Text_SprayingRepelToKeepWildMonsOut)
     release
     end
@@ -731,9 +751,15 @@ script PewterCity_EventScript_RunningShoesAideTriggerBottom {
 
 script PewterCity_EventScript_AideGiveRunningShoes {
     textcolor(NPC_TEXT_COLOR_MALE)
-    if (var(VAR_TEMP_1) == 1) call(PewterCity_EventScript_AideNoticePlayer)
-    if (var(VAR_TEMP_1) == 2) call(PewterCity_EventScript_AideNoticePlayer)
-    if (var(VAR_TEMP_1) == 3) call(PewterCity_EventScript_AideNoticePlayer)
+    if (var(VAR_TEMP_1) == 1) {
+        call(PewterCity_EventScript_AideNoticePlayer)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(PewterCity_EventScript_AideNoticePlayer)
+    }
+    if (var(VAR_TEMP_1) == 3) {
+        call(PewterCity_EventScript_AideNoticePlayer)
+    }
     waitse()
     playse(SE_PIN)
     applymovement(LOCALID_PEWTER_AIDE, Common_Movement_ExclamationMark)
@@ -741,10 +767,18 @@ script PewterCity_EventScript_AideGiveRunningShoes {
     applymovement(LOCALID_PEWTER_AIDE, Common_Movement_Delay48)
     waitmovement(0)
     msgbox(PewterCity_Text_OhPlayer)
-    if (var(VAR_TEMP_1) == 0) call(PewterCity_EventScript_AideApproachPlayer0)
-    if (var(VAR_TEMP_1) == 1) call(PewterCity_EventScript_AideApproachPlayer1)
-    if (var(VAR_TEMP_1) == 2) call(PewterCity_EventScript_AideApproachPlayer2)
-    if (var(VAR_TEMP_1) == 3) call(PewterCity_EventScript_AideApproachPlayer3)
+    if (var(VAR_TEMP_1) == 0) {
+        call(PewterCity_EventScript_AideApproachPlayer0)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(PewterCity_EventScript_AideApproachPlayer1)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(PewterCity_EventScript_AideApproachPlayer2)
+    }
+    if (var(VAR_TEMP_1) == 3) {
+        call(PewterCity_EventScript_AideApproachPlayer3)
+    }
     msgbox(PewterCity_Text_AskedToDeliverThis)
     textcolor(NPC_TEXT_COLOR_NEUTRAL)
     playfanfare(MUS_RG_OBTAIN_KEY_ITEM)
@@ -759,10 +793,18 @@ script PewterCity_EventScript_AideGiveRunningShoes {
     call(EventScript_RestorePrevTextColor)
     msgbox(PewterCity_Text_MustBeGoingBackToLab)
     closemessage
-    if (var(VAR_TEMP_1) == 0) call(PewterCity_EventScript_AideExit0)
-    if (var(VAR_TEMP_1) == 1) call(PewterCity_EventScript_AideExit1)
-    if (var(VAR_TEMP_1) == 2) call(PewterCity_EventScript_AideExit2)
-    if (var(VAR_TEMP_1) == 3) call(PewterCity_EventScript_AideExit3)
+    if (var(VAR_TEMP_1) == 0) {
+        call(PewterCity_EventScript_AideExit0)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(PewterCity_EventScript_AideExit1)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(PewterCity_EventScript_AideExit2)
+    }
+    if (var(VAR_TEMP_1) == 3) {
+        call(PewterCity_EventScript_AideExit3)
+    }
     delay(30)
     textcolor(NPC_TEXT_COLOR_NEUTRAL)
     msgbox(PewterCity_Text_RunningShoesLetterFromMom)

@@ -3,7 +3,9 @@ mapscripts RustboroCity_DevonCorp_1F_MapScripts {
 }
 
 script RustboroCity_DevonCorp_1F_OnTransition {
-    if (!flag(FLAG_RETURNED_DEVON_GOODS)) call(RustboroCity_DevonCorp_1F_EventScript_BlockStairs)
+    if (!flag(FLAG_RETURNED_DEVON_GOODS)) {
+        call(RustboroCity_DevonCorp_1F_EventScript_BlockStairs)
+    }
     end
 }
 
@@ -16,8 +18,12 @@ script RustboroCity_DevonCorp_1F_EventScript_BlockStairs {
 script RustboroCity_DevonCorp_1F_EventScript_Employee {
     lock
     faceplayer
-    if (flag(FLAG_RETURNED_DEVON_GOODS)) goto(RustboroCity_DevonCorp_1F_EventScript_GoodsRecovered)
-    if (flag(FLAG_DEVON_GOODS_STOLEN)) goto(RustboroCity_DevonCorp_1F_EventScript_RobberWasntBright)
+    if (flag(FLAG_RETURNED_DEVON_GOODS)) {
+        goto(RustboroCity_DevonCorp_1F_EventScript_GoodsRecovered)
+    }
+    if (flag(FLAG_DEVON_GOODS_STOLEN)) {
+        goto(RustboroCity_DevonCorp_1F_EventScript_RobberWasntBright)
+    }
     msgbox(RustboroCity_DevonCorp_1F_Text_ThoseShoesAreOurProduct, MSGBOX_DEFAULT)
     release
     end
@@ -38,9 +44,15 @@ script RustboroCity_DevonCorp_1F_EventScript_GoodsRecovered {
 script RustboroCity_DevonCorp_1F_EventScript_StairGuard {
     lock
     faceplayer
-    if (flag(FLAG_RETURNED_DEVON_GOODS)) goto(RustboroCity_DevonCorp_1F_EventScript_AlwaysWelcome)
-    if (flag(FLAG_RECOVERED_DEVON_GOODS)) goto(RustboroCity_DevonCorp_1F_EventScript_GotRobbed)
-    if (flag(FLAG_DEVON_GOODS_STOLEN)) goto(RustboroCity_DevonCorp_1F_EventScript_GotRobbed)
+    if (flag(FLAG_RETURNED_DEVON_GOODS)) {
+        goto(RustboroCity_DevonCorp_1F_EventScript_AlwaysWelcome)
+    }
+    if (flag(FLAG_RECOVERED_DEVON_GOODS)) {
+        goto(RustboroCity_DevonCorp_1F_EventScript_GotRobbed)
+    }
+    if (flag(FLAG_DEVON_GOODS_STOLEN)) {
+        goto(RustboroCity_DevonCorp_1F_EventScript_GotRobbed)
+    }
     msgbox(RustboroCity_DevonCorp_1F_Text_OnlyAuthorizedPeopleEnter, MSGBOX_DEFAULT)
     release
     end
@@ -61,9 +73,15 @@ script RustboroCity_DevonCorp_1F_EventScript_GotRobbed {
 script RustboroCity_DevonCorp_1F_EventScript_Greeter {
     lock
     faceplayer
-    if (flag(FLAG_RETURNED_DEVON_GOODS)) goto(RustboroCity_DevonCorp_1F_EventScript_WelcomeToDevonCorp)
-    if (flag(FLAG_RECOVERED_DEVON_GOODS)) goto(RustboroCity_DevonCorp_1F_EventScript_StaffGotRobbed)
-    if (flag(FLAG_DEVON_GOODS_STOLEN)) goto(RustboroCity_DevonCorp_1F_EventScript_StaffGotRobbed)
+    if (flag(FLAG_RETURNED_DEVON_GOODS)) {
+        goto(RustboroCity_DevonCorp_1F_EventScript_WelcomeToDevonCorp)
+    }
+    if (flag(FLAG_RECOVERED_DEVON_GOODS)) {
+        goto(RustboroCity_DevonCorp_1F_EventScript_StaffGotRobbed)
+    }
+    if (flag(FLAG_DEVON_GOODS_STOLEN)) {
+        goto(RustboroCity_DevonCorp_1F_EventScript_StaffGotRobbed)
+    }
     msgbox(RustboroCity_DevonCorp_1F_Text_WelcomeToDevonCorp, MSGBOX_DEFAULT)
     release
     end

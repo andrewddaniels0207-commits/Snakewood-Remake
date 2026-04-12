@@ -3,7 +3,9 @@ mapscripts Route124_MapScripts {
 }
 
 script Route124_OnTransition {
-    if (flag(FLAG_SYS_WEATHER_CTRL)) call(Common_EventScript_SetAbnormalWeather)
+    if (flag(FLAG_SYS_WEATHER_CTRL)) {
+        call(Common_EventScript_SetAbnormalWeather)
+    }
     end
 }
 
@@ -27,7 +29,9 @@ script Route124_EventScript_Roland {
 script Route124_EventScript_Jenny {
     trainerbattle_single(TRAINER_JENNY_1, Route124_Text_JennyIntro, Route124_Text_JennyDefeat, Route124_EventScript_RegisterJenny)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route124_EventScript_RematchJenny)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route124_EventScript_RematchJenny)
+    }
     msgbox(Route124_Text_JennyPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -63,7 +67,9 @@ script Route124_EventScript_Chad {
 script Route124_EventScript_Lila {
     trainerbattle_double(TRAINER_LILA_AND_ROY_1, Route124_Text_LilaIntro, Route124_Text_LilaDefeat, Route124_Text_LilaNotEnoughMons, Route124_EventScript_RegisterLila)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route124_EventScript_RematchLila)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route124_EventScript_RematchLila)
+    }
     msgbox(Route124_Text_LilaPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -85,7 +91,9 @@ script Route124_EventScript_RematchLila {
 script Route124_EventScript_Roy {
     trainerbattle_double(TRAINER_LILA_AND_ROY_1, Route124_Text_RoyIntro, Route124_Text_RoyDefeat, Route124_Text_RoyNotEnoughMons, Route124_EventScript_RegisterRoy)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route124_EventScript_RematchRoy)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route124_EventScript_RematchRoy)
+    }
     msgbox(Route124_Text_RoyPostBattle, MSGBOX_DEFAULT)
     release
     end

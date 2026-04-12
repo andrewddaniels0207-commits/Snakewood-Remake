@@ -3,7 +3,9 @@ mapscripts MtPyre_Summit_MapScripts {
 }
 
 script MtPyre_Summit_OnTransition {
-    if (var(VAR_MT_PYRE_STATE) == 2) call(MtPyre_Summit_EventScript_SetArchieMaxiePositions)
+    if (var(VAR_MT_PYRE_STATE) == 2) {
+        call(MtPyre_Summit_EventScript_SetArchieMaxiePositions)
+    }
     end
 }
 
@@ -41,9 +43,15 @@ script MtPyre_Summit_EventScript_TeamAquaExits {
     applymovement(LOCALID_MT_PYRE_SUMMIT_ARCHIE, Common_Movement_WalkInPlaceFasterDown)
     waitmovement(0)
     delay(50)
-    if (var(VAR_0x8008) == 0) call(MtPyre_Summit_EventScript_ArchieFacePlayer0)
-    if (var(VAR_0x8008) == 1) call(MtPyre_Summit_EventScript_ArchieFacePlayer1)
-    if (var(VAR_0x8008) == 2) call(MtPyre_Summit_EventScript_ArchieFacePlayer2)
+    if (var(VAR_0x8008) == 0) {
+        call(MtPyre_Summit_EventScript_ArchieFacePlayer0)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(MtPyre_Summit_EventScript_ArchieFacePlayer1)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(MtPyre_Summit_EventScript_ArchieFacePlayer2)
+    }
     msgbox(MtPyre_Summit_Text_ArchieWeGotTheOrbLetsGo, MSGBOX_DEFAULT)
     closemessage
     fadescreenswapbuffers(FADE_TO_BLACK)
@@ -58,9 +66,15 @@ script MtPyre_Summit_EventScript_TeamAquaExits {
     fadescreenswapbuffers(FADE_FROM_BLACK)
     delay(20)
     setvar(VAR_MT_PYRE_STATE, 1)
-    if (var(VAR_0x8008) == 0) call(MtPyre_Summit_EventScript_OldLadyApproachPlayer0)
-    if (var(VAR_0x8008) == 1) call(MtPyre_Summit_EventScript_OldLadyApproachPlayer1)
-    if (var(VAR_0x8008) == 2) call(MtPyre_Summit_EventScript_OldLadyApproachPlayer2)
+    if (var(VAR_0x8008) == 0) {
+        call(MtPyre_Summit_EventScript_OldLadyApproachPlayer0)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(MtPyre_Summit_EventScript_OldLadyApproachPlayer1)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(MtPyre_Summit_EventScript_OldLadyApproachPlayer2)
+    }
     msgbox(MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis, MSGBOX_DEFAULT)
     giveitem(ITEM_MAGMA_EMBLEM)
     setflag(FLAG_RECEIVED_RED_OR_BLUE_ORB)
@@ -141,18 +155,28 @@ movement MtPyre_Summit_Movement_ArchieFacePlayer2 {
 script MtPyre_Summit_EventScript_OldMan {
     lock
     faceplayer
-    if (flag(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE)) goto(MtPyre_Summit_EventScript_OldManAfterRayquaza)
+    if (flag(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE)) {
+        goto(MtPyre_Summit_EventScript_OldManAfterRayquaza)
+    }
     msgbox(MtPyre_Summit_Text_WillYouHearOutMyTale, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) call(MtPyre_Summit_EventScript_OldManTale)
-    if (var(VAR_RESULT) == NO) call(MtPyre_Summit_EventScript_DeclineOldManTale)
+    if (var(VAR_RESULT) == YES) {
+        call(MtPyre_Summit_EventScript_OldManTale)
+    }
+    if (var(VAR_RESULT) == NO) {
+        call(MtPyre_Summit_EventScript_DeclineOldManTale)
+    }
     release
     end
 }
 
 script MtPyre_Summit_EventScript_OldManAfterRayquaza {
     msgbox(MtPyre_Summit_Text_HearTheNewLegendOfHoenn, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) call(MtPyre_Summit_EventScript_OldManNewTale)
-    if (var(VAR_RESULT) == NO) call(MtPyre_Summit_EventScript_DeclineOldManTale)
+    if (var(VAR_RESULT) == YES) {
+        call(MtPyre_Summit_EventScript_OldManNewTale)
+    }
+    if (var(VAR_RESULT) == NO) {
+        call(MtPyre_Summit_EventScript_DeclineOldManTale)
+    }
     release
     end
 }
@@ -175,9 +199,15 @@ script MtPyre_Summit_EventScript_OldManNewTale {
 script MtPyre_Summit_EventScript_OldLady {
     lock
     faceplayer
-    if (flag(FLAG_RETURNED_RED_OR_BLUE_ORB)) goto(MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned)
-    if (var(VAR_MT_PYRE_STATE) >= 3) call(MtPyre_Summit_EventScript_OldLadyOrbsReturned)
-    if (flag(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN)) goto(MtPyre_Summit_EventScript_OldLadyLegendariesAwake)
+    if (flag(FLAG_RETURNED_RED_OR_BLUE_ORB)) {
+        goto(MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned)
+    }
+    if (var(VAR_MT_PYRE_STATE) >= 3) {
+        call(MtPyre_Summit_EventScript_OldLadyOrbsReturned)
+    }
+    if (flag(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN)) {
+        goto(MtPyre_Summit_EventScript_OldLadyLegendariesAwake)
+    }
     msgbox(MtPyre_Summit_Text_OrbsHaveBeenTaken, MSGBOX_DEFAULT)
     release
     end
@@ -227,23 +257,41 @@ script MtPyre_Summit_EventScript_ArchieMaxieReturnOrbs {
     applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
     waitmovement(0)
     delay(60)
-    if (var(VAR_0x8008) == 0) call(MtPyre_Summit_EventScript_ArchieMaxieBeginExit0)
-    if (var(VAR_0x8008) == 1) call(MtPyre_Summit_EventScript_ArchieMaxieBeginExit1)
-    if (var(VAR_0x8008) == 2) call(MtPyre_Summit_EventScript_ArchieMaxieBeginExit2)
+    if (var(VAR_0x8008) == 0) {
+        call(MtPyre_Summit_EventScript_ArchieMaxieBeginExit0)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(MtPyre_Summit_EventScript_ArchieMaxieBeginExit1)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(MtPyre_Summit_EventScript_ArchieMaxieBeginExit2)
+    }
     playse(SE_PIN)
     applymovement(LOCALID_MT_PYRE_SUMMIT_MAXIE, Common_Movement_ExclamationMark)
     waitmovement(0)
     applymovement(LOCALID_MT_PYRE_SUMMIT_MAXIE, Common_Movement_Delay48)
     waitmovement(0)
     delay(30)
-    if (var(VAR_0x8008) == 0) call(MtPyre_Summit_EventScript_MaxieApproachPlayer0)
-    if (var(VAR_0x8008) == 1) call(MtPyre_Summit_EventScript_MaxieApproachPlayer1)
-    if (var(VAR_0x8008) == 2) call(MtPyre_Summit_EventScript_MaxieApproachPlayer2)
+    if (var(VAR_0x8008) == 0) {
+        call(MtPyre_Summit_EventScript_MaxieApproachPlayer0)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(MtPyre_Summit_EventScript_MaxieApproachPlayer1)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(MtPyre_Summit_EventScript_MaxieApproachPlayer2)
+    }
     msgbox(MtPyre_Summit_Text_MaxieSilence, MSGBOX_DEFAULT)
     closemessage
-    if (var(VAR_0x8008) == 0) call(MtPyre_Summit_EventScript_MaxieApproachArchie0)
-    if (var(VAR_0x8008) == 1) call(MtPyre_Summit_EventScript_MaxieApproachArchie1)
-    if (var(VAR_0x8008) == 2) call(MtPyre_Summit_EventScript_MaxieApproachArchie2)
+    if (var(VAR_0x8008) == 0) {
+        call(MtPyre_Summit_EventScript_MaxieApproachArchie0)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(MtPyre_Summit_EventScript_MaxieApproachArchie1)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(MtPyre_Summit_EventScript_MaxieApproachArchie2)
+    }
     delay(30)
     applymovement(LOCALID_MT_PYRE_SUMMIT_ARCHIE, MtPyre_Summit_Movement_ArchieExit)
     applymovement(LOCALID_MT_PYRE_SUMMIT_MAXIE, MtPyre_Summit_Movement_MaxieExit)

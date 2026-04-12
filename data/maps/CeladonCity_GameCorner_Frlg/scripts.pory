@@ -3,7 +3,9 @@ mapscripts CeladonCity_GameCorner_Frlg_MapScripts {
 }
 
 script CeladonCity_GameCorner_OnLoad {
-    if (!flag(FLAG_OPENED_ROCKET_HIDEOUT)) call(CeladonCity_GameCorner_EventScript_HideRocketHideout)
+    if (!flag(FLAG_OPENED_ROCKET_HIDEOUT)) {
+        call(CeladonCity_GameCorner_EventScript_HideRocketHideout)
+    }
     end
 }
 
@@ -39,9 +41,15 @@ script CeladonCity_GameCorner_EventScript_CoinsClerk {
 }
 
 script CeladonCity_GameCorner_EventScript_BuyCoins {
-    if (!flag(FLAG_GOT_COIN_CASE)) goto(CeladonCity_GameCorner_EventScript_ClerkNoCoinCase)
-    if (var(VAR_0x8009) == 0) goto(CeladonCity_GameCorner_EventScript_Buy50Coins)
-    if (var(VAR_0x8009) == 1) goto(CeladonCity_GameCorner_EventScript_Buy500Coins)
+    if (!flag(FLAG_GOT_COIN_CASE)) {
+        goto(CeladonCity_GameCorner_EventScript_ClerkNoCoinCase)
+    }
+    if (var(VAR_0x8009) == 0) {
+        goto(CeladonCity_GameCorner_EventScript_Buy50Coins)
+    }
+    if (var(VAR_0x8009) == 1) {
+        goto(CeladonCity_GameCorner_EventScript_Buy500Coins)
+    }
     end
 }
 
@@ -49,7 +57,9 @@ script CeladonCity_GameCorner_EventScript_Buy500Coins {
     checkcoins(VAR_TEMP_1)
     goto_if_ge(VAR_TEMP_1, (MAX_COINS + 1) - 500, CeladonCity_GameCorner_EventScript_ClerkNoRoomForCoins)
     checkmoney(10000)
-    if (var(VAR_RESULT) == FALSE) goto(CeladonCity_GameCorner_EventScript_ClerkNotEnoughMoney)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(CeladonCity_GameCorner_EventScript_ClerkNotEnoughMoney)
+    }
     addcoins(500)
     removemoney(10000)
     goto(CeladonCity_GameCorner_EventScript_BoughtCoins)
@@ -60,7 +70,9 @@ script CeladonCity_GameCorner_EventScript_Buy50Coins {
     checkcoins(VAR_TEMP_1)
     goto_if_ge(VAR_TEMP_1, (MAX_COINS + 1) - 50, CeladonCity_GameCorner_EventScript_ClerkNoRoomForCoins)
     checkmoney(1000)
-    if (var(VAR_RESULT) == FALSE) goto(CeladonCity_GameCorner_EventScript_ClerkNotEnoughMoney)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(CeladonCity_GameCorner_EventScript_ClerkNotEnoughMoney)
+    }
     addcoins(50)
     removemoney(1000)
     goto(CeladonCity_GameCorner_EventScript_BoughtCoins)
@@ -134,9 +146,13 @@ script CeladonCity_GameCorner_EventScript_Woman1 {
 script CeladonCity_GameCorner_EventScript_Fisher {
     lock
     faceplayer
-    if (flag(FLAG_GOT_10_COINS_FROM_GAMBLER)) goto(CeladonCity_GameCorner_EventScript_FisherAlreadyGotCoins)
+    if (flag(FLAG_GOT_10_COINS_FROM_GAMBLER)) {
+        goto(CeladonCity_GameCorner_EventScript_FisherAlreadyGotCoins)
+    }
     msgbox(CeladonCity_GameCorner_Text_DoYouWantToPlay)
-    if (!flag(FLAG_GOT_COIN_CASE)) goto(CeladonCity_GameCorner_EventScript_GamblerNoCoinCase)
+    if (!flag(FLAG_GOT_COIN_CASE)) {
+        goto(CeladonCity_GameCorner_EventScript_GamblerNoCoinCase)
+    }
     checkcoins(VAR_TEMP_1)
     goto_if_ge(VAR_TEMP_1, (MAX_COINS + 1) - 10, CeladonCity_GameCorner_EventScript_FisherNoRoomForCoins)
     addcoins(10)
@@ -171,7 +187,9 @@ script CeladonCity_GameCorner_EventScript_FisherAlreadyGotCoins {
 script CeladonCity_GameCorner_EventScript_GymGuy {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_ERIKA)) goto(CeladonCity_GameCorner_EventScript_GymGuyPostVictory)
+    if (flag(FLAG_DEFEATED_ERIKA)) {
+        goto(CeladonCity_GameCorner_EventScript_GymGuyPostVictory)
+    }
     msgbox(CeladonCity_GameCorner_Text_GymGuyAdvice)
     goto(CeladonCity_GameCorner_EventScript_FaceSlotMachine)
     end
@@ -202,9 +220,13 @@ script CeladonCity_GameCorner_EventScript_OldMan {
 script CeladonCity_GameCorner_EventScript_Scientist {
     lock
     faceplayer
-    if (flag(FLAG_GOT_20_COINS_FROM_GAMBLER)) goto(CeladonCity_GameCorner_EventScript_ScientistAlreadyGotCoins)
+    if (flag(FLAG_GOT_20_COINS_FROM_GAMBLER)) {
+        goto(CeladonCity_GameCorner_EventScript_ScientistAlreadyGotCoins)
+    }
     msgbox(CeladonCity_GameCorner_Text_WantSomeCoins)
-    if (!flag(FLAG_GOT_COIN_CASE)) goto(CeladonCity_GameCorner_EventScript_GamblerNoCoinCase)
+    if (!flag(FLAG_GOT_COIN_CASE)) {
+        goto(CeladonCity_GameCorner_EventScript_GamblerNoCoinCase)
+    }
     checkcoins(VAR_TEMP_1)
     goto_if_ge(VAR_TEMP_1, (MAX_COINS + 1) - 20, CeladonCity_GameCorner_EventScript_ScientistNoRoomForCoins)
     addcoins(20)
@@ -232,9 +254,13 @@ script CeladonCity_GameCorner_EventScript_ScientistAlreadyGotCoins {
 script CeladonCity_GameCorner_EventScript_Gentleman {
     lock
     faceplayer
-    if (flag(FLAG_GOT_20_COINS_FROM_GAMBLER_2)) goto(CeladonCity_GameCorner_EventScript_GentlemanAlreadyGotCoins)
+    if (flag(FLAG_GOT_20_COINS_FROM_GAMBLER_2)) {
+        goto(CeladonCity_GameCorner_EventScript_GentlemanAlreadyGotCoins)
+    }
     msgbox(CeladonCity_GameCorner_Text_HereAreSomeCoinsShoo)
-    if (!flag(FLAG_GOT_COIN_CASE)) goto(CeladonCity_GameCorner_EventScript_GamblerNoCoinCase)
+    if (!flag(FLAG_GOT_COIN_CASE)) {
+        goto(CeladonCity_GameCorner_EventScript_GamblerNoCoinCase)
+    }
     checkcoins(VAR_TEMP_1)
     goto_if_ge(VAR_TEMP_1, (MAX_COINS + 1) - 20, CeladonCity_GameCorner_EventScript_GentlemanNoRoomForCoins)
     addcoins(20)
@@ -272,9 +298,13 @@ script CeladonCity_GameCorner_EventScript_DontPlaySlotMachine {
 }
 
 script CeladonCity_GameCorner_EventScript_SlotMachine {
-    if (!flag(FLAG_GOT_COIN_CASE)) goto(CeladonCity_GameCorner_EventScript_SlotMachineNoCoinCase)
+    if (!flag(FLAG_GOT_COIN_CASE)) {
+        goto(CeladonCity_GameCorner_EventScript_SlotMachineNoCoinCase)
+    }
     msgbox(CeladonCity_GameCorner_Text_SlotMachineWantToPlay, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(CeladonCity_GameCorner_EventScript_DontPlaySlotMachine)
+    if (var(VAR_RESULT) == NO) {
+        goto(CeladonCity_GameCorner_EventScript_DontPlaySlotMachine)
+    }
     setfieldeffectargument(0, LOCALID_PLAYER)
     #ifdef(BUGFIX)
     setfieldeffectargument(1, MAP_NUM(MAP_CELADON_CITY_GAME_CORNER))
@@ -447,7 +477,9 @@ script CeladonCity_GameCorner_EventScript_SlotMachineNoCoinCase {
 script CeladonCity_GameCorner_EventScript_Poster {
     lockall
     msgbox(CeladonCity_GameCorner_Text_SwitchBehindPosterPushIt)
-    if (!flag(FLAG_OPENED_ROCKET_HIDEOUT)) call(CeladonCity_GameCorner_EventScript_OpenRocketHideout)
+    if (!flag(FLAG_OPENED_ROCKET_HIDEOUT)) {
+        call(CeladonCity_GameCorner_EventScript_OpenRocketHideout)
+    }
     releaseall
     end
 }
@@ -473,8 +505,12 @@ script CeladonCity_GameCorner_EventScript_RocketGrunt {
 script CeladonCity_GameCorner_Text_DefeatedGrunt {
     msgbox(CeladonCity_GameCorner_Text_GruntPostBattle)
     closemessage
-    if (var(VAR_FACING) == DIR_WEST) call(CeladonCity_GameCorner_Text_GruntExitWest)
-    if (var(VAR_FACING) != DIR_WEST) call(CeladonCity_GameCorner_Text_GruntExit)
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(CeladonCity_GameCorner_Text_GruntExitWest)
+    }
+    if (var(VAR_FACING) != DIR_WEST) {
+        call(CeladonCity_GameCorner_Text_GruntExit)
+    }
     removeobject(LOCALID_GAME_CORNER_GRUNT)
     release
     end

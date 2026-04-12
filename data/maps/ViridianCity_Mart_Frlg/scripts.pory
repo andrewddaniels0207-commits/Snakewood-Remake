@@ -6,7 +6,9 @@ mapscripts ViridianCity_Mart_Frlg_MapScripts {
 }
 
 script ViridianCity_Mart_OnLoad {
-    if (!flag(FLAG_SYS_POKEDEX_GET)) goto(ViridianCity_Mart_EventScript_HideQuestionnaire)
+    if (!flag(FLAG_SYS_POKEDEX_GET)) {
+        goto(ViridianCity_Mart_EventScript_HideQuestionnaire)
+    }
     end
 }
 
@@ -55,7 +57,9 @@ movement ViridianCity_Mart_Movement_FacePlayer {
 script ViridianCity_Mart_EventScript_Clerk {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_VIRIDIAN_CITY_MART) == 1) goto(ViridianCity_Mart_EventScript_SayHiToOak)
+    if (var(VAR_MAP_SCENE_VIRIDIAN_CITY_MART) == 1) {
+        goto(ViridianCity_Mart_EventScript_SayHiToOak)
+    }
     message(gText_HowMayIServeYou)
     waitmessage()
     pokemart(ViridianCity_Mart_Items)

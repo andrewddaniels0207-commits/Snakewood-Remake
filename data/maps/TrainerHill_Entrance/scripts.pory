@@ -25,7 +25,9 @@ script TrainerHill_Entrance_OnResume {
     trainerhill_resumetimer()
     setvar(VAR_TEMP_0, 0)
     trainerhill_getusingereader()
-    if (var(VAR_RESULT) == FALSE) goto(TrainerHill_Entrance_EventScript_TryFaceAttendant)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(TrainerHill_Entrance_EventScript_TryFaceAttendant)
+    }
     setobjectxy(LOCALID_PLAYER, 9, 6)
     applymovement(LOCALID_PLAYER, TrainerHill_Entrance_Movement_PlayerFaceAttendant)
     end
@@ -33,7 +35,9 @@ script TrainerHill_Entrance_OnResume {
 
 script TrainerHill_Entrance_EventScript_TryFaceAttendant {
     trainerhill_getwon()
-    if (var(VAR_RESULT) == TRUE) goto(TrainerHill_Entrance_EventScript_PlayerDontFaceAttendant)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(TrainerHill_Entrance_EventScript_PlayerDontFaceAttendant)
+    }
     applymovement(LOCALID_PLAYER, TrainerHill_Entrance_Movement_PlayerFaceAttendant)
     end
 }
@@ -51,7 +55,9 @@ script TrainerHill_Entrance_OnReturn {
 }
 
 script TrainerHill_Entrance_OnLoad {
-    if (var(VAR_TEMP_D) == 17) call(TrainerHill_Entrance_EventScript_OpenCounterDoor)
+    if (var(VAR_TEMP_D) == 17) {
+        call(TrainerHill_Entrance_EventScript_OpenCounterDoor)
+    }
     end
 }
 
@@ -122,7 +128,9 @@ script TrainerHill_Entrance_EventScript_Attendant {
     lock
     faceplayer
     trainerhill_inchallenge()
-    if (var(VAR_RESULT) == FALSE) goto(TrainerHill_Entrance_EventScript_ThanksForPlaying)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(TrainerHill_Entrance_EventScript_ThanksForPlaying)
+    }
     msgbox(TrainerHill_Entrance_Text_HopeYouGiveItYourBest, MSGBOX_DEFAULT)
     goto(TrainerHill_Entrance_EventScript_AttendantEnd)
 }
@@ -139,12 +147,18 @@ script TrainerHill_Entrance_EventScript_AttendantEnd {
 script TrainerHill_Entrance_EventScript_EntryTrigger {
     lockall
     applymovement(LOCALID_PLAYER, TrainerHill_Entrance_Movement_PlayerFaceAttendant)
-    if (!flag(FLAG_SYS_GAME_CLEAR)) goto(TrainerHill_Entrance_EventScript_Closed)
+    if (!flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(TrainerHill_Entrance_EventScript_Closed)
+    }
     msgbox(TrainerHill_Entrance_Text_WelcomeToTrainerHill, MSGBOX_DEFAULT)
     trainerhill_getsaved()
-    if (var(VAR_RESULT) == FALSE) call(TrainerHill_Entrance_EventScript_SaveGame)
+    if (var(VAR_RESULT) == FALSE) {
+        call(TrainerHill_Entrance_EventScript_SaveGame)
+    }
     trainerhill_allfloorsused()
-    if (var(VAR_RESULT) == TRUE) goto(TrainerHill_Entrance_EventScript_AllFloorsUsed)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(TrainerHill_Entrance_EventScript_AllFloorsUsed)
+    }
     msgbox(TrainerHill_Entrance_Text_TrainersUpToFloorX, MSGBOX_DEFAULT)
     goto(TrainerHill_Entrance_EventScript_AskChallengeTrainers)
 }
@@ -202,7 +216,9 @@ script TrainerHill_Entrance_EventScript_SaveGame {
     trainerhill_setsaved()
     setvar(VAR_TEMP_5, 1)
     call(Common_EventScript_SaveGame)
-    if (var(VAR_RESULT) == FALSE) goto(TrainerHill_Entrance_EventScript_SaveFailed)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(TrainerHill_Entrance_EventScript_SaveFailed)
+    }
     trainerhill_setsaved()
     return
 }
@@ -254,7 +270,9 @@ script TrainerHill_Entrance_EventScript_Records {
 }
 
 script TrainerHill_Entrance_EventScript_Man {
-    if (!flag(FLAG_SYS_GAME_CLEAR)) goto(TrainerHill_Entrance_EventScript_ManTrainerHillClosed)
+    if (!flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(TrainerHill_Entrance_EventScript_ManTrainerHillClosed)
+    }
     msgbox(TrainerHill_Entrance_Text_WhatSortOfTrainersAreAhead, MSGBOX_NPC)
     end
 }
@@ -265,7 +283,9 @@ script TrainerHill_Entrance_EventScript_ManTrainerHillClosed {
 }
 
 script TrainerHill_Entrance_EventScript_Girl {
-    if (!flag(FLAG_SYS_GAME_CLEAR)) goto(TrainerHill_Entrance_EventScript_GirlTrainerHillClosed)
+    if (!flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(TrainerHill_Entrance_EventScript_GirlTrainerHillClosed)
+    }
     msgbox(TrainerHill_Entrance_Text_FriendsTryingToReachTimeBoardTop, MSGBOX_NPC)
     end
 }
@@ -280,7 +300,9 @@ script TrainerHill_Entrance_EventScript_Clerk {
     faceplayer
     message(gText_HowMayIServeYou)
     waitmessage()
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(TrainerHill_Entrance_EventScript_ExpandedPokemart)
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(TrainerHill_Entrance_EventScript_ExpandedPokemart)
+    }
     pokemart(TrainerHill_Entrance_Pokemart_Basic)
     msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
     release

@@ -4,13 +4,27 @@ script CeruleanCity_House4_EventScript_WonderNewsBerryMan {
     lock
     specialvar(REWARD_TYPE, WonderNews_GetRewardInfo)
     copyvar(REWARD_ITEM, VAR_RESULT)
-    if (var(REWARD_TYPE) == NEWS_REWARD_NONE) goto(CeruleanCity_House4_EventScript_NoNews)
-    if (var(REWARD_TYPE) == NEWS_REWARD_RECV_SMALL) goto(CeruleanCity_House4_EventScript_Reward_RecvSmall)
-    if (var(REWARD_TYPE) == NEWS_REWARD_RECV_BIG) goto(CeruleanCity_House4_EventScript_Reward_RecvBig)
-    if (var(REWARD_TYPE) == NEWS_REWARD_WAITING) goto(CeruleanCity_House4_EventScript_Waiting)
-    if (var(REWARD_TYPE) == NEWS_REWARD_SENT_SMALL) goto(CeruleanCity_House4_EventScript_Reward_SentSmall)
-    if (var(REWARD_TYPE) == NEWS_REWARD_SENT_BIG) goto(CeruleanCity_House4_EventScript_Reward_SentBig)
-    if (var(REWARD_TYPE) == NEWS_REWARD_AT_MAX) goto(CeruleanCity_House4_EventScript_AtMax)
+    if (var(REWARD_TYPE) == NEWS_REWARD_NONE) {
+        goto(CeruleanCity_House4_EventScript_NoNews)
+    }
+    if (var(REWARD_TYPE) == NEWS_REWARD_RECV_SMALL) {
+        goto(CeruleanCity_House4_EventScript_Reward_RecvSmall)
+    }
+    if (var(REWARD_TYPE) == NEWS_REWARD_RECV_BIG) {
+        goto(CeruleanCity_House4_EventScript_Reward_RecvBig)
+    }
+    if (var(REWARD_TYPE) == NEWS_REWARD_WAITING) {
+        goto(CeruleanCity_House4_EventScript_Waiting)
+    }
+    if (var(REWARD_TYPE) == NEWS_REWARD_SENT_SMALL) {
+        goto(CeruleanCity_House4_EventScript_Reward_SentSmall)
+    }
+    if (var(REWARD_TYPE) == NEWS_REWARD_SENT_BIG) {
+        goto(CeruleanCity_House4_EventScript_Reward_SentBig)
+    }
+    if (var(REWARD_TYPE) == NEWS_REWARD_AT_MAX) {
+        goto(CeruleanCity_House4_EventScript_AtMax)
+    }
     end
 }
 
@@ -24,7 +38,9 @@ script CeruleanCity_House4_EventScript_Reward_RecvSmall {
     call(CeruleanCity_House4_EventScript_MovementReactionToNews)
     msgbox(CeruleanCity_House4_Text_NewNewsInformativeHaveThis)
     giveitem(REWARD_ITEM)
-    if (var(VAR_RESULT) == FALSE) goto(CeruleanCity_House4_EventScript_NoRoomForBerries)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(CeruleanCity_House4_EventScript_NoRoomForBerries)
+    }
     release
     end
 }
@@ -33,7 +49,9 @@ script CeruleanCity_House4_EventScript_Reward_RecvBig {
     call(CeruleanCity_House4_EventScript_MovementReactionToNews)
     msgbox(CeruleanCity_House4_Text_IncredibleNewsHaveBerries)
     giveitem(REWARD_ITEM, 4)
-    if (var(VAR_RESULT) == FALSE) goto(CeruleanCity_House4_EventScript_NoRoomForBerries)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(CeruleanCity_House4_EventScript_NoRoomForBerries)
+    }
     release
     end
 }
@@ -50,7 +68,9 @@ script CeruleanCity_House4_EventScript_Reward_SentSmall {
     call(CeruleanCity_House4_EventScript_MovementReactionToNews)
     msgbox(CeruleanCity_House4_Text_ThanksForSpreadingNewsTakeThis)
     giveitem(REWARD_ITEM)
-    if (var(VAR_RESULT) == FALSE) goto(CeruleanCity_House4_EventScript_NoRoomForBerries)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(CeruleanCity_House4_EventScript_NoRoomForBerries)
+    }
     release
     end
 }
@@ -59,7 +79,9 @@ script CeruleanCity_House4_EventScript_Reward_SentBig {
     call(CeruleanCity_House4_EventScript_MovementReactionToNews)
     msgbox(CeruleanCity_House4_Text_MagnificentNewsSpreadHaveBerries)
     giveitem(REWARD_ITEM, 4)
-    if (var(VAR_RESULT) == FALSE) goto(CeruleanCity_House4_EventScript_NoRoomForBerries)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(CeruleanCity_House4_EventScript_NoRoomForBerries)
+    }
     release
     end
 }

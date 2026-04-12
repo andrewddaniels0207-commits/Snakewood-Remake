@@ -3,17 +3,27 @@ mapscripts SilphCo_9F_Frlg_MapScripts {
 }
 
 script SilphCo_9F_OnLoad {
-    if (!flag(FLAG_SILPH_9F_DOOR_1)) call(EventScript_Close9FDoor1)
-    if (!flag(FLAG_SILPH_9F_DOOR_2)) call(EventScript_Close9FDoor2)
-    if (!flag(FLAG_SILPH_9F_DOOR_3)) call(EventScript_Close9FDoor3)
-    if (!flag(FLAG_SILPH_9F_DOOR_4)) call(EventScript_Close9FDoor4)
+    if (!flag(FLAG_SILPH_9F_DOOR_1)) {
+        call(EventScript_Close9FDoor1)
+    }
+    if (!flag(FLAG_SILPH_9F_DOOR_2)) {
+        call(EventScript_Close9FDoor2)
+    }
+    if (!flag(FLAG_SILPH_9F_DOOR_3)) {
+        call(EventScript_Close9FDoor3)
+    }
+    if (!flag(FLAG_SILPH_9F_DOOR_4)) {
+        call(EventScript_Close9FDoor4)
+    }
     end
 }
 
 script SilphCo_9F_EventScript_HealWoman {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) goto(SilphCo_9F_EventScript_HealWomanRocketsGone)
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
+        goto(SilphCo_9F_EventScript_HealWomanRocketsGone)
+    }
     msgbox(SilphCo_9F_Text_YouShouldTakeQuickNap)
     closemessage
     call(Common_EventScript_OutOfCenterPartyHeal)

@@ -5,22 +5,36 @@ script PacifidlogTown_House2_EventScript_FanClubYoungerBrother {
     faceplayer
     dotimebasedevents()
     call(PacifidlogTown_House2_EventScript_UpdateFanClubTMFlag)
-    if (flag(FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK)) goto(PacifidlogTown_House2_EventScript_ComeBackInXDays)
-    if (flag(FLAG_MET_FANCLUB_YOUNGER_BROTHER)) call(PacifidlogTown_House2_EventScript_MonAssessment)
-    if (!flag(FLAG_MET_FANCLUB_YOUNGER_BROTHER)) call(PacifidlogTown_House2_EventScript_FirstMonAssessment)
+    if (flag(FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK)) {
+        goto(PacifidlogTown_House2_EventScript_ComeBackInXDays)
+    }
+    if (flag(FLAG_MET_FANCLUB_YOUNGER_BROTHER)) {
+        call(PacifidlogTown_House2_EventScript_MonAssessment)
+    }
+    if (!flag(FLAG_MET_FANCLUB_YOUNGER_BROTHER)) {
+        call(PacifidlogTown_House2_EventScript_FirstMonAssessment)
+    }
     setflag(FLAG_MET_FANCLUB_YOUNGER_BROTHER)
     specialvar(VAR_RESULT, GetLeadMonFriendshipScore)
-    if (var(VAR_RESULT) >= FRIENDSHIP_150_TO_199) goto(PacifidlogTown_House2_EventScript_GiveReturn)
+    if (var(VAR_RESULT) >= FRIENDSHIP_150_TO_199) {
+        goto(PacifidlogTown_House2_EventScript_GiveReturn)
+    }
     specialvar(VAR_RESULT, GetLeadMonFriendshipScore)
-    if (var(VAR_RESULT) >= FRIENDSHIP_50_TO_99) goto(PacifidlogTown_House2_EventScript_PutInEffort)
+    if (var(VAR_RESULT) >= FRIENDSHIP_50_TO_99) {
+        goto(PacifidlogTown_House2_EventScript_PutInEffort)
+    }
     goto(PacifidlogTown_House2_EventScript_GiveFrustration)
     end
 }
 
 script PacifidlogTown_House2_EventScript_UpdateFanClubTMFlag {
-    if (!flag(FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK)) goto(Common_EventScript_NopReturn)
+    if (!flag(FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK)) {
+        goto(Common_EventScript_NopReturn)
+    }
     specialvar(VAR_RESULT, GetDaysUntilPacifidlogTMAvailable)
-    if (var(VAR_RESULT) == 0) call(PacifidlogTown_House2_EventScript_ClearReceivedFanClubTM)
+    if (var(VAR_RESULT) == 0) {
+        call(PacifidlogTown_House2_EventScript_ClearReceivedFanClubTM)
+    }
     return
 }
 
@@ -43,7 +57,9 @@ script PacifidlogTown_House2_EventScript_ClearReceivedFanClubTM {
 script PacifidlogTown_House2_EventScript_GiveReturn {
     msgbox(PacifidlogTown_House2_Text_AdoringPokemonTakeThis, MSGBOX_DEFAULT)
     giveitem(ITEM_TM_RETURN)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK)
     special(SetPacifidlogTMReceivedDay)
     msgbox(PacifidlogTown_House2_Text_ExplainReturnFrustration, MSGBOX_DEFAULT)
@@ -60,7 +76,9 @@ script PacifidlogTown_House2_EventScript_PutInEffort {
 script PacifidlogTown_House2_EventScript_GiveFrustration {
     msgbox(PacifidlogTown_House2_Text_ViciousPokemonTakeThis, MSGBOX_DEFAULT)
     giveitem(ITEM_TM_FRUSTRATION)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK)
     special(SetPacifidlogTMReceivedDay)
     msgbox(PacifidlogTown_House2_Text_ExplainReturnFrustration, MSGBOX_DEFAULT)

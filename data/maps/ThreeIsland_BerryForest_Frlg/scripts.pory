@@ -27,7 +27,9 @@ script ThreeIsland_BerryForest_EventScript_Lostelle {
     waitmovement(0)
     msgbox(ThreeIsland_BerryForest_Text_ThankYouHaveThis)
     giveitem(ITEM_IAPAPA_BERRY)
-    if (var(VAR_RESULT) == FALSE) call(ThreeIsland_BerryForest_EventScript_NoRoomForBerry)
+    if (var(VAR_RESULT) == FALSE) {
+        call(ThreeIsland_BerryForest_EventScript_NoRoomForBerry)
+    }
     special(GetPlayerBigGuyGirlString)
     msgbox(ThreeIsland_BerryForest_Text_LetsGoHome)
     closemessage

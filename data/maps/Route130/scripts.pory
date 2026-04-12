@@ -3,9 +3,13 @@ mapscripts Route130_MapScripts {
 }
 
 script Route130_OnTransition {
-    if (var(VAR_SOOTOPOLIS_CITY_STATE) >= 4) call(Route130_EventScript_CheckSetAbnormalWeather)
+    if (var(VAR_SOOTOPOLIS_CITY_STATE) >= 4) {
+        call(Route130_EventScript_CheckSetAbnormalWeather)
+    }
     specialvar(VAR_RESULT, IsMirageIslandPresent)
-    if (var(VAR_RESULT) == TRUE) goto(Route130_EventScript_SetMirageIslandLayout)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route130_EventScript_SetMirageIslandLayout)
+    }
     setflag(FLAG_TEMP_HIDE_MIRAGE_ISLAND_BERRY_TREE)
     setflag(FLAG_TEMP_12)
     setflag(FLAG_TEMP_13)
@@ -31,7 +35,9 @@ script Route130_EventScript_SetMirageIslandLayout {
 }
 
 script Route130_EventScript_CheckSetAbnormalWeather {
-    if (flag(FLAG_SYS_WEATHER_CTRL)) call(Common_EventScript_SetAbnormalWeather)
+    if (flag(FLAG_SYS_WEATHER_CTRL)) {
+        call(Common_EventScript_SetAbnormalWeather)
+    }
     return
 }
 

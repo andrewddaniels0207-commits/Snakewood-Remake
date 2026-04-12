@@ -7,9 +7,15 @@ script FortreeCity_House4_EventScript_Woman {
 
 script FortreeCity_House4_EventScript_Boy {
     lockall
-    if (flag(FLAG_RECEIVED_MENTAL_HERB)) goto(FortreeCity_House4_EventScript_ReceivedMentalHerb)
-    if (flag(FLAG_WINGULL_DELIVERED_MAIL)) goto(FortreeCity_House4_EventScript_WingullReturned)
-    if (flag(FLAG_WINGULL_SENT_ON_ERRAND)) goto(FortreeCity_House4_EventScript_WingullOnErrand)
+    if (flag(FLAG_RECEIVED_MENTAL_HERB)) {
+        goto(FortreeCity_House4_EventScript_ReceivedMentalHerb)
+    }
+    if (flag(FLAG_WINGULL_DELIVERED_MAIL)) {
+        goto(FortreeCity_House4_EventScript_WingullReturned)
+    }
+    if (flag(FLAG_WINGULL_SENT_ON_ERRAND)) {
+        goto(FortreeCity_House4_EventScript_WingullOnErrand)
+    }
     msgbox(FortreeCity_House4_Text_GoBirdPokemon, MSGBOX_DEFAULT)
     closemessage
     setflag(FLAG_WINGULL_SENT_ON_ERRAND)
@@ -34,7 +40,9 @@ script FortreeCity_House4_EventScript_WingullReturned {
     waitmovement(0)
     msgbox(FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb, MSGBOX_DEFAULT)
     giveitem(ITEM_MENTAL_HERB)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_MENTAL_HERB)
     releaseall
     end

@@ -4,13 +4,17 @@ mapscripts BattleFrontier_OutsideEast_MapScripts {
 }
 
 script BattleFrontier_OutsideEast_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(BattleFrontier_OutsideEast_EventScript_TryRemoveSudowoodo)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(BattleFrontier_OutsideEast_EventScript_TryRemoveSudowoodo)
+    }
     end
 }
 
 script BattleFrontier_OutsideEast_EventScript_TryRemoveSudowoodo {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
+        goto(Common_EventScript_NopReturn)
+    }
     removeobject(VAR_LAST_TALKED)
     return
 }
@@ -18,7 +22,9 @@ script BattleFrontier_OutsideEast_EventScript_TryRemoveSudowoodo {
 script BattleFrontier_OutsideEast_OnTransition {
     setvar(VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0)
     setflag(FLAG_HIDE_BATTLE_TOWER_REPORTER)
-    if (!flag(FLAG_DEFEATED_SUDOWOODO)) call(BattleFrontier_OutsideEast_EventScript_ShowSudowoodo)
+    if (!flag(FLAG_DEFEATED_SUDOWOODO)) {
+        call(BattleFrontier_OutsideEast_EventScript_ShowSudowoodo)
+    }
     end
 }
 
@@ -154,9 +160,15 @@ script BattleFrontier_OutsideEast_EventScript_WaterSudowoodo {
     dowildbattle()
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo)
+    }
     setflag(FLAG_DEFEATED_SUDOWOODO)
     release
     end
@@ -254,7 +266,9 @@ script BattleFrontier_OutsideEast_EventScript_Gentleman {
 script BattleFrontier_OutsideEast_EventScript_OldWoman {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_SUDOWOODO)) goto(BattleFrontier_OutsideEast_EventScript_OldWomanSudowoodoGone)
+    if (flag(FLAG_DEFEATED_SUDOWOODO)) {
+        goto(BattleFrontier_OutsideEast_EventScript_OldWomanSudowoodoGone)
+    }
     msgbox(BattleFrontier_OutsideEast_Text_OddTreeHereSeemsToWiggle, MSGBOX_DEFAULT)
     release
     end

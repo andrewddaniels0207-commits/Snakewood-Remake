@@ -7,21 +7,35 @@ mapscripts Route129_MapScripts {
 }
 
 script Route129_OnLoad {
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_129_WEST) call(AbnormalWeather_EventScript_PlaceTilesRoute129West)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_129_EAST) call(AbnormalWeather_EventScript_PlaceTilesRoute129East)
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_129_WEST) {
+        call(AbnormalWeather_EventScript_PlaceTilesRoute129West)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_129_EAST) {
+        call(AbnormalWeather_EventScript_PlaceTilesRoute129East)
+    }
     end
 }
 
 script Route129_OnTransition {
-    if (var(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1) call(AbnormalWeather_EventScript_HideMapNamePopup)
-    if (var(VAR_SOOTOPOLIS_CITY_STATE) >= 4) call(Route129_EventScript_CheckSetAbnormalWeather)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_129_WEST) call(AbnormalWeather_StartKyogreWeather)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_129_EAST) call(AbnormalWeather_StartKyogreWeather)
+    if (var(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1) {
+        call(AbnormalWeather_EventScript_HideMapNamePopup)
+    }
+    if (var(VAR_SOOTOPOLIS_CITY_STATE) >= 4) {
+        call(Route129_EventScript_CheckSetAbnormalWeather)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_129_WEST) {
+        call(AbnormalWeather_StartKyogreWeather)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_129_EAST) {
+        call(AbnormalWeather_StartKyogreWeather)
+    }
     end
 }
 
 script Route129_EventScript_CheckSetAbnormalWeather {
-    if (flag(FLAG_SYS_WEATHER_CTRL)) call(Common_EventScript_SetAbnormalWeather)
+    if (flag(FLAG_SYS_WEATHER_CTRL)) {
+        call(Common_EventScript_SetAbnormalWeather)
+    }
     return
 }
 

@@ -18,8 +18,12 @@ script SootopolisCity_Mart_Pokemart {
 script SootopolisCity_Mart_EventScript_FatMan {
     lock
     faceplayer
-    if (var(VAR_SKY_PILLAR_STATE) >= 2) goto(SootopolisCity_Mart_EventScript_FatManNoLegendaries)
-    if (!flag(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN)) goto(SootopolisCity_Mart_EventScript_FatManNoLegendaries)
+    if (var(VAR_SKY_PILLAR_STATE) >= 2) {
+        goto(SootopolisCity_Mart_EventScript_FatManNoLegendaries)
+    }
+    if (!flag(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN)) {
+        goto(SootopolisCity_Mart_EventScript_FatManNoLegendaries)
+    }
     msgbox(SootopolisCity_Mart_Text_TooScaryOutside, MSGBOX_DEFAULT)
     release
     end
@@ -34,8 +38,12 @@ script SootopolisCity_Mart_EventScript_FatManNoLegendaries {
 script SootopolisCity_Mart_EventScript_Gentleman {
     lock
     faceplayer
-    if (var(VAR_SKY_PILLAR_STATE) >= 2) goto(SootopolisCity_Mart_EventScript_GentlemanNoLegendaries)
-    if (!flag(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN)) goto(SootopolisCity_Mart_EventScript_GentlemanNoLegendaries)
+    if (var(VAR_SKY_PILLAR_STATE) >= 2) {
+        goto(SootopolisCity_Mart_EventScript_GentlemanNoLegendaries)
+    }
+    if (!flag(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN)) {
+        goto(SootopolisCity_Mart_EventScript_GentlemanNoLegendaries)
+    }
     msgbox(SootopolisCity_Mart_Text_DidSomethingAwaken, MSGBOX_DEFAULT)
     release
     end

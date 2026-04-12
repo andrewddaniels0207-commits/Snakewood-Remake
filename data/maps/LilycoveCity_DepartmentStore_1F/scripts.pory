@@ -9,10 +9,16 @@ script LilycoveCity_DepartmentStore_1F_EventScript_LotteryClerk {
     lock
     faceplayer
     dotimebasedevents()
-    if (var(VAR_POKELOT_PRIZE_ITEM) != ITEM_NONE) goto(LilycoveCity_DepartmentStore_1F_EventScript_GivePrizeFromEarlier)
-    if (flag(FLAG_DAILY_PICKED_LOTO_TICKET)) goto(LilycoveCity_DepartmentStore_1F_EventScript_ComeBackTomorrow)
+    if (var(VAR_POKELOT_PRIZE_ITEM) != ITEM_NONE) {
+        goto(LilycoveCity_DepartmentStore_1F_EventScript_GivePrizeFromEarlier)
+    }
+    if (flag(FLAG_DAILY_PICKED_LOTO_TICKET)) {
+        goto(LilycoveCity_DepartmentStore_1F_EventScript_ComeBackTomorrow)
+    }
     msgbox(LilycoveCity_DepartmentStore_1F_Text_LotteryCornerDrawTicket, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain)
+    if (var(VAR_RESULT) == NO) {
+        goto(LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain)
+    }
     setflag(FLAG_DAILY_PICKED_LOTO_TICKET)
     message(LilycoveCity_DepartmentStore_1F_Text_PleasePickTicket)
     waitmessage()
@@ -30,17 +36,33 @@ script LilycoveCity_DepartmentStore_1F_EventScript_LotteryClerk {
     delay(10)
     applymovement(LOCALID_LOTTERY_CLERK, Common_Movement_FacePlayer)
     waitmovement(0)
-    if (var(VAR_0x8004) == 0) goto(LilycoveCity_DepartmentStore_1F_EventScript_NoMatch)
+    if (var(VAR_0x8004) == 0) {
+        goto(LilycoveCity_DepartmentStore_1F_EventScript_NoMatch)
+    }
     incrementgamestat(GAME_STAT_WON_POKEMON_LOTTERY)
-    if (var(VAR_0x8006) == 0) call(LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPartyMon)
-    if (var(VAR_0x8006) == 1) call(LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPCMon)
+    if (var(VAR_0x8006) == 0) {
+        call(LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPartyMon)
+    }
+    if (var(VAR_0x8006) == 1) {
+        call(LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPCMon)
+    }
     bufferitemname(STR_VAR_1, VAR_0x8005)
-    if (var(VAR_0x8004) == 1) call(LilycoveCity_DepartmentStore_1F_EventScript_TwoDigitMatch)
-    if (var(VAR_0x8004) == 2) call(LilycoveCity_DepartmentStore_1F_EventScript_ThreeDigitMatch)
-    if (var(VAR_0x8004) == 3) call(LilycoveCity_DepartmentStore_1F_EventScript_FourDigitMatch)
-    if (var(VAR_0x8004) == 4) call(LilycoveCity_DepartmentStore_1F_EventScript_FullMatch)
+    if (var(VAR_0x8004) == 1) {
+        call(LilycoveCity_DepartmentStore_1F_EventScript_TwoDigitMatch)
+    }
+    if (var(VAR_0x8004) == 2) {
+        call(LilycoveCity_DepartmentStore_1F_EventScript_ThreeDigitMatch)
+    }
+    if (var(VAR_0x8004) == 3) {
+        call(LilycoveCity_DepartmentStore_1F_EventScript_FourDigitMatch)
+    }
+    if (var(VAR_0x8004) == 4) {
+        call(LilycoveCity_DepartmentStore_1F_EventScript_FullMatch)
+    }
     giveitem(VAR_0x8005)
-    if (var(VAR_RESULT) == FALSE) goto(LilycoveCity_DepartmentStore_1F_EventScript_RecordPrizeNoRoom)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(LilycoveCity_DepartmentStore_1F_EventScript_RecordPrizeNoRoom)
+    }
     special(TryPutLotteryWinnerReportOnAir)
     goto(LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain2)
     end
@@ -116,7 +138,9 @@ script LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize {
 script LilycoveCity_DepartmentStore_1F_EventScript_GivePrizeFromEarlier {
     msgbox(LilycoveCity_DepartmentStore_1F_Text_PrizeWeveBeenHolding, MSGBOX_DEFAULT)
     giveitem(VAR_POKELOT_PRIZE_ITEM)
-    if (var(VAR_RESULT) == FALSE) goto(LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize)
+    }
     copyvar(VAR_0x8004, VAR_POKELOT_PRIZE_PLACE)
     copyvar(VAR_0x8005, VAR_POKELOT_PRIZE_ITEM)
     special(TryPutLotteryWinnerReportOnAir)

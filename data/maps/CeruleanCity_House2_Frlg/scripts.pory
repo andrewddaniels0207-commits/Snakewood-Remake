@@ -3,7 +3,9 @@ mapscripts CeruleanCity_House2_Frlg_MapScripts {}
 script CeruleanCity_House2_EventScript_Hiker {
     lock
     faceplayer
-    if (flag(FLAG_GOT_TM28_FROM_ROCKET)) goto(CeruleanCity_House2_EventScript_HikerGotTM28)
+    if (flag(FLAG_GOT_TM28_FROM_ROCKET)) {
+        goto(CeruleanCity_House2_EventScript_HikerGotTM28)
+    }
     msgbox(CeruleanCity_House2_Text_RocketsStoleTMForDig)
     release
     end

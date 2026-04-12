@@ -14,8 +14,12 @@ script PokemonLeague_BrunosRoom_OnResume {
 }
 
 script PokemonLeague_BrunosRoom_OnLoad {
-    if (flag(FLAG_DEFEATED_BRUNO)) call(PokemonLeague_BrunosRoom_EventScript_SetDoorOpen)
-    if (var(VAR_MAP_SCENE_POKEMON_LEAGUE) == 2) call(PokemonLeague_BrunosRoom_EventScript_CloseEntry)
+    if (flag(FLAG_DEFEATED_BRUNO)) {
+        call(PokemonLeague_BrunosRoom_EventScript_SetDoorOpen)
+    }
+    if (var(VAR_MAP_SCENE_POKEMON_LEAGUE) == 2) {
+        call(PokemonLeague_BrunosRoom_EventScript_CloseEntry)
+    }
     end
 }
 
@@ -53,15 +57,25 @@ script PokemonLeague_BrunosRoom_EventScript_Bruno {
     lock
     faceplayer
     famechecker(FAMECHECKER_BRUNO, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
-    if (flag(FLAG_DEFEATED_BRUNO)) goto(PokemonLeague_BrunosRoom_EventScript_PostBattle)
+    if (flag(FLAG_DEFEATED_BRUNO)) {
+        goto(PokemonLeague_BrunosRoom_EventScript_PostBattle)
+    }
     famechecker(FAMECHECKER_BRUNO, 0)
     famechecker(FAMECHECKER_BRUNO, 1)
-    if (!flag(FLAG_SYS_GAME_CLEAR)) call(PokemonLeague_BrunosRoom_EventScript_Intro)
-    if (flag(FLAG_SYS_GAME_CLEAR)) call(PokemonLeague_BrunosRoom_EventScript_RematchIntro)
+    if (!flag(FLAG_SYS_GAME_CLEAR)) {
+        call(PokemonLeague_BrunosRoom_EventScript_Intro)
+    }
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        call(PokemonLeague_BrunosRoom_EventScript_RematchIntro)
+    }
     setflag(FLAG_TEMP_3)
     setflag(FLAG_TEMP_5)
-    if (!flag(FLAG_IS_CHAMPION)) call(PokemonLeague_BrunosRoom_EventScript_Battle)
-    if (flag(FLAG_IS_CHAMPION)) call(PokemonLeague_BrunosRoom_EventScript_Rematch)
+    if (!flag(FLAG_IS_CHAMPION)) {
+        call(PokemonLeague_BrunosRoom_EventScript_Battle)
+    }
+    if (flag(FLAG_IS_CHAMPION)) {
+        call(PokemonLeague_BrunosRoom_EventScript_Rematch)
+    }
     clearflag(FLAG_TEMP_5)
     goto(PokemonLeague_BrunosRoom_EventScript_DefeatedBruno)
     end
@@ -90,10 +104,18 @@ script PokemonLeague_BrunosRoom_EventScript_Rematch {
 script PokemonLeague_BrunosRoom_EventScript_PostBattle {
     msgbox(PokemonLeague_BrunosRoom_Text_PostBattle)
     closemessage
-    if (var(VAR_FACING) == DIR_NORTH) call(PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayRight)
-    if (var(VAR_FACING) == DIR_SOUTH) call(PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayLeft)
-    if (var(VAR_FACING) == DIR_WEST) call(PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown)
-    if (var(VAR_FACING) == DIR_EAST) call(PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayRight)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayLeft)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown)
+    }
     release
     end
 }
@@ -103,10 +125,18 @@ script PokemonLeague_BrunosRoom_EventScript_DefeatedBruno {
     call(PokemonLeague_EventScript_OpenDoor)
     msgbox(PokemonLeague_BrunosRoom_Text_PostBattle)
     closemessage
-    if (var(VAR_FACING) == DIR_NORTH) call(PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayRight)
-    if (var(VAR_FACING) == DIR_SOUTH) call(PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayLeft)
-    if (var(VAR_FACING) == DIR_WEST) call(PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown)
-    if (var(VAR_FACING) == DIR_EAST) call(PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayRight)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayLeft)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown)
+    }
     release
     end
 }

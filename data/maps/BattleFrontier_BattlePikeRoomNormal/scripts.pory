@@ -134,7 +134,9 @@ script BattleFrontier_BattlePikeRoomNormal_EventScript_LucyEnter {
     case(FRONTIER_BRAIN_STREAK, BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucySilver)
     case(FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucyGold)
     frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
-    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucySilver)
+    if (var(VAR_RESULT) != FALSE) {
+        goto(BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucySilver)
+    }
     msgbox(BattleFrontier_BattlePikeRoomNormal_Text_ImThePikeQueen, MSGBOX_DEFAULT)
     frontier_set(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
 }
@@ -142,13 +144,17 @@ script BattleFrontier_BattlePikeRoomNormal_EventScript_LucyEnter {
 script BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucySilver {
     msgbox(BattleFrontier_BattlePikeRoomNormal_Text_HopeYouDidntUseUpLuck, MSGBOX_DEFAULT)
     call(BattleFrontier_BattlePikeRoomNormal_EventScript_DoPikeQueenBattle)
-    if (var(VAR_RESULT) == 1) goto(BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucySilver)
+    if (var(VAR_RESULT) == 1) {
+        goto(BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucySilver)
+    }
     goto(BattleFrontier_BattlePikeRoomNormal_EventScript_WarpToLobbyLost)
 }
 
 script BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucySilver {
     frontier_getsymbols()
-    if (var(VAR_RESULT) != 0) goto(BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucy)
+    if (var(VAR_RESULT) != 0) {
+        goto(BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucy)
+    }
     msgbox(BattleFrontier_BattlePikeRoomNormal_Text_LucyShowMeFrontierPass, MSGBOX_DEFAULT)
     waitmessage()
     playfanfare(MUS_OBTAIN_SYMBOL)
@@ -163,7 +169,9 @@ script BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucySilver {
 
 script BattleFrontier_BattlePikeRoomNormal_EventScript_IntroLucyGold {
     frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
-    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucyGold)
+    if (var(VAR_RESULT) != FALSE) {
+        goto(BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucyGold)
+    }
     msgbox(BattleFrontier_BattlePikeRoomNormal_Text_LucyYouAgain, MSGBOX_DEFAULT)
     frontier_set(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
 }
@@ -171,13 +179,17 @@ script BattleFrontier_BattlePikeRoomNormal_EventScript_IntroLucyGold {
 script BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucyGold {
     msgbox(BattleFrontier_BattlePikeRoomNormal_Text_NowComeOn, MSGBOX_DEFAULT)
     call(BattleFrontier_BattlePikeRoomNormal_EventScript_DoPikeQueenBattle)
-    if (var(VAR_RESULT) == 1) goto(BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucyGold)
+    if (var(VAR_RESULT) == 1) {
+        goto(BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucyGold)
+    }
     goto(BattleFrontier_BattlePikeRoomNormal_EventScript_WarpToLobbyLost)
 }
 
 script BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucyGold {
     frontier_getsymbols()
-    if (var(VAR_RESULT) == 2) goto(BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucy)
+    if (var(VAR_RESULT) == 2) {
+        goto(BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucy)
+    }
     msgbox(BattleFrontier_BattlePikeRoomNormal_Text_LucyFrontierPass, MSGBOX_DEFAULT)
     waitmessage()
     playfanfare(MUS_OBTAIN_SYMBOL)
@@ -294,8 +306,12 @@ script BattleFrontier_BattlePikeRoomNormal_EventScript_EnterStatusRoom {
     waitmovement(0)
     pike_getstatusmon()
     copyvar(VAR_0x8004, VAR_RESULT)
-    if (var(VAR_0x8004) == PIKE_STATUSMON_KIRLIA) call(BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaAttack)
-    if (var(VAR_0x8004) == PIKE_STATUSMON_DUSCLOPS) call(BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsAttack)
+    if (var(VAR_0x8004) == PIKE_STATUSMON_KIRLIA) {
+        call(BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaAttack)
+    }
+    if (var(VAR_0x8004) == PIKE_STATUSMON_DUSCLOPS) {
+        call(BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsAttack)
+    }
     msgbox(BattleFrontier_BattlePikeRoomNormal_Text_AttacksWhenStartled, MSGBOX_DEFAULT)
     closemessage
     releaseall
@@ -309,10 +325,18 @@ script BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaAttack {
     playmoncry(SPECIES_KIRLIA, CRY_MODE_NORMAL)
     waitmoncry()
     pike_getstatus()
-    if (var(VAR_RESULT) == PIKE_STATUS_TOXIC) call(BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedToxic)
-    if (var(VAR_RESULT) == PIKE_STATUS_BURN) call(BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedWillOWisp)
-    if (var(VAR_RESULT) == PIKE_STATUS_PARALYSIS) call(BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedThunderWave)
-    if (var(VAR_RESULT) == PIKE_STATUS_SLEEP) call(BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedHypnosis)
+    if (var(VAR_RESULT) == PIKE_STATUS_TOXIC) {
+        call(BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedToxic)
+    }
+    if (var(VAR_RESULT) == PIKE_STATUS_BURN) {
+        call(BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedWillOWisp)
+    }
+    if (var(VAR_RESULT) == PIKE_STATUS_PARALYSIS) {
+        call(BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedThunderWave)
+    }
+    if (var(VAR_RESULT) == PIKE_STATUS_SLEEP) {
+        call(BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedHypnosis)
+    }
     pike_flashscreen()
     waitstate
     applymovement(LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_NPCApproachMon)
@@ -341,8 +365,12 @@ script BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsAttack {
     playmoncry(SPECIES_DUSCLOPS, CRY_MODE_NORMAL)
     waitmoncry()
     pike_getstatus()
-    if (var(VAR_RESULT) == PIKE_STATUS_FREEZE) call(BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsUsedIceBeam)
-    if (var(VAR_RESULT) == PIKE_STATUS_BURN) call(BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsUsedWillOWisp)
+    if (var(VAR_RESULT) == PIKE_STATUS_FREEZE) {
+        call(BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsUsedIceBeam)
+    }
+    if (var(VAR_RESULT) == PIKE_STATUS_BURN) {
+        call(BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsUsedWillOWisp)
+    }
     pike_flashscreen()
     waitstate
     applymovement(LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_NPCApproachMon)
@@ -602,8 +630,12 @@ script BattleFrontier_BattlePikeRoomNormal_EventScript_StatusNPC {
 
 script BattleFrontier_BattlePikeRoomNormal_EventScript_HealNPC {
     pike_healonetwomons()
-    if (var(VAR_RESULT) == 2) call(BattleFrontier_BattlePikeRoomNormal_EventScript_WillRestoreTwoMons)
-    if (var(VAR_RESULT) == 1) call(BattleFrontier_BattlePikeRoomNormal_EventScript_WillRestoreOneMon)
+    if (var(VAR_RESULT) == 2) {
+        call(BattleFrontier_BattlePikeRoomNormal_EventScript_WillRestoreTwoMons)
+    }
+    if (var(VAR_RESULT) == 1) {
+        call(BattleFrontier_BattlePikeRoomNormal_EventScript_WillRestoreOneMon)
+    }
     playfanfare(MUS_HEAL)
     waitfanfare()
     msgbox(BattleFrontier_BattlePikeRoomNormal_Text_BestOfLuckFarewell, MSGBOX_DEFAULT)

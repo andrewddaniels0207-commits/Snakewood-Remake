@@ -4,7 +4,9 @@ mapscripts SevenIsland_SevaultCanyon_TanobyKey_Frlg_MapScripts {
 
 script SevenIsland_SevaultCanyon_TanobyKey_OnTransition {
     setworldmapflag(FLAG_WORLD_MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY)
-    if (flag(FLAG_SYS_UNLOCKED_TANOBY_RUINS)) call(SevenIsland_SevaultCanyon_TanobyKey_EventScript_MoveBouldersToSolvedPos)
+    if (flag(FLAG_SYS_UNLOCKED_TANOBY_RUINS)) {
+        call(SevenIsland_SevaultCanyon_TanobyKey_EventScript_MoveBouldersToSolvedPos)
+    }
     setvar(VAR_TEMP_1, 0)
     setvar(VAR_TEMP_2, 0)
     setvar(VAR_TEMP_3, 0)
@@ -29,70 +31,98 @@ script SevenIsland_SevaultCanyon_TanobyKey_EventScript_MoveBouldersToSolvedPos {
 
 script SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch1 {
     lockall
-    if (var(VAR_TEMP_1) == 100) goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed)
+    if (var(VAR_TEMP_1) == 100) {
+        goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed)
+    }
     call(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed)
     setvar(VAR_TEMP_1, 100)
-    if (var(NUM_SWITCHES_PRESSED) == 7) goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved)
+    if (var(NUM_SWITCHES_PRESSED) == 7) {
+        goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved)
+    }
     releaseall
     end
 }
 
 script SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch2 {
     lockall
-    if (var(VAR_TEMP_2) == 100) goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed)
+    if (var(VAR_TEMP_2) == 100) {
+        goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed)
+    }
     call(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed)
     setvar(VAR_TEMP_2, 100)
-    if (var(NUM_SWITCHES_PRESSED) == 7) goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved)
+    if (var(NUM_SWITCHES_PRESSED) == 7) {
+        goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved)
+    }
     releaseall
     end
 }
 
 script SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch3 {
     lockall
-    if (var(VAR_TEMP_3) == 100) goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed)
+    if (var(VAR_TEMP_3) == 100) {
+        goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed)
+    }
     call(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed)
     setvar(VAR_TEMP_3, 100)
-    if (var(NUM_SWITCHES_PRESSED) == 7) goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved)
+    if (var(NUM_SWITCHES_PRESSED) == 7) {
+        goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved)
+    }
     releaseall
     end
 }
 
 script SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch4 {
     lockall
-    if (var(VAR_TEMP_4) == 100) goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed)
+    if (var(VAR_TEMP_4) == 100) {
+        goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed)
+    }
     call(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed)
     setvar(VAR_TEMP_4, 100)
-    if (var(NUM_SWITCHES_PRESSED) == 7) goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved)
+    if (var(NUM_SWITCHES_PRESSED) == 7) {
+        goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved)
+    }
     releaseall
     end
 }
 
 script SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch5 {
     lockall
-    if (var(VAR_TEMP_5) == 100) goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed)
+    if (var(VAR_TEMP_5) == 100) {
+        goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed)
+    }
     call(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed)
     setvar(VAR_TEMP_5, 100)
-    if (var(NUM_SWITCHES_PRESSED) == 7) goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved)
+    if (var(NUM_SWITCHES_PRESSED) == 7) {
+        goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved)
+    }
     releaseall
     end
 }
 
 script SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch6 {
     lockall
-    if (var(VAR_TEMP_6) == 100) goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed)
+    if (var(VAR_TEMP_6) == 100) {
+        goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed)
+    }
     call(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed)
     setvar(VAR_TEMP_6, 100)
-    if (var(NUM_SWITCHES_PRESSED) == 7) goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved)
+    if (var(NUM_SWITCHES_PRESSED) == 7) {
+        goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved)
+    }
     releaseall
     end
 }
 
 script SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch7 {
     lockall
-    if (var(VAR_TEMP_7) == 100) goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed)
+    if (var(VAR_TEMP_7) == 100) {
+        goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed)
+    }
     call(SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed)
     setvar(VAR_TEMP_7, 100)
-    if (var(NUM_SWITCHES_PRESSED) == 7) goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved)
+    if (var(NUM_SWITCHES_PRESSED) == 7) {
+        goto(SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved)
+    }
     releaseall
     end
 }

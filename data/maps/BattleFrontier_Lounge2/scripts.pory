@@ -3,7 +3,9 @@ mapscripts BattleFrontier_Lounge2_MapScripts {}
 script BattleFrontier_Lounge2_EventScript_FrontierManiac {
     lock
     faceplayer
-    if (flag(FLAG_MET_BATTLE_FRONTIER_MANIAC)) goto(BattleFrontier_Lounge2_EventScript_AlreadyMetManiac)
+    if (flag(FLAG_MET_BATTLE_FRONTIER_MANIAC)) {
+        goto(BattleFrontier_Lounge2_EventScript_AlreadyMetManiac)
+    }
     setflag(FLAG_MET_BATTLE_FRONTIER_MANIAC)
     msgbox(BattleFrontier_Lounge2_Text_FrontierManiacIntro, MSGBOX_DEFAULT)
     goto(BattleFrontier_Lounge2_EventScript_GiveAdvice)
@@ -17,18 +19,42 @@ script BattleFrontier_Lounge2_EventScript_AlreadyMetManiac {
 }
 
 script BattleFrontier_Lounge2_EventScript_GiveAdvice {
-    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_TOWER_SINGLES) call(BattleFrontier_Lounge2_EventScript_BufferSingle)
-    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_TOWER_DOUBLES) call(BattleFrontier_Lounge2_EventScript_BufferDouble)
-    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_TOWER_MULTIS) call(BattleFrontier_Lounge2_EventScript_BufferMulti)
-    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_TOWER_LINK) call(BattleFrontier_Lounge2_EventScript_BufferMultiLink)
-    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_DOME) call(BattleFrontier_Lounge2_EventScript_BufferBattleDome)
-    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_FACTORY) call(BattleFrontier_Lounge2_EventScript_BufferBattleFactory)
-    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_PALACE) call(BattleFrontier_Lounge2_EventScript_BufferBattlePalace)
-    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_ARENA) call(BattleFrontier_Lounge2_EventScript_BufferBattleArena)
-    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_PIKE) call(BattleFrontier_Lounge2_EventScript_BufferBattlePike)
-    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_PYRAMID) call(BattleFrontier_Lounge2_EventScript_BufferBattlePyramid)
-    if (var(VAR_FRONTIER_MANIAC_FACILITY) <= FRONTIER_MANIAC_TOWER_LINK) call(BattleFrontier_Lounge2_EventScript_BattleTowerNews)
-    if (var(VAR_FRONTIER_MANIAC_FACILITY) >= FRONTIER_MANIAC_DOME) call(BattleFrontier_Lounge2_EventScript_FacilityNews)
+    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_TOWER_SINGLES) {
+        call(BattleFrontier_Lounge2_EventScript_BufferSingle)
+    }
+    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_TOWER_DOUBLES) {
+        call(BattleFrontier_Lounge2_EventScript_BufferDouble)
+    }
+    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_TOWER_MULTIS) {
+        call(BattleFrontier_Lounge2_EventScript_BufferMulti)
+    }
+    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_TOWER_LINK) {
+        call(BattleFrontier_Lounge2_EventScript_BufferMultiLink)
+    }
+    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_DOME) {
+        call(BattleFrontier_Lounge2_EventScript_BufferBattleDome)
+    }
+    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_FACTORY) {
+        call(BattleFrontier_Lounge2_EventScript_BufferBattleFactory)
+    }
+    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_PALACE) {
+        call(BattleFrontier_Lounge2_EventScript_BufferBattlePalace)
+    }
+    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_ARENA) {
+        call(BattleFrontier_Lounge2_EventScript_BufferBattleArena)
+    }
+    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_PIKE) {
+        call(BattleFrontier_Lounge2_EventScript_BufferBattlePike)
+    }
+    if (var(VAR_FRONTIER_MANIAC_FACILITY) == FRONTIER_MANIAC_PYRAMID) {
+        call(BattleFrontier_Lounge2_EventScript_BufferBattlePyramid)
+    }
+    if (var(VAR_FRONTIER_MANIAC_FACILITY) <= FRONTIER_MANIAC_TOWER_LINK) {
+        call(BattleFrontier_Lounge2_EventScript_BattleTowerNews)
+    }
+    if (var(VAR_FRONTIER_MANIAC_FACILITY) >= FRONTIER_MANIAC_DOME) {
+        call(BattleFrontier_Lounge2_EventScript_FacilityNews)
+    }
     special(ShowFrontierManiacMessage)
     waitmessage()
     waitbuttonpress()

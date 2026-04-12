@@ -3,7 +3,9 @@ mapscripts FourIsland_IcefallCave_Back_Frlg_MapScripts {
 }
 
 script FourIsland_IcefallCave_Back_OnTransition {
-    if (var(VAR_MAP_SCENE_ICEFALL_CAVE_BACK) == 1) call(FourIsland_IcefallCave_Back_EventScript_HideLorelei)
+    if (var(VAR_MAP_SCENE_ICEFALL_CAVE_BACK) == 1) {
+        call(FourIsland_IcefallCave_Back_EventScript_HideLorelei)
+    }
     end
 }
 

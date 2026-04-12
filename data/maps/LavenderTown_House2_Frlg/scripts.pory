@@ -4,8 +4,12 @@ script LavenderTown_House2_EventScript_NameRater {
     lock
     faceplayer
     msgbox(LavenderTown_House2_Text_WantMeToRateNicknames, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(LavenderTown_House2_EventScript_ChooseMon)
-    if (var(VAR_RESULT) == NO) goto(LavenderTown_House2_EventScript_DontRateNickname)
+    if (var(VAR_RESULT) == YES) {
+        goto(LavenderTown_House2_EventScript_ChooseMon)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(LavenderTown_House2_EventScript_DontRateNickname)
+    }
     end
 }
 
@@ -13,8 +17,12 @@ script LavenderTown_House2_EventScript_ChooseMon {
     msgbox(LavenderTown_House2_Text_CritiqueWhichMonsNickname)
     special(ChoosePartyMon)
     waitstate
-    if (var(VAR_0x8004) < PARTY_SIZE) goto(LavenderTown_House2_EventScript_CheckCanRateMon)
-    if (var(VAR_0x8004) >= PARTY_SIZE) goto(LavenderTown_House2_EventScript_DontRateNickname)
+    if (var(VAR_0x8004) < PARTY_SIZE) {
+        goto(LavenderTown_House2_EventScript_CheckCanRateMon)
+    }
+    if (var(VAR_0x8004) >= PARTY_SIZE) {
+        goto(LavenderTown_House2_EventScript_DontRateNickname)
+    }
     end
 }
 
@@ -26,16 +34,26 @@ script LavenderTown_House2_EventScript_DontRateNickname {
 
 script LavenderTown_House2_EventScript_CheckCanRateMon {
     specialvar(VAR_RESULT, ScriptGetPartyMonSpecies)
-    if (var(VAR_RESULT) == SPECIES_EGG) goto(LavenderTown_House2_EventScript_CantNicknameEgg)
+    if (var(VAR_RESULT) == SPECIES_EGG) {
+        goto(LavenderTown_House2_EventScript_CantNicknameEgg)
+    }
     special(BufferMonNickname)
     special(IsMonOTIDNotPlayers)
-    if (var(VAR_RESULT) == TRUE) goto(LavenderTown_House2_EventScript_CantNicknameTradeMon)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LavenderTown_House2_EventScript_CantNicknameTradeMon)
+    }
     specialvar(VAR_RESULT, MonOTNameNotPlayer)
     special(BufferMonNickname)
-    if (var(VAR_RESULT) == TRUE) goto(LavenderTown_House2_EventScript_CantNicknameTradeMon)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LavenderTown_House2_EventScript_CantNicknameTradeMon)
+    }
     msgbox(LavenderTown_House2_Text_GiveItANicerName, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(LavenderTown_House2_EventScript_ChooseNewNickname)
-    if (var(VAR_RESULT) == NO) goto(LavenderTown_House2_EventScript_DontRateNickname)
+    if (var(VAR_RESULT) == YES) {
+        goto(LavenderTown_House2_EventScript_ChooseNewNickname)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(LavenderTown_House2_EventScript_DontRateNickname)
+    }
     end
 }
 
@@ -56,7 +74,9 @@ script LavenderTown_House2_EventScript_ChooseNewNickname {
     call(Common_EventScript_NameReceivedPartyMon)
     specialvar(VAR_RESULT, TryPutNameRaterShowOnTheAir)
     special(BufferMonNickname)
-    if (var(VAR_RESULT) == TRUE) goto(LavenderTown_House2_EventScript_ChoseNewNickname)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(LavenderTown_House2_EventScript_ChoseNewNickname)
+    }
     msgbox(LavenderTown_House2_Text_FromNowOnShallBeKnownAsSameName)
     release
     end

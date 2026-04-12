@@ -4,7 +4,9 @@ mapscripts SaffronCity_Frlg_MapScripts {
 
 script SaffronCity_OnTransition {
     setworldmapflag(FLAG_WORLD_MAP_SAFFRON_CITY)
-    if (!flag(FLAG_RESCUED_MR_FUJI)) call(SaffronCity_EventScript_MoveDoorGuardGrunt)
+    if (!flag(FLAG_RESCUED_MR_FUJI)) {
+        call(SaffronCity_EventScript_MoveDoorGuardGrunt)
+    }
     end
 }
 
@@ -50,7 +52,9 @@ script SaffronCity_EventScript_RocketGrunt7 {
 
 script SaffronCity_EventScript_DoorGuardGrunt {
     lock
-    if (flag(FLAG_RESCUED_MR_FUJI)) goto(SaffronCity_EventScript_DoorGuardAsleep)
+    if (flag(FLAG_RESCUED_MR_FUJI)) {
+        goto(SaffronCity_EventScript_DoorGuardAsleep)
+    }
     applymovement(LOCALID_SAFFRON_DOOR_GUARD_GRUNT, Common_Movement_FacePlayer)
     waitmovement(0)
     msgbox(SaffronCity_Text_ImASecurityGuard)

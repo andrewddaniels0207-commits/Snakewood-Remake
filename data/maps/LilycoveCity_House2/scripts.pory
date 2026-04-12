@@ -3,10 +3,14 @@ mapscripts LilycoveCity_House2_MapScripts {}
 script LilycoveCity_House2_EventScript_FatMan {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_TM_REST)) goto(LilycoveCity_House2_EventScript_ReceivedRest)
+    if (flag(FLAG_RECEIVED_TM_REST)) {
+        goto(LilycoveCity_House2_EventScript_ReceivedRest)
+    }
     msgbox(LilycoveCity_House2_Text_NotAwakeYetHaveThis, MSGBOX_DEFAULT)
     giveitem(ITEM_TM_REST)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_TM_REST)
     msgbox(LilycoveCity_House2_Text_SleepIsEssential, MSGBOX_DEFAULT)
     release

@@ -7,16 +7,28 @@ mapscripts Route127_MapScripts {
 }
 
 script Route127_OnTransition {
-    if (flag(FLAG_SYS_WEATHER_CTRL)) call(Common_EventScript_SetAbnormalWeather)
-    if (var(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1) call(AbnormalWeather_EventScript_HideMapNamePopup)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_127_NORTH) call(AbnormalWeather_StartKyogreWeather)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_127_SOUTH) call(AbnormalWeather_StartKyogreWeather)
+    if (flag(FLAG_SYS_WEATHER_CTRL)) {
+        call(Common_EventScript_SetAbnormalWeather)
+    }
+    if (var(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1) {
+        call(AbnormalWeather_EventScript_HideMapNamePopup)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_127_NORTH) {
+        call(AbnormalWeather_StartKyogreWeather)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_127_SOUTH) {
+        call(AbnormalWeather_StartKyogreWeather)
+    }
     end
 }
 
 script Route127_OnLoad {
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_127_NORTH) call(AbnormalWeather_EventScript_PlaceTilesRoute127North)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_127_SOUTH) call(AbnormalWeather_EventScript_PlaceTilesRoute127South)
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_127_NORTH) {
+        call(AbnormalWeather_EventScript_PlaceTilesRoute127North)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_127_SOUTH) {
+        call(AbnormalWeather_EventScript_PlaceTilesRoute127South)
+    }
     end
 }
 
@@ -65,7 +77,9 @@ script Route127_EventScript_Athena {
 script Route127_EventScript_Koji {
     trainerbattle_single(TRAINER_KOJI_1, Route127_Text_KojiIntro, Route127_Text_KojiDefeat, Route127_EventScript_RegisterKoji)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route127_EventScript_RematchKoji)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route127_EventScript_RematchKoji)
+    }
     msgbox(Route127_Text_KojiPostBattle, MSGBOX_DEFAULT)
     release
     end

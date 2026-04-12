@@ -19,8 +19,12 @@ script Route104_OnTransition {
 }
 
 script Route104_EventScript_ShowOrHideWhiteHerbFlorist {
-    if (!flag(FLAG_MET_PRETTY_PETAL_SHOP_OWNER)) goto(Route104_EventScript_HideWhiteHerbFlorist)
-    if (!flag(FLAG_BADGE03_GET)) goto(Route104_EventScript_HideWhiteHerbFlorist)
+    if (!flag(FLAG_MET_PRETTY_PETAL_SHOP_OWNER)) {
+        goto(Route104_EventScript_HideWhiteHerbFlorist)
+    }
+    if (!flag(FLAG_BADGE03_GET)) {
+        goto(Route104_EventScript_HideWhiteHerbFlorist)
+    }
     clearflag(FLAG_HIDE_ROUTE_104_WHITE_HERB_FLORIST)
     return
 }
@@ -31,9 +35,15 @@ script Route104_EventScript_HideWhiteHerbFlorist {
 }
 
 script Route104_EventScript_TrySetRivalPos {
-    if (var(VAR_BOARD_BRINEY_BOAT_STATE) >= 1) goto(Route104_EventScript_DontSetRivalPos)
-    if (flag(FLAG_MET_RIVAL_RUSTBORO)) goto(Route104_EventScript_DontSetRivalPos)
-    if (!flag(FLAG_REGISTER_RIVAL_POKENAV)) goto(Route104_EventScript_DontSetRivalPos)
+    if (var(VAR_BOARD_BRINEY_BOAT_STATE) >= 1) {
+        goto(Route104_EventScript_DontSetRivalPos)
+    }
+    if (flag(FLAG_MET_RIVAL_RUSTBORO)) {
+        goto(Route104_EventScript_DontSetRivalPos)
+    }
+    if (!flag(FLAG_REGISTER_RIVAL_POKENAV)) {
+        goto(Route104_EventScript_DontSetRivalPos)
+    }
     setobjectxyperm(LOCALID_ROUTE104_RIVAL, 17, 52)
     return
 }
@@ -77,8 +87,12 @@ script Route104_EventScript_RivalTrigger {
 
 script Route104_EventScript_PlayRivalMusic {
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(Route104_EventScript_PlayMayMusic)
-    if (var(VAR_RESULT) == FEMALE) goto(Route104_EventScript_PlayBrendanMusic)
+    if (var(VAR_RESULT) == MALE) {
+        goto(Route104_EventScript_PlayMayMusic)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(Route104_EventScript_PlayBrendanMusic)
+    }
     return
 }
 
@@ -94,14 +108,22 @@ script Route104_EventScript_PlayBrendanMusic {
 
 script Route104_EventScript_RivalEncounter {
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(Route104_EventScript_MayEncounter)
-    if (var(VAR_RESULT) == FEMALE) goto(Route104_EventScript_BrendanEncounter)
+    if (var(VAR_RESULT) == MALE) {
+        goto(Route104_EventScript_MayEncounter)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(Route104_EventScript_BrendanEncounter)
+    }
     end
 }
 
 script Route104_EventScript_MayEncounter {
-    if (flag(FLAG_DEFEATED_RIVAL_ROUTE_104)) goto(Route104_EventScript_MayDefeated)
-    if (flag(FLAG_REGISTER_RIVAL_POKENAV)) goto(Route104_EventScript_MayAskToBattle)
+    if (flag(FLAG_DEFEATED_RIVAL_ROUTE_104)) {
+        goto(Route104_EventScript_MayDefeated)
+    }
+    if (flag(FLAG_REGISTER_RIVAL_POKENAV)) {
+        goto(Route104_EventScript_MayAskToBattle)
+    }
     setflag(FLAG_REGISTER_RIVAL_POKENAV)
     msgbox(Route104_Text_MayWeShouldRegister, MSGBOX_DEFAULT)
     closemessage
@@ -121,7 +143,9 @@ script Route104_EventScript_MayEncounter {
     waitmovement(0)
     copyobjectxytoperm(LOCALID_ROUTE104_RIVAL)
     msgbox(Route104_Text_MayMinesDecentLetsBattle, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(Route104_EventScript_BattleMay)
+    if (var(VAR_RESULT) == YES) {
+        goto(Route104_EventScript_BattleMay)
+    }
     msgbox(Route104_Text_MayHaventRaisedPokemon, MSGBOX_DEFAULT)
     call(Route104_EventScript_RestoreMusic)
     releaseall
@@ -147,7 +171,9 @@ movement Route104_Movement_PlayerFaceRival {
 
 script Route104_EventScript_MayAskToBattle {
     msgbox(Route104_Text_MayLetsBattle, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(Route104_EventScript_BattleMay)
+    if (var(VAR_RESULT) == YES) {
+        goto(Route104_EventScript_BattleMay)
+    }
     msgbox(Route104_Text_MayHaventRaisedPokemon, MSGBOX_DEFAULT)
     releaseall
     end
@@ -164,7 +190,9 @@ script Route104_EventScript_BattleMay {
 
 script Route104_EventScript_MayDefeated {
     msgbox(Route104_Text_MayPostBattle, MSGBOX_DEFAULT)
-    if (var(VAR_0x8008) == 0) call(Route104_EventScript_RestoreMusic)
+    if (var(VAR_0x8008) == 0) {
+        call(Route104_EventScript_RestoreMusic)
+    }
     releaseall
     end
 }
@@ -197,8 +225,12 @@ script Route104_EventScript_BattleMayMudkip {
 }
 
 script Route104_EventScript_BrendanEncounter {
-    if (flag(FLAG_DEFEATED_RIVAL_ROUTE_104)) goto(Route104_EventScript_BrendanDefeated)
-    if (flag(FLAG_REGISTER_RIVAL_POKENAV)) goto(Route104_EventScript_BrendanAskToBattle)
+    if (flag(FLAG_DEFEATED_RIVAL_ROUTE_104)) {
+        goto(Route104_EventScript_BrendanDefeated)
+    }
+    if (flag(FLAG_REGISTER_RIVAL_POKENAV)) {
+        goto(Route104_EventScript_BrendanAskToBattle)
+    }
     setflag(FLAG_REGISTER_RIVAL_POKENAV)
     msgbox(Route104_Text_BrendanWeShouldRegister, MSGBOX_DEFAULT)
     closemessage
@@ -218,7 +250,9 @@ script Route104_EventScript_BrendanEncounter {
     waitmovement(0)
     copyobjectxytoperm(LOCALID_ROUTE104_RIVAL)
     msgbox(Route104_Text_BrendanDoingGreatLetsBattle, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(Route104_EventScript_BattleBrendan)
+    if (var(VAR_RESULT) == YES) {
+        goto(Route104_EventScript_BattleBrendan)
+    }
     msgbox(Route104_Text_BrendanNoConfidence, MSGBOX_DEFAULT)
     call(Route104_EventScript_RestoreMusic)
     releaseall
@@ -227,7 +261,9 @@ script Route104_EventScript_BrendanEncounter {
 
 script Route104_EventScript_BrendanAskToBattle {
     msgbox(Route104_Text_BrendanLetsBattle, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(Route104_EventScript_BattleBrendan)
+    if (var(VAR_RESULT) == YES) {
+        goto(Route104_EventScript_BattleBrendan)
+    }
     msgbox(Route104_Text_BrendanNoConfidence, MSGBOX_DEFAULT)
     releaseall
     end
@@ -244,7 +280,9 @@ script Route104_EventScript_BattleBrendan {
 
 script Route104_EventScript_BrendanDefeated {
     msgbox(Route104_Text_BrendanPostBattle, MSGBOX_DEFAULT)
-    if (var(VAR_0x8008) == 0) call(Route104_EventScript_RestoreMusic)
+    if (var(VAR_0x8008) == 0) {
+        call(Route104_EventScript_RestoreMusic)
+    }
     releaseall
     end
 }
@@ -285,10 +323,14 @@ movement Route104_Movement_RivalExitBrineysCottage {
 script Route104_EventScript_ExpertF {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104)) goto(Route104_EventScript_ReceivedBerry)
+    if (flag(FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104)) {
+        goto(Route104_EventScript_ReceivedBerry)
+    }
     msgbox(Route104_Text_PlantBerriesInSoilTakeThis, MSGBOX_DEFAULT)
     giveitem(ITEM_CHESTO_BERRY)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104)
     msgbox(Route104_Text_TrainersOftenMakeMonHoldBerries, MSGBOX_DEFAULT)
     release
@@ -304,10 +346,14 @@ script Route104_EventScript_ReceivedBerry {
 script Route104_EventScript_WhiteHerbFlorist {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_WHITE_HERB)) goto(Route104_EventScript_ReceivedWhiteHerb)
+    if (flag(FLAG_RECEIVED_WHITE_HERB)) {
+        goto(Route104_EventScript_ReceivedWhiteHerb)
+    }
     msgbox(Route104_Text_DontNeedThisTakeIt, MSGBOX_DEFAULT)
     giveitem(ITEM_WHITE_HERB)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_WHITE_HERB)
     release
     end
@@ -367,10 +413,14 @@ script Route104_EventScript_Woman {
 script Route104_EventScript_Boy2 {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_TM_BULLET_SEED)) goto(Route104_EventScript_ReceivedBulletSeed)
+    if (flag(FLAG_RECEIVED_TM_BULLET_SEED)) {
+        goto(Route104_EventScript_ReceivedBulletSeed)
+    }
     msgbox(Route104_Text_LikeFillingMouthWithSeedsTakeThis, MSGBOX_DEFAULT)
     giveitem(ITEM_TM_BULLET_SEED)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_TM_BULLET_SEED)
     release
     end
@@ -397,8 +447,12 @@ script Route104_EventScript_SailToDewford {
     waitmovement(0)
     hideobjectat(LOCALID_PLAYER, MAP_ROUTE104)
     call(Common_EventScript_PlayBrineysBoatMusic)
-    if (flag(FLAG_ENABLE_NORMAN_MATCH_CALL)) goto(Route104_EventScript_SailToDewfordNoCall)
-    if (!flag(FLAG_ENABLE_NORMAN_MATCH_CALL)) goto(Route104_EventScript_SailToDewfordDadCalls)
+    if (flag(FLAG_ENABLE_NORMAN_MATCH_CALL)) {
+        goto(Route104_EventScript_SailToDewfordNoCall)
+    }
+    if (!flag(FLAG_ENABLE_NORMAN_MATCH_CALL)) {
+        goto(Route104_EventScript_SailToDewfordDadCalls)
+    }
     end
 }
 
@@ -453,8 +507,12 @@ script Route104_EventScript_ArriveInDewford {
     resetobjectsubpriority(LOCALID_DEWFORD_BRINEY, MAP_DEWFORD_TOWN)
     copyobjectxytoperm(LOCALID_DEWFORD_BRINEY)
     setvar(VAR_BOARD_BRINEY_BOAT_STATE, 0)
-    if (!flag(FLAG_DELIVERED_STEVEN_LETTER)) goto(Route104_EventScript_DeliverLetterReminder)
-    if (flag(FLAG_DELIVERED_STEVEN_LETTER)) goto(Route104_EventScript_LandedInDewford)
+    if (!flag(FLAG_DELIVERED_STEVEN_LETTER)) {
+        goto(Route104_EventScript_DeliverLetterReminder)
+    }
+    if (flag(FLAG_DELIVERED_STEVEN_LETTER)) {
+        goto(Route104_EventScript_LandedInDewford)
+    }
     end
 }
 
@@ -916,10 +974,14 @@ script Route104_EventScript_Billy {
 script Route104_EventScript_Haley {
     trainerbattle_single(TRAINER_HALEY_1, Route104_Text_HaleyIntro, Route104_Text_HaleyDefeat, Route104_EventScript_TryRegisterHaleyAfterBattle)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route104_EventScript_RematchHaley)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route104_EventScript_RematchHaley)
+    }
     setvar(VAR_0x8004, TRAINER_HALEY_1)
     specialvar(VAR_RESULT, IsTrainerRegistered)
-    if (var(VAR_RESULT) == FALSE) goto(Route104_EventScript_TryRegisterHaley)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route104_EventScript_TryRegisterHaley)
+    }
     msgbox(Route104_Text_HaleyPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -928,7 +990,9 @@ script Route104_EventScript_Haley {
 script Route104_EventScript_TryRegisterHaleyAfterBattle {
     special(PlayerFaceTrainerAfterBattle)
     waitmovement(0)
-    if (flag(FLAG_HAS_MATCH_CALL)) goto(Route104_EventScript_RegisterHaleyAfterBattle)
+    if (flag(FLAG_HAS_MATCH_CALL)) {
+        goto(Route104_EventScript_RegisterHaleyAfterBattle)
+    }
     release
     end
 }
@@ -941,7 +1005,9 @@ script Route104_EventScript_RegisterHaleyAfterBattle {
 }
 
 script Route104_EventScript_TryRegisterHaley {
-    if (flag(FLAG_HAS_MATCH_CALL)) goto(Route104_EventScript_RegisterHaley)
+    if (flag(FLAG_HAS_MATCH_CALL)) {
+        goto(Route104_EventScript_RegisterHaley)
+    }
     msgbox(Route104_Text_HaleyPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -963,10 +1029,14 @@ script Route104_EventScript_RematchHaley {
 script Route104_EventScript_Winston {
     trainerbattle_single(TRAINER_WINSTON_1, Route104_Text_WinstonIntro, Route104_Text_WinstonDefeat, Route104_EventScript_TryRegisterWinstonAfterBattle)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route104_EventScript_RematchWinston)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route104_EventScript_RematchWinston)
+    }
     setvar(VAR_0x8004, TRAINER_WINSTON_1)
     specialvar(VAR_RESULT, IsTrainerRegistered)
-    if (var(VAR_RESULT) == FALSE) goto(Route104_EventScript_TryRegisterWinston)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route104_EventScript_TryRegisterWinston)
+    }
     msgbox(Route104_Text_WinstonPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -975,7 +1045,9 @@ script Route104_EventScript_Winston {
 script Route104_EventScript_TryRegisterWinstonAfterBattle {
     special(PlayerFaceTrainerAfterBattle)
     waitmovement(0)
-    if (flag(FLAG_HAS_MATCH_CALL)) goto(Route104_EventScript_RegisterWinstonAfterBattle)
+    if (flag(FLAG_HAS_MATCH_CALL)) {
+        goto(Route104_EventScript_RegisterWinstonAfterBattle)
+    }
     release
     end
 }
@@ -988,7 +1060,9 @@ script Route104_EventScript_RegisterWinstonAfterBattle {
 }
 
 script Route104_EventScript_TryRegisterWinston {
-    if (flag(FLAG_HAS_MATCH_CALL)) goto(Route104_EventScript_RegisterWinston)
+    if (flag(FLAG_HAS_MATCH_CALL)) {
+        goto(Route104_EventScript_RegisterWinston)
+    }
     msgbox(Route104_Text_WinstonPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -1010,10 +1084,14 @@ script Route104_EventScript_RematchWinston {
 script Route104_EventScript_Cindy {
     trainerbattle_single(TRAINER_CINDY_1, Route104_Text_CindyIntro, Route104_Text_CindyDefeat, Route104_EventScript_TryRegisterCindyAfterBattle)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route104_EventScript_RematchCindy)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route104_EventScript_RematchCindy)
+    }
     setvar(VAR_0x8004, TRAINER_CINDY_1)
     specialvar(VAR_RESULT, IsTrainerRegistered)
-    if (var(VAR_RESULT) == FALSE) goto(Route104_EventScript_TryRegisterCindy)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route104_EventScript_TryRegisterCindy)
+    }
     msgbox(Route104_Text_CindyPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -1022,7 +1100,9 @@ script Route104_EventScript_Cindy {
 script Route104_EventScript_TryRegisterCindyAfterBattle {
     special(PlayerFaceTrainerAfterBattle)
     waitmovement(0)
-    if (flag(FLAG_HAS_MATCH_CALL)) goto(Route104_EventScript_RegisterCindyAfterBattle)
+    if (flag(FLAG_HAS_MATCH_CALL)) {
+        goto(Route104_EventScript_RegisterCindyAfterBattle)
+    }
     release
     end
 }
@@ -1035,7 +1115,9 @@ script Route104_EventScript_RegisterCindyAfterBattle {
 }
 
 script Route104_EventScript_TryRegisterCindy {
-    if (flag(FLAG_HAS_MATCH_CALL)) goto(Route104_EventScript_RegisterCindy)
+    if (flag(FLAG_HAS_MATCH_CALL)) {
+        goto(Route104_EventScript_RegisterCindy)
+    }
     msgbox(Route104_Text_CindyPostBattle, MSGBOX_DEFAULT)
     release
     end

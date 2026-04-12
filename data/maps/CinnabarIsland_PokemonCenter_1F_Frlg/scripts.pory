@@ -35,7 +35,9 @@ script CinnabarIsland_PokemonCenter_1F_EventScript_Bill {
     lock
     faceplayer
     msgbox(CinnabarIsland_PokemonCenter_1F_Text_ReadyToSailToOneIsland, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(CinnabarIsland_PokemonCenter_1F_EventScript_NotReadyToSail)
+    if (var(VAR_RESULT) == NO) {
+        goto(CinnabarIsland_PokemonCenter_1F_EventScript_NotReadyToSail)
+    }
     msgbox(CinnabarIsland_PokemonCenter_1F_Text_LetsGo)
     closemessage
     playbgm(MUS_FOLLOW_ME, 1)
@@ -43,9 +45,15 @@ script CinnabarIsland_PokemonCenter_1F_EventScript_Bill {
     setflag(FLAG_DONT_TRANSITION_MUSIC)
     setflag(FLAG_HIDE_CINNABAR_POKECENTER_BILL)
     delay(20)
-    if (var(VAR_FACING) == DIR_SOUTH) call(CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillSouth)
-    if (var(VAR_FACING) == DIR_EAST) call(CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillEast)
-    if (var(VAR_FACING) == DIR_WEST) call(CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillWest)
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillSouth)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillEast)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillWest)
+    }
     removeobject(LOCALID_CINNABAR_POKEMON_CENTER_BILL)
     setvar(VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1)
     clearflag(FLAG_HIDE_CINNABAR_BILL)

@@ -3,8 +3,12 @@ mapscripts CeruleanCity_BikeShop_Frlg_MapScripts {}
 script CeruleanCity_BikeShop_EventScript_Clerk {
     lock
     faceplayer
-    if (flag(FLAG_GOT_BICYCLE)) goto(CeruleanCity_BikeShop_EventScript_AlreadyGotBicycle)
-    if (flag(FLAG_GOT_BIKE_VOUCHER)) goto(CeruleanCity_BikeShop_EventScript_ExchangeBikeVoucher)
+    if (flag(FLAG_GOT_BICYCLE)) {
+        goto(CeruleanCity_BikeShop_EventScript_AlreadyGotBicycle)
+    }
+    if (flag(FLAG_GOT_BIKE_VOUCHER)) {
+        goto(CeruleanCity_BikeShop_EventScript_ExchangeBikeVoucher)
+    }
     showmoneybox(0, 0)
     message(CeruleanCity_BikeShop_Text_WelcomeToBikeShop)
     waitmessage()
@@ -62,7 +66,9 @@ script CeruleanCity_BikeShop_EventScript_Woman {
 script CeruleanCity_BikeShop_EventScript_Youngster {
     lock
     faceplayer
-    if (flag(FLAG_GOT_BICYCLE)) goto(CeruleanCity_BikeShop_EventScript_YoungsterHaveBike)
+    if (flag(FLAG_GOT_BICYCLE)) {
+        goto(CeruleanCity_BikeShop_EventScript_YoungsterHaveBike)
+    }
     msgbox(CeruleanCity_BikeShop_Text_BikesCoolButExpensive)
     release
     end

@@ -4,7 +4,9 @@ script SSAnne_1F_Room6_EventScript_Woman {
     lock
     faceplayer
     msgbox(SSAnne_1F_Room6_Text_TakeAShortRest, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(SSAnne_1F_Room6_EventScript_DeclineHeal)
+    if (var(VAR_RESULT) == NO) {
+        goto(SSAnne_1F_Room6_EventScript_DeclineHeal)
+    }
     closemessage
     call(Common_EventScript_OutOfCenterPartyHeal)
     msgbox(SSAnne_1F_Room6_Text_GladEveryoneIsRefreshed)
@@ -14,7 +16,9 @@ script SSAnne_1F_Room6_EventScript_Woman {
 
 script SSAnne_1F_Room6_EventScript_DeclineHeal {
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(SSAnne_1F_Room6_EventScript_DeclineHealMale)
+    if (var(VAR_RESULT) == MALE) {
+        goto(SSAnne_1F_Room6_EventScript_DeclineHealMale)
+    }
     msgbox(SSAnne_1F_Room6_Text_SorryYouLookLikeMySister)
     release
     end

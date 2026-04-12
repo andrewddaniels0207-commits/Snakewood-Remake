@@ -4,7 +4,9 @@ mapscripts Route114_FossilManiacsTunnel_MapScripts {
 }
 
 script Route114_FossilManiacsTunnel_OnTransition {
-    if (flag(FLAG_SYS_GAME_CLEAR)) call(Route114_FossilManiacsTunnel_EventScript_MoveFossilManiac)
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        call(Route114_FossilManiacsTunnel_EventScript_MoveFossilManiac)
+    }
     end
 }
 
@@ -15,7 +17,9 @@ script Route114_FossilManiacsTunnel_EventScript_MoveFossilManiac {
 }
 
 script Route114_FossilManiacsTunnel_OnLoad {
-    if (!flag(FLAG_SYS_GAME_CLEAR)) call(Route114_FossilManiacsTunnel_EventScript_CloseDesertUnderpass)
+    if (!flag(FLAG_SYS_GAME_CLEAR)) {
+        call(Route114_FossilManiacsTunnel_EventScript_CloseDesertUnderpass)
+    }
     end
 }
 
@@ -39,11 +43,17 @@ script Route114_FossilManiacsTunnel_EventScript_ManiacMentionCaveIn {
 script Route114_FossilManiacsTunnel_EventScript_FossilManiac {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_REVIVED_FOSSIL_MON)) goto(Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil)
+    if (flag(FLAG_RECEIVED_REVIVED_FOSSIL_MON)) {
+        goto(Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil)
+    }
     checkitem(ITEM_ROOT_FOSSIL)
-    if (var(VAR_RESULT) == TRUE) goto(Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil)
+    }
     checkitem(ITEM_CLAW_FOSSIL)
-    if (var(VAR_RESULT) == TRUE) goto(Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil)
+    }
     msgbox(Route114_FossilManiacsTunnel_Text_LookInDesertForFossils, MSGBOX_DEFAULT)
     release
     end

@@ -4,8 +4,12 @@ script SlateportCity_NameRatersHouse_EventScript_NameRater {
     lock
     faceplayer
     msgbox(SlateportCity_NameRatersHouse_Text_PleasedToRateMonNickname, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(SlateportCity_NameRatersHouse_EventScript_ChooseMonToRate)
-    if (var(VAR_RESULT) == NO) goto(SlateportCity_NameRatersHouse_EventScript_DeclineNameRate)
+    if (var(VAR_RESULT) == YES) {
+        goto(SlateportCity_NameRatersHouse_EventScript_ChooseMonToRate)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(SlateportCity_NameRatersHouse_EventScript_DeclineNameRate)
+    }
     end
 }
 
@@ -13,8 +17,12 @@ script SlateportCity_NameRatersHouse_EventScript_ChooseMonToRate {
     msgbox(SlateportCity_NameRatersHouse_Text_CritiqueWhichMonNickname, MSGBOX_DEFAULT)
     chooseboxmon()
     waitstate
-    if (var(VAR_0x8004) != PARTY_NOTHING_CHOSEN) goto(SlateportCity_NameRatersHouse_EventScript_RateMonNickname)
-    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) goto(SlateportCity_NameRatersHouse_EventScript_DeclineNameRate)
+    if (var(VAR_0x8004) != PARTY_NOTHING_CHOSEN) {
+        goto(SlateportCity_NameRatersHouse_EventScript_RateMonNickname)
+    }
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        goto(SlateportCity_NameRatersHouse_EventScript_DeclineNameRate)
+    }
     end
 }
 
@@ -26,16 +34,26 @@ script SlateportCity_NameRatersHouse_EventScript_DeclineNameRate {
 
 script SlateportCity_NameRatersHouse_EventScript_RateMonNickname {
     specialvar(VAR_RESULT, ScriptGetPartyMonSpecies)
-    if (var(VAR_RESULT) == SPECIES_EGG) goto(SlateportCity_NameRatersHouse_EventScript_CantRateEgg)
+    if (var(VAR_RESULT) == SPECIES_EGG) {
+        goto(SlateportCity_NameRatersHouse_EventScript_CantRateEgg)
+    }
     special(BufferMonNickname)
     special(IsMonOTIDNotPlayers)
-    if (var(VAR_RESULT) == TRUE) goto(SlateportCity_NameRatersHouse_EventScript_PlayerNotMonsOT)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(SlateportCity_NameRatersHouse_EventScript_PlayerNotMonsOT)
+    }
     specialvar(VAR_RESULT, MonOTNameNotPlayer)
     special(BufferMonNickname)
-    if (var(VAR_RESULT) == TRUE) goto(SlateportCity_NameRatersHouse_EventScript_PlayerNotMonsOT)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(SlateportCity_NameRatersHouse_EventScript_PlayerNotMonsOT)
+    }
     msgbox(SlateportCity_NameRatersHouse_Text_FineNameSuggestBetterOne, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(SlateportCity_NameRatersHouse_EventScript_ChangeNickname)
-    if (var(VAR_RESULT) == NO) goto(SlateportCity_NameRatersHouse_EventScript_DeclineNameRate)
+    if (var(VAR_RESULT) == YES) {
+        goto(SlateportCity_NameRatersHouse_EventScript_ChangeNickname)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(SlateportCity_NameRatersHouse_EventScript_DeclineNameRate)
+    }
     end
 }
 
@@ -56,7 +74,9 @@ script SlateportCity_NameRatersHouse_EventScript_ChangeNickname {
     call(Common_EventScript_NameReceivedPartyMon)
     specialvar(VAR_RESULT, TryPutNameRaterShowOnTheAir)
     special(BufferMonNickname)
-    if (var(VAR_RESULT) == TRUE) goto(SlateportCity_NameRatersHouse_EventScript_NewNameDifferent)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(SlateportCity_NameRatersHouse_EventScript_NewNameDifferent)
+    }
     msgbox(SlateportCity_NameRatersHouse_Text_NameNoDifferentYetSuperior, MSGBOX_DEFAULT)
     release
     end

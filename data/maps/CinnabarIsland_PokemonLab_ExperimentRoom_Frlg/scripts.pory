@@ -5,13 +5,21 @@ script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett {
     faceplayer
     setvar(VAR_0x8008, INGAME_TRADE_SEEL)
     call(EventScript_GetInGameTradeSpeciesInfo)
-    if (flag(FLAG_DID_SEELOR_TRADE)) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_AlreadyTraded)
+    if (flag(FLAG_DID_SEELOR_TRADE)) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_AlreadyTraded)
+    }
     msgbox(Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineTrade)
+    if (var(VAR_RESULT) == NO) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineTrade)
+    }
     call(EventScript_ChooseMonForInGameTrade)
-    if (var(VAR_0x8004) >= PARTY_SIZE) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineTrade)
+    if (var(VAR_0x8004) >= PARTY_SIZE) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineTrade)
+    }
     call(EventScript_GetInGameTradeSpecies)
-    if (var(VAR_RESULT) != VAR_0x8009) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NotRequestedMon)
+    if (var(VAR_RESULT) != VAR_0x8009) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NotRequestedMon)
+    }
     call(EventScript_DoInGameTrade)
     msgbox(Trade_Text_HeyThanks)
     setflag(FLAG_DID_SEELOR_TRADE)
@@ -42,38 +50,64 @@ script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist {
     lock
     faceplayer
     setvar(VAR_RESULT, FALSE)
-    if (flag(FLAG_REVIVED_AMBER)) call(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil)
-    if (var(VAR_RESULT) == TRUE) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_RevivedAllFossils)
-    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE) == 2) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon)
-    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE) == 1) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilStillReviving)
+    if (flag(FLAG_REVIVED_AMBER)) {
+        call(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil)
+    }
+    if (var(VAR_RESULT) == TRUE) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_RevivedAllFossils)
+    }
+    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE) == 2) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon)
+    }
+    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE) == 1) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilStillReviving)
+    }
     call(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddHelixFossilToList)
-    if (var(VAR_RESULT) == TRUE) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix)
+    }
     call(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddDomeFossilToList)
-    if (var(VAR_RESULT) == TRUE) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome)
+    }
     call(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList)
-    if (var(VAR_RESULT) == TRUE) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber)
+    }
     msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe)
     goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
     end
 }
 
 script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddHelixFossilToList {
-    if (!flag(FLAG_GOT_HELIX_FOSSIL)) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
-    if (flag(FLAG_REVIVED_HELIX)) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
+    if (!flag(FLAG_GOT_HELIX_FOSSIL)) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
+    }
+    if (flag(FLAG_REVIVED_HELIX)) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
+    }
     setvar(VAR_RESULT, TRUE)
     return
 }
 
 script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddDomeFossilToList {
-    if (!flag(FLAG_GOT_DOME_FOSSIL)) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
-    if (flag(FLAG_REVIVED_DOME)) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
+    if (!flag(FLAG_GOT_DOME_FOSSIL)) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
+    }
+    if (flag(FLAG_REVIVED_DOME)) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
+    }
     setvar(VAR_RESULT, TRUE)
     return
 }
 
 script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList {
-    if (!flag(FLAG_GOT_OLD_AMBER)) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
-    if (flag(FLAG_REVIVED_AMBER)) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
+    if (!flag(FLAG_GOT_OLD_AMBER)) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
+    }
+    if (flag(FLAG_REVIVED_AMBER)) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
+    }
     setvar(VAR_RESULT, TRUE)
     return
 }
@@ -93,7 +127,9 @@ script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix {
     message(CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe)
     waitmessage()
     call(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList)
-    if (var(VAR_RESULT) == TRUE) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber)
+    }
     multichoice(0, 0, MULTI_HELIX, FALSE)
     switch(VAR_RESULT)
     case(0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil)
@@ -106,7 +142,9 @@ script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome {
     message(CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe)
     waitmessage()
     call(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList)
-    if (var(VAR_RESULT) == TRUE) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber)
+    }
     multichoice(0, 0, MULTI_DOME, FALSE)
     switch(VAR_RESULT)
     case(0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil)
@@ -150,7 +188,9 @@ script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil {
     bufferspeciesname(STR_VAR_1, SPECIES_OMANYTE)
     bufferitemname(STR_VAR_2, ITEM_HELIX_FOSSIL)
     msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil)
+    if (var(VAR_RESULT) == NO) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil)
+    }
     msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor)
     textcolor(NPC_TEXT_COLOR_MALE)
     removeitem(ITEM_HELIX_FOSSIL)
@@ -165,7 +205,9 @@ script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil {
     bufferspeciesname(STR_VAR_1, SPECIES_KABUTO)
     bufferitemname(STR_VAR_2, ITEM_DOME_FOSSIL)
     msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil)
+    if (var(VAR_RESULT) == NO) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil)
+    }
     msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor)
     textcolor(NPC_TEXT_COLOR_MALE)
     removeitem(ITEM_DOME_FOSSIL)
@@ -180,7 +222,9 @@ script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber {
     bufferspeciesname(STR_VAR_1, SPECIES_AERODACTYL)
     bufferitemname(STR_VAR_2, ITEM_OLD_AMBER)
     msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil)
+    if (var(VAR_RESULT) == NO) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil)
+    }
     msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor)
     textcolor(NPC_TEXT_COLOR_MALE)
     removeitem(ITEM_OLD_AMBER)
@@ -204,9 +248,15 @@ script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilStillReviving 
 }
 
 script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon {
-    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL) == HELIX_FOSSIL) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte)
-    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL) == DOME_FOSSIL) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto)
-    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL) == OLD_AMBER) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl)
+    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL) == HELIX_FOSSIL) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte)
+    }
+    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL) == DOME_FOSSIL) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto)
+    }
+    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL) == OLD_AMBER) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl)
+    }
     end
 }
 
@@ -215,10 +265,16 @@ script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte {
     bufferspeciesname(STR_VAR_1, SPECIES_OMANYTE)
     msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife)
     givemon(SPECIES_OMANYTE, 5)
-    if (var(VAR_RESULT) == 2) goto(Common_EventScript_NoMoreRoomForPokemon)
+    if (var(VAR_RESULT) == 2) {
+        goto(Common_EventScript_NoMoreRoomForPokemon)
+    }
     setflag(FLAG_REVIVED_HELIX)
-    if (var(VAR_RESULT) == 0) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty)
-    if (var(VAR_RESULT) == 1) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC)
+    if (var(VAR_RESULT) == 0) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty)
+    }
+    if (var(VAR_RESULT) == 1) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC)
+    }
     end
 }
 
@@ -227,10 +283,16 @@ script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto {
     bufferspeciesname(STR_VAR_1, SPECIES_KABUTO)
     msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife)
     givemon(SPECIES_KABUTO, 5)
-    if (var(VAR_RESULT) == 2) goto(Common_EventScript_NoMoreRoomForPokemon)
+    if (var(VAR_RESULT) == 2) {
+        goto(Common_EventScript_NoMoreRoomForPokemon)
+    }
     setflag(FLAG_REVIVED_DOME)
-    if (var(VAR_RESULT) == 0) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty)
-    if (var(VAR_RESULT) == 1) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC)
+    if (var(VAR_RESULT) == 0) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty)
+    }
+    if (var(VAR_RESULT) == 1) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC)
+    }
     end
 }
 
@@ -239,10 +301,16 @@ script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl {
     bufferspeciesname(STR_VAR_1, SPECIES_AERODACTYL)
     msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife)
     givemon(SPECIES_AERODACTYL, 5)
-    if (var(VAR_RESULT) == 2) goto(Common_EventScript_NoMoreRoomForPokemon)
+    if (var(VAR_RESULT) == 2) {
+        goto(Common_EventScript_NoMoreRoomForPokemon)
+    }
     setflag(FLAG_REVIVED_AMBER)
-    if (var(VAR_RESULT) == 0) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty)
-    if (var(VAR_RESULT) == 1) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC)
+    if (var(VAR_RESULT) == 0) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty)
+    }
+    if (var(VAR_RESULT) == 1) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC)
+    }
     end
 }
 
@@ -254,7 +322,9 @@ script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty {
     waitfanfare()
     setvar(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 0)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon)
+    if (var(VAR_RESULT) == NO) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon)
+    }
     call(Common_EventScript_GetGiftMonPartySlot)
     call(Common_EventScript_NameReceivedPartyMon)
     goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon)
@@ -269,7 +339,9 @@ script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC {
     waitfanfare()
     setvar(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 0)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_MonSentToPC)
+    if (var(VAR_RESULT) == NO) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_MonSentToPC)
+    }
     call(Common_EventScript_NameReceivedBoxMon)
     goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_MonSentToPC)
     end
@@ -293,20 +365,28 @@ script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_RevivedAllFossils {
 }
 
 script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil {
-    if (flag(FLAG_GOT_HELIX_FOSSIL)) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedHelix)
-    if (flag(FLAG_GOT_DOME_FOSSIL)) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedDome)
+    if (flag(FLAG_GOT_HELIX_FOSSIL)) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedHelix)
+    }
+    if (flag(FLAG_GOT_DOME_FOSSIL)) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedDome)
+    }
     goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
     end
 }
 
 script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedHelix {
-    if (!flag(FLAG_REVIVED_HELIX)) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
+    if (!flag(FLAG_REVIVED_HELIX)) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
+    }
     setvar(VAR_RESULT, TRUE)
     return
 }
 
 script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedDome {
-    if (!flag(FLAG_REVIVED_DOME)) goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
+    if (!flag(FLAG_REVIVED_DOME)) {
+        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
+    }
     setvar(VAR_RESULT, TRUE)
     return
 }

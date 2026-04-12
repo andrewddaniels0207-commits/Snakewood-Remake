@@ -44,8 +44,12 @@ script SSTidalRooms_EventScript_ArrivedInLilycove {
 }
 
 script SSTidalCorridor_EventScript_ReachedStepCount {
-    if (var(VAR_SS_TIDAL_STATE) == SS_TIDAL_DEPART_SLATEPORT) goto(SSTidalCorridor_EventScript_HalfwayToLilycove)
-    if (var(VAR_SS_TIDAL_STATE) == SS_TIDAL_HALFWAY_SLATEPORT) goto(SSTidalCorridor_EventScript_ArrivedInSlateport)
+    if (var(VAR_SS_TIDAL_STATE) == SS_TIDAL_DEPART_SLATEPORT) {
+        goto(SSTidalCorridor_EventScript_HalfwayToLilycove)
+    }
+    if (var(VAR_SS_TIDAL_STATE) == SS_TIDAL_HALFWAY_SLATEPORT) {
+        goto(SSTidalCorridor_EventScript_ArrivedInSlateport)
+    }
     end
 }
 
@@ -125,8 +129,12 @@ script SSTidalCorridor_EventScript_Cabin4Sign {
 script SSTidalCorridor_EventScript_ExitSailor {
     lock
     faceplayer
-    if (var(VAR_SS_TIDAL_STATE) == SS_TIDAL_LAND_LILYCOVE) goto(SSTidalCorridor_EventScript_ExitLilycove)
-    if (var(VAR_SS_TIDAL_STATE) == SS_TIDAL_LAND_SLATEPORT) goto(SSTidalCorridor_EventScript_ExitSlateport)
+    if (var(VAR_SS_TIDAL_STATE) == SS_TIDAL_LAND_LILYCOVE) {
+        goto(SSTidalCorridor_EventScript_ExitLilycove)
+    }
+    if (var(VAR_SS_TIDAL_STATE) == SS_TIDAL_LAND_SLATEPORT) {
+        goto(SSTidalCorridor_EventScript_ExitSlateport)
+    }
     msgbox(SSTidalCorridor_Text_CanRestInCabin2, MSGBOX_DEFAULT)
     release
     end
@@ -135,7 +143,9 @@ script SSTidalCorridor_EventScript_ExitSailor {
 script SSTidalCorridor_EventScript_ExitLilycove {
     setrespawn(HEAL_LOCATION_LILYCOVE_CITY)
     msgbox(SSTidalCorridor_Text_WeveArrived, MSGBOX_DEFAULT)
-    if (flag(FLAG_RECEIVED_TM_SNATCH)) call(SSTidalCorridor_EventScript_HideSnatchGiver)
+    if (flag(FLAG_RECEIVED_TM_SNATCH)) {
+        call(SSTidalCorridor_EventScript_HideSnatchGiver)
+    }
     warp(MAP_LILYCOVE_CITY_HARBOR, 8, 11)
     waitstate
     release
@@ -145,7 +155,9 @@ script SSTidalCorridor_EventScript_ExitLilycove {
 script SSTidalCorridor_EventScript_ExitSlateport {
     setrespawn(HEAL_LOCATION_SLATEPORT_CITY)
     msgbox(SSTidalCorridor_Text_WeveArrived, MSGBOX_DEFAULT)
-    if (flag(FLAG_RECEIVED_TM_SNATCH)) call(SSTidalCorridor_EventScript_HideSnatchGiver)
+    if (flag(FLAG_RECEIVED_TM_SNATCH)) {
+        call(SSTidalCorridor_EventScript_HideSnatchGiver)
+    }
     warp(MAP_SLATEPORT_CITY_HARBOR, 8, 11)
     waitstate
     release
@@ -159,8 +171,12 @@ script SSTidalCorridor_EventScript_HideSnatchGiver {
 
 script SSTidalCorridor_EventScript_Porthole {
     lockall
-    if (var(VAR_SS_TIDAL_STATE) == SS_TIDAL_DEPART_SLATEPORT) goto(SSTidalCorridor_EventScript_LookThroughPorthole)
-    if (var(VAR_SS_TIDAL_STATE) == SS_TIDAL_HALFWAY_SLATEPORT) goto(SSTidalCorridor_EventScript_LookThroughPorthole)
+    if (var(VAR_SS_TIDAL_STATE) == SS_TIDAL_DEPART_SLATEPORT) {
+        goto(SSTidalCorridor_EventScript_LookThroughPorthole)
+    }
+    if (var(VAR_SS_TIDAL_STATE) == SS_TIDAL_HALFWAY_SLATEPORT) {
+        goto(SSTidalCorridor_EventScript_LookThroughPorthole)
+    }
     msgbox(SSTidalCorridor_Text_HorizonSpreadsBeyondPorthole, MSGBOX_DEFAULT)
     releaseall
     end
@@ -175,7 +191,9 @@ script SSTidalCorridor_EventScript_LookThroughPorthole {
 script SSTidalCorridor_EventScript_Sailor {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_SS_TIDAL_TRAINERS)) goto(SSTidalCorridor_EventScript_EnjoyYourCruise)
+    if (flag(FLAG_DEFEATED_SS_TIDAL_TRAINERS)) {
+        goto(SSTidalCorridor_EventScript_EnjoyYourCruise)
+    }
     call(SSTidalCorridor_EventScript_CheckIfTrainersDefeated)
     msgbox(SSTidalCorridor_Text_VisitOtherCabins, MSGBOX_DEFAULT)
     release

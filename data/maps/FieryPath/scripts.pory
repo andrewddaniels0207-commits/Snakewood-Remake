@@ -3,7 +3,9 @@ mapscripts FieryPath_MapScripts {
 }
 
 script FieryPath_OnTransition {
-    if (!flag(FLAG_LANDMARK_FIERY_PATH)) call(FieryPath_EventScript_MoveScottToFallarbor)
+    if (!flag(FLAG_LANDMARK_FIERY_PATH)) {
+        call(FieryPath_EventScript_MoveScottToFallarbor)
+    }
     setflag(FLAG_LANDMARK_FIERY_PATH)
     end
 }

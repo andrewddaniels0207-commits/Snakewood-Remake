@@ -13,8 +13,12 @@ script SlateportCity_BattleTentBattleRoom_OnTransition {
 
 script SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfx {
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxMale)
-    if (var(VAR_RESULT) == FEMALE) goto(SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale)
+    if (var(VAR_RESULT) == MALE) {
+        goto(SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxMale)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale)
+    }
     return
 }
 

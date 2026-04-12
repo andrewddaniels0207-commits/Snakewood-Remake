@@ -3,9 +3,13 @@ mapscripts Route12_FishingHouse_Frlg_MapScripts {}
 script Route12_FishingHouse_EventScript_FishingGuruBrother {
     lock
     faceplayer
-    if (flag(FLAG_GOT_SUPER_ROD)) goto(Route12_FishingHouse_EventScript_CheckMagikarpRecord)
+    if (flag(FLAG_GOT_SUPER_ROD)) {
+        goto(Route12_FishingHouse_EventScript_CheckMagikarpRecord)
+    }
     msgbox(Route12_FishingHouse_Text_DoYouLikeToFish, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(Route12_FishingHouse_EventScript_GiveSuperRod)
+    if (var(VAR_RESULT) == YES) {
+        goto(Route12_FishingHouse_EventScript_GiveSuperRod)
+    }
     msgbox(Route12_FishingHouse_Text_OhThatsDisappointing)
     release
     end
@@ -13,7 +17,9 @@ script Route12_FishingHouse_EventScript_FishingGuruBrother {
 
 script Route12_FishingHouse_EventScript_GiveSuperRod {
     checkitemspace(ITEM_SUPER_ROD)
-    if (var(VAR_RESULT) == FALSE) goto(Route12_FishingHouse_EventScript_NoRoomForSuperRod)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route12_FishingHouse_EventScript_NoRoomForSuperRod)
+    }
     additem(ITEM_SUPER_ROD)
     msgbox(Route12_FishingHouse_Text_TakeThisAndFish)
     msgreceiveditem(Route12_FishingHouse_Text_ReceivedSuperRod, ITEM_SUPER_ROD)
@@ -32,18 +38,30 @@ script Route12_FishingHouse_EventScript_NoRoomForSuperRod {
 script Route12_FishingHouse_EventScript_CheckMagikarpRecord {
     setvar(VAR_0x8004, SPECIES_MAGIKARP)
     specialvar(VAR_RESULT, DoesPlayerPartyContainSpecies)
-    if (var(VAR_RESULT) == FALSE) goto(Route12_FishingHouse_EventScript_NoMagikarpInParty)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route12_FishingHouse_EventScript_NoMagikarpInParty)
+    }
     special(GetMagikarpSizeRecordInfo)
     msgbox(Route12_FishingHouse_Text_OhMagikarpAllowMeToSee)
     special(ChoosePartyMon)
     waitstate
     copyvar(VAR_RESULT, VAR_0x8004)
-    if (var(VAR_RESULT) >= PARTY_SIZE) goto(Route12_FishingHouse_EventScript_CancelShowMon)
+    if (var(VAR_RESULT) >= PARTY_SIZE) {
+        goto(Route12_FishingHouse_EventScript_CancelShowMon)
+    }
     special(CompareMagikarpSize)
-    if (var(VAR_RESULT) == 1) goto(Route12_FishingHouse_EventScript_NotMagikarp)
-    if (var(VAR_RESULT) == 2) goto(Route12_FishingHouse_EventScript_NotRecordMagikarp)
-    if (var(VAR_RESULT) == 3) goto(Route12_FishingHouse_EventScript_NewRecordMagikarp)
-    if (var(VAR_RESULT) == 4) goto(Route12_FishingHouse_EventScript_TieRecordMagikarp)
+    if (var(VAR_RESULT) == 1) {
+        goto(Route12_FishingHouse_EventScript_NotMagikarp)
+    }
+    if (var(VAR_RESULT) == 2) {
+        goto(Route12_FishingHouse_EventScript_NotRecordMagikarp)
+    }
+    if (var(VAR_RESULT) == 3) {
+        goto(Route12_FishingHouse_EventScript_NewRecordMagikarp)
+    }
+    if (var(VAR_RESULT) == 4) {
+        goto(Route12_FishingHouse_EventScript_TieRecordMagikarp)
+    }
     release
     end
 }
@@ -66,14 +84,18 @@ script Route12_FishingHouse_EventScript_NotMagikarp {
 }
 
 script Route12_FishingHouse_EventScript_NotRecordMagikarp {
-    if (!flag(FLAG_GOT_RECORD_SETTING_MAGIKARP)) goto(Route12_FishingHouse_EventScript_NewRecordMagikarp)
+    if (!flag(FLAG_GOT_RECORD_SETTING_MAGIKARP)) {
+        goto(Route12_FishingHouse_EventScript_NewRecordMagikarp)
+    }
     msgbox(Route12_FishingHouse_Text_HmmXInchesDoesntMeasureUp)
     release
     end
 }
 
 script Route12_FishingHouse_EventScript_TieRecordMagikarp {
-    if (!flag(FLAG_GOT_RECORD_SETTING_MAGIKARP)) goto(Route12_FishingHouse_EventScript_NewRecordMagikarp)
+    if (!flag(FLAG_GOT_RECORD_SETTING_MAGIKARP)) {
+        goto(Route12_FishingHouse_EventScript_NewRecordMagikarp)
+    }
     msgbox(Route12_FishingHouse_Text_HuhXInchesSameSizeAsLast)
     release
     end
@@ -83,7 +105,9 @@ script Route12_FishingHouse_EventScript_NewRecordMagikarp {
     setflag(FLAG_GOT_RECORD_SETTING_MAGIKARP)
     msgbox(Route12_FishingHouse_Text_WhoaXInchesTakeThis)
     giveitem(ITEM_NET_BALL)
-    if (var(VAR_RESULT) == FALSE) goto(Route12_FishingHouse_EventScript_NoRoomForNetBall)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route12_FishingHouse_EventScript_NoRoomForNetBall)
+    }
     msgbox(Route12_FishingHouse_Text_LookForwardToGreaterRecords)
     release
     end
@@ -97,7 +121,9 @@ script Route12_FishingHouse_EventScript_NoRoomForNetBall {
 
 script Route12_FishingHouse_EventScript_MagikarpRecordSign {
     lockall
-    if (flag(FLAG_GOT_RECORD_SETTING_MAGIKARP)) goto(Route12_FishingHouse_EventScript_MagikarpRecordSignRecordSet)
+    if (flag(FLAG_GOT_RECORD_SETTING_MAGIKARP)) {
+        goto(Route12_FishingHouse_EventScript_MagikarpRecordSignRecordSet)
+    }
     msgbox(Route12_FishingHouse_Text_BlankChartOfSomeSort)
     releaseall
     end

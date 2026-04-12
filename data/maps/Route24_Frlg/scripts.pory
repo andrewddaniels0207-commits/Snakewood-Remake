@@ -3,10 +3,14 @@ mapscripts Route24_Frlg_MapScripts {}
 script Route24_EventScript_Rocket {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_ROUTE24) == 1) goto(Route24_EventScript_RocketPostBattle)
+    if (var(VAR_MAP_SCENE_ROUTE24) == 1) {
+        goto(Route24_EventScript_RocketPostBattle)
+    }
     msgbox(Route24_Text_JustEarnedFabulousPrize)
     checkitemspace(ITEM_NUGGET)
-    if (var(VAR_RESULT) == FALSE) goto(Route24_EventScript_NoRoomForNugget)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route24_EventScript_NoRoomForNugget)
+    }
     call(Route24_EventScript_BattleRocket)
     release
     end
@@ -40,13 +44,19 @@ script Route24_EventScript_RocketTriggerRight {
 
 script Route24_EventScript_RocketTrigger {
     textcolor(NPC_TEXT_COLOR_MALE)
-    if (var(VAR_TEMP_1) == 0) call(Route24_EventScript_RocketApproachPlayer)
-    if (var(VAR_TEMP_1) == 1) call(Route24_EventScript_RocketMotionToPlayer)
+    if (var(VAR_TEMP_1) == 0) {
+        call(Route24_EventScript_RocketApproachPlayer)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(Route24_EventScript_RocketMotionToPlayer)
+    }
     applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
     waitmovement(0)
     msgbox(Route24_Text_JustEarnedFabulousPrize)
     checkitemspace(ITEM_NUGGET)
-    if (var(VAR_RESULT) == FALSE) goto(Route24_EventScript_NoRoomForNuggetTrigger)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route24_EventScript_NoRoomForNuggetTrigger)
+    }
     call(Route24_EventScript_BattleRocket)
     releaseall
     end
@@ -82,7 +92,9 @@ script Route24_EventScript_NoRoomForNuggetTrigger {
     closemessage
     applymovement(LOCALID_PLAYER, Route24_Movement_WalkDown)
     waitmovement(0)
-    if (var(VAR_TEMP_1) == 0) call(Route24_EventScript_RocketWalkBackToPos)
+    if (var(VAR_TEMP_1) == 0) {
+        call(Route24_EventScript_RocketWalkBackToPos)
+    }
     release
     end
 }

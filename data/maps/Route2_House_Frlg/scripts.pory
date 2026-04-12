@@ -10,13 +10,21 @@ script Route2_House_EventScript_Reyley {
     faceplayer
     setvar(VAR_0x8008, INGAME_TRADE_MR_MIME)
     call(EventScript_GetInGameTradeSpeciesInfo)
-    if (flag(FLAG_DID_MIMIEN_TRADE)) goto(Route2_House_EventScript_AlreadyTraded)
+    if (flag(FLAG_DID_MIMIEN_TRADE)) {
+        goto(Route2_House_EventScript_AlreadyTraded)
+    }
     msgbox(Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route2_House_EventScript_DeclineTrade)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route2_House_EventScript_DeclineTrade)
+    }
     call(EventScript_ChooseMonForInGameTrade)
-    if (var(VAR_0x8004) >= PARTY_SIZE) goto(Route2_House_EventScript_DeclineTrade)
+    if (var(VAR_0x8004) >= PARTY_SIZE) {
+        goto(Route2_House_EventScript_DeclineTrade)
+    }
     call(EventScript_GetInGameTradeSpecies)
-    if (var(VAR_RESULT) != VAR_0x8009) goto(Route2_House_EventScript_NotRequestedMon)
+    if (var(VAR_RESULT) != VAR_0x8009) {
+        goto(Route2_House_EventScript_NotRequestedMon)
+    }
     call(EventScript_DoInGameTrade)
     msgbox(Trade_Text_HeyThanks)
     setflag(FLAG_DID_MIMIEN_TRADE)

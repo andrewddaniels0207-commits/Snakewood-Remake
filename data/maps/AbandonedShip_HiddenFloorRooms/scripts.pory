@@ -8,9 +8,15 @@ script AbandonedShip_HiddenFloorRooms_EventScript_DoHiddenItemSparkle {
     setvar(VAR_TEMP_1, 1)
     getplayerxy(VAR_TEMP_2, VAR_TEMP_3)
     setvar(VAR_TEMP_4, 1)
-    if (var(VAR_TEMP_2) == 21) call(AbandonedShip_HiddenFloorRooms_EventScript_InMiddleRoomColumn)
-    if (var(VAR_TEMP_2) == 36) call(AbandonedShip_HiddenFloorRooms_EventScript_InRightRoomColumn)
-    if (var(VAR_TEMP_3) == 2) call(AbandonedShip_HiddenFloorRooms_EventScript_InUpperRoomRow)
+    if (var(VAR_TEMP_2) == 21) {
+        call(AbandonedShip_HiddenFloorRooms_EventScript_InMiddleRoomColumn)
+    }
+    if (var(VAR_TEMP_2) == 36) {
+        call(AbandonedShip_HiddenFloorRooms_EventScript_InRightRoomColumn)
+    }
+    if (var(VAR_TEMP_3) == 2) {
+        call(AbandonedShip_HiddenFloorRooms_EventScript_InUpperRoomRow)
+    }
     switch(VAR_TEMP_4)
     case(1, AbandonedShip_HiddenFloorRooms_EventScript_EnterRm1)
     case(2, AbandonedShip_HiddenFloorRooms_EventScript_EnterRm2)
@@ -40,7 +46,9 @@ script AbandonedShip_HiddenFloorRooms_EventScript_EnterRm1 {
     delay(20)
     dofieldeffectsparkle(10, 10, 0)
     specialvar(VAR_RESULT, FoundAbandonedShipRoom4Key)
-    if (var(VAR_RESULT) == FALSE) call(AbandonedShip_HiddenFloorRooms_EventScript_Rm4KeySparkle)
+    if (var(VAR_RESULT) == FALSE) {
+        call(AbandonedShip_HiddenFloorRooms_EventScript_Rm4KeySparkle)
+    }
     waitfieldeffect(FLDEFF_SPARKLE)
     delay(10)
     end
@@ -52,9 +60,13 @@ script AbandonedShip_HiddenFloorRooms_EventScript_EnterRm2 {
 
 script AbandonedShip_HiddenFloorRooms_EventScript_EnterRm3 {
     specialvar(VAR_RESULT, FoundAbandonedShipRoom1Key)
-    if (var(VAR_RESULT) == TRUE) goto(AbandonedShip_HiddenFloorRooms_EventScript_Rm3NoSparkle)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(AbandonedShip_HiddenFloorRooms_EventScript_Rm3NoSparkle)
+    }
     delay(20)
-    if (var(VAR_RESULT) == FALSE) call(AbandonedShip_HiddenFloorRooms_EventScript_Rm1KeySparkle)
+    if (var(VAR_RESULT) == FALSE) {
+        call(AbandonedShip_HiddenFloorRooms_EventScript_Rm1KeySparkle)
+    }
     waitfieldeffect(FLDEFF_SPARKLE)
     delay(10)
     end
@@ -69,7 +81,9 @@ script AbandonedShip_HiddenFloorRooms_EventScript_EnterRm4 {
     dofieldeffectsparkle(8, 5, 0)
     dofieldeffectsparkle(11, 3, 0)
     specialvar(VAR_RESULT, FoundAbandonedShipRoom6Key)
-    if (var(VAR_RESULT) == FALSE) call(AbandonedShip_HiddenFloorRooms_EventScript_Rm6KeySparkle)
+    if (var(VAR_RESULT) == FALSE) {
+        call(AbandonedShip_HiddenFloorRooms_EventScript_Rm6KeySparkle)
+    }
     waitfieldeffect(FLDEFF_SPARKLE)
     delay(10)
     end
@@ -81,7 +95,9 @@ script AbandonedShip_HiddenFloorRooms_EventScript_EnterRm5 {
     dofieldeffectsparkle(25, 2, 0)
     dofieldeffectsparkle(24, 6, 0)
     specialvar(VAR_RESULT, FoundAbandonedShipRoom2Key)
-    if (var(VAR_RESULT) == FALSE) call(AbandonedShip_HiddenFloorRooms_EventScript_Rm2KeySparkle)
+    if (var(VAR_RESULT) == FALSE) {
+        call(AbandonedShip_HiddenFloorRooms_EventScript_Rm2KeySparkle)
+    }
     waitfieldeffect(FLDEFF_SPARKLE)
     delay(10)
     end

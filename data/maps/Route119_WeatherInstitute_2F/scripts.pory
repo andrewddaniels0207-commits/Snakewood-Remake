@@ -3,9 +3,15 @@ mapscripts Route119_WeatherInstitute_2F_MapScripts {
 }
 
 script Route119_WeatherInstitute_2F_OnTransition {
-    if (var(VAR_WEATHER_INSTITUTE_STATE) == 0) call(Route119_WeatherInstitute_2F_EventScript_SetScientistPosAquaHere)
-    if (var(VAR_WEATHER_INSTITUTE_STATE) == 1) call(Route119_WeatherInstitute_2F_EventScript_SetScientistPosAquaGone)
-    if (flag(FLAG_SYS_GAME_CLEAR)) call(Route119_WeatherInstitute_2F_EventScript_SetScientistPosGameClear)
+    if (var(VAR_WEATHER_INSTITUTE_STATE) == 0) {
+        call(Route119_WeatherInstitute_2F_EventScript_SetScientistPosAquaHere)
+    }
+    if (var(VAR_WEATHER_INSTITUTE_STATE) == 1) {
+        call(Route119_WeatherInstitute_2F_EventScript_SetScientistPosAquaGone)
+    }
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        call(Route119_WeatherInstitute_2F_EventScript_SetScientistPosGameClear)
+    }
     end
 }
 
@@ -92,8 +98,12 @@ script Route119_WeatherInstitute_2F_EventScript_ReceiveCastform {
     msgbox(Route119_WeatherInstitute_2F_Text_ThanksPleaseTakePokemon, MSGBOX_DEFAULT)
     setvar(VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_CASTFORM_NORMAL)
     givemon(SPECIES_CASTFORM_NORMAL, 25, ITEM_MYSTIC_WATER)
-    if (var(VAR_RESULT) == MON_GIVEN_TO_PARTY) goto(Route119_WeatherInstitute_2F_EventScript_ReceiveCastformParty)
-    if (var(VAR_RESULT) == MON_GIVEN_TO_PC) goto(Route119_WeatherInstitute_2F_EventScript_ReceiveCastformPC)
+    if (var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+        goto(Route119_WeatherInstitute_2F_EventScript_ReceiveCastformParty)
+    }
+    if (var(VAR_RESULT) == MON_GIVEN_TO_PC) {
+        goto(Route119_WeatherInstitute_2F_EventScript_ReceiveCastformPC)
+    }
     goto(Common_EventScript_NoMoreRoomForPokemon)
     end
 }
@@ -101,7 +111,9 @@ script Route119_WeatherInstitute_2F_EventScript_ReceiveCastform {
 script Route119_WeatherInstitute_2F_EventScript_ReceiveCastformParty {
     call(Route119_WeatherInstitute_2F_EventScript_ReceivedCastformFanfare)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route119_WeatherInstitute_2F_EventScript_ExplainCastform)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route119_WeatherInstitute_2F_EventScript_ExplainCastform)
+    }
     call(Common_EventScript_GetGiftMonPartySlot)
     call(Common_EventScript_NameReceivedPartyMon)
     goto(Route119_WeatherInstitute_2F_EventScript_ExplainCastform)
@@ -111,7 +123,9 @@ script Route119_WeatherInstitute_2F_EventScript_ReceiveCastformParty {
 script Route119_WeatherInstitute_2F_EventScript_ReceiveCastformPC {
     call(Route119_WeatherInstitute_2F_EventScript_ReceivedCastformFanfare)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route119_WeatherInstitute_2F_EventScript_SendCastformToPC)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route119_WeatherInstitute_2F_EventScript_SendCastformToPC)
+    }
     call(Common_EventScript_NameReceivedBoxMon)
     goto(Route119_WeatherInstitute_2F_EventScript_SendCastformToPC)
     end
@@ -140,7 +154,9 @@ script Route119_WeatherInstitute_2F_EventScript_ExplainCastform {
 }
 
 script Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather {
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather)
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather)
+    }
     msgbox(Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous, MSGBOX_DEFAULT)
     release
     end
@@ -148,12 +164,22 @@ script Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather {
 
 script Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather {
     setvar(VAR_0x8004, 0)
-    if (flag(FLAG_DEFEATED_KYOGRE)) call(Route119_WeatherInstitute_2F_EventScript_LegendaryDefeated)
-    if (flag(FLAG_DEFEATED_GROUDON)) call(Route119_WeatherInstitute_2F_EventScript_LegendaryDefeated)
-    if (var(VAR_0x8004) == 2) goto(Route119_WeatherInstitute_2F_EventScript_NoAbnormalWeather)
-    if (!flag(FLAG_TEMP_2)) call(Route119_WeatherInstitute_2F_EventScript_CreateAbnormalWeather)
+    if (flag(FLAG_DEFEATED_KYOGRE)) {
+        call(Route119_WeatherInstitute_2F_EventScript_LegendaryDefeated)
+    }
+    if (flag(FLAG_DEFEATED_GROUDON)) {
+        call(Route119_WeatherInstitute_2F_EventScript_LegendaryDefeated)
+    }
+    if (var(VAR_0x8004) == 2) {
+        goto(Route119_WeatherInstitute_2F_EventScript_NoAbnormalWeather)
+    }
+    if (!flag(FLAG_TEMP_2)) {
+        call(Route119_WeatherInstitute_2F_EventScript_CreateAbnormalWeather)
+    }
     specialvar(VAR_RESULT, GetAbnormalWeatherMapNameAndType)
-    if (var(VAR_RESULT) == 1) goto(Route119_WeatherInstitute_2F_EventScript_KyogreWeather)
+    if (var(VAR_RESULT) == 1) {
+        goto(Route119_WeatherInstitute_2F_EventScript_KyogreWeather)
+    }
     msgbox(Route119_WeatherInstitute_2F_Text_GroudonWeather, MSGBOX_DEFAULT)
     release
     end
@@ -224,7 +250,9 @@ movement Route119_WeatherInstitute_2F_Movement_ScientistApproachPlayer {
 script Route119_WeatherInstitute_2F_EventScript_WeatherScientist {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_CASTFORM)) goto(Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather)
+    if (flag(FLAG_RECEIVED_CASTFORM)) {
+        goto(Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather)
+    }
     goto(Route119_WeatherInstitute_2F_EventScript_ReceiveCastform)
     end
 }

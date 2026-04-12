@@ -3,10 +3,14 @@ mapscripts MtPyre_1F_MapScripts {}
 script MtPyre_1F_EventScript_CleanseTagWoman {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_CLEANSE_TAG)) goto(MtPyre_1F_EventScript_ReceivedCleanseTag)
+    if (flag(FLAG_RECEIVED_CLEANSE_TAG)) {
+        goto(MtPyre_1F_EventScript_ReceivedCleanseTag)
+    }
     msgbox(MtPyre_1F_Text_TakeThisForYourOwnGood, MSGBOX_DEFAULT)
     giveitem(ITEM_CLEANSE_TAG)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_CLEANSE_TAG)
     release
     end

@@ -4,7 +4,9 @@ script SSAnne_1F_Room4_EventScript_Woman {
     lock
     faceplayer
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(SSAnne_1F_Room4_EventScript_WomanPlayerMale)
+    if (var(VAR_RESULT) == MALE) {
+        goto(SSAnne_1F_Room4_EventScript_WomanPlayerMale)
+    }
     msgbox(SSAnne_1F_Room4_Text_WaitressCherryPiePlease)
     release
     end

@@ -3,8 +3,12 @@ mapscripts AquaHideout_1F_MapScripts {}
 script AquaHideout_1F_EventScript_HideoutEntranceGrunt1 {
     lock
     faceplayer
-    if (flag(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT)) goto(AquaHideout_1F_EventScript_SlateportHint1)
-    if (flag(FLAG_RECEIVED_RED_OR_BLUE_ORB)) goto(AquaHideout_1F_EventScript_MagmaHideoutHint1)
+    if (flag(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT)) {
+        goto(AquaHideout_1F_EventScript_SlateportHint1)
+    }
+    if (flag(FLAG_RECEIVED_RED_OR_BLUE_ORB)) {
+        goto(AquaHideout_1F_EventScript_MagmaHideoutHint1)
+    }
     msgbox(AquaHideout_1F_Text_OurBossIsSnatchingSomething, MSGBOX_DEFAULT)
     release
     end
@@ -25,8 +29,12 @@ script AquaHideout_1F_EventScript_SlateportHint1 {
 script AquaHideout_1F_EventScript_HideoutEntranceGrunt2 {
     lock
     faceplayer
-    if (flag(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT)) goto(AquaHideout_1F_EventScript_SlateportHint2)
-    if (flag(FLAG_RECEIVED_RED_OR_BLUE_ORB)) goto(AquaHideout_1F_EventScript_MagmaHideoutHint2)
+    if (flag(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT)) {
+        goto(AquaHideout_1F_EventScript_SlateportHint2)
+    }
+    if (flag(FLAG_RECEIVED_RED_OR_BLUE_ORB)) {
+        goto(AquaHideout_1F_EventScript_MagmaHideoutHint2)
+    }
     msgbox(AquaHideout_1F_Text_BossIsOnRoute122, MSGBOX_DEFAULT)
     release
     end

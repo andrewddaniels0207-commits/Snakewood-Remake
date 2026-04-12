@@ -6,7 +6,9 @@ script MauvilleCity_GameCorner_EventScript_CoinsClerk {
     faceplayer
     msgbox(MauvilleCity_GameCorner_Text_ThisIsMauvilleGameCorner, MSGBOX_DEFAULT)
     checkitem(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NeedCoinCase)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NeedCoinCase)
+    }
     message(MauvilleCity_GameCorner_Text_WereYouLookingForCoins)
     waitmessage()
     showmoneybox(0, 0)
@@ -36,7 +38,9 @@ script MauvilleCity_GameCorner_EventScript_Buy50Coins {
     checkcoins(VAR_TEMP_1)
     goto_if_ge(VAR_TEMP_1, (MAX_COINS + 1 - 50), MauvilleCity_GameCorner_EventScript_NoRoomForCoins)
     checkmoney(COINS_PRICE_50)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NotEnoughMoney)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NotEnoughMoney)
+    }
     addcoins(50)
     removemoney(COINS_PRICE_50)
     updatemoneybox()
@@ -53,7 +57,9 @@ script MauvilleCity_GameCorner_EventScript_Buy500Coins {
     checkcoins(VAR_TEMP_1)
     goto_if_ge(VAR_TEMP_1, (MAX_COINS + 1 - 500), MauvilleCity_GameCorner_EventScript_NoRoomForCoins)
     checkmoney(COINS_PRICE_500)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NotEnoughMoney)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NotEnoughMoney)
+    }
     addcoins(500)
     removemoney(COINS_PRICE_500)
     updatemoneybox()
@@ -101,7 +107,9 @@ script MauvilleCity_GameCorner_EventScript_PrizeCornerDolls {
     faceplayer
     msgbox(MauvilleCity_GameCorner_Text_ExchangeCoinsForPrizes, MSGBOX_DEFAULT)
     checkitem(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == TRUE) goto(MauvilleCity_GameCorner_EventScript_ChooseDollPrizeMessage)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(MauvilleCity_GameCorner_EventScript_ChooseDollPrizeMessage)
+    }
     release
     end
 }
@@ -151,7 +159,9 @@ script MauvilleCity_GameCorner_EventScript_MudkipDoll {
 
 script MauvilleCity_GameCorner_EventScript_ConfirmDollPrize {
     msgbox(MauvilleCity_GameCorner_Text_SoYourChoiceIsX, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(MauvilleCity_GameCorner_EventScript_CancelDollSelect)
+    if (var(VAR_RESULT) == NO) {
+        goto(MauvilleCity_GameCorner_EventScript_CancelDollSelect)
+    }
     switch(VAR_TEMP_1)
     case(1, MauvilleCity_GameCorner_EventScript_BuyTreeckoDoll)
     case(2, MauvilleCity_GameCorner_EventScript_BuyTorchicDoll)
@@ -161,10 +171,14 @@ script MauvilleCity_GameCorner_EventScript_ConfirmDollPrize {
 
 script MauvilleCity_GameCorner_EventScript_BuyTreeckoDoll {
     checkcoins(VAR_TEMP_2)
-    if (var(VAR_TEMP_2) < DOLL_COINS) goto(MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForDoll)
+    if (var(VAR_TEMP_2) < DOLL_COINS) {
+        goto(MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForDoll)
+    }
     bufferdecorationname(STR_VAR_2, DECOR_TREECKO_DOLL)
     checkdecorspace(DECOR_TREECKO_DOLL)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoRoomForDoll)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoRoomForDoll)
+    }
     removecoins(DOLL_COINS)
     adddecoration(DECOR_TREECKO_DOLL)
     updatecoinsbox(1, 1)
@@ -176,10 +190,14 @@ script MauvilleCity_GameCorner_EventScript_BuyTreeckoDoll {
 
 script MauvilleCity_GameCorner_EventScript_BuyTorchicDoll {
     checkcoins(VAR_TEMP_2)
-    if (var(VAR_TEMP_2) < DOLL_COINS) goto(MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForDoll)
+    if (var(VAR_TEMP_2) < DOLL_COINS) {
+        goto(MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForDoll)
+    }
     bufferdecorationname(STR_VAR_2, DECOR_TORCHIC_DOLL)
     checkdecorspace(DECOR_TORCHIC_DOLL)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoRoomForDoll)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoRoomForDoll)
+    }
     removecoins(DOLL_COINS)
     adddecoration(DECOR_TORCHIC_DOLL)
     updatecoinsbox(1, 1)
@@ -191,10 +209,14 @@ script MauvilleCity_GameCorner_EventScript_BuyTorchicDoll {
 
 script MauvilleCity_GameCorner_EventScript_BuyMudkipDoll {
     checkcoins(VAR_TEMP_2)
-    if (var(VAR_TEMP_2) < DOLL_COINS) goto(MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForDoll)
+    if (var(VAR_TEMP_2) < DOLL_COINS) {
+        goto(MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForDoll)
+    }
     bufferdecorationname(STR_VAR_2, DECOR_MUDKIP_DOLL)
     checkdecorspace(DECOR_MUDKIP_DOLL)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoRoomForDoll)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoRoomForDoll)
+    }
     removecoins(DOLL_COINS)
     adddecoration(DECOR_MUDKIP_DOLL)
     updatecoinsbox(1, 1)
@@ -228,7 +250,9 @@ script MauvilleCity_GameCorner_EventScript_PrizeCornerTMs {
     faceplayer
     msgbox(MauvilleCity_GameCorner_Text_ExchangeCoinsForPrizes, MSGBOX_DEFAULT)
     checkitem(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == TRUE) goto(MauvilleCity_GameCorner_EventScript_ChooseTMPrizeMessage)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(MauvilleCity_GameCorner_EventScript_ChooseTMPrizeMessage)
+    }
     release
     end
 }
@@ -298,7 +322,9 @@ script MauvilleCity_GameCorner_EventScript_TMIceBeam {
 script MauvilleCity_GameCorner_EventScript_ConfirmTMPrize {
     special(BufferTMHMMoveName)
     msgbox(MauvilleCity_GameCorner_Text_SoYourChoiceIsTheTMX, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(MauvilleCity_GameCorner_EventScript_CancelTMSelect)
+    if (var(VAR_RESULT) == NO) {
+        goto(MauvilleCity_GameCorner_EventScript_CancelTMSelect)
+    }
     switch(VAR_TEMP_1)
     case(1, MauvilleCity_GameCorner_EventScript_BuyTMDoubleTeam)
     case(2, MauvilleCity_GameCorner_EventScript_BuyTMPsychic)
@@ -310,9 +336,13 @@ script MauvilleCity_GameCorner_EventScript_ConfirmTMPrize {
 
 script MauvilleCity_GameCorner_EventScript_BuyTMDoubleTeam {
     checkcoins(VAR_TEMP_2)
-    if (var(VAR_TEMP_2) < TM_DOUBLE_TEAM_COINS) goto(MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForTM)
+    if (var(VAR_TEMP_2) < TM_DOUBLE_TEAM_COINS) {
+        goto(MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForTM)
+    }
     checkitemspace(ITEM_TM_DOUBLE_TEAM)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoRoomForTM)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoRoomForTM)
+    }
     removecoins(TM_DOUBLE_TEAM_COINS)
     additem(ITEM_TM_DOUBLE_TEAM)
     updatecoinsbox(1, 1)
@@ -324,9 +354,13 @@ script MauvilleCity_GameCorner_EventScript_BuyTMDoubleTeam {
 
 script MauvilleCity_GameCorner_EventScript_BuyTMPsychic {
     checkcoins(VAR_TEMP_2)
-    if (var(VAR_TEMP_2) < TM_PSYCHIC_COINS) goto(MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForTM)
+    if (var(VAR_TEMP_2) < TM_PSYCHIC_COINS) {
+        goto(MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForTM)
+    }
     checkitemspace(ITEM_TM_PSYCHIC)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoRoomForTM)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoRoomForTM)
+    }
     removecoins(TM_PSYCHIC_COINS)
     additem(ITEM_TM_PSYCHIC)
     updatecoinsbox(1, 1)
@@ -338,9 +372,13 @@ script MauvilleCity_GameCorner_EventScript_BuyTMPsychic {
 
 script MauvilleCity_GameCorner_EventScript_BuyTMFlamethrower {
     checkcoins(VAR_TEMP_2)
-    if (var(VAR_TEMP_2) < TM_FLAMETHROWER_COINS) goto(MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForTM)
+    if (var(VAR_TEMP_2) < TM_FLAMETHROWER_COINS) {
+        goto(MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForTM)
+    }
     checkitemspace(ITEM_TM_FLAMETHROWER)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoRoomForTM)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoRoomForTM)
+    }
     removecoins(TM_FLAMETHROWER_COINS)
     additem(ITEM_TM_FLAMETHROWER)
     updatecoinsbox(1, 1)
@@ -352,9 +390,13 @@ script MauvilleCity_GameCorner_EventScript_BuyTMFlamethrower {
 
 script MauvilleCity_GameCorner_EventScript_BuyTMThunderbolt {
     checkcoins(VAR_TEMP_2)
-    if (var(VAR_TEMP_2) < TM_THUNDERBOLT_COINS) goto(MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForTM)
+    if (var(VAR_TEMP_2) < TM_THUNDERBOLT_COINS) {
+        goto(MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForTM)
+    }
     checkitemspace(ITEM_TM_THUNDERBOLT)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoRoomForTM)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoRoomForTM)
+    }
     removecoins(TM_THUNDERBOLT_COINS)
     additem(ITEM_TM_THUNDERBOLT)
     updatecoinsbox(1, 1)
@@ -366,9 +408,13 @@ script MauvilleCity_GameCorner_EventScript_BuyTMThunderbolt {
 
 script MauvilleCity_GameCorner_EventScript_BuyTMIceBeam {
     checkcoins(VAR_TEMP_2)
-    if (var(VAR_TEMP_2) < TM_ICE_BEAM_COINS) goto(MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForTM)
+    if (var(VAR_TEMP_2) < TM_ICE_BEAM_COINS) {
+        goto(MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForTM)
+    }
     checkitemspace(ITEM_TM_ICE_BEAM)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoRoomForTM)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoRoomForTM)
+    }
     removecoins(TM_ICE_BEAM_COINS)
     additem(ITEM_TM_ICE_BEAM)
     updatecoinsbox(1, 1)
@@ -410,9 +456,13 @@ script MauvilleCity_GameCorner_EventScript_Gentleman {
 script MauvilleCity_GameCorner_EventScript_Girl {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_STARTER_DOLL)) goto(MauvilleCity_GameCorner_EventScript_ReceivedStarterDoll)
+    if (flag(FLAG_RECEIVED_STARTER_DOLL)) {
+        goto(MauvilleCity_GameCorner_EventScript_ReceivedStarterDoll)
+    }
     msgbox(MauvilleCity_GameCorner_Text_GotTwoOfSameDollWantOne, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(MauvilleCity_GameCorner_EventScript_DeclineStarterDoll)
+    if (var(VAR_RESULT) == NO) {
+        goto(MauvilleCity_GameCorner_EventScript_DeclineStarterDoll)
+    }
     switch(VAR_STARTER_MON)
     case(0, MauvilleCity_GameCorner_EventScript_GiveTreeckoDoll)
     case(1, MauvilleCity_GameCorner_EventScript_GiveTorchicDoll)
@@ -423,7 +473,9 @@ script MauvilleCity_GameCorner_EventScript_Girl {
 script MauvilleCity_GameCorner_EventScript_GiveTreeckoDoll {
     bufferdecorationname(STR_VAR_2, DECOR_TREECKO_DOLL)
     checkdecorspace(DECOR_TREECKO_DOLL)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoRoomForStarterDoll)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoRoomForStarterDoll)
+    }
     msgbox(MauvilleCity_GameCorner_Text_HereYouGo2, MSGBOX_DEFAULT)
     givedecoration(DECOR_TREECKO_DOLL)
     setflag(FLAG_RECEIVED_STARTER_DOLL)
@@ -434,7 +486,9 @@ script MauvilleCity_GameCorner_EventScript_GiveTreeckoDoll {
 script MauvilleCity_GameCorner_EventScript_GiveTorchicDoll {
     bufferdecorationname(STR_VAR_2, DECOR_TORCHIC_DOLL)
     checkdecorspace(DECOR_TORCHIC_DOLL)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoRoomForStarterDoll)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoRoomForStarterDoll)
+    }
     msgbox(MauvilleCity_GameCorner_Text_HereYouGo2, MSGBOX_DEFAULT)
     givedecoration(DECOR_TORCHIC_DOLL)
     setflag(FLAG_RECEIVED_STARTER_DOLL)
@@ -445,7 +499,9 @@ script MauvilleCity_GameCorner_EventScript_GiveTorchicDoll {
 script MauvilleCity_GameCorner_EventScript_GiveMudkipDoll {
     bufferdecorationname(STR_VAR_2, DECOR_MUDKIP_DOLL)
     checkdecorspace(DECOR_MUDKIP_DOLL)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoRoomForStarterDoll)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoRoomForStarterDoll)
+    }
     msgbox(MauvilleCity_GameCorner_Text_HereYouGo2, MSGBOX_DEFAULT)
     givedecoration(DECOR_MUDKIP_DOLL)
     setflag(FLAG_RECEIVED_STARTER_DOLL)
@@ -476,16 +532,22 @@ script MauvilleCity_GameCorner_EventScript_PokefanM {
     lock
     faceplayer
     checkitem(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == TRUE) goto(MauvilleCity_GameCorner_EventScript_TryGive20Coins)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(MauvilleCity_GameCorner_EventScript_TryGive20Coins)
+    }
     msgbox(MauvilleCity_GameCorner_Text_NeedCoinCaseGoNextDoor, MSGBOX_DEFAULT)
     goto(MauvilleCity_GameCorner_EventScript_NPCReturnToSlots)
     end
 }
 
 script MauvilleCity_GameCorner_EventScript_TryGive20Coins {
-    if (flag(FLAG_RECEIVED_20_COINS)) goto(MauvilleCity_GameCorner_EventScript_PokefanMNormal)
+    if (flag(FLAG_RECEIVED_20_COINS)) {
+        goto(MauvilleCity_GameCorner_EventScript_PokefanMNormal)
+    }
     checkcoins(VAR_TEMP_1)
-    if (var(VAR_TEMP_1) >= 1) goto(MauvilleCity_GameCorner_EventScript_PokefanMNormal)
+    if (var(VAR_TEMP_1) >= 1) {
+        goto(MauvilleCity_GameCorner_EventScript_PokefanMNormal)
+    }
     setflag(FLAG_RECEIVED_20_COINS)
     addcoins(20)
     msgbox(MauvilleCity_GameCorner_Text_LuckOnlyLastSoLongTakeCoins, MSGBOX_DEFAULT)
@@ -551,7 +613,9 @@ script MauvilleCity_GameCorner_EventScript_Woman {
 script MauvilleCity_GameCorner_EventScript_SlotMachine0 {
     lockall
     checkitem(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    }
     setvar(VAR_0x8004, 0)
     specialvar(VAR_RESULT, GetSlotMachineId)
     playslotmachine(VAR_RESULT)
@@ -562,7 +626,9 @@ script MauvilleCity_GameCorner_EventScript_SlotMachine0 {
 script MauvilleCity_GameCorner_EventScript_SlotMachine1 {
     lockall
     checkitem(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    }
     setvar(VAR_0x8004, 1)
     specialvar(VAR_RESULT, GetSlotMachineId)
     playslotmachine(VAR_RESULT)
@@ -573,7 +639,9 @@ script MauvilleCity_GameCorner_EventScript_SlotMachine1 {
 script MauvilleCity_GameCorner_EventScript_SlotMachine2 {
     lockall
     checkitem(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    }
     setvar(VAR_0x8004, 2)
     specialvar(VAR_RESULT, GetSlotMachineId)
     playslotmachine(VAR_RESULT)
@@ -584,7 +652,9 @@ script MauvilleCity_GameCorner_EventScript_SlotMachine2 {
 script MauvilleCity_GameCorner_EventScript_SlotMachine3 {
     lockall
     checkitem(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    }
     setvar(VAR_0x8004, 3)
     specialvar(VAR_RESULT, GetSlotMachineId)
     playslotmachine(VAR_RESULT)
@@ -595,7 +665,9 @@ script MauvilleCity_GameCorner_EventScript_SlotMachine3 {
 script MauvilleCity_GameCorner_EventScript_SlotMachine4 {
     lockall
     checkitem(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    }
     setvar(VAR_0x8004, 4)
     specialvar(VAR_RESULT, GetSlotMachineId)
     playslotmachine(VAR_RESULT)
@@ -606,7 +678,9 @@ script MauvilleCity_GameCorner_EventScript_SlotMachine4 {
 script MauvilleCity_GameCorner_EventScript_SlotMachine5 {
     lockall
     checkitem(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    }
     setvar(VAR_0x8004, 5)
     specialvar(VAR_RESULT, GetSlotMachineId)
     playslotmachine(VAR_RESULT)
@@ -617,7 +691,9 @@ script MauvilleCity_GameCorner_EventScript_SlotMachine5 {
 script MauvilleCity_GameCorner_EventScript_SlotMachine6 {
     lockall
     checkitem(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    }
     setvar(VAR_0x8004, 6)
     specialvar(VAR_RESULT, GetSlotMachineId)
     playslotmachine(VAR_RESULT)
@@ -628,7 +704,9 @@ script MauvilleCity_GameCorner_EventScript_SlotMachine6 {
 script MauvilleCity_GameCorner_EventScript_SlotMachine7 {
     lockall
     checkitem(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    }
     setvar(VAR_0x8004, 7)
     specialvar(VAR_RESULT, GetSlotMachineId)
     playslotmachine(VAR_RESULT)
@@ -639,7 +717,9 @@ script MauvilleCity_GameCorner_EventScript_SlotMachine7 {
 script MauvilleCity_GameCorner_EventScript_SlotMachine8 {
     lockall
     checkitem(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    }
     setvar(VAR_0x8004, 8)
     specialvar(VAR_RESULT, GetSlotMachineId)
     playslotmachine(VAR_RESULT)
@@ -650,7 +730,9 @@ script MauvilleCity_GameCorner_EventScript_SlotMachine8 {
 script MauvilleCity_GameCorner_EventScript_SlotMachine9 {
     lockall
     checkitem(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    }
     setvar(VAR_0x8004, 9)
     specialvar(VAR_RESULT, GetSlotMachineId)
     playslotmachine(VAR_RESULT)
@@ -661,7 +743,9 @@ script MauvilleCity_GameCorner_EventScript_SlotMachine9 {
 script MauvilleCity_GameCorner_EventScript_SlotMachine10 {
     lockall
     checkitem(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    }
     setvar(VAR_0x8004, 10)
     specialvar(VAR_RESULT, GetSlotMachineId)
     playslotmachine(VAR_RESULT)
@@ -672,7 +756,9 @@ script MauvilleCity_GameCorner_EventScript_SlotMachine10 {
 script MauvilleCity_GameCorner_EventScript_SlotMachine11 {
     lockall
     checkitem(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == FALSE) goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(MauvilleCity_GameCorner_EventScript_NoCoinCase)
+    }
     setvar(VAR_0x8004, 11)
     specialvar(VAR_RESULT, GetSlotMachineId)
     playslotmachine(VAR_RESULT)

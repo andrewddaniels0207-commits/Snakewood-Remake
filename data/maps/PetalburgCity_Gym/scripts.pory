@@ -8,8 +8,12 @@ mapscripts PetalburgCity_Gym_MapScripts {
 }
 
 script PetalburgCity_Gym_OnLoad {
-    if (var(VAR_PETALBURG_GYM_STATE) == 6) goto(PetalburgCity_Gym_EventScript_OpenUnlockedDoors)
-    if (var(VAR_PETALBURG_GYM_STATE) >= 7) call(PetalburgCity_Gym_EventScript_UnlockAllDoors)
+    if (var(VAR_PETALBURG_GYM_STATE) == 6) {
+        goto(PetalburgCity_Gym_EventScript_OpenUnlockedDoors)
+    }
+    if (var(VAR_PETALBURG_GYM_STATE) >= 7) {
+        call(PetalburgCity_Gym_EventScript_UnlockAllDoors)
+    }
     end
 }
 
@@ -40,9 +44,15 @@ script PetalburgCity_Gym_EventScript_UnlockAllDoors {
 }
 
 script PetalburgCity_Gym_OnTransition {
-    if (var(VAR_PETALBURG_GYM_STATE) == 1) call(PetalburgCity_Gym_EventScript_MoveWallyToEntrance)
-    if (var(VAR_PETALBURG_GYM_STATE) < 6) call(PetalburgCity_Gym_EventScript_MoveNormanToEntrance)
-    if (flag(FLAG_SYS_GAME_CLEAR)) call(PetalburgCity_Gym_EventScript_CheckNormanForRematch)
+    if (var(VAR_PETALBURG_GYM_STATE) == 1) {
+        call(PetalburgCity_Gym_EventScript_MoveWallyToEntrance)
+    }
+    if (var(VAR_PETALBURG_GYM_STATE) < 6) {
+        call(PetalburgCity_Gym_EventScript_MoveNormanToEntrance)
+    }
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        call(PetalburgCity_Gym_EventScript_CheckNormanForRematch)
+    }
     end
 }
 
@@ -59,8 +69,12 @@ script PetalburgCity_Gym_EventScript_MoveNormanToEntrance {
 script PetalburgCity_Gym_EventScript_CheckNormanForRematch {
     setorcopyvar(VAR_TRAINER_BATTLE_OPPONENT_A, TRAINER_NORMAN_1)
     specialvar(VAR_RESULT, IsTrainerReadyForRematch)
-    if (var(VAR_RESULT) == TRUE) goto(PetalburgCity_Gym_EventScript_DontMoveNormanToFront)
-    if (var(VAR_PETALBURG_GYM_STATE) == 8) goto(PetalburgCity_Gym_EventScript_DontMoveNormanToFront)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(PetalburgCity_Gym_EventScript_DontMoveNormanToFront)
+    }
+    if (var(VAR_PETALBURG_GYM_STATE) == 8) {
+        goto(PetalburgCity_Gym_EventScript_DontMoveNormanToFront)
+    }
     setobjectxyperm(LOCALID_PETALBURG_GYM_NORMAN, 4, 107)
     return
 }
@@ -159,42 +173,90 @@ script PetalburgCity_Gym_EventScript_BeginWallyTutorialEast {
 script PetalburgCity_Gym_EventScript_BeginWallyTutorial {
     addobject(LOCALID_PETALBURG_GYM_WALLY)
     playse(SE_DOOR)
-    if (var(VAR_0x8008) == 0) call(PetalburgCity_Gym_EventScript_WallyArriveSouth)
-    if (var(VAR_0x8008) == 1) call(PetalburgCity_Gym_EventScript_WallyArriveNorth)
-    if (var(VAR_0x8008) == 2) call(PetalburgCity_Gym_EventScript_WallyArriveWestEast)
-    if (var(VAR_0x8008) == 3) call(PetalburgCity_Gym_EventScript_WallyArriveWestEast)
+    if (var(VAR_0x8008) == 0) {
+        call(PetalburgCity_Gym_EventScript_WallyArriveSouth)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(PetalburgCity_Gym_EventScript_WallyArriveNorth)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(PetalburgCity_Gym_EventScript_WallyArriveWestEast)
+    }
+    if (var(VAR_0x8008) == 3) {
+        call(PetalburgCity_Gym_EventScript_WallyArriveWestEast)
+    }
     msgbox(PetalburgCity_Gym_Text_WallyIdLikeAPokemon, MSGBOX_DEFAULT)
     msgbox(PetalburgCity_Gym_Text_DadOhYoureWallyRight, MSGBOX_DEFAULT)
     msgbox(PetalburgCity_Gym_Text_WallyIveNeverCaughtAPokemon, MSGBOX_DEFAULT)
     msgbox(PetalburgCity_Gym_Text_DadHmISee, MSGBOX_DEFAULT)
-    if (var(VAR_0x8008) == 0) call(PetalburgCity_Gym_EventScript_NormanAddressPlayerSouth)
-    if (var(VAR_0x8008) == 1) call(PetalburgCity_Gym_EventScript_NormanAddressPlayerNorth)
-    if (var(VAR_0x8008) == 2) call(PetalburgCity_Gym_EventScript_NormanAddressPlayerWest)
-    if (var(VAR_0x8008) == 3) call(PetalburgCity_Gym_EventScript_NormanAddressPlayerEast)
+    if (var(VAR_0x8008) == 0) {
+        call(PetalburgCity_Gym_EventScript_NormanAddressPlayerSouth)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(PetalburgCity_Gym_EventScript_NormanAddressPlayerNorth)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(PetalburgCity_Gym_EventScript_NormanAddressPlayerWest)
+    }
+    if (var(VAR_0x8008) == 3) {
+        call(PetalburgCity_Gym_EventScript_NormanAddressPlayerEast)
+    }
     msgbox(PetalburgCity_Gym_Text_DadPlayerGoWithWally, MSGBOX_DEFAULT)
-    if (var(VAR_0x8008) == 0) call(PetalburgCity_Gym_EventScript_NormanAddressWallySouth)
-    if (var(VAR_0x8008) == 1) call(PetalburgCity_Gym_EventScript_NormanAddressWallyNorth)
-    if (var(VAR_0x8008) == 2) call(PetalburgCity_Gym_EventScript_NormanAddressWallyWest)
-    if (var(VAR_0x8008) == 3) call(PetalburgCity_Gym_EventScript_NormanAddressWallyEast)
+    if (var(VAR_0x8008) == 0) {
+        call(PetalburgCity_Gym_EventScript_NormanAddressWallySouth)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(PetalburgCity_Gym_EventScript_NormanAddressWallyNorth)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(PetalburgCity_Gym_EventScript_NormanAddressWallyWest)
+    }
+    if (var(VAR_0x8008) == 3) {
+        call(PetalburgCity_Gym_EventScript_NormanAddressWallyEast)
+    }
     msgbox(PetalburgCity_Gym_Text_IllLoanYouMyZigzagoon, MSGBOX_DEFAULT)
     msgbox(PetalburgCity_Gym_Text_WallyThankYouAndDadGivesPokeBall, MSGBOX_DEFAULT)
     msgbox(PetalburgCity_Gym_Text_WallyOhWowThankYou, MSGBOX_DEFAULT)
-    if (var(VAR_0x8008) == 0) call(PetalburgCity_Gym_EventScript_NormanFaceDoorSouth)
-    if (var(VAR_0x8008) == 1) call(PetalburgCity_Gym_EventScript_NormanFaceDoorNorth)
-    if (var(VAR_0x8008) == 2) call(PetalburgCity_Gym_EventScript_NormanFaceDoorWest)
-    if (var(VAR_0x8008) == 3) call(PetalburgCity_Gym_EventScript_NormanFaceDoorEast)
-    if (var(VAR_0x8008) == 0) call(PetalburgCity_Gym_EventScript_WallyFacePlayer)
-    if (var(VAR_0x8008) == 1) call(PetalburgCity_Gym_EventScript_WallyFaceDown)
-    if (var(VAR_0x8008) == 2) call(PetalburgCity_Gym_EventScript_WallyFacePlayer)
-    if (var(VAR_0x8008) == 3) call(PetalburgCity_Gym_EventScript_WallyFacePlayer)
+    if (var(VAR_0x8008) == 0) {
+        call(PetalburgCity_Gym_EventScript_NormanFaceDoorSouth)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(PetalburgCity_Gym_EventScript_NormanFaceDoorNorth)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(PetalburgCity_Gym_EventScript_NormanFaceDoorWest)
+    }
+    if (var(VAR_0x8008) == 3) {
+        call(PetalburgCity_Gym_EventScript_NormanFaceDoorEast)
+    }
+    if (var(VAR_0x8008) == 0) {
+        call(PetalburgCity_Gym_EventScript_WallyFacePlayer)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(PetalburgCity_Gym_EventScript_WallyFaceDown)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(PetalburgCity_Gym_EventScript_WallyFacePlayer)
+    }
+    if (var(VAR_0x8008) == 3) {
+        call(PetalburgCity_Gym_EventScript_WallyFacePlayer)
+    }
     msgbox(PetalburgCity_Gym_Text_WouldYouReallyComeWithMe, MSGBOX_DEFAULT)
     closemessage
     setflag(FLAG_DONT_TRANSITION_MUSIC)
     playbgm(MUS_FOLLOW_ME, FALSE)
-    if (var(VAR_0x8008) == 0) call(PetalburgCity_Gym_EventScript_ExitGymWithWallySouth)
-    if (var(VAR_0x8008) == 1) call(PetalburgCity_Gym_EventScript_ExitGymWithWallyNorth)
-    if (var(VAR_0x8008) == 2) call(PetalburgCity_Gym_EventScript_ExitGymWithWallyWest)
-    if (var(VAR_0x8008) == 3) call(PetalburgCity_Gym_EventScript_ExitGymWithWallyEast)
+    if (var(VAR_0x8008) == 0) {
+        call(PetalburgCity_Gym_EventScript_ExitGymWithWallySouth)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(PetalburgCity_Gym_EventScript_ExitGymWithWallyNorth)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(PetalburgCity_Gym_EventScript_ExitGymWithWallyWest)
+    }
+    if (var(VAR_0x8008) == 3) {
+        call(PetalburgCity_Gym_EventScript_ExitGymWithWallyEast)
+    }
     removeobject(LOCALID_PETALBURG_GYM_WALLY)
     setflag(FLAG_HIDE_PETALBURG_CITY_WALLYS_MOM)
     setvar(VAR_PETALBURG_GYM_STATE, 1)
@@ -369,9 +431,15 @@ script PetalburgCity_Gym_EventScript_NormanFaceDoorEast {
 
 script PetalburgCity_Gym_EventScript_NormanPostBattle {
     call(PetalburgCity_Gym_EventScript_ShouldGiveEnigmaBerry)
-    if (var(VAR_RESULT) == TRUE) goto(PetalburgCity_Gym_EventScript_GiveEnigmaBerry)
-    if (!flag(FLAG_RECEIVED_TM_FACADE)) goto(PetalburgCity_Gym_EventScript_GiveFacade2)
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(PetalburgCity_Gym_EventScript_NoAmountOfTrainingIsEnough)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(PetalburgCity_Gym_EventScript_GiveEnigmaBerry)
+    }
+    if (!flag(FLAG_RECEIVED_TM_FACADE)) {
+        goto(PetalburgCity_Gym_EventScript_GiveFacade2)
+    }
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(PetalburgCity_Gym_EventScript_NoAmountOfTrainingIsEnough)
+    }
     msgbox(PetalburgCity_Gym_Text_DadGoingToKeepTraining, MSGBOX_DEFAULT)
     release
     end
@@ -391,12 +459,20 @@ script PetalburgCity_Gym_EventScript_NormanRematch {
 
 script PetalburgCity_Gym_EventScript_ShouldGiveEnigmaBerry {
     specialvar(VAR_RESULT, IsEnigmaBerryValid)
-    if (var(VAR_RESULT) == FALSE) goto(PetalburgCity_Gym_EventScript_DontGiveEnigmaBerry)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(PetalburgCity_Gym_EventScript_DontGiveEnigmaBerry)
+    }
     checkitem(ITEM_ENIGMA_BERRY_E_READER)
-    if (var(VAR_RESULT) == TRUE) goto(PetalburgCity_Gym_EventScript_DontGiveEnigmaBerry)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(PetalburgCity_Gym_EventScript_DontGiveEnigmaBerry)
+    }
     checkpcitem(ITEM_ENIGMA_BERRY_E_READER)
-    if (var(VAR_RESULT) == TRUE) goto(PetalburgCity_Gym_EventScript_DontGiveEnigmaBerry)
-    if (var(VAR_ENIGMA_BERRY_AVAILABLE) == 0) goto(PetalburgCity_Gym_EventScript_DontGiveEnigmaBerry)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(PetalburgCity_Gym_EventScript_DontGiveEnigmaBerry)
+    }
+    if (var(VAR_ENIGMA_BERRY_AVAILABLE) == 0) {
+        goto(PetalburgCity_Gym_EventScript_DontGiveEnigmaBerry)
+    }
     msgbox(PetalburgCity_Gym_Text_GiveEnigmaBerry, MSGBOX_DEFAULT)
     setvar(VAR_RESULT, TRUE)
     return
@@ -409,7 +485,9 @@ script PetalburgCity_Gym_EventScript_DontGiveEnigmaBerry {
 
 script PetalburgCity_Gym_EventScript_GiveEnigmaBerry {
     giveitem(ITEM_ENIGMA_BERRY_E_READER)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setvar(VAR_ENIGMA_BERRY_AVAILABLE, 0)
     release
     end
@@ -451,7 +529,9 @@ script PetalburgCity_Gym_EventScript_NormanBattle {
 
 script PetalburgCity_Gym_EventScript_GiveFacade {
     giveitem(ITEM_TM_FACADE)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_BagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_BagIsFull)
+    }
     setflag(FLAG_RECEIVED_TM_FACADE)
     msgbox(PetalburgCity_Gym_Text_ExplainFacade, MSGBOX_DEFAULT)
     return
@@ -481,22 +561,40 @@ script PetalburgCity_Gym_EventScript_WallysDadArrives {
     applymovement(LOCALID_PETALBURG_GYM_WALLYS_DAD, Common_Movement_Delay48)
     waitmovement(0)
     delay(10)
-    if (var(VAR_0x8008) == 1) call(PetalburgCity_Gym_EventScript_WallysDadApproachPlayerNorth)
-    if (var(VAR_0x8008) == 2) call(PetalburgCity_Gym_EventScript_WallysDadApproachPlayerEast)
-    if (var(VAR_0x8008) == 3) call(PetalburgCity_Gym_EventScript_WallysDadApproachPlayerWest)
+    if (var(VAR_0x8008) == 1) {
+        call(PetalburgCity_Gym_EventScript_WallysDadApproachPlayerNorth)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(PetalburgCity_Gym_EventScript_WallysDadApproachPlayerEast)
+    }
+    if (var(VAR_0x8008) == 3) {
+        call(PetalburgCity_Gym_EventScript_WallysDadApproachPlayerWest)
+    }
     msgbox(PetalburgCity_Gym_Text_PleaseComeWithMe, MSGBOX_DEFAULT)
     closemessage
     delay(20)
-    if (var(VAR_0x8008) == 1) call(PetalburgCity_Gym_EventScript_WallysDadFaceNormanNorth)
-    if (var(VAR_0x8008) == 2) call(PetalburgCity_Gym_EventScript_WallysDadFaceNormanEast)
-    if (var(VAR_0x8008) == 3) call(PetalburgCity_Gym_EventScript_WallysDadFaceNormanWest)
+    if (var(VAR_0x8008) == 1) {
+        call(PetalburgCity_Gym_EventScript_WallysDadFaceNormanNorth)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(PetalburgCity_Gym_EventScript_WallysDadFaceNormanEast)
+    }
+    if (var(VAR_0x8008) == 3) {
+        call(PetalburgCity_Gym_EventScript_WallysDadFaceNormanWest)
+    }
     msgbox(PetalburgCity_Gym_Text_LetMeBorrowPlayer, MSGBOX_DEFAULT)
     closemessage
     setflag(FLAG_DONT_TRANSITION_MUSIC)
     playbgm(MUS_FOLLOW_ME, FALSE)
-    if (var(VAR_0x8008) == 1) call(PetalburgCity_Gym_EventScript_ExitGymWithWallysDadNorth)
-    if (var(VAR_0x8008) == 2) call(PetalburgCity_Gym_EventScript_ExitGymWithWallysDadEast)
-    if (var(VAR_0x8008) == 3) call(PetalburgCity_Gym_EventScript_ExitGymWithWallysDadWest)
+    if (var(VAR_0x8008) == 1) {
+        call(PetalburgCity_Gym_EventScript_ExitGymWithWallysDadNorth)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(PetalburgCity_Gym_EventScript_ExitGymWithWallysDadEast)
+    }
+    if (var(VAR_0x8008) == 3) {
+        call(PetalburgCity_Gym_EventScript_ExitGymWithWallysDadWest)
+    }
     removeobject(LOCALID_PETALBURG_GYM_WALLYS_DAD)
     setvar(VAR_PETALBURG_CITY_STATE, 4)
     clearflag(FLAG_HIDE_PETALBURG_CITY_WALLYS_DAD)
@@ -816,12 +914,18 @@ script PetalburgCity_Gym_EventScript_NoAmountOfTrainingIsEnough {
 
 script PetalburgCity_Gym_EventScript_SpeedRoomDoor {
     lockall
-    if (var(VAR_PETALBURG_GYM_STATE) < 6) goto(PetalburgCity_Gym_EventScript_DoorLocked)
+    if (var(VAR_PETALBURG_GYM_STATE) < 6) {
+        goto(PetalburgCity_Gym_EventScript_DoorLocked)
+    }
     setvar(VAR_0x8008, 7)
     setvar(VAR_0x8009, 85)
     msgbox(PetalburgCity_Gym_Text_EnterSpeedRoom, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PetalburgCity_Gym_EventScript_EnterRoom)
-    if (var(VAR_RESULT) == NO) goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    if (var(VAR_RESULT) == YES) {
+        goto(PetalburgCity_Gym_EventScript_EnterRoom)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    }
     end
 }
 
@@ -847,12 +951,18 @@ script PetalburgCity_Gym_EventScript_DoorLocked {
 
 script PetalburgCity_Gym_EventScript_AccuracyRoomDoor {
     lockall
-    if (var(VAR_PETALBURG_GYM_STATE) < 6) goto(PetalburgCity_Gym_EventScript_DoorLocked)
+    if (var(VAR_PETALBURG_GYM_STATE) < 6) {
+        goto(PetalburgCity_Gym_EventScript_DoorLocked)
+    }
     setvar(VAR_0x8008, 1)
     setvar(VAR_0x8009, 98)
     msgbox(PetalburgCity_Gym_Text_EnterAccuracyRoom, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PetalburgCity_Gym_EventScript_EnterRoom)
-    if (var(VAR_RESULT) == NO) goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    if (var(VAR_RESULT) == YES) {
+        goto(PetalburgCity_Gym_EventScript_EnterRoom)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    }
     end
 }
 
@@ -862,8 +972,12 @@ script PetalburgCity_Gym_EventScript_ConfusionRoomDoor {
     setvar(VAR_0x8008, 7)
     setvar(VAR_0x8009, 46)
     msgbox(PetalburgCity_Gym_Text_EnterConfusionRoom, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PetalburgCity_Gym_EventScript_EnterRoom)
-    if (var(VAR_RESULT) == NO) goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    if (var(VAR_RESULT) == YES) {
+        goto(PetalburgCity_Gym_EventScript_EnterRoom)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    }
     end
 }
 
@@ -873,8 +987,12 @@ script PetalburgCity_Gym_EventScript_LeftDefenseRoomDoor {
     setvar(VAR_0x8008, 1)
     setvar(VAR_0x8009, 59)
     msgbox(PetalburgCity_Gym_Text_EnterDefenseRoom, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PetalburgCity_Gym_EventScript_EnterRoom)
-    if (var(VAR_RESULT) == NO) goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    if (var(VAR_RESULT) == YES) {
+        goto(PetalburgCity_Gym_EventScript_EnterRoom)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    }
     end
 }
 
@@ -884,8 +1002,12 @@ script PetalburgCity_Gym_EventScript_RightDefenseRoomDoor {
     setvar(VAR_0x8008, 7)
     setvar(VAR_0x8009, 59)
     msgbox(PetalburgCity_Gym_Text_EnterDefenseRoom, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PetalburgCity_Gym_EventScript_EnterRoom)
-    if (var(VAR_RESULT) == NO) goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    if (var(VAR_RESULT) == YES) {
+        goto(PetalburgCity_Gym_EventScript_EnterRoom)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    }
     end
 }
 
@@ -895,8 +1017,12 @@ script PetalburgCity_Gym_EventScript_RecoveryRoomDoor {
     setvar(VAR_0x8008, 1)
     setvar(VAR_0x8009, 72)
     msgbox(PetalburgCity_Gym_Text_EnterRecoveryRoom, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PetalburgCity_Gym_EventScript_EnterRoom)
-    if (var(VAR_RESULT) == NO) goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    if (var(VAR_RESULT) == YES) {
+        goto(PetalburgCity_Gym_EventScript_EnterRoom)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    }
     end
 }
 
@@ -906,8 +1032,12 @@ script PetalburgCity_Gym_EventScript_LeftStrengthRoomDoor {
     setvar(VAR_0x8008, 1)
     setvar(VAR_0x8009, 20)
     msgbox(PetalburgCity_Gym_Text_EnterStrengthRoom, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PetalburgCity_Gym_EventScript_EnterRoom)
-    if (var(VAR_RESULT) == NO) goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    if (var(VAR_RESULT) == YES) {
+        goto(PetalburgCity_Gym_EventScript_EnterRoom)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    }
     end
 }
 
@@ -917,8 +1047,12 @@ script PetalburgCity_Gym_EventScript_RightStrengthRoomDoor {
     setvar(VAR_0x8008, 7)
     setvar(VAR_0x8009, 20)
     msgbox(PetalburgCity_Gym_Text_EnterStrengthRoom, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PetalburgCity_Gym_EventScript_EnterRoom)
-    if (var(VAR_RESULT) == NO) goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    if (var(VAR_RESULT) == YES) {
+        goto(PetalburgCity_Gym_EventScript_EnterRoom)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    }
     end
 }
 
@@ -928,8 +1062,12 @@ script PetalburgCity_Gym_EventScript_LeftOHKORoomDoor {
     setvar(VAR_0x8008, 1)
     setvar(VAR_0x8009, 33)
     msgbox(PetalburgCity_Gym_Text_EnterOHKORoom, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PetalburgCity_Gym_EventScript_EnterRoom)
-    if (var(VAR_RESULT) == NO) goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    if (var(VAR_RESULT) == YES) {
+        goto(PetalburgCity_Gym_EventScript_EnterRoom)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    }
     end
 }
 
@@ -939,8 +1077,12 @@ script PetalburgCity_Gym_EventScript_RightOHKORoomDoor {
     setvar(VAR_0x8008, 7)
     setvar(VAR_0x8009, 33)
     msgbox(PetalburgCity_Gym_Text_EnterOHKORoom, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PetalburgCity_Gym_EventScript_EnterRoom)
-    if (var(VAR_RESULT) == NO) goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    if (var(VAR_RESULT) == YES) {
+        goto(PetalburgCity_Gym_EventScript_EnterRoom)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    }
     end
 }
 
@@ -950,8 +1092,12 @@ script PetalburgCity_Gym_EventScript_LeftGymLeadersRoomDoor {
     setvar(VAR_0x8008, 1)
     setvar(VAR_0x8009, 7)
     msgbox(PetalburgCity_Gym_Text_EnterGymLeadersRoom, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PetalburgCity_Gym_EventScript_EnterRoom)
-    if (var(VAR_RESULT) == NO) goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    if (var(VAR_RESULT) == YES) {
+        goto(PetalburgCity_Gym_EventScript_EnterRoom)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    }
     end
 }
 
@@ -961,14 +1107,20 @@ script PetalburgCity_Gym_EventScript_RightGymLeadersRoomDoor {
     setvar(VAR_0x8008, 7)
     setvar(VAR_0x8009, 7)
     msgbox(PetalburgCity_Gym_Text_EnterGymLeadersRoom, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(PetalburgCity_Gym_EventScript_EnterRoom)
-    if (var(VAR_RESULT) == NO) goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    if (var(VAR_RESULT) == YES) {
+        goto(PetalburgCity_Gym_EventScript_EnterRoom)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(PetalburgCity_Gym_EventScript_DontEnterRoom)
+    }
     end
 }
 
 script PetalburgCity_Gym_EventScript_Randall {
     trainerbattle_single(TRAINER_RANDALL, PetalburgCity_Gym_Text_RandallIntro, PetalburgCity_Gym_Text_RandallDefeat, PetalburgCity_Gym_EventScript_SlideOpenSpeedRoomDoors)
-    if (flag(FLAG_DEFEATED_PETALBURG_GYM)) goto(PetalburgCity_Gym_EventScript_RandallPostBadge)
+    if (flag(FLAG_DEFEATED_PETALBURG_GYM)) {
+        goto(PetalburgCity_Gym_EventScript_RandallPostBadge)
+    }
     msgbox(PetalburgCity_Gym_Text_RandallPostBattle, MSGBOX_AUTOCLOSE)
     end
 }
@@ -988,7 +1140,9 @@ script PetalburgCity_Gym_EventScript_RandallPostBadge {
 
 script PetalburgCity_Gym_EventScript_Parker {
     trainerbattle_single(TRAINER_PARKER, PetalburgCity_Gym_Text_ParkerIntro, PetalburgCity_Gym_Text_ParkerDefeat, PetalburgCity_Gym_EventScript_SlideOpenConfusionRoomDoors)
-    if (flag(FLAG_DEFEATED_PETALBURG_GYM)) goto(PetalburgCity_Gym_EventScript_ParkerPostBadge)
+    if (flag(FLAG_DEFEATED_PETALBURG_GYM)) {
+        goto(PetalburgCity_Gym_EventScript_ParkerPostBadge)
+    }
     msgbox(PetalburgCity_Gym_Text_ParkerPostBattle, MSGBOX_AUTOCLOSE)
     end
 }
@@ -1008,7 +1162,9 @@ script PetalburgCity_Gym_EventScript_ParkerPostBadge {
 
 script PetalburgCity_Gym_EventScript_George {
     trainerbattle_single(TRAINER_GEORGE, PetalburgCity_Gym_Text_GeorgeIntro, PetalburgCity_Gym_Text_GeorgeDefeat, PetalburgCity_Gym_EventScript_SlideOpenRecoveryRoomDoors)
-    if (flag(FLAG_DEFEATED_PETALBURG_GYM)) goto(PetalburgCity_Gym_EventScript_GeorgePostBadge)
+    if (flag(FLAG_DEFEATED_PETALBURG_GYM)) {
+        goto(PetalburgCity_Gym_EventScript_GeorgePostBadge)
+    }
     msgbox(PetalburgCity_Gym_Text_GeorgePostBattle, MSGBOX_AUTOCLOSE)
     end
 }
@@ -1028,7 +1184,9 @@ script PetalburgCity_Gym_EventScript_GeorgePostBadge {
 
 script PetalburgCity_Gym_EventScript_Berke {
     trainerbattle_single(TRAINER_BERKE, PetalburgCity_Gym_Text_BerkeIntro, PetalburgCity_Gym_Text_BerkeDefeat, PetalburgCity_Gym_EventScript_SlideOpenOHKORoomDoors)
-    if (flag(FLAG_DEFEATED_PETALBURG_GYM)) goto(PetalburgCity_Gym_EventScript_BerkePostBadge)
+    if (flag(FLAG_DEFEATED_PETALBURG_GYM)) {
+        goto(PetalburgCity_Gym_EventScript_BerkePostBadge)
+    }
     msgbox(PetalburgCity_Gym_Text_BerkePostBattle, MSGBOX_AUTOCLOSE)
     end
 }
@@ -1048,7 +1206,9 @@ script PetalburgCity_Gym_EventScript_BerkePostBadge {
 
 script PetalburgCity_Gym_EventScript_Mary {
     trainerbattle_single(TRAINER_MARY, PetalburgCity_Gym_Text_MaryIntro, PetalburgCity_Gym_Text_MaryDefeat, PetalburgCity_Gym_EventScript_SlideOpenAccuracyRoomDoors)
-    if (flag(FLAG_DEFEATED_PETALBURG_GYM)) goto(PetalburgCity_Gym_EventScript_MaryPostBadge)
+    if (flag(FLAG_DEFEATED_PETALBURG_GYM)) {
+        goto(PetalburgCity_Gym_EventScript_MaryPostBadge)
+    }
     msgbox(PetalburgCity_Gym_Text_MaryPostBattle, MSGBOX_AUTOCLOSE)
     end
 }
@@ -1068,7 +1228,9 @@ script PetalburgCity_Gym_EventScript_MaryPostBadge {
 
 script PetalburgCity_Gym_EventScript_Alexia {
     trainerbattle_single(TRAINER_ALEXIA, PetalburgCity_Gym_Text_AlexiaIntro, PetalburgCity_Gym_Text_AlexiaDefeat, PetalburgCity_Gym_EventScript_SlideOpenDefenseRoomDoors)
-    if (flag(FLAG_DEFEATED_PETALBURG_GYM)) goto(PetalburgCity_Gym_EventScript_AlexiaPostBadge)
+    if (flag(FLAG_DEFEATED_PETALBURG_GYM)) {
+        goto(PetalburgCity_Gym_EventScript_AlexiaPostBadge)
+    }
     msgbox(PetalburgCity_Gym_Text_AlexiaPostBattle, MSGBOX_AUTOCLOSE)
     end
 }
@@ -1088,7 +1250,9 @@ script PetalburgCity_Gym_EventScript_AlexiaPostBadge {
 
 script PetalburgCity_Gym_EventScript_Jody {
     trainerbattle_single(TRAINER_JODY, PetalburgCity_Gym_Text_JodyIntro, PetalburgCity_Gym_Text_JodyDefeat, PetalburgCity_Gym_EventScript_SlideOpenStrengthRoomDoors)
-    if (flag(FLAG_DEFEATED_PETALBURG_GYM)) goto(PetalburgCity_Gym_EventScript_JodyPostBadge)
+    if (flag(FLAG_DEFEATED_PETALBURG_GYM)) {
+        goto(PetalburgCity_Gym_EventScript_JodyPostBadge)
+    }
     msgbox(PetalburgCity_Gym_Text_JodyPostBattle, MSGBOX_AUTOCLOSE)
     end
 }
@@ -1108,64 +1272,96 @@ script PetalburgCity_Gym_EventScript_JodyPostBadge {
 
 script PetalburgCity_Gym_EventScript_OpenGymEntranceDoors {
     setvar(VAR_0x8004, 1)
-    if (var(VAR_0x8005) == 0) call(PetalburgCity_Gym_EventScript_SlideOpenRoomDoors)
-    if (var(VAR_0x8005) == 1) call(PetalburgCity_Gym_EventScript_UnlockRoomDoors)
+    if (var(VAR_0x8005) == 0) {
+        call(PetalburgCity_Gym_EventScript_SlideOpenRoomDoors)
+    }
+    if (var(VAR_0x8005) == 1) {
+        call(PetalburgCity_Gym_EventScript_UnlockRoomDoors)
+    }
     call(PetalburgCity_Gym_EventScript_SetEntranceRoomDoorMetatiles)
     return
 }
 
 script PetalburgCity_Gym_EventScript_OpenSpeedRoomDoors {
     setvar(VAR_0x8004, 2)
-    if (var(VAR_0x8005) == 0) call(PetalburgCity_Gym_EventScript_SlideOpenRoomDoors)
-    if (var(VAR_0x8005) == 1) call(PetalburgCity_Gym_EventScript_UnlockRoomDoors)
+    if (var(VAR_0x8005) == 0) {
+        call(PetalburgCity_Gym_EventScript_SlideOpenRoomDoors)
+    }
+    if (var(VAR_0x8005) == 1) {
+        call(PetalburgCity_Gym_EventScript_UnlockRoomDoors)
+    }
     call(PetalburgCity_Gym_EventScript_SetSpeedRoomDoorMetatiles)
     return
 }
 
 script PetalburgCity_Gym_EventScript_OpenAccuracyRoomDoors {
     setvar(VAR_0x8004, 3)
-    if (var(VAR_0x8005) == 0) call(PetalburgCity_Gym_EventScript_SlideOpenRoomDoors)
-    if (var(VAR_0x8005) == 1) call(PetalburgCity_Gym_EventScript_UnlockRoomDoors)
+    if (var(VAR_0x8005) == 0) {
+        call(PetalburgCity_Gym_EventScript_SlideOpenRoomDoors)
+    }
+    if (var(VAR_0x8005) == 1) {
+        call(PetalburgCity_Gym_EventScript_UnlockRoomDoors)
+    }
     call(PetalburgCity_Gym_EventScript_SetAccuracyRoomDoorMetatiles)
     return
 }
 
 script PetalburgCity_Gym_EventScript_OpenConfusionRoomDoors {
     setvar(VAR_0x8004, 4)
-    if (var(VAR_0x8005) == 0) call(PetalburgCity_Gym_EventScript_SlideOpenRoomDoors)
-    if (var(VAR_0x8005) == 1) call(PetalburgCity_Gym_EventScript_UnlockRoomDoors)
+    if (var(VAR_0x8005) == 0) {
+        call(PetalburgCity_Gym_EventScript_SlideOpenRoomDoors)
+    }
+    if (var(VAR_0x8005) == 1) {
+        call(PetalburgCity_Gym_EventScript_UnlockRoomDoors)
+    }
     call(PetalburgCity_Gym_EventScript_SetConfusionRoomDoorMetatiles)
     return
 }
 
 script PetalburgCity_Gym_EventScript_OpenDefenseRoomDoors {
     setvar(VAR_0x8004, 5)
-    if (var(VAR_0x8005) == 0) call(PetalburgCity_Gym_EventScript_SlideOpenRoomDoors)
-    if (var(VAR_0x8005) == 1) call(PetalburgCity_Gym_EventScript_UnlockRoomDoors)
+    if (var(VAR_0x8005) == 0) {
+        call(PetalburgCity_Gym_EventScript_SlideOpenRoomDoors)
+    }
+    if (var(VAR_0x8005) == 1) {
+        call(PetalburgCity_Gym_EventScript_UnlockRoomDoors)
+    }
     call(PetalburgCity_Gym_EventScript_SetDefenseRoomDoorMetatiles)
     return
 }
 
 script PetalburgCity_Gym_EventScript_OpenRecoveryRoomDoors {
     setvar(VAR_0x8004, 6)
-    if (var(VAR_0x8005) == 0) call(PetalburgCity_Gym_EventScript_SlideOpenRoomDoors)
-    if (var(VAR_0x8005) == 1) call(PetalburgCity_Gym_EventScript_UnlockRoomDoors)
+    if (var(VAR_0x8005) == 0) {
+        call(PetalburgCity_Gym_EventScript_SlideOpenRoomDoors)
+    }
+    if (var(VAR_0x8005) == 1) {
+        call(PetalburgCity_Gym_EventScript_UnlockRoomDoors)
+    }
     call(PetalburgCity_Gym_EventScript_SetRecoveryRoomDoorMetatiles)
     return
 }
 
 script PetalburgCity_Gym_EventScript_OpenStrengthRoomDoors {
     setvar(VAR_0x8004, 7)
-    if (var(VAR_0x8005) == 0) call(PetalburgCity_Gym_EventScript_SlideOpenRoomDoors)
-    if (var(VAR_0x8005) == 1) call(PetalburgCity_Gym_EventScript_UnlockRoomDoors)
+    if (var(VAR_0x8005) == 0) {
+        call(PetalburgCity_Gym_EventScript_SlideOpenRoomDoors)
+    }
+    if (var(VAR_0x8005) == 1) {
+        call(PetalburgCity_Gym_EventScript_UnlockRoomDoors)
+    }
     call(PetalburgCity_Gym_EventScript_SetStrengthRoomDoorMetatiles)
     return
 }
 
 script PetalburgCity_Gym_EventScript_OpenOHKORoomDoors {
     setvar(VAR_0x8004, 8)
-    if (var(VAR_0x8005) == 0) call(PetalburgCity_Gym_EventScript_SlideOpenRoomDoors)
-    if (var(VAR_0x8005) == 1) call(PetalburgCity_Gym_EventScript_UnlockRoomDoors)
+    if (var(VAR_0x8005) == 0) {
+        call(PetalburgCity_Gym_EventScript_SlideOpenRoomDoors)
+    }
+    if (var(VAR_0x8005) == 1) {
+        call(PetalburgCity_Gym_EventScript_UnlockRoomDoors)
+    }
     call(PetalburgCity_Gym_EventScript_SetOHKORoomDoorMetatiles)
     return
 }
@@ -1240,7 +1436,9 @@ script PetalburgCity_Gym_EventScript_UnlockRoomDoors {
 script PetalburgCity_Gym_EventScript_GymGuide {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_PETALBURG_GYM)) goto(PetalburgCity_Gym_EventScript_GymGuidePostVictory)
+    if (flag(FLAG_DEFEATED_PETALBURG_GYM)) {
+        goto(PetalburgCity_Gym_EventScript_GymGuidePostVictory)
+    }
     msgbox(PetalburgCity_Gym_Text_GymGuideAdvice, MSGBOX_DEFAULT)
     release
     end
@@ -1254,14 +1452,18 @@ script PetalburgCity_Gym_EventScript_GymGuidePostVictory {
 
 script PetalburgCity_Gym_EventScript_LeftGymStatue {
     lockall
-    if (flag(FLAG_BADGE05_GET)) goto(PetalburgCity_Gym_EventScript_GymStatueCertified)
+    if (flag(FLAG_BADGE05_GET)) {
+        goto(PetalburgCity_Gym_EventScript_GymStatueCertified)
+    }
     goto(PetalburgCity_Gym_EventScript_GymStatue)
     end
 }
 
 script PetalburgCity_Gym_EventScript_RightGymStatue {
     lockall
-    if (flag(FLAG_BADGE05_GET)) goto(PetalburgCity_Gym_EventScript_GymStatueCertified)
+    if (flag(FLAG_BADGE05_GET)) {
+        goto(PetalburgCity_Gym_EventScript_GymStatueCertified)
+    }
     goto(PetalburgCity_Gym_EventScript_GymStatue)
     end
 }

@@ -3,10 +3,14 @@ mapscripts SaffronCity_MrPsychicsHouse_Frlg_MapScripts {}
 script SaffronCity_MrPsychicsHouse_EventScript_MrPsychic {
     lock
     faceplayer
-    if (flag(FLAG_GOT_TM29_FROM_MR_PSYCHIC)) goto(SaffronCity_MrPsychicsHouse_EventScript_AlreadyGotTM29)
+    if (flag(FLAG_GOT_TM29_FROM_MR_PSYCHIC)) {
+        goto(SaffronCity_MrPsychicsHouse_EventScript_AlreadyGotTM29)
+    }
     msgbox(SaffronCity_MrPsychicsHouse_Text_YouWantedThis)
     checkitemspace(ITEM_TM29)
-    if (var(VAR_RESULT) == FALSE) goto(SaffronCity_MrPsychicsHouse_EventScript_NoRoomForTM29)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SaffronCity_MrPsychicsHouse_EventScript_NoRoomForTM29)
+    }
     giveitem_msg(SaffronCity_MrPsychicsHouse_Text_ReceivedTM29FromMrPsychic, ITEM_TM29)
     msgbox(SaffronCity_MrPsychicsHouse_Text_ExplainTM29)
     setflag(FLAG_GOT_TM29_FROM_MR_PSYCHIC)

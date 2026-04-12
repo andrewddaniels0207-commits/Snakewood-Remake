@@ -10,9 +10,15 @@ script CeladonCity_Condominiums_RoofRoom_EventScript_EeveeBall {
     faceplayer
     setvar(VAR_TEMP_1, SPECIES_EEVEE)
     givemon(SPECIES_EEVEE, 25)
-    if (var(VAR_RESULT) == 0) goto(CeladonCity_Condominiums_RoofRoom_EventScript_GetEeveeParty)
-    if (var(VAR_RESULT) == 1) goto(CeladonCity_Condominiums_RoofRoom_EventScript_GetEeveePC)
-    if (var(VAR_RESULT) == 2) goto(Common_EventScript_NoMoreRoomForPokemon)
+    if (var(VAR_RESULT) == 0) {
+        goto(CeladonCity_Condominiums_RoofRoom_EventScript_GetEeveeParty)
+    }
+    if (var(VAR_RESULT) == 1) {
+        goto(CeladonCity_Condominiums_RoofRoom_EventScript_GetEeveePC)
+    }
+    if (var(VAR_RESULT) == 2) {
+        goto(Common_EventScript_NoMoreRoomForPokemon)
+    }
     release
     end
 }
@@ -25,7 +31,9 @@ script CeladonCity_Condominiums_RoofRoom_EventScript_GetEeveeParty {
     waitfanfare()
     bufferspeciesname(STR_VAR_1, SPECIES_EEVEE)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(CeladonCity_Condominiums_RoofRoom_EventScript_SetGotEevee)
+    if (var(VAR_RESULT) == NO) {
+        goto(CeladonCity_Condominiums_RoofRoom_EventScript_SetGotEevee)
+    }
     call(Common_EventScript_GetGiftMonPartySlot)
     call(Common_EventScript_NameReceivedPartyMon)
     goto(CeladonCity_Condominiums_RoofRoom_EventScript_SetGotEevee)
@@ -40,7 +48,9 @@ script CeladonCity_Condominiums_RoofRoom_EventScript_GetEeveePC {
     waitfanfare()
     bufferspeciesname(STR_VAR_1, SPECIES_EEVEE)
     msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(CeladonCity_Condominiums_RoofRoom_EventScript_TransferEeveeToPC)
+    if (var(VAR_RESULT) == NO) {
+        goto(CeladonCity_Condominiums_RoofRoom_EventScript_TransferEeveeToPC)
+    }
     call(Common_EventScript_NameReceivedBoxMon)
     goto(CeladonCity_Condominiums_RoofRoom_EventScript_TransferEeveeToPC)
     end

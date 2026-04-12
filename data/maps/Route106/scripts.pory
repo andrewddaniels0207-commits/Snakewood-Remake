@@ -20,7 +20,9 @@ script Route106_EventScript_Kyla {
 script Route106_EventScript_Elliot {
     trainerbattle_single(TRAINER_ELLIOT_1, Route106_Text_ElliotIntro, Route106_Text_ElliotDefeated, Route106_EventScript_ElliotRegisterMatchCallAfterBattle)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route106_EventScript_ElliotRematch)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route106_EventScript_ElliotRematch)
+    }
     msgbox(Route106_Text_ElliotPostBattle, MSGBOX_DEFAULT)
     release
     end

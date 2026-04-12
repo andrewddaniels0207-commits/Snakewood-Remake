@@ -3,11 +3,19 @@ mapscripts FuchsiaCity_WardensHouse_Frlg_MapScripts {}
 script FuchsiaCity_WardensHouse_EventScript_Warden {
     lock
     faceplayer
-    if (flag(FLAG_GOT_HM04)) goto(FuchsiaCity_WardensHouse_EventScript_ExplainStrength)
-    if (flag(FLAG_HIDE_SAFARI_ZONE_WEST_GOLD_TEETH)) goto(FuchsiaCity_WardensHouse_EventScript_GiveGoldTeeth)
+    if (flag(FLAG_GOT_HM04)) {
+        goto(FuchsiaCity_WardensHouse_EventScript_ExplainStrength)
+    }
+    if (flag(FLAG_HIDE_SAFARI_ZONE_WEST_GOLD_TEETH)) {
+        goto(FuchsiaCity_WardensHouse_EventScript_GiveGoldTeeth)
+    }
     msgbox(FuchsiaCity_WardensHouse_Text_HifFuffHefifoo, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) call(FuchsiaCity_WardensHouse_EventScript_WardenYes)
-    if (var(VAR_RESULT) == NO) call(FuchsiaCity_WardensHouse_EventScript_WardenNo)
+    if (var(VAR_RESULT) == YES) {
+        call(FuchsiaCity_WardensHouse_EventScript_WardenYes)
+    }
+    if (var(VAR_RESULT) == NO) {
+        call(FuchsiaCity_WardensHouse_EventScript_WardenNo)
+    }
     release
     end
 }
@@ -21,8 +29,12 @@ script FuchsiaCity_WardensHouse_EventScript_GiveGoldTeeth {
     msgbox(FuchsiaCity_WardensHouse_Text_WardenPoppedInHisTeeth)
     call(EventScript_RestorePrevTextColor)
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(FuchsiaCity_WardensHouse_EventScript_WardenThanksMale)
-    if (var(VAR_RESULT) == FEMALE) call(FuchsiaCity_WardensHouse_EventScript_WardenThanksFemale)
+    if (var(VAR_RESULT) == MALE) {
+        call(FuchsiaCity_WardensHouse_EventScript_WardenThanksMale)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(FuchsiaCity_WardensHouse_EventScript_WardenThanksFemale)
+    }
     giveitem_msg(FuchsiaCity_WardensHouse_Text_ReceivedHM04FromWarden, ITEM_HM04)
     setflag(FLAG_GOT_HM04)
     removeitem(ITEM_GOLD_TEETH)

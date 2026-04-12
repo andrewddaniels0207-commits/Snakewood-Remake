@@ -12,7 +12,9 @@ script LilycoveCity_House3_EventScript_PokefanF {
     lock
     faceplayer
     msgbox(LilycoveCity_House3_Text_LearnFromMasterOfPokeblocks, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(LilycoveCity_House3_EventScript_DeclinePokeblockLearn)
+    if (var(VAR_RESULT) == NO) {
+        goto(LilycoveCity_House3_EventScript_DeclinePokeblockLearn)
+    }
     msgbox(LilycoveCity_House3_Text_ExplainPokeblocks, MSGBOX_DEFAULT)
     closemessage
     applymovement(VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection)

@@ -4,7 +4,9 @@ mapscripts MossdeepCity_SpaceCenter_1F_MapScripts {
 }
 
 script MossdeepCity_SpaceCenter_1F_OnTransition {
-    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) goto(MossdeepCity_SpaceCenter_1F_EventScript_MoveObjectsForTeamMagma)
+    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) {
+        goto(MossdeepCity_SpaceCenter_1F_EventScript_MoveObjectsForTeamMagma)
+    }
     end
 }
 
@@ -18,9 +20,15 @@ script MossdeepCity_SpaceCenter_1F_EventScript_MoveObjectsForTeamMagma {
     setobjectxyperm(LOCALID_SPACE_CENTER_1F_SCIENTIST_1, 3, 4)
     setobjectmovementtype(LOCALID_SPACE_CENTER_1F_SCIENTIST_1, MOVEMENT_TYPE_FACE_RIGHT)
     setobjectmovementtype(LOCALID_SPACE_CENTER_1F_SCIENTIST_2, MOVEMENT_TYPE_FACE_RIGHT)
-    if (var(VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE) == 1) goto(MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardLeft)
-    if (var(VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE) == 2) goto(MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardDown)
-    if (var(VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE) == 3) goto(MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardRight)
+    if (var(VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE) == 1) {
+        goto(MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardLeft)
+    }
+    if (var(VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE) == 2) {
+        goto(MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardDown)
+    }
+    if (var(VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE) == 3) {
+        goto(MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardRight)
+    }
     end
 }
 
@@ -40,7 +48,9 @@ script MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardRight {
 }
 
 script MossdeepCity_SpaceCenter_1F_OnLoad {
-    if (var(VAR_MOSSDEEP_CITY_STATE) <= 2) goto(MossdeepCity_SpaceCenter_1F_EventScript_SetMagmaNote)
+    if (var(VAR_MOSSDEEP_CITY_STATE) <= 2) {
+        goto(MossdeepCity_SpaceCenter_1F_EventScript_SetMagmaNote)
+    }
     end
 }
 
@@ -52,12 +62,18 @@ script MossdeepCity_SpaceCenter_1F_EventScript_SetMagmaNote {
 script MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounter {
     lock
     faceplayer
-    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) goto(MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounterMagma)
+    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) {
+        goto(MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounterMagma)
+    }
     dotimebasedevents()
     specialvar(VAR_RESULT, GetWeekCount)
     buffernumberstring(STR_VAR_1, VAR_RESULT)
-    if (var(VAR_RESULT) == 0) call(MossdeepCity_SpaceCenter_1F_EventScript_NoLaunchesYet)
-    if (var(VAR_RESULT) >= 1) call(MossdeepCity_SpaceCenter_1F_EventScript_ShowLaunchNumber)
+    if (var(VAR_RESULT) == 0) {
+        call(MossdeepCity_SpaceCenter_1F_EventScript_NoLaunchesYet)
+    }
+    if (var(VAR_RESULT) >= 1) {
+        call(MossdeepCity_SpaceCenter_1F_EventScript_ShowLaunchNumber)
+    }
     closemessage
     applymovement(VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection)
     waitmovement(0)
@@ -79,8 +95,12 @@ script MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounterMagma {
     dotimebasedevents()
     specialvar(VAR_RESULT, GetWeekCount)
     buffernumberstring(STR_VAR_1, VAR_RESULT)
-    if (var(VAR_RESULT) == 0) call(MossdeepCity_SpaceCenter_1F_EventScript_NoLaunchesYetMagma)
-    if (var(VAR_RESULT) >= 1) call(MossdeepCity_SpaceCenter_1F_EventScript_ShowLaunchNumberMagma)
+    if (var(VAR_RESULT) == 0) {
+        call(MossdeepCity_SpaceCenter_1F_EventScript_NoLaunchesYetMagma)
+    }
+    if (var(VAR_RESULT) >= 1) {
+        call(MossdeepCity_SpaceCenter_1F_EventScript_ShowLaunchNumberMagma)
+    }
     closemessage
     applymovement(VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterRight)
     waitmovement(0)
@@ -101,7 +121,9 @@ script MossdeepCity_SpaceCenter_1F_EventScript_ShowLaunchNumberMagma {
 script MossdeepCity_SpaceCenter_1F_EventScript_Scientist {
     lock
     faceplayer
-    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) goto(MossdeepCity_SpaceCenter_1F_EventScript_ScientistMagma)
+    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) {
+        goto(MossdeepCity_SpaceCenter_1F_EventScript_ScientistMagma)
+    }
     msgbox(MossdeepCity_SpaceCenter_1F_Text_RocketLaunchDemandsPerfection, MSGBOX_DEFAULT)
     release
     end
@@ -118,11 +140,17 @@ script MossdeepCity_SpaceCenter_1F_EventScript_ScientistMagma {
 script MossdeepCity_SpaceCenter_1F_EventScript_SunStoneMan {
     lock
     faceplayer
-    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) goto(MossdeepCity_SpaceCenter_1F_EventScript_SunStoneManMagma)
-    if (flag(FLAG_RECEIVED_SUN_STONE_MOSSDEEP)) goto(MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStone)
+    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) {
+        goto(MossdeepCity_SpaceCenter_1F_EventScript_SunStoneManMagma)
+    }
+    if (flag(FLAG_RECEIVED_SUN_STONE_MOSSDEEP)) {
+        goto(MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStone)
+    }
     msgbox(MossdeepCity_SpaceCenter_1F_Text_FoundThisYouCanHaveIt, MSGBOX_DEFAULT)
     giveitem(ITEM_SUN_STONE)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_SUN_STONE_MOSSDEEP)
     msgbox(MossdeepCity_SpaceCenter_1F_Text_HoennFamousForMeteorShowers, MSGBOX_DEFAULT)
     release
@@ -136,10 +164,14 @@ script MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStone {
 }
 
 script MossdeepCity_SpaceCenter_1F_EventScript_SunStoneManMagma {
-    if (flag(FLAG_RECEIVED_SUN_STONE_MOSSDEEP)) goto(MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma)
+    if (flag(FLAG_RECEIVED_SUN_STONE_MOSSDEEP)) {
+        goto(MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma)
+    }
     msgbox(MossdeepCity_SpaceCenter_1F_Text_MagmaCantStealFuelTakeThis, MSGBOX_DEFAULT)
     giveitem(ITEM_SUN_STONE)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_SUN_STONE_MOSSDEEP)
     msgbox(MossdeepCity_SpaceCenter_1F_Text_CantStrollOnBeachWithMagma, MSGBOX_DEFAULT)
     applymovement(VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterRight)
@@ -159,9 +191,15 @@ script MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma {
 script MossdeepCity_SpaceCenter_1F_EventScript_Woman {
     lock
     faceplayer
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal)
-    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) goto(MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma)
-    if (var(VAR_MOSSDEEP_CITY_STATE) < 2) goto(MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal)
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal)
+    }
+    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) {
+        goto(MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma)
+    }
+    if (var(VAR_MOSSDEEP_CITY_STATE) < 2) {
+        goto(MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal)
+    }
     goto(MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma)
     end
 }
@@ -181,9 +219,15 @@ script MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma {
 script MossdeepCity_SpaceCenter_1F_EventScript_OldMan {
     lock
     faceplayer
-    if (flag(FLAG_SYS_GAME_CLEAR)) goto(MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal)
-    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) goto(MossdeepCity_SpaceCenter_1F_EventScript_OldManMagma)
-    if (var(VAR_MOSSDEEP_CITY_STATE) < 2) goto(MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal)
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        goto(MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal)
+    }
+    if (var(VAR_MOSSDEEP_CITY_STATE) == 2) {
+        goto(MossdeepCity_SpaceCenter_1F_EventScript_OldManMagma)
+    }
+    if (var(VAR_MOSSDEEP_CITY_STATE) < 2) {
+        goto(MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal)
+    }
     goto(MossdeepCity_SpaceCenter_1F_EventScript_OldManMagma)
     end
 }
@@ -244,7 +288,9 @@ script MossdeepCity_SpaceCenter_1F_EventScript_Grunt4 {
 script MossdeepCity_SpaceCenter_1F_EventScript_Grunt2 {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_GRUNT_SPACE_CENTER_1F)) goto(MossdeepCity_SpaceCenter_1F_EventScript_Grunt2Defeated)
+    if (flag(FLAG_DEFEATED_GRUNT_SPACE_CENTER_1F)) {
+        goto(MossdeepCity_SpaceCenter_1F_EventScript_Grunt2Defeated)
+    }
     msgbox(MossdeepCity_SpaceCenter_1F_Text_Grunt2Intro, MSGBOX_DEFAULT)
     trainerbattle_no_intro(TRAINER_GRUNT_SPACE_CENTER_2, MossdeepCity_SpaceCenter_1F_Text_Grunt2Defeat)
     setflag(FLAG_DEFEATED_GRUNT_SPACE_CENTER_1F)

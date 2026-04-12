@@ -3,7 +3,9 @@ mapscripts ViridianCity_Gym_Frlg_MapScripts {}
 script ViridianCity_Gym_EventScript_Giovanni {
     famechecker(FAMECHECKER_GIOVANNI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
     trainerbattle_single(TRAINER_LEADER_GIOVANNI, ViridianCity_Gym_Text_GiovanniIntro, ViridianCity_Gym_Text_GiovanniDefeat, ViridianCity_Gym_EventScript_DefeatedGiovanni, NO_MUSIC)
-    if (!flag(FLAG_GOT_TM26_FROM_GIOVANNI)) goto(ViridianCity_Gym_EventScript_GiveTM26)
+    if (!flag(FLAG_GOT_TM26_FROM_GIOVANNI)) {
+        goto(ViridianCity_Gym_EventScript_GiveTM26)
+    }
     msgbox(ViridianCity_Gym_Text_GiovanniPostBattle)
     closemessage
     fadescreen(FADE_TO_BLACK)
@@ -27,7 +29,9 @@ script ViridianCity_Gym_EventScript_DefeatedGiovanni {
 script ViridianCity_Gym_EventScript_GiveTM26 {
     msgbox(ViridianCity_Gym_Text_ExplainEarthBadgeTakeThis)
     checkitemspace(ITEM_TM26)
-    if (var(VAR_RESULT) == FALSE) goto(ViridianCity_Gym_EventScript_NoRoomForTM26)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(ViridianCity_Gym_EventScript_NoRoomForTM26)
+    }
     giveitem_msg(ViridianCity_Gym_Text_ReceivedTM26FromGiovanni, ITEM_TM26)
     setflag(FLAG_GOT_TM26_FROM_GIOVANNI)
     msgbox(ViridianCity_Gym_Text_ExplainTM26)
@@ -92,7 +96,9 @@ script ViridianCity_Gym_EventScript_Warren {
 script ViridianCity_Gym_EventScript_GymGuy {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_LEADER_GIOVANNI)) goto(ViridianCity_Gym_EventScript_GymGuyPostVictory)
+    if (flag(FLAG_DEFEATED_LEADER_GIOVANNI)) {
+        goto(ViridianCity_Gym_EventScript_GymGuyPostVictory)
+    }
     msgbox(ViridianCity_Gym_Text_GymGuyAdvice)
     release
     end
@@ -107,7 +113,9 @@ script ViridianCity_Gym_EventScript_GymGuyPostVictory {
 
 script ViridianCity_Gym_EventScript_GymStatue {
     lockall
-    if (flag(FLAG_BADGE08_GET)) goto(ViridianCity_Gym_EventScript_GymStatuePostVictory)
+    if (flag(FLAG_BADGE08_GET)) {
+        goto(ViridianCity_Gym_EventScript_GymStatuePostVictory)
+    }
     msgbox(ViridianCity_Gym_Text_GymStatue)
     releaseall
     end

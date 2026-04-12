@@ -4,8 +4,12 @@ mapscripts NavelRock_Base_Frlg_MapScripts {
 }
 
 script NavelRock_Base_Frlg_OnTransition {
-    if (flag(FLAG_FOUGHT_LUGIA)) call(NavelRock_Base_Frlg_EventScript_HideLugia)
-    if (!flag(FLAG_FOUGHT_LUGIA)) call(NavelRock_Base_Frlg_EventScript_TryShowLugia)
+    if (flag(FLAG_FOUGHT_LUGIA)) {
+        call(NavelRock_Base_Frlg_EventScript_HideLugia)
+    }
+    if (!flag(FLAG_FOUGHT_LUGIA)) {
+        call(NavelRock_Base_Frlg_EventScript_TryShowLugia)
+    }
     end
 }
 
@@ -15,19 +19,25 @@ script NavelRock_Base_Frlg_EventScript_HideLugia {
 }
 
 script NavelRock_Base_Frlg_EventScript_TryShowLugia {
-    if (flag(FLAG_LUGIA_FLEW_AWAY)) goto(Common_EventScript_NopReturn)
+    if (flag(FLAG_LUGIA_FLEW_AWAY)) {
+        goto(Common_EventScript_NopReturn)
+    }
     clearflag(FLAG_HIDE_LUGIA)
     return
 }
 
 script NavelRock_Base_Frlg_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(NavelRock_Base_Frlg_EventScript_TryRemoveLugia)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(NavelRock_Base_Frlg_EventScript_TryRemoveLugia)
+    }
     end
 }
 
 script NavelRock_Base_Frlg_EventScript_TryRemoveLugia {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
+        goto(Common_EventScript_NopReturn)
+    }
     removeobject(LOCALID_NAVEL_ROCK_LUGIA)
     return
 }
@@ -62,9 +72,15 @@ script NavelRock_Base_Frlg_EventScript_Lugia {
     waitstate
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(NavelRock_Base_Frlg_EventScript_DefeatedLugia)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(NavelRock_Base_Frlg_EventScript_RanFromLugia)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(NavelRock_Base_Frlg_EventScript_RanFromLugia)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(NavelRock_Base_Frlg_EventScript_DefeatedLugia)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(NavelRock_Base_Frlg_EventScript_RanFromLugia)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(NavelRock_Base_Frlg_EventScript_RanFromLugia)
+    }
     setflag(FLAG_FOUGHT_LUGIA)
     release
     end

@@ -3,8 +3,12 @@ mapscripts SlateportCity_PokemonFanClub_MapScripts {}
 script SlateportCity_PokemonFanClub_EventScript_Chairman {
     lock
     faceplayer
-    if (!flag(FLAG_ENTERED_CONTEST)) goto(SlateportCity_PokemonFanClub_EventScript_ChairmanNotEnteredContest)
-    if (!flag(FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN)) call(SlateportCity_PokemonFanClub_EventScript_MeetChairman)
+    if (!flag(FLAG_ENTERED_CONTEST)) {
+        goto(SlateportCity_PokemonFanClub_EventScript_ChairmanNotEnteredContest)
+    }
+    if (!flag(FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN)) {
+        call(SlateportCity_PokemonFanClub_EventScript_MeetChairman)
+    }
     switch(VAR_SLATEPORT_FAN_CLUB_STATE)
     case(0, SlateportCity_PokemonFanClub_EventScript_ChairmanFirstAssessment)
     case(1, SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon)
@@ -22,13 +26,27 @@ script SlateportCity_PokemonFanClub_EventScript_ChairmanFirstAssessment {
 
 script SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon {
     setvar(VAR_TEMP_2, 0)
-    if (flag(FLAG_RECEIVED_YELLOW_SCARF)) call(SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf)
-    if (flag(FLAG_RECEIVED_GREEN_SCARF)) call(SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf)
-    if (flag(FLAG_RECEIVED_PINK_SCARF)) call(SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf)
-    if (flag(FLAG_RECEIVED_BLUE_SCARF)) call(SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf)
-    if (flag(FLAG_RECEIVED_RED_SCARF)) call(SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf)
-    if (var(VAR_TEMP_2) == CONTEST_CATEGORIES_COUNT) call(SlateportCity_PokemonFanClub_EventScript_ReceivedAllScarves)
-    if (var(VAR_SLATEPORT_FAN_CLUB_STATE) == 2) goto(SlateportCity_PokemonFanClub_EventScript_NoMoreScarves)
+    if (flag(FLAG_RECEIVED_YELLOW_SCARF)) {
+        call(SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf)
+    }
+    if (flag(FLAG_RECEIVED_GREEN_SCARF)) {
+        call(SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf)
+    }
+    if (flag(FLAG_RECEIVED_PINK_SCARF)) {
+        call(SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf)
+    }
+    if (flag(FLAG_RECEIVED_BLUE_SCARF)) {
+        call(SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf)
+    }
+    if (flag(FLAG_RECEIVED_RED_SCARF)) {
+        call(SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf)
+    }
+    if (var(VAR_TEMP_2) == CONTEST_CATEGORIES_COUNT) {
+        call(SlateportCity_PokemonFanClub_EventScript_ReceivedAllScarves)
+    }
+    if (var(VAR_SLATEPORT_FAN_CLUB_STATE) == 2) {
+        goto(SlateportCity_PokemonFanClub_EventScript_NoMoreScarves)
+    }
     msgbox(SlateportCity_PokemonFanClub_Text_HowIsYourPokemonGrowing, MSGBOX_DEFAULT)
     goto(SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon)
     end
@@ -43,11 +61,21 @@ script SlateportCity_PokemonFanClub_EventScript_NoMoreScarves {
 script SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon {
     msgbox(SlateportCity_PokemonFanClub_Text_HmHmISee, MSGBOX_DEFAULT)
     setvar(VAR_TEMP_1, 0)
-    if (!flag(FLAG_RECEIVED_YELLOW_SCARF)) call(SlateportCity_PokemonFanClub_EventScript_CheckMonTough)
-    if (!flag(FLAG_RECEIVED_GREEN_SCARF)) call(SlateportCity_PokemonFanClub_EventScript_CheckMonSmart)
-    if (!flag(FLAG_RECEIVED_PINK_SCARF)) call(SlateportCity_PokemonFanClub_EventScript_CheckMonCute)
-    if (!flag(FLAG_RECEIVED_BLUE_SCARF)) call(SlateportCity_PokemonFanClub_EventScript_CheckMonBeauty)
-    if (!flag(FLAG_RECEIVED_RED_SCARF)) call(SlateportCity_PokemonFanClub_EventScript_CheckMonCool)
+    if (!flag(FLAG_RECEIVED_YELLOW_SCARF)) {
+        call(SlateportCity_PokemonFanClub_EventScript_CheckMonTough)
+    }
+    if (!flag(FLAG_RECEIVED_GREEN_SCARF)) {
+        call(SlateportCity_PokemonFanClub_EventScript_CheckMonSmart)
+    }
+    if (!flag(FLAG_RECEIVED_PINK_SCARF)) {
+        call(SlateportCity_PokemonFanClub_EventScript_CheckMonCute)
+    }
+    if (!flag(FLAG_RECEIVED_BLUE_SCARF)) {
+        call(SlateportCity_PokemonFanClub_EventScript_CheckMonBeauty)
+    }
+    if (!flag(FLAG_RECEIVED_RED_SCARF)) {
+        call(SlateportCity_PokemonFanClub_EventScript_CheckMonCool)
+    }
     bufferleadmonspeciesname(STR_VAR_1)
     switch(VAR_TEMP_1)
     case(0, SlateportCity_PokemonFanClub_EventScript_NoHighConditions)
@@ -78,7 +106,9 @@ script SlateportCity_PokemonFanClub_EventScript_NoHighConditions {
 
 script SlateportCity_PokemonFanClub_EventScript_GiveRedScarf {
     checkitemspace(ITEM_RED_SCARF)
-    if (var(VAR_RESULT) == FALSE) goto(SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf)
+    }
     msgbox(SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT)
     setflag(FLAG_RECEIVED_RED_SCARF)
     giveitem(ITEM_RED_SCARF)
@@ -89,7 +119,9 @@ script SlateportCity_PokemonFanClub_EventScript_GiveRedScarf {
 
 script SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf {
     checkitemspace(ITEM_BLUE_SCARF)
-    if (var(VAR_RESULT) == FALSE) goto(SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf)
+    }
     msgbox(SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT)
     setflag(FLAG_RECEIVED_BLUE_SCARF)
     giveitem(ITEM_BLUE_SCARF)
@@ -100,7 +132,9 @@ script SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf {
 
 script SlateportCity_PokemonFanClub_EventScript_GivePinkScarf {
     checkitemspace(ITEM_PINK_SCARF)
-    if (var(VAR_RESULT) == FALSE) goto(SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf)
+    }
     msgbox(SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT)
     setflag(FLAG_RECEIVED_PINK_SCARF)
     giveitem(ITEM_PINK_SCARF)
@@ -111,7 +145,9 @@ script SlateportCity_PokemonFanClub_EventScript_GivePinkScarf {
 
 script SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf {
     checkitemspace(ITEM_GREEN_SCARF)
-    if (var(VAR_RESULT) == FALSE) goto(SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf)
+    }
     msgbox(SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT)
     setflag(FLAG_RECEIVED_GREEN_SCARF)
     giveitem(ITEM_GREEN_SCARF)
@@ -122,7 +158,9 @@ script SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf {
 
 script SlateportCity_PokemonFanClub_EventScript_GiveYellowScarf {
     checkitemspace(ITEM_YELLOW_SCARF)
-    if (var(VAR_RESULT) == FALSE) goto(SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf)
+    }
     msgbox(SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT)
     setflag(FLAG_RECEIVED_YELLOW_SCARF)
     giveitem(ITEM_YELLOW_SCARF)
@@ -139,7 +177,9 @@ script SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf {
 
 script SlateportCity_PokemonFanClub_EventScript_CheckMonCool {
     specialvar(VAR_RESULT, CheckLeadMonCool)
-    if (var(VAR_RESULT) == TRUE) call(SlateportCity_PokemonFanClub_EventScript_SetMonCool)
+    if (var(VAR_RESULT) == TRUE) {
+        call(SlateportCity_PokemonFanClub_EventScript_SetMonCool)
+    }
     return
 }
 
@@ -150,7 +190,9 @@ script SlateportCity_PokemonFanClub_EventScript_SetMonCool {
 
 script SlateportCity_PokemonFanClub_EventScript_CheckMonBeauty {
     specialvar(VAR_RESULT, CheckLeadMonBeauty)
-    if (var(VAR_RESULT) == TRUE) call(SlateportCity_PokemonFanClub_EventScript_SetMonBeauty)
+    if (var(VAR_RESULT) == TRUE) {
+        call(SlateportCity_PokemonFanClub_EventScript_SetMonBeauty)
+    }
     return
 }
 
@@ -161,7 +203,9 @@ script SlateportCity_PokemonFanClub_EventScript_SetMonBeauty {
 
 script SlateportCity_PokemonFanClub_EventScript_CheckMonCute {
     specialvar(VAR_RESULT, CheckLeadMonCute)
-    if (var(VAR_RESULT) == TRUE) call(SlateportCity_PokemonFanClub_EventScript_SetMonCute)
+    if (var(VAR_RESULT) == TRUE) {
+        call(SlateportCity_PokemonFanClub_EventScript_SetMonCute)
+    }
     return
 }
 
@@ -172,7 +216,9 @@ script SlateportCity_PokemonFanClub_EventScript_SetMonCute {
 
 script SlateportCity_PokemonFanClub_EventScript_CheckMonSmart {
     specialvar(VAR_RESULT, CheckLeadMonSmart)
-    if (var(VAR_RESULT) == TRUE) call(SlateportCity_PokemonFanClub_EventScript_SetMonSmart)
+    if (var(VAR_RESULT) == TRUE) {
+        call(SlateportCity_PokemonFanClub_EventScript_SetMonSmart)
+    }
     return
 }
 
@@ -183,7 +229,9 @@ script SlateportCity_PokemonFanClub_EventScript_SetMonSmart {
 
 script SlateportCity_PokemonFanClub_EventScript_CheckMonTough {
     specialvar(VAR_RESULT, CheckLeadMonTough)
-    if (var(VAR_RESULT) == TRUE) call(SlateportCity_PokemonFanClub_EventScript_SetMonTough)
+    if (var(VAR_RESULT) == TRUE) {
+        call(SlateportCity_PokemonFanClub_EventScript_SetMonTough)
+    }
     return
 }
 
@@ -193,7 +241,9 @@ script SlateportCity_PokemonFanClub_EventScript_SetMonTough {
 }
 
 script SlateportCity_PokemonFanClub_EventScript_ChairmanNotEnteredContest {
-    if (flag(FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN)) goto(SlateportCity_PokemonFanClub_EventScript_ChairmanEnterContest)
+    if (flag(FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN)) {
+        goto(SlateportCity_PokemonFanClub_EventScript_ChairmanEnterContest)
+    }
     msgbox(SlateportCity_PokemonFanClub_Text_MeetChairman, MSGBOX_DEFAULT)
     setflag(FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN)
     release
@@ -215,10 +265,14 @@ script SlateportCity_PokemonFanClub_EventScript_MeetChairman {
 script SlateportCity_PokemonFanClub_EventScript_SootheBellWoman {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_SOOTHE_BELL)) goto(SlateportCity_PokemonFanClub_EventScript_ReceivedSootheBell)
+    if (flag(FLAG_RECEIVED_SOOTHE_BELL)) {
+        goto(SlateportCity_PokemonFanClub_EventScript_ReceivedSootheBell)
+    }
     msgbox(SlateportCity_PokemonFanClub_Text_ShowMePokemonThatLoveYou, MSGBOX_DEFAULT)
     specialvar(VAR_RESULT, GetLeadMonFriendshipScore)
-    if (var(VAR_RESULT) >= FRIENDSHIP_150_TO_199) goto(SlateportCity_PokemonFanClub_EventScript_GiveSootheBell)
+    if (var(VAR_RESULT) >= FRIENDSHIP_150_TO_199) {
+        goto(SlateportCity_PokemonFanClub_EventScript_GiveSootheBell)
+    }
     release
     end
 }
@@ -231,7 +285,9 @@ script SlateportCity_PokemonFanClub_EventScript_GiveSootheBell {
     waitmovement(0)
     msgbox(SlateportCity_PokemonFanClub_Text_PokemonAdoresYou, MSGBOX_DEFAULT)
     giveitem(ITEM_SOOTHE_BELL)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_SOOTHE_BELL)
     release
     end

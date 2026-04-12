@@ -6,7 +6,9 @@ script MossdeepCity_House1_EventScript_BlackBelt {
     bufferleadmonspeciesname(STR_VAR_1)
     msgbox(MossdeepCity_House1_Text_HmmYourPokemon, MSGBOX_DEFAULT)
     specialvar(VAR_RESULT, GetPokeblockNameByMonNature)
-    if (var(VAR_RESULT) == 0) goto(MossdeepCity_House1_EventScript_NeutralNature)
+    if (var(VAR_RESULT) == 0) {
+        goto(MossdeepCity_House1_EventScript_NeutralNature)
+    }
     msgbox(MossdeepCity_House1_Text_ItLikesXPokeblocks, MSGBOX_DEFAULT)
     release
     end

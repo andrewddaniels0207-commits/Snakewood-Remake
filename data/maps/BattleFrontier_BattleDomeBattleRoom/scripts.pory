@@ -12,15 +12,21 @@ script BattleFrontier_BattleDomeBattleRoom_OnTransition {
     dome_setopponentgfx()
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
     copyvar(VAR_TEMP_F, VAR_RESULT)
-    if (var(VAR_RESULT) == DOME_ROUND1) call(BattleFrontier_BattleDomeBattleRoom_EventScript_SetWalkingAudienceMemberPos)
+    if (var(VAR_RESULT) == DOME_ROUND1) {
+        call(BattleFrontier_BattleDomeBattleRoom_EventScript_SetWalkingAudienceMemberPos)
+    }
     call(BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfx)
     end
 }
 
 script BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfx {
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxMale)
-    if (var(VAR_RESULT) == FEMALE) goto(BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxFemale)
+    if (var(VAR_RESULT) == MALE) {
+        goto(BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxMale)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxFemale)
+    }
     return
 }
 
@@ -37,15 +43,21 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxFemale {
 script BattleFrontier_BattleDomeBattleRoom_EventScript_EnterRoom {
     lockall
     call(BattleFrontier_BattleDomeBattleRoom_EventScript_GetRoundNum)
-    if (var(VAR_RESULT) == DOME_ROUND1) call(BattleFrontier_BattleDomeBattleRoom_EventScript_TryDoAudienceMemberWalkToSeat)
+    if (var(VAR_RESULT) == DOME_ROUND1) {
+        call(BattleFrontier_BattleDomeBattleRoom_EventScript_TryDoAudienceMemberWalkToSeat)
+    }
     applymovement(LOCALID_DOME_ANNOUNCER, Common_Movement_WalkInPlaceDown)
     waitmovement(0)
     call(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayer)
     msgbox(BattleFrontier_BattleDomeBattleRoom_Text_PlayerHasEnteredDome, MSGBOX_DEFAULT)
     closemessage
     showobjectat(LOCALID_DOME_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM)
-    if (var(VAR_TEMP_F) != DOME_FINAL) goto(BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnter)
-    if (var(VAR_TEMP_E) != FRONTIER_BRAIN_NOT_READY) goto(BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnterForTucker)
+    if (var(VAR_TEMP_F) != DOME_FINAL) {
+        goto(BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnter)
+    }
+    if (var(VAR_TEMP_E) != FRONTIER_BRAIN_NOT_READY) {
+        goto(BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnterForTucker)
+    }
 }
 
 script BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnter {
@@ -61,8 +73,12 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceReactToPlayer {
     playse(SE_M_ENCORE2)
     call(BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround)
     waitmovement(0)
-    if (var(VAR_TEMP_F) != DOME_FINAL) goto(BattleFrontier_BattleDomeBattleRoom_EventScript_BattleOpponent)
-    if (var(VAR_TEMP_E) != FRONTIER_BRAIN_NOT_READY) goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnounceTucker)
+    if (var(VAR_TEMP_F) != DOME_FINAL) {
+        goto(BattleFrontier_BattleDomeBattleRoom_EventScript_BattleOpponent)
+    }
+    if (var(VAR_TEMP_E) != FRONTIER_BRAIN_NOT_READY) {
+        goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnounceTucker)
+    }
 }
 
 script BattleFrontier_BattleDomeBattleRoom_EventScript_BattleOpponent {
@@ -98,7 +114,9 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_Draw {
     delay(180)
     applymovement(LOCALID_DOME_REFEREE, BattleFrontier_BattleDomeBattleRoom_Movement_RefereeExit)
     waitmovement(0)
-    if (var(VAR_TEMP_2) == DRAW_TUCKER) goto(BattleFrontier_BattleDomeBattleRoom_EventScript_LostToOpponent)
+    if (var(VAR_TEMP_2) == DRAW_TUCKER) {
+        goto(BattleFrontier_BattleDomeBattleRoom_EventScript_LostToOpponent)
+    }
     dome_compareseeds()
     switch(VAR_RESULT)
     case(1, BattleFrontier_BattleDomeBattleRoom_EventScript_DefeatedOpponent)
@@ -108,9 +126,15 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_LostToOpponent {
     applymovement(LOCALID_DOME_ANNOUNCER, Common_Movement_WalkInPlaceDown)
     waitmovement(0)
     dome_getopponentname()
-    if (var(VAR_TEMP_2) == NO_DRAW) call(BattleFrontier_BattleDomeBattleRoom_EventScript_OpponentWon)
-    if (var(VAR_TEMP_2) == DRAW_TRAINER) call(BattleFrontier_BattleDomeBattleRoom_EventScript_OpponentWonDraw)
-    if (var(VAR_TEMP_2) == DRAW_TUCKER) call(BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerWonDraw)
+    if (var(VAR_TEMP_2) == NO_DRAW) {
+        call(BattleFrontier_BattleDomeBattleRoom_EventScript_OpponentWon)
+    }
+    if (var(VAR_TEMP_2) == DRAW_TRAINER) {
+        call(BattleFrontier_BattleDomeBattleRoom_EventScript_OpponentWonDraw)
+    }
+    if (var(VAR_TEMP_2) == DRAW_TUCKER) {
+        call(BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerWonDraw)
+    }
     playse(SE_M_ENCORE2)
     call(BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround)
     delay(60)
@@ -148,8 +172,12 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerWonDraw {
 script BattleFrontier_BattleDomeBattleRoom_EventScript_DefeatedOpponent {
     applymovement(LOCALID_DOME_ANNOUNCER, Common_Movement_WalkInPlaceDown)
     waitmovement(0)
-    if (var(VAR_TEMP_2) == NO_DRAW) call(BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerWon)
-    if (var(VAR_TEMP_2) == DRAW_TRAINER) call(BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerWonDraw)
+    if (var(VAR_TEMP_2) == NO_DRAW) {
+        call(BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerWon)
+    }
+    if (var(VAR_TEMP_2) == DRAW_TRAINER) {
+        call(BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerWonDraw)
+    }
     playse(SE_M_ENCORE2)
     call(BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround)
     delay(60)
@@ -200,11 +228,17 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerWonDraw {
 
 script BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayer {
     dome_get(DOME_DATA_ATTEMPTED_CHALLENGE)
-    if (var(VAR_RESULT) == FALSE) goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerFirstAttempt)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerFirstAttempt)
+    }
     dome_get(DOME_DATA_HAS_WON_CHALLENGE)
-    if (var(VAR_RESULT) == FALSE) goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerNeverWon)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerNeverWon)
+    }
     dome_get(DOME_DATA_WIN_STREAK_ACTIVE)
-    if (var(VAR_RESULT) == FALSE) goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerBrokenStreak)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerBrokenStreak)
+    }
     goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampion)
     return
 }
@@ -278,7 +312,9 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerNeverWonFin
 }
 
 script BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampion {
-    if (var(VAR_TEMP_F) != DOME_FINAL) goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampionNoTucker)
+    if (var(VAR_TEMP_F) != DOME_FINAL) {
+        goto(BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampionNoTucker)
+    }
     switch(VAR_TEMP_E)
     case(FRONTIER_BRAIN_SILVER, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerPreTuckerSilver)
     case(FRONTIER_BRAIN_GOLD, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerPreTuckerGold)
@@ -417,7 +453,9 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerEnter {
     case(FRONTIER_BRAIN_STREAK, BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerSilver)
     case(FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerGold)
     frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
-    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerSilver)
+    if (var(VAR_RESULT) != FALSE) {
+        goto(BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerSilver)
+    }
     msgbox(BattleFrontier_BattleDomeBattleRoom_Text_TuckerSilverIntro, MSGBOX_DEFAULT)
     frontier_set(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
 }
@@ -432,7 +470,9 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerSilver {
     msgbox(BattleFrontier_BattleDomeBattleRoom_Text_IncredibleVictorIsPlayer, MSGBOX_DEFAULT)
     dome_resolvewinners(DOME_PLAYER_WON_MATCH)
     frontier_getsymbols()
-    if (var(VAR_RESULT) != 0) goto(BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney)
+    if (var(VAR_RESULT) != 0) {
+        goto(BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney)
+    }
     closemessage
     applymovement(LOCALID_DOME_OPPONENT, BattleFrontier_BattleDomeBattleRoom_Movement_TuckerApproachPlayer)
     waitmovement(0)
@@ -448,7 +488,9 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerSilver {
 
 script BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerGoldIntro {
     frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
-    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerGold)
+    if (var(VAR_RESULT) != FALSE) {
+        goto(BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerGold)
+    }
     msgbox(BattleFrontier_BattleDomeBattleRoom_Text_TuckerGoldIntro, MSGBOX_DEFAULT)
     frontier_set(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
 }
@@ -463,7 +505,9 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerGold {
     msgbox(BattleFrontier_BattleDomeBattleRoom_Text_IncredibleVictorIsPlayer, MSGBOX_DEFAULT)
     dome_resolvewinners(DOME_PLAYER_WON_MATCH)
     frontier_getsymbols()
-    if (var(VAR_RESULT) == 2) goto(BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney)
+    if (var(VAR_RESULT) == 2) {
+        goto(BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney)
+    }
     closemessage
     applymovement(LOCALID_DOME_OPPONENT, BattleFrontier_BattleDomeBattleRoom_Movement_TuckerApproachPlayer)
     waitmovement(0)
@@ -527,10 +571,14 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_SetUpObjects {
     setvar(VAR_TEMP_1, 1)
     applymovement(LOCALID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_SetInvisible)
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
-    if (var(VAR_RESULT) != DOME_FINAL) goto(BattleFrontier_BattleDomeBattleRoom_EventScript_EndSetUpObjects)
+    if (var(VAR_RESULT) != DOME_FINAL) {
+        goto(BattleFrontier_BattleDomeBattleRoom_EventScript_EndSetUpObjects)
+    }
     frontier_getbrainstatus()
     copyvar(VAR_TEMP_E, VAR_RESULT)
-    if (var(VAR_RESULT) == FRONTIER_BRAIN_NOT_READY) goto(BattleFrontier_BattleDomeBattleRoom_EventScript_EndSetUpObjects)
+    if (var(VAR_RESULT) == FRONTIER_BRAIN_NOT_READY) {
+        goto(BattleFrontier_BattleDomeBattleRoom_EventScript_EndSetUpObjects)
+    }
     call(BattleFrontier_EventScript_SetBrainObjectGfx)
     setobjectxyperm(LOCALID_DOME_OPPONENT, 13, 9)
     removeobject(LOCALID_DOME_OPPONENT)
@@ -544,7 +592,9 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_EndSetUpObjects {
 }
 
 script BattleFrontier_BattleDomeBattleRoom_OnResume {
-    if (var(VAR_TEMP_9) == 1) call(BattleFrontier_BattleDomeBattleRoom_EventScript_CallAddAudience)
+    if (var(VAR_TEMP_9) == 1) {
+        call(BattleFrontier_BattleDomeBattleRoom_EventScript_CallAddAudience)
+    }
     end
 }
 
@@ -554,10 +604,18 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_CallAddAudience {
 }
 
 script BattleFrontier_BattleDomeBattleRoom_EventScript_AddAudience {
-    if (var(VAR_TEMP_F) == DOME_ROUND1) call(BattleFrontier_BattleDomeBattleRoom_EventScript_AddRound1Audience)
-    if (var(VAR_TEMP_F) == DOME_ROUND2) call(BattleFrontier_BattleDomeBattleRoom_EventScript_AddRound2Audience)
-    if (var(VAR_TEMP_F) == DOME_SEMIFINAL) call(BattleFrontier_BattleDomeBattleRoom_EventScript_AddSemifinalAudience)
-    if (var(VAR_TEMP_F) == DOME_FINAL) call(BattleFrontier_BattleDomeBattleRoom_EventScript_AddFinalAudience)
+    if (var(VAR_TEMP_F) == DOME_ROUND1) {
+        call(BattleFrontier_BattleDomeBattleRoom_EventScript_AddRound1Audience)
+    }
+    if (var(VAR_TEMP_F) == DOME_ROUND2) {
+        call(BattleFrontier_BattleDomeBattleRoom_EventScript_AddRound2Audience)
+    }
+    if (var(VAR_TEMP_F) == DOME_SEMIFINAL) {
+        call(BattleFrontier_BattleDomeBattleRoom_EventScript_AddSemifinalAudience)
+    }
+    if (var(VAR_TEMP_F) == DOME_FINAL) {
+        call(BattleFrontier_BattleDomeBattleRoom_EventScript_AddFinalAudience)
+    }
     return
 }
 
@@ -936,7 +994,9 @@ script BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround {
 
 script BattleFrontier_BattleDomeBattleRoom_EventScript_WarpToLobby {
     copyvar(VAR_RESULT, VAR_FRONTIER_BATTLE_MODE)
-    if (var(VAR_RESULT) == FRONTIER_MODE_DOUBLES) goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_WarpToLobbyDoubles)
+    if (var(VAR_RESULT) == FRONTIER_MODE_DOUBLES) {
+        goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_WarpToLobbyDoubles)
+    }
     warp(MAP_BATTLE_FRONTIER_BATTLE_DOME_LOBBY, 5, 11)
     waitstate
     end
@@ -951,14 +1011,18 @@ script BattleFrontier_BattleDomePreBattleRoom_EventScript_WarpToLobbyDoubles {
 script BattleFrontier_BattleDomeBattleRoom_EventScript_SetWalkingAudienceMemberPos {
     random(2)
     copyvar(VAR_TEMP_D, VAR_RESULT)
-    if (var(VAR_TEMP_D) == 0) goto(Common_EventScript_NopReturn)
+    if (var(VAR_TEMP_D) == 0) {
+        goto(Common_EventScript_NopReturn)
+    }
     setobjectxyperm(LOCALID_DOME_AUDIENCE_WALKING, 2, 0)
     setobjectmovementtype(LOCALID_DOME_AUDIENCE_WALKING, MOVEMENT_TYPE_FACE_RIGHT)
     return
 }
 
 script BattleFrontier_BattleDomeBattleRoom_EventScript_TryDoAudienceMemberWalkToSeat {
-    if (var(VAR_TEMP_D) == 0) goto(Common_EventScript_NopReturn)
+    if (var(VAR_TEMP_D) == 0) {
+        goto(Common_EventScript_NopReturn)
+    }
     applymovement(LOCALID_DOME_AUDIENCE_WALKING, BattleFrontier_BattleDomeBattleRoom_Movement_AudienceMemberWalkToSeat)
     return
 }

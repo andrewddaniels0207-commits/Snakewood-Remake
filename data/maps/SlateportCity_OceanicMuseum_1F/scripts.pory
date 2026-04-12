@@ -24,7 +24,9 @@ script SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFeeRight {
 script SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFee {
     showmoneybox(0, 0)
     msgbox(SlateportCity_OceanicMuseum_1F_Text_WouldYouLikeToEnter, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(SlateportCity_OceanicMuseum_1F_EventScript_CheckMoneyForFee)
+    if (var(VAR_RESULT) == YES) {
+        goto(SlateportCity_OceanicMuseum_1F_EventScript_CheckMoneyForFee)
+    }
     closemessage
     hidemoneybox()
     applymovement(LOCALID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_PushPlayerBackFromCounter)
@@ -35,7 +37,9 @@ script SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFee {
 
 script SlateportCity_OceanicMuseum_1F_EventScript_CheckMoneyForFee {
     checkmoney(50)
-    if (var(VAR_RESULT) == FALSE) goto(SlateportCity_OceanicMuseum_1F_EventScript_NotEnoughMoney)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SlateportCity_OceanicMuseum_1F_EventScript_NotEnoughMoney)
+    }
     playse(SE_SHOP)
     removemoney(50)
     updatemoneybox()
@@ -47,7 +51,9 @@ script SlateportCity_OceanicMuseum_1F_EventScript_CheckMoneyForFee {
 }
 
 script SlateportCity_OceanicMuseum_1F_EventScript_NotEnoughMoney {
-    if (!flag(FLAG_DELIVERED_DEVON_GOODS)) goto(SlateportCity_OceanicMuseum_1F_EventScript_AllowEntranceAnyway)
+    if (!flag(FLAG_DELIVERED_DEVON_GOODS)) {
+        goto(SlateportCity_OceanicMuseum_1F_EventScript_AllowEntranceAnyway)
+    }
     msgbox(SlateportCity_OceanicMuseum_1F_Text_NotEnoughMoney, MSGBOX_DEFAULT)
     closemessage
     hidemoneybox()
@@ -176,14 +182,24 @@ script SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGrunt {
     waitmovement(0)
     msgbox(SlateportCity_OceanicMuseum_1F_Text_RememberMeTakeThis, MSGBOX_DEFAULT)
     giveitem(ITEM_TM_THIEF)
-    if (var(VAR_RESULT) == 0) goto(SlateportCity_OceanicMuseum_1F_EventScript_NoRoomForThief)
+    if (var(VAR_RESULT) == 0) {
+        goto(SlateportCity_OceanicMuseum_1F_EventScript_NoRoomForThief)
+    }
     setflag(FLAG_RECEIVED_TM_THIEF)
     msgbox(SlateportCity_OceanicMuseum_1F_Text_HopeINeverSeeYouAgain, MSGBOX_DEFAULT)
     closemessage
-    if (var(VAR_FACING) == DIR_NORTH) goto(SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitNorth)
-    if (var(VAR_FACING) == DIR_SOUTH) goto(SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitSouth)
-    if (var(VAR_FACING) == DIR_WEST) goto(SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitWestEast)
-    if (var(VAR_FACING) == DIR_EAST) goto(SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitWestEast)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        goto(SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitNorth)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        goto(SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitSouth)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        goto(SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitWestEast)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        goto(SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitWestEast)
+    }
     end
 }
 

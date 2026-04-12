@@ -26,13 +26,19 @@ script ViridianCity_School_EventScript_Notebook {
     lockall
     msgbox(ViridianCity_School_Text_NotebookFirstPage)
     msgbox(ViridianCity_School_Text_TurnThePage, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(ViridianCity_School_EventScript_StopReadingNotebook)
+    if (var(VAR_RESULT) == NO) {
+        goto(ViridianCity_School_EventScript_StopReadingNotebook)
+    }
     msgbox(ViridianCity_School_Text_NotebookSecondPage)
     msgbox(ViridianCity_School_Text_TurnThePage, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(ViridianCity_School_EventScript_StopReadingNotebook)
+    if (var(VAR_RESULT) == NO) {
+        goto(ViridianCity_School_EventScript_StopReadingNotebook)
+    }
     msgbox(ViridianCity_School_Text_NotebookThirdPage)
     msgbox(ViridianCity_School_Text_TurnThePage, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(ViridianCity_School_EventScript_StopReadingNotebook)
+    if (var(VAR_RESULT) == NO) {
+        goto(ViridianCity_School_EventScript_StopReadingNotebook)
+    }
     msgbox(ViridianCity_School_Text_NotebookFourthPage)
     applymovement(LOCALID_SCHOOL_LASS, Common_Movement_WalkInPlaceFasterUp)
     waitmovement(0)

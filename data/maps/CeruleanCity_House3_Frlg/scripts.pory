@@ -10,13 +10,21 @@ script CeruleanCity_House3_EventScript_Dontae {
     faceplayer
     setvar(VAR_0x8008, INGAME_TRADE_JYNX)
     call(EventScript_GetInGameTradeSpeciesInfo)
-    if (flag(FLAG_DID_ZYNX_TRADE)) goto(CeruleanCity_House3_EventScript_AlreadyTraded)
+    if (flag(FLAG_DID_ZYNX_TRADE)) {
+        goto(CeruleanCity_House3_EventScript_AlreadyTraded)
+    }
     msgbox(Trade_Text_DoYouHaveMonWouldYouTradeForMon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(CeruleanCity_House3_EventScript_DeclineTrade)
+    if (var(VAR_RESULT) == NO) {
+        goto(CeruleanCity_House3_EventScript_DeclineTrade)
+    }
     call(EventScript_ChooseMonForInGameTrade)
-    if (var(VAR_0x8004) >= PARTY_SIZE) goto(CeruleanCity_House3_EventScript_DeclineTrade)
+    if (var(VAR_0x8004) >= PARTY_SIZE) {
+        goto(CeruleanCity_House3_EventScript_DeclineTrade)
+    }
     call(EventScript_GetInGameTradeSpecies)
-    if (var(VAR_RESULT) != VAR_0x8009) goto(CeruleanCity_House3_EventScript_NotRequestedMon)
+    if (var(VAR_RESULT) != VAR_0x8009) {
+        goto(CeruleanCity_House3_EventScript_NotRequestedMon)
+    }
     call(EventScript_DoInGameTrade)
     msgbox(Trade_Text_Thanks)
     setflag(FLAG_DID_ZYNX_TRADE)

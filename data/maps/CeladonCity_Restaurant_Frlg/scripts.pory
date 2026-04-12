@@ -13,10 +13,14 @@ script CeladonCity_Restaurant_EventScript_Woman {
 script CeladonCity_Restaurant_EventScript_CoinCaseMan {
     lock
     faceplayer
-    if (flag(FLAG_GOT_COIN_CASE)) goto(CeladonCity_Restaurant_EventScript_AlreadyGotCoinCase)
+    if (flag(FLAG_GOT_COIN_CASE)) {
+        goto(CeladonCity_Restaurant_EventScript_AlreadyGotCoinCase)
+    }
     msgbox(CeladonCity_Restaurant_Text_TakeThisImBusted)
     checkitemspace(ITEM_COIN_CASE)
-    if (var(VAR_RESULT) == FALSE) goto(CeladonCity_Restaurant_EventScript_NoRoomForCoinCase)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(CeladonCity_Restaurant_EventScript_NoRoomForCoinCase)
+    }
     giveitem_msg(CeladonCity_Restaurant_Text_ReceivedCoinCaseFromMan, ITEM_COIN_CASE)
     setflag(FLAG_GOT_COIN_CASE)
     release

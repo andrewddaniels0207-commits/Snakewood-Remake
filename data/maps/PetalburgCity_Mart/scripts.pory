@@ -5,7 +5,9 @@ script PetalburgCity_Mart_EventScript_Clerk {
     faceplayer
     message(gText_HowMayIServeYou)
     waitmessage()
-    if (flag(FLAG_PETALBURG_MART_EXPANDED_ITEMS)) goto(PetalburgCity_Mart_EventScript_ExpandedItems)
+    if (flag(FLAG_PETALBURG_MART_EXPANDED_ITEMS)) {
+        goto(PetalburgCity_Mart_EventScript_ExpandedItems)
+    }
     pokemart(PetalburgCity_Mart_Pokemart_Basic)
     msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
     release

@@ -131,25 +131,26 @@ def convert_command(cmd_line):
         return None
 
     # Check for conditional flag goto/call
+    # Poryscript requires braces around if-bodies: if (cond) { action }
     m = GOTO_IF_SET.match(line)
     if m:
         flag, label = m.group(1), m.group(2)
-        return f'if (flag({flag})) goto({label})'
+        return f'if (flag({flag})) {{\n        goto({label})\n    }}'
 
     m = GOTO_IF_UNSET.match(line)
     if m:
         flag, label = m.group(1), m.group(2)
-        return f'if (!flag({flag})) goto({label})'
+        return f'if (!flag({flag})) {{\n        goto({label})\n    }}'
 
     m = CALL_IF_SET.match(line)
     if m:
         flag, label = m.group(1), m.group(2)
-        return f'if (flag({flag})) call({label})'
+        return f'if (flag({flag})) {{\n        call({label})\n    }}'
 
     m = CALL_IF_UNSET.match(line)
     if m:
         flag, label = m.group(1), m.group(2)
-        return f'if (!flag({flag})) call({label})'
+        return f'if (!flag({flag})) {{\n        call({label})\n    }}'
 
     # Check for var comparison goto/call
     m = GOTO_IF_CMP.match(line)
@@ -157,9 +158,9 @@ def convert_command(cmd_line):
         action, cmp, var, val, label = m.group(1), m.group(2), m.group(3), m.group(4), m.group(5)
         op = CMP_MAP[cmp]
         if action == 'goto':
-            return f'if (var({var}) {op} {val}) goto({label})'
+            return f'if (var({var}) {op} {val}) {{\n        goto({label})\n    }}'
         else:
-            return f'if (var({var}) {op} {val}) call({label})'
+            return f'if (var({var}) {op} {val}) {{\n        call({label})\n    }}'
 
     # Split into command and args
     parts = line.split(None, 1)

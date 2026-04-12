@@ -20,8 +20,12 @@ script MossdeepCity_House2_EventScript_Wingull {
     closemessage
     setflag(FLAG_WINGULL_DELIVERED_MAIL)
     clearflag(FLAG_HIDE_FORTREE_CITY_HOUSE_4_WINGULL)
-    if (var(VAR_FACING) == DIR_NORTH) call(MossdeepCity_House2_EventScript_WingullExitNorth)
-    if (var(VAR_FACING) == DIR_WEST) call(MossdeepCity_House2_EventScript_WingullExitWest)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(MossdeepCity_House2_EventScript_WingullExitNorth)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(MossdeepCity_House2_EventScript_WingullExitWest)
+    }
     removeobject(LOCALID_MOSSDEEP_HOUSE_WINGULL)
     release
     end

@@ -7,7 +7,9 @@ mapscripts Route112_CableCarStation_MapScripts {
 
 script Route112_CableCarStation_OnTransition {
     setescapewarp(MAP_ROUTE112, 28, 28)
-    if (var(VAR_CABLE_CAR_STATION_STATE) == 2) call(Route112_CableCarStation_EventScript_MoveAttendantAside)
+    if (var(VAR_CABLE_CAR_STATION_STATE) == 2) {
+        call(Route112_CableCarStation_EventScript_MoveAttendantAside)
+    }
     end
 }
 
@@ -33,8 +35,12 @@ script Route112_CableCarStation_EventScript_Attendant {
     lock
     faceplayer
     msgbox(Route112_CableCarStation_Text_CableCarReadyGetOn, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(Route112_CableCarStation_EventScript_RideCableCar)
-    if (var(VAR_RESULT) == NO) goto(Route112_CableCarStation_EventScript_DeclineRide)
+    if (var(VAR_RESULT) == YES) {
+        goto(Route112_CableCarStation_EventScript_RideCableCar)
+    }
+    if (var(VAR_RESULT) == NO) {
+        goto(Route112_CableCarStation_EventScript_DeclineRide)
+    }
     end
 }
 

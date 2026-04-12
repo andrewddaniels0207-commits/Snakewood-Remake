@@ -59,13 +59,21 @@ script EverGrandeCity_ChampionsRoom_EventScript_Defeated {
     closemessage
     playse(SE_DOOR)
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(EverGrandeCity_ChampionsRoom_EventScript_PlayMayMusic)
-    if (var(VAR_RESULT) == FEMALE) call(EverGrandeCity_ChampionsRoom_EventScript_PlayBrendanMusic)
+    if (var(VAR_RESULT) == MALE) {
+        call(EverGrandeCity_ChampionsRoom_EventScript_PlayMayMusic)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(EverGrandeCity_ChampionsRoom_EventScript_PlayBrendanMusic)
+    }
     addobject(LOCALID_CHAMPIONS_ROOM_RIVAL)
     call(EverGrandeCity_ChampionsRoom_EventScript_RivalApproachPlayer)
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(EverGrandeCity_ChampionsRoom_EventScript_MayAdvice)
-    if (var(VAR_RESULT) == FEMALE) goto(EverGrandeCity_ChampionsRoom_EventScript_BrendanAdvice)
+    if (var(VAR_RESULT) == MALE) {
+        goto(EverGrandeCity_ChampionsRoom_EventScript_MayAdvice)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(EverGrandeCity_ChampionsRoom_EventScript_BrendanAdvice)
+    }
     end
 }
 
@@ -135,8 +143,12 @@ script EverGrandeCity_ChampionsRoom_EventScript_BirchArrivesExitForHoF {
     waitmovement(0)
     msgbox(EverGrandeCity_ChampionsRoom_Text_WallaceWaitOutside, MSGBOX_DEFAULT)
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(EverGrandeCity_ChampionsRoom_EventScript_MayCongratulations)
-    if (var(VAR_RESULT) == FEMALE) call(EverGrandeCity_ChampionsRoom_EventScript_BrendanCongratulations)
+    if (var(VAR_RESULT) == MALE) {
+        call(EverGrandeCity_ChampionsRoom_EventScript_MayCongratulations)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(EverGrandeCity_ChampionsRoom_EventScript_BrendanCongratulations)
+    }
     closemessage
     applymovement(LOCALID_CHAMPIONS_ROOM_WALLACE, EverGrandeCity_ChampionsRoom_Movement_WallaceExit)
     applymovement(LOCALID_PLAYER, EverGrandeCity_ChampionsRoom_Movement_PlayerExit)

@@ -9,11 +9,17 @@ mapscripts BattleFrontier_BattleFactoryBattleRoom_MapScripts {
 script BattleFrontier_BattleFactoryBattleRoom_OnTransition {
     frontier_settrainers()
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) call(BattleFrontier_BattleFactoryBattleRoom_EventScript_SetPlayerGfxMale)
-    if (var(VAR_RESULT) == FEMALE) call(BattleFrontier_BattleFactoryBattleRoom_EventScript_SetPlayerGfxFemale)
+    if (var(VAR_RESULT) == MALE) {
+        call(BattleFrontier_BattleFactoryBattleRoom_EventScript_SetPlayerGfxMale)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        call(BattleFrontier_BattleFactoryBattleRoom_EventScript_SetPlayerGfxFemale)
+    }
     frontier_getbrainstatus()
     copyvar(VAR_TEMP_F, VAR_RESULT)
-    if (var(VAR_RESULT) != FRONTIER_BRAIN_NOT_READY) goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_SetUpFactoryHeadObj)
+    if (var(VAR_RESULT) != FRONTIER_BRAIN_NOT_READY) {
+        goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_SetUpFactoryHeadObj)
+    }
     end
 }
 
@@ -33,7 +39,9 @@ BattleFrontier_BattleFactoryBattleRoom_OnWarp:
 script BattleFrontier_BattleFactoryBattleRoom_EventScript_HideObjects {
     setvar(VAR_TEMP_1, 1)
     hideobjectat(LOCALID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM)
-    if (var(VAR_TEMP_F) != FRONTIER_BRAIN_NOT_READY) goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_EndHideObjects)
+    if (var(VAR_TEMP_F) != FRONTIER_BRAIN_NOT_READY) {
+        goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_EndHideObjects)
+    }
     hideobjectat(LOCALID_FACTORY_BATTLE_OPPONENT, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM)
 }
 
@@ -64,7 +72,9 @@ script BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoomFactoryHeadBa
 }
 
 script BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoom {
-    if (var(VAR_TEMP_F) != FRONTIER_BRAIN_NOT_READY) goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoomFactoryHeadBattle)
+    if (var(VAR_TEMP_F) != FRONTIER_BRAIN_NOT_READY) {
+        goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoomFactoryHeadBattle)
+    }
     applymovement(LOCALID_FACTORY_BATTLE_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom)
     applymovement(LOCALID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom)
     waitmovement(0)
@@ -78,7 +88,9 @@ script BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoom {
 }
 
 script BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleOpponent {
-    if (var(VAR_TEMP_F) != FRONTIER_BRAIN_NOT_READY) goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNoland)
+    if (var(VAR_TEMP_F) != FRONTIER_BRAIN_NOT_READY) {
+        goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNoland)
+    }
     palace_getopponentintro()
     lockall
     msgbox(gStringVar4, MSGBOX_DEFAULT)
@@ -99,7 +111,9 @@ script BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyLost {
 
 script BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedOpponent {
     factory_get(FACTORY_DATA_WIN_STREAK_SWAPS)
-    if (var(VAR_RESULT) == MAX_STREAK) goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_IncrementWinStreak)
+    if (var(VAR_RESULT) == MAX_STREAK) {
+        goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_IncrementWinStreak)
+    }
     addvar(VAR_RESULT, 1)
     setorcopyvar(VAR_0x8006, VAR_RESULT)
     factory_set(FACTORY_DATA_WIN_STREAK_SWAPS)
@@ -131,7 +145,9 @@ script BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNoland {
     case(FRONTIER_BRAIN_STREAK, BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNolandSilver)
     case(FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNolandGold)
     frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
-    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNolandSilver)
+    if (var(VAR_RESULT) != FALSE) {
+        goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNolandSilver)
+    }
     msgbox(BattleFrontier_BattleFactoryBattleRoom_Text_NolandImFactoryHead, MSGBOX_DEFAULT)
     frontier_set(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
 }
@@ -139,13 +155,17 @@ script BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNoland {
 script BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNolandSilver {
     msgbox(BattleFrontier_BattleFactoryBattleRoom_Text_ShakeOutKnowledgeBringItOn, MSGBOX_DEFAULT)
     call(BattleFrontier_BattleFactoryBattleRoom_EventScript_DoNolandBattle)
-    if (var(VAR_RESULT) == 1) goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandSilver)
+    if (var(VAR_RESULT) == 1) {
+        goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandSilver)
+    }
     goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyLost)
 }
 
 script BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandSilver {
     frontier_getsymbols()
-    if (var(VAR_RESULT) != 0) goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNoland)
+    if (var(VAR_RESULT) != 0) {
+        goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNoland)
+    }
     msgbox(BattleFrontier_BattleFactoryBattleRoom_Text_NolandLetsSeeFrontierPass, MSGBOX_DEFAULT)
     closemessage
     applymovement(LOCALID_FACTORY_BATTLE_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerApproachNoland)
@@ -161,7 +181,9 @@ script BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandSilver {
 
 script BattleFrontier_BattleFactoryBattleRoom_EventScript_IntroNolandGold {
     frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
-    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNolandGold)
+    if (var(VAR_RESULT) != FALSE) {
+        goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNolandGold)
+    }
     msgbox(BattleFrontier_BattleFactoryBattleRoom_Text_HarderLookThanLastTime, MSGBOX_DEFAULT)
     frontier_set(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
 }
@@ -169,13 +191,17 @@ script BattleFrontier_BattleFactoryBattleRoom_EventScript_IntroNolandGold {
 script BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNolandGold {
     msgbox(BattleFrontier_BattleFactoryBattleRoom_Text_AllRightBringItOn, MSGBOX_DEFAULT)
     call(BattleFrontier_BattleFactoryBattleRoom_EventScript_DoNolandBattle)
-    if (var(VAR_RESULT) == 1) goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandGold)
+    if (var(VAR_RESULT) == 1) {
+        goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandGold)
+    }
     goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyLost)
 }
 
 script BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandGold {
     frontier_getsymbols()
-    if (var(VAR_RESULT) == 2) goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNoland)
+    if (var(VAR_RESULT) == 2) {
+        goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNoland)
+    }
     msgbox(BattleFrontier_BattleFactoryBattleRoom_Text_OutOfMyLeagueLetsSeePass, MSGBOX_DEFAULT)
     waitmessage()
     applymovement(LOCALID_FACTORY_BATTLE_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerApproachNoland)
@@ -200,12 +226,16 @@ script BattleFrontier_BattleFactoryBattleRoom_EventScript_DoNolandBattle {
 
 script BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNoland {
     factory_get(FACTORY_DATA_WIN_STREAK_SWAPS)
-    if (var(VAR_RESULT) == MAX_STREAK) goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_IncrementWinStreak)
+    if (var(VAR_RESULT) == MAX_STREAK) {
+        goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_IncrementWinStreak)
+    }
     addvar(VAR_RESULT, 1)
     setorcopyvar(VAR_0x8006, VAR_RESULT)
     factory_set(FACTORY_DATA_WIN_STREAK_SWAPS)
     factory_get(FACTORY_DATA_WIN_STREAK)
-    if (var(VAR_RESULT) == MAX_STREAK) goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_IncrementBattleNum)
+    if (var(VAR_RESULT) == MAX_STREAK) {
+        goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_IncrementBattleNum)
+    }
     addvar(VAR_RESULT, 1)
     factory_set(FACTORY_DATA_WIN_STREAK, VAR_RESULT)
     frontier_get(FRONTIER_DATA_BATTLE_NUM)
@@ -249,7 +279,9 @@ movement BattleFrontier_BattleFactoryBattleRoom_Movement_NolandMoveToBattle {
 
 script BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobby {
     copyvar(VAR_RESULT, VAR_FRONTIER_BATTLE_MODE)
-    if (var(VAR_RESULT) == FRONTIER_MODE_DOUBLES) goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyDoubles)
+    if (var(VAR_RESULT) == FRONTIER_MODE_DOUBLES) {
+        goto(BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyDoubles)
+    }
     warp(MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY, 4, 8)
     waitstate
     end

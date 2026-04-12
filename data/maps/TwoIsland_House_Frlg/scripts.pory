@@ -6,7 +6,9 @@ script TwoIsland_House_EventScript_MoveManiac {
     clearflag(HAS_BIG_MUSHROOM)
     clearflag(HAS_TINY_MUSHROOMS)
     clearflag(HAS_BOTH_MUSHROOMS)
-    if (flag(CHECKED_MUSHROOMS)) goto(TwoIsland_House_EventScript_CheckPlayerHasMushrooms)
+    if (flag(CHECKED_MUSHROOMS)) {
+        goto(TwoIsland_House_EventScript_CheckPlayerHasMushrooms)
+    }
     msgbox(TwoIsland_House_Text_TeachMonMoveForMushroom)
     setflag(CHECKED_MUSHROOMS)
     goto(TwoIsland_House_EventScript_CheckPlayerHasMushrooms)
@@ -15,30 +17,44 @@ script TwoIsland_House_EventScript_MoveManiac {
 
 script TwoIsland_House_EventScript_CheckPlayerHasMushrooms {
     checkitem(ITEM_BIG_MUSHROOM)
-    if (var(VAR_RESULT) == TRUE) call(TwoIsland_House_EventScript_SetHasBigMushroom)
+    if (var(VAR_RESULT) == TRUE) {
+        call(TwoIsland_House_EventScript_SetHasBigMushroom)
+    }
     checkitem(ITEM_TINY_MUSHROOM, 2)
-    if (var(VAR_RESULT) == TRUE) call(TwoIsland_House_EventScript_SetHasTinyMushrooms)
-    if (flag(HAS_BIG_MUSHROOM)) goto(TwoIsland_House_EventScript_CheckAlsoHasTinyMushrooms)
-    if (flag(HAS_TINY_MUSHROOMS)) goto(TwoIsland_House_EventScript_CheckAlsoHasBigMushroom)
+    if (var(VAR_RESULT) == TRUE) {
+        call(TwoIsland_House_EventScript_SetHasTinyMushrooms)
+    }
+    if (flag(HAS_BIG_MUSHROOM)) {
+        goto(TwoIsland_House_EventScript_CheckAlsoHasTinyMushrooms)
+    }
+    if (flag(HAS_TINY_MUSHROOMS)) {
+        goto(TwoIsland_House_EventScript_CheckAlsoHasBigMushroom)
+    }
     goto(TwoIsland_House_EventScript_EndTutorMove)
     end
 }
 
 script TwoIsland_House_EventScript_CheckAlsoHasTinyMushrooms {
-    if (flag(HAS_TINY_MUSHROOMS)) call(TwoIsland_House_EventScript_SetHasBothMushrooms)
+    if (flag(HAS_TINY_MUSHROOMS)) {
+        call(TwoIsland_House_EventScript_SetHasBothMushrooms)
+    }
     goto(TwoIsland_House_EventScript_AskTutorMon)
     end
 }
 
 script TwoIsland_House_EventScript_CheckAlsoHasBigMushroom {
-    if (flag(HAS_BIG_MUSHROOM)) call(TwoIsland_House_EventScript_SetHasBothMushrooms)
+    if (flag(HAS_BIG_MUSHROOM)) {
+        call(TwoIsland_House_EventScript_SetHasBothMushrooms)
+    }
     goto(TwoIsland_House_EventScript_AskTutorMon)
     end
 }
 
 script TwoIsland_House_EventScript_AskTutorMon {
     msgbox(TwoIsland_House_Text_WantMeToTeachMove, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(TwoIsland_House_EventScript_EndTutorMove)
+    if (var(VAR_RESULT) == NO) {
+        goto(TwoIsland_House_EventScript_EndTutorMove)
+    }
     goto(TwoIsland_House_EventScript_ChooseMonToTutor)
     end
 }
@@ -47,10 +63,16 @@ script TwoIsland_House_EventScript_ChooseMonToTutor {
     msgbox(TwoIsland_House_Text_TutorWhichMon)
     special(ChooseMonForMoveRelearner)
     waitstate
-    if (var(VAR_0x8004) >= PARTY_SIZE) goto(TwoIsland_House_EventScript_EndTutorMove)
+    if (var(VAR_0x8004) >= PARTY_SIZE) {
+        goto(TwoIsland_House_EventScript_EndTutorMove)
+    }
     special(IsSelectedMonEgg)
-    if (var(VAR_RESULT) == TRUE) goto(TwoIsland_House_EventScript_CantTutorEgg)
-    if (var(VAR_0x8005) == 0) goto(TwoIsland_House_EventScript_NoMoveToTutorMon)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(TwoIsland_House_EventScript_CantTutorEgg)
+    }
+    if (var(VAR_0x8005) == 0) {
+        goto(TwoIsland_House_EventScript_NoMoveToTutorMon)
+    }
     goto(TwoIsland_House_EventScript_ChooseMoveToTeach)
     end
 }
@@ -59,10 +81,18 @@ script TwoIsland_House_EventScript_ChooseMoveToTeach {
     msgbox(TwoIsland_House_Text_TeachWhichMove)
     special(TeachMoveRelearnerMove)
     waitstate
-    if (var(VAR_0x8004) == 0) goto(TwoIsland_House_EventScript_ChooseMonToTutor)
-    if (flag(HAS_BOTH_MUSHROOMS)) goto(TwoIsland_House_EventScript_ChooseMushroom)
-    if (flag(HAS_BIG_MUSHROOM)) goto(TwoIsland_House_EventScript_GiveBigMushroom)
-    if (flag(HAS_TINY_MUSHROOMS)) goto(TwoIsland_House_EventScript_GiveTinyMushrooms)
+    if (var(VAR_0x8004) == 0) {
+        goto(TwoIsland_House_EventScript_ChooseMonToTutor)
+    }
+    if (flag(HAS_BOTH_MUSHROOMS)) {
+        goto(TwoIsland_House_EventScript_ChooseMushroom)
+    }
+    if (flag(HAS_BIG_MUSHROOM)) {
+        goto(TwoIsland_House_EventScript_GiveBigMushroom)
+    }
+    if (flag(HAS_TINY_MUSHROOMS)) {
+        goto(TwoIsland_House_EventScript_GiveTinyMushrooms)
+    }
     end
 }
 

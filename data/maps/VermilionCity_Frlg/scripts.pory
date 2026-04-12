@@ -22,7 +22,9 @@ movement VermilionCity_Movement_ExitSSAnne {
 
 script VermilionCity_OnTransition {
     setworldmapflag(FLAG_WORLD_MAP_VERMILION_CITY)
-    if (flag(FLAG_TALKED_TO_OAKS_AIDE_IN_VERMILION)) call(VermilionCity_EventScript_HideOaksAide)
+    if (flag(FLAG_TALKED_TO_OAKS_AIDE_IN_VERMILION)) {
+        call(VermilionCity_EventScript_HideOaksAide)
+    }
     end
 }
 
@@ -39,7 +41,9 @@ script VermilionCity_EventScript_Woman {
 script VermilionCity_EventScript_OldMan1 {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_VERMILION_CITY) == 3) goto(VermilionCity_EventScript_OldMan1SSAnneLeft)
+    if (var(VAR_MAP_SCENE_VERMILION_CITY) == 3) {
+        goto(VermilionCity_EventScript_OldMan1SSAnneLeft)
+    }
     msgbox(VermilionCity_Text_DidYouSeeSSAnneInHarbor)
     release
     end
@@ -54,32 +58,46 @@ script VermilionCity_EventScript_OldMan1SSAnneLeft {
 script VermilionCity_EventScript_FerrySailor {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_VERMILION_CITY) == 3) goto(VermilionCity_EventScript_CheckSeagallopPresent)
+    if (var(VAR_MAP_SCENE_VERMILION_CITY) == 3) {
+        goto(VermilionCity_EventScript_CheckSeagallopPresent)
+    }
     msgbox(VermilionCity_Text_WelcomeToTheSSAnne)
     release
     end
 }
 
 script VermilionCity_EventScript_CheckHasMysticTicket {
-    if (!flag(FLAG_ENABLE_SHIP_NAVEL_ROCK)) goto(EventScript_SetResultFalse)
+    if (!flag(FLAG_ENABLE_SHIP_NAVEL_ROCK)) {
+        goto(EventScript_SetResultFalse)
+    }
     checkitem(ITEM_MYSTIC_TICKET)
-    if (var(VAR_RESULT) == FALSE) goto(EventScript_SetResultFalse)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(EventScript_SetResultFalse)
+    }
     goto(EventScript_SetResultTrue)
     end
 }
 
 script VermilionCity_EventScript_CheckHasAuroraTicket {
-    if (!flag(FLAG_ENABLE_SHIP_BIRTH_ISLAND)) goto(EventScript_SetResultFalse)
+    if (!flag(FLAG_ENABLE_SHIP_BIRTH_ISLAND)) {
+        goto(EventScript_SetResultFalse)
+    }
     checkitem(ITEM_AURORA_TICKET)
-    if (var(VAR_RESULT) == FALSE) goto(EventScript_SetResultFalse)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(EventScript_SetResultFalse)
+    }
     goto(EventScript_SetResultTrue)
     end
 }
 
 script VermilionCity_EventScript_CheckSeagallopPresent {
     setvar(VAR_0x8004, SEAGALLOP_VERMILION_CITY)
-    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) >= 5) goto(VermilionCity_EventScript_ChooseSeagallopDestRainbowPass)
-    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) >= 1) goto(VermilionCity_EventScript_ChooseSeagallopDestTriPass)
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) >= 5) {
+        goto(VermilionCity_EventScript_ChooseSeagallopDestRainbowPass)
+    }
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) >= 1) {
+        goto(VermilionCity_EventScript_ChooseSeagallopDestTriPass)
+    }
     msgbox(VermilionCity_Text_TheShipSetSail)
     release
     end
@@ -87,9 +105,13 @@ script VermilionCity_EventScript_CheckSeagallopPresent {
 
 script VermilionCity_EventScript_ChooseSeagallopDestRainbowPass {
     call(VermilionCity_EventScript_CheckHasMysticTicket)
-    if (var(VAR_RESULT) == TRUE) goto(VermilionCity_EventScript_HasMysticTicket)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(VermilionCity_EventScript_HasMysticTicket)
+    }
     call(VermilionCity_EventScript_CheckHasAuroraTicket)
-    if (var(VAR_RESULT) == TRUE) goto(VermilionCity_EventScript_HasAuroraTicket)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(VermilionCity_EventScript_HasAuroraTicket)
+    }
     setvar(VAR_0x8004, SEAGALLOP_VERMILION_CITY)
     message(VermilionCity_Text_BoardSeagallopRainbowPass)
     waitmessage()
@@ -99,8 +121,12 @@ script VermilionCity_EventScript_ChooseSeagallopDestRainbowPass {
 
 script VermilionCity_EventScript_HasMysticTicket {
     call(VermilionCity_EventScript_CheckHasAuroraTicket)
-    if (var(VAR_RESULT) == TRUE) goto(VermilionCity_EventScript_HasMysticAndAuroraTickets)
-    if (!flag(FLAG_SHOWN_MYSTIC_TICKET)) call(VermilionCity_EventScript_ShowMysticTicket)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(VermilionCity_EventScript_HasMysticAndAuroraTickets)
+    }
+    if (!flag(FLAG_SHOWN_MYSTIC_TICKET)) {
+        call(VermilionCity_EventScript_ShowMysticTicket)
+    }
     message(VermilionCity_Text_BoardSeagallopFerry)
     waitmessage()
     multichoice(17, 6, MULTI_SEVII_NAVEL, FALSE)
@@ -119,7 +145,9 @@ script VermilionCity_EventScript_ShowMysticTicket {
 }
 
 script VermilionCity_EventScript_HasAuroraTicket {
-    if (!flag(FLAG_SHOWN_AURORA_TICKET)) call(VermilionCity_EventScript_ShowAuroraTicket)
+    if (!flag(FLAG_SHOWN_AURORA_TICKET)) {
+        call(VermilionCity_EventScript_ShowAuroraTicket)
+    }
     message(VermilionCity_Text_BoardSeagallopFerry)
     waitmessage()
     multichoice(13, 6, MULTI_SEVII_BIRTH, FALSE)
@@ -138,8 +166,12 @@ script VermilionCity_EventScript_ShowAuroraTicket {
 }
 
 script VermilionCity_EventScript_HasMysticAndAuroraTickets {
-    if (!flag(FLAG_SHOWN_MYSTIC_TICKET)) call(VermilionCity_EventScript_ShowMysticTicket)
-    if (!flag(FLAG_SHOWN_AURORA_TICKET)) call(VermilionCity_EventScript_ShowAuroraTicket)
+    if (!flag(FLAG_SHOWN_MYSTIC_TICKET)) {
+        call(VermilionCity_EventScript_ShowMysticTicket)
+    }
+    if (!flag(FLAG_SHOWN_AURORA_TICKET)) {
+        call(VermilionCity_EventScript_ShowAuroraTicket)
+    }
     message(VermilionCity_Text_BoardSeagallopFerry)
     waitmessage()
     multichoice(13, 5, MULTI_SEVII_NAVEL_BIRTH, FALSE)
@@ -211,9 +243,13 @@ script VermilionCity_EventScript_CheckTicket {
     applymovement(LOCALID_VERMILION_FERRY_SAILOR, Common_Movement_WalkInPlaceFasterLeft)
     applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
     waitmovement(0)
-    if (var(VAR_MAP_SCENE_VERMILION_CITY) == 3) goto(VermilionCity_EventScript_CheckSeagallopPresentTrigger)
+    if (var(VAR_MAP_SCENE_VERMILION_CITY) == 3) {
+        goto(VermilionCity_EventScript_CheckSeagallopPresentTrigger)
+    }
     msgbox(VermilionCity_Text_DoYouHaveATicket)
-    if (!flag(FLAG_GOT_SS_TICKET)) goto(VermilionCity_EventScript_DontHaveSSTicket)
+    if (!flag(FLAG_GOT_SS_TICKET)) {
+        goto(VermilionCity_EventScript_DontHaveSSTicket)
+    }
     msgbox(VermilionCity_Text_FlashedSSTicket)
     setvar(VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER, 1)
     releaseall
@@ -229,8 +265,12 @@ script VermilionCity_EventScript_DontHaveSSTicket {
 
 script VermilionCity_EventScript_CheckSeagallopPresentTrigger {
     setvar(VAR_0x8004, SEAGALLOP_VERMILION_CITY)
-    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) >= 5) goto(VermilionCity_EventScript_ChooseSeagallopDestRainbowPass)
-    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) >= 1) goto(VermilionCity_EventScript_ChooseSeagallopDestTriPass)
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) >= 5) {
+        goto(VermilionCity_EventScript_ChooseSeagallopDestRainbowPass)
+    }
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) >= 1) {
+        goto(VermilionCity_EventScript_ChooseSeagallopDestTriPass)
+    }
     msgbox(VermilionCity_Text_TheShipSetSail)
     closemessage
     goto(VermilionCity_EventScript_WalkUpPier)

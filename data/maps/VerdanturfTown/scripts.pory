@@ -11,7 +11,9 @@ script VerdanturfTown_OnTransition {
 script VerdanturfTown_EventScript_Twin {
     lock
     faceplayer
-    if (flag(FLAG_RUSTURF_TUNNEL_OPENED)) goto(VerdanturfTown_EventScript_TwinTunnelOpen)
+    if (flag(FLAG_RUSTURF_TUNNEL_OPENED)) {
+        goto(VerdanturfTown_EventScript_TwinTunnelOpen)
+    }
     msgbox(VerdanturfTown_Text_ManTryingToDigTunnel, MSGBOX_DEFAULT)
     applymovement(LOCALID_VERDANTURF_TWIN, Common_Movement_FaceOriginalDirection)
     waitmovement(0)
@@ -40,7 +42,9 @@ script VerdanturfTown_EventScript_Camper {
 script VerdanturfTown_EventScript_Boy {
     lock
     faceplayer
-    if (flag(FLAG_RUSTURF_TUNNEL_OPENED)) goto(VerdanturfTown_EventScript_BoyTunnelOpen)
+    if (flag(FLAG_RUSTURF_TUNNEL_OPENED)) {
+        goto(VerdanturfTown_EventScript_BoyTunnelOpen)
+    }
     msgbox(VerdanturfTown_Text_GuyTryingToBustThroughCave, MSGBOX_DEFAULT)
     release
     end

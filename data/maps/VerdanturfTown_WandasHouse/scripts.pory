@@ -3,7 +3,9 @@ mapscripts VerdanturfTown_WandasHouse_MapScripts {}
 script VerdanturfTown_WandasHouse_EventScript_Wally {
     lock
     faceplayer
-    if (flag(FLAG_WALLY_SPEECH)) goto(VerdanturfTown_WandasHouse_EventScript_WallyShortSpeech)
+    if (flag(FLAG_WALLY_SPEECH)) {
+        goto(VerdanturfTown_WandasHouse_EventScript_WallyShortSpeech)
+    }
     msgbox(VerdanturfTown_WandasHouse_Text_StrongerSpeech, MSGBOX_DEFAULT)
     setflag(FLAG_WALLY_SPEECH)
     release
@@ -19,8 +21,12 @@ script VerdanturfTown_WandasHouse_EventScript_WallyShortSpeech {
 script VerdanturfTown_WandasHouse_EventScript_WallysUncle {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_WALLY_VICTORY_ROAD)) goto(VerdanturfTown_WandasHouse_EventScript_WallysUncleEverGrande)
-    if (flag(FLAG_DEFEATED_LAVARIDGE_GYM)) goto(VerdanturfTown_WandasHouse_EventScript_WallysUncleSlippedOff)
+    if (flag(FLAG_DEFEATED_WALLY_VICTORY_ROAD)) {
+        goto(VerdanturfTown_WandasHouse_EventScript_WallysUncleEverGrande)
+    }
+    if (flag(FLAG_DEFEATED_LAVARIDGE_GYM)) {
+        goto(VerdanturfTown_WandasHouse_EventScript_WallysUncleSlippedOff)
+    }
     msgbox(VerdanturfTown_WandasHouse_Text_WallysNextDoor, MSGBOX_DEFAULT)
     release
     end
@@ -46,8 +52,12 @@ script VerdanturfTown_WandasHouse_EventScript_WandasBoyfriend {
 script VerdanturfTown_WandasHouse_EventScript_Wanda {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_LAVARIDGE_GYM)) goto(VerdanturfTown_WandasHouse_EventScript_WandaDontWorry)
-    if (flag(FLAG_DEFEATED_WALLY_MAUVILLE)) goto(VerdanturfTown_WandasHouse_EventScript_MeetWanda)
+    if (flag(FLAG_DEFEATED_LAVARIDGE_GYM)) {
+        goto(VerdanturfTown_WandasHouse_EventScript_WandaDontWorry)
+    }
+    if (flag(FLAG_DEFEATED_WALLY_MAUVILLE)) {
+        goto(VerdanturfTown_WandasHouse_EventScript_MeetWanda)
+    }
     msgbox(VerdanturfTown_WandasHouse_Text_DontWorryAboutWally, MSGBOX_DEFAULT)
     release
     end
@@ -68,9 +78,15 @@ script VerdanturfTown_WandasHouse_EventScript_WandaDontWorry {
 script VerdanturfTown_WandasHouse_EventScript_WallysAunt {
     lock
     faceplayer
-    if (flag(FLAG_DEFEATED_WALLY_VICTORY_ROAD)) goto(VerdanturfTown_WandasHouse_EventScript_WallysAuntEverGrande)
-    if (flag(FLAG_DEFEATED_LAVARIDGE_GYM)) goto(VerdanturfTown_WandasHouse_EventScript_WallysAuntAnythingHappened)
-    if (flag(FLAG_RUSTURF_TUNNEL_OPENED)) goto(VerdanturfTown_WandasHouse_EventScript_WallysAuntTunnelOpen)
+    if (flag(FLAG_DEFEATED_WALLY_VICTORY_ROAD)) {
+        goto(VerdanturfTown_WandasHouse_EventScript_WallysAuntEverGrande)
+    }
+    if (flag(FLAG_DEFEATED_LAVARIDGE_GYM)) {
+        goto(VerdanturfTown_WandasHouse_EventScript_WallysAuntAnythingHappened)
+    }
+    if (flag(FLAG_RUSTURF_TUNNEL_OPENED)) {
+        goto(VerdanturfTown_WandasHouse_EventScript_WallysAuntTunnelOpen)
+    }
     msgbox(VerdanturfTown_WandasHouse_Text_DaughtersBoyfriendDriven, MSGBOX_DEFAULT)
     release
     end

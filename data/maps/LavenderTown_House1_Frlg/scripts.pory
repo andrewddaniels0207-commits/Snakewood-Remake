@@ -3,7 +3,9 @@ mapscripts LavenderTown_House1_Frlg_MapScripts {}
 script LavenderTown_House1_EventScript_CooltrainerF {
     lock
     faceplayer
-    if (flag(FLAG_RESCUED_MR_FUJI)) goto(LavenderTown_House1_EventScript_CooltrainerFGhostGone)
+    if (flag(FLAG_RESCUED_MR_FUJI)) {
+        goto(LavenderTown_House1_EventScript_CooltrainerFGhostGone)
+    }
     msgbox(LavenderTown_House1_Text_RocketsKilledCubonesMother)
     release
     end

@@ -102,7 +102,9 @@ script SlateportCity_BattleTentLobby_EventScript_Attendant {
     lock
     faceplayer
     slateporttent_getprize()
-    if (var(VAR_RESULT) != ITEM_NONE) goto(SlateportCity_BattleTentLobby_EventScript_GivePrize)
+    if (var(VAR_RESULT) != ITEM_NONE) {
+        goto(SlateportCity_BattleTentLobby_EventScript_GivePrize)
+    }
     special(SavePlayerParty)
     msgbox(SlateportCity_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT)
 }
@@ -139,7 +141,9 @@ script SlateportCity_BattleTentLobby_EventScript_SaveBeforeChallenge {
     delay(2)
     call(Common_EventScript_SaveGame)
     setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
-    if (var(VAR_RESULT) == 0) goto(SlateportCity_BattleTentLobby_EventScript_CancelChallengeSaveFailed)
+    if (var(VAR_RESULT) == 0) {
+        goto(SlateportCity_BattleTentLobby_EventScript_CancelChallengeSaveFailed)
+    }
     setvar(VAR_0x8006, 0)
 }
 
@@ -225,10 +229,14 @@ movement SlateportCity_BattleTentLobby_Movement_UnusedEnterDoor {
 script SlateportCity_BattleTentLobby_EventScript_TormentGiver {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_TM_TORMENT)) goto(SlateportCity_BattleTentLobby_EventScript_ReceivedTorment)
+    if (flag(FLAG_RECEIVED_TM_TORMENT)) {
+        goto(SlateportCity_BattleTentLobby_EventScript_ReceivedTorment)
+    }
     msgbox(SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe, MSGBOX_DEFAULT)
     giveitem(ITEM_TM_TORMENT)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_TM_TORMENT)
     msgbox(SlateportCity_BattleTentLobby_Text_ExplainTorment, MSGBOX_DEFAULT)
     release

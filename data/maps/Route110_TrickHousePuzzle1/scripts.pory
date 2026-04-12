@@ -3,7 +3,9 @@ mapscripts Route110_TrickHousePuzzle1_MapScripts {
 }
 
 script Route110_TrickHousePuzzle1_OnLoad {
-    if (var(VAR_TRICK_HOUSE_PUZZLE_1_STATE) == 2) goto(Route110_TrickHousePuzzle1_EventScript_OpenDoor)
+    if (var(VAR_TRICK_HOUSE_PUZZLE_1_STATE) == 2) {
+        goto(Route110_TrickHousePuzzle1_EventScript_OpenDoor)
+    }
     end
 }
 
@@ -14,7 +16,9 @@ script Route110_TrickHousePuzzle1_EventScript_OpenDoor {
 
 script Route110_TrickHousePuzzle1_EventScript_Scroll {
     lockall
-    if (var(VAR_TRICK_HOUSE_PUZZLE_1_STATE) == 0) goto(Route110_TrickHousePuzzle1_EventScript_FoundScroll)
+    if (var(VAR_TRICK_HOUSE_PUZZLE_1_STATE) == 0) {
+        goto(Route110_TrickHousePuzzle1_EventScript_FoundScroll)
+    }
     goto(Route110_TrickHousePuzzle_EventScript_ReadScrollAgain)
     end
 }

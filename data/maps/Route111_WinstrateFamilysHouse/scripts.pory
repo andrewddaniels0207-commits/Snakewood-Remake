@@ -13,10 +13,14 @@ script Route111_WinstrateFamilysHouse_EventScript_Victoria {
     lock
     faceplayer
     setvar(VAR_0x8008, LOCALID_WINSTRATE_HOUSE_VICTORIA)
-    if (flag(FLAG_RECEIVED_MACHO_BRACE)) goto(Route111_WinstrateFamilysHouse_EventScript_ReceivedMachoBrace)
+    if (flag(FLAG_RECEIVED_MACHO_BRACE)) {
+        goto(Route111_WinstrateFamilysHouse_EventScript_ReceivedMachoBrace)
+    }
     msgbox(Route111_WinstrateFamilysHouse_Text_LikeYouToHaveMachoBrace, MSGBOX_DEFAULT)
     giveitem(ITEM_MACHO_BRACE)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_MACHO_BRACE)
     goto(Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection)
     end
@@ -41,7 +45,9 @@ script Route111_WinstrateFamilysHouse_EventScript_Vicky {
     lock
     faceplayer
     setvar(VAR_0x8008, LOCALID_WINSTRATE_HOUSE_VICKY)
-    if (flag(FLAG_TEMP_4)) goto(Route111_WinstrateFamilysHouse_EventScript_AlreadySpokenTo)
+    if (flag(FLAG_TEMP_4)) {
+        goto(Route111_WinstrateFamilysHouse_EventScript_AlreadySpokenTo)
+    }
     msgbox(Route111_WinstrateFamilysHouse_Text_GrandsonStrong, MSGBOX_DEFAULT)
     setflag(FLAG_TEMP_4)
     goto(Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection)

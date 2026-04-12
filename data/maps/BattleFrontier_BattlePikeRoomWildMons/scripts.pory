@@ -36,8 +36,12 @@ script BattleFrontier_BattlePikeRoomWildMons_EventScript_TurnPlayerNorth {
 script BattleFrontier_BattlePikeRoomWildMons_OnResume {
     call(BattleFrontier_BattlePikeRoom_EventScript_ResetSketchedMoves)
     frontier_get(FRONTIER_DATA_BATTLE_OUTCOME)
-    if (var(VAR_RESULT) == B_OUTCOME_LOST) goto(BattleFrontier_BattlePikeRoomWildMons_EventScript_SetLost)
-    if (var(VAR_RESULT) == B_OUTCOME_DREW) goto(BattleFrontier_BattlePikeRoomWildMons_EventScript_SetLost)
+    if (var(VAR_RESULT) == B_OUTCOME_LOST) {
+        goto(BattleFrontier_BattlePikeRoomWildMons_EventScript_SetLost)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_DREW) {
+        goto(BattleFrontier_BattlePikeRoomWildMons_EventScript_SetLost)
+    }
     end
 }
 

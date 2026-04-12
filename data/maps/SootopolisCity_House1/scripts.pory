@@ -3,10 +3,14 @@ mapscripts SootopolisCity_House1_MapScripts {}
 script SootopolisCity_House1_EventScript_BrickBreakBlackBelt {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_TM_BRICK_BREAK)) goto(SootopolisCity_House1_EventScript_ReceivedBrickBreak)
+    if (flag(FLAG_RECEIVED_TM_BRICK_BREAK)) {
+        goto(SootopolisCity_House1_EventScript_ReceivedBrickBreak)
+    }
     msgbox(SootopolisCity_House1_Text_DevelopedThisTM, MSGBOX_DEFAULT)
     giveitem(ITEM_TM_BRICK_BREAK)
-    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     setflag(FLAG_RECEIVED_TM_BRICK_BREAK)
     msgbox(SootopolisCity_House1_Text_ExplainBrickBreak, MSGBOX_DEFAULT)
     release

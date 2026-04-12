@@ -24,7 +24,9 @@ script TrainerHill_Elevator_EventScript_EnterElevator {
     waitmovement(0)
     lockall
     msgbox(TrainerHill_Elevator_Text_ReturnToReception, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(TrainerHill_Elevator_EventScript_ExitToRoof)
+    if (var(VAR_RESULT) == NO) {
+        goto(TrainerHill_Elevator_EventScript_ExitToRoof)
+    }
     releaseall
     applymovement(LOCALID_TRAINER_HILL_ELEVATOR_ATTENDANT, TrainerHill_Elevator_Movement_AttendantFaceDown)
     waitmovement(0)

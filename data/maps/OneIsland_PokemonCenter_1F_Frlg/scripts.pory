@@ -8,8 +8,12 @@ mapscripts OneIsland_PokemonCenter_1F_Frlg_MapScripts {
 }
 
 script OneIsland_PokemonCenter_1F_OnLoad {
-    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) >= 5) call(OneIsland_PokemonCenter_1F_EventScript_SetRubyMetatile)
-    if (flag(FLAG_IS_CHAMPION)) call(OneIsland_PokemonCenter_1F_EventScript_SetNetworkMachineOn)
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) >= 5) {
+        call(OneIsland_PokemonCenter_1F_EventScript_SetRubyMetatile)
+    }
+    if (flag(FLAG_IS_CHAMPION)) {
+        call(OneIsland_PokemonCenter_1F_EventScript_SetNetworkMachineOn)
+    }
     end
 }
 
@@ -32,9 +36,15 @@ script OneIsland_PokemonCenter_1F_EventScript_SetNetworkMachineOn {
 
 script OneIsland_PokemonCenter_1F_OnTransition {
     setrespawn(HEAL_LOCATION_ONE_ISLAND)
-    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 6) call(OneIsland_PokemonCenter_1F_EventScript_SetCelioQuestDone)
-    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 0) call(OneIsland_PokemonCenter_1F_EventScript_SetBillCelioFirstMeetingPos)
-    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 2) call(OneIsland_PokemonCenter_1F_EventScript_SetBillCelioReadyToLeavePos)
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 6) {
+        call(OneIsland_PokemonCenter_1F_EventScript_SetCelioQuestDone)
+    }
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 0) {
+        call(OneIsland_PokemonCenter_1F_EventScript_SetBillCelioFirstMeetingPos)
+    }
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 2) {
+        call(OneIsland_PokemonCenter_1F_EventScript_SetBillCelioReadyToLeavePos)
+    }
     end
 }
 
@@ -85,8 +95,12 @@ script OneIsland_PokemonCenter_1F_EventScript_MeetCelioScene {
     waitmovement(0)
     applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
     waitmovement(0)
-    if (flag(FLAG_SYS_GAME_CLEAR)) call(OneIsland_PokemonCenter_1F_EventScript_IntroducePlayerChamp)
-    if (!flag(FLAG_SYS_GAME_CLEAR)) call(OneIsland_PokemonCenter_1F_EventScript_IntroducePlayerNotChamp)
+    if (flag(FLAG_SYS_GAME_CLEAR)) {
+        call(OneIsland_PokemonCenter_1F_EventScript_IntroducePlayerChamp)
+    }
+    if (!flag(FLAG_SYS_GAME_CLEAR)) {
+        call(OneIsland_PokemonCenter_1F_EventScript_IntroducePlayerNotChamp)
+    }
     applymovement(LOCALID_CELIO, Common_Movement_WalkInPlaceFasterDown)
     waitmovement(0)
     msgbox(OneIsland_PokemonCenter_1F_Text_CelioThatsReallyImpressive)
@@ -110,8 +124,12 @@ script OneIsland_PokemonCenter_1F_EventScript_MeetCelioScene {
     msgbox(OneIsland_PokemonCenter_1F_Text_CelioPleaseTakeThis)
     giveitem_msg(OneIsland_PokemonCenter_1F_Text_ObtainedTriPass, ITEM_TRI_PASS, 1, MUS_RG_OBTAIN_KEY_ITEM)
     msgbox(OneIsland_PokemonCenter_1F_Text_PassLetsYouTravelBetweenIslands)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) >= 2) call(OneIsland_PokemonCenter_1F_EventScript_ReceiveTownMapPage)
-    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) < 2) call(OneIsland_PokemonCenter_1F_EventScript_ReceiveTownMap)
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) >= 2) {
+        call(OneIsland_PokemonCenter_1F_EventScript_ReceiveTownMapPage)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) < 2) {
+        call(OneIsland_PokemonCenter_1F_EventScript_ReceiveTownMap)
+    }
     setflag(FLAG_SYS_SEVII_MAP_123)
     msgbox(OneIsland_PokemonCenter_1F_Text_BillCatchYouLater)
     closemessage
@@ -197,7 +215,9 @@ script OneIsland_PokemonCenter_1F_EventScript_Nurse {
 
 script OneIsland_PokemonCenter_1F_EventScript_Bill {
     lock
-    if (flag(FLAG_SEVII_DETOUR_FINISHED)) goto(OneIsland_PokemonCenter_1F_EventScript_BillGoTakeStroll)
+    if (flag(FLAG_SEVII_DETOUR_FINISHED)) {
+        goto(OneIsland_PokemonCenter_1F_EventScript_BillGoTakeStroll)
+    }
     msgbox(OneIsland_PokemonCenter_1F_Text_HmmHowAboutLikeThis)
     release
     end
@@ -214,15 +234,31 @@ script OneIsland_PokemonCenter_1F_EventScript_BillGoTakeStroll {
 script OneIsland_PokemonCenter_1F_EventScript_Celio {
     lock
     faceplayer
-    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 7) goto(OneIsland_PokemonCenter_1F_EventScript_CelioGiveBillFact)
-    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 6) goto(OneIsland_PokemonCenter_1F_EventScript_CelioJustGivenSapphire)
-    if (flag(FLAG_RECOVERED_SAPPHIRE)) goto(OneIsland_PokemonCenter_1F_EventScript_GiveCelioSapphire)
-    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 5) goto(OneIsland_PokemonCenter_1F_EventScript_ExplainRainbowPass)
-    if (flag(FLAG_GOT_RUBY)) goto(OneIsland_PokemonCenter_1F_EventScript_GiveCelioRuby)
-    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 4) goto(OneIsland_PokemonCenter_1F_EventScript_CelioWaitingForRuby)
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 7) {
+        goto(OneIsland_PokemonCenter_1F_EventScript_CelioGiveBillFact)
+    }
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 6) {
+        goto(OneIsland_PokemonCenter_1F_EventScript_CelioJustGivenSapphire)
+    }
+    if (flag(FLAG_RECOVERED_SAPPHIRE)) {
+        goto(OneIsland_PokemonCenter_1F_EventScript_GiveCelioSapphire)
+    }
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 5) {
+        goto(OneIsland_PokemonCenter_1F_EventScript_ExplainRainbowPass)
+    }
+    if (flag(FLAG_GOT_RUBY)) {
+        goto(OneIsland_PokemonCenter_1F_EventScript_GiveCelioRuby)
+    }
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 4) {
+        goto(OneIsland_PokemonCenter_1F_EventScript_CelioWaitingForRuby)
+    }
     specialvar(VAR_RESULT, IsNationalPokedexEnabled)
-    if (var(VAR_RESULT) == TRUE) goto(OneIsland_PokemonCenter_1F_EventScript_CelioRequestRuby)
-    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 3) goto(OneIsland_PokemonCenter_1F_EventScript_CelioPlayerMissingNationalDex)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(OneIsland_PokemonCenter_1F_EventScript_CelioRequestRuby)
+    }
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 3) {
+        goto(OneIsland_PokemonCenter_1F_EventScript_CelioPlayerMissingNationalDex)
+    }
     msgbox(OneIsland_PokemonCenter_1F_Text_SorryForBeingPoorHost)
     closemessage
     applymovement(LOCALID_CELIO, Common_Movement_FaceOriginalDirection)
@@ -234,8 +270,12 @@ script OneIsland_PokemonCenter_1F_EventScript_Celio {
 script OneIsland_PokemonCenter_1F_EventScript_CelioGiveBillFact {
     msgbox(OneIsland_PokemonCenter_1F_Text_CelioHearingRumorsAboutYou)
     random(3)
-    if (var(VAR_RESULT) == 0) goto(OneIsland_PokemonCenter_1F_EventScript_BillFact1)
-    if (var(VAR_RESULT) == 1) goto(OneIsland_PokemonCenter_1F_EventScript_BillFact2)
+    if (var(VAR_RESULT) == 0) {
+        goto(OneIsland_PokemonCenter_1F_EventScript_BillFact1)
+    }
+    if (var(VAR_RESULT) == 1) {
+        goto(OneIsland_PokemonCenter_1F_EventScript_BillFact2)
+    }
     famechecker(FAMECHECKER_BILL, 5)
     msgbox(OneIsland_PokemonCenter_1F_Text_BillCantStomachMilk)
     release
@@ -327,14 +367,18 @@ script OneIsland_PokemonCenter_1F_EventScript_GiveCelioRuby {
     applymovement(LOCALID_CELIO, Common_Movement_FacePlayer)
     waitmovement(0)
     msgbox(OneIsland_PokemonCenter_1F_Text_MayIAskOneMoreFavor, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(OneIsland_PokemonCenter_1F_EventScript_DeclineHelpCelio)
+    if (var(VAR_RESULT) == NO) {
+        goto(OneIsland_PokemonCenter_1F_EventScript_DeclineHelpCelio)
+    }
     goto(OneIsland_PokemonCenter_1F_EventScript_GiveRainbowPass)
     end
 }
 
 script OneIsland_PokemonCenter_1F_EventScript_DeclineHelpCelio {
     msgbox(OneIsland_PokemonCenter_1F_Text_PleaseINeedYourHelp, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(OneIsland_PokemonCenter_1F_EventScript_DeclineHelpCelio)
+    if (var(VAR_RESULT) == NO) {
+        goto(OneIsland_PokemonCenter_1F_EventScript_DeclineHelpCelio)
+    }
     goto(OneIsland_PokemonCenter_1F_EventScript_GiveRainbowPass)
     end
 }
@@ -415,7 +459,9 @@ script OneIsland_PokemonCenter_1F_EventScript_Hiker {
 script OneIsland_PokemonCenter_1F_EventScript_BattleGirl {
     lock
     faceplayer
-    if (flag(FLAG_IS_CHAMPION)) goto(OneIsland_PokemonCenter_1F_EventScript_BattleGirlHoennLinked)
+    if (flag(FLAG_IS_CHAMPION)) {
+        goto(OneIsland_PokemonCenter_1F_EventScript_BattleGirlHoennLinked)
+    }
     msgbox(OneIsland_PokemonCenter_1F_Text_WishICouldTradeWithBoyfriend)
     release
     end
@@ -429,8 +475,12 @@ script OneIsland_PokemonCenter_1F_EventScript_BattleGirlHoennLinked {
 
 script OneIsland_PokemonCenter_1F_EventScript_NetworkMachine {
     lockall
-    if (flag(FLAG_IS_CHAMPION)) goto(OneIsland_PokemonCenter_1F_EventScript_NetworkMachineLinkedWithHoenn)
-    if (flag(FLAG_SEVII_DETOUR_FINISHED)) goto(OneIsland_PokemonCenter_1F_EventScript_NetworkMachineLinkedWithKanto)
+    if (flag(FLAG_IS_CHAMPION)) {
+        goto(OneIsland_PokemonCenter_1F_EventScript_NetworkMachineLinkedWithHoenn)
+    }
+    if (flag(FLAG_SEVII_DETOUR_FINISHED)) {
+        goto(OneIsland_PokemonCenter_1F_EventScript_NetworkMachineLinkedWithKanto)
+    }
     msgbox(OneIsland_PokemonCenter_1F_Text_MachineUnderAdjustment)
     releaseall
     end
@@ -483,10 +533,18 @@ script OneIsland_PokemonCenter_1F_EventScript_LeaveOneIslandScene {
     waitmovement(0)
     msgbox(OneIsland_PokemonCenter_1F_Text_BillOhHeyPlayer)
     closemessage
-    if (var(VAR_TEMP_1) == 1) call(OneIsland_PokemonCenter_1F_EventScript_PlayerWalkToBillTop)
-    if (var(VAR_TEMP_1) == 2) call(OneIsland_PokemonCenter_1F_EventScript_PlayerWalkToBillMidTop)
-    if (var(VAR_TEMP_1) == 3) call(OneIsland_PokemonCenter_1F_EventScript_PlayerWalkToBillMidBottom)
-    if (var(VAR_TEMP_1) == 4) call(OneIsland_PokemonCenter_1F_EventScript_PlayerWalkToBillBottom)
+    if (var(VAR_TEMP_1) == 1) {
+        call(OneIsland_PokemonCenter_1F_EventScript_PlayerWalkToBillTop)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(OneIsland_PokemonCenter_1F_EventScript_PlayerWalkToBillMidTop)
+    }
+    if (var(VAR_TEMP_1) == 3) {
+        call(OneIsland_PokemonCenter_1F_EventScript_PlayerWalkToBillMidBottom)
+    }
+    if (var(VAR_TEMP_1) == 4) {
+        call(OneIsland_PokemonCenter_1F_EventScript_PlayerWalkToBillBottom)
+    }
     delay(10)
     msgbox(OneIsland_PokemonCenter_1F_Text_BillWeGotItDone)
     applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown)

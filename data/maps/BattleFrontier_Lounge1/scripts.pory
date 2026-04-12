@@ -3,8 +3,12 @@ mapscripts BattleFrontier_Lounge1_MapScripts {}
 script BattleFrontier_Lounge1_EventScript_Breeder {
     lock
     faceplayer
-    if (!flag(FLAG_MET_BATTLE_FRONTIER_BREEDER)) call(BattleFrontier_Lounge1_EventScript_BreederIntro)
-    if (flag(FLAG_MET_BATTLE_FRONTIER_BREEDER)) call(BattleFrontier_Lounge1_EventScript_AlreadyMetBreeder)
+    if (!flag(FLAG_MET_BATTLE_FRONTIER_BREEDER)) {
+        call(BattleFrontier_Lounge1_EventScript_BreederIntro)
+    }
+    if (flag(FLAG_MET_BATTLE_FRONTIER_BREEDER)) {
+        call(BattleFrontier_Lounge1_EventScript_AlreadyMetBreeder)
+    }
     setflag(FLAG_MET_BATTLE_FRONTIER_BREEDER)
     goto(BattleFrontier_Lounge1_EventScript_ChooseMonToShowBreeder)
     end
@@ -13,8 +17,12 @@ script BattleFrontier_Lounge1_EventScript_Breeder {
 script BattleFrontier_Lounge1_EventScript_ChooseMonToShowBreeder {
     chooseboxmon()
     waitstate
-    if (var(VAR_0x8004) != PARTY_NOTHING_CHOSEN) goto(BattleFrontier_Lounge1_EventScript_ShowMonToBreeder)
-    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) goto(BattleFrontier_Lounge1_EventScript_CancelMonSelect)
+    if (var(VAR_0x8004) != PARTY_NOTHING_CHOSEN) {
+        goto(BattleFrontier_Lounge1_EventScript_ShowMonToBreeder)
+    }
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        goto(BattleFrontier_Lounge1_EventScript_CancelMonSelect)
+    }
     end
 }
 
@@ -30,12 +38,22 @@ script BattleFrontier_Lounge1_EventScript_AlreadyMetBreeder {
 
 script BattleFrontier_Lounge1_EventScript_ShowMonToBreeder {
     specialvar(VAR_RESULT, ScriptGetPartyMonSpecies)
-    if (var(VAR_RESULT) == SPECIES_EGG) goto(BattleFrontier_Lounge1_EventScript_ShowEggToBreeder)
+    if (var(VAR_RESULT) == SPECIES_EGG) {
+        goto(BattleFrontier_Lounge1_EventScript_ShowEggToBreeder)
+    }
     special(BufferVarsForIVRater)
-    if (var(VAR_0x8005) <= 90) goto(BattleFrontier_Lounge1_EventScript_AverageTotalIVs)
-    if (var(VAR_0x8005) <= 120) goto(BattleFrontier_Lounge1_EventScript_AboveAverageTotalIVs)
-    if (var(VAR_0x8005) <= 150) goto(BattleFrontier_Lounge1_EventScript_HighTotalIVs)
-    if (var(VAR_0x8005) >= 151) goto(BattleFrontier_Lounge1_EventScript_VeryHighTotalIVs)
+    if (var(VAR_0x8005) <= 90) {
+        goto(BattleFrontier_Lounge1_EventScript_AverageTotalIVs)
+    }
+    if (var(VAR_0x8005) <= 120) {
+        goto(BattleFrontier_Lounge1_EventScript_AboveAverageTotalIVs)
+    }
+    if (var(VAR_0x8005) <= 150) {
+        goto(BattleFrontier_Lounge1_EventScript_HighTotalIVs)
+    }
+    if (var(VAR_0x8005) >= 151) {
+        goto(BattleFrontier_Lounge1_EventScript_VeryHighTotalIVs)
+    }
     end
 }
 
@@ -46,20 +64,40 @@ script BattleFrontier_Lounge1_EventScript_ShowEggToBreeder {
 }
 
 script BattleFrontier_Lounge1_EventScript_HighestIVStat {
-    if (var(VAR_0x8006) == STAT_HP) goto(BattleFrontier_Lounge1_EventScript_HighestIVHP)
-    if (var(VAR_0x8006) == STAT_ATK) goto(BattleFrontier_Lounge1_EventScript_HighestIVAtk)
-    if (var(VAR_0x8006) == STAT_DEF) goto(BattleFrontier_Lounge1_EventScript_HighestIVDef)
-    if (var(VAR_0x8006) == STAT_SPEED) goto(BattleFrontier_Lounge1_EventScript_HighestIVSpeed)
-    if (var(VAR_0x8006) == STAT_SPATK) goto(BattleFrontier_Lounge1_EventScript_HighestIVSpAtk)
-    if (var(VAR_0x8006) == STAT_SPDEF) goto(BattleFrontier_Lounge1_EventScript_HighestIVSpDef)
+    if (var(VAR_0x8006) == STAT_HP) {
+        goto(BattleFrontier_Lounge1_EventScript_HighestIVHP)
+    }
+    if (var(VAR_0x8006) == STAT_ATK) {
+        goto(BattleFrontier_Lounge1_EventScript_HighestIVAtk)
+    }
+    if (var(VAR_0x8006) == STAT_DEF) {
+        goto(BattleFrontier_Lounge1_EventScript_HighestIVDef)
+    }
+    if (var(VAR_0x8006) == STAT_SPEED) {
+        goto(BattleFrontier_Lounge1_EventScript_HighestIVSpeed)
+    }
+    if (var(VAR_0x8006) == STAT_SPATK) {
+        goto(BattleFrontier_Lounge1_EventScript_HighestIVSpAtk)
+    }
+    if (var(VAR_0x8006) == STAT_SPDEF) {
+        goto(BattleFrontier_Lounge1_EventScript_HighestIVSpDef)
+    }
     end
 }
 
 script BattleFrontier_Lounge1_EventScript_HighestIVValue {
-    if (var(VAR_0x8007) <= 15) goto(BattleFrontier_Lounge1_EventScript_HighestIVLow)
-    if (var(VAR_0x8007) <= 25) goto(BattleFrontier_Lounge1_EventScript_HighestIVMid)
-    if (var(VAR_0x8007) <= 30) goto(BattleFrontier_Lounge1_EventScript_HighestIVHigh)
-    if (var(VAR_0x8007) >= 31) goto(BattleFrontier_Lounge1_EventScript_HighestIVMax)
+    if (var(VAR_0x8007) <= 15) {
+        goto(BattleFrontier_Lounge1_EventScript_HighestIVLow)
+    }
+    if (var(VAR_0x8007) <= 25) {
+        goto(BattleFrontier_Lounge1_EventScript_HighestIVMid)
+    }
+    if (var(VAR_0x8007) <= 30) {
+        goto(BattleFrontier_Lounge1_EventScript_HighestIVHigh)
+    }
+    if (var(VAR_0x8007) >= 31) {
+        goto(BattleFrontier_Lounge1_EventScript_HighestIVMax)
+    }
     end
 }
 

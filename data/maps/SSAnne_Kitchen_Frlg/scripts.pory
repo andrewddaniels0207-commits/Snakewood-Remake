@@ -21,9 +21,15 @@ script SSAnne_Kitchen_EventScript_Chef4 {
     msgbox(SSAnne_Kitchen_Text_IAmLeChefMainCourseIs)
     random(3)
     copyvar(VAR_0x8008, VAR_RESULT)
-    if (var(VAR_0x8008) == 0) call(SSAnne_Kitchen_EventScript_SalmonDuSalad)
-    if (var(VAR_0x8008) == 1) call(SSAnne_Kitchen_EventScript_EelsAuBarbecue)
-    if (var(VAR_0x8008) == 2) call(SSAnne_Kitchen_EventScript_PrimeBeefsteak)
+    if (var(VAR_0x8008) == 0) {
+        call(SSAnne_Kitchen_EventScript_SalmonDuSalad)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(SSAnne_Kitchen_EventScript_EelsAuBarbecue)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(SSAnne_Kitchen_EventScript_PrimeBeefsteak)
+    }
     release
     end
 }

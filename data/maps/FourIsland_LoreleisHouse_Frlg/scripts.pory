@@ -10,8 +10,12 @@ script FourIsland_LoreleisHouse_OnTransition {
 script FourIsland_LoreleisHouse_EventScript_Lorelei {
     lock
     faceplayer
-    if (flag(FLAG_TALKED_TO_LORELEI_AFTER_WAREHOUSE)) goto(FourIsland_LoreleisHouse_EventScript_Lorelei3)
-    if (flag(FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE)) goto(FourIsland_LoreleisHouse_EventScript_Lorelei2)
+    if (flag(FLAG_TALKED_TO_LORELEI_AFTER_WAREHOUSE)) {
+        goto(FourIsland_LoreleisHouse_EventScript_Lorelei3)
+    }
+    if (flag(FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE)) {
+        goto(FourIsland_LoreleisHouse_EventScript_Lorelei2)
+    }
     msgbox(FourIsland_LoreleisHouse_Text_IfAnythingWereToHappenToIsland)
     release
     end

@@ -3,8 +3,12 @@ mapscripts Route20_Frlg_MapScripts {
 }
 
 script Route20_OnTransition {
-    if (!flag(FLAG_STOPPED_SEAFOAM_B3F_CURRENT)) call(Route20_EventScript_ResetSeafoamBouldersForB3F)
-    if (!flag(FLAG_STOPPED_SEAFOAM_B4F_CURRENT)) call(Route20_EventScript_ResetSeafoamBouldersForB4F)
+    if (!flag(FLAG_STOPPED_SEAFOAM_B3F_CURRENT)) {
+        call(Route20_EventScript_ResetSeafoamBouldersForB3F)
+    }
+    if (!flag(FLAG_STOPPED_SEAFOAM_B4F_CURRENT)) {
+        call(Route20_EventScript_ResetSeafoamBouldersForB4F)
+    }
     end
 }
 

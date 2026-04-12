@@ -3,14 +3,20 @@ mapscripts FiveIsland_Meadow_Frlg_MapScripts {
 }
 
 script FiveIsland_Meadow_OnLoad {
-    if (flag(FLAG_UNLOCKED_ROCKET_WAREHOUSE)) call(FiveIsland_Meadow_EventScript_SetWarehouseDoorUnlocked)
+    if (flag(FLAG_UNLOCKED_ROCKET_WAREHOUSE)) {
+        call(FiveIsland_Meadow_EventScript_SetWarehouseDoorUnlocked)
+    }
     end
 }
 
 script FiveIsland_Meadow_EventScript_WarehouseDoor {
     lockall
-    if (flag(FLAG_UNLOCKED_ROCKET_WAREHOUSE)) goto(FiveIsland_Meadow_EventScript_WarehouseDoorAlreadyOpen)
-    if (flag(FLAG_LEARNED_YES_NAH_CHANSEY)) goto(FiveIsland_Meadow_EventScript_OpenWarehouseDoor)
+    if (flag(FLAG_UNLOCKED_ROCKET_WAREHOUSE)) {
+        goto(FiveIsland_Meadow_EventScript_WarehouseDoorAlreadyOpen)
+    }
+    if (flag(FLAG_LEARNED_YES_NAH_CHANSEY)) {
+        goto(FiveIsland_Meadow_EventScript_OpenWarehouseDoor)
+    }
     msgbox(FiveIsland_Meadow_Text_EnteredPasswordAnotherNeeded)
     releaseall
     end

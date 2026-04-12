@@ -38,7 +38,9 @@ script FuchsiaCity_SafariZone_Entrance_EventScript_ExitEarly {
     lockall
     textcolor(NPC_TEXT_COLOR_MALE)
     msgbox(FuchsiaCity_SafariZone_Entrance_Text_GoingToLeaveSafariZoneEarly, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(FuchsiaCity_SafariZone_Entrance_EventScript_ReturnToSafariZone)
+    if (var(VAR_RESULT) == NO) {
+        goto(FuchsiaCity_SafariZone_Entrance_EventScript_ReturnToSafariZone)
+    }
     msgbox(FuchsiaCity_SafariZone_Entrance_Text_PleaseReturnSafariBalls)
     closemessage
     applymovement(LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_Exit)
@@ -110,7 +112,9 @@ script FuchsiaCity_SafariZone_Entrance_EventScript_AskEnterSafariZone {
     waitmovement(0)
     showmoneybox(0, 0)
     msgbox(FuchsiaCity_SafariZone_Entrance_Text_PlaySafariGameFor500, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(FuchsiaCity_SafariZone_Entrance_EventScript_TryEnterSafariZone)
+    if (var(VAR_RESULT) == YES) {
+        goto(FuchsiaCity_SafariZone_Entrance_EventScript_TryEnterSafariZone)
+    }
     msgbox(FuchsiaCity_SafariZone_Entrance_Text_OkayPleaseComeAgain)
     goto(FuchsiaCity_SafariZone_Entrance_EventScript_ForcePlayerBack)
     end
@@ -119,7 +123,9 @@ script FuchsiaCity_SafariZone_Entrance_EventScript_AskEnterSafariZone {
 script FuchsiaCity_SafariZone_Entrance_EventScript_TryEnterSafariZone {
     call(FuchsiaCity_SafariZone_Entrance_EventScript_CheckSpaceForMons)
     checkmoney(500)
-    if (var(VAR_RESULT) == FALSE) goto(FuchsiaCity_SafariZone_Entrance_EventScript_NotEnoughMoney)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(FuchsiaCity_SafariZone_Entrance_EventScript_NotEnoughMoney)
+    }
     removemoney(500)
     updatemoneybox()
     msgbox(FuchsiaCity_SafariZone_Entrance_Text_ThatllBe500WeOnlyUseSpecialBalls)
@@ -131,9 +137,15 @@ script FuchsiaCity_SafariZone_Entrance_EventScript_TryEnterSafariZone {
     msgbox(FuchsiaCity_SafariZone_Entrance_Text_CallYouOnPAWhenYouRunOut)
     closemessage
     hidemoneybox()
-    if (var(VAR_TEMP_2) == 0) call(FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneMid)
-    if (var(VAR_TEMP_2) == 1) call(FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneRight)
-    if (var(VAR_TEMP_2) == 2) call(FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneLeft)
+    if (var(VAR_TEMP_2) == 0) {
+        call(FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneMid)
+    }
+    if (var(VAR_TEMP_2) == 1) {
+        call(FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneRight)
+    }
+    if (var(VAR_TEMP_2) == 2) {
+        call(FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneLeft)
+    }
     special(EnterSafariMode)
     setvar(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 2)
     warp(MAP_SAFARI_ZONE_CENTER, 255, 26, 30)
@@ -161,9 +173,13 @@ script FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneLeft {
 
 script FuchsiaCity_SafariZone_Entrance_EventScript_CheckSpaceForMons {
     getpartysize()
-    if (var(VAR_RESULT) != PARTY_SIZE) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != PARTY_SIZE) {
+        goto(Common_EventScript_NopReturn)
+    }
     specialvar(VAR_RESULT, ScriptCheckFreePokemonStorageSpace)
-    if (var(VAR_RESULT) == TRUE) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Common_EventScript_NopReturn)
+    }
     msgbox(Route121_SafariZoneEntrance_Text_PCIsFull)
     goto(FuchsiaCity_SafariZone_Entrance_EventScript_ForcePlayerBack)
     end
@@ -213,7 +229,9 @@ script FuchsiaCity_SafariZone_Entrance_EventScript_InfoAttendant {
     lock
     faceplayer
     msgbox(FuchsiaCity_SafariZone_Entrance_Text_FirstTimeAtSafariZone, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) goto(FuchsiaCity_SafariZone_Entrance_EventScript_ExplainSafariZone)
+    if (var(VAR_RESULT) == YES) {
+        goto(FuchsiaCity_SafariZone_Entrance_EventScript_ExplainSafariZone)
+    }
     msgbox(FuchsiaCity_SafariZone_Entrance_Text_SorryYoureARegularHere)
     release
     end

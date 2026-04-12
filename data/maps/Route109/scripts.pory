@@ -283,7 +283,9 @@ movement Route109_Movement_BrineyExitBoat {
 script Route109_EventScript_MrBriney {
     lock
     faceplayer
-    if (!flag(FLAG_DELIVERED_DEVON_GOODS)) goto(Route109_EventScript_HaveNotDeliveredDevonGood)
+    if (!flag(FLAG_DELIVERED_DEVON_GOODS)) {
+        goto(Route109_EventScript_HaveNotDeliveredDevonGood)
+    }
     goto(Route109_EventScript_DeliveredDevonGoods)
     end
 }
@@ -291,7 +293,9 @@ script Route109_EventScript_MrBriney {
 script Route109_EventScript_HaveNotDeliveredDevonGood {
     message(Route109_Text_BrineySailToDewfordQuestion)
     msgbox(Route109_Text_BrineySailToDewfordQuestion, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(Route109_EventScript_StayHere)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route109_EventScript_StayHere)
+    }
     goto(Route109_EventScript_SailToDewford)
     end
 }
@@ -346,10 +350,14 @@ script Route109_EventScript_SoftSandGirl {
     lock
     faceplayer
     special(GetPlayerBigGuyGirlString)
-    if (flag(FLAG_RECEIVED_SOFT_SAND)) goto(Route109_EventScript_AlreadyReceivedSoftSand)
+    if (flag(FLAG_RECEIVED_SOFT_SAND)) {
+        goto(Route109_EventScript_AlreadyReceivedSoftSand)
+    }
     msgbox(Route109_Text_YouCanHaveThis, MSGBOX_DEFAULT)
     giveitem(ITEM_SOFT_SAND)
-    if (var(VAR_RESULT) == 0) goto(Common_EventScript_ShowBagIsFull)
+    if (var(VAR_RESULT) == 0) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
     closemessage
     applymovement(VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection)
     waitmovement(0)
@@ -424,7 +432,9 @@ script Route109_EventScript_Edmond {
 script Route109_EventScript_Ricky {
     trainerbattle_single(TRAINER_RICKY_1, Route109_Text_RickyIntro, Route109_Text_RickyDefeated, Route109_EventScript_RickyRegisterMatchCallAfterBattle)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route109_EventScript_RickyRematch)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route109_EventScript_RickyRematch)
+    }
     msgbox(Route109_Text_RickyPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -448,7 +458,9 @@ script Route109_EventScript_RickyRematch {
 script Route109_EventScript_Lola {
     trainerbattle_single(TRAINER_LOLA_1, Route109_Text_LolaIntro, Route109_Text_LolaDefeated, Route109_EventScript_LolaRegisterMatchCallAfterBattle)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route109_EventScript_LolaRematch)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route109_EventScript_LolaRematch)
+    }
     msgbox(Route109_Text_LolaPostBattle, MSGBOX_DEFAULT)
     release
     end

@@ -26,7 +26,9 @@ script PokemonTower_1F_EventScript_Woman2 {
     lock
     faceplayer
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(PokemonTower_1F_EventScript_Woman2MalePlayer)
+    if (var(VAR_RESULT) == MALE) {
+        goto(PokemonTower_1F_EventScript_Woman2MalePlayer)
+    }
     msgbox(PokemonTower_1F_Text_ComeToPayRespectsGirl)
     release
     end

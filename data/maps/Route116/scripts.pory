@@ -7,10 +7,18 @@ mapscripts Route116_MapScripts {
 }
 
 script Route116_OnTransition {
-    if (flag(FLAG_RECOVERED_DEVON_GOODS)) call(Route116_EventScript_SetWandasBoyfriendPos)
-    if (var(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1) call(AbnormalWeather_EventScript_HideMapNamePopup)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_116_NORTH) call(AbnormalWeather_StartGroudonWeather)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_116_SOUTH) call(AbnormalWeather_StartGroudonWeather)
+    if (flag(FLAG_RECOVERED_DEVON_GOODS)) {
+        call(Route116_EventScript_SetWandasBoyfriendPos)
+    }
+    if (var(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1) {
+        call(AbnormalWeather_EventScript_HideMapNamePopup)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_116_NORTH) {
+        call(AbnormalWeather_StartGroudonWeather)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_116_SOUTH) {
+        call(AbnormalWeather_StartGroudonWeather)
+    }
     end
 }
 
@@ -20,16 +28,24 @@ script Route116_EventScript_SetWandasBoyfriendPos {
 }
 
 script Route116_OnLoad {
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_116_NORTH) call(AbnormalWeather_EventScript_PlaceTilesRoute116North)
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_116_SOUTH) call(AbnormalWeather_EventScript_PlaceTilesRoute116South)
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_116_NORTH) {
+        call(AbnormalWeather_EventScript_PlaceTilesRoute116North)
+    }
+    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_116_SOUTH) {
+        call(AbnormalWeather_EventScript_PlaceTilesRoute116South)
+    }
     end
 }
 
 script Route116_EventScript_WandasBoyfriend {
     lock
     faceplayer
-    if (flag(FLAG_RECOVERED_DEVON_GOODS)) goto(Route116_EventScript_BoyfriendGruntLeftTunnel)
-    if (flag(FLAG_DEVON_GOODS_STOLEN)) goto(Route116_EventScript_BoyfriendGruntInTunnel)
+    if (flag(FLAG_RECOVERED_DEVON_GOODS)) {
+        goto(Route116_EventScript_BoyfriendGruntLeftTunnel)
+    }
+    if (flag(FLAG_DEVON_GOODS_STOLEN)) {
+        goto(Route116_EventScript_BoyfriendGruntInTunnel)
+    }
     msgbox(Route116_Text_WantToDigTunnel, MSGBOX_DEFAULT)
     release
     end
@@ -50,7 +66,9 @@ script Route116_EventScript_BoyfriendGruntInTunnel {
 script Route116_EventScript_DevonEmployee {
     lock
     faceplayer
-    if (flag(FLAG_MET_DEVON_EMPLOYEE)) goto(Route116_EventScript_TryGiveRepeatBallAgain)
+    if (flag(FLAG_MET_DEVON_EMPLOYEE)) {
+        goto(Route116_EventScript_TryGiveRepeatBallAgain)
+    }
     msgbox(Route116_Text_ThankYouTokenOfAppreciation, MSGBOX_DEFAULT)
     goto(Route116_EventScript_GiveRepeatBall)
     end
@@ -59,13 +77,23 @@ script Route116_EventScript_DevonEmployee {
 script Route116_EventScript_GiveRepeatBall {
     setflag(FLAG_MET_DEVON_EMPLOYEE)
     giveitem(ITEM_REPEAT_BALL)
-    if (var(VAR_RESULT) == FALSE) goto(Route116_EventScript_NoRoomForRepeatBall)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route116_EventScript_NoRoomForRepeatBall)
+    }
     msgbox(Route116_Text_NewBallAvailableAtMart, MSGBOX_DEFAULT)
     closemessage
-    if (var(VAR_FACING) == DIR_NORTH) call(Route116_EventScript_DevonEmployeeExit)
-    if (var(VAR_FACING) == DIR_SOUTH) call(Route116_EventScript_DevonEmployeeExit)
-    if (var(VAR_FACING) == DIR_WEST) call(Route116_EventScript_DevonEmployeeExit)
-    if (var(VAR_FACING) == DIR_EAST) call(Route116_EventScript_DevonEmployeeExitEast)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(Route116_EventScript_DevonEmployeeExit)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(Route116_EventScript_DevonEmployeeExit)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(Route116_EventScript_DevonEmployeeExit)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(Route116_EventScript_DevonEmployeeExitEast)
+    }
     removeobject(VAR_LAST_TALKED)
     clearflag(FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE)
     setflag(FLAG_RECEIVED_REPEAT_BALL)
@@ -172,9 +200,13 @@ script Route116_EventScript_GlassesMan {
     lock
     faceplayer
     checkitem(ITEM_BLACK_GLASSES)
-    if (var(VAR_RESULT) == TRUE) goto(Route116_EventScript_PlayerHasGlasses)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route116_EventScript_PlayerHasGlasses)
+    }
     specialvar(VAR_RESULT, FoundBlackGlasses)
-    if (var(VAR_RESULT) == TRUE) goto(Route116_EventScript_FoundGlassesNotOnPlayer)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route116_EventScript_FoundGlassesNotOnPlayer)
+    }
     msgbox(Route116_Text_CanYouHelpMeFindGlasses, MSGBOX_DEFAULT)
     release
     end
@@ -191,7 +223,9 @@ script Route116_EventScript_PlayerHasGlasses {
     msgbox(Route116_Text_CanYouHelpMeFindGlasses, MSGBOX_DEFAULT)
     msgbox(Route116_Text_MayISeeThoseGlasses, MSGBOX_DEFAULT)
     specialvar(VAR_RESULT, FoundBlackGlasses)
-    if (var(VAR_RESULT) == TRUE) goto(Route116_EventScript_FoundGlassesOnPlayer)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route116_EventScript_FoundGlassesOnPlayer)
+    }
     msgbox(Route116_Text_NotWhatImLookingFor, MSGBOX_DEFAULT)
     release
     end
@@ -206,10 +240,18 @@ script Route116_EventScript_FoundGlassesOnPlayer {
 
 script Route116_EventScript_GlassesManExit {
     delay(20)
-    if (var(VAR_FACING) == DIR_NORTH) call(Route116_EventScript_GlassesManExitNormal)
-    if (var(VAR_FACING) == DIR_SOUTH) call(Route116_EventScript_GlassesManExitNormal)
-    if (var(VAR_FACING) == DIR_WEST) call(Route116_EventScript_GlassesManExitNormal)
-    if (var(VAR_FACING) == DIR_EAST) call(Route116_EventScript_GlassesManExitEast)
+    if (var(VAR_FACING) == DIR_NORTH) {
+        call(Route116_EventScript_GlassesManExitNormal)
+    }
+    if (var(VAR_FACING) == DIR_SOUTH) {
+        call(Route116_EventScript_GlassesManExitNormal)
+    }
+    if (var(VAR_FACING) == DIR_WEST) {
+        call(Route116_EventScript_GlassesManExitNormal)
+    }
+    if (var(VAR_FACING) == DIR_EAST) {
+        call(Route116_EventScript_GlassesManExitEast)
+    }
     removeobject(VAR_LAST_TALKED)
     release
     end
@@ -269,17 +311,23 @@ script Route116_EventScript_Jose {
 script Route116_EventScript_Jerry {
     trainerbattle_single(TRAINER_JERRY_1, Route116_Text_JerryIntro, Route116_Text_JerryDefeat, Route116_EventScript_TryRegisterJerryAfterBattle)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route116_EventScript_RematchJerry)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route116_EventScript_RematchJerry)
+    }
     setvar(VAR_0x8004, TRAINER_JERRY_1)
     specialvar(VAR_RESULT, IsTrainerRegistered)
-    if (var(VAR_RESULT) == FALSE) goto(Route116_EventScript_TryRegisterJerry)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route116_EventScript_TryRegisterJerry)
+    }
     msgbox(Route116_Text_JerryPostBattle, MSGBOX_DEFAULT)
     release
     end
 }
 
 script Route116_EventScript_TryRegisterJerryAfterBattle {
-    if (flag(FLAG_HAS_MATCH_CALL)) goto(Route116_EventScript_RegisterJerryAfterBattle)
+    if (flag(FLAG_HAS_MATCH_CALL)) {
+        goto(Route116_EventScript_RegisterJerryAfterBattle)
+    }
     release
     end
 }
@@ -294,7 +342,9 @@ script Route116_EventScript_RegisterJerryAfterBattle {
 }
 
 script Route116_EventScript_TryRegisterJerry {
-    if (flag(FLAG_HAS_MATCH_CALL)) goto(Route116_EventScript_RegisterJerry)
+    if (flag(FLAG_HAS_MATCH_CALL)) {
+        goto(Route116_EventScript_RegisterJerry)
+    }
     msgbox(Route116_Text_JerryPostBattle, MSGBOX_DEFAULT)
     release
     end
@@ -328,17 +378,23 @@ script Route116_EventScript_Janice {
 script Route116_EventScript_Karen {
     trainerbattle_single(TRAINER_KAREN_1, Route116_Text_KarenIntro, Route116_Text_KarenDefeat, Route116_EventScript_TryRegisterKarenAfterBattle)
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) goto(Route116_EventScript_RematchKaren)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Route116_EventScript_RematchKaren)
+    }
     setvar(VAR_0x8004, TRAINER_KAREN_1)
     specialvar(VAR_RESULT, IsTrainerRegistered)
-    if (var(VAR_RESULT) == FALSE) goto(Route116_EventScript_TryRegisterKaren)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Route116_EventScript_TryRegisterKaren)
+    }
     msgbox(Route116_Text_KarenPostBattle, MSGBOX_DEFAULT)
     release
     end
 }
 
 script Route116_EventScript_TryRegisterKarenAfterBattle {
-    if (flag(FLAG_HAS_MATCH_CALL)) goto(Route116_EventScript_RegisterKarenAfterBattle)
+    if (flag(FLAG_HAS_MATCH_CALL)) {
+        goto(Route116_EventScript_RegisterKarenAfterBattle)
+    }
     release
     end
 }
@@ -353,7 +409,9 @@ script Route116_EventScript_RegisterKarenAfterBattle {
 }
 
 script Route116_EventScript_TryRegisterKaren {
-    if (flag(FLAG_HAS_MATCH_CALL)) goto(Route116_EventScript_RegisterKaren)
+    if (flag(FLAG_HAS_MATCH_CALL)) {
+        goto(Route116_EventScript_RegisterKaren)
+    }
     msgbox(Route116_Text_KarenPostBattle, MSGBOX_DEFAULT)
     release
     end

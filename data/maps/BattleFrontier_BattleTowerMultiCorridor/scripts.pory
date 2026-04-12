@@ -7,15 +7,21 @@ mapscripts BattleFrontier_BattleTowerMultiCorridor_MapScripts {
 }
 
 script BattleFrontier_BattleTowerMultiCorridor_OnTransition {
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS) call(BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) call(BattleFrontier_BattleTowerMultiCorridor_EventScript_SetLinkPlayerGfx)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS) {
+        call(BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) {
+        call(BattleFrontier_BattleTowerMultiCorridor_EventScript_SetLinkPlayerGfx)
+    }
     end
 }
 
 script BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx {
     tower_setpartnergfx()
     checkplayergender()
-    if (var(VAR_RESULT) == FEMALE) goto(BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale)
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale)
+    }
     setvar(VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_BRENDAN_NORMAL)
     return
 }
@@ -90,10 +96,18 @@ script BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor {
 }
 
 script BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom {
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS) call(BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToMultiBattleRoom)
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) call(BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) {
+        call(BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) {
+        call(BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS) {
+        call(BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToMultiBattleRoom)
+    }
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) {
+        call(BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom)
+    }
     return
 }
 

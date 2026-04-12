@@ -4,19 +4,25 @@ mapscripts TerraCave_End_MapScripts {
 }
 
 script TerraCave_End_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(TerraCave_End_EventScript_TryRemoveGroudon)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(TerraCave_End_EventScript_TryRemoveGroudon)
+    }
     end
 }
 
 script TerraCave_End_EventScript_TryRemoveGroudon {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
+        goto(Common_EventScript_NopReturn)
+    }
     removeobject(LOCALID_TERRA_CAVE_GROUDON)
     return
 }
 
 script TerraCave_End_OnTransition {
-    if (!flag(FLAG_DEFEATED_GROUDON)) call(TerraCave_End_EventScript_ShowGroudon)
+    if (!flag(FLAG_DEFEATED_GROUDON)) {
+        call(TerraCave_End_EventScript_ShowGroudon)
+    }
     end
 }
 
@@ -44,9 +50,15 @@ script TerraCave_End_EventScript_Groudon {
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     setvar(VAR_TEMP_1, 0)
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(TerraCave_End_EventScript_DefeatedGroudon)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(TerraCave_End_EventScript_RanFromGroudon)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(TerraCave_End_EventScript_RanFromGroudon)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(TerraCave_End_EventScript_DefeatedGroudon)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(TerraCave_End_EventScript_RanFromGroudon)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(TerraCave_End_EventScript_RanFromGroudon)
+    }
     setvar(VAR_SHOULD_END_ABNORMAL_WEATHER, 1)
     setflag(FLAG_DEFEATED_GROUDON)
     releaseall

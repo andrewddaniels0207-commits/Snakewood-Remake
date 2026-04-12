@@ -5,18 +5,30 @@ script SixIsland_WaterPath_House1_EventScript_Beauty {
     faceplayer
     setvar(VAR_0x8004, SPECIES_HERACROSS)
     specialvar(VAR_RESULT, DoesPlayerPartyContainSpecies)
-    if (var(VAR_RESULT) == FALSE) goto(SixIsland_WaterPath_House1_EventScript_NoHeracrossInParty)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SixIsland_WaterPath_House1_EventScript_NoHeracrossInParty)
+    }
     special(GetHeracrossSizeRecordInfo)
     msgbox(SixIsland_WaterPath_House1_Text_MayIMeasureHeracross)
     special(ChoosePartyMon)
     waitstate
     copyvar(VAR_RESULT, VAR_0x8004)
-    if (var(VAR_RESULT) >= PARTY_SIZE) goto(SixIsland_WaterPath_House1_EventScript_DontShowMon)
+    if (var(VAR_RESULT) >= PARTY_SIZE) {
+        goto(SixIsland_WaterPath_House1_EventScript_DontShowMon)
+    }
     special(CompareHeracrossSize)
-    if (var(VAR_RESULT) == 1) goto(SixIsland_WaterPath_House1_EventScript_ShownNonHeracross)
-    if (var(VAR_RESULT) == 2) goto(SixIsland_WaterPath_House1_EventScript_ShownSmallHeracross)
-    if (var(VAR_RESULT) == 3) goto(SixIsland_WaterPath_House1_EventScript_ShownBigHeracross)
-    if (var(VAR_RESULT) == 4) goto(SixIsland_WaterPath_House1_EventScript_ShownTiedHeracross)
+    if (var(VAR_RESULT) == 1) {
+        goto(SixIsland_WaterPath_House1_EventScript_ShownNonHeracross)
+    }
+    if (var(VAR_RESULT) == 2) {
+        goto(SixIsland_WaterPath_House1_EventScript_ShownSmallHeracross)
+    }
+    if (var(VAR_RESULT) == 3) {
+        goto(SixIsland_WaterPath_House1_EventScript_ShownBigHeracross)
+    }
+    if (var(VAR_RESULT) == 4) {
+        goto(SixIsland_WaterPath_House1_EventScript_ShownTiedHeracross)
+    }
     release
     end
 }
@@ -39,14 +51,18 @@ script SixIsland_WaterPath_House1_EventScript_ShownNonHeracross {
 }
 
 script SixIsland_WaterPath_House1_EventScript_ShownSmallHeracross {
-    if (!flag(FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1)) goto(SixIsland_WaterPath_House1_EventScript_ShownBigHeracross)
+    if (!flag(FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1)) {
+        goto(SixIsland_WaterPath_House1_EventScript_ShownBigHeracross)
+    }
     msgbox(SixIsland_WaterPath_House1_Text_ItsXInchesYInchesWasBiggest)
     release
     end
 }
 
 script SixIsland_WaterPath_House1_EventScript_ShownTiedHeracross {
-    if (!flag(FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1)) goto(SixIsland_WaterPath_House1_EventScript_ShownBigHeracross)
+    if (!flag(FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1)) {
+        goto(SixIsland_WaterPath_House1_EventScript_ShownBigHeracross)
+    }
     msgbox(SixIsland_WaterPath_House1_Text_ItsXInchesSameAsBefore)
     release
     end
@@ -56,7 +72,9 @@ script SixIsland_WaterPath_House1_EventScript_ShownBigHeracross {
     setflag(FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1)
     msgbox(SixIsland_WaterPath_House1_Text_ItsXInchesDeserveReward)
     giveitem(ITEM_NEST_BALL)
-    if (var(VAR_RESULT) == FALSE) goto(SixIsland_WaterPath_House1_EventScript_NoRoomForNestBall)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SixIsland_WaterPath_House1_EventScript_NoRoomForNestBall)
+    }
     msgbox(SixIsland_WaterPath_House1_Text_WantToSeeBiggerOne)
     release
     end
@@ -70,7 +88,9 @@ script SixIsland_WaterPath_House1_EventScript_NoRoomForNestBall {
 
 script SixIsland_WaterPath_House1_EventScript_SizeRecord {
     lockall
-    if (flag(FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1)) goto(SixIsland_WaterPath_House1_EventScript_SizeRecordNonEmpty)
+    if (flag(FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1)) {
+        goto(SixIsland_WaterPath_House1_EventScript_SizeRecordNonEmpty)
+    }
     msgbox(SixIsland_WaterPath_House1_Text_BlankChartOfSomeSort)
     releaseall
     end

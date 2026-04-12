@@ -4,7 +4,9 @@ script CeladonCity_DepartmentStore_Roof_EventScript_ThirstyGirl {
     lock
     faceplayer
     call(CeladonCity_DepartmentStore_Roof_EventScript_CheckPlayerHasDrinks)
-    if (var(VAR_TEMP_1) == 0) goto(CeladonCity_DepartmentStore_Roof_EventScript_IWantDrink)
+    if (var(VAR_TEMP_1) == 0) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_IWantDrink)
+    }
     goto(CeladonCity_DepartmentStore_Roof_EventScript_AskGiveDrink)
     end
 }
@@ -12,11 +14,17 @@ script CeladonCity_DepartmentStore_Roof_EventScript_ThirstyGirl {
 script CeladonCity_DepartmentStore_Roof_EventScript_CheckPlayerHasDrinks {
     setvar(VAR_TEMP_1, 0)
     checkitem(ITEM_FRESH_WATER)
-    if (var(VAR_RESULT) == TRUE) call(CeladonCity_DepartmentStore_Roof_EventScript_SetHasFreshWater)
+    if (var(VAR_RESULT) == TRUE) {
+        call(CeladonCity_DepartmentStore_Roof_EventScript_SetHasFreshWater)
+    }
     checkitem(ITEM_SODA_POP)
-    if (var(VAR_RESULT) == TRUE) call(CeladonCity_DepartmentStore_Roof_EventScript_SetHasSodaPop)
+    if (var(VAR_RESULT) == TRUE) {
+        call(CeladonCity_DepartmentStore_Roof_EventScript_SetHasSodaPop)
+    }
     checkitem(ITEM_LEMONADE)
-    if (var(VAR_RESULT) == TRUE) call(CeladonCity_DepartmentStore_Roof_EventScript_SetHasLemonade)
+    if (var(VAR_RESULT) == TRUE) {
+        call(CeladonCity_DepartmentStore_Roof_EventScript_SetHasLemonade)
+    }
     return
 }
 
@@ -37,7 +45,9 @@ script CeladonCity_DepartmentStore_Roof_EventScript_SetHasLemonade {
 
 script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveDrink {
     msgbox(CeladonCity_DepartmentStore_Roof_Text_ImThirstyGiveHerDrink, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    if (var(VAR_RESULT) == NO) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_DontGiveDrink)
+    }
     textcolor(NPC_TEXT_COLOR_NEUTRAL)
     message(CeladonCity_DepartmentStore_Roof_Text_GiveWhichDrink)
     waitmessage()
@@ -124,7 +134,9 @@ script CeladonCity_DepartmentStore_Roof_EventScript_AskGiveAllDrinks {
 script CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater {
     setvar(VAR_0x8008, ITEM_FRESH_WATER)
     setvar(VAR_0x8009, ITEM_TM16)
-    if (flag(FLAG_GOT_TM16_FROM_THIRSTY_GIRL)) goto(CeladonCity_DepartmentStore_Roof_EventScript_NotThirstyAfterAll)
+    if (flag(FLAG_GOT_TM16_FROM_THIRSTY_GIRL)) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_NotThirstyAfterAll)
+    }
     msgbox(CeladonCity_DepartmentStore_Roof_Text_YayFreshWaterHaveThis)
     goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink)
     end
@@ -133,7 +145,9 @@ script CeladonCity_DepartmentStore_Roof_EventScript_GiveFreshWater {
 script CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop {
     setvar(VAR_0x8008, ITEM_SODA_POP)
     setvar(VAR_0x8009, ITEM_TM20)
-    if (flag(FLAG_GOT_TM20_FROM_THIRSTY_GIRL)) goto(CeladonCity_DepartmentStore_Roof_EventScript_NotThirstyAfterAll)
+    if (flag(FLAG_GOT_TM20_FROM_THIRSTY_GIRL)) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_NotThirstyAfterAll)
+    }
     msgbox(CeladonCity_DepartmentStore_Roof_Text_YaySodaPopHaveThis)
     goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink)
     end
@@ -142,7 +156,9 @@ script CeladonCity_DepartmentStore_Roof_EventScript_GiveSodaPop {
 script CeladonCity_DepartmentStore_Roof_EventScript_GiveLemonade {
     setvar(VAR_0x8008, ITEM_LEMONADE)
     setvar(VAR_0x8009, ITEM_TM33)
-    if (flag(FLAG_GOT_TM33_FROM_THIRSTY_GIRL)) goto(CeladonCity_DepartmentStore_Roof_EventScript_NotThirstyAfterAll)
+    if (flag(FLAG_GOT_TM33_FROM_THIRSTY_GIRL)) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_NotThirstyAfterAll)
+    }
     msgbox(CeladonCity_DepartmentStore_Roof_Text_YayLemonadeHaveThis)
     goto(CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink)
     end
@@ -153,7 +169,9 @@ script CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink {
     bufferitemname(STR_VAR_2, VAR_0x8009)
     removeitem(VAR_0x8008)
     checkitemspace(VAR_0x8009)
-    if (var(VAR_RESULT) == FALSE) goto(CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForReward)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForReward)
+    }
     additem(VAR_0x8009)
     textcolor(NPC_TEXT_COLOR_NEUTRAL)
     playfanfare(MUS_LEVEL_UP)
@@ -162,9 +180,15 @@ script CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink {
     waitfanfare()
     putitemaway(VAR_0x8009)
     call(EventScript_RestorePrevTextColor)
-    if (var(VAR_0x8008) == ITEM_FRESH_WATER) call(CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM16)
-    if (var(VAR_0x8008) == ITEM_SODA_POP) call(CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM20)
-    if (var(VAR_0x8008) == ITEM_LEMONADE) call(CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM33)
+    if (var(VAR_0x8008) == ITEM_FRESH_WATER) {
+        call(CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM16)
+    }
+    if (var(VAR_0x8008) == ITEM_SODA_POP) {
+        call(CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM20)
+    }
+    if (var(VAR_0x8008) == ITEM_LEMONADE) {
+        call(CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM33)
+    }
     release
     end
 }
@@ -278,12 +302,22 @@ script CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneyLemonade {
 }
 
 script CeladonCity_DepartmentStore_Roof_EventScript_TryBuyDrink {
-    if (var(VAR_RESULT) == FALSE) goto(CeladonCity_DepartmentStore_Roof_EventScript_NotEnoughMoney)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_NotEnoughMoney)
+    }
     checkitemspace(VAR_TEMP_0)
-    if (var(VAR_RESULT) == FALSE) goto(CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForDrink)
-    if (var(VAR_TEMP_1) == 0) call(CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneyFreshWater)
-    if (var(VAR_TEMP_1) == 1) call(CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneySodaPop)
-    if (var(VAR_TEMP_1) == 2) call(CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneyLemonade)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(CeladonCity_DepartmentStore_Roof_EventScript_NoRoomForDrink)
+    }
+    if (var(VAR_TEMP_1) == 0) {
+        call(CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneyFreshWater)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneySodaPop)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(CeladonCity_DepartmentStore_Roof_EventScript_RemoveMoneyLemonade)
+    }
     updatemoneybox()
     bufferitemname(STR_VAR_1, VAR_TEMP_0)
     playse(SE_VEND)

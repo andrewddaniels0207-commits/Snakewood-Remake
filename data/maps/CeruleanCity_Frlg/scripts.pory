@@ -4,7 +4,9 @@ mapscripts CeruleanCity_Frlg_MapScripts {
 
 script CeruleanCity_OnTransition {
     setworldmapflag(FLAG_WORLD_MAP_CERULEAN_CITY)
-    if (!flag(FLAG_GOT_SS_TICKET)) call(CeruleanCity_EventScript_BlockExits)
+    if (!flag(FLAG_GOT_SS_TICKET)) {
+        call(CeruleanCity_EventScript_BlockExits)
+    }
     end
 }
 
@@ -47,16 +49,28 @@ script CeruleanCity_EventScript_Rival {
     waitmovement(0)
     msgbox(CeruleanCity_Text_RivalIntro)
     setvar(VAR_LAST_TALKED, LOCALID_CERULEAN_RIVAL)
-    if (var(VAR_STARTER_MON) == 2) call(CeruleanCity_EventScript_RivalSquirtle)
-    if (var(VAR_STARTER_MON) == 1) call(CeruleanCity_EventScript_RivalBulbasaur)
-    if (var(VAR_STARTER_MON) == 0) call(CeruleanCity_EventScript_RivalCharmander)
+    if (var(VAR_STARTER_MON) == 2) {
+        call(CeruleanCity_EventScript_RivalSquirtle)
+    }
+    if (var(VAR_STARTER_MON) == 1) {
+        call(CeruleanCity_EventScript_RivalBulbasaur)
+    }
+    if (var(VAR_STARTER_MON) == 0) {
+        call(CeruleanCity_EventScript_RivalCharmander)
+    }
     famechecker(FAMECHECKER_BILL, 0)
     msgbox(CeruleanCity_Text_RivalPostBattle)
     closemessage
     playbgm(MUS_RG_RIVAL_EXIT, 0)
-    if (var(VAR_TEMP_1) == 0) call(CeruleanCity_EventScript_RivalStartExit)
-    if (var(VAR_TEMP_1) == 1) call(CeruleanCity_EventScript_RivalStartExit)
-    if (var(VAR_TEMP_1) == 2) call(CeruleanCity_EventScript_RivalStartExitRight)
+    if (var(VAR_TEMP_1) == 0) {
+        call(CeruleanCity_EventScript_RivalStartExit)
+    }
+    if (var(VAR_TEMP_1) == 1) {
+        call(CeruleanCity_EventScript_RivalStartExit)
+    }
+    if (var(VAR_TEMP_1) == 2) {
+        call(CeruleanCity_EventScript_RivalStartExitRight)
+    }
     msgbox(CeruleanCity_Text_OhRightLittlePresentAsFavor)
     setvar(VAR_MAP_SCENE_CERULEAN_CITY_RIVAL, 1)
     setflag(FLAG_GOT_FAME_CHECKER)
@@ -195,7 +209,9 @@ script CeruleanCity_EventScript_Grunt {
 script CeruleanCity_EventScript_GruntDefeated {
     msgbox(CeruleanCity_Text_OkayIllReturnStolenTM)
     checkitemspace(ITEM_TM28)
-    if (var(VAR_RESULT) == FALSE) goto(CeruleanCity_EventScript_NoRoomForTM28)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(CeruleanCity_EventScript_NoRoomForTM28)
+    }
     giveitem_msg(CeruleanCity_Text_RecoveredTM28FromGrunt, ITEM_TM28)
     msgbox(CeruleanCity_Text_BetterGetMovingBye)
     closemessage
@@ -260,7 +276,9 @@ script CeruleanCity_EventScript_Policeman {
 script CeruleanCity_EventScript_LittleBoy {
     lock
     faceplayer
-    if (flag(FLAG_GOT_SS_TICKET)) goto(CeruleanCity_EventScript_LittleBoySlowbroMoved)
+    if (flag(FLAG_GOT_SS_TICKET)) {
+        goto(CeruleanCity_EventScript_LittleBoySlowbroMoved)
+    }
     msgbox(CeruleanCity_Text_IfSlowbroWasntThereCouldCutTree)
     release
     end
@@ -302,18 +320,30 @@ script CeruleanCity_EventScript_Lass {
     lock
     random(3)
     copyvar(VAR_0x8008, VAR_RESULT)
-    if (var(VAR_0x8008) == 0) call(CeruleanCity_EventScript_SlowbroCommand1)
-    if (var(VAR_0x8008) == 1) call(CeruleanCity_EventScript_SlowbroCommand2)
-    if (var(VAR_0x8008) == 2) call(CeruleanCity_EventScript_SlowbroCommand3)
+    if (var(VAR_0x8008) == 0) {
+        call(CeruleanCity_EventScript_SlowbroCommand1)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(CeruleanCity_EventScript_SlowbroCommand2)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(CeruleanCity_EventScript_SlowbroCommand3)
+    }
     waitmessage()
     delay(40)
     playse(SE_PIN)
     applymovement(LOCALID_CERULEAN_SLOWBRO, Common_Movement_QuestionMark)
     waitmovement(0)
     delay(30)
-    if (var(VAR_0x8008) == 0) call(CeruleanCity_EventScript_SlowbroFailed1)
-    if (var(VAR_0x8008) == 1) call(CeruleanCity_EventScript_SlowbroFailed2)
-    if (var(VAR_0x8008) == 2) call(CeruleanCity_EventScript_SlowbroFailed3)
+    if (var(VAR_0x8008) == 0) {
+        call(CeruleanCity_EventScript_SlowbroFailed1)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(CeruleanCity_EventScript_SlowbroFailed2)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(CeruleanCity_EventScript_SlowbroFailed3)
+    }
     release
     end
 }
@@ -352,10 +382,18 @@ script CeruleanCity_EventScript_Slowbro {
     lock
     random(4)
     copyvar(VAR_0x8008, VAR_RESULT)
-    if (var(VAR_0x8008) == 0) call(CeruleanCity_EventScript_SlowbroText1)
-    if (var(VAR_0x8008) == 1) call(CeruleanCity_EventScript_SlowbroText2)
-    if (var(VAR_0x8008) == 2) call(CeruleanCity_EventScript_SlowbroText3)
-    if (var(VAR_0x8008) == 3) call(CeruleanCity_EventScript_SlowbroText4)
+    if (var(VAR_0x8008) == 0) {
+        call(CeruleanCity_EventScript_SlowbroText1)
+    }
+    if (var(VAR_0x8008) == 1) {
+        call(CeruleanCity_EventScript_SlowbroText2)
+    }
+    if (var(VAR_0x8008) == 2) {
+        call(CeruleanCity_EventScript_SlowbroText3)
+    }
+    if (var(VAR_0x8008) == 3) {
+        call(CeruleanCity_EventScript_SlowbroText4)
+    }
     release
     end
 }

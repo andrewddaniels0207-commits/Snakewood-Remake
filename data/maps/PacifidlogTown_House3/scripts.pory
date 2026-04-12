@@ -3,7 +3,9 @@ mapscripts PacifidlogTown_House3_MapScripts {}
 script PacifidlogTown_House3_EventScript_Trader {
     lock
     faceplayer
-    if (flag(FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED)) goto(PacifidlogTown_House3_EventScript_TradeCompleted)
+    if (flag(FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED)) {
+        goto(PacifidlogTown_House3_EventScript_TradeCompleted)
+    }
     ingame_trade(INGAME_TRADE_HORSEA, PacifidlogTown_House3_Text_WillingToTradeIt, PacifidlogTown_House3_EventScript_DeclineTrade, PacifidlogTown_House3_EventScript_NotRequestedMon, PacifidlogTown_House3_Text_ItsSubtlyDifferentThankYou)
     setflag(FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED)
     release

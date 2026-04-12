@@ -3,12 +3,18 @@ mapscripts SootopolisCity_House6_MapScripts {}
 script SootopolisCity_House6_EventScript_Woman {
     lock
     faceplayer
-    if (flag(FLAG_RECEIVED_WAILMER_DOLL)) goto(SootopolisCity_House6_EventScript_ReceivedWailmerDoll)
+    if (flag(FLAG_RECEIVED_WAILMER_DOLL)) {
+        goto(SootopolisCity_House6_EventScript_ReceivedWailmerDoll)
+    }
     msgbox(SootopolisCity_House6_Text_FirstGuestInWhileTakeDoll, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) call(SootopolisCity_House6_EventScript_DeclineWailmerDoll)
+    if (var(VAR_RESULT) == NO) {
+        call(SootopolisCity_House6_EventScript_DeclineWailmerDoll)
+    }
     msgbox(SootopolisCity_House6_Text_TakeGoodCareOfIt, MSGBOX_DEFAULT)
     givedecoration(DECOR_WAILMER_DOLL)
-    if (var(VAR_RESULT) == FALSE) goto(SootopolisCity_House6_EventScript_NoRoomForWailmerDoll)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(SootopolisCity_House6_EventScript_NoRoomForWailmerDoll)
+    }
     setflag(FLAG_RECEIVED_WAILMER_DOLL)
     release
     end

@@ -6,7 +6,9 @@ mapscripts Underwater_SeafloorCavern_MapScripts {
 
 script Underwater_SeafloorCavern_OnTransition {
     setflag(FLAG_LANDMARK_SEAFLOOR_CAVERN)
-    if (flag(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN)) goto(Underwater_SeafloorCavern_EventScript_HideSubmarine)
+    if (flag(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN)) {
+        goto(Underwater_SeafloorCavern_EventScript_HideSubmarine)
+    }
     end
 }
 
@@ -16,7 +18,9 @@ script Underwater_SeafloorCavern_EventScript_HideSubmarine {
 }
 
 script Underwater_SeafloorCavern_OnLoad {
-    if (flag(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN)) call(Underwater_SeafloorCavern_EventScript_SetSubmarineGoneMetatiles)
+    if (flag(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN)) {
+        call(Underwater_SeafloorCavern_EventScript_SetSubmarineGoneMetatiles)
+    }
     end
 }
 

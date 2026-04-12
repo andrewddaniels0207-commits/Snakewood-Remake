@@ -5,8 +5,12 @@ mapscripts SixIsland_PatternBush_Frlg_MapScripts {
 script SixIsland_PatternBush_OnTransition {
     setworldmapflag(FLAG_WORLD_MAP_SIX_ISLAND_PATTERN_BUSH)
     getplayerxy(VAR_TEMP_1, VAR_TEMP_2)
-    if (var(VAR_TEMP_1) >= 50) call(SixIsland_PatternBush_EventScript_SetEscapeRightExit)
-    if (var(VAR_TEMP_1) <= 49) call(SixIsland_PatternBush_EventScript_SetEscapeLeftExit)
+    if (var(VAR_TEMP_1) >= 50) {
+        call(SixIsland_PatternBush_EventScript_SetEscapeRightExit)
+    }
+    if (var(VAR_TEMP_1) <= 49) {
+        call(SixIsland_PatternBush_EventScript_SetEscapeLeftExit)
+    }
     end
 }
 

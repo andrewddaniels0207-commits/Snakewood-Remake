@@ -4,20 +4,28 @@ mapscripts SouthernIsland_Interior_MapScripts {
 }
 
 script SouthernIsland_Interior_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(SouthernIsland_Interior_EventScript_TryRemoveLati)
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
+        call(SouthernIsland_Interior_EventScript_TryRemoveLati)
+    }
     end
 }
 
 script SouthernIsland_Interior_EventScript_TryRemoveLati {
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
+        goto(Common_EventScript_NopReturn)
+    }
     removeobject(LOCALID_SOUTHERN_ISLAND_LATI)
     return
 }
 
 script SouthernIsland_Interior_OnTransition {
-    if (var(VAR_ROAMER_POKEMON) == 0) call(SouthernIsland_Interior_EventScript_SetUpLatios)
-    if (var(VAR_ROAMER_POKEMON) != 0) call(SouthernIsland_Interior_EventScript_SetUpLatias)
+    if (var(VAR_ROAMER_POKEMON) == 0) {
+        call(SouthernIsland_Interior_EventScript_SetUpLatios)
+    }
+    if (var(VAR_ROAMER_POKEMON) != 0) {
+        call(SouthernIsland_Interior_EventScript_SetUpLatias)
+    }
     call(SouthernIsland_Interior_EventScript_SetUpPlayerGfx)
     end
 }
@@ -36,8 +44,12 @@ script SouthernIsland_Interior_EventScript_SetUpLatias {
 
 script SouthernIsland_Interior_EventScript_SetUpPlayerGfx {
     checkplayergender()
-    if (var(VAR_RESULT) == MALE) goto(SouthernIsland_Interior_EventScript_SetBrendanGfx)
-    if (var(VAR_RESULT) == FEMALE) goto(SouthernIsland_Interior_EventScript_SetMayGfx)
+    if (var(VAR_RESULT) == MALE) {
+        goto(SouthernIsland_Interior_EventScript_SetBrendanGfx)
+    }
+    if (var(VAR_RESULT) == FEMALE) {
+        goto(SouthernIsland_Interior_EventScript_SetMayGfx)
+    }
     end
 }
 
@@ -59,10 +71,18 @@ script SouthernIsland_Interior_EventScript_TryLatiEncounter {
 }
 
 script SouthernIsland_Interior_EventScript_Lati {
-    if (flag(FLAG_TEMP_2)) goto(SouthernIsland_Interior_EventScript_Sign)
-    if (flag(FLAG_DEFEATED_LATIAS_OR_LATIOS)) goto(SouthernIsland_Interior_EventScript_Sign)
-    if (flag(FLAG_CAUGHT_LATIAS_OR_LATIOS)) goto(SouthernIsland_Interior_EventScript_Sign)
-    if (!flag(FLAG_ENABLE_SHIP_SOUTHERN_ISLAND)) goto(SouthernIsland_Interior_EventScript_Sign)
+    if (flag(FLAG_TEMP_2)) {
+        goto(SouthernIsland_Interior_EventScript_Sign)
+    }
+    if (flag(FLAG_DEFEATED_LATIAS_OR_LATIOS)) {
+        goto(SouthernIsland_Interior_EventScript_Sign)
+    }
+    if (flag(FLAG_CAUGHT_LATIAS_OR_LATIOS)) {
+        goto(SouthernIsland_Interior_EventScript_Sign)
+    }
+    if (!flag(FLAG_ENABLE_SHIP_SOUTHERN_ISLAND)) {
+        goto(SouthernIsland_Interior_EventScript_Sign)
+    }
     setflag(FLAG_ENCOUNTERED_LATIAS_OR_LATIOS)
     setflag(FLAG_TEMP_2)
     special(SpawnCameraObject)
@@ -81,16 +101,26 @@ script SouthernIsland_Interior_EventScript_Lati {
     delay(50)
     special(RemoveCameraObject)
     setvar(VAR_LAST_TALKED, LOCALID_SOUTHERN_ISLAND_LATI)
-    if (var(VAR_ROAMER_POKEMON) == 0) call(SouthernIsland_Interior_EventScript_SetLatiosBattleVars)
-    if (var(VAR_ROAMER_POKEMON) != 0) call(SouthernIsland_Interior_EventScript_SetLatiasBattleVars)
+    if (var(VAR_ROAMER_POKEMON) == 0) {
+        call(SouthernIsland_Interior_EventScript_SetLatiosBattleVars)
+    }
+    if (var(VAR_ROAMER_POKEMON) != 0) {
+        call(SouthernIsland_Interior_EventScript_SetLatiasBattleVars)
+    }
     setflag(FLAG_SYS_CTRL_OBJ_DELETE)
     special(BattleSetup_StartLatiBattle)
     waitstate
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(SouthernIsland_Interior_EventScript_LatiDefeated)
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(SouthernIsland_Interior_EventScript_RanFromLati)
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(SouthernIsland_Interior_EventScript_RanFromLati)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        goto(SouthernIsland_Interior_EventScript_LatiDefeated)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
+        goto(SouthernIsland_Interior_EventScript_RanFromLati)
+    }
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
+        goto(SouthernIsland_Interior_EventScript_RanFromLati)
+    }
     setflag(FLAG_CAUGHT_LATIAS_OR_LATIOS)
     releaseall
     end
