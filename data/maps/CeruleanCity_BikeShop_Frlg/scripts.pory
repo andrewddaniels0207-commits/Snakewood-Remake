@@ -1,158 +1,226 @@
-mapscripts CeruleanCity_BikeShop_Frlg_MapScripts {}
+raw `
+CeruleanCity_BikeShop_Frlg_MapScripts::
+	.byte 0
 
-script CeruleanCity_BikeShop_EventScript_Clerk {
-    lock
-    faceplayer
-    if (flag(FLAG_GOT_BICYCLE)) {
-        goto(CeruleanCity_BikeShop_EventScript_AlreadyGotBicycle)
-    }
-    if (flag(FLAG_GOT_BIKE_VOUCHER)) {
-        goto(CeruleanCity_BikeShop_EventScript_ExchangeBikeVoucher)
-    }
-    showmoneybox(0, 0)
-    message(CeruleanCity_BikeShop_Text_WelcomeToBikeShop)
-    waitmessage()
-    multichoice(11, 0, MULTI_BIKE_SHOP, FALSE)
-    hidemoneybox()
-    showmoneybox(0, 0)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(CeruleanCity_BikeShop_EventScript_TryPurchaseBicycle)
-        case 1:
-            goto(CeruleanCity_BikeShop_EventScript_ClerkGoodbye)
-        case 127:
-            goto(CeruleanCity_BikeShop_EventScript_ClerkGoodbye)
-    }
-    end
-}
 
-script CeruleanCity_BikeShop_EventScript_TryPurchaseBicycle {
-    msgbox(CeruleanCity_BikeShop_Text_SorryYouCantAffordIt)
-    goto(CeruleanCity_BikeShop_EventScript_ClerkGoodbye)
-    end
-}
+CeruleanCity_BikeShop_EventScript_Clerk::
+# 4 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	lock
+# 5 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	faceplayer
+# 6 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_BICYCLE, CeruleanCity_BikeShop_EventScript_Clerk_2
+CeruleanCity_BikeShop_EventScript_Clerk_1:
+# 9 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_BIKE_VOUCHER, CeruleanCity_BikeShop_EventScript_Clerk_5
+CeruleanCity_BikeShop_EventScript_Clerk_4:
+# 12 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	showmoneybox 0, 0
+# 13 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	message CeruleanCity_BikeShop_Text_WelcomeToBikeShop
+# 14 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	waitmessage
+# 15 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	multichoice 11, 0, MULTI_BIKE_SHOP, FALSE
+# 16 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	hidemoneybox
+# 17 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	showmoneybox 0, 0
+# 18 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	switch VAR_RESULT
+# 19 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	case 0, CeruleanCity_BikeShop_EventScript_Clerk_9
+# 21 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	case 1, CeruleanCity_BikeShop_EventScript_Clerk_10
+# 23 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	case 127, CeruleanCity_BikeShop_EventScript_Clerk_11
+CeruleanCity_BikeShop_EventScript_Clerk_7:
+	end
 
-script CeruleanCity_BikeShop_EventScript_ClerkGoodbye {
-    msgbox(CeruleanCity_BikeShop_Text_ThankYouComeAgain)
-    hidemoneybox()
-    release
-    end
-}
+CeruleanCity_BikeShop_EventScript_Clerk_2:
+# 7 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	goto CeruleanCity_BikeShop_EventScript_AlreadyGotBicycle
+	goto CeruleanCity_BikeShop_EventScript_Clerk_1
 
-script CeruleanCity_BikeShop_EventScript_ExchangeBikeVoucher {
-    msgbox(CeruleanCity_BikeShop_Text_OhBikeVoucherHereYouGo)
-    msgreceiveditem(CeruleanCity_BikeShop_Text_ExchangedVoucherForBicycle, ITEM_BICYCLE, 1, MUS_RG_OBTAIN_KEY_ITEM)
-    setflag(FLAG_GOT_BICYCLE)
-    additem(ITEM_BICYCLE)
-    removeitem(ITEM_BIKE_VOUCHER)
-    msgbox(CeruleanCity_BikeShop_Text_ThankYouComeAgain)
-    release
-    end
-}
+CeruleanCity_BikeShop_EventScript_Clerk_5:
+# 10 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	goto CeruleanCity_BikeShop_EventScript_ExchangeBikeVoucher
+	goto CeruleanCity_BikeShop_EventScript_Clerk_4
 
-script CeruleanCity_BikeShop_EventScript_AlreadyGotBicycle {
-    msgbox(CeruleanCity_BikeShop_Text_HowDoYouLikeNewBicycle)
-    release
-    end
-}
+CeruleanCity_BikeShop_EventScript_Clerk_9:
+# 20 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	goto CeruleanCity_BikeShop_EventScript_TryPurchaseBicycle
+	goto CeruleanCity_BikeShop_EventScript_Clerk_7
 
-script CeruleanCity_BikeShop_EventScript_NoRoomForBicycle {
-    msgbox(CeruleanCity_BikeShop_Text_MakeRoomForBicycle)
-    release
-    end
-}
+CeruleanCity_BikeShop_EventScript_Clerk_10:
+# 22 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	goto CeruleanCity_BikeShop_EventScript_ClerkGoodbye
+	goto CeruleanCity_BikeShop_EventScript_Clerk_7
 
-script CeruleanCity_BikeShop_EventScript_Woman {
-    msgbox(CeruleanCity_BikeShop_Text_CityBikeGoodEnoughForMe, MSGBOX_NPC)
-    end
-}
+CeruleanCity_BikeShop_EventScript_Clerk_11:
+# 24 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	goto CeruleanCity_BikeShop_EventScript_ClerkGoodbye
+	goto CeruleanCity_BikeShop_EventScript_Clerk_7
 
-script CeruleanCity_BikeShop_EventScript_Youngster {
-    lock
-    faceplayer
-    if (flag(FLAG_GOT_BICYCLE)) {
-        goto(CeruleanCity_BikeShop_EventScript_YoungsterHaveBike)
-    }
-    msgbox(CeruleanCity_BikeShop_Text_BikesCoolButExpensive)
-    release
-    end
-}
 
-script CeruleanCity_BikeShop_EventScript_YoungsterHaveBike {
-    msgbox(CeruleanCity_BikeShop_Text_WowYourBikeIsCool)
-    release
-    end
-}
+CeruleanCity_BikeShop_EventScript_TryPurchaseBicycle::
+# 30 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	msgbox CeruleanCity_BikeShop_Text_SorryYouCantAffordIt
+# 31 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	goto CeruleanCity_BikeShop_EventScript_ClerkGoodbye
+	end
 
-script CeruleanCity_BikeShop_EventScript_Bicycle {
-    msgbox(CeruleanCity_BikeShop_Text_ShinyNewBicycle, MSGBOX_SIGN)
-    end
-}
 
-text CeruleanCity_BikeShop_Text_WelcomeToBikeShop {
-    "Hi!\n"
-    "Welcome to our BIKE SHOP.\p"
-    "Have we got just the BIKE for\n"
-    "you!$"
-}
+CeruleanCity_BikeShop_EventScript_ClerkGoodbye::
+# 36 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	msgbox CeruleanCity_BikeShop_Text_ThankYouComeAgain
+# 37 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	hidemoneybox
+# 38 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	release
+	end
 
-text CeruleanCity_BikeShop_Text_SorryYouCantAffordIt {
-    "Sorry!\n"
-    "You can't afford it!$"
-}
 
-text CeruleanCity_BikeShop_Text_OhBikeVoucherHereYouGo {
-    "Oh, that's…\p"
-    "A BIKE VOUCHER!\p"
-    "Okay!\n"
-    "Here you go!$"
-}
+CeruleanCity_BikeShop_EventScript_ExchangeBikeVoucher::
+# 43 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	msgbox CeruleanCity_BikeShop_Text_OhBikeVoucherHereYouGo
+# 44 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	msgreceiveditem CeruleanCity_BikeShop_Text_ExchangedVoucherForBicycle, ITEM_BICYCLE, 1, MUS_RG_OBTAIN_KEY_ITEM
+# 45 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	setflag FLAG_GOT_BICYCLE
+# 46 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	additem ITEM_BICYCLE
+# 47 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	removeitem ITEM_BIKE_VOUCHER
+# 48 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	msgbox CeruleanCity_BikeShop_Text_ThankYouComeAgain
+# 49 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	release
+	end
 
-text CeruleanCity_BikeShop_Text_ExchangedVoucherForBicycle {
-    "{PLAYER} exchanged the\n"
-    "BIKE VOUCHER for a BICYCLE.$"
-}
 
-text CeruleanCity_BikeShop_Text_ThankYouComeAgain {
-    "Thank you!\n"
-    "Come back again sometime!$"
-}
+CeruleanCity_BikeShop_EventScript_AlreadyGotBicycle::
+# 54 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	msgbox CeruleanCity_BikeShop_Text_HowDoYouLikeNewBicycle
+# 55 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	release
+	end
 
-text CeruleanCity_BikeShop_Text_HowDoYouLikeNewBicycle {
-    "How do you like your new BICYCLE?\n"
-    "Do you like how it rides?\p"
-    "You can take it out on CYCLING\n"
-    "ROAD and even into caves!$"
-}
 
-text CeruleanCity_BikeShop_Text_MakeRoomForBicycle {
-    "You better make room for your\n"
-    "BICYCLE!$"
-}
+CeruleanCity_BikeShop_EventScript_NoRoomForBicycle::
+# 60 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	msgbox CeruleanCity_BikeShop_Text_MakeRoomForBicycle
+# 61 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	release
+	end
 
-text CeruleanCity_BikeShop_Text_CityBikeGoodEnoughForMe {
-    "A plain city bike is good enough\n"
-    "for me.\p"
-    "After all, you can't put a shopping\n"
-    "basket on a mountain bike.$"
-}
 
-text CeruleanCity_BikeShop_Text_BikesCoolButExpensive {
-    "These bikes are cool, but they're\n"
-    "way expensive!$"
-}
+CeruleanCity_BikeShop_EventScript_Woman::
+# 66 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	msgbox CeruleanCity_BikeShop_Text_CityBikeGoodEnoughForMe, MSGBOX_NPC
+	end
 
-text CeruleanCity_BikeShop_Text_WowYourBikeIsCool {
-    "Wow.\n"
-    "Your BIKE is really cool!$"
-}
 
-text CeruleanCity_BikeShop_Text_GermanFoldableBicyleFinallyOnMarket {
-    "ついに　はつばい！\p"
-    "ドイツ　せい　さいこうきゅう\n"
-    "おりたたみ　じてんしゃ！$"
-}
+CeruleanCity_BikeShop_EventScript_Youngster::
+# 71 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	lock
+# 72 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	faceplayer
+# 73 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_BICYCLE, CeruleanCity_BikeShop_EventScript_Youngster_2
+CeruleanCity_BikeShop_EventScript_Youngster_1:
+# 76 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	msgbox CeruleanCity_BikeShop_Text_BikesCoolButExpensive
+# 77 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	release
+	end
 
-text CeruleanCity_BikeShop_Text_ShinyNewBicycle {
-    "A shiny new BICYCLE!$"
-}
+CeruleanCity_BikeShop_EventScript_Youngster_2:
+# 74 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	goto CeruleanCity_BikeShop_EventScript_YoungsterHaveBike
+	goto CeruleanCity_BikeShop_EventScript_Youngster_1
+
+
+CeruleanCity_BikeShop_EventScript_YoungsterHaveBike::
+# 82 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	msgbox CeruleanCity_BikeShop_Text_WowYourBikeIsCool
+# 83 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	release
+	end
+
+
+CeruleanCity_BikeShop_EventScript_Bicycle::
+# 88 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	msgbox CeruleanCity_BikeShop_Text_ShinyNewBicycle, MSGBOX_SIGN
+	end
+
+
+CeruleanCity_BikeShop_Text_WelcomeToBikeShop::
+# 92 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	.string "Hi!\n"
+	.string "Welcome to our BIKE SHOP.\p"
+	.string "Have we got just the BIKE for\n"
+	.string "you!$"
+
+CeruleanCity_BikeShop_Text_SorryYouCantAffordIt::
+# 99 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	.string "Sorry!\n"
+	.string "You can't afford it!$"
+
+CeruleanCity_BikeShop_Text_OhBikeVoucherHereYouGo::
+# 104 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	.string "Oh, that's…\p"
+	.string "A BIKE VOUCHER!\p"
+	.string "Okay!\n"
+	.string "Here you go!$"
+
+CeruleanCity_BikeShop_Text_ExchangedVoucherForBicycle::
+# 111 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	.string "{PLAYER} exchanged the\n"
+	.string "BIKE VOUCHER for a BICYCLE.$"
+
+CeruleanCity_BikeShop_Text_ThankYouComeAgain::
+# 116 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	.string "Thank you!\n"
+	.string "Come back again sometime!$"
+
+CeruleanCity_BikeShop_Text_HowDoYouLikeNewBicycle::
+# 121 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	.string "How do you like your new BICYCLE?\n"
+	.string "Do you like how it rides?\p"
+	.string "You can take it out on CYCLING\n"
+	.string "ROAD and even into caves!$"
+
+CeruleanCity_BikeShop_Text_MakeRoomForBicycle::
+# 128 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	.string "You better make room for your\n"
+	.string "BICYCLE!$"
+
+CeruleanCity_BikeShop_Text_CityBikeGoodEnoughForMe::
+# 133 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	.string "A plain city bike is good enough\n"
+	.string "for me.\p"
+	.string "After all, you can't put a shopping\n"
+	.string "basket on a mountain bike.$"
+
+CeruleanCity_BikeShop_Text_BikesCoolButExpensive::
+# 140 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	.string "These bikes are cool, but they're\n"
+	.string "way expensive!$"
+
+CeruleanCity_BikeShop_Text_WowYourBikeIsCool::
+# 145 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	.string "Wow.\n"
+	.string "Your BIKE is really cool!$"
+
+CeruleanCity_BikeShop_Text_GermanFoldableBicyleFinallyOnMarket::
+# 150 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	.string "ついに　はつばい！\p"
+	.string "ドイツ　せい　さいこうきゅう\n"
+	.string "おりたたみ　じてんしゃ！$"
+
+CeruleanCity_BikeShop_Text_ShinyNewBicycle::
+# 156 "data/maps/CeruleanCity_BikeShop_Frlg/scripts.pory"
+	.string "A shiny new BICYCLE!$"
+
+`

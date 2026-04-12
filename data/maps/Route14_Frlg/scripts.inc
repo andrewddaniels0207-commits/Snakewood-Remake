@@ -1,163 +1,205 @@
 Route14_Frlg_MapScripts::
 	.byte 0
 
+
 Route14_EventScript_RouteSign::
+# 4 "data/maps/Route14_Frlg/scripts.pory"
 	msgbox Route14_Text_RouteSign, MSGBOX_SIGN
 	end
 
+
 Route14_Text_CarterIntro::
+# 8 "data/maps/Route14_Frlg/scripts.pory"
 	.string "You need to use TMs to teach good\n"
 	.string "moves to POKéMON.$"
 
 Route14_Text_CarterDefeat::
+# 13 "data/maps/Route14_Frlg/scripts.pory"
 	.string "Not good enough quite yet.$"
 
 Route14_Text_CarterPostBattle::
+# 17 "data/maps/Route14_Frlg/scripts.pory"
 	.string "You have some HMs, right? POKéMON\n"
 	.string "can't forget those moves easily.$"
 
 Route14_Text_MitchIntro::
+# 22 "data/maps/Route14_Frlg/scripts.pory"
 	.string "My bird POKéMON should be ready\n"
 	.string "for battle.$"
 
 Route14_Text_MitchDefeat::
+# 27 "data/maps/Route14_Frlg/scripts.pory"
 	.string "Not ready yet!$"
 
 Route14_Text_MitchPostBattle::
+# 31 "data/maps/Route14_Frlg/scripts.pory"
 	.string "My bird POKéMON need to learn\n"
 	.string "better moves.$"
 
 Route14_Text_BeckIntro::
+# 36 "data/maps/Route14_Frlg/scripts.pory"
 	.string "They have TMs on sale at the\n"
 	.string "CELADON DEPT. STORE.\p"
 	.string "TMs aren't really rare, but not\n"
 	.string "many people have HMs.$"
 
 Route14_Text_BeckDefeat::
+# 43 "data/maps/Route14_Frlg/scripts.pory"
 	.string "Aww, bummer!$"
 
 Route14_Text_BeckPostBattle::
+# 47 "data/maps/Route14_Frlg/scripts.pory"
 	.string "Try teaching POKéMON a move that's\n"
 	.string "the same type as it.\p"
 	.string "That apparently boosts the power\n"
 	.string "of the move.$"
 
 Route14_Text_MarlonIntro::
+# 54 "data/maps/Route14_Frlg/scripts.pory"
 	.string "Have you taught your bird POKéMON\n"
 	.string "how to FLY?\p"
 	.string "You'll be able to soar with it into\n"
 	.string "the sky!$"
 
 Route14_Text_MarlonDefeat::
+# 61 "data/maps/Route14_Frlg/scripts.pory"
 	.string "Shot down in flames!$"
 
 Route14_Text_MarlonPostBattle::
+# 65 "data/maps/Route14_Frlg/scripts.pory"
 	.string "Bird POKéMON are my one true love.\n"
 	.string "I don't want to raise anything else.$"
 
 Route14_Text_DonaldIntro::
+# 70 "data/maps/Route14_Frlg/scripts.pory"
 	.string "Have you heard the legend of the\n"
 	.string "winged mirages?$"
 
 Route14_Text_DonaldDefeat::
+# 75 "data/maps/Route14_Frlg/scripts.pory"
 	.string "Why?\n"
 	.string "Why'd I lose?$"
 
 Route14_Text_DonaldPostBattle::
+# 80 "data/maps/Route14_Frlg/scripts.pory"
 	.string "Well, the winged mirages are the\n"
 	.string "legendary bird POKéMON.\p"
 	.string "There are three of them: ARTICUNO,\n"
 	.string "ZAPDOS, and MOLTRES.$"
 
 Route14_Text_BennyIntro::
+# 87 "data/maps/Route14_Frlg/scripts.pory"
 	.string "I'm not into it, but okay.\n"
 	.string "Let's go!$"
 
 Route14_Text_BennyDefeat::
+# 92 "data/maps/Route14_Frlg/scripts.pory"
 	.string "I knew it!$"
 
 Route14_Text_BennyPostBattle::
+# 96 "data/maps/Route14_Frlg/scripts.pory"
 	.string "Winning, losing… It's insignificant\n"
 	.string "under this huge sky.$"
 
 Route14_Text_LukasIntro::
+# 101 "data/maps/Route14_Frlg/scripts.pory"
 	.string "C'mon, c'mon.\n"
 	.string "Let's go, let's go, let's go!$"
 
 Route14_Text_LukasDefeat::
+# 106 "data/maps/Route14_Frlg/scripts.pory"
 	.string "Arrg!\n"
 	.string "Lost! Get lost!$"
 
 Route14_Text_LukasPostBattle::
+# 111 "data/maps/Route14_Frlg/scripts.pory"
 	.string "What, what, what?\n"
 	.string "What do you want still?$"
 
 Route14_Text_IsaacIntro::
+# 116 "data/maps/Route14_Frlg/scripts.pory"
 	.string "I need to burn some time.\n"
 	.string "Shut up and battle.$"
 
 Route14_Text_IsaacDefeat::
+# 121 "data/maps/Route14_Frlg/scripts.pory"
 	.string "What?\n"
 	.string "You!?$"
 
 Route14_Text_IsaacPostBattle::
+# 126 "data/maps/Route14_Frlg/scripts.pory"
 	.string "Raising POKéMON is a drag, man.$"
 
 Route14_Text_GeraldIntro::
+# 130 "data/maps/Route14_Frlg/scripts.pory"
 	.string "We ride out here because of the\n"
 	.string "wide-open spaces.$"
 
 Route14_Text_GeraldDefeat::
+# 135 "data/maps/Route14_Frlg/scripts.pory"
 	.string "Wipeout!$"
 
 Route14_Text_GeraldPostBattle::
+# 139 "data/maps/Route14_Frlg/scripts.pory"
 	.string "It's cool you made your POKéMON so\n"
 	.string "strong.\p"
 	.string "Might is right!\n"
 	.string "And you know it!$"
 
 Route14_Text_MalikIntro::
+# 146 "data/maps/Route14_Frlg/scripts.pory"
 	.string "POKéMON battle?\n"
 	.string "Cool! Rumble!$"
 
 Route14_Text_MalikDefeat::
+# 151 "data/maps/Route14_Frlg/scripts.pory"
 	.string "Blown away!$"
 
 Route14_Text_MalikPostBattle::
+# 155 "data/maps/Route14_Frlg/scripts.pory"
 	.string "You know who'd win, you and me\n"
 	.string "one-on-one!$"
 
 Route14_Text_RouteSign::
+# 160 "data/maps/Route14_Frlg/scripts.pory"
 	.string "ROUTE 14\n"
 	.string "West to FUCHSIA CITY$"
 
 Route14_Text_KiriIntro::
+# 165 "data/maps/Route14_Frlg/scripts.pory"
 	.string "KIRI: JAN, let's try really,\n"
 	.string "really hard together.$"
 
 Route14_Text_KiriDefeat::
+# 170 "data/maps/Route14_Frlg/scripts.pory"
 	.string "KIRI: Whimper…\n"
 	.string "We lost, didn't we?$"
 
 Route14_Text_KiriPostBattle::
+# 175 "data/maps/Route14_Frlg/scripts.pory"
 	.string "KIRI: Did we lose because of me?$"
 
 Route14_Text_KiriNotEnoughMons::
+# 179 "data/maps/Route14_Frlg/scripts.pory"
 	.string "KIRI: We can battle if you have\n"
 	.string "two POKéMON.$"
 
 Route14_Text_JanIntro::
+# 184 "data/maps/Route14_Frlg/scripts.pory"
 	.string "JAN: KIRI, here we go!\n"
 	.string "We have to try hard!$"
 
 Route14_Text_JanDefeat::
+# 189 "data/maps/Route14_Frlg/scripts.pory"
 	.string "JAN: Eeeeh!\n"
 	.string "No fair!$"
 
 Route14_Text_JanPostBattle::
+# 194 "data/maps/Route14_Frlg/scripts.pory"
 	.string "JAN: KIRI, don't cry!\n"
 	.string "We'll just try harder next time.$"
 
 Route14_Text_JanNotEnoughMons::
+# 199 "data/maps/Route14_Frlg/scripts.pory"
 	.string "JAN: You want to battle?\n"
 	.string "You don't have enough POKéMON.$"

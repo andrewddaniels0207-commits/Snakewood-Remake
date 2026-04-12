@@ -1,145 +1,356 @@
 SouthernIsland_Interior_MapScripts::
+# 2 "data/maps/SouthernIsland_Interior/scripts.pory"
 	map_script MAP_SCRIPT_ON_RESUME, SouthernIsland_Interior_OnResume
+# 3 "data/maps/SouthernIsland_Interior/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, SouthernIsland_Interior_OnTransition
 	.byte 0
 
-SouthernIsland_Interior_OnResume:
-	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, SouthernIsland_Interior_EventScript_TryRemoveLati
+
+SouthernIsland_Interior_OnResume::
+# 7 "data/maps/SouthernIsland_Interior/scripts.pory"
+	goto_if_set FLAG_SYS_CTRL_OBJ_DELETE, SouthernIsland_Interior_OnResume_2
+SouthernIsland_Interior_OnResume_1:
 	end
 
+SouthernIsland_Interior_OnResume_2:
+# 8 "data/maps/SouthernIsland_Interior/scripts.pory"
+	call SouthernIsland_Interior_EventScript_TryRemoveLati
+	goto SouthernIsland_Interior_OnResume_1
+
+
 SouthernIsland_Interior_EventScript_TryRemoveLati::
+# 14 "data/maps/SouthernIsland_Interior/scripts.pory"
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
+# 15 "data/maps/SouthernIsland_Interior/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
+	goto_if_ne SouthernIsland_Interior_EventScript_TryRemoveLati_2
+SouthernIsland_Interior_EventScript_TryRemoveLati_1:
+# 18 "data/maps/SouthernIsland_Interior/scripts.pory"
 	removeobject LOCALID_SOUTHERN_ISLAND_LATI
 	return
 
-SouthernIsland_Interior_OnTransition:
-	call_if_eq VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetUpLatios
-	call_if_ne VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetUpLatias
+SouthernIsland_Interior_EventScript_TryRemoveLati_2:
+# 16 "data/maps/SouthernIsland_Interior/scripts.pory"
+	goto Common_EventScript_NopReturn
+	goto SouthernIsland_Interior_EventScript_TryRemoveLati_1
+
+
+SouthernIsland_Interior_OnTransition::
+# 23 "data/maps/SouthernIsland_Interior/scripts.pory"
+	compare VAR_ROAMER_POKEMON, 0
+	goto_if_eq SouthernIsland_Interior_OnTransition_2
+SouthernIsland_Interior_OnTransition_1:
+# 26 "data/maps/SouthernIsland_Interior/scripts.pory"
+	compare VAR_ROAMER_POKEMON, 0
+	goto_if_ne SouthernIsland_Interior_OnTransition_5
+SouthernIsland_Interior_OnTransition_4:
+# 29 "data/maps/SouthernIsland_Interior/scripts.pory"
 	call SouthernIsland_Interior_EventScript_SetUpPlayerGfx
 	end
 
+SouthernIsland_Interior_OnTransition_2:
+# 24 "data/maps/SouthernIsland_Interior/scripts.pory"
+	call SouthernIsland_Interior_EventScript_SetUpLatios
+	goto SouthernIsland_Interior_OnTransition_1
+
+SouthernIsland_Interior_OnTransition_5:
+# 27 "data/maps/SouthernIsland_Interior/scripts.pory"
+	call SouthernIsland_Interior_EventScript_SetUpLatias
+	goto SouthernIsland_Interior_OnTransition_4
+
+
 SouthernIsland_Interior_EventScript_SetUpLatios::
+# 34 "data/maps/SouthernIsland_Interior/scripts.pory"
 	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_LATIOS
+# 35 "data/maps/SouthernIsland_Interior/scripts.pory"
 	setvar VAR_TEMP_4, SPECIES_LATIOS
 	return
 
+
 SouthernIsland_Interior_EventScript_SetUpLatias::
+# 40 "data/maps/SouthernIsland_Interior/scripts.pory"
 	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_LATIAS
+# 41 "data/maps/SouthernIsland_Interior/scripts.pory"
 	setvar VAR_TEMP_4, SPECIES_LATIAS
 	return
 
+
 SouthernIsland_Interior_EventScript_SetUpPlayerGfx::
+# 46 "data/maps/SouthernIsland_Interior/scripts.pory"
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, SouthernIsland_Interior_EventScript_SetBrendanGfx
-	goto_if_eq VAR_RESULT, FEMALE, SouthernIsland_Interior_EventScript_SetMayGfx
+# 47 "data/maps/SouthernIsland_Interior/scripts.pory"
+	compare VAR_RESULT, MALE
+	goto_if_eq SouthernIsland_Interior_EventScript_SetUpPlayerGfx_2
+SouthernIsland_Interior_EventScript_SetUpPlayerGfx_1:
+# 50 "data/maps/SouthernIsland_Interior/scripts.pory"
+	compare VAR_RESULT, FEMALE
+	goto_if_eq SouthernIsland_Interior_EventScript_SetUpPlayerGfx_5
+SouthernIsland_Interior_EventScript_SetUpPlayerGfx_4:
 	end
 
+SouthernIsland_Interior_EventScript_SetUpPlayerGfx_2:
+# 48 "data/maps/SouthernIsland_Interior/scripts.pory"
+	goto SouthernIsland_Interior_EventScript_SetBrendanGfx
+	goto SouthernIsland_Interior_EventScript_SetUpPlayerGfx_1
+
+SouthernIsland_Interior_EventScript_SetUpPlayerGfx_5:
+# 51 "data/maps/SouthernIsland_Interior/scripts.pory"
+	goto SouthernIsland_Interior_EventScript_SetMayGfx
+	goto SouthernIsland_Interior_EventScript_SetUpPlayerGfx_4
+
+
 SouthernIsland_Interior_EventScript_SetBrendanGfx::
+# 57 "data/maps/SouthernIsland_Interior/scripts.pory"
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
+
 SouthernIsland_Interior_EventScript_SetMayGfx::
+# 62 "data/maps/SouthernIsland_Interior/scripts.pory"
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	return
 
+
 SouthernIsland_Interior_EventScript_TryLatiEncounter::
+# 67 "data/maps/SouthernIsland_Interior/scripts.pory"
 	lockall
-	setvar VAR_0x8008, 12  @ Player's Y coordinate. Not read
+# 68 "data/maps/SouthernIsland_Interior/scripts.pory"
+	setvar VAR_0x8008, 12
+# 69 "data/maps/SouthernIsland_Interior/scripts.pory"
 	goto SouthernIsland_Interior_EventScript_Lati
 	end
 
+
 SouthernIsland_Interior_EventScript_Lati::
-	goto_if_set FLAG_TEMP_2, SouthernIsland_Interior_EventScript_Sign
-	goto_if_set FLAG_DEFEATED_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_Sign
-	goto_if_set FLAG_CAUGHT_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_Sign
-	goto_if_unset FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, SouthernIsland_Interior_EventScript_Sign
+# 74 "data/maps/SouthernIsland_Interior/scripts.pory"
+	goto_if_set FLAG_TEMP_2, SouthernIsland_Interior_EventScript_Lati_2
+SouthernIsland_Interior_EventScript_Lati_1:
+# 77 "data/maps/SouthernIsland_Interior/scripts.pory"
+	goto_if_set FLAG_DEFEATED_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_Lati_5
+SouthernIsland_Interior_EventScript_Lati_4:
+# 80 "data/maps/SouthernIsland_Interior/scripts.pory"
+	goto_if_set FLAG_CAUGHT_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_Lati_8
+SouthernIsland_Interior_EventScript_Lati_7:
+# 83 "data/maps/SouthernIsland_Interior/scripts.pory"
+	goto_if_unset FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, SouthernIsland_Interior_EventScript_Lati_11
+SouthernIsland_Interior_EventScript_Lati_10:
+# 86 "data/maps/SouthernIsland_Interior/scripts.pory"
 	setflag FLAG_ENCOUNTERED_LATIAS_OR_LATIOS
+# 87 "data/maps/SouthernIsland_Interior/scripts.pory"
 	setflag FLAG_TEMP_2
+# 88 "data/maps/SouthernIsland_Interior/scripts.pory"
 	special SpawnCameraObject
+# 89 "data/maps/SouthernIsland_Interior/scripts.pory"
 	applymovement LOCALID_CAMERA, SouthernIsland_Interior_Movement_CameraPanUp
+# 90 "data/maps/SouthernIsland_Interior/scripts.pory"
 	waitmovement 0
+# 91 "data/maps/SouthernIsland_Interior/scripts.pory"
 	delay 50
+# 92 "data/maps/SouthernIsland_Interior/scripts.pory"
 	waitse
+# 93 "data/maps/SouthernIsland_Interior/scripts.pory"
 	playmoncry VAR_TEMP_4, CRY_MODE_NORMAL
+# 94 "data/maps/SouthernIsland_Interior/scripts.pory"
 	delay 30
+# 95 "data/maps/SouthernIsland_Interior/scripts.pory"
 	waitmoncry
+# 96 "data/maps/SouthernIsland_Interior/scripts.pory"
 	addobject LOCALID_SOUTHERN_ISLAND_LATI
+# 97 "data/maps/SouthernIsland_Interior/scripts.pory"
 	delay 30
+# 98 "data/maps/SouthernIsland_Interior/scripts.pory"
 	applymovement LOCALID_CAMERA, SouthernIsland_Interior_Movement_CameraPanDown
+# 99 "data/maps/SouthernIsland_Interior/scripts.pory"
 	applymovement LOCALID_SOUTHERN_ISLAND_LATI, SouthernIsland_Interior_Movement_LatiApproach
+# 100 "data/maps/SouthernIsland_Interior/scripts.pory"
 	waitmovement 0
+# 101 "data/maps/SouthernIsland_Interior/scripts.pory"
 	delay 50
+# 102 "data/maps/SouthernIsland_Interior/scripts.pory"
 	special RemoveCameraObject
+# 103 "data/maps/SouthernIsland_Interior/scripts.pory"
 	setvar VAR_LAST_TALKED, LOCALID_SOUTHERN_ISLAND_LATI
-	call_if_eq VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetLatiosBattleVars
-	call_if_ne VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetLatiasBattleVars
+# 104 "data/maps/SouthernIsland_Interior/scripts.pory"
+	compare VAR_ROAMER_POKEMON, 0
+	goto_if_eq SouthernIsland_Interior_EventScript_Lati_14
+SouthernIsland_Interior_EventScript_Lati_13:
+# 107 "data/maps/SouthernIsland_Interior/scripts.pory"
+	compare VAR_ROAMER_POKEMON, 0
+	goto_if_ne SouthernIsland_Interior_EventScript_Lati_17
+SouthernIsland_Interior_EventScript_Lati_16:
+# 110 "data/maps/SouthernIsland_Interior/scripts.pory"
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
+# 111 "data/maps/SouthernIsland_Interior/scripts.pory"
 	special BattleSetup_StartLatiBattle
+# 112 "data/maps/SouthernIsland_Interior/scripts.pory"
 	waitstate
+# 113 "data/maps/SouthernIsland_Interior/scripts.pory"
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+# 114 "data/maps/SouthernIsland_Interior/scripts.pory"
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, SouthernIsland_Interior_EventScript_LatiDefeated
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, SouthernIsland_Interior_EventScript_RanFromLati
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, SouthernIsland_Interior_EventScript_RanFromLati
+# 115 "data/maps/SouthernIsland_Interior/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_WON
+	goto_if_eq SouthernIsland_Interior_EventScript_Lati_20
+SouthernIsland_Interior_EventScript_Lati_19:
+# 118 "data/maps/SouthernIsland_Interior/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_RAN
+	goto_if_eq SouthernIsland_Interior_EventScript_Lati_23
+SouthernIsland_Interior_EventScript_Lati_22:
+# 121 "data/maps/SouthernIsland_Interior/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	goto_if_eq SouthernIsland_Interior_EventScript_Lati_26
+SouthernIsland_Interior_EventScript_Lati_25:
+# 124 "data/maps/SouthernIsland_Interior/scripts.pory"
 	setflag FLAG_CAUGHT_LATIAS_OR_LATIOS
+# 125 "data/maps/SouthernIsland_Interior/scripts.pory"
 	releaseall
 	end
+
+SouthernIsland_Interior_EventScript_Lati_2:
+# 75 "data/maps/SouthernIsland_Interior/scripts.pory"
+	goto SouthernIsland_Interior_EventScript_Sign
+	goto SouthernIsland_Interior_EventScript_Lati_1
+
+SouthernIsland_Interior_EventScript_Lati_5:
+# 78 "data/maps/SouthernIsland_Interior/scripts.pory"
+	goto SouthernIsland_Interior_EventScript_Sign
+	goto SouthernIsland_Interior_EventScript_Lati_4
+
+SouthernIsland_Interior_EventScript_Lati_8:
+# 81 "data/maps/SouthernIsland_Interior/scripts.pory"
+	goto SouthernIsland_Interior_EventScript_Sign
+	goto SouthernIsland_Interior_EventScript_Lati_7
+
+SouthernIsland_Interior_EventScript_Lati_11:
+# 84 "data/maps/SouthernIsland_Interior/scripts.pory"
+	goto SouthernIsland_Interior_EventScript_Sign
+	goto SouthernIsland_Interior_EventScript_Lati_10
+
+SouthernIsland_Interior_EventScript_Lati_14:
+# 105 "data/maps/SouthernIsland_Interior/scripts.pory"
+	call SouthernIsland_Interior_EventScript_SetLatiosBattleVars
+	goto SouthernIsland_Interior_EventScript_Lati_13
+
+SouthernIsland_Interior_EventScript_Lati_17:
+# 108 "data/maps/SouthernIsland_Interior/scripts.pory"
+	call SouthernIsland_Interior_EventScript_SetLatiasBattleVars
+	goto SouthernIsland_Interior_EventScript_Lati_16
+
+SouthernIsland_Interior_EventScript_Lati_20:
+# 116 "data/maps/SouthernIsland_Interior/scripts.pory"
+	goto SouthernIsland_Interior_EventScript_LatiDefeated
+	goto SouthernIsland_Interior_EventScript_Lati_19
+
+SouthernIsland_Interior_EventScript_Lati_23:
+# 119 "data/maps/SouthernIsland_Interior/scripts.pory"
+	goto SouthernIsland_Interior_EventScript_RanFromLati
+	goto SouthernIsland_Interior_EventScript_Lati_22
+
+SouthernIsland_Interior_EventScript_Lati_26:
+# 122 "data/maps/SouthernIsland_Interior/scripts.pory"
+	goto SouthernIsland_Interior_EventScript_RanFromLati
+	goto SouthernIsland_Interior_EventScript_Lati_25
+
 
 SouthernIsland_Interior_EventScript_LatiDefeated::
+# 130 "data/maps/SouthernIsland_Interior/scripts.pory"
 	setflag FLAG_DEFEATED_LATIAS_OR_LATIOS
+# 131 "data/maps/SouthernIsland_Interior/scripts.pory"
 	copyvar VAR_0x8004, VAR_TEMP_4
+# 132 "data/maps/SouthernIsland_Interior/scripts.pory"
 	goto Common_EventScript_LegendaryFlewAway
 	end
+
 
 SouthernIsland_Interior_EventScript_RanFromLati::
+# 137 "data/maps/SouthernIsland_Interior/scripts.pory"
 	copyvar VAR_0x8004, VAR_TEMP_4
+# 138 "data/maps/SouthernIsland_Interior/scripts.pory"
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
+
 SouthernIsland_Interior_EventScript_Sign::
+# 143 "data/maps/SouthernIsland_Interior/scripts.pory"
 	msgbox SouthernIsland_Interior_Text_Sign, MSGBOX_DEFAULT
+# 144 "data/maps/SouthernIsland_Interior/scripts.pory"
 	releaseall
 	end
 
+
 SouthernIsland_Interior_EventScript_SetLatiosBattleVars::
+# 149 "data/maps/SouthernIsland_Interior/scripts.pory"
 	seteventmon SPECIES_LATIOS, 50, ITEM_SOUL_DEW
 	return
 
+
 SouthernIsland_Interior_EventScript_SetLatiasBattleVars::
+# 154 "data/maps/SouthernIsland_Interior/scripts.pory"
 	seteventmon SPECIES_LATIAS, 50, ITEM_SOUL_DEW
 	return
 
+
+# 158 "data/maps/SouthernIsland_Interior/scripts.pory"
 SouthernIsland_Interior_Movement_CameraPanUp:
+# 159 "data/maps/SouthernIsland_Interior/scripts.pory"
 	walk_up
+# 160 "data/maps/SouthernIsland_Interior/scripts.pory"
 	walk_up
+# 161 "data/maps/SouthernIsland_Interior/scripts.pory"
 	walk_up
+# 162 "data/maps/SouthernIsland_Interior/scripts.pory"
 	step_end
 
+# 165 "data/maps/SouthernIsland_Interior/scripts.pory"
 SouthernIsland_Interior_Movement_CameraPanDown:
+# 166 "data/maps/SouthernIsland_Interior/scripts.pory"
 	delay_16
+# 167 "data/maps/SouthernIsland_Interior/scripts.pory"
 	delay_16
+# 168 "data/maps/SouthernIsland_Interior/scripts.pory"
 	delay_16
+# 169 "data/maps/SouthernIsland_Interior/scripts.pory"
 	delay_16
+# 170 "data/maps/SouthernIsland_Interior/scripts.pory"
 	delay_16
+# 171 "data/maps/SouthernIsland_Interior/scripts.pory"
 	delay_16
+# 172 "data/maps/SouthernIsland_Interior/scripts.pory"
 	delay_16
+# 173 "data/maps/SouthernIsland_Interior/scripts.pory"
 	walk_down
+# 174 "data/maps/SouthernIsland_Interior/scripts.pory"
 	walk_down
+# 175 "data/maps/SouthernIsland_Interior/scripts.pory"
 	walk_down
+# 176 "data/maps/SouthernIsland_Interior/scripts.pory"
 	walk_in_place_faster_up
+# 177 "data/maps/SouthernIsland_Interior/scripts.pory"
 	step_end
 
+# 180 "data/maps/SouthernIsland_Interior/scripts.pory"
 SouthernIsland_Interior_Movement_LatiApproach:
+# 181 "data/maps/SouthernIsland_Interior/scripts.pory"
 	walk_down
+# 182 "data/maps/SouthernIsland_Interior/scripts.pory"
 	walk_down
+# 183 "data/maps/SouthernIsland_Interior/scripts.pory"
 	walk_down
+# 184 "data/maps/SouthernIsland_Interior/scripts.pory"
 	walk_down
+# 185 "data/maps/SouthernIsland_Interior/scripts.pory"
 	walk_down
+# 186 "data/maps/SouthernIsland_Interior/scripts.pory"
 	delay_16
+# 187 "data/maps/SouthernIsland_Interior/scripts.pory"
 	delay_16
+# 188 "data/maps/SouthernIsland_Interior/scripts.pory"
 	walk_down
+# 189 "data/maps/SouthernIsland_Interior/scripts.pory"
 	walk_down
+# 190 "data/maps/SouthernIsland_Interior/scripts.pory"
 	walk_down
+# 191 "data/maps/SouthernIsland_Interior/scripts.pory"
 	walk_down
+# 192 "data/maps/SouthernIsland_Interior/scripts.pory"
 	step_end

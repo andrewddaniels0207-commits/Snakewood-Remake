@@ -1,8 +1,14 @@
-mapscripts TerraCave_Entrance_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: TerraCave_Entrance_OnTransition
-}
+raw `
+TerraCave_Entrance_MapScripts::
+# 2 "data/maps/TerraCave_Entrance/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, TerraCave_Entrance_OnTransition
+	.byte 0
 
-script TerraCave_Entrance_OnTransition {
-    setflag(FLAG_ARRIVED_AT_TERRA_CAVE_ENTRANCE)
-    end
-}
+
+TerraCave_Entrance_OnTransition::
+# 6 "data/maps/TerraCave_Entrance/scripts.pory"
+	setflag FLAG_ARRIVED_AT_TERRA_CAVE_ENTRANCE
+	end
+
+
+`

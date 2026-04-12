@@ -1,34 +1,41 @@
-mapscripts Route11_EastEntrance_1F_Frlg_MapScripts {}
+raw `
+Route11_EastEntrance_1F_Frlg_MapScripts::
+	.byte 0
 
-script Route11_EastEntrance_1F_EventScript_TopGuard {
-    msgbox(Route11_EastEntrance_1F_Text_ManInLavenderRatesNames, MSGBOX_NPC)
-    end
-}
 
-script Route11_EastEntrance_1F_EventScript_BottomGuard {
-    msgbox(Route11_EastEntrance_1F_Text_RockTunnelToReachLavender, MSGBOX_NPC)
-    end
-}
+Route11_EastEntrance_1F_EventScript_TopGuard::
+# 4 "data/maps/Route11_EastEntrance_1F_Frlg/scripts.pory"
+	msgbox Route11_EastEntrance_1F_Text_ManInLavenderRatesNames, MSGBOX_NPC
+	end
 
-text Route11_EastEntrance_1F_Text_BagIsFull {
-    "{PLAYER}{KUN}の　バッグ\n"
-    "いっぱい　みたい　だね$"
-}
 
-text Route11_EastEntrance_1F_Text_ManInLavenderRatesNames {
-    "Don't you think it's hard to think\n"
-    "up good names for POKéMON?\p"
-    "Especially if you've caught a\n"
-    "whole bunch?\p"
-    "In LAVENDER TOWN, there's a man\n"
-    "who rates POKéMON nicknames.\p"
-    "He can even help you rename your\n"
-    "POKéMON, too.$"
-}
+Route11_EastEntrance_1F_EventScript_BottomGuard::
+# 9 "data/maps/Route11_EastEntrance_1F_Frlg/scripts.pory"
+	msgbox Route11_EastEntrance_1F_Text_RockTunnelToReachLavender, MSGBOX_NPC
+	end
 
-text Route11_EastEntrance_1F_Text_RockTunnelToReachLavender {
-    "If you're aiming to reach LAVENDER\n"
-    "TOWN, take ROCK TUNNEL.\p"
-    "You can get to ROCK TUNNEL from\n"
-    "CERULEAN CITY.$"
-}
+
+Route11_EastEntrance_1F_Text_BagIsFull::
+# 13 "data/maps/Route11_EastEntrance_1F_Frlg/scripts.pory"
+	.string "{PLAYER}{KUN}の　バッグ\n"
+	.string "いっぱい　みたい　だね$"
+
+Route11_EastEntrance_1F_Text_ManInLavenderRatesNames::
+# 18 "data/maps/Route11_EastEntrance_1F_Frlg/scripts.pory"
+	.string "Don't you think it's hard to think\n"
+	.string "up good names for POKéMON?\p"
+	.string "Especially if you've caught a\n"
+	.string "whole bunch?\p"
+	.string "In LAVENDER TOWN, there's a man\n"
+	.string "who rates POKéMON nicknames.\p"
+	.string "He can even help you rename your\n"
+	.string "POKéMON, too.$"
+
+Route11_EastEntrance_1F_Text_RockTunnelToReachLavender::
+# 29 "data/maps/Route11_EastEntrance_1F_Frlg/scripts.pory"
+	.string "If you're aiming to reach LAVENDER\n"
+	.string "TOWN, take ROCK TUNNEL.\p"
+	.string "You can get to ROCK TUNNEL from\n"
+	.string "CERULEAN CITY.$"
+
+`

@@ -1,57 +1,100 @@
 Route16_House_Frlg_MapScripts::
 	.byte 0
 
+
 Route16_House_EventScript_Woman::
+# 4 "data/maps/Route16_House_Frlg/scripts.pory"
 	lock
+# 5 "data/maps/Route16_House_Frlg/scripts.pory"
 	faceplayer
-	goto_if_set FLAG_GOT_HM02, Route16_House_EventScript_AlreadyGotHM02
+# 6 "data/maps/Route16_House_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_HM02, Route16_House_EventScript_Woman_2
+Route16_House_EventScript_Woman_1:
+# 9 "data/maps/Route16_House_Frlg/scripts.pory"
 	msgbox Route16_House_Text_FoundMySecretRetreat
+# 10 "data/maps/Route16_House_Frlg/scripts.pory"
 	checkitemspace ITEM_HM02
-	goto_if_eq VAR_RESULT, FALSE, Route16_House_EventScript_NoRoomForHM02
+# 11 "data/maps/Route16_House_Frlg/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route16_House_EventScript_Woman_5
+Route16_House_EventScript_Woman_4:
+# 14 "data/maps/Route16_House_Frlg/scripts.pory"
 	giveitem_msg Route16_House_Text_ReceivedHM02FromGirl, ITEM_HM02
+# 15 "data/maps/Route16_House_Frlg/scripts.pory"
 	msgbox Route16_House_Text_ExplainHM02
+# 16 "data/maps/Route16_House_Frlg/scripts.pory"
 	setflag FLAG_GOT_HM02
+# 17 "data/maps/Route16_House_Frlg/scripts.pory"
 	release
 	end
+
+Route16_House_EventScript_Woman_2:
+# 7 "data/maps/Route16_House_Frlg/scripts.pory"
+	goto Route16_House_EventScript_AlreadyGotHM02
+	goto Route16_House_EventScript_Woman_1
+
+Route16_House_EventScript_Woman_5:
+# 12 "data/maps/Route16_House_Frlg/scripts.pory"
+	goto Route16_House_EventScript_NoRoomForHM02
+	goto Route16_House_EventScript_Woman_4
+
 
 Route16_House_EventScript_NoRoomForHM02::
+# 22 "data/maps/Route16_House_Frlg/scripts.pory"
 	msgbox Route16_House_Text_DontHaveAnyRoomForThis
+# 23 "data/maps/Route16_House_Frlg/scripts.pory"
 	release
 	end
+
 
 Route16_House_EventScript_AlreadyGotHM02::
+# 28 "data/maps/Route16_House_Frlg/scripts.pory"
 	msgbox Route16_House_Text_ExplainHM02
+# 29 "data/maps/Route16_House_Frlg/scripts.pory"
 	release
 	end
+
 
 Route16_House_EventScript_Fearow::
+# 34 "data/maps/Route16_House_Frlg/scripts.pory"
 	lock
+# 35 "data/maps/Route16_House_Frlg/scripts.pory"
 	faceplayer
+# 36 "data/maps/Route16_House_Frlg/scripts.pory"
 	waitse
+# 37 "data/maps/Route16_House_Frlg/scripts.pory"
 	playmoncry SPECIES_FEAROW, CRY_MODE_NORMAL
+# 38 "data/maps/Route16_House_Frlg/scripts.pory"
 	msgbox Route16_House_Text_Fearow
+# 39 "data/maps/Route16_House_Frlg/scripts.pory"
 	waitmoncry
+# 40 "data/maps/Route16_House_Frlg/scripts.pory"
 	release
 	end
 
+
 Route16_House_Text_FoundMySecretRetreat::
+# 44 "data/maps/Route16_House_Frlg/scripts.pory"
 	.string "Oh, dear.\n"
 	.string "You've found my secret retreat.\p"
 	.string "Please don't tell anyone I'm here.\n"
 	.string "I'll make it up to you with this!$"
 
 Route16_House_Text_ReceivedHM02FromGirl::
+# 51 "data/maps/Route16_House_Frlg/scripts.pory"
 	.string "{PLAYER} received HM02\n"
 	.string "from the girl.$"
 
 Route16_House_Text_ExplainHM02::
+# 56 "data/maps/Route16_House_Frlg/scripts.pory"
 	.string "HM02 is FLY.\n"
 	.string "It's a wonderfully convenient move.\p"
 	.string "Please, put it to good use.$"
 
 Route16_House_Text_DontHaveAnyRoomForThis::
+# 62 "data/maps/Route16_House_Frlg/scripts.pory"
 	.string "You don't have any room for this.$"
 
 Route16_House_Text_Fearow::
+# 66 "data/maps/Route16_House_Frlg/scripts.pory"
 	.string "FEAROW: Kyueen!$"
-

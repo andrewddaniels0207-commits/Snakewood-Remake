@@ -1,50 +1,59 @@
-mapscripts FuchsiaCity_SafariZone_Office_Frlg_MapScripts {}
+raw `
+FuchsiaCity_SafariZone_Office_Frlg_MapScripts::
+	.byte 0
 
-script FuchsiaCity_SafariZone_Office_EventScript_Worker1 {
-    msgbox(FuchsiaCity_SafariZone_Office_Text_NicknamedWardenSlowpoke, MSGBOX_NPC)
-    end
-}
 
-script FuchsiaCity_SafariZone_Office_EventScript_Worker2 {
-    msgbox(FuchsiaCity_SafariZone_Office_Text_WardenIsVeryKnowledgeable, MSGBOX_NPC)
-    end
-}
+FuchsiaCity_SafariZone_Office_EventScript_Worker1::
+# 4 "data/maps/FuchsiaCity_SafariZone_Office_Frlg/scripts.pory"
+	msgbox FuchsiaCity_SafariZone_Office_Text_NicknamedWardenSlowpoke, MSGBOX_NPC
+	end
 
-script FuchsiaCity_SafariZone_Office_EventScript_Worker3 {
-    msgbox(FuchsiaCity_SafariZone_Office_Text_CouldntUnderstandWarden, MSGBOX_NPC)
-    end
-}
 
-script FuchsiaCity_SafariZone_Office_EventScript_Worker4 {
-    msgbox(FuchsiaCity_SafariZone_Office_Text_PrizeInSafariZone, MSGBOX_NPC)
-    end
-}
+FuchsiaCity_SafariZone_Office_EventScript_Worker2::
+# 9 "data/maps/FuchsiaCity_SafariZone_Office_Frlg/scripts.pory"
+	msgbox FuchsiaCity_SafariZone_Office_Text_WardenIsVeryKnowledgeable, MSGBOX_NPC
+	end
 
-text FuchsiaCity_SafariZone_Office_Text_NicknamedWardenSlowpoke {
-    "We nicknamed the WARDEN\n"
-    "“SLOWPOKE.”\p"
-    "You know, he has that vacant look\n"
-    "like a SLOWPOKE.$"
-}
 
-text FuchsiaCity_SafariZone_Office_Text_WardenIsVeryKnowledgeable {
-    "WARDEN SLOWPOKE is very\n"
-    "knowledgeable about POKéMON.\p"
-    "He even has some fossils of rare,\n"
-    "extinct POKéMON.$"
-}
+FuchsiaCity_SafariZone_Office_EventScript_Worker3::
+# 14 "data/maps/FuchsiaCity_SafariZone_Office_Frlg/scripts.pory"
+	msgbox FuchsiaCity_SafariZone_Office_Text_CouldntUnderstandWarden, MSGBOX_NPC
+	end
 
-text FuchsiaCity_SafariZone_Office_Text_CouldntUnderstandWarden {
-    "WARDEN SLOWPOKE came in, but\n"
-    "I couldn't understand him.\p"
-    "I think he's got a speech problem!$"
-}
 
-text FuchsiaCity_SafariZone_Office_Text_PrizeInSafariZone {
-    "WARDEN SLOWPOKE is running a\n"
-    "promotion campaign right now.\p"
-    "Try to get to the farthest corner\n"
-    "of the SAFARI ZONE.\p"
-    "If you can make it, you'll win a\n"
-    "very convenient prize.$"
-}
+FuchsiaCity_SafariZone_Office_EventScript_Worker4::
+# 19 "data/maps/FuchsiaCity_SafariZone_Office_Frlg/scripts.pory"
+	msgbox FuchsiaCity_SafariZone_Office_Text_PrizeInSafariZone, MSGBOX_NPC
+	end
+
+
+FuchsiaCity_SafariZone_Office_Text_NicknamedWardenSlowpoke::
+# 23 "data/maps/FuchsiaCity_SafariZone_Office_Frlg/scripts.pory"
+	.string "We nicknamed the WARDEN\n"
+	.string "“SLOWPOKE.”\p"
+	.string "You know, he has that vacant look\n"
+	.string "like a SLOWPOKE.$"
+
+FuchsiaCity_SafariZone_Office_Text_WardenIsVeryKnowledgeable::
+# 30 "data/maps/FuchsiaCity_SafariZone_Office_Frlg/scripts.pory"
+	.string "WARDEN SLOWPOKE is very\n"
+	.string "knowledgeable about POKéMON.\p"
+	.string "He even has some fossils of rare,\n"
+	.string "extinct POKéMON.$"
+
+FuchsiaCity_SafariZone_Office_Text_CouldntUnderstandWarden::
+# 37 "data/maps/FuchsiaCity_SafariZone_Office_Frlg/scripts.pory"
+	.string "WARDEN SLOWPOKE came in, but\n"
+	.string "I couldn't understand him.\p"
+	.string "I think he's got a speech problem!$"
+
+FuchsiaCity_SafariZone_Office_Text_PrizeInSafariZone::
+# 43 "data/maps/FuchsiaCity_SafariZone_Office_Frlg/scripts.pory"
+	.string "WARDEN SLOWPOKE is running a\n"
+	.string "promotion campaign right now.\p"
+	.string "Try to get to the farthest corner\n"
+	.string "of the SAFARI ZONE.\p"
+	.string "If you can make it, you'll win a\n"
+	.string "very convenient prize.$"
+
+`

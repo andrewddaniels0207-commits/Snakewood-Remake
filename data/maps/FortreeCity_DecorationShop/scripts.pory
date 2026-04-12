@@ -1,56 +1,81 @@
-mapscripts FortreeCity_DecorationShop_MapScripts {}
+raw `
+FortreeCity_DecorationShop_MapScripts::
+	.byte 0
 
-script FortreeCity_DecorationShop_EventScript_PokefanM {
-    msgbox(FortreeCity_DecorationShop_Text_MerchandiseSentToPC, MSGBOX_NPC)
-    end
-}
 
-script FortreeCity_DecorationShop_EventScript_Girl {
-    msgbox(FortreeCity_DecorationShop_Text_BuyingDeskForDolls, MSGBOX_NPC)
-    end
-}
+FortreeCity_DecorationShop_EventScript_PokefanM::
+# 4 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	msgbox FortreeCity_DecorationShop_Text_MerchandiseSentToPC, MSGBOX_NPC
+	end
 
-script FortreeCity_DecorationShop_EventScript_ClerkDesks {
-    lock
-    faceplayer
-    message(gText_HowMayIServeYou)
-    waitmessage()
-    pokemartdecoration(FortreeCity_DecorationShop_PokemartDecor_Desks)
-    msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
-    release
-    end
-}
 
-script FortreeCity_DecorationShop_PokemartDecor_Desks {
-    pokemartlistend()
-}
+FortreeCity_DecorationShop_EventScript_Girl::
+# 9 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	msgbox FortreeCity_DecorationShop_Text_BuyingDeskForDolls, MSGBOX_NPC
+	end
 
-script FortreeCity_DecorationShop_EventScript_ClerkChairs {
-    lock
-    faceplayer
-    message(gText_HowMayIServeYou)
-    waitmessage()
-    pokemartdecoration(FortreeCity_DecorationShop_PokemartDecor_Chairs)
-    msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
-    release
-    end
-}
 
-script FortreeCity_DecorationShop_PokemartDecor_Chairs {
-    pokemartlistend()
-}
+FortreeCity_DecorationShop_EventScript_ClerkDesks::
+# 14 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	lock
+# 15 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	faceplayer
+# 16 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	message gText_HowMayIServeYou
+# 17 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	waitmessage
+# 18 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	pokemartdecoration FortreeCity_DecorationShop_PokemartDecor_Desks
+# 19 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+# 20 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	release
+	end
 
-text FortreeCity_DecorationShop_Text_MerchandiseSentToPC {
-    "Merchandise you buy here is sent to\n"
-    "your own PC.\p"
-    "That's fantastic! I wish they could\n"
-    "also deliver me home like that.$"
-}
 
-text FortreeCity_DecorationShop_Text_BuyingDeskForDolls {
-    "I'm buying a pretty desk and I'm\n"
-    "putting my cute DOLLS on it.\p"
-    "If I don't, when I decorate my\n"
-    "SECRET BASE, my DOLLS will get\l"
-    "dirty or poked with splinters.$"
-}
+FortreeCity_DecorationShop_PokemartDecor_Desks::
+# 25 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	pokemartlistend
+	return
+
+
+FortreeCity_DecorationShop_EventScript_ClerkChairs::
+# 29 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	lock
+# 30 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	faceplayer
+# 31 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	message gText_HowMayIServeYou
+# 32 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	waitmessage
+# 33 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	pokemartdecoration FortreeCity_DecorationShop_PokemartDecor_Chairs
+# 34 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+# 35 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	release
+	end
+
+
+FortreeCity_DecorationShop_PokemartDecor_Chairs::
+# 40 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	pokemartlistend
+	return
+
+
+FortreeCity_DecorationShop_Text_MerchandiseSentToPC::
+# 43 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	.string "Merchandise you buy here is sent to\n"
+	.string "your own PC.\p"
+	.string "That's fantastic! I wish they could\n"
+	.string "also deliver me home like that.$"
+
+FortreeCity_DecorationShop_Text_BuyingDeskForDolls::
+# 50 "data/maps/FortreeCity_DecorationShop/scripts.pory"
+	.string "I'm buying a pretty desk and I'm\n"
+	.string "putting my cute DOLLS on it.\p"
+	.string "If I don't, when I decorate my\n"
+	.string "SECRET BASE, my DOLLS will get\l"
+	.string "dirty or poked with splinters.$"
+
+`

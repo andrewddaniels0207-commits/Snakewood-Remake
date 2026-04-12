@@ -1,8 +1,11 @@
 Underwater_Route125_MapScripts::
+# 2 "data/maps/Underwater_Route125/scripts.pory"
 	map_script MAP_SCRIPT_ON_RESUME, Underwater_Route125_OnResume
 	.byte 0
 
-Underwater_Route125_OnResume:
+
+Underwater_Route125_OnResume::
+# 6 "data/maps/Underwater_Route125/scripts.pory"
 	call AbnormalWeather_Underwater_SetupEscapeWarp
 	end
 

@@ -1,294 +1,350 @@
-mapscripts SaffronCity_Frlg_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: SaffronCity_OnTransition
-}
+raw `
+SaffronCity_Frlg_MapScripts::
+# 2 "data/maps/SaffronCity_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, SaffronCity_OnTransition
+	.byte 0
 
-script SaffronCity_OnTransition {
-    setworldmapflag(FLAG_WORLD_MAP_SAFFRON_CITY)
-    if (!flag(FLAG_RESCUED_MR_FUJI)) {
-        call(SaffronCity_EventScript_MoveDoorGuardGrunt)
-    }
-    end
-}
 
-script SaffronCity_EventScript_MoveDoorGuardGrunt {
-    setobjectxyperm(LOCALID_SAFFRON_DOOR_GUARD_GRUNT, 33, 31)
-    return
-}
+SaffronCity_OnTransition::
+# 6 "data/maps/SaffronCity_Frlg/scripts.pory"
+	setworldmapflag FLAG_WORLD_MAP_SAFFRON_CITY
+# 7 "data/maps/SaffronCity_Frlg/scripts.pory"
+	goto_if_unset FLAG_RESCUED_MR_FUJI, SaffronCity_OnTransition_2
+SaffronCity_OnTransition_1:
+	end
 
-script SaffronCity_EventScript_RocketGrunt1 {
-    msgbox(SaffronCity_Text_WhatDoYouWantGetLost, MSGBOX_NPC)
-    end
-}
+SaffronCity_OnTransition_2:
+# 8 "data/maps/SaffronCity_Frlg/scripts.pory"
+	call SaffronCity_EventScript_MoveDoorGuardGrunt
+	goto SaffronCity_OnTransition_1
 
-script SaffronCity_EventScript_RocketGrunt2 {
-    msgbox(SaffronCity_Text_BossTakeTownForTeamRocket, MSGBOX_NPC)
-    end
-}
 
-script SaffronCity_EventScript_RocketGrunt3 {
-    msgbox(SaffronCity_Text_DontGetDefiantOrIllHurtYou, MSGBOX_NPC)
-    end
-}
+SaffronCity_EventScript_MoveDoorGuardGrunt::
+# 14 "data/maps/SaffronCity_Frlg/scripts.pory"
+	setobjectxyperm LOCALID_SAFFRON_DOOR_GUARD_GRUNT, 33, 31
+	return
 
-script SaffronCity_EventScript_RocketGrunt4 {
-    msgbox(SaffronCity_Text_SaffronBelongsToTeamRocket, MSGBOX_NPC)
-    end
-}
 
-script SaffronCity_EventScript_RocketGrunt5 {
-    msgbox(SaffronCity_Text_CriminalLifeMakesMeFeelAlive, MSGBOX_NPC)
-    end
-}
+SaffronCity_EventScript_RocketGrunt1::
+# 19 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_WhatDoYouWantGetLost, MSGBOX_NPC
+	end
 
-script SaffronCity_EventScript_RocketGrunt6 {
-    msgbox(SaffronCity_Text_WatchWhereYoureWalking, MSGBOX_NPC)
-    end
-}
 
-script SaffronCity_EventScript_RocketGrunt7 {
-    msgbox(SaffronCity_Text_WeCanExploitMonsAroundWorld, MSGBOX_NPC)
-    end
-}
+SaffronCity_EventScript_RocketGrunt2::
+# 24 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_BossTakeTownForTeamRocket, MSGBOX_NPC
+	end
 
-script SaffronCity_EventScript_DoorGuardGrunt {
-    lock
-    if (flag(FLAG_RESCUED_MR_FUJI)) {
-        goto(SaffronCity_EventScript_DoorGuardAsleep)
-    }
-    applymovement(LOCALID_SAFFRON_DOOR_GUARD_GRUNT, Common_Movement_FacePlayer)
-    waitmovement(0)
-    msgbox(SaffronCity_Text_ImASecurityGuard)
-    release
-    end
-}
 
-script SaffronCity_EventScript_DoorGuardAsleep {
-    textcolor(NPC_TEXT_COLOR_NEUTRAL)
-    msgbox(SaffronCity_Text_HesTakingASnooze)
-    release
-    end
-}
+SaffronCity_EventScript_RocketGrunt3::
+# 29 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_DontGetDefiantOrIllHurtYou, MSGBOX_NPC
+	end
 
-script SaffronCity_EventScript_WorkerM {
-    msgbox(SaffronCity_Text_YouBeatTeamRocket, MSGBOX_NPC)
-    end
-}
 
-script SaffronCity_EventScript_Youngster {
-    msgbox(SaffronCity_Text_SafeToGoOutAgain, MSGBOX_NPC)
-    end
-}
+SaffronCity_EventScript_RocketGrunt4::
+# 34 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_SaffronBelongsToTeamRocket, MSGBOX_NPC
+	end
 
-script SaffronCity_EventScript_Lass {
-    msgbox(SaffronCity_Text_PeopleComingBackToSaffron, MSGBOX_NPC)
-    end
-}
 
-script SaffronCity_EventScript_Boy {
-    msgbox(SaffronCity_Text_FlewHereOnPidgeot, MSGBOX_NPC)
-    end
-}
+SaffronCity_EventScript_RocketGrunt5::
+# 39 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_CriminalLifeMakesMeFeelAlive, MSGBOX_NPC
+	end
 
-script SaffronCity_EventScript_Pidgeot {
-    lock
-    faceplayer
-    waitse()
-    playmoncry(SPECIES_PIDGEOT, CRY_MODE_NORMAL)
-    msgbox(SaffronCity_Text_Pidgeot)
-    waitmoncry()
-    release
-    end
-}
 
-script SaffronCity_EventScript_Man {
-    msgbox(SaffronCity_Text_SawRocketBossEscaping, MSGBOX_NPC)
-    end
-}
+SaffronCity_EventScript_RocketGrunt6::
+# 44 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_WatchWhereYoureWalking, MSGBOX_NPC
+	end
 
-script SaffronCity_EventScript_CitySign {
-    msgbox(SaffronCity_Text_CitySign, MSGBOX_SIGN)
-    end
-}
 
-script SaffronCity_EventScript_DojoSign {
-    msgbox(SaffronCity_Text_FightingDojo, MSGBOX_SIGN)
-    end
-}
+SaffronCity_EventScript_RocketGrunt7::
+# 49 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_WeCanExploitMonsAroundWorld, MSGBOX_NPC
+	end
 
-script SaffronCity_EventScript_GymSign {
-    lockall
-    famechecker(FAMECHECKER_SABRINA, 0)
-    msgbox(SaffronCity_Text_GymSign)
-    releaseall
-    end
-}
 
-script SaffronCity_EventScript_TrainerTips1 {
-    msgbox(SaffronCity_Text_FullHealCuresStatus, MSGBOX_SIGN)
-    end
-}
+SaffronCity_EventScript_DoorGuardGrunt::
+# 54 "data/maps/SaffronCity_Frlg/scripts.pory"
+	lock
+# 55 "data/maps/SaffronCity_Frlg/scripts.pory"
+	goto_if_set FLAG_RESCUED_MR_FUJI, SaffronCity_EventScript_DoorGuardGrunt_2
+SaffronCity_EventScript_DoorGuardGrunt_1:
+# 58 "data/maps/SaffronCity_Frlg/scripts.pory"
+	applymovement LOCALID_SAFFRON_DOOR_GUARD_GRUNT, Common_Movement_FacePlayer
+# 59 "data/maps/SaffronCity_Frlg/scripts.pory"
+	waitmovement 0
+# 60 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_ImASecurityGuard
+# 61 "data/maps/SaffronCity_Frlg/scripts.pory"
+	release
+	end
 
-script SaffronCity_EventScript_TrainerTips2 {
-    msgbox(SaffronCity_Text_GreatBallImprovedCatchRate, MSGBOX_SIGN)
-    end
-}
+SaffronCity_EventScript_DoorGuardGrunt_2:
+# 56 "data/maps/SaffronCity_Frlg/scripts.pory"
+	goto SaffronCity_EventScript_DoorGuardAsleep
+	goto SaffronCity_EventScript_DoorGuardGrunt_1
 
-script SaffronCity_EventScript_SilphCoSign {
-    msgbox(SaffronCity_Text_SilphCoSign, MSGBOX_SIGN)
-    end
-}
 
-script SaffronCity_EventScript_MrPsychicsHouseSign {
-    msgbox(SaffronCity_Text_MrPsychicsHouse, MSGBOX_SIGN)
-    end
-}
+SaffronCity_EventScript_DoorGuardAsleep::
+# 66 "data/maps/SaffronCity_Frlg/scripts.pory"
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+# 67 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_HesTakingASnooze
+# 68 "data/maps/SaffronCity_Frlg/scripts.pory"
+	release
+	end
 
-script SaffronCity_EventScript_SilphProductSign {
-    msgbox(SaffronCity_Text_SilphsLatestProduct, MSGBOX_SIGN)
-    end
-}
 
-script SaffronCity_EventScript_TrainerFanClubSign {
-    msgbox(SaffronCity_Text_TrainerFanClubSign, MSGBOX_SIGN)
-    end
-}
+SaffronCity_EventScript_WorkerM::
+# 73 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_YouBeatTeamRocket, MSGBOX_NPC
+	end
 
-text SaffronCity_Text_WhatDoYouWantGetLost {
-    "What do you want?\n"
-    "Get lost!$"
-}
 
-text SaffronCity_Text_BossTakeTownForTeamRocket {
-    "BOSS said he'll take this town\n"
-    "in the name of TEAM ROCKET!$"
-}
+SaffronCity_EventScript_Youngster::
+# 78 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_SafeToGoOutAgain, MSGBOX_NPC
+	end
 
-text SaffronCity_Text_DontGetDefiantOrIllHurtYou {
-    "Don't get defiant!\n"
-    "Or I'll have to hurt you!$"
-}
 
-text SaffronCity_Text_SaffronBelongsToTeamRocket {
-    "SAFFRON belongs to TEAM ROCKET!$"
-}
+SaffronCity_EventScript_Lass::
+# 83 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_PeopleComingBackToSaffron, MSGBOX_NPC
+	end
 
-text SaffronCity_Text_CriminalLifeMakesMeFeelAlive {
-    "My life as a criminal makes me feel\n"
-    "so alive!$"
-}
 
-text SaffronCity_Text_WatchWhereYoureWalking {
-    "Ow!\n"
-    "Watch where you're walking!$"
-}
+SaffronCity_EventScript_Boy::
+# 88 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_FlewHereOnPidgeot, MSGBOX_NPC
+	end
 
-text SaffronCity_Text_WeCanExploitMonsAroundWorld {
-    "With SILPH under control, we can\n"
-    "exploit POKéMON around the world!\p"
-    "We'll get stinking rich, yeahah!$"
-}
 
-text SaffronCity_Text_YouBeatTeamRocket {
-    "You beat TEAM ROCKET all alone?\n"
-    "That's amazing!$"
-}
+SaffronCity_EventScript_Pidgeot::
+# 93 "data/maps/SaffronCity_Frlg/scripts.pory"
+	lock
+# 94 "data/maps/SaffronCity_Frlg/scripts.pory"
+	faceplayer
+# 95 "data/maps/SaffronCity_Frlg/scripts.pory"
+	waitse
+# 96 "data/maps/SaffronCity_Frlg/scripts.pory"
+	playmoncry SPECIES_PIDGEOT, CRY_MODE_NORMAL
+# 97 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_Pidgeot
+# 98 "data/maps/SaffronCity_Frlg/scripts.pory"
+	waitmoncry
+# 99 "data/maps/SaffronCity_Frlg/scripts.pory"
+	release
+	end
 
-text SaffronCity_Text_SafeToGoOutAgain {
-    "Yeah! TEAM ROCKET is gone!\n"
-    "It's safe to go out again!$"
-}
 
-text SaffronCity_Text_PeopleComingBackToSaffron {
-    "People fled from here in droves\n"
-    "when those ROCKETS came.\p"
-    "They should be flocking back to\n"
-    "SAFFRON now.$"
-}
+SaffronCity_EventScript_Man::
+# 104 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_SawRocketBossEscaping, MSGBOX_NPC
+	end
 
-text SaffronCity_Text_FlewHereOnPidgeot {
-    "I flew here on my PIDGEOT when\n"
-    "I read about SILPH.\p"
-    "It's already over?\n"
-    "I missed the media action…$"
-}
 
-text SaffronCity_Text_Pidgeot {
-    "PIDGEOT: Bi bibii!$"
-}
+SaffronCity_EventScript_CitySign::
+# 109 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_CitySign, MSGBOX_SIGN
+	end
 
-text SaffronCity_Text_SawRocketBossEscaping {
-    "I saw the ROCKET BOSS escaping\n"
-    "SILPH's building.$"
-}
 
-text SaffronCity_Text_ImASecurityGuard {
-    "I'm a security guard.\p"
-    "Suspicious kids I don't allow in!$"
-}
+SaffronCity_EventScript_DojoSign::
+# 114 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_FightingDojo, MSGBOX_SIGN
+	end
 
-text SaffronCity_Text_HesTakingASnooze {
-    "…\n"
-    "Snore…\p"
-    "Hah! He's taking a snooze!$"
-}
 
-text SaffronCity_Text_CitySign {
-    "SAFFRON CITY\n"
-    "Shining, Golden Land of Commerce$"
-}
+SaffronCity_EventScript_GymSign::
+# 119 "data/maps/SaffronCity_Frlg/scripts.pory"
+	lockall
+# 120 "data/maps/SaffronCity_Frlg/scripts.pory"
+	famechecker FAMECHECKER_SABRINA, 0
+# 121 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_GymSign
+# 122 "data/maps/SaffronCity_Frlg/scripts.pory"
+	releaseall
+	end
 
-text SaffronCity_Text_FightingDojo {
-    "FIGHTING DOJO$"
-}
 
-text SaffronCity_Text_GymSign {
-    "SAFFRON CITY POKéMON GYM\n"
-    "LEADER: SABRINA\l"
-    "The Master of PSYCHIC POKéMON!$"
-}
+SaffronCity_EventScript_TrainerTips1::
+# 127 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_FullHealCuresStatus, MSGBOX_SIGN
+	end
 
-text SaffronCity_Text_FullHealCuresStatus {
-    "TRAINER TIPS\p"
-    "FULL HEAL cures all ailments like\n"
-    "burns, paralysis, poisoning,\l"
-    "freezing, and sleep.\p"
-    "It costs a bit more, but it's more\n"
-    "convenient than buying other items.$"
-}
 
-text SaffronCity_Text_GreatBallImprovedCatchRate {
-    "TRAINER TIPS\p"
-    "The new GREAT BALL offers improved\n"
-    "catching rates.\p"
-    "Try it on those hard-to-catch\n"
-    "POKéMON.$"
-}
+SaffronCity_EventScript_TrainerTips2::
+# 132 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_GreatBallImprovedCatchRate, MSGBOX_SIGN
+	end
 
-text SaffronCity_Text_SilphCoSign {
-    "SILPH CO. OFFICE BUILDING$"
-}
 
-text SaffronCity_Text_MrPsychicsHouse {
-    "MR. PSYCHIC'S HOUSE$"
-}
+SaffronCity_EventScript_SilphCoSign::
+# 137 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_SilphCoSign, MSGBOX_SIGN
+	end
 
-text SaffronCity_Text_SilphsLatestProduct {
-    "SILPH's latest product!\n"
-    "Release to be determined…$"
-}
 
-text SaffronCity_Text_TrainerFanClubSign {
-    "POKéMON TRAINER FAN CLUB\p"
-    "Many TRAINERS have scribbled their\n"
-    "names on this sign.$"
-}
+SaffronCity_EventScript_MrPsychicsHouseSign::
+# 142 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_MrPsychicsHouse, MSGBOX_SIGN
+	end
 
-text SaffronCity_Text_HowCanClubNotRecognizeLance {
-    "This FAN CLUB…\n"
-    "No one here has a clue!\p"
-    "How could they not recognize\n"
-    "the brilliance that is LANCE?\p"
-    "He stands for justice!\n"
-    "He's cool, and yet passionate!\l"
-    "He's the greatest, LANCE!$"
-}
+
+SaffronCity_EventScript_SilphProductSign::
+# 147 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_SilphsLatestProduct, MSGBOX_SIGN
+	end
+
+
+SaffronCity_EventScript_TrainerFanClubSign::
+# 152 "data/maps/SaffronCity_Frlg/scripts.pory"
+	msgbox SaffronCity_Text_TrainerFanClubSign, MSGBOX_SIGN
+	end
+
+
+SaffronCity_Text_WhatDoYouWantGetLost::
+# 156 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "What do you want?\n"
+	.string "Get lost!$"
+
+SaffronCity_Text_BossTakeTownForTeamRocket::
+# 161 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "BOSS said he'll take this town\n"
+	.string "in the name of TEAM ROCKET!$"
+
+SaffronCity_Text_DontGetDefiantOrIllHurtYou::
+# 166 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "Don't get defiant!\n"
+	.string "Or I'll have to hurt you!$"
+
+SaffronCity_Text_SaffronBelongsToTeamRocket::
+# 171 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "SAFFRON belongs to TEAM ROCKET!$"
+
+SaffronCity_Text_CriminalLifeMakesMeFeelAlive::
+# 175 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "My life as a criminal makes me feel\n"
+	.string "so alive!$"
+
+SaffronCity_Text_WatchWhereYoureWalking::
+# 180 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "Ow!\n"
+	.string "Watch where you're walking!$"
+
+SaffronCity_Text_WeCanExploitMonsAroundWorld::
+# 185 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "With SILPH under control, we can\n"
+	.string "exploit POKéMON around the world!\p"
+	.string "We'll get stinking rich, yeahah!$"
+
+SaffronCity_Text_YouBeatTeamRocket::
+# 191 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "You beat TEAM ROCKET all alone?\n"
+	.string "That's amazing!$"
+
+SaffronCity_Text_SafeToGoOutAgain::
+# 196 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "Yeah! TEAM ROCKET is gone!\n"
+	.string "It's safe to go out again!$"
+
+SaffronCity_Text_PeopleComingBackToSaffron::
+# 201 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "People fled from here in droves\n"
+	.string "when those ROCKETS came.\p"
+	.string "They should be flocking back to\n"
+	.string "SAFFRON now.$"
+
+SaffronCity_Text_FlewHereOnPidgeot::
+# 208 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "I flew here on my PIDGEOT when\n"
+	.string "I read about SILPH.\p"
+	.string "It's already over?\n"
+	.string "I missed the media action…$"
+
+SaffronCity_Text_Pidgeot::
+# 215 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "PIDGEOT: Bi bibii!$"
+
+SaffronCity_Text_SawRocketBossEscaping::
+# 219 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "I saw the ROCKET BOSS escaping\n"
+	.string "SILPH's building.$"
+
+SaffronCity_Text_ImASecurityGuard::
+# 224 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "I'm a security guard.\p"
+	.string "Suspicious kids I don't allow in!$"
+
+SaffronCity_Text_HesTakingASnooze::
+# 229 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "…\n"
+	.string "Snore…\p"
+	.string "Hah! He's taking a snooze!$"
+
+SaffronCity_Text_CitySign::
+# 235 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "SAFFRON CITY\n"
+	.string "Shining, Golden Land of Commerce$"
+
+SaffronCity_Text_FightingDojo::
+# 240 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "FIGHTING DOJO$"
+
+SaffronCity_Text_GymSign::
+# 244 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "SAFFRON CITY POKéMON GYM\n"
+	.string "LEADER: SABRINA\l"
+	.string "The Master of PSYCHIC POKéMON!$"
+
+SaffronCity_Text_FullHealCuresStatus::
+# 250 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "TRAINER TIPS\p"
+	.string "FULL HEAL cures all ailments like\n"
+	.string "burns, paralysis, poisoning,\l"
+	.string "freezing, and sleep.\p"
+	.string "It costs a bit more, but it's more\n"
+	.string "convenient than buying other items.$"
+
+SaffronCity_Text_GreatBallImprovedCatchRate::
+# 259 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "TRAINER TIPS\p"
+	.string "The new GREAT BALL offers improved\n"
+	.string "catching rates.\p"
+	.string "Try it on those hard-to-catch\n"
+	.string "POKéMON.$"
+
+SaffronCity_Text_SilphCoSign::
+# 267 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "SILPH CO. OFFICE BUILDING$"
+
+SaffronCity_Text_MrPsychicsHouse::
+# 271 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "MR. PSYCHIC'S HOUSE$"
+
+SaffronCity_Text_SilphsLatestProduct::
+# 275 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "SILPH's latest product!\n"
+	.string "Release to be determined…$"
+
+SaffronCity_Text_TrainerFanClubSign::
+# 280 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "POKéMON TRAINER FAN CLUB\p"
+	.string "Many TRAINERS have scribbled their\n"
+	.string "names on this sign.$"
+
+SaffronCity_Text_HowCanClubNotRecognizeLance::
+# 286 "data/maps/SaffronCity_Frlg/scripts.pory"
+	.string "This FAN CLUB…\n"
+	.string "No one here has a clue!\p"
+	.string "How could they not recognize\n"
+	.string "the brilliance that is LANCE?\p"
+	.string "He stands for justice!\n"
+	.string "He's cool, and yet passionate!\l"
+	.string "He's the greatest, LANCE!$"
+
+`

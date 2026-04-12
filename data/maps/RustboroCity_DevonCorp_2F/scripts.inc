@@ -1,284 +1,689 @@
 RustboroCity_DevonCorp_2F_MapScripts::
+# 2 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_DevonCorp_2F_OnTransition
 	.byte 0
 
-RustboroCity_DevonCorp_2F_OnTransition:
-	call_if_eq VAR_FOSSIL_RESURRECTION_STATE, 1, RustboroCity_DevonCorp_2F_EventScript_SetFossilReady
+
+RustboroCity_DevonCorp_2F_OnTransition::
+# 6 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_FOSSIL_RESURRECTION_STATE, 1
+	goto_if_eq RustboroCity_DevonCorp_2F_OnTransition_2
+RustboroCity_DevonCorp_2F_OnTransition_1:
 	end
 
+RustboroCity_DevonCorp_2F_OnTransition_2:
+# 7 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	call RustboroCity_DevonCorp_2F_EventScript_SetFossilReady
+	goto RustboroCity_DevonCorp_2F_OnTransition_1
+
+
 RustboroCity_DevonCorp_2F_EventScript_SetFossilReady::
+# 13 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	setvar VAR_FOSSIL_RESURRECTION_STATE, 2
 	return
 
+
 RustboroCity_DevonCorp_2F_EventScript_TalkToPokemonScientist::
+# 18 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	lock
+# 19 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	faceplayer
-	call_if_eq VAR_FOSSIL_RESURRECTION_STATE, 1, RustboroCity_DevonCorp_2F_EventScript_SetFossilReady
+# 20 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_FOSSIL_RESURRECTION_STATE, 1
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_TalkToPokemonScientist_2
+RustboroCity_DevonCorp_2F_EventScript_TalkToPokemonScientist_1:
+# 23 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox RustboroCity_DevonCorp_2F_Text_DeviceForTalkingToPokemon, MSGBOX_DEFAULT
+# 24 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	release
 	end
+
+RustboroCity_DevonCorp_2F_EventScript_TalkToPokemonScientist_2:
+# 21 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	call RustboroCity_DevonCorp_2F_EventScript_SetFossilReady
+	goto RustboroCity_DevonCorp_2F_EventScript_TalkToPokemonScientist_1
+
 
 RustboroCity_DevonCorp_2F_EventScript_BallScientist::
+# 29 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	lock
+# 30 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	faceplayer
-	call_if_eq VAR_FOSSIL_RESURRECTION_STATE, 1, RustboroCity_DevonCorp_2F_EventScript_SetFossilReady
-	goto_if_set FLAG_MET_DEVON_EMPLOYEE, RustboroCity_DevonCorp_2F_EventScript_DevelopedBalls
+# 31 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_FOSSIL_RESURRECTION_STATE, 1
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_BallScientist_2
+RustboroCity_DevonCorp_2F_EventScript_BallScientist_1:
+# 34 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto_if_set FLAG_MET_DEVON_EMPLOYEE, RustboroCity_DevonCorp_2F_EventScript_BallScientist_5
+RustboroCity_DevonCorp_2F_EventScript_BallScientist_4:
+# 37 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox RustboroCity_DevonCorp_2F_Text_DevelopingNewBalls, MSGBOX_DEFAULT
+# 38 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	release
 	end
+
+RustboroCity_DevonCorp_2F_EventScript_BallScientist_2:
+# 32 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	call RustboroCity_DevonCorp_2F_EventScript_SetFossilReady
+	goto RustboroCity_DevonCorp_2F_EventScript_BallScientist_1
+
+RustboroCity_DevonCorp_2F_EventScript_BallScientist_5:
+# 35 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_DevelopedBalls
+	goto RustboroCity_DevonCorp_2F_EventScript_BallScientist_4
+
 
 RustboroCity_DevonCorp_2F_EventScript_DevelopedBalls::
+# 43 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox RustboroCity_DevonCorp_2F_Text_WeFinallyMadeNewBalls, MSGBOX_DEFAULT
+# 44 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	release
 	end
+
 
 RustboroCity_DevonCorp_2F_EventScript_PokenavScientist::
+# 49 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	lock
+# 50 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	faceplayer
-	call_if_eq VAR_FOSSIL_RESURRECTION_STATE, 1, RustboroCity_DevonCorp_2F_EventScript_SetFossilReady
-	goto_if_set FLAG_RECEIVED_POKENAV, RustboroCity_DevonCorp_2F_EventScript_HasPokenav
+# 51 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_FOSSIL_RESURRECTION_STATE, 1
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_PokenavScientist_2
+RustboroCity_DevonCorp_2F_EventScript_PokenavScientist_1:
+# 54 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto_if_set FLAG_RECEIVED_POKENAV, RustboroCity_DevonCorp_2F_EventScript_PokenavScientist_5
+RustboroCity_DevonCorp_2F_EventScript_PokenavScientist_4:
+# 57 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox RustboroCity_DevonCorp_2F_Text_IMadePokenav, MSGBOX_DEFAULT
+# 58 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	release
 	end
+
+RustboroCity_DevonCorp_2F_EventScript_PokenavScientist_2:
+# 52 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	call RustboroCity_DevonCorp_2F_EventScript_SetFossilReady
+	goto RustboroCity_DevonCorp_2F_EventScript_PokenavScientist_1
+
+RustboroCity_DevonCorp_2F_EventScript_PokenavScientist_5:
+# 55 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_HasPokenav
+	goto RustboroCity_DevonCorp_2F_EventScript_PokenavScientist_4
+
 
 RustboroCity_DevonCorp_2F_EventScript_HasPokenav::
+# 63 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox RustboroCity_DevonCorp_2F_Text_WowThatsAPokenav, MSGBOX_DEFAULT
+# 64 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	release
 	end
+
 
 RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist::
+# 69 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	lock
+# 70 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	faceplayer
-	call_if_eq VAR_FOSSIL_RESURRECTION_STATE, 1, RustboroCity_DevonCorp_2F_EventScript_SetFossilReady
+# 71 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_FOSSIL_RESURRECTION_STATE, 1
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist_2
+RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist_1:
+# 74 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox RustboroCity_DevonCorp_2F_Text_DeviceToVisualizePokemonDreams, MSGBOX_DEFAULT
+# 75 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	release
 	end
+
+RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist_2:
+# 72 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	call RustboroCity_DevonCorp_2F_EventScript_SetFossilReady
+	goto RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist_1
+
 
 RustboroCity_DevonCorp_2F_EventScript_FossilScientist::
+# 80 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	lock
+# 81 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	faceplayer
-	goto_if_eq VAR_FOSSIL_RESURRECTION_STATE, 2, RustboroCity_DevonCorp_2F_EventScript_FossilMonReady
-	goto_if_eq VAR_FOSSIL_RESURRECTION_STATE, 1, RustboroCity_DevonCorp_2F_EventScript_StillRegenerating
+# 82 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_FOSSIL_RESURRECTION_STATE, 2
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_FossilScientist_2
+RustboroCity_DevonCorp_2F_EventScript_FossilScientist_1:
+# 85 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_FOSSIL_RESURRECTION_STATE, 1
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_FossilScientist_5
+RustboroCity_DevonCorp_2F_EventScript_FossilScientist_4:
+# 88 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox RustboroCity_DevonCorp_2F_Text_DevelopDeviceToResurrectFossils, MSGBOX_DEFAULT
+# 89 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	checkitem ITEM_ROOT_FOSSIL
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil
+# 90 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_FossilScientist_8
+RustboroCity_DevonCorp_2F_EventScript_FossilScientist_7:
+# 93 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	checkitem ITEM_CLAW_FOSSIL
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil
+# 94 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_FossilScientist_11
+RustboroCity_DevonCorp_2F_EventScript_FossilScientist_10:
+# 97 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	release
 	end
 
-@ This whole section has needless duplication and could be condensed considerably
+RustboroCity_DevonCorp_2F_EventScript_FossilScientist_2:
+# 83 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_FossilMonReady
+	goto RustboroCity_DevonCorp_2F_EventScript_FossilScientist_1
+
+RustboroCity_DevonCorp_2F_EventScript_FossilScientist_5:
+# 86 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_StillRegenerating
+	goto RustboroCity_DevonCorp_2F_EventScript_FossilScientist_4
+
+RustboroCity_DevonCorp_2F_EventScript_FossilScientist_8:
+# 91 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil
+	goto RustboroCity_DevonCorp_2F_EventScript_FossilScientist_7
+
+RustboroCity_DevonCorp_2F_EventScript_FossilScientist_11:
+# 95 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil
+	goto RustboroCity_DevonCorp_2F_EventScript_FossilScientist_10
+
+
 RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil::
+# 102 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	closemessage
+# 103 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	playse SE_PIN
+# 104 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	applymovement LOCALID_FOSSIL_SCIENTIST, Common_Movement_ExclamationMark
+# 105 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	waitmovement 0
+# 106 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	applymovement LOCALID_FOSSIL_SCIENTIST, Common_Movement_Delay48
+# 107 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	waitmovement 0
+# 108 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox RustboroCity_DevonCorp_2F_Text_WantToBringFossilBackToLife, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, RustboroCity_DevonCorp_2F_EventScript_DeclineGiveFossil
+# 109 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil_2
+RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil_1:
+# 112 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	checkitem ITEM_CLAW_FOSSIL
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_ChooseFossil
+# 113 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil_5
+RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil_4:
+# 116 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	goto RustboroCity_DevonCorp_2F_EventScript_GiveRootFossil
 	end
 
+RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil_2:
+# 110 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_DeclineGiveFossil
+	goto RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil_1
+
+RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil_5:
+# 114 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_ChooseFossil
+	goto RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil_4
+
+
 RustboroCity_DevonCorp_2F_EventScript_GiveRootFossil::
+# 121 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	bufferitemname STR_VAR_1, ITEM_ROOT_FOSSIL
+# 122 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox RustboroCity_DevonCorp_2F_Text_HandedFossilToResearcher, MSGBOX_DEFAULT
+# 123 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	removeitem ITEM_ROOT_FOSSIL
+# 124 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	setvar VAR_FOSSIL_RESURRECTION_STATE, 1
+# 125 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	setvar VAR_WHICH_FOSSIL_REVIVED, 1
+# 126 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	release
 	end
 
+
 RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil::
+# 131 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	closemessage
+# 132 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	playse SE_PIN
+# 133 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	applymovement LOCALID_FOSSIL_SCIENTIST, Common_Movement_ExclamationMark
+# 134 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	waitmovement 0
+# 135 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	applymovement LOCALID_FOSSIL_SCIENTIST, Common_Movement_Delay48
+# 136 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	waitmovement 0
+# 137 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox RustboroCity_DevonCorp_2F_Text_WantToBringFossilBackToLife, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, RustboroCity_DevonCorp_2F_EventScript_DeclineGiveFossil
+# 138 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil_2
+RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil_1:
+# 141 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	checkitem ITEM_ROOT_FOSSIL
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_ChooseFossil
+# 142 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil_5
+RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil_4:
+# 145 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	goto RustboroCity_DevonCorp_2F_EventScript_GiveClawFossil
 	end
 
+RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil_2:
+# 139 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_DeclineGiveFossil
+	goto RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil_1
+
+RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil_5:
+# 143 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_ChooseFossil
+	goto RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil_4
+
+
 RustboroCity_DevonCorp_2F_EventScript_GiveClawFossil::
+# 150 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	bufferitemname STR_VAR_1, ITEM_CLAW_FOSSIL
+# 151 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox RustboroCity_DevonCorp_2F_Text_HandedFossilToResearcher, MSGBOX_DEFAULT
+# 152 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	removeitem ITEM_CLAW_FOSSIL
+# 153 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	setvar VAR_FOSSIL_RESURRECTION_STATE, 1
+# 154 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	setvar VAR_WHICH_FOSSIL_REVIVED, 2
+# 155 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	release
 	end
+
 
 RustboroCity_DevonCorp_2F_EventScript_DeclineGiveFossil::
+# 160 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox RustboroCity_DevonCorp_2F_Text_OhIsThatSo, MSGBOX_DEFAULT
+# 161 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	release
 	end
+
 
 RustboroCity_DevonCorp_2F_EventScript_StillRegenerating::
+# 166 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox RustboroCity_DevonCorp_2F_Text_FossilRegeneratorTakesTime, MSGBOX_DEFAULT
+# 167 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	release
 	end
 
+
 RustboroCity_DevonCorp_2F_EventScript_FossilMonReady::
-	goto_if_eq VAR_WHICH_FOSSIL_REVIVED, 1, RustboroCity_DevonCorp_2F_EventScript_LileepReady
-	goto_if_eq VAR_WHICH_FOSSIL_REVIVED, 2, RustboroCity_DevonCorp_2F_EventScript_AnorithReady
+# 172 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_WHICH_FOSSIL_REVIVED, 1
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_FossilMonReady_2
+RustboroCity_DevonCorp_2F_EventScript_FossilMonReady_1:
+# 175 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_WHICH_FOSSIL_REVIVED, 2
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_FossilMonReady_5
+RustboroCity_DevonCorp_2F_EventScript_FossilMonReady_4:
 	end
 
+RustboroCity_DevonCorp_2F_EventScript_FossilMonReady_2:
+# 173 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_LileepReady
+	goto RustboroCity_DevonCorp_2F_EventScript_FossilMonReady_1
+
+RustboroCity_DevonCorp_2F_EventScript_FossilMonReady_5:
+# 176 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_AnorithReady
+	goto RustboroCity_DevonCorp_2F_EventScript_FossilMonReady_4
+
+
 RustboroCity_DevonCorp_2F_EventScript_LileepReady::
+# 182 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	bufferspeciesname STR_VAR_2, SPECIES_LILEEP
+# 183 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox RustboroCity_DevonCorp_2F_Text_FossilizedMonBroughtBackToLife, MSGBOX_DEFAULT
+# 184 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	goto RustboroCity_DevonCorp_2F_EventScript_ReceiveLileep
 	end
 
+
 RustboroCity_DevonCorp_2F_EventScript_AnorithReady::
+# 189 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	bufferspeciesname STR_VAR_2, SPECIES_ANORITH
+# 190 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox RustboroCity_DevonCorp_2F_Text_FossilizedMonBroughtBackToLife, MSGBOX_DEFAULT
+# 191 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	goto RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorith
 	end
 
+
 RustboroCity_DevonCorp_2F_EventScript_ReceiveLileep::
+# 196 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_LILEEP
+# 197 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	givemon SPECIES_LILEEP, 20
-	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepParty
-	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepPC
+# 198 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_RESULT, MON_GIVEN_TO_PARTY
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_ReceiveLileep_2
+RustboroCity_DevonCorp_2F_EventScript_ReceiveLileep_1:
+# 201 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_RESULT, MON_GIVEN_TO_PC
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_ReceiveLileep_5
+RustboroCity_DevonCorp_2F_EventScript_ReceiveLileep_4:
+# 204 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	goto Common_EventScript_NoMoreRoomForPokemon
 	end
 
+RustboroCity_DevonCorp_2F_EventScript_ReceiveLileep_2:
+# 199 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepParty
+	goto RustboroCity_DevonCorp_2F_EventScript_ReceiveLileep_1
+
+RustboroCity_DevonCorp_2F_EventScript_ReceiveLileep_5:
+# 202 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepPC
+	goto RustboroCity_DevonCorp_2F_EventScript_ReceiveLileep_4
+
+
 RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepParty::
+# 209 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	call RustboroCity_DevonCorp_2F_EventScript_ReceivedLileepFanfare
+# 210 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, RustboroCity_DevonCorp_2F_EventScript_FinishReceivingLileep
+# 211 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepParty_2
+RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepParty_1:
+# 214 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	call Common_EventScript_GetGiftMonPartySlot
+# 215 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	call Common_EventScript_NameReceivedPartyMon
+# 216 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	goto RustboroCity_DevonCorp_2F_EventScript_FinishReceivingLileep
 	end
 
+RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepParty_2:
+# 212 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_FinishReceivingLileep
+	goto RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepParty_1
+
+
 RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepPC::
+# 221 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	call RustboroCity_DevonCorp_2F_EventScript_ReceivedLileepFanfare
+# 222 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, RustboroCity_DevonCorp_2F_EventScript_TransferLileepToPC
+# 223 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepPC_2
+RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepPC_1:
+# 226 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	call Common_EventScript_NameReceivedBoxMon
+# 227 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	goto RustboroCity_DevonCorp_2F_EventScript_TransferLileepToPC
 	end
 
+RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepPC_2:
+# 224 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_TransferLileepToPC
+	goto RustboroCity_DevonCorp_2F_EventScript_ReceiveLileepPC_1
+
+
 RustboroCity_DevonCorp_2F_EventScript_TransferLileepToPC::
+# 232 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	call Common_EventScript_TransferredToPC
+# 233 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	goto RustboroCity_DevonCorp_2F_EventScript_FinishReceivingLileep
 	end
 
+
 RustboroCity_DevonCorp_2F_EventScript_ReceivedLileepFanfare::
+# 238 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	bufferspeciesname STR_VAR_2, SPECIES_LILEEP
+# 239 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	playfanfare MUS_OBTAIN_ITEM
+# 240 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	message RustboroCity_DevonCorp_2F_Text_ReceivedMonFromResearcher
+# 241 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	waitmessage
+# 242 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	waitfanfare
+# 243 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	bufferspeciesname STR_VAR_1, SPECIES_LILEEP
 	return
 
+
 RustboroCity_DevonCorp_2F_EventScript_FinishReceivingLileep::
+# 248 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	setvar VAR_FOSSIL_RESURRECTION_STATE, 0
+# 249 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	setflag FLAG_RECEIVED_REVIVED_FOSSIL_MON
+# 250 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	release
 	end
 
+
 RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorith::
+# 255 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_ANORITH
+# 256 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	givemon SPECIES_ANORITH, 20
-	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithParty
-	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithPC
+# 257 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_RESULT, MON_GIVEN_TO_PARTY
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorith_2
+RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorith_1:
+# 260 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_RESULT, MON_GIVEN_TO_PC
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorith_5
+RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorith_4:
+# 263 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	goto Common_EventScript_NoMoreRoomForPokemon
 	end
 
+RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorith_2:
+# 258 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithParty
+	goto RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorith_1
+
+RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorith_5:
+# 261 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithPC
+	goto RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorith_4
+
+
 RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithParty::
+# 268 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	call RustboroCity_DevonCorp_2F_EventScript_ReceivedAnorithFanfare
+# 269 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, RustboroCity_DevonCorp_2F_EventScript_FinishReceivingAnorith
+# 270 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithParty_2
+RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithParty_1:
+# 273 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	call Common_EventScript_GetGiftMonPartySlot
+# 274 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	call Common_EventScript_NameReceivedPartyMon
+# 275 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	goto RustboroCity_DevonCorp_2F_EventScript_FinishReceivingAnorith
 	end
 
+RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithParty_2:
+# 271 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_FinishReceivingAnorith
+	goto RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithParty_1
+
+
 RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithPC::
+# 280 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	call RustboroCity_DevonCorp_2F_EventScript_ReceivedAnorithFanfare
+# 281 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, RustboroCity_DevonCorp_2F_EventScript_TransferAnorithToPC
+# 282 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithPC_2
+RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithPC_1:
+# 285 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	call Common_EventScript_NameReceivedBoxMon
+# 286 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	goto RustboroCity_DevonCorp_2F_EventScript_TransferAnorithToPC
 	end
 
+RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithPC_2:
+# 283 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_TransferAnorithToPC
+	goto RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorithPC_1
+
+
 RustboroCity_DevonCorp_2F_EventScript_TransferAnorithToPC::
+# 291 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	call Common_EventScript_TransferredToPC
+# 292 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	goto RustboroCity_DevonCorp_2F_EventScript_FinishReceivingAnorith
 	end
 
+
 RustboroCity_DevonCorp_2F_EventScript_ReceivedAnorithFanfare::
+# 297 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	bufferspeciesname STR_VAR_2, SPECIES_ANORITH
+# 298 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	playfanfare MUS_OBTAIN_ITEM
+# 299 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	message RustboroCity_DevonCorp_2F_Text_ReceivedMonFromResearcher
+# 300 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	waitmessage
+# 301 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	waitfanfare
+# 302 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	bufferspeciesname STR_VAR_1, SPECIES_ANORITH
 	return
 
+
 RustboroCity_DevonCorp_2F_EventScript_FinishReceivingAnorith::
+# 307 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	setvar VAR_FOSSIL_RESURRECTION_STATE, 0
+# 308 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	setflag FLAG_RECEIVED_REVIVED_FOSSIL_MON
+# 309 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	release
 	end
 
+
 RustboroCity_DevonCorp_2F_EventScript_ChooseFossil::
+# 314 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	message RustboroCity_DevonCorp_2F_Text_TwoFossilsPickOne
+# 315 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	waitmessage
+# 316 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	multichoice 17, 6, MULTI_FOSSIL, FALSE
+# 317 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	switch VAR_RESULT
-	case 0, RustboroCity_DevonCorp_2F_EventScript_ChooseClawFossil
-	case 1, RustboroCity_DevonCorp_2F_EventScript_ChooseRootFossil
-	case 2, RustboroCity_DevonCorp_2F_EventScript_CancelFossilSelect
-	case MULTI_B_PRESSED, RustboroCity_DevonCorp_2F_EventScript_CancelFossilSelect
+# 318 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	case 0, RustboroCity_DevonCorp_2F_EventScript_ChooseFossil_3
+# 320 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	case 1, RustboroCity_DevonCorp_2F_EventScript_ChooseFossil_4
+# 322 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	case 2, RustboroCity_DevonCorp_2F_EventScript_ChooseFossil_5
+# 324 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	case MULTI_B_PRESSED, RustboroCity_DevonCorp_2F_EventScript_ChooseFossil_6
+RustboroCity_DevonCorp_2F_EventScript_ChooseFossil_1:
 	end
 
+RustboroCity_DevonCorp_2F_EventScript_ChooseFossil_3:
+# 319 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_ChooseClawFossil
+	goto RustboroCity_DevonCorp_2F_EventScript_ChooseFossil_1
+
+RustboroCity_DevonCorp_2F_EventScript_ChooseFossil_4:
+# 321 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_ChooseRootFossil
+	goto RustboroCity_DevonCorp_2F_EventScript_ChooseFossil_1
+
+RustboroCity_DevonCorp_2F_EventScript_ChooseFossil_5:
+# 323 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_CancelFossilSelect
+	goto RustboroCity_DevonCorp_2F_EventScript_ChooseFossil_1
+
+RustboroCity_DevonCorp_2F_EventScript_ChooseFossil_6:
+# 325 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_CancelFossilSelect
+	goto RustboroCity_DevonCorp_2F_EventScript_ChooseFossil_1
+
+
 RustboroCity_DevonCorp_2F_EventScript_ChooseClawFossil::
+# 331 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	goto RustboroCity_DevonCorp_2F_EventScript_GiveClawFossil
 	end
 
+
 RustboroCity_DevonCorp_2F_EventScript_ChooseRootFossil::
+# 336 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	goto RustboroCity_DevonCorp_2F_EventScript_GiveRootFossil
 	end
 
+
 RustboroCity_DevonCorp_2F_EventScript_CancelFossilSelect::
+# 341 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	release
 	end
+
 
 RustboroCity_DevonCorp_2F_EventScript_MatchCallScientist::
+# 346 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	lock
+# 347 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	faceplayer
-	call_if_eq VAR_FOSSIL_RESURRECTION_STATE, 1, RustboroCity_DevonCorp_2F_EventScript_SetFossilReady
-	goto_if_ge VAR_RUSTBORO_CITY_STATE, 6, RustboroCity_DevonCorp_2F_EventScript_WorkOnNext
+# 348 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_FOSSIL_RESURRECTION_STATE, 1
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_MatchCallScientist_2
+RustboroCity_DevonCorp_2F_EventScript_MatchCallScientist_1:
+# 351 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	compare VAR_RUSTBORO_CITY_STATE, 6
+	goto_if_ge RustboroCity_DevonCorp_2F_EventScript_MatchCallScientist_5
+RustboroCity_DevonCorp_2F_EventScript_MatchCallScientist_4:
+# 354 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox RustboroCity_DevonCorp_2F_Text_DevelopNewPokenavFeature, MSGBOX_DEFAULT
+# 355 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	release
 	end
+
+RustboroCity_DevonCorp_2F_EventScript_MatchCallScientist_2:
+# 349 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	call RustboroCity_DevonCorp_2F_EventScript_SetFossilReady
+	goto RustboroCity_DevonCorp_2F_EventScript_MatchCallScientist_1
+
+RustboroCity_DevonCorp_2F_EventScript_MatchCallScientist_5:
+# 352 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
+	goto RustboroCity_DevonCorp_2F_EventScript_WorkOnNext
+	goto RustboroCity_DevonCorp_2F_EventScript_MatchCallScientist_4
+
 
 RustboroCity_DevonCorp_2F_EventScript_WorkOnNext::
+# 360 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	msgbox RustboroCity_DevonCorp_2F_Text_WhatToWorkOnNext, MSGBOX_DEFAULT
+# 361 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	release
 	end
 
-RustboroCity_DevonCorp_2F_Text_DeviceForTalkingToPokemon:
+
+RustboroCity_DevonCorp_2F_Text_DeviceForTalkingToPokemon::
+# 365 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	.string "We're developing a device for talking\n"
 	.string "with POKéMON.\p"
 	.string "But we haven't had much success…$"
 
-RustboroCity_DevonCorp_2F_Text_DevelopingNewBalls:
+RustboroCity_DevonCorp_2F_Text_DevelopingNewBalls::
+# 371 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	.string "I'm developing new kinds of\n"
 	.string "POKé BALLS…\p"
 	.string "But I haven't made much headway…$"
 
-RustboroCity_DevonCorp_2F_Text_WeFinallyMadeNewBalls:
+RustboroCity_DevonCorp_2F_Text_WeFinallyMadeNewBalls::
+# 377 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	.string "We finally made new kinds of\n"
 	.string "POKé BALLS!\p"
 	.string "The REPEAT BALL makes it easier to\n"
@@ -289,12 +694,14 @@ RustboroCity_DevonCorp_2F_Text_WeFinallyMadeNewBalls:
 	.string "the DEVON CORPORATION.\p"
 	.string "Please give them a try!$"
 
-RustboroCity_DevonCorp_2F_Text_IMadePokenav:
+RustboroCity_DevonCorp_2F_Text_IMadePokenav::
+# 389 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	.string "I made the POKéNAV!\p"
 	.string "As an engineer, I feel blessed to have\n"
 	.string "made something so great!$"
 
-RustboroCity_DevonCorp_2F_Text_WowThatsAPokenav:
+RustboroCity_DevonCorp_2F_Text_WowThatsAPokenav::
+# 395 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	.string "Oh, wow!\n"
 	.string "That's a POKéNAV!\p"
 	.string "It came about as a result of our\n"
@@ -305,18 +712,21 @@ RustboroCity_DevonCorp_2F_Text_WowThatsAPokenav:
 	.string "No, no. I think you'll find out just by\n"
 	.string "trying the POKéNAV out.$"
 
-RustboroCity_DevonCorp_2F_Text_DeviceToVisualizePokemonDreams:
+RustboroCity_DevonCorp_2F_Text_DeviceToVisualizePokemonDreams::
+# 407 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	.string "I'm trying to develop a device that\n"
 	.string "visually reproduces the dreams of\l"
 	.string "POKéMON…\p"
 	.string "But it's not going well.$"
 
-RustboroCity_DevonCorp_2F_Text_DevelopDeviceToResurrectFossils:
+RustboroCity_DevonCorp_2F_Text_DevelopDeviceToResurrectFossils::
+# 414 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	.string "I've been trying to develop a device\n"
 	.string "that resurrects POKéMON from fossils…\p"
 	.string "And, it's working!$"
 
-RustboroCity_DevonCorp_2F_Text_WantToBringFossilBackToLife:
+RustboroCity_DevonCorp_2F_Text_WantToBringFossilBackToLife::
+# 420 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	.string "Wait! That thing you have there…\n"
 	.string "Is that a POKéMON fossil?\p"
 	.string "Would you like to bring that POKéMON\n"
@@ -324,12 +734,14 @@ RustboroCity_DevonCorp_2F_Text_WantToBringFossilBackToLife:
 	.string "I can with my newly developed\n"
 	.string "FOSSIL REGENERATOR.$"
 
-RustboroCity_DevonCorp_2F_Text_OhIsThatSo:
+RustboroCity_DevonCorp_2F_Text_OhIsThatSo::
+# 429 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	.string "Oh, is that so?\p"
 	.string "DEVON's technological expertise\n"
 	.string "is outstanding, I tell you.$"
 
-RustboroCity_DevonCorp_2F_Text_TwoFossilsPickOne:
+RustboroCity_DevonCorp_2F_Text_TwoFossilsPickOne::
+# 435 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	.string "Oh, now that's a surprise!\n"
 	.string "You have not one, but two, fossils?\p"
 	.string "Unfortunately, my machine can only\n"
@@ -337,13 +749,15 @@ RustboroCity_DevonCorp_2F_Text_TwoFossilsPickOne:
 	.string "Would you like to pick one of your\n"
 	.string "fossils for regeneration?$"
 
-RustboroCity_DevonCorp_2F_Text_HandedFossilToResearcher:
+RustboroCity_DevonCorp_2F_Text_HandedFossilToResearcher::
+# 444 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	.string "Excellent!\n"
 	.string "Let's do this right away.\p"
 	.string "{PLAYER} handed the {STR_VAR_1} to\n"
 	.string "the DEVON RESEARCHER.$"
 
-RustboroCity_DevonCorp_2F_Text_FossilRegeneratorTakesTime:
+RustboroCity_DevonCorp_2F_Text_FossilRegeneratorTakesTime::
+# 451 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	.string "The FOSSIL REGENERATOR, which I made,\n"
 	.string "is incredible.\p"
 	.string "But it has one drawback--it takes\n"
@@ -351,32 +765,35 @@ RustboroCity_DevonCorp_2F_Text_FossilRegeneratorTakesTime:
 	.string "So, uh… How about you go for a stroll\n"
 	.string "and look around for a while?$"
 
-RustboroCity_DevonCorp_2F_Text_FossilizedMonBroughtBackToLife:
+RustboroCity_DevonCorp_2F_Text_FossilizedMonBroughtBackToLife::
+# 460 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	.string "Thanks for waiting!\p"
 	.string "Your fossilized POKéMON has been\n"
 	.string "brought back to life!\p"
 	.string "The fossil was an ancient POKéMON.\n"
 	.string "{STR_VAR_2}, it was!$"
 
-RustboroCity_DevonCorp_2F_Text_ReceivedMonFromResearcher:
+RustboroCity_DevonCorp_2F_Text_ReceivedMonFromResearcher::
+# 468 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	.string "{PLAYER} received {STR_VAR_2} from\n"
 	.string "the DEVON RESEARCHER.$"
 
-@ Unused
-RustboroCity_DevonCorp_2F_Text_TooManyPokemon:
+RustboroCity_DevonCorp_2F_Text_TooManyPokemon::
+# 473 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	.string "Uh-oh, you've got too many POKéMON.\n"
 	.string "You have no room for this one.$"
 
-RustboroCity_DevonCorp_2F_Text_DevelopNewPokenavFeature:
+RustboroCity_DevonCorp_2F_Text_DevelopNewPokenavFeature::
+# 478 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	.string "I'm trying to develop a new feature\n"
 	.string "for the POKéNAV…\p"
 	.string "But it's not going well.$"
 
-RustboroCity_DevonCorp_2F_Text_WhatToWorkOnNext:
+RustboroCity_DevonCorp_2F_Text_WhatToWorkOnNext::
+# 484 "data/maps/RustboroCity_DevonCorp_2F/scripts.pory"
 	.string "Well, now what shall I work on\n"
 	.string "developing next?\p"
 	.string "Our company allows us to make our\n"
 	.string "inspirations into reality.\p"
 	.string "One couldn't ask for a better\n"
 	.string "environment as an engineer.$"
-

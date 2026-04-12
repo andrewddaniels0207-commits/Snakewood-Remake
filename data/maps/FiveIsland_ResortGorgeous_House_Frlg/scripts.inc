@@ -1,146 +1,310 @@
-.equ SHOWN_REQUESTED_MON, FLAG_TEMP_2
-
 FiveIsland_ResortGorgeous_House_Frlg_MapScripts::
 	.byte 0
 
+
 FiveIsland_ResortGorgeous_House_EventScript_Selphy::
+# 4 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	lock
+# 5 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	faceplayer
-	goto_if_set SHOWN_REQUESTED_MON, FiveIsland_ResortGorgeous_House_EventScript_JustFulfilledRequest
-	goto_if_eq VAR_RESORT_GORGEOUS_REQUESTED_MON, 0xFFFF, FiveIsland_ResortGorgeous_House_EventScript_RequestTookTooLong
-	goto_if_ne VAR_RESORT_GORGEOUS_REQUESTED_MON, SPECIES_NONE, FiveIsland_ResortGorgeous_House_EventScript_CheckForRequestedMon
+# 6 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	goto_if_set SHOWN_REQUESTED_MON, FiveIsland_ResortGorgeous_House_EventScript_Selphy_2
+FiveIsland_ResortGorgeous_House_EventScript_Selphy_1:
+# 9 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	compare VAR_RESORT_GORGEOUS_REQUESTED_MON, 0xFFFF
+	goto_if_eq FiveIsland_ResortGorgeous_House_EventScript_Selphy_5
+FiveIsland_ResortGorgeous_House_EventScript_Selphy_4:
+# 12 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	compare VAR_RESORT_GORGEOUS_REQUESTED_MON, SPECIES_NONE
+	goto_if_ne FiveIsland_ResortGorgeous_House_EventScript_Selphy_8
+FiveIsland_ResortGorgeous_House_EventScript_Selphy_7:
+# 15 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	msgbox FiveIsland_ResortGorgeous_House_Text_PleaseHearMyWish
+# 16 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	goto FiveIsland_ResortGorgeous_House_EventScript_RequestMon
 	end
+
+FiveIsland_ResortGorgeous_House_EventScript_Selphy_2:
+# 7 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	goto FiveIsland_ResortGorgeous_House_EventScript_JustFulfilledRequest
+	goto FiveIsland_ResortGorgeous_House_EventScript_Selphy_1
+
+FiveIsland_ResortGorgeous_House_EventScript_Selphy_5:
+# 10 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	goto FiveIsland_ResortGorgeous_House_EventScript_RequestTookTooLong
+	goto FiveIsland_ResortGorgeous_House_EventScript_Selphy_4
+
+FiveIsland_ResortGorgeous_House_EventScript_Selphy_8:
+# 13 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	goto FiveIsland_ResortGorgeous_House_EventScript_CheckForRequestedMon
+	goto FiveIsland_ResortGorgeous_House_EventScript_Selphy_7
+
 
 FiveIsland_ResortGorgeous_House_EventScript_RequestMon::
+# 21 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	special SampleResortGorgeousMonAndReward
+# 22 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	msgbox FiveIsland_ResortGorgeous_House_Text_WishToSeeMonPlease
+# 23 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	release
 	end
+
 
 FiveIsland_ResortGorgeous_House_EventScript_RequestTookTooLong::
+# 28 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	msgbox FiveIsland_ResortGorgeous_House_Text_OhImTiredOfWaiting
+# 29 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	goto FiveIsland_ResortGorgeous_House_EventScript_RequestMon
 	end
+
 
 FiveIsland_ResortGorgeous_House_EventScript_CheckForRequestedMon::
+# 34 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	copyvar VAR_0x8004, VAR_RESORT_GORGEOUS_REQUESTED_MON
+# 35 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	specialvar VAR_RESULT, DoesPlayerPartyContainSpecies
-	goto_if_eq VAR_RESULT, TRUE, FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon
+# 36 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq FiveIsland_ResortGorgeous_House_EventScript_CheckForRequestedMon_2
+FiveIsland_ResortGorgeous_House_EventScript_CheckForRequestedMon_1:
+# 39 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	goto FiveIsland_ResortGorgeous_House_EventScript_RequestMon
 	end
 
+FiveIsland_ResortGorgeous_House_EventScript_CheckForRequestedMon_2:
+# 37 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	goto FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon
+	goto FiveIsland_ResortGorgeous_House_EventScript_CheckForRequestedMon_1
+
+
 FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon::
+# 44 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	special SampleResortGorgeousMonAndReward
+# 45 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	msgbox FiveIsland_ResortGorgeous_House_Text_MonYouCaughtForMeThankYou
+# 46 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	addobject LOCALID_RESORT_GORGEOUS_HOUSE_BUTLER
+# 47 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	applymovement LOCALID_RESORT_GORGEOUS_HOUSE_BUTLER, FiveIsland_ResortGorgeous_House_Movement_ButlerEnter
+# 48 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	waitmovement 0
+# 49 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_MALE
+# 50 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	msgbox FiveIsland_ResortGorgeous_House_Text_ButlerYesMyLady
+# 51 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	applymovement LOCALID_RESORT_GORGEOUS_HOUSE_SELPHY, Common_Movement_WalkInPlaceFasterUp
+# 52 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	waitmovement 0
+# 53 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_FEMALE
+# 54 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	msgbox FiveIsland_ResortGorgeous_House_Text_SelphyGiveTokenOfAppreciation
+# 55 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_MALE
+# 56 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	msgbox FiveIsland_ResortGorgeous_House_Text_ButlerIShallDoAsYouBid
+# 57 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	closemessage
-	call_if_eq VAR_FACING, DIR_NORTH, FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerNorth
-	call_if_eq VAR_FACING, DIR_SOUTH, FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerSouth
-	call_if_eq VAR_FACING, DIR_EAST, FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerEast
-	call_if_eq VAR_FACING, DIR_WEST, FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerWest
+# 58 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	compare VAR_FACING, DIR_NORTH
+	goto_if_eq FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_2
+FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_1:
+# 61 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	compare VAR_FACING, DIR_SOUTH
+	goto_if_eq FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_5
+FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_4:
+# 64 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	compare VAR_FACING, DIR_EAST
+	goto_if_eq FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_8
+FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_7:
+# 67 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	compare VAR_FACING, DIR_WEST
+	goto_if_eq FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_11
+FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_10:
+# 70 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	copyobjectxytoperm LOCALID_RESORT_GORGEOUS_HOUSE_BUTLER
+# 71 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	msgbox FiveIsland_ResortGorgeous_House_Text_ButlerPleaseAcceptThisAsHerThanks
+# 72 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	giveitem VAR_RESORT_GORGEOUS_REWARD
-	goto_if_eq VAR_RESULT, FALSE, FiveIsland_ResortGorgeous_House_EventScript_NoRoomForReward
+# 73 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_14
+FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_13:
+# 76 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	setflag SHOWN_REQUESTED_MON
+# 77 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	setvar VAR_RESORT_GORGEOUS_REQUESTED_MON, SPECIES_NONE
+# 78 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	release
 	end
+
+FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_2:
+# 59 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	call FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerNorth
+	goto FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_1
+
+FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_5:
+# 62 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	call FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerSouth
+	goto FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_4
+
+FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_8:
+# 65 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	call FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerEast
+	goto FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_7
+
+FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_11:
+# 68 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	call FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerWest
+	goto FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_10
+
+FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_14:
+# 74 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+	goto FiveIsland_ResortGorgeous_House_EventScript_NoRoomForReward
+	goto FiveIsland_ResortGorgeous_House_EventScript_ShowRequestedMon_13
+
 
 FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerNorth::
+# 83 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	applymovement LOCALID_RESORT_GORGEOUS_HOUSE_SELPHY, Common_Movement_WalkInPlaceFasterDown
+# 84 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	applymovement LOCALID_RESORT_GORGEOUS_HOUSE_BUTLER, FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerNorth
+# 85 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	waitmovement 0
+# 86 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+# 87 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerSouth::
+# 92 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	applymovement LOCALID_RESORT_GORGEOUS_HOUSE_BUTLER, FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerSouth
+# 93 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	waitmovement 0
+# 94 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+# 95 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerEast::
+# 100 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	applymovement LOCALID_RESORT_GORGEOUS_HOUSE_SELPHY, Common_Movement_WalkInPlaceFasterLeft
+# 101 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	applymovement LOCALID_RESORT_GORGEOUS_HOUSE_BUTLER, FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerEast
+# 102 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	waitmovement 0
+# 103 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+# 104 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerWest::
+# 109 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	applymovement LOCALID_RESORT_GORGEOUS_HOUSE_BUTLER, FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerWest
+# 110 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	waitmovement 0
 	return
 
+
 FiveIsland_ResortGorgeous_House_EventScript_NoRoomForReward::
+# 115 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_MALE
+# 116 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	msgbox FiveIsland_ResortGorgeous_House_Text_ButlerBagAppearsToBeFull
+# 117 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_FEMALE
+# 118 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	msgbox FiveIsland_ResortGorgeous_House_Text_OhHowDisappointing
+# 119 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	setflag SHOWN_REQUESTED_MON
+# 120 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	setvar VAR_RESORT_GORGEOUS_REQUESTED_MON, SPECIES_NONE
+# 121 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	release
 	end
+
 
 FiveIsland_ResortGorgeous_House_EventScript_JustFulfilledRequest::
+# 126 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	msgbox FiveIsland_ResortGorgeous_House_Text_SelphyWishYouBestOfLuck
+# 127 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	release
 	end
 
-FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerNorth::
+
+# 131 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerNorth:
+# 132 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	walk_left
+# 133 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	walk_left
+# 134 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	walk_left
+# 135 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	walk_down
+# 136 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	walk_down
+# 137 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	walk_down
+# 138 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	walk_in_place_faster_right
+# 139 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	step_end
 
-FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerSouth::
+# 142 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerSouth:
+# 143 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	walk_left
+# 144 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	walk_left
+# 145 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	walk_in_place_faster_down
+# 146 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	step_end
 
-FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerEast::
+# 149 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerEast:
+# 150 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	walk_left
+# 151 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	walk_left
+# 152 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	walk_left
+# 153 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	walk_down
+# 154 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	step_end
 
-@ Very odd. If the player is talking to Selphy facing West, then the player has clipped through the table
-@ In this case rather than approach the player the Butler walks up, which clips the Butler into a wall
-FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerWest::
+# 157 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerWest:
+# 158 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	walk_up
+# 159 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	step_end
 
-FiveIsland_ResortGorgeous_House_Movement_ButlerEnter::
+# 162 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
+FiveIsland_ResortGorgeous_House_Movement_ButlerEnter:
+# 163 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	walk_in_place_down
+# 164 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	step_end
 
-@ Addressed as "Sebastian" but speaks only as "Butler"
 FiveIsland_ResortGorgeous_House_EventScript_Butler::
+# 168 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	msgbox FiveIsland_ResortGorgeous_House_Text_LadySelphySmileHasBrillianceOfSun, MSGBOX_NPC
 	end
 
+
 FiveIsland_ResortGorgeous_House_Text_PleaseHearMyWish::
+# 172 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	.string "SELPHY: Oh?\n"
 	.string "Do I know you from somewhere?\p"
 	.string "Oh, but that doesn't matter.\p"
@@ -148,18 +312,21 @@ FiveIsland_ResortGorgeous_House_Text_PleaseHearMyWish::
 	.string "Please, hear my wish.$"
 
 FiveIsland_ResortGorgeous_House_Text_WishToSeeMonPlease::
+# 180 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	.string "I wish to see a POKéMON.\n"
 	.string "A darling {STR_VAR_1}.\p"
 	.string "I want to see one right away.\n"
 	.string "Please, make my wish come true.$"
 
 FiveIsland_ResortGorgeous_House_Text_OhImTiredOfWaiting::
+# 187 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	.string "SELPHY: Oh, I'm tired of this.\n"
 	.string "I'm tired of waiting for you.\p"
 	.string "I'll forgive you this time, but\n"
 	.string "please don't fail me next time.$"
 
 FiveIsland_ResortGorgeous_House_Text_MonYouCaughtForMeThankYou::
+# 194 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	.string "SELPHY: Oh, hello, there.\p"
 	.string "Oh, my gracious. That must be the\n"
 	.string "{STR_VAR_1} you caught for me.\p"
@@ -175,36 +342,43 @@ FiveIsland_ResortGorgeous_House_Text_MonYouCaughtForMeThankYou::
 	.string "I need you here this instant!$"
 
 FiveIsland_ResortGorgeous_House_Text_ButlerYesMyLady::
+# 210 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	.string "Butler: Yes, my lady.$"
 
 FiveIsland_ResortGorgeous_House_Text_SelphyGiveTokenOfAppreciation::
+# 214 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	.string "SELPHY: See to it that this person\n"
 	.string "is given a token of appreciation.$"
 
 FiveIsland_ResortGorgeous_House_Text_ButlerIShallDoAsYouBid::
+# 219 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	.string "Butler: I shall do as you bid,\n"
 	.string "my lady.$"
 
 FiveIsland_ResortGorgeous_House_Text_ButlerPleaseAcceptThisAsHerThanks::
+# 224 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	.string "Butler: I sincerely thank you for\n"
 	.string "pleasing Lady SELPHY.\p"
 	.string "Please accept this as her thanks…$"
 
 FiveIsland_ResortGorgeous_House_Text_ButlerBagAppearsToBeFull::
+# 230 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	.string "Butler: Your BAG appears to be\n"
 	.string "unfortunately full.$"
 
 FiveIsland_ResortGorgeous_House_Text_OhHowDisappointing::
+# 235 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	.string "Oh…\n"
 	.string "How disappointing.$"
 
 FiveIsland_ResortGorgeous_House_Text_SelphyWishYouBestOfLuck::
+# 240 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	.string "SELPHY: I wish you the best of\n"
 	.string "luck.$"
 
 FiveIsland_ResortGorgeous_House_Text_LadySelphySmileHasBrillianceOfSun::
+# 245 "data/maps/FiveIsland_ResortGorgeous_House_Frlg/scripts.pory"
 	.string "Butler: The smile of Lady SELPHY\n"
 	.string "has the brilliance of the sun.\p"
 	.string "Please, I beg you to bring joy\n"
 	.string "to Lady SELPHY.$"
-

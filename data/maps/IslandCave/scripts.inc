@@ -1,118 +1,275 @@
 IslandCave_MapScripts::
+# 2 "data/maps/IslandCave/scripts.pory"
 	map_script MAP_SCRIPT_ON_RESUME, IslandCave_OnResume
+# 3 "data/maps/IslandCave/scripts.pory"
 	map_script MAP_SCRIPT_ON_LOAD, IslandCave_OnLoad
+# 4 "data/maps/IslandCave/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, IslandCave_OnTransition
 	.byte 0
 
-IslandCave_OnResume:
-	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, IslandCave_EventScript_TryRemoveRegice
+
+IslandCave_OnResume::
+# 8 "data/maps/IslandCave/scripts.pory"
+	goto_if_set FLAG_SYS_CTRL_OBJ_DELETE, IslandCave_OnResume_2
+IslandCave_OnResume_1:
 	end
 
+IslandCave_OnResume_2:
+# 9 "data/maps/IslandCave/scripts.pory"
+	call IslandCave_EventScript_TryRemoveRegice
+	goto IslandCave_OnResume_1
+
+
 IslandCave_EventScript_TryRemoveRegice::
+# 15 "data/maps/IslandCave/scripts.pory"
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
+# 16 "data/maps/IslandCave/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
+	goto_if_ne IslandCave_EventScript_TryRemoveRegice_2
+IslandCave_EventScript_TryRemoveRegice_1:
+# 19 "data/maps/IslandCave/scripts.pory"
 	removeobject VAR_LAST_TALKED
 	return
 
-IslandCave_OnLoad:
-	call_if_unset FLAG_SYS_BRAILLE_REGICE_COMPLETED, IslandCave_EventScript_HideRegiEntrance
+IslandCave_EventScript_TryRemoveRegice_2:
+# 17 "data/maps/IslandCave/scripts.pory"
+	goto Common_EventScript_NopReturn
+	goto IslandCave_EventScript_TryRemoveRegice_1
+
+
+IslandCave_OnLoad::
+# 24 "data/maps/IslandCave/scripts.pory"
+	goto_if_unset FLAG_SYS_BRAILLE_REGICE_COMPLETED, IslandCave_OnLoad_2
+IslandCave_OnLoad_1:
 	end
 
+IslandCave_OnLoad_2:
+# 25 "data/maps/IslandCave/scripts.pory"
+	call IslandCave_EventScript_HideRegiEntrance
+	goto IslandCave_OnLoad_1
+
+
 IslandCave_EventScript_HideRegiEntrance::
+# 31 "data/maps/IslandCave/scripts.pory"
 	setmetatile 7, 19, METATILE_Cave_EntranceCover, TRUE
+# 32 "data/maps/IslandCave/scripts.pory"
 	setmetatile 8, 19, METATILE_Cave_EntranceCover, TRUE
+# 33 "data/maps/IslandCave/scripts.pory"
 	setmetatile 9, 19, METATILE_Cave_EntranceCover, TRUE
+# 34 "data/maps/IslandCave/scripts.pory"
 	setmetatile 7, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE
+# 35 "data/maps/IslandCave/scripts.pory"
 	setmetatile 8, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE
+# 36 "data/maps/IslandCave/scripts.pory"
 	setmetatile 9, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE
 	return
 
-IslandCave_OnTransition:
+
+IslandCave_OnTransition::
+# 41 "data/maps/IslandCave/scripts.pory"
 	setflag FLAG_LANDMARK_ISLAND_CAVE
+# 42 "data/maps/IslandCave/scripts.pory"
 	call IslandCave_EventScript_ClearSteps
-	call_if_unset FLAG_DEFEATED_REGICE, IslandCave_EventScript_ShowRegice
+# 43 "data/maps/IslandCave/scripts.pory"
+	goto_if_unset FLAG_DEFEATED_REGICE, IslandCave_OnTransition_2
+IslandCave_OnTransition_1:
 	end
 
+IslandCave_OnTransition_2:
+# 44 "data/maps/IslandCave/scripts.pory"
+	call IslandCave_EventScript_ShowRegice
+	goto IslandCave_OnTransition_1
+
+
 IslandCave_EventScript_ShowRegice::
+# 50 "data/maps/IslandCave/scripts.pory"
 	clearflag FLAG_HIDE_REGICE
 	return
 
+
 IslandCave_EventScript_OpenRegiEntrance::
+# 55 "data/maps/IslandCave/scripts.pory"
 	setmetatile 7, 19, METATILE_Cave_SealedChamberEntrance_TopLeft, TRUE
+# 56 "data/maps/IslandCave/scripts.pory"
 	setmetatile 8, 19, METATILE_Cave_SealedChamberEntrance_TopMid, TRUE
+# 57 "data/maps/IslandCave/scripts.pory"
 	setmetatile 9, 19, METATILE_Cave_SealedChamberEntrance_TopRight, TRUE
+# 58 "data/maps/IslandCave/scripts.pory"
 	setmetatile 7, 20, METATILE_Cave_SealedChamberEntrance_BottomLeft, TRUE
+# 59 "data/maps/IslandCave/scripts.pory"
 	setmetatile 8, 20, METATILE_Cave_SealedChamberEntrance_BottomMid, FALSE
+# 60 "data/maps/IslandCave/scripts.pory"
 	setmetatile 9, 20, METATILE_Cave_SealedChamberEntrance_BottomRight, TRUE
+# 61 "data/maps/IslandCave/scripts.pory"
 	special DrawWholeMapView
+# 62 "data/maps/IslandCave/scripts.pory"
 	playse SE_BANG
+# 63 "data/maps/IslandCave/scripts.pory"
 	setflag FLAG_SYS_BRAILLE_REGICE_COMPLETED
 	end
 
+
 IslandCave_EventScript_CaveEntranceMiddle::
+# 68 "data/maps/IslandCave/scripts.pory"
 	lockall
-	call_if_set FLAG_TEMP_REGICE_PUZZLE_FAILED, IslandCave_EventScript_ClearSteps
-	goto_if_set FLAG_SYS_BRAILLE_REGICE_COMPLETED, IslandCave_EventScript_BigHoleInWall
+# 69 "data/maps/IslandCave/scripts.pory"
+	goto_if_set FLAG_TEMP_REGICE_PUZZLE_FAILED, IslandCave_EventScript_CaveEntranceMiddle_2
+IslandCave_EventScript_CaveEntranceMiddle_1:
+# 72 "data/maps/IslandCave/scripts.pory"
+	goto_if_set FLAG_SYS_BRAILLE_REGICE_COMPLETED, IslandCave_EventScript_CaveEntranceMiddle_5
+IslandCave_EventScript_CaveEntranceMiddle_4:
+# 75 "data/maps/IslandCave/scripts.pory"
 	braillemessage IslandCave_Braille_RunLapAroundWall
+# 76 "data/maps/IslandCave/scripts.pory"
 	setflag FLAG_TEMP_REGICE_PUZZLE_STARTED
+# 77 "data/maps/IslandCave/scripts.pory"
 	special ShouldDoBrailleRegicePuzzle
+# 78 "data/maps/IslandCave/scripts.pory"
 	goto IslandCave_EventScript_CloseBrailleMsg
 	end
+
+IslandCave_EventScript_CaveEntranceMiddle_2:
+# 70 "data/maps/IslandCave/scripts.pory"
+	call IslandCave_EventScript_ClearSteps
+	goto IslandCave_EventScript_CaveEntranceMiddle_1
+
+IslandCave_EventScript_CaveEntranceMiddle_5:
+# 73 "data/maps/IslandCave/scripts.pory"
+	goto IslandCave_EventScript_BigHoleInWall
+	goto IslandCave_EventScript_CaveEntranceMiddle_4
+
 
 IslandCave_EventScript_BigHoleInWall::
+# 83 "data/maps/IslandCave/scripts.pory"
 	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
+# 84 "data/maps/IslandCave/scripts.pory"
 	releaseall
 	end
 
+
 IslandCave_EventScript_CaveEntranceSide::
+# 89 "data/maps/IslandCave/scripts.pory"
 	lockall
-	call_if_set FLAG_TEMP_REGICE_PUZZLE_FAILED, IslandCave_EventScript_ClearSteps
+# 90 "data/maps/IslandCave/scripts.pory"
+	goto_if_set FLAG_TEMP_REGICE_PUZZLE_FAILED, IslandCave_EventScript_CaveEntranceSide_2
+IslandCave_EventScript_CaveEntranceSide_1:
+# 93 "data/maps/IslandCave/scripts.pory"
 	braillemessage IslandCave_Braille_RunLapAroundWall
-	goto_if_set FLAG_SYS_BRAILLE_REGICE_COMPLETED, IslandCave_EventScript_CloseBrailleMsg
+# 94 "data/maps/IslandCave/scripts.pory"
+	goto_if_set FLAG_SYS_BRAILLE_REGICE_COMPLETED, IslandCave_EventScript_CaveEntranceSide_5
+IslandCave_EventScript_CaveEntranceSide_4:
+# 97 "data/maps/IslandCave/scripts.pory"
 	setflag FLAG_TEMP_REGICE_PUZZLE_STARTED
+# 98 "data/maps/IslandCave/scripts.pory"
 	special ShouldDoBrailleRegicePuzzle
+# 99 "data/maps/IslandCave/scripts.pory"
 	goto IslandCave_EventScript_CloseBrailleMsg
 	end
 
+IslandCave_EventScript_CaveEntranceSide_2:
+# 91 "data/maps/IslandCave/scripts.pory"
+	call IslandCave_EventScript_ClearSteps
+	goto IslandCave_EventScript_CaveEntranceSide_1
+
+IslandCave_EventScript_CaveEntranceSide_5:
+# 95 "data/maps/IslandCave/scripts.pory"
+	goto IslandCave_EventScript_CloseBrailleMsg
+	goto IslandCave_EventScript_CaveEntranceSide_4
+
+
 IslandCave_EventScript_CloseBrailleMsg::
+# 104 "data/maps/IslandCave/scripts.pory"
 	waitbuttonpress
+# 105 "data/maps/IslandCave/scripts.pory"
 	closebraillemessage
+# 106 "data/maps/IslandCave/scripts.pory"
 	releaseall
 	end
 
+
 IslandCave_EventScript_ClearSteps::
+# 111 "data/maps/IslandCave/scripts.pory"
 	setvar VAR_REGICE_STEPS_1, 0
+# 112 "data/maps/IslandCave/scripts.pory"
 	setvar VAR_REGICE_STEPS_2, 0
+# 113 "data/maps/IslandCave/scripts.pory"
 	setvar VAR_REGICE_STEPS_3, 0
+# 114 "data/maps/IslandCave/scripts.pory"
 	clearflag FLAG_TEMP_REGICE_PUZZLE_FAILED
 	return
 
+
 IslandCave_EventScript_Regice::
+# 119 "data/maps/IslandCave/scripts.pory"
 	lock
+# 120 "data/maps/IslandCave/scripts.pory"
 	faceplayer
+# 121 "data/maps/IslandCave/scripts.pory"
 	waitse
+# 122 "data/maps/IslandCave/scripts.pory"
 	playmoncry SPECIES_REGICE, CRY_MODE_ENCOUNTER
+# 123 "data/maps/IslandCave/scripts.pory"
 	delay 40
+# 124 "data/maps/IslandCave/scripts.pory"
 	waitmoncry
+# 125 "data/maps/IslandCave/scripts.pory"
 	setwildbattle SPECIES_REGICE, 40
+# 126 "data/maps/IslandCave/scripts.pory"
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
+# 127 "data/maps/IslandCave/scripts.pory"
 	special StartRegiBattle
+# 128 "data/maps/IslandCave/scripts.pory"
 	waitstate
+# 129 "data/maps/IslandCave/scripts.pory"
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+# 130 "data/maps/IslandCave/scripts.pory"
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, IslandCave_EventScript_DefeatedRegice
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, IslandCave_EventScript_RanFromRegice
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, IslandCave_EventScript_RanFromRegice
+# 131 "data/maps/IslandCave/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_WON
+	goto_if_eq IslandCave_EventScript_Regice_2
+IslandCave_EventScript_Regice_1:
+# 134 "data/maps/IslandCave/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_RAN
+	goto_if_eq IslandCave_EventScript_Regice_5
+IslandCave_EventScript_Regice_4:
+# 137 "data/maps/IslandCave/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	goto_if_eq IslandCave_EventScript_Regice_8
+IslandCave_EventScript_Regice_7:
+# 140 "data/maps/IslandCave/scripts.pory"
 	setflag FLAG_DEFEATED_REGICE
+# 141 "data/maps/IslandCave/scripts.pory"
 	release
 	end
 
+IslandCave_EventScript_Regice_2:
+# 132 "data/maps/IslandCave/scripts.pory"
+	goto IslandCave_EventScript_DefeatedRegice
+	goto IslandCave_EventScript_Regice_1
+
+IslandCave_EventScript_Regice_5:
+# 135 "data/maps/IslandCave/scripts.pory"
+	goto IslandCave_EventScript_RanFromRegice
+	goto IslandCave_EventScript_Regice_4
+
+IslandCave_EventScript_Regice_8:
+# 138 "data/maps/IslandCave/scripts.pory"
+	goto IslandCave_EventScript_RanFromRegice
+	goto IslandCave_EventScript_Regice_7
+
+
 IslandCave_EventScript_DefeatedRegice::
+# 146 "data/maps/IslandCave/scripts.pory"
 	setflag FLAG_DEFEATED_REGICE
+# 147 "data/maps/IslandCave/scripts.pory"
 	goto Common_EventScript_RemoveStaticPokemon
 	end
 
+
 IslandCave_EventScript_RanFromRegice::
+# 152 "data/maps/IslandCave/scripts.pory"
 	setvar VAR_0x8004, SPECIES_REGICE
+# 153 "data/maps/IslandCave/scripts.pory"
 	goto Common_EventScript_LegendaryFlewAway
 	end
+

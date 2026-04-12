@@ -1,6 +1,12 @@
-mapscripts SafariZone_Northwest_MapScripts {}
+raw `
+SafariZone_Northwest_MapScripts::
+	.byte 0
 
-script SafariZone_Northwest_EventScript_Man {
-    msgbox(SafariZone_Northwest_Text_Man, MSGBOX_NPC)
-    end
-}
+
+SafariZone_Northwest_EventScript_Man::
+# 4 "data/maps/SafariZone_Northwest/scripts.pory"
+	msgbox SafariZone_Northwest_Text_Man, MSGBOX_NPC
+	end
+
+
+`

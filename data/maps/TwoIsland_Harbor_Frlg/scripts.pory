@@ -1,11 +1,22 @@
-mapscripts TwoIsland_Harbor_Frlg_MapScripts {}
+raw `
+TwoIsland_Harbor_Frlg_MapScripts::
+	.byte 0
 
-script TwoIsland_Harbor_EventScript_Sailor {
-    lock
-    faceplayer
-    message(Text_WhereDoYouWantToSail)
-    waitmessage()
-    setvar(VAR_0x8004, SEAGALLOP_TWO_ISLAND)
-    goto(EventScript_ChooseDestFromTwoIsland)
-    end
-}
+
+TwoIsland_Harbor_EventScript_Sailor::
+# 4 "data/maps/TwoIsland_Harbor_Frlg/scripts.pory"
+	lock
+# 5 "data/maps/TwoIsland_Harbor_Frlg/scripts.pory"
+	faceplayer
+# 6 "data/maps/TwoIsland_Harbor_Frlg/scripts.pory"
+	message Text_WhereDoYouWantToSail
+# 7 "data/maps/TwoIsland_Harbor_Frlg/scripts.pory"
+	waitmessage
+# 8 "data/maps/TwoIsland_Harbor_Frlg/scripts.pory"
+	setvar VAR_0x8004, SEAGALLOP_TWO_ISLAND
+# 9 "data/maps/TwoIsland_Harbor_Frlg/scripts.pory"
+	goto EventScript_ChooseDestFromTwoIsland
+	end
+
+
+`

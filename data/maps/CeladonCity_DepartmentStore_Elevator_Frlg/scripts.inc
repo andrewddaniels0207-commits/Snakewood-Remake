@@ -1,115 +1,304 @@
 CeladonCity_DepartmentStore_Elevator_Frlg_MapScripts::
 	.byte 0
 
+
 CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect::
+# 4 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	lockall
+# 5 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setvar VAR_0x8004, 3
-	call_if_unset FLAG_TEMP_2, EventScript_GetElevatorFloor
+# 6 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto_if_unset FLAG_TEMP_2, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_2
+CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_1:
+# 9 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
+# 10 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	special DrawElevatorCurrentFloorWindow
+# 11 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	message gText_WantWhichFloor
+# 12 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	waitmessage
+# 13 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setvar VAR_0x8004, 3
+# 14 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	specialvar VAR_RESULT, InitElevatorFloorSelectMenuPos
+# 15 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	switch VAR_RESULT
-	case 0, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom5F
-	case 1, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom4F
-	case 2, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom3F
-	case 3, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom2F
-	case 4, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom1F
+# 16 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	case 0, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_6
+# 18 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	case 1, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_7
+# 20 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	case 2, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_8
+# 22 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	case 3, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_9
+# 24 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	case 4, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_10
+CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_4:
 	end
+
+CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_2:
+# 7 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	call EventScript_GetElevatorFloor
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_1
+
+CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_6:
+# 17 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom5F
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_4
+
+CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_7:
+# 19 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom4F
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_4
+
+CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_8:
+# 21 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom3F
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_4
+
+CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_9:
+# 23 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom2F
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_4
+
+CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_10:
+# 25 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom1F
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect_4
+
 
 CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom5F::
+# 31 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	multichoicedefault 0, 0, MULTI_DEPT_STORE_ELEVATOR, 0, FALSE
+# 32 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	goto CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor
 	end
+
 
 CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom4F::
+# 37 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	multichoicedefault 0, 0, MULTI_DEPT_STORE_ELEVATOR, 1, FALSE
+# 38 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	goto CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor
 	end
+
 
 CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom3F::
+# 43 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	multichoicedefault 0, 0, MULTI_DEPT_STORE_ELEVATOR, 2, FALSE
+# 44 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	goto CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor
 	end
+
 
 CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom2F::
+# 49 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	multichoicedefault 0, 0, MULTI_DEPT_STORE_ELEVATOR, 3, FALSE
+# 50 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	goto CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor
 	end
+
 
 CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom1F::
+# 55 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	multichoicedefault 0, 0, MULTI_DEPT_STORE_ELEVATOR, 4, FALSE
+# 56 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	goto CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor
 	end
 
+
 CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor::
+# 61 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	switch VAR_RESULT
-	case 0, CeladonCity_DepartmentStore_Elevator_EventScript_To5F
-	case 1, CeladonCity_DepartmentStore_Elevator_EventScript_To4F
-	case 2, CeladonCity_DepartmentStore_Elevator_EventScript_To3F
-	case 3, CeladonCity_DepartmentStore_Elevator_EventScript_To2F
-	case 4, CeladonCity_DepartmentStore_Elevator_EventScript_To1F
-	case 5, CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
-	case 127, CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+# 62 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	case 0, CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_3
+# 64 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	case 1, CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_4
+# 66 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	case 2, CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_5
+# 68 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	case 3, CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_6
+# 70 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	case 4, CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_7
+# 72 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	case 5, CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_8
+# 74 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	case 127, CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_9
+CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_1:
 	end
+
+CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_3:
+# 63 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_To5F
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_1
+
+CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_4:
+# 65 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_To4F
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_1
+
+CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_5:
+# 67 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_To3F
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_1
+
+CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_6:
+# 69 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_To2F
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_1
+
+CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_7:
+# 71 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_To1F
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_1
+
+CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_8:
+# 73 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_1
+
+CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_9:
+# 75 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_ChooseFloor_1
+
 
 CeladonCity_DepartmentStore_Elevator_EventScript_To1F::
+# 81 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setvar VAR_0x8006, 4
+# 82 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_1F, 255, 6, 1
-	goto_if_eq VAR_ELEVATOR_FLOOR, 4, CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+# 83 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	compare VAR_ELEVATOR_FLOOR, 4
+	goto_if_eq CeladonCity_DepartmentStore_Elevator_EventScript_To1F_2
+CeladonCity_DepartmentStore_Elevator_EventScript_To1F_1:
+# 86 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	call CeladonCity_DepartmentStore_Elevator_EventScript_MoveElevator
+# 87 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setvar VAR_ELEVATOR_FLOOR, 4
+# 88 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	goto CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
 	end
+
+CeladonCity_DepartmentStore_Elevator_EventScript_To1F_2:
+# 84 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_To1F_1
+
 
 CeladonCity_DepartmentStore_Elevator_EventScript_To2F::
+# 93 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setvar VAR_0x8006, 5
+# 94 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_2F, 255, 6, 1
-	goto_if_eq VAR_ELEVATOR_FLOOR, 5, CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+# 95 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	compare VAR_ELEVATOR_FLOOR, 5
+	goto_if_eq CeladonCity_DepartmentStore_Elevator_EventScript_To2F_2
+CeladonCity_DepartmentStore_Elevator_EventScript_To2F_1:
+# 98 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	call CeladonCity_DepartmentStore_Elevator_EventScript_MoveElevator
+# 99 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setvar VAR_ELEVATOR_FLOOR, 5
+# 100 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	goto CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
 	end
+
+CeladonCity_DepartmentStore_Elevator_EventScript_To2F_2:
+# 96 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_To2F_1
+
 
 CeladonCity_DepartmentStore_Elevator_EventScript_To3F::
+# 105 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setvar VAR_0x8006, 6
+# 106 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_3F, 255, 6, 1
-	goto_if_eq VAR_ELEVATOR_FLOOR, 6, CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+# 107 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	compare VAR_ELEVATOR_FLOOR, 6
+	goto_if_eq CeladonCity_DepartmentStore_Elevator_EventScript_To3F_2
+CeladonCity_DepartmentStore_Elevator_EventScript_To3F_1:
+# 110 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	call CeladonCity_DepartmentStore_Elevator_EventScript_MoveElevator
+# 111 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setvar VAR_ELEVATOR_FLOOR, 6
+# 112 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	goto CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
 	end
+
+CeladonCity_DepartmentStore_Elevator_EventScript_To3F_2:
+# 108 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_To3F_1
+
 
 CeladonCity_DepartmentStore_Elevator_EventScript_To4F::
+# 117 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setvar VAR_0x8006, 7
+# 118 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_4F, 255, 6, 1
-	goto_if_eq VAR_ELEVATOR_FLOOR, 7, CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+# 119 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	compare VAR_ELEVATOR_FLOOR, 7
+	goto_if_eq CeladonCity_DepartmentStore_Elevator_EventScript_To4F_2
+CeladonCity_DepartmentStore_Elevator_EventScript_To4F_1:
+# 122 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	call CeladonCity_DepartmentStore_Elevator_EventScript_MoveElevator
+# 123 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setvar VAR_ELEVATOR_FLOOR, 7
+# 124 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	goto CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
 	end
+
+CeladonCity_DepartmentStore_Elevator_EventScript_To4F_2:
+# 120 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_To4F_1
+
 
 CeladonCity_DepartmentStore_Elevator_EventScript_To5F::
+# 129 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setvar VAR_0x8006, 8
+# 130 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_5F, 255, 6, 1
-	goto_if_eq VAR_ELEVATOR_FLOOR, 8, CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+# 131 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	compare VAR_ELEVATOR_FLOOR, 8
+	goto_if_eq CeladonCity_DepartmentStore_Elevator_EventScript_To5F_2
+CeladonCity_DepartmentStore_Elevator_EventScript_To5F_1:
+# 134 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	call CeladonCity_DepartmentStore_Elevator_EventScript_MoveElevator
+# 135 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setvar VAR_ELEVATOR_FLOOR, 8
+# 136 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	goto CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
 	end
 
+CeladonCity_DepartmentStore_Elevator_EventScript_To5F_2:
+# 132 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect
+	goto CeladonCity_DepartmentStore_Elevator_EventScript_To5F_1
+
+
 CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect::
+# 141 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	special CloseElevatorCurrentFloorWindow
+# 142 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	releaseall
 	end
 
+
 CeladonCity_DepartmentStore_Elevator_EventScript_MoveElevator::
+# 147 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	special CloseElevatorCurrentFloorWindow
+# 148 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	closemessage
+# 149 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	waitse
+# 150 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	special AnimateElevator
+# 151 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	waitstate
+# 152 "data/maps/CeladonCity_DepartmentStore_Elevator_Frlg/scripts.pory"
 	setflag FLAG_TEMP_2
 	return
+

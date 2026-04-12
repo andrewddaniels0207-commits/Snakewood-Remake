@@ -1,89 +1,166 @@
 CeladonCity_Gym_Frlg_MapScripts::
 	.byte 0
 
+
 CeladonCity_Gym_EventScript_Erika::
+# 4 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	famechecker FAMECHECKER_ERIKA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+# 5 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_LEADER_ERIKA, CeladonCity_Gym_Text_ErikaIntro, CeladonCity_Gym_Text_ErikaDefeat, CeladonCity_Gym_EventScript_DefeatedErika, NO_MUSIC
-	goto_if_unset FLAG_GOT_TM19_FROM_ERIKA, CeladonCity_Gym_EventScript_GiveTM19
+# 6 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
+	goto_if_unset FLAG_GOT_TM19_FROM_ERIKA, CeladonCity_Gym_EventScript_Erika_2
+CeladonCity_Gym_EventScript_Erika_1:
+# 9 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	famechecker FAMECHECKER_ERIKA, 4
+# 10 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	msgbox CeladonCity_Gym_Text_ErikaPostBattle
+# 11 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	release
 	end
 
+CeladonCity_Gym_EventScript_Erika_2:
+# 7 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
+	goto CeladonCity_Gym_EventScript_GiveTM19
+	goto CeladonCity_Gym_EventScript_Erika_1
+
+
 CeladonCity_Gym_EventScript_DefeatedErika::
+# 16 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	famechecker FAMECHECKER_ERIKA, 1
+# 17 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	clearflag FLAG_HIDE_FAME_CHECKER_ERIKA_JOURNALS
+# 18 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	setflag FLAG_DEFEATED_ERIKA
+# 19 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	setflag FLAG_BADGE04_GET
+# 20 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	set_gym_trainers_frlg 4
+# 21 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	goto CeladonCity_Gym_EventScript_GiveTM19
 	end
 
+
 CeladonCity_Gym_EventScript_GiveTM19::
+# 26 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	msgbox CeladonCity_Gym_Text_ExplainRainbowBadgeTakeThis
+# 27 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	checkitemspace ITEM_TM19
-	goto_if_eq VAR_RESULT, FALSE, CeladonCity_Gym_EventScript_NoRoomForTM19
+# 28 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq CeladonCity_Gym_EventScript_GiveTM19_2
+CeladonCity_Gym_EventScript_GiveTM19_1:
+# 31 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	giveitem_msg CeladonCity_Gym_Text_ReceivedTM19FromErika, ITEM_TM19
+# 32 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	setflag FLAG_GOT_TM19_FROM_ERIKA
+# 33 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	msgbox CeladonCity_Gym_Text_ExplainTM19
+# 34 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	release
 	end
+
+CeladonCity_Gym_EventScript_GiveTM19_2:
+# 29 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
+	goto CeladonCity_Gym_EventScript_NoRoomForTM19
+	goto CeladonCity_Gym_EventScript_GiveTM19_1
+
 
 CeladonCity_Gym_EventScript_NoRoomForTM19::
+# 39 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	msgbox CeladonCity_Gym_Text_ShouldMakeRoomForThis
+# 40 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	release
 	end
 
+
 CeladonCity_Gym_EventScript_Kay::
+# 45 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_LASS_KAY, CeladonCity_Gym_Text_KayIntro, CeladonCity_Gym_Text_KayDefeat
+# 46 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	msgbox CeladonCity_Gym_Text_KayPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 CeladonCity_Gym_EventScript_Lisa::
+# 51 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_LASS_LISA, CeladonCity_Gym_Text_LisaIntro, CeladonCity_Gym_Text_LisaDefeat
+# 52 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	famechecker FAMECHECKER_ERIKA, 2
+# 53 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	msgbox CeladonCity_Gym_Text_LisaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 CeladonCity_Gym_EventScript_Tina::
+# 58 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_PICNICKER_TINA, CeladonCity_Gym_Text_TinaIntro, CeladonCity_Gym_Text_TinaDefeat
+# 59 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	msgbox CeladonCity_Gym_Text_TinaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 CeladonCity_Gym_EventScript_Bridget::
+# 64 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_BEAUTY_BRIDGET, CeladonCity_Gym_Text_BridgetIntro, CeladonCity_Gym_Text_BridgetDefeat
+# 65 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	msgbox CeladonCity_Gym_Text_BridgetPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 CeladonCity_Gym_EventScript_Tamia::
+# 70 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_BEAUTY_TAMIA, CeladonCity_Gym_Text_TamiaIntro, CeladonCity_Gym_Text_TamiaDefeat
+# 71 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	famechecker FAMECHECKER_ERIKA, 3
+# 72 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	msgbox CeladonCity_Gym_Text_TamiaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 CeladonCity_Gym_EventScript_Lori::
+# 77 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_BEAUTY_LORI, CeladonCity_Gym_Text_LoriIntro, CeladonCity_Gym_Text_LoriDefeat
+# 78 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	msgbox CeladonCity_Gym_Text_LoriPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 CeladonCity_Gym_EventScript_Mary::
+# 83 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_COOLTRAINER_MARY, CeladonCity_Gym_Text_MaryIntro, CeladonCity_Gym_Text_MaryDefeat
+# 84 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	msgbox CeladonCity_Gym_Text_MaryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 CeladonCity_Gym_EventScript_GymStatue::
+# 89 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	lockall
-	goto_if_set FLAG_BADGE04_GET, CeladonCity_Gym_EventScript_GymStatuePostVictory
+# 90 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
+	goto_if_set FLAG_BADGE04_GET, CeladonCity_Gym_EventScript_GymStatue_2
+CeladonCity_Gym_EventScript_GymStatue_1:
+# 93 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	msgbox CeladonCity_Gym_Text_GymStatue
+# 94 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	releaseall
 	end
+
+CeladonCity_Gym_EventScript_GymStatue_2:
+# 91 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
+	goto CeladonCity_Gym_EventScript_GymStatuePostVictory
+	goto CeladonCity_Gym_EventScript_GymStatue_1
+
 
 CeladonCity_Gym_EventScript_GymStatuePostVictory::
+# 99 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	msgbox CeladonCity_Gym_Text_GymStatuePlayerWon
+# 100 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	releaseall
 	end
 
+
 CeladonCity_Gym_Text_ErikaIntro::
+# 104 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "Hello…\n"
 	.string "Lovely weather, isn't it?\l"
 	.string "It's so pleasant…\p"
@@ -100,6 +177,7 @@ CeladonCity_Gym_Text_ErikaIntro::
 	.string "Very well, but I shall not lose.{PLAY_BGM MUS_RG_ENCOUNTER_GYM_LEADER}$"
 
 CeladonCity_Gym_Text_ErikaDefeat::
+# 121 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "Oh!\n"
 	.string "I concede defeat.\l"
 	.string "You are remarkably strong.\p"
@@ -107,12 +185,14 @@ CeladonCity_Gym_Text_ErikaDefeat::
 	.string "RAINBOWBADGE.$"
 
 CeladonCity_Gym_Text_ErikaPostBattle::
+# 129 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "You are cataloging POKéMON?\n"
 	.string "I must say I'm impressed.\p"
 	.string "I would never collect POKéMON if\n"
 	.string "they were unattractive.$"
 
 CeladonCity_Gym_Text_ExplainRainbowBadgeTakeThis::
+# 136 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "The RAINBOWBADGE will make\n"
 	.string "POKéMON up to Lv. 50 obey.\p"
 	.string "It also allows POKéMON to use\n"
@@ -120,10 +200,12 @@ CeladonCity_Gym_Text_ExplainRainbowBadgeTakeThis::
 	.string "Please also take this with you.$"
 
 CeladonCity_Gym_Text_ReceivedTM19FromErika::
+# 144 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "{PLAYER} received TM19\n"
 	.string "from ERIKA.$"
 
 CeladonCity_Gym_Text_ExplainTM19::
+# 149 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "TM19 contains GIGA DRAIN.\p"
 	.string "Half the damage it inflicts is\n"
 	.string "drained to heal your POKéMON.\p"
@@ -131,107 +213,130 @@ CeladonCity_Gym_Text_ExplainTM19::
 	.string "wonderful move?$"
 
 CeladonCity_Gym_Text_ShouldMakeRoomForThis::
+# 157 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "You should make room for this.$"
 
 CeladonCity_Gym_Text_KayIntro::
+# 161 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "I should tell you about this GYM.\p"
 	.string "Only real ladies are allowed in\n"
 	.string "here!$"
 
 CeladonCity_Gym_Text_KayDefeat::
+# 167 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "You're too rough!$"
 
 CeladonCity_Gym_Text_KayPostBattle::
+# 171 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "Bleaah!\n"
 	.string "I hope ERIKA wipes you out!$"
 
 CeladonCity_Gym_Text_BridgetIntro::
+# 176 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "Oh, welcome.\n"
 	.string "I was getting bored.$"
 
 CeladonCity_Gym_Text_BridgetDefeat::
+# 181 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "My makeup!$"
 
 CeladonCity_Gym_Text_BridgetPostBattle::
+# 185 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "GRASS-type POKéMON are tough\n"
 	.string "against the WATER type.\p"
 	.string "They also have an edge on ROCK-\n"
 	.string "and GROUND-type POKéMON.$"
 
 CeladonCity_Gym_Text_TinaIntro::
+# 192 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "…Weren't you peeking in here\n"
 	.string "earlier?$"
 
 CeladonCity_Gym_Text_TinaDefeat::
+# 197 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "You're an eye-opener!$"
 
 CeladonCity_Gym_Text_TinaPostBattle::
+# 201 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "Oh, you were looking at ERIKA…\n"
 	.string "You weren't looking at me…$"
 
 CeladonCity_Gym_Text_TamiaIntro::
+# 206 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "Look, look!\n"
 	.string "See my POKéMON!\p"
 	.string "I like the GRASS type.\n"
 	.string "I like how they're easy to raise.$"
 
 CeladonCity_Gym_Text_TamiaDefeat::
+# 213 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "No!$"
 
 CeladonCity_Gym_Text_TamiaPostBattle::
+# 217 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "We only use GRASS-type POKéMON at\n"
 	.string "our GYM.\p"
 	.string "Why? We also use them for making\n"
 	.string "flower arrangements!$"
 
 CeladonCity_Gym_Text_LisaIntro::
+# 224 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "Oh, hey!\p"
 	.string "We don't like BUG- or FIRE-type\n"
 	.string "POKéMON in here!$"
 
 CeladonCity_Gym_Text_LisaDefeat::
+# 230 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "Oh!\n"
 	.string "You!$"
 
 CeladonCity_Gym_Text_LisaPostBattle::
+# 235 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "Our LEADER ERIKA might be quiet,\n"
 	.string "but she's famous around here.$"
 
 CeladonCity_Gym_Text_LoriIntro::
+# 240 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "Pleased to meet you.\n"
 	.string "My hobby is POKéMON training.$"
 
 CeladonCity_Gym_Text_LoriDefeat::
+# 245 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "Oh!\n"
 	.string "Splendid!$"
 
 CeladonCity_Gym_Text_LoriPostBattle::
+# 250 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "I have a blind date coming up.\n"
 	.string "I have to learn to be polite,\l"
 	.string "especially if I have to battle.$"
 
 CeladonCity_Gym_Text_MaryIntro::
+# 256 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "Welcome to CELADON GYM!\p"
 	.string "You'd better not underestimate\n"
 	.string "the nice ladies here.$"
 
 CeladonCity_Gym_Text_MaryDefeat::
+# 262 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "Oh!\n"
 	.string "Beaten!$"
 
 CeladonCity_Gym_Text_MaryPostBattle::
+# 267 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "I didn't bring my best POKéMON.\n"
 	.string "Wait until next time!$"
 
 CeladonCity_Gym_Text_GymStatue::
+# 272 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "CELADON POKéMON GYM\n"
 	.string "LEADER: ERIKA\p"
 	.string "WINNING TRAINERS:\n"
 	.string "{RIVAL}$"
 
 CeladonCity_Gym_Text_GymStatuePlayerWon::
+# 279 "data/maps/CeladonCity_Gym_Frlg/scripts.pory"
 	.string "CELADON POKéMON GYM\n"
 	.string "LEADER: ERIKA\p"
 	.string "WINNING TRAINERS:\n"
 	.string "{RIVAL}, {PLAYER}$"
-

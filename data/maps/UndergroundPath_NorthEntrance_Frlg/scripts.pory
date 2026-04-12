@@ -1,47 +1,93 @@
-mapscripts UndergroundPath_NorthEntrance_Frlg_MapScripts {}
+raw `
+UndergroundPath_NorthEntrance_Frlg_MapScripts::
+	.byte 0
 
-script UndergroundPath_NorthEntrance_EventScript_Saige {
-    lock
-    faceplayer
-    setvar(VAR_0x8008, INGAME_TRADE_NIDORAN)
-    call(EventScript_GetInGameTradeSpeciesInfo)
-    if (flag(FLAG_DID_MS_NIDO_TRADE)) {
-        goto(UndergroundPath_NorthEntrance_EventScript_AlreadyTraded)
-    }
-    msgbox(Trade_Text_DoYouHaveMonWantToTradeForMon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) {
-        goto(UndergroundPath_NorthEntrance_EventScript_DeclineTrade)
-    }
-    call(EventScript_ChooseMonForInGameTrade)
-    if (var(VAR_0x8004) >= PARTY_SIZE) {
-        goto(UndergroundPath_NorthEntrance_EventScript_DeclineTrade)
-    }
-    call(EventScript_GetInGameTradeSpecies)
-    if (var(VAR_RESULT) != VAR_0x8009) {
-        goto(UndergroundPath_NorthEntrance_EventScript_NotRequestedMon)
-    }
-    call(EventScript_DoInGameTrade)
-    msgbox(Trade_Text_ThanksYoureAPal)
-    setflag(FLAG_DID_MS_NIDO_TRADE)
-    release
-    end
-}
 
-script UndergroundPath_NorthEntrance_EventScript_DeclineTrade {
-    msgbox(Trade_Text_ThatsTooBad)
-    release
-    end
-}
+UndergroundPath_NorthEntrance_EventScript_Saige::
+# 4 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	lock
+# 5 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	faceplayer
+# 6 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	setvar VAR_0x8008, INGAME_TRADE_NIDORAN
+# 7 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	call EventScript_GetInGameTradeSpeciesInfo
+# 8 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	goto_if_set FLAG_DID_MS_NIDO_TRADE, UndergroundPath_NorthEntrance_EventScript_Saige_2
+UndergroundPath_NorthEntrance_EventScript_Saige_1:
+# 11 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	msgbox Trade_Text_DoYouHaveMonWantToTradeForMon, MSGBOX_YESNO
+# 12 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq UndergroundPath_NorthEntrance_EventScript_Saige_5
+UndergroundPath_NorthEntrance_EventScript_Saige_4:
+# 15 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	call EventScript_ChooseMonForInGameTrade
+# 16 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	compare VAR_0x8004, PARTY_SIZE
+	goto_if_ge UndergroundPath_NorthEntrance_EventScript_Saige_8
+UndergroundPath_NorthEntrance_EventScript_Saige_7:
+# 19 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	call EventScript_GetInGameTradeSpecies
+# 20 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	compare VAR_RESULT, VAR_0x8009
+	goto_if_ne UndergroundPath_NorthEntrance_EventScript_Saige_11
+UndergroundPath_NorthEntrance_EventScript_Saige_10:
+# 23 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	call EventScript_DoInGameTrade
+# 24 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	msgbox Trade_Text_ThanksYoureAPal
+# 25 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	setflag FLAG_DID_MS_NIDO_TRADE
+# 26 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	release
+	end
 
-script UndergroundPath_NorthEntrance_EventScript_NotRequestedMon {
-    bufferspeciesname(STR_VAR_1, VAR_0x8009)
-    msgbox(Trade_Text_ThisIsNoMon)
-    release
-    end
-}
+UndergroundPath_NorthEntrance_EventScript_Saige_2:
+# 9 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	goto UndergroundPath_NorthEntrance_EventScript_AlreadyTraded
+	goto UndergroundPath_NorthEntrance_EventScript_Saige_1
 
-script UndergroundPath_NorthEntrance_EventScript_AlreadyTraded {
-    msgbox(Trade_Text_HowIsMyOldMon)
-    release
-    end
-}
+UndergroundPath_NorthEntrance_EventScript_Saige_5:
+# 13 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	goto UndergroundPath_NorthEntrance_EventScript_DeclineTrade
+	goto UndergroundPath_NorthEntrance_EventScript_Saige_4
+
+UndergroundPath_NorthEntrance_EventScript_Saige_8:
+# 17 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	goto UndergroundPath_NorthEntrance_EventScript_DeclineTrade
+	goto UndergroundPath_NorthEntrance_EventScript_Saige_7
+
+UndergroundPath_NorthEntrance_EventScript_Saige_11:
+# 21 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	goto UndergroundPath_NorthEntrance_EventScript_NotRequestedMon
+	goto UndergroundPath_NorthEntrance_EventScript_Saige_10
+
+
+UndergroundPath_NorthEntrance_EventScript_DeclineTrade::
+# 31 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	msgbox Trade_Text_ThatsTooBad
+# 32 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	release
+	end
+
+
+UndergroundPath_NorthEntrance_EventScript_NotRequestedMon::
+# 37 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	bufferspeciesname STR_VAR_1, VAR_0x8009
+# 38 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	msgbox Trade_Text_ThisIsNoMon
+# 39 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	release
+	end
+
+
+UndergroundPath_NorthEntrance_EventScript_AlreadyTraded::
+# 44 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	msgbox Trade_Text_HowIsMyOldMon
+# 45 "data/maps/UndergroundPath_NorthEntrance_Frlg/scripts.pory"
+	release
+	end
+
+
+`

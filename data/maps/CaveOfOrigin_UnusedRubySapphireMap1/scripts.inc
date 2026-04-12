@@ -1,7 +1,17 @@
 CaveOfOrigin_UnusedRubySapphireMap1_MapScripts::
+# 2 "data/maps/CaveOfOrigin_UnusedRubySapphireMap1/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, CaveOfOrigin_UnusedRubySapphireMap1_OnTransition
 	.byte 0
 
-CaveOfOrigin_UnusedRubySapphireMap1_OnTransition:
-	call_if_set FLAG_UNUSED_RS_LEGENDARY_BATTLE_DONE, CaveOfOrigin_EventScript_DisableTriggers
+
+CaveOfOrigin_UnusedRubySapphireMap1_OnTransition::
+# 6 "data/maps/CaveOfOrigin_UnusedRubySapphireMap1/scripts.pory"
+	goto_if_set FLAG_UNUSED_RS_LEGENDARY_BATTLE_DONE, CaveOfOrigin_UnusedRubySapphireMap1_OnTransition_2
+CaveOfOrigin_UnusedRubySapphireMap1_OnTransition_1:
 	end
+
+CaveOfOrigin_UnusedRubySapphireMap1_OnTransition_2:
+# 7 "data/maps/CaveOfOrigin_UnusedRubySapphireMap1/scripts.pory"
+	call CaveOfOrigin_EventScript_DisableTriggers
+	goto CaveOfOrigin_UnusedRubySapphireMap1_OnTransition_1
+

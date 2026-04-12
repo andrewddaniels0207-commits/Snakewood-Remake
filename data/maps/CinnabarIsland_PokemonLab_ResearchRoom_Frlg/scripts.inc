@@ -1,27 +1,38 @@
 CinnabarIsland_PokemonLab_ResearchRoom_Frlg_MapScripts::
 	.byte 0
 
+
 CinnabarIsland_PokemonLab_ResearchRoom_EventScript_MetronomeTutor::
+# 4 "data/maps/CinnabarIsland_PokemonLab_ResearchRoom_Frlg/scripts.pory"
 	goto EventScript_MetronomeTutor
 	end
 
+
 CinnabarIsland_PokemonLab_ResearchRoom_EventScript_Scientist::
+# 9 "data/maps/CinnabarIsland_PokemonLab_ResearchRoom_Frlg/scripts.pory"
 	msgbox CinnabarIsland_PokemonLab_ResearchRoom_Text_EeveeCanEvolveIntroThreeMons, MSGBOX_NPC
 	end
 
+
 CinnabarIsland_PokemonLab_ResearchRoom_EventScript_Computer::
+# 14 "data/maps/CinnabarIsland_PokemonLab_ResearchRoom_Frlg/scripts.pory"
 	msgbox CinnabarIsland_PokemonLab_ResearchRoom_Text_LegendaryBirdEmail, MSGBOX_SIGN
 	end
 
+
 CinnabarIsland_PokemonLab_ResearchRoom_EventScript_AmberPipe::
+# 19 "data/maps/CinnabarIsland_PokemonLab_ResearchRoom_Frlg/scripts.pory"
 	msgbox CinnabarIsland_PokemonLab_ResearchRoom_Text_AnAmberPipe, MSGBOX_SIGN
 	end
 
+
 CinnabarIsland_PokemonLab_ResearchRoom_Text_EeveeCanEvolveIntroThreeMons::
+# 23 "data/maps/CinnabarIsland_PokemonLab_ResearchRoom_Frlg/scripts.pory"
 	.string "EEVEE can evolve into one of three\n"
 	.string "kinds of POKéMON.$"
 
 CinnabarIsland_PokemonLab_ResearchRoom_Text_LegendaryBirdEmail::
+# 28 "data/maps/CinnabarIsland_PokemonLab_ResearchRoom_Frlg/scripts.pory"
 	.string "There's an e-mail message.\p"
 	.string "… … …\p"
 	.string "There are three legendary bird\n"
@@ -34,5 +45,5 @@ CinnabarIsland_PokemonLab_ResearchRoom_Text_LegendaryBirdEmail::
 	.string "From: POKéMON RESEARCH TEAM…$"
 
 CinnabarIsland_PokemonLab_ResearchRoom_Text_AnAmberPipe::
+# 41 "data/maps/CinnabarIsland_PokemonLab_ResearchRoom_Frlg/scripts.pory"
 	.string "An amber pipe!$"
-

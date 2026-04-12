@@ -1,22 +1,29 @@
-mapscripts MtPyre_4F_MapScripts {}
+raw `
+MtPyre_4F_MapScripts::
+	.byte 0
 
-script MtPyre_5F_EventScript_Atsushi {
-    trainerbattle_single(TRAINER_ATSUSHI, MtPyre_5F_Text_AtsushiIntro, MtPyre_5F_Text_AtsushiDefeat)
-    msgbox(MtPyre_5F_Text_AtsushiPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
 
-text MtPyre_5F_Text_AtsushiIntro {
-    "Teacher…\n"
-    "Please watch over my progress!$"
-}
+MtPyre_5F_EventScript_Atsushi::
+# 4 "data/maps/MtPyre_4F/scripts.pory"
+	trainerbattle_single TRAINER_ATSUSHI, MtPyre_5F_Text_AtsushiIntro, MtPyre_5F_Text_AtsushiDefeat
+# 5 "data/maps/MtPyre_4F/scripts.pory"
+	msgbox MtPyre_5F_Text_AtsushiPostBattle, MSGBOX_AUTOCLOSE
+	end
 
-text MtPyre_5F_Text_AtsushiDefeat {
-    "Teacher…\n"
-    "Please forgive me!$"
-}
 
-text MtPyre_5F_Text_AtsushiPostBattle {
-    "Until I improve, my teacher, who rests\n"
-    "here, will never find true peace…$"
-}
+MtPyre_5F_Text_AtsushiIntro::
+# 9 "data/maps/MtPyre_4F/scripts.pory"
+	.string "Teacher…\n"
+	.string "Please watch over my progress!$"
+
+MtPyre_5F_Text_AtsushiDefeat::
+# 14 "data/maps/MtPyre_4F/scripts.pory"
+	.string "Teacher…\n"
+	.string "Please forgive me!$"
+
+MtPyre_5F_Text_AtsushiPostBattle::
+# 19 "data/maps/MtPyre_4F/scripts.pory"
+	.string "Until I improve, my teacher, who rests\n"
+	.string "here, will never find true peace…$"
+
+`

@@ -1,254 +1,404 @@
-mapscripts Route114_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: Route114_OnTransition
-    MAP_SCRIPT_ON_LOAD: Route114_OnLoad
-    MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_SHOULD_END_ABNORMAL_WEATHER, 1: AbnormalWeather_EventScript_EndEventAndCleanup_1
-    ]
-}
+raw `
+Route114_MapScripts::
+# 2 "data/maps/Route114/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, Route114_OnTransition
+# 3 "data/maps/Route114/scripts.pory"
+	map_script MAP_SCRIPT_ON_LOAD, Route114_OnLoad
+# 4 "data/maps/Route114/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route114_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
+	.byte 0
 
-script Route114_OnTransition {
-    if (var(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1) {
-        call(AbnormalWeather_EventScript_HideMapNamePopup)
-    }
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_114_NORTH) {
-        call(AbnormalWeather_StartGroudonWeather)
-    }
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_114_SOUTH) {
-        call(AbnormalWeather_StartGroudonWeather)
-    }
-    end
-}
+Route114_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 5 "data/maps/Route114/scripts.pory"
+	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
+	.2byte 0
 
-script Route114_OnLoad {
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_114_NORTH) {
-        call(AbnormalWeather_EventScript_PlaceTilesRoute114North)
-    }
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_114_SOUTH) {
-        call(AbnormalWeather_EventScript_PlaceTilesRoute114South)
-    }
-    end
-}
 
-script Route114_EventScript_Man {
-    lock
-    faceplayer
-    dotimebasedevents()
-    if (flag(FLAG_DAILY_ROUTE_114_RECEIVED_BERRY)) {
-        goto(Route114_EventScript_ReceivedBerry)
-    }
-    msgbox(Route114_Text_LoveUsingBerryCrushShareBerry, MSGBOX_DEFAULT)
-    random(NUM_ROUTE_114_MAN_BERRIES)
-    addvar(VAR_RESULT, NUM_ROUTE_114_MAN_BERRIES_SKIPPED)
-    addvar(VAR_RESULT, FIRST_BERRY_INDEX)
-    giveitem(VAR_RESULT)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(Common_EventScript_ShowBagIsFull)
-    }
-    setflag(FLAG_DAILY_ROUTE_114_RECEIVED_BERRY)
-    msgbox(Route114_Text_TryBerryCrushWithFriends, MSGBOX_DEFAULT)
-    release
-    end
-}
+Route114_OnTransition::
+# 10 "data/maps/Route114/scripts.pory"
+	compare VAR_SHOULD_END_ABNORMAL_WEATHER, 1
+	goto_if_eq Route114_OnTransition_2
+Route114_OnTransition_1:
+# 13 "data/maps/Route114/scripts.pory"
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_114_NORTH
+	goto_if_eq Route114_OnTransition_5
+Route114_OnTransition_4:
+# 16 "data/maps/Route114/scripts.pory"
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_114_SOUTH
+	goto_if_eq Route114_OnTransition_8
+Route114_OnTransition_7:
+	end
 
-script Route114_EventScript_ReceivedBerry {
-    msgbox(Route114_Text_FunToThinkAboutBerries, MSGBOX_DEFAULT)
-    release
-    end
-}
+Route114_OnTransition_2:
+# 11 "data/maps/Route114/scripts.pory"
+	call AbnormalWeather_EventScript_HideMapNamePopup
+	goto Route114_OnTransition_1
 
-script Route114_EventScript_RoarGentleman {
-    lock
-    faceplayer
-    if (flag(FLAG_RECEIVED_TM_ROAR)) {
-        goto(Route114_EventScript_ReceivedRoar)
-    }
-    msgbox(Route114_Text_AllMyMonDoesIsRoarTakeThis, MSGBOX_DEFAULT)
-    giveitem(ITEM_TM_ROAR)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(Common_EventScript_ShowBagIsFull)
-    }
-    setflag(FLAG_RECEIVED_TM_ROAR)
-    msgbox(Route114_Text_ExplainRoar, MSGBOX_DEFAULT)
-    release
-    end
-}
+Route114_OnTransition_5:
+# 14 "data/maps/Route114/scripts.pory"
+	call AbnormalWeather_StartGroudonWeather
+	goto Route114_OnTransition_4
 
-script Route114_EventScript_ReceivedRoar {
-    msgbox(Route114_Text_ExplainRoar, MSGBOX_DEFAULT)
-    release
-    end
-}
+Route114_OnTransition_8:
+# 17 "data/maps/Route114/scripts.pory"
+	call AbnormalWeather_StartGroudonWeather
+	goto Route114_OnTransition_7
 
-script Route114_EventScript_Poochyena {
-    lock
-    faceplayer
-    waitse()
-    playmoncry(SPECIES_POOCHYENA, CRY_MODE_ENCOUNTER)
-    msgbox(Route114_Text_Poochyena, MSGBOX_DEFAULT)
-    waitmoncry()
-    release
-    end
-}
 
-script Route114_EventScript_MeteorFallsSign {
-    msgbox(Route114_Text_MeteorFallsSign, MSGBOX_SIGN)
-    end
-}
+Route114_OnLoad::
+# 23 "data/maps/Route114/scripts.pory"
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_114_NORTH
+	goto_if_eq Route114_OnLoad_2
+Route114_OnLoad_1:
+# 26 "data/maps/Route114/scripts.pory"
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_114_SOUTH
+	goto_if_eq Route114_OnLoad_5
+Route114_OnLoad_4:
+	end
 
-script Route114_EventScript_FossilManiacsHouseSign {
-    msgbox(Route114_Text_FossilManiacsHouseSign, MSGBOX_SIGN)
-    end
-}
+Route114_OnLoad_2:
+# 24 "data/maps/Route114/scripts.pory"
+	call AbnormalWeather_EventScript_PlaceTilesRoute114North
+	goto Route114_OnLoad_1
 
-script Route114_EventScript_LanettesHouseSign {
-    msgbox(Route114_Text_LanettesHouse, MSGBOX_SIGN)
-    end
-}
+Route114_OnLoad_5:
+# 27 "data/maps/Route114/scripts.pory"
+	call AbnormalWeather_EventScript_PlaceTilesRoute114South
+	goto Route114_OnLoad_4
 
-script Route114_EventScript_Lenny {
-    trainerbattle_single(TRAINER_LENNY, Route114_Text_LennyIntro, Route114_Text_LennyDefeat)
-    msgbox(Route114_Text_LennyPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
 
-script Route114_EventScript_Lucas {
-    trainerbattle_single(TRAINER_LUCAS_1, Route114_Text_LucasIntro, Route114_Text_LucasDefeat)
-    msgbox(Route114_Text_LucasPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route114_EventScript_Man::
+# 33 "data/maps/Route114/scripts.pory"
+	lock
+# 34 "data/maps/Route114/scripts.pory"
+	faceplayer
+# 35 "data/maps/Route114/scripts.pory"
+	dotimebasedevents
+# 36 "data/maps/Route114/scripts.pory"
+	goto_if_set FLAG_DAILY_ROUTE_114_RECEIVED_BERRY, Route114_EventScript_Man_2
+Route114_EventScript_Man_1:
+# 39 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_LoveUsingBerryCrushShareBerry, MSGBOX_DEFAULT
+# 40 "data/maps/Route114/scripts.pory"
+	random NUM_ROUTE_114_MAN_BERRIES
+# 41 "data/maps/Route114/scripts.pory"
+	addvar VAR_RESULT, NUM_ROUTE_114_MAN_BERRIES_SKIPPED
+# 42 "data/maps/Route114/scripts.pory"
+	addvar VAR_RESULT, FIRST_BERRY_INDEX
+# 43 "data/maps/Route114/scripts.pory"
+	giveitem VAR_RESULT
+# 44 "data/maps/Route114/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route114_EventScript_Man_5
+Route114_EventScript_Man_4:
+# 47 "data/maps/Route114/scripts.pory"
+	setflag FLAG_DAILY_ROUTE_114_RECEIVED_BERRY
+# 48 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_TryBerryCrushWithFriends, MSGBOX_DEFAULT
+# 49 "data/maps/Route114/scripts.pory"
+	release
+	end
 
-script Route114_EventScript_Shane {
-    trainerbattle_single(TRAINER_SHANE, Route114_Text_ShaneIntro, Route114_Text_ShaneDefeat)
-    msgbox(Route114_Text_ShanePostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route114_EventScript_Man_2:
+# 37 "data/maps/Route114/scripts.pory"
+	goto Route114_EventScript_ReceivedBerry
+	goto Route114_EventScript_Man_1
 
-script Route114_EventScript_Nancy {
-    trainerbattle_single(TRAINER_NANCY, Route114_Text_NancyIntro, Route114_Text_NancyDefeat)
-    msgbox(Route114_Text_NancyPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route114_EventScript_Man_5:
+# 45 "data/maps/Route114/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto Route114_EventScript_Man_4
 
-script Route114_EventScript_Steve {
-    trainerbattle_single(TRAINER_STEVE_1, Route114_Text_SteveIntro, Route114_Text_SteveDefeat, Route114_EventScript_RegisterSteve)
-    specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(Route114_EventScript_RematchSteve)
-    }
-    msgbox(Route114_Text_StevePostBattle, MSGBOX_DEFAULT)
-    release
-    end
-}
 
-script Route114_EventScript_RegisterSteve {
-    special(PlayerFaceTrainerAfterBattle)
-    waitmovement(0)
-    msgbox(Route114_Text_SteveRegister, MSGBOX_DEFAULT)
-    register_matchcall(TRAINER_STEVE_1)
-    release
-    end
-}
+Route114_EventScript_ReceivedBerry::
+# 54 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_FunToThinkAboutBerries, MSGBOX_DEFAULT
+# 55 "data/maps/Route114/scripts.pory"
+	release
+	end
 
-script Route114_EventScript_RematchSteve {
-    trainerbattle_rematch(TRAINER_STEVE_1, Route114_Text_SteveRematchIntro, Route114_Text_SteveRematchDefeat)
-    msgbox(Route114_Text_StevePostRematch, MSGBOX_AUTOCLOSE)
-    end
-}
 
-script Route114_EventScript_Bernie {
-    trainerbattle_single(TRAINER_BERNIE_1, Route114_Text_BernieIntro, Route114_Text_BernieDefeat, Route114_EventScript_RegisterBernie)
-    specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(Route114_EventScript_RematchBernie)
-    }
-    msgbox(Route114_Text_BerniePostBattle, MSGBOX_DEFAULT)
-    release
-    end
-}
+Route114_EventScript_RoarGentleman::
+# 60 "data/maps/Route114/scripts.pory"
+	lock
+# 61 "data/maps/Route114/scripts.pory"
+	faceplayer
+# 62 "data/maps/Route114/scripts.pory"
+	goto_if_set FLAG_RECEIVED_TM_ROAR, Route114_EventScript_RoarGentleman_2
+Route114_EventScript_RoarGentleman_1:
+# 65 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_AllMyMonDoesIsRoarTakeThis, MSGBOX_DEFAULT
+# 66 "data/maps/Route114/scripts.pory"
+	giveitem ITEM_TM_ROAR
+# 67 "data/maps/Route114/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route114_EventScript_RoarGentleman_5
+Route114_EventScript_RoarGentleman_4:
+# 70 "data/maps/Route114/scripts.pory"
+	setflag FLAG_RECEIVED_TM_ROAR
+# 71 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_ExplainRoar, MSGBOX_DEFAULT
+# 72 "data/maps/Route114/scripts.pory"
+	release
+	end
 
-script Route114_EventScript_RegisterBernie {
-    special(PlayerFaceTrainerAfterBattle)
-    waitmovement(0)
-    msgbox(Route114_Text_BernieRegister, MSGBOX_DEFAULT)
-    register_matchcall(TRAINER_BERNIE_1)
-    release
-    end
-}
+Route114_EventScript_RoarGentleman_2:
+# 63 "data/maps/Route114/scripts.pory"
+	goto Route114_EventScript_ReceivedRoar
+	goto Route114_EventScript_RoarGentleman_1
 
-script Route114_EventScript_RematchBernie {
-    trainerbattle_rematch(TRAINER_BERNIE_1, Route114_Text_BernieRematchIntro, Route114_Text_BernieRematchDefeat)
-    msgbox(Route114_Text_BerniePostRematch, MSGBOX_AUTOCLOSE)
-    end
-}
+Route114_EventScript_RoarGentleman_5:
+# 68 "data/maps/Route114/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto Route114_EventScript_RoarGentleman_4
 
-script Route114_EventScript_Claude {
-    trainerbattle_single(TRAINER_CLAUDE, Route114_Text_ClaudeIntro, Route114_Text_ClaudeDefeat)
-    msgbox(Route114_Text_ClaudePostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
 
-script Route114_EventScript_Nolan {
-    trainerbattle_single(TRAINER_NOLAN, Route114_Text_NolanIntro, Route114_Text_NolanDefeat)
-    msgbox(Route114_Text_NolanPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route114_EventScript_ReceivedRoar::
+# 77 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_ExplainRoar, MSGBOX_DEFAULT
+# 78 "data/maps/Route114/scripts.pory"
+	release
+	end
 
-script Route114_EventScript_Tyra {
-    trainerbattle_double(TRAINER_TYRA_AND_IVY, Route114_Text_TyraIntro, Route114_Text_TyraDefeat, Route114_Text_TyraNotEnoughMons)
-    msgbox(Route114_Text_TyraPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
 
-script Route114_EventScript_Ivy {
-    trainerbattle_double(TRAINER_TYRA_AND_IVY, Route114_Text_IvyIntro, Route114_Text_IvyDefeat, Route114_Text_IvyNotEnoughMons)
-    msgbox(Route114_Text_IvyPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route114_EventScript_Poochyena::
+# 83 "data/maps/Route114/scripts.pory"
+	lock
+# 84 "data/maps/Route114/scripts.pory"
+	faceplayer
+# 85 "data/maps/Route114/scripts.pory"
+	waitse
+# 86 "data/maps/Route114/scripts.pory"
+	playmoncry SPECIES_POOCHYENA, CRY_MODE_ENCOUNTER
+# 87 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_Poochyena, MSGBOX_DEFAULT
+# 88 "data/maps/Route114/scripts.pory"
+	waitmoncry
+# 89 "data/maps/Route114/scripts.pory"
+	release
+	end
 
-script Route114_EventScript_Angelina {
-    trainerbattle_single(TRAINER_ANGELINA, Route114_Text_AngelinaIntro, Route114_Text_AngelinaDefeat)
-    msgbox(Route114_Text_AngelinaPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
 
-script Route114_EventScript_Charlotte {
-    trainerbattle_single(TRAINER_CHARLOTTE, Route114_Text_CharlotteIntro, Route114_Text_CharlotteDefeat)
-    msgbox(Route114_Text_CharlottePostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route114_EventScript_MeteorFallsSign::
+# 94 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_MeteorFallsSign, MSGBOX_SIGN
+	end
 
-script Route114_EventScript_Kai {
-    trainerbattle_single(TRAINER_KAI, Route114_Text_KaiIntro, Route114_Text_KaiDefeat)
-    msgbox(Route114_Text_KaiPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
 
-text Route114_Text_AllMyMonDoesIsRoarTakeThis {
-    "All my POKéMON does is ROAR…\n"
-    "No one dares to come near me…\p"
-    "Sigh… If you would, please take\n"
-    "this TM away…$"
-}
+Route114_EventScript_FossilManiacsHouseSign::
+# 99 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_FossilManiacsHouseSign, MSGBOX_SIGN
+	end
 
-text Route114_Text_ExplainRoar {
-    "TM05 contains ROAR.\n"
-    "A ROAR sends POKéMON scurrying.$"
-}
 
-text Route114_Text_Poochyena {
-    "Bow! Bowwow!$"
-}
+Route114_EventScript_LanettesHouseSign::
+# 104 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_LanettesHouse, MSGBOX_SIGN
+	end
 
-text Route114_Text_MeteorFallsSign {
-    "METEOR FALLS\n"
-    "RUSTBORO CITY THROUGH HERE$"
-}
 
-text Route114_Text_FossilManiacsHouseSign {
-    "FOSSIL MANIAC'S HOUSE\n"
-    "“Fossils gratefully accepted!”$"
-}
+Route114_EventScript_Lenny::
+# 109 "data/maps/Route114/scripts.pory"
+	trainerbattle_single TRAINER_LENNY, Route114_Text_LennyIntro, Route114_Text_LennyDefeat
+# 110 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_LennyPostBattle, MSGBOX_AUTOCLOSE
+	end
 
-text Route114_Text_LanettesHouse {
-    "LANETTE'S HOUSE$"
-}
+
+Route114_EventScript_Lucas::
+# 115 "data/maps/Route114/scripts.pory"
+	trainerbattle_single TRAINER_LUCAS_1, Route114_Text_LucasIntro, Route114_Text_LucasDefeat
+# 116 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_LucasPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route114_EventScript_Shane::
+# 121 "data/maps/Route114/scripts.pory"
+	trainerbattle_single TRAINER_SHANE, Route114_Text_ShaneIntro, Route114_Text_ShaneDefeat
+# 122 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_ShanePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route114_EventScript_Nancy::
+# 127 "data/maps/Route114/scripts.pory"
+	trainerbattle_single TRAINER_NANCY, Route114_Text_NancyIntro, Route114_Text_NancyDefeat
+# 128 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_NancyPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route114_EventScript_Steve::
+# 133 "data/maps/Route114/scripts.pory"
+	trainerbattle_single TRAINER_STEVE_1, Route114_Text_SteveIntro, Route114_Text_SteveDefeat, Route114_EventScript_RegisterSteve
+# 134 "data/maps/Route114/scripts.pory"
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+# 135 "data/maps/Route114/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route114_EventScript_Steve_2
+Route114_EventScript_Steve_1:
+# 138 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_StevePostBattle, MSGBOX_DEFAULT
+# 139 "data/maps/Route114/scripts.pory"
+	release
+	end
+
+Route114_EventScript_Steve_2:
+# 136 "data/maps/Route114/scripts.pory"
+	goto Route114_EventScript_RematchSteve
+	goto Route114_EventScript_Steve_1
+
+
+Route114_EventScript_RegisterSteve::
+# 144 "data/maps/Route114/scripts.pory"
+	special PlayerFaceTrainerAfterBattle
+# 145 "data/maps/Route114/scripts.pory"
+	waitmovement 0
+# 146 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_SteveRegister, MSGBOX_DEFAULT
+# 147 "data/maps/Route114/scripts.pory"
+	register_matchcall TRAINER_STEVE_1
+# 148 "data/maps/Route114/scripts.pory"
+	release
+	end
+
+
+Route114_EventScript_RematchSteve::
+# 153 "data/maps/Route114/scripts.pory"
+	trainerbattle_rematch TRAINER_STEVE_1, Route114_Text_SteveRematchIntro, Route114_Text_SteveRematchDefeat
+# 154 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_StevePostRematch, MSGBOX_AUTOCLOSE
+	end
+
+
+Route114_EventScript_Bernie::
+# 159 "data/maps/Route114/scripts.pory"
+	trainerbattle_single TRAINER_BERNIE_1, Route114_Text_BernieIntro, Route114_Text_BernieDefeat, Route114_EventScript_RegisterBernie
+# 160 "data/maps/Route114/scripts.pory"
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+# 161 "data/maps/Route114/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route114_EventScript_Bernie_2
+Route114_EventScript_Bernie_1:
+# 164 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_BerniePostBattle, MSGBOX_DEFAULT
+# 165 "data/maps/Route114/scripts.pory"
+	release
+	end
+
+Route114_EventScript_Bernie_2:
+# 162 "data/maps/Route114/scripts.pory"
+	goto Route114_EventScript_RematchBernie
+	goto Route114_EventScript_Bernie_1
+
+
+Route114_EventScript_RegisterBernie::
+# 170 "data/maps/Route114/scripts.pory"
+	special PlayerFaceTrainerAfterBattle
+# 171 "data/maps/Route114/scripts.pory"
+	waitmovement 0
+# 172 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_BernieRegister, MSGBOX_DEFAULT
+# 173 "data/maps/Route114/scripts.pory"
+	register_matchcall TRAINER_BERNIE_1
+# 174 "data/maps/Route114/scripts.pory"
+	release
+	end
+
+
+Route114_EventScript_RematchBernie::
+# 179 "data/maps/Route114/scripts.pory"
+	trainerbattle_rematch TRAINER_BERNIE_1, Route114_Text_BernieRematchIntro, Route114_Text_BernieRematchDefeat
+# 180 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_BerniePostRematch, MSGBOX_AUTOCLOSE
+	end
+
+
+Route114_EventScript_Claude::
+# 185 "data/maps/Route114/scripts.pory"
+	trainerbattle_single TRAINER_CLAUDE, Route114_Text_ClaudeIntro, Route114_Text_ClaudeDefeat
+# 186 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_ClaudePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route114_EventScript_Nolan::
+# 191 "data/maps/Route114/scripts.pory"
+	trainerbattle_single TRAINER_NOLAN, Route114_Text_NolanIntro, Route114_Text_NolanDefeat
+# 192 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_NolanPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route114_EventScript_Tyra::
+# 197 "data/maps/Route114/scripts.pory"
+	trainerbattle_double TRAINER_TYRA_AND_IVY, Route114_Text_TyraIntro, Route114_Text_TyraDefeat, Route114_Text_TyraNotEnoughMons
+# 198 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_TyraPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route114_EventScript_Ivy::
+# 203 "data/maps/Route114/scripts.pory"
+	trainerbattle_double TRAINER_TYRA_AND_IVY, Route114_Text_IvyIntro, Route114_Text_IvyDefeat, Route114_Text_IvyNotEnoughMons
+# 204 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_IvyPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route114_EventScript_Angelina::
+# 209 "data/maps/Route114/scripts.pory"
+	trainerbattle_single TRAINER_ANGELINA, Route114_Text_AngelinaIntro, Route114_Text_AngelinaDefeat
+# 210 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_AngelinaPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route114_EventScript_Charlotte::
+# 215 "data/maps/Route114/scripts.pory"
+	trainerbattle_single TRAINER_CHARLOTTE, Route114_Text_CharlotteIntro, Route114_Text_CharlotteDefeat
+# 216 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_CharlottePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route114_EventScript_Kai::
+# 221 "data/maps/Route114/scripts.pory"
+	trainerbattle_single TRAINER_KAI, Route114_Text_KaiIntro, Route114_Text_KaiDefeat
+# 222 "data/maps/Route114/scripts.pory"
+	msgbox Route114_Text_KaiPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route114_Text_AllMyMonDoesIsRoarTakeThis::
+# 226 "data/maps/Route114/scripts.pory"
+	.string "All my POKéMON does is ROAR…\n"
+	.string "No one dares to come near me…\p"
+	.string "Sigh… If you would, please take\n"
+	.string "this TM away…$"
+
+Route114_Text_ExplainRoar::
+# 233 "data/maps/Route114/scripts.pory"
+	.string "TM05 contains ROAR.\n"
+	.string "A ROAR sends POKéMON scurrying.$"
+
+Route114_Text_Poochyena::
+# 238 "data/maps/Route114/scripts.pory"
+	.string "Bow! Bowwow!$"
+
+Route114_Text_MeteorFallsSign::
+# 242 "data/maps/Route114/scripts.pory"
+	.string "METEOR FALLS\n"
+	.string "RUSTBORO CITY THROUGH HERE$"
+
+Route114_Text_FossilManiacsHouseSign::
+# 247 "data/maps/Route114/scripts.pory"
+	.string "FOSSIL MANIAC'S HOUSE\n"
+	.string "“Fossils gratefully accepted!”$"
+
+Route114_Text_LanettesHouse::
+# 252 "data/maps/Route114/scripts.pory"
+	.string "LANETTE'S HOUSE$"
+
+`

@@ -1,159 +1,238 @@
-mapscripts PokemonLeague_LoreleisRoom_Frlg_MapScripts {
-    MAP_SCRIPT_ON_RESUME: PokemonLeague_LoreleisRoom_OnResume
-    MAP_SCRIPT_ON_LOAD: PokemonLeague_LoreleisRoom_OnLoad
-    MAP_SCRIPT_ON_TRANSITION: PokemonLeague_LoreleisRoom_OnTransition
-    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: PokemonLeague_LoreleisRoom_OnWarp
-    MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_MAP_SCENE_POKEMON_LEAGUE, 0: PokemonLeague_LoreleisRoom_EventScript_EnterRoom
-    ]
-}
-
-script PokemonLeague_LoreleisRoom_OnResume {
-    setvar(VAR_0x8004, 0)
-    call(PokemonLeague_EventScript_DoLightingEffect)
-    end
-}
-
-script PokemonLeague_LoreleisRoom_OnLoad {
-    if (flag(FLAG_DEFEATED_LORELEI)) {
-        call(PokemonLeague_LoreleisRoom_EventScript_SetDoorOpen)
-    }
-    if (var(VAR_MAP_SCENE_POKEMON_LEAGUE) == 1) {
-        call(PokemonLeague_LoreleisRoom_EventScript_CloseEntry)
-    }
-    end
-}
-
-script PokemonLeague_LoreleisRoom_EventScript_CloseEntry {
-    call(PokemonLeague_EventScript_CloseEntry)
-    return
-}
-
-script PokemonLeague_LoreleisRoom_EventScript_SetDoorOpen {
-    call(PokemonLeague_EventScript_SetDoorOpen)
-    return
-}
-
-script PokemonLeague_LoreleisRoom_OnTransition {
-    setworldmapflag(FLAG_WORLD_MAP_POKEMON_LEAGUE_LORELEIS_ROOM)
-    end
-}
-
 raw `
-PokemonLeague_LoreleisRoom_OnWarp:
-	map_script_2 VAR_TEMP_1, 0, PokemonLeague_LoreleisRoom_EventScript_TurnPlayerNorth
+PokemonLeague_LoreleisRoom_Frlg_MapScripts::
+# 2 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_RESUME, PokemonLeague_LoreleisRoom_OnResume
+# 3 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_LOAD, PokemonLeague_LoreleisRoom_OnLoad
+# 4 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, PokemonLeague_LoreleisRoom_OnTransition
+# 5 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PokemonLeague_LoreleisRoom_OnWarp
+# 6 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, PokemonLeague_LoreleisRoom_Frlg_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
+	.byte 0
+
+PokemonLeague_LoreleisRoom_Frlg_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 7 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	map_script_2 VAR_MAP_SCENE_POKEMON_LEAGUE, 0, PokemonLeague_LoreleisRoom_EventScript_EnterRoom
 	.2byte 0
 
+
+PokemonLeague_LoreleisRoom_OnResume::
+# 12 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	setvar VAR_0x8004, 0
+# 13 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	call PokemonLeague_EventScript_DoLightingEffect
+	end
+
+
+PokemonLeague_LoreleisRoom_OnLoad::
+# 18 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	goto_if_set FLAG_DEFEATED_LORELEI, PokemonLeague_LoreleisRoom_OnLoad_2
+PokemonLeague_LoreleisRoom_OnLoad_1:
+# 21 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 1
+	goto_if_eq PokemonLeague_LoreleisRoom_OnLoad_5
+PokemonLeague_LoreleisRoom_OnLoad_4:
+	end
+
+PokemonLeague_LoreleisRoom_OnLoad_2:
+# 19 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	call PokemonLeague_LoreleisRoom_EventScript_SetDoorOpen
+	goto PokemonLeague_LoreleisRoom_OnLoad_1
+
+PokemonLeague_LoreleisRoom_OnLoad_5:
+# 22 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	call PokemonLeague_LoreleisRoom_EventScript_CloseEntry
+	goto PokemonLeague_LoreleisRoom_OnLoad_4
+
+
+PokemonLeague_LoreleisRoom_EventScript_CloseEntry::
+# 28 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	call PokemonLeague_EventScript_CloseEntry
+	return
+
+
+PokemonLeague_LoreleisRoom_EventScript_SetDoorOpen::
+# 33 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	call PokemonLeague_EventScript_SetDoorOpen
+	return
+
+
+PokemonLeague_LoreleisRoom_OnTransition::
+# 38 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	setworldmapflag FLAG_WORLD_MAP_POKEMON_LEAGUE_LORELEIS_ROOM
+	end
+
+
+# 42 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+
+# 43 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+PokemonLeague_LoreleisRoom_OnWarp:
+# 44 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	map_script_2 VAR_TEMP_1, 0, PokemonLeague_LoreleisRoom_EventScript_TurnPlayerNorth
+# 45 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	.2byte 0
+
+PokemonLeague_LoreleisRoom_EventScript_TurnPlayerNorth::
+# 50 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	turnobject LOCALID_PLAYER, DIR_NORTH
+	end
+
+
+PokemonLeague_LoreleisRoom_EventScript_EnterRoom::
+# 55 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	lockall
+# 56 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	call PokemonLeague_EventScript_EnterRoom
+# 57 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	setvar VAR_MAP_SCENE_POKEMON_LEAGUE, 1
+# 58 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	releaseall
+	end
+
+
+PokemonLeague_LoreleisRoom_EventScript_Lorelei::
+# 63 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	lock
+# 64 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	faceplayer
+# 65 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	famechecker FAMECHECKER_LORELEI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+# 66 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	goto_if_set FLAG_DEFEATED_LORELEI, PokemonLeague_LoreleisRoom_EventScript_Lorelei_2
+PokemonLeague_LoreleisRoom_EventScript_Lorelei_1:
+# 69 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	famechecker FAMECHECKER_LORELEI, 0
+# 70 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	famechecker FAMECHECKER_LORELEI, 1
+# 71 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	goto_if_unset FLAG_IS_CHAMPION, PokemonLeague_LoreleisRoom_EventScript_Lorelei_5
+PokemonLeague_LoreleisRoom_EventScript_Lorelei_4:
+# 74 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	goto_if_set FLAG_IS_CHAMPION, PokemonLeague_LoreleisRoom_EventScript_Lorelei_8
+PokemonLeague_LoreleisRoom_EventScript_Lorelei_7:
+# 77 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	setflag FLAG_TEMP_3
+# 78 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	setflag FLAG_TEMP_5
+# 79 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	goto_if_unset FLAG_IS_CHAMPION, PokemonLeague_LoreleisRoom_EventScript_Lorelei_11
+PokemonLeague_LoreleisRoom_EventScript_Lorelei_10:
+# 82 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	goto_if_set FLAG_IS_CHAMPION, PokemonLeague_LoreleisRoom_EventScript_Lorelei_14
+PokemonLeague_LoreleisRoom_EventScript_Lorelei_13:
+# 85 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	clearflag FLAG_TEMP_5
+# 86 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	goto PokemonLeague_LoreleisRoom_EventScript_DefeatedLorelei
+	end
+
+PokemonLeague_LoreleisRoom_EventScript_Lorelei_2:
+# 67 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	goto PokemonLeague_LoreleisRoom_EventScript_PostBattle
+	goto PokemonLeague_LoreleisRoom_EventScript_Lorelei_1
+
+PokemonLeague_LoreleisRoom_EventScript_Lorelei_5:
+# 72 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	call PokemonLeague_LoreleisRoom_EventScript_Intro
+	goto PokemonLeague_LoreleisRoom_EventScript_Lorelei_4
+
+PokemonLeague_LoreleisRoom_EventScript_Lorelei_8:
+# 75 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	call PokemonLeague_LoreleisRoom_EventScript_RematchIntro
+	goto PokemonLeague_LoreleisRoom_EventScript_Lorelei_7
+
+PokemonLeague_LoreleisRoom_EventScript_Lorelei_11:
+# 80 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	call PokemonLeague_LoreleisRoom_EventScript_Battle
+	goto PokemonLeague_LoreleisRoom_EventScript_Lorelei_10
+
+PokemonLeague_LoreleisRoom_EventScript_Lorelei_14:
+# 83 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	call PokemonLeague_LoreleisRoom_EventScript_Rematch
+	goto PokemonLeague_LoreleisRoom_EventScript_Lorelei_13
+
+
+PokemonLeague_LoreleisRoom_EventScript_Intro::
+# 91 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	msgbox PokemonLeague_LoreleisRoom_Text_Intro
+	return
+
+
+PokemonLeague_LoreleisRoom_EventScript_RematchIntro::
+# 96 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	msgbox PokemonLeague_LoreleisRoom_Text_RematchIntro
+	return
+
+
+PokemonLeague_LoreleisRoom_EventScript_Battle::
+# 101 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	trainerbattle_no_intro TRAINER_ELITE_FOUR_LORELEI, PokemonLeague_LoreleisRoom_Text_Defeat
+	return
+
+
+PokemonLeague_LoreleisRoom_EventScript_Rematch::
+# 106 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	trainerbattle_no_intro TRAINER_ELITE_FOUR_LORELEI_2, PokemonLeague_LoreleisRoom_Text_Defeat
+	return
+
+
+PokemonLeague_LoreleisRoom_EventScript_PostBattle::
+# 111 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	msgbox PokemonLeague_LoreleisRoom_Text_PostBattle
+# 112 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	release
+	end
+
+
+PokemonLeague_LoreleisRoom_EventScript_DefeatedLorelei::
+# 117 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	setflag FLAG_DEFEATED_LORELEI
+# 118 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	call PokemonLeague_EventScript_OpenDoor
+# 119 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	msgbox PokemonLeague_LoreleisRoom_Text_PostBattle
+# 120 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	release
+	end
+
+
+PokemonLeague_LoreleisRoom_Text_Intro::
+# 124 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	.string "Welcome to the POKéMON LEAGUE.\p"
+	.string "I am LORELEI of the ELITE FOUR.\p"
+	.string "No one can best me when it comes\n"
+	.string "to icy POKéMON.\p"
+	.string "Freezing moves are powerful.\p"
+	.string "Your POKéMON will be at my mercy\n"
+	.string "when they are frozen solid.\p"
+	.string "Hahaha!\n"
+	.string "Are you ready?{PLAY_BGM}{MUS_RG_ENCOUNTER_GYM_LEADER}$"
+
+PokemonLeague_LoreleisRoom_Text_RematchIntro::
+# 136 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	.string "Welcome to the POKéMON LEAGUE.\p"
+	.string "I, LORELEI of the ELITE FOUR,\n"
+	.string "have returned!\p"
+	.string "You know how it goes.\n"
+	.string "No one can best me when it comes\l"
+	.string "to icy POKéMON.\p"
+	.string "Freezing moves are powerful.\p"
+	.string "Your POKéMON will be at my mercy\n"
+	.string "when they are frozen solid.\p"
+	.string "Hahaha!\n"
+	.string "Are you ready?{PLAY_BGM}{MUS_RG_ENCOUNTER_GYM_LEADER}$"
+
+PokemonLeague_LoreleisRoom_Text_Defeat::
+# 150 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	.string "…Things shouldn't be this way!$"
+
+PokemonLeague_LoreleisRoom_Text_PostBattle::
+# 154 "data/maps/PokemonLeague_LoreleisRoom_Frlg/scripts.pory"
+	.string "You're better than I thought.\n"
+	.string "Go on ahead.\p"
+	.string "You only got a taste of the\n"
+	.string "POKéMON LEAGUE's power.$"
+
 `
-
-script PokemonLeague_LoreleisRoom_EventScript_TurnPlayerNorth {
-    turnobject(LOCALID_PLAYER, DIR_NORTH)
-    end
-}
-
-script PokemonLeague_LoreleisRoom_EventScript_EnterRoom {
-    lockall
-    call(PokemonLeague_EventScript_EnterRoom)
-    setvar(VAR_MAP_SCENE_POKEMON_LEAGUE, 1)
-    releaseall
-    end
-}
-
-script PokemonLeague_LoreleisRoom_EventScript_Lorelei {
-    lock
-    faceplayer
-    famechecker(FAMECHECKER_LORELEI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
-    if (flag(FLAG_DEFEATED_LORELEI)) {
-        goto(PokemonLeague_LoreleisRoom_EventScript_PostBattle)
-    }
-    famechecker(FAMECHECKER_LORELEI, 0)
-    famechecker(FAMECHECKER_LORELEI, 1)
-    if (!flag(FLAG_IS_CHAMPION)) {
-        call(PokemonLeague_LoreleisRoom_EventScript_Intro)
-    }
-    if (flag(FLAG_IS_CHAMPION)) {
-        call(PokemonLeague_LoreleisRoom_EventScript_RematchIntro)
-    }
-    setflag(FLAG_TEMP_3)
-    setflag(FLAG_TEMP_5)
-    if (!flag(FLAG_IS_CHAMPION)) {
-        call(PokemonLeague_LoreleisRoom_EventScript_Battle)
-    }
-    if (flag(FLAG_IS_CHAMPION)) {
-        call(PokemonLeague_LoreleisRoom_EventScript_Rematch)
-    }
-    clearflag(FLAG_TEMP_5)
-    goto(PokemonLeague_LoreleisRoom_EventScript_DefeatedLorelei)
-    end
-}
-
-script PokemonLeague_LoreleisRoom_EventScript_Intro {
-    msgbox(PokemonLeague_LoreleisRoom_Text_Intro)
-    return
-}
-
-script PokemonLeague_LoreleisRoom_EventScript_RematchIntro {
-    msgbox(PokemonLeague_LoreleisRoom_Text_RematchIntro)
-    return
-}
-
-script PokemonLeague_LoreleisRoom_EventScript_Battle {
-    trainerbattle_no_intro(TRAINER_ELITE_FOUR_LORELEI, PokemonLeague_LoreleisRoom_Text_Defeat)
-    return
-}
-
-script PokemonLeague_LoreleisRoom_EventScript_Rematch {
-    trainerbattle_no_intro(TRAINER_ELITE_FOUR_LORELEI_2, PokemonLeague_LoreleisRoom_Text_Defeat)
-    return
-}
-
-script PokemonLeague_LoreleisRoom_EventScript_PostBattle {
-    msgbox(PokemonLeague_LoreleisRoom_Text_PostBattle)
-    release
-    end
-}
-
-script PokemonLeague_LoreleisRoom_EventScript_DefeatedLorelei {
-    setflag(FLAG_DEFEATED_LORELEI)
-    call(PokemonLeague_EventScript_OpenDoor)
-    msgbox(PokemonLeague_LoreleisRoom_Text_PostBattle)
-    release
-    end
-}
-
-text PokemonLeague_LoreleisRoom_Text_Intro {
-    "Welcome to the POKéMON LEAGUE.\p"
-    "I am LORELEI of the ELITE FOUR.\p"
-    "No one can best me when it comes\n"
-    "to icy POKéMON.\p"
-    "Freezing moves are powerful.\p"
-    "Your POKéMON will be at my mercy\n"
-    "when they are frozen solid.\p"
-    "Hahaha!\n"
-    "Are you ready?{PLAY_BGM}{MUS_RG_ENCOUNTER_GYM_LEADER}$"
-}
-
-text PokemonLeague_LoreleisRoom_Text_RematchIntro {
-    "Welcome to the POKéMON LEAGUE.\p"
-    "I, LORELEI of the ELITE FOUR,\n"
-    "have returned!\p"
-    "You know how it goes.\n"
-    "No one can best me when it comes\l"
-    "to icy POKéMON.\p"
-    "Freezing moves are powerful.\p"
-    "Your POKéMON will be at my mercy\n"
-    "when they are frozen solid.\p"
-    "Hahaha!\n"
-    "Are you ready?{PLAY_BGM}{MUS_RG_ENCOUNTER_GYM_LEADER}$"
-}
-
-text PokemonLeague_LoreleisRoom_Text_Defeat {
-    "…Things shouldn't be this way!$"
-}
-
-text PokemonLeague_LoreleisRoom_Text_PostBattle {
-    "You're better than I thought.\n"
-    "Go on ahead.\p"
-    "You only got a taste of the\n"
-    "POKéMON LEAGUE's power.$"
-}

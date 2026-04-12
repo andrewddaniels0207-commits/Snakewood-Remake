@@ -1,331 +1,746 @@
 VerdanturfTown_BattleTentLobby_MapScripts::
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, VerdanturfTown_BattleTentLobby_OnFrame
+# 9 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, VerdanturfTown_BattleTentLobby_OnWarp
+# 2 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, VerdanturfTown_BattleTentLobby_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
 	.byte 0
 
-VerdanturfTown_BattleTentLobby_OnWarp:
-	map_script_2 VAR_TEMP_1, 0, VerdanturfTown_BattleTentLobby_EventScript_TurnPlayerNorth
-	.2byte 0
-
-VerdanturfTown_BattleTentLobby_EventScript_TurnPlayerNorth::
-	setvar VAR_TEMP_1, 1
-	turnobject LOCALID_PLAYER, DIR_NORTH
-	end
-
-VerdanturfTown_BattleTentLobby_OnFrame:
+VerdanturfTown_BattleTentLobby_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 3 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, 0, VerdanturfTown_BattleTentLobby_EventScript_GetChallengeStatus
+# 4 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING, VerdanturfTown_BattleTentLobby_EventScript_QuitWithoutSaving
+# 5 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_PAUSED, VerdanturfTown_BattleTentLobby_EventScript_ResumeChallenge
+# 6 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_WON, VerdanturfTown_BattleTentLobby_EventScript_WonChallenge
+# 7 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST, VerdanturfTown_BattleTentLobby_EventScript_LostChallenge
 	.2byte 0
 
+
+# 12 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+
+# 13 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+VerdanturfTown_BattleTentLobby_OnWarp:
+# 14 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	map_script_2 VAR_TEMP_1, 0, VerdanturfTown_BattleTentLobby_EventScript_TurnPlayerNorth
+# 15 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	.2byte 0
+
+VerdanturfTown_BattleTentLobby_EventScript_TurnPlayerNorth::
+# 20 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	setvar VAR_TEMP_1, 1
+# 21 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	turnobject LOCALID_PLAYER, DIR_NORTH
+	end
+
+
 VerdanturfTown_BattleTentLobby_EventScript_GetChallengeStatus::
+# 26 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	frontier_getstatus
 	end
 
+
 VerdanturfTown_BattleTentLobby_EventScript_QuitWithoutSaving::
+# 31 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	lockall
+# 32 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox BattleFrontier_BattlePalaceLobby_Text_FailedToSaveBeforeEndingChallenge, MSGBOX_DEFAULT
+# 33 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	closemessage
+# 34 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
+# 35 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
+# 36 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
+# 37 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	releaseall
 	end
+
 
 VerdanturfTown_BattleTentLobby_EventScript_WonChallenge::
+# 42 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	lockall
+# 43 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_AchievedThreeWinStreak, MSGBOX_DEFAULT
+# 44 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	message VerdanturfTown_BattleTentLobby_Text_FeatWillBeRecorded
+# 45 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitmessage
+# 46 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	verdanturftent_setrandomprize
+# 47 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
+# 48 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	verdanturftent_save 0
+# 49 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	playse SE_SAVE
+# 50 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitse
+	return
+
 
 VerdanturfTown_BattleTentLobby_EventScript_GivePrize::
+# 54 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_PresentYouWithPrize, MSGBOX_DEFAULT
+# 55 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	verdanturftent_giveprize
+# 56 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	switch VAR_RESULT
-	case FALSE, VerdanturfTown_BattleTentLobby_EventScript_NoRoomForPrize
+# 57 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case FALSE, VerdanturfTown_BattleTentLobby_EventScript_GivePrize_3
+VerdanturfTown_BattleTentLobby_EventScript_GivePrize_1:
+# 60 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
-	message BattleFrontier_BattleDomeLobby_Text_ReceivedPrize  @ Odd that it used Dome's copy instead of Palace's
+# 61 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	message BattleFrontier_BattleDomeLobby_Text_ReceivedPrize
+# 62 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitmessage
+# 63 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	playfanfare MUS_OBTAIN_ITEM
+# 64 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitfanfare
+# 65 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_ReturnFortified, MSGBOX_DEFAULT
+# 66 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	closemessage
+# 67 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
+# 68 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	releaseall
 	end
+
+VerdanturfTown_BattleTentLobby_EventScript_GivePrize_3:
+# 58 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_NoRoomForPrize
+	goto VerdanturfTown_BattleTentLobby_EventScript_GivePrize_1
+
 
 VerdanturfTown_BattleTentLobby_EventScript_NoRoomForPrize::
+# 73 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox BattleFrontier_BattlePalaceLobby_Text_NoSpaceForPrize, MSGBOX_DEFAULT
+# 74 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitmessage
+# 75 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	closemessage
+# 76 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
+# 77 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	releaseall
 	end
 
+
 VerdanturfTown_BattleTentLobby_EventScript_PrizeWaiting::
+# 82 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	lockall
+# 83 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_AchievedThreeWinStreak, MSGBOX_DEFAULT
+# 84 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	goto VerdanturfTown_BattleTentLobby_EventScript_GivePrize
 	end
 
+
 VerdanturfTown_BattleTentLobby_EventScript_LostChallenge::
+# 89 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	lockall
+# 90 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	message VerdanturfTown_BattleTentLobby_Text_ResultsWillBeRecorded
+# 91 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitmessage
+# 92 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
+# 93 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	verdanturftent_save 0
+# 94 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	playse SE_SAVE
+# 95 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitse
+# 96 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_ReturnFortified, MSGBOX_DEFAULT
+# 97 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	closemessage
+# 98 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
+# 99 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	releaseall
 	end
 
+
 VerdanturfTown_BattleTentLobby_EventScript_ResumeChallenge::
+# 104 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	lockall
+# 105 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox BattleFrontier_BattlePalaceLobby_Text_WeHaveBeenWaiting, MSGBOX_DEFAULT
+# 106 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	message BattleFrontier_BattlePalaceLobby_Text_MustSaveBeforeChallenge
+# 107 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitmessage
+# 108 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	verdanturftent_save CHALLENGE_STATUS_SAVING
+# 109 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	playse SE_SAVE
+# 110 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitse
+# 111 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
+# 112 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
+# 113 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	goto VerdanturfTown_BattleTentLobby_EventScript_EnterChallenge
+	return
+
 
 VerdanturfTown_BattleTentLobby_EventScript_Attendant::
+# 117 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	lock
+# 118 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	faceplayer
+# 119 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	verdanturftent_getprize
-	goto_if_ne VAR_RESULT, ITEM_NONE, VerdanturfTown_BattleTentLobby_EventScript_PrizeWaiting
+# 120 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	compare VAR_RESULT, ITEM_NONE
+	goto_if_ne VerdanturfTown_BattleTentLobby_EventScript_Attendant_2
+VerdanturfTown_BattleTentLobby_EventScript_Attendant_1:
+# 123 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	special SavePlayerParty
+# 124 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT
+	return
+
+VerdanturfTown_BattleTentLobby_EventScript_Attendant_2:
+# 121 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_PrizeWaiting
+	goto VerdanturfTown_BattleTentLobby_EventScript_Attendant_1
+
+
 VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge::
+# 128 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	message VerdanturfTown_BattleTentLobby_Text_TakeChallenge
+# 129 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitmessage
+# 130 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
+# 131 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	switch VAR_RESULT
-	case 0, VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge
-	case 1, VerdanturfTown_BattleTentLobby_EventScript_ExplainChallenge
-	case 2, VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge
-	case MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge
+# 132 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case 0, VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge_2
+# 134 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case 1, VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge_3
+# 136 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case 2, VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge_4
+# 138 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge_5
+	return
+
+VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge_2:
+# 133 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge
+	return
+
+VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge_3:
+# 135 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_ExplainChallenge
+	return
+
+VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge_4:
+# 137 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge
+	return
+
+VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge_5:
+# 139 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge
+	return
+
 
 VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge::
+# 144 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PALACE
+# 145 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+# 146 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	setvar VAR_RESULT, 2
+# 147 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	frontier_checkineligible
-	goto_if_eq VAR_0x8004, TRUE, VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMons
+# 148 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	compare VAR_0x8004, TRUE
+	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge_2
+VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge_1:
+# 151 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_TENT
+# 152 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_SelectThreeMons, MSGBOX_DEFAULT
+# 153 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	fadescreen FADE_TO_BLACK
+# 154 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	setvar VAR_0x8004, 1
+# 155 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
+# 156 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	special ChoosePartyForBattleFrontier
+# 157 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitstate
-	goto_if_eq VAR_RESULT, 0, VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
+# 158 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	compare VAR_RESULT, 0
+	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge_5
+VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge_4:
+# 161 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO
+# 162 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	switch VAR_RESULT
-	case NO, VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
-	case YES, VerdanturfTown_BattleTentLobby_EventScript_SaveBeforeChallenge
-	case MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
+# 163 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case NO, VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge_8
+# 165 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case YES, VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge_9
+# 167 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge_10
+	return
+
+VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge_2:
+# 149 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMons
+	goto VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge_1
+
+VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge_5:
+# 159 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
+	goto VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge_4
+
+VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge_8:
+# 164 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
+	return
+
+VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge_9:
+# 166 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_SaveBeforeChallenge
+	return
+
+VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge_10:
+# 168 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
+	return
+
 
 VerdanturfTown_BattleTentLobby_EventScript_SaveBeforeChallenge::
+# 173 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	setvar VAR_TEMP_CHALLENGE_STATUS, 0
+# 174 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
+# 175 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	verdanturftent_init
+# 176 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
+# 177 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
+# 178 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	special LoadPlayerParty
+# 179 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	closemessage
+# 180 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	delay 2
+# 181 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	call Common_EventScript_SaveGame
+# 182 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	goto_if_eq VAR_RESULT, 0, VerdanturfTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed
+# 183 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	compare VAR_RESULT, 0
+	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_SaveBeforeChallenge_1
+	return
+
+VerdanturfTown_BattleTentLobby_EventScript_SaveBeforeChallenge_1:
+# 184 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed
+	return
+
+
 VerdanturfTown_BattleTentLobby_EventScript_EnterChallenge::
+# 189 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	special SavePlayerParty
+# 190 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
+# 191 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_NowFollowMe, MSGBOX_DEFAULT
+# 192 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	closemessage
+# 193 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	call VerdanturfTown_BattleTentLobby_EventScript_WalkToDoor
+# 194 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	warp MAP_VERDANTURF_TOWN_BATTLE_TENT_CORRIDOR, 2, 7
+# 195 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	setvar VAR_TEMP_CHALLENGE_STATUS, 0
+# 196 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitstate
 	end
 
+
 VerdanturfTown_BattleTentLobby_EventScript_ExplainChallenge::
+# 201 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_ExplainVerdanturfTent, MSGBOX_DEFAULT
+# 202 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	goto VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge
+	return
+
 
 VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMons::
+# 206 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	switch VAR_RESULT
-	case FRONTIER_LVL_50, VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50
-	case FRONTIER_LVL_OPEN, VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLvOpen
+# 207 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case FRONTIER_LVL_50, VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMons_2
+# 209 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case FRONTIER_LVL_OPEN, VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMons_3
+	return
+
+VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMons_2:
+# 208 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50
+	return
+
+VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMons_3:
+# 210 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLvOpen
+	return
+
 
 VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50::
+# 215 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_NotEnoughValidMonsLv50, MSGBOX_DEFAULT
+# 216 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	goto VerdanturfTown_BattleTentLobby_EventScript_EndCancelChallenge
+	return
+
 
 VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLvOpen::
+# 220 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_NotEnoughValidMonsLvOpen, MSGBOX_DEFAULT
+# 221 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	goto VerdanturfTown_BattleTentLobby_EventScript_EndCancelChallenge
+	return
+
 
 VerdanturfTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed::
+# 225 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
+# 226 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	goto VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge
+	return
+
 
 VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge::
+# 230 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	special LoadPlayerParty
+	return
+
+
 VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge::
+# 234 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_ReturnFortified, MSGBOX_DEFAULT
+	return
+
+
 VerdanturfTown_BattleTentLobby_EventScript_EndCancelChallenge::
+# 238 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	release
 	end
 
+
 VerdanturfTown_BattleTentLobby_EventScript_WalkToDoor::
+# 243 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	applymovement LOCALID_VERDANTURF_TENT_ATTENDANT, VerdanturfTown_BattleTentLobby_Movement_WalkToDoor
+# 244 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	applymovement LOCALID_PLAYER, VerdanturfTown_BattleTentLobby_Movement_WalkToDoor
+# 245 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitmovement 0
+# 246 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	opendoor 6, 1
+# 247 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitdooranim
+# 248 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	applymovement LOCALID_VERDANTURF_TENT_ATTENDANT, VerdanturfTown_BattleTentLobby_Movement_AttendantEnterDoor
+# 249 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	applymovement LOCALID_PLAYER, VerdanturfTown_BattleTentLobby_Movement_PlayerEnterDoor
+# 250 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitmovement 0
+# 251 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	closedoor 6, 1
+# 252 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitdooranim
 	return
 
+
+# 256 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 VerdanturfTown_BattleTentLobby_Movement_WalkToDoor:
+# 257 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	walk_up
+# 258 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	walk_up
+# 259 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	walk_up
+# 260 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	step_end
 
+# 263 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 VerdanturfTown_BattleTentLobby_Movement_AttendantEnterDoor:
+# 264 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	walk_up
+# 265 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	set_invisible
+# 266 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	step_end
 
+# 269 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 VerdanturfTown_BattleTentLobby_Movement_PlayerEnterDoor:
+# 270 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	walk_up
+# 271 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	walk_up
+# 272 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	set_invisible
+# 273 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	step_end
 
 VerdanturfTown_BattleTentLobby_EventScript_AttractGiver::
+# 277 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	lock
+# 278 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM_ATTRACT, VerdanturfTown_BattleTentLobby_EventScript_ReceivedAttract
+# 279 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto_if_set FLAG_RECEIVED_TM_ATTRACT, VerdanturfTown_BattleTentLobby_EventScript_AttractGiver_2
+VerdanturfTown_BattleTentLobby_EventScript_AttractGiver_1:
+# 282 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep, MSGBOX_DEFAULT
+# 283 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	giveitem ITEM_TM_ATTRACT
-	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
+# 284 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	compare VAR_RESULT, 0
+	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_AttractGiver_5
+VerdanturfTown_BattleTentLobby_EventScript_AttractGiver_4:
+# 287 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	setflag FLAG_RECEIVED_TM_ATTRACT
+# 288 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_AttractionMutual, MSGBOX_DEFAULT
+# 289 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	release
 	end
+
+VerdanturfTown_BattleTentLobby_EventScript_AttractGiver_2:
+# 280 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_ReceivedAttract
+	goto VerdanturfTown_BattleTentLobby_EventScript_AttractGiver_1
+
+VerdanturfTown_BattleTentLobby_EventScript_AttractGiver_5:
+# 285 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto VerdanturfTown_BattleTentLobby_EventScript_AttractGiver_4
+
 
 VerdanturfTown_BattleTentLobby_EventScript_ReceivedAttract::
+# 294 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_AttractionMutual, MSGBOX_DEFAULT
+# 295 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	release
 	end
 
+
 VerdanturfTown_BattleTentLobby_EventScript_Boy1::
+# 300 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_TaughtWhatKindsOfMoves, MSGBOX_NPC
 	end
 
+
 VerdanturfTown_BattleTentLobby_EventScript_Boy2::
+# 305 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	lock
+# 306 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_MonsReluctantToUseDislikedMoves, MSGBOX_DEFAULT
+# 307 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	release
 	end
+
 
 VerdanturfTown_BattleTentLobby_EventScript_Scott::
+# 312 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	lock
+# 313 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	faceplayer
-	goto_if_set FLAG_MET_SCOTT_IN_VERDANTURF, VerdanturfTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo
+# 314 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto_if_set FLAG_MET_SCOTT_IN_VERDANTURF, VerdanturfTown_BattleTentLobby_EventScript_Scott_2
+VerdanturfTown_BattleTentLobby_EventScript_Scott_1:
+# 317 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_ScottCanMeetToughTrainers, MSGBOX_DEFAULT
+# 318 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	addvar VAR_SCOTT_STATE, 1
+# 319 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	setflag FLAG_MET_SCOTT_IN_VERDANTURF
+# 320 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	release
 	end
+
+VerdanturfTown_BattleTentLobby_EventScript_Scott_2:
+# 315 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo
+	goto VerdanturfTown_BattleTentLobby_EventScript_Scott_1
+
 
 VerdanturfTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo::
+# 325 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_ScottVisitRegularly, MSGBOX_DEFAULT
+# 326 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	release
 	end
+
 
 VerdanturfTown_BattleTentLobby_EventScript_LittleBoy::
+# 331 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	lock
+# 332 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_GentleMonsScaryIfAngry, MSGBOX_DEFAULT
+# 333 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	release
 	end
 
+
 VerdanturfTown_BattleTentLobby_EventScript_RulesBoard::
+# 338 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	lockall
+# 339 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox VerdanturfTown_BattleTentLobby_Text_RulesAreListed, MSGBOX_DEFAULT
+# 340 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
+
 
 VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard::
+# 345 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	message BattleFrontier_BattlePalaceLobby_Text_ReadWhichHeading
+# 346 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitmessage
+# 347 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	setvar VAR_0x8004, SCROLL_MULTI_BATTLE_TENT_RULES
+# 348 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	special ShowScrollableMultichoice
+# 349 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	waitstate
+# 350 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	switch VAR_RESULT
-	case 0, VerdanturfTown_BattleTentLobby_EventScript_RulesLevel
-	case 1, VerdanturfTown_BattleTentLobby_EventScript_RulesBasics
-	case 2, VerdanturfTown_BattleTentLobby_EventScript_RulesNature
-	case 3, VerdanturfTown_BattleTentLobby_EventScript_RulesMoves
-	case 4, VerdanturfTown_BattleTentLobby_EventScript_RulesUnderpowered
-	case 5, VerdanturfTown_BattleTentLobby_EventScript_RulesWhenInDanger
-	case 6, VerdanturfTown_BattleTentLobby_EventScript_ExitRules
-	case MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_ExitRules
+# 351 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case 0, VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_3
+# 353 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case 1, VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_4
+# 355 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case 2, VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_5
+# 357 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case 3, VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_6
+# 359 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case 4, VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_7
+# 361 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case 5, VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_8
+# 363 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case 6, VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_9
+# 365 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	case MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_10
+VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_1:
 	end
+
+VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_3:
+# 352 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_RulesLevel
+	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_1
+
+VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_4:
+# 354 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_RulesBasics
+	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_1
+
+VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_5:
+# 356 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_RulesNature
+	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_1
+
+VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_6:
+# 358 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_RulesMoves
+	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_1
+
+VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_7:
+# 360 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_RulesUnderpowered
+	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_1
+
+VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_8:
+# 362 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_RulesWhenInDanger
+	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_1
+
+VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_9:
+# 364 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_ExitRules
+	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_1
+
+VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_10:
+# 366 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
+	goto VerdanturfTown_BattleTentLobby_EventScript_ExitRules
+	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard_1
+
 
 VerdanturfTown_BattleTentLobby_EventScript_RulesLevel::
+# 372 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox BattleTentLobby_Text_ExplainLevelRules, MSGBOX_DEFAULT
+# 373 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
+
 
 VerdanturfTown_BattleTentLobby_EventScript_RulesBasics::
+# 378 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesBasics, MSGBOX_DEFAULT
+# 379 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
+
 
 VerdanturfTown_BattleTentLobby_EventScript_RulesNature::
+# 384 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesNature, MSGBOX_DEFAULT
+# 385 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
+
 
 VerdanturfTown_BattleTentLobby_EventScript_RulesMoves::
+# 390 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesMoves, MSGBOX_DEFAULT
+# 391 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
+
 
 VerdanturfTown_BattleTentLobby_EventScript_RulesUnderpowered::
+# 396 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesUnderpowered, MSGBOX_DEFAULT
+# 397 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
+
 
 VerdanturfTown_BattleTentLobby_EventScript_RulesWhenInDanger::
+# 402 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesWhenInDanger, MSGBOX_DEFAULT
+# 403 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard
 	end
 
+
 VerdanturfTown_BattleTentLobby_EventScript_ExitRules::
+# 408 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	releaseall
 	end
 
-VerdanturfTown_BattleTentLobby_Text_MonsReluctantToUseDislikedMoves:
+
+VerdanturfTown_BattleTentLobby_Text_MonsReluctantToUseDislikedMoves::
+# 412 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	.string "If it doesn't like a certain move,\n"
 	.string "a POKéMON will be reluctant to use it.\p"
 	.string "It doesn't matter how strong it is,\n"
@@ -337,14 +752,16 @@ VerdanturfTown_BattleTentLobby_Text_MonsReluctantToUseDislikedMoves:
 	.string "potential, it's probably failing at\l"
 	.string "using a disliked move against its will.$"
 
-VerdanturfTown_BattleTentLobby_Text_GentleMonsScaryIfAngry:
+VerdanturfTown_BattleTentLobby_Text_GentleMonsScaryIfAngry::
+# 425 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	.string "My big sister is gentle usually.\n"
 	.string "But when she gets angry,\l"
 	.string "she's really, really scary!\p"
 	.string "I bet a gentle POKéMON will be scary\n"
 	.string "if it gets angry!$"
 
-VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep:
+VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep::
+# 433 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	.string "My feelings toward my POKéMON…\n"
 	.string "The attraction runs deep…\p"
 	.string "Oh, hi, you didn't see that, did you?\n"
@@ -352,20 +769,23 @@ VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep:
 	.string "How would you like this TM for\n"
 	.string "your POKéMON?$"
 
-VerdanturfTown_BattleTentLobby_Text_AttractionMutual:
+VerdanturfTown_BattleTentLobby_Text_AttractionMutual::
+# 442 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	.string "My feelings toward my POKéMON…\n"
 	.string "I'm sure the attraction is mutual!\p"
 	.string "They battle exactly the way I want\n"
 	.string "them to!$"
 
-VerdanturfTown_BattleTentLobby_Text_TaughtWhatKindsOfMoves:
+VerdanturfTown_BattleTentLobby_Text_TaughtWhatKindsOfMoves::
+# 449 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	.string "What kind of moves have you taught\n"
 	.string "your POKéMON?\p"
 	.string "I think you would give yourself\n"
 	.string "an advantage if they knew how to\l"
 	.string "heal or protect themselves.$"
 
-VerdanturfTown_BattleTentLobby_Text_ScottCanMeetToughTrainers:
+VerdanturfTown_BattleTentLobby_Text_ScottCanMeetToughTrainers::
+# 457 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	.string "SCOTT: Hey there, {PLAYER}{KUN}!\n"
 	.string "I thought I might see you here.\p"
 	.string "A BATTLE TENT's a place where\n"
@@ -375,7 +795,8 @@ VerdanturfTown_BattleTentLobby_Text_ScottCanMeetToughTrainers:
 	.string "{PLAYER}{KUN}, I expect you to do\n"
 	.string "the best you can!$"
 
-VerdanturfTown_BattleTentLobby_Text_ScottVisitRegularly:
+VerdanturfTown_BattleTentLobby_Text_ScottVisitRegularly::
+# 468 "data/maps/VerdanturfTown_BattleTentLobby/scripts.pory"
 	.string "SCOTT: I visit here regularly in hopes\n"
 	.string "of seeing tough TRAINERS in action\l"
 	.string "in whatever the situation.$"

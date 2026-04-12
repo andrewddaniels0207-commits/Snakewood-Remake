@@ -1,108 +1,237 @@
 ViridianCity_School_Frlg_MapScripts::
 	.byte 0
 
+
 ViridianCity_School_EventScript_Lass::
+# 4 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	lock
+# 5 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	faceplayer
+# 6 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	msgbox ViridianCity_School_Text_TryingToMemorizeNotes
+# 7 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	closemessage
+# 8 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	applymovement LOCALID_SCHOOL_LASS, Common_Movement_WalkInPlaceFasterUp
+# 9 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	waitmovement 0
+# 10 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	release
 	end
+
 
 ViridianCity_School_EventScript_Woman::
+# 15 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	lock
+# 16 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	faceplayer
+# 17 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	msgbox ViridianCity_School_Text_ReadBlackboardCarefully
+# 18 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	closemessage
+# 19 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	applymovement LOCALID_SCHOOL_WOMAN, Common_Movement_FaceOriginalDirection
+# 20 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	waitmovement 0
+# 21 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	release
 	end
 
+
 ViridianCity_School_EventScript_Notebook::
+# 26 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	lockall
+# 27 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	msgbox ViridianCity_School_Text_NotebookFirstPage
+# 28 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	msgbox ViridianCity_School_Text_TurnThePage, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, ViridianCity_School_EventScript_StopReadingNotebook
+# 29 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq ViridianCity_School_EventScript_Notebook_2
+ViridianCity_School_EventScript_Notebook_1:
+# 32 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	msgbox ViridianCity_School_Text_NotebookSecondPage
+# 33 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	msgbox ViridianCity_School_Text_TurnThePage, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, ViridianCity_School_EventScript_StopReadingNotebook
+# 34 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq ViridianCity_School_EventScript_Notebook_5
+ViridianCity_School_EventScript_Notebook_4:
+# 37 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	msgbox ViridianCity_School_Text_NotebookThirdPage
+# 38 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	msgbox ViridianCity_School_Text_TurnThePage, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, ViridianCity_School_EventScript_StopReadingNotebook
+# 39 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq ViridianCity_School_EventScript_Notebook_8
+ViridianCity_School_EventScript_Notebook_7:
+# 42 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	msgbox ViridianCity_School_Text_NotebookFourthPage
+# 43 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	applymovement LOCALID_SCHOOL_LASS, Common_Movement_WalkInPlaceFasterUp
+# 44 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	waitmovement 0
+# 45 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_FEMALE
+# 46 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	msgbox ViridianCity_School_Text_HeyDontLookAtMyNotes
+# 47 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	releaseall
 	end
+
+ViridianCity_School_EventScript_Notebook_2:
+# 30 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	goto ViridianCity_School_EventScript_StopReadingNotebook
+	goto ViridianCity_School_EventScript_Notebook_1
+
+ViridianCity_School_EventScript_Notebook_5:
+# 35 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	goto ViridianCity_School_EventScript_StopReadingNotebook
+	goto ViridianCity_School_EventScript_Notebook_4
+
+ViridianCity_School_EventScript_Notebook_8:
+# 40 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	goto ViridianCity_School_EventScript_StopReadingNotebook
+	goto ViridianCity_School_EventScript_Notebook_7
+
 
 ViridianCity_School_EventScript_StopReadingNotebook::
+# 52 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	releaseall
 	end
+
 
 ViridianCity_School_EventScript_Blackboard::
+# 57 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	lockall
+# 58 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	msgbox ViridianCity_School_Text_BlackboardListsStatusProblems
+# 59 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	goto ViridianCity_School_EventScript_ChooseBlackboardTopic
 	end
+
 
 ViridianCity_School_EventScript_ChooseBlackboardTopic::
+# 64 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	message ViridianCity_School_Text_ReadWhichTopic
+# 65 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	waitmessage
+# 66 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	multichoicegrid 7, 1, MULTI_STATUS_INFO, 3, FALSE
+# 67 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	switch VAR_RESULT
-	case 0, ViridianCity_School_EventScript_ReadSleep
-	case 1, ViridianCity_School_EventScript_ReadPoison
-	case 2, ViridianCity_School_EventScript_ReadParalysis
-	case 3, ViridianCity_School_EventScript_ReadBurn
-	case 4, ViridianCity_School_EventScript_ReadFreeze
-	case 5, ViridianCity_School_EventScript_ExitBlackboard
-	case 127, ViridianCity_School_EventScript_ExitBlackboard
+# 68 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	case 0, ViridianCity_School_EventScript_ChooseBlackboardTopic_3
+# 70 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	case 1, ViridianCity_School_EventScript_ChooseBlackboardTopic_4
+# 72 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	case 2, ViridianCity_School_EventScript_ChooseBlackboardTopic_5
+# 74 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	case 3, ViridianCity_School_EventScript_ChooseBlackboardTopic_6
+# 76 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	case 4, ViridianCity_School_EventScript_ChooseBlackboardTopic_7
+# 78 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	case 5, ViridianCity_School_EventScript_ChooseBlackboardTopic_8
+# 80 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	case 127, ViridianCity_School_EventScript_ChooseBlackboardTopic_9
+ViridianCity_School_EventScript_ChooseBlackboardTopic_1:
 	end
+
+ViridianCity_School_EventScript_ChooseBlackboardTopic_3:
+# 69 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	goto ViridianCity_School_EventScript_ReadSleep
+	goto ViridianCity_School_EventScript_ChooseBlackboardTopic_1
+
+ViridianCity_School_EventScript_ChooseBlackboardTopic_4:
+# 71 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	goto ViridianCity_School_EventScript_ReadPoison
+	goto ViridianCity_School_EventScript_ChooseBlackboardTopic_1
+
+ViridianCity_School_EventScript_ChooseBlackboardTopic_5:
+# 73 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	goto ViridianCity_School_EventScript_ReadParalysis
+	goto ViridianCity_School_EventScript_ChooseBlackboardTopic_1
+
+ViridianCity_School_EventScript_ChooseBlackboardTopic_6:
+# 75 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	goto ViridianCity_School_EventScript_ReadBurn
+	goto ViridianCity_School_EventScript_ChooseBlackboardTopic_1
+
+ViridianCity_School_EventScript_ChooseBlackboardTopic_7:
+# 77 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	goto ViridianCity_School_EventScript_ReadFreeze
+	goto ViridianCity_School_EventScript_ChooseBlackboardTopic_1
+
+ViridianCity_School_EventScript_ChooseBlackboardTopic_8:
+# 79 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	goto ViridianCity_School_EventScript_ExitBlackboard
+	goto ViridianCity_School_EventScript_ChooseBlackboardTopic_1
+
+ViridianCity_School_EventScript_ChooseBlackboardTopic_9:
+# 81 "data/maps/ViridianCity_School_Frlg/scripts.pory"
+	goto ViridianCity_School_EventScript_ExitBlackboard
+	goto ViridianCity_School_EventScript_ChooseBlackboardTopic_1
+
 
 ViridianCity_School_EventScript_ReadSleep::
+# 87 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	msgbox ViridianCity_School_Text_ExplainSleep
+# 88 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	goto ViridianCity_School_EventScript_ChooseBlackboardTopic
 	end
+
 
 ViridianCity_School_EventScript_ReadBurn::
+# 93 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	msgbox ViridianCity_School_Text_ExplainBurn
+# 94 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	goto ViridianCity_School_EventScript_ChooseBlackboardTopic
 	end
+
 
 ViridianCity_School_EventScript_ReadPoison::
+# 99 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	msgbox ViridianCity_School_Text_ExplainPoison
+# 100 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	goto ViridianCity_School_EventScript_ChooseBlackboardTopic
 	end
+
 
 ViridianCity_School_EventScript_ReadFreeze::
+# 105 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	msgbox ViridianCity_School_Text_ExplainFreeze
+# 106 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	goto ViridianCity_School_EventScript_ChooseBlackboardTopic
 	end
+
 
 ViridianCity_School_EventScript_ReadParalysis::
+# 111 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	msgbox ViridianCity_School_Text_ExplainParalysis
+# 112 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	goto ViridianCity_School_EventScript_ChooseBlackboardTopic
 	end
 
+
 ViridianCity_School_EventScript_ExitBlackboard::
+# 117 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	releaseall
 	end
 
+
 ViridianCity_School_Text_TryingToMemorizeNotes::
+# 121 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	.string "Whew! I'm trying to memorize all my\n"
 	.string "notes.$"
 
 ViridianCity_School_Text_ReadBlackboardCarefully::
+# 126 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	.string "Okay!\p"
 	.string "Be sure to read what's on the\n"
 	.string "blackboard carefully!$"
 
 ViridianCity_School_Text_NotebookFirstPage::
+# 132 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	.string "Let's check out the notebook.\p"
 	.string "First page…\p"
 	.string "POKé BALLS are used to catch\n"
@@ -113,6 +242,7 @@ ViridianCity_School_Text_NotebookFirstPage::
 	.string "with POKéMON are called TRAINERS.$"
 
 ViridianCity_School_Text_NotebookSecondPage::
+# 143 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	.string "Second page…\p"
 	.string "A healthy POKéMON may be hard to\n"
 	.string "catch, so weaken it first.\p"
@@ -120,6 +250,7 @@ ViridianCity_School_Text_NotebookSecondPage::
 	.string "status problem to weaken it.$"
 
 ViridianCity_School_Text_NotebookThirdPage::
+# 151 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	.string "Third page…\p"
 	.string "POKéMON TRAINERS seek others to\n"
 	.string "engage in POKéMON battles.\p"
@@ -129,6 +260,7 @@ ViridianCity_School_Text_NotebookThirdPage::
 	.string "POKéMON GYMS everywhere.$"
 
 ViridianCity_School_Text_NotebookFourthPage::
+# 161 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	.string "Fourth page…\p"
 	.string "The ultimate goal for all POKéMON\n"
 	.string "TRAINERS is simple.\p"
@@ -139,20 +271,25 @@ ViridianCity_School_Text_NotebookFourthPage::
 	.string "LEAGUE!$"
 
 ViridianCity_School_Text_TurnThePage::
+# 172 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	.string "Turn the page?$"
 
 ViridianCity_School_Text_HeyDontLookAtMyNotes::
+# 176 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	.string "GIRL: Hey!\n"
 	.string "Don't look at my notes!$"
 
 ViridianCity_School_Text_BlackboardListsStatusProblems::
+# 181 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	.string "The blackboard lists POKéMON\n"
 	.string "STATUS problems during battles.$"
 
 ViridianCity_School_Text_ReadWhichTopic::
+# 186 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	.string "Which topic do you want to read?$"
 
 ViridianCity_School_Text_ExplainSleep::
+# 190 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	.string "A POKéMON can't attack if it's\n"
 	.string "asleep.\p"
 	.string "POKéMON will stay asleep even\n"
@@ -161,18 +298,21 @@ ViridianCity_School_Text_ExplainSleep::
 	.string "from sleep.$"
 
 ViridianCity_School_Text_ExplainBurn::
+# 199 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	.string "A burn reduces ATTACK power.\n"
 	.string "It also causes ongoing HP loss.\p"
 	.string "A burn remains after a battle.\n"
 	.string "Use BURN HEAL to cure a burn.$"
 
 ViridianCity_School_Text_ExplainPoison::
+# 206 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	.string "When poisoned, a POKéMON's health\n"
 	.string "steadily drops.\p"
 	.string "Poison lingers after battles.\n"
 	.string "Use an ANTIDOTE to cure poison!$"
 
 ViridianCity_School_Text_ExplainFreeze::
+# 213 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	.string "A frozen POKéMON becomes\n"
 	.string "helplessly immobile.\p"
 	.string "It stays frozen even after the\n"
@@ -181,8 +321,8 @@ ViridianCity_School_Text_ExplainFreeze::
 	.string "suffering POKéMON.$"
 
 ViridianCity_School_Text_ExplainParalysis::
+# 222 "data/maps/ViridianCity_School_Frlg/scripts.pory"
 	.string "Paralysis reduces SPEED and may\n"
 	.string "prevent the POKéMON from moving.\p"
 	.string "Paralysis remains after battles.\n"
 	.string "Use PARLYZ HEAL for treatment.$"
-

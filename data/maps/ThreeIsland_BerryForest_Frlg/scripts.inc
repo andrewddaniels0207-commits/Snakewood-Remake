@@ -1,65 +1,121 @@
 ThreeIsland_BerryForest_Frlg_MapScripts::
+# 2 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, ThreeIsland_BerryForest_OnTransition
 	.byte 0
 
+
 ThreeIsland_BerryForest_OnTransition::
+# 6 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND_BERRY_FOREST
+# 7 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	setescapewarp MAP_THREE_ISLAND_BOND_BRIDGE, 12, 6
 	end
 
+
 ThreeIsland_BerryForest_EventScript_Lostelle::
+# 12 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	lock
+# 13 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	faceplayer
+# 14 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	msgbox ThreeIsland_BerryForest_Text_HelpScaryPokemon
+# 15 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	playse SE_PIN
+# 16 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	applymovement LOCALID_BERRY_FOREST_LOSTELLE, Common_Movement_ExclamationMark
+# 17 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	waitmovement 0
+# 18 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	applymovement LOCALID_BERRY_FOREST_LOSTELLE, ThreeIsland_BerryForest_Movement_LostelleLookAround
+# 19 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	waitmovement 0
+# 20 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	msgbox ThreeIsland_BerryForest_Text_HereItComesAgain
+# 21 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	waitse
+# 22 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	playmoncry SPECIES_HYPNO, CRY_MODE_ENCOUNTER
+# 23 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	waitmoncry
+# 24 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	setwildbattle SPECIES_HYPNO, 30
+# 25 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	dowildbattle
+# 26 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	applymovement LOCALID_BERRY_FOREST_LOSTELLE, Common_Movement_FacePlayer
+# 27 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	waitmovement 0
+# 28 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	msgbox ThreeIsland_BerryForest_Text_ThankYouHaveThis
+# 29 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	giveitem ITEM_IAPAPA_BERRY
-	call_if_eq VAR_RESULT, FALSE, ThreeIsland_BerryForest_EventScript_NoRoomForBerry
+# 30 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq ThreeIsland_BerryForest_EventScript_Lostelle_2
+ThreeIsland_BerryForest_EventScript_Lostelle_1:
+# 33 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	special GetPlayerBigGuyGirlString
+# 34 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	msgbox ThreeIsland_BerryForest_Text_LetsGoHome
+# 35 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	closemessage
+# 36 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	setflag FLAG_RESCUED_LOSTELLE
+# 37 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	setflag FLAG_HIDE_LOSTELLE_IN_BERRY_FOREST
+# 38 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	setvar VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 2
+# 39 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	clearflag FLAG_HIDE_TWO_ISLAND_GAME_CORNER_LOSTELLE
+# 40 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	warp MAP_TWO_ISLAND_JOYFUL_GAME_CORNER, 6, 6
+# 41 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	waitstate
+# 42 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	release
 	end
 
+ThreeIsland_BerryForest_EventScript_Lostelle_2:
+# 31 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
+	call ThreeIsland_BerryForest_EventScript_NoRoomForBerry
+	goto ThreeIsland_BerryForest_EventScript_Lostelle_1
+
+
 ThreeIsland_BerryForest_EventScript_NoRoomForBerry::
+# 47 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	msgbox ThreeIsland_BerryForest_Text_BerryPouchIsFull
 	return
 
-ThreeIsland_BerryForest_Movement_LostelleLookAround::
+
+# 51 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
+ThreeIsland_BerryForest_Movement_LostelleLookAround:
+# 52 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	walk_in_place_faster_left
+# 53 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	delay_16
+# 54 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	walk_in_place_faster_right
+# 55 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	delay_8
+# 56 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	walk_in_place_faster_left
+# 57 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	step_end
 
 ThreeIsland_BerryForest_EventScript_WelcomeSign::
+# 61 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	msgbox ThreeIsland_BerryForest_Text_WelcomeToBerryForest, MSGBOX_SIGN
 	end
 
+
 ThreeIsland_BerryForest_EventScript_BewareSign::
+# 66 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	msgbox ThreeIsland_BerryForest_Text_BewareWildBerryLovingMons, MSGBOX_SIGN
 	end
 
+
 ThreeIsland_BerryForest_Text_HelpScaryPokemon::
+# 70 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	.string "LOSTELLE: Whimper… Sniff…\n"
 	.string "Oh! Please, help!\p"
 	.string "A scary POKéMON appeared there\n"
@@ -70,12 +126,14 @@ ThreeIsland_BerryForest_Text_HelpScaryPokemon::
 	.string "But I want to go home…$"
 
 ThreeIsland_BerryForest_Text_HereItComesAgain::
+# 81 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	.string "Oh! Here it comes again!\n"
 	.string "No! Go away! It's scaring me!\p"
 	.string "Waaaaaaah!\n"
 	.string "I want my daddy!$"
 
 ThreeIsland_BerryForest_Text_ThankYouHaveThis::
+# 88 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	.string "Ohh! That was so scary!\n"
 	.string "Thank you!\p"
 	.string "LOSTELLE came to pick some\n"
@@ -83,6 +141,7 @@ ThreeIsland_BerryForest_Text_ThankYouHaveThis::
 	.string "You can have this!$"
 
 ThreeIsland_BerryForest_Text_LetsGoHome::
+# 96 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	.string "What's your name?\p"
 	.string "LOSTELLE's scared, so can I go\n"
 	.string "with you to my daddy's house?\p"
@@ -90,15 +149,17 @@ ThreeIsland_BerryForest_Text_LetsGoHome::
 	.string "Let's go home!$"
 
 ThreeIsland_BerryForest_Text_BerryPouchIsFull::
+# 104 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	.string "Your BERRY POUCH is full.\n"
 	.string "I guess you don't want this.$"
 
 ThreeIsland_BerryForest_Text_WelcomeToBerryForest::
+# 109 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	.string "Welcome to the BERRY FOREST\p"
 	.string "Be friendly and share BERRIES with\n"
 	.string "others and POKéMON.$"
 
 ThreeIsland_BerryForest_Text_BewareWildBerryLovingMons::
+# 115 "data/maps/ThreeIsland_BerryForest_Frlg/scripts.pory"
 	.string "Beware of wild, BERRY-loving\n"
 	.string "POKéMON!$"
-

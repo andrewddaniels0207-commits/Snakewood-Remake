@@ -1,186 +1,319 @@
 IndigoPlateau_Exterior_Frlg_MapScripts::
+# 2 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, IndigoPlateau_Exterior_OnTransition
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, IndigoPlateau_Exterior_OnFrame
+# 3 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, IndigoPlateau_Exterior_Frlg_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
 	.byte 0
 
-IndigoPlateau_Exterior_OnTransition::
-	setworldmapflag FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR
-	call_if_eq VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1, IndigoPlateau_Exterior_EventScript_PlayCreditsMusic
-	end
-
-IndigoPlateau_Exterior_EventScript_PlayCreditsMusic::
-	playbgm MUS_CREDITS, 0
-	return
-
-IndigoPlateau_Exterior_OnFrame::
+IndigoPlateau_Exterior_Frlg_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 4 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	map_script_2 VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1, IndigoPlateau_Exterior_EventScript_Credits
 	.2byte 0
 
 
-@ After beating the champion, you are warped to the main
-@ entrance of Indigo Plateau. This script starts running
-@ immediately after your walking animation.
-@ The script is timed to the music.
+IndigoPlateau_Exterior_OnTransition::
+# 9 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+	setworldmapflag FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR
+# 10 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1
+	goto_if_eq IndigoPlateau_Exterior_OnTransition_2
+IndigoPlateau_Exterior_OnTransition_1:
+	end
+
+IndigoPlateau_Exterior_OnTransition_2:
+# 11 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+	call IndigoPlateau_Exterior_EventScript_PlayCreditsMusic
+	goto IndigoPlateau_Exterior_OnTransition_1
+
+
+IndigoPlateau_Exterior_EventScript_PlayCreditsMusic::
+# 17 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+	playbgm MUS_CREDITS, 0
+	return
+
+
 IndigoPlateau_Exterior_EventScript_Credits::
+# 22 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	lockall
+# 23 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay 105
-
-	@ Rival exits building. Spawn a dummy object to lock the camera.
+# 24 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	opendoor 11, 6
+# 25 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	waitdooranim
+# 26 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	special SpawnCameraObject
+# 27 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	addobject LOCALID_CREDITS_RIVAL
+# 28 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	applymovement LOCALID_CREDITS_RIVAL, IndigoPlateau_Exterior_Movement_RivalExitBuilding
+# 29 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, IndigoPlateau_Exterior_Movement_PushPlayerOutOfWay
+# 30 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	waitmovement 0
+# 31 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	closedoor 11, 6
+# 32 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	waitdooranim
-
-	@ Rival runs off
+# 33 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerWatchRivalLeave
+# 34 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	applymovement LOCALID_CREDITS_RIVAL, IndigoPlateau_Exterior_Movement_RivalLeave
+# 35 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	waitmovement 0
+# 36 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay 100
-
-	@ Oak exits building
+# 37 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	opendoor 11, 6
+# 38 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	waitdooranim
+# 39 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	addobject LOCALID_CREDITS_PROF_OAK
+# 40 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	applymovement LOCALID_CREDITS_PROF_OAK, IndigoPlateau_Exterior_Movement_OakExitBuilding
+# 41 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	waitmovement 0
+# 42 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	closedoor 11, 6
+# 43 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	waitdooranim
+# 44 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay 160
-
-	@ Oak looks at player, then walks off
+# 45 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerWatchOakLeave
+# 46 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	applymovement LOCALID_CREDITS_PROF_OAK, IndigoPlateau_Exterior_Movement_OakLeave
+# 47 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	waitmovement 0
+# 48 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay 100
-
-	@ Player begin to leave
+# 49 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerBeginLeave
+# 50 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	waitmovement 0
+# 51 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay 155
+# 52 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerFaceLeague
+# 53 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	waitmovement 0
+# 54 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay 90
-
-	@ Player runs off
+# 55 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerTurnAround
+# 56 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	waitmovement 0
+# 57 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerLeave
+# 58 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	waitmovement 0
-
-	@ Reset the map state and roll the credits
+# 59 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	special RemoveCameraObject
+# 60 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	setvar VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 0
+# 61 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	removeobject LOCALID_CREDITS_RIVAL
+# 62 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	removeobject LOCALID_CREDITS_PROF_OAK
+# 63 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	special CB2_StartCreditsSequence
+# 64 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	waitstate
+# 65 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	releaseall
 	end
 
+
 IndigoPlateau_Exterior_Movement_PlayerLeave::
+# 70 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	player_run_down
+# 71 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	player_run_down
+# 72 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	player_run_down
+# 73 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	player_run_down
+# 74 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	player_run_down
+# 75 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	player_run_down
+# 76 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+	step_end
+	return
+
+
+# 79 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+IndigoPlateau_Exterior_Movement_PlayerExitBuilding:
+# 80 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+	walk_down
+# 81 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+	walk_down
+# 82 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	step_end
 
-@ Unused
-IndigoPlateau_Exterior_Movement_PlayerExitBuilding::
-	walk_down
-	walk_down
-	step_end
-
-IndigoPlateau_Exterior_Movement_PlayerWatchRivalLeave::
+# 85 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+IndigoPlateau_Exterior_Movement_PlayerWatchRivalLeave:
+# 86 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 87 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_4
+# 88 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_in_place_faster_down
+# 89 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	step_end
 
-IndigoPlateau_Exterior_Movement_PlayerWatchOakLeave::
+# 92 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+IndigoPlateau_Exterior_Movement_PlayerWatchOakLeave:
+# 93 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_8
+# 94 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_in_place_faster_right
+# 95 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 96 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 97 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 98 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 99 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 100 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 101 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 102 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 103 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 104 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 105 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 106 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_in_place_faster_down
+# 107 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	step_end
 
-IndigoPlateau_Exterior_Movement_PlayerBeginLeave::
+# 110 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+IndigoPlateau_Exterior_Movement_PlayerBeginLeave:
+# 111 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_right
+# 112 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 113 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_down
+# 114 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_down
+# 115 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 116 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 117 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	step_end
 
-IndigoPlateau_Exterior_Movement_PlayerTurnAround::
+# 120 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+IndigoPlateau_Exterior_Movement_PlayerTurnAround:
+# 121 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_in_place_faster_down
+# 122 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	step_end
 
 IndigoPlateau_Exterior_Movement_PushPlayerOutOfWay::
+# 126 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	face_right
+# 127 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	lock_facing_direction
+# 128 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_left
+# 129 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	unlock_facing_direction
+# 130 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	step_end
+	return
 
-IndigoPlateau_Exterior_Movement_PlayerFaceLeague::
+
+# 133 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+IndigoPlateau_Exterior_Movement_PlayerFaceLeague:
+# 134 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_in_place_faster_up
+# 135 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	step_end
 
-IndigoPlateau_Exterior_Movement_RivalLeave::
+# 138 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+IndigoPlateau_Exterior_Movement_RivalLeave:
+# 139 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_fast_down
+# 140 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_fast_down
+# 141 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_fast_down
+# 142 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_fast_down
+# 143 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_fast_down
+# 144 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_fast_down
+# 145 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_fast_down
+# 146 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	step_end
 
-IndigoPlateau_Exterior_Movement_RivalExitBuilding::
+# 149 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+IndigoPlateau_Exterior_Movement_RivalExitBuilding:
+# 150 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_fast_down
+# 151 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	step_end
 
-IndigoPlateau_Exterior_Movement_OakLeave::
+# 154 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+IndigoPlateau_Exterior_Movement_OakLeave:
+# 155 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_in_place_faster_left
+# 156 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 157 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 158 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 159 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 160 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 161 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 162 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 163 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 164 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 165 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 166 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_in_place_faster_down
+# 167 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	delay_16
+# 168 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_down
+# 169 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_down
+# 170 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_down
+# 171 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_down
+# 172 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_down
+# 173 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_down
+# 174 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_down
+# 175 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	step_end
 
-IndigoPlateau_Exterior_Movement_OakExitBuilding::
+# 178 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
+IndigoPlateau_Exterior_Movement_OakExitBuilding:
+# 179 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	walk_down
+# 180 "data/maps/IndigoPlateau_Exterior_Frlg/scripts.pory"
 	step_end

@@ -1,255 +1,358 @@
-mapscripts VermilionCity_PokemonFanClub_Frlg_MapScripts {}
+raw `
+VermilionCity_PokemonFanClub_Frlg_MapScripts::
+	.byte 0
 
-script VermilionCity_PokemonFanClub_EventScript_Chairman {
-    lock
-    faceplayer
-    if (flag(FLAG_GOT_BIKE_VOUCHER)) {
-        goto(VermilionCity_PokemonFanClub_EventScript_AlreadyHeardStory)
-    }
-    msgbox(VermilionCity_PokemonFanClub_Text_DidYouComeToHearAboutMyMons, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) {
-        goto(VermilionCity_PokemonFanClub_EventScript_ChairmanStory)
-    }
-    msgbox(VermilionCity_PokemonFanClub_Text_ComeBackToHearStory)
-    release
-    end
-}
 
-script VermilionCity_PokemonFanClub_EventScript_AlreadyHeardStory {
-    msgbox(VermilionCity_PokemonFanClub_Text_DidntComeToSeeAboutMonsAgain)
-    release
-    end
-}
+VermilionCity_PokemonFanClub_EventScript_Chairman::
+# 4 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	lock
+# 5 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	faceplayer
+# 6 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_BIKE_VOUCHER, VermilionCity_PokemonFanClub_EventScript_Chairman_2
+VermilionCity_PokemonFanClub_EventScript_Chairman_1:
+# 9 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	msgbox VermilionCity_PokemonFanClub_Text_DidYouComeToHearAboutMyMons, MSGBOX_YESNO
+# 10 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq VermilionCity_PokemonFanClub_EventScript_Chairman_5
+VermilionCity_PokemonFanClub_EventScript_Chairman_4:
+# 13 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	msgbox VermilionCity_PokemonFanClub_Text_ComeBackToHearStory
+# 14 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	release
+	end
 
-script VermilionCity_PokemonFanClub_EventScript_ChairmanStory {
-    msgbox(VermilionCity_PokemonFanClub_Text_ChairmansStory)
-    checkitemspace(ITEM_BIKE_VOUCHER)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(VermilionCity_PokemonFanClub_EventScript_NoRoomForBikeVoucher)
-    }
-    setflag(FLAG_GOT_BIKE_VOUCHER)
-    giveitem_msg(VermilionCity_PokemonFanClub_Text_ReceivedBikeVoucherFromChairman, ITEM_BIKE_VOUCHER, 1, MUS_RG_OBTAIN_KEY_ITEM)
-    msgbox(VermilionCity_PokemonFanClub_Text_ExplainBikeVoucher)
-    release
-    end
-}
+VermilionCity_PokemonFanClub_EventScript_Chairman_2:
+# 7 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	goto VermilionCity_PokemonFanClub_EventScript_AlreadyHeardStory
+	goto VermilionCity_PokemonFanClub_EventScript_Chairman_1
 
-script VermilionCity_PokemonFanClub_EventScript_NoRoomForBikeVoucher {
-    msgbox(VermilionCity_PokemonFanClub_Text_MakeRoomForThis)
-    release
-    end
-}
+VermilionCity_PokemonFanClub_EventScript_Chairman_5:
+# 11 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	goto VermilionCity_PokemonFanClub_EventScript_ChairmanStory
+	goto VermilionCity_PokemonFanClub_EventScript_Chairman_4
 
-script VermilionCity_PokemonFanClub_EventScript_WorkerF {
-    lock
-    faceplayer
-    if (flag(FLAG_SYS_GAME_CLEAR)) {
-        goto(VermilionCity_PokemonFanClub_EventScript_WorkerFGameClear)
-    }
-    msgbox(VermilionCity_PokemonFanClub_Text_ChairmanVeryVocalAboutPokemon)
-    release
-    end
-}
 
-script VermilionCity_PokemonFanClub_EventScript_WorkerFGameClear {
-    famechecker(FAMECHECKER_DAISY, 1)
-    msgbox(VermilionCity_PokemonFanClub_Text_ChairmanReallyAdoresHisMons)
-    release
-    end
-}
+VermilionCity_PokemonFanClub_EventScript_AlreadyHeardStory::
+# 19 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	msgbox VermilionCity_PokemonFanClub_Text_DidntComeToSeeAboutMonsAgain
+# 20 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	release
+	end
 
-script VermilionCity_PokemonFanClub_EventScript_Woman {
-    lock
-    faceplayer
-    if (flag(SPOKE_TO_FAT_MAN_LAST)) {
-        goto(VermilionCity_PokemonFanClub_EventScript_WomanSpokeToFatMan)
-    }
-    msgbox(VermilionCity_PokemonFanClub_Text_AdoreMySeel)
-    closemessage
-    applymovement(LOCALID_POKEMON_FAN_CLUB_WOMAN, Common_Movement_FaceOriginalDirection)
-    waitmovement(0)
-    setflag(SPOKE_TO_WOMAN_LAST)
-    release
-    end
-}
 
-script VermilionCity_PokemonFanClub_EventScript_WomanSpokeToFatMan {
-    msgbox(VermilionCity_PokemonFanClub_Text_SeelFarMoreAttractive)
-    closemessage
-    applymovement(LOCALID_POKEMON_FAN_CLUB_WOMAN, Common_Movement_FaceOriginalDirection)
-    waitmovement(0)
-    clearflag(SPOKE_TO_FAT_MAN_LAST)
-    release
-    end
-}
+VermilionCity_PokemonFanClub_EventScript_ChairmanStory::
+# 25 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	msgbox VermilionCity_PokemonFanClub_Text_ChairmansStory
+# 26 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	checkitemspace ITEM_BIKE_VOUCHER
+# 27 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq VermilionCity_PokemonFanClub_EventScript_ChairmanStory_2
+VermilionCity_PokemonFanClub_EventScript_ChairmanStory_1:
+# 30 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	setflag FLAG_GOT_BIKE_VOUCHER
+# 31 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	giveitem_msg VermilionCity_PokemonFanClub_Text_ReceivedBikeVoucherFromChairman, ITEM_BIKE_VOUCHER, 1, MUS_RG_OBTAIN_KEY_ITEM
+# 32 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	msgbox VermilionCity_PokemonFanClub_Text_ExplainBikeVoucher
+# 33 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	release
+	end
 
-script VermilionCity_PokemonFanClub_EventScript_FatMan {
-    lock
-    faceplayer
-    if (flag(SPOKE_TO_WOMAN_LAST)) {
-        goto(VermilionCity_PokemonFanClub_EventScript_FatManSpokeToWoman)
-    }
-    msgbox(VermilionCity_PokemonFanClub_Text_AdmirePikachusTail)
-    closemessage
-    applymovement(LOCALID_POKEMON_FAN_CLUB_FAT_MAN, Common_Movement_FaceOriginalDirection)
-    waitmovement(0)
-    setflag(SPOKE_TO_FAT_MAN_LAST)
-    release
-    end
-}
+VermilionCity_PokemonFanClub_EventScript_ChairmanStory_2:
+# 28 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	goto VermilionCity_PokemonFanClub_EventScript_NoRoomForBikeVoucher
+	goto VermilionCity_PokemonFanClub_EventScript_ChairmanStory_1
 
-script VermilionCity_PokemonFanClub_EventScript_FatManSpokeToWoman {
-    msgbox(VermilionCity_PokemonFanClub_Text_PikachuTwiceAsCute)
-    closemessage
-    applymovement(LOCALID_POKEMON_FAN_CLUB_FAT_MAN, Common_Movement_FaceOriginalDirection)
-    waitmovement(0)
-    clearflag(SPOKE_TO_WOMAN_LAST)
-    release
-    end
-}
 
-script VermilionCity_PokemonFanClub_EventScript_Pikachu {
-    lock
-    faceplayer
-    waitse()
-    playmoncry(SPECIES_PIKACHU, CRY_MODE_NORMAL)
-    msgbox(VermilionCity_PokemonFanClub_Text_Pikachu)
-    waitmoncry()
-    release
-    end
-}
+VermilionCity_PokemonFanClub_EventScript_NoRoomForBikeVoucher::
+# 38 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	msgbox VermilionCity_PokemonFanClub_Text_MakeRoomForThis
+# 39 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	release
+	end
 
-script VermilionCity_PokemonFanClub_EventScript_Seel {
-    lock
-    faceplayer
-    waitse()
-    playmoncry(SPECIES_SEEL, CRY_MODE_NORMAL)
-    msgbox(VermilionCity_PokemonFanClub_Text_Seel)
-    waitmoncry()
-    release
-    end
-}
 
-script VermilionCity_PokemonFanClub_EventScript_RulesSign1 {
-    msgbox(VermilionCity_PokemonFanClub_Text_ListenPolitelyToOtherTrainers, MSGBOX_SIGN)
-    end
-}
+VermilionCity_PokemonFanClub_EventScript_WorkerF::
+# 44 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	lock
+# 45 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	faceplayer
+# 46 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	goto_if_set FLAG_SYS_GAME_CLEAR, VermilionCity_PokemonFanClub_EventScript_WorkerF_2
+VermilionCity_PokemonFanClub_EventScript_WorkerF_1:
+# 49 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	msgbox VermilionCity_PokemonFanClub_Text_ChairmanVeryVocalAboutPokemon
+# 50 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	release
+	end
 
-script VermilionCity_PokemonFanClub_EventScript_RulesSign2 {
-    msgbox(VermilionCity_PokemonFanClub_Text_SomeoneBragsBragBack, MSGBOX_SIGN)
-    end
-}
+VermilionCity_PokemonFanClub_EventScript_WorkerF_2:
+# 47 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	goto VermilionCity_PokemonFanClub_EventScript_WorkerFGameClear
+	goto VermilionCity_PokemonFanClub_EventScript_WorkerF_1
 
-text VermilionCity_PokemonFanClub_Text_AdmirePikachusTail {
-    "Won't you admire my PIKACHU's\n"
-    "adorable tail?$"
-}
 
-text VermilionCity_PokemonFanClub_Text_PikachuTwiceAsCute {
-    "Humph!\p"
-    "My PIKACHU is twice as cute as\n"
-    "that one!$"
-}
+VermilionCity_PokemonFanClub_EventScript_WorkerFGameClear::
+# 55 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	famechecker FAMECHECKER_DAISY, 1
+# 56 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	msgbox VermilionCity_PokemonFanClub_Text_ChairmanReallyAdoresHisMons
+# 57 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	release
+	end
 
-text VermilionCity_PokemonFanClub_Text_AdoreMySeel {
-    "I just adore my SEEL!\n"
-    "It's so lovable!\p"
-    "It squeals, “Kyuuuh,” when I\n"
-    "hug it!$"
-}
 
-text VermilionCity_PokemonFanClub_Text_SeelFarMoreAttractive {
-    "Oh, dear!\p"
-    "My SEEL is far more attractive.\n"
-    "By double, I would say.$"
-}
+VermilionCity_PokemonFanClub_EventScript_Woman::
+# 62 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	lock
+# 63 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	faceplayer
+# 64 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	goto_if_set SPOKE_TO_FAT_MAN_LAST, VermilionCity_PokemonFanClub_EventScript_Woman_2
+VermilionCity_PokemonFanClub_EventScript_Woman_1:
+# 67 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	msgbox VermilionCity_PokemonFanClub_Text_AdoreMySeel
+# 68 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	closemessage
+# 69 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	applymovement LOCALID_POKEMON_FAN_CLUB_WOMAN, Common_Movement_FaceOriginalDirection
+# 70 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	waitmovement 0
+# 71 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	setflag SPOKE_TO_WOMAN_LAST
+# 72 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	release
+	end
 
-text VermilionCity_PokemonFanClub_Text_Pikachu {
-    "PIKACHU: Chu! Pikachu!$"
-}
+VermilionCity_PokemonFanClub_EventScript_Woman_2:
+# 65 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	goto VermilionCity_PokemonFanClub_EventScript_WomanSpokeToFatMan
+	goto VermilionCity_PokemonFanClub_EventScript_Woman_1
 
-text VermilionCity_PokemonFanClub_Text_Seel {
-    "SEEL: Kyuoo!$"
-}
 
-text VermilionCity_PokemonFanClub_Text_DidYouComeToHearAboutMyMons {
-    "I chair the POKéMON Fan Club!\p"
-    "I raise more than a hundred\n"
-    "POKéMON!\p"
-    "I'm very fussy when it comes to\n"
-    "POKéMON! I surely am!\p"
-    "So…\p"
-    "Did you come visit to hear about\n"
-    "my POKéMON?$"
-}
+VermilionCity_PokemonFanClub_EventScript_WomanSpokeToFatMan::
+# 77 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	msgbox VermilionCity_PokemonFanClub_Text_SeelFarMoreAttractive
+# 78 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	closemessage
+# 79 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	applymovement LOCALID_POKEMON_FAN_CLUB_WOMAN, Common_Movement_FaceOriginalDirection
+# 80 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	waitmovement 0
+# 81 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	clearflag SPOKE_TO_FAT_MAN_LAST
+# 82 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	release
+	end
 
-text VermilionCity_PokemonFanClub_Text_ChairmansStory {
-    "Good!\n"
-    "Then listen up!\p"
-    "My favorite RAPIDASH…\p"
-    "It's…cute…lovely…smart… \n"
-    "plus…amazing…you think so?…\l"
-    "oh yes…it's…stunning…\l"
-    "kindly…love it!\p"
-    "Hug it…when…sleeping…warm\n"
-    "and cuddly…spectacular…\l"
-    "ravishing…\l"
-    "…Oops! Look at the time!\l"
-    "I kept you too long!\p"
-    "Thanks for hearing me out!\n"
-    "I want you to have this!$"
-}
 
-text VermilionCity_PokemonFanClub_Text_ReceivedBikeVoucherFromChairman {
-    "{PLAYER} received a BIKE VOUCHER\n"
-    "from the CHAIRMAN.$"
-}
+VermilionCity_PokemonFanClub_EventScript_FatMan::
+# 87 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	lock
+# 88 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	faceplayer
+# 89 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	goto_if_set SPOKE_TO_WOMAN_LAST, VermilionCity_PokemonFanClub_EventScript_FatMan_2
+VermilionCity_PokemonFanClub_EventScript_FatMan_1:
+# 92 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	msgbox VermilionCity_PokemonFanClub_Text_AdmirePikachusTail
+# 93 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	closemessage
+# 94 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	applymovement LOCALID_POKEMON_FAN_CLUB_FAT_MAN, Common_Movement_FaceOriginalDirection
+# 95 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	waitmovement 0
+# 96 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	setflag SPOKE_TO_FAT_MAN_LAST
+# 97 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	release
+	end
 
-text VermilionCity_PokemonFanClub_Text_ExplainBikeVoucher {
-    "Take that BIKE VOUCHER to the\n"
-    "BIKE SHOP in CERULEAN CITY.\p"
-    "Exchange that for a BICYCLE\n"
-    "free of charge!\p"
-    "Don't worry, my favorite FEAROW\n"
-    "will FLY me anywhere I need to go.\p"
-    "So, I have no need for a BICYCLE.\p"
-    "I hope you like cycling!$"
-}
+VermilionCity_PokemonFanClub_EventScript_FatMan_2:
+# 90 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	goto VermilionCity_PokemonFanClub_EventScript_FatManSpokeToWoman
+	goto VermilionCity_PokemonFanClub_EventScript_FatMan_1
 
-text VermilionCity_PokemonFanClub_Text_ComeBackToHearStory {
-    "Oh. Come back when you want to\n"
-    "hear my story!$"
-}
 
-text VermilionCity_PokemonFanClub_Text_DidntComeToSeeAboutMonsAgain {
-    "Hello, {PLAYER}!\p"
-    "Did you come see me about my\n"
-    "POKéMON again?\p"
-    "No?\n"
-    "Too bad!$"
-}
+VermilionCity_PokemonFanClub_EventScript_FatManSpokeToWoman::
+# 102 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	msgbox VermilionCity_PokemonFanClub_Text_PikachuTwiceAsCute
+# 103 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	closemessage
+# 104 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	applymovement LOCALID_POKEMON_FAN_CLUB_FAT_MAN, Common_Movement_FaceOriginalDirection
+# 105 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	waitmovement 0
+# 106 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	clearflag SPOKE_TO_WOMAN_LAST
+# 107 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	release
+	end
 
-text VermilionCity_PokemonFanClub_Text_MakeRoomForThis {
-    "Make room for this!$"
-}
 
-text VermilionCity_PokemonFanClub_Text_ChairmanVeryVocalAboutPokemon {
-    "Our CHAIRMAN is very vocal about\n"
-    "POKéMON.$"
-}
+VermilionCity_PokemonFanClub_EventScript_Pikachu::
+# 112 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	lock
+# 113 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	faceplayer
+# 114 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	waitse
+# 115 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	playmoncry SPECIES_PIKACHU, CRY_MODE_NORMAL
+# 116 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	msgbox VermilionCity_PokemonFanClub_Text_Pikachu
+# 117 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	waitmoncry
+# 118 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	release
+	end
 
-text VermilionCity_PokemonFanClub_Text_ListenPolitelyToOtherTrainers {
-    "Let's all listen politely to other\n"
-    "TRAINERS!$"
-}
 
-text VermilionCity_PokemonFanClub_Text_SomeoneBragsBragBack {
-    "If someone brags, brag right back!$"
-}
+VermilionCity_PokemonFanClub_EventScript_Seel::
+# 123 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	lock
+# 124 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	faceplayer
+# 125 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	waitse
+# 126 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	playmoncry SPECIES_SEEL, CRY_MODE_NORMAL
+# 127 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	msgbox VermilionCity_PokemonFanClub_Text_Seel
+# 128 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	waitmoncry
+# 129 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	release
+	end
 
-text VermilionCity_PokemonFanClub_Text_ChairmanReallyAdoresHisMons {
-    "Our CHAIRMAN really does adore his\n"
-    "POKéMON.\p"
-    "But the person who is most liked by\n"
-    "POKéMON is DAISY, I think.$"
-}
+
+VermilionCity_PokemonFanClub_EventScript_RulesSign1::
+# 134 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	msgbox VermilionCity_PokemonFanClub_Text_ListenPolitelyToOtherTrainers, MSGBOX_SIGN
+	end
+
+
+VermilionCity_PokemonFanClub_EventScript_RulesSign2::
+# 139 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	msgbox VermilionCity_PokemonFanClub_Text_SomeoneBragsBragBack, MSGBOX_SIGN
+	end
+
+
+VermilionCity_PokemonFanClub_Text_AdmirePikachusTail::
+# 143 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	.string "Won't you admire my PIKACHU's\n"
+	.string "adorable tail?$"
+
+VermilionCity_PokemonFanClub_Text_PikachuTwiceAsCute::
+# 148 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	.string "Humph!\p"
+	.string "My PIKACHU is twice as cute as\n"
+	.string "that one!$"
+
+VermilionCity_PokemonFanClub_Text_AdoreMySeel::
+# 154 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	.string "I just adore my SEEL!\n"
+	.string "It's so lovable!\p"
+	.string "It squeals, “Kyuuuh,” when I\n"
+	.string "hug it!$"
+
+VermilionCity_PokemonFanClub_Text_SeelFarMoreAttractive::
+# 161 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	.string "Oh, dear!\p"
+	.string "My SEEL is far more attractive.\n"
+	.string "By double, I would say.$"
+
+VermilionCity_PokemonFanClub_Text_Pikachu::
+# 167 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	.string "PIKACHU: Chu! Pikachu!$"
+
+VermilionCity_PokemonFanClub_Text_Seel::
+# 171 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	.string "SEEL: Kyuoo!$"
+
+VermilionCity_PokemonFanClub_Text_DidYouComeToHearAboutMyMons::
+# 175 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	.string "I chair the POKéMON Fan Club!\p"
+	.string "I raise more than a hundred\n"
+	.string "POKéMON!\p"
+	.string "I'm very fussy when it comes to\n"
+	.string "POKéMON! I surely am!\p"
+	.string "So…\p"
+	.string "Did you come visit to hear about\n"
+	.string "my POKéMON?$"
+
+VermilionCity_PokemonFanClub_Text_ChairmansStory::
+# 186 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	.string "Good!\n"
+	.string "Then listen up!\p"
+	.string "My favorite RAPIDASH…\p"
+	.string "It's…cute…lovely…smart… \n"
+	.string "plus…amazing…you think so?…\l"
+	.string "oh yes…it's…stunning…\l"
+	.string "kindly…love it!\p"
+	.string "Hug it…when…sleeping…warm\n"
+	.string "and cuddly…spectacular…\l"
+	.string "ravishing…\l"
+	.string "…Oops! Look at the time!\l"
+	.string "I kept you too long!\p"
+	.string "Thanks for hearing me out!\n"
+	.string "I want you to have this!$"
+
+VermilionCity_PokemonFanClub_Text_ReceivedBikeVoucherFromChairman::
+# 203 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	.string "{PLAYER} received a BIKE VOUCHER\n"
+	.string "from the CHAIRMAN.$"
+
+VermilionCity_PokemonFanClub_Text_ExplainBikeVoucher::
+# 208 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	.string "Take that BIKE VOUCHER to the\n"
+	.string "BIKE SHOP in CERULEAN CITY.\p"
+	.string "Exchange that for a BICYCLE\n"
+	.string "free of charge!\p"
+	.string "Don't worry, my favorite FEAROW\n"
+	.string "will FLY me anywhere I need to go.\p"
+	.string "So, I have no need for a BICYCLE.\p"
+	.string "I hope you like cycling!$"
+
+VermilionCity_PokemonFanClub_Text_ComeBackToHearStory::
+# 219 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	.string "Oh. Come back when you want to\n"
+	.string "hear my story!$"
+
+VermilionCity_PokemonFanClub_Text_DidntComeToSeeAboutMonsAgain::
+# 224 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	.string "Hello, {PLAYER}!\p"
+	.string "Did you come see me about my\n"
+	.string "POKéMON again?\p"
+	.string "No?\n"
+	.string "Too bad!$"
+
+VermilionCity_PokemonFanClub_Text_MakeRoomForThis::
+# 232 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	.string "Make room for this!$"
+
+VermilionCity_PokemonFanClub_Text_ChairmanVeryVocalAboutPokemon::
+# 236 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	.string "Our CHAIRMAN is very vocal about\n"
+	.string "POKéMON.$"
+
+VermilionCity_PokemonFanClub_Text_ListenPolitelyToOtherTrainers::
+# 241 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	.string "Let's all listen politely to other\n"
+	.string "TRAINERS!$"
+
+VermilionCity_PokemonFanClub_Text_SomeoneBragsBragBack::
+# 246 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	.string "If someone brags, brag right back!$"
+
+VermilionCity_PokemonFanClub_Text_ChairmanReallyAdoresHisMons::
+# 250 "data/maps/VermilionCity_PokemonFanClub_Frlg/scripts.pory"
+	.string "Our CHAIRMAN really does adore his\n"
+	.string "POKéMON.\p"
+	.string "But the person who is most liked by\n"
+	.string "POKéMON is DAISY, I think.$"
+
+`

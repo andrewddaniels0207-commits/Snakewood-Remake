@@ -1,147 +1,164 @@
-mapscripts CeladonCity_DepartmentStore_3F_Frlg_MapScripts {}
+raw `
+CeladonCity_DepartmentStore_3F_Frlg_MapScripts::
+	.byte 0
 
-script CeladonCity_DepartmentStore_3F_EventScript_CounterTutor {
-    goto(EventScript_CounterTutor)
-    end
-}
 
-script CeladonCity_DepartmentStore_3F_EventScript_GBAKid1 {
-    msgbox(CeladonCity_DepartmentStore_3F_Text_OTStandsForOriginalTrainer, MSGBOX_NPC)
-    end
-}
+CeladonCity_DepartmentStore_3F_EventScript_CounterTutor::
+# 4 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	goto EventScript_CounterTutor
+	end
 
-script CeladonCity_DepartmentStore_3F_EventScript_GBAKid2 {
-    msgbox(CeladonCity_DepartmentStore_3F_Text_BuddyTradingKangaskhanForHaunter, MSGBOX_NPC)
-    end
-}
 
-script CeladonCity_DepartmentStore_3F_EventScript_GBAKid3 {
-    msgbox(CeladonCity_DepartmentStore_3F_Text_HaunterEvolvedOnTrade, MSGBOX_NPC)
-    end
-}
+CeladonCity_DepartmentStore_3F_EventScript_GBAKid1::
+# 9 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	msgbox CeladonCity_DepartmentStore_3F_Text_OTStandsForOriginalTrainer, MSGBOX_NPC
+	end
 
-script CeladonCity_DepartmentStore_3F_EventScript_LittleGirl {
-    msgbox(CeladonCity_DepartmentStore_3F_Text_CanIdentifyTradeMonsByID, MSGBOX_NPC)
-    end
-}
 
-script CeladonCity_DepartmentStore_3F_EventScript_SuperNES {
-    msgbox(CeladonCity_DepartmentStore_3F_Text_ItsSuperNES, MSGBOX_SIGN)
-    end
-}
+CeladonCity_DepartmentStore_3F_EventScript_GBAKid2::
+# 14 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	msgbox CeladonCity_DepartmentStore_3F_Text_BuddyTradingKangaskhanForHaunter, MSGBOX_NPC
+	end
 
-script CeladonCity_DepartmentStore_3F_EventScript_TV1 {
-    msgbox(CeladonCity_DepartmentStore_3F_Text_AnRPG, MSGBOX_SIGN)
-    end
-}
 
-script CeladonCity_DepartmentStore_3F_EventScript_TV2 {
-    msgbox(CeladonCity_DepartmentStore_3F_Text_SportsGame, MSGBOX_SIGN)
-    end
-}
+CeladonCity_DepartmentStore_3F_EventScript_GBAKid3::
+# 19 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	msgbox CeladonCity_DepartmentStore_3F_Text_HaunterEvolvedOnTrade, MSGBOX_NPC
+	end
 
-script CeladonCity_DepartmentStore_3F_EventScript_TV3 {
-    msgbox(CeladonCity_DepartmentStore_3F_Text_PuzzleGame, MSGBOX_SIGN)
-    end
-}
 
-script CeladonCity_DepartmentStore_3F_EventScript_TV4 {
-    msgbox(CeladonCity_DepartmentStore_3F_Text_FightingGame, MSGBOX_SIGN)
-    end
-}
+CeladonCity_DepartmentStore_3F_EventScript_LittleGirl::
+# 24 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	msgbox CeladonCity_DepartmentStore_3F_Text_CanIdentifyTradeMonsByID, MSGBOX_NPC
+	end
 
-script CeladonCity_DepartmentStore_3F_EventScript_FloorSign {
-    msgbox(CeladonCity_DepartmentStore_3F_Text_TVGameShop, MSGBOX_SIGN)
-    end
-}
 
-script CeladonCity_DepartmentStore_3F_EventScript_Poster {
-    msgbox(CeladonCity_DepartmentStore_3F_Text_RedGreenBothArePokemon, MSGBOX_SIGN)
-    end
-}
+CeladonCity_DepartmentStore_3F_EventScript_SuperNES::
+# 29 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	msgbox CeladonCity_DepartmentStore_3F_Text_ItsSuperNES, MSGBOX_SIGN
+	end
 
-text CeladonCity_DepartmentStore_3F_Text_OTStandsForOriginalTrainer {
-    "Captured POKéMON are registered\n"
-    "with an ID No. and the OT.\p"
-    "OT stands for “Original TRAINER” -\n"
-    "the TRAINER that caught it first.$"
-}
 
-text CeladonCity_DepartmentStore_3F_Text_BuddyTradingKangaskhanForHaunter {
-    "All right!\p"
-    "My buddy's going to trade me his\n"
-    "KANGASKHAN for my HAUNTER!$"
-}
+CeladonCity_DepartmentStore_3F_EventScript_TV1::
+# 34 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	msgbox CeladonCity_DepartmentStore_3F_Text_AnRPG, MSGBOX_SIGN
+	end
 
-text CeladonCity_DepartmentStore_3F_Text_HaunterEvolvedOnTrade {
-    "Come on, HAUNTER!\p"
-    "I love HAUNTER!\n"
-    "I collect them!\p"
-    "Huh?\p"
-    "HAUNTER turned into a different\n"
-    "POKéMON while being traded!$"
-}
 
-text CeladonCity_DepartmentStore_3F_Text_CanIdentifyTradeMonsByID {
-    "You can identify POKéMON you get\n"
-    "in trades by their ID Numbers.$"
-}
+CeladonCity_DepartmentStore_3F_EventScript_TV2::
+# 39 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	msgbox CeladonCity_DepartmentStore_3F_Text_SportsGame, MSGBOX_SIGN
+	end
 
-text CeladonCity_DepartmentStore_3F_Text_ItsSuperNES {
-    "It's a Super NES.$"
-}
 
-text CeladonCity_DepartmentStore_3F_Text_AnRPG {
-    "An RPG!\n"
-    "There's no time for that!$"
-}
+CeladonCity_DepartmentStore_3F_EventScript_TV3::
+# 44 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	msgbox CeladonCity_DepartmentStore_3F_Text_PuzzleGame, MSGBOX_SIGN
+	end
 
-text CeladonCity_DepartmentStore_3F_Text_SportsGame {
-    "A sports game!\n"
-    "Dad'll like that!$"
-}
 
-text CeladonCity_DepartmentStore_3F_Text_PuzzleGame {
-    "A puzzle game!\n"
-    "Looks addictive!$"
-}
+CeladonCity_DepartmentStore_3F_EventScript_TV4::
+# 49 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	msgbox CeladonCity_DepartmentStore_3F_Text_FightingGame, MSGBOX_SIGN
+	end
 
-text CeladonCity_DepartmentStore_3F_Text_FightingGame {
-    "A fighting game!\n"
-    "Looks tough!$"
-}
 
-text CeladonCity_DepartmentStore_3F_Text_TVGameShop {
-    "3F: TV GAME SHOP$"
-}
+CeladonCity_DepartmentStore_3F_EventScript_FloorSign::
+# 54 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	msgbox CeladonCity_DepartmentStore_3F_Text_TVGameShop, MSGBOX_SIGN
+	end
 
-text CeladonCity_DepartmentStore_3F_Text_RedGreenBothArePokemon {
-    "Red and Green!\n"
-    "Both are POKéMON!$"
-}
 
-text Text_CounterTeach {
-    "Oh, hi!\n"
-    "I finally finished POKéMON.\p"
-    "Not done yet? How about I teach\n"
-    "you a good move?\p"
-    "The move I have in mind is\n"
-    "COUNTER.\p"
-    "Not like the one I'm leaning on,\n"
-    "mind you!$"
-}
+CeladonCity_DepartmentStore_3F_EventScript_Poster::
+# 59 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	msgbox CeladonCity_DepartmentStore_3F_Text_RedGreenBothArePokemon, MSGBOX_SIGN
+	end
 
-text Text_CounterDeclined {
-    "You're not interested? Come see\n"
-    "me if you change your mind.$"
-}
 
-text Text_CounterWhichMon {
-    "Which POKéMON should I teach\n"
-    "COUNTER to?$"
-}
+CeladonCity_DepartmentStore_3F_Text_OTStandsForOriginalTrainer::
+# 63 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	.string "Captured POKéMON are registered\n"
+	.string "with an ID No. and the OT.\p"
+	.string "OT stands for “Original TRAINER” -\n"
+	.string "the TRAINER that caught it first.$"
 
-text Text_CounterTaught {
-    "Are you using that COUNTER move\n"
-    "I taught your POKéMON?$"
-}
+CeladonCity_DepartmentStore_3F_Text_BuddyTradingKangaskhanForHaunter::
+# 70 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	.string "All right!\p"
+	.string "My buddy's going to trade me his\n"
+	.string "KANGASKHAN for my HAUNTER!$"
+
+CeladonCity_DepartmentStore_3F_Text_HaunterEvolvedOnTrade::
+# 76 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	.string "Come on, HAUNTER!\p"
+	.string "I love HAUNTER!\n"
+	.string "I collect them!\p"
+	.string "Huh?\p"
+	.string "HAUNTER turned into a different\n"
+	.string "POKéMON while being traded!$"
+
+CeladonCity_DepartmentStore_3F_Text_CanIdentifyTradeMonsByID::
+# 85 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	.string "You can identify POKéMON you get\n"
+	.string "in trades by their ID Numbers.$"
+
+CeladonCity_DepartmentStore_3F_Text_ItsSuperNES::
+# 90 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	.string "It's a Super NES.$"
+
+CeladonCity_DepartmentStore_3F_Text_AnRPG::
+# 94 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	.string "An RPG!\n"
+	.string "There's no time for that!$"
+
+CeladonCity_DepartmentStore_3F_Text_SportsGame::
+# 99 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	.string "A sports game!\n"
+	.string "Dad'll like that!$"
+
+CeladonCity_DepartmentStore_3F_Text_PuzzleGame::
+# 104 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	.string "A puzzle game!\n"
+	.string "Looks addictive!$"
+
+CeladonCity_DepartmentStore_3F_Text_FightingGame::
+# 109 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	.string "A fighting game!\n"
+	.string "Looks tough!$"
+
+CeladonCity_DepartmentStore_3F_Text_TVGameShop::
+# 114 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	.string "3F: TV GAME SHOP$"
+
+CeladonCity_DepartmentStore_3F_Text_RedGreenBothArePokemon::
+# 118 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	.string "Red and Green!\n"
+	.string "Both are POKéMON!$"
+
+Text_CounterTeach::
+# 123 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	.string "Oh, hi!\n"
+	.string "I finally finished POKéMON.\p"
+	.string "Not done yet? How about I teach\n"
+	.string "you a good move?\p"
+	.string "The move I have in mind is\n"
+	.string "COUNTER.\p"
+	.string "Not like the one I'm leaning on,\n"
+	.string "mind you!$"
+
+Text_CounterDeclined::
+# 134 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	.string "You're not interested? Come see\n"
+	.string "me if you change your mind.$"
+
+Text_CounterWhichMon::
+# 139 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	.string "Which POKéMON should I teach\n"
+	.string "COUNTER to?$"
+
+Text_CounterTaught::
+# 144 "data/maps/CeladonCity_DepartmentStore_3F_Frlg/scripts.pory"
+	.string "Are you using that COUNTER move\n"
+	.string "I taught your POKéMON?$"
+
+`

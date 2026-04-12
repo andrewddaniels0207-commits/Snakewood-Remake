@@ -1,60 +1,105 @@
 BattleFrontier_BattlePikeCorridor_MapScripts::
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePikeCorridor_OnFrame
+# 5 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeCorridor_OnWarp
+# 2 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePikeCorridor_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
 	.byte 0
 
-BattleFrontier_BattlePikeCorridor_OnFrame:
+BattleFrontier_BattlePikeCorridor_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 3 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePikeCorridor_EventScript_EnterCorridor
 	.2byte 0
 
+
 BattleFrontier_BattlePikeCorridor_EventScript_EnterCorridor::
+# 9 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	delay 16
+# 10 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	frontier_set FRONTIER_DATA_BATTLE_NUM, 1
+# 11 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	pike_cleartrainerids
+# 12 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	pike_nohealing TRUE
+# 13 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	applymovement LOCALID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_PlayerEnterCorridor
+# 14 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	applymovement LOCALID_PIKE_CORRIDOR_ATTENDANT, BattleFrontier_BattlePikeCorridor_Movement_AttendantEnterCorridor
+# 15 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	waitmovement 0
+# 16 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	lockall
+# 17 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	msgbox BattleFrontier_BattlePikeCorridor_Text_YourChallengeHasBegun, MSGBOX_DEFAULT
+# 18 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	closemessage
+# 19 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	releaseall
+# 20 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	applymovement LOCALID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_PlayerExitCorridor
+# 21 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	waitmovement 0
+# 22 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 99
+# 23 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	call BattleFrontier_BattlePike_EventScript_CloseCurtain
+# 24 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM, 6, 10
+# 25 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	waitstate
 	end
 
+
+# 29 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
+
+# 30 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 BattleFrontier_BattlePikeCorridor_OnWarp:
+# 31 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattlePikeCorridor_EventScript_TurnPlayerNorth
+# 32 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	.2byte 0
 
 BattleFrontier_BattlePikeCorridor_EventScript_TurnPlayerNorth::
+# 37 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	setvar VAR_TEMP_1, 1
+# 38 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 
+
+# 42 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 BattleFrontier_BattlePikeCorridor_Movement_PlayerEnterCorridor:
+# 43 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	walk_up
+# 44 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	walk_up
+# 45 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	step_end
 
+# 48 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 BattleFrontier_BattlePikeCorridor_Movement_PlayerExitCorridor:
+# 49 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	walk_up
+# 50 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	walk_up
+# 51 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	set_invisible
+# 52 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	step_end
 
+# 55 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 BattleFrontier_BattlePikeCorridor_Movement_AttendantEnterCorridor:
+# 56 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	walk_up
+# 57 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	walk_up
+# 58 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	walk_left
+# 59 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	face_down
+# 60 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	step_end
 
-BattleFrontier_BattlePikeCorridor_Text_YourChallengeHasBegun:
+BattleFrontier_BattlePikeCorridor_Text_YourChallengeHasBegun::
+# 63 "data/maps/BattleFrontier_BattlePikeCorridor/scripts.pory"
 	.string "Your Battle Choice challenge\n"
 	.string "has now begun…$"
-

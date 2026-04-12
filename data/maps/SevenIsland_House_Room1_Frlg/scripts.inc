@@ -1,176 +1,399 @@
-.equ TRAINER_VISITING, VAR_TEMP_1
-
 SevenIsland_House_Room1_Frlg_MapScripts::
+# 2 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_House_Room1_OnTransition
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, SevenIsland_House_Room1_OnFrame
+# 3 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SevenIsland_House_Room1_Frlg_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
 	.byte 0
 
-SevenIsland_House_Room1_OnTransition::
-	special ValidateEReaderTrainer
-	call_if_eq VAR_RESULT, 0, SevenIsland_House_Room1_EventScript_SetTrainerVisitingLayout
-	call_if_ne VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 0, SevenIsland_House_Room1_EventScript_MoveOldWomanToDoor
-	end
-
-SevenIsland_House_Room1_EventScript_SetTrainerVisitingLayout::
-	setvar TRAINER_VISITING, TRUE
-	setobjectxyperm LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, 4, 2
-	setobjectmovementtype LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, MOVEMENT_TYPE_FACE_DOWN
-	setmaplayoutindex LAYOUT_SEVEN_ISLAND_HOUSE_ROOM1_DOOR_OPEN
-	return
-
-SevenIsland_House_Room1_EventScript_MoveOldWomanToDoor::
-	setobjectxyperm LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, 3, 2
-	setobjectmovementtype LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, MOVEMENT_TYPE_FACE_RIGHT
-	return
-
-SevenIsland_House_Room1_OnFrame::
+SevenIsland_House_Room1_Frlg_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 4 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1, SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle
+# 5 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2, SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle
+# 6 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3, SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle
 	.2byte 0
 
+
+SevenIsland_House_Room1_OnTransition::
+# 11 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	special ValidateEReaderTrainer
+# 12 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	compare VAR_RESULT, 0
+	goto_if_eq SevenIsland_House_Room1_OnTransition_2
+SevenIsland_House_Room1_OnTransition_1:
+# 15 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 0
+	goto_if_ne SevenIsland_House_Room1_OnTransition_5
+SevenIsland_House_Room1_OnTransition_4:
+	end
+
+SevenIsland_House_Room1_OnTransition_2:
+# 13 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	call SevenIsland_House_Room1_EventScript_SetTrainerVisitingLayout
+	goto SevenIsland_House_Room1_OnTransition_1
+
+SevenIsland_House_Room1_OnTransition_5:
+# 16 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	call SevenIsland_House_Room1_EventScript_MoveOldWomanToDoor
+	goto SevenIsland_House_Room1_OnTransition_4
+
+
+SevenIsland_House_Room1_EventScript_SetTrainerVisitingLayout::
+# 22 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	setvar TRAINER_VISITING, TRUE
+# 23 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	setobjectxyperm LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, 4, 2
+# 24 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	setobjectmovementtype LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, MOVEMENT_TYPE_FACE_DOWN
+# 25 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	setmaplayoutindex LAYOUT_SEVEN_ISLAND_HOUSE_ROOM1_DOOR_OPEN
+	return
+
+
+SevenIsland_House_Room1_EventScript_MoveOldWomanToDoor::
+# 30 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	setobjectxyperm LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, 3, 2
+# 31 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	setobjectmovementtype LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, MOVEMENT_TYPE_FACE_RIGHT
+	return
+
+
 SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle::
+# 36 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	lockall
+# 37 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_FEMALE
+# 38 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, SevenIsland_House_Room1_Movement_PlayerReEnterRoom
+# 39 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	waitmovement 0
+# 40 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	applymovement LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, SevenIsland_House_Room1_Movement_OldWomanWalkBehindPlayer
+# 41 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	waitmovement 0
+# 42 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	copyobjectxytoperm LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN
+# 43 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+# 44 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	waitmovement 0
-	call_if_eq VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1, SevenIsland_House_Room1_EventScript_BattleWonComment
-	call_if_eq VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2, SevenIsland_House_Room1_EventScript_BattleLostComment
-	call_if_eq VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3, SevenIsland_House_Room1_EventScript_BattleTiedComment
+# 45 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1
+	goto_if_eq SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle_2
+SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle_1:
+# 48 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2
+	goto_if_eq SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle_5
+SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle_4:
+# 51 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3
+	goto_if_eq SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle_8
+SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle_7:
+# 54 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	special LoadPlayerParty
+# 55 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 0
+# 56 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	releaseall
 	end
 
+SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle_2:
+# 46 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	call SevenIsland_House_Room1_EventScript_BattleWonComment
+	goto SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle_1
+
+SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle_5:
+# 49 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	call SevenIsland_House_Room1_EventScript_BattleLostComment
+	goto SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle_4
+
+SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle_8:
+# 52 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	call SevenIsland_House_Room1_EventScript_BattleTiedComment
+	goto SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle_7
+
+
 SevenIsland_House_Room1_EventScript_BattleWonComment::
+# 61 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	msgbox SevenIsland_House_Room1_Text_AstoundingBattle
 	return
 
+
 SevenIsland_House_Room1_EventScript_BattleLostComment::
+# 66 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	msgbox SevenIsland_House_Room1_Text_FeelYourDisappointment
 	return
 
+
 SevenIsland_House_Room1_EventScript_BattleTiedComment::
+# 71 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	msgbox SevenIsland_House_Room1_Text_DrawWasIt
 	return
 
-SevenIsland_House_Room1_Movement_PlayerReEnterRoom::
+
+# 75 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+SevenIsland_House_Room1_Movement_PlayerReEnterRoom:
+# 76 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	walk_down
+# 77 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	step_end
 
-SevenIsland_House_Room1_Movement_OldWomanWalkBehindPlayer::
+# 80 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+SevenIsland_House_Room1_Movement_OldWomanWalkBehindPlayer:
+# 81 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	walk_right
+# 82 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	walk_in_place_faster_down
+# 83 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	step_end
 
 SevenIsland_House_Room1_EventScript_OldWoman::
+# 87 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	lock
+# 88 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	faceplayer
+# 89 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	special ValidateEReaderTrainer
-	call_if_eq VAR_RESULT, 1, SevenIsland_House_Room1_EventScript_InvalidVisitingTrainer
-	goto_if_eq TRAINER_VISITING, TRUE, SevenIsland_House_Room1_EventScript_TrainerVisiting
+# 90 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq SevenIsland_House_Room1_EventScript_OldWoman_2
+SevenIsland_House_Room1_EventScript_OldWoman_1:
+# 93 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	compare TRAINER_VISITING, TRUE
+	goto_if_eq SevenIsland_House_Room1_EventScript_OldWoman_5
+SevenIsland_House_Room1_EventScript_OldWoman_4:
+# 96 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	msgbox SevenIsland_House_Room1_Text_OnlyEnjoymentWatchingBattles
+# 97 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	release
 	end
+
+SevenIsland_House_Room1_EventScript_OldWoman_2:
+# 91 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	call SevenIsland_House_Room1_EventScript_InvalidVisitingTrainer
+	goto SevenIsland_House_Room1_EventScript_OldWoman_1
+
+SevenIsland_House_Room1_EventScript_OldWoman_5:
+# 94 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	goto SevenIsland_House_Room1_EventScript_TrainerVisiting
+	goto SevenIsland_House_Room1_EventScript_OldWoman_4
+
 
 SevenIsland_House_Room1_EventScript_InvalidVisitingTrainer::
+# 102 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	msgbox SevenIsland_House_Room1_Text_OnlyEnjoymentWatchingBattles
+# 103 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	release
 	end
+
 
 SevenIsland_House_Room1_EventScript_TrainerVisiting::
+# 108 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	special SavePlayerParty
+# 109 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	special BufferEReaderTrainerName
+# 110 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	msgbox SevenIsland_House_Room1_Text_ChallengeVisitingTrainer, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, SevenIsland_House_Room1_EventScript_DeclineBattle
+# 111 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq SevenIsland_House_Room1_EventScript_TrainerVisiting_2
+SevenIsland_House_Room1_EventScript_TrainerVisiting_1:
+# 114 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	call SevenIsland_House_Room1_EventScript_ChooseParty
-	goto_if_eq VAR_RESULT, 0, SevenIsland_House_Room1_EventScript_DeclineBattle
+# 115 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	compare VAR_RESULT, 0
+	goto_if_eq SevenIsland_House_Room1_EventScript_TrainerVisiting_5
+SevenIsland_House_Room1_EventScript_TrainerVisiting_4:
+# 118 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	msgbox SevenIsland_House_Room1_Text_SaveProgressBeforeBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, SevenIsland_House_Room1_EventScript_DeclineBattle
+# 119 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq SevenIsland_House_Room1_EventScript_TrainerVisiting_8
+SevenIsland_House_Room1_EventScript_TrainerVisiting_7:
+# 122 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	special LoadPlayerParty
+# 123 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	call Common_EventScript_SaveGame
-	goto_if_eq VAR_RESULT, 0, SevenIsland_House_Room1_EventScript_DeclineBattle
+# 124 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	compare VAR_RESULT, 0
+	goto_if_eq SevenIsland_House_Room1_EventScript_TrainerVisiting_11
+SevenIsland_House_Room1_EventScript_TrainerVisiting_10:
+# 127 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	special SavePlayerParty
+# 128 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	special ReducePlayerPartyToSelectedMons
+# 129 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	msgbox SevenIsland_House_Room1_Text_DontHoldAnythingBack
+# 130 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	closemessage
-	call_if_eq VAR_FACING, DIR_NORTH, SevenIsland_House_Room1_EventScript_EnterBattleRoomNorth
-	call_if_eq VAR_FACING, DIR_EAST, SevenIsland_House_Room1_EventScript_EnterBattleRoomEast
-	call_if_eq VAR_FACING, DIR_WEST, SevenIsland_House_Room1_EventScript_EnterBattleRoomWest
+# 131 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	compare VAR_FACING, DIR_NORTH
+	goto_if_eq SevenIsland_House_Room1_EventScript_TrainerVisiting_14
+SevenIsland_House_Room1_EventScript_TrainerVisiting_13:
+# 134 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	compare VAR_FACING, DIR_EAST
+	goto_if_eq SevenIsland_House_Room1_EventScript_TrainerVisiting_17
+SevenIsland_House_Room1_EventScript_TrainerVisiting_16:
+# 137 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	compare VAR_FACING, DIR_WEST
+	goto_if_eq SevenIsland_House_Room1_EventScript_TrainerVisiting_20
+SevenIsland_House_Room1_EventScript_TrainerVisiting_19:
+# 140 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	warp MAP_SEVEN_ISLAND_HOUSE_ROOM2, 3, 1
+# 141 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	waitstate
+# 142 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	release
 	end
+
+SevenIsland_House_Room1_EventScript_TrainerVisiting_2:
+# 112 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	goto SevenIsland_House_Room1_EventScript_DeclineBattle
+	goto SevenIsland_House_Room1_EventScript_TrainerVisiting_1
+
+SevenIsland_House_Room1_EventScript_TrainerVisiting_5:
+# 116 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	goto SevenIsland_House_Room1_EventScript_DeclineBattle
+	goto SevenIsland_House_Room1_EventScript_TrainerVisiting_4
+
+SevenIsland_House_Room1_EventScript_TrainerVisiting_8:
+# 120 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	goto SevenIsland_House_Room1_EventScript_DeclineBattle
+	goto SevenIsland_House_Room1_EventScript_TrainerVisiting_7
+
+SevenIsland_House_Room1_EventScript_TrainerVisiting_11:
+# 125 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	goto SevenIsland_House_Room1_EventScript_DeclineBattle
+	goto SevenIsland_House_Room1_EventScript_TrainerVisiting_10
+
+SevenIsland_House_Room1_EventScript_TrainerVisiting_14:
+# 132 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	call SevenIsland_House_Room1_EventScript_EnterBattleRoomNorth
+	goto SevenIsland_House_Room1_EventScript_TrainerVisiting_13
+
+SevenIsland_House_Room1_EventScript_TrainerVisiting_17:
+# 135 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	call SevenIsland_House_Room1_EventScript_EnterBattleRoomEast
+	goto SevenIsland_House_Room1_EventScript_TrainerVisiting_16
+
+SevenIsland_House_Room1_EventScript_TrainerVisiting_20:
+# 138 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+	call SevenIsland_House_Room1_EventScript_EnterBattleRoomWest
+	goto SevenIsland_House_Room1_EventScript_TrainerVisiting_19
+
 
 SevenIsland_House_Room1_EventScript_DeclineBattle::
+# 147 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	special LoadPlayerParty
+# 148 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	msgbox SevenIsland_House_Room1_Text_OhYouWontBattle
+# 149 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	release
 	end
 
+
 SevenIsland_House_Room1_EventScript_ChooseParty::
+# 154 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	msgbox SevenIsland_House_Room1_Text_LimitThreeMonsPerSide
+# 155 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	fadescreen FADE_TO_BLACK
+# 156 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	special ChooseHalfPartyForBattle
+# 157 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	waitstate
 	return
 
+
 SevenIsland_House_Room1_EventScript_EnterBattleRoomNorth::
+# 162 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	applymovement VAR_LAST_TALKED, SevenIsland_House_Room1_Movement_OldWomanMoveAsideLeft
+# 163 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomNorth
+# 164 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 SevenIsland_House_Room1_EventScript_EnterBattleRoomEast::
+# 169 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	applymovement VAR_LAST_TALKED, SevenIsland_House_Room1_Movement_OldWomanMoveAsideRight
+# 170 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomEast
+# 171 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 SevenIsland_House_Room1_EventScript_EnterBattleRoomWest::
+# 176 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	applymovement VAR_LAST_TALKED, SevenIsland_House_Room1_Movement_OldWomanMoveAsideLeft
+# 177 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomWest
+# 178 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	waitmovement 0
 	return
 
-SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomNorth::
+
+# 182 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomNorth:
+# 183 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	delay_16
+# 184 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	walk_up
+# 185 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	walk_up
+# 186 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	step_end
 
-SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomEast::
+# 189 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomEast:
+# 190 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	delay_16
+# 191 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	walk_right
+# 192 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	walk_up
+# 193 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	step_end
 
-SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomWest::
+# 196 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomWest:
+# 197 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	delay_16
+# 198 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	walk_left
+# 199 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	walk_up
+# 200 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	step_end
 
-SevenIsland_House_Room1_Movement_OldWomanMoveAsideLeft::
+# 203 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+SevenIsland_House_Room1_Movement_OldWomanMoveAsideLeft:
+# 204 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	walk_left
+# 205 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	walk_in_place_faster_right
+# 206 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	step_end
 
-SevenIsland_House_Room1_Movement_OldWomanMoveAsideRight::
+# 209 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
+SevenIsland_House_Room1_Movement_OldWomanMoveAsideRight:
+# 210 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	walk_right
+# 211 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	walk_in_place_faster_left
+# 212 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	step_end
 
 SevenIsland_House_Room1_EventScript_Box::
+# 216 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	msgbox SevenIsland_House_Room1_Text_SlightBreezeAroundBox, MSGBOX_SIGN
 	end
 
+
 SevenIsland_House_Room1_Text_OnlyEnjoymentWatchingBattles::
+# 220 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	.string "I may not look like much now,\n"
 	.string "but when I was younger…\p"
 	.string "I flew everywhere, challenging\n"
@@ -180,10 +403,12 @@ SevenIsland_House_Room1_Text_OnlyEnjoymentWatchingBattles::
 	.string "watching battles.$"
 
 SevenIsland_House_Room1_Text_SlightBreezeAroundBox::
+# 230 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	.string "There is a slight breeze blowing\n"
 	.string "around the box.$"
 
 SevenIsland_House_Room1_Text_ChallengeVisitingTrainer::
+# 235 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	.string "Ah!\n"
 	.string "Welcome, my friend!\p"
 	.string "Let me tell you something. There's\n"
@@ -194,6 +419,7 @@ SevenIsland_House_Room1_Text_ChallengeVisitingTrainer::
 	.string "{STR_VAR_1}, am I right?$"
 
 SevenIsland_House_Room1_Text_OhYouWontBattle::
+# 246 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	.string "Oh…\n"
 	.string "You won't battle…\p"
 	.string "I see, I see.\n"
@@ -202,6 +428,7 @@ SevenIsland_House_Room1_Text_OhYouWontBattle::
 	.string "mind, do come back.$"
 
 SevenIsland_House_Room1_Text_LimitThreeMonsPerSide::
+# 255 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	.string "Ah!\n"
 	.string "You will battle for me?\p"
 	.string "It was worth my time moving the\n"
@@ -214,32 +441,37 @@ SevenIsland_House_Room1_Text_LimitThreeMonsPerSide::
 	.string "battles of three POKéMON per side?$"
 
 SevenIsland_House_Room1_Text_SaveProgressBeforeBattle::
+# 268 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	.string "Fine! Before your battle, would\n"
 	.string "you like to save your game?$"
 
 SevenIsland_House_Room1_Text_DontHoldAnythingBack::
+# 273 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	.string "All right.\n"
 	.string "Don't hold anything back!$"
 
-@ Unused
 SevenIsland_House_Room1_Text_StrVar1_1::
+# 278 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	.string "{STR_VAR_1}$"
 
 SevenIsland_House_Room2_Text_MatchEndedUpDraw::
+# 282 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	.string "The match ended up a draw.$"
 
 SevenIsland_House_Room1_Text_DrawWasIt::
+# 286 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	.string "A draw, was it?\p"
 	.string "However, let me say that it was\n"
 	.string "a worthy spectacle.\p"
 	.string "I'd say it was a wonderful battle\n"
 	.string "with a real sense of depth!$"
 
-@ Unused
 SevenIsland_House_Room1_Text_StrVar1_2::
+# 294 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	.string "{STR_VAR_1}$"
 
 SevenIsland_House_Room1_Text_AstoundingBattle::
+# 298 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	.string "Bravo!\p"
 	.string "Bravo, indeed!\n"
 	.string "What an astounding battle!\p"
@@ -251,11 +483,12 @@ SevenIsland_House_Room1_Text_AstoundingBattle::
 	.string "Yes!\n"
 	.string "It was sheer magnificence!$"
 
-@ Unused
 SevenIsland_House_Room1_Text_StrVar1_3::
+# 311 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	.string "{STR_VAR_1}$"
 
 SevenIsland_House_Room1_Text_FeelYourDisappointment::
+# 315 "data/maps/SevenIsland_House_Room1_Frlg/scripts.pory"
 	.string "Too bad!\n"
 	.string "I feel your disappointment.\p"
 	.string "However, that disappointment is\n"
@@ -264,4 +497,3 @@ SevenIsland_House_Room1_Text_FeelYourDisappointment::
 	.string "motivate you to seek greatness.\p"
 	.string "Forget not this disappointment\n"
 	.string "and redouble your training!$"
-

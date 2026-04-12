@@ -1,18 +1,31 @@
 Route22_NorthEntrance_Frlg_MapScripts::
 	.byte 0
 
+
 Route22_NorthEntrance_EventScript_BoulderBadgeGuard::
+# 4 "data/maps/Route22_NorthEntrance_Frlg/scripts.pory"
 	lock
+# 5 "data/maps/Route22_NorthEntrance_Frlg/scripts.pory"
 	faceplayer
+# 6 "data/maps/Route22_NorthEntrance_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 1
+# 7 "data/maps/Route22_NorthEntrance_Frlg/scripts.pory"
 	bufferstdstring STR_VAR_1, STDSTRING_BOULDER_BADGE
+# 8 "data/maps/Route22_NorthEntrance_Frlg/scripts.pory"
 	goto Route22_NorthEntrance_EventScript_BadgeGuard
 	end
 
+
 Route22_NorthEntrance_EventScript_BoulderBadgeGuardTrigger::
+# 13 "data/maps/Route22_NorthEntrance_Frlg/scripts.pory"
 	lockall
+# 14 "data/maps/Route22_NorthEntrance_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 1
+# 15 "data/maps/Route22_NorthEntrance_Frlg/scripts.pory"
 	setvar VAR_0x8009, 1
+# 16 "data/maps/Route22_NorthEntrance_Frlg/scripts.pory"
 	bufferstdstring STR_VAR_1, STDSTRING_BOULDER_BADGE
+# 17 "data/maps/Route22_NorthEntrance_Frlg/scripts.pory"
 	goto Route23_EventScript_BadgeGuardTrigger
 	end
+

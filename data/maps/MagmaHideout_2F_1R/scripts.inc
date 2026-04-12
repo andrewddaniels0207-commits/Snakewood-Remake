@@ -1,27 +1,41 @@
 MagmaHideout_2F_1R_MapScripts::
 	.byte 0
 
+
 MagmaHideout_2F_1R_EventScript_Grunt14::
+# 4 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_14, MagmaHideout_2F_1R_Text_Grunt14Intro, MagmaHideout_2F_1R_Text_Grunt14Defeat
+# 5 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	msgbox MagmaHideout_2F_1R_Text_Grunt14PostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 MagmaHideout_2F_1R_EventScript_Grunt3::
+# 10 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_3, MagmaHideout_2F_1R_Text_Grunt3Intro, MagmaHideout_2F_1R_Text_Grunt3Defeat
+# 11 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	msgbox MagmaHideout_2F_1R_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 MagmaHideout_2F_1R_EventScript_Grunt4::
+# 16 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_4, MagmaHideout_2F_1R_Text_Grunt4Intro, MagmaHideout_2F_1R_Text_Grunt4Defeat
+# 17 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	msgbox MagmaHideout_2F_1R_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 MagmaHideout_2F_1R_EventScript_Grunt5::
+# 22 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_5, MagmaHideout_2F_1R_Text_Grunt5Intro, MagmaHideout_2F_1R_Text_Grunt5Defeat
+# 23 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	msgbox MagmaHideout_2F_1R_Text_Grunt5PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MagmaHideout_2F_1R_Text_Grunt14Intro:
+
+MagmaHideout_2F_1R_Text_Grunt14Intro::
+# 27 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	.string "What, what, what?\p"
 	.string "Only TEAM MAGMA members are supposed\n"
 	.string "to be in here!\p"
@@ -30,46 +44,56 @@ MagmaHideout_2F_1R_Text_Grunt14Intro:
 	.string "You rouse my suspicion!\n"
 	.string "Battle with me!$"
 
-MagmaHideout_2F_1R_Text_Grunt14Defeat:
+MagmaHideout_2F_1R_Text_Grunt14Defeat::
+# 37 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	.string "Aiyiyi…\n"
 	.string "My pride as a TEAM MAGMA member…$"
 
-MagmaHideout_2F_1R_Text_Grunt14PostBattle:
+MagmaHideout_2F_1R_Text_Grunt14PostBattle::
+# 42 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	.string "If you suffer from chills, you should\n"
 	.string "join TEAM MAGMA.$"
 
-MagmaHideout_2F_1R_Text_Grunt3Intro:
+MagmaHideout_2F_1R_Text_Grunt3Intro::
+# 47 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	.string "Hold it right there!\p"
 	.string "You don't really expect me to keep\n"
 	.string "my trap shut and let you waltz by me?$"
 
-MagmaHideout_2F_1R_Text_Grunt3Defeat:
+MagmaHideout_2F_1R_Text_Grunt3Defeat::
+# 53 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	.string "Ooh wow!\n"
 	.string "I concede!$"
 
-MagmaHideout_2F_1R_Text_Grunt3PostBattle:
+MagmaHideout_2F_1R_Text_Grunt3PostBattle::
+# 58 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	.string "Maybe it would've been better if I did\n"
 	.string "just let you go unchallenged…$"
 
-MagmaHideout_2F_1R_Text_Grunt4Intro:
+MagmaHideout_2F_1R_Text_Grunt4Intro::
+# 63 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	.string "Ahah!\n"
 	.string "An intruder!$"
 
-MagmaHideout_2F_1R_Text_Grunt4Defeat:
+MagmaHideout_2F_1R_Text_Grunt4Defeat::
+# 68 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	.string "Graaah!$"
 
-MagmaHideout_2F_1R_Text_Grunt4PostBattle:
+MagmaHideout_2F_1R_Text_Grunt4PostBattle::
+# 72 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	.string "I've already lost.\p"
 	.string "Do I really need to keep running\n"
 	.string "around in a circle?$"
 
-MagmaHideout_2F_1R_Text_Grunt5Intro:
+MagmaHideout_2F_1R_Text_Grunt5Intro::
+# 78 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	.string "Oh, oh!\n"
 	.string "An intruder!$"
 
-MagmaHideout_2F_1R_Text_Grunt5Defeat:
+MagmaHideout_2F_1R_Text_Grunt5Defeat::
+# 83 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	.string "Mutter…$"
 
-MagmaHideout_2F_1R_Text_Grunt5PostBattle:
+MagmaHideout_2F_1R_Text_Grunt5PostBattle::
+# 87 "data/maps/MagmaHideout_2F_1R/scripts.pory"
 	.string "Actually, I'm no expert at battling…$"
-

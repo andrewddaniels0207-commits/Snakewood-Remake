@@ -1,135 +1,338 @@
-.equ NUM_SWITCHES_PRESSED, VAR_TEMP_8
-
 SevenIsland_SevaultCanyon_TanobyKey_Frlg_MapScripts::
+# 2 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_SevaultCanyon_TanobyKey_OnTransition
 	.byte 0
 
+
 SevenIsland_SevaultCanyon_TanobyKey_OnTransition::
+# 6 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setworldmapflag FLAG_WORLD_MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY
-	call_if_set FLAG_SYS_UNLOCKED_TANOBY_RUINS, SevenIsland_SevaultCanyon_TanobyKey_EventScript_MoveBouldersToSolvedPos
+# 7 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	goto_if_set FLAG_SYS_UNLOCKED_TANOBY_RUINS, SevenIsland_SevaultCanyon_TanobyKey_OnTransition_2
+SevenIsland_SevaultCanyon_TanobyKey_OnTransition_1:
+# 10 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 0
+# 11 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_TEMP_2, 0
+# 12 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_TEMP_3, 0
+# 13 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_TEMP_4, 0
+# 14 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_TEMP_5, 0
+# 15 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_TEMP_6, 0
+# 16 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_TEMP_7, 0
+# 17 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar NUM_SWITCHES_PRESSED, 0
 	end
 
+SevenIsland_SevaultCanyon_TanobyKey_OnTransition_2:
+# 8 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	call SevenIsland_SevaultCanyon_TanobyKey_EventScript_MoveBouldersToSolvedPos
+	goto SevenIsland_SevaultCanyon_TanobyKey_OnTransition_1
+
+
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_MoveBouldersToSolvedPos::
+# 22 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setobjectxyperm LOCALID_TANOBY_KEY_BOULDER1, 7, 2
+# 23 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setobjectxyperm LOCALID_TANOBY_KEY_BOULDER2, 4, 4
+# 24 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setobjectxyperm LOCALID_TANOBY_KEY_BOULDER3, 10, 4
+# 25 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setobjectxyperm LOCALID_TANOBY_KEY_BOULDER4, 5, 6
+# 26 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setobjectxyperm LOCALID_TANOBY_KEY_BOULDER5, 9, 6
+# 27 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setobjectxyperm LOCALID_TANOBY_KEY_BOULDER6, 5, 8
+# 28 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setobjectxyperm LOCALID_TANOBY_KEY_BOULDER7, 9, 8
 	return
 
+
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch1::
+# 33 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	lockall
-	goto_if_eq VAR_TEMP_1, 100, SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+# 34 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 100
+	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch1_2
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch1_1:
+# 37 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	call SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed
+# 38 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 100
-	goto_if_eq NUM_SWITCHES_PRESSED, 7, SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+# 39 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	compare NUM_SWITCHES_PRESSED, 7
+	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch1_5
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch1_4:
+# 42 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	releaseall
 	end
+
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch1_2:
+# 35 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch1_1
+
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch1_5:
+# 40 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch1_4
+
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch2::
+# 47 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	lockall
-	goto_if_eq VAR_TEMP_2, 100, SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+# 48 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	compare VAR_TEMP_2, 100
+	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch2_2
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch2_1:
+# 51 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	call SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed
+# 52 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_TEMP_2, 100
-	goto_if_eq NUM_SWITCHES_PRESSED, 7, SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+# 53 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	compare NUM_SWITCHES_PRESSED, 7
+	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch2_5
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch2_4:
+# 56 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	releaseall
 	end
+
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch2_2:
+# 49 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch2_1
+
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch2_5:
+# 54 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch2_4
+
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch3::
+# 61 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	lockall
-	goto_if_eq VAR_TEMP_3, 100, SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+# 62 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	compare VAR_TEMP_3, 100
+	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch3_2
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch3_1:
+# 65 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	call SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed
+# 66 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_TEMP_3, 100
-	goto_if_eq NUM_SWITCHES_PRESSED, 7, SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+# 67 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	compare NUM_SWITCHES_PRESSED, 7
+	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch3_5
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch3_4:
+# 70 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	releaseall
 	end
+
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch3_2:
+# 63 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch3_1
+
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch3_5:
+# 68 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch3_4
+
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch4::
+# 75 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	lockall
-	goto_if_eq VAR_TEMP_4, 100, SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+# 76 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	compare VAR_TEMP_4, 100
+	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch4_2
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch4_1:
+# 79 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	call SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed
+# 80 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_TEMP_4, 100
-	goto_if_eq NUM_SWITCHES_PRESSED, 7, SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+# 81 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	compare NUM_SWITCHES_PRESSED, 7
+	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch4_5
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch4_4:
+# 84 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	releaseall
 	end
+
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch4_2:
+# 77 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch4_1
+
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch4_5:
+# 82 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch4_4
+
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch5::
+# 89 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	lockall
-	goto_if_eq VAR_TEMP_5, 100, SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+# 90 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	compare VAR_TEMP_5, 100
+	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch5_2
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch5_1:
+# 93 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	call SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed
+# 94 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_TEMP_5, 100
-	goto_if_eq NUM_SWITCHES_PRESSED, 7, SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+# 95 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	compare NUM_SWITCHES_PRESSED, 7
+	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch5_5
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch5_4:
+# 98 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	releaseall
 	end
+
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch5_2:
+# 91 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch5_1
+
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch5_5:
+# 96 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch5_4
+
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch6::
+# 103 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	lockall
-	goto_if_eq VAR_TEMP_6, 100, SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+# 104 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	compare VAR_TEMP_6, 100
+	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch6_2
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch6_1:
+# 107 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	call SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed
+# 108 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_TEMP_6, 100
-	goto_if_eq NUM_SWITCHES_PRESSED, 7, SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+# 109 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	compare NUM_SWITCHES_PRESSED, 7
+	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch6_5
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch6_4:
+# 112 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	releaseall
 	end
+
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch6_2:
+# 105 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch6_1
+
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch6_5:
+# 110 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch6_4
+
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch7::
+# 117 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	lockall
-	goto_if_eq VAR_TEMP_7, 100, SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+# 118 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	compare VAR_TEMP_7, 100
+	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch7_2
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch7_1:
+# 121 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	call SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed
+# 122 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_TEMP_7, 100
-	goto_if_eq NUM_SWITCHES_PRESSED, 7, SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+# 123 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	compare NUM_SWITCHES_PRESSED, 7
+	goto_if_eq SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch7_5
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch7_4:
+# 126 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	releaseall
 	end
 
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch7_2:
+# 119 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch7_1
+
+SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch7_5:
+# 124 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved
+	goto SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch7_4
+
+
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchPressed::
+# 131 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	addvar NUM_SWITCHES_PRESSED, 1
+# 132 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	playse SE_TRUCK_MOVE
+# 133 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_0x8004, 1
+# 134 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_0x8005, 1
+# 135 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_0x8006, 8
+# 136 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_0x8007, 3
+# 137 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	special ShakeScreen
+# 138 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	delay 60
 	return
 
+
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolvedShakeScreen::
+# 143 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_0x8004, 2
+# 144 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_0x8005, 2
+# 145 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_0x8006, 10
+# 146 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_0x8007, 3
+# 147 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	special ShakeScreen
+# 148 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	delay 60
+# 149 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_0x8004, 3
+# 150 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_0x8005, 3
+# 151 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_0x8006, 12
+# 152 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setvar VAR_0x8007, 2
+# 153 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	special ShakeScreen
+# 154 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	delay 60
+# 155 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	playse SE_LAVARIDGE_FALL_WARP
+# 156 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	waitse
 	return
 
+
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_SwitchAlreadyPressed::
+# 161 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	releaseall
 	end
+
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolved::
+# 166 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	call SevenIsland_SevaultCanyon_TanobyKey_EventScript_PuzzleSolvedShakeScreen
+# 167 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	msgbox SevenIsland_SevaultCanyon_TanobyKey_Text_MysteriousRumbleFarAway
+# 168 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	setflag FLAG_SYS_UNLOCKED_TANOBY_RUINS
+# 169 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	releaseall
 	end
 
+
 SevenIsland_SevaultCanyon_TanobyKey_Text_MysteriousRumbleFarAway::
+# 173 "data/maps/SevenIsland_SevaultCanyon_TanobyKey_Frlg/scripts.pory"
 	.string "A mysterious rumble echoed\n"
 	.string "somewhere far away.$"
-

@@ -1,200 +1,206 @@
-mapscripts Route15_Frlg_MapScripts {}
+raw `
+Route15_Frlg_MapScripts::
+	.byte 0
 
-script Route15_EventScript_RouteSign {
-    msgbox(Route15_Text_RouteSign, MSGBOX_SIGN)
-    end
-}
 
-text Route15_Text_KindraIntro {
-    "I just got some POKéMON in trades.\n"
-    "Can I try them out on you?$"
-}
+Route15_EventScript_RouteSign::
+# 4 "data/maps/Route15_Frlg/scripts.pory"
+	msgbox Route15_Text_RouteSign, MSGBOX_SIGN
+	end
 
-text Route15_Text_KindraDefeat {
-    "Not good enough!$"
-}
 
-text Route15_Text_KindraPostBattle {
-    "You can't change the nickname of\n"
-    "any POKéMON you get in a trade.\p"
-    "Only the Original TRAINER can get\n"
-    "the nickname changed.$"
-}
+Route15_Text_KindraIntro::
+# 8 "data/maps/Route15_Frlg/scripts.pory"
+	.string "I just got some POKéMON in trades.\n"
+	.string "Can I try them out on you?$"
 
-text Route15_Text_BeckyIntro {
-    "You look gentle, so I think I can\n"
-    "beat you.\p"
-    "I'll give it a go!$"
-}
+Route15_Text_KindraDefeat::
+# 13 "data/maps/Route15_Frlg/scripts.pory"
+	.string "Not good enough!$"
 
-text Route15_Text_BeckyDefeat {
-    "No, wrong!$"
-}
+Route15_Text_KindraPostBattle::
+# 17 "data/maps/Route15_Frlg/scripts.pory"
+	.string "You can't change the nickname of\n"
+	.string "any POKéMON you get in a trade.\p"
+	.string "Only the Original TRAINER can get\n"
+	.string "the nickname changed.$"
 
-text Route15_Text_BeckyPostBattle {
-    "I'm afraid of BIKERS. They look so\n"
-    "ugly and mean!$"
-}
+Route15_Text_BeckyIntro::
+# 24 "data/maps/Route15_Frlg/scripts.pory"
+	.string "You look gentle, so I think I can\n"
+	.string "beat you.\p"
+	.string "I'll give it a go!$"
 
-text Route15_Text_EdwinIntro {
-    "When I whistle, I can summon bird\n"
-    "POKéMON.$"
-}
+Route15_Text_BeckyDefeat::
+# 30 "data/maps/Route15_Frlg/scripts.pory"
+	.string "No, wrong!$"
 
-text Route15_Text_EdwinDefeat {
-    "Ow!\n"
-    "That's tragic!$"
-}
+Route15_Text_BeckyPostBattle::
+# 34 "data/maps/Route15_Frlg/scripts.pory"
+	.string "I'm afraid of BIKERS. They look so\n"
+	.string "ugly and mean!$"
 
-text Route15_Text_EdwinPostBattle {
-    "Maybe I'm not cut out for battles.\n"
-    "I'm not the right type, I guess.$"
-}
+Route15_Text_EdwinIntro::
+# 39 "data/maps/Route15_Frlg/scripts.pory"
+	.string "When I whistle, I can summon bird\n"
+	.string "POKéMON.$"
 
-text Route15_Text_ChesterIntro {
-    "Hmm? My birds are shivering!\n"
-    "You're good, aren't you?$"
-}
+Route15_Text_EdwinDefeat::
+# 44 "data/maps/Route15_Frlg/scripts.pory"
+	.string "Ow!\n"
+	.string "That's tragic!$"
 
-text Route15_Text_ChesterDefeat {
-    "Just as I thought!$"
-}
+Route15_Text_EdwinPostBattle::
+# 49 "data/maps/Route15_Frlg/scripts.pory"
+	.string "Maybe I'm not cut out for battles.\n"
+	.string "I'm not the right type, I guess.$"
 
-text Route15_Text_ChesterPostBattle {
-    "This is so obvious, you should know\n"
-    "this, but…\p"
-    "Moves like EARTHQUAKE and FISSURE\n"
-    "have no effect on bird POKéMON.$"
-}
+Route15_Text_ChesterIntro::
+# 54 "data/maps/Route15_Frlg/scripts.pory"
+	.string "Hmm? My birds are shivering!\n"
+	.string "You're good, aren't you?$"
 
-text Route15_Text_GraceIntro {
-    "Oh, you're a little cutie!\n"
-    "So like a darling POKéMON!$"
-}
+Route15_Text_ChesterDefeat::
+# 59 "data/maps/Route15_Frlg/scripts.pory"
+	.string "Just as I thought!$"
 
-text Route15_Text_GraceDefeat {
-    "You looked so cute, too!$"
-}
+Route15_Text_ChesterPostBattle::
+# 63 "data/maps/Route15_Frlg/scripts.pory"
+	.string "This is so obvious, you should know\n"
+	.string "this, but…\p"
+	.string "Moves like EARTHQUAKE and FISSURE\n"
+	.string "have no effect on bird POKéMON.$"
 
-text Route15_Text_GracePostBattle {
-    "I forgive you.\n"
-    "I can take it.\l"
-    "I'm a big girl now.$"
-}
+Route15_Text_GraceIntro::
+# 70 "data/maps/Route15_Frlg/scripts.pory"
+	.string "Oh, you're a little cutie!\n"
+	.string "So like a darling POKéMON!$"
 
-text Route15_Text_OliviaIntro {
-    "I raise POKéMON for protection\n"
-    "because I live alone.$"
-}
+Route15_Text_GraceDefeat::
+# 75 "data/maps/Route15_Frlg/scripts.pory"
+	.string "You looked so cute, too!$"
 
-text Route15_Text_OliviaDefeat {
-    "POKéMON isn't about winning or\n"
-    "losing for me.$"
-}
+Route15_Text_GracePostBattle::
+# 79 "data/maps/Route15_Frlg/scripts.pory"
+	.string "I forgive you.\n"
+	.string "I can take it.\l"
+	.string "I'm a big girl now.$"
 
-text Route15_Text_OliviaPostBattle {
-    "I love having my POKéMON greet me\n"
-    "when I get home.\p"
-    "It's so reassuring.$"
-}
+Route15_Text_OliviaIntro::
+# 85 "data/maps/Route15_Frlg/scripts.pory"
+	.string "I raise POKéMON for protection\n"
+	.string "because I live alone.$"
 
-text Route15_Text_ErnestIntro {
-    "Hey, kid! C'mon!\n"
-    "I just got these off some loser!$"
-}
+Route15_Text_OliviaDefeat::
+# 90 "data/maps/Route15_Frlg/scripts.pory"
+	.string "POKéMON isn't about winning or\n"
+	.string "losing for me.$"
 
-text Route15_Text_ErnestDefeat {
-    "Why not?$"
-}
+Route15_Text_OliviaPostBattle::
+# 95 "data/maps/Route15_Frlg/scripts.pory"
+	.string "I love having my POKéMON greet me\n"
+	.string "when I get home.\p"
+	.string "It's so reassuring.$"
 
-text Route15_Text_ErnestPostBattle {
-    "Life's too short.\n"
-    "It's cool to live as an outlaw.\l"
-    "TEAM ROCKET RULES!$"
-}
+Route15_Text_ErnestIntro::
+# 101 "data/maps/Route15_Frlg/scripts.pory"
+	.string "Hey, kid! C'mon!\n"
+	.string "I just got these off some loser!$"
 
-text Route15_Text_AlexIntro {
-    "Fork over all your cash when you\n"
-    "lose to me, kid!$"
-}
+Route15_Text_ErnestDefeat::
+# 106 "data/maps/Route15_Frlg/scripts.pory"
+	.string "Why not?$"
 
-text Route15_Text_AlexDefeat {
-    "That can't be true!$"
-}
+Route15_Text_ErnestPostBattle::
+# 110 "data/maps/Route15_Frlg/scripts.pory"
+	.string "Life's too short.\n"
+	.string "It's cool to live as an outlaw.\l"
+	.string "TEAM ROCKET RULES!$"
 
-text Route15_Text_AlexPostBattle {
-    "I was just joking about the money.\n"
-    "Don't take me all serious.$"
-}
+Route15_Text_AlexIntro::
+# 116 "data/maps/Route15_Frlg/scripts.pory"
+	.string "Fork over all your cash when you\n"
+	.string "lose to me, kid!$"
 
-text Route15_Text_CeliaIntro {
-    "What's cool and happening?\n"
-    "Trading POKéMON!$"
-}
+Route15_Text_AlexDefeat::
+# 121 "data/maps/Route15_Frlg/scripts.pory"
+	.string "That can't be true!$"
 
-text Route15_Text_CeliaDefeat {
-    "I said trade!$"
-}
+Route15_Text_AlexPostBattle::
+# 125 "data/maps/Route15_Frlg/scripts.pory"
+	.string "I was just joking about the money.\n"
+	.string "Don't take me all serious.$"
 
-text Route15_Text_CeliaPostBattle {
-    "I trade POKéMON with my friends\n"
-    "all the time.$"
-}
+Route15_Text_CeliaIntro::
+# 130 "data/maps/Route15_Frlg/scripts.pory"
+	.string "What's cool and happening?\n"
+	.string "Trading POKéMON!$"
 
-text Route15_Text_YazminIntro {
-    "Want to play with my POKéMON?$"
-}
+Route15_Text_CeliaDefeat::
+# 135 "data/maps/Route15_Frlg/scripts.pory"
+	.string "I said trade!$"
 
-text Route15_Text_YazminDefeat {
-    "I was too impatient!$"
-}
+Route15_Text_CeliaPostBattle::
+# 139 "data/maps/Route15_Frlg/scripts.pory"
+	.string "I trade POKéMON with my friends\n"
+	.string "all the time.$"
 
-text Route15_Text_YazminPostBattle {
-    "I'll go train with weaker people.$"
-}
+Route15_Text_YazminIntro::
+# 144 "data/maps/Route15_Frlg/scripts.pory"
+	.string "Want to play with my POKéMON?$"
 
-text Route15_Text_RouteSign {
-    "ROUTE 15\n"
-    "West to FUCHSIA CITY$"
-}
+Route15_Text_YazminDefeat::
+# 148 "data/maps/Route15_Frlg/scripts.pory"
+	.string "I was too impatient!$"
 
-text Route15_Text_MyaIntro {
-    "MYA: You're perfect.\n"
-    "Help me train my little brother?$"
-}
+Route15_Text_YazminPostBattle::
+# 152 "data/maps/Route15_Frlg/scripts.pory"
+	.string "I'll go train with weaker people.$"
 
-text Route15_Text_MyaDefeat {
-    "MYA: RON, you have to focus!\n"
-    "Concentrate on what you're doing!$"
-}
+Route15_Text_RouteSign::
+# 156 "data/maps/Route15_Frlg/scripts.pory"
+	.string "ROUTE 15\n"
+	.string "West to FUCHSIA CITY$"
 
-text Route15_Text_MyaPostBattle {
-    "MYA: Okay, we'll turn it up.\n"
-    "I'll add to our training menu!$"
-}
+Route15_Text_MyaIntro::
+# 161 "data/maps/Route15_Frlg/scripts.pory"
+	.string "MYA: You're perfect.\n"
+	.string "Help me train my little brother?$"
 
-text Route15_Text_MyaNotEnoughMons {
-    "MYA: Do you want to challenge us?\n"
-    "You'll need two POKéMON, though.$"
-}
+Route15_Text_MyaDefeat::
+# 166 "data/maps/Route15_Frlg/scripts.pory"
+	.string "MYA: RON, you have to focus!\n"
+	.string "Concentrate on what you're doing!$"
 
-text Route15_Text_RonIntro {
-    "RON: My sister gets scary when we\n"
-    "lose.$"
-}
+Route15_Text_MyaPostBattle::
+# 171 "data/maps/Route15_Frlg/scripts.pory"
+	.string "MYA: Okay, we'll turn it up.\n"
+	.string "I'll add to our training menu!$"
 
-text Route15_Text_RonDefeat {
-    "RON: Oh, no, no…\n"
-    "Sis, I'm sorry!$"
-}
+Route15_Text_MyaNotEnoughMons::
+# 176 "data/maps/Route15_Frlg/scripts.pory"
+	.string "MYA: Do you want to challenge us?\n"
+	.string "You'll need two POKéMON, though.$"
 
-text Route15_Text_RonPostBattle {
-    "RON: Oh, bleah…\n"
-    "I wish I had a nice sister…$"
-}
+Route15_Text_RonIntro::
+# 181 "data/maps/Route15_Frlg/scripts.pory"
+	.string "RON: My sister gets scary when we\n"
+	.string "lose.$"
 
-text Route15_Text_RonNotEnoughMons {
-    "RON: Did you want to battle with\n"
-    "my sister and me?\p"
-    "You need two POKéMON, then.$"
-}
+Route15_Text_RonDefeat::
+# 186 "data/maps/Route15_Frlg/scripts.pory"
+	.string "RON: Oh, no, no…\n"
+	.string "Sis, I'm sorry!$"
+
+Route15_Text_RonPostBattle::
+# 191 "data/maps/Route15_Frlg/scripts.pory"
+	.string "RON: Oh, bleah…\n"
+	.string "I wish I had a nice sister…$"
+
+Route15_Text_RonNotEnoughMons::
+# 196 "data/maps/Route15_Frlg/scripts.pory"
+	.string "RON: Did you want to battle with\n"
+	.string "my sister and me?\p"
+	.string "You need two POKéMON, then.$"
+
+`

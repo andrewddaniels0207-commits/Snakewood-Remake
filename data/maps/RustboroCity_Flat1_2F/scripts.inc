@@ -1,82 +1,196 @@
 RustboroCity_Flat1_2F_MapScripts::
 	.byte 0
 
+
 RustboroCity_Flat1_2F_EventScript_WaldasDad::
+# 4 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	lock
+# 5 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	faceplayer
+# 6 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	specialvar VAR_RESULT, TryBufferWaldaPhrase
-	goto_if_eq VAR_RESULT, FALSE, RustboroCity_Flat1_2F_EventScript_WaldasDadFirstPhrase
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_Flat1_2F_EventScript_WaldasDadNewPhrase
+# 7 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq RustboroCity_Flat1_2F_EventScript_WaldasDad_2
+RustboroCity_Flat1_2F_EventScript_WaldasDad_1:
+# 10 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq RustboroCity_Flat1_2F_EventScript_WaldasDad_4
+	return
+
+RustboroCity_Flat1_2F_EventScript_WaldasDad_2:
+# 8 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
+	goto RustboroCity_Flat1_2F_EventScript_WaldasDadFirstPhrase
+	goto RustboroCity_Flat1_2F_EventScript_WaldasDad_1
+
+RustboroCity_Flat1_2F_EventScript_WaldasDad_4:
+# 11 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
+	goto RustboroCity_Flat1_2F_EventScript_WaldasDadNewPhrase
+	return
+
 
 RustboroCity_Flat1_2F_EventScript_GivePhrase::
+# 16 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	special DoWaldaNamingScreen
+# 17 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	waitstate
-	goto_if_eq VAR_0x8004, 1, RustboroCity_Flat1_2F_EventScript_CancelGivePhrase
-	goto_if_eq VAR_0x8004, 2, RustboroCity_Flat1_2F_EventScript_CancelGiveFirstPhrase
+# 18 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
+	compare VAR_0x8004, 1
+	goto_if_eq RustboroCity_Flat1_2F_EventScript_GivePhrase_2
+RustboroCity_Flat1_2F_EventScript_GivePhrase_1:
+# 21 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
+	compare VAR_0x8004, 2
+	goto_if_eq RustboroCity_Flat1_2F_EventScript_GivePhrase_5
+RustboroCity_Flat1_2F_EventScript_GivePhrase_4:
+# 24 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	specialvar VAR_RESULT, TryGetWallpaperWithWaldaPhrase
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_Flat1_2F_EventScript_WaldaLikesPhrase
-	goto_if_eq VAR_RESULT, FALSE, RustboroCity_Flat1_2F_EventScript_WaldaDoesntLikePhrase
+# 25 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq RustboroCity_Flat1_2F_EventScript_GivePhrase_8
+RustboroCity_Flat1_2F_EventScript_GivePhrase_7:
+# 28 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq RustboroCity_Flat1_2F_EventScript_GivePhrase_11
+RustboroCity_Flat1_2F_EventScript_GivePhrase_10:
 	end
+
+RustboroCity_Flat1_2F_EventScript_GivePhrase_2:
+# 19 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
+	goto RustboroCity_Flat1_2F_EventScript_CancelGivePhrase
+	goto RustboroCity_Flat1_2F_EventScript_GivePhrase_1
+
+RustboroCity_Flat1_2F_EventScript_GivePhrase_5:
+# 22 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
+	goto RustboroCity_Flat1_2F_EventScript_CancelGiveFirstPhrase
+	goto RustboroCity_Flat1_2F_EventScript_GivePhrase_4
+
+RustboroCity_Flat1_2F_EventScript_GivePhrase_8:
+# 26 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
+	goto RustboroCity_Flat1_2F_EventScript_WaldaLikesPhrase
+	goto RustboroCity_Flat1_2F_EventScript_GivePhrase_7
+
+RustboroCity_Flat1_2F_EventScript_GivePhrase_11:
+# 29 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
+	goto RustboroCity_Flat1_2F_EventScript_WaldaDoesntLikePhrase
+	goto RustboroCity_Flat1_2F_EventScript_GivePhrase_10
+
 
 RustboroCity_Flat1_2F_EventScript_WaldasDadFirstPhrase::
+# 35 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	msgbox RustboroCity_Flat1_2F_Text_HelloDoYouKnowFunnyPhrase, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, RustboroCity_Flat1_2F_EventScript_DeclineGivePhrase
+# 36 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq RustboroCity_Flat1_2F_EventScript_WaldasDadFirstPhrase_2
+RustboroCity_Flat1_2F_EventScript_WaldasDadFirstPhrase_1:
+# 39 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	msgbox RustboroCity_Flat1_2F_Text_WonderfulLetsHearSuggestion, MSGBOX_DEFAULT
+# 40 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	goto RustboroCity_Flat1_2F_EventScript_GivePhrase
+	return
+
+RustboroCity_Flat1_2F_EventScript_WaldasDadFirstPhrase_2:
+# 37 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
+	goto RustboroCity_Flat1_2F_EventScript_DeclineGivePhrase
+	goto RustboroCity_Flat1_2F_EventScript_WaldasDadFirstPhrase_1
+
 
 RustboroCity_Flat1_2F_EventScript_WaldasDadNewPhrase::
+# 44 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	msgbox RustboroCity_Flat1_2F_Text_BeenSayingXDoYouKnowBetterPhrase, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, RustboroCity_Flat1_2F_EventScript_DeclineGivePhrase
+# 45 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq RustboroCity_Flat1_2F_EventScript_WaldasDadNewPhrase_2
+RustboroCity_Flat1_2F_EventScript_WaldasDadNewPhrase_1:
+# 48 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	msgbox RustboroCity_Flat1_2F_Text_WonderfulLetsHearSuggestion, MSGBOX_DEFAULT
+# 49 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	goto RustboroCity_Flat1_2F_EventScript_GivePhrase
+	return
+
+RustboroCity_Flat1_2F_EventScript_WaldasDadNewPhrase_2:
+# 46 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
+	goto RustboroCity_Flat1_2F_EventScript_DeclineGivePhrase
+	goto RustboroCity_Flat1_2F_EventScript_WaldasDadNewPhrase_1
+
 
 RustboroCity_Flat1_2F_EventScript_DeclineGivePhrase::
+# 53 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	msgbox RustboroCity_Flat1_2F_Text_OhIsThatRight, MSGBOX_DEFAULT
+# 54 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	release
 	end
+
 
 RustboroCity_Flat1_2F_EventScript_CancelGivePhrase::
+# 59 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	msgbox RustboroCity_Flat1_2F_Text_OhYouDontKnowAny, MSGBOX_DEFAULT
+# 60 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	release
 	end
+
 
 RustboroCity_Flat1_2F_EventScript_CancelGiveFirstPhrase::
+# 65 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	msgbox RustboroCity_Flat1_2F_Text_ThinkOfMyOwnPhrase, MSGBOX_DEFAULT
+# 66 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	call RustboroCity_Flat1_2F_EventScript_WaldasDadFaceWalda
+# 67 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	msgbox RustboroCity_Flat1_2F_Text_ShesNotSmilingAtAll2, MSGBOX_DEFAULT
+# 68 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	release
 	end
+
 
 RustboroCity_Flat1_2F_EventScript_WaldaLikesPhrase::
+# 73 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	msgbox RustboroCity_Flat1_2F_Text_LetsGiveItATry2, MSGBOX_DEFAULT
+# 74 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	call RustboroCity_Flat1_2F_EventScript_WaldasDadFaceWalda
+# 75 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	msgbox RustboroCity_Flat1_2F_Text_OhShesLaughing, MSGBOX_DEFAULT
+# 76 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	applymovement LOCALID_WALDAS_DAD, Common_Movement_FacePlayer
+# 77 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	waitmovement 0
+# 78 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	msgbox RustboroCity_Flat1_2F_Text_ThankYouIllGiveYouWallpaper, MSGBOX_DEFAULT
+# 79 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	release
 	end
+
 
 RustboroCity_Flat1_2F_EventScript_WaldaDoesntLikePhrase::
+# 84 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	msgbox RustboroCity_Flat1_2F_Text_LetsGiveItATry, MSGBOX_DEFAULT
+# 85 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	call RustboroCity_Flat1_2F_EventScript_WaldasDadFaceWalda
+# 86 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	msgbox RustboroCity_Flat1_2F_Text_ShesNotSmilingAtAll, MSGBOX_DEFAULT
+# 87 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	release
 	end
 
+
 RustboroCity_Flat1_2F_EventScript_WaldasDadFaceWalda::
+# 92 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	turnobject LOCALID_WALDAS_DAD, DIR_EAST
 	return
 
+
 RustboroCity_Flat1_2F_EventScript_WaldasMom::
+# 97 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	msgbox RustboroCity_Flat1_2F_Text_ComingUpWithMealsIsHard, MSGBOX_NPC
 	end
 
+
 RustboroCity_Flat1_2F_EventScript_PokeDoll::
+# 102 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	msgbox RustboroCity_Flat1_2F_Text_ItsAPokemonPlushDoll, MSGBOX_SIGN
 	end
 
-RustboroCity_Flat1_2F_Text_ComingUpWithMealsIsHard:
+
+RustboroCity_Flat1_2F_Text_ComingUpWithMealsIsHard::
+# 106 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	.string "Oh, it's so hard every day…\p"
 	.string "What's hard?\n"
 	.string "You need to ask?\p"
@@ -85,7 +199,8 @@ RustboroCity_Flat1_2F_Text_ComingUpWithMealsIsHard:
 	.string "It really isn't easy coming up with\n"
 	.string "meals every day.$"
 
-RustboroCity_Flat1_2F_Text_HelloDoYouKnowFunnyPhrase:
+RustboroCity_Flat1_2F_Text_HelloDoYouKnowFunnyPhrase::
+# 116 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	.string "Oh, hello!\n"
 	.string "Welcome to the PEPPER household.\p"
 	.string "I have a question for you.\n"
@@ -99,62 +214,73 @@ RustboroCity_Flat1_2F_Text_HelloDoYouKnowFunnyPhrase:
 	.string "Do you know of a funny word or\n"
 	.string "phrase you can tell me?$"
 
-RustboroCity_Flat1_2F_Text_BeenSayingXDoYouKnowBetterPhrase:
+RustboroCity_Flat1_2F_Text_BeenSayingXDoYouKnowBetterPhrase::
+# 131 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	.string "I've been saying “{STR_VAR_1}”\n"
 	.string "to amuse her lately.\p"
 	.string "Do you know of a better word or\n"
 	.string "a phrase that might work?$"
 
-RustboroCity_Flat1_2F_Text_WonderfulLetsHearSuggestion:
+RustboroCity_Flat1_2F_Text_WonderfulLetsHearSuggestion::
+# 138 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	.string "Oh, that's wonderful.\n"
 	.string "So, let's hear it, your suggestion.$"
 
-RustboroCity_Flat1_2F_Text_OhIsThatRight:
+RustboroCity_Flat1_2F_Text_OhIsThatRight::
+# 143 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	.string "Oh, is that right?\p"
 	.string "Well, if you come up with a good\n"
 	.string "suggestion, I'm all ears.$"
 
-RustboroCity_Flat1_2F_Text_LetsGiveItATry2:
+RustboroCity_Flat1_2F_Text_LetsGiveItATry2::
+# 149 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	.string "Ah, I see.\n"
 	.string "Well, let's give it a try, shall we?$"
 
-RustboroCity_Flat1_2F_Text_OhShesLaughing:
+RustboroCity_Flat1_2F_Text_OhShesLaughing::
+# 154 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	.string "{STR_VAR_1}.\n"
 	.string "{STR_VAR_1}.\p"
 	.string "Oh, yes! She's laughing!\n"
 	.string "Oh, I am as delighted as she!$"
 
-RustboroCity_Flat1_2F_Text_LetsGiveItATry:
+RustboroCity_Flat1_2F_Text_LetsGiveItATry::
+# 161 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	.string "Ah, I see.\n"
 	.string "Well, let's give it a try, shall we?$"
 
-RustboroCity_Flat1_2F_Text_ShesNotSmilingAtAll:
+RustboroCity_Flat1_2F_Text_ShesNotSmilingAtAll::
+# 166 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	.string "{STR_VAR_1}.\n"
 	.string "{STR_VAR_1}.\p"
 	.string "Hmmm… She's not smiling at all.\n"
 	.string "Maybe WALDA is one serious child…$"
 
-RustboroCity_Flat1_2F_Text_ThinkOfMyOwnPhrase:
+RustboroCity_Flat1_2F_Text_ThinkOfMyOwnPhrase::
+# 173 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	.string "Oh, so you don't know any good words.\n"
 	.string "I'd better think for myself, then.\p"
 	.string "Hmm…\n"
 	.string "How about “{STR_VAR_1}”?\l"
 	.string "Let's see if that will work.$"
 
-RustboroCity_Flat1_2F_Text_ShesNotSmilingAtAll2:
+RustboroCity_Flat1_2F_Text_ShesNotSmilingAtAll2::
+# 181 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	.string "{STR_VAR_1}.\n"
 	.string "{STR_VAR_1}.\p"
 	.string "Hmmm… She's not smiling at all.\n"
 	.string "Maybe WALDA is one serious child…$"
 
-RustboroCity_Flat1_2F_Text_OhYouDontKnowAny:
+RustboroCity_Flat1_2F_Text_OhYouDontKnowAny::
+# 188 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	.string "Oh, so you don't know any good words.\n"
 	.string "I guess I'll try to amuse her with\l"
 	.string "the saying I used before.\p"
 	.string "Anyways, if you have a good suggestion,\n"
 	.string "don't hesitate in telling me, okay?$"
 
-RustboroCity_Flat1_2F_Text_ThankYouIllGiveYouWallpaper:
+RustboroCity_Flat1_2F_Text_ThankYouIllGiveYouWallpaper::
+# 196 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	.string "Thank you!\p"
 	.string "Thanks to you, my darling WALDA\n"
 	.string "laughed for me!\p"
@@ -171,6 +297,6 @@ RustboroCity_Flat1_2F_Text_ThankYouIllGiveYouWallpaper:
 	.string "That will give you access to the new\n"
 	.string "wallpaper patterns.$"
 
-RustboroCity_Flat1_2F_Text_ItsAPokemonPlushDoll:
+RustboroCity_Flat1_2F_Text_ItsAPokemonPlushDoll::
+# 214 "data/maps/RustboroCity_Flat1_2F/scripts.pory"
 	.string "It's a POKéMON plush DOLL!$"
-

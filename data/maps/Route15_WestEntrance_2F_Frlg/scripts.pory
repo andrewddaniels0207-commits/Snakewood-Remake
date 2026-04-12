@@ -1,108 +1,164 @@
-mapscripts Route15_WestEntrance_2F_Frlg_MapScripts {}
+raw `
+Route15_WestEntrance_2F_Frlg_MapScripts::
+	.byte 0
 
-script Route15_WestEntrance_2F_EventScript_LeftBinoculars {
-    lockall
-    msgbox(Route15_WestEntrance_2F_Text_LargeShiningBird)
-    showmonpic(SPECIES_ARTICUNO, 10, 3)
-    delay(20)
-    waitbuttonpress()
-    hidemonpic()
-    setvar(VAR_0x8004, SPECIES_ARTICUNO)
-    special(SetSeenMon)
-    releaseall
-    end
-}
 
-script Route15_WestEntrance_2F_EventScript_RightBinoculars {
-    msgbox(Route15_WestEntrance_2F_Text_SmallIslandOnHorizon, MSGBOX_SIGN)
-    end
-}
+Route15_WestEntrance_2F_EventScript_LeftBinoculars::
+# 4 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	lockall
+# 5 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	msgbox Route15_WestEntrance_2F_Text_LargeShiningBird
+# 6 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	showmonpic SPECIES_ARTICUNO, 10, 3
+# 7 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	delay 20
+# 8 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	waitbuttonpress
+# 9 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	hidemonpic
+# 10 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	setvar VAR_0x8004, SPECIES_ARTICUNO
+# 11 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	special SetSeenMon
+# 12 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	releaseall
+	end
 
-script Route15_WestEntrance_2F_EventScript_Aide {
-    lock
-    faceplayer
-    call(Route15_WestEntrance_2F_EventScript_GetAideRequestInfo)
-    if (flag(FLAG_GOT_EXP_SHARE_FROM_OAKS_AIDE)) {
-        goto(Route15_WestEntrance_2F_EventScript_AlreadyGotExpShare)
-    }
-    msgbox(Route15_WestEntrance_2F_Text_GiveItemIfCaughtEnough, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) {
-        goto(Aide_EventScript_DeclineCheckMons)
-    }
-    setvar(VAR_0x8004, 0)
-    specialvar(VAR_RESULT, GetFrlgPokedexCount)
-    buffernumberstring(STR_VAR_3, VAR_0x8006)
-    call(Route15_WestEntrance_2F_EventScript_GetAideRequestInfo)
-    if (var(VAR_0x8006) < REQUIRED_CAUGHT_MONS) {
-        goto(Aide_EventScript_HaventCaughtEnough)
-    }
-    msgbox(Route15_WestEntrance_2F_Text_GreatHereYouGo)
-    checkitemspace(ITEM_EXP_SHARE)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(Aide_EventScript_NoRoomForItem)
-    }
-    giveitem_msg(Route15_WestEntrance_2F_Text_ReceivedItemFromAide, ITEM_EXP_SHARE)
-    setflag(FLAG_GOT_EXP_SHARE_FROM_OAKS_AIDE)
-    msgbox(Route15_WestEntrance_2F_Text_ExplainExpShare)
-    release
-    end
-}
 
-script Route15_WestEntrance_2F_EventScript_AlreadyGotExpShare {
-    msgbox(Route15_WestEntrance_2F_Text_ExplainExpShare)
-    release
-    end
-}
+Route15_WestEntrance_2F_EventScript_RightBinoculars::
+# 17 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	msgbox Route15_WestEntrance_2F_Text_SmallIslandOnHorizon, MSGBOX_SIGN
+	end
 
-script Route15_WestEntrance_2F_EventScript_GetAideRequestInfo {
-    buffernumberstring(STR_VAR_1, REQUIRED_CAUGHT_MONS)
-    bufferitemname(STR_VAR_2, ITEM_EXP_SHARE)
-    return
-}
 
-text Route15_WestEntrance_2F_Text_GiveItemIfCaughtEnough {
-    "Hi! Remember me?\n"
-    "I'm one of PROF. OAK's AIDES.\p"
-    "If your POKéDEX has complete data\n"
-    "on {STR_VAR_1} species, I'm supposed to\l"
-    "give you a reward.\p"
-    "PROF. OAK entrusted me with the\n"
-    "{STR_VAR_2} for you.\p"
-    "So, {PLAYER}, let me ask you.\p"
-    "Have you gathered data on at least\n"
-    "{STR_VAR_1} kinds of POKéMON?$"
-}
+Route15_WestEntrance_2F_EventScript_Aide::
+# 22 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	lock
+# 23 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	faceplayer
+# 24 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	call Route15_WestEntrance_2F_EventScript_GetAideRequestInfo
+# 25 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_EXP_SHARE_FROM_OAKS_AIDE, Route15_WestEntrance_2F_EventScript_Aide_2
+Route15_WestEntrance_2F_EventScript_Aide_1:
+# 28 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	msgbox Route15_WestEntrance_2F_Text_GiveItemIfCaughtEnough, MSGBOX_YESNO
+# 29 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq Route15_WestEntrance_2F_EventScript_Aide_5
+Route15_WestEntrance_2F_EventScript_Aide_4:
+# 32 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	setvar VAR_0x8004, 0
+# 33 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	specialvar VAR_RESULT, GetFrlgPokedexCount
+# 34 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	buffernumberstring STR_VAR_3, VAR_0x8006
+# 35 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	call Route15_WestEntrance_2F_EventScript_GetAideRequestInfo
+# 36 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	compare VAR_0x8006, REQUIRED_CAUGHT_MONS
+	goto_if_lt Route15_WestEntrance_2F_EventScript_Aide_8
+Route15_WestEntrance_2F_EventScript_Aide_7:
+# 39 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	msgbox Route15_WestEntrance_2F_Text_GreatHereYouGo
+# 40 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	checkitemspace ITEM_EXP_SHARE
+# 41 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route15_WestEntrance_2F_EventScript_Aide_11
+Route15_WestEntrance_2F_EventScript_Aide_10:
+# 44 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	giveitem_msg Route15_WestEntrance_2F_Text_ReceivedItemFromAide, ITEM_EXP_SHARE
+# 45 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	setflag FLAG_GOT_EXP_SHARE_FROM_OAKS_AIDE
+# 46 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	msgbox Route15_WestEntrance_2F_Text_ExplainExpShare
+# 47 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	release
+	end
 
-text Route15_WestEntrance_2F_Text_GreatHereYouGo {
-    "Great! You have caught or owned\n"
-    "{STR_VAR_3} kinds of POKéMON!\p"
-    "Congratulations!\n"
-    "Here you go!$"
-}
+Route15_WestEntrance_2F_EventScript_Aide_2:
+# 26 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	goto Route15_WestEntrance_2F_EventScript_AlreadyGotExpShare
+	goto Route15_WestEntrance_2F_EventScript_Aide_1
 
-text Route15_WestEntrance_2F_Text_ReceivedItemFromAide {
-    "{PLAYER} received the {STR_VAR_2}\n"
-    "from the AIDE.$"
-}
+Route15_WestEntrance_2F_EventScript_Aide_5:
+# 30 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	goto Aide_EventScript_DeclineCheckMons
+	goto Route15_WestEntrance_2F_EventScript_Aide_4
 
-text Route15_WestEntrance_2F_Text_ExplainExpShare {
-    "EXP. SHARE is an item to be held\n"
-    "by a POKéMON.\p"
-    "The POKéMON will receive a share\n"
-    "of the EXP. Points without having\l"
-    "to battle.$"
-}
+Route15_WestEntrance_2F_EventScript_Aide_8:
+# 37 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	goto Aide_EventScript_HaventCaughtEnough
+	goto Route15_WestEntrance_2F_EventScript_Aide_7
 
-text Route15_WestEntrance_2F_Text_LargeShiningBird {
-    "Let's see what the binoculars have\n"
-    "to show…\p"
-    "A large, shining bird is flying\n"
-    "toward the sea.$"
-}
+Route15_WestEntrance_2F_EventScript_Aide_11:
+# 42 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	goto Aide_EventScript_NoRoomForItem
+	goto Route15_WestEntrance_2F_EventScript_Aide_10
 
-text Route15_WestEntrance_2F_Text_SmallIslandOnHorizon {
-    "Let's see what the binoculars have\n"
-    "to show…\p"
-    "It looks like a small island on\n"
-    "the horizon!$"
-}
+
+Route15_WestEntrance_2F_EventScript_AlreadyGotExpShare::
+# 52 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	msgbox Route15_WestEntrance_2F_Text_ExplainExpShare
+# 53 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	release
+	end
+
+
+Route15_WestEntrance_2F_EventScript_GetAideRequestInfo::
+# 58 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	buffernumberstring STR_VAR_1, REQUIRED_CAUGHT_MONS
+# 59 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	bufferitemname STR_VAR_2, ITEM_EXP_SHARE
+	return
+
+
+Route15_WestEntrance_2F_Text_GiveItemIfCaughtEnough::
+# 63 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	.string "Hi! Remember me?\n"
+	.string "I'm one of PROF. OAK's AIDES.\p"
+	.string "If your POKéDEX has complete data\n"
+	.string "on {STR_VAR_1} species, I'm supposed to\l"
+	.string "give you a reward.\p"
+	.string "PROF. OAK entrusted me with the\n"
+	.string "{STR_VAR_2} for you.\p"
+	.string "So, {PLAYER}, let me ask you.\p"
+	.string "Have you gathered data on at least\n"
+	.string "{STR_VAR_1} kinds of POKéMON?$"
+
+Route15_WestEntrance_2F_Text_GreatHereYouGo::
+# 76 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	.string "Great! You have caught or owned\n"
+	.string "{STR_VAR_3} kinds of POKéMON!\p"
+	.string "Congratulations!\n"
+	.string "Here you go!$"
+
+Route15_WestEntrance_2F_Text_ReceivedItemFromAide::
+# 83 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	.string "{PLAYER} received the {STR_VAR_2}\n"
+	.string "from the AIDE.$"
+
+Route15_WestEntrance_2F_Text_ExplainExpShare::
+# 88 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	.string "EXP. SHARE is an item to be held\n"
+	.string "by a POKéMON.\p"
+	.string "The POKéMON will receive a share\n"
+	.string "of the EXP. Points without having\l"
+	.string "to battle.$"
+
+Route15_WestEntrance_2F_Text_LargeShiningBird::
+# 96 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	.string "Let's see what the binoculars have\n"
+	.string "to show…\p"
+	.string "A large, shining bird is flying\n"
+	.string "toward the sea.$"
+
+Route15_WestEntrance_2F_Text_SmallIslandOnHorizon::
+# 103 "data/maps/Route15_WestEntrance_2F_Frlg/scripts.pory"
+	.string "Let's see what the binoculars have\n"
+	.string "to show…\p"
+	.string "It looks like a small island on\n"
+	.string "the horizon!$"
+
+`

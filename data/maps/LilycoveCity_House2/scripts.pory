@@ -1,36 +1,61 @@
-mapscripts LilycoveCity_House2_MapScripts {}
+raw `
+LilycoveCity_House2_MapScripts::
+	.byte 0
 
-script LilycoveCity_House2_EventScript_FatMan {
-    lock
-    faceplayer
-    if (flag(FLAG_RECEIVED_TM_REST)) {
-        goto(LilycoveCity_House2_EventScript_ReceivedRest)
-    }
-    msgbox(LilycoveCity_House2_Text_NotAwakeYetHaveThis, MSGBOX_DEFAULT)
-    giveitem(ITEM_TM_REST)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(Common_EventScript_ShowBagIsFull)
-    }
-    setflag(FLAG_RECEIVED_TM_REST)
-    msgbox(LilycoveCity_House2_Text_SleepIsEssential, MSGBOX_DEFAULT)
-    release
-    end
-}
 
-script LilycoveCity_House2_EventScript_ReceivedRest {
-    msgbox(LilycoveCity_House2_Text_SleepIsEssential, MSGBOX_DEFAULT)
-    release
-    end
-}
+LilycoveCity_House2_EventScript_FatMan::
+# 4 "data/maps/LilycoveCity_House2/scripts.pory"
+	lock
+# 5 "data/maps/LilycoveCity_House2/scripts.pory"
+	faceplayer
+# 6 "data/maps/LilycoveCity_House2/scripts.pory"
+	goto_if_set FLAG_RECEIVED_TM_REST, LilycoveCity_House2_EventScript_FatMan_2
+LilycoveCity_House2_EventScript_FatMan_1:
+# 9 "data/maps/LilycoveCity_House2/scripts.pory"
+	msgbox LilycoveCity_House2_Text_NotAwakeYetHaveThis, MSGBOX_DEFAULT
+# 10 "data/maps/LilycoveCity_House2/scripts.pory"
+	giveitem ITEM_TM_REST
+# 11 "data/maps/LilycoveCity_House2/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_House2_EventScript_FatMan_5
+LilycoveCity_House2_EventScript_FatMan_4:
+# 14 "data/maps/LilycoveCity_House2/scripts.pory"
+	setflag FLAG_RECEIVED_TM_REST
+# 15 "data/maps/LilycoveCity_House2/scripts.pory"
+	msgbox LilycoveCity_House2_Text_SleepIsEssential, MSGBOX_DEFAULT
+# 16 "data/maps/LilycoveCity_House2/scripts.pory"
+	release
+	end
 
-text LilycoveCity_House2_Text_NotAwakeYetHaveThis {
-    "Huh? What? What's that?\p"
-    "I'm not near awake yet…\n"
-    "You can have this…$"
-}
+LilycoveCity_House2_EventScript_FatMan_2:
+# 7 "data/maps/LilycoveCity_House2/scripts.pory"
+	goto LilycoveCity_House2_EventScript_ReceivedRest
+	goto LilycoveCity_House2_EventScript_FatMan_1
 
-text LilycoveCity_House2_Text_SleepIsEssential {
-    "Yawn…\p"
-    "Sleep is essential for good health…\n"
-    "Sleep and regain health…$"
-}
+LilycoveCity_House2_EventScript_FatMan_5:
+# 12 "data/maps/LilycoveCity_House2/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto LilycoveCity_House2_EventScript_FatMan_4
+
+
+LilycoveCity_House2_EventScript_ReceivedRest::
+# 21 "data/maps/LilycoveCity_House2/scripts.pory"
+	msgbox LilycoveCity_House2_Text_SleepIsEssential, MSGBOX_DEFAULT
+# 22 "data/maps/LilycoveCity_House2/scripts.pory"
+	release
+	end
+
+
+LilycoveCity_House2_Text_NotAwakeYetHaveThis::
+# 26 "data/maps/LilycoveCity_House2/scripts.pory"
+	.string "Huh? What? What's that?\p"
+	.string "I'm not near awake yet…\n"
+	.string "You can have this…$"
+
+LilycoveCity_House2_Text_SleepIsEssential::
+# 32 "data/maps/LilycoveCity_House2/scripts.pory"
+	.string "Yawn…\p"
+	.string "Sleep is essential for good health…\n"
+	.string "Sleep and regain health…$"
+
+`

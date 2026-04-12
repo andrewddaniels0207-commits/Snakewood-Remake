@@ -9,189 +9,261 @@ AncientTomb_MapScripts::
 
 
 AncientTomb_OnResume::
-# 8 "data/maps/AncientTomb/scripts.pory"
-	goto_if_set FLAG_SYS_CTRL_OBJ_DELETE, AncientTomb_OnResume_2
+# 9 "data/maps/AncientTomb/scripts.pory"
+	goto_if_set FLAG_SYS_CTRL_OBJ_DELETE, AncientTomb_OnResume_1
+	return
+
 AncientTomb_OnResume_1:
+# 10 "data/maps/AncientTomb/scripts.pory"
+	goto AncientTomb_OnResume_2
+	return
+
+
+AncientTomb_OnResume_1::
 	end
 
-AncientTomb_OnResume_2:
-# 9 "data/maps/AncientTomb/scripts.pory"
+
+AncientTomb_OnResume_2::
+# 20 "data/maps/AncientTomb/scripts.pory"
 	call AncientTomb_EventScript_TryRemoveRegisteel
+# 21 "data/maps/AncientTomb/scripts.pory"
 	goto AncientTomb_OnResume_1
+	return
 
 
 AncientTomb_EventScript_TryRemoveRegisteel::
-# 15 "data/maps/AncientTomb/scripts.pory"
+# 26 "data/maps/AncientTomb/scripts.pory"
 	specialvar VAR_RESULT, GetBattleOutcome
-# 16 "data/maps/AncientTomb/scripts.pory"
+# 28 "data/maps/AncientTomb/scripts.pory"
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
+# 29 "data/maps/AncientTomb/scripts.pory"
 	goto_if_ne AncientTomb_EventScript_TryRemoveRegisteel_2
-AncientTomb_EventScript_TryRemoveRegisteel_1:
-# 19 "data/maps/AncientTomb/scripts.pory"
+	return
+
+
+AncientTomb_EventScript_TryRemoveRegisteel_1::
+# 34 "data/maps/AncientTomb/scripts.pory"
 	removeobject VAR_LAST_TALKED
 	return
 
-AncientTomb_EventScript_TryRemoveRegisteel_2:
-# 17 "data/maps/AncientTomb/scripts.pory"
+
+AncientTomb_EventScript_TryRemoveRegisteel_2::
+# 40 "data/maps/AncientTomb/scripts.pory"
 	goto Common_EventScript_NopReturn
+# 41 "data/maps/AncientTomb/scripts.pory"
 	goto AncientTomb_EventScript_TryRemoveRegisteel_1
+	return
 
 
 AncientTomb_OnTransition::
-# 24 "data/maps/AncientTomb/scripts.pory"
+# 46 "data/maps/AncientTomb/scripts.pory"
 	setflag FLAG_LANDMARK_ANCIENT_TOMB
-# 25 "data/maps/AncientTomb/scripts.pory"
-	goto_if_unset FLAG_DEFEATED_REGISTEEL, AncientTomb_OnTransition_2
+# 48 "data/maps/AncientTomb/scripts.pory"
+	goto_if_unset FLAG_DEFEATED_REGISTEEL, AncientTomb_OnTransition_1
+	return
+
 AncientTomb_OnTransition_1:
+# 49 "data/maps/AncientTomb/scripts.pory"
+	goto AncientTomb_OnTransition_2
+	return
+
+
+AncientTomb_OnTransition_1::
 	end
 
-AncientTomb_OnTransition_2:
-# 26 "data/maps/AncientTomb/scripts.pory"
+
+AncientTomb_OnTransition_2::
+# 59 "data/maps/AncientTomb/scripts.pory"
 	call AncientTomb_EventScript_ShowRegisteel
+# 60 "data/maps/AncientTomb/scripts.pory"
 	goto AncientTomb_OnTransition_1
+	return
 
 
 AncientTomb_EventScript_ShowRegisteel::
-# 32 "data/maps/AncientTomb/scripts.pory"
+# 65 "data/maps/AncientTomb/scripts.pory"
 	clearflag FLAG_HIDE_REGISTEEL
 	return
 
 
 AncientTomb_OnLoad::
-# 37 "data/maps/AncientTomb/scripts.pory"
-	goto_if_unset FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED, AncientTomb_OnLoad_2
+# 71 "data/maps/AncientTomb/scripts.pory"
+	goto_if_unset FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED, AncientTomb_OnLoad_1
+	return
+
 AncientTomb_OnLoad_1:
+# 72 "data/maps/AncientTomb/scripts.pory"
+	goto AncientTomb_OnLoad_2
+	return
+
+
+AncientTomb_OnLoad_1::
 	end
 
-AncientTomb_OnLoad_2:
-# 38 "data/maps/AncientTomb/scripts.pory"
+
+AncientTomb_OnLoad_2::
+# 82 "data/maps/AncientTomb/scripts.pory"
 	call AncientTomb_EventScript_HideRegiEntrance
+# 83 "data/maps/AncientTomb/scripts.pory"
 	goto AncientTomb_OnLoad_1
+	return
 
 
 AncientTomb_EventScript_HideRegiEntrance::
-# 44 "data/maps/AncientTomb/scripts.pory"
+# 88 "data/maps/AncientTomb/scripts.pory"
 	setmetatile 7, 19, METATILE_Cave_EntranceCover, TRUE
-# 45 "data/maps/AncientTomb/scripts.pory"
+# 90 "data/maps/AncientTomb/scripts.pory"
 	setmetatile 8, 19, METATILE_Cave_EntranceCover, TRUE
-# 46 "data/maps/AncientTomb/scripts.pory"
+# 92 "data/maps/AncientTomb/scripts.pory"
 	setmetatile 9, 19, METATILE_Cave_EntranceCover, TRUE
-# 47 "data/maps/AncientTomb/scripts.pory"
+# 94 "data/maps/AncientTomb/scripts.pory"
 	setmetatile 7, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE
-# 48 "data/maps/AncientTomb/scripts.pory"
+# 96 "data/maps/AncientTomb/scripts.pory"
 	setmetatile 8, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE
-# 49 "data/maps/AncientTomb/scripts.pory"
+# 98 "data/maps/AncientTomb/scripts.pory"
 	setmetatile 9, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE
 	return
 
 
 AncientTomb_EventScript_CaveEntranceMiddle::
-# 54 "data/maps/AncientTomb/scripts.pory"
+# 104 "data/maps/AncientTomb/scripts.pory"
 	lockall
-# 55 "data/maps/AncientTomb/scripts.pory"
-	goto_if_set FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED, AncientTomb_EventScript_CaveEntranceMiddle_2
+# 106 "data/maps/AncientTomb/scripts.pory"
+	goto_if_set FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED, AncientTomb_EventScript_CaveEntranceMiddle_1
+	return
+
 AncientTomb_EventScript_CaveEntranceMiddle_1:
-# 58 "data/maps/AncientTomb/scripts.pory"
+# 107 "data/maps/AncientTomb/scripts.pory"
+	goto AncientTomb_EventScript_CaveEntranceMiddle_2
+	return
+
+
+AncientTomb_EventScript_CaveEntranceMiddle_1::
+# 113 "data/maps/AncientTomb/scripts.pory"
 	braillemsgbox AncientTomb_Braille_ShineInTheMiddle
-# 59 "data/maps/AncientTomb/scripts.pory"
+# 115 "data/maps/AncientTomb/scripts.pory"
 	releaseall
 	end
 
-AncientTomb_EventScript_CaveEntranceMiddle_2:
-# 56 "data/maps/AncientTomb/scripts.pory"
+
+AncientTomb_EventScript_CaveEntranceMiddle_2::
+# 121 "data/maps/AncientTomb/scripts.pory"
 	goto AncientTomb_EventScript_BigHoleInWall
+# 122 "data/maps/AncientTomb/scripts.pory"
 	goto AncientTomb_EventScript_CaveEntranceMiddle_1
+	return
 
 
 AncientTomb_EventScript_BigHoleInWall::
-# 64 "data/maps/AncientTomb/scripts.pory"
+# 127 "data/maps/AncientTomb/scripts.pory"
 	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
-# 65 "data/maps/AncientTomb/scripts.pory"
+# 129 "data/maps/AncientTomb/scripts.pory"
 	releaseall
 	end
 
 
 AncientTomb_EventScript_CaveEntranceSide::
-# 70 "data/maps/AncientTomb/scripts.pory"
+# 135 "data/maps/AncientTomb/scripts.pory"
 	lockall
-# 71 "data/maps/AncientTomb/scripts.pory"
+# 137 "data/maps/AncientTomb/scripts.pory"
 	braillemsgbox AncientTomb_Braille_ShineInTheMiddle
-# 72 "data/maps/AncientTomb/scripts.pory"
+# 139 "data/maps/AncientTomb/scripts.pory"
 	releaseall
 	end
 
 
 AncientTomb_EventScript_Registeel::
-# 77 "data/maps/AncientTomb/scripts.pory"
+# 145 "data/maps/AncientTomb/scripts.pory"
 	lock
-# 78 "data/maps/AncientTomb/scripts.pory"
+# 147 "data/maps/AncientTomb/scripts.pory"
 	faceplayer
-# 79 "data/maps/AncientTomb/scripts.pory"
+# 149 "data/maps/AncientTomb/scripts.pory"
 	waitse
-# 80 "data/maps/AncientTomb/scripts.pory"
+# 151 "data/maps/AncientTomb/scripts.pory"
 	playmoncry SPECIES_REGISTEEL, CRY_MODE_ENCOUNTER
-# 81 "data/maps/AncientTomb/scripts.pory"
+# 153 "data/maps/AncientTomb/scripts.pory"
 	delay 40
-# 82 "data/maps/AncientTomb/scripts.pory"
+# 155 "data/maps/AncientTomb/scripts.pory"
 	waitmoncry
-# 83 "data/maps/AncientTomb/scripts.pory"
+# 157 "data/maps/AncientTomb/scripts.pory"
 	setwildbattle SPECIES_REGISTEEL, 40
-# 84 "data/maps/AncientTomb/scripts.pory"
+# 159 "data/maps/AncientTomb/scripts.pory"
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
-# 85 "data/maps/AncientTomb/scripts.pory"
+# 161 "data/maps/AncientTomb/scripts.pory"
 	special StartRegiBattle
-# 86 "data/maps/AncientTomb/scripts.pory"
+# 163 "data/maps/AncientTomb/scripts.pory"
 	waitstate
-# 87 "data/maps/AncientTomb/scripts.pory"
+# 165 "data/maps/AncientTomb/scripts.pory"
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-# 88 "data/maps/AncientTomb/scripts.pory"
+# 167 "data/maps/AncientTomb/scripts.pory"
 	specialvar VAR_RESULT, GetBattleOutcome
-# 89 "data/maps/AncientTomb/scripts.pory"
+# 169 "data/maps/AncientTomb/scripts.pory"
 	compare VAR_RESULT, B_OUTCOME_WON
+# 170 "data/maps/AncientTomb/scripts.pory"
 	goto_if_eq AncientTomb_EventScript_Registeel_2
-AncientTomb_EventScript_Registeel_1:
-# 92 "data/maps/AncientTomb/scripts.pory"
+	return
+
+
+AncientTomb_EventScript_Registeel_1::
+# 175 "data/maps/AncientTomb/scripts.pory"
 	compare VAR_RESULT, B_OUTCOME_RAN
+# 176 "data/maps/AncientTomb/scripts.pory"
 	goto_if_eq AncientTomb_EventScript_Registeel_5
-AncientTomb_EventScript_Registeel_4:
-# 95 "data/maps/AncientTomb/scripts.pory"
+	return
+
+
+AncientTomb_EventScript_Registeel_4::
+# 181 "data/maps/AncientTomb/scripts.pory"
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+# 182 "data/maps/AncientTomb/scripts.pory"
 	goto_if_eq AncientTomb_EventScript_Registeel_8
-AncientTomb_EventScript_Registeel_7:
-# 98 "data/maps/AncientTomb/scripts.pory"
+	return
+
+
+AncientTomb_EventScript_Registeel_7::
+# 187 "data/maps/AncientTomb/scripts.pory"
 	setflag FLAG_DEFEATED_REGISTEEL
-# 99 "data/maps/AncientTomb/scripts.pory"
+# 189 "data/maps/AncientTomb/scripts.pory"
 	release
 	end
 
-AncientTomb_EventScript_Registeel_2:
-# 90 "data/maps/AncientTomb/scripts.pory"
+
+AncientTomb_EventScript_Registeel_2::
+# 195 "data/maps/AncientTomb/scripts.pory"
 	goto AncientTomb_EventScript_DefeatedRegisteel
+# 196 "data/maps/AncientTomb/scripts.pory"
 	goto AncientTomb_EventScript_Registeel_1
+	return
 
-AncientTomb_EventScript_Registeel_5:
-# 93 "data/maps/AncientTomb/scripts.pory"
+
+AncientTomb_EventScript_Registeel_5::
+# 201 "data/maps/AncientTomb/scripts.pory"
 	goto AncientTomb_EventScript_RanFromRegisteel
+# 202 "data/maps/AncientTomb/scripts.pory"
 	goto AncientTomb_EventScript_Registeel_4
+	return
 
-AncientTomb_EventScript_Registeel_8:
-# 96 "data/maps/AncientTomb/scripts.pory"
+
+AncientTomb_EventScript_Registeel_8::
+# 207 "data/maps/AncientTomb/scripts.pory"
 	goto AncientTomb_EventScript_RanFromRegisteel
+# 208 "data/maps/AncientTomb/scripts.pory"
 	goto AncientTomb_EventScript_Registeel_7
+	return
 
 
 AncientTomb_EventScript_DefeatedRegisteel::
-# 104 "data/maps/AncientTomb/scripts.pory"
+# 213 "data/maps/AncientTomb/scripts.pory"
 	setflag FLAG_DEFEATED_REGISTEEL
-# 105 "data/maps/AncientTomb/scripts.pory"
+# 215 "data/maps/AncientTomb/scripts.pory"
 	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 
 AncientTomb_EventScript_RanFromRegisteel::
-# 110 "data/maps/AncientTomb/scripts.pory"
+# 221 "data/maps/AncientTomb/scripts.pory"
 	setvar VAR_0x8004, SPECIES_REGISTEEL
-# 111 "data/maps/AncientTomb/scripts.pory"
+# 223 "data/maps/AncientTomb/scripts.pory"
 	goto Common_EventScript_LegendaryFlewAway
 	end
 

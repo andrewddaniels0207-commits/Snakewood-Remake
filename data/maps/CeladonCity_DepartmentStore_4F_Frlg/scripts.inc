@@ -1,47 +1,58 @@
 CeladonCity_DepartmentStore_4F_Frlg_MapScripts::
 	.byte 0
 
+
 CeladonCity_DepartmentStore_4F_EventScript_Man::
+# 4 "data/maps/CeladonCity_DepartmentStore_4F_Frlg/scripts.pory"
 	msgbox CeladonCity_DepartmentStore_4F_Text_GettingPokeDollAsPresent, MSGBOX_NPC
 	end
 
+
 CeladonCity_DepartmentStore_4F_EventScript_Youngster::
+# 9 "data/maps/CeladonCity_DepartmentStore_4F_Frlg/scripts.pory"
 	msgbox CeladonCity_DepartmentStore_4F_Text_CanRunAwayWithPokeDoll, MSGBOX_NPC
 	end
 
+
 CeladonCity_DepartmentStore_4F_EventScript_FloorSign::
+# 14 "data/maps/CeladonCity_DepartmentStore_4F_Frlg/scripts.pory"
 	msgbox CeladonCity_DepartmentStore_4F_Text_FloorSign, MSGBOX_SIGN
 	end
 
+
 CeladonCity_DepartmentStore_4F_EventScript_Clerk::
+# 19 "data/maps/CeladonCity_DepartmentStore_4F_Frlg/scripts.pory"
 	lock
+# 20 "data/maps/CeladonCity_DepartmentStore_4F_Frlg/scripts.pory"
 	faceplayer
+# 21 "data/maps/CeladonCity_DepartmentStore_4F_Frlg/scripts.pory"
 	message gText_HowMayIServeYou
+# 22 "data/maps/CeladonCity_DepartmentStore_4F_Frlg/scripts.pory"
 	waitmessage
+# 23 "data/maps/CeladonCity_DepartmentStore_4F_Frlg/scripts.pory"
 	pokemart CeladonCity_DepartmentStore_4F_Items
+# 24 "data/maps/CeladonCity_DepartmentStore_4F_Frlg/scripts.pory"
 	msgbox gText_PleaseComeAgain
+# 25 "data/maps/CeladonCity_DepartmentStore_4F_Frlg/scripts.pory"
 	release
 	end
 
-	.align 2
+
 CeladonCity_DepartmentStore_4F_Items::
-	.2byte ITEM_POKE_DOLL
-	.2byte ITEM_RETRO_MAIL
-	.2byte ITEM_FIRE_STONE
-	.2byte ITEM_THUNDER_STONE
-	.2byte ITEM_WATER_STONE
-	.2byte ITEM_LEAF_STONE
-	.2byte ITEM_NONE
+# 30 "data/maps/CeladonCity_DepartmentStore_4F_Frlg/scripts.pory"
 	release
 	end
+
 
 CeladonCity_DepartmentStore_4F_Text_GettingPokeDollAsPresent::
+# 34 "data/maps/CeladonCity_DepartmentStore_4F_Frlg/scripts.pory"
 	.string "I'm getting a present for my\n"
 	.string "girlfriend.\p"
 	.string "I guess a POKé DOLL will be it.\n"
 	.string "It's the popular thing.$"
 
 CeladonCity_DepartmentStore_4F_Text_CanRunAwayWithPokeDoll::
+# 41 "data/maps/CeladonCity_DepartmentStore_4F_Frlg/scripts.pory"
 	.string "I heard something useful.\p"
 	.string "If a wild POKéMON appears, you can\n"
 	.string "distract it with a POKé DOLL.\p"
@@ -49,6 +60,7 @@ CeladonCity_DepartmentStore_4F_Text_CanRunAwayWithPokeDoll::
 	.string "POKéMON is distracted.$"
 
 CeladonCity_DepartmentStore_4F_Text_FloorSign::
+# 49 "data/maps/CeladonCity_DepartmentStore_4F_Frlg/scripts.pory"
 	.string "Express yourself with gifts!\n"
 	.string "4F: WISE MAN GIFTS\p"
 	.string "Evolution Special!\n"

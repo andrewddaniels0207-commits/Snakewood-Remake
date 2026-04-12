@@ -1,42 +1,57 @@
-mapscripts DewfordTown_PokemonCenter_1F_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: DewfordTown_PokemonCenter_1F_OnTransition
-    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
-}
+raw `
+DewfordTown_PokemonCenter_1F_MapScripts::
+# 2 "data/maps/DewfordTown_PokemonCenter_1F/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_PokemonCenter_1F_OnTransition
+# 3 "data/maps/DewfordTown_PokemonCenter_1F/scripts.pory"
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
+	.byte 0
 
-script DewfordTown_PokemonCenter_1F_OnTransition {
-    setrespawn(HEAL_LOCATION_DEWFORD_TOWN)
-    call(Common_EventScript_UpdateBrineyLocation)
-    end
-}
 
-script DewfordTown_PokemonCenter_1F_EventScript_Nurse {
-    setvar(VAR_0x800B, LOCALID_DEWFORD_NURSE)
-    call(Common_EventScript_PkmnCenterNurse)
-    waitmessage()
-    waitbuttonpress()
-    release
-    end
-}
+DewfordTown_PokemonCenter_1F_OnTransition::
+# 7 "data/maps/DewfordTown_PokemonCenter_1F/scripts.pory"
+	setrespawn HEAL_LOCATION_DEWFORD_TOWN
+# 8 "data/maps/DewfordTown_PokemonCenter_1F/scripts.pory"
+	call Common_EventScript_UpdateBrineyLocation
+	end
 
-script DewfordTown_PokemonCenter_1F_EventScript_PokefanF {
-    msgbox(DewfordTown_PokemonCenter_1F_Text_StoneCavern, MSGBOX_NPC)
-    end
-}
 
-script DewfordTown_PokemonCenter_1F_EventScript_Man {
-    msgbox(DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM, MSGBOX_NPC)
-    end
-}
+DewfordTown_PokemonCenter_1F_EventScript_Nurse::
+# 13 "data/maps/DewfordTown_PokemonCenter_1F/scripts.pory"
+	setvar VAR_0x800B, LOCALID_DEWFORD_NURSE
+# 14 "data/maps/DewfordTown_PokemonCenter_1F/scripts.pory"
+	call Common_EventScript_PkmnCenterNurse
+# 15 "data/maps/DewfordTown_PokemonCenter_1F/scripts.pory"
+	waitmessage
+# 16 "data/maps/DewfordTown_PokemonCenter_1F/scripts.pory"
+	waitbuttonpress
+# 17 "data/maps/DewfordTown_PokemonCenter_1F/scripts.pory"
+	release
+	end
 
-text DewfordTown_PokemonCenter_1F_Text_StoneCavern {
-    "There's a stone cavern at the edge\n"
-    "of town.\p"
-    "I've heard you can find rare stones\n"
-    "there.$"
-}
 
-text DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM {
-    "Even if a POKéMON faints and can't\n"
-    "battle, it can still use a move learned\l"
-    "from a HIDDEN MACHINE (HM).$"
-}
+DewfordTown_PokemonCenter_1F_EventScript_PokefanF::
+# 22 "data/maps/DewfordTown_PokemonCenter_1F/scripts.pory"
+	msgbox DewfordTown_PokemonCenter_1F_Text_StoneCavern, MSGBOX_NPC
+	end
+
+
+DewfordTown_PokemonCenter_1F_EventScript_Man::
+# 27 "data/maps/DewfordTown_PokemonCenter_1F/scripts.pory"
+	msgbox DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM, MSGBOX_NPC
+	end
+
+
+DewfordTown_PokemonCenter_1F_Text_StoneCavern::
+# 31 "data/maps/DewfordTown_PokemonCenter_1F/scripts.pory"
+	.string "There's a stone cavern at the edge\n"
+	.string "of town.\p"
+	.string "I've heard you can find rare stones\n"
+	.string "there.$"
+
+DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM::
+# 38 "data/maps/DewfordTown_PokemonCenter_1F/scripts.pory"
+	.string "Even if a POKéMON faints and can't\n"
+	.string "battle, it can still use a move learned\l"
+	.string "from a HIDDEN MACHINE (HM).$"
+
+`

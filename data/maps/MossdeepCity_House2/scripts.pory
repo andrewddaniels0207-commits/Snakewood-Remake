@@ -1,80 +1,126 @@
-mapscripts MossdeepCity_House2_MapScripts {}
+raw `
+MossdeepCity_House2_MapScripts::
+	.byte 0
 
-script MossdeepCity_House2_EventScript_Man {
-    msgbox(MossdeepCity_House2_Text_SisterMailsBoyfriendInFortree, MSGBOX_NPC)
-    end
-}
 
-script MossdeepCity_House2_EventScript_Twin {
-    msgbox(MossdeepCity_House2_Text_PokemonCarriesMailBackAndForth, MSGBOX_NPC)
-    end
-}
+MossdeepCity_House2_EventScript_Man::
+# 4 "data/maps/MossdeepCity_House2/scripts.pory"
+	msgbox MossdeepCity_House2_Text_SisterMailsBoyfriendInFortree, MSGBOX_NPC
+	end
 
-script MossdeepCity_House2_EventScript_Wingull {
-    lock
-    faceplayer
-    waitse()
-    playmoncry(SPECIES_WINGULL, CRY_MODE_NORMAL)
-    msgbox(MossdeepCity_House2_Text_Wingull, MSGBOX_DEFAULT)
-    waitmoncry()
-    closemessage
-    setflag(FLAG_WINGULL_DELIVERED_MAIL)
-    clearflag(FLAG_HIDE_FORTREE_CITY_HOUSE_4_WINGULL)
-    if (var(VAR_FACING) == DIR_NORTH) {
-        call(MossdeepCity_House2_EventScript_WingullExitNorth)
-    }
-    if (var(VAR_FACING) == DIR_WEST) {
-        call(MossdeepCity_House2_EventScript_WingullExitWest)
-    }
-    removeobject(LOCALID_MOSSDEEP_HOUSE_WINGULL)
-    release
-    end
-}
 
-script MossdeepCity_House2_EventScript_WingullExitNorth {
-    applymovement(LOCALID_MOSSDEEP_HOUSE_WINGULL, MossdeepCity_House2_Movement_WingullExitNorth)
-    waitmovement(0)
-    return
-}
+MossdeepCity_House2_EventScript_Twin::
+# 9 "data/maps/MossdeepCity_House2/scripts.pory"
+	msgbox MossdeepCity_House2_Text_PokemonCarriesMailBackAndForth, MSGBOX_NPC
+	end
 
-script MossdeepCity_House2_EventScript_WingullExitWest {
-    applymovement(LOCALID_MOSSDEEP_HOUSE_WINGULL, MossdeepCity_House2_Movement_WingullExitEast)
-    waitmovement(0)
-    return
-}
 
-movement MossdeepCity_House2_Movement_WingullExitNorth {
-    walk_fast_right
-    walk_fast_down
-    walk_fast_down
-    walk_fast_left
-    walk_fast_down
-    delay_8
-    step_end
-}
+MossdeepCity_House2_EventScript_Wingull::
+# 14 "data/maps/MossdeepCity_House2/scripts.pory"
+	lock
+# 15 "data/maps/MossdeepCity_House2/scripts.pory"
+	faceplayer
+# 16 "data/maps/MossdeepCity_House2/scripts.pory"
+	waitse
+# 17 "data/maps/MossdeepCity_House2/scripts.pory"
+	playmoncry SPECIES_WINGULL, CRY_MODE_NORMAL
+# 18 "data/maps/MossdeepCity_House2/scripts.pory"
+	msgbox MossdeepCity_House2_Text_Wingull, MSGBOX_DEFAULT
+# 19 "data/maps/MossdeepCity_House2/scripts.pory"
+	waitmoncry
+# 20 "data/maps/MossdeepCity_House2/scripts.pory"
+	closemessage
+# 21 "data/maps/MossdeepCity_House2/scripts.pory"
+	setflag FLAG_WINGULL_DELIVERED_MAIL
+# 22 "data/maps/MossdeepCity_House2/scripts.pory"
+	clearflag FLAG_HIDE_FORTREE_CITY_HOUSE_4_WINGULL
+# 23 "data/maps/MossdeepCity_House2/scripts.pory"
+	compare VAR_FACING, DIR_NORTH
+	goto_if_eq MossdeepCity_House2_EventScript_Wingull_2
+MossdeepCity_House2_EventScript_Wingull_1:
+# 26 "data/maps/MossdeepCity_House2/scripts.pory"
+	compare VAR_FACING, DIR_WEST
+	goto_if_eq MossdeepCity_House2_EventScript_Wingull_5
+MossdeepCity_House2_EventScript_Wingull_4:
+# 29 "data/maps/MossdeepCity_House2/scripts.pory"
+	removeobject LOCALID_MOSSDEEP_HOUSE_WINGULL
+# 30 "data/maps/MossdeepCity_House2/scripts.pory"
+	release
+	end
 
-movement MossdeepCity_House2_Movement_WingullExitEast {
-    walk_fast_down
-    walk_fast_down
-    walk_fast_down
-    delay_8
-    step_end
-}
+MossdeepCity_House2_EventScript_Wingull_2:
+# 24 "data/maps/MossdeepCity_House2/scripts.pory"
+	call MossdeepCity_House2_EventScript_WingullExitNorth
+	goto MossdeepCity_House2_EventScript_Wingull_1
 
-text MossdeepCity_House2_Text_SisterMailsBoyfriendInFortree {
-    "My little sister exchanges MAIL with\n"
-    "her boyfriend in FORTREE.\p"
-    "I don't envy her one bit at all.$"
-}
+MossdeepCity_House2_EventScript_Wingull_5:
+# 27 "data/maps/MossdeepCity_House2/scripts.pory"
+	call MossdeepCity_House2_EventScript_WingullExitWest
+	goto MossdeepCity_House2_EventScript_Wingull_4
 
-text MossdeepCity_House2_Text_PokemonCarriesMailBackAndForth {
-    "Even though I can't see my friend in\n"
-    "FORTREE, my POKéMON carries MAIL\l"
-    "back and forth for us.\p"
-    "I'm not lonesome, even though we're\n"
-    "apart.$"
-}
 
-text MossdeepCity_House2_Text_Wingull {
-    "WINGULL: Pihyoh!$"
-}
+MossdeepCity_House2_EventScript_WingullExitNorth::
+# 35 "data/maps/MossdeepCity_House2/scripts.pory"
+	applymovement LOCALID_MOSSDEEP_HOUSE_WINGULL, MossdeepCity_House2_Movement_WingullExitNorth
+# 36 "data/maps/MossdeepCity_House2/scripts.pory"
+	waitmovement 0
+	return
+
+
+MossdeepCity_House2_EventScript_WingullExitWest::
+# 41 "data/maps/MossdeepCity_House2/scripts.pory"
+	applymovement LOCALID_MOSSDEEP_HOUSE_WINGULL, MossdeepCity_House2_Movement_WingullExitEast
+# 42 "data/maps/MossdeepCity_House2/scripts.pory"
+	waitmovement 0
+	return
+
+
+# 46 "data/maps/MossdeepCity_House2/scripts.pory"
+MossdeepCity_House2_Movement_WingullExitNorth:
+# 47 "data/maps/MossdeepCity_House2/scripts.pory"
+	walk_fast_right
+# 48 "data/maps/MossdeepCity_House2/scripts.pory"
+	walk_fast_down
+# 49 "data/maps/MossdeepCity_House2/scripts.pory"
+	walk_fast_down
+# 50 "data/maps/MossdeepCity_House2/scripts.pory"
+	walk_fast_left
+# 51 "data/maps/MossdeepCity_House2/scripts.pory"
+	walk_fast_down
+# 52 "data/maps/MossdeepCity_House2/scripts.pory"
+	delay_8
+# 53 "data/maps/MossdeepCity_House2/scripts.pory"
+	step_end
+
+# 56 "data/maps/MossdeepCity_House2/scripts.pory"
+MossdeepCity_House2_Movement_WingullExitEast:
+# 57 "data/maps/MossdeepCity_House2/scripts.pory"
+	walk_fast_down
+# 58 "data/maps/MossdeepCity_House2/scripts.pory"
+	walk_fast_down
+# 59 "data/maps/MossdeepCity_House2/scripts.pory"
+	walk_fast_down
+# 60 "data/maps/MossdeepCity_House2/scripts.pory"
+	delay_8
+# 61 "data/maps/MossdeepCity_House2/scripts.pory"
+	step_end
+
+MossdeepCity_House2_Text_SisterMailsBoyfriendInFortree::
+# 64 "data/maps/MossdeepCity_House2/scripts.pory"
+	.string "My little sister exchanges MAIL with\n"
+	.string "her boyfriend in FORTREE.\p"
+	.string "I don't envy her one bit at all.$"
+
+MossdeepCity_House2_Text_PokemonCarriesMailBackAndForth::
+# 70 "data/maps/MossdeepCity_House2/scripts.pory"
+	.string "Even though I can't see my friend in\n"
+	.string "FORTREE, my POKéMON carries MAIL\l"
+	.string "back and forth for us.\p"
+	.string "I'm not lonesome, even though we're\n"
+	.string "apart.$"
+
+MossdeepCity_House2_Text_Wingull::
+# 78 "data/maps/MossdeepCity_House2/scripts.pory"
+	.string "WINGULL: Pihyoh!$"
+
+`

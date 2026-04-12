@@ -1,91 +1,239 @@
 ShoalCave_LowTideEntranceRoom_MapScripts::
+# 2 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, ShoalCave_LowTideEntranceRoom_OnTransition
 	.byte 0
 
-ShoalCave_LowTideEntranceRoom_OnTransition:
+
+ShoalCave_LowTideEntranceRoom_OnTransition::
+# 6 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	special UpdateShoalTideFlag
-	goto_if_set FLAG_SYS_SHOAL_TIDE, ShoalCave_LowTideEntranceRoom_EventScript_SetHighTide
+# 7 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	goto_if_set FLAG_SYS_SHOAL_TIDE, ShoalCave_LowTideEntranceRoom_OnTransition_2
+ShoalCave_LowTideEntranceRoom_OnTransition_1:
+# 10 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	goto ShoalCave_LowTideEntranceRoom_EventScript_SetLowTide
+	return
+
+ShoalCave_LowTideEntranceRoom_OnTransition_2:
+# 8 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	goto ShoalCave_LowTideEntranceRoom_EventScript_SetHighTide
+	goto ShoalCave_LowTideEntranceRoom_OnTransition_1
+
 
 ShoalCave_LowTideEntranceRoom_EventScript_SetHighTide::
+# 14 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	setmaplayoutindex LAYOUT_SHOAL_CAVE_HIGH_TIDE_ENTRANCE_ROOM
 	end
 
+
 ShoalCave_LowTideEntranceRoom_EventScript_SetLowTide::
+# 19 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	setmaplayoutindex LAYOUT_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM
 	end
 
+
 ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert::
+# 24 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	lock
+# 25 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	faceplayer
+# 26 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	dotimebasedevents
-	call_if_set FLAG_SYS_SHOAL_ITEM, ShoalCave_LowTideEntranceRoom_EventScript_ResetShoalItems
+# 27 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	goto_if_set FLAG_SYS_SHOAL_ITEM, ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_2
+ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_1:
+# 30 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	checkitem ITEM_SHOAL_SALT, 4
-	goto_if_eq VAR_RESULT, FALSE, ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells
+# 31 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_5
+ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_4:
+# 34 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	checkitem ITEM_SHOAL_SHELL, 4
-	goto_if_eq VAR_RESULT, FALSE, ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells
+# 35 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_8
+ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_7:
+# 38 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	msgbox ShoalCave_LowTideEntranceRoom_Text_WouldYouLikeShellBell, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, ShoalCave_LowTideEntranceRoom_EventScript_DeclineShellBell
+# 39 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_11
+ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_10:
+# 42 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	checkitemspace ITEM_SHELL_BELL
-	call_if_eq VAR_RESULT, FALSE, ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreed
-	goto_if_eq VAR_RESULT, 2, ShoalCave_LowTideEntranceRoom_EventScript_NoRoomForShellBell
+# 43 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_14
+ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_13:
+# 46 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	compare VAR_RESULT, 2
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_17
+ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_16:
+# 49 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	msgbox ShoalCave_LowTideEntranceRoom_Text_MakeShellBellRightAway, MSGBOX_DEFAULT
+# 50 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	removeitem ITEM_SHOAL_SALT, 4
+# 51 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	removeitem ITEM_SHOAL_SHELL, 4
+# 52 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	giveitem ITEM_SHELL_BELL
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull  @ Never FALSE, we already made sure there will be room in the bag.
+# 53 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_20
+ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_19:
+# 56 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	msgbox ShoalCave_LowTideEntranceRoom_Text_ExplainShellBell, MSGBOX_DEFAULT
-	setflag FLAG_TEMP_2  @ Not read. Perhaps meant to stop him from re-explaining the Shell Bell if multiple are received in one sitting.
+# 57 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	setflag FLAG_TEMP_2
+# 58 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	release
 	end
 
-@ If the bag is full, check if a slot will be freed when 4 Shoal Salt or Shells are given
+ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_2:
+# 28 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	call ShoalCave_LowTideEntranceRoom_EventScript_ResetShoalItems
+	goto ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_1
+
+ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_5:
+# 32 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	goto ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells
+	goto ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_4
+
+ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_8:
+# 36 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	goto ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells
+	goto ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_7
+
+ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_11:
+# 40 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	goto ShoalCave_LowTideEntranceRoom_EventScript_DeclineShellBell
+	goto ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_10
+
+ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_14:
+# 44 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	call ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreed
+	goto ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_13
+
+ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_17:
+# 47 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	goto ShoalCave_LowTideEntranceRoom_EventScript_NoRoomForShellBell
+	goto ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_16
+
+ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_20:
+# 54 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert_19
+
+
 ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreed::
+# 63 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	checkitem ITEM_SHOAL_SALT, 5
-	goto_if_eq VAR_RESULT, TRUE, ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreedShells
+# 64 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreed_2
+ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreed_1:
 	return
+
+ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreed_2:
+# 65 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	goto ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreedShells
+	goto ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreed_1
+
 
 ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreedShells::
+# 71 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	checkitem ITEM_SHOAL_SHELL, 5
-	goto_if_eq VAR_RESULT, TRUE, ShoalCave_LowTideEntranceRoom_EventScript_NoSpaceWillBeFreed
+# 72 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreedShells_2
+ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreedShells_1:
 	return
 
+ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreedShells_2:
+# 73 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	goto ShoalCave_LowTideEntranceRoom_EventScript_NoSpaceWillBeFreed
+	goto ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreedShells_1
+
+
 ShoalCave_LowTideEntranceRoom_EventScript_NoSpaceWillBeFreed::
+# 79 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	setvar VAR_RESULT, 2
 	return
 
+
 ShoalCave_LowTideEntranceRoom_EventScript_NoRoomForShellBell::
+# 84 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	msgbox ShoalCave_LowTideEntranceRoom_Text_NoSpaceInYourBag, MSGBOX_DEFAULT
+# 85 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	release
 	end
+
 
 ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells::
+# 90 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	checkitem ITEM_SHOAL_SALT
-	goto_if_eq VAR_RESULT, TRUE, ShoalCave_LowTideEntranceRoom_EventScript_HasSomeShoalSaltOrShell
+# 91 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells_2
+ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells_1:
+# 94 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	checkitem ITEM_SHOAL_SHELL
-	goto_if_eq VAR_RESULT, TRUE, ShoalCave_LowTideEntranceRoom_EventScript_HasSomeShoalSaltOrShell
+# 95 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells_5
+ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells_4:
+# 98 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	msgbox ShoalCave_LowTideEntranceRoom_Text_AreYouPlanningOnGoingInThere, MSGBOX_DEFAULT
+# 99 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	release
 	end
+
+ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells_2:
+# 92 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	goto ShoalCave_LowTideEntranceRoom_EventScript_HasSomeShoalSaltOrShell
+	goto ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells_1
+
+ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells_5:
+# 96 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
+	goto ShoalCave_LowTideEntranceRoom_EventScript_HasSomeShoalSaltOrShell
+	goto ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells_4
+
 
 ShoalCave_LowTideEntranceRoom_EventScript_HasSomeShoalSaltOrShell::
+# 104 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	msgbox ShoalCave_LowTideEntranceRoom_Text_BringMe4ShoalSaltAndShells, MSGBOX_DEFAULT
+# 105 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	release
 	end
+
 
 ShoalCave_LowTideEntranceRoom_EventScript_DeclineShellBell::
+# 110 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	msgbox ShoalCave_LowTideEntranceRoom_Text_WantedToMakeShellBell, MSGBOX_DEFAULT
+# 111 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	release
 	end
 
+
 ShoalCave_LowTideEntranceRoom_EventScript_ResetShoalItems::
+# 116 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	clearflag FLAG_RECEIVED_SHOAL_SALT_1
+# 117 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	clearflag FLAG_RECEIVED_SHOAL_SALT_2
+# 118 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	clearflag FLAG_RECEIVED_SHOAL_SALT_3
+# 119 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	clearflag FLAG_RECEIVED_SHOAL_SALT_4
+# 120 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	clearflag FLAG_RECEIVED_SHOAL_SHELL_1
+# 121 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	clearflag FLAG_RECEIVED_SHOAL_SHELL_2
+# 122 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	clearflag FLAG_RECEIVED_SHOAL_SHELL_3
+# 123 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	clearflag FLAG_RECEIVED_SHOAL_SHELL_4
+# 124 "data/maps/ShoalCave_LowTideEntranceRoom/scripts.pory"
 	clearflag FLAG_SYS_SHOAL_ITEM
 	return
+

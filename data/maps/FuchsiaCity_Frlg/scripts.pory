@@ -1,299 +1,388 @@
-mapscripts FuchsiaCity_Frlg_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: FuchsiaCity_OnTransition
-}
+raw `
+FuchsiaCity_Frlg_MapScripts::
+# 2 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, FuchsiaCity_OnTransition
+	.byte 0
 
-script FuchsiaCity_OnTransition {
-    setworldmapflag(FLAG_WORLD_MAP_FUCHSIA_CITY)
-    if (flag(FLAG_GOT_DOME_FOSSIL)) {
-        call(FuchsiaCity_EventScript_SetOmanyteGfx)
-    }
-    if (!flag(FLAG_GOT_DOME_FOSSIL)) {
-        call(FuchsiaCity_EventScript_SetKabutoGfx)
-    }
-    end
-}
 
-script FuchsiaCity_EventScript_SetOmanyteGfx {
-    setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_OMANYTE)
-    return
-}
+FuchsiaCity_OnTransition::
+# 6 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	setworldmapflag FLAG_WORLD_MAP_FUCHSIA_CITY
+# 7 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_DOME_FOSSIL, FuchsiaCity_OnTransition_2
+FuchsiaCity_OnTransition_1:
+# 10 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	goto_if_unset FLAG_GOT_DOME_FOSSIL, FuchsiaCity_OnTransition_5
+FuchsiaCity_OnTransition_4:
+	end
 
-script FuchsiaCity_EventScript_SetKabutoGfx {
-    setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_KABUTO)
-    return
-}
+FuchsiaCity_OnTransition_2:
+# 8 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	call FuchsiaCity_EventScript_SetOmanyteGfx
+	goto FuchsiaCity_OnTransition_1
 
-script FuchsiaCity_EventScript_LittleBoy {
-    msgbox(FuchsiaCity_Text_DidYouTrySafariGame, MSGBOX_NPC)
-    end
-}
+FuchsiaCity_OnTransition_5:
+# 11 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	call FuchsiaCity_EventScript_SetKabutoGfx
+	goto FuchsiaCity_OnTransition_4
 
-script FuchsiaCity_EventScript_OldMan {
-    msgbox(FuchsiaCity_Text_SafariZoneZooInFront, MSGBOX_NPC)
-    end
-}
 
-script FuchsiaCity_EventScript_Erik {
-    msgbox(FuchsiaCity_Text_WheresSara, MSGBOX_NPC)
-    end
-}
+FuchsiaCity_EventScript_SetOmanyteGfx::
+# 17 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_OMANYTE
+	return
 
-script FuchsiaCity_EventScript_Youngster {
-    msgbox(FuchsiaCity_Text_ItemBallInThere, MSGBOX_NPC)
-    end
-}
 
-script FuchsiaCity_EventScript_Lass {
-    lock
-    faceplayer
-    famechecker(FAMECHECKER_KOGA, 3)
-    msgbox(FuchsiaCity_Text_MyFatherIsGymLeader)
-    release
-    end
-}
+FuchsiaCity_EventScript_SetKabutoGfx::
+# 22 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_KABUTO
+	return
 
-script FuchsiaCity_EventScript_CitySign {
-    msgbox(FuchsiaCity_Text_CitySign, MSGBOX_SIGN)
-    end
-}
 
-script FuchsiaCity_EventScript_SafariZoneSign {
-    msgbox(FuchsiaCity_Text_SafariZoneSign, MSGBOX_SIGN)
-    end
-}
+FuchsiaCity_EventScript_LittleBoy::
+# 27 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_DidYouTrySafariGame, MSGBOX_NPC
+	end
 
-script FuchsiaCity_EventScript_SafariGameSign {
-    msgbox(FuchsiaCity_Text_SafariGameSign, MSGBOX_SIGN)
-    end
-}
 
-script FuchsiaCity_EventScript_WardensHomeSign {
-    msgbox(FuchsiaCity_Text_WardensHomeSign, MSGBOX_SIGN)
-    end
-}
+FuchsiaCity_EventScript_OldMan::
+# 32 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_SafariZoneZooInFront, MSGBOX_NPC
+	end
 
-script FuchsiaCity_EventScript_SafariZoneOfficeSign {
-    msgbox(FuchsiaCity_Text_SafariZoneOfficeSign, MSGBOX_SIGN)
-    end
-}
 
-script FuchsiaCity_EventScript_GymSign {
-    lockall
-    famechecker(FAMECHECKER_KOGA, 0)
-    msgbox(FuchsiaCity_Text_GymSign)
-    releaseall
-    end
-}
+FuchsiaCity_EventScript_Erik::
+# 37 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_WheresSara, MSGBOX_NPC
+	end
 
-script FuchsiaCity_EventScript_ChanseySign {
-    lockall
-    setvar(VAR_0x8004, SPECIES_CHANSEY)
-    special(SetSeenMon)
-    showmonpic(SPECIES_CHANSEY, 10, 3)
-    msgbox(FuchsiaCity_Text_ChanseySign)
-    hidemonpic()
-    releaseall
-    end
-}
 
-script FuchsiaCity_EventScript_VoltorbSign {
-    lockall
-    setvar(VAR_0x8004, SPECIES_VOLTORB)
-    special(SetSeenMon)
-    showmonpic(SPECIES_VOLTORB, 10, 3)
-    msgbox(FuchsiaCity_Text_VoltorbSign)
-    hidemonpic()
-    releaseall
-    end
-}
+FuchsiaCity_EventScript_Youngster::
+# 42 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_ItemBallInThere, MSGBOX_NPC
+	end
 
-script FuchsiaCity_EventScript_KangaskhanSign {
-    lockall
-    setvar(VAR_0x8004, SPECIES_KANGASKHAN)
-    special(SetSeenMon)
-    showmonpic(SPECIES_KANGASKHAN, 10, 3)
-    msgbox(FuchsiaCity_Text_KangaskhanSign)
-    hidemonpic()
-    releaseall
-    end
-}
 
-script FuchsiaCity_EventScript_SlowpokeSign {
-    lockall
-    setvar(VAR_0x8004, SPECIES_SLOWPOKE)
-    special(SetSeenMon)
-    showmonpic(SPECIES_SLOWPOKE, 10, 3)
-    msgbox(FuchsiaCity_Text_SlowpokeSign)
-    hidemonpic()
-    releaseall
-    end
-}
+FuchsiaCity_EventScript_Lass::
+# 47 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	lock
+# 48 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	faceplayer
+# 49 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	famechecker FAMECHECKER_KOGA, 3
+# 50 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_MyFatherIsGymLeader
+# 51 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	release
+	end
 
-script FuchsiaCity_EventScript_LaprasSign {
-    lockall
-    setvar(VAR_0x8004, SPECIES_LAPRAS)
-    special(SetSeenMon)
-    showmonpic(SPECIES_LAPRAS, 10, 3)
-    msgbox(FuchsiaCity_Text_LaprasSign)
-    hidemonpic()
-    releaseall
-    end
-}
 
-script FuchsiaCity_EventScript_FossilMonSign {
-    lockall
-    if (flag(FLAG_GOT_DOME_FOSSIL)) {
-        goto(FuchsiaCity_EventScript_OmanyteSign)
-    }
-    setvar(VAR_0x8004, SPECIES_KABUTO)
-    special(SetSeenMon)
-    showmonpic(SPECIES_KABUTO, 10, 3)
-    msgbox(FuchsiaCity_Text_KabutoSign)
-    hidemonpic()
-    releaseall
-    end
-}
+FuchsiaCity_EventScript_CitySign::
+# 56 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_CitySign, MSGBOX_SIGN
+	end
 
-script FuchsiaCity_EventScript_OmanyteSign {
-    setvar(VAR_0x8004, SPECIES_OMANYTE)
-    special(SetSeenMon)
-    showmonpic(SPECIES_OMANYTE, 10, 3)
-    msgbox(FuchsiaCity_Text_OmanyteSign)
-    hidemonpic()
-    releaseall
-    end
-}
 
-text FuchsiaCity_Text_DidYouTrySafariGame {
-    "Did you try the SAFARI GAME?\p"
-    "There are some rare POKéMON that\n"
-    "can only be caught there.$"
-}
+FuchsiaCity_EventScript_SafariZoneSign::
+# 61 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_SafariZoneSign, MSGBOX_SIGN
+	end
 
-text FuchsiaCity_Text_SafariZoneZooInFront {
-    "The SAFARI ZONE has a zoo in front\n"
-    "of the entrance.\p"
-    "Out back is the SAFARI GAME for\n"
-    "catching POKéMON.$"
-}
 
-text FuchsiaCity_Text_WheresSara {
-    "ERIK: Where's SARA?\n"
-    "I said I'd meet her here.$"
-}
+FuchsiaCity_EventScript_SafariGameSign::
+# 66 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_SafariGameSign, MSGBOX_SIGN
+	end
 
-text FuchsiaCity_Text_ItemBallInThere {
-    "That item ball in there…\n"
-    "Were you wanting that?\p"
-    "Me, too!\n"
-    "…Huh? That's a POKéMON?$"
-}
 
-text FuchsiaCity_Text_CitySign {
-    "FUCHSIA CITY\n"
-    "Behold! It's Passion Pink!$"
-}
+FuchsiaCity_EventScript_WardensHomeSign::
+# 71 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_WardensHomeSign, MSGBOX_SIGN
+	end
 
-text FuchsiaCity_Text_SafariZoneSign {
-    "POKéMON PARADISE\n"
-    "SAFARI ZONE$"
-}
 
-text FuchsiaCity_Text_SafariGameSign {
-    "SAFARI GAME\n"
-    "POKéMON-U-CATCH!$"
-}
+FuchsiaCity_EventScript_SafariZoneOfficeSign::
+# 76 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_SafariZoneOfficeSign, MSGBOX_SIGN
+	end
 
-text FuchsiaCity_Text_WardensHomeSign {
-    "SAFARI ZONE\n"
-    "WARDEN'S HOME$"
-}
 
-text FuchsiaCity_Text_SafariZoneOfficeSign {
-    "POKéMON PARADISE!\n"
-    "Welcome to the SAFARI ZONE!\l"
-    "SAFARI ZONE OFFICE$"
-}
+FuchsiaCity_EventScript_GymSign::
+# 81 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	lockall
+# 82 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	famechecker FAMECHECKER_KOGA, 0
+# 83 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_GymSign
+# 84 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	releaseall
+	end
 
-text FuchsiaCity_Text_GymSign {
-    "FUCHSIA CITY POKéMON GYM\n"
-    "LEADER: KOGA\l"
-    "The Poisonous Ninja Master$"
-}
 
-text FuchsiaCity_Text_ChanseySign {
-    "Name: CHANSEY\n"
-    "Catching one is all up to chance.$"
-}
+FuchsiaCity_EventScript_ChanseySign::
+# 89 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	lockall
+# 90 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	setvar VAR_0x8004, SPECIES_CHANSEY
+# 91 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	special SetSeenMon
+# 92 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	showmonpic SPECIES_CHANSEY, 10, 3
+# 93 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_ChanseySign
+# 94 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	hidemonpic
+# 95 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	releaseall
+	end
 
-text FuchsiaCity_Text_VoltorbSign {
-    "Name: VOLTORB\n"
-    "The very image of a POKé BALL.$"
-}
 
-text FuchsiaCity_Text_KangaskhanSign {
-    "Name: KANGASKHAN\p"
-    "A maternal POKéMON that raises its\n"
-    "young in a pouch on its belly.$"
-}
+FuchsiaCity_EventScript_VoltorbSign::
+# 100 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	lockall
+# 101 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	setvar VAR_0x8004, SPECIES_VOLTORB
+# 102 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	special SetSeenMon
+# 103 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	showmonpic SPECIES_VOLTORB, 10, 3
+# 104 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_VoltorbSign
+# 105 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	hidemonpic
+# 106 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	releaseall
+	end
 
-text FuchsiaCity_Text_SlowpokeSign {
-    "Name: SLOWPOKE\n"
-    "Friendly and very slow moving.$"
-}
 
-text FuchsiaCity_Text_LaprasSign {
-    "Name: LAPRAS\n"
-    "AKA the king of the seas.$"
-}
+FuchsiaCity_EventScript_KangaskhanSign::
+# 111 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	lockall
+# 112 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	setvar VAR_0x8004, SPECIES_KANGASKHAN
+# 113 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	special SetSeenMon
+# 114 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	showmonpic SPECIES_KANGASKHAN, 10, 3
+# 115 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_KangaskhanSign
+# 116 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	hidemonpic
+# 117 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	releaseall
+	end
 
-text FuchsiaCity_Text_OmanyteSign {
-    "Name: OMANYTE\n"
-    "An extremely rare POKéMON that was\l"
-    "regenerated from a fossil.$"
-}
 
-text FuchsiaCity_Text_KabutoSign {
-    "Name: KABUTO\n"
-    "An extremely rare POKéMON that was\l"
-    "regenerated from a fossil.$"
-}
+FuchsiaCity_EventScript_SlowpokeSign::
+# 122 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	lockall
+# 123 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	setvar VAR_0x8004, SPECIES_SLOWPOKE
+# 124 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	special SetSeenMon
+# 125 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	showmonpic SPECIES_SLOWPOKE, 10, 3
+# 126 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_SlowpokeSign
+# 127 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	hidemonpic
+# 128 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	releaseall
+	end
 
-text FuchsiaCity_Text_Ellipsis {
-    "……$"
-}
 
-text Text_SubstituteTeach {
-    "Aww, I wish I was a KANGASKHAN\n"
-    "baby.\p"
-    "I'd love to be a substitute for the\n"
-    "baby…\p"
-    "And snuggle in the mother\n"
-    "KANGASKHAN's belly pouch.\p"
-    "But only POKéMON can use the\n"
-    "technique SUBSTITUTE…\p"
-    "Want me to teach SUBSTITUTE to\n"
-    "one of your POKéMON?$"
-}
+FuchsiaCity_EventScript_LaprasSign::
+# 133 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	lockall
+# 134 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	setvar VAR_0x8004, SPECIES_LAPRAS
+# 135 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	special SetSeenMon
+# 136 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	showmonpic SPECIES_LAPRAS, 10, 3
+# 137 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_LaprasSign
+# 138 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	hidemonpic
+# 139 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	releaseall
+	end
 
-text Text_SubstituteDeclined {
-    "Oh, really?\n"
-    "SUBSTITUTE seems so fun…$"
-}
 
-text Text_SubstituteWhichMon {
-    "Which POKéMON wants to learn\n"
-    "SUBSTITUTE?$"
-}
+FuchsiaCity_EventScript_FossilMonSign::
+# 144 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	lockall
+# 145 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_DOME_FOSSIL, FuchsiaCity_EventScript_FossilMonSign_2
+FuchsiaCity_EventScript_FossilMonSign_1:
+# 148 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	setvar VAR_0x8004, SPECIES_KABUTO
+# 149 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	special SetSeenMon
+# 150 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	showmonpic SPECIES_KABUTO, 10, 3
+# 151 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_KabutoSign
+# 152 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	hidemonpic
+# 153 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	releaseall
+	end
 
-text Text_SubstituteTaught {
-    "Boy, what I'd give to crawl inside\n"
-    "a KANGASKHAN belly pouch…$"
-}
+FuchsiaCity_EventScript_FossilMonSign_2:
+# 146 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	goto FuchsiaCity_EventScript_OmanyteSign
+	goto FuchsiaCity_EventScript_FossilMonSign_1
 
-text FuchsiaCity_Text_MyFatherIsGymLeader {
-    "My father is the GYM LEADER of\n"
-    "this town.\p"
-    "I'm training to use POISON POKéMON\n"
-    "as well as my father.$"
-}
+
+FuchsiaCity_EventScript_OmanyteSign::
+# 158 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	setvar VAR_0x8004, SPECIES_OMANYTE
+# 159 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	special SetSeenMon
+# 160 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	showmonpic SPECIES_OMANYTE, 10, 3
+# 161 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	msgbox FuchsiaCity_Text_OmanyteSign
+# 162 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	hidemonpic
+# 163 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	releaseall
+	end
+
+
+FuchsiaCity_Text_DidYouTrySafariGame::
+# 167 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "Did you try the SAFARI GAME?\p"
+	.string "There are some rare POKéMON that\n"
+	.string "can only be caught there.$"
+
+FuchsiaCity_Text_SafariZoneZooInFront::
+# 173 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "The SAFARI ZONE has a zoo in front\n"
+	.string "of the entrance.\p"
+	.string "Out back is the SAFARI GAME for\n"
+	.string "catching POKéMON.$"
+
+FuchsiaCity_Text_WheresSara::
+# 180 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "ERIK: Where's SARA?\n"
+	.string "I said I'd meet her here.$"
+
+FuchsiaCity_Text_ItemBallInThere::
+# 185 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "That item ball in there…\n"
+	.string "Were you wanting that?\p"
+	.string "Me, too!\n"
+	.string "…Huh? That's a POKéMON?$"
+
+FuchsiaCity_Text_CitySign::
+# 192 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "FUCHSIA CITY\n"
+	.string "Behold! It's Passion Pink!$"
+
+FuchsiaCity_Text_SafariZoneSign::
+# 197 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "POKéMON PARADISE\n"
+	.string "SAFARI ZONE$"
+
+FuchsiaCity_Text_SafariGameSign::
+# 202 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "SAFARI GAME\n"
+	.string "POKéMON-U-CATCH!$"
+
+FuchsiaCity_Text_WardensHomeSign::
+# 207 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "SAFARI ZONE\n"
+	.string "WARDEN'S HOME$"
+
+FuchsiaCity_Text_SafariZoneOfficeSign::
+# 212 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "POKéMON PARADISE!\n"
+	.string "Welcome to the SAFARI ZONE!\l"
+	.string "SAFARI ZONE OFFICE$"
+
+FuchsiaCity_Text_GymSign::
+# 218 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "FUCHSIA CITY POKéMON GYM\n"
+	.string "LEADER: KOGA\l"
+	.string "The Poisonous Ninja Master$"
+
+FuchsiaCity_Text_ChanseySign::
+# 224 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "Name: CHANSEY\n"
+	.string "Catching one is all up to chance.$"
+
+FuchsiaCity_Text_VoltorbSign::
+# 229 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "Name: VOLTORB\n"
+	.string "The very image of a POKé BALL.$"
+
+FuchsiaCity_Text_KangaskhanSign::
+# 234 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "Name: KANGASKHAN\p"
+	.string "A maternal POKéMON that raises its\n"
+	.string "young in a pouch on its belly.$"
+
+FuchsiaCity_Text_SlowpokeSign::
+# 240 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "Name: SLOWPOKE\n"
+	.string "Friendly and very slow moving.$"
+
+FuchsiaCity_Text_LaprasSign::
+# 245 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "Name: LAPRAS\n"
+	.string "AKA the king of the seas.$"
+
+FuchsiaCity_Text_OmanyteSign::
+# 250 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "Name: OMANYTE\n"
+	.string "An extremely rare POKéMON that was\l"
+	.string "regenerated from a fossil.$"
+
+FuchsiaCity_Text_KabutoSign::
+# 256 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "Name: KABUTO\n"
+	.string "An extremely rare POKéMON that was\l"
+	.string "regenerated from a fossil.$"
+
+FuchsiaCity_Text_Ellipsis::
+# 262 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "……$"
+
+Text_SubstituteTeach::
+# 266 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "Aww, I wish I was a KANGASKHAN\n"
+	.string "baby.\p"
+	.string "I'd love to be a substitute for the\n"
+	.string "baby…\p"
+	.string "And snuggle in the mother\n"
+	.string "KANGASKHAN's belly pouch.\p"
+	.string "But only POKéMON can use the\n"
+	.string "technique SUBSTITUTE…\p"
+	.string "Want me to teach SUBSTITUTE to\n"
+	.string "one of your POKéMON?$"
+
+Text_SubstituteDeclined::
+# 279 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "Oh, really?\n"
+	.string "SUBSTITUTE seems so fun…$"
+
+Text_SubstituteWhichMon::
+# 284 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "Which POKéMON wants to learn\n"
+	.string "SUBSTITUTE?$"
+
+Text_SubstituteTaught::
+# 289 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "Boy, what I'd give to crawl inside\n"
+	.string "a KANGASKHAN belly pouch…$"
+
+FuchsiaCity_Text_MyFatherIsGymLeader::
+# 294 "data/maps/FuchsiaCity_Frlg/scripts.pory"
+	.string "My father is the GYM LEADER of\n"
+	.string "this town.\p"
+	.string "I'm training to use POISON POKéMON\n"
+	.string "as well as my father.$"
+
+`

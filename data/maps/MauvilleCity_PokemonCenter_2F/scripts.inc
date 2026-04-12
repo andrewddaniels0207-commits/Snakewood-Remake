@@ -1,32 +1,44 @@
 MauvilleCity_PokemonCenter_2F_MapScripts::
+# 2 "data/maps/MauvilleCity_PokemonCenter_2F/scripts.pory"
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame
+# 3 "data/maps/MauvilleCity_PokemonCenter_2F/scripts.pory"
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp
+# 4 "data/maps/MauvilleCity_PokemonCenter_2F/scripts.pory"
 	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
+# 5 "data/maps/MauvilleCity_PokemonCenter_2F/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-@ The below 3 are unused and leftover from RS
+
 MauvilleCity_PokemonCenter_2F_EventScript_Colosseum::
+# 9 "data/maps/MauvilleCity_PokemonCenter_2F/scripts.pory"
 	call CableClub_EventScript_Colosseum
 	end
 
+
 MauvilleCity_PokemonCenter_2F_EventScript_TradeCenter::
+# 14 "data/maps/MauvilleCity_PokemonCenter_2F/scripts.pory"
 	call CableClub_EventScript_TradeCenter
 	end
 
+
 MauvilleCity_PokemonCenter_2F_EventScript_RecordCorner::
+# 19 "data/maps/MauvilleCity_PokemonCenter_2F/scripts.pory"
 	call CableClub_EventScript_RecordCorner
 	end
 
+
 MauvilleCity_PokemonCenter_2F_EventScript_Youngster::
+# 24 "data/maps/MauvilleCity_PokemonCenter_2F/scripts.pory"
 	msgbox MauvilleCity_PokemonCenter_2F_Text_Youngster, MSGBOX_NPC
 	end
 
-MauvilleCity_PokemonCenter_2F_Text_Youngster:
+
+MauvilleCity_PokemonCenter_2F_Text_Youngster::
+# 28 "data/maps/MauvilleCity_PokemonCenter_2F/scripts.pory"
 	.string "Did you know that you can link battle\n"
 	.string "at the COLOSSEUM here?\p"
 	.string "They put up your record on the wall\n"
 	.string "for everyone to see.\p"
 	.string "It's embarrassing if you lose more\n"
 	.string "often than you win…$"
-

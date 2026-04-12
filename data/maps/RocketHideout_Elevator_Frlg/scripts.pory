@@ -1,123 +1,237 @@
-mapscripts RocketHideout_Elevator_Frlg_MapScripts {}
+raw `
+RocketHideout_Elevator_Frlg_MapScripts::
+	.byte 0
 
-script RocketHideout_Elevator_EventScript_FloorSelect {
-    lockall
-    if (!flag(FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT)) {
-        goto(RocketHideout_Elevator_EventScript_NeedKey)
-    }
-    setvar(VAR_0x8004, 2)
-    if (!flag(FLAG_TEMP_2)) {
-        call(EventScript_GetElevatorFloor)
-    }
-    copyvar(VAR_0x8005, VAR_ELEVATOR_FLOOR)
-    special(DrawElevatorCurrentFloorWindow)
-    message(gText_WantWhichFloor)
-    waitmessage()
-    setvar(VAR_0x8004, 2)
-    specialvar(VAR_RESULT, InitElevatorFloorSelectMenuPos)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(RocketHideout_Elevator_EventScript_FloorSelectFromB1F)
-        case 1:
-            goto(RocketHideout_Elevator_EventScript_FloorSelectFromB2F)
-        case 2:
-            goto(RocketHideout_Elevator_EventScript_FloorSelectFromB4F)
-    }
-    end
-}
 
-script RocketHideout_Elevator_EventScript_FloorSelectFromB1F {
-    multichoicedefault(0, 0, MULTI_ROCKET_HIDEOUT_ELEVATOR, 0, FALSE)
-    goto(RocketHideout_Elevator_EventScript_ChooseFloor)
-    end
-}
+RocketHideout_Elevator_EventScript_FloorSelect::
+# 4 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	lockall
+# 5 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto_if_unset FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT, RocketHideout_Elevator_EventScript_FloorSelect_2
+RocketHideout_Elevator_EventScript_FloorSelect_1:
+# 8 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	setvar VAR_0x8004, 2
+# 9 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto_if_unset FLAG_TEMP_2, RocketHideout_Elevator_EventScript_FloorSelect_5
+RocketHideout_Elevator_EventScript_FloorSelect_4:
+# 12 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
+# 13 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	special DrawElevatorCurrentFloorWindow
+# 14 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	message gText_WantWhichFloor
+# 15 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	waitmessage
+# 16 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	setvar VAR_0x8004, 2
+# 17 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	specialvar VAR_RESULT, InitElevatorFloorSelectMenuPos
+# 18 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	switch VAR_RESULT
+# 19 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	case 0, RocketHideout_Elevator_EventScript_FloorSelect_9
+# 21 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	case 1, RocketHideout_Elevator_EventScript_FloorSelect_10
+# 23 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	case 2, RocketHideout_Elevator_EventScript_FloorSelect_11
+RocketHideout_Elevator_EventScript_FloorSelect_7:
+	end
 
-script RocketHideout_Elevator_EventScript_FloorSelectFromB2F {
-    multichoicedefault(0, 0, MULTI_ROCKET_HIDEOUT_ELEVATOR, 1, FALSE)
-    goto(RocketHideout_Elevator_EventScript_ChooseFloor)
-    end
-}
+RocketHideout_Elevator_EventScript_FloorSelect_2:
+# 6 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_NeedKey
+	goto RocketHideout_Elevator_EventScript_FloorSelect_1
 
-script RocketHideout_Elevator_EventScript_FloorSelectFromB4F {
-    multichoicedefault(0, 0, MULTI_ROCKET_HIDEOUT_ELEVATOR, 2, FALSE)
-    goto(RocketHideout_Elevator_EventScript_ChooseFloor)
-    end
-}
+RocketHideout_Elevator_EventScript_FloorSelect_5:
+# 10 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	call EventScript_GetElevatorFloor
+	goto RocketHideout_Elevator_EventScript_FloorSelect_4
 
-script RocketHideout_Elevator_EventScript_ChooseFloor {
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(RocketHideout_Elevator_EventScript_ToB1F)
-        case 1:
-            goto(RocketHideout_Elevator_EventScript_ToB2F)
-        case 2:
-            goto(RocketHideout_Elevator_EventScript_ToB4F)
-        case 3:
-            goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
-        case 127:
-            goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
-    }
-    end
-}
+RocketHideout_Elevator_EventScript_FloorSelect_9:
+# 20 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_FloorSelectFromB1F
+	goto RocketHideout_Elevator_EventScript_FloorSelect_7
 
-script RocketHideout_Elevator_EventScript_ToB1F {
-    setvar(VAR_0x8006, 3)
-    setdynamicwarp(MAP_ROCKET_HIDEOUT_B1F, 255, 24, 25)
-    if (var(VAR_ELEVATOR_FLOOR) == 3) {
-        goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
-    }
-    call(RocketHideout_Elevator_EventScript_MoveElevator)
-    setvar(VAR_ELEVATOR_FLOOR, 3)
-    goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
-    end
-}
+RocketHideout_Elevator_EventScript_FloorSelect_10:
+# 22 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_FloorSelectFromB2F
+	goto RocketHideout_Elevator_EventScript_FloorSelect_7
 
-script RocketHideout_Elevator_EventScript_ToB2F {
-    setvar(VAR_0x8006, 2)
-    setdynamicwarp(MAP_ROCKET_HIDEOUT_B2F, 255, 28, 16)
-    if (var(VAR_ELEVATOR_FLOOR) == 2) {
-        goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
-    }
-    call(RocketHideout_Elevator_EventScript_MoveElevator)
-    setvar(VAR_ELEVATOR_FLOOR, 2)
-    goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
-    end
-}
+RocketHideout_Elevator_EventScript_FloorSelect_11:
+# 24 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_FloorSelectFromB4F
+	goto RocketHideout_Elevator_EventScript_FloorSelect_7
 
-script RocketHideout_Elevator_EventScript_ToB4F {
-    setvar(VAR_0x8006, 0)
-    setdynamicwarp(MAP_ROCKET_HIDEOUT_B4F, 255, 20, 23)
-    if (var(VAR_ELEVATOR_FLOOR) == 0) {
-        goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
-    }
-    call(RocketHideout_Elevator_EventScript_MoveElevator)
-    setvar(VAR_ELEVATOR_FLOOR, 0)
-    goto(RocketHideout_Elevator_EventScript_ExitFloorSelect)
-    end
-}
 
-script RocketHideout_Elevator_EventScript_ExitFloorSelect {
-    special(CloseElevatorCurrentFloorWindow)
-    releaseall
-    end
-}
+RocketHideout_Elevator_EventScript_FloorSelectFromB1F::
+# 30 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	multichoicedefault 0, 0, MULTI_ROCKET_HIDEOUT_ELEVATOR, 0, FALSE
+# 31 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_ChooseFloor
+	end
 
-script RocketHideout_Elevator_EventScript_MoveElevator {
-    special(CloseElevatorCurrentFloorWindow)
-    closemessage
-    waitse()
-    special(AnimateElevator)
-    waitstate
-    setflag(FLAG_TEMP_2)
-    return
-}
 
-script RocketHideout_Elevator_EventScript_NeedKey {
-    msgbox(RocketHideout_Elevator_Text_AppearsToNeedAKey)
-    releaseall
-    end
-}
+RocketHideout_Elevator_EventScript_FloorSelectFromB2F::
+# 36 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	multichoicedefault 0, 0, MULTI_ROCKET_HIDEOUT_ELEVATOR, 1, FALSE
+# 37 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_ChooseFloor
+	end
 
-text RocketHideout_Elevator_Text_AppearsToNeedAKey {
-    "It appears to need a key.$"
-}
+
+RocketHideout_Elevator_EventScript_FloorSelectFromB4F::
+# 42 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	multichoicedefault 0, 0, MULTI_ROCKET_HIDEOUT_ELEVATOR, 2, FALSE
+# 43 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_ChooseFloor
+	end
+
+
+RocketHideout_Elevator_EventScript_ChooseFloor::
+# 48 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	switch VAR_RESULT
+# 49 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	case 0, RocketHideout_Elevator_EventScript_ChooseFloor_3
+# 51 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	case 1, RocketHideout_Elevator_EventScript_ChooseFloor_4
+# 53 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	case 2, RocketHideout_Elevator_EventScript_ChooseFloor_5
+# 55 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	case 3, RocketHideout_Elevator_EventScript_ChooseFloor_6
+# 57 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	case 127, RocketHideout_Elevator_EventScript_ChooseFloor_7
+RocketHideout_Elevator_EventScript_ChooseFloor_1:
+	end
+
+RocketHideout_Elevator_EventScript_ChooseFloor_3:
+# 50 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_ToB1F
+	goto RocketHideout_Elevator_EventScript_ChooseFloor_1
+
+RocketHideout_Elevator_EventScript_ChooseFloor_4:
+# 52 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_ToB2F
+	goto RocketHideout_Elevator_EventScript_ChooseFloor_1
+
+RocketHideout_Elevator_EventScript_ChooseFloor_5:
+# 54 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_ToB4F
+	goto RocketHideout_Elevator_EventScript_ChooseFloor_1
+
+RocketHideout_Elevator_EventScript_ChooseFloor_6:
+# 56 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_ExitFloorSelect
+	goto RocketHideout_Elevator_EventScript_ChooseFloor_1
+
+RocketHideout_Elevator_EventScript_ChooseFloor_7:
+# 58 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_ExitFloorSelect
+	goto RocketHideout_Elevator_EventScript_ChooseFloor_1
+
+
+RocketHideout_Elevator_EventScript_ToB1F::
+# 64 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	setvar VAR_0x8006, 3
+# 65 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	setdynamicwarp MAP_ROCKET_HIDEOUT_B1F, 255, 24, 25
+# 66 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	compare VAR_ELEVATOR_FLOOR, 3
+	goto_if_eq RocketHideout_Elevator_EventScript_ToB1F_2
+RocketHideout_Elevator_EventScript_ToB1F_1:
+# 69 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	call RocketHideout_Elevator_EventScript_MoveElevator
+# 70 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	setvar VAR_ELEVATOR_FLOOR, 3
+# 71 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_ExitFloorSelect
+	end
+
+RocketHideout_Elevator_EventScript_ToB1F_2:
+# 67 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_ExitFloorSelect
+	goto RocketHideout_Elevator_EventScript_ToB1F_1
+
+
+RocketHideout_Elevator_EventScript_ToB2F::
+# 76 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	setvar VAR_0x8006, 2
+# 77 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	setdynamicwarp MAP_ROCKET_HIDEOUT_B2F, 255, 28, 16
+# 78 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	compare VAR_ELEVATOR_FLOOR, 2
+	goto_if_eq RocketHideout_Elevator_EventScript_ToB2F_2
+RocketHideout_Elevator_EventScript_ToB2F_1:
+# 81 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	call RocketHideout_Elevator_EventScript_MoveElevator
+# 82 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	setvar VAR_ELEVATOR_FLOOR, 2
+# 83 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_ExitFloorSelect
+	end
+
+RocketHideout_Elevator_EventScript_ToB2F_2:
+# 79 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_ExitFloorSelect
+	goto RocketHideout_Elevator_EventScript_ToB2F_1
+
+
+RocketHideout_Elevator_EventScript_ToB4F::
+# 88 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	setvar VAR_0x8006, 0
+# 89 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	setdynamicwarp MAP_ROCKET_HIDEOUT_B4F, 255, 20, 23
+# 90 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	compare VAR_ELEVATOR_FLOOR, 0
+	goto_if_eq RocketHideout_Elevator_EventScript_ToB4F_2
+RocketHideout_Elevator_EventScript_ToB4F_1:
+# 93 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	call RocketHideout_Elevator_EventScript_MoveElevator
+# 94 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	setvar VAR_ELEVATOR_FLOOR, 0
+# 95 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_ExitFloorSelect
+	end
+
+RocketHideout_Elevator_EventScript_ToB4F_2:
+# 91 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	goto RocketHideout_Elevator_EventScript_ExitFloorSelect
+	goto RocketHideout_Elevator_EventScript_ToB4F_1
+
+
+RocketHideout_Elevator_EventScript_ExitFloorSelect::
+# 100 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	special CloseElevatorCurrentFloorWindow
+# 101 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	releaseall
+	end
+
+
+RocketHideout_Elevator_EventScript_MoveElevator::
+# 106 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	special CloseElevatorCurrentFloorWindow
+# 107 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	closemessage
+# 108 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	waitse
+# 109 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	special AnimateElevator
+# 110 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	waitstate
+# 111 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	setflag FLAG_TEMP_2
+	return
+
+
+RocketHideout_Elevator_EventScript_NeedKey::
+# 116 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	msgbox RocketHideout_Elevator_Text_AppearsToNeedAKey
+# 117 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	releaseall
+	end
+
+
+RocketHideout_Elevator_Text_AppearsToNeedAKey::
+# 121 "data/maps/RocketHideout_Elevator_Frlg/scripts.pory"
+	.string "It appears to need a key.$"
+
+`

@@ -1,1362 +1,2375 @@
-mapscripts Route110_TrickHousePuzzle5_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: Route110_TrickHousePuzzle5_OnTransition
-}
-
-script Route110_TrickHousePuzzle5_OnTransition {
-    setvar(VAR_TEMP_1, 0)
-    setvar(VAR_TEMP_2, 0)
-    setvar(VAR_TEMP_3, 0)
-    setvar(VAR_TEMP_4, 0)
-    setvar(VAR_TEMP_5, 0)
-    setvar(VAR_TEMP_8, 0)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Scroll {
-    lockall
-    if (var(VAR_TRICK_HOUSE_PUZZLE_5_STATE) == 0) {
-        goto(Route110_TrickHousePuzzle5_EventScript_FoundScroll)
-    }
-    goto(Route110_TrickHousePuzzle_EventScript_ReadScrollAgain)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_FoundScroll {
-    setvar(VAR_TRICK_HOUSE_PUZZLE_5_STATE, 1)
-    goto(Route110_TrickHousePuzzle_EventScript_FoundScroll)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1 {
-    lockall
-    applymovement(LOCALID_MECHADOLL_1, Common_Movement_FacePlayer)
-    waitmovement(0)
-    if (var(VAR_TEMP_1) == 1) {
-        goto(Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough)
-    }
-    setvar(VAR_TEMP_9, 0)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2 {
-    lockall
-    applymovement(LOCALID_MECHADOLL_2, Common_Movement_FacePlayer)
-    waitmovement(0)
-    if (var(VAR_TEMP_2) == 1) {
-        goto(Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough)
-    }
-    setvar(VAR_TEMP_9, 0)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3 {
-    lockall
-    applymovement(LOCALID_MECHADOLL_3, Common_Movement_FacePlayer)
-    waitmovement(0)
-    if (var(VAR_TEMP_3) == 1) {
-        goto(Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough)
-    }
-    setvar(VAR_TEMP_9, 0)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4 {
-    lockall
-    applymovement(LOCALID_MECHADOLL_4, Common_Movement_FacePlayer)
-    waitmovement(0)
-    if (var(VAR_TEMP_4) == 1) {
-        goto(Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough)
-    }
-    setvar(VAR_TEMP_9, 0)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll5 {
-    lockall
-    applymovement(LOCALID_MECHADOLL_5, Common_Movement_FacePlayer)
-    waitmovement(0)
-    if (var(VAR_TEMP_5) == 1) {
-        goto(Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough)
-    }
-    setvar(VAR_TEMP_9, 0)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1Trigger0 {
-    lockall
-    setvar(VAR_TEMP_9, 0)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1Trigger1 {
-    lockall
-    setvar(VAR_TEMP_9, 1)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1Trigger2 {
-    lockall
-    setvar(VAR_TEMP_9, 2)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1Trigger3 {
-    lockall
-    setvar(VAR_TEMP_9, 3)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1Trigger4 {
-    lockall
-    setvar(VAR_TEMP_9, 4)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2Trigger0 {
-    lockall
-    setvar(VAR_TEMP_9, 0)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2Trigger1 {
-    lockall
-    setvar(VAR_TEMP_9, 1)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2Trigger2 {
-    lockall
-    setvar(VAR_TEMP_9, 2)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2Trigger3 {
-    lockall
-    setvar(VAR_TEMP_9, 3)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2Trigger4 {
-    lockall
-    setvar(VAR_TEMP_9, 4)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2Trigger5 {
-    lockall
-    setvar(VAR_TEMP_9, 5)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3Trigger0 {
-    lockall
-    setvar(VAR_TEMP_9, 0)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3Trigger1 {
-    lockall
-    setvar(VAR_TEMP_9, 1)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3Trigger2 {
-    lockall
-    setvar(VAR_TEMP_9, 2)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3Trigger3 {
-    lockall
-    setvar(VAR_TEMP_9, 3)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3Trigger4 {
-    lockall
-    setvar(VAR_TEMP_9, 4)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4Trigger0 {
-    lockall
-    setvar(VAR_TEMP_9, 0)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4Trigger1 {
-    lockall
-    setvar(VAR_TEMP_9, 1)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4Trigger2 {
-    lockall
-    setvar(VAR_TEMP_9, 2)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4Trigger3 {
-    lockall
-    setvar(VAR_TEMP_9, 3)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4Trigger4 {
-    lockall
-    setvar(VAR_TEMP_9, 4)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4Trigger5 {
-    lockall
-    setvar(VAR_TEMP_9, 5)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll5Trigger0 {
-    lockall
-    setvar(VAR_TEMP_9, 0)
-    goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate {
-    setvar(VAR_TEMP_1, 1)
-    setvar(VAR_TEMP_8, LOCALID_MECHADOLL_1)
-    playse(SE_PIN)
-    applymovement(LOCALID_MECHADOLL_1, Common_Movement_ExclamationMark)
-    waitmovement(0)
-    applymovement(LOCALID_MECHADOLL_1, Common_Movement_Delay48)
-    waitmovement(0)
-    if (var(VAR_TEMP_9) == 1) {
-        call(Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1)
-    }
-    if (var(VAR_TEMP_9) == 2) {
-        call(Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2)
-    }
-    if (var(VAR_TEMP_9) == 3) {
-        call(Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3)
-    }
-    if (var(VAR_TEMP_9) == 4) {
-        call(Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4)
-    }
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll1Intro, MSGBOX_DEFAULT)
-    random(3)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz1)
-        case 1:
-            goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz2)
-        case 2:
-            goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz3)
-    }
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate {
-    setvar(VAR_TEMP_2, 1)
-    setvar(VAR_TEMP_8, LOCALID_MECHADOLL_2)
-    playse(SE_PIN)
-    applymovement(LOCALID_MECHADOLL_2, Common_Movement_ExclamationMark)
-    waitmovement(0)
-    applymovement(LOCALID_MECHADOLL_2, Common_Movement_Delay48)
-    waitmovement(0)
-    if (var(VAR_TEMP_9) == 1) {
-        call(Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1)
-    }
-    if (var(VAR_TEMP_9) == 2) {
-        call(Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2)
-    }
-    if (var(VAR_TEMP_9) == 3) {
-        call(Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3)
-    }
-    if (var(VAR_TEMP_9) == 4) {
-        call(Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4)
-    }
-    if (var(VAR_TEMP_9) == 5) {
-        call(Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5)
-    }
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll2Intro, MSGBOX_DEFAULT)
-    random(3)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz1)
-        case 1:
-            goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz2)
-        case 2:
-            goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz3)
-    }
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate {
-    setvar(VAR_TEMP_3, 1)
-    setvar(VAR_TEMP_8, LOCALID_MECHADOLL_3)
-    playse(SE_PIN)
-    applymovement(LOCALID_MECHADOLL_3, Common_Movement_ExclamationMark)
-    waitmovement(0)
-    applymovement(LOCALID_MECHADOLL_3, Common_Movement_Delay48)
-    waitmovement(0)
-    if (var(VAR_TEMP_9) == 1) {
-        call(Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1)
-    }
-    if (var(VAR_TEMP_9) == 2) {
-        call(Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2)
-    }
-    if (var(VAR_TEMP_9) == 3) {
-        call(Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3)
-    }
-    if (var(VAR_TEMP_9) == 4) {
-        call(Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4)
-    }
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll3Intro, MSGBOX_DEFAULT)
-    random(3)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz1)
-        case 1:
-            goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz2)
-        case 2:
-            goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz3)
-    }
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate {
-    setvar(VAR_TEMP_4, 1)
-    setvar(VAR_TEMP_8, LOCALID_MECHADOLL_4)
-    playse(SE_PIN)
-    applymovement(LOCALID_MECHADOLL_4, Common_Movement_ExclamationMark)
-    waitmovement(0)
-    applymovement(LOCALID_MECHADOLL_4, Common_Movement_Delay48)
-    waitmovement(0)
-    if (var(VAR_TEMP_9) == 1) {
-        call(Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1)
-    }
-    if (var(VAR_TEMP_9) == 2) {
-        call(Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2)
-    }
-    if (var(VAR_TEMP_9) == 3) {
-        call(Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3)
-    }
-    if (var(VAR_TEMP_9) == 4) {
-        call(Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4)
-    }
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll4Intro, MSGBOX_DEFAULT)
-    random(3)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz1)
-        case 1:
-            goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz2)
-        case 2:
-            goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz3)
-    }
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate {
-    setvar(VAR_TEMP_5, 1)
-    setvar(VAR_TEMP_8, LOCALID_MECHADOLL_5)
-    playse(SE_PIN)
-    applymovement(LOCALID_MECHADOLL_5, Common_Movement_ExclamationMark)
-    waitmovement(0)
-    applymovement(LOCALID_MECHADOLL_5, Common_Movement_Delay48)
-    waitmovement(0)
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll5Intro, MSGBOX_DEFAULT)
-    random(3)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz1)
-        case 1:
-            goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz2)
-        case 2:
-            goto(Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz3)
-    }
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz1 {
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz1, MSGBOX_DEFAULT)
-    multichoice(0, 0, MULTI_MECHADOLL1_Q1, TRUE)
-    switch (var(VAR_RESULT)) {
-        case 2:
-            goto(Route110_TrickHousePuzzle5_EventScript_CorrectAnswer)
-    }
-    goto(Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz2 {
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz2, MSGBOX_DEFAULT)
-    multichoice(0, 0, MULTI_MECHADOLL1_Q2, TRUE)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(Route110_TrickHousePuzzle5_EventScript_CorrectAnswer)
-    }
-    goto(Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz3 {
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz3, MSGBOX_DEFAULT)
-    multichoice(0, 0, MULTI_MECHADOLL1_Q3, TRUE)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(Route110_TrickHousePuzzle5_EventScript_CorrectAnswer)
-    }
-    goto(Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz1 {
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz1, MSGBOX_DEFAULT)
-    multichoice(0, 0, MULTI_MECHADOLL2_Q1, TRUE)
-    switch (var(VAR_RESULT)) {
-        case 1:
-            goto(Route110_TrickHousePuzzle5_EventScript_CorrectAnswer)
-    }
-    goto(Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz2 {
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz2, MSGBOX_DEFAULT)
-    multichoice(0, 0, MULTI_MECHADOLL2_Q2, TRUE)
-    switch (var(VAR_RESULT)) {
-        case 2:
-            goto(Route110_TrickHousePuzzle5_EventScript_CorrectAnswer)
-    }
-    goto(Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz3 {
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz3, MSGBOX_DEFAULT)
-    multichoice(0, 0, MULTI_MECHADOLL2_Q3, TRUE)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(Route110_TrickHousePuzzle5_EventScript_CorrectAnswer)
-    }
-    goto(Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz1 {
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz1, MSGBOX_DEFAULT)
-    multichoice(0, 0, MULTI_MECHADOLL3_Q1, TRUE)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(Route110_TrickHousePuzzle5_EventScript_CorrectAnswer)
-    }
-    goto(Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz2 {
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz2, MSGBOX_DEFAULT)
-    multichoice(0, 0, MULTI_MECHADOLL3_Q2, TRUE)
-    switch (var(VAR_RESULT)) {
-        case 2:
-            goto(Route110_TrickHousePuzzle5_EventScript_CorrectAnswer)
-    }
-    goto(Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz3 {
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz3, MSGBOX_DEFAULT)
-    multichoice(0, 0, MULTI_MECHADOLL3_Q3, TRUE)
-    switch (var(VAR_RESULT)) {
-        case 1:
-            goto(Route110_TrickHousePuzzle5_EventScript_CorrectAnswer)
-    }
-    goto(Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz1 {
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz1, MSGBOX_DEFAULT)
-    multichoice(0, 0, MULTI_MECHADOLL4_Q1, TRUE)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(Route110_TrickHousePuzzle5_EventScript_CorrectAnswer)
-    }
-    goto(Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz2 {
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz2, MSGBOX_DEFAULT)
-    multichoice(0, 0, MULTI_MECHADOLL4_Q2, TRUE)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(Route110_TrickHousePuzzle5_EventScript_CorrectAnswer)
-    }
-    goto(Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz3 {
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz3, MSGBOX_DEFAULT)
-    multichoice(0, 0, MULTI_MECHADOLL4_Q3, TRUE)
-    switch (var(VAR_RESULT)) {
-        case 1:
-            goto(Route110_TrickHousePuzzle5_EventScript_CorrectAnswer)
-    }
-    goto(Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz1 {
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz1, MSGBOX_DEFAULT)
-    multichoice(0, 0, MULTI_MECHADOLL5_Q1, TRUE)
-    switch (var(VAR_RESULT)) {
-        case 1:
-            goto(Route110_TrickHousePuzzle5_EventScript_CorrectAnswer)
-    }
-    goto(Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz2 {
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz2, MSGBOX_DEFAULT)
-    multichoice(0, 0, MULTI_MECHADOLL5_Q2, TRUE)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(Route110_TrickHousePuzzle5_EventScript_CorrectAnswer)
-    }
-    goto(Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz3 {
-    msgbox(Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz3, MSGBOX_DEFAULT)
-    multichoice(0, 0, MULTI_MECHADOLL5_Q3, TRUE)
-    switch (var(VAR_RESULT)) {
-        case 2:
-            goto(Route110_TrickHousePuzzle5_EventScript_CorrectAnswer)
-    }
-    goto(Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer {
-    waitse()
-    playse(SE_FAILURE)
-    msgbox(Route110_TrickHousePuzzle5_Text_DisappointmentError, MSGBOX_DEFAULT)
-    applymovement(LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_MechadollShake)
-    applymovement(LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_MechadollShake)
-    applymovement(LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_MechadollShake)
-    applymovement(LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_MechadollShake)
-    applymovement(LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_MechadollShake)
-    msgbox(Route110_TrickHousePuzzle5_Text_Wahahahaha, MSGBOX_DEFAULT)
-    waitmovement(0)
-    msgbox(Route110_TrickHousePuzzle5_Text_WaitForNextChallenge, MSGBOX_DEFAULT)
-    closemessage
-    warp(MAP_ROUTE110_TRICK_HOUSE_PUZZLE5, 0, 21)
-    waitstate
-    releaseall
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_CorrectAnswer {
-    waitse()
-    playse(SE_SUCCESS)
-    goto(Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough)
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough {
-    msgbox(Route110_TrickHousePuzzle5_Text_CorrectGoThrough, MSGBOX_DEFAULT)
-    releaseall
-    end
-}
-
-script Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1 {
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_1) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft1)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_2) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft1)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_3) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft1)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_4) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft1)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_5) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft1)
-    }
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2 {
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_1) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft2)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_2) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft2)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_3) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft2)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_4) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft2)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_5) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft2)
-    }
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3 {
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_1) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft3)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_2) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft3)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_3) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft3)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_4) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft3)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_5) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft3)
-    }
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4 {
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_1) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft4)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_2) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft4)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_3) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft4)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_4) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft4)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_5) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft4)
-    }
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5 {
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_1) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft5)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_2) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft5)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_3) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft5)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_4) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft5)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_5) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft5)
-    }
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1 {
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_1) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight1)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_2) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight1)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_3) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight1)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_4) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight1)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_5) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight1)
-    }
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2 {
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_1) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight2)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_2) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight2)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_3) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight2)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_4) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight2)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_5) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight2)
-    }
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3 {
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_1) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight3)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_2) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight3)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_3) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight3)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_4) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight3)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_5) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight3)
-    }
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4 {
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_1) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight4)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_2) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight4)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_3) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight4)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_4) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight4)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_5) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight4)
-    }
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5 {
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_1) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight5)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_2) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight5)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_3) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight5)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_4) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight5)
-    }
-    if (var(VAR_TEMP_8) == LOCALID_MECHADOLL_5) {
-        call(Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight5)
-    }
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft1 {
-    applymovement(LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkLeft1)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft1 {
-    applymovement(LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkLeft1)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft1 {
-    applymovement(LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkLeft1)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft1 {
-    applymovement(LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkLeft1)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft1 {
-    applymovement(LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkLeft1)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft2 {
-    applymovement(LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkLeft2)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft2 {
-    applymovement(LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkLeft2)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft2 {
-    applymovement(LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkLeft2)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft2 {
-    applymovement(LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkLeft2)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft2 {
-    applymovement(LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkLeft2)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft3 {
-    applymovement(LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkLeft3)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft3 {
-    applymovement(LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkLeft3)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft3 {
-    applymovement(LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkLeft3)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft3 {
-    applymovement(LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkLeft3)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft3 {
-    applymovement(LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkLeft3)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft4 {
-    applymovement(LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkLeft4)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft4 {
-    applymovement(LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkLeft4)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft4 {
-    applymovement(LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkLeft4)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft4 {
-    applymovement(LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkLeft4)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft4 {
-    applymovement(LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkLeft4)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft5 {
-    applymovement(LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkLeft5)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft5 {
-    applymovement(LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkLeft5)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft5 {
-    applymovement(LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkLeft5)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft5 {
-    applymovement(LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkLeft5)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft5 {
-    applymovement(LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkLeft5)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight1 {
-    applymovement(LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkRight1)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight1 {
-    applymovement(LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkRight1)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight1 {
-    applymovement(LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkRight1)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight1 {
-    applymovement(LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkRight1)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight1 {
-    applymovement(LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkRight1)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight2 {
-    applymovement(LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkRight2)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight2 {
-    applymovement(LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkRight2)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight2 {
-    applymovement(LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkRight2)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight2 {
-    applymovement(LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkRight2)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight2 {
-    applymovement(LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkRight2)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight3 {
-    applymovement(LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkRight3)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight3 {
-    applymovement(LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkRight3)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight3 {
-    applymovement(LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkRight3)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight3 {
-    applymovement(LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkRight3)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight3 {
-    applymovement(LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkRight3)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight4 {
-    applymovement(LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkRight4)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight4 {
-    applymovement(LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkRight4)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight4 {
-    applymovement(LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkRight4)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight4 {
-    applymovement(LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkRight4)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight4 {
-    applymovement(LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkRight4)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight5 {
-    applymovement(LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkRight5)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight5 {
-    applymovement(LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkRight5)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight5 {
-    applymovement(LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkRight5)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight5 {
-    applymovement(LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkRight5)
-    waitmovement(0)
-    return
-}
-
-script Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight5 {
-    applymovement(LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkRight5)
-    waitmovement(0)
-    return
-}
-
-movement Route110_TrickHousePuzzle5_Movement_WalkLeft1 {
-    walk_left
-    step_end
-}
-
-movement Route110_TrickHousePuzzle5_Movement_WalkLeft2 {
-    walk_left
-    walk_left
-    step_end
-}
-
-movement Route110_TrickHousePuzzle5_Movement_WalkLeft3 {
-    walk_left
-    walk_left
-    walk_left
-    step_end
-}
-
-movement Route110_TrickHousePuzzle5_Movement_WalkLeft4 {
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    step_end
-}
-
-movement Route110_TrickHousePuzzle5_Movement_WalkLeft5 {
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    step_end
-}
-
-movement Route110_TrickHousePuzzle5_Movement_WalkRight1 {
-    walk_right
-    step_end
-}
-
-movement Route110_TrickHousePuzzle5_Movement_WalkRight2 {
-    walk_right
-    walk_right
-    step_end
-}
-
-movement Route110_TrickHousePuzzle5_Movement_WalkRight3 {
-    walk_right
-    walk_right
-    walk_right
-    step_end
-}
-
-movement Route110_TrickHousePuzzle5_Movement_WalkRight4 {
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    step_end
-}
-
-movement Route110_TrickHousePuzzle5_Movement_WalkRight5 {
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    step_end
-}
-
-movement Route110_TrickHousePuzzle5_Movement_MechadollShake {
-    face_left
-    delay_2
-    face_right
-    delay_2
-    face_left
-    delay_2
-    face_right
-    delay_2
-    face_left
-    delay_2
-    face_right
-    delay_2
-    face_left
-    delay_2
-    face_right
-    delay_2
-    face_left
-    delay_2
-    face_right
-    delay_2
-    face_left
-    delay_2
-    face_right
-    delay_2
-    face_left
-    delay_2
-    face_right
-    delay_2
-    face_left
-    delay_2
-    face_right
-    delay_2
-    face_left
-    delay_2
-    face_right
-    delay_2
-    face_left
-    delay_2
-    face_right
-    delay_2
-    face_left
-    delay_2
-    face_right
-    delay_2
-    face_down
-    step_end
-}
-
-text Route110_TrickHousePuzzle5_Text_WroteSecretCodeLockOpened {
-    "{PLAYER} wrote down the secret code\n"
-    "on the door.\p"
-    "“TRICK MASTER is a genius.”\n"
-    "… … … … … … … …\p"
-    "The lock clicked open!$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll1Intro {
-    "CLICKETY-CLACK…\n"
-    "MECHADOLL 1 AM I!\p"
-    "IF YOU ANSWER QUIZZES CORRECTLY,\n"
-    "THEN YOU WILL GO TO MECHADOLL 5.\l"
-    "THEN YOU CAN OBTAIN THE SECRET CODE.$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz1 {
-    "MECHADOLL 1 QUIZ.\p"
-    "One of these POKéMON is not found\n"
-    "on ROUTE 110. Which one is it?$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz2 {
-    "MECHADOLL 1 QUIZ.\p"
-    "One of these POKéMON is not of the\n"
-    "WATER type. Which one is it?$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz3 {
-    "MECHADOLL 1 QUIZ.\p"
-    "One of these POKéMON does not use\n"
-    "LEECH LIFE. Which one is it?$"
-}
-
-text Route110_TrickHousePuzzle5_Text_CorrectGoThrough {
-    "CONGRATULATIONS. CORRECT YOU ARE.\n"
-    "GO THROUGH. PLEASE.$"
-}
-
-text Route110_TrickHousePuzzle5_Text_DisappointmentError {
-    "BZZZT. DISAPPOINTMENT.\n"
-    "ERROR.$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Wahahahaha {
-    "WAHAHAHAHA! WAHAHAHAHA!\n"
-    "CLICKETY-CLACK!$"
-}
-
-text Route110_TrickHousePuzzle5_Text_WaitForNextChallenge {
-    "YOUR NEXT CHALLENGE WE WAIT FOR.$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll2Intro {
-    "CLICKETY-CLACK…\n"
-    "MECHADOLL 2 AM I!\p"
-    "MECHADOLL 1'S QUIZ DIFFICULTY LEVEL\n"
-    "IS SET TOO LOW.$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz1 {
-    "MECHADOLL 2 QUIZ.\p"
-    "Which of these POKéMON did WALLY\n"
-    "borrow from your father?$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz2 {
-    "MECHADOLL 2 QUIZ.\p"
-    "Which of these POKéMON was chasing\n"
-    "PROF. BIRCH?$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz3 {
-    "MECHADOLL 2 QUIZ.\p"
-    "Which of these POKéMON did TEAM AQUA\n"
-    "use in PETALBURG FOREST?$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll3Intro {
-    "CLICKETY-CLACK…\n"
-    "MECHADOLL 3 AM I!\p"
-    "MATTERS OF MONEY ARE MY SOLE FOCUS.$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz1 {
-    "MECHADOLL 3 QUIZ.\p"
-    "Which costs more?\n"
-    "Three HARBOR MAILS or one BURN HEAL?$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz2 {
-    "MECHADOLL 3 QUIZ.\p"
-    "Sell one GREAT BALL and buy\n"
-    "one POTION. How much money remains?$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz3 {
-    "MECHADOLL 3 QUIZ.\p"
-    "Do one REPEL and SODA POP cost\n"
-    "more than one SUPER POTION?$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll4Intro {
-    "CLICKETY-CLACK…\n"
-    "MECHADOLL 4 THAT IS ME!\p"
-    "MY QUIZ IS AN OBJECT OF BEAUTY.$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz1 {
-    "MECHADOLL 4 QUIZ.\p"
-    "In SEASHORE HOUSE, were there more men\n"
-    "or women?$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz2 {
-    "MECHADOLL 4 QUIZ.\p"
-    "In LAVARIDGE TOWN, were there more\n"
-    "elderly men or elderly women?$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz3 {
-    "MECHADOLL 4 QUIZ.\p"
-    "In the TRAINER'S SCHOOL, how many\n"
-    "girl students were there?$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll5Intro {
-    "CLICKETY-CLACK…\n"
-    "MECHADOLL 5 AM I!\p"
-    "THE MASTER'S BEST AND PROUDEST\n"
-    "ACHIEVEMENT AM I.$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz1 {
-    "MECHADOLL 5 QUIZ.\p"
-    "In SLATEPORT's POKéMON FAN CLUB,\n"
-    "how many POKéMON were there?$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz2 {
-    "MECHADOLL 5 QUIZ.\p"
-    "In FORTREE CITY, how many\n"
-    "tree houses were there?$"
-}
-
-text Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz3 {
-    "MECHADOLL 5 QUIZ.\p"
-    "On the CYCLING ROAD, how many\n"
-    "TRIATHLETES were there?$"
-}
+raw `
+Route110_TrickHousePuzzle5_MapScripts::
+# 2 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle5_OnTransition
+	.byte 0
+
+
+Route110_TrickHousePuzzle5_OnTransition::
+# 6 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_1, 0
+# 7 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_2, 0
+# 8 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_3, 0
+# 9 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_4, 0
+# 10 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_5, 0
+# 11 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_8, 0
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Scroll::
+# 16 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 17 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TRICK_HOUSE_PUZZLE_5_STATE, 0
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Scroll_2
+Route110_TrickHousePuzzle5_EventScript_Scroll_1:
+# 20 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle_EventScript_ReadScrollAgain
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Scroll_2:
+# 18 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_FoundScroll
+	goto Route110_TrickHousePuzzle5_EventScript_Scroll_1
+
+
+Route110_TrickHousePuzzle5_EventScript_FoundScroll::
+# 25 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TRICK_HOUSE_PUZZLE_5_STATE, 1
+# 26 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle_EventScript_FoundScroll
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1::
+# 31 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 32 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_1, Common_Movement_FacePlayer
+# 33 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+# 34 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_1, 1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll1_2
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1_1:
+# 37 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 0
+# 38 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1_2:
+# 35 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2::
+# 43 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 44 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_2, Common_Movement_FacePlayer
+# 45 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+# 46 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_2, 1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll2_2
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2_1:
+# 49 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 0
+# 50 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2_2:
+# 47 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3::
+# 55 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 56 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_3, Common_Movement_FacePlayer
+# 57 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+# 58 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_3, 1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll3_2
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3_1:
+# 61 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 0
+# 62 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3_2:
+# 59 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4::
+# 67 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 68 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_4, Common_Movement_FacePlayer
+# 69 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+# 70 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_4, 1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll4_2
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4_1:
+# 73 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 0
+# 74 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4_2:
+# 71 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5::
+# 79 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 80 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_5, Common_Movement_FacePlayer
+# 81 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+# 82 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_5, 1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll5_2
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5_1:
+# 85 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 0
+# 86 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5_2:
+# 83 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll5_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Trigger0::
+# 91 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 92 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 0
+# 93 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Trigger1::
+# 98 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 99 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 1
+# 100 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Trigger2::
+# 105 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 106 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 2
+# 107 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Trigger3::
+# 112 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 113 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 3
+# 114 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Trigger4::
+# 119 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 120 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 4
+# 121 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Trigger0::
+# 126 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 127 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 0
+# 128 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Trigger1::
+# 133 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 134 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 1
+# 135 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Trigger2::
+# 140 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 141 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 2
+# 142 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Trigger3::
+# 147 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 148 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 3
+# 149 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Trigger4::
+# 154 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 155 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 4
+# 156 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Trigger5::
+# 161 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 162 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 5
+# 163 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Trigger0::
+# 168 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 169 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 0
+# 170 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Trigger1::
+# 175 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 176 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 1
+# 177 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Trigger2::
+# 182 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 183 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 2
+# 184 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Trigger3::
+# 189 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 190 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 3
+# 191 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Trigger4::
+# 196 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 197 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 4
+# 198 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Trigger0::
+# 203 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 204 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 0
+# 205 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Trigger1::
+# 210 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 211 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 1
+# 212 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Trigger2::
+# 217 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 218 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 2
+# 219 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Trigger3::
+# 224 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 225 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 3
+# 226 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Trigger4::
+# 231 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 232 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 4
+# 233 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Trigger5::
+# 238 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 239 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 5
+# 240 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5Trigger0::
+# 245 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	lockall
+# 246 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_9, 0
+# 247 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate::
+# 252 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_1, 1
+# 253 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_8, LOCALID_MECHADOLL_1
+# 254 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	playse SE_PIN
+# 255 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_1, Common_Movement_ExclamationMark
+# 256 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+# 257 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_1, Common_Movement_Delay48
+# 258 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+# 259 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_9, 1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_2
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_1:
+# 262 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_9, 2
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_5
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_4:
+# 265 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_9, 3
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_8
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_7:
+# 268 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_9, 4
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_11
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_10:
+# 271 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll1Intro, MSGBOX_DEFAULT
+# 272 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	random 3
+# 273 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 274 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 0, Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_15
+# 276 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 1, Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_16
+# 278 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 2, Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_17
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_13:
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_2:
+# 260 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_1
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_5:
+# 263 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_4
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_8:
+# 266 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_7
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_11:
+# 269 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_10
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_15:
+# 275 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz1
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_13
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_16:
+# 277 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz2
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_13
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_17:
+# 279 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz3
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate_13
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate::
+# 285 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_2, 1
+# 286 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_8, LOCALID_MECHADOLL_2
+# 287 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	playse SE_PIN
+# 288 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_2, Common_Movement_ExclamationMark
+# 289 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+# 290 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_2, Common_Movement_Delay48
+# 291 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+# 292 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_9, 1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_2
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_1:
+# 295 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_9, 2
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_5
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_4:
+# 298 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_9, 3
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_8
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_7:
+# 301 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_9, 4
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_11
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_10:
+# 304 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_9, 5
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_14
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_13:
+# 307 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll2Intro, MSGBOX_DEFAULT
+# 308 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	random 3
+# 309 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 310 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 0, Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_18
+# 312 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 1, Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_19
+# 314 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 2, Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_20
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_16:
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_2:
+# 293 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_1
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_5:
+# 296 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_4
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_8:
+# 299 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_7
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_11:
+# 302 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_10
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_14:
+# 305 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_13
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_18:
+# 311 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz1
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_16
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_19:
+# 313 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz2
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_16
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_20:
+# 315 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz3
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate_16
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate::
+# 321 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_3, 1
+# 322 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_8, LOCALID_MECHADOLL_3
+# 323 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	playse SE_PIN
+# 324 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_3, Common_Movement_ExclamationMark
+# 325 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+# 326 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_3, Common_Movement_Delay48
+# 327 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+# 328 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_9, 1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_2
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_1:
+# 331 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_9, 2
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_5
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_4:
+# 334 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_9, 3
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_8
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_7:
+# 337 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_9, 4
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_11
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_10:
+# 340 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll3Intro, MSGBOX_DEFAULT
+# 341 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	random 3
+# 342 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 343 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 0, Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_15
+# 345 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 1, Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_16
+# 347 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 2, Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_17
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_13:
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_2:
+# 329 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_1
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_5:
+# 332 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_4
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_8:
+# 335 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_7
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_11:
+# 338 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_10
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_15:
+# 344 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz1
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_13
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_16:
+# 346 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz2
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_13
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_17:
+# 348 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz3
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate_13
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate::
+# 354 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_4, 1
+# 355 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_8, LOCALID_MECHADOLL_4
+# 356 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	playse SE_PIN
+# 357 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_4, Common_Movement_ExclamationMark
+# 358 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+# 359 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_4, Common_Movement_Delay48
+# 360 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+# 361 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_9, 1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_2
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_1:
+# 364 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_9, 2
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_5
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_4:
+# 367 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_9, 3
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_8
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_7:
+# 370 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_9, 4
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_11
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_10:
+# 373 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll4Intro, MSGBOX_DEFAULT
+# 374 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	random 3
+# 375 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 376 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 0, Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_15
+# 378 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 1, Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_16
+# 380 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 2, Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_17
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_13:
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_2:
+# 362 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_1
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_5:
+# 365 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_4
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_8:
+# 368 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_7
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_11:
+# 371 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_10
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_15:
+# 377 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz1
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_13
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_16:
+# 379 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz2
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_13
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_17:
+# 381 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz3
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate_13
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate::
+# 387 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_5, 1
+# 388 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	setvar VAR_TEMP_8, LOCALID_MECHADOLL_5
+# 389 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	playse SE_PIN
+# 390 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_5, Common_Movement_ExclamationMark
+# 391 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+# 392 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_5, Common_Movement_Delay48
+# 393 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+# 394 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll5Intro, MSGBOX_DEFAULT
+# 395 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	random 3
+# 396 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 397 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 0, Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate_3
+# 399 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 1, Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate_4
+# 401 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 2, Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate_5
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate_1:
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate_3:
+# 398 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz1
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate_1
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate_4:
+# 400 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz2
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate_1
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate_5:
+# 402 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz3
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz1::
+# 408 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz1, MSGBOX_DEFAULT
+# 409 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	multichoice 0, 0, MULTI_MECHADOLL1_Q1, TRUE
+# 410 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 411 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 2, Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz1_3
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz1_1:
+# 414 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz1_3:
+# 412 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz1_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz2::
+# 419 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz2, MSGBOX_DEFAULT
+# 420 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	multichoice 0, 0, MULTI_MECHADOLL1_Q2, TRUE
+# 421 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 422 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 0, Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz2_3
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz2_1:
+# 425 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz2_3:
+# 423 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz2_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz3::
+# 430 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz3, MSGBOX_DEFAULT
+# 431 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	multichoice 0, 0, MULTI_MECHADOLL1_Q3, TRUE
+# 432 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 433 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 0, Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz3_3
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz3_1:
+# 436 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz3_3:
+# 434 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz3_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz1::
+# 441 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz1, MSGBOX_DEFAULT
+# 442 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	multichoice 0, 0, MULTI_MECHADOLL2_Q1, TRUE
+# 443 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 444 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 1, Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz1_3
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz1_1:
+# 447 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz1_3:
+# 445 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz1_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz2::
+# 452 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz2, MSGBOX_DEFAULT
+# 453 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	multichoice 0, 0, MULTI_MECHADOLL2_Q2, TRUE
+# 454 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 455 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 2, Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz2_3
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz2_1:
+# 458 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz2_3:
+# 456 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz2_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz3::
+# 463 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz3, MSGBOX_DEFAULT
+# 464 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	multichoice 0, 0, MULTI_MECHADOLL2_Q3, TRUE
+# 465 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 466 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 0, Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz3_3
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz3_1:
+# 469 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz3_3:
+# 467 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz3_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz1::
+# 474 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz1, MSGBOX_DEFAULT
+# 475 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	multichoice 0, 0, MULTI_MECHADOLL3_Q1, TRUE
+# 476 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 477 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 0, Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz1_3
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz1_1:
+# 480 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz1_3:
+# 478 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz1_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz2::
+# 485 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz2, MSGBOX_DEFAULT
+# 486 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	multichoice 0, 0, MULTI_MECHADOLL3_Q2, TRUE
+# 487 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 488 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 2, Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz2_3
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz2_1:
+# 491 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz2_3:
+# 489 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz2_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz3::
+# 496 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz3, MSGBOX_DEFAULT
+# 497 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	multichoice 0, 0, MULTI_MECHADOLL3_Q3, TRUE
+# 498 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 499 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 1, Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz3_3
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz3_1:
+# 502 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz3_3:
+# 500 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz3_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz1::
+# 507 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz1, MSGBOX_DEFAULT
+# 508 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	multichoice 0, 0, MULTI_MECHADOLL4_Q1, TRUE
+# 509 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 510 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 0, Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz1_3
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz1_1:
+# 513 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz1_3:
+# 511 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz1_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz2::
+# 518 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz2, MSGBOX_DEFAULT
+# 519 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	multichoice 0, 0, MULTI_MECHADOLL4_Q2, TRUE
+# 520 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 521 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 0, Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz2_3
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz2_1:
+# 524 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz2_3:
+# 522 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz2_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz3::
+# 529 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz3, MSGBOX_DEFAULT
+# 530 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	multichoice 0, 0, MULTI_MECHADOLL4_Q3, TRUE
+# 531 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 532 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 1, Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz3_3
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz3_1:
+# 535 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz3_3:
+# 533 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz3_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz1::
+# 540 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz1, MSGBOX_DEFAULT
+# 541 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	multichoice 0, 0, MULTI_MECHADOLL5_Q1, TRUE
+# 542 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 543 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 1, Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz1_3
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz1_1:
+# 546 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz1_3:
+# 544 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz1_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz2::
+# 551 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz2, MSGBOX_DEFAULT
+# 552 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	multichoice 0, 0, MULTI_MECHADOLL5_Q2, TRUE
+# 553 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 554 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 0, Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz2_3
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz2_1:
+# 557 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz2_3:
+# 555 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz2_1
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz3::
+# 562 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz3, MSGBOX_DEFAULT
+# 563 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	multichoice 0, 0, MULTI_MECHADOLL5_Q3, TRUE
+# 564 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	switch VAR_RESULT
+# 565 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	case 2, Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz3_3
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz3_1:
+# 568 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
+	end
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz3_3:
+# 566 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz3_1
+
+
+Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer::
+# 573 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitse
+# 574 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	playse SE_FAILURE
+# 575 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_DisappointmentError, MSGBOX_DEFAULT
+# 576 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_MechadollShake
+# 577 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_MechadollShake
+# 578 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_MechadollShake
+# 579 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_MechadollShake
+# 580 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_MechadollShake
+# 581 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_Wahahahaha, MSGBOX_DEFAULT
+# 582 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+# 583 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_WaitForNextChallenge, MSGBOX_DEFAULT
+# 584 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	closemessage
+# 585 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE5, 0, 21
+# 586 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitstate
+# 587 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	releaseall
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_CorrectAnswer::
+# 592 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitse
+# 593 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	playse SE_SUCCESS
+# 594 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	goto Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough::
+# 599 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	msgbox Route110_TrickHousePuzzle5_Text_CorrectGoThrough, MSGBOX_DEFAULT
+# 600 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	releaseall
+	end
+
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1::
+# 605 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_2
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_1:
+# 608 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_2
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_5
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_4:
+# 611 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_3
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_8
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_7:
+# 614 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_4
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_11
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_10:
+# 617 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_5
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_14
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_13:
+	return
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_2:
+# 606 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft1
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_1
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_5:
+# 609 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft1
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_4
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_8:
+# 612 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft1
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_7
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_11:
+# 615 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft1
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_10
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_14:
+# 618 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft1
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1_13
+
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2::
+# 624 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_2
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_1:
+# 627 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_2
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_5
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_4:
+# 630 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_3
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_8
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_7:
+# 633 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_4
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_11
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_10:
+# 636 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_5
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_14
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_13:
+	return
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_2:
+# 625 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft2
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_1
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_5:
+# 628 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft2
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_4
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_8:
+# 631 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft2
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_7
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_11:
+# 634 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft2
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_10
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_14:
+# 637 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft2
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2_13
+
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3::
+# 643 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_2
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_1:
+# 646 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_2
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_5
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_4:
+# 649 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_3
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_8
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_7:
+# 652 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_4
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_11
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_10:
+# 655 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_5
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_14
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_13:
+	return
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_2:
+# 644 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft3
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_1
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_5:
+# 647 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft3
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_4
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_8:
+# 650 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft3
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_7
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_11:
+# 653 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft3
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_10
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_14:
+# 656 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft3
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3_13
+
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4::
+# 662 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_2
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_1:
+# 665 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_2
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_5
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_4:
+# 668 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_3
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_8
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_7:
+# 671 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_4
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_11
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_10:
+# 674 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_5
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_14
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_13:
+	return
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_2:
+# 663 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft4
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_1
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_5:
+# 666 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft4
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_4
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_8:
+# 669 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft4
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_7
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_11:
+# 672 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft4
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_10
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_14:
+# 675 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft4
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4_13
+
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5::
+# 681 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_2
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_1:
+# 684 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_2
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_5
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_4:
+# 687 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_3
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_8
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_7:
+# 690 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_4
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_11
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_10:
+# 693 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_5
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_14
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_13:
+	return
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_2:
+# 682 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft5
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_1
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_5:
+# 685 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft5
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_4
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_8:
+# 688 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft5
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_7
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_11:
+# 691 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft5
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_10
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_14:
+# 694 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft5
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5_13
+
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1::
+# 700 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_2
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_1:
+# 703 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_2
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_5
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_4:
+# 706 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_3
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_8
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_7:
+# 709 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_4
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_11
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_10:
+# 712 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_5
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_14
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_13:
+	return
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_2:
+# 701 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight1
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_1
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_5:
+# 704 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight1
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_4
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_8:
+# 707 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight1
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_7
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_11:
+# 710 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight1
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_10
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_14:
+# 713 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight1
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1_13
+
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2::
+# 719 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_2
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_1:
+# 722 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_2
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_5
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_4:
+# 725 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_3
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_8
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_7:
+# 728 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_4
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_11
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_10:
+# 731 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_5
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_14
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_13:
+	return
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_2:
+# 720 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight2
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_1
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_5:
+# 723 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight2
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_4
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_8:
+# 726 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight2
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_7
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_11:
+# 729 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight2
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_10
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_14:
+# 732 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight2
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2_13
+
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3::
+# 738 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_2
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_1:
+# 741 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_2
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_5
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_4:
+# 744 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_3
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_8
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_7:
+# 747 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_4
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_11
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_10:
+# 750 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_5
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_14
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_13:
+	return
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_2:
+# 739 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight3
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_1
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_5:
+# 742 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight3
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_4
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_8:
+# 745 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight3
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_7
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_11:
+# 748 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight3
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_10
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_14:
+# 751 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight3
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3_13
+
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4::
+# 757 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_2
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_1:
+# 760 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_2
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_5
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_4:
+# 763 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_3
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_8
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_7:
+# 766 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_4
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_11
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_10:
+# 769 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_5
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_14
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_13:
+	return
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_2:
+# 758 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight4
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_1
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_5:
+# 761 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight4
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_4
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_8:
+# 764 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight4
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_7
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_11:
+# 767 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight4
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_10
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_14:
+# 770 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight4
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4_13
+
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5::
+# 776 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_1
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_2
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_1:
+# 779 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_2
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_5
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_4:
+# 782 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_3
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_8
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_7:
+# 785 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_4
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_11
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_10:
+# 788 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	compare VAR_TEMP_8, LOCALID_MECHADOLL_5
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_14
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_13:
+	return
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_2:
+# 777 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight5
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_1
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_5:
+# 780 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight5
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_4
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_8:
+# 783 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight5
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_7
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_11:
+# 786 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight5
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_10
+
+Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_14:
+# 789 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	call Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight5
+	goto Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5_13
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft1::
+# 795 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkLeft1
+# 796 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft1::
+# 801 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkLeft1
+# 802 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft1::
+# 807 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkLeft1
+# 808 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft1::
+# 813 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkLeft1
+# 814 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft1::
+# 819 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkLeft1
+# 820 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft2::
+# 825 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkLeft2
+# 826 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft2::
+# 831 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkLeft2
+# 832 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft2::
+# 837 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkLeft2
+# 838 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft2::
+# 843 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkLeft2
+# 844 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft2::
+# 849 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkLeft2
+# 850 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft3::
+# 855 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkLeft3
+# 856 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft3::
+# 861 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkLeft3
+# 862 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft3::
+# 867 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkLeft3
+# 868 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft3::
+# 873 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkLeft3
+# 874 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft3::
+# 879 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkLeft3
+# 880 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft4::
+# 885 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkLeft4
+# 886 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft4::
+# 891 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkLeft4
+# 892 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft4::
+# 897 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkLeft4
+# 898 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft4::
+# 903 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkLeft4
+# 904 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft4::
+# 909 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkLeft4
+# 910 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft5::
+# 915 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkLeft5
+# 916 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft5::
+# 921 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkLeft5
+# 922 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft5::
+# 927 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkLeft5
+# 928 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft5::
+# 933 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkLeft5
+# 934 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft5::
+# 939 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkLeft5
+# 940 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight1::
+# 945 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkRight1
+# 946 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight1::
+# 951 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkRight1
+# 952 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight1::
+# 957 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkRight1
+# 958 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight1::
+# 963 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkRight1
+# 964 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight1::
+# 969 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkRight1
+# 970 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight2::
+# 975 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkRight2
+# 976 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight2::
+# 981 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkRight2
+# 982 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight2::
+# 987 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkRight2
+# 988 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight2::
+# 993 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkRight2
+# 994 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight2::
+# 999 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkRight2
+# 1000 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight3::
+# 1005 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkRight3
+# 1006 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight3::
+# 1011 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkRight3
+# 1012 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight3::
+# 1017 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkRight3
+# 1018 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight3::
+# 1023 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkRight3
+# 1024 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight3::
+# 1029 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkRight3
+# 1030 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight4::
+# 1035 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkRight4
+# 1036 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight4::
+# 1041 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkRight4
+# 1042 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight4::
+# 1047 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkRight4
+# 1048 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight4::
+# 1053 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkRight4
+# 1054 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight4::
+# 1059 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkRight4
+# 1060 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight5::
+# 1065 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkRight5
+# 1066 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight5::
+# 1071 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkRight5
+# 1072 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight5::
+# 1077 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkRight5
+# 1078 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight5::
+# 1083 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkRight5
+# 1084 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight5::
+# 1089 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	applymovement LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkRight5
+# 1090 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	waitmovement 0
+	return
+
+
+# 1094 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+Route110_TrickHousePuzzle5_Movement_WalkLeft1:
+# 1095 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_left
+# 1096 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	step_end
+
+# 1099 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+Route110_TrickHousePuzzle5_Movement_WalkLeft2:
+# 1100 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_left
+# 1101 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_left
+# 1102 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	step_end
+
+# 1105 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+Route110_TrickHousePuzzle5_Movement_WalkLeft3:
+# 1106 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_left
+# 1107 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_left
+# 1108 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_left
+# 1109 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	step_end
+
+# 1112 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+Route110_TrickHousePuzzle5_Movement_WalkLeft4:
+# 1113 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_left
+# 1114 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_left
+# 1115 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_left
+# 1116 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_left
+# 1117 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	step_end
+
+# 1120 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+Route110_TrickHousePuzzle5_Movement_WalkLeft5:
+# 1121 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_left
+# 1122 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_left
+# 1123 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_left
+# 1124 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_left
+# 1125 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_left
+# 1126 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	step_end
+
+# 1129 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+Route110_TrickHousePuzzle5_Movement_WalkRight1:
+# 1130 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_right
+# 1131 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	step_end
+
+# 1134 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+Route110_TrickHousePuzzle5_Movement_WalkRight2:
+# 1135 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_right
+# 1136 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_right
+# 1137 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	step_end
+
+# 1140 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+Route110_TrickHousePuzzle5_Movement_WalkRight3:
+# 1141 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_right
+# 1142 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_right
+# 1143 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_right
+# 1144 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	step_end
+
+# 1147 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+Route110_TrickHousePuzzle5_Movement_WalkRight4:
+# 1148 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_right
+# 1149 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_right
+# 1150 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_right
+# 1151 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_right
+# 1152 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	step_end
+
+# 1155 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+Route110_TrickHousePuzzle5_Movement_WalkRight5:
+# 1156 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_right
+# 1157 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_right
+# 1158 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_right
+# 1159 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_right
+# 1160 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	walk_right
+# 1161 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	step_end
+
+# 1164 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+Route110_TrickHousePuzzle5_Movement_MechadollShake:
+# 1165 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_left
+# 1166 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1167 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_right
+# 1168 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1169 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_left
+# 1170 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1171 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_right
+# 1172 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1173 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_left
+# 1174 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1175 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_right
+# 1176 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1177 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_left
+# 1178 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1179 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_right
+# 1180 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1181 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_left
+# 1182 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1183 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_right
+# 1184 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1185 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_left
+# 1186 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1187 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_right
+# 1188 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1189 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_left
+# 1190 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1191 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_right
+# 1192 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1193 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_left
+# 1194 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1195 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_right
+# 1196 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1197 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_left
+# 1198 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1199 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_right
+# 1200 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1201 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_left
+# 1202 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1203 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_right
+# 1204 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1205 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_left
+# 1206 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1207 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_right
+# 1208 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	delay_2
+# 1209 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	face_down
+# 1210 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	step_end
+
+Route110_TrickHousePuzzle5_Text_WroteSecretCodeLockOpened::
+# 1213 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "{PLAYER} wrote down the secret code\n"
+	.string "on the door.\p"
+	.string "“TRICK MASTER is a genius.”\n"
+	.string "… … … … … … … …\p"
+	.string "The lock clicked open!$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll1Intro::
+# 1221 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "CLICKETY-CLACK…\n"
+	.string "MECHADOLL 1 AM I!\p"
+	.string "IF YOU ANSWER QUIZZES CORRECTLY,\n"
+	.string "THEN YOU WILL GO TO MECHADOLL 5.\l"
+	.string "THEN YOU CAN OBTAIN THE SECRET CODE.$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz1::
+# 1229 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "MECHADOLL 1 QUIZ.\p"
+	.string "One of these POKéMON is not found\n"
+	.string "on ROUTE 110. Which one is it?$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz2::
+# 1235 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "MECHADOLL 1 QUIZ.\p"
+	.string "One of these POKéMON is not of the\n"
+	.string "WATER type. Which one is it?$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz3::
+# 1241 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "MECHADOLL 1 QUIZ.\p"
+	.string "One of these POKéMON does not use\n"
+	.string "LEECH LIFE. Which one is it?$"
+
+Route110_TrickHousePuzzle5_Text_CorrectGoThrough::
+# 1247 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "CONGRATULATIONS. CORRECT YOU ARE.\n"
+	.string "GO THROUGH. PLEASE.$"
+
+Route110_TrickHousePuzzle5_Text_DisappointmentError::
+# 1252 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "BZZZT. DISAPPOINTMENT.\n"
+	.string "ERROR.$"
+
+Route110_TrickHousePuzzle5_Text_Wahahahaha::
+# 1257 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "WAHAHAHAHA! WAHAHAHAHA!\n"
+	.string "CLICKETY-CLACK!$"
+
+Route110_TrickHousePuzzle5_Text_WaitForNextChallenge::
+# 1262 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "YOUR NEXT CHALLENGE WE WAIT FOR.$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll2Intro::
+# 1266 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "CLICKETY-CLACK…\n"
+	.string "MECHADOLL 2 AM I!\p"
+	.string "MECHADOLL 1'S QUIZ DIFFICULTY LEVEL\n"
+	.string "IS SET TOO LOW.$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz1::
+# 1273 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "MECHADOLL 2 QUIZ.\p"
+	.string "Which of these POKéMON did WALLY\n"
+	.string "borrow from your father?$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz2::
+# 1279 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "MECHADOLL 2 QUIZ.\p"
+	.string "Which of these POKéMON was chasing\n"
+	.string "PROF. BIRCH?$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz3::
+# 1285 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "MECHADOLL 2 QUIZ.\p"
+	.string "Which of these POKéMON did TEAM AQUA\n"
+	.string "use in PETALBURG FOREST?$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll3Intro::
+# 1291 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "CLICKETY-CLACK…\n"
+	.string "MECHADOLL 3 AM I!\p"
+	.string "MATTERS OF MONEY ARE MY SOLE FOCUS.$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz1::
+# 1297 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "MECHADOLL 3 QUIZ.\p"
+	.string "Which costs more?\n"
+	.string "Three HARBOR MAILS or one BURN HEAL?$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz2::
+# 1303 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "MECHADOLL 3 QUIZ.\p"
+	.string "Sell one GREAT BALL and buy\n"
+	.string "one POTION. How much money remains?$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz3::
+# 1309 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "MECHADOLL 3 QUIZ.\p"
+	.string "Do one REPEL and SODA POP cost\n"
+	.string "more than one SUPER POTION?$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll4Intro::
+# 1315 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "CLICKETY-CLACK…\n"
+	.string "MECHADOLL 4 THAT IS ME!\p"
+	.string "MY QUIZ IS AN OBJECT OF BEAUTY.$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz1::
+# 1321 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "MECHADOLL 4 QUIZ.\p"
+	.string "In SEASHORE HOUSE, were there more men\n"
+	.string "or women?$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz2::
+# 1327 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "MECHADOLL 4 QUIZ.\p"
+	.string "In LAVARIDGE TOWN, were there more\n"
+	.string "elderly men or elderly women?$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz3::
+# 1333 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "MECHADOLL 4 QUIZ.\p"
+	.string "In the TRAINER'S SCHOOL, how many\n"
+	.string "girl students were there?$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll5Intro::
+# 1339 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "CLICKETY-CLACK…\n"
+	.string "MECHADOLL 5 AM I!\p"
+	.string "THE MASTER'S BEST AND PROUDEST\n"
+	.string "ACHIEVEMENT AM I.$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz1::
+# 1346 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "MECHADOLL 5 QUIZ.\p"
+	.string "In SLATEPORT's POKéMON FAN CLUB,\n"
+	.string "how many POKéMON were there?$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz2::
+# 1352 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "MECHADOLL 5 QUIZ.\p"
+	.string "In FORTREE CITY, how many\n"
+	.string "tree houses were there?$"
+
+Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz3::
+# 1358 "data/maps/Route110_TrickHousePuzzle5/scripts.pory"
+	.string "MECHADOLL 5 QUIZ.\p"
+	.string "On the CYCLING ROAD, how many\n"
+	.string "TRIATHLETES were there?$"
+
+`

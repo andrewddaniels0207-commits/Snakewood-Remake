@@ -1,24 +1,45 @@
 MauvilleCity_House1_MapScripts::
 	.byte 0
 
+
 MauvilleCity_House1_EventScript_RockSmashDude::
+# 4 "data/maps/MauvilleCity_House1/scripts.pory"
 	lock
+# 5 "data/maps/MauvilleCity_House1/scripts.pory"
 	faceplayer
-	goto_if_set FLAG_RECEIVED_HM_ROCK_SMASH, MauvilleCity_House1_EventScript_ReceivedRockSmash
+# 6 "data/maps/MauvilleCity_House1/scripts.pory"
+	goto_if_set FLAG_RECEIVED_HM_ROCK_SMASH, MauvilleCity_House1_EventScript_RockSmashDude_2
+MauvilleCity_House1_EventScript_RockSmashDude_1:
+# 9 "data/maps/MauvilleCity_House1/scripts.pory"
 	msgbox MauvilleCity_House1_Text_ImRockSmashDudeTakeThis, MSGBOX_DEFAULT
+# 10 "data/maps/MauvilleCity_House1/scripts.pory"
 	giveitem ITEM_HM_ROCK_SMASH
+# 11 "data/maps/MauvilleCity_House1/scripts.pory"
 	setflag FLAG_RECEIVED_HM_ROCK_SMASH
+# 12 "data/maps/MauvilleCity_House1/scripts.pory"
 	setflag FLAG_HIDE_ROUTE_111_ROCK_SMASH_TIP_GUY
+# 13 "data/maps/MauvilleCity_House1/scripts.pory"
 	msgbox MauvilleCity_House1_Text_ExplainRockSmash, MSGBOX_DEFAULT
+# 14 "data/maps/MauvilleCity_House1/scripts.pory"
 	release
 	end
+
+MauvilleCity_House1_EventScript_RockSmashDude_2:
+# 7 "data/maps/MauvilleCity_House1/scripts.pory"
+	goto MauvilleCity_House1_EventScript_ReceivedRockSmash
+	goto MauvilleCity_House1_EventScript_RockSmashDude_1
+
 
 MauvilleCity_House1_EventScript_ReceivedRockSmash::
+# 19 "data/maps/MauvilleCity_House1/scripts.pory"
 	msgbox MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock, MSGBOX_DEFAULT
+# 20 "data/maps/MauvilleCity_House1/scripts.pory"
 	release
 	end
 
-MauvilleCity_House1_Text_ImRockSmashDudeTakeThis:
+
+MauvilleCity_House1_Text_ImRockSmashDudeTakeThis::
+# 24 "data/maps/MauvilleCity_House1/scripts.pory"
 	.string "Woohoo!\p"
 	.string "I hear people call me the ROCK SMASH\n"
 	.string "GUY, but I find that sort of degrading.\p"
@@ -30,7 +51,8 @@ MauvilleCity_House1_Text_ImRockSmashDudeTakeThis:
 	.string "I like that!\n"
 	.string "Here, take this HIDDEN MACHINE!$"
 
-MauvilleCity_House1_Text_ExplainRockSmash:
+MauvilleCity_House1_Text_ExplainRockSmash::
+# 37 "data/maps/MauvilleCity_House1/scripts.pory"
 	.string "That HM contains ROCK SMASH.\p"
 	.string "If you come across large boulders\n"
 	.string "that block your path…\p"
@@ -39,8 +61,8 @@ MauvilleCity_House1_Text_ExplainRockSmash:
 	.string "Yes, sir! Smash rocks aside, I say!\n"
 	.string "Woohoo!$"
 
-MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock:
+MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock::
+# 47 "data/maps/MauvilleCity_House1/scripts.pory"
 	.string "Oh, yes, if you smash a rock, a POKéMON\n"
 	.string "could come flying out of hiding.\p"
 	.string "Woohoo!$"
-

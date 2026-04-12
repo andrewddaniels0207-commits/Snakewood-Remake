@@ -1,35 +1,39 @@
 SixIsland_Mart_Frlg_MapScripts::
 	.byte 0
 
+
 SixIsland_Mart_EventScript_Clerk::
+# 4 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
 	lock
+# 5 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
 	faceplayer
+# 6 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
 	message gText_HowMayIServeYou
+# 7 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
 	waitmessage
+# 8 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
 	pokemart SixIsland_Mart_Items
+# 9 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
 	msgbox gText_PleaseComeAgain
+# 10 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
 	release
 	end
 
-	.align 2
+
 SixIsland_Mart_Items::
-	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_FULL_RESTORE
-	.2byte ITEM_MAX_POTION
-	.2byte ITEM_REVIVE
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_ESCAPE_ROPE
-	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_DREAM_MAIL
-	.2byte ITEM_NONE
+# 15 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
 	release
 	end
+
 
 SixIsland_Mart_EventScript_Picnicker::
+# 20 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
 	msgbox SixIsland_Mart_Text_ShouldBuyMailAndWriteLetter, MSGBOX_NPC
 	end
 
+
 SixIsland_Mart_Text_AgathaOldestEverEliteFourMember::
+# 24 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
 	.string "Play with POKéMON lots and live\n"
 	.string "a long life!\p"
 	.string "Take AGATHA, for example.\p"
@@ -38,6 +42,6 @@ SixIsland_Mart_Text_AgathaOldestEverEliteFourMember::
 	.string "She spurs me to do bigger things.$"
 
 SixIsland_Mart_Text_ShouldBuyMailAndWriteLetter::
+# 33 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
 	.string "I should buy some MAIL and write\n"
 	.string "him a letter…$"
-

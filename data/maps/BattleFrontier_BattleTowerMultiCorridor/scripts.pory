@@ -1,195 +1,348 @@
-mapscripts BattleFrontier_BattleTowerMultiCorridor_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: BattleFrontier_BattleTowerMultiCorridor_OnTransition
-    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: BattleFrontier_BattleTowerMultiCorridor_OnWarp
-    MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_TEMP_1, 0: BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor
-    ]
-}
-
-script BattleFrontier_BattleTowerMultiCorridor_OnTransition {
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS) {
-        call(BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx)
-    }
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) {
-        call(BattleFrontier_BattleTowerMultiCorridor_EventScript_SetLinkPlayerGfx)
-    }
-    end
-}
-
-script BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx {
-    tower_setpartnergfx()
-    checkplayergender()
-    if (var(VAR_RESULT) == FEMALE) {
-        goto(BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale)
-    }
-    setvar(VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_BRENDAN_NORMAL)
-    return
-}
-
-script BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale {
-    setvar(VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_MAY_NORMAL)
-    return
-}
-
-script BattleFrontier_BattleTowerMultiCorridor_EventScript_SetLinkPlayerGfx {
-    special(SetBattleTowerLinkPlayerGfx)
-    return
-}
-
 raw `
-BattleFrontier_BattleTowerMultiCorridor_OnWarp:
-	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerMultiCorridor_EventScript_SetUpObjects
+BattleFrontier_BattleTowerMultiCorridor_MapScripts::
+# 2 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerMultiCorridor_OnTransition
+# 3 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerMultiCorridor_OnWarp
+# 4 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerMultiCorridor_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
+	.byte 0
+
+BattleFrontier_BattleTowerMultiCorridor_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 5 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor
 	.2byte 0
 
+
+BattleFrontier_BattleTowerMultiCorridor_OnTransition::
+# 10 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS
+	goto_if_eq BattleFrontier_BattleTowerMultiCorridor_OnTransition_2
+BattleFrontier_BattleTowerMultiCorridor_OnTransition_1:
+# 13 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS
+	goto_if_eq BattleFrontier_BattleTowerMultiCorridor_OnTransition_5
+BattleFrontier_BattleTowerMultiCorridor_OnTransition_4:
+	end
+
+BattleFrontier_BattleTowerMultiCorridor_OnTransition_2:
+# 11 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	call BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx
+	goto BattleFrontier_BattleTowerMultiCorridor_OnTransition_1
+
+BattleFrontier_BattleTowerMultiCorridor_OnTransition_5:
+# 14 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	call BattleFrontier_BattleTowerMultiCorridor_EventScript_SetLinkPlayerGfx
+	goto BattleFrontier_BattleTowerMultiCorridor_OnTransition_4
+
+
+BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx::
+# 20 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	tower_setpartnergfx
+# 21 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	checkplayergender
+# 22 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	compare VAR_RESULT, FEMALE
+	goto_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx_2
+BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx_1:
+# 25 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	setvar VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_BRENDAN_NORMAL
+	return
+
+BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx_2:
+# 23 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	goto BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale
+	goto BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx_1
+
+
+BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale::
+# 30 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	setvar VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_MAY_NORMAL
+	return
+
+
+BattleFrontier_BattleTowerMultiCorridor_EventScript_SetLinkPlayerGfx::
+# 35 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	special SetBattleTowerLinkPlayerGfx
+	return
+
+
+# 39 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+
+# 40 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+BattleFrontier_BattleTowerMultiCorridor_OnWarp:
+# 41 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerMultiCorridor_EventScript_SetUpObjects
+# 42 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	.2byte 0
+
+BattleFrontier_BattleTowerMultiCorridor_EventScript_SetUpObjects::
+# 47 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	hideobjectat LOCALID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
+# 48 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	hideobjectat LOCALID_TOWER_MULTI_CORRIDOR_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
+# 49 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	hideobjectat LOCALID_TOWER_MULTI_CORRIDOR_PARTNER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
+# 50 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	special OffsetCameraForBattle
+	end
+
+
+BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor::
+# 55 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	lockall
+# 56 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	setflag FLAG_ENABLE_MULTI_CORRIDOR_DOOR
+# 57 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	setvar VAR_0x8004, 14
+# 58 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	setvar VAR_0x8005, 1
+# 59 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	opendoor 1, 1
+# 60 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	waitdooranim
+# 61 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	clearflag FLAG_ENABLE_MULTI_CORRIDOR_DOOR
+# 62 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	showobjectat LOCALID_TOWER_MULTI_CORRIDOR_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
+# 63 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	showobjectat LOCALID_TOWER_MULTI_CORRIDOR_PARTNER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
+# 64 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	applymovement LOCALID_TOWER_MULTI_CORRIDOR_PLAYER, BattleFrontier_BattleTowerMultiCorridor_Movement_ExitElevator
+# 65 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	applymovement LOCALID_TOWER_MULTI_CORRIDOR_PARTNER, BattleFrontier_BattleTowerMultiCorridor_Movement_ExitElevator
+# 66 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	waitmovement 0
+# 67 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	setflag FLAG_ENABLE_MULTI_CORRIDOR_DOOR
+# 68 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	setvar VAR_0x8004, 14
+# 69 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	setvar VAR_0x8005, 1
+# 70 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	closedoor 1, 1
+# 71 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	waitdooranim
+# 72 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	clearflag FLAG_ENABLE_MULTI_CORRIDOR_DOOR
+# 73 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	applymovement LOCALID_TOWER_MULTI_CORRIDOR_PLAYER, BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerWalkToDoor
+# 74 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	applymovement LOCALID_TOWER_MULTI_CORRIDOR_PARTNER, BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerWalkToDoor
+# 75 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	applymovement LOCALID_TOWER_MULTI_CORRIDOR_ATTENDANT_2, BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerAttendantWalkToDoor
+# 76 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	applymovement LOCALID_TOWER_MULTI_CORRIDOR_ATTENDANT_1, BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerAttendantWalkToDoor
+# 77 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	waitmovement 0
+# 78 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	delay 40
+# 79 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	applymovement LOCALID_TOWER_MULTI_CORRIDOR_ATTENDANT_2, Common_Movement_WalkInPlaceFasterUp
+# 80 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	applymovement LOCALID_TOWER_MULTI_CORRIDOR_ATTENDANT_1, Common_Movement_WalkInPlaceFasterUp
+# 81 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	waitmovement 0
+# 82 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	opendoor 7, 1
+# 83 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	waitdooranim
+# 84 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	applymovement LOCALID_TOWER_MULTI_CORRIDOR_ATTENDANT_2, BattleFrontier_BattleTowerMultiCorridor_Movement_AttendantEnterDoor
+# 85 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	applymovement LOCALID_TOWER_MULTI_CORRIDOR_ATTENDANT_1, BattleFrontier_BattleTowerMultiCorridor_Movement_AttendantEnterDoor
+# 86 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	applymovement LOCALID_TOWER_MULTI_CORRIDOR_PLAYER, BattleFrontier_BattleTowerMultiCorridor_Movement_TrainerEnterDoor
+# 87 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	applymovement LOCALID_TOWER_MULTI_CORRIDOR_PARTNER, BattleFrontier_BattleTowerMultiCorridor_Movement_TrainerEnterDoor
+# 88 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	waitmovement 0
+# 89 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	closedoor 7, 1
+# 90 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	waitdooranim
+# 91 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	delay 30
+# 92 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	setvar VAR_TEMP_1, 1
+# 93 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	call BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom
+# 94 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	releaseall
+	end
+
+
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom::
+# 99 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+	goto_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom_2
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom_1:
+# 102 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
+	goto_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom_5
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom_4:
+# 105 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS
+	goto_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom_8
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom_7:
+# 108 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS
+	goto_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom_11
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom_10:
+	return
+
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom_2:
+# 100 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	call BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom
+	goto BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom_1
+
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom_5:
+# 103 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	call BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom
+	goto BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom_4
+
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom_8:
+# 106 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	call BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToMultiBattleRoom
+	goto BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom_7
+
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom_11:
+# 109 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	call BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom
+	goto BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom_10
+
+
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom::
+# 115 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 4, 8
+# 116 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	waitstate
+	return
+
+
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToMultiBattleRoom::
+# 121 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 4, 5
+# 122 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	waitstate
+	return
+
+
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom::
+# 127 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 4, 5
+# 128 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	waitstate
+	return
+
+
+# 132 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerWalkToDoor:
+# 133 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_down
+# 134 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_right
+# 135 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_right
+# 136 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_right
+# 137 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_right
+# 138 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_right
+# 139 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_right
+# 140 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	step_end
+
+# 143 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerWalkToDoor:
+# 144 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_down
+# 145 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_left
+# 146 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_left
+# 147 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_left
+# 148 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_left
+# 149 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_left
+# 150 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_left
+# 151 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	step_end
+
+# 154 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerAttendantWalkToDoor:
+# 155 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_right
+# 156 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_right
+# 157 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_right
+# 158 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_right
+# 159 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_right
+# 160 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_right
+# 161 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_up
+# 162 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_in_place_faster_right
+# 163 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	step_end
+
+# 166 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerAttendantWalkToDoor:
+# 167 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_left
+# 168 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_left
+# 169 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_left
+# 170 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_left
+# 171 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_left
+# 172 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_left
+# 173 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_up
+# 174 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_in_place_faster_left
+# 175 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	step_end
+
+# 178 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+BattleFrontier_BattleTowerMultiCorridor_Movement_TrainerEnterDoor:
+# 179 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	delay_16
+# 180 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_up
+# 181 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_up
+# 182 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	set_invisible
+# 183 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	step_end
+
+# 186 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+BattleFrontier_BattleTowerMultiCorridor_Movement_AttendantEnterDoor:
+# 187 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_up
+# 188 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	set_invisible
+# 189 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	step_end
+
+# 192 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+BattleFrontier_BattleTowerMultiCorridor_Movement_ExitElevator:
+# 193 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	walk_down
+# 194 "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.pory"
+	step_end
+
 `
-
-script BattleFrontier_BattleTowerMultiCorridor_EventScript_SetUpObjects {
-    hideobjectat(LOCALID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR)
-    hideobjectat(LOCALID_TOWER_MULTI_CORRIDOR_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR)
-    hideobjectat(LOCALID_TOWER_MULTI_CORRIDOR_PARTNER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR)
-    special(OffsetCameraForBattle)
-    end
-}
-
-script BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor {
-    lockall
-    setflag(FLAG_ENABLE_MULTI_CORRIDOR_DOOR)
-    setvar(VAR_0x8004, 14)
-    setvar(VAR_0x8005, 1)
-    opendoor(1, 1)
-    waitdooranim()
-    clearflag(FLAG_ENABLE_MULTI_CORRIDOR_DOOR)
-    showobjectat(LOCALID_TOWER_MULTI_CORRIDOR_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR)
-    showobjectat(LOCALID_TOWER_MULTI_CORRIDOR_PARTNER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR)
-    applymovement(LOCALID_TOWER_MULTI_CORRIDOR_PLAYER, BattleFrontier_BattleTowerMultiCorridor_Movement_ExitElevator)
-    applymovement(LOCALID_TOWER_MULTI_CORRIDOR_PARTNER, BattleFrontier_BattleTowerMultiCorridor_Movement_ExitElevator)
-    waitmovement(0)
-    setflag(FLAG_ENABLE_MULTI_CORRIDOR_DOOR)
-    setvar(VAR_0x8004, 14)
-    setvar(VAR_0x8005, 1)
-    closedoor(1, 1)
-    waitdooranim()
-    clearflag(FLAG_ENABLE_MULTI_CORRIDOR_DOOR)
-    applymovement(LOCALID_TOWER_MULTI_CORRIDOR_PLAYER, BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerWalkToDoor)
-    applymovement(LOCALID_TOWER_MULTI_CORRIDOR_PARTNER, BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerWalkToDoor)
-    applymovement(LOCALID_TOWER_MULTI_CORRIDOR_ATTENDANT_2, BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerAttendantWalkToDoor)
-    applymovement(LOCALID_TOWER_MULTI_CORRIDOR_ATTENDANT_1, BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerAttendantWalkToDoor)
-    waitmovement(0)
-    delay(40)
-    applymovement(LOCALID_TOWER_MULTI_CORRIDOR_ATTENDANT_2, Common_Movement_WalkInPlaceFasterUp)
-    applymovement(LOCALID_TOWER_MULTI_CORRIDOR_ATTENDANT_1, Common_Movement_WalkInPlaceFasterUp)
-    waitmovement(0)
-    opendoor(7, 1)
-    waitdooranim()
-    applymovement(LOCALID_TOWER_MULTI_CORRIDOR_ATTENDANT_2, BattleFrontier_BattleTowerMultiCorridor_Movement_AttendantEnterDoor)
-    applymovement(LOCALID_TOWER_MULTI_CORRIDOR_ATTENDANT_1, BattleFrontier_BattleTowerMultiCorridor_Movement_AttendantEnterDoor)
-    applymovement(LOCALID_TOWER_MULTI_CORRIDOR_PLAYER, BattleFrontier_BattleTowerMultiCorridor_Movement_TrainerEnterDoor)
-    applymovement(LOCALID_TOWER_MULTI_CORRIDOR_PARTNER, BattleFrontier_BattleTowerMultiCorridor_Movement_TrainerEnterDoor)
-    waitmovement(0)
-    closedoor(7, 1)
-    waitdooranim()
-    delay(30)
-    setvar(VAR_TEMP_1, 1)
-    call(BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom)
-    releaseall
-    end
-}
-
-script BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom {
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) {
-        call(BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom)
-    }
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) {
-        call(BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom)
-    }
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS) {
-        call(BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToMultiBattleRoom)
-    }
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) {
-        call(BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom)
-    }
-    return
-}
-
-script BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom {
-    warp(MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 4, 8)
-    waitstate
-    return
-}
-
-script BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToMultiBattleRoom {
-    warp(MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 4, 5)
-    waitstate
-    return
-}
-
-script BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom {
-    warp(MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 4, 5)
-    waitstate
-    return
-}
-
-movement BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerWalkToDoor {
-    walk_down
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    step_end
-}
-
-movement BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerWalkToDoor {
-    walk_down
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    step_end
-}
-
-movement BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerAttendantWalkToDoor {
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_up
-    walk_in_place_faster_right
-    step_end
-}
-
-movement BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerAttendantWalkToDoor {
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_up
-    walk_in_place_faster_left
-    step_end
-}
-
-movement BattleFrontier_BattleTowerMultiCorridor_Movement_TrainerEnterDoor {
-    delay_16
-    walk_up
-    walk_up
-    set_invisible
-    step_end
-}
-
-movement BattleFrontier_BattleTowerMultiCorridor_Movement_AttendantEnterDoor {
-    walk_up
-    set_invisible
-    step_end
-}
-
-movement BattleFrontier_BattleTowerMultiCorridor_Movement_ExitElevator {
-    walk_down
-    step_end
-}

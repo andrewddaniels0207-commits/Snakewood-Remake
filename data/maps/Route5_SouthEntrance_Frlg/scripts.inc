@@ -1,98 +1,187 @@
 Route5_SouthEntrance_Frlg_MapScripts::
 	.byte 0
 
+
 Route5_SouthEntrance_EventScript_Guard::
+# 4 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	msgbox Route5_SouthEntrance_Text_HiHowsItGoing, MSGBOX_NPC
 	end
 
+
 Route5_SouthEntrance_EventScript_GuardTriggerLeft::
+# 9 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	lockall
+# 10 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 0
+# 11 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	goto Route5_SouthEntrance_EventScript_GuardTrigger
 	end
+
 
 Route5_SouthEntrance_EventScript_GuardTriggerMid::
+# 16 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	lockall
+# 17 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 1
+# 18 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	goto Route5_SouthEntrance_EventScript_GuardTrigger
 	end
+
 
 Route5_SouthEntrance_EventScript_GuardTriggerRight::
+# 23 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	lockall
+# 24 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 2
+# 25 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	goto Route5_SouthEntrance_EventScript_GuardTrigger
 	end
 
+
 Route5_SouthEntrance_EventScript_GuardTrigger::
+# 30 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_MALE
+# 31 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+# 32 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	waitmovement 0
-	goto_if_set FLAG_GOT_TEA, Route5_SouthEntrance_EventScript_GiveTea
+# 33 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_TEA, Route5_SouthEntrance_EventScript_GuardTrigger_2
+Route5_SouthEntrance_EventScript_GuardTrigger_1:
+# 36 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	msgbox Route5_SouthEntrance_Text_ThirstyOnGuardDuty
+# 37 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	closemessage
+# 38 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Route5_SouthEntrance_Movement_BlockPlayerEntry
+# 39 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	waitmovement 0
+# 40 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	releaseall
 	end
 
+Route5_SouthEntrance_EventScript_GuardTrigger_2:
+# 34 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	goto Route5_SouthEntrance_EventScript_GiveTea
+	goto Route5_SouthEntrance_EventScript_GuardTrigger_1
+
+
 Route5_SouthEntrance_EventScript_GiveTea::
+# 45 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	removeitem ITEM_TEA
+# 46 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	goto Route5_SouthEntrance_EventScript_GuardDrinkTea
 	end
 
+
 Route5_SouthEntrance_EventScript_GuardDrinkTea::
+# 51 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	msgbox Route5_SouthEntrance_Text_ThatTeaLooksTasty
+# 52 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	closemessage
-	call_if_eq VAR_TEMP_1, 0, Route5_SouthEntrance_EventScript_WalkToGuardLeft
-	call_if_eq VAR_TEMP_1, 1, Route5_SouthEntrance_EventScript_WalkToGuardMid
-	call_if_eq VAR_TEMP_1, 2, Route5_SouthEntrance_EventScript_WalkToGuardRight
+# 53 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 0
+	goto_if_eq Route5_SouthEntrance_EventScript_GuardDrinkTea_2
+Route5_SouthEntrance_EventScript_GuardDrinkTea_1:
+# 56 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 1
+	goto_if_eq Route5_SouthEntrance_EventScript_GuardDrinkTea_5
+Route5_SouthEntrance_EventScript_GuardDrinkTea_4:
+# 59 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 2
+	goto_if_eq Route5_SouthEntrance_EventScript_GuardDrinkTea_8
+Route5_SouthEntrance_EventScript_GuardDrinkTea_7:
+# 62 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	msgbox Route5_SouthEntrance_Text_ThanksIllShareTeaWithGuards
+# 63 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	setvar VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1
+# 64 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	releaseall
 	end
 
+Route5_SouthEntrance_EventScript_GuardDrinkTea_2:
+# 54 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	call Route5_SouthEntrance_EventScript_WalkToGuardLeft
+	goto Route5_SouthEntrance_EventScript_GuardDrinkTea_1
+
+Route5_SouthEntrance_EventScript_GuardDrinkTea_5:
+# 57 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	call Route5_SouthEntrance_EventScript_WalkToGuardMid
+	goto Route5_SouthEntrance_EventScript_GuardDrinkTea_4
+
+Route5_SouthEntrance_EventScript_GuardDrinkTea_8:
+# 60 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	call Route5_SouthEntrance_EventScript_WalkToGuardRight
+	goto Route5_SouthEntrance_EventScript_GuardDrinkTea_7
+
+
 Route5_SouthEntrance_EventScript_WalkToGuardLeft::
+# 69 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Route5_SouthEntrance_Movement_WalkToGuardLeft
+# 70 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 Route5_SouthEntrance_EventScript_WalkToGuardMid::
+# 75 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Route5_SouthEntrance_Movement_WalkToGuardMid
+# 76 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 Route5_SouthEntrance_EventScript_WalkToGuardRight::
+# 81 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Route5_SouthEntrance_Movement_WalkToGuardRight
+# 82 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	waitmovement 0
 	return
 
-Route5_SouthEntrance_Movement_WalkToGuardMid::
+
+# 86 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+Route5_SouthEntrance_Movement_WalkToGuardMid:
+# 87 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	walk_left
+# 88 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	step_end
 
-Route5_SouthEntrance_Movement_WalkToGuardRight::
+# 91 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+Route5_SouthEntrance_Movement_WalkToGuardRight:
+# 92 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	walk_left
+# 93 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	walk_left
+# 94 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	step_end
 
-Route5_SouthEntrance_Movement_WalkToGuardLeft::
+# 97 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+Route5_SouthEntrance_Movement_WalkToGuardLeft:
+# 98 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	walk_in_place_left
+# 99 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	step_end
 
-Route5_SouthEntrance_Movement_BlockPlayerEntry::
+# 102 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+Route5_SouthEntrance_Movement_BlockPlayerEntry:
+# 103 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	walk_up
+# 104 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	step_end
 
 Route5_SouthEntrance_Text_ThirstyOnGuardDuty::
+# 107 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	.string "I'm on guard duty.\n"
 	.string "Gee, I'm thirsty, though!\p"
 	.string "Oh, wait there, the road's closed.$"
 
 Route5_SouthEntrance_Text_ThatTeaLooksTasty::
+# 113 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	.string "Oh, that TEA…\n"
 	.string "It looks awfully tasty…$"
 
 Route5_SouthEntrance_Text_ThanksIllShareTeaWithGuards::
+# 118 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	.string "Huh? I can have this drink?\n"
 	.string "Gee, thanks!\l"
 	.string "… …\l"
@@ -107,5 +196,5 @@ Route5_SouthEntrance_Text_ThanksIllShareTeaWithGuards::
 	.string "guards!$"
 
 Route5_SouthEntrance_Text_HiHowsItGoing::
+# 133 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
 	.string "Hi, how's it going?$"
-

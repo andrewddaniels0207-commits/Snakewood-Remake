@@ -1,66 +1,93 @@
-mapscripts Route114_FossilManiacsHouse_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: Route114_FossilManiacsHouse_OnTransition
-}
+raw `
+Route114_FossilManiacsHouse_MapScripts::
+# 2 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, Route114_FossilManiacsHouse_OnTransition
+	.byte 0
 
-script Route114_FossilManiacsHouse_OnTransition {
-    setflag(FLAG_LANDMARK_FOSSIL_MANIACS_HOUSE)
-    end
-}
 
-script Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother {
-    lock
-    faceplayer
-    if (flag(FLAG_RECEIVED_TM_DIG)) {
-        goto(Route114_FossilManiacsHouse_EventScript_ReceivedDig)
-    }
-    msgbox(Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother, MSGBOX_DEFAULT)
-    giveitem(ITEM_TM_DIG)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(Common_EventScript_ShowBagIsFull)
-    }
-    setflag(FLAG_RECEIVED_TM_DIG)
-    release
-    end
-}
+Route114_FossilManiacsHouse_OnTransition::
+# 6 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	setflag FLAG_LANDMARK_FOSSIL_MANIACS_HOUSE
+	end
 
-script Route114_FossilManiacsHouse_EventScript_ReceivedDig {
-    msgbox(Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance, MSGBOX_DEFAULT)
-    release
-    end
-}
 
-script Route114_FossilManiacsHouse_EventScript_RockDisplay {
-    msgbox(Route114_FossilManiacsHouse_Text_RocksFillDisplayCase, MSGBOX_SIGN)
-    end
-}
+Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother::
+# 11 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	lock
+# 12 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	faceplayer
+# 13 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	goto_if_set FLAG_RECEIVED_TM_DIG, Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother_2
+Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother_1:
+# 16 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	msgbox Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother, MSGBOX_DEFAULT
+# 17 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	giveitem ITEM_TM_DIG
+# 18 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother_5
+Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother_4:
+# 21 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	setflag FLAG_RECEIVED_TM_DIG
+# 22 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	release
+	end
 
-script Route114_FossilManiacsHouse_EventScript_Bookshelf {
-    msgbox(Route114_FossilManiacsHouse_Text_CrammedWithBooks, MSGBOX_SIGN)
-    end
-}
+Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother_2:
+# 14 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	goto Route114_FossilManiacsHouse_EventScript_ReceivedDig
+	goto Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother_1
 
-text Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother {
-    "My big brother's the FOSSIL MANIAC…\n"
-    "He's a nice guy who loves FOSSILS…\p"
-    "He loves digging holes, too…\n"
-    "He dug this hole by himself…\p"
-    "You can have this, so you can DIG\n"
-    "holes just like my big brother…$"
-}
+Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother_5:
+# 19 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother_4
 
-text Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance {
-    "If you make a POKéMON DIG inside a\n"
-    "cave, you're returned to the entrance…$"
-}
 
-text Route114_FossilManiacsHouse_Text_RocksFillDisplayCase {
-    "Rocks in peculiar shapes fill\n"
-    "the display case…$"
-}
+Route114_FossilManiacsHouse_EventScript_ReceivedDig::
+# 27 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	msgbox Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance, MSGBOX_DEFAULT
+# 28 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	release
+	end
 
-text Route114_FossilManiacsHouse_Text_CrammedWithBooks {
-    "THE COMPOSITION OF STRATA…\n"
-    "HOW RAIN SHAPES THE LAND…\l"
-    "STONES, SOIL, AND ROCK…\p"
-    "It's crammed with books.$"
-}
+
+Route114_FossilManiacsHouse_EventScript_RockDisplay::
+# 33 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	msgbox Route114_FossilManiacsHouse_Text_RocksFillDisplayCase, MSGBOX_SIGN
+	end
+
+
+Route114_FossilManiacsHouse_EventScript_Bookshelf::
+# 38 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	msgbox Route114_FossilManiacsHouse_Text_CrammedWithBooks, MSGBOX_SIGN
+	end
+
+
+Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother::
+# 42 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	.string "My big brother's the FOSSIL MANIAC…\n"
+	.string "He's a nice guy who loves FOSSILS…\p"
+	.string "He loves digging holes, too…\n"
+	.string "He dug this hole by himself…\p"
+	.string "You can have this, so you can DIG\n"
+	.string "holes just like my big brother…$"
+
+Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance::
+# 51 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	.string "If you make a POKéMON DIG inside a\n"
+	.string "cave, you're returned to the entrance…$"
+
+Route114_FossilManiacsHouse_Text_RocksFillDisplayCase::
+# 56 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	.string "Rocks in peculiar shapes fill\n"
+	.string "the display case…$"
+
+Route114_FossilManiacsHouse_Text_CrammedWithBooks::
+# 61 "data/maps/Route114_FossilManiacsHouse/scripts.pory"
+	.string "THE COMPOSITION OF STRATA…\n"
+	.string "HOW RAIN SHAPES THE LAND…\l"
+	.string "STONES, SOIL, AND ROCK…\p"
+	.string "It's crammed with books.$"
+
+`

@@ -1,64 +1,69 @@
-mapscripts TwoIsland_CapeBrink_House_Frlg_MapScripts {}
+raw `
+TwoIsland_CapeBrink_House_Frlg_MapScripts::
+	.byte 0
 
-text Text_UltimateMoveThatMon {
-    "I perfected the ultimate move of\n"
-    "its type…\p"
-    "But will no one take it for\n"
-    "future use?\p"
-    "…Hm? Hmmm!\p"
-    "Y-you…\n"
-    "Th-that {STR_VAR_1}…$"
-}
 
-text Text_JustMistaken {
-    "…No…\n"
-    "I was just mistaken.$"
-}
+Text_UltimateMoveThatMon::
+# 3 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
+	.string "I perfected the ultimate move of\n"
+	.string "its type…\p"
+	.string "But will no one take it for\n"
+	.string "future use?\p"
+	.string "…Hm? Hmmm!\p"
+	.string "Y-you…\n"
+	.string "Th-that {STR_VAR_1}…$"
 
-text Text_AllowMeToTeachMonUltimateMove {
-    "Oh! This is the one!\n"
-    "This is the POKéMON!\p"
-    "This {STR_VAR_1} is worthy of\n"
-    "learning my ultimate move!\p"
-    "Will you allow it?\p"
-    "Will you allow your {STR_VAR_1} to\n"
-    "learn my {STR_VAR_2}?$"
-}
+Text_JustMistaken::
+# 13 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
+	.string "…No…\n"
+	.string "I was just mistaken.$"
 
-text Text_YouRejectIt {
-    "Gaah! You reject it?\n"
-    "No, I won't be dissuaded!$"
-}
+Text_AllowMeToTeachMonUltimateMove::
+# 18 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
+	.string "Oh! This is the one!\n"
+	.string "This is the POKéMON!\p"
+	.string "This {STR_VAR_1} is worthy of\n"
+	.string "learning my ultimate move!\p"
+	.string "Will you allow it?\p"
+	.string "Will you allow your {STR_VAR_1} to\n"
+	.string "learn my {STR_VAR_2}?$"
 
-text Text_LetMeConferUltimateMove {
-    "You will allow it?\p"
-    "Then, let me confer my ultimate\n"
-    "{STR_VAR_2} on your {STR_VAR_1}.\p"
-    "Ggggrah-awooo!$"
-}
+Text_YouRejectIt::
+# 28 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
+	.string "Gaah! You reject it?\n"
+	.string "No, I won't be dissuaded!$"
 
-text Text_TaughtMove {
-    "Gasp, gasp, gasp…\p"
-    "I didn't think I could teach that\n"
-    "move while I still lived…$"
-}
+Text_LetMeConferUltimateMove::
+# 33 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
+	.string "You will allow it?\p"
+	.string "Then, let me confer my ultimate\n"
+	.string "{STR_VAR_2} on your {STR_VAR_1}.\p"
+	.string "Ggggrah-awooo!$"
 
-text Text_MakeBestUseOfMove {
-    "I implore you to make the best\n"
-    "use of that move and gain power!$"
-}
+Text_TaughtMove::
+# 40 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
+	.string "Gasp, gasp, gasp…\p"
+	.string "I didn't think I could teach that\n"
+	.string "move while I still lived…$"
 
-text Text_PassedOnEverythingIKnow {
-    "Gasp, gasp, gasp…\p"
-    "I have no regrets now.\n"
-    "I've passed on everything I know.\p"
-    "Now I can live out my life knowing\n"
-    "my work is done.$"
-}
+Text_MakeBestUseOfMove::
+# 46 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
+	.string "I implore you to make the best\n"
+	.string "use of that move and gain power!$"
 
-text Text_FeelRejuvenated {
-    "After I passed on my knowledge to\n"
-    "you, I felt so much relief.\p"
-    "In fact, I feel rejuvenated,\n"
-    "as if I were younger again!$"
-}
+Text_PassedOnEverythingIKnow::
+# 51 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
+	.string "Gasp, gasp, gasp…\p"
+	.string "I have no regrets now.\n"
+	.string "I've passed on everything I know.\p"
+	.string "Now I can live out my life knowing\n"
+	.string "my work is done.$"
+
+Text_FeelRejuvenated::
+# 59 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
+	.string "After I passed on my knowledge to\n"
+	.string "you, I felt so much relief.\p"
+	.string "In fact, I feel rejuvenated,\n"
+	.string "as if I were younger again!$"
+
+`

@@ -1,58 +1,111 @@
 InsideOfTruck_MapScripts::
+# 2 "data/maps/InsideOfTruck/scripts.pory"
 	map_script MAP_SCRIPT_ON_LOAD, InsideOfTruck_OnLoad
+# 3 "data/maps/InsideOfTruck/scripts.pory"
 	map_script MAP_SCRIPT_ON_RESUME, InsideOfTruck_OnResume
 	.byte 0
 
-InsideOfTruck_OnLoad:
+
+InsideOfTruck_OnLoad::
+# 7 "data/maps/InsideOfTruck/scripts.pory"
 	setmetatile 4, 1, METATILE_InsideOfTruck_ExitLight_Top, FALSE
+# 8 "data/maps/InsideOfTruck/scripts.pory"
 	setmetatile 4, 2, METATILE_InsideOfTruck_ExitLight_Mid, FALSE
+# 9 "data/maps/InsideOfTruck/scripts.pory"
 	setmetatile 4, 3, METATILE_InsideOfTruck_ExitLight_Bottom, FALSE
 	end
 
-InsideOfTruck_OnResume:
+
+InsideOfTruck_OnResume::
+# 14 "data/maps/InsideOfTruck/scripts.pory"
 	setstepcallback STEP_CB_TRUCK
 	end
 
+
 InsideOfTruck_EventScript_SetIntroFlags::
+# 19 "data/maps/InsideOfTruck/scripts.pory"
 	lockall
+# 20 "data/maps/InsideOfTruck/scripts.pory"
 	setflag FLAG_HIDE_MAP_NAME_POPUP
+# 21 "data/maps/InsideOfTruck/scripts.pory"
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, InsideOfTruck_EventScript_SetIntroFlagsMale
-	goto_if_eq VAR_RESULT, FEMALE, InsideOfTruck_EventScript_SetIntroFlagsFemale
+# 22 "data/maps/InsideOfTruck/scripts.pory"
+	compare VAR_RESULT, MALE
+	goto_if_eq InsideOfTruck_EventScript_SetIntroFlags_2
+InsideOfTruck_EventScript_SetIntroFlags_1:
+# 25 "data/maps/InsideOfTruck/scripts.pory"
+	compare VAR_RESULT, FEMALE
+	goto_if_eq InsideOfTruck_EventScript_SetIntroFlags_5
+InsideOfTruck_EventScript_SetIntroFlags_4:
 	end
+
+InsideOfTruck_EventScript_SetIntroFlags_2:
+# 23 "data/maps/InsideOfTruck/scripts.pory"
+	goto InsideOfTruck_EventScript_SetIntroFlagsMale
+	goto InsideOfTruck_EventScript_SetIntroFlags_1
+
+InsideOfTruck_EventScript_SetIntroFlags_5:
+# 26 "data/maps/InsideOfTruck/scripts.pory"
+	goto InsideOfTruck_EventScript_SetIntroFlagsFemale
+	goto InsideOfTruck_EventScript_SetIntroFlags_4
+
 
 InsideOfTruck_EventScript_SetIntroFlagsMale::
+# 32 "data/maps/InsideOfTruck/scripts.pory"
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
+# 33 "data/maps/InsideOfTruck/scripts.pory"
 	setvar VAR_LITTLEROOT_INTRO_STATE, 1
+# 34 "data/maps/InsideOfTruck/scripts.pory"
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MOM
+# 35 "data/maps/InsideOfTruck/scripts.pory"
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_TRUCK
+# 36 "data/maps/InsideOfTruck/scripts.pory"
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_MOM
+# 37 "data/maps/InsideOfTruck/scripts.pory"
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_SIBLING
+# 38 "data/maps/InsideOfTruck/scripts.pory"
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
+# 39 "data/maps/InsideOfTruck/scripts.pory"
 	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 1
+# 40 "data/maps/InsideOfTruck/scripts.pory"
 	setdynamicwarp MAP_LITTLEROOT_TOWN, 3, 10
+# 41 "data/maps/InsideOfTruck/scripts.pory"
 	releaseall
 	end
+
 
 InsideOfTruck_EventScript_SetIntroFlagsFemale::
+# 46 "data/maps/InsideOfTruck/scripts.pory"
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F
+# 47 "data/maps/InsideOfTruck/scripts.pory"
 	setvar VAR_LITTLEROOT_INTRO_STATE, 2
+# 48 "data/maps/InsideOfTruck/scripts.pory"
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_MOM
+# 49 "data/maps/InsideOfTruck/scripts.pory"
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_TRUCK
+# 50 "data/maps/InsideOfTruck/scripts.pory"
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_MOM
+# 51 "data/maps/InsideOfTruck/scripts.pory"
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_SIBLING
+# 52 "data/maps/InsideOfTruck/scripts.pory"
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
+# 53 "data/maps/InsideOfTruck/scripts.pory"
 	setvar VAR_LITTLEROOT_HOUSES_STATE_MAY, 1
+# 54 "data/maps/InsideOfTruck/scripts.pory"
 	setdynamicwarp MAP_LITTLEROOT_TOWN, 12, 10
+# 55 "data/maps/InsideOfTruck/scripts.pory"
 	releaseall
 	end
 
+
 InsideOfTruck_EventScript_MovingBox::
+# 60 "data/maps/InsideOfTruck/scripts.pory"
 	msgbox InsideOfTruck_Text_BoxPrintedWithMonLogo, MSGBOX_SIGN
 	end
 
-InsideOfTruck_Text_BoxPrintedWithMonLogo:
+
+InsideOfTruck_Text_BoxPrintedWithMonLogo::
+# 64 "data/maps/InsideOfTruck/scripts.pory"
 	.string "The box is printed with a POKéMON logo.\p"
 	.string "It's a POKéMON brand moving and\n"
 	.string "delivery service.$"
-

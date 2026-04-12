@@ -1,65 +1,75 @@
 BattleFrontier_Mart_MapScripts::
 	.byte 0
 
+
 BattleFrontier_Mart_EventScript_Clerk::
+# 4 "data/maps/BattleFrontier_Mart/scripts.pory"
 	lock
+# 5 "data/maps/BattleFrontier_Mart/scripts.pory"
 	faceplayer
+# 6 "data/maps/BattleFrontier_Mart/scripts.pory"
 	message gText_HowMayIServeYou
+# 7 "data/maps/BattleFrontier_Mart/scripts.pory"
 	waitmessage
+# 8 "data/maps/BattleFrontier_Mart/scripts.pory"
 	pokemart BattleFrontier_Mart_Pokemart
+# 9 "data/maps/BattleFrontier_Mart/scripts.pory"
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+# 10 "data/maps/BattleFrontier_Mart/scripts.pory"
 	release
 	end
 
-	.align 2
-BattleFrontier_Mart_Pokemart:
-	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_MAX_POTION
-	.2byte ITEM_FULL_RESTORE
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_REVIVE
-	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_PROTEIN
-	.2byte ITEM_CALCIUM
-	.2byte ITEM_IRON
-	.2byte ITEM_ZINC
-	.2byte ITEM_CARBOS
-	.2byte ITEM_HP_UP
+
+BattleFrontier_Mart_Pokemart::
+# 15 "data/maps/BattleFrontier_Mart/scripts.pory"
 	pokemartlistend
+	return
+
 
 BattleFrontier_Mart_EventScript_OldMan::
+# 19 "data/maps/BattleFrontier_Mart/scripts.pory"
 	msgbox BattleFrontier_Mart_Text_ChaperonGrandson, MSGBOX_NPC
 	end
 
+
 BattleFrontier_Mart_EventScript_OldWoman::
+# 24 "data/maps/BattleFrontier_Mart/scripts.pory"
 	lock
+# 25 "data/maps/BattleFrontier_Mart/scripts.pory"
 	applymovement LOCALID_FRONTIER_MART_OLD_WOMAN, Common_Movement_FaceDown
+# 26 "data/maps/BattleFrontier_Mart/scripts.pory"
 	waitmovement 0
+# 27 "data/maps/BattleFrontier_Mart/scripts.pory"
 	msgbox BattleFrontier_Mart_Text_ProteinMakeNiceGift, MSGBOX_DEFAULT
+# 28 "data/maps/BattleFrontier_Mart/scripts.pory"
 	release
 	end
 
+
 BattleFrontier_Mart_EventScript_Boy::
+# 33 "data/maps/BattleFrontier_Mart/scripts.pory"
 	msgbox BattleFrontier_Mart_Text_FacilitiesDontAllowItems, MSGBOX_NPC
 	end
 
-BattleFrontier_Mart_Text_ChaperonGrandson:
+
+BattleFrontier_Mart_Text_ChaperonGrandson::
+# 37 "data/maps/BattleFrontier_Mart/scripts.pory"
 	.string "We came here to chaperon our\n"
 	.string "grandson.\p"
 	.string "But since we're here, we thought\n"
 	.string "we should get some souvenirs.$"
 
-BattleFrontier_Mart_Text_ProteinMakeNiceGift:
+BattleFrontier_Mart_Text_ProteinMakeNiceGift::
+# 44 "data/maps/BattleFrontier_Mart/scripts.pory"
 	.string "Dear, what do you think of this?\n"
 	.string "Wouldn't this make a nice gift?\p"
 	.string "It's…PRO…TE…IN?\n"
 	.string "It sounds delicious, doesn't it?$"
 
-BattleFrontier_Mart_Text_FacilitiesDontAllowItems:
+BattleFrontier_Mart_Text_FacilitiesDontAllowItems::
+# 51 "data/maps/BattleFrontier_Mart/scripts.pory"
 	.string "A lot of the BATTLE FRONTIER's\n"
 	.string "facilities don't allow the use of items\l"
 	.string "during battles.\p"
 	.string "That rule makes things tougher than\n"
 	.string "they already are!$"
-

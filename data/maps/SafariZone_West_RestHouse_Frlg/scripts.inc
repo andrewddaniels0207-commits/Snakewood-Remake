@@ -1,19 +1,27 @@
 SafariZone_West_RestHouse_Frlg_MapScripts::
 	.byte 0
 
+
 SafariZone_West_RestHouse_EventScript_Man::
+# 4 "data/maps/SafariZone_West_RestHouse_Frlg/scripts.pory"
 	msgbox SafariZone_West_Text_BaitMakesMonStickAround, MSGBOX_NPC
 	end
 
+
 SafariZone_West_RestHouse_EventScript_Scientist::
+# 9 "data/maps/SafariZone_West_RestHouse_Frlg/scripts.pory"
 	msgbox SafariZone_West_Text_RocksMakeMonRunButEasierCatch, MSGBOX_NPC
 	end
 
+
 SafariZone_West_RestHouse_EventScript_CooltrainerF::
+# 14 "data/maps/SafariZone_West_RestHouse_Frlg/scripts.pory"
 	msgbox SafariZone_West_Text_HikedLotsDidntSeeMonIWanted, MSGBOX_NPC
 	end
 
+
 SafariZone_West_Text_KogaPatrolsSafariEverySoOften::
+# 18 "data/maps/SafariZone_West_RestHouse_Frlg/scripts.pory"
 	.string "The SAFARI ZONE's huge, wouldn't\n"
 	.string "you say?\p"
 	.string "FUCHSIA's GYM LEADER, KOGA, \n"
@@ -22,16 +30,18 @@ SafariZone_West_Text_KogaPatrolsSafariEverySoOften::
 	.string "knowing that we're safe.$"
 
 SafariZone_West_Text_RocksMakeMonRunButEasierCatch::
+# 27 "data/maps/SafariZone_West_RestHouse_Frlg/scripts.pory"
 	.string "Tossing ROCKS at POKéMON might\n"
 	.string "make them run, but they'll be\l"
 	.string "easier to catch.$"
 
 SafariZone_West_Text_BaitMakesMonStickAround::
+# 33 "data/maps/SafariZone_West_RestHouse_Frlg/scripts.pory"
 	.string "Using BAIT will make POKéMON more\n"
 	.string "likely to stick around if they get\l"
 	.string "busy eating.$"
 
 SafariZone_West_Text_HikedLotsDidntSeeMonIWanted::
+# 39 "data/maps/SafariZone_West_RestHouse_Frlg/scripts.pory"
 	.string "I hiked a lot, but I didn't see any\n"
 	.string "POKéMON I wanted.$"
-

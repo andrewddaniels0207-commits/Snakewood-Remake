@@ -1,87 +1,162 @@
 FallarborTown_PokemonCenter_1F_MapScripts::
+# 2 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_PokemonCenter_1F_OnTransition
+# 3 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
-FallarborTown_PokemonCenter_1F_OnTransition:
+
+FallarborTown_PokemonCenter_1F_OnTransition::
+# 7 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	setrespawn HEAL_LOCATION_FALLARBOR_TOWN
+# 8 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	call Common_EventScript_UpdateBrineyLocation
 	end
 
+
 FallarborTown_PokemonCenter_1F_EventScript_Nurse::
+# 13 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	setvar VAR_0x800B, LOCALID_FALLARBOR_NURSE
+# 14 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	call Common_EventScript_PkmnCenterNurse
+# 15 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	waitmessage
+# 16 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	waitbuttonpress
+# 17 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	release
 	end
 
+
 FallarborTown_PokemonCenter_1F_EventScript_Girl::
+# 22 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	msgbox FallarborTown_PokemonCenter_1F_Text_FossilManiacEdgeOfTown, MSGBOX_NPC
 	end
 
+
 FallarborTown_PokemonCenter_1F_EventScript_ExpertM::
+# 27 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	msgbox FallarborTown_PokemonCenter_1F_Text_PlantHardyTrees, MSGBOX_NPC
 	end
 
+
 FallarborTown_PokemonCenter_1F_EventScript_Lanette::
+# 32 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	lock
+# 33 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	faceplayer
+# 34 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	msgbox FallarborTown_PokemonCenter_1F_Text_LanetteGreeting, MSGBOX_DEFAULT
+# 35 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	closemessage
+# 36 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	switch VAR_FACING
-	case DIR_NORTH, FallarborTown_PokemonCenter_1F_EventScript_LanetteExitNorth
-	case DIR_WEST, FallarborTown_PokemonCenter_1F_EventScript_LanetteExitWest
+# 37 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
+	case DIR_NORTH, FallarborTown_PokemonCenter_1F_EventScript_Lanette_3
+# 39 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
+	case DIR_WEST, FallarborTown_PokemonCenter_1F_EventScript_Lanette_4
+FallarborTown_PokemonCenter_1F_EventScript_Lanette_1:
 	end
+
+FallarborTown_PokemonCenter_1F_EventScript_Lanette_3:
+# 38 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
+	goto FallarborTown_PokemonCenter_1F_EventScript_LanetteExitNorth
+	goto FallarborTown_PokemonCenter_1F_EventScript_Lanette_1
+
+FallarborTown_PokemonCenter_1F_EventScript_Lanette_4:
+# 40 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
+	goto FallarborTown_PokemonCenter_1F_EventScript_LanetteExitWest
+	goto FallarborTown_PokemonCenter_1F_EventScript_Lanette_1
+
 
 FallarborTown_PokemonCenter_1F_EventScript_LanetteExitNorth::
+# 46 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	applymovement LOCALID_FALLARBOR_LANETTE, FallarborTown_PokemonCenter_1F_Movement_LanetteExitNorth
+# 47 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	waitmovement 0
+# 48 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	goto FallarborTown_PokemonCenter_1F_EventScript_LanetteExited
 	end
+
 
 FallarborTown_PokemonCenter_1F_EventScript_LanetteExitWest::
+# 53 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	applymovement LOCALID_FALLARBOR_LANETTE, FallarborTown_PokemonCenter_1F_Movement_LanetteExitWest
+# 54 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	waitmovement 0
+# 55 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	goto FallarborTown_PokemonCenter_1F_EventScript_LanetteExited
 	end
 
+
 FallarborTown_PokemonCenter_1F_EventScript_LanetteExited::
+# 60 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	playse SE_SLIDING_DOOR
+# 61 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	removeobject LOCALID_FALLARBOR_LANETTE
+# 62 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	clearflag FLAG_HIDE_LANETTES_HOUSE_LANETTE
+# 63 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	release
 	end
 
+
+# 67 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 FallarborTown_PokemonCenter_1F_Movement_LanetteExitNorth:
+# 68 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_right
+# 69 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_down
+# 70 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_down
+# 71 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_left
+# 72 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_left
+# 73 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_left
+# 74 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_left
+# 75 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_down
+# 76 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_down
+# 77 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_down
+# 78 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_down
+# 79 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	delay_8
+# 80 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	step_end
 
+# 83 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 FallarborTown_PokemonCenter_1F_Movement_LanetteExitWest:
+# 84 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_down
+# 85 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_down
+# 86 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_left
+# 87 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_left
+# 88 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_left
+# 89 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_down
+# 90 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_down
+# 91 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_down
+# 92 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	walk_down
+# 93 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	delay_8
+# 94 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	step_end
 
-FallarborTown_PokemonCenter_1F_Text_LanetteGreeting:
+FallarborTown_PokemonCenter_1F_Text_LanetteGreeting::
+# 97 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	.string "Oh, hello.\n"
 	.string "You are?\p"
 	.string "Okay, your name's {PLAYER}{KUN}.\n"
@@ -98,14 +173,15 @@ FallarborTown_PokemonCenter_1F_Text_LanetteGreeting:
 	.string "If you could, please visit me at home.\n"
 	.string "My house is on ROUTE 114.$"
 
-FallarborTown_PokemonCenter_1F_Text_FossilManiacEdgeOfTown:
+FallarborTown_PokemonCenter_1F_Text_FossilManiacEdgeOfTown::
+# 115 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	.string "I wonder what POKéMON looked like\n"
 	.string "long, long ago?\p"
 	.string "Maybe the FOSSIL MANIAC at the edge\n"
 	.string "of town will know.$"
 
-FallarborTown_PokemonCenter_1F_Text_PlantHardyTrees:
+FallarborTown_PokemonCenter_1F_Text_PlantHardyTrees::
+# 122 "data/maps/FallarborTown_PokemonCenter_1F/scripts.pory"
 	.string "In the fields of FALLARBOR, we plant\n"
 	.string "seedlings of hardy trees that thrive\l"
 	.string "even in volcanic ash.$"
-

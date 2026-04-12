@@ -1,99 +1,158 @@
 SSAnne_Kitchen_Frlg_MapScripts::
 	.byte 0
 
+
 SSAnne_Kitchen_EventScript_Chef1::
+# 4 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	msgbox SSAnne_Kitchen_Text_BusyOutOfTheWay, MSGBOX_NPC
 	end
 
+
 SSAnne_Kitchen_EventScript_Chef2::
+# 9 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	msgbox SSAnne_Kitchen_Text_SawOddBerryInTrash, MSGBOX_NPC
 	end
 
+
 SSAnne_Kitchen_EventScript_Chef3::
+# 14 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	msgbox SSAnne_Kitchen_Text_SoBusyImDizzy, MSGBOX_NPC
 	end
 
+
 SSAnne_Kitchen_EventScript_Chef4::
+# 19 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	lock
+# 20 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	faceplayer
+# 21 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	msgbox SSAnne_Kitchen_Text_IAmLeChefMainCourseIs
+# 22 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	random 3
+# 23 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	copyvar VAR_0x8008, VAR_RESULT
-	call_if_eq VAR_0x8008, 0, SSAnne_Kitchen_EventScript_SalmonDuSalad
-	call_if_eq VAR_0x8008, 1, SSAnne_Kitchen_EventScript_EelsAuBarbecue
-	call_if_eq VAR_0x8008, 2, SSAnne_Kitchen_EventScript_PrimeBeefsteak
+# 24 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
+	compare VAR_0x8008, 0
+	goto_if_eq SSAnne_Kitchen_EventScript_Chef4_2
+SSAnne_Kitchen_EventScript_Chef4_1:
+# 27 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
+	compare VAR_0x8008, 1
+	goto_if_eq SSAnne_Kitchen_EventScript_Chef4_5
+SSAnne_Kitchen_EventScript_Chef4_4:
+# 30 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
+	compare VAR_0x8008, 2
+	goto_if_eq SSAnne_Kitchen_EventScript_Chef4_8
+SSAnne_Kitchen_EventScript_Chef4_7:
+# 33 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	release
 	end
 
+SSAnne_Kitchen_EventScript_Chef4_2:
+# 25 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
+	call SSAnne_Kitchen_EventScript_SalmonDuSalad
+	goto SSAnne_Kitchen_EventScript_Chef4_1
+
+SSAnne_Kitchen_EventScript_Chef4_5:
+# 28 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
+	call SSAnne_Kitchen_EventScript_EelsAuBarbecue
+	goto SSAnne_Kitchen_EventScript_Chef4_4
+
+SSAnne_Kitchen_EventScript_Chef4_8:
+# 31 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
+	call SSAnne_Kitchen_EventScript_PrimeBeefsteak
+	goto SSAnne_Kitchen_EventScript_Chef4_7
+
+
 SSAnne_Kitchen_EventScript_SalmonDuSalad::
+# 38 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	msgbox SSAnne_Kitchen_Text_SalmonDuSalad
 	return
 
+
 SSAnne_Kitchen_EventScript_EelsAuBarbecue::
+# 43 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	msgbox SSAnne_Kitchen_Text_EelsAuBarbecue
 	return
 
+
 SSAnne_Kitchen_EventScript_PrimeBeefsteak::
+# 48 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	msgbox SSAnne_Kitchen_Text_PrimeBeefsteak
 	return
 
+
 SSAnne_Kitchen_EventScript_Chef5::
+# 53 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	msgbox SSAnne_Kitchen_Text_PeelSpudsEveryDay, MSGBOX_NPC
 	end
 
+
 SSAnne_Kitchen_EventScript_Chef6::
+# 58 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	msgbox SSAnne_Kitchen_Text_HearAboutSnorlaxItsAGlutton, MSGBOX_NPC
 	end
 
+
 SSAnne_Kitchen_EventScript_Chef7::
+# 63 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	msgbox SSAnne_Kitchen_Text_OnlyGetToPeelOnions, MSGBOX_NPC
 	end
 
+
 SSAnne_Kitchen_Text_BusyOutOfTheWay::
+# 67 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	.string "You, mon petit!\n"
 	.string "We're busy here!\l"
 	.string "Out of the way!$"
 
 SSAnne_Kitchen_Text_SawOddBerryInTrash::
+# 73 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	.string "I saw an odd BERRY in the trash.\n"
 	.string "I wonder what that was?$"
 
 SSAnne_Kitchen_Text_SoBusyImDizzy::
+# 78 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	.string "I'm so busy I'm getting dizzy!\n"
 	.string "You have to give me room here!$"
 
 SSAnne_Kitchen_Text_PeelSpudsEveryDay::
+# 83 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	.string "Hum-de-hum-de-ho…\p"
 	.string "I peel spuds every day!\n"
 	.string "Hum-hum…$"
 
 SSAnne_Kitchen_Text_HearAboutSnorlaxItsAGlutton::
+# 89 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	.string "Did you hear about SNORLAX?\n"
 	.string "It's a glutton.\p"
 	.string "No other POKéMON eats and sleeps\n"
 	.string "the way SNORLAX can and does!$"
 
 SSAnne_Kitchen_Text_OnlyGetToPeelOnions::
+# 96 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	.string "Snivel… Sniff…\p"
 	.string "I only get to peel onions…\n"
 	.string "Snivel…$"
 
 SSAnne_Kitchen_Text_IAmLeChefMainCourseIs::
+# 102 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	.string "Er-hem!\n"
 	.string "Indeed I am le CHEF!\p"
 	.string "Le main course is$"
 
 SSAnne_Kitchen_Text_SalmonDuSalad::
+# 108 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	.string "Salmon du Salad!\p"
 	.string "Les guests may gripe it's fish\n"
 	.string "again, however!$"
 
 SSAnne_Kitchen_Text_EelsAuBarbecue::
+# 114 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	.string "Eels au Barbecue!\p"
 	.string "Les guests will mutiny, I fear.$"
 
 SSAnne_Kitchen_Text_PrimeBeefsteak::
+# 119 "data/maps/SSAnne_Kitchen_Frlg/scripts.pory"
 	.string "Prime Beefsteak!\p"
 	.string "But, have I enough fillets du\n"
 	.string "beef?$"
-

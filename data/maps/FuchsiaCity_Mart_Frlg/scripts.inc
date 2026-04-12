@@ -1,43 +1,51 @@
 FuchsiaCity_Mart_Frlg_MapScripts::
 	.byte 0
 
+
 FuchsiaCity_Mart_EventScript_CooltrainerF::
+# 4 "data/maps/FuchsiaCity_Mart_Frlg/scripts.pory"
 	msgbox FuchsiaCity_Mart_Text_DidYouTryXSpeed, MSGBOX_NPC
 	end
 
+
 FuchsiaCity_Mart_EventScript_Gentleman::
+# 9 "data/maps/FuchsiaCity_Mart_Frlg/scripts.pory"
 	msgbox FuchsiaCity_Mart_Text_DontTheyHaveSafariZonePennants, MSGBOX_NPC
 	end
 
+
 FuchsiaCity_Mart_EventScript_Clerk::
+# 14 "data/maps/FuchsiaCity_Mart_Frlg/scripts.pory"
 	lock
+# 15 "data/maps/FuchsiaCity_Mart_Frlg/scripts.pory"
 	faceplayer
+# 16 "data/maps/FuchsiaCity_Mart_Frlg/scripts.pory"
 	message gText_HowMayIServeYou
+# 17 "data/maps/FuchsiaCity_Mart_Frlg/scripts.pory"
 	waitmessage
+# 18 "data/maps/FuchsiaCity_Mart_Frlg/scripts.pory"
 	pokemart FuchsiaCity_Mart_Items
+# 19 "data/maps/FuchsiaCity_Mart_Frlg/scripts.pory"
 	msgbox gText_PleaseComeAgain
+# 20 "data/maps/FuchsiaCity_Mart_Frlg/scripts.pory"
 	release
 	end
 
-	.align 2
+
 FuchsiaCity_Mart_Items::
-	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_GREAT_BALL
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_REVIVE
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_NONE
+# 25 "data/maps/FuchsiaCity_Mart_Frlg/scripts.pory"
 	release
 	end
+
 
 FuchsiaCity_Mart_Text_DontTheyHaveSafariZonePennants::
+# 29 "data/maps/FuchsiaCity_Mart_Frlg/scripts.pory"
 	.string "Don't they have any pennants\n"
 	.string "promoting the SAFARI ZONE?\p"
 	.string "How about some paper lanterns?\n"
 	.string "Aren't there even any calendars?$"
 
 FuchsiaCity_Mart_Text_DidYouTryXSpeed::
+# 36 "data/maps/FuchsiaCity_Mart_Frlg/scripts.pory"
 	.string "Did you try X SPEED?\n"
 	.string "It speeds up a POKéMON in battle.$"
-

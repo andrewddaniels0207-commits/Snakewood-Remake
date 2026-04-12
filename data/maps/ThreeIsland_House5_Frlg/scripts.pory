@@ -1,32 +1,48 @@
-mapscripts ThreeIsland_House5_Frlg_MapScripts {}
+raw `
+ThreeIsland_House5_Frlg_MapScripts::
+	.byte 0
 
-script ThreeIsland_House5_EventScript_LittleGirl {
-    lock
-    faceplayer
-    if (flag(FLAG_RESCUED_LOSTELLE)) {
-        goto(ThreeIsland_House5_EventScript_LittleGirlLostelleFound)
-    }
-    msgbox(ThreeIsland_House5_Text_ImNotLostelle)
-    release
-    end
-}
 
-script ThreeIsland_House5_EventScript_LittleGirlLostelleFound {
-    msgbox(ThreeIsland_House5_Text_IllGoPlayWithLostelle)
-    release
-    end
-}
+ThreeIsland_House5_EventScript_LittleGirl::
+# 4 "data/maps/ThreeIsland_House5_Frlg/scripts.pory"
+	lock
+# 5 "data/maps/ThreeIsland_House5_Frlg/scripts.pory"
+	faceplayer
+# 6 "data/maps/ThreeIsland_House5_Frlg/scripts.pory"
+	goto_if_set FLAG_RESCUED_LOSTELLE, ThreeIsland_House5_EventScript_LittleGirl_2
+ThreeIsland_House5_EventScript_LittleGirl_1:
+# 9 "data/maps/ThreeIsland_House5_Frlg/scripts.pory"
+	msgbox ThreeIsland_House5_Text_ImNotLostelle
+# 10 "data/maps/ThreeIsland_House5_Frlg/scripts.pory"
+	release
+	end
 
-text ThreeIsland_House5_Text_ImNotLostelle {
-    "Me?\n"
-    "I'm not LOSTELLE.\p"
-    "She's probably gone to the\n"
-    "BERRY FOREST, I think.\p"
-    "She picks BERRIES there for making\n"
-    "lunch.$"
-}
+ThreeIsland_House5_EventScript_LittleGirl_2:
+# 7 "data/maps/ThreeIsland_House5_Frlg/scripts.pory"
+	goto ThreeIsland_House5_EventScript_LittleGirlLostelleFound
+	goto ThreeIsland_House5_EventScript_LittleGirl_1
 
-text ThreeIsland_House5_Text_IllGoPlayWithLostelle {
-    "I think I'll go play with LOSTELLE\n"
-    "today.$"
-}
+
+ThreeIsland_House5_EventScript_LittleGirlLostelleFound::
+# 15 "data/maps/ThreeIsland_House5_Frlg/scripts.pory"
+	msgbox ThreeIsland_House5_Text_IllGoPlayWithLostelle
+# 16 "data/maps/ThreeIsland_House5_Frlg/scripts.pory"
+	release
+	end
+
+
+ThreeIsland_House5_Text_ImNotLostelle::
+# 20 "data/maps/ThreeIsland_House5_Frlg/scripts.pory"
+	.string "Me?\n"
+	.string "I'm not LOSTELLE.\p"
+	.string "She's probably gone to the\n"
+	.string "BERRY FOREST, I think.\p"
+	.string "She picks BERRIES there for making\n"
+	.string "lunch.$"
+
+ThreeIsland_House5_Text_IllGoPlayWithLostelle::
+# 29 "data/maps/ThreeIsland_House5_Frlg/scripts.pory"
+	.string "I think I'll go play with LOSTELLE\n"
+	.string "today.$"
+
+`

@@ -1,9 +1,16 @@
-mapscripts TrainerTower_Roof_Frlg_MapScripts {
-    MAP_SCRIPT_ON_RESUME: TrainerTower_OnResume
-    MAP_SCRIPT_ON_FRAME_TABLE: TrainerTower_OnFrame
-}
+raw `
+TrainerTower_Roof_Frlg_MapScripts::
+# 2 "data/maps/TrainerTower_Roof_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_RESUME, TrainerTower_OnResume
+# 3 "data/maps/TrainerTower_Roof_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, TrainerTower_OnFrame
+	.byte 0
 
-script TrainerTower_Roof_EventScript_Owner {
-    call(TrainerTower_EventScript_SpeakToOwner)
-    end
-}
+
+TrainerTower_Roof_EventScript_Owner::
+# 7 "data/maps/TrainerTower_Roof_Frlg/scripts.pory"
+	call TrainerTower_EventScript_SpeakToOwner
+	end
+
+
+`

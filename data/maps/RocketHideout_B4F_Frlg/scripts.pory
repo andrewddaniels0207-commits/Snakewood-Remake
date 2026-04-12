@@ -1,215 +1,329 @@
-mapscripts RocketHideout_B4F_Frlg_MapScripts {
-    MAP_SCRIPT_ON_LOAD: RocketHideout_B4F_OnLoad
-}
+raw `
+RocketHideout_B4F_Frlg_MapScripts::
+# 2 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_LOAD, RocketHideout_B4F_OnLoad
+	.byte 0
 
-script RocketHideout_B4F_OnLoad {
-    setvar(NUM_DOOR_GRUNTS_DEFEATED, 0)
-    call_if_defeated(TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_EventScript_CountGruntDefeated)
-    call_if_defeated(TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_EventScript_CountGruntDefeated)
-    if (var(NUM_DOOR_GRUNTS_DEFEATED) != 2) {
-        call(RocketHideout_B4F_EventScript_SetBarrier)
-    }
-    end
-}
 
-script RocketHideout_B4F_EventScript_CountGruntDefeated {
-    addvar(NUM_DOOR_GRUNTS_DEFEATED, 1)
-    return
-}
+RocketHideout_B4F_OnLoad::
+# 6 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	setvar NUM_DOOR_GRUNTS_DEFEATED, 0
+# 7 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_EventScript_CountGruntDefeated
+# 8 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_EventScript_CountGruntDefeated
+# 9 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	compare NUM_DOOR_GRUNTS_DEFEATED, 2
+	goto_if_ne RocketHideout_B4F_OnLoad_2
+RocketHideout_B4F_OnLoad_1:
+	end
 
-script RocketHideout_B4F_EventScript_Giovanni {
-    lock
-    faceplayer
-    famechecker(FAMECHECKER_GIOVANNI, 0)
-    message(RocketHideout_B4F_Text_GiovanniIntro)
-    waitmessage()
-    playbgm(MUS_RG_ENCOUNTER_ROCKET, 0)
-    waitbuttonpress()
-    trainerbattle_no_intro(TRAINER_BOSS_GIOVANNI, RocketHideout_B4F_Text_GiovanniDefeat)
-    msgbox(RocketHideout_B4F_Text_GiovanniPostBattle)
-    fadescreen(FADE_TO_BLACK)
-    closemessage
-    removeobject(LOCALID_HIDEOUT_GIOVANNI)
-    addobject(LOCALID_SILPH_SCOPE)
-    clearflag(FLAG_HIDE_SILPH_SCOPE)
-    setflag(FLAG_HIDE_CELADON_ROCKETS)
-    famechecker(FAMECHECKER_GIOVANNI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
-    fadescreen(FADE_FROM_BLACK)
-    release
-    end
-}
+RocketHideout_B4F_OnLoad_2:
+# 10 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	call RocketHideout_B4F_EventScript_SetBarrier
+	goto RocketHideout_B4F_OnLoad_1
 
-script RocketHideout_B4F_EventScript_SilphScope {
-    lock
-    faceplayer
-    removeobject(LOCALID_SILPH_SCOPE)
-    giveitem(ITEM_SILPH_SCOPE)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(EventScript_BagIsFull)
-    }
-    release
-    end
-}
 
-script RocketHideout_B4F_EventScript_Grunt1 {
-    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_18, RocketHideout_B4F_Text_Grunt1Intro, RocketHideout_B4F_Text_Grunt1Defeat, RocketHideout_B4F_EventScript_DefeatedGrunt1)
-    msgbox(RocketHideout_B4F_Text_Grunt1PostBattle)
-    release
-    end
-}
+RocketHideout_B4F_EventScript_CountGruntDefeated::
+# 16 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	addvar NUM_DOOR_GRUNTS_DEFEATED, 1
+	return
 
-script RocketHideout_B4F_EventScript_DefeatedGrunt1 {
-    msgbox(RocketHideout_B4F_Text_Grunt1PostBattle)
-    addobject(LOCALID_LIFT_KEY)
-    clearflag(FLAG_HIDE_LIFT_KEY)
-    release
-    end
-}
 
-script RocketHideout_B4F_EventScript_LiftKey {
-    lock
-    faceplayer
-    setflag(FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT)
-    removeobject(LOCALID_LIFT_KEY)
-    giveitem(ITEM_LIFT_KEY)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(EventScript_BagIsFull)
-    }
-    release
-    end
-}
+RocketHideout_B4F_EventScript_Giovanni::
+# 21 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	lock
+# 22 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	faceplayer
+# 23 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	famechecker FAMECHECKER_GIOVANNI, 0
+# 24 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	message RocketHideout_B4F_Text_GiovanniIntro
+# 25 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	waitmessage
+# 26 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	playbgm MUS_RG_ENCOUNTER_ROCKET, 0
+# 27 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	waitbuttonpress
+# 28 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	trainerbattle_no_intro TRAINER_BOSS_GIOVANNI, RocketHideout_B4F_Text_GiovanniDefeat
+# 29 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	msgbox RocketHideout_B4F_Text_GiovanniPostBattle
+# 30 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	fadescreen FADE_TO_BLACK
+# 31 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	closemessage
+# 32 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	removeobject LOCALID_HIDEOUT_GIOVANNI
+# 33 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	addobject LOCALID_SILPH_SCOPE
+# 34 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	clearflag FLAG_HIDE_SILPH_SCOPE
+# 35 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	setflag FLAG_HIDE_CELADON_ROCKETS
+# 36 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	famechecker FAMECHECKER_GIOVANNI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+# 37 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	fadescreen FADE_FROM_BLACK
+# 38 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	release
+	end
 
-script RocketHideout_B4F_EventScript_Grunt2 {
-    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_Text_Grunt2Intro, RocketHideout_B4F_Text_Grunt2Defeat, RocketHideout_B4F_EventScript_DefeatedGrunt2)
-    msgbox(RocketHideout_B4F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
 
-script RocketHideout_B4F_EventScript_DefeatedGrunt2 {
-    setvar(NUM_DOOR_GRUNTS_DEFEATED, 0)
-    call_if_defeated(TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_EventScript_CountGruntDefeated)
-    call_if_defeated(TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_EventScript_CountGruntDefeated)
-    if (var(NUM_DOOR_GRUNTS_DEFEATED) == 2) {
-        call(RocketHideout_B4F_EventScript_RemoveBarrier)
-    }
-    if (var(NUM_DOOR_GRUNTS_DEFEATED) == 2) {
-        call(RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval)
-    }
-    release
-    end
-}
+RocketHideout_B4F_EventScript_SilphScope::
+# 43 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	lock
+# 44 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	faceplayer
+# 45 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	removeobject LOCALID_SILPH_SCOPE
+# 46 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	giveitem ITEM_SILPH_SCOPE
+# 47 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq RocketHideout_B4F_EventScript_SilphScope_2
+RocketHideout_B4F_EventScript_SilphScope_1:
+# 50 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	release
+	end
 
-script RocketHideout_B4F_EventScript_Grunt3 {
-    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_Text_Grunt3Intro, RocketHideout_B4F_Text_Grunt3Defeat, RocketHideout_B4F_EventScript_DefeatedGrunt3)
-    msgbox(RocketHideout_B4F_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+RocketHideout_B4F_EventScript_SilphScope_2:
+# 48 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	goto EventScript_BagIsFull
+	goto RocketHideout_B4F_EventScript_SilphScope_1
 
-script RocketHideout_B4F_EventScript_DefeatedGrunt3 {
-    setvar(NUM_DOOR_GRUNTS_DEFEATED, 0)
-    call_if_defeated(TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_EventScript_CountGruntDefeated)
-    call_if_defeated(TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_EventScript_CountGruntDefeated)
-    if (var(NUM_DOOR_GRUNTS_DEFEATED) == 2) {
-        call(RocketHideout_B4F_EventScript_RemoveBarrier)
-    }
-    if (var(NUM_DOOR_GRUNTS_DEFEATED) == 2) {
-        call(RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval)
-    }
-    release
-    end
-}
 
-script RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval {
-    playse(SE_UNLOCK)
-    special(DrawWholeMapView)
-    waitse()
-    return
-}
+RocketHideout_B4F_EventScript_Grunt1::
+# 55 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_18, RocketHideout_B4F_Text_Grunt1Intro, RocketHideout_B4F_Text_Grunt1Defeat, RocketHideout_B4F_EventScript_DefeatedGrunt1
+# 56 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	msgbox RocketHideout_B4F_Text_Grunt1PostBattle
+# 57 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	release
+	end
 
-script RocketHideout_B4F_EventScript_SetBarrier {
-    setmetatile(17, 12, METATILE_SilphCo_HideoutBarrier_TopLeft_Floor, 1)
-    setmetatile(18, 12, METATILE_SilphCo_HideoutBarrier_TopRight_Floor, 1)
-    setmetatile(17, 13, METATILE_SilphCo_HideoutBarrier_BottomLeft, 1)
-    setmetatile(18, 13, METATILE_SilphCo_HideoutBarrier_BottomRight, 1)
-    setmetatile(17, 14, METATILE_SilphCo_HideoutFloor_ShadeFull, 0)
-    setmetatile(18, 14, METATILE_SilphCo_HideoutFloor_ShadeFull, 0)
-    return
-}
 
-script RocketHideout_B4F_EventScript_RemoveBarrier {
-    setmetatile(17, 12, METATILE_SilphCo_HideoutFloor_ShadeFull, 0)
-    setmetatile(18, 12, METATILE_SilphCo_HideoutFloor, 0)
-    setmetatile(17, 13, METATILE_SilphCo_HideoutFloor_ShadeFull, 0)
-    setmetatile(18, 13, METATILE_SilphCo_HideoutFloor, 0)
-    setmetatile(17, 14, METATILE_SilphCo_HideoutFloor_ShadeFull, 0)
-    setmetatile(18, 14, METATILE_SilphCo_HideoutFloor, 0)
-    return
-}
+RocketHideout_B4F_EventScript_DefeatedGrunt1::
+# 62 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	msgbox RocketHideout_B4F_Text_Grunt1PostBattle
+# 63 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	addobject LOCALID_LIFT_KEY
+# 64 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	clearflag FLAG_HIDE_LIFT_KEY
+# 65 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	release
+	end
 
-text RocketHideout_B4F_Text_GiovanniIntro {
-    "So! I must say, I am impressed you\n"
-    "got here.\p"
-    "TEAM ROCKET captures POKéMON from\n"
-    "around the world.\p"
-    "They're important tools for keeping\n"
-    "our criminal enterprise going.\p"
-    "I am the leader, GIOVANNI!\p"
-    "For your insolence, you will feel a\n"
-    "world of pain!$"
-}
 
-text RocketHideout_B4F_Text_GiovanniDefeat {
-    "WHAT!\n"
-    "This can't be!$"
-}
+RocketHideout_B4F_EventScript_LiftKey::
+# 70 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	lock
+# 71 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	faceplayer
+# 72 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	setflag FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT
+# 73 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	removeobject LOCALID_LIFT_KEY
+# 74 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	giveitem ITEM_LIFT_KEY
+# 75 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq RocketHideout_B4F_EventScript_LiftKey_2
+RocketHideout_B4F_EventScript_LiftKey_1:
+# 78 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	release
+	end
 
-text RocketHideout_B4F_Text_GiovanniPostBattle {
-    "I see that you raise POKéMON with\n"
-    "utmost care.\p"
-    "A child like you would never\n"
-    "understand what I hope to achieve.\p"
-    "I shall step aside this time!\p"
-    "I hope we meet again…$"
-}
+RocketHideout_B4F_EventScript_LiftKey_2:
+# 76 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	goto EventScript_BagIsFull
+	goto RocketHideout_B4F_EventScript_LiftKey_1
 
-text RocketHideout_B4F_Text_Grunt2Intro {
-    "I know you!\n"
-    "You ruined our plans at MT. MOON!$"
-}
 
-text RocketHideout_B4F_Text_Grunt2Defeat {
-    "Burned again!$"
-}
+RocketHideout_B4F_EventScript_Grunt2::
+# 83 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_Text_Grunt2Intro, RocketHideout_B4F_Text_Grunt2Defeat, RocketHideout_B4F_EventScript_DefeatedGrunt2
+# 84 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	msgbox RocketHideout_B4F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
+	end
 
-text RocketHideout_B4F_Text_Grunt2PostBattle {
-    "Do you have something against TEAM\n"
-    "ROCKET?$"
-}
 
-text RocketHideout_B4F_Text_Grunt3Intro {
-    "How can you not see the beauty of\n"
-    "our evil?$"
-}
+RocketHideout_B4F_EventScript_DefeatedGrunt2::
+# 89 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	setvar NUM_DOOR_GRUNTS_DEFEATED, 0
+# 90 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_EventScript_CountGruntDefeated
+# 91 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_EventScript_CountGruntDefeated
+# 92 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	compare NUM_DOOR_GRUNTS_DEFEATED, 2
+	goto_if_eq RocketHideout_B4F_EventScript_DefeatedGrunt2_2
+RocketHideout_B4F_EventScript_DefeatedGrunt2_1:
+# 95 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	compare NUM_DOOR_GRUNTS_DEFEATED, 2
+	goto_if_eq RocketHideout_B4F_EventScript_DefeatedGrunt2_5
+RocketHideout_B4F_EventScript_DefeatedGrunt2_4:
+# 98 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	release
+	end
 
-text RocketHideout_B4F_Text_Grunt3Defeat {
-    "Ayaya!$"
-}
+RocketHideout_B4F_EventScript_DefeatedGrunt2_2:
+# 93 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	call RocketHideout_B4F_EventScript_RemoveBarrier
+	goto RocketHideout_B4F_EventScript_DefeatedGrunt2_1
 
-text RocketHideout_B4F_Text_Grunt3PostBattle {
-    "BOSS!\n"
-    "I'm sorry I failed you!$"
-}
+RocketHideout_B4F_EventScript_DefeatedGrunt2_5:
+# 96 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	call RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval
+	goto RocketHideout_B4F_EventScript_DefeatedGrunt2_4
 
-text RocketHideout_B4F_Text_Grunt1Intro {
-    "The elevator doesn't work?\n"
-    "Who has the LIFT KEY?$"
-}
 
-text RocketHideout_B4F_Text_Grunt1Defeat {
-    "No!$"
-}
+RocketHideout_B4F_EventScript_Grunt3::
+# 103 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_Text_Grunt3Intro, RocketHideout_B4F_Text_Grunt3Defeat, RocketHideout_B4F_EventScript_DefeatedGrunt3
+# 104 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	msgbox RocketHideout_B4F_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
+	end
 
-text RocketHideout_B4F_Text_Grunt1PostBattle {
-    "Oh, no!\n"
-    "I dropped the LIFT KEY!$"
-}
+
+RocketHideout_B4F_EventScript_DefeatedGrunt3::
+# 109 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	setvar NUM_DOOR_GRUNTS_DEFEATED, 0
+# 110 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_EventScript_CountGruntDefeated
+# 111 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_EventScript_CountGruntDefeated
+# 112 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	compare NUM_DOOR_GRUNTS_DEFEATED, 2
+	goto_if_eq RocketHideout_B4F_EventScript_DefeatedGrunt3_2
+RocketHideout_B4F_EventScript_DefeatedGrunt3_1:
+# 115 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	compare NUM_DOOR_GRUNTS_DEFEATED, 2
+	goto_if_eq RocketHideout_B4F_EventScript_DefeatedGrunt3_5
+RocketHideout_B4F_EventScript_DefeatedGrunt3_4:
+# 118 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	release
+	end
+
+RocketHideout_B4F_EventScript_DefeatedGrunt3_2:
+# 113 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	call RocketHideout_B4F_EventScript_RemoveBarrier
+	goto RocketHideout_B4F_EventScript_DefeatedGrunt3_1
+
+RocketHideout_B4F_EventScript_DefeatedGrunt3_5:
+# 116 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	call RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval
+	goto RocketHideout_B4F_EventScript_DefeatedGrunt3_4
+
+
+RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval::
+# 123 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	playse SE_UNLOCK
+# 124 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	special DrawWholeMapView
+# 125 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	waitse
+	return
+
+
+RocketHideout_B4F_EventScript_SetBarrier::
+# 130 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	setmetatile 17, 12, METATILE_SilphCo_HideoutBarrier_TopLeft_Floor, 1
+# 131 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	setmetatile 18, 12, METATILE_SilphCo_HideoutBarrier_TopRight_Floor, 1
+# 132 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	setmetatile 17, 13, METATILE_SilphCo_HideoutBarrier_BottomLeft, 1
+# 133 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	setmetatile 18, 13, METATILE_SilphCo_HideoutBarrier_BottomRight, 1
+# 134 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	setmetatile 17, 14, METATILE_SilphCo_HideoutFloor_ShadeFull, 0
+# 135 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	setmetatile 18, 14, METATILE_SilphCo_HideoutFloor_ShadeFull, 0
+	return
+
+
+RocketHideout_B4F_EventScript_RemoveBarrier::
+# 140 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	setmetatile 17, 12, METATILE_SilphCo_HideoutFloor_ShadeFull, 0
+# 141 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	setmetatile 18, 12, METATILE_SilphCo_HideoutFloor, 0
+# 142 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	setmetatile 17, 13, METATILE_SilphCo_HideoutFloor_ShadeFull, 0
+# 143 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	setmetatile 18, 13, METATILE_SilphCo_HideoutFloor, 0
+# 144 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	setmetatile 17, 14, METATILE_SilphCo_HideoutFloor_ShadeFull, 0
+# 145 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	setmetatile 18, 14, METATILE_SilphCo_HideoutFloor, 0
+	return
+
+
+RocketHideout_B4F_Text_GiovanniIntro::
+# 149 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	.string "So! I must say, I am impressed you\n"
+	.string "got here.\p"
+	.string "TEAM ROCKET captures POKéMON from\n"
+	.string "around the world.\p"
+	.string "They're important tools for keeping\n"
+	.string "our criminal enterprise going.\p"
+	.string "I am the leader, GIOVANNI!\p"
+	.string "For your insolence, you will feel a\n"
+	.string "world of pain!$"
+
+RocketHideout_B4F_Text_GiovanniDefeat::
+# 161 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	.string "WHAT!\n"
+	.string "This can't be!$"
+
+RocketHideout_B4F_Text_GiovanniPostBattle::
+# 166 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	.string "I see that you raise POKéMON with\n"
+	.string "utmost care.\p"
+	.string "A child like you would never\n"
+	.string "understand what I hope to achieve.\p"
+	.string "I shall step aside this time!\p"
+	.string "I hope we meet again…$"
+
+RocketHideout_B4F_Text_Grunt2Intro::
+# 175 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	.string "I know you!\n"
+	.string "You ruined our plans at MT. MOON!$"
+
+RocketHideout_B4F_Text_Grunt2Defeat::
+# 180 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	.string "Burned again!$"
+
+RocketHideout_B4F_Text_Grunt2PostBattle::
+# 184 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	.string "Do you have something against TEAM\n"
+	.string "ROCKET?$"
+
+RocketHideout_B4F_Text_Grunt3Intro::
+# 189 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	.string "How can you not see the beauty of\n"
+	.string "our evil?$"
+
+RocketHideout_B4F_Text_Grunt3Defeat::
+# 194 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	.string "Ayaya!$"
+
+RocketHideout_B4F_Text_Grunt3PostBattle::
+# 198 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	.string "BOSS!\n"
+	.string "I'm sorry I failed you!$"
+
+RocketHideout_B4F_Text_Grunt1Intro::
+# 203 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	.string "The elevator doesn't work?\n"
+	.string "Who has the LIFT KEY?$"
+
+RocketHideout_B4F_Text_Grunt1Defeat::
+# 208 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	.string "No!$"
+
+RocketHideout_B4F_Text_Grunt1PostBattle::
+# 212 "data/maps/RocketHideout_B4F_Frlg/scripts.pory"
+	.string "Oh, no!\n"
+	.string "I dropped the LIFT KEY!$"
+
+`

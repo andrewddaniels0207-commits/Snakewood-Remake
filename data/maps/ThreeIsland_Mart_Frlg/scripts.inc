@@ -1,46 +1,57 @@
 ThreeIsland_Mart_Frlg_MapScripts::
 	.byte 0
 
+
 ThreeIsland_Mart_EventScript_Clerk::
+# 4 "data/maps/ThreeIsland_Mart_Frlg/scripts.pory"
 	lock
+# 5 "data/maps/ThreeIsland_Mart_Frlg/scripts.pory"
 	faceplayer
+# 6 "data/maps/ThreeIsland_Mart_Frlg/scripts.pory"
 	message gText_HowMayIServeYou
+# 7 "data/maps/ThreeIsland_Mart_Frlg/scripts.pory"
 	waitmessage
+# 8 "data/maps/ThreeIsland_Mart_Frlg/scripts.pory"
 	pokemart ThreeIsland_Mart_Items
+# 9 "data/maps/ThreeIsland_Mart_Frlg/scripts.pory"
 	msgbox gText_PleaseComeAgain
+# 10 "data/maps/ThreeIsland_Mart_Frlg/scripts.pory"
 	release
 	end
 
-	.align 2
+
 ThreeIsland_Mart_Items::
-	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_REVIVE
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_ESCAPE_ROPE
-	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_NONE
+# 15 "data/maps/ThreeIsland_Mart_Frlg/scripts.pory"
 	release
 	end
+
 
 ThreeIsland_Mart_EventScript_Picnicker::
+# 20 "data/maps/ThreeIsland_Mart_Frlg/scripts.pory"
 	msgbox ThreeIsland_Mart_Text_TrueThatCeldadonDeptStoreBigger, MSGBOX_NPC
 	end
 
+
 ThreeIsland_Mart_EventScript_BugCatcher::
+# 25 "data/maps/ThreeIsland_Mart_Frlg/scripts.pory"
 	msgbox ThreeIsland_Mart_Text_PeopleHealWithBerriesFromForest, MSGBOX_NPC
 	end
 
+
 ThreeIsland_Mart_EventScript_Youngster::
+# 30 "data/maps/ThreeIsland_Mart_Frlg/scripts.pory"
 	msgbox ThreeIsland_Mart_Text_BikersWereAboutToTrashMart, MSGBOX_NPC
 	end
 
+
 ThreeIsland_Mart_Text_TrueThatCeldadonDeptStoreBigger::
+# 34 "data/maps/ThreeIsland_Mart_Frlg/scripts.pory"
 	.string "Is it true?\p"
 	.string "CELADON DEPT. STORE is several\n"
 	.string "times bigger than this shop?$"
 
 ThreeIsland_Mart_Text_PeopleHealWithBerriesFromForest::
+# 40 "data/maps/ThreeIsland_Mart_Frlg/scripts.pory"
 	.string "I sometimes buy medicine here.\p"
 	.string "But a lot of people heal POKéMON\n"
 	.string "with BERRIES from BERRY FOREST.\p"
@@ -48,7 +59,7 @@ ThreeIsland_Mart_Text_PeopleHealWithBerriesFromForest::
 	.string "they never run out.$"
 
 ThreeIsland_Mart_Text_BikersWereAboutToTrashMart::
+# 48 "data/maps/ThreeIsland_Mart_Frlg/scripts.pory"
 	.string "Those BIKERS were about to trash\n"
 	.string "this POKéMON MART.\p"
 	.string "Am I glad they decided to leave!$"
-

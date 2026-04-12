@@ -1,118 +1,267 @@
 BattleFrontier_Lounge2_MapScripts::
 	.byte 0
 
-@ This NPC gives hints about a random facility or battle mode.
-@ For battle modes he gives generic advice
-@ For facilities, depending on how far the player has progressed he will say either
-@    The name of the Frontier Brain there
-@    The type and description of the 3 pokemon they use in their silver battle
-@    The type and description of the 3 pokemon they use in their gold battle
+
 BattleFrontier_Lounge2_EventScript_FrontierManiac::
+# 4 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	lock
+# 5 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	faceplayer
-	goto_if_set FLAG_MET_BATTLE_FRONTIER_MANIAC, BattleFrontier_Lounge2_EventScript_AlreadyMetManiac
+# 6 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	goto_if_set FLAG_MET_BATTLE_FRONTIER_MANIAC, BattleFrontier_Lounge2_EventScript_FrontierManiac_2
+BattleFrontier_Lounge2_EventScript_FrontierManiac_1:
+# 9 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	setflag FLAG_MET_BATTLE_FRONTIER_MANIAC
+# 10 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	msgbox BattleFrontier_Lounge2_Text_FrontierManiacIntro, MSGBOX_DEFAULT
+# 11 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	goto BattleFrontier_Lounge2_EventScript_GiveAdvice
 	end
+
+BattleFrontier_Lounge2_EventScript_FrontierManiac_2:
+# 7 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	goto BattleFrontier_Lounge2_EventScript_AlreadyMetManiac
+	goto BattleFrontier_Lounge2_EventScript_FrontierManiac_1
+
 
 BattleFrontier_Lounge2_EventScript_AlreadyMetManiac::
+# 16 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	msgbox BattleFrontier_Lounge2_Text_SwingByForTheLatestWord, MSGBOX_DEFAULT
+# 17 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	goto BattleFrontier_Lounge2_EventScript_GiveAdvice
 	end
 
+
 BattleFrontier_Lounge2_EventScript_GiveAdvice::
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_TOWER_SINGLES, BattleFrontier_Lounge2_EventScript_BufferSingle
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_TOWER_DOUBLES, BattleFrontier_Lounge2_EventScript_BufferDouble
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_TOWER_MULTIS, BattleFrontier_Lounge2_EventScript_BufferMulti
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_TOWER_LINK, BattleFrontier_Lounge2_EventScript_BufferMultiLink
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_DOME, BattleFrontier_Lounge2_EventScript_BufferBattleDome
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_FACTORY, BattleFrontier_Lounge2_EventScript_BufferBattleFactory
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_PALACE, BattleFrontier_Lounge2_EventScript_BufferBattlePalace
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_ARENA, BattleFrontier_Lounge2_EventScript_BufferBattleArena
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_PIKE, BattleFrontier_Lounge2_EventScript_BufferBattlePike
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_PYRAMID, BattleFrontier_Lounge2_EventScript_BufferBattlePyramid
-@ <= FRONTIER_MANIAC_TOWER_LINK is any Battle Tower mode
-	call_if_le VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_TOWER_LINK, BattleFrontier_Lounge2_EventScript_BattleTowerNews
-@ >= FRONTIER_MANIAC_DOME is any facility other than Battle Tower
-	call_if_ge VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_DOME, BattleFrontier_Lounge2_EventScript_FacilityNews
+# 22 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	compare VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_TOWER_SINGLES
+	goto_if_eq BattleFrontier_Lounge2_EventScript_GiveAdvice_2
+BattleFrontier_Lounge2_EventScript_GiveAdvice_1:
+# 25 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	compare VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_TOWER_DOUBLES
+	goto_if_eq BattleFrontier_Lounge2_EventScript_GiveAdvice_5
+BattleFrontier_Lounge2_EventScript_GiveAdvice_4:
+# 28 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	compare VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_TOWER_MULTIS
+	goto_if_eq BattleFrontier_Lounge2_EventScript_GiveAdvice_8
+BattleFrontier_Lounge2_EventScript_GiveAdvice_7:
+# 31 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	compare VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_TOWER_LINK
+	goto_if_eq BattleFrontier_Lounge2_EventScript_GiveAdvice_11
+BattleFrontier_Lounge2_EventScript_GiveAdvice_10:
+# 34 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	compare VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_DOME
+	goto_if_eq BattleFrontier_Lounge2_EventScript_GiveAdvice_14
+BattleFrontier_Lounge2_EventScript_GiveAdvice_13:
+# 37 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	compare VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_FACTORY
+	goto_if_eq BattleFrontier_Lounge2_EventScript_GiveAdvice_17
+BattleFrontier_Lounge2_EventScript_GiveAdvice_16:
+# 40 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	compare VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_PALACE
+	goto_if_eq BattleFrontier_Lounge2_EventScript_GiveAdvice_20
+BattleFrontier_Lounge2_EventScript_GiveAdvice_19:
+# 43 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	compare VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_ARENA
+	goto_if_eq BattleFrontier_Lounge2_EventScript_GiveAdvice_23
+BattleFrontier_Lounge2_EventScript_GiveAdvice_22:
+# 46 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	compare VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_PIKE
+	goto_if_eq BattleFrontier_Lounge2_EventScript_GiveAdvice_26
+BattleFrontier_Lounge2_EventScript_GiveAdvice_25:
+# 49 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	compare VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_PYRAMID
+	goto_if_eq BattleFrontier_Lounge2_EventScript_GiveAdvice_29
+BattleFrontier_Lounge2_EventScript_GiveAdvice_28:
+# 52 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	compare VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_TOWER_LINK
+	goto_if_le BattleFrontier_Lounge2_EventScript_GiveAdvice_32
+BattleFrontier_Lounge2_EventScript_GiveAdvice_31:
+# 55 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	compare VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_DOME
+	goto_if_ge BattleFrontier_Lounge2_EventScript_GiveAdvice_35
+BattleFrontier_Lounge2_EventScript_GiveAdvice_34:
+# 58 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	special ShowFrontierManiacMessage
+# 59 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	waitmessage
+# 60 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	waitbuttonpress
+# 61 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	release
 	end
 
+BattleFrontier_Lounge2_EventScript_GiveAdvice_2:
+# 23 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	call BattleFrontier_Lounge2_EventScript_BufferSingle
+	goto BattleFrontier_Lounge2_EventScript_GiveAdvice_1
+
+BattleFrontier_Lounge2_EventScript_GiveAdvice_5:
+# 26 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	call BattleFrontier_Lounge2_EventScript_BufferDouble
+	goto BattleFrontier_Lounge2_EventScript_GiveAdvice_4
+
+BattleFrontier_Lounge2_EventScript_GiveAdvice_8:
+# 29 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	call BattleFrontier_Lounge2_EventScript_BufferMulti
+	goto BattleFrontier_Lounge2_EventScript_GiveAdvice_7
+
+BattleFrontier_Lounge2_EventScript_GiveAdvice_11:
+# 32 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	call BattleFrontier_Lounge2_EventScript_BufferMultiLink
+	goto BattleFrontier_Lounge2_EventScript_GiveAdvice_10
+
+BattleFrontier_Lounge2_EventScript_GiveAdvice_14:
+# 35 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	call BattleFrontier_Lounge2_EventScript_BufferBattleDome
+	goto BattleFrontier_Lounge2_EventScript_GiveAdvice_13
+
+BattleFrontier_Lounge2_EventScript_GiveAdvice_17:
+# 38 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	call BattleFrontier_Lounge2_EventScript_BufferBattleFactory
+	goto BattleFrontier_Lounge2_EventScript_GiveAdvice_16
+
+BattleFrontier_Lounge2_EventScript_GiveAdvice_20:
+# 41 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	call BattleFrontier_Lounge2_EventScript_BufferBattlePalace
+	goto BattleFrontier_Lounge2_EventScript_GiveAdvice_19
+
+BattleFrontier_Lounge2_EventScript_GiveAdvice_23:
+# 44 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	call BattleFrontier_Lounge2_EventScript_BufferBattleArena
+	goto BattleFrontier_Lounge2_EventScript_GiveAdvice_22
+
+BattleFrontier_Lounge2_EventScript_GiveAdvice_26:
+# 47 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	call BattleFrontier_Lounge2_EventScript_BufferBattlePike
+	goto BattleFrontier_Lounge2_EventScript_GiveAdvice_25
+
+BattleFrontier_Lounge2_EventScript_GiveAdvice_29:
+# 50 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	call BattleFrontier_Lounge2_EventScript_BufferBattlePyramid
+	goto BattleFrontier_Lounge2_EventScript_GiveAdvice_28
+
+BattleFrontier_Lounge2_EventScript_GiveAdvice_32:
+# 53 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	call BattleFrontier_Lounge2_EventScript_BattleTowerNews
+	goto BattleFrontier_Lounge2_EventScript_GiveAdvice_31
+
+BattleFrontier_Lounge2_EventScript_GiveAdvice_35:
+# 56 "data/maps/BattleFrontier_Lounge2/scripts.pory"
+	call BattleFrontier_Lounge2_EventScript_FacilityNews
+	goto BattleFrontier_Lounge2_EventScript_GiveAdvice_34
+
+
 BattleFrontier_Lounge2_EventScript_BattleTowerNews::
+# 66 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	msgbox BattleFrontier_Lounge2_Text_BattleTowerIsHottest, MSGBOX_DEFAULT
 	return
 
+
 BattleFrontier_Lounge2_EventScript_FacilityNews::
+# 71 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	msgbox BattleFrontier_Lounge2_Text_FacilityIsHottest, MSGBOX_DEFAULT
 	return
 
+
 BattleFrontier_Lounge2_EventScript_BufferSingle::
+# 76 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	bufferstdstring STR_VAR_1, STDSTRING_SINGLE
 	return
 
+
 BattleFrontier_Lounge2_EventScript_BufferDouble::
+# 81 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	bufferstdstring STR_VAR_1, STDSTRING_DOUBLE
 	return
 
+
 BattleFrontier_Lounge2_EventScript_BufferMulti::
+# 86 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	bufferstdstring STR_VAR_1, STDSTRING_MULTI
 	return
 
+
 BattleFrontier_Lounge2_EventScript_BufferMultiLink::
+# 91 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	bufferstdstring STR_VAR_1, STDSTRING_MULTI_LINK
 	return
 
+
 BattleFrontier_Lounge2_EventScript_BufferBattleDome::
+# 96 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_DOME
 	return
 
+
 BattleFrontier_Lounge2_EventScript_BufferBattleFactory::
+# 101 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_FACTORY
 	return
 
+
 BattleFrontier_Lounge2_EventScript_BufferBattlePalace::
+# 106 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_PALACE
 	return
 
+
 BattleFrontier_Lounge2_EventScript_BufferBattleArena::
+# 111 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_ARENA
 	return
 
+
 BattleFrontier_Lounge2_EventScript_BufferBattlePike::
+# 116 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_PIKE
 	return
 
+
 BattleFrontier_Lounge2_EventScript_BufferBattlePyramid::
+# 121 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	bufferstdstring STR_VAR_1, STDSTRING_BATTLE_PYRAMID
 	return
 
+
 BattleFrontier_Lounge2_EventScript_Maniac1::
+# 126 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	lock
+# 127 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	msgbox BattleFrontier_Lounge2_Text_NewsGatheringPower, MSGBOX_DEFAULT
+# 128 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	release
 	end
+
 
 BattleFrontier_Lounge2_EventScript_Maniac2::
+# 133 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	lock
+# 134 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	msgbox BattleFrontier_Lounge2_Text_AmazingPowersOfObservation, MSGBOX_DEFAULT
+# 135 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	release
 	end
+
 
 BattleFrontier_Lounge2_EventScript_Maniac3::
+# 140 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	lock
+# 141 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	msgbox BattleFrontier_Lounge2_Text_AmazingPowerOfPersuasion, MSGBOX_DEFAULT
+# 142 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	release
 	end
 
+
 BattleFrontier_Lounge2_EventScript_TriathleteF::
+# 147 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	msgbox BattleFrontier_Lounge2_Text_ThisPlaceIsScaringMe, MSGBOX_NPC
 	end
 
+
 BattleFrontier_Lounge2_Text_FrontierManiacIntro::
+# 151 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Howdy! When it comes to news about\n"
 	.string "the BATTLE FRONTIER, I'm no. 1.\p"
 	.string "You can think of me as\n"
@@ -123,26 +272,30 @@ BattleFrontier_Lounge2_Text_FrontierManiacIntro::
 	.string "I gathered about the BATTLE FRONTIER.$"
 
 BattleFrontier_Lounge2_Text_SwingByForTheLatestWord::
+# 162 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Howdy! Did you swing by to grill me\n"
 	.string "about the latest word? Oh, all right!$"
 
-@ Unused
 BattleFrontier_Lounge2_Text_MyInformationsBeenUsefulRight::
+# 167 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Well? Well? Well?\p"
 	.string "I'm sure my information's been\n"
 	.string "seriously useful to you, right?$"
 
 BattleFrontier_Lounge2_Text_FacilityIsHottest::
+# 173 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Let's see now…\p"
 	.string "It sounds like the {STR_VAR_1}\n"
 	.string "is the hottest place going.$"
 
 BattleFrontier_Lounge2_Text_BattleTowerIsHottest::
+# 179 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Let's see now…\p"
 	.string "It sounds like BATTLE TOWER\n"
 	.string "{STR_VAR_1} is the hottest.$"
 
 BattleFrontier_Lounge2_Text_SalonMaidenIsThere::
+# 185 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Bet you didn't know this!\p"
 	.string "One of those top TRAINERS that SCOTT\n"
 	.string "calls the FRONTIER BRAINS is there.\p"
@@ -150,6 +303,7 @@ BattleFrontier_Lounge2_Text_SalonMaidenIsThere::
 	.string "the SALON MAIDEN that runs the place.$"
 
 BattleFrontier_Lounge2_Text_SalonMaidenSilverMons::
+# 193 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Have you battled the SALON MAIDEN?\p"
 	.string "When she's measuring up her opponent,\n"
 	.string "she apparently uses these POKéMON:\p"
@@ -158,6 +312,7 @@ BattleFrontier_Lounge2_Text_SalonMaidenSilverMons::
 	.string "and a NORMAL-type SLEEPING POKéMON.$"
 
 BattleFrontier_Lounge2_Text_SalonMaidenGoldMons::
+# 202 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Have you battled the SALON MAIDEN\n"
 	.string "when she's serious?\p"
 	.string "When she's battling flat out,\n"
@@ -167,6 +322,7 @@ BattleFrontier_Lounge2_Text_SalonMaidenGoldMons::
 	.string "and a NORMAL-type SLEEPING POKéMON.$"
 
 BattleFrontier_Lounge2_Text_DomeAceIsThere::
+# 212 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Bet you didn't know this!\p"
 	.string "One of those top TRAINERS that SCOTT\n"
 	.string "calls the FRONTIER BRAINS is there.\p"
@@ -174,6 +330,7 @@ BattleFrontier_Lounge2_Text_DomeAceIsThere::
 	.string "the DOME ACE that runs the place.$"
 
 BattleFrontier_Lounge2_Text_DomeAceSilverMons::
+# 220 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Have you battled the DOME ACE?\p"
 	.string "When he's treating the opponent\n"
 	.string "lightly, he uses these three POKéMON:\p"
@@ -182,6 +339,7 @@ BattleFrontier_Lounge2_Text_DomeAceSilverMons::
 	.string "and a FIRE & FLYING FLAME POKéMON.$"
 
 BattleFrontier_Lounge2_Text_DomeAceGoldMons::
+# 229 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Have you battled the DOME ACE\n"
 	.string "when he's serious?\p"
 	.string "When he's demonstrating his strategy,\n"
@@ -192,6 +350,7 @@ BattleFrontier_Lounge2_Text_DomeAceGoldMons::
 	.string "POKéMON.$"
 
 BattleFrontier_Lounge2_Text_FactoryHeadIsThere::
+# 240 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Bet you didn't know this!\p"
 	.string "One of those top TRAINERS that SCOTT\n"
 	.string "calls the FRONTIER BRAINS is there.\p"
@@ -199,6 +358,7 @@ BattleFrontier_Lounge2_Text_FactoryHeadIsThere::
 	.string "the FACTORY HEAD that runs the place.$"
 
 BattleFrontier_Lounge2_Text_FactoryHeadSilverMons::
+# 248 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Have you battled the FACTORY HEAD\n"
 	.string "already?\p"
 	.string "Let me think… When he goes to battle,\n"
@@ -207,6 +367,7 @@ BattleFrontier_Lounge2_Text_FactoryHeadSilverMons::
 	.string "conditions as you.$"
 
 BattleFrontier_Lounge2_Text_FactoryHeadGoldMons::
+# 257 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Have you battled the FACTORY HEAD\n"
 	.string "when he's serious?\p"
 	.string "When he goes seriously to battle,\n"
@@ -215,6 +376,7 @@ BattleFrontier_Lounge2_Text_FactoryHeadGoldMons::
 	.string "conditions as you.$"
 
 BattleFrontier_Lounge2_Text_PikeQueenIsThere::
+# 266 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Bet you didn't know this!\p"
 	.string "One of those top TRAINERS that SCOTT\n"
 	.string "calls the FRONTIER BRAINS is there.\p"
@@ -222,6 +384,7 @@ BattleFrontier_Lounge2_Text_PikeQueenIsThere::
 	.string "the PIKE QUEEN that runs the place.$"
 
 BattleFrontier_Lounge2_Text_PikeQueenSilverMons::
+# 274 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Have you battled the PIKE QUEEN\n"
 	.string "before?\p"
 	.string "When she's in a good mood, they say\n"
@@ -231,6 +394,7 @@ BattleFrontier_Lounge2_Text_PikeQueenSilverMons::
 	.string "and a WATER-type TENDER POKéMON.$"
 
 BattleFrontier_Lounge2_Text_PikeQueenGoldMons::
+# 284 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Have you battled the PIKE QUEEN\n"
 	.string "when she's serious?\p"
 	.string "When she's seriously annoyed, they say\n"
@@ -241,6 +405,7 @@ BattleFrontier_Lounge2_Text_PikeQueenGoldMons::
 	.string "POKéMON.$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonIsThere::
+# 295 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Bet you didn't know this!\p"
 	.string "One of those top TRAINERS that SCOTT\n"
 	.string "calls the FRONTIER BRAINS is there.\p"
@@ -248,6 +413,7 @@ BattleFrontier_Lounge2_Text_ArenaTycoonIsThere::
 	.string "the ARENA TYCOON that runs the place.$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonSilverMons::
+# 303 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Have you battled the ARENA TYCOON\n"
 	.string "before?\p"
 	.string "When she's assessing the foe's ability,\n"
@@ -257,6 +423,7 @@ BattleFrontier_Lounge2_Text_ArenaTycoonSilverMons::
 	.string "and a BUG & GHOST SHED POKéMON.$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonGoldMons::
+# 313 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Have you battled the ARENA TYCOON\n"
 	.string "when she's serious?\p"
 	.string "When she battles for keeps,\n"
@@ -267,6 +434,7 @@ BattleFrontier_Lounge2_Text_ArenaTycoonGoldMons::
 	.string "MUSHROOM POKéMON.$"
 
 BattleFrontier_Lounge2_Text_PalaceMavenIsThere::
+# 324 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Bet you didn't know this!\p"
 	.string "One of those top TRAINERS that SCOTT\n"
 	.string "calls the FRONTIER BRAINS is there.\p"
@@ -274,6 +442,7 @@ BattleFrontier_Lounge2_Text_PalaceMavenIsThere::
 	.string "the PALACE MAVEN that runs the place.$"
 
 BattleFrontier_Lounge2_Text_PalaceMavenSilverMons::
+# 332 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Have you battled the PALACE MAVEN\n"
 	.string "before?\p"
 	.string "When he's testing the opponent's\n"
@@ -283,6 +452,7 @@ BattleFrontier_Lounge2_Text_PalaceMavenSilverMons::
 	.string "WATER- & ICE-type TRANSPORT POKéMON.$"
 
 BattleFrontier_Lounge2_Text_PalaceMavenGoldMons::
+# 342 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Have you battled the PALACE MAVEN\n"
 	.string "when he's serious?\p"
 	.string "When he throws his entire might into\n"
@@ -292,6 +462,7 @@ BattleFrontier_Lounge2_Text_PalaceMavenGoldMons::
 	.string "and a WATER-type AURORA POKéMON.$"
 
 BattleFrontier_Lounge2_Text_PyramidKingIsThere::
+# 352 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Bet you didn't know this!\p"
 	.string "One of those top TRAINERS that SCOTT\n"
 	.string "calls the FRONTIER BRAINS is there.\p"
@@ -299,6 +470,7 @@ BattleFrontier_Lounge2_Text_PyramidKingIsThere::
 	.string "the PYRAMID KING that runs the place.$"
 
 BattleFrontier_Lounge2_Text_PyramidKingSilverMons::
+# 360 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Have you battled the PYRAMID KING\n"
 	.string "before?\p"
 	.string "When he's checking the foe's power,\n"
@@ -308,6 +480,7 @@ BattleFrontier_Lounge2_Text_PyramidKingSilverMons::
 	.string "and a STEEL-type IRON POKéMON.$"
 
 BattleFrontier_Lounge2_Text_PyramidKingGoldMons::
+# 370 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Have you battled the PYRAMID KING\n"
 	.string "when he's serious?\p"
 	.string "When he's pumped with hot power,\n"
@@ -318,6 +491,7 @@ BattleFrontier_Lounge2_Text_PyramidKingGoldMons::
 	.string "POKéMON.$"
 
 BattleFrontier_Lounge2_Text_DoubleBattleAdvice1::
+# 381 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Sure, there are several places where\n"
 	.string "you can enter DOUBLE BATTLES.\p"
 	.string "But the DOUBLE BATTLE ROOMS of\n"
@@ -327,18 +501,21 @@ BattleFrontier_Lounge2_Text_DoubleBattleAdvice1::
 	.string "in the BATTLE FRONTIER.$"
 
 BattleFrontier_Lounge2_Text_DoubleBattleAdvice2::
+# 391 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Watch yourself in the battles here.\p"
 	.string "I hear there are TRAINERS that have\n"
 	.string "strategies they developed just for\l"
 	.string "DOUBLE BATTLES.$"
 
 BattleFrontier_Lounge2_Text_DoubleBattleAdvice3::
+# 398 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "Once you're confident and comfortable\n"
 	.string "with DOUBLE BATTLES here, you should\l"
 	.string "think about challenging other places\l"
 	.string "offering DOUBLE BATTLES.$"
 
 BattleFrontier_Lounge2_Text_MultiBattleAdvice::
+# 405 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "All sorts of TRAINERS gather in\n"
 	.string "the BATTLE SALON.\p"
 	.string "Just think--you may run into your\n"
@@ -346,24 +523,28 @@ BattleFrontier_Lounge2_Text_MultiBattleAdvice::
 	.string "You should look carefully!$"
 
 BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice::
+# 413 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "If you're with a friend, head for the\n"
 	.string "LINK MULTI BATTLE ROOM.\p"
 	.string "If you play with a strong friend,\n"
 	.string "you can expect to see tough foes!$"
 
 BattleFrontier_Lounge2_Text_NewsGatheringPower::
+# 420 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "What amazing news-gathering power!\n"
 	.string "My mentor's like none other!$"
 
 BattleFrontier_Lounge2_Text_AmazingPowersOfObservation::
+# 425 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "What amazing powers of observation!\n"
 	.string "My mentor's like none other!$"
 
 BattleFrontier_Lounge2_Text_AmazingPowerOfPersuasion::
+# 430 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "What amazing power of persuasion!\n"
 	.string "My mentor's like none other!$"
 
 BattleFrontier_Lounge2_Text_ThisPlaceIsScaringMe::
+# 435 "data/maps/BattleFrontier_Lounge2/scripts.pory"
 	.string "…What is this place?\n"
 	.string "It's scaring me…$"
-

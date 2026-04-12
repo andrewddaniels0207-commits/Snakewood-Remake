@@ -1,78 +1,119 @@
-mapscripts Route126_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: Route126_OnTransition
-}
+raw `
+Route126_MapScripts::
+# 2 "data/maps/Route126/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, Route126_OnTransition
+	.byte 0
 
-script Route126_OnTransition {
-    if (flag(FLAG_SYS_WEATHER_CTRL)) {
-        call(Common_EventScript_SetAbnormalWeather)
-    }
-    end
-}
 
-script Route126_EventScript_Barry {
-    trainerbattle_single(TRAINER_BARRY, Route126_Text_BarryIntro, Route126_Text_BarryDefeat)
-    msgbox(Route126_Text_BarryPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route126_OnTransition::
+# 6 "data/maps/Route126/scripts.pory"
+	goto_if_set FLAG_SYS_WEATHER_CTRL, Route126_OnTransition_2
+Route126_OnTransition_1:
+	end
 
-script Route126_EventScript_Dean {
-    trainerbattle_single(TRAINER_DEAN, Route126_Text_DeanIntro, Route126_Text_DeanDefeat)
-    msgbox(Route126_Text_DeanPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route126_OnTransition_2:
+# 7 "data/maps/Route126/scripts.pory"
+	call Common_EventScript_SetAbnormalWeather
+	goto Route126_OnTransition_1
 
-script Route126_EventScript_Nikki {
-    trainerbattle_single(TRAINER_NIKKI, Route126_Text_NikkiIntro, Route126_Text_NikkiDefeat)
-    msgbox(Route126_Text_NikkiPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
 
-script Route126_EventScript_Brenda {
-    trainerbattle_single(TRAINER_BRENDA, Route126_Text_BrendaIntro, Route126_Text_BrendaDefeat)
-    msgbox(Route126_Text_BrendaPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route126_EventScript_Barry::
+# 13 "data/maps/Route126/scripts.pory"
+	trainerbattle_single TRAINER_BARRY, Route126_Text_BarryIntro, Route126_Text_BarryDefeat
+# 14 "data/maps/Route126/scripts.pory"
+	msgbox Route126_Text_BarryPostBattle, MSGBOX_AUTOCLOSE
+	end
 
-script Route126_EventScript_Leonardo {
-    trainerbattle_single(TRAINER_LEONARDO, Route126_Text_LeonardoIntro, Route126_Text_LeonardoDefeat)
-    msgbox(Route126_Text_LeonardoPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
 
-script Route126_EventScript_Isobel {
-    trainerbattle_single(TRAINER_ISOBEL, Route126_Text_IsobelIntro, Route126_Text_IsobelDefeat)
-    msgbox(Route126_Text_IsobelPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route126_EventScript_Dean::
+# 19 "data/maps/Route126/scripts.pory"
+	trainerbattle_single TRAINER_DEAN, Route126_Text_DeanIntro, Route126_Text_DeanDefeat
+# 20 "data/maps/Route126/scripts.pory"
+	msgbox Route126_Text_DeanPostBattle, MSGBOX_AUTOCLOSE
+	end
 
-script Route126_EventScript_Sienna {
-    trainerbattle_single(TRAINER_SIENNA, Route126_Text_SiennaIntro, Route126_Text_SiennaDefeat)
-    msgbox(Route126_Text_SiennaPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
 
-script Route126_EventScript_Pablo {
-    trainerbattle_single(TRAINER_PABLO_1, Route126_Text_PabloIntro, Route126_Text_PabloDefeat, Route126_EventScript_RegisterPablo)
-    specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(Route126_EventScript_RematchPablo)
-    }
-    msgbox(Route126_Text_PabloPostBattle, MSGBOX_DEFAULT)
-    release
-    end
-}
+Route126_EventScript_Nikki::
+# 25 "data/maps/Route126/scripts.pory"
+	trainerbattle_single TRAINER_NIKKI, Route126_Text_NikkiIntro, Route126_Text_NikkiDefeat
+# 26 "data/maps/Route126/scripts.pory"
+	msgbox Route126_Text_NikkiPostBattle, MSGBOX_AUTOCLOSE
+	end
 
-script Route126_EventScript_RegisterPablo {
-    special(PlayerFaceTrainerAfterBattle)
-    waitmovement(0)
-    msgbox(Route126_Text_PabloRegister, MSGBOX_DEFAULT)
-    register_matchcall(TRAINER_PABLO_1)
-    release
-    end
-}
 
-script Route126_EventScript_RematchPablo {
-    trainerbattle_rematch(TRAINER_PABLO_1, Route126_Text_PabloRematchIntro, Route126_Text_PabloRematchDefeat)
-    msgbox(Route126_Text_PabloPostRematch, MSGBOX_AUTOCLOSE)
-    end
-}
+Route126_EventScript_Brenda::
+# 31 "data/maps/Route126/scripts.pory"
+	trainerbattle_single TRAINER_BRENDA, Route126_Text_BrendaIntro, Route126_Text_BrendaDefeat
+# 32 "data/maps/Route126/scripts.pory"
+	msgbox Route126_Text_BrendaPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route126_EventScript_Leonardo::
+# 37 "data/maps/Route126/scripts.pory"
+	trainerbattle_single TRAINER_LEONARDO, Route126_Text_LeonardoIntro, Route126_Text_LeonardoDefeat
+# 38 "data/maps/Route126/scripts.pory"
+	msgbox Route126_Text_LeonardoPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route126_EventScript_Isobel::
+# 43 "data/maps/Route126/scripts.pory"
+	trainerbattle_single TRAINER_ISOBEL, Route126_Text_IsobelIntro, Route126_Text_IsobelDefeat
+# 44 "data/maps/Route126/scripts.pory"
+	msgbox Route126_Text_IsobelPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route126_EventScript_Sienna::
+# 49 "data/maps/Route126/scripts.pory"
+	trainerbattle_single TRAINER_SIENNA, Route126_Text_SiennaIntro, Route126_Text_SiennaDefeat
+# 50 "data/maps/Route126/scripts.pory"
+	msgbox Route126_Text_SiennaPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route126_EventScript_Pablo::
+# 55 "data/maps/Route126/scripts.pory"
+	trainerbattle_single TRAINER_PABLO_1, Route126_Text_PabloIntro, Route126_Text_PabloDefeat, Route126_EventScript_RegisterPablo
+# 56 "data/maps/Route126/scripts.pory"
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+# 57 "data/maps/Route126/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route126_EventScript_Pablo_2
+Route126_EventScript_Pablo_1:
+# 60 "data/maps/Route126/scripts.pory"
+	msgbox Route126_Text_PabloPostBattle, MSGBOX_DEFAULT
+# 61 "data/maps/Route126/scripts.pory"
+	release
+	end
+
+Route126_EventScript_Pablo_2:
+# 58 "data/maps/Route126/scripts.pory"
+	goto Route126_EventScript_RematchPablo
+	goto Route126_EventScript_Pablo_1
+
+
+Route126_EventScript_RegisterPablo::
+# 66 "data/maps/Route126/scripts.pory"
+	special PlayerFaceTrainerAfterBattle
+# 67 "data/maps/Route126/scripts.pory"
+	waitmovement 0
+# 68 "data/maps/Route126/scripts.pory"
+	msgbox Route126_Text_PabloRegister, MSGBOX_DEFAULT
+# 69 "data/maps/Route126/scripts.pory"
+	register_matchcall TRAINER_PABLO_1
+# 70 "data/maps/Route126/scripts.pory"
+	release
+	end
+
+
+Route126_EventScript_RematchPablo::
+# 75 "data/maps/Route126/scripts.pory"
+	trainerbattle_rematch TRAINER_PABLO_1, Route126_Text_PabloRematchIntro, Route126_Text_PabloRematchDefeat
+# 76 "data/maps/Route126/scripts.pory"
+	msgbox Route126_Text_PabloPostRematch, MSGBOX_AUTOCLOSE
+	end
+
+
+`

@@ -1,23 +1,30 @@
-mapscripts ThreeIsland_House4_Frlg_MapScripts {}
+raw `
+ThreeIsland_House4_Frlg_MapScripts::
+	.byte 0
 
-script ThreeIsland_House4_EventScript_BaldingMan {
-    msgbox(ThreeIsland_House4_Text_GhostsInBerryForest, MSGBOX_NPC)
-    end
-}
 
-script ThreeIsland_House4_EventScript_LittleBoy {
-    msgbox(ThreeIsland_House4_Text_PapaKeepsLyingToMe, MSGBOX_NPC)
-    end
-}
+ThreeIsland_House4_EventScript_BaldingMan::
+# 4 "data/maps/ThreeIsland_House4_Frlg/scripts.pory"
+	msgbox ThreeIsland_House4_Text_GhostsInBerryForest, MSGBOX_NPC
+	end
 
-text ThreeIsland_House4_Text_GhostsInBerryForest {
-    "You must never, ever go out to\n"
-    "the BERRY FOREST alone.\p"
-    "Why?\n"
-    "There are ghosts there.$"
-}
 
-text ThreeIsland_House4_Text_PapaKeepsLyingToMe {
-    "Papa keeps lying to me, and won't\n"
-    "let me go out and play!$"
-}
+ThreeIsland_House4_EventScript_LittleBoy::
+# 9 "data/maps/ThreeIsland_House4_Frlg/scripts.pory"
+	msgbox ThreeIsland_House4_Text_PapaKeepsLyingToMe, MSGBOX_NPC
+	end
+
+
+ThreeIsland_House4_Text_GhostsInBerryForest::
+# 13 "data/maps/ThreeIsland_House4_Frlg/scripts.pory"
+	.string "You must never, ever go out to\n"
+	.string "the BERRY FOREST alone.\p"
+	.string "Why?\n"
+	.string "There are ghosts there.$"
+
+ThreeIsland_House4_Text_PapaKeepsLyingToMe::
+# 20 "data/maps/ThreeIsland_House4_Frlg/scripts.pory"
+	.string "Papa keeps lying to me, and won't\n"
+	.string "let me go out and play!$"
+
+`

@@ -1,130 +1,383 @@
 Route123_BerryMastersHouse_MapScripts::
+# 2 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, Route123_BerryMastersHouse_OnTransition
 	.byte 0
 
-Route123_BerryMastersHouse_OnTransition:
+
+Route123_BerryMastersHouse_OnTransition::
+# 6 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	setflag FLAG_LANDMARK_BERRY_MASTERS_HOUSE
 	end
 
+
 Route123_BerryMastersHouse_EventScript_BerryMaster::
+# 11 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	lock
+# 12 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	faceplayer
+# 13 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	dotimebasedevents
-	goto_if_set FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY, Route123_BerryMastersHouse_EventScript_ReceivedBerryToday
+# 14 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto_if_set FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY, Route123_BerryMastersHouse_EventScript_BerryMaster_2
+Route123_BerryMastersHouse_EventScript_BerryMaster_1:
+# 17 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	msgbox Route123_BerryMastersHouse_Text_YoureDeservingOfBerry, MSGBOX_DEFAULT
+# 18 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	random NUM_BERRY_MASTER_BERRIES
+# 19 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	addvar VAR_RESULT, NUM_BERRY_MASTER_BERRIES_SKIPPED
+# 20 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	addvar VAR_RESULT, FIRST_BERRY_INDEX
+# 21 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	giveitem VAR_RESULT
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+# 22 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route123_BerryMastersHouse_EventScript_BerryMaster_5
+Route123_BerryMastersHouse_EventScript_BerryMaster_4:
+# 25 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	setflag FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY
+# 26 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	msgbox Route123_BerryMastersHouse_Text_WhyBeStingyTakeAnother, MSGBOX_DEFAULT
+# 27 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	random NUM_BERRY_MASTER_BERRIES
+# 28 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	addvar VAR_RESULT, NUM_BERRY_MASTER_BERRIES_SKIPPED
+# 29 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	addvar VAR_RESULT, FIRST_BERRY_INDEX
+# 30 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	giveitem VAR_RESULT
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+# 31 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route123_BerryMastersHouse_EventScript_BerryMaster_8
+Route123_BerryMastersHouse_EventScript_BerryMaster_7:
+# 34 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	msgbox Route123_BerryMastersHouse_Text_VisitPrettyPetalFlowerShop, MSGBOX_DEFAULT
+# 35 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	release
 	end
+
+Route123_BerryMastersHouse_EventScript_BerryMaster_2:
+# 15 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Route123_BerryMastersHouse_EventScript_ReceivedBerryToday
+	goto Route123_BerryMastersHouse_EventScript_BerryMaster_1
+
+Route123_BerryMastersHouse_EventScript_BerryMaster_5:
+# 23 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto Route123_BerryMastersHouse_EventScript_BerryMaster_4
+
+Route123_BerryMastersHouse_EventScript_BerryMaster_8:
+# 32 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto Route123_BerryMastersHouse_EventScript_BerryMaster_7
+
 
 Route123_BerryMastersHouse_EventScript_ReceivedBerryToday::
+# 40 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	msgbox Route123_BerryMastersHouse_Text_DoneForToday, MSGBOX_DEFAULT
+# 41 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	release
 	end
+
 
 Route123_BerryMastersHouse_EventScript_BerryMastersWife::
+# 46 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	lock
+# 47 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	faceplayer
+# 48 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	dotimebasedevents
-	goto_if_set FLAG_DAILY_BERRY_MASTERS_WIFE, Route123_BerryMastersHouse_EventScript_ReceivedWifeBerryToday
+# 49 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto_if_set FLAG_DAILY_BERRY_MASTERS_WIFE, Route123_BerryMastersHouse_EventScript_BerryMastersWife_2
+Route123_BerryMastersHouse_EventScript_BerryMastersWife_1:
+# 52 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	msgbox Route123_BerryMastersHouse_Text_HeardAGoodSayingLately, MSGBOX_DEFAULT
+# 53 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	setvar VAR_0x8004, EASY_CHAT_TYPE_GOOD_SAYING
+# 54 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	call Common_ShowEasyChatScreen
+# 55 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	lock
+# 56 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	faceplayer
-	goto_if_eq VAR_RESULT, TRUE, Route123_BerryMastersHouse_EventScript_GavePhrase
-	goto_if_eq VAR_RESULT, FALSE, Route123_BerryMastersHouse_EventScript_CancelPhrase
+# 57 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route123_BerryMastersHouse_EventScript_BerryMastersWife_5
+Route123_BerryMastersHouse_EventScript_BerryMastersWife_4:
+# 60 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route123_BerryMastersHouse_EventScript_BerryMastersWife_8
+Route123_BerryMastersHouse_EventScript_BerryMastersWife_7:
 	end
+
+Route123_BerryMastersHouse_EventScript_BerryMastersWife_2:
+# 50 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Route123_BerryMastersHouse_EventScript_ReceivedWifeBerryToday
+	goto Route123_BerryMastersHouse_EventScript_BerryMastersWife_1
+
+Route123_BerryMastersHouse_EventScript_BerryMastersWife_5:
+# 58 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Route123_BerryMastersHouse_EventScript_GavePhrase
+	goto Route123_BerryMastersHouse_EventScript_BerryMastersWife_4
+
+Route123_BerryMastersHouse_EventScript_BerryMastersWife_8:
+# 61 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Route123_BerryMastersHouse_EventScript_CancelPhrase
+	goto Route123_BerryMastersHouse_EventScript_BerryMastersWife_7
+
 
 Route123_BerryMastersHouse_EventScript_CancelPhrase::
+# 67 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	msgbox Route123_BerryMastersHouse_Text_Ah, MSGBOX_DEFAULT
+# 68 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	msgbox Route123_BerryMastersHouse_Text_JoyNeverGoesOutOfMyLife, MSGBOX_DEFAULT
+# 69 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	release
 	end
+
 
 Route123_BerryMastersHouse_EventScript_GavePhrase::
-	goto_if_eq VAR_0x8004, NOT_SPECIAL_PHRASE, Route123_BerryMastersHouse_EventScript_GiveNormalBerry
-	goto_if_eq VAR_0x8004, PHRASE_GREAT_BATTLE, Route123_BerryMastersHouse_EventScript_GiveSpelonBerry
-	goto_if_eq VAR_0x8004, PHRASE_CHALLENGE_CONTEST, Route123_BerryMastersHouse_EventScript_GivePamtreBerry
-	goto_if_eq VAR_0x8004, PHRASE_OVERWHELMING_LATIAS, Route123_BerryMastersHouse_EventScript_GiveWatmelBerry
-	goto_if_eq VAR_0x8004, PHRASE_COOL_LATIOS, Route123_BerryMastersHouse_EventScript_GiveDurinBerry
-	goto_if_eq VAR_0x8004, PHRASE_SUPER_HUSTLE, Route123_BerryMastersHouse_EventScript_GiveBelueBerry
+# 74 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	compare VAR_0x8004, NOT_SPECIAL_PHRASE
+	goto_if_eq Route123_BerryMastersHouse_EventScript_GavePhrase_2
+Route123_BerryMastersHouse_EventScript_GavePhrase_1:
+# 77 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	compare VAR_0x8004, PHRASE_GREAT_BATTLE
+	goto_if_eq Route123_BerryMastersHouse_EventScript_GavePhrase_5
+Route123_BerryMastersHouse_EventScript_GavePhrase_4:
+# 80 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	compare VAR_0x8004, PHRASE_CHALLENGE_CONTEST
+	goto_if_eq Route123_BerryMastersHouse_EventScript_GavePhrase_8
+Route123_BerryMastersHouse_EventScript_GavePhrase_7:
+# 83 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	compare VAR_0x8004, PHRASE_OVERWHELMING_LATIAS
+	goto_if_eq Route123_BerryMastersHouse_EventScript_GavePhrase_11
+Route123_BerryMastersHouse_EventScript_GavePhrase_10:
+# 86 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	compare VAR_0x8004, PHRASE_COOL_LATIOS
+	goto_if_eq Route123_BerryMastersHouse_EventScript_GavePhrase_14
+Route123_BerryMastersHouse_EventScript_GavePhrase_13:
+# 89 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	compare VAR_0x8004, PHRASE_SUPER_HUSTLE
+	goto_if_eq Route123_BerryMastersHouse_EventScript_GavePhrase_17
+Route123_BerryMastersHouse_EventScript_GavePhrase_16:
 	end
+
+Route123_BerryMastersHouse_EventScript_GavePhrase_2:
+# 75 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Route123_BerryMastersHouse_EventScript_GiveNormalBerry
+	goto Route123_BerryMastersHouse_EventScript_GavePhrase_1
+
+Route123_BerryMastersHouse_EventScript_GavePhrase_5:
+# 78 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Route123_BerryMastersHouse_EventScript_GiveSpelonBerry
+	goto Route123_BerryMastersHouse_EventScript_GavePhrase_4
+
+Route123_BerryMastersHouse_EventScript_GavePhrase_8:
+# 81 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Route123_BerryMastersHouse_EventScript_GivePamtreBerry
+	goto Route123_BerryMastersHouse_EventScript_GavePhrase_7
+
+Route123_BerryMastersHouse_EventScript_GavePhrase_11:
+# 84 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Route123_BerryMastersHouse_EventScript_GiveWatmelBerry
+	goto Route123_BerryMastersHouse_EventScript_GavePhrase_10
+
+Route123_BerryMastersHouse_EventScript_GavePhrase_14:
+# 87 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Route123_BerryMastersHouse_EventScript_GiveDurinBerry
+	goto Route123_BerryMastersHouse_EventScript_GavePhrase_13
+
+Route123_BerryMastersHouse_EventScript_GavePhrase_17:
+# 90 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Route123_BerryMastersHouse_EventScript_GiveBelueBerry
+	goto Route123_BerryMastersHouse_EventScript_GavePhrase_16
+
 
 Route123_BerryMastersHouse_EventScript_GiveNormalBerry::
+# 96 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	msgbox Route123_BerryMastersHouse_Text_GoodSayingTakeThis, MSGBOX_DEFAULT
+# 97 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	random NUM_BERRY_MASTER_WIFE_BERRIES
+# 98 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	addvar VAR_RESULT, FIRST_BERRY_INDEX
+# 99 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	giveitem VAR_RESULT
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+# 100 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route123_BerryMastersHouse_EventScript_GiveNormalBerry_2
+Route123_BerryMastersHouse_EventScript_GiveNormalBerry_1:
+# 103 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	goto Route123_BerryMastersHouse_EventScript_GaveBerry
+# 104 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	release
 	end
+
+Route123_BerryMastersHouse_EventScript_GiveNormalBerry_2:
+# 101 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto Route123_BerryMastersHouse_EventScript_GiveNormalBerry_1
+
 
 Route123_BerryMastersHouse_EventScript_GiveSpelonBerry::
-	goto_if_set FLAG_RECEIVED_SPELON_BERRY, Route123_BerryMastersHouse_EventScript_GiveNormalBerry
+# 109 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto_if_set FLAG_RECEIVED_SPELON_BERRY, Route123_BerryMastersHouse_EventScript_GiveSpelonBerry_2
+Route123_BerryMastersHouse_EventScript_GiveSpelonBerry_1:
+# 112 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	msgbox Route123_BerryMastersHouse_Text_InspirationalTakeThis, MSGBOX_DEFAULT
+# 113 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	giveitem ITEM_SPELON_BERRY
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+# 114 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route123_BerryMastersHouse_EventScript_GiveSpelonBerry_5
+Route123_BerryMastersHouse_EventScript_GiveSpelonBerry_4:
+# 117 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	setflag FLAG_RECEIVED_SPELON_BERRY
+# 118 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	goto Route123_BerryMastersHouse_EventScript_GaveBerry
 	end
+
+Route123_BerryMastersHouse_EventScript_GiveSpelonBerry_2:
+# 110 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Route123_BerryMastersHouse_EventScript_GiveNormalBerry
+	goto Route123_BerryMastersHouse_EventScript_GiveSpelonBerry_1
+
+Route123_BerryMastersHouse_EventScript_GiveSpelonBerry_5:
+# 115 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto Route123_BerryMastersHouse_EventScript_GiveSpelonBerry_4
+
 
 Route123_BerryMastersHouse_EventScript_GivePamtreBerry::
-	goto_if_set FLAG_RECEIVED_PAMTRE_BERRY, Route123_BerryMastersHouse_EventScript_GiveNormalBerry
+# 123 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto_if_set FLAG_RECEIVED_PAMTRE_BERRY, Route123_BerryMastersHouse_EventScript_GivePamtreBerry_2
+Route123_BerryMastersHouse_EventScript_GivePamtreBerry_1:
+# 126 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	msgbox Route123_BerryMastersHouse_Text_InspirationalTakeThis, MSGBOX_DEFAULT
+# 127 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	giveitem ITEM_PAMTRE_BERRY
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+# 128 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route123_BerryMastersHouse_EventScript_GivePamtreBerry_5
+Route123_BerryMastersHouse_EventScript_GivePamtreBerry_4:
+# 131 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	setflag FLAG_RECEIVED_PAMTRE_BERRY
+# 132 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	goto Route123_BerryMastersHouse_EventScript_GaveBerry
 	end
+
+Route123_BerryMastersHouse_EventScript_GivePamtreBerry_2:
+# 124 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Route123_BerryMastersHouse_EventScript_GiveNormalBerry
+	goto Route123_BerryMastersHouse_EventScript_GivePamtreBerry_1
+
+Route123_BerryMastersHouse_EventScript_GivePamtreBerry_5:
+# 129 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto Route123_BerryMastersHouse_EventScript_GivePamtreBerry_4
+
 
 Route123_BerryMastersHouse_EventScript_GiveWatmelBerry::
-	goto_if_set FLAG_RECEIVED_WATMEL_BERRY, Route123_BerryMastersHouse_EventScript_GiveNormalBerry
+# 137 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto_if_set FLAG_RECEIVED_WATMEL_BERRY, Route123_BerryMastersHouse_EventScript_GiveWatmelBerry_2
+Route123_BerryMastersHouse_EventScript_GiveWatmelBerry_1:
+# 140 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	msgbox Route123_BerryMastersHouse_Text_InspirationalTakeThis, MSGBOX_DEFAULT
+# 141 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	giveitem ITEM_WATMEL_BERRY
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+# 142 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route123_BerryMastersHouse_EventScript_GiveWatmelBerry_5
+Route123_BerryMastersHouse_EventScript_GiveWatmelBerry_4:
+# 145 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	setflag FLAG_RECEIVED_WATMEL_BERRY
+# 146 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	goto Route123_BerryMastersHouse_EventScript_GaveBerry
 	end
+
+Route123_BerryMastersHouse_EventScript_GiveWatmelBerry_2:
+# 138 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Route123_BerryMastersHouse_EventScript_GiveNormalBerry
+	goto Route123_BerryMastersHouse_EventScript_GiveWatmelBerry_1
+
+Route123_BerryMastersHouse_EventScript_GiveWatmelBerry_5:
+# 143 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto Route123_BerryMastersHouse_EventScript_GiveWatmelBerry_4
+
 
 Route123_BerryMastersHouse_EventScript_GiveDurinBerry::
-	goto_if_set FLAG_RECEIVED_DURIN_BERRY, Route123_BerryMastersHouse_EventScript_GiveNormalBerry
+# 151 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto_if_set FLAG_RECEIVED_DURIN_BERRY, Route123_BerryMastersHouse_EventScript_GiveDurinBerry_2
+Route123_BerryMastersHouse_EventScript_GiveDurinBerry_1:
+# 154 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	msgbox Route123_BerryMastersHouse_Text_InspirationalTakeThis, MSGBOX_DEFAULT
+# 155 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	giveitem ITEM_DURIN_BERRY
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+# 156 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route123_BerryMastersHouse_EventScript_GiveDurinBerry_5
+Route123_BerryMastersHouse_EventScript_GiveDurinBerry_4:
+# 159 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	setflag FLAG_RECEIVED_DURIN_BERRY
+# 160 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	goto Route123_BerryMastersHouse_EventScript_GaveBerry
 	end
+
+Route123_BerryMastersHouse_EventScript_GiveDurinBerry_2:
+# 152 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Route123_BerryMastersHouse_EventScript_GiveNormalBerry
+	goto Route123_BerryMastersHouse_EventScript_GiveDurinBerry_1
+
+Route123_BerryMastersHouse_EventScript_GiveDurinBerry_5:
+# 157 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto Route123_BerryMastersHouse_EventScript_GiveDurinBerry_4
+
 
 Route123_BerryMastersHouse_EventScript_GiveBelueBerry::
-	goto_if_set FLAG_RECEIVED_BELUE_BERRY, Route123_BerryMastersHouse_EventScript_GiveNormalBerry
+# 165 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto_if_set FLAG_RECEIVED_BELUE_BERRY, Route123_BerryMastersHouse_EventScript_GiveBelueBerry_2
+Route123_BerryMastersHouse_EventScript_GiveBelueBerry_1:
+# 168 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	msgbox Route123_BerryMastersHouse_Text_InspirationalTakeThis, MSGBOX_DEFAULT
+# 169 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	giveitem ITEM_BELUE_BERRY
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+# 170 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route123_BerryMastersHouse_EventScript_GiveBelueBerry_5
+Route123_BerryMastersHouse_EventScript_GiveBelueBerry_4:
+# 173 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	setflag FLAG_RECEIVED_BELUE_BERRY
+# 174 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	goto Route123_BerryMastersHouse_EventScript_GaveBerry
 	end
 
+Route123_BerryMastersHouse_EventScript_GiveBelueBerry_2:
+# 166 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Route123_BerryMastersHouse_EventScript_GiveNormalBerry
+	goto Route123_BerryMastersHouse_EventScript_GiveBelueBerry_1
+
+Route123_BerryMastersHouse_EventScript_GiveBelueBerry_5:
+# 171 "data/maps/Route123_BerryMastersHouse/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto Route123_BerryMastersHouse_EventScript_GiveBelueBerry_4
+
+
 Route123_BerryMastersHouse_EventScript_ReceivedWifeBerryToday::
+# 179 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	msgbox Route123_BerryMastersHouse_Text_JoyNeverGoesOutOfMyLife, MSGBOX_DEFAULT
+# 180 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	release
 	end
 
+
 Route123_BerryMastersHouse_EventScript_GaveBerry::
+# 185 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	setflag FLAG_DAILY_BERRY_MASTERS_WIFE
+# 186 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	msgbox Route123_BerryMastersHouse_Text_JoyNeverGoesOutOfMyLife, MSGBOX_DEFAULT
+# 187 "data/maps/Route123_BerryMastersHouse/scripts.pory"
 	release
 	end
 

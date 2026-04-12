@@ -1,215 +1,622 @@
 BattleFrontier_ScottsHouse_MapScripts::
 	.byte 0
 
+
 BattleFrontier_ScottsHouse_EventScript_Scott::
+# 4 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	lock
+# 5 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	faceplayer
-	goto_if_set FLAG_TEMP_4, BattleFrontier_ScottsHouse_EventScript_GivenBerry
-	goto_if_set FLAG_TEMP_3, BattleFrontier_ScottsHouse_EventScript_GivenShield
-	goto_if_set FLAG_TEMP_2, BattleFrontier_ScottsHouse_EventScript_GivenBattlePoints
+# 6 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_set FLAG_TEMP_4, BattleFrontier_ScottsHouse_EventScript_Scott_2
+BattleFrontier_ScottsHouse_EventScript_Scott_1:
+# 9 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_set FLAG_TEMP_3, BattleFrontier_ScottsHouse_EventScript_Scott_5
+BattleFrontier_ScottsHouse_EventScript_Scott_4:
+# 12 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_set FLAG_TEMP_2, BattleFrontier_ScottsHouse_EventScript_Scott_8
+BattleFrontier_ScottsHouse_EventScript_Scott_7:
+# 15 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveItems
 	end
 
+BattleFrontier_ScottsHouse_EventScript_Scott_2:
+# 7 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_GivenBerry
+	goto BattleFrontier_ScottsHouse_EventScript_Scott_1
+
+BattleFrontier_ScottsHouse_EventScript_Scott_5:
+# 10 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_GivenShield
+	goto BattleFrontier_ScottsHouse_EventScript_Scott_4
+
+BattleFrontier_ScottsHouse_EventScript_Scott_8:
+# 13 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_GivenBattlePoints
+	goto BattleFrontier_ScottsHouse_EventScript_Scott_7
+
+
 BattleFrontier_ScottsHouse_EventScript_CheckGiveItems::
-	goto_if_unset FLAG_SCOTT_GIVES_BATTLE_POINTS, BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier
-	goto_if_unset FLAG_COLLECTED_ALL_SILVER_SYMBOLS, BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols
-	goto_if_unset FLAG_COLLECTED_ALL_GOLD_SYMBOLS, BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols
+# 20 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_SCOTT_GIVES_BATTLE_POINTS, BattleFrontier_ScottsHouse_EventScript_CheckGiveItems_2
+BattleFrontier_ScottsHouse_EventScript_CheckGiveItems_1:
+# 23 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_COLLECTED_ALL_SILVER_SYMBOLS, BattleFrontier_ScottsHouse_EventScript_CheckGiveItems_5
+BattleFrontier_ScottsHouse_EventScript_CheckGiveItems_4:
+# 26 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_COLLECTED_ALL_GOLD_SYMBOLS, BattleFrontier_ScottsHouse_EventScript_CheckGiveItems_8
+BattleFrontier_ScottsHouse_EventScript_CheckGiveItems_7:
+# 29 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	end
 
+BattleFrontier_ScottsHouse_EventScript_CheckGiveItems_2:
+# 21 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveItems_1
+
+BattleFrontier_ScottsHouse_EventScript_CheckGiveItems_5:
+# 24 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveItems_4
+
+BattleFrontier_ScottsHouse_EventScript_CheckGiveItems_8:
+# 27 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveItems_7
+
+
 BattleFrontier_ScottsHouse_EventScript_CheckGiveShield::
-	goto_if_unset FLAG_RECEIVED_SILVER_SHIELD, BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield
-	goto_if_unset FLAG_RECEIVED_GOLD_SHIELD, BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield
+# 34 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_RECEIVED_SILVER_SHIELD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield_2
+BattleFrontier_ScottsHouse_EventScript_CheckGiveShield_1:
+# 37 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_RECEIVED_GOLD_SHIELD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield_5
+BattleFrontier_ScottsHouse_EventScript_CheckGiveShield_4:
+# 40 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	goto BattleFrontier_ScottsHouse_EventScript_RandomComment
 	end
+
+BattleFrontier_ScottsHouse_EventScript_CheckGiveShield_2:
+# 35 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield_1
+
+BattleFrontier_ScottsHouse_EventScript_CheckGiveShield_5:
+# 38 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield_4
+
 
 BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols::
-	goto_if_unset FLAG_SYS_TOWER_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_DOME_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_PALACE_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_ARENA_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_FACTORY_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_PIKE_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_PYRAMID_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+# 45 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_SYS_TOWER_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_2
+BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_1:
+# 48 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_SYS_DOME_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_5
+BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_4:
+# 51 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_SYS_PALACE_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_8
+BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_7:
+# 54 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_SYS_ARENA_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_11
+BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_10:
+# 57 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_SYS_FACTORY_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_14
+BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_13:
+# 60 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_SYS_PIKE_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_17
+BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_16:
+# 63 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_SYS_PYRAMID_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_20
+BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_19:
+# 66 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	msgbox BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols, MSGBOX_DEFAULT
+# 67 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	giveitem ITEM_LANSAT_BERRY
-	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_ScottsHouse_EventScript_BerryPocketFull
+# 68 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_23
+BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_22:
+# 71 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	setflag FLAG_COLLECTED_ALL_SILVER_SYMBOLS
+# 72 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	setflag FLAG_TEMP_4
+# 73 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	release
 	end
+
+BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_2:
+# 46 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_1
+
+BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_5:
+# 49 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_4
+
+BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_8:
+# 52 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_7
+
+BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_11:
+# 55 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_10
+
+BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_14:
+# 58 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_13
+
+BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_17:
+# 61 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_16
+
+BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_20:
+# 64 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_19
+
+BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_23:
+# 69 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_BerryPocketFull
+	goto BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols_22
+
 
 BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols::
-	goto_if_unset FLAG_SYS_TOWER_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_DOME_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_PALACE_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_ARENA_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_FACTORY_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_PIKE_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_PYRAMID_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+# 78 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_SYS_TOWER_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_2
+BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_1:
+# 81 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_SYS_DOME_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_5
+BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_4:
+# 84 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_SYS_PALACE_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_8
+BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_7:
+# 87 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_SYS_ARENA_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_11
+BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_10:
+# 90 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_SYS_FACTORY_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_14
+BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_13:
+# 93 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_SYS_PIKE_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_17
+BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_16:
+# 96 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto_if_unset FLAG_SYS_PYRAMID_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_20
+BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_19:
+# 99 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	msgbox BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols, MSGBOX_DEFAULT
+# 100 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	giveitem ITEM_STARF_BERRY
-	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_ScottsHouse_EventScript_BerryPocketFull
+# 101 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_23
+BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_22:
+# 104 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	setflag FLAG_COLLECTED_ALL_GOLD_SYMBOLS
+# 105 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	setflag FLAG_TEMP_4
+# 106 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	release
 	end
+
+BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_2:
+# 79 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_1
+
+BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_5:
+# 82 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_4
+
+BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_8:
+# 85 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_7
+
+BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_11:
+# 88 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_10
+
+BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_14:
+# 91 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_13
+
+BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_17:
+# 94 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_16
+
+BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_20:
+# 97 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_19
+
+BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_23:
+# 102 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_BerryPocketFull
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols_22
+
 
 BattleFrontier_ScottsHouse_EventScript_BerryPocketFull::
+# 111 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	msgbox BattleFrontier_ScottsHouse_Text_BerryPocketStuffed, MSGBOX_DEFAULT
+# 112 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	release
 	end
+
 
 BattleFrontier_ScottsHouse_EventScript_GivenBerry::
+# 117 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	msgbox BattleFrontier_ScottsHouse_Text_SoGladIBroughtYouHere, MSGBOX_DEFAULT
+# 118 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	release
 	end
+
 
 BattleFrontier_ScottsHouse_EventScript_RandomComment::
+# 123 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	random 3
-	goto_if_eq VAR_RESULT, 1, BattleFrontier_ScottsHouse_EventScript_FrontierBrainComment
-	goto_if_eq VAR_RESULT, 2, BattleFrontier_ScottsHouse_EventScript_ArtisanCaveComment
+# 124 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_RandomComment_2
+BattleFrontier_ScottsHouse_EventScript_RandomComment_1:
+# 127 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	compare VAR_RESULT, 2
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_RandomComment_5
+BattleFrontier_ScottsHouse_EventScript_RandomComment_4:
+# 130 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	msgbox BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers, MSGBOX_DEFAULT
+# 131 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	release
 	end
+
+BattleFrontier_ScottsHouse_EventScript_RandomComment_2:
+# 125 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_FrontierBrainComment
+	goto BattleFrontier_ScottsHouse_EventScript_RandomComment_1
+
+BattleFrontier_ScottsHouse_EventScript_RandomComment_5:
+# 128 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_ArtisanCaveComment
+	goto BattleFrontier_ScottsHouse_EventScript_RandomComment_4
+
 
 BattleFrontier_ScottsHouse_EventScript_FrontierBrainComment::
+# 136 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	msgbox BattleFrontier_ScottsHouse_Text_HaveYouMetFrontierBrain, MSGBOX_DEFAULT
+# 137 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	release
 	end
+
 
 BattleFrontier_ScottsHouse_EventScript_ArtisanCaveComment::
+# 142 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	msgbox BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier, MSGBOX_DEFAULT
+# 143 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	release
 	end
+
 
 BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield::
+# 148 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+# 149 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
+# 150 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	tower_get TOWER_DATA_WIN_STREAK
-	goto_if_ge VAR_RESULT, 50, BattleFrontier_ScottsHouse_EventScript_GiveSilverShield
+# 151 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	compare VAR_RESULT, 50
+	goto_if_ge BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield_2
+BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield_1:
+# 154 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_OPEN
+# 155 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	tower_get TOWER_DATA_WIN_STREAK
-	goto_if_ge VAR_RESULT, 50, BattleFrontier_ScottsHouse_EventScript_GiveSilverShield
+# 156 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	compare VAR_RESULT, 50
+	goto_if_ge BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield_5
+BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield_4:
+# 159 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	goto BattleFrontier_ScottsHouse_EventScript_RandomComment
 	end
+
+BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield_2:
+# 152 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_GiveSilverShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield_1
+
+BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield_5:
+# 157 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_GiveSilverShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield_4
+
 
 BattleFrontier_ScottsHouse_EventScript_GiveSilverShield::
+# 164 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	msgbox BattleFrontier_ScottsHouse_Text_Beat50TrainersInARow, MSGBOX_DEFAULT
+# 165 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	givedecoration DECOR_SILVER_SHIELD
-	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_ScottsHouse_EventScript_NoRoomForShield
+# 166 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_GiveSilverShield_2
+BattleFrontier_ScottsHouse_EventScript_GiveSilverShield_1:
+# 169 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	setflag FLAG_RECEIVED_SILVER_SHIELD
+# 170 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	setflag FLAG_TEMP_3
+# 171 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	goto BattleFrontier_ScottsHouse_EventScript_GivenShield
 	end
 
+BattleFrontier_ScottsHouse_EventScript_GiveSilverShield_2:
+# 167 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_NoRoomForShield
+	goto BattleFrontier_ScottsHouse_EventScript_GiveSilverShield_1
+
+
 BattleFrontier_ScottsHouse_EventScript_NoRoomForShield::
+# 176 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	msgbox BattleFrontier_ScottsHouse_Text_ComeBackForThisLater, MSGBOX_DEFAULT
+# 177 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	release
 	end
+
 
 BattleFrontier_ScottsHouse_EventScript_GivenShield::
+# 182 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	msgbox BattleFrontier_ScottsHouse_Text_ExpectingToHearEvenGreaterThings, MSGBOX_DEFAULT
+# 183 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	release
 	end
 
+
 BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield::
+# 188 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+# 189 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
+# 190 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	tower_get TOWER_DATA_WIN_STREAK
-	goto_if_ge VAR_RESULT, 100, BattleFrontier_ScottsHouse_EventScript_GiveGoldShield
+# 191 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	compare VAR_RESULT, 100
+	goto_if_ge BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield_2
+BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield_1:
+# 194 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_OPEN
+# 195 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	tower_get TOWER_DATA_WIN_STREAK
-	goto_if_ge VAR_RESULT, 100, BattleFrontier_ScottsHouse_EventScript_GiveGoldShield
+# 196 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	compare VAR_RESULT, 100
+	goto_if_ge BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield_5
+BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield_4:
+# 199 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	goto BattleFrontier_ScottsHouse_EventScript_RandomComment
 	end
 
+BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield_2:
+# 192 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_GiveGoldShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield_1
+
+BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield_5:
+# 197 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_GiveGoldShield
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield_4
+
+
 BattleFrontier_ScottsHouse_EventScript_GiveGoldShield::
+# 204 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	msgbox BattleFrontier_ScottsHouse_Text_Beat100TrainersInARow, MSGBOX_DEFAULT
+# 205 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	givedecoration DECOR_GOLD_SHIELD
-	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_ScottsHouse_EventScript_NoRoomForShield
+# 206 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_GiveGoldShield_2
+BattleFrontier_ScottsHouse_EventScript_GiveGoldShield_1:
+# 209 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	setflag FLAG_RECEIVED_GOLD_SHIELD
+# 210 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	setflag FLAG_TEMP_3
+# 211 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	goto BattleFrontier_ScottsHouse_EventScript_GivenShield
 	end
 
+BattleFrontier_ScottsHouse_EventScript_GiveGoldShield_2:
+# 207 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_NoRoomForShield
+	goto BattleFrontier_ScottsHouse_EventScript_GiveGoldShield_1
+
+
 BattleFrontier_ScottsHouse_EventScript_GivenBattlePoints::
+# 216 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	msgbox BattleFrontier_ScottsHouse_Text_ExpectingGreatThings, MSGBOX_DEFAULT
+# 217 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	release
 	end
 
+
 BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier::
+# 222 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	msgbox BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier, MSGBOX_DEFAULT
+# 223 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	closemessage
+# 224 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	delay 30
-	call_if_eq VAR_FACING, DIR_NORTH, BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayNorth
-	call_if_eq VAR_FACING, DIR_SOUTH, BattleFrontier_ScottsHouse_EventScript_ScottFaceAwaySouth
-	call_if_eq VAR_FACING, DIR_EAST, BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayEast
-	call_if_eq VAR_FACING, DIR_WEST, BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest
+# 225 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	compare VAR_FACING, DIR_NORTH
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_2
+BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_1:
+# 228 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	compare VAR_FACING, DIR_SOUTH
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_5
+BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_4:
+# 231 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	compare VAR_FACING, DIR_EAST
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_8
+BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_7:
+# 234 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	compare VAR_FACING, DIR_WEST
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_11
+BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_10:
+# 237 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	msgbox BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal, MSGBOX_DEFAULT
+# 238 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	applymovement LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_FacePlayer
+# 239 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	waitmovement 0
+# 240 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	msgbox BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing, MSGBOX_DEFAULT
-	goto_if_eq VAR_SCOTT_STATE, 13, BattleFrontier_ScottsHouse_EventScript_Give4BattlePoints
-	goto_if_ge VAR_SCOTT_STATE, 9, BattleFrontier_ScottsHouse_EventScript_Give3BattlePoints
-	goto_if_ge VAR_SCOTT_STATE, 6, BattleFrontier_ScottsHouse_EventScript_Give2BattlePoints
+# 241 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	compare VAR_SCOTT_STATE, 13
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_14
+BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_13:
+# 244 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	compare VAR_SCOTT_STATE, 9
+	goto_if_ge BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_17
+BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_16:
+# 247 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	compare VAR_SCOTT_STATE, 6
+	goto_if_ge BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_20
+BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_19:
+# 250 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	goto BattleFrontier_ScottsHouse_EventScript_Give1BattlePoint
 	end
 
+BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_2:
+# 226 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	call BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayNorth
+	goto BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_1
+
+BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_5:
+# 229 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	call BattleFrontier_ScottsHouse_EventScript_ScottFaceAwaySouth
+	goto BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_4
+
+BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_8:
+# 232 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	call BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayEast
+	goto BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_7
+
+BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_11:
+# 235 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	call BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest
+	goto BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_10
+
+BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_14:
+# 242 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_Give4BattlePoints
+	goto BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_13
+
+BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_17:
+# 245 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_Give3BattlePoints
+	goto BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_16
+
+BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_20:
+# 248 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
+	goto BattleFrontier_ScottsHouse_EventScript_Give2BattlePoints
+	goto BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier_19
+
+
 BattleFrontier_ScottsHouse_EventScript_Give4BattlePoints::
+# 255 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	buffernumberstring STR_VAR_1, 4
+# 256 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	setvar VAR_0x8004, 4
+# 257 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	goto BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints
 	end
+
 
 BattleFrontier_ScottsHouse_EventScript_Give3BattlePoints::
+# 262 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	buffernumberstring STR_VAR_1, 3
+# 263 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	setvar VAR_0x8004, 3
+# 264 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	goto BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints
 	end
+
 
 BattleFrontier_ScottsHouse_EventScript_Give2BattlePoints::
+# 269 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	buffernumberstring STR_VAR_1, 2
+# 270 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	setvar VAR_0x8004, 2
+# 271 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	goto BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints
 	end
+
 
 BattleFrontier_ScottsHouse_EventScript_Give1BattlePoint::
+# 276 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	buffernumberstring STR_VAR_1, 1
+# 277 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	setvar VAR_0x8004, 1
+# 278 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	goto BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints
 	end
 
+
 BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints::
+# 283 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	special GiveFrontierBattlePoints
+# 284 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	msgbox BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
+# 285 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	msgbox BattleFrontier_ScottsHouse_Text_ExplainBattlePoints, MSGBOX_DEFAULT
+# 286 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	setflag FLAG_SCOTT_GIVES_BATTLE_POINTS
+# 287 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	setflag FLAG_TEMP_2
+# 288 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	release
 	end
 
+
 BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayNorth::
+# 293 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	applymovement LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_WalkInPlaceFasterUp
+# 294 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	waitmovement 0
 	return
+
 
 BattleFrontier_ScottsHouse_EventScript_ScottFaceAwaySouth::
+# 299 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	applymovement LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_WalkInPlaceFasterDown
+# 300 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	waitmovement 0
 	return
+
 
 BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayEast::
+# 305 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	applymovement LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_WalkInPlaceFasterRight
+# 306 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	waitmovement 0
 	return
+
 
 BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest::
+# 311 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	applymovement LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_WalkInPlaceFasterLeft
+# 312 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	waitmovement 0
 	return
 
-BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier:
+
+BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier::
+# 316 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	.string "SCOTT: Well, hello and welcome!\n"
 	.string "Heheh… Sorry about the cramped space.\p"
 	.string "Anyway, {PLAYER}{KUN}, let me formally\n"
@@ -218,7 +625,8 @@ BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier:
 	.string "It took me years and years, but I've\l"
 	.string "finally given shape to my dream.$"
 
-BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal:
+BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal::
+# 326 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	.string "On reflection, it was a terribly long\n"
 	.string "journey…\p"
 	.string "I left home alone on a quest to find\n"
@@ -226,7 +634,8 @@ BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal:
 	.string "No one can imagine how much effort\n"
 	.string "or time it took to make this real.$"
 
-BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing:
+BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing::
+# 335 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	.string "But that's all in the past.\n"
 	.string "No point dwelling on that!\p"
 	.string "All I want for you is to enjoy battling\n"
@@ -235,11 +644,13 @@ BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing:
 	.string "as a memento for all the time our\l"
 	.string "paths crossed on our journeys.$"
 
-BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints:
+BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints::
+# 345 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	.string "{PLAYER} obtained\n"
 	.string "{STR_VAR_1} Battle Point(s).$"
 
-BattleFrontier_ScottsHouse_Text_ExplainBattlePoints:
+BattleFrontier_ScottsHouse_Text_ExplainBattlePoints::
+# 350 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	.string "SCOTT: You can check your Battle\n"
 	.string "Points on your FRONTIER PASS.\p"
 	.string "The more success you have here at\n"
@@ -248,10 +659,12 @@ BattleFrontier_ScottsHouse_Text_ExplainBattlePoints:
 	.string "Use your Battle Points the way you\n"
 	.string "see fit, like trading them for items.$"
 
-BattleFrontier_ScottsHouse_Text_ExpectingGreatThings:
+BattleFrontier_ScottsHouse_Text_ExpectingGreatThings::
+# 360 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	.string "I'm expecting great things from you!$"
 
-BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers:
+BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers::
+# 364 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	.string "SCOTT: Every TRAINER is an individual.\n"
 	.string "They all lead lives of their own.\p"
 	.string "But when they're in a battle,\n"
@@ -263,7 +676,8 @@ BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers:
 	.string "TRAINERS who are serious about\l"
 	.string "battling, and invite them here.$"
 
-BattleFrontier_ScottsHouse_Text_HaveYouMetFrontierBrain:
+BattleFrontier_ScottsHouse_Text_HaveYouMetFrontierBrain::
+# 377 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	.string "SCOTT: Have you met any of\n"
 	.string "the FRONTIER BRAINS?\p"
 	.string "Better yet, have you obtained any\n"
@@ -273,7 +687,8 @@ BattleFrontier_ScottsHouse_Text_HaveYouMetFrontierBrain:
 	.string "But I'm sure that seeing how tough\n"
 	.string "you are will startle even them!$"
 
-BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier:
+BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier::
+# 388 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	.string "SCOTT: You don't just train for battle,\n"
 	.string "right?\p"
 	.string "I think I remember you working on\n"
@@ -283,7 +698,8 @@ BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier:
 	.string "the BATTLE FRONTIER somewhere…\l"
 	.string "Fufufu!$"
 
-BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols:
+BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols::
+# 399 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	.string "SCOTT: Are you enjoying things in\n"
 	.string "the BATTLE FRONTIER?\p"
 	.string "…Wait a second…\n"
@@ -298,7 +714,8 @@ BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols:
 	.string "I want you to have this.\n"
 	.string "I'm sure you can put it to proper use.$"
 
-BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols:
+BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols::
+# 415 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	.string "SCOTT: I hope you're enjoying\n"
 	.string "everything in the BATTLE FRONTIER.\p"
 	.string "…Wait a second…\n"
@@ -313,35 +730,40 @@ BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols:
 	.string "I think you will be able to\n"
 	.string "appreciate the value of my gift!$"
 
-BattleFrontier_ScottsHouse_Text_SoGladIBroughtYouHere:
+BattleFrontier_ScottsHouse_Text_SoGladIBroughtYouHere::
+# 431 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	.string "I must say I have the gift of knowing\n"
 	.string "a good TRAINER when I see one.\p"
 	.string "I'm so glad I had the foresight to\n"
 	.string "bring you here!$"
 
-BattleFrontier_ScottsHouse_Text_BerryPocketStuffed:
+BattleFrontier_ScottsHouse_Text_BerryPocketStuffed::
+# 438 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	.string "Your BERRY POCKET seems to\n"
 	.string "be stuffed.$"
 
-BattleFrontier_ScottsHouse_Text_Beat50TrainersInARow:
+BattleFrontier_ScottsHouse_Text_Beat50TrainersInARow::
+# 443 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	.string "SCOTT: Oh, I heard about you!\n"
 	.string "How you ruled the BATTLE TOWER!\l"
 	.string "You beat over 50 TRAINERS in a row?\p"
 	.string "That's fantastic!\n"
 	.string "I want you to have this!$"
 
-BattleFrontier_ScottsHouse_Text_Beat100TrainersInARow:
+BattleFrontier_ScottsHouse_Text_Beat100TrainersInARow::
+# 451 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	.string "SCOTT: Oh, my! I heard about you!\n"
 	.string "How you overwhelmed the BATTLE TOWER!\l"
 	.string "You beat over 100 TRAINERS in a row?\p"
 	.string "That's ridiculously spectacular!\n"
 	.string "You've got to have this!$"
 
-BattleFrontier_ScottsHouse_Text_ExpectingToHearEvenGreaterThings:
+BattleFrontier_ScottsHouse_Text_ExpectingToHearEvenGreaterThings::
+# 459 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	.string "I'll be expecting to hear even greater\n"
 	.string "things about you now!$"
 
-BattleFrontier_ScottsHouse_Text_ComeBackForThisLater:
+BattleFrontier_ScottsHouse_Text_ComeBackForThisLater::
+# 464 "data/maps/BattleFrontier_ScottsHouse/scripts.pory"
 	.string "Oops, well, if you have too much\n"
 	.string "stuff, come back for this later.$"
-

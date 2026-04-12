@@ -1,27 +1,34 @@
-mapscripts PacifidlogTown_House1_MapScripts {}
+raw `
+PacifidlogTown_House1_MapScripts::
+	.byte 0
 
-script PacifidlogTown_House1_EventScript_Man {
-    msgbox(PacifidlogTown_House1_Text_RegiStory, MSGBOX_NPC)
-    end
-}
 
-script PacifidlogTown_House1_EventScript_Woman {
-    msgbox(PacifidlogTown_House1_Text_SixDotsOpenThreeDoors, MSGBOX_NPC)
-    end
-}
+PacifidlogTown_House1_EventScript_Man::
+# 4 "data/maps/PacifidlogTown_House1/scripts.pory"
+	msgbox PacifidlogTown_House1_Text_RegiStory, MSGBOX_NPC
+	end
 
-text PacifidlogTown_House1_Text_RegiStory {
-    "In the HOENN region, there are three\n"
-    "POKéMON that represent the power of\l"
-    "rock, ice, and steel.\p"
-    "Each of them is said to hide away deep\n"
-    "inside caves.\p"
-    "That's the story I heard when I was\n"
-    "just a little kid.$"
-}
 
-text PacifidlogTown_House1_Text_SixDotsOpenThreeDoors {
-    "“Six dots open three doors.”\p"
-    "Grandpa used to say that, but I don't\n"
-    "know what he meant.$"
-}
+PacifidlogTown_House1_EventScript_Woman::
+# 9 "data/maps/PacifidlogTown_House1/scripts.pory"
+	msgbox PacifidlogTown_House1_Text_SixDotsOpenThreeDoors, MSGBOX_NPC
+	end
+
+
+PacifidlogTown_House1_Text_RegiStory::
+# 13 "data/maps/PacifidlogTown_House1/scripts.pory"
+	.string "In the HOENN region, there are three\n"
+	.string "POKéMON that represent the power of\l"
+	.string "rock, ice, and steel.\p"
+	.string "Each of them is said to hide away deep\n"
+	.string "inside caves.\p"
+	.string "That's the story I heard when I was\n"
+	.string "just a little kid.$"
+
+PacifidlogTown_House1_Text_SixDotsOpenThreeDoors::
+# 23 "data/maps/PacifidlogTown_House1/scripts.pory"
+	.string "“Six dots open three doors.”\p"
+	.string "Grandpa used to say that, but I don't\n"
+	.string "know what he meant.$"
+
+`

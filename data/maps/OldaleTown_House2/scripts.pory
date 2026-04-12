@@ -1,22 +1,29 @@
-mapscripts OldaleTown_House2_MapScripts {}
+raw `
+OldaleTown_House2_MapScripts::
+	.byte 0
 
-script OldaleTown_House2_EventScript_Woman {
-    msgbox(OldaleTown_House2_Text_PokemonLevelUp, MSGBOX_NPC)
-    end
-}
 
-script OldaleTown_House2_EventScript_Man {
-    msgbox(OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon, MSGBOX_NPC)
-    end
-}
+OldaleTown_House2_EventScript_Woman::
+# 4 "data/maps/OldaleTown_House2/scripts.pory"
+	msgbox OldaleTown_House2_Text_PokemonLevelUp, MSGBOX_NPC
+	end
 
-text OldaleTown_House2_Text_PokemonLevelUp {
-    "When POKéMON battle, they eventually\n"
-    "level up and become stronger.$"
-}
 
-text OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon {
-    "If the POKéMON with you become\n"
-    "stronger, you'll be able to go farther\l"
-    "away from here.$"
-}
+OldaleTown_House2_EventScript_Man::
+# 9 "data/maps/OldaleTown_House2/scripts.pory"
+	msgbox OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon, MSGBOX_NPC
+	end
+
+
+OldaleTown_House2_Text_PokemonLevelUp::
+# 13 "data/maps/OldaleTown_House2/scripts.pory"
+	.string "When POKéMON battle, they eventually\n"
+	.string "level up and become stronger.$"
+
+OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon::
+# 18 "data/maps/OldaleTown_House2/scripts.pory"
+	.string "If the POKéMON with you become\n"
+	.string "stronger, you'll be able to go farther\l"
+	.string "away from here.$"
+
+`

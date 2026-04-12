@@ -1,36 +1,50 @@
-mapscripts SixIsland_Mart_Frlg_MapScripts {}
+raw `
+SixIsland_Mart_Frlg_MapScripts::
+	.byte 0
 
-script SixIsland_Mart_EventScript_Clerk {
-    lock
-    faceplayer
-    message(gText_HowMayIServeYou)
-    waitmessage()
-    pokemart(SixIsland_Mart_Items)
-    msgbox(gText_PleaseComeAgain)
-    release
-    end
-}
 
-script SixIsland_Mart_Items {
-    release
-    end
-}
+SixIsland_Mart_EventScript_Clerk::
+# 4 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
+	lock
+# 5 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
+	faceplayer
+# 6 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
+	message gText_HowMayIServeYou
+# 7 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
+	waitmessage
+# 8 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
+	pokemart SixIsland_Mart_Items
+# 9 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
+	msgbox gText_PleaseComeAgain
+# 10 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
+	release
+	end
 
-script SixIsland_Mart_EventScript_Picnicker {
-    msgbox(SixIsland_Mart_Text_ShouldBuyMailAndWriteLetter, MSGBOX_NPC)
-    end
-}
 
-text SixIsland_Mart_Text_AgathaOldestEverEliteFourMember {
-    "Play with POKéMON lots and live\n"
-    "a long life!\p"
-    "Take AGATHA, for example.\p"
-    "She set a record for being the\n"
-    "oldest-ever ELITE FOUR member.\p"
-    "She spurs me to do bigger things.$"
-}
+SixIsland_Mart_Items::
+# 15 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
+	release
+	end
 
-text SixIsland_Mart_Text_ShouldBuyMailAndWriteLetter {
-    "I should buy some MAIL and write\n"
-    "him a letter…$"
-}
+
+SixIsland_Mart_EventScript_Picnicker::
+# 20 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
+	msgbox SixIsland_Mart_Text_ShouldBuyMailAndWriteLetter, MSGBOX_NPC
+	end
+
+
+SixIsland_Mart_Text_AgathaOldestEverEliteFourMember::
+# 24 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
+	.string "Play with POKéMON lots and live\n"
+	.string "a long life!\p"
+	.string "Take AGATHA, for example.\p"
+	.string "She set a record for being the\n"
+	.string "oldest-ever ELITE FOUR member.\p"
+	.string "She spurs me to do bigger things.$"
+
+SixIsland_Mart_Text_ShouldBuyMailAndWriteLetter::
+# 33 "data/maps/SixIsland_Mart_Frlg/scripts.pory"
+	.string "I should buy some MAIL and write\n"
+	.string "him a letter…$"
+
+`

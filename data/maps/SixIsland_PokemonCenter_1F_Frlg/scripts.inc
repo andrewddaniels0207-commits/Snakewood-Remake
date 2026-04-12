@@ -1,83 +1,150 @@
 SixIsland_PokemonCenter_1F_Frlg_MapScripts::
+# 2 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, SixIsland_PokemonCenter_1F_OnTransition
+# 3 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, SixIsland_PokemonCenter_1F_OnFrame
+# 4 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SixIsland_PokemonCenter_1F_Frlg_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
 	.byte 0
 
-SixIsland_PokemonCenter_1F_OnTransition::
-	setrespawn HEAL_LOCATION_SIX_ISLAND
-	call_if_eq VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 0, SixIsland_PokemonCenter_1F_EventScript_ShowRival
-	end
-
-SixIsland_PokemonCenter_1F_EventScript_ShowRival::
-	clearflag FLAG_HIDE_SIX_ISLAND_POKECENTER_RIVAL
-	return
-
-SixIsland_PokemonCenter_1F_OnFrame::
+SixIsland_PokemonCenter_1F_Frlg_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 5 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	map_script_2 VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 0, SixIsland_PokemonCenter_1F_EventScript_RivalScene
 	.2byte 0
 
+
+SixIsland_PokemonCenter_1F_OnTransition::
+# 10 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
+	setrespawn HEAL_LOCATION_SIX_ISLAND
+# 11 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 0
+	goto_if_eq SixIsland_PokemonCenter_1F_OnTransition_2
+SixIsland_PokemonCenter_1F_OnTransition_1:
+	end
+
+SixIsland_PokemonCenter_1F_OnTransition_2:
+# 12 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
+	call SixIsland_PokemonCenter_1F_EventScript_ShowRival
+	goto SixIsland_PokemonCenter_1F_OnTransition_1
+
+
+SixIsland_PokemonCenter_1F_EventScript_ShowRival::
+# 18 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
+	clearflag FLAG_HIDE_SIX_ISLAND_POKECENTER_RIVAL
+	return
+
+
 SixIsland_PokemonCenter_1F_EventScript_RivalScene::
+# 23 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	lockall
+# 24 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_MALE
+# 25 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	applymovement LOCALID_SIX_ISLAND_RIVAL, Common_Movement_WalkInPlaceFasterDown
+# 26 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	waitmovement 0
+# 27 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	playbgm MUS_RG_ENCOUNTER_RIVAL, 0
+# 28 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	applymovement LOCALID_SIX_ISLAND_RIVAL, Common_Movement_ExclamationMark
+# 29 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	waitmovement 0
+# 30 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	applymovement LOCALID_SIX_ISLAND_RIVAL, Common_Movement_Delay48
+# 31 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	waitmovement 0
+# 32 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	delay 25
+# 33 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	applymovement LOCALID_SIX_ISLAND_RIVAL, SixIsland_PokemonCenter_1F_Movement_RivalApproach
+# 34 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	waitmovement 0
+# 35 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	msgbox SixIsland_PokemonCenter_1F_Text_RivalImpossibleToGetAllMonsAroundHere
+# 36 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	closemessage
+# 37 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, SixIsland_PokemonCenter_1F_Movement_PlayerWatchRivalExit
+# 38 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	applymovement LOCALID_SIX_ISLAND_RIVAL, SixIsland_PokemonCenter_1F_Movement_RivalExit
+# 39 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	waitmovement 0
+# 40 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	fadedefaultbgm
+# 41 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	playse SE_EXIT
+# 42 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	delay 35
+# 43 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	removeobject LOCALID_SIX_ISLAND_RIVAL
+# 44 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	setvar VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 1
+# 45 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	setvar VAR_MAP_SCENE_FOUR_ISLAND, 1
+# 46 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	releaseall
 	end
 
-SixIsland_PokemonCenter_1F_Movement_RivalApproach::
+
+# 50 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
+SixIsland_PokemonCenter_1F_Movement_RivalApproach:
+# 51 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	walk_right
+# 52 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	walk_right
+# 53 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	walk_down
+# 54 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	walk_down
+# 55 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	step_end
 
-SixIsland_PokemonCenter_1F_Movement_RivalExit::
+# 58 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
+SixIsland_PokemonCenter_1F_Movement_RivalExit:
+# 59 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	delay_16
+# 60 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	delay_4
+# 61 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	walk_down
+# 62 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	step_end
 
-SixIsland_PokemonCenter_1F_Movement_PlayerWatchRivalExit::
+# 65 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
+SixIsland_PokemonCenter_1F_Movement_PlayerWatchRivalExit:
+# 66 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	walk_left
+# 67 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	walk_in_place_faster_right
+# 68 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	step_end
 
 SixIsland_PokemonCenter_1F_EventScript_Nurse::
+# 72 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	lock
+# 73 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	faceplayer
+# 74 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	call EventScript_PkmnCenterNurse_Frlg
+# 75 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	release
 	end
 
+
 SixIsland_PokemonCenter_1F_EventScript_Hiker::
+# 80 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	msgbox SixIsland_PokemonCenter_1F_Text_SomethingHiddenOnThisIsland, MSGBOX_NPC
 	end
 
+
 SixIsland_PokemonCenter_1F_EventScript_OldMan::
+# 85 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	msgbox SixIsland_PokemonCenter_1F_Text_SomeMonsEvolveByTradingWithHeldItem, MSGBOX_NPC
 	end
 
+
 SixIsland_PokemonCenter_1F_Text_SomethingHiddenOnThisIsland::
+# 89 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	.string "For ten years, I've searched for\n"
 	.string "RUINS.\p"
 	.string "No, make that twenty years.\p"
@@ -85,6 +152,7 @@ SixIsland_PokemonCenter_1F_Text_SomethingHiddenOnThisIsland::
 	.string "something hidden on this island.$"
 
 SixIsland_PokemonCenter_1F_Text_SomeMonsEvolveByTradingWithHeldItem::
+# 97 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	.string "You know of POKéMON that evolve\n"
 	.string "only upon trading, yes?\p"
 	.string "But did you know that there are\n"
@@ -93,6 +161,7 @@ SixIsland_PokemonCenter_1F_Text_SomeMonsEvolveByTradingWithHeldItem::
 	.string "traded while holding specific items.$"
 
 SixIsland_PokemonCenter_1F_Text_RivalImpossibleToGetAllMonsAroundHere::
+# 106 "data/maps/SixIsland_PokemonCenter_1F_Frlg/scripts.pory"
 	.string "{RIVAL}: Hey, {PLAYER}!\n"
 	.string "How's your POKéDEX filling up?\p"
 	.string "It looks like it's impossible to get\n"
@@ -112,4 +181,3 @@ SixIsland_PokemonCenter_1F_Text_RivalImpossibleToGetAllMonsAroundHere::
 	.string "I may as well leave for home.\p"
 	.string "That's that, then!\n"
 	.string "Smell ya later!$"
-

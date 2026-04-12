@@ -1,55 +1,114 @@
 Route18_EastEntrance_2F_Frlg_MapScripts::
 	.byte 0
 
+
 Route18_EastEntrance_2F_EventScript_LeftBinoculars::
+# 4 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	msgbox Route18_EastEntrance_2F_Text_PalletTownInWest, MSGBOX_SIGN
 	end
 
+
 Route18_EastEntrance_2F_EventScript_RightBinoculars::
+# 9 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	msgbox Route18_EastEntrance_2F_Text_PeopleSwimming, MSGBOX_SIGN
 	end
 
+
 Route18_EastEntrance_2F_EventScript_Haden::
+# 14 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	lock
+# 15 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	faceplayer
+# 16 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	setvar VAR_0x8008, INGAME_TRADE_LICKITUNG
+# 17 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	call EventScript_GetInGameTradeSpeciesInfo
-	goto_if_set FLAG_DID_MARC_TRADE, Route18_EastEntrance_2F_EventScript_AlreadyTraded
+# 18 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
+	goto_if_set FLAG_DID_MARC_TRADE, Route18_EastEntrance_2F_EventScript_Haden_2
+Route18_EastEntrance_2F_EventScript_Haden_1:
+# 21 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	msgbox Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, Route18_EastEntrance_2F_EventScript_DeclineTrade
+# 22 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq Route18_EastEntrance_2F_EventScript_Haden_5
+Route18_EastEntrance_2F_EventScript_Haden_4:
+# 25 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	call EventScript_ChooseMonForInGameTrade
-	goto_if_ge VAR_0x8004, PARTY_SIZE, Route18_EastEntrance_2F_EventScript_DeclineTrade
+# 26 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
+	compare VAR_0x8004, PARTY_SIZE
+	goto_if_ge Route18_EastEntrance_2F_EventScript_Haden_8
+Route18_EastEntrance_2F_EventScript_Haden_7:
+# 29 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	call EventScript_GetInGameTradeSpecies
-	goto_if_ne VAR_RESULT, VAR_0x8009, Route18_EastEntrance_2F_EventScript_NotRequestedMon
+# 30 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
+	compare VAR_RESULT, VAR_0x8009
+	goto_if_ne Route18_EastEntrance_2F_EventScript_Haden_11
+Route18_EastEntrance_2F_EventScript_Haden_10:
+# 33 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	call EventScript_DoInGameTrade
+# 34 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	msgbox Trade_Text_HeyThanks
+# 35 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	setflag FLAG_DID_MARC_TRADE
+# 36 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	release
 	end
+
+Route18_EastEntrance_2F_EventScript_Haden_2:
+# 19 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
+	goto Route18_EastEntrance_2F_EventScript_AlreadyTraded
+	goto Route18_EastEntrance_2F_EventScript_Haden_1
+
+Route18_EastEntrance_2F_EventScript_Haden_5:
+# 23 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
+	goto Route18_EastEntrance_2F_EventScript_DeclineTrade
+	goto Route18_EastEntrance_2F_EventScript_Haden_4
+
+Route18_EastEntrance_2F_EventScript_Haden_8:
+# 27 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
+	goto Route18_EastEntrance_2F_EventScript_DeclineTrade
+	goto Route18_EastEntrance_2F_EventScript_Haden_7
+
+Route18_EastEntrance_2F_EventScript_Haden_11:
+# 31 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
+	goto Route18_EastEntrance_2F_EventScript_NotRequestedMon
+	goto Route18_EastEntrance_2F_EventScript_Haden_10
+
 
 Route18_EastEntrance_2F_EventScript_DeclineTrade::
+# 41 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	msgbox Trade_Text_AwwOhWell
+# 42 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	release
 	end
+
 
 Route18_EastEntrance_2F_EventScript_NotRequestedMon::
+# 47 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	bufferspeciesname STR_VAR_1, VAR_0x8009
+# 48 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	msgbox Trade_Text_WhatThatsNoMon
+# 49 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	release
 	end
+
 
 Route18_EastEntrance_2F_EventScript_AlreadyTraded::
+# 54 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	msgbox Trade_Text_IsntMyOldMonGreat
+# 55 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	release
 	end
 
+
 Route18_EastEntrance_2F_Text_PalletTownInWest::
+# 59 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	.string "Let's see what the binoculars have\n"
 	.string "to show…\p"
 	.string "PALLET TOWN is in the west.$"
 
 Route18_EastEntrance_2F_Text_PeopleSwimming::
+# 65 "data/maps/Route18_EastEntrance_2F_Frlg/scripts.pory"
 	.string "Let's see what the binoculars have\n"
 	.string "to show…\p"
 	.string "There are people swimming.$"
-

@@ -1,183 +1,243 @@
 SootopolisCity_Gym_B1F_MapScripts::
 	.byte 0
 
+
 SootopolisCity_Gym_B1F_EventScript_Andrea::
+# 4 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	trainerbattle_single TRAINER_ANDREA, SootopolisCity_Gym_B1F_Text_AndreaIntro, SootopolisCity_Gym_B1F_Text_AndreaDefeat
+# 5 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	msgbox SootopolisCity_Gym_B1F_Text_AndreaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 SootopolisCity_Gym_B1F_EventScript_Crissy::
+# 10 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	trainerbattle_single TRAINER_CRISSY, SootopolisCity_Gym_B1F_Text_CrissyIntro, SootopolisCity_Gym_B1F_Text_CrissyDefeat
+# 11 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	msgbox SootopolisCity_Gym_B1F_Text_CrissyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 SootopolisCity_Gym_B1F_EventScript_Brianna::
+# 16 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	trainerbattle_single TRAINER_BRIANNA, SootopolisCity_Gym_B1F_Text_BriannaIntro, SootopolisCity_Gym_B1F_Text_BriannaDefeat
+# 17 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	msgbox SootopolisCity_Gym_B1F_Text_BriannaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 SootopolisCity_Gym_B1F_EventScript_Connie::
+# 22 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	trainerbattle_single TRAINER_CONNIE, SootopolisCity_Gym_B1F_Text_ConnieIntro, SootopolisCity_Gym_B1F_Text_ConnieDefeat
+# 23 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	msgbox SootopolisCity_Gym_B1F_Text_ConniePostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 SootopolisCity_Gym_B1F_EventScript_Bridget::
+# 28 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	trainerbattle_single TRAINER_BRIDGET, SootopolisCity_Gym_B1F_Text_BridgetIntro, SootopolisCity_Gym_B1F_Text_BridgetDefeat
+# 29 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	msgbox SootopolisCity_Gym_B1F_Text_BridgetPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 SootopolisCity_Gym_B1F_EventScript_Olivia::
+# 34 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	trainerbattle_single TRAINER_OLIVIA, SootopolisCity_Gym_B1F_Text_OliviaIntro, SootopolisCity_Gym_B1F_Text_OliviaDefeat
+# 35 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	msgbox SootopolisCity_Gym_B1F_Text_OliviaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 SootopolisCity_Gym_B1F_EventScript_Tiffany::
+# 40 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	trainerbattle_single TRAINER_TIFFANY, SootopolisCity_Gym_B1F_Text_TiffanyIntro, SootopolisCity_Gym_B1F_Text_TiffanyDefeat
+# 41 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	msgbox SootopolisCity_Gym_B1F_Text_TiffanyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 SootopolisCity_Gym_B1F_EventScript_Bethany::
+# 46 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	trainerbattle_single TRAINER_BETHANY, SootopolisCity_Gym_B1F_Text_BethanyIntro, SootopolisCity_Gym_B1F_Text_BethanyDefeat
+# 47 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	msgbox SootopolisCity_Gym_B1F_Text_BethanyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 SootopolisCity_Gym_B1F_EventScript_Annika::
+# 52 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	trainerbattle_single TRAINER_ANNIKA, SootopolisCity_Gym_B1F_Text_AnnikaIntro, SootopolisCity_Gym_B1F_Text_AnnikaDefeat
+# 53 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	msgbox SootopolisCity_Gym_B1F_Text_AnnikaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 SootopolisCity_Gym_B1F_EventScript_Daphne::
+# 58 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	trainerbattle_single TRAINER_DAPHNE, SootopolisCity_Gym_B1F_Text_DaphneIntro, SootopolisCity_Gym_B1F_Text_DaphneDefeat
+# 59 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	msgbox SootopolisCity_Gym_B1F_Text_DaphnePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SootopolisCity_Gym_B1F_Text_AndreaIntro:
+
+SootopolisCity_Gym_B1F_Text_AndreaIntro::
+# 63 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "I'll show you the sublime techniques\n"
 	.string "I learned from our LEADER JUAN!$"
 
-SootopolisCity_Gym_B1F_Text_AndreaDefeat:
+SootopolisCity_Gym_B1F_Text_AndreaDefeat::
+# 68 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "Please forgive me, JUAN…$"
 
-SootopolisCity_Gym_B1F_Text_AndreaPostBattle:
+SootopolisCity_Gym_B1F_Text_AndreaPostBattle::
+# 72 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "Watch what happens if you crack all\n"
 	.string "the floor tiles.$"
 
-SootopolisCity_Gym_B1F_Text_CrissyIntro:
+SootopolisCity_Gym_B1F_Text_CrissyIntro::
+# 77 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "You came all the way here, but you won't\n"
 	.string "get to see JUAN.\p"
 	.string "Not if you lose to me, you won't!$"
 
-SootopolisCity_Gym_B1F_Text_CrissyDefeat:
+SootopolisCity_Gym_B1F_Text_CrissyDefeat::
+# 83 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "You're strong!\n"
 	.string "I was fooled by your cute looks!$"
 
-SootopolisCity_Gym_B1F_Text_CrissyPostBattle:
+SootopolisCity_Gym_B1F_Text_CrissyPostBattle::
+# 88 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "You might be good enough to avoid\n"
 	.string "being wiped out in one hit by JUAN.$"
 
-SootopolisCity_Gym_B1F_Text_DaphneIntro:
+SootopolisCity_Gym_B1F_Text_DaphneIntro::
+# 93 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "The sight of JUAN conducting\n"
 	.string "a battle…\p"
 	.string "The very beauty of it compelled me to\n"
 	.string "become a TRAINER.$"
 
-SootopolisCity_Gym_B1F_Text_DaphneDefeat:
+SootopolisCity_Gym_B1F_Text_DaphneDefeat::
+# 100 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "You battled with more beauty than\n"
 	.string "I could muster…$"
 
-SootopolisCity_Gym_B1F_Text_DaphnePostBattle:
+SootopolisCity_Gym_B1F_Text_DaphnePostBattle::
+# 105 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "The grace you bring to battle is\n"
 	.string "fabulous.\p"
 	.string "Oh… I'm so fortunate to have found\n"
 	.string "POKéMON.$"
 
-SootopolisCity_Gym_B1F_Text_ConnieIntro:
+SootopolisCity_Gym_B1F_Text_ConnieIntro::
+# 112 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "I should teach you how harsh battles\n"
 	.string "can be.$"
 
-SootopolisCity_Gym_B1F_Text_ConnieDefeat:
+SootopolisCity_Gym_B1F_Text_ConnieDefeat::
+# 117 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "Oh.\n"
 	.string "You're strong.$"
 
-SootopolisCity_Gym_B1F_Text_ConniePostBattle:
+SootopolisCity_Gym_B1F_Text_ConniePostBattle::
+# 122 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "I'll tell you something good.\p"
 	.string "If you want to reach JUAN, you\n"
 	.string "need to walk on each floor tile once.$"
 
-SootopolisCity_Gym_B1F_Text_BridgetIntro:
+SootopolisCity_Gym_B1F_Text_BridgetIntro::
+# 128 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "The POKéMON GYM of the highest level\n"
 	.string "in the HOENN region…\p"
 	.string "That's the SOOTOPOLIS GYM.$"
 
-SootopolisCity_Gym_B1F_Text_BridgetDefeat:
+SootopolisCity_Gym_B1F_Text_BridgetDefeat::
+# 134 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "What a high level you are!$"
 
-SootopolisCity_Gym_B1F_Text_BridgetPostBattle:
+SootopolisCity_Gym_B1F_Text_BridgetPostBattle::
+# 138 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "Rather than being satisfied by being\n"
 	.string "in a strong GYM, I imagine training in\l"
 	.string "other places will make you stronger.\l"
 	.string "But above all, it looks more fun.$"
 
-SootopolisCity_Gym_B1F_Text_OliviaIntro:
+SootopolisCity_Gym_B1F_Text_OliviaIntro::
+# 145 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "I train my POKéMON together with\n"
 	.string "JUAN.\p"
 	.string "Don't think I'm a pushover.$"
 
-SootopolisCity_Gym_B1F_Text_OliviaDefeat:
+SootopolisCity_Gym_B1F_Text_OliviaDefeat::
+# 151 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "I was beaten…$"
 
-SootopolisCity_Gym_B1F_Text_OliviaPostBattle:
+SootopolisCity_Gym_B1F_Text_OliviaPostBattle::
+# 155 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "I think you have potential.\n"
 	.string "Why don't you stay and train with us?$"
 
-SootopolisCity_Gym_B1F_Text_TiffanyIntro:
+SootopolisCity_Gym_B1F_Text_TiffanyIntro::
+# 160 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "A graceful glide across the ice while\n"
 	.string "crossing no lines…\p"
 	.string "A TRAINER putting on that performance\n"
 	.string "would be elegantly beautiful!$"
 
-SootopolisCity_Gym_B1F_Text_TiffanyDefeat:
+SootopolisCity_Gym_B1F_Text_TiffanyDefeat::
+# 167 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "Well, excuse me?!$"
 
-SootopolisCity_Gym_B1F_Text_TiffanyPostBattle:
+SootopolisCity_Gym_B1F_Text_TiffanyPostBattle::
+# 171 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "This is really obvious, but how strong\n"
 	.string "you are as a TRAINER has nothing to do\l"
 	.string "with how young or old you are.$"
 
-SootopolisCity_Gym_B1F_Text_BethanyIntro:
+SootopolisCity_Gym_B1F_Text_BethanyIntro::
+# 177 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "When I'm with my POKéMON, the time\n"
 	.string "flies by before you can say, “Oops!”$"
 
-SootopolisCity_Gym_B1F_Text_BethanyDefeat:
+SootopolisCity_Gym_B1F_Text_BethanyDefeat::
+# 182 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "Oops!$"
 
-SootopolisCity_Gym_B1F_Text_BethanyPostBattle:
+SootopolisCity_Gym_B1F_Text_BethanyPostBattle::
+# 186 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "I wish I could forget about lost causes\n"
 	.string "before I can manage an “Oops!”$"
 
-SootopolisCity_Gym_B1F_Text_AnnikaIntro:
+SootopolisCity_Gym_B1F_Text_AnnikaIntro::
+# 191 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "I can battle with really rare POKéMON\n"
 	.string "if you'd like.$"
 
-SootopolisCity_Gym_B1F_Text_AnnikaDefeat:
+SootopolisCity_Gym_B1F_Text_AnnikaDefeat::
+# 196 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "Oh, there now! Did you have a good look\n"
 	.string "at my POKéMON?$"
 
-SootopolisCity_Gym_B1F_Text_AnnikaPostBattle:
+SootopolisCity_Gym_B1F_Text_AnnikaPostBattle::
+# 201 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "I came to this GYM because JUAN\n"
 	.string "praised me for my darling POKéMON.\p"
 	.string "Oh, if only I'd met JUAN years ago\n"
 	.string "when I was younger…$"
 
-SootopolisCity_Gym_B1F_Text_BriannaIntro:
+SootopolisCity_Gym_B1F_Text_BriannaIntro::
+# 208 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "Giggle…\n"
 	.string "Your grim look is so charming.$"
 
-SootopolisCity_Gym_B1F_Text_BriannaDefeat:
+SootopolisCity_Gym_B1F_Text_BriannaDefeat::
+# 213 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "Oh, dear.\n"
 	.string "I went much too easy on you.$"
 
-SootopolisCity_Gym_B1F_Text_BriannaPostBattle:
+SootopolisCity_Gym_B1F_Text_BriannaPostBattle::
+# 218 "data/maps/SootopolisCity_Gym_B1F/scripts.pory"
 	.string "You couldn't lay a finger on JUAN,\n"
 	.string "I'm sure. Giggle…$"
-

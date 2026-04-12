@@ -1,10 +1,20 @@
-mapscripts CaveOfOrigin_UnusedRubySapphireMap2_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: CaveOfOrigin_UnusedRubySapphireMap2_OnTransition
-}
+raw `
+CaveOfOrigin_UnusedRubySapphireMap2_MapScripts::
+# 2 "data/maps/CaveOfOrigin_UnusedRubySapphireMap2/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, CaveOfOrigin_UnusedRubySapphireMap2_OnTransition
+	.byte 0
 
-script CaveOfOrigin_UnusedRubySapphireMap2_OnTransition {
-    if (flag(FLAG_UNUSED_RS_LEGENDARY_BATTLE_DONE)) {
-        call(CaveOfOrigin_EventScript_DisableTriggers)
-    }
-    end
-}
+
+CaveOfOrigin_UnusedRubySapphireMap2_OnTransition::
+# 6 "data/maps/CaveOfOrigin_UnusedRubySapphireMap2/scripts.pory"
+	goto_if_set FLAG_UNUSED_RS_LEGENDARY_BATTLE_DONE, CaveOfOrigin_UnusedRubySapphireMap2_OnTransition_2
+CaveOfOrigin_UnusedRubySapphireMap2_OnTransition_1:
+	end
+
+CaveOfOrigin_UnusedRubySapphireMap2_OnTransition_2:
+# 7 "data/maps/CaveOfOrigin_UnusedRubySapphireMap2/scripts.pory"
+	call CaveOfOrigin_EventScript_DisableTriggers
+	goto CaveOfOrigin_UnusedRubySapphireMap2_OnTransition_1
+
+
+`

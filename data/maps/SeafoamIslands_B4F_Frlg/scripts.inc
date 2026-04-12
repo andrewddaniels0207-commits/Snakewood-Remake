@@ -1,199 +1,456 @@
-.equ NUM_BOULDERS_PRESENT, VAR_TEMP_2
-
 SeafoamIslands_B4F_Frlg_MapScripts::
+# 2 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, SeafoamIslands_B4F_OnTransition
+# 3 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_RESUME, SeafoamIslands_B4F_OnResume
+# 4 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_LOAD, SeafoamIslands_B4F_OnLoad
+# 5 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SeafoamIslands_B4F_OnWarp
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, SeafoamIslands_B4F_OnFrame
+# 6 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SeafoamIslands_B4F_Frlg_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
 	.byte 0
 
-SeafoamIslands_B4F_OnResume::
-	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, SeafoamIslands_B4F_EventScript_TryRemoveArticuno
-	end
-
-SeafoamIslands_B4F_EventScript_TryRemoveArticuno::
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject VAR_LAST_TALKED
-	return
-
-SeafoamIslands_B4F_OnTransition::
-	call_if_unset FLAG_FOUGHT_ARTICUNO, SeafoamIslands_B4F_EventScript_ShowArticuno
-	call_if_unset FLAG_STOPPED_SEAFOAM_B4F_CURRENT, SeafoamIslands_B4F_EventScript_CheckStoppedCurrent
-	call_if_set FLAG_STOPPED_SEAFOAM_B4F_CURRENT, SeafoamIslands_B4F_EventScript_SetNoCurrentLayout
-	end
-
-SeafoamIslands_B4F_EventScript_CheckStoppedCurrent::
-	setvar NUM_BOULDERS_PRESENT, 0
-	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_1, SeafoamIslands_B4F_EventScript_AddBoulderPresent
-	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_2, SeafoamIslands_B4F_EventScript_AddBoulderPresent
-	call_if_eq NUM_BOULDERS_PRESENT, 2, SeafoamIslands_B4F_EventScript_StoppedCurrent
-	return
-
-SeafoamIslands_B4F_EventScript_StoppedCurrent::
-	setflag FLAG_STOPPED_SEAFOAM_B4F_CURRENT
-	return
-
-SeafoamIslands_B4F_EventScript_SetNoCurrentLayout::
-	setmaplayoutindex LAYOUT_SEAFOAM_ISLANDS_B4F_CURRENT_STOPPED
-	return
-
-SeafoamIslands_B4F_EventScript_ShowArticuno::
-	clearflag FLAG_HIDE_ARTICUNO
-	return
-
-SeafoamIslands_B4F_OnLoad::
-	setvar NUM_BOULDERS_PRESENT, 0
-	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_1, SeafoamIslands_B4F_EventScript_AddBoulderPresent
-	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_2, SeafoamIslands_B4F_EventScript_AddBoulderPresent
-	goto_if_eq NUM_BOULDERS_PRESENT, 2, SeafoamIslands_B4F_EventScript_SetCalmWaterNearStairs
-	end
-
-SeafoamIslands_B4F_EventScript_SetCalmWaterNearStairs::
-	setmetatile 12, 14, METATILE_GeneralFrlg_CalmWater, 0
-	setmetatile 13, 14, METATILE_GeneralFrlg_CalmWater, 0
-	end
-
-SeafoamIslands_B4F_OnWarp::
-	map_script_2 VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 1, SeafoamIslands_B4F_EventScript_WarpInOnCurrent
-	.2byte 0
-
-SeafoamIslands_B4F_EventScript_WarpInOnCurrent::
-	turnobject LOCALID_PLAYER, DIR_NORTH
-	special ForcePlayerToStartSurfing
-	end
-
-SeafoamIslands_B4F_OnFrame::
+SeafoamIslands_B4F_Frlg_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 7 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	map_script_2 VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 1, SeafoamIslands_B4F_EventScript_EnterOnCurrent
+# 8 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	map_script_2 VAR_TEMP_1, 1, SeafoamIslands_B4F_EventScript_EnterByFalling
 	.2byte 0
 
-@ The current the player is forced in on from B3F
+
+SeafoamIslands_B4F_OnResume::
+# 13 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	goto_if_set FLAG_SYS_CTRL_OBJ_DELETE, SeafoamIslands_B4F_OnResume_2
+SeafoamIslands_B4F_OnResume_1:
+	end
+
+SeafoamIslands_B4F_OnResume_2:
+# 14 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	call SeafoamIslands_B4F_EventScript_TryRemoveArticuno
+	goto SeafoamIslands_B4F_OnResume_1
+
+
+SeafoamIslands_B4F_EventScript_TryRemoveArticuno::
+# 20 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	specialvar VAR_RESULT, GetBattleOutcome
+# 21 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
+	goto_if_ne SeafoamIslands_B4F_EventScript_TryRemoveArticuno_2
+SeafoamIslands_B4F_EventScript_TryRemoveArticuno_1:
+# 24 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	removeobject VAR_LAST_TALKED
+	return
+
+SeafoamIslands_B4F_EventScript_TryRemoveArticuno_2:
+# 22 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	goto Common_EventScript_NopReturn
+	goto SeafoamIslands_B4F_EventScript_TryRemoveArticuno_1
+
+
+SeafoamIslands_B4F_OnTransition::
+# 29 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	goto_if_unset FLAG_FOUGHT_ARTICUNO, SeafoamIslands_B4F_OnTransition_2
+SeafoamIslands_B4F_OnTransition_1:
+# 32 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	goto_if_unset FLAG_STOPPED_SEAFOAM_B4F_CURRENT, SeafoamIslands_B4F_OnTransition_5
+SeafoamIslands_B4F_OnTransition_4:
+# 35 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	goto_if_set FLAG_STOPPED_SEAFOAM_B4F_CURRENT, SeafoamIslands_B4F_OnTransition_8
+SeafoamIslands_B4F_OnTransition_7:
+	end
+
+SeafoamIslands_B4F_OnTransition_2:
+# 30 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	call SeafoamIslands_B4F_EventScript_ShowArticuno
+	goto SeafoamIslands_B4F_OnTransition_1
+
+SeafoamIslands_B4F_OnTransition_5:
+# 33 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	call SeafoamIslands_B4F_EventScript_CheckStoppedCurrent
+	goto SeafoamIslands_B4F_OnTransition_4
+
+SeafoamIslands_B4F_OnTransition_8:
+# 36 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	call SeafoamIslands_B4F_EventScript_SetNoCurrentLayout
+	goto SeafoamIslands_B4F_OnTransition_7
+
+
+SeafoamIslands_B4F_EventScript_CheckStoppedCurrent::
+# 42 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	setvar NUM_BOULDERS_PRESENT, 0
+# 43 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	goto_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_1, SeafoamIslands_B4F_EventScript_CheckStoppedCurrent_2
+SeafoamIslands_B4F_EventScript_CheckStoppedCurrent_1:
+# 46 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	goto_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_2, SeafoamIslands_B4F_EventScript_CheckStoppedCurrent_5
+SeafoamIslands_B4F_EventScript_CheckStoppedCurrent_4:
+# 49 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	compare NUM_BOULDERS_PRESENT, 2
+	goto_if_eq SeafoamIslands_B4F_EventScript_CheckStoppedCurrent_8
+SeafoamIslands_B4F_EventScript_CheckStoppedCurrent_7:
+	return
+
+SeafoamIslands_B4F_EventScript_CheckStoppedCurrent_2:
+# 44 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	call SeafoamIslands_B4F_EventScript_AddBoulderPresent
+	goto SeafoamIslands_B4F_EventScript_CheckStoppedCurrent_1
+
+SeafoamIslands_B4F_EventScript_CheckStoppedCurrent_5:
+# 47 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	call SeafoamIslands_B4F_EventScript_AddBoulderPresent
+	goto SeafoamIslands_B4F_EventScript_CheckStoppedCurrent_4
+
+SeafoamIslands_B4F_EventScript_CheckStoppedCurrent_8:
+# 50 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	call SeafoamIslands_B4F_EventScript_StoppedCurrent
+	goto SeafoamIslands_B4F_EventScript_CheckStoppedCurrent_7
+
+
+SeafoamIslands_B4F_EventScript_StoppedCurrent::
+# 56 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	setflag FLAG_STOPPED_SEAFOAM_B4F_CURRENT
+	return
+
+
+SeafoamIslands_B4F_EventScript_SetNoCurrentLayout::
+# 61 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	setmaplayoutindex LAYOUT_SEAFOAM_ISLANDS_B4F_CURRENT_STOPPED
+	return
+
+
+SeafoamIslands_B4F_EventScript_ShowArticuno::
+# 66 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	clearflag FLAG_HIDE_ARTICUNO
+	return
+
+
+SeafoamIslands_B4F_OnLoad::
+# 71 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	setvar NUM_BOULDERS_PRESENT, 0
+# 72 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	goto_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_1, SeafoamIslands_B4F_OnLoad_2
+SeafoamIslands_B4F_OnLoad_1:
+# 75 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	goto_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_2, SeafoamIslands_B4F_OnLoad_5
+SeafoamIslands_B4F_OnLoad_4:
+# 78 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	compare NUM_BOULDERS_PRESENT, 2
+	goto_if_eq SeafoamIslands_B4F_OnLoad_8
+SeafoamIslands_B4F_OnLoad_7:
+	end
+
+SeafoamIslands_B4F_OnLoad_2:
+# 73 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	call SeafoamIslands_B4F_EventScript_AddBoulderPresent
+	goto SeafoamIslands_B4F_OnLoad_1
+
+SeafoamIslands_B4F_OnLoad_5:
+# 76 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	call SeafoamIslands_B4F_EventScript_AddBoulderPresent
+	goto SeafoamIslands_B4F_OnLoad_4
+
+SeafoamIslands_B4F_OnLoad_8:
+# 79 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	goto SeafoamIslands_B4F_EventScript_SetCalmWaterNearStairs
+	goto SeafoamIslands_B4F_OnLoad_7
+
+
+SeafoamIslands_B4F_EventScript_SetCalmWaterNearStairs::
+# 85 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	setmetatile 12, 14, METATILE_GeneralFrlg_CalmWater, 0
+# 86 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	setmetatile 13, 14, METATILE_GeneralFrlg_CalmWater, 0
+	end
+
+
+# 90 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+
+# 91 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+SeafoamIslands_B4F_OnWarp:
+# 92 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	map_script_2 VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 1, SeafoamIslands_B4F_EventScript_WarpInOnCurrent
+# 93 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	.2byte 0
+
+SeafoamIslands_B4F_EventScript_WarpInOnCurrent::
+# 98 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	turnobject LOCALID_PLAYER, DIR_NORTH
+# 99 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	special ForcePlayerToStartSurfing
+	end
+
+
 SeafoamIslands_B4F_EventScript_EnterOnCurrent::
+# 104 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	lockall
+# 105 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, SeafoamIslands_B4F_Movement_EnterOnCurrent
+# 106 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	waitmovement 0
+# 107 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	setvar VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 0
+# 108 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	releaseall
 	end
 
-SeafoamIslands_B4F_Movement_EnterOnCurrent::
+
+# 112 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+SeafoamIslands_B4F_Movement_EnterOnCurrent:
+# 113 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_fast_up
+# 114 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_fast_up
+# 115 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_fast_up
+# 116 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	step_end
 
-@ The current the player lands on when entering the map by falling
 SeafoamIslands_B4F_EventScript_EnterByFalling::
+# 120 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	lockall
+# 121 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	setvar NUM_BOULDERS_PRESENT, 0
-	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_1, SeafoamIslands_B4F_EventScript_AddBoulderPresent
-	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_2, SeafoamIslands_B4F_EventScript_AddBoulderPresent
-	goto_if_eq NUM_BOULDERS_PRESENT, 2, SeafoamIslands_B4F_EventScript_CurrentBlocked
+# 122 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	goto_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_1, SeafoamIslands_B4F_EventScript_EnterByFalling_2
+SeafoamIslands_B4F_EventScript_EnterByFalling_1:
+# 125 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	goto_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_2, SeafoamIslands_B4F_EventScript_EnterByFalling_5
+SeafoamIslands_B4F_EventScript_EnterByFalling_4:
+# 128 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	compare NUM_BOULDERS_PRESENT, 2
+	goto_if_eq SeafoamIslands_B4F_EventScript_EnterByFalling_8
+SeafoamIslands_B4F_EventScript_EnterByFalling_7:
+# 131 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	getplayerxy VAR_0x8008, VAR_0x8009
-	call_if_lt VAR_0x8008, 9, SeafoamIslands_B4F_EventScript_RideCurrentFar
-	call_if_ge VAR_0x8008, 9, SeafoamIslands_B4F_EventScript_RideCurrentClose
+# 132 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	compare VAR_0x8008, 9
+	goto_if_lt SeafoamIslands_B4F_EventScript_EnterByFalling_11
+SeafoamIslands_B4F_EventScript_EnterByFalling_10:
+# 135 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	compare VAR_0x8008, 9
+	goto_if_ge SeafoamIslands_B4F_EventScript_EnterByFalling_14
+SeafoamIslands_B4F_EventScript_EnterByFalling_13:
+# 138 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	special SeafoamIslandsB4F_CurrentDumpsPlayerOnLand
+# 139 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 0
+# 140 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	releaseall
 	end
 
+SeafoamIslands_B4F_EventScript_EnterByFalling_2:
+# 123 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	call SeafoamIslands_B4F_EventScript_AddBoulderPresent
+	goto SeafoamIslands_B4F_EventScript_EnterByFalling_1
+
+SeafoamIslands_B4F_EventScript_EnterByFalling_5:
+# 126 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	call SeafoamIslands_B4F_EventScript_AddBoulderPresent
+	goto SeafoamIslands_B4F_EventScript_EnterByFalling_4
+
+SeafoamIslands_B4F_EventScript_EnterByFalling_8:
+# 129 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	goto SeafoamIslands_B4F_EventScript_CurrentBlocked
+	goto SeafoamIslands_B4F_EventScript_EnterByFalling_7
+
+SeafoamIslands_B4F_EventScript_EnterByFalling_11:
+# 133 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	call SeafoamIslands_B4F_EventScript_RideCurrentFar
+	goto SeafoamIslands_B4F_EventScript_EnterByFalling_10
+
+SeafoamIslands_B4F_EventScript_EnterByFalling_14:
+# 136 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	call SeafoamIslands_B4F_EventScript_RideCurrentClose
+	goto SeafoamIslands_B4F_EventScript_EnterByFalling_13
+
+
 SeafoamIslands_B4F_EventScript_AddBoulderPresent::
+# 145 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	addvar NUM_BOULDERS_PRESENT, 1
 	return
 
+
 SeafoamIslands_B4F_EventScript_RideCurrentFar::
+# 150 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, SeafoamIslands_B4F_Movement_RideCurrentFar
+# 151 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 SeafoamIslands_B4F_EventScript_RideCurrentClose::
+# 156 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, SeafoamIslands_B4F_Movement_RideCurrentClose
+# 157 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	waitmovement 0
 	return
 
+
 SeafoamIslands_B4F_EventScript_CurrentBlocked::
+# 162 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 0
+# 163 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	releaseall
 	end
 
-SeafoamIslands_B4F_Movement_RideCurrentFar::
+
+# 167 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+SeafoamIslands_B4F_Movement_RideCurrentFar:
+# 168 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_up
+# 169 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_up
+# 170 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_up
+# 171 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_right
+# 172 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_right
+# 173 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_right
+# 174 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_right
+# 175 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_up
+# 176 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	step_end
 
-SeafoamIslands_B4F_Movement_RideCurrentClose::
+# 179 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+SeafoamIslands_B4F_Movement_RideCurrentClose:
+# 180 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_up
+# 181 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_up
+# 182 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_up
+# 183 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_right
+# 184 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_right
+# 185 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_right
+# 186 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_up
+# 187 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	step_end
 
-@ Triggers blocking re-entry to B3F
 SeafoamIslands_B4F_EventScript_UpwardCurrent::
+# 191 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	lockall
+# 192 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, SeafoamIslands_B4F_Movement_WalkUp
+# 193 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	waitmovement 0
+# 194 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	releaseall
 	end
 
-SeafoamIslands_B4F_Movement_WalkUp::
+
+# 198 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+SeafoamIslands_B4F_Movement_WalkUp:
+# 199 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	walk_up
+# 200 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	step_end
 
 SeafoamIslands_B4F_EventScript_Articuno::
+# 204 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	lock
+# 205 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	faceplayer
+# 206 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	setwildbattle SPECIES_ARTICUNO, 50
+# 207 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	waitse
+# 208 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	playmoncry SPECIES_ARTICUNO, CRY_MODE_ENCOUNTER
+# 209 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	message Text_Gyaoo
+# 210 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	waitmessage
+# 211 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	waitmoncry
+# 212 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	delay 10
+# 213 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	playbgm MUS_RG_ENCOUNTER_GYM_LEADER, 0
+# 214 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	waitbuttonpress
+# 215 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
+# 216 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	special BattleSetup_StartLegendaryBattle
+# 217 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	waitstate
+# 218 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+# 219 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, SeafoamIslands_B4F_EventScript_DefeatedArticuno
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, SeafoamIslands_B4F_EventScript_RanFromArticuno
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, SeafoamIslands_B4F_EventScript_RanFromArticuno
+# 220 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_WON
+	goto_if_eq SeafoamIslands_B4F_EventScript_Articuno_2
+SeafoamIslands_B4F_EventScript_Articuno_1:
+# 223 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_RAN
+	goto_if_eq SeafoamIslands_B4F_EventScript_Articuno_5
+SeafoamIslands_B4F_EventScript_Articuno_4:
+# 226 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	goto_if_eq SeafoamIslands_B4F_EventScript_Articuno_8
+SeafoamIslands_B4F_EventScript_Articuno_7:
+# 229 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	setflag FLAG_FOUGHT_ARTICUNO
+# 230 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	release
 	end
 
+SeafoamIslands_B4F_EventScript_Articuno_2:
+# 221 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	goto SeafoamIslands_B4F_EventScript_DefeatedArticuno
+	goto SeafoamIslands_B4F_EventScript_Articuno_1
+
+SeafoamIslands_B4F_EventScript_Articuno_5:
+# 224 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	goto SeafoamIslands_B4F_EventScript_RanFromArticuno
+	goto SeafoamIslands_B4F_EventScript_Articuno_4
+
+SeafoamIslands_B4F_EventScript_Articuno_8:
+# 227 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
+	goto SeafoamIslands_B4F_EventScript_RanFromArticuno
+	goto SeafoamIslands_B4F_EventScript_Articuno_7
+
+
 SeafoamIslands_B4F_EventScript_DefeatedArticuno::
+# 235 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	setflag FLAG_FOUGHT_ARTICUNO
+# 236 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	goto EventScript_RemoveStaticMon
 	end
 
+
 SeafoamIslands_B4F_EventScript_RanFromArticuno::
+# 241 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	setvar VAR_0x8004, SPECIES_ARTICUNO
+# 242 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	goto EventScript_MonFlewAway
 	end
 
+
 SeafoamIslands_B4F_EventScript_BoulderHintSign::
+# 247 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	msgbox SeafoamIslands_B4F_Text_BouldersMightChangeWaterFlow, MSGBOX_SIGN
 	end
 
+
 SeafoamIslands_B4F_EventScript_FastCurrentSign::
+# 252 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	msgbox SeafoamIslands_B4F_Text_DangerFastCurrent, MSGBOX_SIGN
 	end
 
+
 Text_RockSlideTeach::
+# 256 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	.string "When you're up on a rocky mountain\n"
 	.string "like this, rockslides are a threat.\p"
 	.string "Can you imagine?\n"
@@ -204,21 +461,25 @@ Text_RockSlideTeach::
 	.string "Want to try using ROCK SLIDE?$"
 
 Text_RockSlideDeclined::
+# 267 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	.string "Oh, so you are scared after all.$"
 
 Text_RockSlideWhichMon::
+# 271 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	.string "Which POKéMON should I teach\n"
 	.string "ROCK SLIDE?$"
 
 Text_RockSlideTaught::
+# 276 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	.string "It might be scary to use it in this\n"
 	.string "tunnel…$"
 
 SeafoamIslands_B4F_Text_BouldersMightChangeWaterFlow::
+# 281 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	.string "Hint: Boulders might change the\n"
 	.string "flow of water.$"
 
 SeafoamIslands_B4F_Text_DangerFastCurrent::
+# 286 "data/maps/SeafoamIslands_B4F_Frlg/scripts.pory"
 	.string "DANGER\n"
 	.string "Fast current!$"
-

@@ -1,8 +1,14 @@
-mapscripts SevenIsland_TanobyRuins_RixyChamber_Frlg_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: SevenIsland_TanobyRuins_RixyChamber_OnTransition
-}
+raw `
+SevenIsland_TanobyRuins_RixyChamber_Frlg_MapScripts::
+# 2 "data/maps/SevenIsland_TanobyRuins_RixyChamber_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_TanobyRuins_RixyChamber_OnTransition
+	.byte 0
 
-script SevenIsland_TanobyRuins_RixyChamber_OnTransition {
-    call(EventScript_TryDarkenRuins)
-    end
-}
+
+SevenIsland_TanobyRuins_RixyChamber_OnTransition::
+# 6 "data/maps/SevenIsland_TanobyRuins_RixyChamber_Frlg/scripts.pory"
+	call EventScript_TryDarkenRuins
+	end
+
+
+`

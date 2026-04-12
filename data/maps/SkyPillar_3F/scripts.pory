@@ -1,15 +1,27 @@
-mapscripts SkyPillar_3F_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: SkyPillar_3F_OnTransition
-}
+raw `
+SkyPillar_3F_MapScripts::
+# 2 "data/maps/SkyPillar_3F/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_3F_OnTransition
+	.byte 0
 
-script SkyPillar_3F_OnTransition {
-    if (var(VAR_SKY_PILLAR_STATE) < 2) {
-        call(SkyPillar_3F_EventScript_CleanFloor)
-    }
-    end
-}
 
-script SkyPillar_3F_EventScript_CleanFloor {
-    setmaplayoutindex(LAYOUT_SKY_PILLAR_3F_CLEAN)
-    return
-}
+SkyPillar_3F_OnTransition::
+# 6 "data/maps/SkyPillar_3F/scripts.pory"
+	compare VAR_SKY_PILLAR_STATE, 2
+	goto_if_lt SkyPillar_3F_OnTransition_2
+SkyPillar_3F_OnTransition_1:
+	end
+
+SkyPillar_3F_OnTransition_2:
+# 7 "data/maps/SkyPillar_3F/scripts.pory"
+	call SkyPillar_3F_EventScript_CleanFloor
+	goto SkyPillar_3F_OnTransition_1
+
+
+SkyPillar_3F_EventScript_CleanFloor::
+# 13 "data/maps/SkyPillar_3F/scripts.pory"
+	setmaplayoutindex LAYOUT_SKY_PILLAR_3F_CLEAN
+	return
+
+
+`

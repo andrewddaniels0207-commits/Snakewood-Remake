@@ -1,11 +1,17 @@
-mapscripts Route5_Frlg_MapScripts {}
+raw `
+Route5_Frlg_MapScripts::
+	.byte 0
 
-script Route5_EventScript_UndergroundPathSign {
-    msgbox(Route5_Text_UndergroundPathSign, MSGBOX_SIGN)
-    end
-}
 
-text Route5_Text_UndergroundPathSign {
-    "UNDERGROUND PATH\n"
-    "CERULEAN CITY - VERMILION CITY$"
-}
+Route5_EventScript_UndergroundPathSign::
+# 4 "data/maps/Route5_Frlg/scripts.pory"
+	msgbox Route5_Text_UndergroundPathSign, MSGBOX_SIGN
+	end
+
+
+Route5_Text_UndergroundPathSign::
+# 8 "data/maps/Route5_Frlg/scripts.pory"
+	.string "UNDERGROUND PATH\n"
+	.string "CERULEAN CITY - VERMILION CITY$"
+
+`

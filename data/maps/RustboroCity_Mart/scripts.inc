@@ -1,84 +1,102 @@
 RustboroCity_Mart_MapScripts::
 	.byte 0
 
+
 RustboroCity_Mart_EventScript_Clerk::
+# 4 "data/maps/RustboroCity_Mart/scripts.pory"
 	lock
+# 5 "data/maps/RustboroCity_Mart/scripts.pory"
 	faceplayer
+# 6 "data/maps/RustboroCity_Mart/scripts.pory"
 	message gText_HowMayIServeYou
+# 7 "data/maps/RustboroCity_Mart/scripts.pory"
 	waitmessage
-	goto_if_unset FLAG_MET_DEVON_EMPLOYEE, RustboroCity_Mart_EventScript_PokemartBasic
-	goto_if_set FLAG_MET_DEVON_EMPLOYEE, RustboroCity_Mart_EventScript_PokemartExpanded
+# 8 "data/maps/RustboroCity_Mart/scripts.pory"
+	goto_if_unset FLAG_MET_DEVON_EMPLOYEE, RustboroCity_Mart_EventScript_Clerk_2
+RustboroCity_Mart_EventScript_Clerk_1:
+# 11 "data/maps/RustboroCity_Mart/scripts.pory"
+	goto_if_set FLAG_MET_DEVON_EMPLOYEE, RustboroCity_Mart_EventScript_Clerk_5
+RustboroCity_Mart_EventScript_Clerk_4:
 	end
+
+RustboroCity_Mart_EventScript_Clerk_2:
+# 9 "data/maps/RustboroCity_Mart/scripts.pory"
+	goto RustboroCity_Mart_EventScript_PokemartBasic
+	goto RustboroCity_Mart_EventScript_Clerk_1
+
+RustboroCity_Mart_EventScript_Clerk_5:
+# 12 "data/maps/RustboroCity_Mart/scripts.pory"
+	goto RustboroCity_Mart_EventScript_PokemartExpanded
+	goto RustboroCity_Mart_EventScript_Clerk_4
+
 
 RustboroCity_Mart_EventScript_PokemartBasic::
+# 18 "data/maps/RustboroCity_Mart/scripts.pory"
 	pokemart RustboroCity_Mart_Pokemart_Basic
+# 19 "data/maps/RustboroCity_Mart/scripts.pory"
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+# 20 "data/maps/RustboroCity_Mart/scripts.pory"
 	release
 	end
 
-	.align 2
-RustboroCity_Mart_Pokemart_Basic:
-	.2byte ITEM_POKE_BALL
-	.2byte ITEM_POTION
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_ANTIDOTE
-	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_ESCAPE_ROPE
-	.2byte ITEM_REPEL
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
+
+RustboroCity_Mart_Pokemart_Basic::
+# 25 "data/maps/RustboroCity_Mart/scripts.pory"
 	pokemartlistend
+	return
+
 
 RustboroCity_Mart_EventScript_PokemartExpanded::
+# 29 "data/maps/RustboroCity_Mart/scripts.pory"
 	pokemart RustboroCity_Mart_Pokemart_Expanded
+# 30 "data/maps/RustboroCity_Mart/scripts.pory"
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+# 31 "data/maps/RustboroCity_Mart/scripts.pory"
 	release
 	end
 
-	.align 2
-RustboroCity_Mart_Pokemart_Expanded:
-	.2byte ITEM_POKE_BALL
-	.2byte ITEM_TIMER_BALL
-	.2byte ITEM_REPEAT_BALL
-	.2byte ITEM_POTION
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_ANTIDOTE
-	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_ESCAPE_ROPE
-	.2byte ITEM_REPEL
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
+
+RustboroCity_Mart_Pokemart_Expanded::
+# 36 "data/maps/RustboroCity_Mart/scripts.pory"
 	pokemartlistend
+	return
+
 
 RustboroCity_Mart_EventScript_PokefanF::
+# 40 "data/maps/RustboroCity_Mart/scripts.pory"
 	msgbox RustboroCity_Mart_Text_BuyingHealsInCaseOfShroomish, MSGBOX_NPC
 	end
 
+
 RustboroCity_Mart_EventScript_Boy::
+# 45 "data/maps/RustboroCity_Mart/scripts.pory"
 	msgbox RustboroCity_Mart_Text_ShouldBuySuperPotionsInstead, MSGBOX_NPC
 	end
 
+
 RustboroCity_Mart_EventScript_BugCatcher::
+# 50 "data/maps/RustboroCity_Mart/scripts.pory"
 	msgbox RustboroCity_Mart_Text_GettingEscapeRopeJustInCase, MSGBOX_NPC
 	end
 
-RustboroCity_Mart_Text_BuyingHealsInCaseOfShroomish:
+
+RustboroCity_Mart_Text_BuyingHealsInCaseOfShroomish::
+# 54 "data/maps/RustboroCity_Mart/scripts.pory"
 	.string "I'm buying some PARLYZ HEALS and\n"
 	.string "ANTIDOTES.\p"
 	.string "Just in case I run into SHROOMISH\n"
 	.string "in PETALBURG WOODS.$"
 
-RustboroCity_Mart_Text_ShouldBuySuperPotionsInstead:
+RustboroCity_Mart_Text_ShouldBuySuperPotionsInstead::
+# 61 "data/maps/RustboroCity_Mart/scripts.pory"
 	.string "My POKéMON evolved.\n"
 	.string "It has a lot of HP now.\p"
 	.string "I should buy SUPER POTIONS for it\n"
 	.string "instead of ordinary POTIONS.$"
 
-RustboroCity_Mart_Text_GettingEscapeRopeJustInCase:
+RustboroCity_Mart_Text_GettingEscapeRopeJustInCase::
+# 68 "data/maps/RustboroCity_Mart/scripts.pory"
 	.string "I'm getting an ESCAPE ROPE just in\n"
 	.string "case I get lost in a cave.\p"
 	.string "I just need to use it to get back to\n"
 	.string "the entrance.$"
-

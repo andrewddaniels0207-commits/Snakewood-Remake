@@ -1,55 +1,64 @@
 FortreeCity_Mart_MapScripts::
 	.byte 0
 
+
 FortreeCity_Mart_EventScript_Clerk::
+# 4 "data/maps/FortreeCity_Mart/scripts.pory"
 	lock
+# 5 "data/maps/FortreeCity_Mart/scripts.pory"
 	faceplayer
+# 6 "data/maps/FortreeCity_Mart/scripts.pory"
 	message gText_HowMayIServeYou
+# 7 "data/maps/FortreeCity_Mart/scripts.pory"
 	waitmessage
+# 8 "data/maps/FortreeCity_Mart/scripts.pory"
 	pokemart FortreeCity_Mart_Pokemart
+# 9 "data/maps/FortreeCity_Mart/scripts.pory"
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+# 10 "data/maps/FortreeCity_Mart/scripts.pory"
 	release
 	end
 
-	.align 2
-FortreeCity_Mart_Pokemart:
-	.2byte ITEM_GREAT_BALL
-	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_ANTIDOTE
-	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_AWAKENING
-	.2byte ITEM_REVIVE
-	.2byte ITEM_SUPER_REPEL
-	.2byte ITEM_WOOD_MAIL
+
+FortreeCity_Mart_Pokemart::
+# 15 "data/maps/FortreeCity_Mart/scripts.pory"
 	pokemartlistend
+	return
+
 
 FortreeCity_Mart_EventScript_Woman::
+# 19 "data/maps/FortreeCity_Mart/scripts.pory"
 	msgbox FortreeCity_Mart_Text_SuperRepelBetter, MSGBOX_NPC
 	end
 
+
 FortreeCity_Mart_EventScript_Girl::
+# 24 "data/maps/FortreeCity_Mart/scripts.pory"
 	msgbox FortreeCity_Mart_Text_StockUpOnItems, MSGBOX_NPC
 	end
 
+
 FortreeCity_Mart_EventScript_Boy::
+# 29 "data/maps/FortreeCity_Mart/scripts.pory"
 	msgbox FortreeCity_Mart_Text_RareCandyMakesMonGrow, MSGBOX_NPC
 	end
 
-FortreeCity_Mart_Text_SuperRepelBetter:
+
+FortreeCity_Mart_Text_SuperRepelBetter::
+# 33 "data/maps/FortreeCity_Mart/scripts.pory"
 	.string "SUPER REPEL lasts a long time,\n"
 	.string "and it gets the job done.\p"
 	.string "It's much better than an ordinary\n"
 	.string "REPEL.$"
 
-FortreeCity_Mart_Text_StockUpOnItems:
+FortreeCity_Mart_Text_StockUpOnItems::
+# 40 "data/maps/FortreeCity_Mart/scripts.pory"
 	.string "I always stock up on more items than\n"
 	.string "I'm sure I'll need.\p"
 	.string "You never know what might happen.\n"
 	.string "Better to be safe than sorry!$"
 
-FortreeCity_Mart_Text_RareCandyMakesMonGrow:
+FortreeCity_Mart_Text_RareCandyMakesMonGrow::
+# 47 "data/maps/FortreeCity_Mart/scripts.pory"
 	.string "A RARE CANDY makes a POKéMON grow\n"
 	.string "immediately by one level.$"
-

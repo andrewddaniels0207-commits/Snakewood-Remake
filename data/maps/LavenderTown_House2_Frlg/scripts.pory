@@ -1,145 +1,236 @@
-mapscripts LavenderTown_House2_Frlg_MapScripts {}
+raw `
+LavenderTown_House2_Frlg_MapScripts::
+	.byte 0
 
-script LavenderTown_House2_EventScript_NameRater {
-    lock
-    faceplayer
-    msgbox(LavenderTown_House2_Text_WantMeToRateNicknames, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) {
-        goto(LavenderTown_House2_EventScript_ChooseMon)
-    }
-    if (var(VAR_RESULT) == NO) {
-        goto(LavenderTown_House2_EventScript_DontRateNickname)
-    }
-    end
-}
 
-script LavenderTown_House2_EventScript_ChooseMon {
-    msgbox(LavenderTown_House2_Text_CritiqueWhichMonsNickname)
-    special(ChoosePartyMon)
-    waitstate
-    if (var(VAR_0x8004) < PARTY_SIZE) {
-        goto(LavenderTown_House2_EventScript_CheckCanRateMon)
-    }
-    if (var(VAR_0x8004) >= PARTY_SIZE) {
-        goto(LavenderTown_House2_EventScript_DontRateNickname)
-    }
-    end
-}
+LavenderTown_House2_EventScript_NameRater::
+# 4 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	lock
+# 5 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	faceplayer
+# 6 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	msgbox LavenderTown_House2_Text_WantMeToRateNicknames, MSGBOX_YESNO
+# 7 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq LavenderTown_House2_EventScript_NameRater_2
+LavenderTown_House2_EventScript_NameRater_1:
+# 10 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq LavenderTown_House2_EventScript_NameRater_5
+LavenderTown_House2_EventScript_NameRater_4:
+	end
 
-script LavenderTown_House2_EventScript_DontRateNickname {
-    msgbox(LavenderTown_House2_Text_ISeeComeVisitAgain)
-    release
-    end
-}
+LavenderTown_House2_EventScript_NameRater_2:
+# 8 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	goto LavenderTown_House2_EventScript_ChooseMon
+	goto LavenderTown_House2_EventScript_NameRater_1
 
-script LavenderTown_House2_EventScript_CheckCanRateMon {
-    specialvar(VAR_RESULT, ScriptGetPartyMonSpecies)
-    if (var(VAR_RESULT) == SPECIES_EGG) {
-        goto(LavenderTown_House2_EventScript_CantNicknameEgg)
-    }
-    special(BufferMonNickname)
-    special(IsMonOTIDNotPlayers)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(LavenderTown_House2_EventScript_CantNicknameTradeMon)
-    }
-    specialvar(VAR_RESULT, MonOTNameNotPlayer)
-    special(BufferMonNickname)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(LavenderTown_House2_EventScript_CantNicknameTradeMon)
-    }
-    msgbox(LavenderTown_House2_Text_GiveItANicerName, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) {
-        goto(LavenderTown_House2_EventScript_ChooseNewNickname)
-    }
-    if (var(VAR_RESULT) == NO) {
-        goto(LavenderTown_House2_EventScript_DontRateNickname)
-    }
-    end
-}
+LavenderTown_House2_EventScript_NameRater_5:
+# 11 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	goto LavenderTown_House2_EventScript_DontRateNickname
+	goto LavenderTown_House2_EventScript_NameRater_4
 
-script LavenderTown_House2_EventScript_CantNicknameEgg {
-    msgbox(LavenderTown_House2_Text_ThatIsMerelyAnEgg)
-    release
-    end
-}
 
-script LavenderTown_House2_EventScript_CantNicknameTradeMon {
-    msgbox(LavenderTown_House2_Text_TrulyImpeccableName)
-    release
-    end
-}
+LavenderTown_House2_EventScript_ChooseMon::
+# 17 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	msgbox LavenderTown_House2_Text_CritiqueWhichMonsNickname
+# 18 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	special ChoosePartyMon
+# 19 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	waitstate
+# 20 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	compare VAR_0x8004, PARTY_SIZE
+	goto_if_lt LavenderTown_House2_EventScript_ChooseMon_2
+LavenderTown_House2_EventScript_ChooseMon_1:
+# 23 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	compare VAR_0x8004, PARTY_SIZE
+	goto_if_ge LavenderTown_House2_EventScript_ChooseMon_5
+LavenderTown_House2_EventScript_ChooseMon_4:
+	end
 
-script LavenderTown_House2_EventScript_ChooseNewNickname {
-    msgbox(LavenderTown_House2_Text_WhatShallNewNicknameBe)
-    call(Common_EventScript_NameReceivedPartyMon)
-    specialvar(VAR_RESULT, TryPutNameRaterShowOnTheAir)
-    special(BufferMonNickname)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(LavenderTown_House2_EventScript_ChoseNewNickname)
-    }
-    msgbox(LavenderTown_House2_Text_FromNowOnShallBeKnownAsSameName)
-    release
-    end
-}
+LavenderTown_House2_EventScript_ChooseMon_2:
+# 21 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	goto LavenderTown_House2_EventScript_CheckCanRateMon
+	goto LavenderTown_House2_EventScript_ChooseMon_1
 
-script LavenderTown_House2_EventScript_ChoseNewNickname {
-    msgbox(LavenderTown_House2_Text_FromNowOnShallBeKnownAsName)
-    release
-    end
-}
+LavenderTown_House2_EventScript_ChooseMon_5:
+# 24 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	goto LavenderTown_House2_EventScript_DontRateNickname
+	goto LavenderTown_House2_EventScript_ChooseMon_4
 
-text LavenderTown_House2_Text_WantMeToRateNicknames {
-    "Hello, hello!\n"
-    "I am the official NAME RATER!\p"
-    "Want me to rate the nicknames of\n"
-    "your POKéMON?$"
-}
 
-text LavenderTown_House2_Text_CritiqueWhichMonsNickname {
-    "Which POKéMON's nickname should\n"
-    "I critique?$"
-}
+LavenderTown_House2_EventScript_DontRateNickname::
+# 30 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	msgbox LavenderTown_House2_Text_ISeeComeVisitAgain
+# 31 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	release
+	end
 
-text LavenderTown_House2_Text_GiveItANicerName {
-    "{STR_VAR_1}, is it?\n"
-    "That is a decent nickname!\p"
-    "But, would you like me to give it\n"
-    "a nicer name?\p"
-    "How about it?$"
-}
 
-text LavenderTown_House2_Text_WhatShallNewNicknameBe {
-    "Ah, good. Then, what shall the new\n"
-    "nickname be?$"
-}
+LavenderTown_House2_EventScript_CheckCanRateMon::
+# 36 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
+# 37 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	compare VAR_RESULT, SPECIES_EGG
+	goto_if_eq LavenderTown_House2_EventScript_CheckCanRateMon_2
+LavenderTown_House2_EventScript_CheckCanRateMon_1:
+# 40 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	special BufferMonNickname
+# 41 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	special IsMonOTIDNotPlayers
+# 42 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq LavenderTown_House2_EventScript_CheckCanRateMon_5
+LavenderTown_House2_EventScript_CheckCanRateMon_4:
+# 45 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	specialvar VAR_RESULT, MonOTNameNotPlayer
+# 46 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	special BufferMonNickname
+# 47 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq LavenderTown_House2_EventScript_CheckCanRateMon_8
+LavenderTown_House2_EventScript_CheckCanRateMon_7:
+# 50 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	msgbox LavenderTown_House2_Text_GiveItANicerName, MSGBOX_YESNO
+# 51 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq LavenderTown_House2_EventScript_CheckCanRateMon_11
+LavenderTown_House2_EventScript_CheckCanRateMon_10:
+# 54 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq LavenderTown_House2_EventScript_CheckCanRateMon_14
+LavenderTown_House2_EventScript_CheckCanRateMon_13:
+	end
 
-text LavenderTown_House2_Text_FromNowOnShallBeKnownAsName {
-    "Done! From now on, this POKéMON\n"
-    "shall be known as {STR_VAR_1}!\p"
-    "It is a better name than before!\n"
-    "How fortunate for you!$"
-}
+LavenderTown_House2_EventScript_CheckCanRateMon_2:
+# 38 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	goto LavenderTown_House2_EventScript_CantNicknameEgg
+	goto LavenderTown_House2_EventScript_CheckCanRateMon_1
 
-text LavenderTown_House2_Text_ISeeComeVisitAgain {
-    "I see.\n"
-    "Do come visit again.$"
-}
+LavenderTown_House2_EventScript_CheckCanRateMon_5:
+# 43 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	goto LavenderTown_House2_EventScript_CantNicknameTradeMon
+	goto LavenderTown_House2_EventScript_CheckCanRateMon_4
 
-text LavenderTown_House2_Text_FromNowOnShallBeKnownAsSameName {
-    "Done! From now on, this POKéMON\n"
-    "shall be known as {STR_VAR_1}!\p"
-    "It looks no different from before,\n"
-    "and yet, this is vastly superior!\p"
-    "How fortunate for you!$"
-}
+LavenderTown_House2_EventScript_CheckCanRateMon_8:
+# 48 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	goto LavenderTown_House2_EventScript_CantNicknameTradeMon
+	goto LavenderTown_House2_EventScript_CheckCanRateMon_7
 
-text LavenderTown_House2_Text_TrulyImpeccableName {
-    "{STR_VAR_1}, is it?\n"
-    "That is a truly impeccable name!\p"
-    "Take good care of {STR_VAR_1}!$"
-}
+LavenderTown_House2_EventScript_CheckCanRateMon_11:
+# 52 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	goto LavenderTown_House2_EventScript_ChooseNewNickname
+	goto LavenderTown_House2_EventScript_CheckCanRateMon_10
 
-text LavenderTown_House2_Text_ThatIsMerelyAnEgg {
-    "Now, now.\n"
-    "That is merely an EGG!$"
-}
+LavenderTown_House2_EventScript_CheckCanRateMon_14:
+# 55 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	goto LavenderTown_House2_EventScript_DontRateNickname
+	goto LavenderTown_House2_EventScript_CheckCanRateMon_13
+
+
+LavenderTown_House2_EventScript_CantNicknameEgg::
+# 61 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	msgbox LavenderTown_House2_Text_ThatIsMerelyAnEgg
+# 62 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	release
+	end
+
+
+LavenderTown_House2_EventScript_CantNicknameTradeMon::
+# 67 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	msgbox LavenderTown_House2_Text_TrulyImpeccableName
+# 68 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	release
+	end
+
+
+LavenderTown_House2_EventScript_ChooseNewNickname::
+# 73 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	msgbox LavenderTown_House2_Text_WhatShallNewNicknameBe
+# 74 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	call Common_EventScript_NameReceivedPartyMon
+# 75 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	specialvar VAR_RESULT, TryPutNameRaterShowOnTheAir
+# 76 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	special BufferMonNickname
+# 77 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq LavenderTown_House2_EventScript_ChooseNewNickname_2
+LavenderTown_House2_EventScript_ChooseNewNickname_1:
+# 80 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	msgbox LavenderTown_House2_Text_FromNowOnShallBeKnownAsSameName
+# 81 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	release
+	end
+
+LavenderTown_House2_EventScript_ChooseNewNickname_2:
+# 78 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	goto LavenderTown_House2_EventScript_ChoseNewNickname
+	goto LavenderTown_House2_EventScript_ChooseNewNickname_1
+
+
+LavenderTown_House2_EventScript_ChoseNewNickname::
+# 86 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	msgbox LavenderTown_House2_Text_FromNowOnShallBeKnownAsName
+# 87 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	release
+	end
+
+
+LavenderTown_House2_Text_WantMeToRateNicknames::
+# 91 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	.string "Hello, hello!\n"
+	.string "I am the official NAME RATER!\p"
+	.string "Want me to rate the nicknames of\n"
+	.string "your POKéMON?$"
+
+LavenderTown_House2_Text_CritiqueWhichMonsNickname::
+# 98 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	.string "Which POKéMON's nickname should\n"
+	.string "I critique?$"
+
+LavenderTown_House2_Text_GiveItANicerName::
+# 103 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	.string "{STR_VAR_1}, is it?\n"
+	.string "That is a decent nickname!\p"
+	.string "But, would you like me to give it\n"
+	.string "a nicer name?\p"
+	.string "How about it?$"
+
+LavenderTown_House2_Text_WhatShallNewNicknameBe::
+# 111 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	.string "Ah, good. Then, what shall the new\n"
+	.string "nickname be?$"
+
+LavenderTown_House2_Text_FromNowOnShallBeKnownAsName::
+# 116 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	.string "Done! From now on, this POKéMON\n"
+	.string "shall be known as {STR_VAR_1}!\p"
+	.string "It is a better name than before!\n"
+	.string "How fortunate for you!$"
+
+LavenderTown_House2_Text_ISeeComeVisitAgain::
+# 123 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	.string "I see.\n"
+	.string "Do come visit again.$"
+
+LavenderTown_House2_Text_FromNowOnShallBeKnownAsSameName::
+# 128 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	.string "Done! From now on, this POKéMON\n"
+	.string "shall be known as {STR_VAR_1}!\p"
+	.string "It looks no different from before,\n"
+	.string "and yet, this is vastly superior!\p"
+	.string "How fortunate for you!$"
+
+LavenderTown_House2_Text_TrulyImpeccableName::
+# 136 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	.string "{STR_VAR_1}, is it?\n"
+	.string "That is a truly impeccable name!\p"
+	.string "Take good care of {STR_VAR_1}!$"
+
+LavenderTown_House2_Text_ThatIsMerelyAnEgg::
+# 142 "data/maps/LavenderTown_House2_Frlg/scripts.pory"
+	.string "Now, now.\n"
+	.string "That is merely an EGG!$"
+
+`

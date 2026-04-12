@@ -1,107 +1,186 @@
-mapscripts BattleFrontier_BattleTowerElevator_MapScripts {
-    MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_TEMP_0, 0: BattleFrontier_BattleTowerElevator_EventScript_EnterElevator
-    ]
-    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: BattleFrontier_BattleTowerElevator_OnWarp
-}
-
-script BattleFrontier_BattleTowerElevator_EventScript_EnterElevator {
-    setvar(VAR_TEMP_0, 1)
-    applymovement(LOCALID_TOWER_ELEVATOR_ATTENDANT, BattleFrontier_BattleTowerElevator_Movement_AttendantEnter)
-    applymovement(LOCALID_PLAYER, BattleFrontier_BattleTowerElevator_Movement_PlayerEnter)
-    waitmovement(0)
-    special(BufferBattleTowerElevatorFloors)
-    waitse()
-    special(MoveElevator)
-    waitstate
-    delay(48)
-    applymovement(LOCALID_TOWER_ELEVATOR_ATTENDANT, BattleFrontier_BattleTowerElevator_Movement_AttendantExit)
-    applymovement(LOCALID_PLAYER, BattleFrontier_BattleTowerElevator_Movement_PlayerExit)
-    waitmovement(0)
-    call(BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom)
-    end
-}
-
-script BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom {
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) {
-        call(BattleFrontier_BattleTowerElevator_EventScript_WarpToCorridor)
-    }
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) {
-        call(BattleFrontier_BattleTowerElevator_EventScript_WarpToCorridor)
-    }
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS) {
-        call(BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoomMulti)
-    }
-    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_LINK_MULTIS) {
-        call(BattleFrontier_BattleTowerElevator_EventScript_WarpToCorridorMulti)
-    }
-    return
-}
-
-script BattleFrontier_BattleTowerElevator_EventScript_WarpToCorridor {
-    warp(MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR, 8, 1)
-    waitstate
-    return
-}
-
-script BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoomMulti {
-    if (!flag(FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER)) {
-        goto(BattleFrontier_BattleTowerElevator_EventScript_WarpToPartnerRoom)
-    }
-    warp(MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR, 7, 2)
-    waitstate
-    return
-}
-
-script BattleFrontier_BattleTowerElevator_EventScript_WarpToCorridorMulti {
-    warp(MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR, 7, 2)
-    waitstate
-    return
-}
-
-script BattleFrontier_BattleTowerElevator_EventScript_WarpToPartnerRoom {
-    warp(MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM, 10, 1)
-    waitstate
-    return
-}
-
-movement BattleFrontier_BattleTowerElevator_Movement_AttendantEnter {
-    walk_up
-    walk_right
-    face_down
-    step_end
-}
-
-movement BattleFrontier_BattleTowerElevator_Movement_PlayerEnter {
-    walk_up
-    walk_up
-    face_down
-    step_end
-}
-
-movement BattleFrontier_BattleTowerElevator_Movement_AttendantExit {
-    walk_down
-    walk_down
-    set_invisible
-    step_end
-}
-
-movement BattleFrontier_BattleTowerElevator_Movement_PlayerExit {
-    walk_right
-    walk_down
-    walk_down
-    step_end
-}
-
 raw `
-BattleFrontier_BattleTowerElevator_OnWarp:
-	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerElevator_EventScript_TurnPlayerNorth
+BattleFrontier_BattleTowerElevator_MapScripts::
+# 5 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerElevator_OnWarp
+# 2 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerElevator_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
+	.byte 0
+
+BattleFrontier_BattleTowerElevator_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 3 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleTowerElevator_EventScript_EnterElevator
 	.2byte 0
 
-`
 
-script BattleFrontier_BattleTowerElevator_EventScript_TurnPlayerNorth {
-    setvar(VAR_TEMP_1, 1)
-    turnobject(LOCALID_PLAYER, DIR_NORTH)
-    end
-}
+BattleFrontier_BattleTowerElevator_EventScript_EnterElevator::
+# 9 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	setvar VAR_TEMP_0, 1
+# 10 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	applymovement LOCALID_TOWER_ELEVATOR_ATTENDANT, BattleFrontier_BattleTowerElevator_Movement_AttendantEnter
+# 11 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleTowerElevator_Movement_PlayerEnter
+# 12 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	waitmovement 0
+# 13 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	special BufferBattleTowerElevatorFloors
+# 14 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	waitse
+# 15 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	special MoveElevator
+# 16 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	waitstate
+# 17 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	delay 48
+# 18 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	applymovement LOCALID_TOWER_ELEVATOR_ATTENDANT, BattleFrontier_BattleTowerElevator_Movement_AttendantExit
+# 19 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleTowerElevator_Movement_PlayerExit
+# 20 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	waitmovement 0
+# 21 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	call BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom
+	end
+
+
+BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom::
+# 26 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+	goto_if_eq BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom_2
+BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom_1:
+# 29 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
+	goto_if_eq BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom_5
+BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom_4:
+# 32 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS
+	goto_if_eq BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom_8
+BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom_7:
+# 35 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS
+	goto_if_eq BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom_11
+BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom_10:
+	return
+
+BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom_2:
+# 27 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	call BattleFrontier_BattleTowerElevator_EventScript_WarpToCorridor
+	goto BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom_1
+
+BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom_5:
+# 30 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	call BattleFrontier_BattleTowerElevator_EventScript_WarpToCorridor
+	goto BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom_4
+
+BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom_8:
+# 33 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	call BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoomMulti
+	goto BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom_7
+
+BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom_11:
+# 36 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	call BattleFrontier_BattleTowerElevator_EventScript_WarpToCorridorMulti
+	goto BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoom_10
+
+
+BattleFrontier_BattleTowerElevator_EventScript_WarpToCorridor::
+# 42 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR, 8, 1
+# 43 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	waitstate
+	return
+
+
+BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoomMulti::
+# 48 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	goto_if_unset FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER, BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoomMulti_2
+BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoomMulti_1:
+# 51 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR, 7, 2
+# 52 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	waitstate
+	return
+
+BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoomMulti_2:
+# 49 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	goto BattleFrontier_BattleTowerElevator_EventScript_WarpToPartnerRoom
+	goto BattleFrontier_BattleTowerElevator_EventScript_WarpToNextRoomMulti_1
+
+
+BattleFrontier_BattleTowerElevator_EventScript_WarpToCorridorMulti::
+# 57 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR, 7, 2
+# 58 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	waitstate
+	return
+
+
+BattleFrontier_BattleTowerElevator_EventScript_WarpToPartnerRoom::
+# 63 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM, 10, 1
+# 64 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	waitstate
+	return
+
+
+# 68 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+BattleFrontier_BattleTowerElevator_Movement_AttendantEnter:
+# 69 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	walk_up
+# 70 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	walk_right
+# 71 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	face_down
+# 72 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	step_end
+
+# 75 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+BattleFrontier_BattleTowerElevator_Movement_PlayerEnter:
+# 76 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	walk_up
+# 77 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	walk_up
+# 78 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	face_down
+# 79 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	step_end
+
+# 82 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+BattleFrontier_BattleTowerElevator_Movement_AttendantExit:
+# 83 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	walk_down
+# 84 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	walk_down
+# 85 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	set_invisible
+# 86 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	step_end
+
+# 89 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+BattleFrontier_BattleTowerElevator_Movement_PlayerExit:
+# 90 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	walk_right
+# 91 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	walk_down
+# 92 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	walk_down
+# 93 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	step_end
+
+# 96 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+
+# 97 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+BattleFrontier_BattleTowerElevator_OnWarp:
+# 98 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerElevator_EventScript_TurnPlayerNorth
+# 99 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	.2byte 0
+
+BattleFrontier_BattleTowerElevator_EventScript_TurnPlayerNorth::
+# 104 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	setvar VAR_TEMP_1, 1
+# 105 "data/maps/BattleFrontier_BattleTowerElevator/scripts.pory"
+	turnobject LOCALID_PLAYER, DIR_NORTH
+	end
+
+
+`

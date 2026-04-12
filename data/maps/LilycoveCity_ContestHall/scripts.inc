@@ -1,323 +1,557 @@
-@ All the LOCALID constants used in this file are essentially redundant.
-@ They're all used to have the NPC the player talked to turn back so they're facing
-@ their original direction (because they're watching/participating in the contests).
-@ They could all be substituted for VAR_LAST_TALKED.
 LilycoveCity_ContestHall_MapScripts::
 	.byte 0
 
+
 LilycoveCity_ContestHall_EventScript_Boy1::
+# 4 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_TodayWonSmartnessContest, MSGBOX_NPC
 	end
 
+
 LilycoveCity_ContestHall_EventScript_Boy2::
+# 9 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_EnteredBunchOfContests, MSGBOX_NPC
 	end
 
+
 LilycoveCity_ContestHall_EventScript_Girl::
+# 14 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_ManWhoWonEarlierHadPokeblocks, MSGBOX_NPC
 	end
 
+
 LilycoveCity_ContestHall_EventScript_Sailor::
+# 19 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_IsntThisPlaceHumongous, MSGBOX_NPC
 	end
 
+
 LilycoveCity_ContestHall_EventScript_SmartContestMC::
+# 24 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 25 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 26 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_GiveItBestSmartAppeal, MSGBOX_DEFAULT
+# 27 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 28 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_SMART_MC, Common_Movement_FaceOriginalDirection
+# 29 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 30 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_SmartContestJudge::
+# 35 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 36 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 37 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_AreYouEnjoyingThisContest, MSGBOX_DEFAULT
+# 38 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 39 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_SMART_JUDGE, Common_Movement_FaceOriginalDirection
+# 40 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 41 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_SmartContestant1::
+# 46 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 47 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 48 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_EnteredWrongContest, MSGBOX_DEFAULT
+# 49 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 50 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_SMART_CONTESTANT_1, Common_Movement_FaceOriginalDirection
+# 51 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 52 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_SmartContestant2::
+# 57 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 58 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 59 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_RaisedMonToBeSmart, MSGBOX_DEFAULT
+# 60 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 61 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_SMART_CONTESTANT_2, Common_Movement_FaceOriginalDirection
+# 62 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 63 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_SmartContestant3::
+# 68 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 69 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 70 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_IfMonPullsSmartMoveNext, MSGBOX_DEFAULT
+# 71 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 72 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_SMART_CONTESTANT_3, Common_Movement_FaceOriginalDirection
+# 73 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 74 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_SmartContestant4::
+# 79 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 80 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 81 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_DontAppreciateCuteLeechLife, MSGBOX_DEFAULT
+# 82 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 83 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_SMART_CONTESTANT_4, Common_Movement_FaceOriginalDirection
+# 84 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 85 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
 
+
 LilycoveCity_ContestHall_EventScript_SmartContestAudience1::
+# 90 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_YoureBeautifulGrandpa, MSGBOX_SIGN
 	end
 
+
 LilycoveCity_ContestHall_EventScript_SmartContestAudience2::
+# 95 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 96 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 97 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_AllSeemToUseDifferentMoves, MSGBOX_DEFAULT
+# 98 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 99 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_SMART_AUDIENCE_2, Common_Movement_FaceOriginalDirection
+# 100 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 101 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_SmartContestAudience3::
+# 106 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 107 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 108 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_PokemonSmarterThanTrainers, MSGBOX_DEFAULT
+# 109 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 110 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_SMART_AUDIENCE_3, Common_Movement_FaceOriginalDirection
+# 111 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 112 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_SmartContestAudience4::
+# 117 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 118 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 119 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_StillLoveSmartnessContests, MSGBOX_DEFAULT
+# 120 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 121 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_SMART_AUDIENCE_4, Common_Movement_FaceOriginalDirection
+# 122 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 123 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_BeautyContestMC::
+# 128 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 129 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 130 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_AreYouEnteringBeautyContest, MSGBOX_DEFAULT
+# 131 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 132 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_BEAUTY_MC, Common_Movement_FaceOriginalDirection
+# 133 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 134 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_BeautyContestJudge::
+# 139 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 140 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 141 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_EveryPokemonPristineBeauty, MSGBOX_DEFAULT
+# 142 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 143 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_BEAUTY_JUDGE, Common_Movement_FaceOriginalDirection
+# 144 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 145 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_BeautyContestant1::
+# 150 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 151 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 152 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_EyesWillBeGluedToMyBeauty, MSGBOX_DEFAULT
+# 153 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 154 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_BEAUTY_CONTESTANT_1, Common_Movement_FaceOriginalDirection
+# 155 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 156 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_BeautyContestant2::
+# 161 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 162 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 163 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_OverdidGrooming, MSGBOX_DEFAULT
+# 164 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 165 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_BEAUTY_CONTESTANT_2, Common_Movement_FaceOriginalDirection
+# 166 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 167 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_BeautyContestant3::
+# 172 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 173 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 174 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_JudgeWontSeeAuroraBeam, MSGBOX_DEFAULT
+# 175 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 176 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_BEAUTY_CONTESTANT_3, Common_Movement_FaceOriginalDirection
+# 177 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 178 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_BeautyContestant4::
+# 183 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 184 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 185 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_PokemonLooksLikeYoungerMe, MSGBOX_DEFAULT
+# 186 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 187 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_BEAUTY_CONTESTANT_4, Common_Movement_FaceOriginalDirection
+# 188 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 189 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_BeautyContestAudience1::
+# 194 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 195 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 196 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_WinBeautyContestMakesMeHappy, MSGBOX_DEFAULT
+# 197 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 198 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_BEAUTY_AUDIENCE_1, Common_Movement_FaceOriginalDirection
+# 199 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 200 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_BeautyContestAudience2::
+# 205 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 206 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 207 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_GanderAtAllThosePrettyPokemon, MSGBOX_DEFAULT
+# 208 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 209 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_BEAUTY_AUDIENCE_2, Common_Movement_FaceOriginalDirection
+# 210 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 211 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_BeautyContestAudience3::
+# 216 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 217 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 218 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_CantWinOnBeautyAlone, MSGBOX_DEFAULT
+# 219 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 220 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_BEAUTY_AUDIENCE_3, Common_Movement_FaceOriginalDirection
+# 221 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 222 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_CuteContestMC::
+# 227 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 228 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 229 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_InTheMiddleOfContest, MSGBOX_DEFAULT
+# 230 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 231 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_CUTE_MC, Common_Movement_FaceOriginalDirection
+# 232 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 233 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_CuteContestJudge::
+# 238 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 239 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 240 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_SuchCharmingCuteAppeals, MSGBOX_DEFAULT
+# 241 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 242 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_CUTE_JUDGE, Common_Movement_FaceOriginalDirection
+# 243 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 244 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_CuteContestant1::
+# 249 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 250 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 251 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_MyAzurillWasDistracted, MSGBOX_DEFAULT
+# 252 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 253 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_CUTE_CONTESTANT_1, Common_Movement_FaceOriginalDirection
+# 254 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 255 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_CuteContestant2::
+# 260 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 261 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 262 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_NeverWonBattleButContest, MSGBOX_DEFAULT
+# 263 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 264 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_CUTE_CONTESTANT_2, Common_Movement_FaceOriginalDirection
+# 265 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 266 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_CuteContestant3::
+# 271 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 272 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 273 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_PetalDanceIsMarvel, MSGBOX_DEFAULT
+# 274 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 275 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_CUTE_CONTESTANT_3, Common_Movement_FaceOriginalDirection
+# 276 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 277 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_CuteContestant4::
+# 282 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 283 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 284 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_MyMonAppealSoMuchCuter, MSGBOX_DEFAULT
+# 285 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 286 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_CUTE_CONTESTANT_4, Common_Movement_FaceOriginalDirection
+# 287 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 288 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
 
+
 LilycoveCity_ContestHall_EventScript_CuteContestAudience1::
+# 293 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lockall
+# 294 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_CUTE_AUDIENCE_1, Common_Movement_FacePlayer
+# 295 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 296 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_MyChildIsInContest, MSGBOX_DEFAULT
+# 297 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 298 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_CUTE_AUDIENCE_1, Common_Movement_FaceOriginalDirection
+# 299 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 300 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	delay 25
+# 301 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_ComeOnDear, MSGBOX_DEFAULT
+# 302 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	releaseall
 	end
 
+
 LilycoveCity_ContestHall_EventScript_CuteContestAudience2::
+# 307 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 308 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 309 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_WantCuteMonOfMyOwn, MSGBOX_DEFAULT
+# 310 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 311 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_CUTE_AUDIENCE_2, Common_Movement_FaceOriginalDirection
+# 312 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 313 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_ContestHall_EventScript_CuteContestAudience3::
+# 318 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	lock
+# 319 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	faceplayer
+# 320 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_ThatGirlThereIsCutest, MSGBOX_DEFAULT
+# 321 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	closemessage
+# 322 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	applymovement LOCALID_CUTE_AUDIENCE_3, Common_Movement_FaceOriginalDirection
+# 323 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	waitmovement 0
+# 324 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	release
 	end
 
+
 LilycoveCity_ContestHall_EventScript_BeautyStageSign::
+# 329 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_BeautyContestStage, MSGBOX_SIGN
 	end
 
+
 LilycoveCity_ContestHall_EventScript_CuteStageSign::
+# 334 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_CuteContestStage, MSGBOX_SIGN
 	end
 
+
 LilycoveCity_ContestHall_EventScript_SmartStageSign::
+# 339 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	msgbox LilycoveCity_ContestHall_Text_SmartContestStage, MSGBOX_SIGN
 	end
 
-LilycoveCity_ContestHall_Text_TodayWonSmartnessContest:
+
+LilycoveCity_ContestHall_Text_TodayWonSmartnessContest::
+# 343 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "This POKéMON won the BEAUTY CONTEST\n"
 	.string "here before.\p"
 	.string "Well, guess what? Today, I made it\n"
 	.string "win a SMARTNESS CONTEST!\p"
 	.string "My abilities scare even me…$"
 
-LilycoveCity_ContestHall_Text_EnteredBunchOfContests:
+LilycoveCity_ContestHall_Text_EnteredBunchOfContests::
+# 351 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "I've entered a bunch of CONTESTS,\n"
 	.string "so I'm seeing how things work.\p"
 	.string "If you're in a COOLNESS CONTEST,\n"
@@ -325,29 +559,34 @@ LilycoveCity_ContestHall_Text_EnteredBunchOfContests:
 	.string "But smart moves and cute moves\n"
 	.string "don't go over well, for instance.$"
 
-LilycoveCity_ContestHall_Text_ManWhoWonEarlierHadPokeblocks:
+LilycoveCity_ContestHall_Text_ManWhoWonEarlierHadPokeblocks::
+# 360 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "That young man who won earlier had\n"
 	.string "a whole bunch of different {POKEBLOCK}S.\p"
 	.string "Can you win if you had that many\n"
 	.string "of those things?$"
 
-LilycoveCity_ContestHall_Text_IsntThisPlaceHumongous:
+LilycoveCity_ContestHall_Text_IsntThisPlaceHumongous::
+# 367 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "Whoa, isn't this place humongous!\p"
 	.string "The tension in the air… It's not\n"
 	.string "like a CONTEST hall in the sticks.$"
 
-LilycoveCity_ContestHall_Text_GiveItBestSmartAppeal:
+LilycoveCity_ContestHall_Text_GiveItBestSmartAppeal::
+# 373 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "MC: Okay, SMART POKéMON and their\n"
 	.string "TRAINERS, are you ready?!\p"
 	.string "Give it your best showing!\n"
 	.string "Let's appeal!$"
 
-LilycoveCity_ContestHall_Text_AreYouEnjoyingThisContest:
+LilycoveCity_ContestHall_Text_AreYouEnjoyingThisContest::
+# 380 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "JUDGE: Are you enjoying this CONTEST?\p"
 	.string "Come back with three friends, and\n"
 	.string "all of you may enter a CONTEST!$"
 
-LilycoveCity_ContestHall_Text_EnteredWrongContest:
+LilycoveCity_ContestHall_Text_EnteredWrongContest::
+# 386 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "Ayayayay…\n"
 	.string "I entered the wrong CONTEST.\p"
 	.string "I entered this tough POKéMON in\n"
@@ -355,7 +594,8 @@ LilycoveCity_ContestHall_Text_EnteredWrongContest:
 	.string "Come on, wow them with a smart-looking\n"
 	.string "ROCK SMASH.$"
 
-LilycoveCity_ContestHall_Text_RaisedMonToBeSmart:
+LilycoveCity_ContestHall_Text_RaisedMonToBeSmart::
+# 395 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "I've spent many a year, and all my\n"
 	.string "wisdom besides, raising this POKéMON\l"
 	.string "to be smart.\p"
@@ -363,54 +603,64 @@ LilycoveCity_ContestHall_Text_RaisedMonToBeSmart:
 	.string "young pup's POKéMON.\p"
 	.string "My dear wife, are you seeing this?$"
 
-LilycoveCity_ContestHall_Text_IfMonPullsSmartMoveNext:
+LilycoveCity_ContestHall_Text_IfMonPullsSmartMoveNext::
+# 404 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "There it is!\p"
 	.string "If my POKéMON pulls a smart move next,\n"
 	.string "the audience's excitement will peak!$"
 
-LilycoveCity_ContestHall_Text_DontAppreciateCuteLeechLife:
+LilycoveCity_ContestHall_Text_DontAppreciateCuteLeechLife::
+# 410 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "Oh, dear, no!\p"
 	.string "My darling ZUBAT's LEECH LIFE is so\n"
 	.string "cute I kept using it over and over!\p"
 	.string "But these mean people don't appreciate\n"
 	.string "it at all!$"
 
-LilycoveCity_ContestHall_Text_YoureBeautifulGrandpa:
+LilycoveCity_ContestHall_Text_YoureBeautifulGrandpa::
+# 418 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "Kiyaaah! You're beautiful, Grandpa!$"
 
-LilycoveCity_ContestHall_Text_AllSeemToUseDifferentMoves:
+LilycoveCity_ContestHall_Text_AllSeemToUseDifferentMoves::
+# 422 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "Even when TRAINERS enter the same\n"
 	.string "kind of POKéMON, they all seem to use\l"
 	.string "different moves for appeals.\p"
 	.string "It's just like the way people have\n"
 	.string "different styles for battling.$"
 
-LilycoveCity_ContestHall_Text_PokemonSmarterThanTrainers:
+LilycoveCity_ContestHall_Text_PokemonSmarterThanTrainers::
+# 430 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "I think the POKéMON look smarter\n"
 	.string "than their TRAINERS. By a lot.$"
 
-LilycoveCity_ContestHall_Text_StillLoveSmartnessContests:
+LilycoveCity_ContestHall_Text_StillLoveSmartnessContests::
+# 435 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "When all's said and done, I still love\n"
 	.string "SMARTNESS CONTESTS.\p"
 	.string "That intellectual green color…\n"
 	.string "It's so… So… Cool.$"
 
-LilycoveCity_ContestHall_Text_AreYouEnteringBeautyContest:
+LilycoveCity_ContestHall_Text_AreYouEnteringBeautyContest::
+# 442 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "MC: Are you entering the BEAUTY\n"
 	.string "CONTEST, too? Good luck!$"
 
-LilycoveCity_ContestHall_Text_EveryPokemonPristineBeauty:
+LilycoveCity_ContestHall_Text_EveryPokemonPristineBeauty::
+# 447 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "JUDGE: Ah, every POKéMON here is\n"
 	.string "a model of pristine beauty!\p"
 	.string "Why, I almost forgot to score them!$"
 
-LilycoveCity_ContestHall_Text_EyesWillBeGluedToMyBeauty:
+LilycoveCity_ContestHall_Text_EyesWillBeGluedToMyBeauty::
+# 453 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "A POKéMON this beautiful…\n"
 	.string "There isn't another one like it.\p"
 	.string "Everyone's eyes will be glued to\n"
 	.string "my beauty.$"
 
-LilycoveCity_ContestHall_Text_OverdidGrooming:
+LilycoveCity_ContestHall_Text_OverdidGrooming::
+# 460 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "Waaaah!\p"
 	.string "I brushed and groomed my POKéMON\n"
 	.string "carefully for this CONTEST…\p"
@@ -418,96 +668,113 @@ LilycoveCity_ContestHall_Text_OverdidGrooming:
 	.string "My POKéMON's coat turned all scraggly…\p"
 	.string "What should I do?$"
 
-LilycoveCity_ContestHall_Text_JudgeWontSeeAuroraBeam:
+LilycoveCity_ContestHall_Text_JudgeWontSeeAuroraBeam::
+# 469 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "This AURORA BEAM is so dazzling,\n"
 	.string "the JUDGE won't be able to see it.\p"
 	.string "Uh, wait a second…\n"
 	.string "That'll be meaningless, then!$"
 
-LilycoveCity_ContestHall_Text_PokemonLooksLikeYoungerMe:
+LilycoveCity_ContestHall_Text_PokemonLooksLikeYoungerMe::
+# 476 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "This pretty POKéMON looks just like\n"
 	.string "me when I was younger.\p"
 	.string "Right when I said that, my husband\n"
 	.string "spewed the coffee he was drinking.\p"
 	.string "Did I say something funny?$"
 
-LilycoveCity_ContestHall_Text_WinBeautyContestMakesMeHappy:
+LilycoveCity_ContestHall_Text_WinBeautyContestMakesMeHappy::
+# 484 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "You know, if I win at a BEAUTY\n"
 	.string "CONTEST, sure it makes me\l"
 	.string "happy. More than usual, anyway.$"
 
-LilycoveCity_ContestHall_Text_GanderAtAllThosePrettyPokemon:
+LilycoveCity_ContestHall_Text_GanderAtAllThosePrettyPokemon::
+# 490 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "Wahahahah!\p"
 	.string "Will you take a gander at all those\n"
 	.string "pretty POKéMON!\l"
 	.string "I just love this sort of glitz!$"
 
-LilycoveCity_ContestHall_Text_CantWinOnBeautyAlone:
+LilycoveCity_ContestHall_Text_CantWinOnBeautyAlone::
+# 497 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "You can't always win on just beauty\n"
 	.string "alone.\p"
 	.string "You have to groom your POKéMON so\n"
 	.string "it's nice and glossy like mine.$"
 
-LilycoveCity_ContestHall_Text_InTheMiddleOfContest:
+LilycoveCity_ContestHall_Text_InTheMiddleOfContest::
+# 504 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "MC: Uh-oh! Hello!\n"
 	.string "We're in the middle of a CONTEST!\p"
 	.string "Please enter at our registration\n"
 	.string "counter and come out, okay?$"
 
-LilycoveCity_ContestHall_Text_SuchCharmingCuteAppeals:
+LilycoveCity_ContestHall_Text_SuchCharmingCuteAppeals::
+# 511 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "JUDGE: Oh, such charming and cute\n"
 	.string "appeals!\p"
 	.string "Oh, my goodness! What a perfectly\n"
 	.string "adorable WATER SPORT appeal!$"
 
-LilycoveCity_ContestHall_Text_MyAzurillWasDistracted:
+LilycoveCity_ContestHall_Text_MyAzurillWasDistracted::
+# 518 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "Oh, no… My sweet AZURILL was\n"
 	.string "distracted by another POKéMON.$"
 
-LilycoveCity_ContestHall_Text_NeverWonBattleButContest:
+LilycoveCity_ContestHall_Text_NeverWonBattleButContest::
+# 523 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "My POKéMON has never won in a battle,\n"
 	.string "but put it in a CONTEST and look out!$"
 
-LilycoveCity_ContestHall_Text_PetalDanceIsMarvel:
+LilycoveCity_ContestHall_Text_PetalDanceIsMarvel::
+# 528 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "My POKéMON's PETAL DANCE is a marvel\n"
 	.string "of elegance.\p"
 	.string "I won't let anyone disturb its\n"
 	.string "performance.$"
 
-LilycoveCity_ContestHall_Text_MyMonAppealSoMuchCuter:
+LilycoveCity_ContestHall_Text_MyMonAppealSoMuchCuter::
+# 535 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "Everyone's POKéMON are very cute.\p"
 	.string "However, if my POKéMON were to make\n"
 	.string "a cute appeal…\p"
 	.string "I'm sure that it would be so much \n"
 	.string "cuter than the others.$"
 
-LilycoveCity_ContestHall_Text_MyChildIsInContest:
+LilycoveCity_ContestHall_Text_MyChildIsInContest::
+# 543 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "My child is in this CONTEST.$"
 
-LilycoveCity_ContestHall_Text_ComeOnDear:
+LilycoveCity_ContestHall_Text_ComeOnDear::
+# 547 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "Come on, dear. Go for it!\n"
 	.string "Your POKéMON is the best!$"
 
-LilycoveCity_ContestHall_Text_ThatGirlThereIsCutest:
+LilycoveCity_ContestHall_Text_ThatGirlThereIsCutest::
+# 552 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "I think that girl over there is\n"
 	.string "the cutest of the lot.\p"
 	.string "What's that? They're judging\n"
 	.string "POKéMON by their looks?$"
 
-LilycoveCity_ContestHall_Text_WantCuteMonOfMyOwn:
+LilycoveCity_ContestHall_Text_WantCuteMonOfMyOwn::
+# 559 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "Ohh, seeing all these cute POKéMON,\n"
 	.string "they make we want to get my own!\p"
 	.string "I'm going to go catch some!$"
 
-LilycoveCity_ContestHall_Text_BeautyContestStage:
+LilycoveCity_ContestHall_Text_BeautyContestStage::
+# 565 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "BEAUTY CONTEST STAGE\n"
 	.string "BE ALLURED BY BEAUTIFUL POKéMON!$"
 
-LilycoveCity_ContestHall_Text_CuteContestStage:
+LilycoveCity_ContestHall_Text_CuteContestStage::
+# 570 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "CUTENESS CONTEST STAGE\n"
 	.string "BE CHARMED BY CUTE POKéMON!$"
 
-LilycoveCity_ContestHall_Text_SmartContestStage:
+LilycoveCity_ContestHall_Text_SmartContestStage::
+# 575 "data/maps/LilycoveCity_ContestHall/scripts.pory"
 	.string "SMARTNESS CONTEST STAGE\n"
 	.string "BE IMPRESSED BY SMART POKéMON!$"
-

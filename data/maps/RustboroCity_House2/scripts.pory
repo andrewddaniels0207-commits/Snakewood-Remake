@@ -1,23 +1,30 @@
-mapscripts RustboroCity_House2_MapScripts {}
+raw `
+RustboroCity_House2_MapScripts::
+	.byte 0
 
-script RustboroCity_House2_EventScript_PokefanF {
-    msgbox(RustboroCity_House2_Text_TrainerSchoolExcellent, MSGBOX_NPC)
-    end
-}
 
-script RustboroCity_House2_EventScript_LittleGirl {
-    msgbox(RustboroCity_House2_Text_RoxanneKnowsALot, MSGBOX_NPC)
-    end
-}
+RustboroCity_House2_EventScript_PokefanF::
+# 4 "data/maps/RustboroCity_House2/scripts.pory"
+	msgbox RustboroCity_House2_Text_TrainerSchoolExcellent, MSGBOX_NPC
+	end
 
-text RustboroCity_House2_Text_TrainerSchoolExcellent {
-    "The TRAINER'S SCHOOL is excellent.\p"
-    "If you study there, you could even\n"
-    "become a GYM LEADER.$"
-}
 
-text RustboroCity_House2_Text_RoxanneKnowsALot {
-    "ROXANNE, the GYM LEADER, really knows\n"
-    "a lot about POKéMON.\p"
-    "She's really strong, too!$"
-}
+RustboroCity_House2_EventScript_LittleGirl::
+# 9 "data/maps/RustboroCity_House2/scripts.pory"
+	msgbox RustboroCity_House2_Text_RoxanneKnowsALot, MSGBOX_NPC
+	end
+
+
+RustboroCity_House2_Text_TrainerSchoolExcellent::
+# 13 "data/maps/RustboroCity_House2/scripts.pory"
+	.string "The TRAINER'S SCHOOL is excellent.\p"
+	.string "If you study there, you could even\n"
+	.string "become a GYM LEADER.$"
+
+RustboroCity_House2_Text_RoxanneKnowsALot::
+# 19 "data/maps/RustboroCity_House2/scripts.pory"
+	.string "ROXANNE, the GYM LEADER, really knows\n"
+	.string "a lot about POKéMON.\p"
+	.string "She's really strong, too!$"
+
+`

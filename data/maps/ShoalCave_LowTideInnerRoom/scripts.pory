@@ -1,197 +1,370 @@
-mapscripts ShoalCave_LowTideInnerRoom_MapScripts {
-    MAP_SCRIPT_ON_LOAD: ShoalCave_LowTideInnerRoom_OnLoad
-    MAP_SCRIPT_ON_TRANSITION: ShoalCave_LowTideInnerRoom_OnTransition
-}
+raw `
+ShoalCave_LowTideInnerRoom_MapScripts::
+# 2 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	map_script MAP_SCRIPT_ON_LOAD, ShoalCave_LowTideInnerRoom_OnLoad
+# 3 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, ShoalCave_LowTideInnerRoom_OnTransition
+	.byte 0
 
-script ShoalCave_LowTideInnerRoom_OnTransition {
-    if (flag(FLAG_SYS_SHOAL_TIDE)) {
-        goto(ShoalCave_LowTideInnerRoom_EventScript_SetHighTide)
-    }
-    goto(ShoalCave_LowTideInnerRoom_EventScript_SetLowTide)
-}
 
-script ShoalCave_LowTideInnerRoom_EventScript_SetHighTide {
-    setmaplayoutindex(LAYOUT_SHOAL_CAVE_HIGH_TIDE_INNER_ROOM)
-    end
-}
+ShoalCave_LowTideInnerRoom_OnTransition::
+# 7 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto_if_set FLAG_SYS_SHOAL_TIDE, ShoalCave_LowTideInnerRoom_OnTransition_2
+ShoalCave_LowTideInnerRoom_OnTransition_1:
+# 10 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetLowTide
+	return
 
-script ShoalCave_LowTideInnerRoom_EventScript_SetLowTide {
-    setmaplayoutindex(LAYOUT_SHOAL_CAVE_LOW_TIDE_INNER_ROOM)
-    end
-}
+ShoalCave_LowTideInnerRoom_OnTransition_2:
+# 8 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetHighTide
+	goto ShoalCave_LowTideInnerRoom_OnTransition_1
 
-script ShoalCave_LowTideInnerRoom_OnLoad {
-    call(ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles)
-    end
-}
 
-script ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles {
-    if (flag(FLAG_RECEIVED_SHOAL_SALT_1)) {
-        goto(ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2)
-    }
-    if (flag(FLAG_SYS_SHOAL_TIDE)) {
-        goto(ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2)
-    }
-    setmetatile(31, 8, METATILE_Cave_ShoalCave_DirtPile_Large, TRUE)
-    goto(ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2)
-    end
-}
+ShoalCave_LowTideInnerRoom_EventScript_SetHighTide::
+# 14 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setmaplayoutindex LAYOUT_SHOAL_CAVE_HIGH_TIDE_INNER_ROOM
+	end
 
-script ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2 {
-    if (flag(FLAG_RECEIVED_SHOAL_SALT_2)) {
-        goto(ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles3)
-    }
-    if (flag(FLAG_SYS_SHOAL_TIDE)) {
-        goto(ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles3)
-    }
-    setmetatile(14, 26, METATILE_Cave_ShoalCave_DirtPile_Large, TRUE)
-    goto(ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles3)
-    end
-}
 
-script ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles3 {
-    if (flag(FLAG_RECEIVED_SHOAL_SHELL_1)) {
-        goto(ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles4)
-    }
-    setmetatile(41, 20, METATILE_Cave_ShoalCave_BlueStone_Large, TRUE)
-    goto(ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles4)
-    end
-}
+ShoalCave_LowTideInnerRoom_EventScript_SetLowTide::
+# 19 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setmaplayoutindex LAYOUT_SHOAL_CAVE_LOW_TIDE_INNER_ROOM
+	end
 
-script ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles4 {
-    if (flag(FLAG_RECEIVED_SHOAL_SHELL_2)) {
-        goto(ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles5)
-    }
-    setmetatile(41, 10, METATILE_Cave_ShoalCave_BlueStone_Large, TRUE)
-    goto(ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles5)
-    end
-}
 
-script ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles5 {
-    if (flag(FLAG_RECEIVED_SHOAL_SHELL_3)) {
-        goto(ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles6)
-    }
-    setmetatile(6, 9, METATILE_Cave_ShoalCave_BlueStone_Large, TRUE)
-    goto(ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles6)
-    end
-}
+ShoalCave_LowTideInnerRoom_OnLoad::
+# 24 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	call ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles
+	end
 
-script ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles6 {
-    if (flag(FLAG_RECEIVED_SHOAL_SHELL_4)) {
-        goto(ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatilesEnd)
-    }
-    setmetatile(16, 13, METATILE_Cave_ShoalCave_BlueStone_Large, TRUE)
-    return
-}
 
-script ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatilesEnd {
-    return
-}
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles::
+# 29 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto_if_set FLAG_RECEIVED_SHOAL_SALT_1, ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles_2
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles_1:
+# 32 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto_if_set FLAG_SYS_SHOAL_TIDE, ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles_5
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles_4:
+# 35 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setmetatile 31, 8, METATILE_Cave_ShoalCave_DirtPile_Large, TRUE
+# 36 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2
+	end
 
-script ShoalCave_LowTideInnerRoom_EventScript_ShoalShell1 {
-    lockall
-    if (flag(FLAG_RECEIVED_SHOAL_SHELL_1)) {
-        goto(ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell)
-    }
-    giveitem(ITEM_SHOAL_SHELL)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(Common_EventScript_ShowBagIsFull)
-    }
-    setmetatile(41, 20, METATILE_Cave_ShoalCave_BlueStone_Small, FALSE)
-    special(DrawWholeMapView)
-    setflag(FLAG_RECEIVED_SHOAL_SHELL_1)
-    releaseall
-    end
-}
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles_2:
+# 30 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles_1
 
-script ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell {
-    msgbox(ShoalCave_Text_WasShoallShellNowNothing, MSGBOX_DEFAULT)
-    releaseall
-    end
-}
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles_5:
+# 33 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles_4
 
-script ShoalCave_LowTideInnerRoom_EventScript_ShoalShell2 {
-    lockall
-    if (flag(FLAG_RECEIVED_SHOAL_SHELL_2)) {
-        goto(ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell)
-    }
-    giveitem(ITEM_SHOAL_SHELL)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(Common_EventScript_ShowBagIsFull)
-    }
-    setmetatile(41, 10, METATILE_Cave_ShoalCave_BlueStone_Small, FALSE)
-    special(DrawWholeMapView)
-    setflag(FLAG_RECEIVED_SHOAL_SHELL_2)
-    releaseall
-    end
-}
 
-script ShoalCave_LowTideInnerRoom_EventScript_ShoalShell3 {
-    lockall
-    if (flag(FLAG_RECEIVED_SHOAL_SHELL_3)) {
-        goto(ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell)
-    }
-    giveitem(ITEM_SHOAL_SHELL)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(Common_EventScript_ShowBagIsFull)
-    }
-    setmetatile(6, 9, METATILE_Cave_ShoalCave_BlueStone_Small, FALSE)
-    special(DrawWholeMapView)
-    setflag(FLAG_RECEIVED_SHOAL_SHELL_3)
-    releaseall
-    end
-}
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2::
+# 41 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto_if_set FLAG_RECEIVED_SHOAL_SALT_2, ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2_2
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2_1:
+# 44 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto_if_set FLAG_SYS_SHOAL_TIDE, ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2_5
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2_4:
+# 47 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setmetatile 14, 26, METATILE_Cave_ShoalCave_DirtPile_Large, TRUE
+# 48 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles3
+	end
 
-script ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4 {
-    lockall
-    if (flag(FLAG_RECEIVED_SHOAL_SHELL_4)) {
-        goto(ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell)
-    }
-    giveitem(ITEM_SHOAL_SHELL)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(Common_EventScript_ShowBagIsFull)
-    }
-    setmetatile(16, 13, METATILE_Cave_ShoalCave_BlueStone_Small, FALSE)
-    special(DrawWholeMapView)
-    setflag(FLAG_RECEIVED_SHOAL_SHELL_4)
-    releaseall
-    end
-}
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2_2:
+# 42 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles3
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2_1
 
-script ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt1 {
-    lockall
-    if (flag(FLAG_RECEIVED_SHOAL_SALT_1)) {
-        goto(ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalSalt)
-    }
-    giveitem(ITEM_SHOAL_SALT)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(Common_EventScript_ShowBagIsFull)
-    }
-    setmetatile(31, 8, METATILE_Cave_ShoalCave_DirtPile_Small, FALSE)
-    special(DrawWholeMapView)
-    setflag(FLAG_RECEIVED_SHOAL_SALT_1)
-    releaseall
-    end
-}
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2_5:
+# 45 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles3
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2_4
 
-script ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalSalt {
-    msgbox(ShoalCave_Text_WasShoalSaltNowNothing, MSGBOX_DEFAULT)
-    releaseall
-    end
-}
 
-script ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt2 {
-    lockall
-    if (flag(FLAG_RECEIVED_SHOAL_SALT_2)) {
-        goto(ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalSalt)
-    }
-    giveitem(ITEM_SHOAL_SALT)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(Common_EventScript_ShowBagIsFull)
-    }
-    setmetatile(14, 26, METATILE_Cave_ShoalCave_DirtPile_Small, FALSE)
-    special(DrawWholeMapView)
-    setflag(FLAG_RECEIVED_SHOAL_SALT_2)
-    releaseall
-    end
-}
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles3::
+# 53 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_1, ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles3_2
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles3_1:
+# 56 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setmetatile 41, 20, METATILE_Cave_ShoalCave_BlueStone_Large, TRUE
+# 57 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles4
+	end
+
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles3_2:
+# 54 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles4
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles3_1
+
+
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles4::
+# 62 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_2, ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles4_2
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles4_1:
+# 65 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setmetatile 41, 10, METATILE_Cave_ShoalCave_BlueStone_Large, TRUE
+# 66 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles5
+	end
+
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles4_2:
+# 63 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles5
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles4_1
+
+
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles5::
+# 71 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_3, ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles5_2
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles5_1:
+# 74 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setmetatile 6, 9, METATILE_Cave_ShoalCave_BlueStone_Large, TRUE
+# 75 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles6
+	end
+
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles5_2:
+# 72 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles6
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles5_1
+
+
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles6::
+# 80 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_4, ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles6_2
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles6_1:
+# 83 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setmetatile 16, 13, METATILE_Cave_ShoalCave_BlueStone_Large, TRUE
+	return
+
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles6_2:
+# 81 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatilesEnd
+	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles6_1
+
+
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatilesEnd::
+	return
+
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell1::
+# 92 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	lockall
+# 93 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_1, ShoalCave_LowTideInnerRoom_EventScript_ShoalShell1_2
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell1_1:
+# 96 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	giveitem ITEM_SHOAL_SHELL
+# 97 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_ShoalShell1_5
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell1_4:
+# 100 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setmetatile 41, 20, METATILE_Cave_ShoalCave_BlueStone_Small, FALSE
+# 101 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	special DrawWholeMapView
+# 102 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setflag FLAG_RECEIVED_SHOAL_SHELL_1
+# 103 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	releaseall
+	end
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell1_2:
+# 94 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell
+	goto ShoalCave_LowTideInnerRoom_EventScript_ShoalShell1_1
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell1_5:
+# 98 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto ShoalCave_LowTideInnerRoom_EventScript_ShoalShell1_4
+
+
+ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell::
+# 108 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	msgbox ShoalCave_Text_WasShoallShellNowNothing, MSGBOX_DEFAULT
+# 109 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	releaseall
+	end
+
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell2::
+# 114 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	lockall
+# 115 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_2, ShoalCave_LowTideInnerRoom_EventScript_ShoalShell2_2
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell2_1:
+# 118 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	giveitem ITEM_SHOAL_SHELL
+# 119 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_ShoalShell2_5
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell2_4:
+# 122 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setmetatile 41, 10, METATILE_Cave_ShoalCave_BlueStone_Small, FALSE
+# 123 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	special DrawWholeMapView
+# 124 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setflag FLAG_RECEIVED_SHOAL_SHELL_2
+# 125 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	releaseall
+	end
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell2_2:
+# 116 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell
+	goto ShoalCave_LowTideInnerRoom_EventScript_ShoalShell2_1
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell2_5:
+# 120 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto ShoalCave_LowTideInnerRoom_EventScript_ShoalShell2_4
+
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell3::
+# 130 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	lockall
+# 131 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_3, ShoalCave_LowTideInnerRoom_EventScript_ShoalShell3_2
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell3_1:
+# 134 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	giveitem ITEM_SHOAL_SHELL
+# 135 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_ShoalShell3_5
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell3_4:
+# 138 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setmetatile 6, 9, METATILE_Cave_ShoalCave_BlueStone_Small, FALSE
+# 139 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	special DrawWholeMapView
+# 140 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setflag FLAG_RECEIVED_SHOAL_SHELL_3
+# 141 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	releaseall
+	end
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell3_2:
+# 132 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell
+	goto ShoalCave_LowTideInnerRoom_EventScript_ShoalShell3_1
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell3_5:
+# 136 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto ShoalCave_LowTideInnerRoom_EventScript_ShoalShell3_4
+
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4::
+# 146 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	lockall
+# 147 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_4, ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4_2
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4_1:
+# 150 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	giveitem ITEM_SHOAL_SHELL
+# 151 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4_5
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4_4:
+# 154 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setmetatile 16, 13, METATILE_Cave_ShoalCave_BlueStone_Small, FALSE
+# 155 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	special DrawWholeMapView
+# 156 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setflag FLAG_RECEIVED_SHOAL_SHELL_4
+# 157 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	releaseall
+	end
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4_2:
+# 148 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell
+	goto ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4_1
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4_5:
+# 152 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4_4
+
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt1::
+# 162 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	lockall
+# 163 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto_if_set FLAG_RECEIVED_SHOAL_SALT_1, ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt1_2
+ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt1_1:
+# 166 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	giveitem ITEM_SHOAL_SALT
+# 167 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt1_5
+ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt1_4:
+# 170 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setmetatile 31, 8, METATILE_Cave_ShoalCave_DirtPile_Small, FALSE
+# 171 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	special DrawWholeMapView
+# 172 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setflag FLAG_RECEIVED_SHOAL_SALT_1
+# 173 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	releaseall
+	end
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt1_2:
+# 164 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalSalt
+	goto ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt1_1
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt1_5:
+# 168 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt1_4
+
+
+ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalSalt::
+# 178 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	msgbox ShoalCave_Text_WasShoalSaltNowNothing, MSGBOX_DEFAULT
+# 179 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	releaseall
+	end
+
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt2::
+# 184 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	lockall
+# 185 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto_if_set FLAG_RECEIVED_SHOAL_SALT_2, ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt2_2
+ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt2_1:
+# 188 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	giveitem ITEM_SHOAL_SALT
+# 189 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt2_5
+ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt2_4:
+# 192 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setmetatile 14, 26, METATILE_Cave_ShoalCave_DirtPile_Small, FALSE
+# 193 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	special DrawWholeMapView
+# 194 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	setflag FLAG_RECEIVED_SHOAL_SALT_2
+# 195 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	releaseall
+	end
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt2_2:
+# 186 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalSalt
+	goto ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt2_1
+
+ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt2_5:
+# 190 "data/maps/ShoalCave_LowTideInnerRoom/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt2_4
+
+
+`

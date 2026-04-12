@@ -5,7 +5,7 @@ ArtisanCave_B1F_MapScripts::
 
 
 ArtisanCave_B1F_OnTransition::
-# 6 "data/maps/ArtisanCave_B1F/scripts.pory"
+# 7 "data/maps/ArtisanCave_B1F/scripts.pory"
 	setflag FLAG_LANDMARK_ARTISAN_CAVE
 	end
 

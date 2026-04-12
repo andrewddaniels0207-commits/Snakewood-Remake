@@ -1,238 +1,544 @@
 SilphCo_7F_Frlg_MapScripts::
+# 2 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_LOAD, SilphCo_7F_OnLoad
+# 3 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, SilphCo_7F_OnTransition
 	.byte 0
 
+
 SilphCo_7F_OnLoad::
-	call_if_unset FLAG_SILPH_7F_DOOR_1, EventScript_Close7FDoor1
-	call_if_unset FLAG_SILPH_7F_DOOR_2, EventScript_Close7FDoor2
-	call_if_unset FLAG_SILPH_7F_DOOR_3, EventScript_Close7FDoor3
+# 7 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	goto_if_unset FLAG_SILPH_7F_DOOR_1, SilphCo_7F_OnLoad_2
+SilphCo_7F_OnLoad_1:
+# 10 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	goto_if_unset FLAG_SILPH_7F_DOOR_2, SilphCo_7F_OnLoad_5
+SilphCo_7F_OnLoad_4:
+# 13 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	goto_if_unset FLAG_SILPH_7F_DOOR_3, SilphCo_7F_OnLoad_8
+SilphCo_7F_OnLoad_7:
 	end
+
+SilphCo_7F_OnLoad_2:
+# 8 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	call EventScript_Close7FDoor1
+	goto SilphCo_7F_OnLoad_1
+
+SilphCo_7F_OnLoad_5:
+# 11 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	call EventScript_Close7FDoor2
+	goto SilphCo_7F_OnLoad_4
+
+SilphCo_7F_OnLoad_8:
+# 14 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	call EventScript_Close7FDoor3
+	goto SilphCo_7F_OnLoad_7
+
 
 SilphCo_7F_OnTransition::
-	call_if_ge VAR_MAP_SCENE_SILPH_CO_11F, 1, SilphCo_7F_EventScript_SetObjRocketsGone
+# 20 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
+	goto_if_ge SilphCo_7F_OnTransition_2
+SilphCo_7F_OnTransition_1:
 	end
 
+SilphCo_7F_OnTransition_2:
+# 21 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	call SilphCo_7F_EventScript_SetObjRocketsGone
+	goto SilphCo_7F_OnTransition_1
+
+
 SilphCo_7F_EventScript_SetObjRocketsGone::
+# 27 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	setobjectmovementtype LOCALID_SILPH_CO_7F_WORKER_M2, MOVEMENT_TYPE_FACE_UP
 	return
 
+
 SilphCo_7F_EventScript_RivalTriggerTop::
+# 32 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	lockall
+# 33 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 0
+# 34 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	goto SilphCo_7F_EventScript_RivalScene
 	end
+
 
 SilphCo_7F_EventScript_RivalTriggerBottom::
+# 39 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	lockall
+# 40 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 1
+# 41 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	goto SilphCo_7F_EventScript_RivalScene
 	end
 
+
 SilphCo_7F_EventScript_RivalScene::
+# 46 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_MALE
+# 47 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	playbgm MUS_RG_ENCOUNTER_RIVAL, 0
+# 48 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	applymovement LOCALID_SILPH_CO_RIVAL, Common_Movement_ExclamationMark
+# 49 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	waitmovement 0
+# 50 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+# 51 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	applymovement LOCALID_SILPH_CO_RIVAL, Common_Movement_Delay48
+# 52 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	waitmovement 0
+# 53 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox SilphCo_7F_Text_RivalWhatKeptYou
-	call_if_eq VAR_TEMP_1, 0, SilphCo_7F_EventScript_RivalApproachTop
-	call_if_eq VAR_TEMP_1, 1, SilphCo_7F_EventScript_RivalApproachBottom
+# 54 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 0
+	goto_if_eq SilphCo_7F_EventScript_RivalScene_2
+SilphCo_7F_EventScript_RivalScene_1:
+# 57 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 1
+	goto_if_eq SilphCo_7F_EventScript_RivalScene_5
+SilphCo_7F_EventScript_RivalScene_4:
+# 60 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox SilphCo_7F_Text_RivalIntro
+# 61 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	setvar VAR_LAST_TALKED, LOCALID_SILPH_CO_RIVAL
-	call_if_eq VAR_STARTER_MON, 2, SilphCo_7F_EventScript_RivalSquirtle
-	call_if_eq VAR_STARTER_MON, 1, SilphCo_7F_EventScript_RivalBulbasaur
-	call_if_eq VAR_STARTER_MON, 0, SilphCo_7F_EventScript_RivalCharmander
+# 62 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	compare VAR_STARTER_MON, 2
+	goto_if_eq SilphCo_7F_EventScript_RivalScene_8
+SilphCo_7F_EventScript_RivalScene_7:
+# 65 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	compare VAR_STARTER_MON, 1
+	goto_if_eq SilphCo_7F_EventScript_RivalScene_11
+SilphCo_7F_EventScript_RivalScene_10:
+# 68 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	compare VAR_STARTER_MON, 0
+	goto_if_eq SilphCo_7F_EventScript_RivalScene_14
+SilphCo_7F_EventScript_RivalScene_13:
+# 71 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox SilphCo_7F_Text_RivalPostBattle
+# 72 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	closemessage
+# 73 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	playbgm MUS_RG_RIVAL_EXIT, 0
-	call_if_eq VAR_TEMP_1, 0, SilphCo_7F_EventScript_RivalExitTop
-	call_if_eq VAR_TEMP_1, 1, SilphCo_7F_EventScript_RivalExitBottom
+# 74 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 0
+	goto_if_eq SilphCo_7F_EventScript_RivalScene_17
+SilphCo_7F_EventScript_RivalScene_16:
+# 77 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 1
+	goto_if_eq SilphCo_7F_EventScript_RivalScene_20
+SilphCo_7F_EventScript_RivalScene_19:
+# 80 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	playse SE_WARP_IN
+# 81 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	fadedefaultbgm
+# 82 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	removeobject LOCALID_SILPH_CO_RIVAL
+# 83 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	waitse
+# 84 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	setvar VAR_MAP_SCENE_SILPH_CO_7F, 1
+# 85 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	releaseall
 	end
 
+SilphCo_7F_EventScript_RivalScene_2:
+# 55 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	call SilphCo_7F_EventScript_RivalApproachTop
+	goto SilphCo_7F_EventScript_RivalScene_1
+
+SilphCo_7F_EventScript_RivalScene_5:
+# 58 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	call SilphCo_7F_EventScript_RivalApproachBottom
+	goto SilphCo_7F_EventScript_RivalScene_4
+
+SilphCo_7F_EventScript_RivalScene_8:
+# 63 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	call SilphCo_7F_EventScript_RivalSquirtle
+	goto SilphCo_7F_EventScript_RivalScene_7
+
+SilphCo_7F_EventScript_RivalScene_11:
+# 66 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	call SilphCo_7F_EventScript_RivalBulbasaur
+	goto SilphCo_7F_EventScript_RivalScene_10
+
+SilphCo_7F_EventScript_RivalScene_14:
+# 69 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	call SilphCo_7F_EventScript_RivalCharmander
+	goto SilphCo_7F_EventScript_RivalScene_13
+
+SilphCo_7F_EventScript_RivalScene_17:
+# 75 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	call SilphCo_7F_EventScript_RivalExitTop
+	goto SilphCo_7F_EventScript_RivalScene_16
+
+SilphCo_7F_EventScript_RivalScene_20:
+# 78 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	call SilphCo_7F_EventScript_RivalExitBottom
+	goto SilphCo_7F_EventScript_RivalScene_19
+
+
 SilphCo_7F_EventScript_RivalApproachTop::
+# 90 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	closemessage
+# 91 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	applymovement LOCALID_SILPH_CO_RIVAL, SilphCo_7F_Movement_RivalApproachTop
+# 92 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 SilphCo_7F_EventScript_RivalApproachBottom::
 	return
 
+
 SilphCo_7F_EventScript_RivalSquirtle::
+# 101 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	trainerbattle_no_intro TRAINER_RIVAL_SILPH_SQUIRTLE, SilphCo_7F_Text_RivalDefeat
 	return
 
+
 SilphCo_7F_EventScript_RivalBulbasaur::
+# 106 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	trainerbattle_no_intro TRAINER_RIVAL_SILPH_BULBASAUR, SilphCo_7F_Text_RivalDefeat
 	return
 
+
 SilphCo_7F_EventScript_RivalCharmander::
+# 111 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	trainerbattle_no_intro TRAINER_RIVAL_SILPH_CHARMANDER, SilphCo_7F_Text_RivalDefeat
 	return
 
+
 SilphCo_7F_EventScript_RivalExitTop::
+# 116 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	applymovement LOCALID_SILPH_CO_RIVAL, SilphCo_7F_Movement_RivalExitTop
+# 117 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 SilphCo_7F_EventScript_RivalExitBottom::
+# 122 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	applymovement LOCALID_SILPH_CO_RIVAL, SilphCo_7F_Movement_RivalExitBottom
+# 123 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	waitmovement 0
 	return
 
-SilphCo_7F_Movement_RivalApproachTop::
+
+# 127 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+SilphCo_7F_Movement_RivalApproachTop:
+# 128 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	walk_up
+# 129 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	step_end
 
-SilphCo_7F_Movement_RivalExitTop::
+# 132 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+SilphCo_7F_Movement_RivalExitTop:
+# 133 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	walk_right
+# 134 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	walk_right
+# 135 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	walk_right
+# 136 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	walk_up
+# 137 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	delay_16
+# 138 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	step_end
 
-SilphCo_7F_Movement_RivalExitBottom::
+# 141 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+SilphCo_7F_Movement_RivalExitBottom:
+# 142 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	walk_left
+# 143 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	walk_up
+# 144 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	walk_up
+# 145 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	walk_right
+# 146 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	walk_right
+# 147 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	walk_right
+# 148 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	walk_right
+# 149 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	delay_16
+# 150 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	step_end
 
 SilphCo_7F_EventScript_LaprasGuy::
+# 154 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	lock
+# 155 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	faceplayer
-	goto_if_set FLAG_GOT_LAPRAS_FROM_SILPH, SilphCo_7F_EventScript_AlreadyGotLapras
+# 156 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_LAPRAS_FROM_SILPH, SilphCo_7F_EventScript_LaprasGuy_2
+SilphCo_7F_EventScript_LaprasGuy_1:
+# 159 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox SilphCo_7F_Text_HaveMonForSavingUs
+# 160 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, SPECIES_LAPRAS
+# 161 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	givemon SPECIES_LAPRAS, 25
-	goto_if_eq VAR_RESULT, 0, SilphCo_7F_EventScript_ReceiveLaprasParty
-	goto_if_eq VAR_RESULT, 1, SilphCo_7F_EventScript_ReceiveLaprasPC
-	goto_if_eq VAR_RESULT, 2, Common_EventScript_NoMoreRoomForPokemon
+# 162 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	compare VAR_RESULT, 0
+	goto_if_eq SilphCo_7F_EventScript_LaprasGuy_5
+SilphCo_7F_EventScript_LaprasGuy_4:
+# 165 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq SilphCo_7F_EventScript_LaprasGuy_8
+SilphCo_7F_EventScript_LaprasGuy_7:
+# 168 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	compare VAR_RESULT, 2
+	goto_if_eq SilphCo_7F_EventScript_LaprasGuy_11
+SilphCo_7F_EventScript_LaprasGuy_10:
+# 171 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	release
 	end
 
+SilphCo_7F_EventScript_LaprasGuy_2:
+# 157 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	goto SilphCo_7F_EventScript_AlreadyGotLapras
+	goto SilphCo_7F_EventScript_LaprasGuy_1
+
+SilphCo_7F_EventScript_LaprasGuy_5:
+# 163 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	goto SilphCo_7F_EventScript_ReceiveLaprasParty
+	goto SilphCo_7F_EventScript_LaprasGuy_4
+
+SilphCo_7F_EventScript_LaprasGuy_8:
+# 166 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	goto SilphCo_7F_EventScript_ReceiveLaprasPC
+	goto SilphCo_7F_EventScript_LaprasGuy_7
+
+SilphCo_7F_EventScript_LaprasGuy_11:
+# 169 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	goto Common_EventScript_NoMoreRoomForPokemon
+	goto SilphCo_7F_EventScript_LaprasGuy_10
+
+
 SilphCo_7F_EventScript_ReceiveLaprasParty::
+# 176 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_NEUTRAL
+# 177 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	playfanfare MUS_LEVEL_UP
+# 178 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	message SilphCo_7F_Text_ObtainedLaprasFromEmployee
+# 179 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	waitmessage
+# 180 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	waitfanfare
+# 181 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	bufferspeciesname STR_VAR_1, SPECIES_LAPRAS
+# 182 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, SilphCo_7F_EventScript_EndReceiveLapras
+# 183 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq SilphCo_7F_EventScript_ReceiveLaprasParty_2
+SilphCo_7F_EventScript_ReceiveLaprasParty_1:
+# 186 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	call Common_EventScript_GetGiftMonPartySlot
+# 187 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	call Common_EventScript_NameReceivedPartyMon
+# 188 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	goto SilphCo_7F_EventScript_EndReceiveLapras
 	end
 
+SilphCo_7F_EventScript_ReceiveLaprasParty_2:
+# 184 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	goto SilphCo_7F_EventScript_EndReceiveLapras
+	goto SilphCo_7F_EventScript_ReceiveLaprasParty_1
+
+
 SilphCo_7F_EventScript_ReceiveLaprasPC::
+# 193 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_NEUTRAL
+# 194 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	playfanfare MUS_LEVEL_UP
+# 195 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	message SilphCo_7F_Text_ObtainedLaprasFromEmployee
+# 196 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	waitmessage
+# 197 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	waitfanfare
+# 198 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	bufferspeciesname STR_VAR_1, SPECIES_LAPRAS
+# 199 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, SilphCo_7F_EventScript_LaprasTransferredToPC
+# 200 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq SilphCo_7F_EventScript_ReceiveLaprasPC_2
+SilphCo_7F_EventScript_ReceiveLaprasPC_1:
+# 203 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	call Common_EventScript_NameReceivedBoxMon
+# 204 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	goto SilphCo_7F_EventScript_LaprasTransferredToPC
 	end
 
+SilphCo_7F_EventScript_ReceiveLaprasPC_2:
+# 201 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	goto SilphCo_7F_EventScript_LaprasTransferredToPC
+	goto SilphCo_7F_EventScript_ReceiveLaprasPC_1
+
+
 SilphCo_7F_EventScript_LaprasTransferredToPC::
+# 209 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	call Common_EventScript_TransferredToPC
+# 210 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	goto SilphCo_7F_EventScript_EndReceiveLapras
 	end
 
+
 SilphCo_7F_EventScript_EndReceiveLapras::
+# 215 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_MALE
+# 216 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox SilphCo_7F_Text_ExplainLapras
+# 217 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	setflag FLAG_GOT_LAPRAS_FROM_SILPH
+# 218 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	release
 	end
+
 
 SilphCo_7F_EventScript_AlreadyGotLapras::
+# 223 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox SilphCo_7F_Text_RocketBossWentToBoardroom
+# 224 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	release
 	end
+
 
 SilphCo_7F_EventScript_WorkerM1::
+# 229 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	lock
+# 230 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	faceplayer
-	goto_if_ge VAR_MAP_SCENE_SILPH_CO_11F, 1, SilphCo_7F_EventScript_WorkerM1RocketsGone
+# 231 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
+	goto_if_ge SilphCo_7F_EventScript_WorkerM1_2
+SilphCo_7F_EventScript_WorkerM1_1:
+# 234 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox SilphCo_7F_Text_RocketsAfterMasterBall
+# 235 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	release
 	end
+
+SilphCo_7F_EventScript_WorkerM1_2:
+# 232 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	goto SilphCo_7F_EventScript_WorkerM1RocketsGone
+	goto SilphCo_7F_EventScript_WorkerM1_1
+
 
 SilphCo_7F_EventScript_WorkerM1RocketsGone::
+# 240 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox SilphCo_7F_Text_CanceledMasterBallProject
+# 241 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	release
 	end
+
 
 SilphCo_7F_EventScript_WorkerM2::
+# 246 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	lock
+# 247 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	faceplayer
-	goto_if_ge VAR_MAP_SCENE_SILPH_CO_11F, 1, SilphCo_7F_EventScript_WorkerM2RocketsGone
+# 248 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
+	goto_if_ge SilphCo_7F_EventScript_WorkerM2_2
+SilphCo_7F_EventScript_WorkerM2_1:
+# 251 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox SilphCo_7F_Text_BadIfTeamRocketTookOver
+# 252 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	release
 	end
+
+SilphCo_7F_EventScript_WorkerM2_2:
+# 249 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	goto SilphCo_7F_EventScript_WorkerM2RocketsGone
+	goto SilphCo_7F_EventScript_WorkerM2_1
+
 
 SilphCo_7F_EventScript_WorkerM2RocketsGone::
+# 257 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox SilphCo_7F_Text_WowYouChasedOffTeamRocket
+# 258 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	release
 	end
+
 
 SilphCo_7F_EventScript_WorkerF::
+# 263 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	lock
+# 264 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	faceplayer
-	goto_if_ge VAR_MAP_SCENE_SILPH_CO_11F, 1, SilphCo_7F_EventScript_WorkerFRocketsGone
+# 265 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
+	goto_if_ge SilphCo_7F_EventScript_WorkerF_2
+SilphCo_7F_EventScript_WorkerF_1:
+# 268 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox SilphCo_7F_Text_ReallyDangerousHere
+# 269 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	release
 	end
+
+SilphCo_7F_EventScript_WorkerF_2:
+# 266 "data/maps/SilphCo_7F_Frlg/scripts.pory"
+	goto SilphCo_7F_EventScript_WorkerFRocketsGone
+	goto SilphCo_7F_EventScript_WorkerF_1
+
 
 SilphCo_7F_EventScript_WorkerFRocketsGone::
+# 274 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox SilphCo_7F_Text_ThankYouSoMuch
+# 275 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	release
 	end
 
+
 SilphCo_7F_EventScript_FloorSign::
+# 280 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox SilphCo_7F_Text_FloorSign, MSGBOX_SIGN
 	end
 
+
 SilphCo_7F_EventScript_Joshua::
+# 285 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_SCIENTIST_JOSHUA, SilphCo_7F_Text_JoshuaIntro, SilphCo_7F_Text_JoshuaDefeat
+# 286 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox SilphCo_7F_Text_JoshuaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 SilphCo_7F_EventScript_Grunt1::
+# 291 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_33, SilphCo_7F_Text_Grunt1Intro, SilphCo_7F_Text_Grunt1Defeat
+# 292 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox SilphCo_7F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 SilphCo_7F_EventScript_Grunt2::
+# 297 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_34, SilphCo_7F_Text_Grunt2Intro, SilphCo_7F_Text_Grunt2Defeat
+# 298 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox SilphCo_7F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 SilphCo_7F_EventScript_Grunt3::
+# 303 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_35, SilphCo_7F_Text_Grunt3Intro, SilphCo_7F_Text_Grunt3Defeat
+# 304 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	msgbox SilphCo_7F_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 SilphCo_7F_Text_HaveMonForSavingUs::
+# 308 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "Oh! Hi! You're not a ROCKET!\n"
 	.string "You came to save us?\l"
 	.string "Why, thank you!\p"
@@ -240,10 +546,12 @@ SilphCo_7F_Text_HaveMonForSavingUs::
 	.string "for saving us.$"
 
 SilphCo_7F_Text_ObtainedLaprasFromEmployee::
+# 316 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "{PLAYER} obtained a LAPRAS from\n"
 	.string "the SILPH employee!$"
 
 SilphCo_7F_Text_ExplainLapras::
+# 321 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "It's a LAPRAS.\n"
 	.string "It's a very intelligent POKéMON.\p"
 	.string "We kept it in our lab, but it will\n"
@@ -254,87 +562,108 @@ SilphCo_7F_Text_ExplainLapras::
 	.string "It'll give you a lift across water!$"
 
 SilphCo_7F_Text_RocketBossWentToBoardroom::
+# 332 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "TEAM ROCKET's BOSS went to the\n"
 	.string "boardroom!\p"
 	.string "Is our PRESIDENT okay?\n"
 	.string "I'm worried.$"
 
 SilphCo_7F_Text_RocketsAfterMasterBall::
+# 339 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "TEAM ROCKET was after the MASTER\n"
 	.string "BALL, which catches any POKéMON.$"
 
 SilphCo_7F_Text_CanceledMasterBallProject::
+# 344 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "We canceled the MASTER BALL\n"
 	.string "project because of TEAM ROCKET.$"
 
 SilphCo_7F_Text_BadIfTeamRocketTookOver::
+# 349 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "It would be bad if TEAM ROCKET\n"
 	.string "took over SILPH or our POKéMON.$"
 
 SilphCo_7F_Text_WowYouChasedOffTeamRocket::
+# 354 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "Wow!\p"
 	.string "You chased off TEAM ROCKET all by\n"
 	.string "yourself?$"
 
 SilphCo_7F_Text_ReallyDangerousHere::
+# 360 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "You!\n"
 	.string "It's really dangerous here!\p"
 	.string "You came to save me?\n"
 	.string "You can't!$"
 
 SilphCo_7F_Text_ThankYouSoMuch::
+# 367 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "Thank you so much!$"
 
 SilphCo_7F_Text_Grunt3Intro::
+# 371 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "Uh-oh!\n"
 	.string "I smell a little mouse!$"
 
 SilphCo_7F_Text_Grunt3Defeat::
+# 376 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "Lights out!$"
 
 SilphCo_7F_Text_Grunt3PostBattle::
+# 380 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "You won't find my BOSS by just\n"
 	.string "scurrying around!$"
 
 SilphCo_7F_Text_JoshuaIntro::
+# 385 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "Heheh!\p"
 	.string "You mistook me for a SILPH worker?$"
 
 SilphCo_7F_Text_JoshuaDefeat::
+# 390 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "I'm done!$"
 
 SilphCo_7F_Text_JoshuaPostBattle::
+# 394 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "Despite your age, you are a\n"
 	.string "skilled TRAINER!$"
 
 SilphCo_7F_Text_Grunt1Intro::
+# 399 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "I am one of the four ROCKET\n"
 	.string "BROTHERS!$"
 
 SilphCo_7F_Text_Grunt1Defeat::
+# 404 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "Aack!\n"
 	.string "Brothers, I lost!$"
 
 SilphCo_7F_Text_Grunt1PostBattle::
+# 409 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "Doesn't matter.\n"
 	.string "My brothers will repay the favor!$"
 
 SilphCo_7F_Text_Grunt2Intro::
+# 414 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "A child intruder?\n"
 	.string "That must be you!$"
 
 SilphCo_7F_Text_Grunt2Defeat::
+# 419 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "Fine!\n"
 	.string "I lost!$"
 
 SilphCo_7F_Text_Grunt2PostBattle::
+# 424 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "Go on home before my BOSS gets\n"
 	.string "ticked off!$"
 
 SilphCo_7F_Text_RivalWhatKeptYou::
+# 429 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "{RIVAL}: What kept you, {PLAYER}?$"
 
 SilphCo_7F_Text_RivalIntro::
+# 433 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "{RIVAL}: Hahaha! I thought you'd\n"
 	.string "turn up if I waited here!\p"
 	.string "I guess TEAM ROCKET slowed you\n"
@@ -343,11 +672,13 @@ SilphCo_7F_Text_RivalIntro::
 	.string "to see if you got better!$"
 
 SilphCo_7F_Text_RivalDefeat::
+# 442 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "Oh, man!\n"
 	.string "So, you are ready for BOSS\l"
 	.string "ROCKET!$"
 
 SilphCo_7F_Text_RivalPostBattle::
+# 448 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "Well, {PLAYER}!\n"
 	.string "I'm moving on up and ahead!\p"
 	.string "By checking my POKéDEX, I'm\n"
@@ -363,6 +694,6 @@ SilphCo_7F_Text_RivalPostBattle::
 	.string "Smell ya!$"
 
 SilphCo_7F_Text_FloorSign::
+# 464 "data/maps/SilphCo_7F_Frlg/scripts.pory"
 	.string "SILPH CO. HEAD OFFICE\n"
 	.string "7F$"
-

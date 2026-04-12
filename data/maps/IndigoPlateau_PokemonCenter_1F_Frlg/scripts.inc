@@ -1,74 +1,133 @@
 IndigoPlateau_PokemonCenter_1F_Frlg_MapScripts::
+# 2 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, IndigoPlateau_PokemonCenter_1F_OnTransition
+# 3 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
+
 IndigoPlateau_PokemonCenter_1F_OnTransition::
+# 7 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	setrespawn HEAL_LOCATION_INDIGO_PLATEAU
+# 8 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
-	call_if_eq VAR_RESULT, TRUE, IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor
+# 9 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq IndigoPlateau_PokemonCenter_1F_OnTransition_2
+IndigoPlateau_PokemonCenter_1F_OnTransition_1:
 	end
 
+IndigoPlateau_PokemonCenter_1F_OnTransition_2:
+# 10 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
+	call IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor
+	goto IndigoPlateau_PokemonCenter_1F_OnTransition_1
+
+
 IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor::
-	goto_if_set FLAG_IS_CHAMPION, Common_EventScript_NopReturn
+# 16 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
+	goto_if_set FLAG_IS_CHAMPION, IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor_2
+IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor_1:
+# 19 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	setobjectxyperm LOCALID_LEAGUE_DOOR_GUARD, 4, 2
 	return
 
+IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor_2:
+# 17 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
+	goto Common_EventScript_NopReturn
+	goto IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor_1
+
+
 IndigoPlateau_PokemonCenter_1F_EventScript_DoorGuard::
+# 24 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	lock
+# 25 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	faceplayer
+# 26 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
-	goto_if_eq VAR_RESULT, TRUE, IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete
+# 27 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq IndigoPlateau_PokemonCenter_1F_EventScript_DoorGuard_2
+IndigoPlateau_PokemonCenter_1F_EventScript_DoorGuard_1:
+# 30 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	msgbox IndigoPlateau_PokemonCenter_1F_Text_FaceEliteFourGoodLuck
+# 31 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	release
 	end
+
+IndigoPlateau_PokemonCenter_1F_EventScript_DoorGuard_2:
+# 28 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
+	goto IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete
+	goto IndigoPlateau_PokemonCenter_1F_EventScript_DoorGuard_1
+
 
 IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete::
-	goto_if_set FLAG_IS_CHAMPION, IndigoPlateau_PokemonCenter_1F_EventScript_SeviiIslandComplete
+# 36 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
+	goto_if_set FLAG_IS_CHAMPION, IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete_2
+IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete_1:
+# 39 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	msgbox IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing
+# 40 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	release
 	end
+
+IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete_2:
+# 37 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
+	goto IndigoPlateau_PokemonCenter_1F_EventScript_SeviiIslandComplete
+	goto IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete_1
+
 
 IndigoPlateau_PokemonCenter_1F_EventScript_SeviiIslandComplete::
+# 45 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	msgbox IndigoPlateau_PokemonCenter_1F_Text_FaceEliteFourGoodLuck
+# 46 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	release
 	end
 
+
 IndigoPlateau_PokemonCenter_1F_EventScript_GymGuy::
+# 51 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	msgbox IndigoPlateau_PokemonCenter_1F_Text_GymGuyAdvice, MSGBOX_NPC
 	end
 
+
 IndigoPlateau_PokemonCenter_1F_EventScript_Clerk::
+# 56 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	lock
+# 57 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	faceplayer
+# 58 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	message gText_HowMayIServeYou
+# 59 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	waitmessage
+# 60 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	pokemart IndigoPlateau_PokemonCenter_1F_Items
+# 61 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	msgbox gText_PleaseComeAgain
+# 62 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	release
 	end
 
-	.align 2
+
 IndigoPlateau_PokemonCenter_1F_Items::
-	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_GREAT_BALL
-	.2byte ITEM_FULL_RESTORE
-	.2byte ITEM_MAX_POTION
-	.2byte ITEM_REVIVE
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_NONE
+# 67 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	release
 	end
+
 
 IndigoPlateau_PokemonCenter_1F_EventScript_Nurse::
+# 72 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	lock
+# 73 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	faceplayer
+# 74 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	call EventScript_PkmnCenterNurse_Frlg
+# 75 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	release
 	end
 
+
 IndigoPlateau_PokemonCenter_1F_Text_GymGuyAdvice::
+# 79 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	.string "Yo!\n"
 	.string "Champ in the making!\p"
 	.string "At the POKéMON LEAGUE, you will\n"
@@ -79,12 +138,14 @@ IndigoPlateau_PokemonCenter_1F_Text_GymGuyAdvice::
 	.string "Go for it!$"
 
 IndigoPlateau_PokemonCenter_1F_Text_FaceEliteFourGoodLuck::
+# 90 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	.string "From here on, you face the\n"
 	.string "ELITE FOUR one by one.\p"
 	.string "If you win, a door opens to the\n"
 	.string "next TRAINER. Good luck!$"
 
 IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing::
+# 97 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	.string "I am so sorry, but you've wasted\n"
 	.string "your time coming here.\p"
 	.string "LORELEI of the ELITE FOUR is\n"
@@ -93,6 +154,7 @@ IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing::
 	.string "closed for the time being.$"
 
 IndigoPlateau_PokemonCenter_1F_Text_AgathaWhuppedUs::
+# 106 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	.string "AGATHA's GHOST-type POKéMON are\n"
 	.string "horrifically terrifying in toughness.\p"
 	.string "I took my FIGHTING-type POKéMON\n"
@@ -105,9 +167,9 @@ IndigoPlateau_PokemonCenter_1F_Text_AgathaWhuppedUs::
 	.string "that scary lady hollering.$"
 
 IndigoPlateau_PokemonCenter_1F_Text_LancesCousinGymLeaderFarAway::
+# 119 "data/maps/IndigoPlateau_PokemonCenter_1F_Frlg/scripts.pory"
 	.string "Maybe becoming an ELITE FOUR\n"
 	.string "member is in the blood.\p"
 	.string "From what I've heard, LANCE has\n"
 	.string "a cousin who's a GYM LEADER\l"
 	.string "somewhere far away.$"
-

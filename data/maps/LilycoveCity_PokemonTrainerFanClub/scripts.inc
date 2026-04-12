@@ -1,568 +1,1345 @@
 LilycoveCity_PokemonTrainerFanClub_MapScripts::
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_PokemonTrainerFanClub_OnFrame
+# 5 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_PokemonTrainerFanClub_OnTransition
+# 2 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_PokemonTrainerFanClub_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
 	.byte 0
 
-	@ See field_specials.c for a breakdown of the Fan Club and its variables
-
-LilycoveCity_PokemonTrainerFanClub_OnFrame:
+LilycoveCity_PokemonTrainerFanClub_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 3 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	map_script_2 VAR_LILYCOVE_FAN_CLUB_STATE, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_MeetFirstFans
 	.2byte 0
 
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_MeetFirstFans::
+# 9 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	lockall
+# 10 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	applymovement LOCALID_TRAINER_FAN_CLUB_LASS, Common_Movement_WalkInPlaceFasterDown
+# 11 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	waitmovement 0
+# 12 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_OhWowItsPlayer, MSGBOX_DEFAULT
+# 13 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	applymovement LOCALID_TRAINER_FAN_CLUB_LITTLE_GIRL, LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlWatchPlayer
+# 14 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	applymovement LOCALID_TRAINER_FAN_CLUB_MAN, LilycoveCity_PokemonTrainerFanClub_Movement_FanApproachPlayer
+# 15 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	waitmovement 0
+# 16 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+# 17 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	waitmovement 0
+# 18 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_HeardAboutYouImYourFan, MSGBOX_DEFAULT
+# 19 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	applymovement LOCALID_TRAINER_FAN_CLUB_LITTLE_GIRL, LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlMoveCloserToPlayer
+# 20 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	waitmovement 0
+# 21 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+# 22 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	waitmovement 0
+# 23 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	applymovement LOCALID_TRAINER_FAN_CLUB_LITTLE_GIRL, LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlHideFromPlayer
+# 24 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	waitmovement 0
+# 25 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_LILYCOVE_FAN_CLUB_STATE, 2
+# 26 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	releaseall
 	end
 
+
+# 30 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 LilycoveCity_PokemonTrainerFanClub_Movement_FanApproachPlayer:
+# 31 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	delay_8
+# 32 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_in_place_faster_down
+# 33 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_down
+# 34 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_down
+# 35 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_down
+# 36 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_left
+# 37 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_left
+# 38 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	step_end
 
+# 41 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlWatchPlayer:
+# 42 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_fast_left
+# 43 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_fast_left
+# 44 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_fast_down
+# 45 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_fast_down
+# 46 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_fast_left
+# 47 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_fast_down
+# 48 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	step_end
 
+# 51 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlMoveCloserToPlayer:
+# 52 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_down
+# 53 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_in_place_faster_right
+# 54 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	step_end
 
+# 57 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlHideFromPlayer:
+# 58 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	jump_in_place_right
+# 59 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_fast_up
+# 60 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_fast_up
+# 61 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_fast_right
+# 62 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	walk_in_place_faster_down
+# 63 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	step_end
 
-LilycoveCity_PokemonTrainerFanClub_OnTransition:
+LilycoveCity_PokemonTrainerFanClub_OnTransition::
+# 67 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	call LilycoveCity_PokemonTrainerFanClub_EventScript_HideOrShowInterviewer
-	goto_if_eq VAR_LILYCOVE_FAN_CLUB_STATE, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_SetFanMemberPositionsForFirstFanMeeting
-	goto_if_eq VAR_LILYCOVE_FAN_CLUB_STATE, 2, LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions
+# 68 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_LILYCOVE_FAN_CLUB_STATE, 1
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_OnTransition_2
+LilycoveCity_PokemonTrainerFanClub_OnTransition_1:
+# 71 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_LILYCOVE_FAN_CLUB_STATE, 2
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_OnTransition_5
+LilycoveCity_PokemonTrainerFanClub_OnTransition_4:
 	end
+
+LilycoveCity_PokemonTrainerFanClub_OnTransition_2:
+# 69 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_SetFanMemberPositionsForFirstFanMeeting
+	goto LilycoveCity_PokemonTrainerFanClub_OnTransition_1
+
+LilycoveCity_PokemonTrainerFanClub_OnTransition_5:
+# 72 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions
+	goto LilycoveCity_PokemonTrainerFanClub_OnTransition_4
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions::
+# 78 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special TryLoseFansFromPlayTime
+# 79 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	call LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow
+# 80 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER1
+# 81 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable
+# 82 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_1:
+# 85 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER2
+# 86 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable
+# 87 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_5
+LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_4:
+# 90 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER3
+# 91 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable
+# 92 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_8
+LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_7:
+# 95 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER4
+# 96 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable
+# 97 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_11
+LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_10:
+# 100 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER5
+# 101 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable
+# 102 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_14
+LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_13:
+# 105 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER6
+# 106 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable
+# 107 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_17
+LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_16:
+# 110 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER7
+# 111 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable
+# 112 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_20
+LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_19:
+# 115 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER8
+# 116 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable
+# 117 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_23
+LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_22:
 	end
 
+LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_2:
+# 83 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	call LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_1
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_5:
+# 88 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	call LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_4
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_8:
+# 93 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	call LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_7
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_11:
+# 98 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	call LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_10
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_14:
+# 103 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	call LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_13
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_17:
+# 108 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	call LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_16
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_20:
+# 113 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	call LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_19
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_23:
+# 118 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	call LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions_22
+
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_HideOrShowInterviewer::
+# 124 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, ShouldHideFanClubInterviewer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_HideInterviewer
+# 125 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_HideOrShowInterviewer_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_HideOrShowInterviewer_1:
+# 128 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	clearflag FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER
+# 129 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	clearflag FLAG_FAN_CLUB_STRENGTH_SHARED
 	return
 
+LilycoveCity_PokemonTrainerFanClub_EventScript_HideOrShowInterviewer_2:
+# 126 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_HideInterviewer
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_HideOrShowInterviewer_1
+
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_HideInterviewer::
+# 134 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setflag FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER
 	return
 
-@ Set up the fan club TV show, if the player has at least 5 fans in the club
-@ Rather than counting up, 1 is subtracted from the total for each member not a fan of the players
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow::
+# 139 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8005, NUM_TRAINER_FAN_CLUB_MEMBERS
+# 140 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER1
+# 141 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan
+# 142 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_1:
+# 145 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER2
+# 146 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan
+# 147 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_5
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_4:
+# 150 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER3
+# 151 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan
+# 152 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_8
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_7:
+# 155 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER4
+# 156 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan
+# 157 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_11
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_10:
+# 160 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER5
+# 161 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan
+# 162 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_14
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_13:
+# 165 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER6
+# 166 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan
+# 167 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_17
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_16:
+# 170 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER7
+# 171 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan
+# 172 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_20
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_19:
+# 175 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER8
+# 176 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan
-	goto_if_ge VAR_0x8005, 5, LilycoveCity_PokemonTrainerFanClub_EventScript_TrySetUpTVShow
+# 177 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_23
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_22:
+# 180 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_0x8005, 5
+	goto_if_ge LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_26
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_25:
 	return
 
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_2:
+# 143 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	call LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_1
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_5:
+# 148 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	call LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_4
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_8:
+# 153 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	call LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_7
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_11:
+# 158 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	call LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_10
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_14:
+# 163 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	call LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_13
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_17:
+# 168 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	call LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_16
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_20:
+# 173 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	call LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_19
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_23:
+# 178 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	call LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_22
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_26:
+# 181 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_TrySetUpTVShow
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow_25
+
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan::
+# 187 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	subvar VAR_0x8005, 1
 	return
 
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_TrySetUpTVShow::
+# 192 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special TryPutTrainerFanClubOnAir
 	return
 
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable::
+# 197 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_LASS, 7, 5
 	return
 
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable::
+# 202 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_POKEFAN_M, 3, 4
 	return
 
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable::
+# 207 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_LITTLE_GIRL, 7, 2
 	return
 
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable::
+# 212 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_NINJA_BOY, 5, 5
 	return
 
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable::
+# 217 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_BOY, 5, 2
 	return
 
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable::
+# 222 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_MAN, 8, 4
 	return
 
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable::
+# 227 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_WOMAN, 3, 3
 	return
 
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable::
+# 232 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_EXPERT_F, 8, 3
 	return
 
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_SetFanMemberPositionsForFirstFanMeeting::
+# 237 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	call LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow
+# 238 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	call LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable
+# 239 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	call LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable
+# 240 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	call LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable
+# 241 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	call LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable
+# 242 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	call LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable
 	end
 
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_Man::
+# 247 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	lock
+# 248 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	faceplayer
+# 249 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER6
+# 250 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special BufferFanClubTrainerName
-	goto_if_eq VAR_LILYCOVE_FAN_CLUB_STATE, 0, LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayerNotChampion
+# 251 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_LILYCOVE_FAN_CLUB_STATE, 0
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_Man_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_Man_1:
+# 254 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayersFan
+# 255 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_Man_5
+LilycoveCity_PokemonTrainerFanClub_EventScript_Man_4:
+# 258 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_ManOnlyNonFan
+# 259 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto_if_eq VAR_RESULT, ( NUM_TRAINER_FAN_CLUB_MEMBERS - 1 ), LilycoveCity_PokemonTrainerFanClub_EventScript_ManOnlyNonFan
+# 260 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_TrainersPowerIsOutOfTheOrdinary, MSGBOX_DEFAULT
+# 261 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_Man_2:
+# 252 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayerNotChampion
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_Man_1
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_Man_5:
+# 256 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayersFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_Man_4
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayersFan::
+# 266 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_ManOnlyFan
+# 267 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayersFan_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayersFan_1:
+# 270 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YoureOneWeWantToWin, MSGBOX_DEFAULT
+# 271 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayersFan_2:
+# 268 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_ManOnlyFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayersFan_1
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_ManOnlyFan::
+# 276 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_OthersDontKnowYoureTheBest, MSGBOX_DEFAULT
+# 277 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_ManOnlyNonFan::
+# 282 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsBestNoOneWantsToListen, MSGBOX_DEFAULT
+# 283 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayerNotChampion::
+# 288 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_HearingAboutToughNewTrainer, MSGBOX_DEFAULT
+# 289 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_Lass::
+# 294 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	lock
+# 295 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	faceplayer
+# 296 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER1
+# 297 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special BufferFanClubTrainerName
-	goto_if_eq VAR_LILYCOVE_FAN_CLUB_STATE, 0, LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayerNotChampion
+# 298 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_LILYCOVE_FAN_CLUB_STATE, 0
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_Lass_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_Lass_1:
+# 301 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayersFan
+# 302 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_Lass_5
+LilycoveCity_PokemonTrainerFanClub_EventScript_Lass_4:
+# 305 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_LassOnlyNonFan
+# 306 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto_if_eq VAR_RESULT, ( NUM_TRAINER_FAN_CLUB_MEMBERS - 1 ), LilycoveCity_PokemonTrainerFanClub_EventScript_LassOnlyNonFan
+# 307 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_ICantHelpLikingBrawly, MSGBOX_DEFAULT
+# 308 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_Lass_2:
+# 299 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayerNotChampion
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_Lass_1
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_Lass_5:
+# 303 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayersFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_Lass_4
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayersFan::
+# 313 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_LassOnlyFan
+# 314 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayersFan_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayersFan_1:
+# 317 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_ImPullingForYou, MSGBOX_DEFAULT
+# 318 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayersFan_2:
+# 315 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_LassOnlyFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayersFan_1
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_LassOnlyFan::
+# 323 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_BrawlyNoImYourFan, MSGBOX_DEFAULT
+# 324 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_LassOnlyNonFan::
+# 329 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_NobodyUnderstandsBrawly, MSGBOX_DEFAULT
+# 330 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayerNotChampion::
+# 335 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_MyFavoriteTrainerIsBrawly, MSGBOX_DEFAULT
+# 336 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanM::
+# 341 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	lock
+# 342 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	faceplayer
+# 343 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER2
+# 344 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special BufferFanClubTrainerName
-	goto_if_eq VAR_LILYCOVE_FAN_CLUB_STATE, 0, LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayerNotChampion
+# 345 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_LILYCOVE_FAN_CLUB_STATE, 0
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanM_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanM_1:
+# 348 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayersFan
+# 349 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanM_5
+LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanM_4:
+# 352 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMOnlyNonFan
+# 353 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto_if_eq VAR_RESULT, ( NUM_TRAINER_FAN_CLUB_MEMBERS - 1 ), LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMOnlyNonFan
+# 354 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_LongWayToGoComparedToNorman, MSGBOX_DEFAULT
+# 355 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanM_2:
+# 346 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayerNotChampion
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanM_1
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanM_5:
+# 350 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayersFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanM_4
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayersFan::
+# 360 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMOnlyFan
+# 361 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayersFan_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayersFan_1:
+# 364 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YouveSurpassedYourFather, MSGBOX_DEFAULT
+# 365 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayersFan_2:
+# 362 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMOnlyFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayersFan_1
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMOnlyFan::
+# 370 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YourFatherNeverGaveUpSoKeepOnBattling, MSGBOX_DEFAULT
+# 371 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMOnlyNonFan::
+# 376 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YouAndNormanAreDifferent, MSGBOX_DEFAULT
+# 377 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayerNotChampion::
+# 382 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_WeDiscussStrongestTrainers, MSGBOX_DEFAULT
+# 383 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirl::
+# 388 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	lock
+# 389 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	faceplayer
+# 390 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER3
+# 391 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special BufferFanClubTrainerName
-	goto_if_eq VAR_LILYCOVE_FAN_CLUB_STATE, 0, LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion
+# 392 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_LILYCOVE_FAN_CLUB_STATE, 0
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirl_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirl_1:
+# 395 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan
+# 396 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirl_5
+LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirl_4:
+# 399 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyNonFan
+# 400 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto_if_eq VAR_RESULT, ( NUM_TRAINER_FAN_CLUB_MEMBERS - 1 ), LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyNonFan
+# 401 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_EveryoneThinksTrainerIsCool, MSGBOX_DEFAULT
+# 402 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirl_2:
+# 393 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirl_1
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirl_5:
+# 397 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirl_4
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan::
+# 407 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan
+# 408 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan_1:
+# 411 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_OhWoweeItsPlayer, MSGBOX_DEFAULT
+# 412 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan_2:
+# 409 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan_1
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan::
+# 417 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_AlwaysCheerForYou, MSGBOX_DEFAULT
+# 418 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyNonFan::
+# 423 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsReallyCoolItsJustMe, MSGBOX_DEFAULT
+# 424 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion::
+# 429 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_WishThereWasTrainerLikeThat, MSGBOX_DEFAULT
+# 430 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoy::
+# 435 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	lock
+# 436 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	faceplayer
+# 437 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER4
+# 438 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special BufferFanClubTrainerName
+# 439 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyPlayersFan
+# 440 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoy_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoy_1:
+# 443 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyOnlyNonFan
+# 444 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto_if_eq VAR_RESULT, ( NUM_TRAINER_FAN_CLUB_MEMBERS - 1 ), LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyOnlyNonFan
+# 445 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsWickedlyCool, MSGBOX_DEFAULT
+# 446 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoy_2:
+# 441 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyPlayersFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoy_1
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyPlayersFan::
+# 451 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyOnlyFan
+# 452 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyPlayersFan_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyPlayersFan_1:
+# 455 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_WantToBeStrongLikeYou, MSGBOX_DEFAULT
+# 456 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyPlayersFan_2:
+# 453 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyOnlyFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyPlayersFan_1
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyOnlyFan::
+# 461 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_OnlyOneWhoCheersForYou, MSGBOX_DEFAULT
+# 462 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyOnlyNonFan::
+# 467 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_NeverGoingToStopBeingTrainersFan, MSGBOX_DEFAULT
+# 468 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_Boy::
+# 473 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	lock
+# 474 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	faceplayer
+# 475 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER5
+# 476 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special BufferFanClubTrainerName
+# 477 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_BoyPlayersFan
+# 478 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_Boy_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_Boy_1:
+# 481 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_BoyOnlyNonFan
+# 482 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto_if_eq VAR_RESULT, ( NUM_TRAINER_FAN_CLUB_MEMBERS - 1 ), LilycoveCity_PokemonTrainerFanClub_EventScript_BoyOnlyNonFan
+# 483 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_ThinkTrainerIsNumberOne, MSGBOX_DEFAULT
+# 484 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_Boy_2:
+# 479 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_BoyPlayersFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_Boy_1
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_BoyPlayersFan::
+# 489 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_BoyOnlyFan
+# 490 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_BoyPlayersFan_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_BoyPlayersFan_1:
+# 493 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YoureAmazingAfterAll, MSGBOX_DEFAULT
+# 494 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_BoyPlayersFan_2:
+# 491 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_BoyOnlyFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_BoyPlayersFan_1
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_BoyOnlyFan::
+# 499 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_ImInYourCorner, MSGBOX_DEFAULT
+# 500 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_BoyOnlyNonFan::
+# 505 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YoureMaybeStrongerThanTrainer, MSGBOX_DEFAULT
+# 506 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_Woman::
+# 511 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	lock
+# 512 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	faceplayer
+# 513 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER7
+# 514 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special BufferFanClubTrainerName
+# 515 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan
+# 516 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_Woman_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_Woman_1:
+# 519 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_WomanOnlyNonFan
+# 520 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto_if_eq VAR_RESULT, ( NUM_TRAINER_FAN_CLUB_MEMBERS - 1 ), LilycoveCity_PokemonTrainerFanClub_EventScript_WomanOnlyNonFan
+# 521 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsStandout, MSGBOX_DEFAULT
+# 522 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_Woman_2:
+# 517 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_Woman_1
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan::
+# 527 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan
+# 528 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan_1:
+# 531 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YouChangedMyMind, MSGBOX_DEFAULT
+# 532 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan_2:
+# 529 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan_1
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan::
+# 537 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YouBattleAttractivelyInToughSituation, MSGBOX_DEFAULT
+# 538 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_WomanOnlyNonFan::
+# 543 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_NoOneCanKnockYouButTrainerStronger, MSGBOX_DEFAULT
+# 544 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertF::
+# 549 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	lock
+# 550 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	faceplayer
+# 551 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER8
+# 552 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special BufferFanClubTrainerName
+# 553 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFPlayersFan
+# 554 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertF_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertF_1:
+# 557 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFOnlyNonFan
+# 558 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto_if_eq VAR_RESULT, ( NUM_TRAINER_FAN_CLUB_MEMBERS - 1 ), LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFOnlyNonFan
+# 559 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_HaventRealizedPotential, MSGBOX_DEFAULT
+# 560 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertF_2:
+# 555 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFPlayersFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertF_1
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFPlayersFan::
+# 565 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFOnlyFan
+# 566 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFPlayersFan_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFPlayersFan_1:
+# 569 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YouImpressive, MSGBOX_DEFAULT
+# 570 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFPlayersFan_2:
+# 567 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFOnlyFan
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFPlayersFan_1
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFOnlyFan::
+# 575 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_OnlyIRecognizeYourTrueWorth, MSGBOX_DEFAULT
+# 576 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFOnlyNonFan::
+# 581 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YourePowerfulButNotTrueStrength, MSGBOX_DEFAULT
+# 582 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
 
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_Interviewer::
+# 587 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	lock
+# 588 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	faceplayer
-	goto_if_set FLAG_FAN_CLUB_STRENGTH_SHARED, LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed
-	goto_if_unset FLAG_FAN_CLUB_STRENGTH_SHARED, LilycoveCity_PokemonTrainerFanClub_EventScript_Interview
+# 589 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto_if_set FLAG_FAN_CLUB_STRENGTH_SHARED, LilycoveCity_PokemonTrainerFanClub_EventScript_Interviewer_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_Interviewer_1:
+# 592 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto_if_unset FLAG_FAN_CLUB_STRENGTH_SHARED, LilycoveCity_PokemonTrainerFanClub_EventScript_Interviewer_5
+LilycoveCity_PokemonTrainerFanClub_EventScript_Interviewer_4:
 	end
 
-@ The interviewer doesnt count as an individual fan club member
-@ Instead they always ask about whoever the Lass would be interested in, if not the player
+LilycoveCity_PokemonTrainerFanClub_EventScript_Interviewer_2:
+# 590 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_Interviewer_1
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_Interviewer_5:
+# 593 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_Interview
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_Interviewer_4
+
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_Interview::
+# 599 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8005, TVSHOW_FAN_CLUB_SPECIAL
+# 600 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special InterviewBefore
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed2
+# 601 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_Interview_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_Interview_1:
+# 604 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	copyvar VAR_0x800A, VAR_0x8006
+# 605 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER1
+# 606 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special BufferFanClubTrainerName
+# 607 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_WhatsYourOpinionOfTrainer, MSGBOX_DEFAULT
+# 608 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, EASY_CHAT_TYPE_FAN_QUESTION
+# 609 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	copyvar VAR_0x8005, VAR_0x800A
+# 610 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	call Common_ShowEasyChatScreen
+# 611 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	lock
+# 612 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	faceplayer
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_SubmitOpinion
-	goto_if_eq VAR_RESULT, 0, LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion
+# 613 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_Interview_5
+LilycoveCity_PokemonTrainerFanClub_EventScript_Interview_4:
+# 616 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, 0
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_Interview_8
+LilycoveCity_PokemonTrainerFanClub_EventScript_Interview_7:
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_Interview_2:
+# 602 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed2
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_Interview_1
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_Interview_5:
+# 614 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_SubmitOpinion
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_Interview_4
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_Interview_8:
+# 617 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_Interview_7
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_SubmitOpinion::
+# 623 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_ThatsWhatYouThink, MSGBOX_DEFAULT
+# 624 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	goto LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer
 	end
 
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion::
+# 629 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER1
+# 630 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special BufferFanClubTrainerName
+# 631 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_HaveYouForgottenTrainer, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, LilycoveCity_PokemonTrainerFanClub_EventScript_ForgetTrainer
-	goto_if_eq VAR_RESULT, NO, LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion
+# 632 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion_1:
+# 635 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion_5
+LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion_4:
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion_2:
+# 633 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_ForgetTrainer
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion_1
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion_5:
+# 636 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion_4
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion::
+# 642 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER1
+# 643 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special BufferFanClubTrainerName
+# 644 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_WhatsYourOpinionOfTrainer2, MSGBOX_DEFAULT
+# 645 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, EASY_CHAT_TYPE_FAN_QUESTION
+# 646 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	copyvar VAR_0x8005, VAR_0x800A
+# 647 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	call Common_ShowEasyChatScreen
+# 648 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	lock
+# 649 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	faceplayer
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_SubmitOpinion
-	goto_if_eq VAR_RESULT, 0, LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion
+# 650 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion_1:
+# 653 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, 0
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion_5
+LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion_4:
 	end
 
+LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion_2:
+# 651 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_SubmitOpinion
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion_1
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion_5:
+# 654 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion_4
+
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer::
+# 660 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER1
+# 661 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special BufferFanClubTrainerName
+# 662 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	message LilycoveCity_PokemonTrainerFanClub_Text_HowStrongRateTrainer
+# 663 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	waitmessage
+# 664 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, SCROLL_MULTI_POKEMON_FAN_CLUB_RATER
+# 665 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special ShowScrollableMultichoice
+# 666 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	waitstate
+# 667 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER1
+# 668 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	switch VAR_RESULT
-	case 11, LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer
-	case MULTI_B_PRESSED, LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer
+# 669 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	case 11, LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer_3
+# 671 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	case MULTI_B_PRESSED, LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer_4
+LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer_1:
+# 674 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER1
+# 675 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special BufferFanClubTrainerName
+# 676 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	copyvar VAR_0x8006, VAR_0x800A
+# 677 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	copyvar VAR_0x8005, VAR_RESULT
+# 678 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special PutFanClubSpecialOnTheAir
+# 679 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CompleteInterview
 	end
 
+LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer_3:
+# 670 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer_1
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer_4:
+# 672 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer_1
+
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer::
+# 684 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER1
+# 685 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special BufferFanClubTrainerName
+# 686 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_HaveYouForgottenTrainer2, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, LilycoveCity_PokemonTrainerFanClub_EventScript_ForgetTrainer
-	goto_if_eq VAR_RESULT, NO, LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer
+# 687 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer_2
+LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer_1:
+# 690 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer_5
+LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer_4:
 	end
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer_2:
+# 688 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_ForgetTrainer
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer_1
+
+LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer_5:
+# 691 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer
+	goto LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer_4
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_ForgetTrainer::
+# 697 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER1
+# 698 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special BufferFanClubTrainerName
+# 699 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YouShouldMeetTrainer, MSGBOX_DEFAULT
+# 700 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_CompleteInterview::
+# 705 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER1
+# 706 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special BufferFanClubTrainerName
+# 707 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_ThankYouIllShareThisInfo, MSGBOX_DEFAULT
+# 708 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setflag FLAG_FAN_CLUB_STRENGTH_SHARED
+# 709 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
+
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed::
+# 714 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	setvar VAR_0x8004, FANCLUB_MEMBER1
+# 715 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	special BufferFanClubTrainerName
+# 716 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	msgbox LilycoveCity_PokemonTrainerFanClub_HopeYouCatchTVSpecial, MSGBOX_DEFAULT
+# 717 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	release
 	end
 
-@ Shouldnt be reached
+
 LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed2::
 	end
 
-LilycoveCity_PokemonTrainerFanClub_Text_OhWowItsPlayer:
+
+LilycoveCity_PokemonTrainerFanClub_Text_OhWowItsPlayer::
+# 725 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Oh, wow!\n"
 	.string "It's {PLAYER}!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_HeardAboutYouImYourFan:
+LilycoveCity_PokemonTrainerFanClub_Text_HeardAboutYouImYourFan::
+# 730 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "I've heard the news!\n"
 	.string "You're really strong, aren't you?\p"
 	.string "We always argue about who is the\n"
@@ -578,29 +1355,34 @@ LilycoveCity_PokemonTrainerFanClub_Text_HeardAboutYouImYourFan:
 	.string "Remember, I'm cheering for you,\n"
 	.string "{PLAYER}!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_YoureOneWeWantToWin:
+LilycoveCity_PokemonTrainerFanClub_Text_YoureOneWeWantToWin::
+# 747 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Yo, {PLAYER}!\n"
 	.string "You're the one we want to win!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_OthersDontKnowYoureTheBest:
+LilycoveCity_PokemonTrainerFanClub_Text_OthersDontKnowYoureTheBest::
+# 752 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "The others, they don't know that\n"
 	.string "you're the best of the best!\p"
 	.string "Isn't that right, {PLAYER}?\n"
 	.string "Show them you've got guts!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_TrainersPowerIsOutOfTheOrdinary:
+LilycoveCity_PokemonTrainerFanClub_Text_TrainersPowerIsOutOfTheOrdinary::
+# 759 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "I hate to say this, but the TRAINER\n"
 	.string "everybody's talking about is\l"
 	.string "{STR_VAR_1}, no question about it!\p"
 	.string "That TRAINER's power…\n"
 	.string "It's out of the ordinary.$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsBestNoOneWantsToListen:
+LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsBestNoOneWantsToListen::
+# 767 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Darn it… I've been telling people\n"
 	.string "that {STR_VAR_1} is the best now…\p"
 	.string "But no one wants to listen…$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_HearingAboutToughNewTrainer:
+LilycoveCity_PokemonTrainerFanClub_Text_HearingAboutToughNewTrainer::
+# 773 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "I've been hearing things about\n"
 	.string "a tough new TRAINER.\p"
 	.string "This TRAINER's supposed to be beating\n"
@@ -608,13 +1390,15 @@ LilycoveCity_PokemonTrainerFanClub_Text_HearingAboutToughNewTrainer:
 	.string "Do you know anything about this\n"
 	.string "new TRAINER?$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_ImPullingForYou:
+LilycoveCity_PokemonTrainerFanClub_Text_ImPullingForYou::
+# 782 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Oh!\n"
 	.string "{PLAYER}!\p"
 	.string "Go for it!\n"
 	.string "I'm pulling for you!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_BrawlyNoImYourFan:
+LilycoveCity_PokemonTrainerFanClub_Text_BrawlyNoImYourFan::
+# 789 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Sigh…\n"
 	.string "BRAWLY…\p"
 	.string "Oh, no! Wait!\n"
@@ -623,36 +1407,42 @@ LilycoveCity_PokemonTrainerFanClub_Text_BrawlyNoImYourFan:
 	.string "So make me proud!\n"
 	.string "Go for it!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_ICantHelpLikingBrawly:
+LilycoveCity_PokemonTrainerFanClub_Text_ICantHelpLikingBrawly::
+# 799 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "I can't help it, I can only get to\n"
 	.string "like BRAWLY…$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_NobodyUnderstandsBrawly:
+LilycoveCity_PokemonTrainerFanClub_Text_NobodyUnderstandsBrawly::
+# 804 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Nobody understands the charm of\n"
 	.string "BRAWLY…\p"
 	.string "I don't care!\p"
 	.string "Even if I'm the only one, I'm going\n"
 	.string "to keep cheering for BRAWLY!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_MyFavoriteTrainerIsBrawly:
+LilycoveCity_PokemonTrainerFanClub_Text_MyFavoriteTrainerIsBrawly::
+# 812 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Whatever anyone says, my favorite\n"
 	.string "TRAINER is DEWFORD's GYM LEADER\l"
 	.string "BRAWLY!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_YouveSurpassedYourFather:
+LilycoveCity_PokemonTrainerFanClub_Text_YouveSurpassedYourFather::
+# 818 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "You've surpassed your own father in\n"
 	.string "every regard!\p"
 	.string "I'm telling you, so there's no question\n"
 	.string "about it at all!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_YourFatherNeverGaveUpSoKeepOnBattling:
+LilycoveCity_PokemonTrainerFanClub_Text_YourFatherNeverGaveUpSoKeepOnBattling::
+# 825 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Even when things turned bleak,\n"
 	.string "your father never gave up.\p"
 	.string "This I know to be true.\p"
 	.string "You never give up even if you lose!\n"
 	.string "So keep on battling!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_LongWayToGoComparedToNorman:
+LilycoveCity_PokemonTrainerFanClub_Text_LongWayToGoComparedToNorman::
+# 833 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "NORMAN battled with more power,\n"
 	.string "charisma, and showmanship than you.\p"
 	.string "Even though people may say that\n"
@@ -660,7 +1450,8 @@ LilycoveCity_PokemonTrainerFanClub_Text_LongWayToGoComparedToNorman:
 	.string "You've still got a long way to go\n"
 	.string "compared to your father.$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_YouAndNormanAreDifferent:
+LilycoveCity_PokemonTrainerFanClub_Text_YouAndNormanAreDifferent::
+# 842 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "You're beginning to get the same\n"
 	.string "air of awe NORMAN exudes.\p"
 	.string "But there's something conclusively\n"
@@ -668,7 +1459,8 @@ LilycoveCity_PokemonTrainerFanClub_Text_YouAndNormanAreDifferent:
 	.string "I can't tell you what that is.\n"
 	.string "You'll have to find it yourself.$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_WeDiscussStrongestTrainers:
+LilycoveCity_PokemonTrainerFanClub_Text_WeDiscussStrongestTrainers::
+# 851 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Everyone here, we're all huge fans\n"
 	.string "of POKéMON battles.\p"
 	.string "We discuss who we consider to be\n"
@@ -676,12 +1468,14 @@ LilycoveCity_PokemonTrainerFanClub_Text_WeDiscussStrongestTrainers:
 	.string "If you were to become famous,\n"
 	.string "we might even become your fans!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_OhWoweeItsPlayer:
+LilycoveCity_PokemonTrainerFanClub_Text_OhWoweeItsPlayer::
+# 860 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Oh, woweee! It's {PLAYER}!\n"
 	.string "For real, too!\p"
 	.string "Please, shake my hand, shake my hand!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_AlwaysCheerForYou:
+LilycoveCity_PokemonTrainerFanClub_Text_AlwaysCheerForYou::
+# 866 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "I'll always cheer for you, {PLAYER}!\n"
 	.string "Always, always!\p"
 	.string "I don't want to see you lose ever,\n"
@@ -689,60 +1483,70 @@ LilycoveCity_PokemonTrainerFanClub_Text_AlwaysCheerForYou:
 	.string "Because I know you're really,\n"
 	.string "really strong, {PLAYER}!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_EveryoneThinksTrainerIsCool:
+LilycoveCity_PokemonTrainerFanClub_Text_EveryoneThinksTrainerIsCool::
+# 875 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "{STR_VAR_1} is really cool…\p"
 	.string "Everyone thinks so, right, right?$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsReallyCoolItsJustMe:
+LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsReallyCoolItsJustMe::
+# 880 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "{STR_VAR_1} really is cool, don't\n"
 	.string "you think so?\p"
 	.string "Even if it's just me, I'm going to keep\n"
 	.string "cheering my favorite TRAINER.$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_WishThereWasTrainerLikeThat:
+LilycoveCity_PokemonTrainerFanClub_Text_WishThereWasTrainerLikeThat::
+# 887 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "My favorite TRAINER is…\p"
 	.string "Cool…\p"
 	.string "Strong…\p"
 	.string "And really nice…\p"
 	.string "I wish there was a TRAINER like that…$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_WantToBeStrongLikeYou:
+LilycoveCity_PokemonTrainerFanClub_Text_WantToBeStrongLikeYou::
+# 895 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Whoa! It's {PLAYER}!\n"
 	.string "Wicked!\p"
 	.string "When I grow up, I want to be strong\n"
 	.string "like you, {PLAYER}!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_OnlyOneWhoCheersForYou:
+LilycoveCity_PokemonTrainerFanClub_Text_OnlyOneWhoCheersForYou::
+# 902 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Even if I'm the only one…\p"
 	.string "You'll always be the only one\n"
 	.string "I cheer for, {PLAYER}!\p"
 	.string "Because I believe in you, {PLAYER}!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsWickedlyCool:
+LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsWickedlyCool::
+# 909 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "{STR_VAR_1} is so wickedly cool…\n"
 	.string "I want to shake hands with my hero.$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_NeverGoingToStopBeingTrainersFan:
+LilycoveCity_PokemonTrainerFanClub_Text_NeverGoingToStopBeingTrainersFan::
+# 914 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Even if I'm the only one…\p"
 	.string "I'm never going to stop being\n"
 	.string "{STR_VAR_1}'s fan!\p"
 	.string "Because I've heard, {STR_VAR_1}\n"
 	.string "never loses!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_YoureAmazingAfterAll:
+LilycoveCity_PokemonTrainerFanClub_Text_YoureAmazingAfterAll::
+# 922 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "{PLAYER}!\n"
 	.string "You are amazing after all!\p"
 	.string "Ever since I set eyes on you,\n"
 	.string "I knew that you were great.\p"
 	.string "It looks like my eyes didn't deceive me.$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_ImInYourCorner:
+LilycoveCity_PokemonTrainerFanClub_Text_ImInYourCorner::
+# 930 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Who cares about the others.\n"
 	.string "I'm in your corner!\p"
 	.string "You don't need to worry. Just get\n"
 	.string "out there and battle like always.$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_ThinkTrainerIsNumberOne:
+LilycoveCity_PokemonTrainerFanClub_Text_ThinkTrainerIsNumberOne::
+# 937 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "You're a pretty decent TRAINER,\n"
 	.string "I think.\p"
 	.string "But I also think that {STR_VAR_1}\n"
@@ -750,32 +1554,37 @@ LilycoveCity_PokemonTrainerFanClub_Text_ThinkTrainerIsNumberOne:
 	.string "That's just my opinion.\n"
 	.string "Don't worry about it too much.$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_YoureMaybeStrongerThanTrainer:
+LilycoveCity_PokemonTrainerFanClub_Text_YoureMaybeStrongerThanTrainer::
+# 946 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Wow, you really are strong.\n"
 	.string "Maybe even stronger than {STR_VAR_1}.\p"
 	.string "But {STR_VAR_1} needs me.\p"
 	.string "If I don't cheer for {STR_VAR_1},\n"
 	.string "who will?$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_YouChangedMyMind:
+LilycoveCity_PokemonTrainerFanClub_Text_YouChangedMyMind::
+# 954 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "You've changed my mind!\n"
 	.string "You are strong, aren't you?\p"
 	.string "I'd like you to tell me how you managed\n"
 	.string "to get so strong!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_YouBattleAttractivelyInToughSituation:
+LilycoveCity_PokemonTrainerFanClub_Text_YouBattleAttractivelyInToughSituation::
+# 961 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "The tougher the situation, the more\n"
 	.string "attractively you battle.\p"
 	.string "I can't wait for your next battle!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsStandout:
+LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsStandout::
+# 967 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Among the recently hot TRAINERS,\n"
 	.string "{STR_VAR_1} is the standout.\p"
 	.string "That toughness, it's simply not normal.\p"
 	.string "You're doing okay, but you're not in\n"
 	.string "the same class as {STR_VAR_1}.$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_NoOneCanKnockYouButTrainerStronger:
+LilycoveCity_PokemonTrainerFanClub_Text_NoOneCanKnockYouButTrainerStronger::
+# 975 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "You are really popular…\p"
 	.string "You're strong, and you're caring to\n"
 	.string "POKéMON. No one can knock you.\p"
@@ -783,23 +1592,27 @@ LilycoveCity_PokemonTrainerFanClub_Text_NoOneCanKnockYouButTrainerStronger:
 	.string "{STR_VAR_1} is definitely stronger!\n"
 	.string "I'm positive!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_YouImpressive:
+LilycoveCity_PokemonTrainerFanClub_Text_YouImpressive::
+# 984 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "You…\p"
 	.string "Impressive!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_OnlyIRecognizeYourTrueWorth:
+LilycoveCity_PokemonTrainerFanClub_Text_OnlyIRecognizeYourTrueWorth::
+# 989 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Your true worth, it is fine if only\n"
 	.string "I recognized it.\p"
 	.string "The others I doubt will understand\n"
 	.string "the hidden power that beats within.$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_HaventRealizedPotential:
+LilycoveCity_PokemonTrainerFanClub_Text_HaventRealizedPotential::
+# 996 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "Yes, I see strength in your eyes.\p"
 	.string "But!\p"
 	.string "You still haven't realized your\n"
 	.string "potential.$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_YourePowerfulButNotTrueStrength:
+LilycoveCity_PokemonTrainerFanClub_Text_YourePowerfulButNotTrueStrength::
+# 1003 "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.pory"
 	.string "It is true that you are tremendously\n"
 	.string "powerful.\p"
 	.string "But!\n"

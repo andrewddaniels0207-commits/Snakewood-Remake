@@ -1,21 +1,27 @@
 LilycoveCity_House4_MapScripts::
 	.byte 0
 
+
 LilycoveCity_House4_EventScript_Man1::
+# 4 "data/maps/LilycoveCity_House4/scripts.pory"
 	msgbox LilycoveCity_House4_Text_MysteriesAtBottomOfSea, MSGBOX_NPC
 	end
 
+
 LilycoveCity_House4_EventScript_Man2::
+# 9 "data/maps/LilycoveCity_House4/scripts.pory"
 	msgbox LilycoveCity_House4_Text_UnderwaterTrenchMossdeepSootopolis, MSGBOX_NPC
 	end
 
-LilycoveCity_House4_Text_MysteriesAtBottomOfSea:
+
+LilycoveCity_House4_Text_MysteriesAtBottomOfSea::
+# 13 "data/maps/LilycoveCity_House4/scripts.pory"
 	.string "This planet's biggest mysteries are\n"
 	.string "at the bottom of the sea.\p"
 	.string "Somebody said that, but I don't know…$"
 
-LilycoveCity_House4_Text_UnderwaterTrenchMossdeepSootopolis:
+LilycoveCity_House4_Text_UnderwaterTrenchMossdeepSootopolis::
+# 19 "data/maps/LilycoveCity_House4/scripts.pory"
 	.string "There's a deep underwater trench\n"
 	.string "between MOSSDEEP and SOOTOPOLIS.\p"
 	.string "That's what someone told me, anyway.$"
-

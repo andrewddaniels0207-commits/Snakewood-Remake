@@ -1,522 +1,835 @@
-mapscripts SlateportCity_PokemonFanClub_MapScripts {}
+raw `
+SlateportCity_PokemonFanClub_MapScripts::
+	.byte 0
 
-script SlateportCity_PokemonFanClub_EventScript_Chairman {
-    lock
-    faceplayer
-    if (!flag(FLAG_ENTERED_CONTEST)) {
-        goto(SlateportCity_PokemonFanClub_EventScript_ChairmanNotEnteredContest)
-    }
-    if (!flag(FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN)) {
-        call(SlateportCity_PokemonFanClub_EventScript_MeetChairman)
-    }
-    switch (var(VAR_SLATEPORT_FAN_CLUB_STATE)) {
-        case 0:
-            goto(SlateportCity_PokemonFanClub_EventScript_ChairmanFirstAssessment)
-        case 1:
-            goto(SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon)
-        case 2:
-            goto(SlateportCity_PokemonFanClub_EventScript_NoMoreScarves)
-    }
-    release
-    end
-}
 
-script SlateportCity_PokemonFanClub_EventScript_ChairmanFirstAssessment {
-    setvar(VAR_SLATEPORT_FAN_CLUB_STATE, 1)
-    msgbox(SlateportCity_PokemonFanClub_Text_AllowMeToExamineYourPokemon, MSGBOX_DEFAULT)
-    goto(SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon)
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_Chairman::
+# 4 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	lock
+# 5 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	faceplayer
+# 6 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto_if_unset FLAG_ENTERED_CONTEST, SlateportCity_PokemonFanClub_EventScript_Chairman_2
+SlateportCity_PokemonFanClub_EventScript_Chairman_1:
+# 9 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto_if_unset FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN, SlateportCity_PokemonFanClub_EventScript_Chairman_5
+SlateportCity_PokemonFanClub_EventScript_Chairman_4:
+# 12 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	switch VAR_SLATEPORT_FAN_CLUB_STATE
+# 13 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	case 0, SlateportCity_PokemonFanClub_EventScript_Chairman_9
+# 15 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	case 1, SlateportCity_PokemonFanClub_EventScript_Chairman_10
+# 17 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	case 2, SlateportCity_PokemonFanClub_EventScript_Chairman_11
+SlateportCity_PokemonFanClub_EventScript_Chairman_7:
+# 20 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
 
-script SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon {
-    setvar(VAR_TEMP_2, 0)
-    if (flag(FLAG_RECEIVED_YELLOW_SCARF)) {
-        call(SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf)
-    }
-    if (flag(FLAG_RECEIVED_GREEN_SCARF)) {
-        call(SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf)
-    }
-    if (flag(FLAG_RECEIVED_PINK_SCARF)) {
-        call(SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf)
-    }
-    if (flag(FLAG_RECEIVED_BLUE_SCARF)) {
-        call(SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf)
-    }
-    if (flag(FLAG_RECEIVED_RED_SCARF)) {
-        call(SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf)
-    }
-    if (var(VAR_TEMP_2) == CONTEST_CATEGORIES_COUNT) {
-        call(SlateportCity_PokemonFanClub_EventScript_ReceivedAllScarves)
-    }
-    if (var(VAR_SLATEPORT_FAN_CLUB_STATE) == 2) {
-        goto(SlateportCity_PokemonFanClub_EventScript_NoMoreScarves)
-    }
-    msgbox(SlateportCity_PokemonFanClub_Text_HowIsYourPokemonGrowing, MSGBOX_DEFAULT)
-    goto(SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon)
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_Chairman_2:
+# 7 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanNotEnteredContest
+	goto SlateportCity_PokemonFanClub_EventScript_Chairman_1
 
-script SlateportCity_PokemonFanClub_EventScript_NoMoreScarves {
-    msgbox(SlateportCity_PokemonFanClub_Text_NothingElseToGiveYou, MSGBOX_DEFAULT)
-    release
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_Chairman_5:
+# 10 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	call SlateportCity_PokemonFanClub_EventScript_MeetChairman
+	goto SlateportCity_PokemonFanClub_EventScript_Chairman_4
 
-script SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon {
-    msgbox(SlateportCity_PokemonFanClub_Text_HmHmISee, MSGBOX_DEFAULT)
-    setvar(VAR_TEMP_1, 0)
-    if (!flag(FLAG_RECEIVED_YELLOW_SCARF)) {
-        call(SlateportCity_PokemonFanClub_EventScript_CheckMonTough)
-    }
-    if (!flag(FLAG_RECEIVED_GREEN_SCARF)) {
-        call(SlateportCity_PokemonFanClub_EventScript_CheckMonSmart)
-    }
-    if (!flag(FLAG_RECEIVED_PINK_SCARF)) {
-        call(SlateportCity_PokemonFanClub_EventScript_CheckMonCute)
-    }
-    if (!flag(FLAG_RECEIVED_BLUE_SCARF)) {
-        call(SlateportCity_PokemonFanClub_EventScript_CheckMonBeauty)
-    }
-    if (!flag(FLAG_RECEIVED_RED_SCARF)) {
-        call(SlateportCity_PokemonFanClub_EventScript_CheckMonCool)
-    }
-    bufferleadmonspeciesname(STR_VAR_1)
-    switch (var(VAR_TEMP_1)) {
-        case 0:
-            goto(SlateportCity_PokemonFanClub_EventScript_NoHighConditions)
-        case 1:
-            goto(SlateportCity_PokemonFanClub_EventScript_GiveRedScarf)
-        case 2:
-            goto(SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf)
-        case 3:
-            goto(SlateportCity_PokemonFanClub_EventScript_GivePinkScarf)
-        case 4:
-            goto(SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf)
-        case 5:
-            goto(SlateportCity_PokemonFanClub_EventScript_GiveYellowScarf)
-    }
-    release
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_Chairman_9:
+# 14 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanFirstAssessment
+	goto SlateportCity_PokemonFanClub_EventScript_Chairman_7
 
-script SlateportCity_PokemonFanClub_EventScript_ReceivedAllScarves {
-    setvar(VAR_SLATEPORT_FAN_CLUB_STATE, 2)
-    return
-}
+SlateportCity_PokemonFanClub_EventScript_Chairman_10:
+# 16 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon
+	goto SlateportCity_PokemonFanClub_EventScript_Chairman_7
 
-script SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf {
-    addvar(VAR_TEMP_2, 1)
-    return
-}
+SlateportCity_PokemonFanClub_EventScript_Chairman_11:
+# 18 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_NoMoreScarves
+	goto SlateportCity_PokemonFanClub_EventScript_Chairman_7
 
-script SlateportCity_PokemonFanClub_EventScript_NoHighConditions {
-    msgbox(SlateportCity_PokemonFanClub_Text_GiveMonMorePokeblocks, MSGBOX_DEFAULT)
-    release
-    end
-}
 
-script SlateportCity_PokemonFanClub_EventScript_GiveRedScarf {
-    checkitemspace(ITEM_RED_SCARF)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf)
-    }
-    msgbox(SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT)
-    setflag(FLAG_RECEIVED_RED_SCARF)
-    giveitem(ITEM_RED_SCARF)
-    msgbox(SlateportCity_PokemonFanClub_Text_ExplainRedScarf, MSGBOX_DEFAULT)
-    release
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanFirstAssessment::
+# 25 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	setvar VAR_SLATEPORT_FAN_CLUB_STATE, 1
+# 26 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_AllowMeToExamineYourPokemon, MSGBOX_DEFAULT
+# 27 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon
+	end
 
-script SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf {
-    checkitemspace(ITEM_BLUE_SCARF)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf)
-    }
-    msgbox(SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT)
-    setflag(FLAG_RECEIVED_BLUE_SCARF)
-    giveitem(ITEM_BLUE_SCARF)
-    msgbox(SlateportCity_PokemonFanClub_Text_ExplainBlueScarf, MSGBOX_DEFAULT)
-    release
-    end
-}
 
-script SlateportCity_PokemonFanClub_EventScript_GivePinkScarf {
-    checkitemspace(ITEM_PINK_SCARF)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf)
-    }
-    msgbox(SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT)
-    setflag(FLAG_RECEIVED_PINK_SCARF)
-    giveitem(ITEM_PINK_SCARF)
-    msgbox(SlateportCity_PokemonFanClub_Text_ExplainPinkScarf, MSGBOX_DEFAULT)
-    release
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon::
+# 32 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	setvar VAR_TEMP_2, 0
+# 33 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto_if_set FLAG_RECEIVED_YELLOW_SCARF, SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_2
+SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_1:
+# 36 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto_if_set FLAG_RECEIVED_GREEN_SCARF, SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_5
+SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_4:
+# 39 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto_if_set FLAG_RECEIVED_PINK_SCARF, SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_8
+SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_7:
+# 42 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto_if_set FLAG_RECEIVED_BLUE_SCARF, SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_11
+SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_10:
+# 45 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto_if_set FLAG_RECEIVED_RED_SCARF, SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_14
+SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_13:
+# 48 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	compare VAR_TEMP_2, CONTEST_CATEGORIES_COUNT
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_17
+SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_16:
+# 51 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	compare VAR_SLATEPORT_FAN_CLUB_STATE, 2
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_20
+SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_19:
+# 54 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_HowIsYourPokemonGrowing, MSGBOX_DEFAULT
+# 55 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon
+	end
 
-script SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf {
-    checkitemspace(ITEM_GREEN_SCARF)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf)
-    }
-    msgbox(SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT)
-    setflag(FLAG_RECEIVED_GREEN_SCARF)
-    giveitem(ITEM_GREEN_SCARF)
-    msgbox(SlateportCity_PokemonFanClub_Text_ExplainGreenScarf, MSGBOX_DEFAULT)
-    release
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_2:
+# 34 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	call SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_1
 
-script SlateportCity_PokemonFanClub_EventScript_GiveYellowScarf {
-    checkitemspace(ITEM_YELLOW_SCARF)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf)
-    }
-    msgbox(SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT)
-    setflag(FLAG_RECEIVED_YELLOW_SCARF)
-    giveitem(ITEM_YELLOW_SCARF)
-    msgbox(SlateportCity_PokemonFanClub_Text_ExplainYellowScarf, MSGBOX_DEFAULT)
-    release
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_5:
+# 37 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	call SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_4
 
-script SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf {
-    msgbox(SlateportCity_PokemonFanClub_Text_NoSpaceForReward, MSGBOX_DEFAULT)
-    release
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_8:
+# 40 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	call SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_7
 
-script SlateportCity_PokemonFanClub_EventScript_CheckMonCool {
-    specialvar(VAR_RESULT, CheckLeadMonCool)
-    if (var(VAR_RESULT) == TRUE) {
-        call(SlateportCity_PokemonFanClub_EventScript_SetMonCool)
-    }
-    return
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_11:
+# 43 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	call SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_10
 
-script SlateportCity_PokemonFanClub_EventScript_SetMonCool {
-    setvar(VAR_TEMP_1, 1)
-    return
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_14:
+# 46 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	call SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_13
 
-script SlateportCity_PokemonFanClub_EventScript_CheckMonBeauty {
-    specialvar(VAR_RESULT, CheckLeadMonBeauty)
-    if (var(VAR_RESULT) == TRUE) {
-        call(SlateportCity_PokemonFanClub_EventScript_SetMonBeauty)
-    }
-    return
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_17:
+# 49 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	call SlateportCity_PokemonFanClub_EventScript_ReceivedAllScarves
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_16
 
-script SlateportCity_PokemonFanClub_EventScript_SetMonBeauty {
-    setvar(VAR_TEMP_1, 2)
-    return
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_20:
+# 52 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_NoMoreScarves
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanTryAssessPokemon_19
 
-script SlateportCity_PokemonFanClub_EventScript_CheckMonCute {
-    specialvar(VAR_RESULT, CheckLeadMonCute)
-    if (var(VAR_RESULT) == TRUE) {
-        call(SlateportCity_PokemonFanClub_EventScript_SetMonCute)
-    }
-    return
-}
 
-script SlateportCity_PokemonFanClub_EventScript_SetMonCute {
-    setvar(VAR_TEMP_1, 3)
-    return
-}
+SlateportCity_PokemonFanClub_EventScript_NoMoreScarves::
+# 60 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_NothingElseToGiveYou, MSGBOX_DEFAULT
+# 61 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
 
-script SlateportCity_PokemonFanClub_EventScript_CheckMonSmart {
-    specialvar(VAR_RESULT, CheckLeadMonSmart)
-    if (var(VAR_RESULT) == TRUE) {
-        call(SlateportCity_PokemonFanClub_EventScript_SetMonSmart)
-    }
-    return
-}
 
-script SlateportCity_PokemonFanClub_EventScript_SetMonSmart {
-    setvar(VAR_TEMP_1, 4)
-    return
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon::
+# 66 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_HmHmISee, MSGBOX_DEFAULT
+# 67 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	setvar VAR_TEMP_1, 0
+# 68 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto_if_unset FLAG_RECEIVED_YELLOW_SCARF, SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_2
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_1:
+# 71 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto_if_unset FLAG_RECEIVED_GREEN_SCARF, SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_5
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_4:
+# 74 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto_if_unset FLAG_RECEIVED_PINK_SCARF, SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_8
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_7:
+# 77 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto_if_unset FLAG_RECEIVED_BLUE_SCARF, SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_11
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_10:
+# 80 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto_if_unset FLAG_RECEIVED_RED_SCARF, SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_14
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_13:
+# 83 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	bufferleadmonspeciesname STR_VAR_1
+# 84 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	switch VAR_TEMP_1
+# 85 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	case 0, SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_18
+# 87 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	case 1, SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_19
+# 89 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	case 2, SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_20
+# 91 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	case 3, SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_21
+# 93 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	case 4, SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_22
+# 95 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	case 5, SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_23
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_16:
+# 98 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
 
-script SlateportCity_PokemonFanClub_EventScript_CheckMonTough {
-    specialvar(VAR_RESULT, CheckLeadMonTough)
-    if (var(VAR_RESULT) == TRUE) {
-        call(SlateportCity_PokemonFanClub_EventScript_SetMonTough)
-    }
-    return
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_2:
+# 69 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	call SlateportCity_PokemonFanClub_EventScript_CheckMonTough
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_1
 
-script SlateportCity_PokemonFanClub_EventScript_SetMonTough {
-    setvar(VAR_TEMP_1, 5)
-    return
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_5:
+# 72 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	call SlateportCity_PokemonFanClub_EventScript_CheckMonSmart
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_4
 
-script SlateportCity_PokemonFanClub_EventScript_ChairmanNotEnteredContest {
-    if (flag(FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN)) {
-        goto(SlateportCity_PokemonFanClub_EventScript_ChairmanEnterContest)
-    }
-    msgbox(SlateportCity_PokemonFanClub_Text_MeetChairman, MSGBOX_DEFAULT)
-    setflag(FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN)
-    release
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_8:
+# 75 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	call SlateportCity_PokemonFanClub_EventScript_CheckMonCute
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_7
 
-script SlateportCity_PokemonFanClub_EventScript_ChairmanEnterContest {
-    msgbox(SlateportCity_PokemonFanClub_Text_LikeToSeeEnteredContestPokemon, MSGBOX_DEFAULT)
-    release
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_11:
+# 78 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	call SlateportCity_PokemonFanClub_EventScript_CheckMonBeauty
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_10
 
-script SlateportCity_PokemonFanClub_EventScript_MeetChairman {
-    msgbox(SlateportCity_PokemonFanClub_Text_MeetChairman, MSGBOX_DEFAULT)
-    setflag(FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN)
-    return
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_14:
+# 81 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	call SlateportCity_PokemonFanClub_EventScript_CheckMonCool
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_13
 
-script SlateportCity_PokemonFanClub_EventScript_SootheBellWoman {
-    lock
-    faceplayer
-    if (flag(FLAG_RECEIVED_SOOTHE_BELL)) {
-        goto(SlateportCity_PokemonFanClub_EventScript_ReceivedSootheBell)
-    }
-    msgbox(SlateportCity_PokemonFanClub_Text_ShowMePokemonThatLoveYou, MSGBOX_DEFAULT)
-    specialvar(VAR_RESULT, GetLeadMonFriendshipScore)
-    if (var(VAR_RESULT) >= FRIENDSHIP_150_TO_199) {
-        goto(SlateportCity_PokemonFanClub_EventScript_GiveSootheBell)
-    }
-    release
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_18:
+# 86 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_NoHighConditions
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_16
 
-script SlateportCity_PokemonFanClub_EventScript_GiveSootheBell {
-    playse(SE_PIN)
-    applymovement(VAR_LAST_TALKED, Common_Movement_ExclamationMark)
-    waitmovement(0)
-    applymovement(VAR_LAST_TALKED, Common_Movement_Delay48)
-    waitmovement(0)
-    msgbox(SlateportCity_PokemonFanClub_Text_PokemonAdoresYou, MSGBOX_DEFAULT)
-    giveitem(ITEM_SOOTHE_BELL)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(Common_EventScript_ShowBagIsFull)
-    }
-    setflag(FLAG_RECEIVED_SOOTHE_BELL)
-    release
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_19:
+# 88 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_GiveRedScarf
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_16
 
-script SlateportCity_PokemonFanClub_EventScript_ReceivedSootheBell {
-    msgbox(SlateportCity_PokemonFanClub_Text_TreatPokemonWithLove, MSGBOX_DEFAULT)
-    release
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_20:
+# 90 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_16
 
-script SlateportCity_PokemonFanClub_EventScript_Man {
-    msgbox(SlateportCity_PokemonFanClub_Text_PokemonDontLikeFainting, MSGBOX_NPC)
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_21:
+# 92 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_GivePinkScarf
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_16
 
-script SlateportCity_PokemonFanClub_EventScript_Twin {
-    msgbox(SlateportCity_PokemonFanClub_Text_MonEnjoyedProtein, MSGBOX_NPC)
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_22:
+# 94 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_16
 
-script SlateportCity_PokemonFanClub_EventScript_Skitty {
-    lock
-    faceplayer
-    waitse()
-    playmoncry(SPECIES_SKITTY, CRY_MODE_NORMAL)
-    msgbox(SlateportCity_PokemonFanClub_Text_Skitty, MSGBOX_DEFAULT)
-    waitmoncry()
-    release
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_23:
+# 96 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_GiveYellowScarf
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanAssessLeadMon_16
 
-script SlateportCity_PokemonFanClub_EventScript_Zigzagoon {
-    lock
-    faceplayer
-    waitse()
-    playmoncry(SPECIES_ZIGZAGOON, CRY_MODE_NORMAL)
-    msgbox(SlateportCity_PokemonFanClub_Text_Zigzagoon, MSGBOX_DEFAULT)
-    waitmoncry()
-    release
-    end
-}
 
-script SlateportCity_PokemonFanClub_EventScript_Azumarill {
-    lock
-    faceplayer
-    waitse()
-    playmoncry(SPECIES_AZUMARILL, CRY_MODE_NORMAL)
-    msgbox(SlateportCity_PokemonFanClub_Text_Azumarill, MSGBOX_DEFAULT)
-    waitmoncry()
-    release
-    end
-}
+SlateportCity_PokemonFanClub_EventScript_ReceivedAllScarves::
+# 103 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	setvar VAR_SLATEPORT_FAN_CLUB_STATE, 2
+	return
 
-text SlateportCity_PokemonFanClub_Text_MeetChairman {
-    "Er-hem! I am the CHAIRMAN of the\n"
-    "POKéMON FAN CLUB!\p"
-    "Being the CHAIRMAN, I am naturally\n"
-    "the most important!\p"
-    "No one can best me when it comes\n"
-    "to raising POKéMON. No one!\p"
-    "Well, let me tell you about\n"
-    "POKéMON CONTESTS.\p"
-    "They're events where one can show off\n"
-    "POKéMON for the world to see!\p"
-    "However, they're held in far-off towns,\n"
-    "so I cannot participate often enough.\p"
-    "That is why we gather here to show\n"
-    "off our POKéMON, and have others\l"
-    "show us theirs.$"
-}
 
-text SlateportCity_PokemonFanClub_Text_LikeToSeeEnteredContestPokemon {
-    "The POKéMON of a TRAINER who has\n"
-    "entered a POKéMON CONTEST…\l"
-    "That, I would like to see.$"
-}
+SlateportCity_PokemonFanClub_EventScript_CountReceivedScarf::
+# 108 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	addvar VAR_TEMP_2, 1
+	return
 
-text SlateportCity_PokemonFanClub_Text_AllowMeToExamineYourPokemon {
-    "Er-hem! I see you've participated in\n"
-    "a POKéMON CONTEST!\p"
-    "Please! Allow me to examine how you\n"
-    "have raised your POKéMON.\p"
-    "It delights me no end to see POKéMON\n"
-    "raised by other TRAINERS.\p"
-    "The happy expressions of POKéMON\n"
-    "raised with proper care…\p"
-    "The kindly eyes of the TRAINER that\n"
-    "nurtured and raised the POKéMON…\p"
-    "The very thought fills my heart to\n"
-    "overwhelming with joy.\p"
-    "Oh! I do beg your pardon!\n"
-    "Forgive me for prattling on so!\p"
-    "Please! Allow me to examine how much\n"
-    "your POKéMON has grown!$"
-}
 
-text SlateportCity_PokemonFanClub_Text_HowIsYourPokemonGrowing {
-    "How is your POKéMON growing?\n"
-    "Allow me to examine it.$"
-}
+SlateportCity_PokemonFanClub_EventScript_NoHighConditions::
+# 113 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_GiveMonMorePokeblocks, MSGBOX_DEFAULT
+# 114 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
 
-text SlateportCity_PokemonFanClub_Text_HmHmISee {
-    "Hm, hm…\n"
-    "I see…$"
-}
 
-text SlateportCity_PokemonFanClub_Text_GiveMonMorePokeblocks {
-    "Hmmm… It's not bad, but it's not\n"
-    "good, either…\p"
-    "You, the TRAINER, must put more\n"
-    "effort into raising this POKéMON!\p"
-    "For instance, may I suggest that\n"
-    "you give it more {POKEBLOCK}S?$"
-}
+SlateportCity_PokemonFanClub_EventScript_GiveRedScarf::
+# 119 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	checkitemspace ITEM_RED_SCARF
+# 120 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_GiveRedScarf_2
+SlateportCity_PokemonFanClub_EventScript_GiveRedScarf_1:
+# 123 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
+# 124 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	setflag FLAG_RECEIVED_RED_SCARF
+# 125 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	giveitem ITEM_RED_SCARF
+# 126 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_ExplainRedScarf, MSGBOX_DEFAULT
+# 127 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
 
-text SlateportCity_PokemonFanClub_Text_NoSpaceForReward {
-    "Oh, my…\p"
-    "Your POKéMON is growing quite well,\n"
-    "so you deserve a reward.\p"
-    "Unfortunately, you have no space for\n"
-    "this in your BAG.$"
-}
+SlateportCity_PokemonFanClub_EventScript_GiveRedScarf_2:
+# 121 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
+	goto SlateportCity_PokemonFanClub_EventScript_GiveRedScarf_1
 
-text SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis {
-    "Your {STR_VAR_1}, it is growing in\n"
-    "a most impressive manner!\l"
-    "It is one fine specimen!\p"
-    "But! If you were to give it this,\n"
-    "it would grow even better! Indeed!$"
-}
 
-text SlateportCity_PokemonFanClub_Text_ExplainRedScarf {
-    "Let a POKéMON hold that RED SCARF.\p"
-    "Everyone will recognize the coolness\n"
-    "of that POKéMON!$"
-}
+SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf::
+# 132 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	checkitemspace ITEM_BLUE_SCARF
+# 133 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf_2
+SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf_1:
+# 136 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
+# 137 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	setflag FLAG_RECEIVED_BLUE_SCARF
+# 138 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	giveitem ITEM_BLUE_SCARF
+# 139 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_ExplainBlueScarf, MSGBOX_DEFAULT
+# 140 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
 
-text SlateportCity_PokemonFanClub_Text_ExplainBlueScarf {
-    "Let a POKéMON hold that BLUE SCARF.\p"
-    "Its beauty will be accentuated much\n"
-    "more than now!$"
-}
+SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf_2:
+# 134 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
+	goto SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf_1
 
-text SlateportCity_PokemonFanClub_Text_ExplainPinkScarf {
-    "Let a POKéMON hold that PINK SCARF.\p"
-    "It will draw out the cuteness of\n"
-    "the POKéMON some more!$"
-}
 
-text SlateportCity_PokemonFanClub_Text_ExplainGreenScarf {
-    "Let a POKéMON hold that GREEN SCARF.\p"
-    "That will enhance the\n"
-    "smartness of POKéMON!$"
-}
+SlateportCity_PokemonFanClub_EventScript_GivePinkScarf::
+# 145 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	checkitemspace ITEM_PINK_SCARF
+# 146 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_GivePinkScarf_2
+SlateportCity_PokemonFanClub_EventScript_GivePinkScarf_1:
+# 149 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
+# 150 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	setflag FLAG_RECEIVED_PINK_SCARF
+# 151 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	giveitem ITEM_PINK_SCARF
+# 152 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_ExplainPinkScarf, MSGBOX_DEFAULT
+# 153 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
 
-text SlateportCity_PokemonFanClub_Text_ExplainYellowScarf {
-    "Let a POKéMON hold that YELLOW SCARF.\p"
-    "It will bolster your POKéMON's\n"
-    "toughness so much more!$"
-}
+SlateportCity_PokemonFanClub_EventScript_GivePinkScarf_2:
+# 147 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
+	goto SlateportCity_PokemonFanClub_EventScript_GivePinkScarf_1
 
-text SlateportCity_PokemonFanClub_Text_NothingElseToGiveYou {
-    "I'm sorry, but I've nothing else to\n"
-    "give you! None at all!\p"
-    "After all, you're blessed with the gift\n"
-    "of raising POKéMON without resorting\l"
-    "to any items!$"
-}
 
-text SlateportCity_PokemonFanClub_Text_ShowMePokemonThatLoveYou {
-    "I love seeing POKéMON that love\n"
-    "their TRAINERS.\p"
-    "POKéMON are very sensitive to\n"
-    "the feelings of their TRAINERS.\p"
-    "If you treat your POKéMON with love\n"
-    "and care, they'll love you back.\p"
-    "When your POKéMON grow to love you,\n"
-    "please come show me.$"
-}
+SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf::
+# 158 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	checkitemspace ITEM_GREEN_SCARF
+# 159 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf_2
+SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf_1:
+# 162 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
+# 163 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	setflag FLAG_RECEIVED_GREEN_SCARF
+# 164 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	giveitem ITEM_GREEN_SCARF
+# 165 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_ExplainGreenScarf, MSGBOX_DEFAULT
+# 166 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
 
-text SlateportCity_PokemonFanClub_Text_PokemonAdoresYou {
-    "Your POKéMON really adores you.\p"
-    "For you, a most compassionate\n"
-    "TRAINER, a gift from the FAN CLUB!$"
-}
+SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf_2:
+# 160 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
+	goto SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf_1
 
-text SlateportCity_PokemonFanClub_Text_TreatPokemonWithLove {
-    "POKéMON are very sensitive to\n"
-    "the feelings of their TRAINERS.\p"
-    "If you treat your POKéMON with love\n"
-    "and care, they'll love you back.$"
-}
 
-text SlateportCity_PokemonFanClub_Text_PokemonDontLikeFainting {
-    "If you keep letting a POKéMON faint\n"
-    "in battle, it'll come to resent it.\p"
-    "Soon, it will become less trusting\n"
-    "of the TRAINER.\p"
-    "In other words, it certainly won't\n"
-    "like you very much.$"
-}
+SlateportCity_PokemonFanClub_EventScript_GiveYellowScarf::
+# 171 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	checkitemspace ITEM_YELLOW_SCARF
+# 172 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_GiveYellowScarf_2
+SlateportCity_PokemonFanClub_EventScript_GiveYellowScarf_1:
+# 175 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
+# 176 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	setflag FLAG_RECEIVED_YELLOW_SCARF
+# 177 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	giveitem ITEM_YELLOW_SCARF
+# 178 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_ExplainYellowScarf, MSGBOX_DEFAULT
+# 179 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
 
-text SlateportCity_PokemonFanClub_Text_MonEnjoyedProtein {
-    "Do POKéMON enjoy having items used\n"
-    "on them?\p"
-    "Mine acted really happy when I gave\n"
-    "it some PROTEIN.$"
-}
+SlateportCity_PokemonFanClub_EventScript_GiveYellowScarf_2:
+# 173 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
+	goto SlateportCity_PokemonFanClub_EventScript_GiveYellowScarf_1
 
-text SlateportCity_PokemonFanClub_Text_Skitty {
-    "SKITTY: Fffnyaaaah…$"
-}
 
-text SlateportCity_PokemonFanClub_Text_Zigzagoon {
-    "ZIGZAGOON: Kyuuu…$"
-}
+SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf::
+# 184 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_NoSpaceForReward, MSGBOX_DEFAULT
+# 185 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
 
-text SlateportCity_PokemonFanClub_Text_Azumarill {
-    "AZUMARILL: Marimari?$"
-}
+
+SlateportCity_PokemonFanClub_EventScript_CheckMonCool::
+# 190 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	specialvar VAR_RESULT, CheckLeadMonCool
+# 191 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_CheckMonCool_2
+SlateportCity_PokemonFanClub_EventScript_CheckMonCool_1:
+	return
+
+SlateportCity_PokemonFanClub_EventScript_CheckMonCool_2:
+# 192 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	call SlateportCity_PokemonFanClub_EventScript_SetMonCool
+	goto SlateportCity_PokemonFanClub_EventScript_CheckMonCool_1
+
+
+SlateportCity_PokemonFanClub_EventScript_SetMonCool::
+# 198 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	setvar VAR_TEMP_1, 1
+	return
+
+
+SlateportCity_PokemonFanClub_EventScript_CheckMonBeauty::
+# 203 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	specialvar VAR_RESULT, CheckLeadMonBeauty
+# 204 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_CheckMonBeauty_2
+SlateportCity_PokemonFanClub_EventScript_CheckMonBeauty_1:
+	return
+
+SlateportCity_PokemonFanClub_EventScript_CheckMonBeauty_2:
+# 205 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	call SlateportCity_PokemonFanClub_EventScript_SetMonBeauty
+	goto SlateportCity_PokemonFanClub_EventScript_CheckMonBeauty_1
+
+
+SlateportCity_PokemonFanClub_EventScript_SetMonBeauty::
+# 211 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	setvar VAR_TEMP_1, 2
+	return
+
+
+SlateportCity_PokemonFanClub_EventScript_CheckMonCute::
+# 216 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	specialvar VAR_RESULT, CheckLeadMonCute
+# 217 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_CheckMonCute_2
+SlateportCity_PokemonFanClub_EventScript_CheckMonCute_1:
+	return
+
+SlateportCity_PokemonFanClub_EventScript_CheckMonCute_2:
+# 218 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	call SlateportCity_PokemonFanClub_EventScript_SetMonCute
+	goto SlateportCity_PokemonFanClub_EventScript_CheckMonCute_1
+
+
+SlateportCity_PokemonFanClub_EventScript_SetMonCute::
+# 224 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	setvar VAR_TEMP_1, 3
+	return
+
+
+SlateportCity_PokemonFanClub_EventScript_CheckMonSmart::
+# 229 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	specialvar VAR_RESULT, CheckLeadMonSmart
+# 230 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_CheckMonSmart_2
+SlateportCity_PokemonFanClub_EventScript_CheckMonSmart_1:
+	return
+
+SlateportCity_PokemonFanClub_EventScript_CheckMonSmart_2:
+# 231 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	call SlateportCity_PokemonFanClub_EventScript_SetMonSmart
+	goto SlateportCity_PokemonFanClub_EventScript_CheckMonSmart_1
+
+
+SlateportCity_PokemonFanClub_EventScript_SetMonSmart::
+# 237 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	setvar VAR_TEMP_1, 4
+	return
+
+
+SlateportCity_PokemonFanClub_EventScript_CheckMonTough::
+# 242 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	specialvar VAR_RESULT, CheckLeadMonTough
+# 243 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_CheckMonTough_2
+SlateportCity_PokemonFanClub_EventScript_CheckMonTough_1:
+	return
+
+SlateportCity_PokemonFanClub_EventScript_CheckMonTough_2:
+# 244 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	call SlateportCity_PokemonFanClub_EventScript_SetMonTough
+	goto SlateportCity_PokemonFanClub_EventScript_CheckMonTough_1
+
+
+SlateportCity_PokemonFanClub_EventScript_SetMonTough::
+# 250 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	setvar VAR_TEMP_1, 5
+	return
+
+
+SlateportCity_PokemonFanClub_EventScript_ChairmanNotEnteredContest::
+# 255 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto_if_set FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN, SlateportCity_PokemonFanClub_EventScript_ChairmanNotEnteredContest_2
+SlateportCity_PokemonFanClub_EventScript_ChairmanNotEnteredContest_1:
+# 258 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_MeetChairman, MSGBOX_DEFAULT
+# 259 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	setflag FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN
+# 260 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
+
+SlateportCity_PokemonFanClub_EventScript_ChairmanNotEnteredContest_2:
+# 256 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanEnterContest
+	goto SlateportCity_PokemonFanClub_EventScript_ChairmanNotEnteredContest_1
+
+
+SlateportCity_PokemonFanClub_EventScript_ChairmanEnterContest::
+# 265 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_LikeToSeeEnteredContestPokemon, MSGBOX_DEFAULT
+# 266 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
+
+
+SlateportCity_PokemonFanClub_EventScript_MeetChairman::
+# 271 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_MeetChairman, MSGBOX_DEFAULT
+# 272 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	setflag FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN
+	return
+
+
+SlateportCity_PokemonFanClub_EventScript_SootheBellWoman::
+# 277 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	lock
+# 278 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	faceplayer
+# 279 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto_if_set FLAG_RECEIVED_SOOTHE_BELL, SlateportCity_PokemonFanClub_EventScript_SootheBellWoman_2
+SlateportCity_PokemonFanClub_EventScript_SootheBellWoman_1:
+# 282 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_ShowMePokemonThatLoveYou, MSGBOX_DEFAULT
+# 283 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	specialvar VAR_RESULT, GetLeadMonFriendshipScore
+# 284 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	compare VAR_RESULT, FRIENDSHIP_150_TO_199
+	goto_if_ge SlateportCity_PokemonFanClub_EventScript_SootheBellWoman_5
+SlateportCity_PokemonFanClub_EventScript_SootheBellWoman_4:
+# 287 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
+
+SlateportCity_PokemonFanClub_EventScript_SootheBellWoman_2:
+# 280 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_ReceivedSootheBell
+	goto SlateportCity_PokemonFanClub_EventScript_SootheBellWoman_1
+
+SlateportCity_PokemonFanClub_EventScript_SootheBellWoman_5:
+# 285 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto SlateportCity_PokemonFanClub_EventScript_GiveSootheBell
+	goto SlateportCity_PokemonFanClub_EventScript_SootheBellWoman_4
+
+
+SlateportCity_PokemonFanClub_EventScript_GiveSootheBell::
+# 292 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	playse SE_PIN
+# 293 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
+# 294 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	waitmovement 0
+# 295 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	applymovement VAR_LAST_TALKED, Common_Movement_Delay48
+# 296 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	waitmovement 0
+# 297 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_PokemonAdoresYou, MSGBOX_DEFAULT
+# 298 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	giveitem ITEM_SOOTHE_BELL
+# 299 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_GiveSootheBell_2
+SlateportCity_PokemonFanClub_EventScript_GiveSootheBell_1:
+# 302 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	setflag FLAG_RECEIVED_SOOTHE_BELL
+# 303 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
+
+SlateportCity_PokemonFanClub_EventScript_GiveSootheBell_2:
+# 300 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto SlateportCity_PokemonFanClub_EventScript_GiveSootheBell_1
+
+
+SlateportCity_PokemonFanClub_EventScript_ReceivedSootheBell::
+# 308 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_TreatPokemonWithLove, MSGBOX_DEFAULT
+# 309 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
+
+
+SlateportCity_PokemonFanClub_EventScript_Man::
+# 314 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_PokemonDontLikeFainting, MSGBOX_NPC
+	end
+
+
+SlateportCity_PokemonFanClub_EventScript_Twin::
+# 319 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_MonEnjoyedProtein, MSGBOX_NPC
+	end
+
+
+SlateportCity_PokemonFanClub_EventScript_Skitty::
+# 324 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	lock
+# 325 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	faceplayer
+# 326 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	waitse
+# 327 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	playmoncry SPECIES_SKITTY, CRY_MODE_NORMAL
+# 328 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_Skitty, MSGBOX_DEFAULT
+# 329 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	waitmoncry
+# 330 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
+
+
+SlateportCity_PokemonFanClub_EventScript_Zigzagoon::
+# 335 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	lock
+# 336 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	faceplayer
+# 337 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	waitse
+# 338 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	playmoncry SPECIES_ZIGZAGOON, CRY_MODE_NORMAL
+# 339 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_Zigzagoon, MSGBOX_DEFAULT
+# 340 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	waitmoncry
+# 341 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
+
+
+SlateportCity_PokemonFanClub_EventScript_Azumarill::
+# 346 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	lock
+# 347 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	faceplayer
+# 348 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	waitse
+# 349 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	playmoncry SPECIES_AZUMARILL, CRY_MODE_NORMAL
+# 350 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	msgbox SlateportCity_PokemonFanClub_Text_Azumarill, MSGBOX_DEFAULT
+# 351 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	waitmoncry
+# 352 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	release
+	end
+
+
+SlateportCity_PokemonFanClub_Text_MeetChairman::
+# 356 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "Er-hem! I am the CHAIRMAN of the\n"
+	.string "POKéMON FAN CLUB!\p"
+	.string "Being the CHAIRMAN, I am naturally\n"
+	.string "the most important!\p"
+	.string "No one can best me when it comes\n"
+	.string "to raising POKéMON. No one!\p"
+	.string "Well, let me tell you about\n"
+	.string "POKéMON CONTESTS.\p"
+	.string "They're events where one can show off\n"
+	.string "POKéMON for the world to see!\p"
+	.string "However, they're held in far-off towns,\n"
+	.string "so I cannot participate often enough.\p"
+	.string "That is why we gather here to show\n"
+	.string "off our POKéMON, and have others\l"
+	.string "show us theirs.$"
+
+SlateportCity_PokemonFanClub_Text_LikeToSeeEnteredContestPokemon::
+# 374 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "The POKéMON of a TRAINER who has\n"
+	.string "entered a POKéMON CONTEST…\l"
+	.string "That, I would like to see.$"
+
+SlateportCity_PokemonFanClub_Text_AllowMeToExamineYourPokemon::
+# 380 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "Er-hem! I see you've participated in\n"
+	.string "a POKéMON CONTEST!\p"
+	.string "Please! Allow me to examine how you\n"
+	.string "have raised your POKéMON.\p"
+	.string "It delights me no end to see POKéMON\n"
+	.string "raised by other TRAINERS.\p"
+	.string "The happy expressions of POKéMON\n"
+	.string "raised with proper care…\p"
+	.string "The kindly eyes of the TRAINER that\n"
+	.string "nurtured and raised the POKéMON…\p"
+	.string "The very thought fills my heart to\n"
+	.string "overwhelming with joy.\p"
+	.string "Oh! I do beg your pardon!\n"
+	.string "Forgive me for prattling on so!\p"
+	.string "Please! Allow me to examine how much\n"
+	.string "your POKéMON has grown!$"
+
+SlateportCity_PokemonFanClub_Text_HowIsYourPokemonGrowing::
+# 399 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "How is your POKéMON growing?\n"
+	.string "Allow me to examine it.$"
+
+SlateportCity_PokemonFanClub_Text_HmHmISee::
+# 404 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "Hm, hm…\n"
+	.string "I see…$"
+
+SlateportCity_PokemonFanClub_Text_GiveMonMorePokeblocks::
+# 409 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "Hmmm… It's not bad, but it's not\n"
+	.string "good, either…\p"
+	.string "You, the TRAINER, must put more\n"
+	.string "effort into raising this POKéMON!\p"
+	.string "For instance, may I suggest that\n"
+	.string "you give it more {POKEBLOCK}S?$"
+
+SlateportCity_PokemonFanClub_Text_NoSpaceForReward::
+# 418 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "Oh, my…\p"
+	.string "Your POKéMON is growing quite well,\n"
+	.string "so you deserve a reward.\p"
+	.string "Unfortunately, you have no space for\n"
+	.string "this in your BAG.$"
+
+SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis::
+# 426 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "Your {STR_VAR_1}, it is growing in\n"
+	.string "a most impressive manner!\l"
+	.string "It is one fine specimen!\p"
+	.string "But! If you were to give it this,\n"
+	.string "it would grow even better! Indeed!$"
+
+SlateportCity_PokemonFanClub_Text_ExplainRedScarf::
+# 434 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "Let a POKéMON hold that RED SCARF.\p"
+	.string "Everyone will recognize the coolness\n"
+	.string "of that POKéMON!$"
+
+SlateportCity_PokemonFanClub_Text_ExplainBlueScarf::
+# 440 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "Let a POKéMON hold that BLUE SCARF.\p"
+	.string "Its beauty will be accentuated much\n"
+	.string "more than now!$"
+
+SlateportCity_PokemonFanClub_Text_ExplainPinkScarf::
+# 446 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "Let a POKéMON hold that PINK SCARF.\p"
+	.string "It will draw out the cuteness of\n"
+	.string "the POKéMON some more!$"
+
+SlateportCity_PokemonFanClub_Text_ExplainGreenScarf::
+# 452 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "Let a POKéMON hold that GREEN SCARF.\p"
+	.string "That will enhance the\n"
+	.string "smartness of POKéMON!$"
+
+SlateportCity_PokemonFanClub_Text_ExplainYellowScarf::
+# 458 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "Let a POKéMON hold that YELLOW SCARF.\p"
+	.string "It will bolster your POKéMON's\n"
+	.string "toughness so much more!$"
+
+SlateportCity_PokemonFanClub_Text_NothingElseToGiveYou::
+# 464 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "I'm sorry, but I've nothing else to\n"
+	.string "give you! None at all!\p"
+	.string "After all, you're blessed with the gift\n"
+	.string "of raising POKéMON without resorting\l"
+	.string "to any items!$"
+
+SlateportCity_PokemonFanClub_Text_ShowMePokemonThatLoveYou::
+# 472 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "I love seeing POKéMON that love\n"
+	.string "their TRAINERS.\p"
+	.string "POKéMON are very sensitive to\n"
+	.string "the feelings of their TRAINERS.\p"
+	.string "If you treat your POKéMON with love\n"
+	.string "and care, they'll love you back.\p"
+	.string "When your POKéMON grow to love you,\n"
+	.string "please come show me.$"
+
+SlateportCity_PokemonFanClub_Text_PokemonAdoresYou::
+# 483 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "Your POKéMON really adores you.\p"
+	.string "For you, a most compassionate\n"
+	.string "TRAINER, a gift from the FAN CLUB!$"
+
+SlateportCity_PokemonFanClub_Text_TreatPokemonWithLove::
+# 489 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "POKéMON are very sensitive to\n"
+	.string "the feelings of their TRAINERS.\p"
+	.string "If you treat your POKéMON with love\n"
+	.string "and care, they'll love you back.$"
+
+SlateportCity_PokemonFanClub_Text_PokemonDontLikeFainting::
+# 496 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "If you keep letting a POKéMON faint\n"
+	.string "in battle, it'll come to resent it.\p"
+	.string "Soon, it will become less trusting\n"
+	.string "of the TRAINER.\p"
+	.string "In other words, it certainly won't\n"
+	.string "like you very much.$"
+
+SlateportCity_PokemonFanClub_Text_MonEnjoyedProtein::
+# 505 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "Do POKéMON enjoy having items used\n"
+	.string "on them?\p"
+	.string "Mine acted really happy when I gave\n"
+	.string "it some PROTEIN.$"
+
+SlateportCity_PokemonFanClub_Text_Skitty::
+# 512 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "SKITTY: Fffnyaaaah…$"
+
+SlateportCity_PokemonFanClub_Text_Zigzagoon::
+# 516 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "ZIGZAGOON: Kyuuu…$"
+
+SlateportCity_PokemonFanClub_Text_Azumarill::
+# 520 "data/maps/SlateportCity_PokemonFanClub/scripts.pory"
+	.string "AZUMARILL: Marimari?$"
+
+`

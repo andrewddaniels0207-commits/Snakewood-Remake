@@ -1,138 +1,188 @@
 MtMoon_1F_Frlg_MapScripts::
+# 2 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, MtMoon_1F_OnTransition
 	.byte 0
 
+
 MtMoon_1F_OnTransition::
+# 6 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	setworldmapflag FLAG_WORLD_MAP_MT_MOON_1F
 	end
 
+
 MtMoon_1F_EventScript_ZubatSign::
+# 11 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	msgbox MtMoon_1F_Text_ZubatIsABloodsucker, MSGBOX_SIGN
 	end
 
+
 MtMoon_1F_EventScript_Marcos::
+# 16 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_HIKER_MARCOS, MtMoon_1F_Text_MarcosIntro, MtMoon_1F_Text_MarcosDefeat
+# 17 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	msgbox MtMoon_1F_Text_MarcosPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 MtMoon_1F_EventScript_Josh::
+# 22 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_YOUNGSTER_JOSH, MtMoon_1F_Text_JoshIntro, MtMoon_1F_Text_JoshDefeat
+# 23 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	msgbox MtMoon_1F_Text_JoshPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 MtMoon_1F_EventScript_Miriam::
+# 28 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_LASS_MIRIAM, MtMoon_1F_Text_MiriamIntro, MtMoon_1F_Text_MiriamDefeat
+# 29 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	msgbox MtMoon_1F_Text_MiriamPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 MtMoon_1F_EventScript_Iris::
+# 34 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_LASS_IRIS, MtMoon_1F_Text_IrisIntro, MtMoon_1F_Text_IrisDefeat
+# 35 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	msgbox MtMoon_1F_Text_IrisPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 MtMoon_1F_EventScript_Jovan::
+# 40 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_SUPER_NERD_JOVAN, MtMoon_1F_Text_JovanIntro, MtMoon_1F_Text_JovanDefeat
+# 41 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	msgbox MtMoon_1F_Text_JovanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 MtMoon_1F_EventScript_Kent::
+# 46 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_BUG_CATCHER_KENT, MtMoon_1F_Text_KentIntro, MtMoon_1F_Text_KentDefeat
+# 47 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	msgbox MtMoon_1F_Text_KentPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 MtMoon_1F_EventScript_Robby::
+# 52 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_BUG_CATCHER_ROBBY, MtMoon_1F_Text_RobbyIntro, MtMoon_1F_Text_RobbyDefeat
+# 53 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	msgbox MtMoon_1F_Text_RobbyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 MtMoon_1F_Text_MarcosIntro::
+# 57 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "WHOA!\n"
 	.string "You shocked me!\l"
 	.string "…Oh, you're just a kid!$"
 
 MtMoon_1F_Text_MarcosDefeat::
+# 63 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "Wow!\n"
 	.string "Shocked again!$"
 
 MtMoon_1F_Text_MarcosPostBattle::
+# 68 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "Kids like you shouldn't be\n"
 	.string "wandering around here in the dark.$"
 
 MtMoon_1F_Text_JoshIntro::
+# 73 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "Did you come to explore the cave,\n"
 	.string "too?$"
 
 MtMoon_1F_Text_JoshDefeat::
+# 78 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "Losing stinks!\n"
 	.string "It's so uncool.$"
 
 MtMoon_1F_Text_JoshPostBattle::
+# 83 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "I came all the way down here to\n"
 	.string "show off to girls.$"
 
 MtMoon_1F_Text_MiriamIntro::
+# 88 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "Wow! It's way bigger in here than\n"
 	.string "I thought!$"
 
 MtMoon_1F_Text_MiriamDefeat::
+# 93 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "Oh!\n"
 	.string "I lost it!$"
 
 MtMoon_1F_Text_MiriamPostBattle::
+# 98 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "How do you get out of here?\n"
 	.string "It's so big, I may get lost.$"
 
 MtMoon_1F_Text_JovanIntro::
+# 103 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "What!\n"
 	.string "Don't sneak up on me!$"
 
 MtMoon_1F_Text_JovanDefeat::
+# 108 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "My POKéMON won't do!$"
 
 MtMoon_1F_Text_JovanPostBattle::
+# 112 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "I have to find stronger POKéMON.\n"
 	.string "Where might they be?$"
 
 MtMoon_1F_Text_IrisIntro::
+# 117 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "What?\n"
 	.string "I'm waiting for my friends to find\l"
 	.string "me here.$"
 
 MtMoon_1F_Text_IrisDefeat::
+# 123 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "I lost?$"
 
 MtMoon_1F_Text_IrisPostBattle::
+# 127 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "I came because I heard there are\n"
 	.string "some very rare fossils here.$"
 
 MtMoon_1F_Text_KentIntro::
+# 132 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "Suspicious men are in the cave.\n"
 	.string "What about you?$"
 
 MtMoon_1F_Text_KentDefeat::
+# 137 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "You got me!$"
 
 MtMoon_1F_Text_KentPostBattle::
+# 141 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "I saw them!\n"
 	.string "I'm sure they're from TEAM ROCKET!$"
 
 MtMoon_1F_Text_RobbyIntro::
+# 146 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "You need to go through this cave\n"
 	.string "to get to CERULEAN CITY.$"
 
 MtMoon_1F_Text_RobbyDefeat::
+# 151 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "I lost.$"
 
 MtMoon_1F_Text_RobbyPostBattle::
+# 155 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "ZUBAT is tough!\n"
 	.string "But if you can catch one, you'll\l"
 	.string "be able to count on it.$"
 
 MtMoon_1F_Text_ZubatIsABloodsucker::
+# 161 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "Beware!\n"
 	.string "ZUBAT is a bloodsucker!$"
 
 MtMoon_1F_Text_BrockHelpsExcavateFossils::
+# 166 "data/maps/MtMoon_1F_Frlg/scripts.pory"
 	.string "Hi, I'm excavating for fossils here\n"
 	.string "under MT. MOON.\p"
 	.string "Sometimes, BROCK of PEWTER GYM\n"

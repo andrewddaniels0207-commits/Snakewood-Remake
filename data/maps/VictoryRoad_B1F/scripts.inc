@@ -1,91 +1,121 @@
 VictoryRoad_B1F_MapScripts::
 	.byte 0
 
+
 VictoryRoad_B1F_EventScript_Samuel::
+# 4 "data/maps/VictoryRoad_B1F/scripts.pory"
 	trainerbattle_single TRAINER_SAMUEL, VictoryRoad_B1F_Text_SamuelIntro, VictoryRoad_B1F_Text_SamuelDefeat
+# 5 "data/maps/VictoryRoad_B1F/scripts.pory"
 	msgbox VictoryRoad_B1F_Text_SamuelPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 VictoryRoad_B1F_EventScript_Shannon::
+# 10 "data/maps/VictoryRoad_B1F/scripts.pory"
 	trainerbattle_single TRAINER_SHANNON, VictoryRoad_B1F_Text_ShannonIntro, VictoryRoad_B1F_Text_ShannonDefeat
+# 11 "data/maps/VictoryRoad_B1F/scripts.pory"
 	msgbox VictoryRoad_B1F_Text_ShannonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 VictoryRoad_B1F_EventScript_Michelle::
+# 16 "data/maps/VictoryRoad_B1F/scripts.pory"
 	trainerbattle_single TRAINER_MICHELLE, VictoryRoad_B1F_Text_MichelleIntro, VictoryRoad_B1F_Text_MichelleDefeat
+# 17 "data/maps/VictoryRoad_B1F/scripts.pory"
 	msgbox VictoryRoad_B1F_Text_MichellePostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 VictoryRoad_B1F_EventScript_Mitchell::
+# 22 "data/maps/VictoryRoad_B1F/scripts.pory"
 	trainerbattle_single TRAINER_MITCHELL, VictoryRoad_B1F_Text_MitchellIntro, VictoryRoad_B1F_Text_MitchellDefeat
+# 23 "data/maps/VictoryRoad_B1F/scripts.pory"
 	msgbox VictoryRoad_B1F_Text_MitchellPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 VictoryRoad_B1F_EventScript_Halle::
+# 28 "data/maps/VictoryRoad_B1F/scripts.pory"
 	trainerbattle_single TRAINER_HALLE, VictoryRoad_B1F_Text_HalleIntro, VictoryRoad_B1F_Text_HalleDefeat
+# 29 "data/maps/VictoryRoad_B1F/scripts.pory"
 	msgbox VictoryRoad_B1F_Text_HallePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-VictoryRoad_B1F_Text_SamuelIntro:
+
+VictoryRoad_B1F_Text_SamuelIntro::
+# 33 "data/maps/VictoryRoad_B1F/scripts.pory"
 	.string "The thought that I'm getting closer to\n"
 	.string "the POKéMON LEAGUE…\p"
 	.string "I'm getting stage fright…$"
 
-VictoryRoad_B1F_Text_SamuelDefeat:
+VictoryRoad_B1F_Text_SamuelDefeat::
+# 39 "data/maps/VictoryRoad_B1F/scripts.pory"
 	.string "I couldn't do a thing…$"
 
-VictoryRoad_B1F_Text_SamuelPostBattle:
+VictoryRoad_B1F_Text_SamuelPostBattle::
+# 43 "data/maps/VictoryRoad_B1F/scripts.pory"
 	.string "The POKéMON LEAGUE became distant\n"
 	.string "again… What a letdown…$"
 
-VictoryRoad_B1F_Text_ShannonIntro:
+VictoryRoad_B1F_Text_ShannonIntro::
+# 48 "data/maps/VictoryRoad_B1F/scripts.pory"
 	.string "To win your way through the POKéMON\n"
 	.string "LEAGUE, you need the trust of your\l"
 	.string "POKéMON.$"
 
-VictoryRoad_B1F_Text_ShannonDefeat:
+VictoryRoad_B1F_Text_ShannonDefeat::
+# 54 "data/maps/VictoryRoad_B1F/scripts.pory"
 	.string "Your relationship is based on\n"
 	.string "solid trust.$"
 
-VictoryRoad_B1F_Text_ShannonPostBattle:
+VictoryRoad_B1F_Text_ShannonPostBattle::
+# 59 "data/maps/VictoryRoad_B1F/scripts.pory"
 	.string "By being together all the time, trust\n"
 	.string "grows between POKéMON and TRAINERS.$"
 
-VictoryRoad_B1F_Text_MichelleIntro:
+VictoryRoad_B1F_Text_MichelleIntro::
+# 64 "data/maps/VictoryRoad_B1F/scripts.pory"
 	.string "This isn't the goal. It's only a place\n"
 	.string "on the way to the POKéMON LEAGUE.$"
 
-VictoryRoad_B1F_Text_MichelleDefeat:
+VictoryRoad_B1F_Text_MichelleDefeat::
+# 69 "data/maps/VictoryRoad_B1F/scripts.pory"
 	.string "That's the way!$"
 
-VictoryRoad_B1F_Text_MichellePostBattle:
+VictoryRoad_B1F_Text_MichellePostBattle::
+# 73 "data/maps/VictoryRoad_B1F/scripts.pory"
 	.string "You'll do fine, for sure!\n"
 	.string "Your POKéMON are all eager to go!$"
 
-VictoryRoad_B1F_Text_MitchellIntro:
+VictoryRoad_B1F_Text_MitchellIntro::
+# 78 "data/maps/VictoryRoad_B1F/scripts.pory"
 	.string "My POKéMON are cosmically\n"
 	.string "awe inspiring!$"
 
-VictoryRoad_B1F_Text_MitchellDefeat:
+VictoryRoad_B1F_Text_MitchellDefeat::
+# 83 "data/maps/VictoryRoad_B1F/scripts.pory"
 	.string "I've never met anyone like you before.$"
 
-VictoryRoad_B1F_Text_MitchellPostBattle:
+VictoryRoad_B1F_Text_MitchellPostBattle::
+# 87 "data/maps/VictoryRoad_B1F/scripts.pory"
 	.string "Even outside of battle, I sense\n"
 	.string "incredible power emanating from you\l"
 	.string "and your POKéMON.$"
 
-VictoryRoad_B1F_Text_HalleIntro:
+VictoryRoad_B1F_Text_HalleIntro::
+# 93 "data/maps/VictoryRoad_B1F/scripts.pory"
 	.string "Okay, no need to get your back up!\n"
 	.string "Relax, let's take it easy!$"
 
-VictoryRoad_B1F_Text_HalleDefeat:
+VictoryRoad_B1F_Text_HalleDefeat::
+# 98 "data/maps/VictoryRoad_B1F/scripts.pory"
 	.string "Whoa!\n"
 	.string "Wonderful!$"
 
-VictoryRoad_B1F_Text_HallePostBattle:
+VictoryRoad_B1F_Text_HallePostBattle::
+# 103 "data/maps/VictoryRoad_B1F/scripts.pory"
 	.string "Sure, this is VICTORY ROAD.\p"
 	.string "But it's not all that different from\n"
 	.string "the path you've taken so far.\p"
 	.string "Try to enjoy things the rest of\n"
 	.string "the way!$"
-

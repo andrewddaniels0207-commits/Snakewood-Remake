@@ -1,33 +1,57 @@
 Route116_TunnelersRestHouse_MapScripts::
+# 2 "data/maps/Route116_TunnelersRestHouse/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, Route116_TunnelersRestHouse_OnTransition
 	.byte 0
 
-Route116_TunnelersRestHouse_OnTransition:
+
+Route116_TunnelersRestHouse_OnTransition::
+# 6 "data/maps/Route116_TunnelersRestHouse/scripts.pory"
 	setflag FLAG_LANDMARK_TUNNELERS_REST_HOUSE
 	end
 
+
 Route116_TunnelersRestHouse_EventScript_Tunneler1::
+# 11 "data/maps/Route116_TunnelersRestHouse/scripts.pory"
 	msgbox Route116_TunnelersRestHouse_Text_WeHadToStopBoring, MSGBOX_NPC
 	end
 
+
 Route116_TunnelersRestHouse_EventScript_Tunneler2::
+# 16 "data/maps/Route116_TunnelersRestHouse/scripts.pory"
 	msgbox Route116_TunnelersRestHouse_Text_ManDiggingHisWayToVerdanturf, MSGBOX_NPC
 	end
 
+
 Route116_TunnelersRestHouse_EventScript_Tunneler3::
+# 21 "data/maps/Route116_TunnelersRestHouse/scripts.pory"
 	lock
+# 22 "data/maps/Route116_TunnelersRestHouse/scripts.pory"
 	faceplayer
-	goto_if_set FLAG_RUSTURF_TUNNEL_OPENED, Route116_TunnelersRestHouse_EventScript_TunnelOpened
+# 23 "data/maps/Route116_TunnelersRestHouse/scripts.pory"
+	goto_if_set FLAG_RUSTURF_TUNNEL_OPENED, Route116_TunnelersRestHouse_EventScript_Tunneler3_2
+Route116_TunnelersRestHouse_EventScript_Tunneler3_1:
+# 26 "data/maps/Route116_TunnelersRestHouse/scripts.pory"
 	msgbox Route116_TunnelersRestHouse_Text_GetToVerdanturfWithoutTunnel, MSGBOX_DEFAULT
+# 27 "data/maps/Route116_TunnelersRestHouse/scripts.pory"
 	release
 	end
+
+Route116_TunnelersRestHouse_EventScript_Tunneler3_2:
+# 24 "data/maps/Route116_TunnelersRestHouse/scripts.pory"
+	goto Route116_TunnelersRestHouse_EventScript_TunnelOpened
+	goto Route116_TunnelersRestHouse_EventScript_Tunneler3_1
+
 
 Route116_TunnelersRestHouse_EventScript_TunnelOpened::
+# 32 "data/maps/Route116_TunnelersRestHouse/scripts.pory"
 	msgbox Route116_TunnelersRestHouse_Text_TunnelHasGoneThrough, MSGBOX_DEFAULT
+# 33 "data/maps/Route116_TunnelersRestHouse/scripts.pory"
 	release
 	end
 
-Route116_TunnelersRestHouse_Text_WeHadToStopBoring:
+
+Route116_TunnelersRestHouse_Text_WeHadToStopBoring::
+# 37 "data/maps/Route116_TunnelersRestHouse/scripts.pory"
 	.string "That RUSTURF TUNNEL there…\p"
 	.string "At first, we had a huge work crew boring\n"
 	.string "through rock with the latest machinery.\l"
@@ -38,7 +62,8 @@ Route116_TunnelersRestHouse_Text_WeHadToStopBoring:
 	.string "So, we've got nothing to do but loll\n"
 	.string "around here doing nothing.$"
 
-Route116_TunnelersRestHouse_Text_ManDiggingHisWayToVerdanturf:
+Route116_TunnelersRestHouse_Text_ManDiggingHisWayToVerdanturf::
+# 49 "data/maps/Route116_TunnelersRestHouse/scripts.pory"
 	.string "There's a man digging his way to\n"
 	.string "VERDANTURF all by his lonesome.\l"
 	.string "He's desperate to get through.\p"
@@ -48,15 +73,16 @@ Route116_TunnelersRestHouse_Text_ManDiggingHisWayToVerdanturf:
 	.string "harming the natural environment.\p"
 	.string "I wonder if he made it through yet.$"
 
-Route116_TunnelersRestHouse_Text_GetToVerdanturfWithoutTunnel:
+Route116_TunnelersRestHouse_Text_GetToVerdanturfWithoutTunnel::
+# 60 "data/maps/Route116_TunnelersRestHouse/scripts.pory"
 	.string "To get to VERDANTURF without using\n"
 	.string "this TUNNEL, you'd have to cross the\l"
 	.string "sea to DEWFORD, sail on to SLATEPORT,\l"
 	.string "then travel through MAUVILLE.$"
 
-Route116_TunnelersRestHouse_Text_TunnelHasGoneThrough:
+Route116_TunnelersRestHouse_Text_TunnelHasGoneThrough::
+# 67 "data/maps/Route116_TunnelersRestHouse/scripts.pory"
 	.string "Did you hear? The TUNNEL to VERDANTURF\n"
 	.string "has gone through!\p"
 	.string "Sometimes, if you hope strongly enough,\n"
 	.string "dreams do come true.$"
-

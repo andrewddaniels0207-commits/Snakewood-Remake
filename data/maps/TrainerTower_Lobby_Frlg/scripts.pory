@@ -1,405 +1,618 @@
-mapscripts TrainerTower_Lobby_Frlg_MapScripts {
-    MAP_SCRIPT_ON_RESUME: TrainerTower_Lobby_OnResume
-    MAP_SCRIPT_ON_RETURN_TO_FIELD: TrainerTower_Lobby_OnReturnToField
-    MAP_SCRIPT_ON_TRANSITION: TrainerTower_Lobby_OnTransition
-    MAP_SCRIPT_ON_LOAD: TrainerTower_Lobby_OnLoad
-    MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_TEMP_0, 0: TrainerTower_Lobby_EventScript_Enter
-        VAR_TEMP_D, 17: TrainerTower_Lobby_EventScript_ExitElevator
-    ]
-}
+raw `
+TrainerTower_Lobby_Frlg_MapScripts::
+# 2 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_RESUME, TrainerTower_Lobby_OnResume
+# 3 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, TrainerTower_Lobby_OnReturnToField
+# 4 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, TrainerTower_Lobby_OnTransition
+# 5 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_LOAD, TrainerTower_Lobby_OnLoad
+# 6 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, TrainerTower_Lobby_Frlg_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
+	.byte 0
 
-script TrainerTower_Lobby_OnResume {
-    setvar(VAR_TEMP_2, 0)
-    ttower_resumetimer()
-    ttower_shouldexit()
-    if (var(VAR_RESULT) == FALSE) {
-        goto(TrainerTower_Lobby_OnResumeEnd)
-    }
-    setvar(VAR_TEMP_0, 0)
-    setobjectxy(LOCALID_PLAYER, 9, 7)
-    applymovement(LOCALID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist)
-}
+TrainerTower_Lobby_Frlg_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 7 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	map_script_2 VAR_TEMP_0, 0, TrainerTower_Lobby_EventScript_Enter
+# 8 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	map_script_2 VAR_TEMP_D, 17, TrainerTower_Lobby_EventScript_ExitElevator
+	.2byte 0
 
-script TrainerTower_Lobby_OnResumeEnd {
-    end
-}
 
-script TrainerTower_Lobby_OnReturnToField {
-    addobject(LOCALID_TOWER_NURSE)
-    addobject(LOCALID_TOWER_MART_CLERK)
-    addobject(LOCALID_TOWER_RECEPTIONIST)
-    addobject(LOCALID_TOWER_COOLTRAINER_F)
-    addobject(LOCALID_TOWER_BALDING_MAN)
-    end
-}
+TrainerTower_Lobby_OnResume::
+# 13 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	setvar VAR_TEMP_2, 0
+# 14 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	ttower_resumetimer
+# 15 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	ttower_shouldexit
+# 16 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq TrainerTower_Lobby_OnResume_2
+TrainerTower_Lobby_OnResume_1:
+# 19 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	setvar VAR_TEMP_0, 0
+# 20 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	setobjectxy LOCALID_PLAYER, 9, 7
+# 21 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	applymovement LOCALID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist
+	return
 
-script TrainerTower_Lobby_OnLoad {
-    if (var(VAR_TEMP_D) == 17) {
-        call(TrainerTower_Lobby_OpenCounterBarrier)
-    }
-    end
-}
+TrainerTower_Lobby_OnResume_2:
+# 17 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_OnResumeEnd
+	goto TrainerTower_Lobby_OnResume_1
 
-script TrainerTower_Lobby_OpenCounterBarrier {
-    setmetatile(17, 10, METATILE_TrainerTower_Floor_ShadeBottomLeft, 0)
-    return
-}
 
-script TrainerTower_Lobby_OnTransition {
-    setworldmapflag(FLAG_WORLD_MAP_TRAINER_TOWER_LOBBY)
-    getplayerxy(VAR_TEMP_D, VAR_RESULT)
-    end
-}
+TrainerTower_Lobby_OnResumeEnd::
+	end
 
-script TrainerTower_Lobby_EventScript_ExitElevator {
-    lockall
-    applymovement(LOCALID_PLAYER, TrainerTower_Lobby_Movement_ExitElevator)
-    waitmovement(0)
-    setmetatile(17, 10, METATILE_TrainerTower_CounterBarrier, 1)
-    special(DrawWholeMapView)
-    playse(SE_CLICK)
-    waitse()
-    setvar(VAR_TEMP_D, 0)
-    releaseall
-    end
-}
 
-movement TrainerTower_Lobby_Movement_ExitElevator {
-    walk_down
-    walk_down
-    step_end
-}
+TrainerTower_Lobby_OnReturnToField::
+# 29 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	addobject LOCALID_TOWER_NURSE
+# 30 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	addobject LOCALID_TOWER_MART_CLERK
+# 31 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	addobject LOCALID_TOWER_RECEPTIONIST
+# 32 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	addobject LOCALID_TOWER_COOLTRAINER_F
+# 33 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	addobject LOCALID_TOWER_BALDING_MAN
+	end
 
-script TrainerTower_Lobby_EventScript_Enter {
-    setvar(VAR_TEMP_0, 1)
-    ttower_getchallengestatus()
-    switch (var(VAR_RESULT)) {
-        case TT_CHALLENGE_STATUS_LOST:
-            goto(TrainerTower_Lobby_EventScript_LostChallenge)
-        case TT_CHALLENGE_STATUS_UNK:
-            goto(TrainerTower_Lobby_EventScript_ExitChallengeSpeakToReceptionist)
-        case TT_CHALLENGE_STATUS_NORMAL:
-            goto(TrainerTower_Lobby_EventScript_EnterEnd)
-    }
-}
 
-script TrainerTower_Lobby_EventScript_LostChallenge {
-    lock
-    faceplayer
-    applymovement(LOCALID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist)
-    textcolor(NPC_TEXT_COLOR_FEMALE)
-    msgbox(TrainerTower_Lobby_Text_TooBadComeBackTryAgain)
-    goto(TrainerTower_Lobby_EventScript_ExitChallenge)
-}
+TrainerTower_Lobby_OnLoad::
+# 38 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	compare VAR_TEMP_D, 17
+	goto_if_eq TrainerTower_Lobby_OnLoad_2
+TrainerTower_Lobby_OnLoad_1:
+	end
 
-script TrainerTower_Lobby_EventScript_ExitChallengeSpeakToReceptionist {
-    lock
-    faceplayer
-    applymovement(LOCALID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist)
-    textcolor(NPC_TEXT_COLOR_FEMALE)
-    msgbox(TrainerTower_Lobby_Text_MoveCounterHereWhenTrainersSwitch)
-}
+TrainerTower_Lobby_OnLoad_2:
+# 39 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	call TrainerTower_Lobby_OpenCounterBarrier
+	goto TrainerTower_Lobby_OnLoad_1
 
-script TrainerTower_Lobby_EventScript_ExitChallenge {
-    closemessage
-    applymovement(LOCALID_PLAYER, TrainerTower_Lobby_Movement_WalkDown)
-    waitmovement(0)
-    setvar(VAR_MAP_SCENE_TRAINER_TOWER, 0)
-    release
-}
 
-script TrainerTower_Lobby_EventScript_EnterEnd {
-    end
-}
+TrainerTower_Lobby_OpenCounterBarrier::
+# 45 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	setmetatile 17, 10, METATILE_TrainerTower_Floor_ShadeBottomLeft, 0
+	return
 
-script TrainerTower_Lobby_EventScript_Nurse {
-    lock
-    faceplayer
-    call(EventScript_PkmnCenterNurse_Frlg)
-    release
-    end
-}
 
-script TrainerTower_Lobby_EventScript_Receptionist {
-    lock
-    faceplayer
-    ttower_getbeatchallenge()
-    if (var(VAR_RESULT) == TRUE) {
-        goto(TrainerTower_Lobby_EventScript_ThanksForCompeting)
-    }
-    msgbox(TrainerTower_Lobby_Text_GiveItYourBest)
-    goto(TrainerTower_Lobby_EventScript_ReceptionistEnd)
-}
+TrainerTower_Lobby_OnTransition::
+# 50 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	setworldmapflag FLAG_WORLD_MAP_TRAINER_TOWER_LOBBY
+# 51 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	getplayerxy VAR_TEMP_D, VAR_RESULT
+	end
 
-script TrainerTower_Lobby_EventScript_ThanksForCompeting {
-    msgbox(TrainerTower_Lobby_Text_ThanksForCompeting)
-}
 
-script TrainerTower_Lobby_EventScript_ReceptionistEnd {
-    release
-    end
-}
+TrainerTower_Lobby_EventScript_ExitElevator::
+# 56 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	lockall
+# 57 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	applymovement LOCALID_PLAYER, TrainerTower_Lobby_Movement_ExitElevator
+# 58 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	waitmovement 0
+# 59 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	setmetatile 17, 10, METATILE_TrainerTower_CounterBarrier, 1
+# 60 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	special DrawWholeMapView
+# 61 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	playse SE_CLICK
+# 62 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	waitse
+# 63 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	setvar VAR_TEMP_D, 0
+# 64 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	releaseall
+	end
 
-script TrainerTower_Lobby_EventScript_MartClerk {
-    lock
-    faceplayer
-    message(gText_HowMayIServeYou)
-    waitmessage()
-    pokemart(TrainerTower_Lobby_Mart_Items)
-    msgbox(gText_PleaseComeAgain)
-    release
-    end
-}
 
-script TrainerTower_Lobby_Mart_Items {
-    release
-    end
-}
+# 68 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+TrainerTower_Lobby_Movement_ExitElevator:
+# 69 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	walk_down
+# 70 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	walk_down
+# 71 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	step_end
 
-script TrainerTower_Lobby_EventScript_EntryTrigger {
-    lockall
-    applymovement(LOCALID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist)
-    textcolor(NPC_TEXT_COLOR_FEMALE)
-    msgbox(TrainerTower_Lobby_Text_WelcomeToTrainerTower)
-    ttower_getnumfloors()
-    if (var(VAR_RESULT) == FALSE) {
-        goto(TrainerTower_Lobby_EventScript_AllFloorsUsed)
-    }
-    msgbox(TrainerTower_Lobby_Text_TrainersUpToFloorNum)
-    goto(TrainerTower_Lobby_EventScript_AskEnterChallenge)
-}
+TrainerTower_Lobby_EventScript_Enter::
+# 75 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	setvar VAR_TEMP_0, 1
+# 76 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	ttower_getchallengestatus
+# 77 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	switch VAR_RESULT
+# 78 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	case TT_CHALLENGE_STATUS_LOST, TrainerTower_Lobby_EventScript_Enter_2
+# 80 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	case TT_CHALLENGE_STATUS_UNK, TrainerTower_Lobby_EventScript_Enter_3
+# 82 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	case TT_CHALLENGE_STATUS_NORMAL, TrainerTower_Lobby_EventScript_Enter_4
+	return
 
-script TrainerTower_Lobby_EventScript_AllFloorsUsed {
-    msgbox(TrainerTower_Lobby_Text_TrainersUpEighthFloor)
-}
+TrainerTower_Lobby_EventScript_Enter_2:
+# 79 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_LostChallenge
+	return
 
-script TrainerTower_Lobby_EventScript_AskEnterChallenge {
-    message(TrainerTower_Lobby_Text_LikeToChallengeTrainers)
-    waitmessage()
-    multichoice(18, 6, MULTI_YESNOINFO, FALSE)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(TrainerTower_Lobby_EventScript_ChooseChallenge)
-        case 1:
-            goto(TrainerTower_Lobby_EventScript_DeclineChallenge)
-        case 2:
-            goto(TrainerTower_Lobby_EventScript_ChallengeInfo)
-        case MULTI_B_PRESSED:
-            goto(TrainerTower_Lobby_EventScript_DeclineChallenge)
-    }
-    end
-}
+TrainerTower_Lobby_EventScript_Enter_3:
+# 81 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_ExitChallengeSpeakToReceptionist
+	return
 
-script TrainerTower_Lobby_EventScript_ChallengeInfo {
-    msgbox(TrainerTower_Lobby_Text_ExplainTrainerTower)
-    goto(TrainerTower_Lobby_EventScript_AskEnterChallenge)
-    end
-}
+TrainerTower_Lobby_EventScript_Enter_4:
+# 83 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_EnterEnd
+	return
 
-script TrainerTower_Lobby_EventScript_ChooseChallenge {
-    multichoice(13, 3, MULTI_TRAINER_TOWER_MODE, FALSE)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(TrainerTower_Lobby_EventScript_BeginChallenge)
-        case 1:
-            goto(TrainerTower_Lobby_EventScript_BeginChallenge)
-        case 2:
-            goto(TrainerTower_Lobby_EventScript_BeginChallenge)
-        case 3:
-            goto(TrainerTower_Lobby_EventScript_BeginChallenge)
-        case 4:
-            goto(TrainerTower_Lobby_EventScript_DeclineChallenge)
-        case MULTI_B_PRESSED:
-            goto(TrainerTower_Lobby_EventScript_DeclineChallenge)
-    }
-    end
-}
 
-script TrainerTower_Lobby_EventScript_BeginChallenge {
-    copyvar(VAR_0x8005, VAR_RESULT)
-    setvar(VAR_MAP_SCENE_TRAINER_TOWER, 1)
-    special(HealPlayerParty)
-    msgbox(TrainerTower_Lobby_Text_StartClockGetSetGo)
-    ttower_startchallenge()
-    releaseall
-    end
-}
+TrainerTower_Lobby_EventScript_LostChallenge::
+# 88 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	lock
+# 89 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	faceplayer
+# 90 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	applymovement LOCALID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist
+# 91 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	textcolor NPC_TEXT_COLOR_FEMALE
+# 92 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	msgbox TrainerTower_Lobby_Text_TooBadComeBackTryAgain
+# 93 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_ExitChallenge
+	return
 
-script TrainerTower_Lobby_EventScript_DeclineChallenge {
-    msgbox(TrainerTower_Lobby_Text_PleaseVisitUsAgain)
-    closemessage
-    applymovement(LOCALID_PLAYER, TrainerTower_Lobby_Movement_WalkDown)
-    waitmovement(0)
-    releaseall
-    end
-}
 
-movement TrainerTower_Lobby_Movement_FaceReceptionist {
-    face_right
-    step_end
-}
+TrainerTower_Lobby_EventScript_ExitChallengeSpeakToReceptionist::
+# 97 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	lock
+# 98 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	faceplayer
+# 99 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	applymovement LOCALID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist
+# 100 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	textcolor NPC_TEXT_COLOR_FEMALE
+# 101 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	msgbox TrainerTower_Lobby_Text_MoveCounterHereWhenTrainersSwitch
+	return
 
-movement TrainerTower_Lobby_Movement_WalkDown {
-    walk_down
-    step_end
-}
 
-script TrainerTower_Lobby_EventScript_ShowRecords {
-    lockall
-    fadescreen(FADE_TO_BLACK)
-    setvar(VAR_0x8004, 1)
-    special(ShowTrainerHillRecords)
-    waitstate
-    releaseall
-    end
-}
+TrainerTower_Lobby_EventScript_ExitChallenge::
+# 105 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	closemessage
+# 106 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	applymovement LOCALID_PLAYER, TrainerTower_Lobby_Movement_WalkDown
+# 107 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	waitmovement 0
+# 108 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	setvar VAR_MAP_SCENE_TRAINER_TOWER, 0
+# 109 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	release
+	return
 
-script TrainerTower_Lobby_EventScript_CooltrainerF {
-    msgbox(TrainerTower_Lobby_Text_WonderWhatKindsOfTrainers, MSGBOX_NPC)
-    end
-}
 
-script TrainerTower_Lobby_EventScript_BaldingMan {
-    msgbox(TrainerTower_Lobby_Text_StairsTougherThanAnyBattle, MSGBOX_NPC)
-    end
-}
+TrainerTower_Lobby_EventScript_EnterEnd::
+	end
 
-text TrainerTower_Lobby_Text_WelcomeToTrainerTower {
-    "Hello!\p"
-    "Welcome to TRAINER TOWER where\n"
-    "TRAINERS gather from all over!$"
-}
 
-text TrainerTower_Lobby_Text_TrainersUpToFloorNum {
-    "TRAINERS from all over the world\n"
-    "gather here to battle.\p"
-    "Let me see…\p"
-    "Right now, there are TRAINERS only\n"
-    "up to Floor {STR_VAR_1}.$"
-}
+TrainerTower_Lobby_EventScript_Nurse::
+# 117 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	lock
+# 118 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	faceplayer
+# 119 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	call EventScript_PkmnCenterNurse_Frlg
+# 120 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	release
+	end
 
-text TrainerTower_Lobby_Text_TrainersUpEighthFloor {
-    "TRAINERS are awaiting your\n"
-    "challenge up to the eighth floor.$"
-}
 
-text TrainerTower_Lobby_Text_LikeToChallengeTrainers {
-    "Would you like to challenge the\n"
-    "waiting TRAINERS?$"
-}
+TrainerTower_Lobby_EventScript_Receptionist::
+# 125 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	lock
+# 126 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	faceplayer
+# 127 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	ttower_getbeatchallenge
+# 128 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq TrainerTower_Lobby_EventScript_Receptionist_2
+TrainerTower_Lobby_EventScript_Receptionist_1:
+# 131 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	msgbox TrainerTower_Lobby_Text_GiveItYourBest
+# 132 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_ReceptionistEnd
+	return
 
-text TrainerTower_Lobby_Text_StartClockGetSetGo {
-    "Okay, I'll get the clock started,\n"
-    "so give it everything you have.\p"
-    "On your marks…\p"
-    "Get set…\p"
-    "Go!$"
-}
+TrainerTower_Lobby_EventScript_Receptionist_2:
+# 129 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_ThanksForCompeting
+	goto TrainerTower_Lobby_EventScript_Receptionist_1
 
-text TrainerTower_Lobby_Text_PleaseVisitUsAgain {
-    "Please do visit us again!$"
-}
 
-text TrainerTower_Lobby_Text_TooBadComeBackTryAgain {
-    "That was too bad.\p"
-    "I think you put in a tremendous\n"
-    "effort in your battling.\p"
-    "Please come back and try again!$"
-}
+TrainerTower_Lobby_EventScript_ThanksForCompeting::
+# 136 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	msgbox TrainerTower_Lobby_Text_ThanksForCompeting
+	return
 
-text TrainerTower_Lobby_Text_GiveItYourBest {
-    "I hope you give it your best.$"
-}
 
-text TrainerTower_Lobby_Text_MoveCounterHereWhenTrainersSwitch {
-    "When the TRAINERS switch places,\n"
-    "the movement can be hectic.\p"
-    "To avoid the stampede, we moved\n"
-    "the reception counter here.\p"
-    "I'm sorry for the inconvenience.$"
-}
+TrainerTower_Lobby_EventScript_ReceptionistEnd::
+# 140 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	release
+	end
 
-text TrainerTower_Roof_Text_ImOwnerBattledPerfectly {
-    "Hello…\p"
-    "I am the owner of this TOWER…\p"
-    "How the sky soars above this\n"
-    "rooftop…\p"
-    "The caress of the winds up here…\p"
-    "It's all so perfect…\p"
-    "The way you battled…\n"
-    "It, too, was perfection…$"
-}
 
-text TrainerTower_Roof_Text_ThisIsForYou {
-    "This is for you…$"
-}
+TrainerTower_Lobby_EventScript_MartClerk::
+# 145 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	lock
+# 146 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	faceplayer
+# 147 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	message gText_HowMayIServeYou
+# 148 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	waitmessage
+# 149 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	pokemart TrainerTower_Lobby_Mart_Items
+# 150 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	msgbox gText_PleaseComeAgain
+# 151 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	release
+	end
 
-text TrainerTower_Roof_Text_DoneItInRecordTime {
-    "Oh!\n"
-    "Stupendous!\p"
-    "It's marvelous how you've come up\n"
-    "here so quickly.\p"
-    "The fact is, you've done it in\n"
-    "record time…\p"
-    "I'll have your record posted at\n"
-    "the reception counter.$"
-}
 
-text TrainerTower_Roof_Text_TookSweetTimeGettingHere {
-    "You seem to have taken your sweet\n"
-    "time getting here…$"
-}
+TrainerTower_Lobby_Mart_Items::
+# 156 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	release
+	end
 
-text TrainerTower_Roof_Text_IdLikeToSeeBetterTime {
-    "What I would like to see is a\n"
-    "better time out of you…\p"
-    "I'm counting on you.\p"
-    "Until then, farewell…$"
-}
 
-text TrainerTower_Text_XMinYZSec {
-    "{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.$"
-}
+TrainerTower_Lobby_EventScript_EntryTrigger::
+# 161 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	lockall
+# 162 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	applymovement LOCALID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist
+# 163 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	textcolor NPC_TEXT_COLOR_FEMALE
+# 164 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	msgbox TrainerTower_Lobby_Text_WelcomeToTrainerTower
+# 165 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	ttower_getnumfloors
+# 166 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq TrainerTower_Lobby_EventScript_EntryTrigger_2
+TrainerTower_Lobby_EventScript_EntryTrigger_1:
+# 169 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	msgbox TrainerTower_Lobby_Text_TrainersUpToFloorNum
+# 170 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_AskEnterChallenge
+	return
 
-text TrainerTower_Lobby_Text_HereAreTheResults {
-    "せいせきひょうです$"
-}
+TrainerTower_Lobby_EventScript_EntryTrigger_2:
+# 167 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_AllFloorsUsed
+	goto TrainerTower_Lobby_EventScript_EntryTrigger_1
 
-text TrainerTower_Lobby_Text_NeedTwoMonsForDouble {
-    "This is a two-on-two battle.\p"
-    "You may not battle unless you have\n"
-    "at least two POKéMON.$"
-}
 
-text TrainerTower_Lobby_Text_ExplainTrainerTower {
-    "Here at TRAINER TOWER, there is an\n"
-    "event called TIME ATTACK.\p"
-    "You will be timed on how quickly\n"
-    "you can get from the reception\l"
-    "counter to the OWNER on the roof.\p"
-    "The best times will be recorded on\n"
-    "the Time Board.\p"
-    "Try competing with friends to see\n"
-    "who can beat it the fastest.\p"
-    "You will not earn any EXP. Points\n"
-    "or money by beating TRAINERS here.$"
-}
+TrainerTower_Lobby_EventScript_AllFloorsUsed::
+# 174 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	msgbox TrainerTower_Lobby_Text_TrainersUpEighthFloor
+	return
 
-text TrainerTower_Lobby_Text_ThanksForCompeting {
-    "Thank you for competing!$"
-}
 
-text TrainerTower_Lobby_Text_WonderWhatKindsOfTrainers {
-    "I'm here to see how good I am.\p"
-    "I wonder what kinds of TRAINERS\n"
-    "are waiting for me?\p"
-    "It's nerve-racking!$"
-}
+TrainerTower_Lobby_EventScript_AskEnterChallenge::
+# 178 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	message TrainerTower_Lobby_Text_LikeToChallengeTrainers
+# 179 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	waitmessage
+# 180 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	multichoice 18, 6, MULTI_YESNOINFO, FALSE
+# 181 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	switch VAR_RESULT
+# 182 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	case 0, TrainerTower_Lobby_EventScript_AskEnterChallenge_3
+# 184 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	case 1, TrainerTower_Lobby_EventScript_AskEnterChallenge_4
+# 186 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	case 2, TrainerTower_Lobby_EventScript_AskEnterChallenge_5
+# 188 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	case MULTI_B_PRESSED, TrainerTower_Lobby_EventScript_AskEnterChallenge_6
+TrainerTower_Lobby_EventScript_AskEnterChallenge_1:
+	end
 
-text TrainerTower_Lobby_Text_StairsTougherThanAnyBattle {
-    "Gasp, gasp…\n"
-    "Gasp…\p"
-    "Never mind battling! These stairs…\n"
-    "They're tougher than any battle…$"
-}
+TrainerTower_Lobby_EventScript_AskEnterChallenge_3:
+# 183 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_ChooseChallenge
+	goto TrainerTower_Lobby_EventScript_AskEnterChallenge_1
+
+TrainerTower_Lobby_EventScript_AskEnterChallenge_4:
+# 185 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_DeclineChallenge
+	goto TrainerTower_Lobby_EventScript_AskEnterChallenge_1
+
+TrainerTower_Lobby_EventScript_AskEnterChallenge_5:
+# 187 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_ChallengeInfo
+	goto TrainerTower_Lobby_EventScript_AskEnterChallenge_1
+
+TrainerTower_Lobby_EventScript_AskEnterChallenge_6:
+# 189 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_DeclineChallenge
+	goto TrainerTower_Lobby_EventScript_AskEnterChallenge_1
+
+
+TrainerTower_Lobby_EventScript_ChallengeInfo::
+# 195 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	msgbox TrainerTower_Lobby_Text_ExplainTrainerTower
+# 196 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_AskEnterChallenge
+	end
+
+
+TrainerTower_Lobby_EventScript_ChooseChallenge::
+# 201 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	multichoice 13, 3, MULTI_TRAINER_TOWER_MODE, FALSE
+# 202 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	switch VAR_RESULT
+# 203 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	case 0, TrainerTower_Lobby_EventScript_ChooseChallenge_3
+# 205 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	case 1, TrainerTower_Lobby_EventScript_ChooseChallenge_4
+# 207 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	case 2, TrainerTower_Lobby_EventScript_ChooseChallenge_5
+# 209 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	case 3, TrainerTower_Lobby_EventScript_ChooseChallenge_6
+# 211 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	case 4, TrainerTower_Lobby_EventScript_ChooseChallenge_7
+# 213 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	case MULTI_B_PRESSED, TrainerTower_Lobby_EventScript_ChooseChallenge_8
+TrainerTower_Lobby_EventScript_ChooseChallenge_1:
+	end
+
+TrainerTower_Lobby_EventScript_ChooseChallenge_3:
+# 204 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_BeginChallenge
+	goto TrainerTower_Lobby_EventScript_ChooseChallenge_1
+
+TrainerTower_Lobby_EventScript_ChooseChallenge_4:
+# 206 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_BeginChallenge
+	goto TrainerTower_Lobby_EventScript_ChooseChallenge_1
+
+TrainerTower_Lobby_EventScript_ChooseChallenge_5:
+# 208 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_BeginChallenge
+	goto TrainerTower_Lobby_EventScript_ChooseChallenge_1
+
+TrainerTower_Lobby_EventScript_ChooseChallenge_6:
+# 210 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_BeginChallenge
+	goto TrainerTower_Lobby_EventScript_ChooseChallenge_1
+
+TrainerTower_Lobby_EventScript_ChooseChallenge_7:
+# 212 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_DeclineChallenge
+	goto TrainerTower_Lobby_EventScript_ChooseChallenge_1
+
+TrainerTower_Lobby_EventScript_ChooseChallenge_8:
+# 214 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	goto TrainerTower_Lobby_EventScript_DeclineChallenge
+	goto TrainerTower_Lobby_EventScript_ChooseChallenge_1
+
+
+TrainerTower_Lobby_EventScript_BeginChallenge::
+# 220 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	copyvar VAR_0x8005, VAR_RESULT
+# 221 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	setvar VAR_MAP_SCENE_TRAINER_TOWER, 1
+# 222 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	special HealPlayerParty
+# 223 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	msgbox TrainerTower_Lobby_Text_StartClockGetSetGo
+# 224 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	ttower_startchallenge
+# 225 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	releaseall
+	end
+
+
+TrainerTower_Lobby_EventScript_DeclineChallenge::
+# 230 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	msgbox TrainerTower_Lobby_Text_PleaseVisitUsAgain
+# 231 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	closemessage
+# 232 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	applymovement LOCALID_PLAYER, TrainerTower_Lobby_Movement_WalkDown
+# 233 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	waitmovement 0
+# 234 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	releaseall
+	end
+
+
+# 238 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+TrainerTower_Lobby_Movement_FaceReceptionist:
+# 239 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	face_right
+# 240 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	step_end
+
+# 243 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+TrainerTower_Lobby_Movement_WalkDown:
+# 244 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	walk_down
+# 245 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	step_end
+
+TrainerTower_Lobby_EventScript_ShowRecords::
+# 249 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	lockall
+# 250 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	fadescreen FADE_TO_BLACK
+# 251 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	setvar VAR_0x8004, 1
+# 252 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	special ShowTrainerHillRecords
+# 253 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	waitstate
+# 254 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	releaseall
+	end
+
+
+TrainerTower_Lobby_EventScript_CooltrainerF::
+# 259 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	msgbox TrainerTower_Lobby_Text_WonderWhatKindsOfTrainers, MSGBOX_NPC
+	end
+
+
+TrainerTower_Lobby_EventScript_BaldingMan::
+# 264 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	msgbox TrainerTower_Lobby_Text_StairsTougherThanAnyBattle, MSGBOX_NPC
+	end
+
+
+TrainerTower_Lobby_Text_WelcomeToTrainerTower::
+# 268 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "Hello!\p"
+	.string "Welcome to TRAINER TOWER where\n"
+	.string "TRAINERS gather from all over!$"
+
+TrainerTower_Lobby_Text_TrainersUpToFloorNum::
+# 274 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "TRAINERS from all over the world\n"
+	.string "gather here to battle.\p"
+	.string "Let me see…\p"
+	.string "Right now, there are TRAINERS only\n"
+	.string "up to Floor {STR_VAR_1}.$"
+
+TrainerTower_Lobby_Text_TrainersUpEighthFloor::
+# 282 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "TRAINERS are awaiting your\n"
+	.string "challenge up to the eighth floor.$"
+
+TrainerTower_Lobby_Text_LikeToChallengeTrainers::
+# 287 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "Would you like to challenge the\n"
+	.string "waiting TRAINERS?$"
+
+TrainerTower_Lobby_Text_StartClockGetSetGo::
+# 292 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "Okay, I'll get the clock started,\n"
+	.string "so give it everything you have.\p"
+	.string "On your marks…\p"
+	.string "Get set…\p"
+	.string "Go!$"
+
+TrainerTower_Lobby_Text_PleaseVisitUsAgain::
+# 300 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "Please do visit us again!$"
+
+TrainerTower_Lobby_Text_TooBadComeBackTryAgain::
+# 304 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "That was too bad.\p"
+	.string "I think you put in a tremendous\n"
+	.string "effort in your battling.\p"
+	.string "Please come back and try again!$"
+
+TrainerTower_Lobby_Text_GiveItYourBest::
+# 311 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "I hope you give it your best.$"
+
+TrainerTower_Lobby_Text_MoveCounterHereWhenTrainersSwitch::
+# 315 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "When the TRAINERS switch places,\n"
+	.string "the movement can be hectic.\p"
+	.string "To avoid the stampede, we moved\n"
+	.string "the reception counter here.\p"
+	.string "I'm sorry for the inconvenience.$"
+
+TrainerTower_Roof_Text_ImOwnerBattledPerfectly::
+# 323 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "Hello…\p"
+	.string "I am the owner of this TOWER…\p"
+	.string "How the sky soars above this\n"
+	.string "rooftop…\p"
+	.string "The caress of the winds up here…\p"
+	.string "It's all so perfect…\p"
+	.string "The way you battled…\n"
+	.string "It, too, was perfection…$"
+
+TrainerTower_Roof_Text_ThisIsForYou::
+# 334 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "This is for you…$"
+
+TrainerTower_Roof_Text_DoneItInRecordTime::
+# 338 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "Oh!\n"
+	.string "Stupendous!\p"
+	.string "It's marvelous how you've come up\n"
+	.string "here so quickly.\p"
+	.string "The fact is, you've done it in\n"
+	.string "record time…\p"
+	.string "I'll have your record posted at\n"
+	.string "the reception counter.$"
+
+TrainerTower_Roof_Text_TookSweetTimeGettingHere::
+# 349 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "You seem to have taken your sweet\n"
+	.string "time getting here…$"
+
+TrainerTower_Roof_Text_IdLikeToSeeBetterTime::
+# 354 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "What I would like to see is a\n"
+	.string "better time out of you…\p"
+	.string "I'm counting on you.\p"
+	.string "Until then, farewell…$"
+
+TrainerTower_Text_XMinYZSec::
+# 361 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.$"
+
+TrainerTower_Lobby_Text_HereAreTheResults::
+# 365 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "せいせきひょうです$"
+
+TrainerTower_Lobby_Text_NeedTwoMonsForDouble::
+# 369 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "This is a two-on-two battle.\p"
+	.string "You may not battle unless you have\n"
+	.string "at least two POKéMON.$"
+
+TrainerTower_Lobby_Text_ExplainTrainerTower::
+# 375 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "Here at TRAINER TOWER, there is an\n"
+	.string "event called TIME ATTACK.\p"
+	.string "You will be timed on how quickly\n"
+	.string "you can get from the reception\l"
+	.string "counter to the OWNER on the roof.\p"
+	.string "The best times will be recorded on\n"
+	.string "the Time Board.\p"
+	.string "Try competing with friends to see\n"
+	.string "who can beat it the fastest.\p"
+	.string "You will not earn any EXP. Points\n"
+	.string "or money by beating TRAINERS here.$"
+
+TrainerTower_Lobby_Text_ThanksForCompeting::
+# 389 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "Thank you for competing!$"
+
+TrainerTower_Lobby_Text_WonderWhatKindsOfTrainers::
+# 393 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "I'm here to see how good I am.\p"
+	.string "I wonder what kinds of TRAINERS\n"
+	.string "are waiting for me?\p"
+	.string "It's nerve-racking!$"
+
+TrainerTower_Lobby_Text_StairsTougherThanAnyBattle::
+# 400 "data/maps/TrainerTower_Lobby_Frlg/scripts.pory"
+	.string "Gasp, gasp…\n"
+	.string "Gasp…\p"
+	.string "Never mind battling! These stairs…\n"
+	.string "They're tougher than any battle…$"
+
+`

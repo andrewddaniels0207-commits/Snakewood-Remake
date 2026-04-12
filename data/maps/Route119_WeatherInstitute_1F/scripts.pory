@@ -1,167 +1,232 @@
-mapscripts Route119_WeatherInstitute_1F_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: Route119_WeatherInstitute_1F_OnTransition
-}
+raw `
+Route119_WeatherInstitute_1F_MapScripts::
+# 2 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, Route119_WeatherInstitute_1F_OnTransition
+	.byte 0
 
-script Route119_WeatherInstitute_1F_OnTransition {
-    if (var(VAR_WEATHER_INSTITUTE_STATE) == 0) {
-        call(Route119_WeatherInstitute_1F_EventScript_SetLittleBoyPos)
-    }
-    end
-}
 
-script Route119_WeatherInstitute_1F_EventScript_SetLittleBoyPos {
-    setobjectxyperm(LOCALID_WEATHER_INSTITUTE_LITTLE_BOY, 0, 5)
-    setobjectmovementtype(LOCALID_WEATHER_INSTITUTE_LITTLE_BOY, MOVEMENT_TYPE_FACE_RIGHT)
-    return
-}
+Route119_WeatherInstitute_1F_OnTransition::
+# 6 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	compare VAR_WEATHER_INSTITUTE_STATE, 0
+	goto_if_eq Route119_WeatherInstitute_1F_OnTransition_2
+Route119_WeatherInstitute_1F_OnTransition_1:
+	end
 
-script Route119_WeatherInstitute_1F_EventScript_LittleBoy {
-    lock
-    faceplayer
-    special(GetPlayerBigGuyGirlString)
-    if (var(VAR_WEATHER_INSTITUTE_STATE) == 0) {
-        goto(Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere)
-    }
-    msgbox(Route119_WeatherInstitute_1F_Text_WowYoureStrong, MSGBOX_DEFAULT)
-    release
-    end
-}
+Route119_WeatherInstitute_1F_OnTransition_2:
+# 7 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	call Route119_WeatherInstitute_1F_EventScript_SetLittleBoyPos
+	goto Route119_WeatherInstitute_1F_OnTransition_1
 
-script Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere {
-    msgbox(Route119_WeatherInstitute_1F_Text_EveryoneWentUpstairs, MSGBOX_DEFAULT)
-    release
-    end
-}
 
-script Route119_WeatherInstitute_1F_EventScript_InstituteWorker1 {
-    lock
-    faceplayer
-    if (!flag(FLAG_SYS_GAME_CLEAR)) {
-        goto(Route119_WeatherInstitute_1F_EventScript_StudyingRain)
-    }
-    setvar(VAR_0x8004, 0)
-    if (flag(FLAG_DEFEATED_KYOGRE)) {
-        call(Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated)
-    }
-    if (flag(FLAG_DEFEATED_GROUDON)) {
-        call(Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated)
-    }
-    if (var(VAR_0x8004) == 2) {
-        goto(Route119_WeatherInstitute_1F_EventScript_StudyingRain)
-    }
-    msgbox(Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather, MSGBOX_DEFAULT)
-    release
-    end
-}
+Route119_WeatherInstitute_1F_EventScript_SetLittleBoyPos::
+# 13 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	setobjectxyperm LOCALID_WEATHER_INSTITUTE_LITTLE_BOY, 0, 5
+# 14 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	setobjectmovementtype LOCALID_WEATHER_INSTITUTE_LITTLE_BOY, MOVEMENT_TYPE_FACE_RIGHT
+	return
 
-script Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated {
-    addvar(VAR_0x8004, 1)
-    return
-}
 
-script Route119_WeatherInstitute_1F_EventScript_StudyingRain {
-    msgbox(Route119_WeatherInstitute_1F_Text_ProfStudyingRain, MSGBOX_DEFAULT)
-    release
-    end
-}
+Route119_WeatherInstitute_1F_EventScript_LittleBoy::
+# 19 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	lock
+# 20 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	faceplayer
+# 21 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	special GetPlayerBigGuyGirlString
+# 22 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	compare VAR_WEATHER_INSTITUTE_STATE, 0
+	goto_if_eq Route119_WeatherInstitute_1F_EventScript_LittleBoy_2
+Route119_WeatherInstitute_1F_EventScript_LittleBoy_1:
+# 25 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	msgbox Route119_WeatherInstitute_1F_Text_WowYoureStrong, MSGBOX_DEFAULT
+# 26 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	release
+	end
 
-script Route119_WeatherInstitute_1F_EventScript_InstituteWorker2 {
-    msgbox(Route119_WeatherInstitute_1F_Text_WhatWereAquasUpTo, MSGBOX_NPC)
-    end
-}
+Route119_WeatherInstitute_1F_EventScript_LittleBoy_2:
+# 23 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	goto Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere
+	goto Route119_WeatherInstitute_1F_EventScript_LittleBoy_1
 
-script Route119_WeatherInstitute_1F_EventScript_Bed {
-    lockall
-    msgbox(Route119_WeatherInstitute_1F_Text_TakeRestInBed, MSGBOX_DEFAULT)
-    closemessage
-    call(Common_EventScript_OutOfCenterPartyHeal)
-    releaseall
-    end
-}
 
-script Route119_WeatherInstitute_1F_EventScript_Grunt1 {
-    trainerbattle_single(TRAINER_GRUNT_WEATHER_INST_1, Route119_WeatherInstitute_1F_Text_Grunt1Intro, Route119_WeatherInstitute_1F_Text_Grunt1Defeat)
-    msgbox(Route119_WeatherInstitute_1F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere::
+# 31 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	msgbox Route119_WeatherInstitute_1F_Text_EveryoneWentUpstairs, MSGBOX_DEFAULT
+# 32 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	release
+	end
 
-script Route119_WeatherInstitute_1F_EventScript_Grunt4 {
-    trainerbattle_single(TRAINER_GRUNT_WEATHER_INST_4, Route119_WeatherInstitute_1F_Text_Grunt4Intro, Route119_WeatherInstitute_1F_Text_Grunt4Defeat)
-    msgbox(Route119_WeatherInstitute_1F_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
 
-text Route119_WeatherInstitute_1F_Text_Grunt1Intro {
-    "The BOSS got interested in\n"
-    "the research they have going here,\l"
-    "so he sent us out.\p"
-    "You quit meddling!$"
-}
+Route119_WeatherInstitute_1F_EventScript_InstituteWorker1::
+# 37 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	lock
+# 38 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	faceplayer
+# 39 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	goto_if_unset FLAG_SYS_GAME_CLEAR, Route119_WeatherInstitute_1F_EventScript_InstituteWorker1_2
+Route119_WeatherInstitute_1F_EventScript_InstituteWorker1_1:
+# 42 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	setvar VAR_0x8004, 0
+# 43 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	goto_if_set FLAG_DEFEATED_KYOGRE, Route119_WeatherInstitute_1F_EventScript_InstituteWorker1_5
+Route119_WeatherInstitute_1F_EventScript_InstituteWorker1_4:
+# 46 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	goto_if_set FLAG_DEFEATED_GROUDON, Route119_WeatherInstitute_1F_EventScript_InstituteWorker1_8
+Route119_WeatherInstitute_1F_EventScript_InstituteWorker1_7:
+# 49 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	compare VAR_0x8004, 2
+	goto_if_eq Route119_WeatherInstitute_1F_EventScript_InstituteWorker1_11
+Route119_WeatherInstitute_1F_EventScript_InstituteWorker1_10:
+# 52 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	msgbox Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather, MSGBOX_DEFAULT
+# 53 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	release
+	end
 
-text Route119_WeatherInstitute_1F_Text_Grunt1Defeat {
-    "Blast it…\n"
-    "Blasted by a kid…$"
-}
+Route119_WeatherInstitute_1F_EventScript_InstituteWorker1_2:
+# 40 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	goto Route119_WeatherInstitute_1F_EventScript_StudyingRain
+	goto Route119_WeatherInstitute_1F_EventScript_InstituteWorker1_1
 
-text Route119_WeatherInstitute_1F_Text_Grunt1PostBattle {
-    "Our BOSS knows everything.\p"
-    "But I'm just a GRUNT. What would I know\n"
-    "about what he's thinking?$"
-}
+Route119_WeatherInstitute_1F_EventScript_InstituteWorker1_5:
+# 44 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	call Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
+	goto Route119_WeatherInstitute_1F_EventScript_InstituteWorker1_4
 
-text Route119_WeatherInstitute_1F_Text_Grunt4Intro {
-    "Huh?\n"
-    "What's a kid doing here?$"
-}
+Route119_WeatherInstitute_1F_EventScript_InstituteWorker1_8:
+# 47 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	call Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
+	goto Route119_WeatherInstitute_1F_EventScript_InstituteWorker1_7
 
-text Route119_WeatherInstitute_1F_Text_Grunt4Defeat {
-    "Huh?\n"
-    "I lost?!$"
-}
+Route119_WeatherInstitute_1F_EventScript_InstituteWorker1_11:
+# 50 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	goto Route119_WeatherInstitute_1F_EventScript_StudyingRain
+	goto Route119_WeatherInstitute_1F_EventScript_InstituteWorker1_10
 
-text Route119_WeatherInstitute_1F_Text_Grunt4PostBattle {
-    "Oh, no…\n"
-    "I'll catch an earful for losing to a kid…\p"
-    "I should just take a nap in the bed…$"
-}
 
-text Route119_WeatherInstitute_1F_Text_EveryoneWentUpstairs {
-    "While I was sleeping, everyone went\n"
-    "upstairs!$"
-}
+Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated::
+# 58 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	addvar VAR_0x8004, 1
+	return
 
-text Route119_WeatherInstitute_1F_Text_WowYoureStrong {
-    "Wow, you're really strong!\p"
-    "I wish I could be a POKéMON TRAINER\n"
-    "like you!$"
-}
 
-text Route119_WeatherInstitute_1F_Text_ProfStudyingRain {
-    "The PROFESSOR loves rain.\n"
-    "That's a fact.\p"
-    "But if it keeps raining, people will be in\n"
-    "trouble. That's another fact.\p"
-    "And thus, the PROFESSOR is studying\n"
-    "if the rain can be put to good use.$"
-}
+Route119_WeatherInstitute_1F_EventScript_StudyingRain::
+# 63 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	msgbox Route119_WeatherInstitute_1F_Text_ProfStudyingRain, MSGBOX_DEFAULT
+# 64 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	release
+	end
 
-text Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather {
-    "On the 2nd floor of the INSTITUTE,\n"
-    "we study the weather patterns over\l"
-    "the HOENN region.\p"
-    "We've been noticing temporary and\n"
-    "isolated cases of droughts and\l"
-    "heavy rain lately…$"
-}
 
-text Route119_WeatherInstitute_1F_Text_WhatWereAquasUpTo {
-    "Hello!\n"
-    "We've been saved by your actions!\p"
-    "What I don't understand is what on\n"
-    "earth the AQUAS were up to.$"
-}
+Route119_WeatherInstitute_1F_EventScript_InstituteWorker2::
+# 69 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	msgbox Route119_WeatherInstitute_1F_Text_WhatWereAquasUpTo, MSGBOX_NPC
+	end
 
-text Route119_WeatherInstitute_1F_Text_TakeRestInBed {
-    "There's a bed…\n"
-    "Let's take a rest.$"
-}
+
+Route119_WeatherInstitute_1F_EventScript_Bed::
+# 74 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	lockall
+# 75 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	msgbox Route119_WeatherInstitute_1F_Text_TakeRestInBed, MSGBOX_DEFAULT
+# 76 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	closemessage
+# 77 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	call Common_EventScript_OutOfCenterPartyHeal
+# 78 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	releaseall
+	end
+
+
+Route119_WeatherInstitute_1F_EventScript_Grunt1::
+# 83 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	trainerbattle_single TRAINER_GRUNT_WEATHER_INST_1, Route119_WeatherInstitute_1F_Text_Grunt1Intro, Route119_WeatherInstitute_1F_Text_Grunt1Defeat
+# 84 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	msgbox Route119_WeatherInstitute_1F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route119_WeatherInstitute_1F_EventScript_Grunt4::
+# 89 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	trainerbattle_single TRAINER_GRUNT_WEATHER_INST_4, Route119_WeatherInstitute_1F_Text_Grunt4Intro, Route119_WeatherInstitute_1F_Text_Grunt4Defeat
+# 90 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	msgbox Route119_WeatherInstitute_1F_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route119_WeatherInstitute_1F_Text_Grunt1Intro::
+# 94 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	.string "The BOSS got interested in\n"
+	.string "the research they have going here,\l"
+	.string "so he sent us out.\p"
+	.string "You quit meddling!$"
+
+Route119_WeatherInstitute_1F_Text_Grunt1Defeat::
+# 101 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	.string "Blast it…\n"
+	.string "Blasted by a kid…$"
+
+Route119_WeatherInstitute_1F_Text_Grunt1PostBattle::
+# 106 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	.string "Our BOSS knows everything.\p"
+	.string "But I'm just a GRUNT. What would I know\n"
+	.string "about what he's thinking?$"
+
+Route119_WeatherInstitute_1F_Text_Grunt4Intro::
+# 112 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	.string "Huh?\n"
+	.string "What's a kid doing here?$"
+
+Route119_WeatherInstitute_1F_Text_Grunt4Defeat::
+# 117 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	.string "Huh?\n"
+	.string "I lost?!$"
+
+Route119_WeatherInstitute_1F_Text_Grunt4PostBattle::
+# 122 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	.string "Oh, no…\n"
+	.string "I'll catch an earful for losing to a kid…\p"
+	.string "I should just take a nap in the bed…$"
+
+Route119_WeatherInstitute_1F_Text_EveryoneWentUpstairs::
+# 128 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	.string "While I was sleeping, everyone went\n"
+	.string "upstairs!$"
+
+Route119_WeatherInstitute_1F_Text_WowYoureStrong::
+# 133 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	.string "Wow, you're really strong!\p"
+	.string "I wish I could be a POKéMON TRAINER\n"
+	.string "like you!$"
+
+Route119_WeatherInstitute_1F_Text_ProfStudyingRain::
+# 139 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	.string "The PROFESSOR loves rain.\n"
+	.string "That's a fact.\p"
+	.string "But if it keeps raining, people will be in\n"
+	.string "trouble. That's another fact.\p"
+	.string "And thus, the PROFESSOR is studying\n"
+	.string "if the rain can be put to good use.$"
+
+Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather::
+# 148 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	.string "On the 2nd floor of the INSTITUTE,\n"
+	.string "we study the weather patterns over\l"
+	.string "the HOENN region.\p"
+	.string "We've been noticing temporary and\n"
+	.string "isolated cases of droughts and\l"
+	.string "heavy rain lately…$"
+
+Route119_WeatherInstitute_1F_Text_WhatWereAquasUpTo::
+# 157 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	.string "Hello!\n"
+	.string "We've been saved by your actions!\p"
+	.string "What I don't understand is what on\n"
+	.string "earth the AQUAS were up to.$"
+
+Route119_WeatherInstitute_1F_Text_TakeRestInBed::
+# 164 "data/maps/Route119_WeatherInstitute_1F/scripts.pory"
+	.string "There's a bed…\n"
+	.string "Let's take a rest.$"
+
+`

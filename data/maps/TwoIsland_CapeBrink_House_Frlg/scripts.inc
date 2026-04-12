@@ -1,9 +1,9 @@
 TwoIsland_CapeBrink_House_Frlg_MapScripts::
 	.byte 0
 
-@ See move_tutors.inc
 
 Text_UltimateMoveThatMon::
+# 3 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
 	.string "I perfected the ultimate move of\n"
 	.string "its type…\p"
 	.string "But will no one take it for\n"
@@ -13,10 +13,12 @@ Text_UltimateMoveThatMon::
 	.string "Th-that {STR_VAR_1}…$"
 
 Text_JustMistaken::
+# 13 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
 	.string "…No…\n"
 	.string "I was just mistaken.$"
 
 Text_AllowMeToTeachMonUltimateMove::
+# 18 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
 	.string "Oh! This is the one!\n"
 	.string "This is the POKéMON!\p"
 	.string "This {STR_VAR_1} is worthy of\n"
@@ -26,25 +28,30 @@ Text_AllowMeToTeachMonUltimateMove::
 	.string "learn my {STR_VAR_2}?$"
 
 Text_YouRejectIt::
+# 28 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
 	.string "Gaah! You reject it?\n"
 	.string "No, I won't be dissuaded!$"
 
 Text_LetMeConferUltimateMove::
+# 33 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
 	.string "You will allow it?\p"
 	.string "Then, let me confer my ultimate\n"
 	.string "{STR_VAR_2} on your {STR_VAR_1}.\p"
 	.string "Ggggrah-awooo!$"
 
 Text_TaughtMove::
+# 40 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
 	.string "Gasp, gasp, gasp…\p"
 	.string "I didn't think I could teach that\n"
 	.string "move while I still lived…$"
 
 Text_MakeBestUseOfMove::
+# 46 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
 	.string "I implore you to make the best\n"
 	.string "use of that move and gain power!$"
 
 Text_PassedOnEverythingIKnow::
+# 51 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
 	.string "Gasp, gasp, gasp…\p"
 	.string "I have no regrets now.\n"
 	.string "I've passed on everything I know.\p"
@@ -52,6 +59,7 @@ Text_PassedOnEverythingIKnow::
 	.string "my work is done.$"
 
 Text_FeelRejuvenated::
+# 59 "data/maps/TwoIsland_CapeBrink_House_Frlg/scripts.pory"
 	.string "After I passed on my knowledge to\n"
 	.string "you, I felt so much relief.\p"
 	.string "In fact, I feel rejuvenated,\n"

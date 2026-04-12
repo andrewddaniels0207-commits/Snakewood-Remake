@@ -1,28 +1,49 @@
 CeruleanCity_House2_Frlg_MapScripts::
 	.byte 0
 
+
 CeruleanCity_House2_EventScript_Hiker::
+# 4 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
 	lock
+# 5 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
 	faceplayer
-	goto_if_set FLAG_GOT_TM28_FROM_ROCKET, CeruleanCity_House2_EventScript_HikerGotTM28
+# 6 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_TM28_FROM_ROCKET, CeruleanCity_House2_EventScript_Hiker_2
+CeruleanCity_House2_EventScript_Hiker_1:
+# 9 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
 	msgbox CeruleanCity_House2_Text_RocketsStoleTMForDig
+# 10 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
 	release
 	end
+
+CeruleanCity_House2_EventScript_Hiker_2:
+# 7 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
+	goto CeruleanCity_House2_EventScript_HikerGotTM28
+	goto CeruleanCity_House2_EventScript_Hiker_1
+
 
 CeruleanCity_House2_EventScript_HikerGotTM28::
+# 15 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
 	msgbox CeruleanCity_House2_Text_TeachDiglettDigWithoutTM
+# 16 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
 	release
 	end
 
+
 CeruleanCity_House2_EventScript_Lass::
+# 21 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
 	msgbox CeruleanCity_House2_Text_TeamRocketTryingToDigIntoNoGood, MSGBOX_NPC
 	end
 
+
 CeruleanCity_House2_EventScript_WallHole::
+# 26 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
 	msgbox CeruleanCity_House2_Text_TeamRocketLeftWayOut, MSGBOX_SIGN
 	end
 
+
 CeruleanCity_House2_Text_RocketsStoleTMForDig::
+# 30 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
 	.string "Those miserable ROCKETS!\p"
 	.string "Look what they've done to my\n"
 	.string "house!\p"
@@ -33,14 +54,16 @@ CeruleanCity_House2_Text_RocketsStoleTMForDig::
 	.string "That cost me a bundle, it did!$"
 
 CeruleanCity_House2_Text_TeachDiglettDigWithoutTM::
+# 41 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
 	.string "I figure what's lost is lost.\p"
 	.string "I decided to teach DIGLETT how to\n"
 	.string "DIG without a TM.$"
 
 CeruleanCity_House2_Text_TeamRocketTryingToDigIntoNoGood::
+# 47 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
 	.string "TEAM ROCKET must be trying to DIG\n"
 	.string "their way into no good!$"
 
 CeruleanCity_House2_Text_TeamRocketLeftWayOut::
+# 52 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
 	.string "TEAM ROCKET left a way out!$"
-

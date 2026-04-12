@@ -1,104 +1,192 @@
 VerdanturfTown_FriendshipRatersHouse_MapScripts::
 	.byte 0
 
+
 VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater::
+# 4 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	lock
+# 5 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	faceplayer
+# 6 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_SeeHowMuchPokemonLikesYou, MSGBOX_DEFAULT
+# 7 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	specialvar VAR_RESULT, GetLeadMonFriendshipScore
+# 8 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	switch VAR_RESULT
-	case FRIENDSHIP_NONE, VerdanturfTown_FriendshipRatersHouse_EventScript_DetestsYou
-	case FRIENDSHIP_1_TO_49, VerdanturfTown_FriendshipRatersHouse_EventScript_VeryWary
-	case FRIENDSHIP_50_TO_99, VerdanturfTown_FriendshipRatersHouse_EventScript_NotUsedToYou
-	case FRIENDSHIP_100_TO_149, VerdanturfTown_FriendshipRatersHouse_EventScript_GettingUsedToYou
-	case FRIENDSHIP_150_TO_199, VerdanturfTown_FriendshipRatersHouse_EventScript_LikesYouQuiteALot
-	case FRIENDSHIP_200_TO_254, VerdanturfTown_FriendshipRatersHouse_EventScript_VeryHappy
-	case FRIENDSHIP_MAX, VerdanturfTown_FriendshipRatersHouse_EventScript_AdoresYou
+# 9 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
+	case FRIENDSHIP_NONE, VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_3
+# 11 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
+	case FRIENDSHIP_1_TO_49, VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_4
+# 13 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
+	case FRIENDSHIP_50_TO_99, VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_5
+# 15 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
+	case FRIENDSHIP_100_TO_149, VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_6
+# 17 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
+	case FRIENDSHIP_150_TO_199, VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_7
+# 19 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
+	case FRIENDSHIP_200_TO_254, VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_8
+# 21 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
+	case FRIENDSHIP_MAX, VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_9
+VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_1:
+# 24 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	release
 	end
+
+VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_3:
+# 10 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_DetestsYou
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_1
+
+VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_4:
+# 12 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_VeryWary
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_1
+
+VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_5:
+# 14 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_NotUsedToYou
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_1
+
+VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_6:
+# 16 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_GettingUsedToYou
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_1
+
+VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_7:
+# 18 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_LikesYouQuiteALot
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_1
+
+VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_8:
+# 20 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_VeryHappy
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_1
+
+VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_9:
+# 22 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_AdoresYou
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater_1
+
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_DetestsYou::
+# 29 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_DetestsYou, MSGBOX_DEFAULT
+# 30 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	release
 	end
+
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_VeryWary::
+# 35 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_VeryWary, MSGBOX_DEFAULT
+# 36 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	release
 	end
+
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_NotUsedToYou::
+# 41 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_NotUsedToYou, MSGBOX_DEFAULT
+# 42 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	release
 	end
+
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_GettingUsedToYou::
+# 47 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_GettingUsedToYou, MSGBOX_DEFAULT
+# 48 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	release
 	end
+
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_LikesYouQuiteALot::
+# 53 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_LikesYouQuiteALot, MSGBOX_DEFAULT
+# 54 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	release
 	end
+
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_VeryHappy::
+# 59 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_VeryHappy, MSGBOX_DEFAULT
+# 60 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	release
 	end
+
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_AdoresYou::
+# 65 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_AdoresYou, MSGBOX_DEFAULT
+# 66 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	release
 	end
+
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_Pikachu::
+# 71 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	lock
+# 72 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	faceplayer
+# 73 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	waitse
+# 74 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	playmoncry SPECIES_PIKACHU, CRY_MODE_NORMAL
+# 75 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_Pikachu, MSGBOX_DEFAULT
+# 76 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	waitmoncry
+# 77 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	release
 	end
 
-VerdanturfTown_FriendshipRatersHouse_Text_SeeHowMuchPokemonLikesYou:
+
+VerdanturfTown_FriendshipRatersHouse_Text_SeeHowMuchPokemonLikesYou::
+# 81 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	.string "Let me see your POKéMON.\n"
 	.string "I'll check to see how much it likes you.\p"
 	.string "Oh.\n"
 	.string "Your POKéMON…$"
 
-VerdanturfTown_FriendshipRatersHouse_Text_AdoresYou:
+VerdanturfTown_FriendshipRatersHouse_Text_AdoresYou::
+# 88 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	.string "It adores you.\n"
 	.string "It can't possibly love you any more.\l"
 	.string "I even feel happy seeing it.$"
 
-VerdanturfTown_FriendshipRatersHouse_Text_VeryHappy:
+VerdanturfTown_FriendshipRatersHouse_Text_VeryHappy::
+# 94 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	.string "It seems to be very happy.\n"
 	.string "It obviously likes you a whole lot.$"
 
-VerdanturfTown_FriendshipRatersHouse_Text_LikesYouQuiteALot:
+VerdanturfTown_FriendshipRatersHouse_Text_LikesYouQuiteALot::
+# 99 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	.string "It likes you quite a lot.\n"
 	.string "It seems to want to be babied a little.$"
 
-VerdanturfTown_FriendshipRatersHouse_Text_GettingUsedToYou:
+VerdanturfTown_FriendshipRatersHouse_Text_GettingUsedToYou::
+# 104 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	.string "It's getting used to you.\n"
 	.string "It seems to believe in you.$"
 
-VerdanturfTown_FriendshipRatersHouse_Text_NotUsedToYou:
+VerdanturfTown_FriendshipRatersHouse_Text_NotUsedToYou::
+# 109 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	.string "It's not very used to you yet.\n"
 	.string "It neither loves nor hates you.$"
 
-VerdanturfTown_FriendshipRatersHouse_Text_VeryWary:
+VerdanturfTown_FriendshipRatersHouse_Text_VeryWary::
+# 114 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	.string "It's very wary.\n"
 	.string "It has scary viciousness in its eyes.\l"
 	.string "It doesn't like you much at all.$"
 
-VerdanturfTown_FriendshipRatersHouse_Text_DetestsYou:
+VerdanturfTown_FriendshipRatersHouse_Text_DetestsYou::
+# 120 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	.string "This is a little hard for me to say…\p"
 	.string "Your POKéMON simply detests you.\n"
 	.string "Doesn't that make you uncomfortable?$"
 
-VerdanturfTown_FriendshipRatersHouse_Text_Pikachu:
+VerdanturfTown_FriendshipRatersHouse_Text_Pikachu::
+# 126 "data/maps/VerdanturfTown_FriendshipRatersHouse/scripts.pory"
 	.string "PIKACHU: Pika pika!$"
-

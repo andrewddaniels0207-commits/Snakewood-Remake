@@ -1,182 +1,290 @@
-mapscripts Route115_MapScripts {
-    MAP_SCRIPT_ON_LOAD: Route115_OnLoad
-    MAP_SCRIPT_ON_TRANSITION: Route115_OnTransition
-    MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_SHOULD_END_ABNORMAL_WEATHER, 1: AbnormalWeather_EventScript_EndEventAndCleanup_1
-    ]
-}
+raw `
+Route115_MapScripts::
+# 2 "data/maps/Route115/scripts.pory"
+	map_script MAP_SCRIPT_ON_LOAD, Route115_OnLoad
+# 3 "data/maps/Route115/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, Route115_OnTransition
+# 4 "data/maps/Route115/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route115_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
+	.byte 0
 
-script Route115_OnLoad {
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_115_WEST) {
-        call(AbnormalWeather_EventScript_PlaceTilesRoute115West)
-    }
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_115_EAST) {
-        call(AbnormalWeather_EventScript_PlaceTilesRoute115East)
-    }
-    end
-}
+Route115_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 5 "data/maps/Route115/scripts.pory"
+	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
+	.2byte 0
 
-script Route115_OnTransition {
-    if (var(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1) {
-        call(AbnormalWeather_EventScript_HideMapNamePopup)
-    }
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_115_WEST) {
-        call(AbnormalWeather_StartGroudonWeather)
-    }
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_115_EAST) {
-        call(AbnormalWeather_StartGroudonWeather)
-    }
-    end
-}
 
-script Route115_EventScript_Woman {
-    msgbox(Route115_Text_NeverKnowWhenCavePokemonWillAppear, MSGBOX_NPC)
-    end
-}
+Route115_OnLoad::
+# 10 "data/maps/Route115/scripts.pory"
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_115_WEST
+	goto_if_eq Route115_OnLoad_2
+Route115_OnLoad_1:
+# 13 "data/maps/Route115/scripts.pory"
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_115_EAST
+	goto_if_eq Route115_OnLoad_5
+Route115_OnLoad_4:
+	end
 
-script Route115_EventScript_RouteSignRustboro {
-    msgbox(Route115_Text_RouteSignRustboro, MSGBOX_SIGN)
-    end
-}
+Route115_OnLoad_2:
+# 11 "data/maps/Route115/scripts.pory"
+	call AbnormalWeather_EventScript_PlaceTilesRoute115West
+	goto Route115_OnLoad_1
 
-script Route115_EventScript_MeteorFallsSign {
-    msgbox(Route115_Text_MeteorFallsSign, MSGBOX_SIGN)
-    end
-}
+Route115_OnLoad_5:
+# 14 "data/maps/Route115/scripts.pory"
+	call AbnormalWeather_EventScript_PlaceTilesRoute115East
+	goto Route115_OnLoad_4
 
-script Route115_EventScript_Timothy {
-    trainerbattle_single(TRAINER_TIMOTHY_1, Route115_Text_TimothyIntro, Route115_Text_TimothyDefeat, Route115_EventScript_RegisterTimothy)
-    specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(Route115_EventScript_RematchTimothy)
-    }
-    msgbox(Route115_Text_TimothyPostBattle, MSGBOX_DEFAULT)
-    release
-    end
-}
 
-script Route115_EventScript_RegisterTimothy {
-    special(PlayerFaceTrainerAfterBattle)
-    waitmovement(0)
-    msgbox(Route115_Text_TimothyRegister, MSGBOX_DEFAULT)
-    register_matchcall(TRAINER_TIMOTHY_1)
-    release
-    end
-}
+Route115_OnTransition::
+# 20 "data/maps/Route115/scripts.pory"
+	compare VAR_SHOULD_END_ABNORMAL_WEATHER, 1
+	goto_if_eq Route115_OnTransition_2
+Route115_OnTransition_1:
+# 23 "data/maps/Route115/scripts.pory"
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_115_WEST
+	goto_if_eq Route115_OnTransition_5
+Route115_OnTransition_4:
+# 26 "data/maps/Route115/scripts.pory"
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_115_EAST
+	goto_if_eq Route115_OnTransition_8
+Route115_OnTransition_7:
+	end
 
-script Route115_EventScript_RematchTimothy {
-    trainerbattle_rematch(TRAINER_TIMOTHY_1, Route115_Text_TimothyRematchIntro, Route115_Text_TimothyRematchDefeat)
-    msgbox(Route115_Text_TimothyPostRematch, MSGBOX_AUTOCLOSE)
-    end
-}
+Route115_OnTransition_2:
+# 21 "data/maps/Route115/scripts.pory"
+	call AbnormalWeather_EventScript_HideMapNamePopup
+	goto Route115_OnTransition_1
 
-script Route115_EventScript_Koichi {
-    trainerbattle_single(TRAINER_KOICHI, Route115_Text_KoichiIntro, Route115_Text_KoichiDefeat)
-    msgbox(Route115_Text_KoichiPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route115_OnTransition_5:
+# 24 "data/maps/Route115/scripts.pory"
+	call AbnormalWeather_StartGroudonWeather
+	goto Route115_OnTransition_4
 
-script Route115_EventScript_Nob {
-    trainerbattle_single(TRAINER_NOB_1, Route115_Text_NobIntro, Route115_Text_NobDefeat, Route115_EventScript_RegisterNob)
-    specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(Route115_EventScript_RematchNob)
-    }
-    msgbox(Route115_Text_NobPostBattle, MSGBOX_DEFAULT)
-    release
-    end
-}
+Route115_OnTransition_8:
+# 27 "data/maps/Route115/scripts.pory"
+	call AbnormalWeather_StartGroudonWeather
+	goto Route115_OnTransition_7
 
-script Route115_EventScript_RegisterNob {
-    special(PlayerFaceTrainerAfterBattle)
-    waitmovement(0)
-    msgbox(Route115_Text_NobRegister, MSGBOX_DEFAULT)
-    register_matchcall(TRAINER_NOB_1)
-    release
-    end
-}
 
-script Route115_EventScript_RematchNob {
-    trainerbattle_rematch(TRAINER_NOB_1, Route115_Text_NobRematchIntro, Route115_Text_NobRematchDefeat)
-    msgbox(Route115_Text_NobPostRematch, MSGBOX_AUTOCLOSE)
-    end
-}
+Route115_EventScript_Woman::
+# 33 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_NeverKnowWhenCavePokemonWillAppear, MSGBOX_NPC
+	end
 
-script Route115_EventScript_Cyndy {
-    trainerbattle_single(TRAINER_CYNDY_1, Route115_Text_CyndyIntro, Route115_Text_CyndyDefeat, Route115_EventScript_RegisterCyndy)
-    specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(Route115_EventScript_RematchCyndy)
-    }
-    msgbox(Route115_Text_CyndyPostBattle, MSGBOX_DEFAULT)
-    release
-    end
-}
 
-script Route115_EventScript_RegisterCyndy {
-    special(PlayerFaceTrainerAfterBattle)
-    waitmovement(0)
-    msgbox(Route115_Text_CyndyRegister, MSGBOX_DEFAULT)
-    register_matchcall(TRAINER_CYNDY_1)
-    release
-    end
-}
+Route115_EventScript_RouteSignRustboro::
+# 38 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_RouteSignRustboro, MSGBOX_SIGN
+	end
 
-script Route115_EventScript_RematchCyndy {
-    trainerbattle_rematch(TRAINER_CYNDY_1, Route115_Text_CyndyRematchIntro, Route115_Text_CyndyRematchDefeat)
-    msgbox(Route115_Text_CyndyPostRematch, MSGBOX_AUTOCLOSE)
-    end
-}
 
-script Route115_EventScript_Hector {
-    trainerbattle_single(TRAINER_HECTOR, Route115_Text_HectorIntro, Route115_Text_HectorDefeat)
-    msgbox(Route115_Text_HectorPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route115_EventScript_MeteorFallsSign::
+# 43 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_MeteorFallsSign, MSGBOX_SIGN
+	end
 
-script Route115_EventScript_Kyra {
-    trainerbattle_single(TRAINER_KYRA, Route115_Text_KyraIntro, Route115_Text_KyraDefeat)
-    msgbox(Route115_Text_KyraPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
 
-script Route115_EventScript_Jaiden {
-    trainerbattle_single(TRAINER_JAIDEN, Route115_Text_JaidenIntro, Route115_Text_JaidenDefeat)
-    msgbox(Route115_Text_JaidenPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route115_EventScript_Timothy::
+# 48 "data/maps/Route115/scripts.pory"
+	trainerbattle_single TRAINER_TIMOTHY_1, Route115_Text_TimothyIntro, Route115_Text_TimothyDefeat, Route115_EventScript_RegisterTimothy
+# 49 "data/maps/Route115/scripts.pory"
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+# 50 "data/maps/Route115/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route115_EventScript_Timothy_2
+Route115_EventScript_Timothy_1:
+# 53 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_TimothyPostBattle, MSGBOX_DEFAULT
+# 54 "data/maps/Route115/scripts.pory"
+	release
+	end
 
-script Route115_EventScript_Alix {
-    trainerbattle_single(TRAINER_ALIX, Route115_Text_AlixIntro, Route115_Text_AlixDefeat)
-    msgbox(Route115_Text_AlixPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route115_EventScript_Timothy_2:
+# 51 "data/maps/Route115/scripts.pory"
+	goto Route115_EventScript_RematchTimothy
+	goto Route115_EventScript_Timothy_1
 
-script Route115_EventScript_Helene {
-    trainerbattle_single(TRAINER_HELENE, Route115_Text_HeleneIntro, Route115_Text_HeleneDefeat)
-    msgbox(Route115_Text_HelenePostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
 
-script Route115_EventScript_Marlene {
-    trainerbattle_single(TRAINER_MARLENE, Route115_Text_MarleneIntro, Route115_Text_MarleneDefeat)
-    msgbox(Route115_Text_MarlenePostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route115_EventScript_RegisterTimothy::
+# 59 "data/maps/Route115/scripts.pory"
+	special PlayerFaceTrainerAfterBattle
+# 60 "data/maps/Route115/scripts.pory"
+	waitmovement 0
+# 61 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_TimothyRegister, MSGBOX_DEFAULT
+# 62 "data/maps/Route115/scripts.pory"
+	register_matchcall TRAINER_TIMOTHY_1
+# 63 "data/maps/Route115/scripts.pory"
+	release
+	end
 
-text Route115_Text_NeverKnowWhenCavePokemonWillAppear {
-    "Exploring a cave isn't like walking\n"
-    "on a road.\p"
-    "You never know when wild POKéMON will\n"
-    "appear. It's full of suspense.$"
-}
 
-text Route115_Text_RouteSignRustboro {
-    "ROUTE 115\n"
-    "{DOWN_ARROW} RUSTBORO CITY$"
-}
+Route115_EventScript_RematchTimothy::
+# 68 "data/maps/Route115/scripts.pory"
+	trainerbattle_rematch TRAINER_TIMOTHY_1, Route115_Text_TimothyRematchIntro, Route115_Text_TimothyRematchDefeat
+# 69 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_TimothyPostRematch, MSGBOX_AUTOCLOSE
+	end
 
-text Route115_Text_MeteorFallsSign {
-    "METEOR FALLS\n"
-    "FALLARBOR TOWN THROUGH HERE$"
-}
+
+Route115_EventScript_Koichi::
+# 74 "data/maps/Route115/scripts.pory"
+	trainerbattle_single TRAINER_KOICHI, Route115_Text_KoichiIntro, Route115_Text_KoichiDefeat
+# 75 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_KoichiPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route115_EventScript_Nob::
+# 80 "data/maps/Route115/scripts.pory"
+	trainerbattle_single TRAINER_NOB_1, Route115_Text_NobIntro, Route115_Text_NobDefeat, Route115_EventScript_RegisterNob
+# 81 "data/maps/Route115/scripts.pory"
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+# 82 "data/maps/Route115/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route115_EventScript_Nob_2
+Route115_EventScript_Nob_1:
+# 85 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_NobPostBattle, MSGBOX_DEFAULT
+# 86 "data/maps/Route115/scripts.pory"
+	release
+	end
+
+Route115_EventScript_Nob_2:
+# 83 "data/maps/Route115/scripts.pory"
+	goto Route115_EventScript_RematchNob
+	goto Route115_EventScript_Nob_1
+
+
+Route115_EventScript_RegisterNob::
+# 91 "data/maps/Route115/scripts.pory"
+	special PlayerFaceTrainerAfterBattle
+# 92 "data/maps/Route115/scripts.pory"
+	waitmovement 0
+# 93 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_NobRegister, MSGBOX_DEFAULT
+# 94 "data/maps/Route115/scripts.pory"
+	register_matchcall TRAINER_NOB_1
+# 95 "data/maps/Route115/scripts.pory"
+	release
+	end
+
+
+Route115_EventScript_RematchNob::
+# 100 "data/maps/Route115/scripts.pory"
+	trainerbattle_rematch TRAINER_NOB_1, Route115_Text_NobRematchIntro, Route115_Text_NobRematchDefeat
+# 101 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_NobPostRematch, MSGBOX_AUTOCLOSE
+	end
+
+
+Route115_EventScript_Cyndy::
+# 106 "data/maps/Route115/scripts.pory"
+	trainerbattle_single TRAINER_CYNDY_1, Route115_Text_CyndyIntro, Route115_Text_CyndyDefeat, Route115_EventScript_RegisterCyndy
+# 107 "data/maps/Route115/scripts.pory"
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+# 108 "data/maps/Route115/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route115_EventScript_Cyndy_2
+Route115_EventScript_Cyndy_1:
+# 111 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_CyndyPostBattle, MSGBOX_DEFAULT
+# 112 "data/maps/Route115/scripts.pory"
+	release
+	end
+
+Route115_EventScript_Cyndy_2:
+# 109 "data/maps/Route115/scripts.pory"
+	goto Route115_EventScript_RematchCyndy
+	goto Route115_EventScript_Cyndy_1
+
+
+Route115_EventScript_RegisterCyndy::
+# 117 "data/maps/Route115/scripts.pory"
+	special PlayerFaceTrainerAfterBattle
+# 118 "data/maps/Route115/scripts.pory"
+	waitmovement 0
+# 119 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_CyndyRegister, MSGBOX_DEFAULT
+# 120 "data/maps/Route115/scripts.pory"
+	register_matchcall TRAINER_CYNDY_1
+# 121 "data/maps/Route115/scripts.pory"
+	release
+	end
+
+
+Route115_EventScript_RematchCyndy::
+# 126 "data/maps/Route115/scripts.pory"
+	trainerbattle_rematch TRAINER_CYNDY_1, Route115_Text_CyndyRematchIntro, Route115_Text_CyndyRematchDefeat
+# 127 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_CyndyPostRematch, MSGBOX_AUTOCLOSE
+	end
+
+
+Route115_EventScript_Hector::
+# 132 "data/maps/Route115/scripts.pory"
+	trainerbattle_single TRAINER_HECTOR, Route115_Text_HectorIntro, Route115_Text_HectorDefeat
+# 133 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_HectorPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route115_EventScript_Kyra::
+# 138 "data/maps/Route115/scripts.pory"
+	trainerbattle_single TRAINER_KYRA, Route115_Text_KyraIntro, Route115_Text_KyraDefeat
+# 139 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_KyraPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route115_EventScript_Jaiden::
+# 144 "data/maps/Route115/scripts.pory"
+	trainerbattle_single TRAINER_JAIDEN, Route115_Text_JaidenIntro, Route115_Text_JaidenDefeat
+# 145 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_JaidenPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route115_EventScript_Alix::
+# 150 "data/maps/Route115/scripts.pory"
+	trainerbattle_single TRAINER_ALIX, Route115_Text_AlixIntro, Route115_Text_AlixDefeat
+# 151 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_AlixPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route115_EventScript_Helene::
+# 156 "data/maps/Route115/scripts.pory"
+	trainerbattle_single TRAINER_HELENE, Route115_Text_HeleneIntro, Route115_Text_HeleneDefeat
+# 157 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_HelenePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route115_EventScript_Marlene::
+# 162 "data/maps/Route115/scripts.pory"
+	trainerbattle_single TRAINER_MARLENE, Route115_Text_MarleneIntro, Route115_Text_MarleneDefeat
+# 163 "data/maps/Route115/scripts.pory"
+	msgbox Route115_Text_MarlenePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route115_Text_NeverKnowWhenCavePokemonWillAppear::
+# 167 "data/maps/Route115/scripts.pory"
+	.string "Exploring a cave isn't like walking\n"
+	.string "on a road.\p"
+	.string "You never know when wild POKéMON will\n"
+	.string "appear. It's full of suspense.$"
+
+Route115_Text_RouteSignRustboro::
+# 174 "data/maps/Route115/scripts.pory"
+	.string "ROUTE 115\n"
+	.string "{DOWN_ARROW} RUSTBORO CITY$"
+
+Route115_Text_MeteorFallsSign::
+# 179 "data/maps/Route115/scripts.pory"
+	.string "METEOR FALLS\n"
+	.string "FALLARBOR TOWN THROUGH HERE$"
+
+`

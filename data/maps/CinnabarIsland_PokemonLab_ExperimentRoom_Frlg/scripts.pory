@@ -1,502 +1,946 @@
-mapscripts CinnabarIsland_PokemonLab_ExperimentRoom_Frlg_MapScripts {}
+raw `
+CinnabarIsland_PokemonLab_ExperimentRoom_Frlg_MapScripts::
+	.byte 0
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett {
-    lock
-    faceplayer
-    setvar(VAR_0x8008, INGAME_TRADE_SEEL)
-    call(EventScript_GetInGameTradeSpeciesInfo)
-    if (flag(FLAG_DID_SEELOR_TRADE)) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_AlreadyTraded)
-    }
-    msgbox(Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineTrade)
-    }
-    call(EventScript_ChooseMonForInGameTrade)
-    if (var(VAR_0x8004) >= PARTY_SIZE) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineTrade)
-    }
-    call(EventScript_GetInGameTradeSpecies)
-    if (var(VAR_RESULT) != VAR_0x8009) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NotRequestedMon)
-    }
-    call(EventScript_DoInGameTrade)
-    msgbox(Trade_Text_HeyThanks)
-    setflag(FLAG_DID_SEELOR_TRADE)
-    release
-    end
-}
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineTrade {
-    msgbox(Trade_Text_AwwOhWell)
-    release
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett::
+# 4 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	lock
+# 5 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	faceplayer
+# 6 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_0x8008, INGAME_TRADE_SEEL
+# 7 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	call EventScript_GetInGameTradeSpeciesInfo
+# 8 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto_if_set FLAG_DID_SEELOR_TRADE, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett_1:
+# 11 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO
+# 12 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett_5
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett_4:
+# 15 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	call EventScript_ChooseMonForInGameTrade
+# 16 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_0x8004, PARTY_SIZE
+	goto_if_ge CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett_8
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett_7:
+# 19 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	call EventScript_GetInGameTradeSpecies
+# 20 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, VAR_0x8009
+	goto_if_ne CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett_11
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett_10:
+# 23 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	call EventScript_DoInGameTrade
+# 24 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox Trade_Text_HeyThanks
+# 25 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setflag FLAG_DID_SEELOR_TRADE
+# 26 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	release
+	end
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NotRequestedMon {
-    bufferspeciesname(STR_VAR_1, VAR_0x8009)
-    msgbox(Trade_Text_WhatThatsNoMon)
-    release
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett_2:
+# 9 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_AlreadyTraded
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett_1
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_AlreadyTraded {
-    msgbox(Trade_Text_IsntMyOldMonGreat)
-    release
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett_5:
+# 13 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineTrade
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett_4
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist {
-    lock
-    faceplayer
-    setvar(VAR_RESULT, FALSE)
-    if (flag(FLAG_REVIVED_AMBER)) {
-        call(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil)
-    }
-    if (var(VAR_RESULT) == TRUE) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_RevivedAllFossils)
-    }
-    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE) == 2) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon)
-    }
-    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE) == 1) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilStillReviving)
-    }
-    call(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddHelixFossilToList)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix)
-    }
-    call(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddDomeFossilToList)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome)
-    }
-    call(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber)
-    }
-    msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe)
-    goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett_8:
+# 17 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineTrade
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett_7
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddHelixFossilToList {
-    if (!flag(FLAG_GOT_HELIX_FOSSIL)) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
-    }
-    if (flag(FLAG_REVIVED_HELIX)) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
-    }
-    setvar(VAR_RESULT, TRUE)
-    return
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett_11:
+# 21 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NotRequestedMon
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett_10
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddDomeFossilToList {
-    if (!flag(FLAG_GOT_DOME_FOSSIL)) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
-    }
-    if (flag(FLAG_REVIVED_DOME)) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
-    }
-    setvar(VAR_RESULT, TRUE)
-    return
-}
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList {
-    if (!flag(FLAG_GOT_OLD_AMBER)) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
-    }
-    if (flag(FLAG_REVIVED_AMBER)) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
-    }
-    setvar(VAR_RESULT, TRUE)
-    return
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineTrade::
+# 31 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox Trade_Text_AwwOhWell
+# 32 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	release
+	end
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse {
-    setvar(VAR_RESULT, FALSE)
-    return
-}
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil {
-    msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_NoIsTooBad)
-    release
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NotRequestedMon::
+# 37 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	bufferspeciesname STR_VAR_1, VAR_0x8009
+# 38 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox Trade_Text_WhatThatsNoMon
+# 39 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	release
+	end
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix {
-    message(CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe)
-    waitmessage()
-    call(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber)
-    }
-    multichoice(0, 0, MULTI_HELIX, FALSE)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil)
-        case 1:
-            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
-        case 127:
-            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
-    }
-    end
-}
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome {
-    message(CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe)
-    waitmessage()
-    call(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber)
-    }
-    multichoice(0, 0, MULTI_DOME, FALSE)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil)
-        case 1:
-            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
-        case 127:
-            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
-    }
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_AlreadyTraded::
+# 44 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox Trade_Text_IsntMyOldMonGreat
+# 45 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	release
+	end
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber {
-    message(CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe)
-    waitmessage()
-    multichoice(0, 0, MULTI_AMBER, FALSE)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber)
-        case 1:
-            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
-        case 127:
-            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
-    }
-    end
-}
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber {
-    multichoice(0, 0, MULTI_HELIX_AMBER, FALSE)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil)
-        case 1:
-            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber)
-        case 2:
-            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
-        case 127:
-            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
-    }
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist::
+# 50 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	lock
+# 51 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	faceplayer
+# 52 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_RESULT, FALSE
+# 53 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto_if_set FLAG_REVIVED_AMBER, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_1:
+# 56 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_5
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_4:
+# 59 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 2
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_8
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_7:
+# 62 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_11
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_10:
+# 65 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	call CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddHelixFossilToList
+# 66 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_14
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_13:
+# 69 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	call CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddDomeFossilToList
+# 70 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_17
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_16:
+# 73 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	call CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList
+# 74 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_20
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_19:
+# 77 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe
+# 78 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
+	end
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber {
-    multichoice(0, 0, MULTI_DOME_AMBER, FALSE)
-    switch (var(VAR_RESULT)) {
-        case 0:
-            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil)
-        case 1:
-            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber)
-        case 2:
-            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
-        case 127:
-            goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil)
-    }
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_2:
+# 54 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	call CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_1
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil {
-    bufferspeciesname(STR_VAR_1, SPECIES_OMANYTE)
-    bufferitemname(STR_VAR_2, ITEM_HELIX_FOSSIL)
-    msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil)
-    }
-    msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor)
-    textcolor(NPC_TEXT_COLOR_MALE)
-    removeitem(ITEM_HELIX_FOSSIL)
-    msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk)
-    setvar(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1)
-    setvar(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, HELIX_FOSSIL)
-    release
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_5:
+# 57 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_RevivedAllFossils
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_4
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil {
-    bufferspeciesname(STR_VAR_1, SPECIES_KABUTO)
-    bufferitemname(STR_VAR_2, ITEM_DOME_FOSSIL)
-    msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil)
-    }
-    msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor)
-    textcolor(NPC_TEXT_COLOR_MALE)
-    removeitem(ITEM_DOME_FOSSIL)
-    msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk)
-    setvar(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1)
-    setvar(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, DOME_FOSSIL)
-    release
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_8:
+# 60 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_7
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber {
-    bufferspeciesname(STR_VAR_1, SPECIES_AERODACTYL)
-    bufferitemname(STR_VAR_2, ITEM_OLD_AMBER)
-    msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil)
-    }
-    msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor)
-    textcolor(NPC_TEXT_COLOR_MALE)
-    removeitem(ITEM_OLD_AMBER)
-    msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk)
-    setvar(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1)
-    setvar(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, OLD_AMBER)
-    release
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_11:
+# 63 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilStillReviving
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_10
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil {
-    msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_YouComeAgain)
-    release
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_14:
+# 67 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_13
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilStillReviving {
-    msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk)
-    release
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_17:
+# 71 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_16
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon {
-    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL) == HELIX_FOSSIL) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte)
-    }
-    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL) == DOME_FOSSIL) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto)
-    }
-    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL) == OLD_AMBER) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl)
-    }
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_20:
+# 75 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist_19
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte {
-    setvar(VAR_TEMP_1, SPECIES_OMANYTE)
-    bufferspeciesname(STR_VAR_1, SPECIES_OMANYTE)
-    msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife)
-    givemon(SPECIES_OMANYTE, 5)
-    if (var(VAR_RESULT) == 2) {
-        goto(Common_EventScript_NoMoreRoomForPokemon)
-    }
-    setflag(FLAG_REVIVED_HELIX)
-    if (var(VAR_RESULT) == 0) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty)
-    }
-    if (var(VAR_RESULT) == 1) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC)
-    }
-    end
-}
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto {
-    setvar(VAR_TEMP_1, SPECIES_KABUTO)
-    bufferspeciesname(STR_VAR_1, SPECIES_KABUTO)
-    msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife)
-    givemon(SPECIES_KABUTO, 5)
-    if (var(VAR_RESULT) == 2) {
-        goto(Common_EventScript_NoMoreRoomForPokemon)
-    }
-    setflag(FLAG_REVIVED_DOME)
-    if (var(VAR_RESULT) == 0) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty)
-    }
-    if (var(VAR_RESULT) == 1) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC)
-    }
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddHelixFossilToList::
+# 83 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto_if_unset FLAG_GOT_HELIX_FOSSIL, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddHelixFossilToList_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddHelixFossilToList_1:
+# 86 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto_if_set FLAG_REVIVED_HELIX, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddHelixFossilToList_5
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddHelixFossilToList_4:
+# 89 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_RESULT, TRUE
+	return
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl {
-    setvar(VAR_TEMP_1, SPECIES_AERODACTYL)
-    bufferspeciesname(STR_VAR_1, SPECIES_AERODACTYL)
-    msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife)
-    givemon(SPECIES_AERODACTYL, 5)
-    if (var(VAR_RESULT) == 2) {
-        goto(Common_EventScript_NoMoreRoomForPokemon)
-    }
-    setflag(FLAG_REVIVED_AMBER)
-    if (var(VAR_RESULT) == 0) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty)
-    }
-    if (var(VAR_RESULT) == 1) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC)
-    }
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddHelixFossilToList_2:
+# 84 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddHelixFossilToList_1
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty {
-    textcolor(NPC_TEXT_COLOR_NEUTRAL)
-    playfanfare(MUS_LEVEL_UP)
-    message(CinnabarIsland_PokemonLab_ExperimentRoom_Text_ReceivedMonFromDoctor)
-    waitmessage()
-    waitfanfare()
-    setvar(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 0)
-    msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon)
-    }
-    call(Common_EventScript_GetGiftMonPartySlot)
-    call(Common_EventScript_NameReceivedPartyMon)
-    goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon)
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddHelixFossilToList_5:
+# 87 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddHelixFossilToList_4
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC {
-    textcolor(NPC_TEXT_COLOR_NEUTRAL)
-    playfanfare(MUS_LEVEL_UP)
-    message(CinnabarIsland_PokemonLab_ExperimentRoom_Text_ReceivedMonFromDoctor)
-    waitmessage()
-    waitfanfare()
-    setvar(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 0)
-    msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_MonSentToPC)
-    }
-    call(Common_EventScript_NameReceivedBoxMon)
-    goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_MonSentToPC)
-    end
-}
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_MonSentToPC {
-    call(Common_EventScript_TransferredToPC)
-    goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon)
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddDomeFossilToList::
+# 94 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto_if_unset FLAG_GOT_DOME_FOSSIL, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddDomeFossilToList_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddDomeFossilToList_1:
+# 97 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto_if_set FLAG_REVIVED_DOME, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddDomeFossilToList_5
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddDomeFossilToList_4:
+# 100 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_RESULT, TRUE
+	return
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon {
-    release
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddDomeFossilToList_2:
+# 95 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddDomeFossilToList_1
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_RevivedAllFossils {
-    msgbox(CinnabarIsland_PokemonLab_ExperimentRoom_Text_YouComeAgain)
-    release
-    end
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddDomeFossilToList_5:
+# 98 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddDomeFossilToList_4
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil {
-    if (flag(FLAG_GOT_HELIX_FOSSIL)) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedHelix)
-    }
-    if (flag(FLAG_GOT_DOME_FOSSIL)) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedDome)
-    }
-    goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
-    end
-}
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedHelix {
-    if (!flag(FLAG_REVIVED_HELIX)) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
-    }
-    setvar(VAR_RESULT, TRUE)
-    return
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList::
+# 105 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto_if_unset FLAG_GOT_OLD_AMBER, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList_1:
+# 108 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto_if_set FLAG_REVIVED_AMBER, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList_5
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList_4:
+# 111 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_RESULT, TRUE
+	return
 
-script CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedDome {
-    if (!flag(FLAG_REVIVED_DOME)) {
-        goto(CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse)
-    }
-    setvar(VAR_RESULT, TRUE)
-    return
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList_2:
+# 106 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList_1
 
-text Text_MetronomeTeach {
-    "Tch-tch-tch!\n"
-    "I'll teach you a nifty move.\p"
-    "Teach it to a POKéMON, and watch\n"
-    "the fun unfold!\p"
-    "It's a move called METRONOME.\n"
-    "Does it strike your fancy?$"
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList_5:
+# 109 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList_4
 
-text Text_MetronomeDeclined {
-    "I tell you, it's a lot of fun!$"
-}
 
-text Text_MetronomeWhichMon {
-    "Okay!\n"
-    "Which POKéMON should I teach?$"
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse::
+# 116 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_RESULT, FALSE
+	return
 
-text Text_MetronomeTaught {
-    "Tch-tch-tch!\n"
-    "That's the sound of a METRONOME.\p"
-    "It tweaks your POKéMON's brain into\n"
-    "using moves it doesn't even know.$"
-}
 
-text CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe {
-    "Hiya!\p"
-    "I am important doctor.\n"
-    "Yes, very much so, indeed.\p"
-    "Here, I study rare POKéMON fossils.\n"
-    "All the time, I study.\p"
-    "You!\n"
-    "Have you a fossil for me?$"
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil::
+# 121 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_NoIsTooBad
+# 122 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	release
+	end
 
-text CinnabarIsland_PokemonLab_ExperimentRoom_Text_NoIsTooBad {
-    "No!\n"
-    "Is too bad!$"
-}
 
-text CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalkJP {
-    "ちょっと　じかん　かかるよ！\p"
-    "そこらへんを　すこし\n"
-    "ブラブラ　してくると　よろしー！$"
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix::
+# 127 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	message CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe
+# 128 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	waitmessage
+# 129 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	call CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList
+# 130 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix_1:
+# 133 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	multichoice 0, 0, MULTI_HELIX, FALSE
+# 134 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	switch VAR_RESULT
+# 135 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	case 0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix_6
+# 137 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	case 1, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix_7
+# 139 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	case 127, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix_8
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix_4:
+	end
 
-text CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife {
-    "You late.\n"
-    "Where were you?\p"
-    "Your fossil is back to life!\n"
-    "It was {STR_VAR_1} like I think!$"
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix_2:
+# 131 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix_1
 
-text CinnabarIsland_PokemonLab_ExperimentRoom_Text_ReceivedMonFromDoctor {
-    "{PLAYER} received the {STR_VAR_1}\n"
-    "from the doctor.$"
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix_6:
+# 136 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix_4
 
-text CinnabarIsland_PokemonLab_ExperimentRoom_Text_NoRoomForPokemon {
-    "ポケモン　いっぱいで　もてないね！$"
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix_7:
+# 138 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix_4
 
-text CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain {
-    "Oh!\n"
-    "That is {STR_VAR_2}, it is!\p"
-    "It is fossil of {STR_VAR_1},\n"
-    "a POKéMON that is already extinct!\p"
-    "My Resurrection Machine will make\n"
-    "that POKéMON live again!$"
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix_8:
+# 140 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix_4
 
-text CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor {
-    "So!\n"
-    "You hurry and give me that!\p"
-    "{FONT_NORMAL}{PLAYER} handed over the\n"
-    "{STR_VAR_2} to the weird doctor.$"
-}
 
-text CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk {
-    "I take a little time!\n"
-    "You go for walk a little while!$"
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome::
+# 146 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	message CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe
+# 147 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	waitmessage
+# 148 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	call CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList
+# 149 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome_1:
+# 152 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	multichoice 0, 0, MULTI_DOME, FALSE
+# 153 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	switch VAR_RESULT
+# 154 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	case 0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome_6
+# 156 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	case 1, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome_7
+# 158 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	case 127, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome_8
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome_4:
+	end
 
-text CinnabarIsland_PokemonLab_ExperimentRoom_Text_YouComeAgain {
-    "Aiyah!\n"
-    "You come again!$"
-}
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome_2:
+# 150 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome_1
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome_6:
+# 155 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome_4
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome_7:
+# 157 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome_4
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome_8:
+# 159 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome_4
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber::
+# 165 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	message CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe
+# 166 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	waitmessage
+# 167 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	multichoice 0, 0, MULTI_AMBER, FALSE
+# 168 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	switch VAR_RESULT
+# 169 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	case 0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber_3
+# 171 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	case 1, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber_4
+# 173 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	case 127, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber_5
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber_1:
+	end
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber_3:
+# 170 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber_1
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber_4:
+# 172 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber_1
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber_5:
+# 174 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber_1
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber::
+# 180 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	multichoice 0, 0, MULTI_HELIX_AMBER, FALSE
+# 181 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	switch VAR_RESULT
+# 182 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	case 0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber_3
+# 184 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	case 1, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber_4
+# 186 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	case 2, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber_5
+# 188 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	case 127, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber_6
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber_1:
+	end
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber_3:
+# 183 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber_1
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber_4:
+# 185 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber_1
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber_5:
+# 187 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber_1
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber_6:
+# 189 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber_1
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber::
+# 195 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	multichoice 0, 0, MULTI_DOME_AMBER, FALSE
+# 196 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	switch VAR_RESULT
+# 197 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	case 0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber_3
+# 199 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	case 1, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber_4
+# 201 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	case 2, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber_5
+# 203 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	case 127, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber_6
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber_1:
+	end
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber_3:
+# 198 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber_1
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber_4:
+# 200 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber_1
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber_5:
+# 202 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber_1
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber_6:
+# 204 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber_1
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil::
+# 210 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	bufferspeciesname STR_VAR_1, SPECIES_OMANYTE
+# 211 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	bufferitemname STR_VAR_2, ITEM_HELIX_FOSSIL
+# 212 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain, MSGBOX_YESNO
+# 213 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil_1:
+# 216 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor
+# 217 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	textcolor NPC_TEXT_COLOR_MALE
+# 218 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	removeitem ITEM_HELIX_FOSSIL
+# 219 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk
+# 220 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1
+# 221 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, HELIX_FOSSIL
+# 222 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	release
+	end
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil_2:
+# 214 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil_1
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil::
+# 227 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	bufferspeciesname STR_VAR_1, SPECIES_KABUTO
+# 228 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	bufferitemname STR_VAR_2, ITEM_DOME_FOSSIL
+# 229 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain, MSGBOX_YESNO
+# 230 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil_1:
+# 233 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor
+# 234 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	textcolor NPC_TEXT_COLOR_MALE
+# 235 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	removeitem ITEM_DOME_FOSSIL
+# 236 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk
+# 237 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1
+# 238 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, DOME_FOSSIL
+# 239 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	release
+	end
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil_2:
+# 231 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil_1
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber::
+# 244 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	bufferspeciesname STR_VAR_1, SPECIES_AERODACTYL
+# 245 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	bufferitemname STR_VAR_2, ITEM_OLD_AMBER
+# 246 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain, MSGBOX_YESNO
+# 247 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber_1:
+# 250 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor
+# 251 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	textcolor NPC_TEXT_COLOR_MALE
+# 252 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	removeitem ITEM_OLD_AMBER
+# 253 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk
+# 254 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1
+# 255 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, OLD_AMBER
+# 256 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	release
+	end
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber_2:
+# 248 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber_1
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil::
+# 261 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_YouComeAgain
+# 262 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	release
+	end
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilStillReviving::
+# 267 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk
+# 268 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	release
+	end
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon::
+# 273 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, HELIX_FOSSIL
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon_1:
+# 276 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, DOME_FOSSIL
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon_5
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon_4:
+# 279 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, OLD_AMBER
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon_8
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon_7:
+	end
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon_2:
+# 274 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon_1
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon_5:
+# 277 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon_4
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon_8:
+# 280 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon_7
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte::
+# 286 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_TEMP_1, SPECIES_OMANYTE
+# 287 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	bufferspeciesname STR_VAR_1, SPECIES_OMANYTE
+# 288 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife
+# 289 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	givemon SPECIES_OMANYTE, 5
+# 290 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, 2
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte_1:
+# 293 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setflag FLAG_REVIVED_HELIX
+# 294 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, 0
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte_5
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte_4:
+# 297 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte_8
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte_7:
+	end
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte_2:
+# 291 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto Common_EventScript_NoMoreRoomForPokemon
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte_1
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte_5:
+# 295 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte_4
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte_8:
+# 298 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte_7
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto::
+# 304 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_TEMP_1, SPECIES_KABUTO
+# 305 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	bufferspeciesname STR_VAR_1, SPECIES_KABUTO
+# 306 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife
+# 307 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	givemon SPECIES_KABUTO, 5
+# 308 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, 2
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto_1:
+# 311 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setflag FLAG_REVIVED_DOME
+# 312 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, 0
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto_5
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto_4:
+# 315 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto_8
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto_7:
+	end
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto_2:
+# 309 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto Common_EventScript_NoMoreRoomForPokemon
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto_1
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto_5:
+# 313 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto_4
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto_8:
+# 316 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto_7
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl::
+# 322 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_TEMP_1, SPECIES_AERODACTYL
+# 323 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	bufferspeciesname STR_VAR_1, SPECIES_AERODACTYL
+# 324 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife
+# 325 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	givemon SPECIES_AERODACTYL, 5
+# 326 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, 2
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl_1:
+# 329 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setflag FLAG_REVIVED_AMBER
+# 330 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, 0
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl_5
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl_4:
+# 333 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl_8
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl_7:
+	end
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl_2:
+# 327 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto Common_EventScript_NoMoreRoomForPokemon
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl_1
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl_5:
+# 331 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl_4
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl_8:
+# 334 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl_7
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty::
+# 340 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+# 341 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	playfanfare MUS_LEVEL_UP
+# 342 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	message CinnabarIsland_PokemonLab_ExperimentRoom_Text_ReceivedMonFromDoctor
+# 343 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	waitmessage
+# 344 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	waitfanfare
+# 345 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 0
+# 346 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+# 347 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty_1:
+# 350 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	call Common_EventScript_GetGiftMonPartySlot
+# 351 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	call Common_EventScript_NameReceivedPartyMon
+# 352 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon
+	end
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty_2:
+# 348 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty_1
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC::
+# 357 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+# 358 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	playfanfare MUS_LEVEL_UP
+# 359 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	message CinnabarIsland_PokemonLab_ExperimentRoom_Text_ReceivedMonFromDoctor
+# 360 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	waitmessage
+# 361 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	waitfanfare
+# 362 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 0
+# 363 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+# 364 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC_1:
+# 367 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	call Common_EventScript_NameReceivedBoxMon
+# 368 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_MonSentToPC
+	end
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC_2:
+# 365 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_MonSentToPC
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC_1
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_MonSentToPC::
+# 373 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	call Common_EventScript_TransferredToPC
+# 374 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon
+	end
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon::
+# 379 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	release
+	end
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_RevivedAllFossils::
+# 384 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_YouComeAgain
+# 385 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	release
+	end
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil::
+# 390 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_HELIX_FOSSIL, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil_1:
+# 393 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_DOME_FOSSIL, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil_5
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil_4:
+# 396 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+	end
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil_2:
+# 391 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedHelix
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil_1
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil_5:
+# 394 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedDome
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil_4
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedHelix::
+# 401 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto_if_unset FLAG_REVIVED_HELIX, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedHelix_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedHelix_1:
+# 404 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_RESULT, TRUE
+	return
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedHelix_2:
+# 402 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedHelix_1
+
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedDome::
+# 409 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto_if_unset FLAG_REVIVED_DOME, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedDome_2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedDome_1:
+# 412 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	setvar VAR_RESULT, TRUE
+	return
+
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedDome_2:
+# 410 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedDome_1
+
+
+Text_MetronomeTeach::
+# 416 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	.string "Tch-tch-tch!\n"
+	.string "I'll teach you a nifty move.\p"
+	.string "Teach it to a POKéMON, and watch\n"
+	.string "the fun unfold!\p"
+	.string "It's a move called METRONOME.\n"
+	.string "Does it strike your fancy?$"
+
+Text_MetronomeDeclined::
+# 425 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	.string "I tell you, it's a lot of fun!$"
+
+Text_MetronomeWhichMon::
+# 429 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	.string "Okay!\n"
+	.string "Which POKéMON should I teach?$"
+
+Text_MetronomeTaught::
+# 434 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	.string "Tch-tch-tch!\n"
+	.string "That's the sound of a METRONOME.\p"
+	.string "It tweaks your POKéMON's brain into\n"
+	.string "using moves it doesn't even know.$"
+
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe::
+# 441 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	.string "Hiya!\p"
+	.string "I am important doctor.\n"
+	.string "Yes, very much so, indeed.\p"
+	.string "Here, I study rare POKéMON fossils.\n"
+	.string "All the time, I study.\p"
+	.string "You!\n"
+	.string "Have you a fossil for me?$"
+
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_NoIsTooBad::
+# 451 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	.string "No!\n"
+	.string "Is too bad!$"
+
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalkJP::
+# 456 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	.string "ちょっと　じかん　かかるよ！\p"
+	.string "そこらへんを　すこし\n"
+	.string "ブラブラ　してくると　よろしー！$"
+
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife::
+# 462 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	.string "You late.\n"
+	.string "Where were you?\p"
+	.string "Your fossil is back to life!\n"
+	.string "It was {STR_VAR_1} like I think!$"
+
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_ReceivedMonFromDoctor::
+# 469 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	.string "{PLAYER} received the {STR_VAR_1}\n"
+	.string "from the doctor.$"
+
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_NoRoomForPokemon::
+# 474 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	.string "ポケモン　いっぱいで　もてないね！$"
+
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain::
+# 478 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	.string "Oh!\n"
+	.string "That is {STR_VAR_2}, it is!\p"
+	.string "It is fossil of {STR_VAR_1},\n"
+	.string "a POKéMON that is already extinct!\p"
+	.string "My Resurrection Machine will make\n"
+	.string "that POKéMON live again!$"
+
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor::
+# 487 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	.string "So!\n"
+	.string "You hurry and give me that!\p"
+	.string "{FONT_NORMAL}{PLAYER} handed over the\n"
+	.string "{STR_VAR_2} to the weird doctor.$"
+
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk::
+# 494 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	.string "I take a little time!\n"
+	.string "You go for walk a little while!$"
+
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_YouComeAgain::
+# 499 "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.pory"
+	.string "Aiyah!\n"
+	.string "You come again!$"
+
+`

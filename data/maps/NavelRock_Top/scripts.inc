@@ -1,115 +1,261 @@
 NavelRock_Top_MapScripts::
+# 2 "data/maps/NavelRock_Top/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Top_OnTransition
+# 3 "data/maps/NavelRock_Top/scripts.pory"
 	map_script MAP_SCRIPT_ON_RESUME, NavelRock_Top_OnResume
 	.byte 0
 
-NavelRock_Top_OnTransition:
-	call_if_set FLAG_CAUGHT_HO_OH, NavelRock_Top_EventScript_HideHoOh
-	call_if_unset FLAG_CAUGHT_HO_OH, NavelRock_Top_EventScript_TryShowHoOh
+
+NavelRock_Top_OnTransition::
+# 7 "data/maps/NavelRock_Top/scripts.pory"
+	goto_if_set FLAG_CAUGHT_HO_OH, NavelRock_Top_OnTransition_2
+NavelRock_Top_OnTransition_1:
+# 10 "data/maps/NavelRock_Top/scripts.pory"
+	goto_if_unset FLAG_CAUGHT_HO_OH, NavelRock_Top_OnTransition_5
+NavelRock_Top_OnTransition_4:
 	end
 
+NavelRock_Top_OnTransition_2:
+# 8 "data/maps/NavelRock_Top/scripts.pory"
+	call NavelRock_Top_EventScript_HideHoOh
+	goto NavelRock_Top_OnTransition_1
+
+NavelRock_Top_OnTransition_5:
+# 11 "data/maps/NavelRock_Top/scripts.pory"
+	call NavelRock_Top_EventScript_TryShowHoOh
+	goto NavelRock_Top_OnTransition_4
+
+
 NavelRock_Top_EventScript_HideHoOh::
+# 17 "data/maps/NavelRock_Top/scripts.pory"
 	setvar VAR_TEMP_1, 1
+# 18 "data/maps/NavelRock_Top/scripts.pory"
 	setflag FLAG_HIDE_HO_OH
 	return
 
+
 NavelRock_Top_EventScript_TryShowHoOh::
+# 23 "data/maps/NavelRock_Top/scripts.pory"
 	setvar VAR_TEMP_1, 1
-	goto_if_set FLAG_DEFEATED_HO_OH, Common_EventScript_NopReturn
+# 24 "data/maps/NavelRock_Top/scripts.pory"
+	goto_if_set FLAG_DEFEATED_HO_OH, NavelRock_Top_EventScript_TryShowHoOh_2
+NavelRock_Top_EventScript_TryShowHoOh_1:
+# 27 "data/maps/NavelRock_Top/scripts.pory"
 	setvar VAR_TEMP_1, 0
+# 28 "data/maps/NavelRock_Top/scripts.pory"
 	clearflag FLAG_HIDE_HO_OH
 	return
 
-NavelRock_Top_OnResume:
-	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, NavelRock_Top_EventScript_TryRemoveHoOh
+NavelRock_Top_EventScript_TryShowHoOh_2:
+# 25 "data/maps/NavelRock_Top/scripts.pory"
+	goto Common_EventScript_NopReturn
+	goto NavelRock_Top_EventScript_TryShowHoOh_1
+
+
+NavelRock_Top_OnResume::
+# 33 "data/maps/NavelRock_Top/scripts.pory"
+	goto_if_set FLAG_SYS_CTRL_OBJ_DELETE, NavelRock_Top_OnResume_2
+NavelRock_Top_OnResume_1:
 	end
 
+NavelRock_Top_OnResume_2:
+# 34 "data/maps/NavelRock_Top/scripts.pory"
+	call NavelRock_Top_EventScript_TryRemoveHoOh
+	goto NavelRock_Top_OnResume_1
+
+
 NavelRock_Top_EventScript_TryRemoveHoOh::
+# 40 "data/maps/NavelRock_Top/scripts.pory"
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
+# 41 "data/maps/NavelRock_Top/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
+	goto_if_ne NavelRock_Top_EventScript_TryRemoveHoOh_2
+NavelRock_Top_EventScript_TryRemoveHoOh_1:
+# 44 "data/maps/NavelRock_Top/scripts.pory"
 	removeobject LOCALID_NAVEL_ROCK_HO_OH
 	return
 
+NavelRock_Top_EventScript_TryRemoveHoOh_2:
+# 42 "data/maps/NavelRock_Top/scripts.pory"
+	goto Common_EventScript_NopReturn
+	goto NavelRock_Top_EventScript_TryRemoveHoOh_1
+
+
 NavelRock_Top_EventScript_HoOh::
+# 49 "data/maps/NavelRock_Top/scripts.pory"
 	lockall
+# 50 "data/maps/NavelRock_Top/scripts.pory"
 	setvar VAR_TEMP_1, 1
+# 51 "data/maps/NavelRock_Top/scripts.pory"
 	special SpawnCameraObject
-	setvar VAR_0x8004, 3  @ num loops
-	setvar VAR_0x8005, 35 @ delay
+# 52 "data/maps/NavelRock_Top/scripts.pory"
+	setvar VAR_0x8004, 3
+# 53 "data/maps/NavelRock_Top/scripts.pory"
+	setvar VAR_0x8005, 35
+# 54 "data/maps/NavelRock_Top/scripts.pory"
 	special LoopWingFlapSE
+# 55 "data/maps/NavelRock_Top/scripts.pory"
 	applymovement LOCALID_NAVEL_ROCK_HO_OH, NavelRock_Top_Movement_HoOhAppear
+# 56 "data/maps/NavelRock_Top/scripts.pory"
 	applymovement LOCALID_CAMERA, NavelRock_Top_Movement_CameraPanUp
+# 57 "data/maps/NavelRock_Top/scripts.pory"
 	waitmovement 0
+# 58 "data/maps/NavelRock_Top/scripts.pory"
 	delay 50
+# 59 "data/maps/NavelRock_Top/scripts.pory"
 	setweather WEATHER_NONE
+# 60 "data/maps/NavelRock_Top/scripts.pory"
 	doweather
+# 61 "data/maps/NavelRock_Top/scripts.pory"
 	waitse
+# 62 "data/maps/NavelRock_Top/scripts.pory"
 	playmoncry SPECIES_HO_OH, CRY_MODE_ENCOUNTER
+# 63 "data/maps/NavelRock_Top/scripts.pory"
 	delay 30
+# 64 "data/maps/NavelRock_Top/scripts.pory"
 	waitmoncry
+# 65 "data/maps/NavelRock_Top/scripts.pory"
 	delay 60
-	setvar VAR_0x8004, 3  @ num loops
-	setvar VAR_0x8005, 35 @ delay
+# 66 "data/maps/NavelRock_Top/scripts.pory"
+	setvar VAR_0x8004, 3
+# 67 "data/maps/NavelRock_Top/scripts.pory"
+	setvar VAR_0x8005, 35
+# 68 "data/maps/NavelRock_Top/scripts.pory"
 	special LoopWingFlapSE
+# 69 "data/maps/NavelRock_Top/scripts.pory"
 	applymovement LOCALID_CAMERA, NavelRock_Top_Movement_CameraPanDown
+# 70 "data/maps/NavelRock_Top/scripts.pory"
 	applymovement LOCALID_NAVEL_ROCK_HO_OH, NavelRock_Top_Movement_HoOhApproach
+# 71 "data/maps/NavelRock_Top/scripts.pory"
 	waitmovement 0
+# 72 "data/maps/NavelRock_Top/scripts.pory"
 	special RemoveCameraObject
+# 73 "data/maps/NavelRock_Top/scripts.pory"
 	seteventmon SPECIES_HO_OH, 70
+# 74 "data/maps/NavelRock_Top/scripts.pory"
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
+# 75 "data/maps/NavelRock_Top/scripts.pory"
 	special BattleSetup_StartLegendaryBattle
+# 76 "data/maps/NavelRock_Top/scripts.pory"
 	waitstate
+# 77 "data/maps/NavelRock_Top/scripts.pory"
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+# 78 "data/maps/NavelRock_Top/scripts.pory"
 	setvar VAR_LAST_TALKED, LOCALID_NAVEL_ROCK_HO_OH
+# 79 "data/maps/NavelRock_Top/scripts.pory"
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NavelRock_Top_EventScript_DefeatedHoOh
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, NavelRock_Top_EventScript_RanFromHoOh
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, NavelRock_Top_EventScript_RanFromHoOh
+# 80 "data/maps/NavelRock_Top/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_WON
+	goto_if_eq NavelRock_Top_EventScript_HoOh_2
+NavelRock_Top_EventScript_HoOh_1:
+# 83 "data/maps/NavelRock_Top/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_RAN
+	goto_if_eq NavelRock_Top_EventScript_HoOh_5
+NavelRock_Top_EventScript_HoOh_4:
+# 86 "data/maps/NavelRock_Top/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	goto_if_eq NavelRock_Top_EventScript_HoOh_8
+NavelRock_Top_EventScript_HoOh_7:
+# 89 "data/maps/NavelRock_Top/scripts.pory"
 	setflag FLAG_CAUGHT_HO_OH
+# 90 "data/maps/NavelRock_Top/scripts.pory"
 	releaseall
 	end
 
+NavelRock_Top_EventScript_HoOh_2:
+# 81 "data/maps/NavelRock_Top/scripts.pory"
+	goto NavelRock_Top_EventScript_DefeatedHoOh
+	goto NavelRock_Top_EventScript_HoOh_1
+
+NavelRock_Top_EventScript_HoOh_5:
+# 84 "data/maps/NavelRock_Top/scripts.pory"
+	goto NavelRock_Top_EventScript_RanFromHoOh
+	goto NavelRock_Top_EventScript_HoOh_4
+
+NavelRock_Top_EventScript_HoOh_8:
+# 87 "data/maps/NavelRock_Top/scripts.pory"
+	goto NavelRock_Top_EventScript_RanFromHoOh
+	goto NavelRock_Top_EventScript_HoOh_7
+
+
 NavelRock_Top_EventScript_DefeatedHoOh::
+# 95 "data/maps/NavelRock_Top/scripts.pory"
 	setflag FLAG_DEFEATED_HO_OH
+# 96 "data/maps/NavelRock_Top/scripts.pory"
 	setvar VAR_0x8004, SPECIES_HO_OH
+# 97 "data/maps/NavelRock_Top/scripts.pory"
 	goto Common_EventScript_LegendaryFlewAway
 	end
+
 
 NavelRock_Top_EventScript_RanFromHoOh::
+# 102 "data/maps/NavelRock_Top/scripts.pory"
 	setvar VAR_0x8004, SPECIES_HO_OH
+# 103 "data/maps/NavelRock_Top/scripts.pory"
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
+
+# 107 "data/maps/NavelRock_Top/scripts.pory"
 NavelRock_Top_Movement_CameraPanUp:
+# 108 "data/maps/NavelRock_Top/scripts.pory"
 	walk_up
+# 109 "data/maps/NavelRock_Top/scripts.pory"
 	walk_up
+# 110 "data/maps/NavelRock_Top/scripts.pory"
 	walk_up
+# 111 "data/maps/NavelRock_Top/scripts.pory"
 	step_end
 
+# 114 "data/maps/NavelRock_Top/scripts.pory"
 NavelRock_Top_Movement_CameraPanDown:
+# 115 "data/maps/NavelRock_Top/scripts.pory"
 	delay_16
+# 116 "data/maps/NavelRock_Top/scripts.pory"
 	delay_16
+# 117 "data/maps/NavelRock_Top/scripts.pory"
 	walk_down
+# 118 "data/maps/NavelRock_Top/scripts.pory"
 	walk_down
+# 119 "data/maps/NavelRock_Top/scripts.pory"
 	walk_down
+# 120 "data/maps/NavelRock_Top/scripts.pory"
 	step_end
 
+# 123 "data/maps/NavelRock_Top/scripts.pory"
 NavelRock_Top_Movement_HoOhApproach:
+# 124 "data/maps/NavelRock_Top/scripts.pory"
 	walk_down
+# 125 "data/maps/NavelRock_Top/scripts.pory"
 	walk_down
+# 126 "data/maps/NavelRock_Top/scripts.pory"
 	walk_down
+# 127 "data/maps/NavelRock_Top/scripts.pory"
 	walk_down
+# 128 "data/maps/NavelRock_Top/scripts.pory"
 	walk_down
+# 129 "data/maps/NavelRock_Top/scripts.pory"
 	walk_in_place_down
+# 130 "data/maps/NavelRock_Top/scripts.pory"
 	delay_16
+# 131 "data/maps/NavelRock_Top/scripts.pory"
 	delay_16
+# 132 "data/maps/NavelRock_Top/scripts.pory"
 	step_end
 
+# 135 "data/maps/NavelRock_Top/scripts.pory"
 NavelRock_Top_Movement_HoOhAppear:
+# 136 "data/maps/NavelRock_Top/scripts.pory"
 	delay_16
+# 137 "data/maps/NavelRock_Top/scripts.pory"
 	delay_16
+# 138 "data/maps/NavelRock_Top/scripts.pory"
 	walk_in_place_down
+# 139 "data/maps/NavelRock_Top/scripts.pory"
 	walk_in_place_down
+# 140 "data/maps/NavelRock_Top/scripts.pory"
 	walk_in_place_down
+# 141 "data/maps/NavelRock_Top/scripts.pory"
 	walk_in_place_down
+# 142 "data/maps/NavelRock_Top/scripts.pory"
 	step_end

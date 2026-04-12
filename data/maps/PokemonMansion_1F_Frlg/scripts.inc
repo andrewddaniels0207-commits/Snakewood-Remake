@@ -1,57 +1,89 @@
 PokemonMansion_1F_Frlg_MapScripts::
+# 2 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_LOAD, PokemonMansion_1F_OnLoad
+# 3 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, PokemonMansion_1F_OnTransition
 	.byte 0
 
+
 PokemonMansion_1F_OnLoad::
-	call_if_set FLAG_POKEMON_MANSION_SWITCH_STATE, PokemonMansion_EventScript_PressSwitch_1F
+# 7 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
+	goto_if_set FLAG_POKEMON_MANSION_SWITCH_STATE, PokemonMansion_1F_OnLoad_2
+PokemonMansion_1F_OnLoad_1:
 	end
 
+PokemonMansion_1F_OnLoad_2:
+# 8 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
+	call PokemonMansion_EventScript_PressSwitch_1F
+	goto PokemonMansion_1F_OnLoad_1
+
+
 PokemonMansion_1F_OnTransition::
+# 14 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	setworldmapflag FLAG_WORLD_MAP_POKEMON_MANSION_1F
 	end
 
+
 PokemonMansion_1F_EventScript_Statue::
+# 19 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	lockall
+# 20 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	setvar VAR_0x8004, 0
+# 21 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	call PokemonMansion_EventScript_SecretSwitch
+# 22 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	playse SE_UNLOCK
+# 23 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	special DrawWholeMapView
+# 24 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	waitse
+# 25 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	releaseall
 	end
 
+
 PokemonMansion_1F_EventScript_Ted::
+# 30 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_SCIENTIST_TED, PokemonMansion_1F_Text_TedIntro, PokemonMansion_1F_Text_TedDefeat
+# 31 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	msgbox PokemonMansion_1F_Text_TedPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 PokemonMansion_1F_EventScript_Johnson::
+# 36 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_YOUNGSTER_JOHNSON, PokemonMansion_1F_Text_JohnsonIntro, PokemonMansion_1F_Text_JohnsonDefeat
+# 37 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	msgbox PokemonMansion_1F_Text_JohnsonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 PokemonMansion_1F_Text_TedIntro::
+# 41 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	.string "Who are you?\n"
 	.string "There shouldn't be anyone here.$"
 
 PokemonMansion_1F_Text_TedDefeat::
+# 46 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	.string "Ouch!$"
 
 PokemonMansion_1F_Text_TedPostBattle::
+# 50 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	.string "A key? I don't know what you're\n"
 	.string "talking about.$"
 
 PokemonMansion_1F_Text_JohnsonIntro::
+# 55 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	.string "W-w-waah! You startled me!\n"
 	.string "I thought you were a ghost.$"
 
 PokemonMansion_1F_Text_JohnsonDefeat::
+# 60 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	.string "Tch!\n"
 	.string "I can't get any wins.$"
 
 PokemonMansion_1F_Text_JohnsonPostBattle::
+# 65 "data/maps/PokemonMansion_1F_Frlg/scripts.pory"
 	.string "I was exploring here by myself,\n"
 	.string "but I feel spooked.\p"
 	.string "I ought to go soon.$"
-

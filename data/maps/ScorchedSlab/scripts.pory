@@ -1,8 +1,14 @@
-mapscripts ScorchedSlab_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: ScorchedSlab_OnTransition
-}
+raw `
+ScorchedSlab_MapScripts::
+# 2 "data/maps/ScorchedSlab/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, ScorchedSlab_OnTransition
+	.byte 0
 
-script ScorchedSlab_OnTransition {
-    setflag(FLAG_LANDMARK_SCORCHED_SLAB)
-    end
-}
+
+ScorchedSlab_OnTransition::
+# 6 "data/maps/ScorchedSlab/scripts.pory"
+	setflag FLAG_LANDMARK_SCORCHED_SLAB
+	end
+
+
+`

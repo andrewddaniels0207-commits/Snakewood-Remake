@@ -1,49 +1,107 @@
 SootopolisCity_PokemonCenter_1F_MapScripts::
+# 2 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_PokemonCenter_1F_OnTransition
+# 3 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
-SootopolisCity_PokemonCenter_1F_OnTransition:
+
+SootopolisCity_PokemonCenter_1F_OnTransition::
+# 7 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	setrespawn HEAL_LOCATION_SOOTOPOLIS_CITY
 	end
 
+
 SootopolisCity_PokemonCenter_1F_EventScript_Nurse::
+# 12 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	setvar VAR_0x800B, LOCALID_SOOTOPOLIS_NURSE
+# 13 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	call Common_EventScript_PkmnCenterNurse
+# 14 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	waitmessage
+# 15 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	waitbuttonpress
+# 16 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	release
 	end
+
 
 SootopolisCity_PokemonCenter_1F_EventScript_Gentleman::
+# 21 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	lock
+# 22 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	faceplayer
-	goto_if_ge VAR_SKY_PILLAR_STATE, 2, SootopolisCity_PokemonCenter_1F_EventScript_GentlemanNoLegendaries
-	goto_if_unset FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_PokemonCenter_1F_EventScript_GentlemanNoLegendaries
+# 23 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
+	compare VAR_SKY_PILLAR_STATE, 2
+	goto_if_ge SootopolisCity_PokemonCenter_1F_EventScript_Gentleman_2
+SootopolisCity_PokemonCenter_1F_EventScript_Gentleman_1:
+# 26 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
+	goto_if_unset FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_PokemonCenter_1F_EventScript_Gentleman_5
+SootopolisCity_PokemonCenter_1F_EventScript_Gentleman_4:
+# 29 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	msgbox SootopolisCity_PokemonCenter_1F_Text_EveryoneTakenRefuge, MSGBOX_DEFAULT
+# 30 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	release
 	end
+
+SootopolisCity_PokemonCenter_1F_EventScript_Gentleman_2:
+# 24 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
+	goto SootopolisCity_PokemonCenter_1F_EventScript_GentlemanNoLegendaries
+	goto SootopolisCity_PokemonCenter_1F_EventScript_Gentleman_1
+
+SootopolisCity_PokemonCenter_1F_EventScript_Gentleman_5:
+# 27 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
+	goto SootopolisCity_PokemonCenter_1F_EventScript_GentlemanNoLegendaries
+	goto SootopolisCity_PokemonCenter_1F_EventScript_Gentleman_4
+
 
 SootopolisCity_PokemonCenter_1F_EventScript_GentlemanNoLegendaries::
+# 35 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	msgbox SootopolisCity_PokemonCenter_1F_Text_WallaceToughestInHoenn, MSGBOX_DEFAULT
+# 36 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	release
 	end
+
 
 SootopolisCity_PokemonCenter_1F_EventScript_Woman::
+# 41 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	lock
+# 42 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	faceplayer
-	goto_if_ge VAR_SKY_PILLAR_STATE, 2, SootopolisCity_PokemonCenter_1F_EventScript_WomanNoLegendaries
-	goto_if_unset FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_PokemonCenter_1F_EventScript_WomanNoLegendaries
+# 43 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
+	compare VAR_SKY_PILLAR_STATE, 2
+	goto_if_ge SootopolisCity_PokemonCenter_1F_EventScript_Woman_2
+SootopolisCity_PokemonCenter_1F_EventScript_Woman_1:
+# 46 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
+	goto_if_unset FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_PokemonCenter_1F_EventScript_Woman_5
+SootopolisCity_PokemonCenter_1F_EventScript_Woman_4:
+# 49 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	msgbox SootopolisCity_PokemonCenter_1F_Text_ArentPokemonOurFriends, MSGBOX_DEFAULT
+# 50 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	release
 	end
+
+SootopolisCity_PokemonCenter_1F_EventScript_Woman_2:
+# 44 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
+	goto SootopolisCity_PokemonCenter_1F_EventScript_WomanNoLegendaries
+	goto SootopolisCity_PokemonCenter_1F_EventScript_Woman_1
+
+SootopolisCity_PokemonCenter_1F_EventScript_Woman_5:
+# 47 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
+	goto SootopolisCity_PokemonCenter_1F_EventScript_WomanNoLegendaries
+	goto SootopolisCity_PokemonCenter_1F_EventScript_Woman_4
+
 
 SootopolisCity_PokemonCenter_1F_EventScript_WomanNoLegendaries::
+# 55 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	msgbox SootopolisCity_PokemonCenter_1F_Text_AlwaysBeFriendsWithPokemon, MSGBOX_DEFAULT
+# 56 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	release
 	end
 
-SootopolisCity_PokemonCenter_1F_Text_WallaceToughestInHoenn:
+
+SootopolisCity_PokemonCenter_1F_Text_WallaceToughestInHoenn::
+# 60 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	.string "WALLACE is rumored to be the toughest\n"
 	.string "TRAINER in the whole HOENN region.\p"
 	.string "This town's GYM is led by the TRAINER\n"
@@ -52,19 +110,21 @@ SootopolisCity_PokemonCenter_1F_Text_WallaceToughestInHoenn:
 	.string "even stronger than WALLACE's mentor.\p"
 	.string "How strong could they be?$"
 
-SootopolisCity_PokemonCenter_1F_Text_EveryoneTakenRefuge:
+SootopolisCity_PokemonCenter_1F_Text_EveryoneTakenRefuge::
+# 70 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	.string "Everyone in town has taken refuge\n"
 	.string "and won't come out of their homes.\p"
 	.string "Even I would rather not venture\n"
 	.string "outside.$"
 
-SootopolisCity_PokemonCenter_1F_Text_AlwaysBeFriendsWithPokemon:
+SootopolisCity_PokemonCenter_1F_Text_AlwaysBeFriendsWithPokemon::
+# 77 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	.string "Whenever, wherever, and whatever\n"
 	.string "happens, I will always be friends with\l"
 	.string "POKéMON.\p"
 	.string "Because it's fun to be with POKéMON!$"
 
-SootopolisCity_PokemonCenter_1F_Text_ArentPokemonOurFriends:
+SootopolisCity_PokemonCenter_1F_Text_ArentPokemonOurFriends::
+# 84 "data/maps/SootopolisCity_PokemonCenter_1F/scripts.pory"
 	.string "Aren't POKéMON our friends?\p"
 	.string "Why are they going wild this way?$"
-

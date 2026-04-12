@@ -1,104 +1,195 @@
-.set DID_CHANSEY_DANCE, FLAG_TEMP_2
-
 SevenIsland_SevaultCanyon_House_Frlg_MapScripts::
 	.byte 0
 
+
 SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan::
+# 4 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	lock
-	goto_if_set DID_CHANSEY_DANCE, SevenIsland_SevaultCanyon_House_EventScript_AlreadyDanced
+# 5 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
+	goto_if_set DID_CHANSEY_DANCE, SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan_2
+SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan_1:
+# 8 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	playbgm MUS_SCHOOL, 0
+# 9 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	applymovement LOCALID_CHANSEY_DANCE_MAN, SevenIsland_SevaultCanyon_House_Movement_ChanseyDance
+# 10 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	waitmovement 0
+# 11 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	fadedefaultbgm
+# 12 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	delay 30
+# 13 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	applymovement LOCALID_CHANSEY_DANCE_MAN, Common_Movement_FacePlayer
+# 14 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	waitmovement 0
+# 15 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	msgbox SevenIsland_SevaultCanyon_House_Text_ChanseyDanceJoinIn
+# 16 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_NEUTRAL
+# 17 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	msgbox SevenIsland_SevaultCanyon_House_Text_WouldYouLikeToDance, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, SevenIsland_SevaultCanyon_House_EventScript_DeclineDance
+# 18 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan_5
+SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan_4:
+# 21 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	msgbox SevenIsland_SevaultCanyon_House_Text_DancedChanseyDance
+# 22 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	closemessage
+# 23 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	call EventScript_RestorePrevTextColor
-	call_if_ne VAR_FACING, DIR_SOUTH, SevenIsland_SevaultCanyon_House_EventScript_PlayerFaceDown
+# 24 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
+	compare VAR_FACING, DIR_SOUTH
+	goto_if_ne SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan_8
+SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan_7:
+# 27 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	delay 30
+# 28 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	playbgm MUS_SCHOOL, 0
+# 29 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, SevenIsland_SevaultCanyon_House_Movement_ChanseyDance
+# 30 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	waitmovement 0
+# 31 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	fadedefaultbgm
+# 32 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	delay 30
+# 33 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	call Common_EventScript_OutOfCenterPartyHeal
+# 34 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	msgbox SevenIsland_SevaultCanyon_House_Text_YoureAllChipperNow
+# 35 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	setflag DID_CHANSEY_DANCE
+# 36 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	release
 	end
 
+SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan_2:
+# 6 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
+	goto SevenIsland_SevaultCanyon_House_EventScript_AlreadyDanced
+	goto SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan_1
+
+SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan_5:
+# 19 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
+	goto SevenIsland_SevaultCanyon_House_EventScript_DeclineDance
+	goto SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan_4
+
+SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan_8:
+# 25 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
+	call SevenIsland_SevaultCanyon_House_EventScript_PlayerFaceDown
+	goto SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan_7
+
+
 SevenIsland_SevaultCanyon_House_EventScript_PlayerFaceDown::
+# 41 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+# 42 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	waitmovement 0
 	return
 
+
 SevenIsland_SevaultCanyon_House_EventScript_AlreadyDanced::
+# 47 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	applymovement LOCALID_CHANSEY_DANCE_MAN, Common_Movement_FacePlayer
+# 48 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	waitmovement 0
+# 49 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	msgbox SevenIsland_SevaultCanyon_House_Text_ChanseyDanceJoinIn
+# 50 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	release
 	end
+
 
 SevenIsland_SevaultCanyon_House_EventScript_DeclineDance::
+# 55 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_MALE
+# 56 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	msgbox SevenIsland_SevaultCanyon_House_Text_ComeOnDance
+# 57 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	release
 	end
 
-SevenIsland_SevaultCanyon_House_Movement_ChanseyDance::
+
+# 61 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
+SevenIsland_SevaultCanyon_House_Movement_ChanseyDance:
+# 62 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	walk_in_place_down
+# 63 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	delay_16
+# 64 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	walk_in_place_down
+# 65 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	delay_16
+# 66 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	walk_in_place_down
+# 67 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	delay_16
+# 68 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	walk_in_place_down
+# 69 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	delay_16
+# 70 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	walk_in_place_faster_right
+# 71 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	delay_4
+# 72 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	walk_in_place_faster_up
+# 73 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	delay_4
+# 74 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	walk_in_place_faster_left
+# 75 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	delay_4
+# 76 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	walk_in_place_faster_down
+# 77 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	delay_4
+# 78 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	step_end
 
 SevenIsland_SevaultCanyon_House_EventScript_Chansey::
+# 82 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	lock
+# 83 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	faceplayer
+# 84 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	waitse
+# 85 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	playmoncry SPECIES_CHANSEY, CRY_MODE_NORMAL
+# 86 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	msgbox SevenIsland_SevaultCanyon_House_Text_Chansey
+# 87 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	waitmoncry
+# 88 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	release
 	end
 
+
 SevenIsland_SevaultCanyon_House_Text_ChanseyDanceJoinIn::
+# 92 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	.string "Dance, dance!\n"
 	.string "CHANSEY Dance!\p"
 	.string "You join in, too!\n"
 	.string "Dance, dance!$"
 
 SevenIsland_SevaultCanyon_House_Text_WouldYouLikeToDance::
+# 99 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	.string "Would you like to dance?$"
 
 SevenIsland_SevaultCanyon_House_Text_ComeOnDance::
+# 103 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	.string "Come on, dance!$"
 
 SevenIsland_SevaultCanyon_House_Text_DancedChanseyDance::
+# 107 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	.string "{PLAYER} danced the CHANSEY Dance!$"
 
 SevenIsland_SevaultCanyon_House_Text_YoureAllChipperNow::
+# 111 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	.string "Ahahahaha!\p"
 	.string "There, you're all chipper now!\n"
 	.string "Lucky!$"
 
 SevenIsland_SevaultCanyon_House_Text_Chansey::
+# 117 "data/maps/SevenIsland_SevaultCanyon_House_Frlg/scripts.pory"
 	.string "CHANSEY: Chansi! Chansi!$"

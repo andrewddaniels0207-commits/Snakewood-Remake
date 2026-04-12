@@ -1,42 +1,77 @@
 SSAnne_1F_Room6_Frlg_MapScripts::
 	.byte 0
 
+
 SSAnne_1F_Room6_EventScript_Woman::
+# 4 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
 	lock
+# 5 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
 	faceplayer
+# 6 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
 	msgbox SSAnne_1F_Room6_Text_TakeAShortRest, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, SSAnne_1F_Room6_EventScript_DeclineHeal
+# 7 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq SSAnne_1F_Room6_EventScript_Woman_2
+SSAnne_1F_Room6_EventScript_Woman_1:
+# 10 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
 	closemessage
+# 11 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
 	call Common_EventScript_OutOfCenterPartyHeal
+# 12 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
 	msgbox SSAnne_1F_Room6_Text_GladEveryoneIsRefreshed
+# 13 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
 	release
 	end
+
+SSAnne_1F_Room6_EventScript_Woman_2:
+# 8 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
+	goto SSAnne_1F_Room6_EventScript_DeclineHeal
+	goto SSAnne_1F_Room6_EventScript_Woman_1
+
 
 SSAnne_1F_Room6_EventScript_DeclineHeal::
+# 18 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, SSAnne_1F_Room6_EventScript_DeclineHealMale
+# 19 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
+	compare VAR_RESULT, MALE
+	goto_if_eq SSAnne_1F_Room6_EventScript_DeclineHeal_2
+SSAnne_1F_Room6_EventScript_DeclineHeal_1:
+# 22 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
 	msgbox SSAnne_1F_Room6_Text_SorryYouLookLikeMySister
+# 23 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
 	release
 	end
+
+SSAnne_1F_Room6_EventScript_DeclineHeal_2:
+# 20 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
+	goto SSAnne_1F_Room6_EventScript_DeclineHealMale
+	goto SSAnne_1F_Room6_EventScript_DeclineHeal_1
+
 
 SSAnne_1F_Room6_EventScript_DeclineHealMale::
+# 28 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
 	msgbox SSAnne_1F_Room6_Text_SorryYouLookLikeMyBrother
+# 29 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
 	release
 	end
 
+
 SSAnne_1F_Room6_Text_TakeAShortRest::
+# 33 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
 	.string "You look tired. Would you like to\n"
 	.string "take a short rest?$"
 
 SSAnne_1F_Room6_Text_GladEveryoneIsRefreshed::
+# 38 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
 	.string "I'm glad to see that everyone is\n"
 	.string "looking refreshed and chipper.$"
 
 SSAnne_1F_Room6_Text_SorryYouLookLikeMyBrother::
+# 43 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
 	.string "Oh, I'm sorry for fussing over you.\n"
 	.string "You look like my little brother…$"
 
 SSAnne_1F_Room6_Text_SorryYouLookLikeMySister::
+# 48 "data/maps/SSAnne_1F_Room6_Frlg/scripts.pory"
 	.string "Oh, I'm sorry for fussing over you.\n"
 	.string "You look like my little sister…$"
-

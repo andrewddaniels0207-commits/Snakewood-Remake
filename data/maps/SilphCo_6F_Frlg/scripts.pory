@@ -1,216 +1,293 @@
-mapscripts SilphCo_6F_Frlg_MapScripts {
-    MAP_SCRIPT_ON_LOAD: SilphCo_6F_OnLoad
-}
+raw `
+SilphCo_6F_Frlg_MapScripts::
+# 2 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_LOAD, SilphCo_6F_OnLoad
+	.byte 0
 
-script SilphCo_6F_OnLoad {
-    if (!flag(FLAG_SILPH_6F_DOOR)) {
-        call(EventScript_Close6FDoor)
-    }
-    end
-}
 
-script SilphCo_6F_EventScript_WorkerM2 {
-    lock
-    faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
-        goto(SilphCo_6F_EventScript_WorkerM2RocketsGone)
-    }
-    msgbox(SilphCo_6F_Text_TargetedSilphForOurMonProducts)
-    release
-    end
-}
+SilphCo_6F_OnLoad::
+# 6 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	goto_if_unset FLAG_SILPH_6F_DOOR, SilphCo_6F_OnLoad_2
+SilphCo_6F_OnLoad_1:
+	end
 
-script SilphCo_6F_EventScript_WorkerM2RocketsGone {
-    msgbox(SilphCo_6F_Text_ComeWorkForSilphWhenYoureOlder)
-    release
-    end
-}
+SilphCo_6F_OnLoad_2:
+# 7 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	call EventScript_Close6FDoor
+	goto SilphCo_6F_OnLoad_1
 
-script SilphCo_6F_EventScript_WorkerM3 {
-    lock
-    faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
-        goto(SilphCo_6F_EventScript_WorkerM3RocketsGone)
-    }
-    msgbox(SilphCo_6F_Text_RocketsTookOverBuilding)
-    release
-    end
-}
 
-script SilphCo_6F_EventScript_WorkerM3RocketsGone {
-    msgbox(SilphCo_6F_Text_BetterGetBackToWork)
-    release
-    end
-}
+SilphCo_6F_EventScript_WorkerM2::
+# 13 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	lock
+# 14 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	faceplayer
+# 15 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
+	goto_if_ge SilphCo_6F_EventScript_WorkerM2_2
+SilphCo_6F_EventScript_WorkerM2_1:
+# 18 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	msgbox SilphCo_6F_Text_TargetedSilphForOurMonProducts
+# 19 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	release
+	end
 
-script SilphCo_6F_EventScript_WorkerM1 {
-    lock
-    faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
-        goto(SilphCo_6F_EventScript_WorkerM1RocketsGone)
-    }
-    msgbox(SilphCo_6F_Text_HelpMePlease)
-    release
-    end
-}
+SilphCo_6F_EventScript_WorkerM2_2:
+# 16 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	goto SilphCo_6F_EventScript_WorkerM2RocketsGone
+	goto SilphCo_6F_EventScript_WorkerM2_1
 
-script SilphCo_6F_EventScript_WorkerM1RocketsGone {
-    msgbox(SilphCo_6F_Text_WeGotEngaged)
-    release
-    end
-}
 
-script SilphCo_6F_EventScript_WorkerF1 {
-    lock
-    faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
-        goto(SilphCo_6F_EventScript_WorkerF1RocketsGone)
-    }
-    msgbox(SilphCo_6F_Text_ThatManIsSuchACoward)
-    release
-    end
-}
+SilphCo_6F_EventScript_WorkerM2RocketsGone::
+# 24 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	msgbox SilphCo_6F_Text_ComeWorkForSilphWhenYoureOlder
+# 25 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	release
+	end
 
-script SilphCo_6F_EventScript_WorkerF1RocketsGone {
-    msgbox(SilphCo_6F_Text_NeedsMeToLookAfterHim)
-    release
-    end
-}
 
-script SilphCo_6F_EventScript_WorkerF2 {
-    lock
-    faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
-        goto(SilphCo_6F_EventScript_WorkerF2RocketsGone)
-    }
-    msgbox(SilphCo_6F_Text_RocketsTryingToConquerWorld)
-    release
-    end
-}
+SilphCo_6F_EventScript_WorkerM3::
+# 30 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	lock
+# 31 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	faceplayer
+# 32 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
+	goto_if_ge SilphCo_6F_EventScript_WorkerM3_2
+SilphCo_6F_EventScript_WorkerM3_1:
+# 35 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	msgbox SilphCo_6F_Text_RocketsTookOverBuilding
+# 36 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	release
+	end
 
-script SilphCo_6F_EventScript_WorkerF2RocketsGone {
-    msgbox(SilphCo_6F_Text_RocketsRanAwayBecauseOfYou)
-    release
-    end
-}
+SilphCo_6F_EventScript_WorkerM3_2:
+# 33 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	goto SilphCo_6F_EventScript_WorkerM3RocketsGone
+	goto SilphCo_6F_EventScript_WorkerM3_1
 
-script SilphCo_6F_EventScript_FloorSign {
-    msgbox(SilphCo_6F_Text_FloorSign, MSGBOX_SIGN)
-    end
-}
 
-script SilphCo_6F_EventScript_Taylor {
-    trainerbattle_single(TRAINER_SCIENTIST_TAYLOR, SilphCo_6F_Text_TaylorIntro, SilphCo_6F_Text_TaylorDefeat)
-    msgbox(SilphCo_6F_Text_TaylorPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+SilphCo_6F_EventScript_WorkerM3RocketsGone::
+# 41 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	msgbox SilphCo_6F_Text_BetterGetBackToWork
+# 42 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	release
+	end
 
-script SilphCo_6F_EventScript_Grunt1 {
-    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_30, SilphCo_6F_Text_Grunt1Intro, SilphCo_6F_Text_Grunt1Defeat)
-    msgbox(SilphCo_6F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
 
-script SilphCo_6F_EventScript_Grunt2 {
-    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_31, SilphCo_6F_Text_Grunt2Intro, SilphCo_6F_Text_Grunt2Defeat)
-    msgbox(SilphCo_6F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+SilphCo_6F_EventScript_WorkerM1::
+# 47 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	lock
+# 48 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	faceplayer
+# 49 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
+	goto_if_ge SilphCo_6F_EventScript_WorkerM1_2
+SilphCo_6F_EventScript_WorkerM1_1:
+# 52 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	msgbox SilphCo_6F_Text_HelpMePlease
+# 53 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	release
+	end
 
-text SilphCo_6F_Text_RocketsTookOverBuilding {
-    "The ROCKETS came and took over\n"
-    "the building!$"
-}
+SilphCo_6F_EventScript_WorkerM1_2:
+# 50 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	goto SilphCo_6F_EventScript_WorkerM1RocketsGone
+	goto SilphCo_6F_EventScript_WorkerM1_1
 
-text SilphCo_6F_Text_BetterGetBackToWork {
-    "Well, better get back to work.$"
-}
 
-text SilphCo_6F_Text_HelpMePlease {
-    "Oh dear, oh dear.\n"
-    "Help me, please!$"
-}
+SilphCo_6F_EventScript_WorkerM1RocketsGone::
+# 58 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	msgbox SilphCo_6F_Text_WeGotEngaged
+# 59 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	release
+	end
 
-text SilphCo_6F_Text_WeGotEngaged {
-    "We got engaged.\n"
-    "Heheh!$"
-}
 
-text SilphCo_6F_Text_ThatManIsSuchACoward {
-    "That man next to me…\n"
-    "He's such a coward!$"
-}
+SilphCo_6F_EventScript_WorkerF1::
+# 64 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	lock
+# 65 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	faceplayer
+# 66 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
+	goto_if_ge SilphCo_6F_EventScript_WorkerF1_2
+SilphCo_6F_EventScript_WorkerF1_1:
+# 69 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	msgbox SilphCo_6F_Text_ThatManIsSuchACoward
+# 70 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	release
+	end
 
-text SilphCo_6F_Text_NeedsMeToLookAfterHim {
-    "He's so helpless, he needed\n"
-    "someone like me to look after him.$"
-}
+SilphCo_6F_EventScript_WorkerF1_2:
+# 67 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	goto SilphCo_6F_EventScript_WorkerF1RocketsGone
+	goto SilphCo_6F_EventScript_WorkerF1_1
 
-text SilphCo_6F_Text_RocketsTryingToConquerWorld {
-    "TEAM ROCKET is trying to conquer\n"
-    "the world with POKéMON.$"
-}
 
-text SilphCo_6F_Text_RocketsRanAwayBecauseOfYou {
-    "TEAM ROCKET ran away, and it's all\n"
-    "because of you!$"
-}
+SilphCo_6F_EventScript_WorkerF1RocketsGone::
+# 75 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	msgbox SilphCo_6F_Text_NeedsMeToLookAfterHim
+# 76 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	release
+	end
 
-text SilphCo_6F_Text_TargetedSilphForOurMonProducts {
-    "They must have targeted SILPH for\n"
-    "our POKéMON products.$"
-}
 
-text SilphCo_6F_Text_ComeWorkForSilphWhenYoureOlder {
-    "Come work for SILPH when you\n"
-    "get older.$"
-}
+SilphCo_6F_EventScript_WorkerF2::
+# 81 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	lock
+# 82 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	faceplayer
+# 83 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
+	goto_if_ge SilphCo_6F_EventScript_WorkerF2_2
+SilphCo_6F_EventScript_WorkerF2_1:
+# 86 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	msgbox SilphCo_6F_Text_RocketsTryingToConquerWorld
+# 87 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	release
+	end
 
-text SilphCo_6F_Text_Grunt1Intro {
-    "I am one of the four ROCKET\n"
-    "BROTHERS!$"
-}
+SilphCo_6F_EventScript_WorkerF2_2:
+# 84 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	goto SilphCo_6F_EventScript_WorkerF2RocketsGone
+	goto SilphCo_6F_EventScript_WorkerF2_1
 
-text SilphCo_6F_Text_Grunt1Defeat {
-    "Flame out!$"
-}
 
-text SilphCo_6F_Text_Grunt1PostBattle {
-    "No matter!\n"
-    "My brothers will avenge me!$"
-}
+SilphCo_6F_EventScript_WorkerF2RocketsGone::
+# 92 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	msgbox SilphCo_6F_Text_RocketsRanAwayBecauseOfYou
+# 93 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	release
+	end
 
-text SilphCo_6F_Text_TaylorIntro {
-    "That rotten PRESIDENT!\p"
-    "Serves him right for shipping me\n"
-    "off to the TIKSI BRANCH!\p"
-    "That's why TEAM ROCKET came after\n"
-    "us, I'm sure of it!$"
-}
 
-text SilphCo_6F_Text_TaylorDefeat {
-    "Shoot!$"
-}
+SilphCo_6F_EventScript_FloorSign::
+# 98 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	msgbox SilphCo_6F_Text_FloorSign, MSGBOX_SIGN
+	end
 
-text SilphCo_6F_Text_TaylorPostBattle {
-    "TIKSI BRANCH?\n"
-    "It's in Russian no-man's-land!$"
-}
 
-text SilphCo_6F_Text_Grunt2Intro {
-    "You dare betray TEAM ROCKET?$"
-}
+SilphCo_6F_EventScript_Taylor::
+# 103 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	trainerbattle_single TRAINER_SCIENTIST_TAYLOR, SilphCo_6F_Text_TaylorIntro, SilphCo_6F_Text_TaylorDefeat
+# 104 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	msgbox SilphCo_6F_Text_TaylorPostBattle, MSGBOX_AUTOCLOSE
+	end
 
-text SilphCo_6F_Text_Grunt2Defeat {
-    "You traitor!$"
-}
 
-text SilphCo_6F_Text_Grunt2PostBattle {
-    "If you stand for justice, you\n"
-    "betray us bad guys!$"
-}
+SilphCo_6F_EventScript_Grunt1::
+# 109 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_30, SilphCo_6F_Text_Grunt1Intro, SilphCo_6F_Text_Grunt1Defeat
+# 110 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	msgbox SilphCo_6F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
+	end
 
-text SilphCo_6F_Text_FloorSign {
-    "SILPH CO. HEAD OFFICE\n"
-    "6F$"
-}
+
+SilphCo_6F_EventScript_Grunt2::
+# 115 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_31, SilphCo_6F_Text_Grunt2Intro, SilphCo_6F_Text_Grunt2Defeat
+# 116 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	msgbox SilphCo_6F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+SilphCo_6F_Text_RocketsTookOverBuilding::
+# 120 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "The ROCKETS came and took over\n"
+	.string "the building!$"
+
+SilphCo_6F_Text_BetterGetBackToWork::
+# 125 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "Well, better get back to work.$"
+
+SilphCo_6F_Text_HelpMePlease::
+# 129 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "Oh dear, oh dear.\n"
+	.string "Help me, please!$"
+
+SilphCo_6F_Text_WeGotEngaged::
+# 134 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "We got engaged.\n"
+	.string "Heheh!$"
+
+SilphCo_6F_Text_ThatManIsSuchACoward::
+# 139 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "That man next to me…\n"
+	.string "He's such a coward!$"
+
+SilphCo_6F_Text_NeedsMeToLookAfterHim::
+# 144 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "He's so helpless, he needed\n"
+	.string "someone like me to look after him.$"
+
+SilphCo_6F_Text_RocketsTryingToConquerWorld::
+# 149 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "TEAM ROCKET is trying to conquer\n"
+	.string "the world with POKéMON.$"
+
+SilphCo_6F_Text_RocketsRanAwayBecauseOfYou::
+# 154 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "TEAM ROCKET ran away, and it's all\n"
+	.string "because of you!$"
+
+SilphCo_6F_Text_TargetedSilphForOurMonProducts::
+# 159 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "They must have targeted SILPH for\n"
+	.string "our POKéMON products.$"
+
+SilphCo_6F_Text_ComeWorkForSilphWhenYoureOlder::
+# 164 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "Come work for SILPH when you\n"
+	.string "get older.$"
+
+SilphCo_6F_Text_Grunt1Intro::
+# 169 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "I am one of the four ROCKET\n"
+	.string "BROTHERS!$"
+
+SilphCo_6F_Text_Grunt1Defeat::
+# 174 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "Flame out!$"
+
+SilphCo_6F_Text_Grunt1PostBattle::
+# 178 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "No matter!\n"
+	.string "My brothers will avenge me!$"
+
+SilphCo_6F_Text_TaylorIntro::
+# 183 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "That rotten PRESIDENT!\p"
+	.string "Serves him right for shipping me\n"
+	.string "off to the TIKSI BRANCH!\p"
+	.string "That's why TEAM ROCKET came after\n"
+	.string "us, I'm sure of it!$"
+
+SilphCo_6F_Text_TaylorDefeat::
+# 191 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "Shoot!$"
+
+SilphCo_6F_Text_TaylorPostBattle::
+# 195 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "TIKSI BRANCH?\n"
+	.string "It's in Russian no-man's-land!$"
+
+SilphCo_6F_Text_Grunt2Intro::
+# 200 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "You dare betray TEAM ROCKET?$"
+
+SilphCo_6F_Text_Grunt2Defeat::
+# 204 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "You traitor!$"
+
+SilphCo_6F_Text_Grunt2PostBattle::
+# 208 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "If you stand for justice, you\n"
+	.string "betray us bad guys!$"
+
+SilphCo_6F_Text_FloorSign::
+# 213 "data/maps/SilphCo_6F_Frlg/scripts.pory"
+	.string "SILPH CO. HEAD OFFICE\n"
+	.string "6F$"
+
+`

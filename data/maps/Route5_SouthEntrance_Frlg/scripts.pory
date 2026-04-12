@@ -1,135 +1,203 @@
-mapscripts Route5_SouthEntrance_Frlg_MapScripts {}
+raw `
+Route5_SouthEntrance_Frlg_MapScripts::
+	.byte 0
 
-script Route5_SouthEntrance_EventScript_Guard {
-    msgbox(Route5_SouthEntrance_Text_HiHowsItGoing, MSGBOX_NPC)
-    end
-}
 
-script Route5_SouthEntrance_EventScript_GuardTriggerLeft {
-    lockall
-    setvar(VAR_TEMP_1, 0)
-    goto(Route5_SouthEntrance_EventScript_GuardTrigger)
-    end
-}
+Route5_SouthEntrance_EventScript_Guard::
+# 4 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	msgbox Route5_SouthEntrance_Text_HiHowsItGoing, MSGBOX_NPC
+	end
 
-script Route5_SouthEntrance_EventScript_GuardTriggerMid {
-    lockall
-    setvar(VAR_TEMP_1, 1)
-    goto(Route5_SouthEntrance_EventScript_GuardTrigger)
-    end
-}
 
-script Route5_SouthEntrance_EventScript_GuardTriggerRight {
-    lockall
-    setvar(VAR_TEMP_1, 2)
-    goto(Route5_SouthEntrance_EventScript_GuardTrigger)
-    end
-}
+Route5_SouthEntrance_EventScript_GuardTriggerLeft::
+# 9 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	lockall
+# 10 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	setvar VAR_TEMP_1, 0
+# 11 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	goto Route5_SouthEntrance_EventScript_GuardTrigger
+	end
 
-script Route5_SouthEntrance_EventScript_GuardTrigger {
-    textcolor(NPC_TEXT_COLOR_MALE)
-    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft)
-    waitmovement(0)
-    if (flag(FLAG_GOT_TEA)) {
-        goto(Route5_SouthEntrance_EventScript_GiveTea)
-    }
-    msgbox(Route5_SouthEntrance_Text_ThirstyOnGuardDuty)
-    closemessage
-    applymovement(LOCALID_PLAYER, Route5_SouthEntrance_Movement_BlockPlayerEntry)
-    waitmovement(0)
-    releaseall
-    end
-}
 
-script Route5_SouthEntrance_EventScript_GiveTea {
-    removeitem(ITEM_TEA)
-    goto(Route5_SouthEntrance_EventScript_GuardDrinkTea)
-    end
-}
+Route5_SouthEntrance_EventScript_GuardTriggerMid::
+# 16 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	lockall
+# 17 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	setvar VAR_TEMP_1, 1
+# 18 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	goto Route5_SouthEntrance_EventScript_GuardTrigger
+	end
 
-script Route5_SouthEntrance_EventScript_GuardDrinkTea {
-    msgbox(Route5_SouthEntrance_Text_ThatTeaLooksTasty)
-    closemessage
-    if (var(VAR_TEMP_1) == 0) {
-        call(Route5_SouthEntrance_EventScript_WalkToGuardLeft)
-    }
-    if (var(VAR_TEMP_1) == 1) {
-        call(Route5_SouthEntrance_EventScript_WalkToGuardMid)
-    }
-    if (var(VAR_TEMP_1) == 2) {
-        call(Route5_SouthEntrance_EventScript_WalkToGuardRight)
-    }
-    msgbox(Route5_SouthEntrance_Text_ThanksIllShareTeaWithGuards)
-    setvar(VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1)
-    releaseall
-    end
-}
 
-script Route5_SouthEntrance_EventScript_WalkToGuardLeft {
-    applymovement(LOCALID_PLAYER, Route5_SouthEntrance_Movement_WalkToGuardLeft)
-    waitmovement(0)
-    return
-}
+Route5_SouthEntrance_EventScript_GuardTriggerRight::
+# 23 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	lockall
+# 24 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	setvar VAR_TEMP_1, 2
+# 25 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	goto Route5_SouthEntrance_EventScript_GuardTrigger
+	end
 
-script Route5_SouthEntrance_EventScript_WalkToGuardMid {
-    applymovement(LOCALID_PLAYER, Route5_SouthEntrance_Movement_WalkToGuardMid)
-    waitmovement(0)
-    return
-}
 
-script Route5_SouthEntrance_EventScript_WalkToGuardRight {
-    applymovement(LOCALID_PLAYER, Route5_SouthEntrance_Movement_WalkToGuardRight)
-    waitmovement(0)
-    return
-}
+Route5_SouthEntrance_EventScript_GuardTrigger::
+# 30 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	textcolor NPC_TEXT_COLOR_MALE
+# 31 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+# 32 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	waitmovement 0
+# 33 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_TEA, Route5_SouthEntrance_EventScript_GuardTrigger_2
+Route5_SouthEntrance_EventScript_GuardTrigger_1:
+# 36 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	msgbox Route5_SouthEntrance_Text_ThirstyOnGuardDuty
+# 37 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	closemessage
+# 38 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	applymovement LOCALID_PLAYER, Route5_SouthEntrance_Movement_BlockPlayerEntry
+# 39 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	waitmovement 0
+# 40 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	releaseall
+	end
 
-movement Route5_SouthEntrance_Movement_WalkToGuardMid {
-    walk_left
-    step_end
-}
+Route5_SouthEntrance_EventScript_GuardTrigger_2:
+# 34 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	goto Route5_SouthEntrance_EventScript_GiveTea
+	goto Route5_SouthEntrance_EventScript_GuardTrigger_1
 
-movement Route5_SouthEntrance_Movement_WalkToGuardRight {
-    walk_left
-    walk_left
-    step_end
-}
 
-movement Route5_SouthEntrance_Movement_WalkToGuardLeft {
-    walk_in_place_left
-    step_end
-}
+Route5_SouthEntrance_EventScript_GiveTea::
+# 45 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	removeitem ITEM_TEA
+# 46 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	goto Route5_SouthEntrance_EventScript_GuardDrinkTea
+	end
 
-movement Route5_SouthEntrance_Movement_BlockPlayerEntry {
-    walk_up
-    step_end
-}
 
-text Route5_SouthEntrance_Text_ThirstyOnGuardDuty {
-    "I'm on guard duty.\n"
-    "Gee, I'm thirsty, though!\p"
-    "Oh, wait there, the road's closed.$"
-}
+Route5_SouthEntrance_EventScript_GuardDrinkTea::
+# 51 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	msgbox Route5_SouthEntrance_Text_ThatTeaLooksTasty
+# 52 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	closemessage
+# 53 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 0
+	goto_if_eq Route5_SouthEntrance_EventScript_GuardDrinkTea_2
+Route5_SouthEntrance_EventScript_GuardDrinkTea_1:
+# 56 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 1
+	goto_if_eq Route5_SouthEntrance_EventScript_GuardDrinkTea_5
+Route5_SouthEntrance_EventScript_GuardDrinkTea_4:
+# 59 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 2
+	goto_if_eq Route5_SouthEntrance_EventScript_GuardDrinkTea_8
+Route5_SouthEntrance_EventScript_GuardDrinkTea_7:
+# 62 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	msgbox Route5_SouthEntrance_Text_ThanksIllShareTeaWithGuards
+# 63 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	setvar VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1
+# 64 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	releaseall
+	end
 
-text Route5_SouthEntrance_Text_ThatTeaLooksTasty {
-    "Oh, that TEA…\n"
-    "It looks awfully tasty…$"
-}
+Route5_SouthEntrance_EventScript_GuardDrinkTea_2:
+# 54 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	call Route5_SouthEntrance_EventScript_WalkToGuardLeft
+	goto Route5_SouthEntrance_EventScript_GuardDrinkTea_1
 
-text Route5_SouthEntrance_Text_ThanksIllShareTeaWithGuards {
-    "Huh? I can have this drink?\n"
-    "Gee, thanks!\l"
-    "… …\l"
-    "Glug, glug…\l"
-    "… …\l"
-    "Gulp…\l"
-    "If you want to go to SAFFRON\l"
-    "CITY…\l"
-    "… …\l"
-    "You can go on through.\p"
-    "I'll share this TEA with the other\n"
-    "guards!$"
-}
+Route5_SouthEntrance_EventScript_GuardDrinkTea_5:
+# 57 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	call Route5_SouthEntrance_EventScript_WalkToGuardMid
+	goto Route5_SouthEntrance_EventScript_GuardDrinkTea_4
 
-text Route5_SouthEntrance_Text_HiHowsItGoing {
-    "Hi, how's it going?$"
-}
+Route5_SouthEntrance_EventScript_GuardDrinkTea_8:
+# 60 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	call Route5_SouthEntrance_EventScript_WalkToGuardRight
+	goto Route5_SouthEntrance_EventScript_GuardDrinkTea_7
+
+
+Route5_SouthEntrance_EventScript_WalkToGuardLeft::
+# 69 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	applymovement LOCALID_PLAYER, Route5_SouthEntrance_Movement_WalkToGuardLeft
+# 70 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route5_SouthEntrance_EventScript_WalkToGuardMid::
+# 75 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	applymovement LOCALID_PLAYER, Route5_SouthEntrance_Movement_WalkToGuardMid
+# 76 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route5_SouthEntrance_EventScript_WalkToGuardRight::
+# 81 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	applymovement LOCALID_PLAYER, Route5_SouthEntrance_Movement_WalkToGuardRight
+# 82 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	waitmovement 0
+	return
+
+
+# 86 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+Route5_SouthEntrance_Movement_WalkToGuardMid:
+# 87 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	walk_left
+# 88 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	step_end
+
+# 91 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+Route5_SouthEntrance_Movement_WalkToGuardRight:
+# 92 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	walk_left
+# 93 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	walk_left
+# 94 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	step_end
+
+# 97 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+Route5_SouthEntrance_Movement_WalkToGuardLeft:
+# 98 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	walk_in_place_left
+# 99 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	step_end
+
+# 102 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+Route5_SouthEntrance_Movement_BlockPlayerEntry:
+# 103 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	walk_up
+# 104 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	step_end
+
+Route5_SouthEntrance_Text_ThirstyOnGuardDuty::
+# 107 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	.string "I'm on guard duty.\n"
+	.string "Gee, I'm thirsty, though!\p"
+	.string "Oh, wait there, the road's closed.$"
+
+Route5_SouthEntrance_Text_ThatTeaLooksTasty::
+# 113 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	.string "Oh, that TEA…\n"
+	.string "It looks awfully tasty…$"
+
+Route5_SouthEntrance_Text_ThanksIllShareTeaWithGuards::
+# 118 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	.string "Huh? I can have this drink?\n"
+	.string "Gee, thanks!\l"
+	.string "… …\l"
+	.string "Glug, glug…\l"
+	.string "… …\l"
+	.string "Gulp…\l"
+	.string "If you want to go to SAFFRON\l"
+	.string "CITY…\l"
+	.string "… …\l"
+	.string "You can go on through.\p"
+	.string "I'll share this TEA with the other\n"
+	.string "guards!$"
+
+Route5_SouthEntrance_Text_HiHowsItGoing::
+# 133 "data/maps/Route5_SouthEntrance_Frlg/scripts.pory"
+	.string "Hi, how's it going?$"
+
+`

@@ -1,8 +1,14 @@
-mapscripts SeafoamIslands_1F_Frlg_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: SeafoamIslands_1F_OnTransition
-}
+raw `
+SeafoamIslands_1F_Frlg_MapScripts::
+# 2 "data/maps/SeafoamIslands_1F_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, SeafoamIslands_1F_OnTransition
+	.byte 0
 
-script SeafoamIslands_1F_OnTransition {
-    setworldmapflag(FLAG_WORLD_MAP_SEAFOAM_ISLANDS_1F)
-    end
-}
+
+SeafoamIslands_1F_OnTransition::
+# 6 "data/maps/SeafoamIslands_1F_Frlg/scripts.pory"
+	setworldmapflag FLAG_WORLD_MAP_SEAFOAM_ISLANDS_1F
+	end
+
+
+`

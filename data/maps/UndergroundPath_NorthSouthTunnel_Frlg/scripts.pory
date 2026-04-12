@@ -1,8 +1,14 @@
-mapscripts UndergroundPath_NorthSouthTunnel_Frlg_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: UndergroundPath_NorthSouthTunnel_OnTransition
-}
+raw `
+UndergroundPath_NorthSouthTunnel_Frlg_MapScripts::
+# 2 "data/maps/UndergroundPath_NorthSouthTunnel_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, UndergroundPath_NorthSouthTunnel_OnTransition
+	.byte 0
 
-script UndergroundPath_NorthSouthTunnel_OnTransition {
-    setworldmapflag(FLAG_WORLD_MAP_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL)
-    end
-}
+
+UndergroundPath_NorthSouthTunnel_OnTransition::
+# 6 "data/maps/UndergroundPath_NorthSouthTunnel_Frlg/scripts.pory"
+	setworldmapflag FLAG_WORLD_MAP_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL
+	end
+
+
+`

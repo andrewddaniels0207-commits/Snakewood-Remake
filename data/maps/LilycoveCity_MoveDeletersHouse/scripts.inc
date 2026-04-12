@@ -1,106 +1,223 @@
 LilycoveCity_MoveDeletersHouse_MapScripts::
 	.byte 0
 
+
 LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter::
+# 4 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	lockall
+# 5 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	applymovement LOCALID_MOVE_DELETER, Common_Movement_FacePlayer
+# 6 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	waitmovement 0
+# 7 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	msgbox LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove, MSGBOX_YESNO
+# 8 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	switch VAR_RESULT
-	case YES, LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget
-	case NO, LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
+# 9 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	case YES, LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter_3
+# 11 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	case NO, LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter_4
+LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter_1:
+# 14 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	releaseall
 	end
+
+LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter_3:
+# 10 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	goto LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget
+	goto LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter_1
+
+LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter_4:
+# 12 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	goto LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
+	goto LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter_1
+
 
 LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget::
+# 19 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	msgbox LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget, MSGBOX_DEFAULT
+# 20 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	chooseboxmon SELECT_PC_MON_MOVE_DELETER
+# 21 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	waitstate
-	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
+# 22 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	compare VAR_0x8004, PARTY_NOTHING_CHOSEN
+	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_2
+LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_1:
+# 25 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	special IsSelectedMonEgg
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_MoveDeletersHouse_EventScript_EggCantForgetMoves
+# 26 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_5
+LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_4:
+# 29 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	special GetNumMovesSelectedMonHas
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_MoveDeletersHouse_EventScript_MonOnlyKnowsOneMove
+# 30 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_8
+LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_7:
+# 33 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	msgbox LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten, MSGBOX_DEFAULT
+# 34 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	fadescreen FADE_TO_BLACK
+# 35 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	special MoveDeleterChooseMoveToForget
+# 36 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	fadescreen FADE_FROM_BLACK
-	goto_if_eq VAR_0x8005, MAX_MON_MOVES, LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget
+# 37 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	compare VAR_0x8005, MAX_MON_MOVES
+	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_11
+LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_10:
+# 40 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	special BufferMoveDeleterNicknameAndMove
+# 41 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	msgbox LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten, MSGBOX_YESNO
+# 42 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	switch VAR_RESULT
-	case YES, LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove
-	case NO, LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
+# 43 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	case YES, LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_15
+# 45 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	case NO, LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_16
+LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_13:
+# 48 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	releaseall
 	end
+
+LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_2:
+# 23 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	goto LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
+	goto LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_1
+
+LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_5:
+# 27 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	goto LilycoveCity_MoveDeletersHouse_EventScript_EggCantForgetMoves
+	goto LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_4
+
+LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_8:
+# 31 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	goto LilycoveCity_MoveDeletersHouse_EventScript_MonOnlyKnowsOneMove
+	goto LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_7
+
+LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_11:
+# 38 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	goto LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget
+	goto LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_10
+
+LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_15:
+# 44 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	goto LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove
+	goto LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_13
+
+LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_16:
+# 46 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	goto LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
+	goto LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget_13
+
 
 LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove::
+# 53 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	special IsLastMonThatKnowsSurf
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf
+# 54 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove_2
+LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove_1:
+# 57 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	special MoveDeleterForgetMove
+# 58 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	playfanfare MUS_MOVE_DELETED
+# 59 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	waitfanfare
+# 60 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	msgbox LilycoveCity_MoveDeletersHouse_Text_MonHasForgottenMove, MSGBOX_DEFAULT
+# 61 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	releaseall
 	end
+
+LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove_2:
+# 55 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
+	goto LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf
+	goto LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove_1
+
 
 LilycoveCity_MoveDeletersHouse_EventScript_MonOnlyKnowsOneMove::
+# 66 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	special BufferMoveDeleterNicknameAndMove
+# 67 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	msgbox LilycoveCity_MoveDeletersHouse_Text_MonOnlyKnowsOneMove, MSGBOX_DEFAULT
+# 68 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	releaseall
 	end
+
 
 LilycoveCity_MoveDeletersHouse_EventScript_EggCantForgetMoves::
+# 73 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	msgbox LilycoveCity_MoveDeletersHouse_Text_EggCantForgetMoves, MSGBOX_DEFAULT
+# 74 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	releaseall
 	end
+
 
 LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain::
+# 79 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	msgbox LilycoveCity_MoveDeletersHouse_Text_ComeAgain, MSGBOX_DEFAULT
+# 80 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	releaseall
 	end
+
 
 LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf::
+# 85 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	special BufferMoveDeleterNicknameAndMove
+# 86 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	msgbox LilycoveCity_MoveDeletersHouse_Text_CantForgetSurf, MSGBOX_DEFAULT
+# 87 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	releaseall
 	end
 
-LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove:
+
+LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove::
+# 91 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	.string "Uh…\n"
 	.string "Oh, yes, I'm the MOVE DELETER.\p"
 	.string "I can make POKéMON forget their moves.\p"
 	.string "Would you like me to do that?$"
 
-LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget:
+LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget::
+# 98 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	.string "Which POKéMON should forget a move?$"
 
-LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten:
+LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten::
+# 102 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	.string "Which move should be forgotten?$"
 
-LilycoveCity_MoveDeletersHouse_Text_MonOnlyKnowsOneMove:
+LilycoveCity_MoveDeletersHouse_Text_MonOnlyKnowsOneMove::
+# 106 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	.string "{STR_VAR_1} knows only one move\n"
 	.string "so it can't be forgotten…$"
 
-LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten:
+LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten::
+# 111 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	.string "Hm! {STR_VAR_1}'s {STR_VAR_2}?\n"
 	.string "That move should be forgotten?$"
 
-LilycoveCity_MoveDeletersHouse_Text_MonHasForgottenMove:
+LilycoveCity_MoveDeletersHouse_Text_MonHasForgottenMove::
+# 116 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	.string "It worked to perfection!\p"
 	.string "{STR_VAR_1} has forgotten\n"
 	.string "{STR_VAR_2} completely.$"
 
-LilycoveCity_MoveDeletersHouse_Text_ComeAgain:
+LilycoveCity_MoveDeletersHouse_Text_ComeAgain::
+# 122 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	.string "Come again if there are moves that\n"
 	.string "need to be forgotten.$"
 
-LilycoveCity_MoveDeletersHouse_Text_EggCantForgetMoves:
+LilycoveCity_MoveDeletersHouse_Text_EggCantForgetMoves::
+# 127 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	.string "What?\n"
 	.string "No EGG should know any moves.$"
 
-LilycoveCity_MoveDeletersHouse_Text_CantForgetSurf:
+LilycoveCity_MoveDeletersHouse_Text_CantForgetSurf::
+# 132 "data/maps/LilycoveCity_MoveDeletersHouse/scripts.pory"
 	.string "Hm!\p"
 	.string "Your {STR_VAR_1} doesn't seem willing\n"
 	.string "to forget SURF.$"
-

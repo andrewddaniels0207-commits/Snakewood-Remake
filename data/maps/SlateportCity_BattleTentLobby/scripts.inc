@@ -1,278 +1,614 @@
 SlateportCity_BattleTentLobby_MapScripts::
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, SlateportCity_BattleTentLobby_OnFrame
+# 9 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SlateportCity_BattleTentLobby_OnWarp
+# 2 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SlateportCity_BattleTentLobby_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
 	.byte 0
 
-SlateportCity_BattleTentLobby_OnWarp:
-	map_script_2 VAR_TEMP_1, 0, SlateportCity_BattleTentLobby_EventScript_TurnPlayerNorth
-	.2byte 0
-
-SlateportCity_BattleTentLobby_EventScript_TurnPlayerNorth::
-	setvar VAR_TEMP_1, 1
-	turnobject LOCALID_PLAYER, DIR_NORTH
-	end
-
-SlateportCity_BattleTentLobby_OnFrame:
+SlateportCity_BattleTentLobby_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 3 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, 0, SlateportCity_BattleTentLobby_EventScript_GetChallengeStatus
+# 4 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING, SlateportCity_BattleTentLobby_EventScript_QuitWithoutSaving
+# 5 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_PAUSED, SlateportCity_BattleTentLobby_EventScript_ResumeChallenge
+# 6 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_WON, SlateportCity_BattleTentLobby_EventScript_WonChallenge
+# 7 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST, SlateportCity_BattleTentLobby_EventScript_LostChallenge
 	.2byte 0
 
+
+# 12 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+
+# 13 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+SlateportCity_BattleTentLobby_OnWarp:
+# 14 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	map_script_2 VAR_TEMP_1, 0, SlateportCity_BattleTentLobby_EventScript_TurnPlayerNorth
+# 15 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	.2byte 0
+
+SlateportCity_BattleTentLobby_EventScript_TurnPlayerNorth::
+# 20 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	setvar VAR_TEMP_1, 1
+# 21 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	turnobject LOCALID_PLAYER, DIR_NORTH
+	end
+
+
 SlateportCity_BattleTentLobby_EventScript_GetChallengeStatus::
+# 26 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	frontier_getstatus
 	end
 
+
 SlateportCity_BattleTentLobby_EventScript_QuitWithoutSaving::
+# 31 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	lockall
+# 32 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_DidntSaveBeforeQuitting, MSGBOX_DEFAULT
+# 33 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	closemessage
+# 34 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
+# 35 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
+# 36 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
+# 37 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	releaseall
 	end
+
 
 SlateportCity_BattleTentLobby_EventScript_WonChallenge::
+# 42 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	lockall
+# 43 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	message SlateportCity_BattleTentLobby_Text_WonThreeMatchesReturnMons
+# 44 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	waitmessage
+# 45 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	slateporttent_setrandomprize
+# 46 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
+# 47 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	slateporttent_save 0
+# 48 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	playse SE_SAVE
+# 49 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	waitse
+	return
+
+
 SlateportCity_BattleTentLobby_EventScript_GivePrize::
+# 53 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_AwardYouThisPrize, MSGBOX_DEFAULT
+# 54 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	slateporttent_giveprize
+# 55 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	switch VAR_RESULT
-	case FALSE, SlateportCity_BattleTentLobby_EventScript_NoRoomForPrize
+# 56 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	case FALSE, SlateportCity_BattleTentLobby_EventScript_GivePrize_3
+SlateportCity_BattleTentLobby_EventScript_GivePrize_1:
+# 59 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
-	message BattleFrontier_BattleTowerLobby_Text_ReceivedPrize  @ Odd that it uses Tower's instead of Factory's or its own
+# 60 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	message BattleFrontier_BattleTowerLobby_Text_ReceivedPrize
+# 61 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	waitmessage
+# 62 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	playfanfare MUS_OBTAIN_ITEM
+# 63 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	waitfanfare
+# 64 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	goto SlateportCity_BattleTentLobby_EventScript_EndGivePrize
+	return
+
+SlateportCity_BattleTentLobby_EventScript_GivePrize_3:
+# 57 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_NoRoomForPrize
+	goto SlateportCity_BattleTentLobby_EventScript_GivePrize_1
+
 
 SlateportCity_BattleTentLobby_EventScript_NoRoomForPrize::
+# 68 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_NoRoomInBagMakeRoom, MSGBOX_DEFAULT
+# 69 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	goto SlateportCity_BattleTentLobby_EventScript_EndGivePrize
+	return
+
 
 SlateportCity_BattleTentLobby_EventScript_LostChallenge::
+# 73 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	lockall
+# 74 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	message SlateportCity_BattleTentLobby_Text_ReturnRentalMonsSaveResults
+# 75 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	waitmessage
+# 76 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
+# 77 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	slateporttent_save 0
+# 78 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	playse SE_SAVE
+# 79 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	waitse
+	return
+
 
 SlateportCity_BattleTentLobby_EventScript_EndGivePrize::
+# 83 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_LookForwardToNextVisit, MSGBOX_DEFAULT
+# 84 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	closemessage
+# 85 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
+# 86 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	releaseall
 	end
 
+
 SlateportCity_BattleTentLobby_EventScript_ResumeChallenge::
+# 91 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	lockall
+# 92 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	message SlateportCity_BattleTentLobby_Text_BeenWaitingForYou
+# 93 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	waitmessage
+# 94 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	slateporttent_save CHALLENGE_STATUS_SAVING
+# 95 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	playse SE_SAVE
+# 96 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	waitse
+# 97 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
+# 98 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
+# 99 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	setvar VAR_0x8006, 2
+# 100 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	goto SlateportCity_BattleTentLobby_EventScript_EnterChallenge
+	return
+
 
 SlateportCity_BattleTentLobby_EventScript_Attendant::
+# 104 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	lock
+# 105 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	faceplayer
+# 106 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	slateporttent_getprize
-	goto_if_ne VAR_RESULT, ITEM_NONE, SlateportCity_BattleTentLobby_EventScript_GivePrize
+# 107 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	compare VAR_RESULT, ITEM_NONE
+	goto_if_ne SlateportCity_BattleTentLobby_EventScript_Attendant_2
+SlateportCity_BattleTentLobby_EventScript_Attendant_1:
+# 110 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	special SavePlayerParty
+# 111 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT
+	return
+
+SlateportCity_BattleTentLobby_EventScript_Attendant_2:
+# 108 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_GivePrize
+	goto SlateportCity_BattleTentLobby_EventScript_Attendant_1
+
+
 SlateportCity_BattleTentLobby_EventScript_AskEnterChallenge::
+# 115 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	message SlateportCity_BattleTentLobby_Text_TakeChallenge
+# 116 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	waitmessage
+# 117 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
+# 118 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	switch VAR_RESULT
-	case 0, SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge
-	case 1, SlateportCity_BattleTentLobby_EventScript_ExplainChallenge
-	case 2, SlateportCity_BattleTentLobby_EventScript_CancelChallenge
-	case MULTI_B_PRESSED, SlateportCity_BattleTentLobby_EventScript_CancelChallenge
+# 119 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	case 0, SlateportCity_BattleTentLobby_EventScript_AskEnterChallenge_2
+# 121 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	case 1, SlateportCity_BattleTentLobby_EventScript_AskEnterChallenge_3
+# 123 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	case 2, SlateportCity_BattleTentLobby_EventScript_AskEnterChallenge_4
+# 125 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	case MULTI_B_PRESSED, SlateportCity_BattleTentLobby_EventScript_AskEnterChallenge_5
+	return
+
+SlateportCity_BattleTentLobby_EventScript_AskEnterChallenge_2:
+# 120 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge
+	return
+
+SlateportCity_BattleTentLobby_EventScript_AskEnterChallenge_3:
+# 122 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_ExplainChallenge
+	return
+
+SlateportCity_BattleTentLobby_EventScript_AskEnterChallenge_4:
+# 124 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_CancelChallenge
+	return
+
+SlateportCity_BattleTentLobby_EventScript_AskEnterChallenge_5:
+# 126 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_CancelChallenge
+	return
+
 
 SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge::
+# 131 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_FACTORY
+# 132 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+# 133 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_TENT
+# 134 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO
+# 135 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	switch VAR_RESULT
-	case NO, SlateportCity_BattleTentLobby_EventScript_LoadPartyCancelChallenge
-	case YES, SlateportCity_BattleTentLobby_EventScript_SaveBeforeChallenge
-	case MULTI_B_PRESSED, SlateportCity_BattleTentLobby_EventScript_LoadPartyCancelChallenge
+# 136 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	case NO, SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge_2
+# 138 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	case YES, SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge_3
+# 140 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	case MULTI_B_PRESSED, SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge_4
+	return
+
+SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge_2:
+# 137 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_LoadPartyCancelChallenge
+	return
+
+SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge_3:
+# 139 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_SaveBeforeChallenge
+	return
+
+SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge_4:
+# 141 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_LoadPartyCancelChallenge
+	return
+
 
 SlateportCity_BattleTentLobby_EventScript_SaveBeforeChallenge::
+# 146 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	setvar VAR_TEMP_CHALLENGE_STATUS, 0
+# 147 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
+# 148 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	slateporttent_init
+# 149 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
+# 150 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
+# 151 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	closemessage
+# 152 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	delay 2
+# 153 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	call Common_EventScript_SaveGame
+# 154 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	goto_if_eq VAR_RESULT, 0, SlateportCity_BattleTentLobby_EventScript_CancelChallengeSaveFailed
+# 155 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	compare VAR_RESULT, 0
+	goto_if_eq SlateportCity_BattleTentLobby_EventScript_SaveBeforeChallenge_2
+SlateportCity_BattleTentLobby_EventScript_SaveBeforeChallenge_1:
+# 158 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	setvar VAR_0x8006, 0
+	return
+
+SlateportCity_BattleTentLobby_EventScript_SaveBeforeChallenge_2:
+# 156 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_CancelChallengeSaveFailed
+	goto SlateportCity_BattleTentLobby_EventScript_SaveBeforeChallenge_1
+
+
 SlateportCity_BattleTentLobby_EventScript_EnterChallenge::
+# 162 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_StepThisWay, MSGBOX_DEFAULT
+# 163 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	closemessage
+# 164 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	call SlateportCity_BattleTentLobby_EventScript_WalkToDoor
+# 165 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	warp MAP_SLATEPORT_CITY_BATTLE_TENT_CORRIDOR, 2, 7
+# 166 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	setvar VAR_TEMP_CHALLENGE_STATUS, 0
+# 167 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	waitstate
 	end
 
+
 SlateportCity_BattleTentLobby_EventScript_WalkToDoor::
+# 172 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	applymovement LOCALID_SLATEPORT_TENT_ATTENDANT, SlateportCity_BattleTentLobby_Movement_AttendantWalkToDoor
+# 173 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	applymovement LOCALID_PLAYER, SlateportCity_BattleTentLobby_Movement_PlayerWalkToDoor
+# 174 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	waitmovement 0
+# 175 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	opendoor 6, 1
+# 176 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	waitdooranim
+# 177 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	applymovement LOCALID_SLATEPORT_TENT_ATTENDANT, SlateportCity_BattleTentLobby_Movement_AttendantEnterDoor
+# 178 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	applymovement LOCALID_PLAYER, SlateportCity_BattleTentLobby_Movement_PlayerEnterDoor
+# 179 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	waitmovement 0
+# 180 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	closedoor 6, 1
+# 181 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	waitdooranim
 	return
 
+
+# 185 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 SlateportCity_BattleTentLobby_Movement_AttendantWalkToDoor:
+# 186 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	walk_up
+# 187 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	walk_up
+# 188 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	walk_up
+# 189 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	step_end
 
+# 192 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 SlateportCity_BattleTentLobby_Movement_AttendantEnterDoor:
+# 193 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	walk_up
+# 194 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	set_invisible
+# 195 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	step_end
 
+# 198 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 SlateportCity_BattleTentLobby_Movement_PlayerWalkToDoor:
+# 199 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	walk_up
+# 200 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	walk_up
+# 201 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	walk_up
+# 202 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	step_end
 
+# 205 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 SlateportCity_BattleTentLobby_Movement_PlayerEnterDoor:
+# 206 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	walk_up
+# 207 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	walk_up
+# 208 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	set_invisible
+# 209 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	step_end
 
 SlateportCity_BattleTentLobby_EventScript_ExplainChallenge::
+# 213 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_ExplainSlateportTent, MSGBOX_DEFAULT
+# 214 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	goto SlateportCity_BattleTentLobby_EventScript_AskEnterChallenge
+	return
+
 
 SlateportCity_BattleTentLobby_EventScript_CancelChallengeSaveFailed::
+# 218 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
+# 219 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	goto SlateportCity_BattleTentLobby_EventScript_CancelChallenge
+	return
+
 
 SlateportCity_BattleTentLobby_EventScript_LoadPartyCancelChallenge::
+# 223 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	special LoadPlayerParty
+	return
+
+
 SlateportCity_BattleTentLobby_EventScript_CancelChallenge::
+# 227 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_LookForwardToNextVisit, MSGBOX_DEFAULT
+# 228 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	release
 	end
 
-@ Unused
-SlateportCity_BattleTentLobby_Movement_UnusedEnterDoor::
+
+# 232 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+SlateportCity_BattleTentLobby_Movement_UnusedEnterDoor:
+# 233 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	walk_up
+# 234 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	walk_up
+# 235 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	walk_up
+# 236 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	set_invisible
+# 237 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	step_end
 
 SlateportCity_BattleTentLobby_EventScript_TormentGiver::
+# 241 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	lock
+# 242 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM_TORMENT, SlateportCity_BattleTentLobby_EventScript_ReceivedTorment
+# 243 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto_if_set FLAG_RECEIVED_TM_TORMENT, SlateportCity_BattleTentLobby_EventScript_TormentGiver_2
+SlateportCity_BattleTentLobby_EventScript_TormentGiver_1:
+# 246 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe, MSGBOX_DEFAULT
+# 247 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	giveitem ITEM_TM_TORMENT
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+# 248 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq SlateportCity_BattleTentLobby_EventScript_TormentGiver_5
+SlateportCity_BattleTentLobby_EventScript_TormentGiver_4:
+# 251 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	setflag FLAG_RECEIVED_TM_TORMENT
+# 252 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_ExplainTorment, MSGBOX_DEFAULT
+# 253 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	release
 	end
+
+SlateportCity_BattleTentLobby_EventScript_TormentGiver_2:
+# 244 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_ReceivedTorment
+	goto SlateportCity_BattleTentLobby_EventScript_TormentGiver_1
+
+SlateportCity_BattleTentLobby_EventScript_TormentGiver_5:
+# 249 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto SlateportCity_BattleTentLobby_EventScript_TormentGiver_4
+
 
 SlateportCity_BattleTentLobby_EventScript_ReceivedTorment::
+# 258 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_ExplainTorment, MSGBOX_DEFAULT
+# 259 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	release
 	end
 
+
 SlateportCity_BattleTentLobby_EventScript_Man::
+# 264 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_IllTryUsingBugMons, MSGBOX_NPC
 	end
 
+
 SlateportCity_BattleTentLobby_EventScript_Girl::
+# 269 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_BattleEvenWithoutToughMons, MSGBOX_NPC
 	end
 
+
 SlateportCity_BattleTentLobby_EventScript_Woman::
+# 274 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_NiceIfMoreSelection, MSGBOX_NPC
 	end
 
+
 SlateportCity_BattleTentLobby_EventScript_RulesBoard::
+# 279 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	lockall
+# 280 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox BattleFrontier_BattleFactoryLobby_Text_RulesAreListed, MSGBOX_DEFAULT
+# 281 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	goto SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard
 	end
+
 
 SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard::
+# 286 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	message BattleFrontier_BattleFactoryLobby_Text_ReadWhichHeading
+# 287 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	waitmessage
+# 288 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	multichoice 17, 0, MULTI_SLATEPORT_TENT_RULES, FALSE
+# 289 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	switch VAR_RESULT
-	case 0, SlateportCity_BattleTentLobby_EventScript_RulesBasics
-	case 1, SlateportCity_BattleTentLobby_EventScript_RulesSwapPartner
-	case 2, SlateportCity_BattleTentLobby_EventScript_RulesSwapNumber
-	case 3, SlateportCity_BattleTentLobby_EventScript_RulesSwapNotes
-	case 4, SlateportCity_BattleTentLobby_EventScript_RulesMons
-	case 5, SlateportCity_BattleTentLobby_EventScript_ExitRules
-	case MULTI_B_PRESSED, SlateportCity_BattleTentLobby_EventScript_ExitRules
+# 290 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	case 0, SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_3
+# 292 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	case 1, SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_4
+# 294 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	case 2, SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_5
+# 296 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	case 3, SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_6
+# 298 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	case 4, SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_7
+# 300 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	case 5, SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_8
+# 302 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	case MULTI_B_PRESSED, SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_9
+SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_1:
 	end
+
+SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_3:
+# 291 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_RulesBasics
+	goto SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_1
+
+SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_4:
+# 293 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_RulesSwapPartner
+	goto SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_1
+
+SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_5:
+# 295 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_RulesSwapNumber
+	goto SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_1
+
+SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_6:
+# 297 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_RulesSwapNotes
+	goto SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_1
+
+SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_7:
+# 299 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_RulesMons
+	goto SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_1
+
+SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_8:
+# 301 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_ExitRules
+	goto SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_1
+
+SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_9:
+# 303 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
+	goto SlateportCity_BattleTentLobby_EventScript_ExitRules
+	goto SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard_1
+
 
 SlateportCity_BattleTentLobby_EventScript_RulesBasics::
+# 309 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_ExplainBasicRules, MSGBOX_DEFAULT
+# 310 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	goto SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard
 	end
+
 
 SlateportCity_BattleTentLobby_EventScript_RulesSwapPartner::
+# 315 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_ExplainSwapPartnerRules, MSGBOX_DEFAULT
+# 316 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	goto SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard
 	end
+
 
 SlateportCity_BattleTentLobby_EventScript_RulesSwapNumber::
+# 321 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_ExplainSwapNumberRules, MSGBOX_DEFAULT
+# 322 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	goto SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard
 	end
+
 
 SlateportCity_BattleTentLobby_EventScript_RulesSwapNotes::
+# 327 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_ExplainSwapNotes, MSGBOX_DEFAULT
+# 328 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	goto SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard
 	end
+
 
 SlateportCity_BattleTentLobby_EventScript_RulesMons::
+# 333 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_ExplainMonRules, MSGBOX_DEFAULT
+# 334 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	goto SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard
 	end
 
+
 SlateportCity_BattleTentLobby_EventScript_ExitRules::
+# 339 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	releaseall
 	end
 
-SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe:
+
+SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe::
+# 343 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	.string "So, like, I couldn't find myself any\n"
 	.string "POKéMON that were, like, for me.\p"
 	.string "So, I figured, like, hey, I should file\n"
@@ -282,7 +618,8 @@ SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe:
 	.string "Hey, like, you! Zip it, you know?\n"
 	.string "Just, you know, take this!$"
 
-SlateportCity_BattleTentLobby_Text_ExplainTorment:
+SlateportCity_BattleTentLobby_Text_ExplainTorment::
+# 354 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	.string "That's, like, TM41, you know?\n"
 	.string "Hey, it's TORMENT, you hearing me?\p"
 	.string "Like, it won't let the other guy\n"
@@ -290,18 +627,20 @@ SlateportCity_BattleTentLobby_Text_ExplainTorment:
 	.string "Hey, now, you listen here, like,\n"
 	.string "I'm not laying a torment on you!$"
 
-SlateportCity_BattleTentLobby_Text_IllTryUsingBugMons:
+SlateportCity_BattleTentLobby_Text_IllTryUsingBugMons::
+# 363 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	.string "I don't really like BUG POKéMON,\n"
 	.string "but maybe I'll try using some for\l"
 	.string "a change of pace.\p"
 	.string "Who knows, I might even get to like\n"
 	.string "them!$"
 
-SlateportCity_BattleTentLobby_Text_BattleEvenWithoutToughMons:
+SlateportCity_BattleTentLobby_Text_BattleEvenWithoutToughMons::
+# 371 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	.string "You can battle all you want here even\n"
 	.string "if you don't have any tough POKéMON.$"
 
-SlateportCity_BattleTentLobby_Text_NiceIfMoreSelection:
+SlateportCity_BattleTentLobby_Text_NiceIfMoreSelection::
+# 376 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	.string "Wouldn't it be nice if they had more of\n"
 	.string "a selection?$"
-

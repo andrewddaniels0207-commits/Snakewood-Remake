@@ -1,57 +1,83 @@
-mapscripts MtPyre_1F_MapScripts {}
+raw `
+MtPyre_1F_MapScripts::
+	.byte 0
 
-script MtPyre_1F_EventScript_CleanseTagWoman {
-    lock
-    faceplayer
-    if (flag(FLAG_RECEIVED_CLEANSE_TAG)) {
-        goto(MtPyre_1F_EventScript_ReceivedCleanseTag)
-    }
-    msgbox(MtPyre_1F_Text_TakeThisForYourOwnGood, MSGBOX_DEFAULT)
-    giveitem(ITEM_CLEANSE_TAG)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(Common_EventScript_ShowBagIsFull)
-    }
-    setflag(FLAG_RECEIVED_CLEANSE_TAG)
-    release
-    end
-}
 
-script MtPyre_1F_EventScript_ReceivedCleanseTag {
-    msgbox(MtPyre_1F_Text_ExplainCleanseTag, MSGBOX_DEFAULT)
-    release
-    end
-}
+MtPyre_1F_EventScript_CleanseTagWoman::
+# 4 "data/maps/MtPyre_1F/scripts.pory"
+	lock
+# 5 "data/maps/MtPyre_1F/scripts.pory"
+	faceplayer
+# 6 "data/maps/MtPyre_1F/scripts.pory"
+	goto_if_set FLAG_RECEIVED_CLEANSE_TAG, MtPyre_1F_EventScript_CleanseTagWoman_2
+MtPyre_1F_EventScript_CleanseTagWoman_1:
+# 9 "data/maps/MtPyre_1F/scripts.pory"
+	msgbox MtPyre_1F_Text_TakeThisForYourOwnGood, MSGBOX_DEFAULT
+# 10 "data/maps/MtPyre_1F/scripts.pory"
+	giveitem ITEM_CLEANSE_TAG
+# 11 "data/maps/MtPyre_1F/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq MtPyre_1F_EventScript_CleanseTagWoman_5
+MtPyre_1F_EventScript_CleanseTagWoman_4:
+# 14 "data/maps/MtPyre_1F/scripts.pory"
+	setflag FLAG_RECEIVED_CLEANSE_TAG
+# 15 "data/maps/MtPyre_1F/scripts.pory"
+	release
+	end
 
-script MtPyre_1F_EventScript_PokefanF {
-    msgbox(MtPyre_1F_Text_ComeToPayRespects, MSGBOX_NPC)
-    end
-}
+MtPyre_1F_EventScript_CleanseTagWoman_2:
+# 7 "data/maps/MtPyre_1F/scripts.pory"
+	goto MtPyre_1F_EventScript_ReceivedCleanseTag
+	goto MtPyre_1F_EventScript_CleanseTagWoman_1
 
-script MtPyre_1F_EventScript_Man {
-    msgbox(MtPyre_1F_Text_RestingPlaceOfZigzagoon, MSGBOX_NPC)
-    end
-}
+MtPyre_1F_EventScript_CleanseTagWoman_5:
+# 12 "data/maps/MtPyre_1F/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto MtPyre_1F_EventScript_CleanseTagWoman_4
 
-text MtPyre_1F_Text_TakeThisForYourOwnGood {
-    "All sorts of beings wander the slopes\n"
-    "of MT. PYRE…\p"
-    "There is no telling what may happen.\n"
-    "Take this. It's for your own good.$"
-}
 
-text MtPyre_1F_Text_ExplainCleanseTag {
-    "Have a POKéMON hold that\n"
-    "CLEANSE TAG.\p"
-    "It will help ward off wild POKéMON.$"
-}
+MtPyre_1F_EventScript_ReceivedCleanseTag::
+# 20 "data/maps/MtPyre_1F/scripts.pory"
+	msgbox MtPyre_1F_Text_ExplainCleanseTag, MSGBOX_DEFAULT
+# 21 "data/maps/MtPyre_1F/scripts.pory"
+	release
+	end
 
-text MtPyre_1F_Text_ComeToPayRespects {
-    "Did you come to pay your respect\n"
-    "to the spirits of departed POKéMON?\p"
-    "You must care for your POKéMON a lot.$"
-}
 
-text MtPyre_1F_Text_RestingPlaceOfZigzagoon {
-    "This is the final resting place of my\n"
-    "ZIGZAGOON. I cherished it…$"
-}
+MtPyre_1F_EventScript_PokefanF::
+# 26 "data/maps/MtPyre_1F/scripts.pory"
+	msgbox MtPyre_1F_Text_ComeToPayRespects, MSGBOX_NPC
+	end
+
+
+MtPyre_1F_EventScript_Man::
+# 31 "data/maps/MtPyre_1F/scripts.pory"
+	msgbox MtPyre_1F_Text_RestingPlaceOfZigzagoon, MSGBOX_NPC
+	end
+
+
+MtPyre_1F_Text_TakeThisForYourOwnGood::
+# 35 "data/maps/MtPyre_1F/scripts.pory"
+	.string "All sorts of beings wander the slopes\n"
+	.string "of MT. PYRE…\p"
+	.string "There is no telling what may happen.\n"
+	.string "Take this. It's for your own good.$"
+
+MtPyre_1F_Text_ExplainCleanseTag::
+# 42 "data/maps/MtPyre_1F/scripts.pory"
+	.string "Have a POKéMON hold that\n"
+	.string "CLEANSE TAG.\p"
+	.string "It will help ward off wild POKéMON.$"
+
+MtPyre_1F_Text_ComeToPayRespects::
+# 48 "data/maps/MtPyre_1F/scripts.pory"
+	.string "Did you come to pay your respect\n"
+	.string "to the spirits of departed POKéMON?\p"
+	.string "You must care for your POKéMON a lot.$"
+
+MtPyre_1F_Text_RestingPlaceOfZigzagoon::
+# 54 "data/maps/MtPyre_1F/scripts.pory"
+	.string "This is the final resting place of my\n"
+	.string "ZIGZAGOON. I cherished it…$"
+
+`

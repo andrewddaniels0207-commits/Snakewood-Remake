@@ -1,406 +1,884 @@
 ThreeIsland_Frlg_MapScripts::
+# 2 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, ThreeIsland_OnTransition
 	.byte 0
 
+
 ThreeIsland_OnTransition::
+# 6 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND
-	call_if_set FLAG_RESCUED_LOSTELLE, ThreeIsland_EventScript_HideAntiBikers
-	call_if_eq VAR_MAP_SCENE_THREE_ISLAND, 4, ThreeIsland_EventScript_SetAntiBikersMovementAfterBikers
+# 7 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	goto_if_set FLAG_RESCUED_LOSTELLE, ThreeIsland_OnTransition_2
+ThreeIsland_OnTransition_1:
+# 10 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_THREE_ISLAND, 4
+	goto_if_eq ThreeIsland_OnTransition_5
+ThreeIsland_OnTransition_4:
 	end
 
+ThreeIsland_OnTransition_2:
+# 8 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_HideAntiBikers
+	goto ThreeIsland_OnTransition_1
+
+ThreeIsland_OnTransition_5:
+# 11 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_SetAntiBikersMovementAfterBikers
+	goto ThreeIsland_OnTransition_4
+
+
 ThreeIsland_EventScript_HideAntiBikers::
+# 17 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setflag FLAG_HIDE_THREE_ISLAND_ANTIBIKERS
 	return
 
+
 ThreeIsland_EventScript_SetAntiBikersMovementAfterBikers::
+# 22 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setobjectmovementtype LOCALID_THREE_ISLAND_ANTIBIKER1, MOVEMENT_TYPE_LOOK_AROUND
+# 23 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setobjectmovementtype LOCALID_THREE_ISLAND_ANTIBIKER2, MOVEMENT_TYPE_LOOK_AROUND
 	return
 
+
 ThreeIsland_EventScript_Biker::
+# 28 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	lock
+# 29 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 2
+# 30 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	call ThreeIsland_EventScript_BikerArgumentScene
+# 31 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	release
 	end
+
 
 ThreeIsland_EventScript_AntiBiker1::
+# 36 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	lock
-	goto_if_set FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER, ThreeIsland_EventScript_AntiBiker1GotFullRestore
-	goto_if_eq VAR_MAP_SCENE_THREE_ISLAND, 4, ThreeIsland_EventScript_GiveFullRestore
+# 37 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER, ThreeIsland_EventScript_AntiBiker1_2
+ThreeIsland_EventScript_AntiBiker1_1:
+# 40 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_THREE_ISLAND, 4
+	goto_if_eq ThreeIsland_EventScript_AntiBiker1_5
+ThreeIsland_EventScript_AntiBiker1_4:
+# 43 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 0
+# 44 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	call ThreeIsland_EventScript_BikerArgumentScene
+# 45 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	release
 	end
+
+ThreeIsland_EventScript_AntiBiker1_2:
+# 38 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	goto ThreeIsland_EventScript_AntiBiker1GotFullRestore
+	goto ThreeIsland_EventScript_AntiBiker1_1
+
+ThreeIsland_EventScript_AntiBiker1_5:
+# 41 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	goto ThreeIsland_EventScript_GiveFullRestore
+	goto ThreeIsland_EventScript_AntiBiker1_4
+
 
 ThreeIsland_EventScript_AntiBiker1GotFullRestore::
+# 50 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_ANTIBIKER1, Common_Movement_FacePlayer
+# 51 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 52 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_YouveGotImpressiveMons
+# 53 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	release
 	end
+
 
 ThreeIsland_EventScript_GiveFullRestore::
+# 58 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_ANTIBIKER1, Common_Movement_FacePlayer
+# 59 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 60 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_ThankYouOhYourMonGotHurt
+# 61 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	checkitemspace ITEM_FULL_RESTORE
-	goto_if_eq VAR_RESULT, FALSE, ThreeIsland_EventScript_NoRoomForFullRestore
+# 62 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq ThreeIsland_EventScript_GiveFullRestore_2
+ThreeIsland_EventScript_GiveFullRestore_1:
+# 65 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgreceiveditem ThreeIsland_Text_GivenFullRestore, ITEM_FULL_RESTORE
+# 66 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	additem ITEM_FULL_RESTORE
+# 67 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setflag FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER
+# 68 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_YouveGotImpressiveMons
+# 69 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	release
 	end
+
+ThreeIsland_EventScript_GiveFullRestore_2:
+# 63 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	goto ThreeIsland_EventScript_NoRoomForFullRestore
+	goto ThreeIsland_EventScript_GiveFullRestore_1
+
 
 ThreeIsland_EventScript_NoRoomForFullRestore::
+# 74 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_OhYourBagIsFull
+# 75 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	release
 	end
 
+
 ThreeIsland_EventScript_BikerArgumentScene::
-	call_if_eq VAR_TEMP_1, 1, ThreeIsland_EventScript_PlayerFaceLeft
-	call_if_eq VAR_TEMP_1, 2, ThreeIsland_EventScript_PlayerFaceLeft
+# 80 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 1
+	goto_if_eq ThreeIsland_EventScript_BikerArgumentScene_2
+ThreeIsland_EventScript_BikerArgumentScene_1:
+# 83 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 2
+	goto_if_eq ThreeIsland_EventScript_BikerArgumentScene_5
+ThreeIsland_EventScript_BikerArgumentScene_4:
+# 86 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_ANTIBIKER1, ThreeIsland_Movement_SpeakRight
+# 87 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 88 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_GoBackToKanto
-	call_if_eq VAR_TEMP_1, 0, ThreeIsland_EventScript_PlayerFaceRight
-	call_if_eq VAR_TEMP_1, 1, ThreeIsland_EventScript_PlayerFaceRight
-	call_if_eq VAR_TEMP_1, 2, ThreeIsland_EventScript_PlayerFaceBiker
+# 89 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 0
+	goto_if_eq ThreeIsland_EventScript_BikerArgumentScene_8
+ThreeIsland_EventScript_BikerArgumentScene_7:
+# 92 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 1
+	goto_if_eq ThreeIsland_EventScript_BikerArgumentScene_11
+ThreeIsland_EventScript_BikerArgumentScene_10:
+# 95 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 2
+	goto_if_eq ThreeIsland_EventScript_BikerArgumentScene_14
+ThreeIsland_EventScript_BikerArgumentScene_13:
+# 98 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER1, ThreeIsland_Movement_SpeakLeft
+# 99 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 100 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_BossIsOnHisWay
-	call_if_eq VAR_TEMP_1, 0, ThreeIsland_EventScript_PlayerFaceUp
-	call_if_eq VAR_TEMP_1, 1, ThreeIsland_EventScript_PlayerFaceUp
-	call_if_eq VAR_TEMP_1, 2, ThreeIsland_EventScript_PlayerFaceAntiBiker
+# 101 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 0
+	goto_if_eq ThreeIsland_EventScript_BikerArgumentScene_17
+ThreeIsland_EventScript_BikerArgumentScene_16:
+# 104 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 1
+	goto_if_eq ThreeIsland_EventScript_BikerArgumentScene_20
+ThreeIsland_EventScript_BikerArgumentScene_19:
+# 107 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 2
+	goto_if_eq ThreeIsland_EventScript_BikerArgumentScene_23
+ThreeIsland_EventScript_BikerArgumentScene_22:
+# 110 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_ANTIBIKER2, ThreeIsland_Movement_SpeakRight
+# 111 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 112 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_GetOffIslandNow
-	call_if_eq VAR_TEMP_1, 0, ThreeIsland_EventScript_PlayerFaceRight
-	call_if_eq VAR_TEMP_1, 1, ThreeIsland_EventScript_PlayerFaceRight
-	call_if_eq VAR_TEMP_1, 2, ThreeIsland_EventScript_PlayerFaceBiker
+# 113 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 0
+	goto_if_eq ThreeIsland_EventScript_BikerArgumentScene_26
+ThreeIsland_EventScript_BikerArgumentScene_25:
+# 116 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 1
+	goto_if_eq ThreeIsland_EventScript_BikerArgumentScene_29
+ThreeIsland_EventScript_BikerArgumentScene_28:
+# 119 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 2
+	goto_if_eq ThreeIsland_EventScript_BikerArgumentScene_32
+ThreeIsland_EventScript_BikerArgumentScene_31:
+# 122 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER3, ThreeIsland_Movement_SpeakLeft
+# 123 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 124 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_WhosGonnaMakeMe
 	return
 
+ThreeIsland_EventScript_BikerArgumentScene_2:
+# 81 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_PlayerFaceLeft
+	goto ThreeIsland_EventScript_BikerArgumentScene_1
+
+ThreeIsland_EventScript_BikerArgumentScene_5:
+# 84 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_PlayerFaceLeft
+	goto ThreeIsland_EventScript_BikerArgumentScene_4
+
+ThreeIsland_EventScript_BikerArgumentScene_8:
+# 90 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_PlayerFaceRight
+	goto ThreeIsland_EventScript_BikerArgumentScene_7
+
+ThreeIsland_EventScript_BikerArgumentScene_11:
+# 93 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_PlayerFaceRight
+	goto ThreeIsland_EventScript_BikerArgumentScene_10
+
+ThreeIsland_EventScript_BikerArgumentScene_14:
+# 96 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_PlayerFaceBiker
+	goto ThreeIsland_EventScript_BikerArgumentScene_13
+
+ThreeIsland_EventScript_BikerArgumentScene_17:
+# 102 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_PlayerFaceUp
+	goto ThreeIsland_EventScript_BikerArgumentScene_16
+
+ThreeIsland_EventScript_BikerArgumentScene_20:
+# 105 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_PlayerFaceUp
+	goto ThreeIsland_EventScript_BikerArgumentScene_19
+
+ThreeIsland_EventScript_BikerArgumentScene_23:
+# 108 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_PlayerFaceAntiBiker
+	goto ThreeIsland_EventScript_BikerArgumentScene_22
+
+ThreeIsland_EventScript_BikerArgumentScene_26:
+# 114 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_PlayerFaceRight
+	goto ThreeIsland_EventScript_BikerArgumentScene_25
+
+ThreeIsland_EventScript_BikerArgumentScene_29:
+# 117 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_PlayerFaceRight
+	goto ThreeIsland_EventScript_BikerArgumentScene_28
+
+ThreeIsland_EventScript_BikerArgumentScene_32:
+# 120 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_PlayerFaceBiker
+	goto ThreeIsland_EventScript_BikerArgumentScene_31
+
+
 ThreeIsland_EventScript_PlayerFaceUp::
+# 129 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+# 130 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
 	return
 
-@ Unused
+
 ThreeIsland_EventScript_PlayerFaceDown::
+# 135 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+# 136 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 ThreeIsland_EventScript_PlayerFaceLeft::
+# 141 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+# 142 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 ThreeIsland_EventScript_PlayerFaceRight::
+# 147 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+# 148 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
 	return
 
+
 ThreeIsland_EventScript_PlayerFaceBiker::
+# 153 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	getplayerxy VAR_0x8004, VAR_0x8005
-	goto_if_ge VAR_0x8004, 9, ThreeIsland_EventScript_PlayerFaceUp
+# 154 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_0x8004, 9
+	goto_if_ge ThreeIsland_EventScript_PlayerFaceBiker_2
+ThreeIsland_EventScript_PlayerFaceBiker_1:
+# 157 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	goto ThreeIsland_EventScript_PlayerFaceRight
 	end
 
+ThreeIsland_EventScript_PlayerFaceBiker_2:
+# 155 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	goto ThreeIsland_EventScript_PlayerFaceUp
+	goto ThreeIsland_EventScript_PlayerFaceBiker_1
+
+
 ThreeIsland_EventScript_PlayerFaceAntiBiker::
+# 162 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	getplayerxy VAR_0x8004, VAR_0x8005
-	goto_if_ge VAR_0x8004, 9, ThreeIsland_EventScript_PlayerFaceLeft
+# 163 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_0x8004, 9
+	goto_if_ge ThreeIsland_EventScript_PlayerFaceAntiBiker_2
+ThreeIsland_EventScript_PlayerFaceAntiBiker_1:
+# 166 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	goto ThreeIsland_EventScript_PlayerFaceUp
 	end
 
+ThreeIsland_EventScript_PlayerFaceAntiBiker_2:
+# 164 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	goto ThreeIsland_EventScript_PlayerFaceLeft
+	goto ThreeIsland_EventScript_PlayerFaceAntiBiker_1
+
+
 ThreeIsland_EventScript_AntiBiker2::
+# 171 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	lock
-	goto_if_eq VAR_MAP_SCENE_THREE_ISLAND, 4, ThreeIsland_EventScript_AntiBiker2BikersGone
+# 172 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_THREE_ISLAND, 4
+	goto_if_eq ThreeIsland_EventScript_AntiBiker2_2
+ThreeIsland_EventScript_AntiBiker2_1:
+# 175 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 1
+# 176 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	call ThreeIsland_EventScript_BikerArgumentScene
+# 177 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	release
 	end
+
+ThreeIsland_EventScript_AntiBiker2_2:
+# 173 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	goto ThreeIsland_EventScript_AntiBiker2BikersGone
+	goto ThreeIsland_EventScript_AntiBiker2_1
+
 
 ThreeIsland_EventScript_AntiBiker2BikersGone::
+# 182 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_ANTIBIKER2, Common_Movement_FacePlayer
+# 183 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 184 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_LostelleWentOffTowardsBondBridge
+# 185 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	release
 	end
 
+
 ThreeIsland_EventScript_BikerBossIntroTrigger::
+# 190 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	lockall
+# 191 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_MALE
+# 192 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_ANTIBIKER1, ThreeIsland_Movement_SpeakRight
+# 193 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 194 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_AreYouBossGoBackToKanto
+# 195 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_SpeakLeft
+# 196 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 197 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_JustGotHerePal
+# 198 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_ANTIBIKER1, ThreeIsland_Movement_SpeakRight
+# 199 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 200 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_FollowersRaisingHavoc
+# 201 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_SpeakLeft
+# 202 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 203 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_OughtToBeThankingUs
+# 204 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_ANTIBIKER1, ThreeIsland_Movement_SpeakRight
+# 205 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 206 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_YouCowardsToughInPack
+# 207 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setvar VAR_MAP_SCENE_THREE_ISLAND, 3
+# 208 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	releaseall
 	end
 
-ThreeIsland_Movement_SpeakLeft::
+
+# 212 "data/maps/ThreeIsland_Frlg/scripts.pory"
+ThreeIsland_Movement_SpeakLeft:
+# 213 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_in_place_left
+# 214 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	step_end
 
-ThreeIsland_Movement_SpeakRight::
+# 217 "data/maps/ThreeIsland_Frlg/scripts.pory"
+ThreeIsland_Movement_SpeakRight:
+# 218 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_in_place_right
+# 219 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	step_end
 
 ThreeIsland_EventScript_BattleBikersTriggerLeft::
+# 223 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	lockall
+# 224 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 0
+# 225 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	goto ThreeIsland_EventScript_BattleBikersScene
 	end
+
 
 ThreeIsland_EventScript_BattleBikersTriggerMidLeft::
+# 230 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	lockall
+# 231 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 1
+# 232 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	goto ThreeIsland_EventScript_BattleBikersScene
 	end
+
 
 ThreeIsland_EventScript_BattleBikersTriggerMid::
+# 237 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	lockall
+# 238 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 2
+# 239 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	goto ThreeIsland_EventScript_BattleBikersScene
 	end
+
 
 ThreeIsland_EventScript_BattleBikersTriggerMidRight::
+# 244 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	lockall
+# 245 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 3
+# 246 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	goto ThreeIsland_EventScript_BattleBikersScene
 	end
+
 
 ThreeIsland_EventScript_BattleBikersTriggerRight::
+# 251 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	lockall
+# 252 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 4
+# 253 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	goto ThreeIsland_EventScript_BattleBikersScene
 	end
 
+
 ThreeIsland_EventScript_BattleBikersScene::
+# 258 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_MALE
+# 259 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER1, Common_Movement_WalkInPlaceFasterDown
+# 260 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 261 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	playse SE_PIN
+# 262 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER1, Common_Movement_ExclamationMark
+# 263 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 264 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER1, Common_Movement_Delay48
+# 265 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 266 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER1, ThreeIsland_Movement_BikerApproach
+# 267 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 268 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	playbgm MUS_RG_ENCOUNTER_BOY, 0
+# 269 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_WannaMakeSomethingOfYourStaring, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, ThreeIsland_EventScript_LeaveBikersAlone
+# 270 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq ThreeIsland_EventScript_BattleBikersScene_2
+ThreeIsland_EventScript_BattleBikersScene_1:
+# 273 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_Biker1Intro
+# 274 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setvar VAR_LAST_TALKED, LOCALID_THREE_ISLAND_BIKER1
+# 275 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	trainerbattle_no_intro TRAINER_BIKER_GOON, ThreeIsland_Text_Biker1Defeat
+# 276 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER1, ThreeIsland_Movement_BikerSpeak
+# 277 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 278 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_Biker1PostBattle
+# 279 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	closemessage
+# 280 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER2, ThreeIsland_Movement_BikerApproach
+# 281 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 282 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	playbgm MUS_RG_ENCOUNTER_BOY, 0
+# 283 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_Biker2Intro
+# 284 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setvar VAR_LAST_TALKED, LOCALID_THREE_ISLAND_BIKER2
+# 285 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	trainerbattle_no_intro TRAINER_BIKER_GOON_2, ThreeIsland_Text_Biker2Defeat
+# 286 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER2, ThreeIsland_Movement_BikerSpeak
+# 287 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 288 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_Biker2PostBattle
+# 289 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	closemessage
+# 290 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER3, ThreeIsland_Movement_BikerApproach
+# 291 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 292 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	playbgm MUS_RG_ENCOUNTER_BOY, 0
+# 293 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_Biker3Intro
+# 294 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setvar VAR_LAST_TALKED, LOCALID_THREE_ISLAND_BIKER3
+# 295 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	trainerbattle_no_intro TRAINER_BIKER_GOON_3, ThreeIsland_Text_Biker3Defeat
+# 296 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER3, Common_Movement_WalkInPlaceFasterLeft
+# 297 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 298 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER4, Common_Movement_WalkInPlaceFasterDown
+# 299 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER5, Common_Movement_WalkInPlaceFasterDown
+# 300 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 301 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_Biker3PostBattle
+# 302 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	closemessage
+# 303 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	delay 45
-	call_if_eq VAR_TEMP_1, 0, ThreeIsland_EventScript_PaxtonApproachLeft
-	call_if_eq VAR_TEMP_1, 1, ThreeIsland_EventScript_PaxtonApproachMidLeft
-	call_if_eq VAR_TEMP_1, 2, ThreeIsland_EventScript_PaxtonApproachMid
-	call_if_eq VAR_TEMP_1, 3, ThreeIsland_EventScript_PaxtonApproachMidRight
-	call_if_eq VAR_TEMP_1, 4, ThreeIsland_EventScript_PaxtonApproachRight
+# 304 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 0
+	goto_if_eq ThreeIsland_EventScript_BattleBikersScene_5
+ThreeIsland_EventScript_BattleBikersScene_4:
+# 307 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 1
+	goto_if_eq ThreeIsland_EventScript_BattleBikersScene_8
+ThreeIsland_EventScript_BattleBikersScene_7:
+# 310 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 2
+	goto_if_eq ThreeIsland_EventScript_BattleBikersScene_11
+ThreeIsland_EventScript_BattleBikersScene_10:
+# 313 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 3
+	goto_if_eq ThreeIsland_EventScript_BattleBikersScene_14
+ThreeIsland_EventScript_BattleBikersScene_13:
+# 316 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 4
+	goto_if_eq ThreeIsland_EventScript_BattleBikersScene_17
+ThreeIsland_EventScript_BattleBikersScene_16:
+# 319 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	playbgm MUS_RG_ENCOUNTER_BOY, 0
+# 320 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_PaxtonIntro
+# 321 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setvar VAR_LAST_TALKED, LOCALID_PAXTON
+# 322 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	trainerbattle_no_intro TRAINER_CUE_BALL_PAXTON, ThreeIsland_Text_PaxtonDefeat
+# 323 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_PaxtonPostBattle
+# 324 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	closemessage
+# 325 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	fadescreenswapbuffers FADE_TO_BLACK
+# 326 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	removeobject LOCALID_PAXTON
+# 327 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	removeobject LOCALID_THREE_ISLAND_BIKER1
+# 328 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	removeobject LOCALID_THREE_ISLAND_BIKER2
+# 329 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	removeobject LOCALID_THREE_ISLAND_BIKER3
+# 330 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	removeobject LOCALID_THREE_ISLAND_BIKER4
+# 331 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	removeobject LOCALID_THREE_ISLAND_BIKER5
+# 332 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	removeobject LOCALID_THREE_ISLAND_BIKER6
+# 333 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	fadescreenswapbuffers FADE_FROM_BLACK
+# 334 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	setvar VAR_MAP_SCENE_THREE_ISLAND, 4
+# 335 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	releaseall
 	end
+
+ThreeIsland_EventScript_BattleBikersScene_2:
+# 271 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	goto ThreeIsland_EventScript_LeaveBikersAlone
+	goto ThreeIsland_EventScript_BattleBikersScene_1
+
+ThreeIsland_EventScript_BattleBikersScene_5:
+# 305 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_PaxtonApproachLeft
+	goto ThreeIsland_EventScript_BattleBikersScene_4
+
+ThreeIsland_EventScript_BattleBikersScene_8:
+# 308 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_PaxtonApproachMidLeft
+	goto ThreeIsland_EventScript_BattleBikersScene_7
+
+ThreeIsland_EventScript_BattleBikersScene_11:
+# 311 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_PaxtonApproachMid
+	goto ThreeIsland_EventScript_BattleBikersScene_10
+
+ThreeIsland_EventScript_BattleBikersScene_14:
+# 314 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_PaxtonApproachMidRight
+	goto ThreeIsland_EventScript_BattleBikersScene_13
+
+ThreeIsland_EventScript_BattleBikersScene_17:
+# 317 "data/maps/ThreeIsland_Frlg/scripts.pory"
+	call ThreeIsland_EventScript_PaxtonApproachRight
+	goto ThreeIsland_EventScript_BattleBikersScene_16
+
 
 ThreeIsland_EventScript_PaxtonApproachLeft::
+# 340 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER3, Common_Movement_WalkInPlaceFasterDown
+# 341 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachLeft
+# 342 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 ThreeIsland_EventScript_PaxtonApproachMidLeft::
+# 347 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER3, Common_Movement_WalkInPlaceFasterDown
+# 348 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachMidLeft
+# 349 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 ThreeIsland_EventScript_PaxtonApproachMid::
+# 354 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER3, Common_Movement_WalkInPlaceFasterDown
+# 355 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachMid
+# 356 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
+# 357 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 ThreeIsland_EventScript_PaxtonApproachMidRight::
+# 362 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER3, Common_Movement_WalkInPlaceFasterDown
+# 363 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
+# 364 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachMidRight
+# 365 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 ThreeIsland_EventScript_PaxtonApproachRight::
+# 370 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER3, Common_Movement_WalkInPlaceFasterDown
+# 371 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
+# 372 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachRight
+# 373 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
 	return
 
+
 ThreeIsland_EventScript_LeaveBikersAlone::
+# 378 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_ThatsSmart
+# 379 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	closemessage
+# 380 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, ThreeIsland_Movement_PlayerLeaveBikers
+# 381 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 382 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	applymovement LOCALID_THREE_ISLAND_BIKER1, ThreeIsland_Movement_Biker1ReturnToPack
+# 383 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 384 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	fadedefaultbgm
+# 385 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	releaseall
 	end
 
-ThreeIsland_Movement_PlayerLeaveBikers::
+
+# 389 "data/maps/ThreeIsland_Frlg/scripts.pory"
+ThreeIsland_Movement_PlayerLeaveBikers:
+# 390 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_down
+# 391 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	step_end
 
-ThreeIsland_Movement_BikerApproach::
+# 394 "data/maps/ThreeIsland_Frlg/scripts.pory"
+ThreeIsland_Movement_BikerApproach:
+# 395 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_down
+# 396 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	step_end
 
-ThreeIsland_Movement_Biker1ReturnToPack::
+# 399 "data/maps/ThreeIsland_Frlg/scripts.pory"
+ThreeIsland_Movement_Biker1ReturnToPack:
+# 400 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_up
+# 401 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_in_place_faster_left
+# 402 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	step_end
 
-ThreeIsland_Movement_BikerSpeak::
+# 405 "data/maps/ThreeIsland_Frlg/scripts.pory"
+ThreeIsland_Movement_BikerSpeak:
+# 406 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_in_place_down
+# 407 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	step_end
 
-ThreeIsland_Movement_PaxtonApproachLeft::
+# 410 "data/maps/ThreeIsland_Frlg/scripts.pory"
+ThreeIsland_Movement_PaxtonApproachLeft:
+# 411 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_down
+# 412 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_left
+# 413 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_in_place_faster_down
+# 414 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	step_end
 
-ThreeIsland_Movement_PaxtonApproachMidLeft::
+# 417 "data/maps/ThreeIsland_Frlg/scripts.pory"
+ThreeIsland_Movement_PaxtonApproachMidLeft:
+# 418 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_down
+# 419 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	step_end
 
-ThreeIsland_Movement_PaxtonApproachMid::
+# 422 "data/maps/ThreeIsland_Frlg/scripts.pory"
+ThreeIsland_Movement_PaxtonApproachMid:
+# 423 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_down
+# 424 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_down
+# 425 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_in_place_faster_right
+# 426 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	step_end
 
-ThreeIsland_Movement_PlayerFacePaxton::
+# 429 "data/maps/ThreeIsland_Frlg/scripts.pory"
+ThreeIsland_Movement_PlayerFacePaxton:
+# 430 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	delay_16
+# 431 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	delay_16
+# 432 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_in_place_faster_left
+# 433 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	step_end
 
-ThreeIsland_Movement_PaxtonApproachMidRight::
+# 436 "data/maps/ThreeIsland_Frlg/scripts.pory"
+ThreeIsland_Movement_PaxtonApproachMidRight:
+# 437 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_down
+# 438 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_down
+# 439 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_right
+# 440 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_in_place_faster_right
+# 441 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	step_end
 
-ThreeIsland_Movement_PaxtonApproachRight::
+# 444 "data/maps/ThreeIsland_Frlg/scripts.pory"
+ThreeIsland_Movement_PaxtonApproachRight:
+# 445 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_down
+# 446 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_down
+# 447 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_right
+# 448 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_right
+# 449 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	walk_in_place_faster_right
+# 450 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	step_end
 
 ThreeIsland_EventScript_Woman::
+# 454 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_WouldntWantToSeeBikersHereAgain, MSGBOX_NPC
 	end
 
+
 ThreeIsland_EventScript_LittleBoy::
+# 459 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_WhenDodouEvolvesGoingToPlayGame, MSGBOX_NPC
 	end
 
+
 ThreeIsland_EventScript_Doduo::
+# 464 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	lock
+# 465 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	faceplayer
+# 466 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitse
+# 467 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	playmoncry SPECIES_DODUO, CRY_MODE_NORMAL
+# 468 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_Doduo
+# 469 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	waitmoncry
+# 470 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	release
 	end
 
+
 ThreeIsland_EventScript_IslandSign::
+# 475 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_IslandSign, MSGBOX_SIGN
 	end
 
+
 ThreeIsland_EventScript_Biker6::
+# 480 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	msgbox ThreeIsland_Text_IslandBelongsToUs, MSGBOX_NPC
 	end
 
+
 ThreeIsland_Text_IslandSign::
+# 484 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "THREE ISLAND\n"
 	.string "Kin Island of Family Bonding$"
 
 ThreeIsland_Text_IslandBelongsToUs::
+# 489 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "Hyahoo!\p"
 	.string "From this day on, this island\n"
 	.string "belongs to us!$"
 
 ThreeIsland_Text_GoBackToKanto::
+# 495 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "We don't need you people bringing\n"
 	.string "your noise and trouble here!\p"
 	.string "We're asking you to go back to\n"
 	.string "KANTO!$"
 
 ThreeIsland_Text_BossIsOnHisWay::
+# 502 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "Hey, go cry somewhere else.\n"
 	.string "Our boss is on his way.\p"
 	.string "When he gets here, we'll give you\n"
@@ -408,23 +886,28 @@ ThreeIsland_Text_BossIsOnHisWay::
 	.string "soon forget!$"
 
 ThreeIsland_Text_GetOffIslandNow::
+# 510 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "W-what!? Not on your life!\n"
 	.string "Get off the island now!$"
 
 ThreeIsland_Text_WhosGonnaMakeMe::
+# 515 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "Who's gonna make me?$"
 
 ThreeIsland_Text_AreYouBossGoBackToKanto::
+# 519 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "Are you the boss?\n"
 	.string "Go back to KANTO right now!$"
 
 ThreeIsland_Text_JustGotHerePal::
+# 524 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "Hah?\p"
 	.string "I just got here, pal.\p"
 	.string "What's with the hostile attitude?\n"
 	.string "It's mighty cold of you!$"
 
 ThreeIsland_Text_FollowersRaisingHavoc::
+# 531 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "Your gang of followers have been\n"
 	.string "raising havoc on their bikes.\p"
 	.string "Do you have any idea how much\n"
@@ -432,6 +915,7 @@ ThreeIsland_Text_FollowersRaisingHavoc::
 	.string "island?$"
 
 ThreeIsland_Text_OughtToBeThankingUs::
+# 539 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "No, man, I don't get it at all.\p"
 	.string "Look at this place.\n"
 	.string "What do you do for entertainment?\p"
@@ -441,56 +925,69 @@ ThreeIsland_Text_OughtToBeThankingUs::
 	.string "making us leave.$"
 
 ThreeIsland_Text_YouCowardsToughInPack::
+# 549 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "Grr… You cowards…\n"
 	.string "So tough in a pack…$"
 
 ThreeIsland_Text_WannaMakeSomethingOfYourStaring::
+# 554 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "You, what are you staring at?\n"
 	.string "Don't you know it's not polite?\p"
 	.string "You wanna make something of it\n"
 	.string "or what?$"
 
 ThreeIsland_Text_ThatsSmart::
+# 561 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "That's smart.\n"
 	.string "Keep your nose out of this.$"
 
 ThreeIsland_Text_Biker1Intro::
+# 566 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "Heh, I like your guts.\n"
 	.string "You'll be losing money to me, but…$"
 
 ThreeIsland_Text_Biker1Defeat::
+# 571 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "Wha…\n"
 	.string "What is this kid?!$"
 
 ThreeIsland_Text_Biker1PostBattle::
+# 576 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "Aww, man…\n"
 	.string "Don't you dare laugh!$"
 
 ThreeIsland_Text_Biker2Intro::
+# 581 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "Aren't you from KANTO?\n"
 	.string "You should be on our side!$"
 
 ThreeIsland_Text_Biker2Defeat::
+# 586 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "Stop fooling around!$"
 
 ThreeIsland_Text_Biker2PostBattle::
+# 590 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "What's the matter with you,\n"
 	.string "getting all hot like that?\p"
 	.string "Totally uncool, man!$"
 
 ThreeIsland_Text_Biker3Intro::
+# 596 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "We invited the boss out here,\n"
 	.string "but you had to mess it up!\p"
 	.string "You embarrassed us, man!$"
 
 ThreeIsland_Text_Biker3Defeat::
+# 602 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "… … …   … … …$"
 
 ThreeIsland_Text_Biker3PostBattle::
+# 606 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "Boss, I'm telling you, you've gotta\n"
 	.string "do something about this kid!$"
 
 ThreeIsland_Text_PaxtonIntro::
+# 611 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "I've been watching you, and I'd say\n"
 	.string "you've done enough.\p"
 	.string "What are you, their friend or\n"
@@ -499,34 +996,41 @@ ThreeIsland_Text_PaxtonIntro::
 	.string "in their place.$"
 
 ThreeIsland_Text_PaxtonDefeat::
+# 620 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "All right, enough!\n"
 	.string "We'll leave like you wanted!\p"
 	.string "We'll be happy to see the last of\n"
 	.string "this boring island!$"
 
 ThreeIsland_Text_PaxtonPostBattle::
+# 627 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "Humph! Yeah, go right on hanging\n"
 	.string "around with these hayseeds!$"
 
 ThreeIsland_Text_ThankYouOhYourMonGotHurt::
+# 632 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "Thank you! Those goons were\n"
 	.string "nothing but bad trouble.\p"
 	.string "Oh, look, your POKéMON got hurt\n"
 	.string "on my account.$"
 
 ThreeIsland_Text_GivenFullRestore::
+# 639 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "{PLAYER} was given\n"
 	.string "a FULL RESTORE.$"
 
 ThreeIsland_Text_OhYourBagIsFull::
+# 644 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "Oh?\n"
 	.string "Your BAG is full.$"
 
 ThreeIsland_Text_YouveGotImpressiveMons::
+# 649 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "You've got seriously impressive\n"
 	.string "POKéMON with you.$"
 
 ThreeIsland_Text_LostelleWentOffTowardsBondBridge::
+# 654 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "It'd be fantastic if someone as\n"
 	.string "strong as you lived here.\p"
 	.string "I hope you'll at least stay here\n"
@@ -537,6 +1041,7 @@ ThreeIsland_Text_LostelleWentOffTowardsBondBridge::
 	.string "BRIDGE a while ago.$"
 
 ThreeIsland_Text_WouldntWantToSeeBikersHereAgain::
+# 665 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "THREE ISLAND is actually the most\n"
 	.string "populous of the islands here.\p"
 	.string "Still, it could be less sleepy.\p"
@@ -544,11 +1049,12 @@ ThreeIsland_Text_WouldntWantToSeeBikersHereAgain::
 	.string "like those BIKERS here again.$"
 
 ThreeIsland_Text_WhenDodouEvolvesGoingToPlayGame::
+# 673 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "I'm going to train my DODUO in the\n"
 	.string "BERRY FOREST.\p"
 	.string "When it evolves, I'm going to play\n"
 	.string "a game on TWO ISLAND.$"
 
 ThreeIsland_Text_Doduo::
+# 680 "data/maps/ThreeIsland_Frlg/scripts.pory"
 	.string "DODUO: Gigiih!$"
-

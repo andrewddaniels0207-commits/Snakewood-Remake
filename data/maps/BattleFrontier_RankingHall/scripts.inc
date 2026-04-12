@@ -1,134 +1,213 @@
 BattleFrontier_RankingHall_MapScripts::
 	.byte 0
 
+
 BattleFrontier_RankingHall_EventScript_TowerSinglesRecords::
+# 4 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	lockall
+# 5 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	setvar VAR_0x8005, RANKING_HALL_TOWER_SINGLES
+# 6 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
+
 
 BattleFrontier_RankingHall_EventScript_TowerDoublesRecords::
+# 11 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	lockall
+# 12 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	setvar VAR_0x8005, RANKING_HALL_TOWER_DOUBLES
+# 13 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
+
 
 BattleFrontier_RankingHall_EventScript_TowerMultisRecords::
+# 18 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	lockall
+# 19 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	setvar VAR_0x8005, RANKING_HALL_TOWER_MULTIS
+# 20 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
+
 
 BattleFrontier_RankingHall_EventScript_TowerLinkRecords::
+# 25 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	lockall
+# 26 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	setvar VAR_0x8005, RANKING_HALL_TOWER_LINK
+# 27 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
+
 
 BattleFrontier_RankingHall_EventScript_ArenaRecords::
+# 32 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	lockall
+# 33 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	setvar VAR_0x8005, RANKING_HALL_ARENA
+# 34 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
+
 
 BattleFrontier_RankingHall_EventScript_PalaceRecords::
+# 39 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	lockall
+# 40 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	setvar VAR_0x8005, RANKING_HALL_PALACE
+# 41 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
+
 
 BattleFrontier_RankingHall_EventScript_FactoryRecords::
+# 46 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	lockall
+# 47 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	setvar VAR_0x8005, RANKING_HALL_FACTORY
+# 48 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
+
 
 BattleFrontier_RankingHall_EventScript_DomeRecords::
+# 53 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	lockall
+# 54 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	setvar VAR_0x8005, RANKING_HALL_DOME
+# 55 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
+
 
 BattleFrontier_RankingHall_EventScript_PikeRecords::
+# 60 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	lockall
+# 61 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	setvar VAR_0x8005, RANKING_HALL_PIKE
+# 62 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
+
 
 BattleFrontier_RankingHall_EventScript_PyramidRecords::
+# 67 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	lockall
+# 68 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	setvar VAR_0x8005, RANKING_HALL_PYRAMID
+# 69 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	goto BattleFrontier_RankingHall_EventScript_ShowRecords
 	end
 
+
 BattleFrontier_RankingHall_EventScript_ShowRecords::
+# 74 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	special ShowRankingHallRecordsWindow
+# 75 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	waitbuttonpress
+# 76 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	special ScrollRankingHallRecordsWindow
+# 77 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	waitbuttonpress
+# 78 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	special RemoveRecordsWindow
+# 79 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	releaseall
 	end
 
+
 BattleFrontier_RankingHall_EventScript_Attendant::
+# 84 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	msgbox BattleFrontier_RankingHall_Text_ExplainRankingHall, MSGBOX_NPC
 	end
 
+
 BattleFrontier_RankingHall_EventScript_DomePikeFactoryRecordsSign::
+# 89 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	msgbox BattleFrontier_RankingHall_Text_DomePikeFactoryRecords, MSGBOX_SIGN
 	end
 
+
 BattleFrontier_RankingHall_EventScript_PalaceArenaPyramidRecordsSIgn::
+# 94 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	msgbox BattleFrontier_RankingHall_Text_PalaceArenaPyramidRecords, MSGBOX_SIGN
 	end
 
+
 BattleFrontier_RankingHall_EventScript_NinjaBoy::
+# 99 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	lock
+# 100 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	faceplayer
+# 101 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	msgbox BattleFrontier_RankingHall_Text_IsYourNameOnThisList, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, BattleFrontier_RankingHall_EventScript_NinjaBoyNameOnList
+# 102 "data/maps/BattleFrontier_RankingHall/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq BattleFrontier_RankingHall_EventScript_NinjaBoy_2
+BattleFrontier_RankingHall_EventScript_NinjaBoy_1:
+# 105 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	msgbox BattleFrontier_RankingHall_Text_WorkHarderIfYouSawFriendsName, MSGBOX_DEFAULT
+# 106 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	release
 	end
+
+BattleFrontier_RankingHall_EventScript_NinjaBoy_2:
+# 103 "data/maps/BattleFrontier_RankingHall/scripts.pory"
+	goto BattleFrontier_RankingHall_EventScript_NinjaBoyNameOnList
+	goto BattleFrontier_RankingHall_EventScript_NinjaBoy_1
+
 
 BattleFrontier_RankingHall_EventScript_NinjaBoyNameOnList::
+# 111 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	msgbox BattleFrontier_RankingHall_Text_WowThatsSuper, MSGBOX_DEFAULT
+# 112 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	release
 	end
 
+
 BattleFrontier_RankingHall_EventScript_Boy::
+# 117 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	msgbox BattleFrontier_RankingHall_Text_MyNamesNotUpThere, MSGBOX_NPC
 	end
 
-BattleFrontier_RankingHall_Text_ExplainRankingHall:
+
+BattleFrontier_RankingHall_Text_ExplainRankingHall::
+# 121 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	.string "This is the RANKING HALL.\p"
 	.string "This is where we recognize the immortal\n"
 	.string "TRAINERS who left great records in\l"
 	.string "BATTLE FRONTIER events.$"
 
-BattleFrontier_RankingHall_Text_DomePikeFactoryRecords:
+BattleFrontier_RankingHall_Text_DomePikeFactoryRecords::
+# 128 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	.string "BATTLE DOME, BATTLE PIKE,\n"
 	.string "and BATTLE FACTORY Records$"
 
-BattleFrontier_RankingHall_Text_PalaceArenaPyramidRecords:
+BattleFrontier_RankingHall_Text_PalaceArenaPyramidRecords::
+# 133 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	.string "BATTLE PALACE, BATTLE ARENA,\n"
 	.string "and BATTLE PYRAMID Records$"
 
-BattleFrontier_RankingHall_Text_IsYourNameOnThisList:
+BattleFrontier_RankingHall_Text_IsYourNameOnThisList::
+# 138 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	.string "Hi, is your name on this list?$"
 
-BattleFrontier_RankingHall_Text_WowThatsSuper:
+BattleFrontier_RankingHall_Text_WowThatsSuper::
+# 142 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	.string "Wow, that's super!\n"
 	.string "I'll have to try harder, too!$"
 
-BattleFrontier_RankingHall_Text_WorkHarderIfYouSawFriendsName:
+BattleFrontier_RankingHall_Text_WorkHarderIfYouSawFriendsName::
+# 147 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	.string "Oh, is that right?\p"
 	.string "If you saw your friend's name up here,\n"
 	.string "I bet it would make you work harder!$"
 
-BattleFrontier_RankingHall_Text_MyNamesNotUpThere:
+BattleFrontier_RankingHall_Text_MyNamesNotUpThere::
+# 153 "data/maps/BattleFrontier_RankingHall/scripts.pory"
 	.string "Hmm…\n"
 	.string "My name's not up there…\p"
 	.string "Well, it's only natural since I haven't\n"
 	.string "taken any challenges yet.$"
-

@@ -1,48 +1,63 @@
 SSAnne_1F_Room2_Frlg_MapScripts::
 	.byte 0
 
+
 SSAnne_1F_Room2_EventScript_Woman::
+# 4 "data/maps/SSAnne_1F_Room2_Frlg/scripts.pory"
 	msgbox SSAnne_1F_Room2_Text_CruisingAroundWorld, MSGBOX_NPC
 	end
 
+
 SSAnne_1F_Room2_EventScript_Ann::
+# 9 "data/maps/SSAnne_1F_Room2_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_LASS_ANN, SSAnne_1F_Room2_Text_AnnIntro, SSAnne_1F_Room2_Text_AnnDefeat
+# 10 "data/maps/SSAnne_1F_Room2_Frlg/scripts.pory"
 	msgbox SSAnne_1F_Room2_Text_AnnPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 SSAnne_1F_Room2_EventScript_Tyler::
+# 15 "data/maps/SSAnne_1F_Room2_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_YOUNGSTER_TYLER, SSAnne_1F_Room2_Text_TylerIntro, SSAnne_1F_Room2_Text_TylerDefeat
+# 16 "data/maps/SSAnne_1F_Room2_Frlg/scripts.pory"
 	msgbox SSAnne_1F_Room2_Text_TylerPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 SSAnne_1F_Room2_Text_TylerIntro::
+# 20 "data/maps/SSAnne_1F_Room2_Frlg/scripts.pory"
 	.string "I love POKéMON!\n"
 	.string "Do you?$"
 
 SSAnne_1F_Room2_Text_TylerDefeat::
+# 25 "data/maps/SSAnne_1F_Room2_Frlg/scripts.pory"
 	.string "Wow! \n"
 	.string "You're great!$"
 
 SSAnne_1F_Room2_Text_TylerPostBattle::
+# 30 "data/maps/SSAnne_1F_Room2_Frlg/scripts.pory"
 	.string "Listen, listen!\n"
 	.string "Let me be your friend, okay?\p"
 	.string "Then we can trade POKéMON and\n"
 	.string "do stuff.$"
 
 SSAnne_1F_Room2_Text_AnnIntro::
+# 37 "data/maps/SSAnne_1F_Room2_Frlg/scripts.pory"
 	.string "I collected these POKéMON\n"
 	.string "from all around the world!$"
 
 SSAnne_1F_Room2_Text_AnnDefeat::
+# 42 "data/maps/SSAnne_1F_Room2_Frlg/scripts.pory"
 	.string "Oh, no!\n"
 	.string "I went around the world for these!$"
 
 SSAnne_1F_Room2_Text_AnnPostBattle::
+# 47 "data/maps/SSAnne_1F_Room2_Frlg/scripts.pory"
 	.string "You hurt my poor POKéMON!\p"
 	.string "I demand that you heal them at a\n"
 	.string "POKéMON CENTER!$"
 
 SSAnne_1F_Room2_Text_CruisingAroundWorld::
+# 53 "data/maps/SSAnne_1F_Room2_Frlg/scripts.pory"
 	.string "We are cruising around the world,\n"
 	.string "my children and I.$"
-

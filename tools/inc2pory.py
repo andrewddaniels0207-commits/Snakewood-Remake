@@ -126,8 +126,8 @@ def convert_command(cmd_line):
     if not line:
         return None
 
-    # Skip assembly directives
-    if line.startswith('.'):
+    # Skip assembly directives and C preprocessor line-number markers (# N "file")
+    if line.startswith('.') or line.startswith('#'):
         return None
 
     # Check for conditional flag goto/call
@@ -393,10 +393,44 @@ def format_raw(label, lines):
     return result
 
 
+COMPILED_PORY_RE = re.compile(r'^# \d+\s+"[^"]*\.pory"', re.MULTILINE)
+
+
+def is_compiled_pory(raw_content):
+    """Return True if the .inc was compiled by poryscript (has # N "file.pory" line directives)."""
+    return bool(COMPILED_PORY_RE.search(raw_content))
+
+
 def convert_inc_to_pory(inc_path, dry_run=False):
-    """Convert a single .inc file to .pory format."""
+    """Convert a single .inc file to .pory format.
+
+    If the .inc was compiled by poryscript (detected by # N "file.pory" line directives)
+    we cannot safely reverse-engineer it — internal labels, poryscript constants, and
+    assembly macros would all be lost or conflict. In that case we emit a verbatim raw
+    passthrough so the file compiles identically to the original.
+
+    For hand-written .inc files we do a full structural conversion.
+    """
     pory_path = inc_path.with_suffix('.pory')
 
+    with open(inc_path, 'r', encoding='utf-8', errors='replace') as f:
+        raw_content = f.read()
+
+    # --- Passthrough for poryscript-compiled .inc files ---
+    if is_compiled_pory(raw_content):
+        # Wrap verbatim in a raw block. This is a safe no-op conversion;
+        # the generated .inc will be byte-for-byte identical to the original.
+        # Individual scripts can be replaced with proper poryscript blocks later.
+        output = f'raw `\n{raw_content}\n`\n'
+        if dry_run:
+            print(f'--- {pory_path} (passthrough raw) ---')
+            print(output[:300])
+            print()
+        else:
+            pory_path.write_text(output, encoding='utf-8')
+        return True
+
+    # --- Full conversion for hand-written .inc files ---
     blocks, preamble = parse_inc_file(inc_path)
 
     if not blocks:
@@ -405,11 +439,13 @@ def convert_inc_to_pory(inc_path, dry_run=False):
             pory_path.write_text('', encoding='utf-8')
         return True
 
-    # Build a dict of all blocks for cross-referencing
+    # Build a dict of all blocks for cross-referencing (first occurrence wins)
     all_blocks_dict = {}
+    seen_labels = set()
     for block in blocks:
         label, is_double, lines = block
-        all_blocks_dict[label] = block
+        if label not in all_blocks_dict:
+            all_blocks_dict[label] = block
 
     consumed = set()  # labels already inlined into mapscripts
 
@@ -418,15 +454,24 @@ def convert_inc_to_pory(inc_path, dry_run=False):
     for block in blocks:
         label, is_double, lines = block
 
+        # Skip duplicate labels (second+ occurrences of the same label)
+        if label in seen_labels:
+            continue
+        seen_labels.add(label)
+
         if label in consumed:
             continue
 
         block_type = classify_block(label, lines)
 
-        if block_type == 'mapscripts':
+        # Single-colon labels are internal jump targets (local scope in assembly).
+        # Emit them as raw to avoid conflicts with poryscript's auto-generated
+        # if-branch labels (which also use _1, _2 suffixes).
+        if not is_double and block_type not in ('text', 'movement', 'mapscripts'):
+            section = format_raw(label, lines)
+        elif block_type == 'mapscripts':
             section = format_mapscripts(label, lines, all_blocks_dict, consumed)
         elif block_type == 'frametable':
-            # If not consumed by a mapscripts block, emit as raw
             section = format_raw(label, lines)
         elif block_type == 'warptable':
             section = format_raw(label, lines)

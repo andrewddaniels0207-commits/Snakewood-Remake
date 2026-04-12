@@ -1,82 +1,160 @@
 FortreeCity_House4_MapScripts::
 	.byte 0
 
+
 FortreeCity_House4_EventScript_Woman::
+# 4 "data/maps/FortreeCity_House4/scripts.pory"
 	msgbox FortreeCity_House4_Text_BringsWorldCloserTogether, MSGBOX_NPC
 	end
 
+
 FortreeCity_House4_EventScript_Boy::
+# 9 "data/maps/FortreeCity_House4/scripts.pory"
 	lockall
-	goto_if_set FLAG_RECEIVED_MENTAL_HERB, FortreeCity_House4_EventScript_ReceivedMentalHerb
-	goto_if_set FLAG_WINGULL_DELIVERED_MAIL, FortreeCity_House4_EventScript_WingullReturned
-	goto_if_set FLAG_WINGULL_SENT_ON_ERRAND, FortreeCity_House4_EventScript_WingullOnErrand
+# 10 "data/maps/FortreeCity_House4/scripts.pory"
+	goto_if_set FLAG_RECEIVED_MENTAL_HERB, FortreeCity_House4_EventScript_Boy_2
+FortreeCity_House4_EventScript_Boy_1:
+# 13 "data/maps/FortreeCity_House4/scripts.pory"
+	goto_if_set FLAG_WINGULL_DELIVERED_MAIL, FortreeCity_House4_EventScript_Boy_5
+FortreeCity_House4_EventScript_Boy_4:
+# 16 "data/maps/FortreeCity_House4/scripts.pory"
+	goto_if_set FLAG_WINGULL_SENT_ON_ERRAND, FortreeCity_House4_EventScript_Boy_8
+FortreeCity_House4_EventScript_Boy_7:
+# 19 "data/maps/FortreeCity_House4/scripts.pory"
 	msgbox FortreeCity_House4_Text_GoBirdPokemon, MSGBOX_DEFAULT
+# 20 "data/maps/FortreeCity_House4/scripts.pory"
 	closemessage
+# 21 "data/maps/FortreeCity_House4/scripts.pory"
 	setflag FLAG_WINGULL_SENT_ON_ERRAND
+# 22 "data/maps/FortreeCity_House4/scripts.pory"
 	clearflag FLAG_HIDE_MOSSDEEP_CITY_HOUSE_2_WINGULL
+# 23 "data/maps/FortreeCity_House4/scripts.pory"
 	applymovement LOCALID_FORTREE_HOUSE_WINGULL, FortreeCity_House4_Movement_WingullExit
+# 24 "data/maps/FortreeCity_House4/scripts.pory"
 	waitmovement 0
+# 25 "data/maps/FortreeCity_House4/scripts.pory"
 	removeobject LOCALID_FORTREE_HOUSE_WINGULL
+# 26 "data/maps/FortreeCity_House4/scripts.pory"
 	releaseall
 	end
+
+FortreeCity_House4_EventScript_Boy_2:
+# 11 "data/maps/FortreeCity_House4/scripts.pory"
+	goto FortreeCity_House4_EventScript_ReceivedMentalHerb
+	goto FortreeCity_House4_EventScript_Boy_1
+
+FortreeCity_House4_EventScript_Boy_5:
+# 14 "data/maps/FortreeCity_House4/scripts.pory"
+	goto FortreeCity_House4_EventScript_WingullReturned
+	goto FortreeCity_House4_EventScript_Boy_4
+
+FortreeCity_House4_EventScript_Boy_8:
+# 17 "data/maps/FortreeCity_House4/scripts.pory"
+	goto FortreeCity_House4_EventScript_WingullOnErrand
+	goto FortreeCity_House4_EventScript_Boy_7
+
 
 FortreeCity_House4_EventScript_WingullOnErrand::
+# 31 "data/maps/FortreeCity_House4/scripts.pory"
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+# 32 "data/maps/FortreeCity_House4/scripts.pory"
 	waitmovement 0
+# 33 "data/maps/FortreeCity_House4/scripts.pory"
 	msgbox FortreeCity_House4_Text_AskedWingullToRunErrand, MSGBOX_DEFAULT
+# 34 "data/maps/FortreeCity_House4/scripts.pory"
 	releaseall
 	end
+
 
 FortreeCity_House4_EventScript_WingullReturned::
+# 39 "data/maps/FortreeCity_House4/scripts.pory"
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+# 40 "data/maps/FortreeCity_House4/scripts.pory"
 	waitmovement 0
+# 41 "data/maps/FortreeCity_House4/scripts.pory"
 	msgbox FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb, MSGBOX_DEFAULT
+# 42 "data/maps/FortreeCity_House4/scripts.pory"
 	giveitem ITEM_MENTAL_HERB
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+# 43 "data/maps/FortreeCity_House4/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq FortreeCity_House4_EventScript_WingullReturned_2
+FortreeCity_House4_EventScript_WingullReturned_1:
+# 46 "data/maps/FortreeCity_House4/scripts.pory"
 	setflag FLAG_RECEIVED_MENTAL_HERB
+# 47 "data/maps/FortreeCity_House4/scripts.pory"
 	releaseall
 	end
+
+FortreeCity_House4_EventScript_WingullReturned_2:
+# 44 "data/maps/FortreeCity_House4/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto FortreeCity_House4_EventScript_WingullReturned_1
+
 
 FortreeCity_House4_EventScript_ReceivedMentalHerb::
+# 52 "data/maps/FortreeCity_House4/scripts.pory"
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+# 53 "data/maps/FortreeCity_House4/scripts.pory"
 	waitmovement 0
+# 54 "data/maps/FortreeCity_House4/scripts.pory"
 	msgbox FortreeCity_House4_Text_FriendsFarAwayThanksToWingull, MSGBOX_DEFAULT
+# 55 "data/maps/FortreeCity_House4/scripts.pory"
 	releaseall
 	end
 
+
+# 59 "data/maps/FortreeCity_House4/scripts.pory"
 FortreeCity_House4_Movement_WingullExit:
+# 60 "data/maps/FortreeCity_House4/scripts.pory"
 	walk_fast_down
+# 61 "data/maps/FortreeCity_House4/scripts.pory"
 	walk_fast_down
+# 62 "data/maps/FortreeCity_House4/scripts.pory"
 	walk_fast_right
+# 63 "data/maps/FortreeCity_House4/scripts.pory"
 	walk_in_place_faster_down
+# 64 "data/maps/FortreeCity_House4/scripts.pory"
 	delay_8
+# 65 "data/maps/FortreeCity_House4/scripts.pory"
 	step_end
 
 FortreeCity_House4_EventScript_Wingull::
+# 69 "data/maps/FortreeCity_House4/scripts.pory"
 	lock
+# 70 "data/maps/FortreeCity_House4/scripts.pory"
 	faceplayer
+# 71 "data/maps/FortreeCity_House4/scripts.pory"
 	waitse
+# 72 "data/maps/FortreeCity_House4/scripts.pory"
 	playmoncry SPECIES_WINGULL, CRY_MODE_NORMAL
+# 73 "data/maps/FortreeCity_House4/scripts.pory"
 	msgbox FortreeCity_House4_Text_Wingull, MSGBOX_DEFAULT
+# 74 "data/maps/FortreeCity_House4/scripts.pory"
 	waitmoncry
+# 75 "data/maps/FortreeCity_House4/scripts.pory"
 	release
 	end
 
-FortreeCity_House4_Text_BringsWorldCloserTogether:
+
+FortreeCity_House4_Text_BringsWorldCloserTogether::
+# 79 "data/maps/FortreeCity_House4/scripts.pory"
 	.string "By being together with POKéMON,\n"
 	.string "people make more and more friends.\p"
 	.string "And that brings the world closer\n"
 	.string "together. I think it's wonderful!$"
 
-FortreeCity_House4_Text_GoBirdPokemon:
+FortreeCity_House4_Text_GoBirdPokemon::
+# 86 "data/maps/FortreeCity_House4/scripts.pory"
 	.string "There!\n"
 	.string "Go, BIRD POKéMON!$"
 
-FortreeCity_House4_Text_AskedWingullToRunErrand:
+FortreeCity_House4_Text_AskedWingullToRunErrand::
+# 91 "data/maps/FortreeCity_House4/scripts.pory"
 	.string "Heheh, I asked my WINGULL to run\n"
 	.string "an errand for me.$"
 
-FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb:
+FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb::
+# 96 "data/maps/FortreeCity_House4/scripts.pory"
 	.string "Good!\n"
 	.string "Welcome back, WINGULL!\p"
 	.string "Huh? What is this?\n"
@@ -86,10 +164,11 @@ FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb:
 	.string "But I'm not a TRAINER, so you can\n"
 	.string "have it.$"
 
-FortreeCity_House4_Text_FriendsFarAwayThanksToWingull:
+FortreeCity_House4_Text_FriendsFarAwayThanksToWingull::
+# 107 "data/maps/FortreeCity_House4/scripts.pory"
 	.string "Thanks to my WINGULL, I have friends\n"
 	.string "who live far away.$"
 
-FortreeCity_House4_Text_Wingull:
+FortreeCity_House4_Text_Wingull::
+# 112 "data/maps/FortreeCity_House4/scripts.pory"
 	.string "WINGULL: Pihyoh!$"
-

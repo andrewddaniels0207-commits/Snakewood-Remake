@@ -1,90 +1,122 @@
-mapscripts SilphCo_3F_Frlg_MapScripts {
-    MAP_SCRIPT_ON_LOAD: SilphCo_3F_OnLoad
-}
+raw `
+SilphCo_3F_Frlg_MapScripts::
+# 2 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_LOAD, SilphCo_3F_OnLoad
+	.byte 0
 
-script SilphCo_3F_OnLoad {
-    if (!flag(FLAG_SILPH_3F_DOOR_1)) {
-        call(EventScript_Close3FDoor1)
-    }
-    if (!flag(FLAG_SILPH_3F_DOOR_2)) {
-        call(EventScript_Close3FDoor2)
-    }
-    end
-}
 
-script SilphCo_3F_EventScript_WorkerM {
-    lock
-    faceplayer
-    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) {
-        goto(SilphCo_3F_EventScript_WorkerMRocketsGone)
-    }
-    msgbox(SilphCo_3F_Text_WhatAmIToDo)
-    release
-    end
-}
+SilphCo_3F_OnLoad::
+# 6 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	goto_if_unset FLAG_SILPH_3F_DOOR_1, SilphCo_3F_OnLoad_2
+SilphCo_3F_OnLoad_1:
+# 9 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	goto_if_unset FLAG_SILPH_3F_DOOR_2, SilphCo_3F_OnLoad_5
+SilphCo_3F_OnLoad_4:
+	end
 
-script SilphCo_3F_EventScript_WorkerMRocketsGone {
-    msgbox(SilphCo_3F_Text_YouAndYourMonsSavedUs)
-    release
-    end
-}
+SilphCo_3F_OnLoad_2:
+# 7 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	call EventScript_Close3FDoor1
+	goto SilphCo_3F_OnLoad_1
 
-script SilphCo_3F_EventScript_FloorSign {
-    msgbox(SilphCo_3F_Text_FloorSign, MSGBOX_SIGN)
-    end
-}
+SilphCo_3F_OnLoad_5:
+# 10 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	call EventScript_Close3FDoor2
+	goto SilphCo_3F_OnLoad_4
 
-script SilphCo_3F_EventScript_Jose {
-    trainerbattle_single(TRAINER_SCIENTIST_JOSE, SilphCo_3F_Text_JoseIntro, SilphCo_3F_Text_JoseDefeat)
-    msgbox(SilphCo_3F_Text_JosePostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
 
-script SilphCo_3F_EventScript_Grunt {
-    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_25, SilphCo_3F_Text_GruntIntro, SilphCo_3F_Text_GruntDefeat)
-    msgbox(SilphCo_3F_Text_GruntPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+SilphCo_3F_EventScript_WorkerM::
+# 16 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	lock
+# 17 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	faceplayer
+# 18 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
+	goto_if_ge SilphCo_3F_EventScript_WorkerM_2
+SilphCo_3F_EventScript_WorkerM_1:
+# 21 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	msgbox SilphCo_3F_Text_WhatAmIToDo
+# 22 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	release
+	end
 
-text SilphCo_3F_Text_WhatAmIToDo {
-    "I work for SILPH CO.\n"
-    "What am I to do?$"
-}
+SilphCo_3F_EventScript_WorkerM_2:
+# 19 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	goto SilphCo_3F_EventScript_WorkerMRocketsGone
+	goto SilphCo_3F_EventScript_WorkerM_1
 
-text SilphCo_3F_Text_YouAndYourMonsSavedUs {
-    "{PLAYER}!\n"
-    "You and your POKéMON saved us!$"
-}
 
-text SilphCo_3F_Text_GruntIntro {
-    "Quit messing with us, kid!$"
-}
+SilphCo_3F_EventScript_WorkerMRocketsGone::
+# 27 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	msgbox SilphCo_3F_Text_YouAndYourMonsSavedUs
+# 28 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	release
+	end
 
-text SilphCo_3F_Text_GruntDefeat {
-    "I give up!$"
-}
 
-text SilphCo_3F_Text_GruntPostBattle {
-    "A hint? You can open doors with\n"
-    "a CARD KEY!$"
-}
+SilphCo_3F_EventScript_FloorSign::
+# 33 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	msgbox SilphCo_3F_Text_FloorSign, MSGBOX_SIGN
+	end
 
-text SilphCo_3F_Text_JoseIntro {
-    "I support TEAM ROCKET more than\n"
-    "I support SILPH CO.!$"
-}
 
-text SilphCo_3F_Text_JoseDefeat {
-    "You really got me!$"
-}
+SilphCo_3F_EventScript_Jose::
+# 38 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	trainerbattle_single TRAINER_SCIENTIST_JOSE, SilphCo_3F_Text_JoseIntro, SilphCo_3F_Text_JoseDefeat
+# 39 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	msgbox SilphCo_3F_Text_JosePostBattle, MSGBOX_AUTOCLOSE
+	end
 
-text SilphCo_3F_Text_JosePostBattle {
-    "Humph…\p"
-    "TEAM ROCKET said that if I helped\n"
-    "them, they'd let me study POKéMON.$"
-}
 
-text SilphCo_3F_Text_FloorSign {
-    "SILPH CO. HEAD OFFICE\n"
-    "3F$"
-}
+SilphCo_3F_EventScript_Grunt::
+# 44 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_25, SilphCo_3F_Text_GruntIntro, SilphCo_3F_Text_GruntDefeat
+# 45 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	msgbox SilphCo_3F_Text_GruntPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+SilphCo_3F_Text_WhatAmIToDo::
+# 49 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	.string "I work for SILPH CO.\n"
+	.string "What am I to do?$"
+
+SilphCo_3F_Text_YouAndYourMonsSavedUs::
+# 54 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	.string "{PLAYER}!\n"
+	.string "You and your POKéMON saved us!$"
+
+SilphCo_3F_Text_GruntIntro::
+# 59 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	.string "Quit messing with us, kid!$"
+
+SilphCo_3F_Text_GruntDefeat::
+# 63 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	.string "I give up!$"
+
+SilphCo_3F_Text_GruntPostBattle::
+# 67 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	.string "A hint? You can open doors with\n"
+	.string "a CARD KEY!$"
+
+SilphCo_3F_Text_JoseIntro::
+# 72 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	.string "I support TEAM ROCKET more than\n"
+	.string "I support SILPH CO.!$"
+
+SilphCo_3F_Text_JoseDefeat::
+# 77 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	.string "You really got me!$"
+
+SilphCo_3F_Text_JosePostBattle::
+# 81 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	.string "Humph…\p"
+	.string "TEAM ROCKET said that if I helped\n"
+	.string "them, they'd let me study POKéMON.$"
+
+SilphCo_3F_Text_FloorSign::
+# 87 "data/maps/SilphCo_3F_Frlg/scripts.pory"
+	.string "SILPH CO. HEAD OFFICE\n"
+	.string "3F$"
+
+`

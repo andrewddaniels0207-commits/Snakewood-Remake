@@ -1,219 +1,368 @@
 MtMoon_B2F_Frlg_MapScripts::
+# 2 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, MtMoon_B2F_OnTransition
 	.byte 0
 
+
 MtMoon_B2F_OnTransition::
-	call_if_unset FLAG_GOT_FOSSIL_FROM_MT_MOON, MtMoon_B2F_EventScript_ShowFossils
+# 6 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
+	goto_if_unset FLAG_GOT_FOSSIL_FROM_MT_MOON, MtMoon_B2F_OnTransition_2
+MtMoon_B2F_OnTransition_1:
 	end
 
+MtMoon_B2F_OnTransition_2:
+# 7 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
+	call MtMoon_B2F_EventScript_ShowFossils
+	goto MtMoon_B2F_OnTransition_1
+
+
 MtMoon_B2F_EventScript_ShowFossils::
+# 13 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	clearflag FLAG_HIDE_DOME_FOSSIL
+# 14 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	clearflag FLAG_HIDE_HELIX_FOSSIL
 	return
 
+
 MtMoon_B2F_EventScript_MiguelTrigger::
+# 19 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	lockall
+# 20 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	applymovement LOCALID_MIGUEL, Common_Movement_WalkInPlaceFasterRight
+# 21 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	waitmovement 0
+# 22 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	call MtMoon_B2F_EventScript_BattleMiguel
+# 23 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	releaseall
 	end
 
+
 MtMoon_B2F_EventScript_Miguel::
+# 28 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	lock
+# 29 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	faceplayer
-	goto_if_set FLAG_GOT_FOSSIL_FROM_MT_MOON, MtMoon_B2F_EventScript_MiguelFossilPicked
+# 30 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_FOSSIL_FROM_MT_MOON, MtMoon_B2F_EventScript_Miguel_2
+MtMoon_B2F_EventScript_Miguel_1:
+# 33 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	goto_if_defeated TRAINER_SUPER_NERD_MIGUEL, MtMoon_B2F_EventScript_MiguelGoPickFossil
+# 34 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	call MtMoon_B2F_EventScript_BattleMiguel
+# 35 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	release
 	end
 
+MtMoon_B2F_EventScript_Miguel_2:
+# 31 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
+	goto MtMoon_B2F_EventScript_MiguelFossilPicked
+	goto MtMoon_B2F_EventScript_Miguel_1
+
+
 MtMoon_B2F_EventScript_BattleMiguel::
+# 40 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_MALE
+# 41 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	message MtMoon_B2F_Text_MiguelIntro
+# 42 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	waitmessage
+# 43 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	playbgm MUS_RG_ENCOUNTER_GYM_LEADER, 0
+# 44 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	waitbuttonpress
+# 45 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	setvar VAR_LAST_TALKED, LOCALID_MIGUEL
+# 46 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	trainerbattle_no_intro TRAINER_SUPER_NERD_MIGUEL, MtMoon_B2F_Text_MiguelDefeat
+# 47 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	setvar VAR_MAP_SCENE_MT_MOON_B2F, 1
+# 48 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	msgbox MtMoon_B2F_Text_WellEachTakeAFossil
 	return
 
+
 MtMoon_B2F_EventScript_MiguelFossilPicked::
+# 53 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	msgbox MtMoon_B2F_Text_LabOnCinnabarRegeneratesFossils
+# 54 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	release
 	end
+
 
 MtMoon_B2F_EventScript_MiguelGoPickFossil::
+# 59 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	msgbox MtMoon_B2F_Text_WellEachTakeAFossil
+# 60 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	release
 	end
+
 
 MtMoon_B2F_EventScript_DomeFossil::
+# 65 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	lock
+# 66 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	faceplayer
+# 67 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	msgbox MtMoon_B2F_Text_YouWantDomeFossil, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MtMoon_B2F_EventScript_DontTakeFossil
+# 68 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq MtMoon_B2F_EventScript_DomeFossil_2
+MtMoon_B2F_EventScript_DomeFossil_1:
+# 71 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	removeobject LOCALID_DOME_FOSSIL
+# 72 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	giveitem_msg MtMoon_B2F_Text_ObtainedDomeFossil, ITEM_DOME_FOSSIL, 1, MUS_RG_OBTAIN_KEY_ITEM
+# 73 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	closemessage
+# 74 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	delay 10
+# 75 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToHelixFossil
+# 76 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	waitmovement 0
+# 77 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	copyobjectxytoperm LOCALID_MIGUEL
+# 78 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_MALE
+# 79 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	playfanfare MUS_RG_OBTAIN_KEY_ITEM
+# 80 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	message MtMoon_B2F_Text_ThenThisFossilIsMine
+# 81 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	waitmessage
+# 82 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	waitfanfare
+# 83 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	removeobject LOCALID_HELIX_FOSSIL
+# 84 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	setflag FLAG_GOT_DOME_FOSSIL
+# 85 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	setflag FLAG_GOT_FOSSIL_FROM_MT_MOON
+# 86 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	release
 	end
 
-MtMoon_B2F_Movement_MiguelToHelixFossil::
+MtMoon_B2F_EventScript_DomeFossil_2:
+# 69 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
+	goto MtMoon_B2F_EventScript_DontTakeFossil
+	goto MtMoon_B2F_EventScript_DomeFossil_1
+
+
+# 90 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
+MtMoon_B2F_Movement_MiguelToHelixFossil:
+# 91 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	walk_right
+# 92 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	walk_up
+# 93 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	walk_up
+# 94 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	walk_up
+# 95 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	step_end
 
 MtMoon_B2F_EventScript_HelixFossil::
+# 99 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	lock
+# 100 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	faceplayer
+# 101 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	msgbox MtMoon_B2F_Text_YouWantHelixFossil, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MtMoon_B2F_EventScript_DontTakeFossil
+# 102 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq MtMoon_B2F_EventScript_HelixFossil_2
+MtMoon_B2F_EventScript_HelixFossil_1:
+# 105 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	removeobject LOCALID_HELIX_FOSSIL
+# 106 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	giveitem_msg MtMoon_B2F_Text_ObtainedHelixFossil, ITEM_HELIX_FOSSIL, 1, MUS_RG_OBTAIN_KEY_ITEM
+# 107 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	closemessage
+# 108 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	delay 10
+# 109 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToDomeFossil
+# 110 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	waitmovement 0
+# 111 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	copyobjectxytoperm LOCALID_MIGUEL
+# 112 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_MALE
+# 113 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	playfanfare MUS_RG_OBTAIN_KEY_ITEM
+# 114 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	message MtMoon_B2F_Text_ThenThisFossilIsMine
+# 115 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	waitmessage
+# 116 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	waitfanfare
+# 117 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	removeobject LOCALID_DOME_FOSSIL
+# 118 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	setflag FLAG_GOT_HELIX_FOSSIL
+# 119 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	setflag FLAG_GOT_FOSSIL_FROM_MT_MOON
+# 120 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	release
 	end
+
+MtMoon_B2F_EventScript_HelixFossil_2:
+# 103 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
+	goto MtMoon_B2F_EventScript_DontTakeFossil
+	goto MtMoon_B2F_EventScript_HelixFossil_1
+
 
 MtMoon_B2F_EventScript_DontTakeFossil::
+# 125 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	release
 	end
 
-MtMoon_B2F_Movement_MiguelToDomeFossil::
+
+# 129 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
+MtMoon_B2F_Movement_MiguelToDomeFossil:
+# 130 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	walk_up
+# 131 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	walk_up
+# 132 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	walk_up
+# 133 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	step_end
 
 MtMoon_B2F_EventScript_Grunt1::
+# 137 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT, MtMoon_B2F_Text_Grunt1Intro, MtMoon_B2F_Text_Grunt1Defeat
+# 138 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	msgbox MtMoon_B2F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 MtMoon_B2F_EventScript_Grunt2::
+# 143 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_2, MtMoon_B2F_Text_Grunt2Intro, MtMoon_B2F_Text_Grunt2Defeat
+# 144 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	msgbox MtMoon_B2F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 MtMoon_B2F_EventScript_Grunt3::
+# 149 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_3, MtMoon_B2F_Text_Grunt3Intro, MtMoon_B2F_Text_Grunt3Defeat
+# 150 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	msgbox MtMoon_B2F_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 MtMoon_B2F_EventScript_Grunt4::
+# 155 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_4, MtMoon_B2F_Text_Grunt4Intro, MtMoon_B2F_Text_Grunt4Defeat
+# 156 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	msgbox MtMoon_B2F_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
 MtMoon_B2F_Text_MiguelIntro::
+# 160 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "Hey, stop!\p"
 	.string "I found these fossils!\n"
 	.string "They're both mine!$"
 
 MtMoon_B2F_Text_MiguelDefeat::
+# 166 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "Okay!\n"
 	.string "I'll share!$"
 
 MtMoon_B2F_Text_WellEachTakeAFossil::
+# 171 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "We'll each take a fossil!\n"
 	.string "No being greedy!$"
 
 MtMoon_B2F_Text_ThenThisFossilIsMine::
+# 176 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "All right.\n"
 	.string "Then this fossil is mine!$"
 
 MtMoon_B2F_Text_LabOnCinnabarRegeneratesFossils::
+# 181 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "Far away, on CINNABAR ISLAND,\n"
 	.string "there's a POKéMON LAB.\p"
 	.string "They do research on regenerating\n"
 	.string "fossils.$"
 
 MtMoon_B2F_Text_Grunt1Intro::
+# 188 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "We, TEAM ROCKET, shall find the\n"
 	.string "fossils!\p"
 	.string "Reviving POKéMON from them will\n"
 	.string "earn us huge riches!$"
 
 MtMoon_B2F_Text_Grunt1Defeat::
+# 195 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "Urgh!\n"
 	.string "Now I'm mad!$"
 
 MtMoon_B2F_Text_Grunt1PostBattle::
+# 200 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "You made me mad!\n"
 	.string "TEAM ROCKET will blacklist you!$"
 
 MtMoon_B2F_Text_Grunt2Intro::
+# 205 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "We, TEAM ROCKET, are POKéMON\n"
 	.string "gangsters!\l"
 	.string "We strike fear with our strength!$"
 
 MtMoon_B2F_Text_Grunt2Defeat::
+# 211 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "I blew it!$"
 
 MtMoon_B2F_Text_Grunt2PostBattle::
+# 215 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "Darn it all!\n"
 	.string "My associates won't stand for this!$"
 
 MtMoon_B2F_Text_Grunt3Intro::
+# 220 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "We're pulling a big job here!\n"
 	.string "Get lost, kid!$"
 
 MtMoon_B2F_Text_Grunt3Defeat::
+# 225 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "So, you are good…$"
 
 MtMoon_B2F_Text_Grunt3PostBattle::
+# 229 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "If you find a fossil, give it to me\n"
 	.string "and scram!$"
 
 MtMoon_B2F_Text_Grunt4Intro::
+# 234 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "Little kids shouldn't be messing\n"
 	.string "around with grown-ups!\p"
 	.string "It could be bad news!$"
 
 MtMoon_B2F_Text_Grunt4Defeat::
+# 240 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "I'm steamed!$"
 
 MtMoon_B2F_Text_Grunt4PostBattle::
+# 244 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "POKéMON lived here long before\n"
 	.string "people came.$"
 
 MtMoon_B2F_Text_YouWantDomeFossil::
+# 249 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "Do you want the DOME FOSSIL?$"
 
 MtMoon_B2F_Text_YouWantHelixFossil::
+# 253 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "Do you want the HELIX FOSSIL?$"
 
 MtMoon_B2F_Text_ObtainedHelixFossil::
+# 257 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "Obtained the HELIX FOSSIL!$"
 
 MtMoon_B2F_Text_ObtainedDomeFossil::
+# 261 "data/maps/MtMoon_B2F_Frlg/scripts.pory"
 	.string "Obtained the DOME FOSSIL!$"
-

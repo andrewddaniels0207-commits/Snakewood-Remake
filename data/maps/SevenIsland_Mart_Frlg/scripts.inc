@@ -1,57 +1,65 @@
 SevenIsland_Mart_Frlg_MapScripts::
 	.byte 0
 
+
 SevenIsland_Mart_EventScript_Clerk::
+# 4 "data/maps/SevenIsland_Mart_Frlg/scripts.pory"
 	lock
+# 5 "data/maps/SevenIsland_Mart_Frlg/scripts.pory"
 	faceplayer
+# 6 "data/maps/SevenIsland_Mart_Frlg/scripts.pory"
 	message gText_HowMayIServeYou
+# 7 "data/maps/SevenIsland_Mart_Frlg/scripts.pory"
 	waitmessage
+# 8 "data/maps/SevenIsland_Mart_Frlg/scripts.pory"
 	pokemart SevenIsland_Mart_Items
+# 9 "data/maps/SevenIsland_Mart_Frlg/scripts.pory"
 	msgbox gText_PleaseComeAgain
+# 10 "data/maps/SevenIsland_Mart_Frlg/scripts.pory"
 	release
 	end
 
-	.align 2
+
 SevenIsland_Mart_Items::
-	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_GREAT_BALL
-	.2byte ITEM_FULL_RESTORE
-	.2byte ITEM_MAX_POTION
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_REVIVE
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_ESCAPE_ROPE
-	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_NONE
+# 15 "data/maps/SevenIsland_Mart_Frlg/scripts.pory"
 	release
 	end
+
 
 SevenIsland_Mart_EventScript_Lass::
+# 20 "data/maps/SevenIsland_Mart_Frlg/scripts.pory"
 	msgbox SevenIsland_Mart_Text_MonHavePersonalitiesOfTheirOwn, MSGBOX_NPC
 	end
 
+
 SevenIsland_Mart_EventScript_Hiker::
+# 25 "data/maps/SevenIsland_Mart_Frlg/scripts.pory"
 	msgbox SevenIsland_Mart_Text_PreparationsCompleteForRuins, MSGBOX_NPC
 	end
 
+
 SevenIsland_Mart_EventScript_Fisher::
+# 30 "data/maps/SevenIsland_Mart_Frlg/scripts.pory"
 	msgbox SevenIsland_Mart_Text_NeedToFishOnSevenIsland, MSGBOX_NPC
 	end
 
+
 SevenIsland_Mart_Text_MonHavePersonalitiesOfTheirOwn::
+# 34 "data/maps/SevenIsland_Mart_Frlg/scripts.pory"
 	.string "POKéMON have personalities of their\n"
 	.string "own, just like people.\p"
 	.string "My PIKACHU has a HASTY nature,\n"
 	.string "so it grew to be a speedy POKéMON.$"
 
 SevenIsland_Mart_Text_PreparationsCompleteForRuins::
+# 41 "data/maps/SevenIsland_Mart_Frlg/scripts.pory"
 	.string "Okay, preparations are complete\n"
 	.string "for me to explore the RUINS.$"
 
 SevenIsland_Mart_Text_NeedToFishOnSevenIsland::
+# 46 "data/maps/SevenIsland_Mart_Frlg/scripts.pory"
 	.string "I need to fish on SEVEN ISLAND.\p"
 	.string "That will complete my fishing tour\n"
 	.string "of the SEVII ISLANDS.\p"
 	.string "I'd better stock up on some\n"
 	.string "POKé BALLS first, though.$"
-

@@ -1,368 +1,588 @@
-mapscripts Route118_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: Route118_OnTransition
-    MAP_SCRIPT_ON_LOAD: Route118_OnLoad
-    MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_SHOULD_END_ABNORMAL_WEATHER, 1: AbnormalWeather_EventScript_EndEventAndCleanup_1
-    ]
-}
+raw `
+Route118_MapScripts::
+# 2 "data/maps/Route118/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, Route118_OnTransition
+# 3 "data/maps/Route118/scripts.pory"
+	map_script MAP_SCRIPT_ON_LOAD, Route118_OnLoad
+# 4 "data/maps/Route118/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route118_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
+	.byte 0
 
-script Route118_OnTransition {
-    call(GabbyAndTy_EventScript_UpdateLocation)
-    if (var(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1) {
-        call(AbnormalWeather_EventScript_HideMapNamePopup)
-    }
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_118_EAST) {
-        call(AbnormalWeather_StartGroudonWeather)
-    }
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_118_WEST) {
-        call(AbnormalWeather_StartGroudonWeather)
-    }
-    end
-}
+Route118_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 5 "data/maps/Route118/scripts.pory"
+	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
+	.2byte 0
 
-script Route118_OnLoad {
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_118_EAST) {
-        call(AbnormalWeather_EventScript_PlaceTilesRoute118East)
-    }
-    if (var(VAR_ABNORMAL_WEATHER_LOCATION) == ABNORMAL_WEATHER_ROUTE_118_WEST) {
-        call(AbnormalWeather_EventScript_PlaceTilesRoute118West)
-    }
-    end
-}
 
-script Route118_EventScript_GoodRodFisherman {
-    lock
-    faceplayer
-    if (flag(FLAG_RECEIVED_GOOD_ROD)) {
-        goto(Route118_EventScript_ReceivedGoodRod)
-    }
-    msgbox(Route118_Text_YouAgreeGoodRodIsGood, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) {
-        goto(Route118_EventScript_ReceiveGoodRod)
-    }
-    if (var(VAR_RESULT) == NO) {
-        goto(Route118_EventScript_DeclineGoodRod)
-    }
-    end
-}
+Route118_OnTransition::
+# 10 "data/maps/Route118/scripts.pory"
+	call GabbyAndTy_EventScript_UpdateLocation
+# 11 "data/maps/Route118/scripts.pory"
+	compare VAR_SHOULD_END_ABNORMAL_WEATHER, 1
+	goto_if_eq Route118_OnTransition_2
+Route118_OnTransition_1:
+# 14 "data/maps/Route118/scripts.pory"
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_118_EAST
+	goto_if_eq Route118_OnTransition_5
+Route118_OnTransition_4:
+# 17 "data/maps/Route118/scripts.pory"
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_118_WEST
+	goto_if_eq Route118_OnTransition_8
+Route118_OnTransition_7:
+	end
 
-script Route118_EventScript_ReceiveGoodRod {
-    msgbox(Route118_Text_IdenticalMindsTakeThis, MSGBOX_DEFAULT)
-    giveitem(ITEM_GOOD_ROD)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(Common_EventScript_ShowBagIsFull)
-    }
-    setflag(FLAG_RECEIVED_GOOD_ROD)
-    msgbox(Route118_Text_TryYourLuckFishing, MSGBOX_DEFAULT)
-    release
-    end
-}
+Route118_OnTransition_2:
+# 12 "data/maps/Route118/scripts.pory"
+	call AbnormalWeather_EventScript_HideMapNamePopup
+	goto Route118_OnTransition_1
 
-script Route118_EventScript_DeclineGoodRod {
-    msgbox(Route118_Text_DontYouLikeToFish, MSGBOX_DEFAULT)
-    release
-    end
-}
+Route118_OnTransition_5:
+# 15 "data/maps/Route118/scripts.pory"
+	call AbnormalWeather_StartGroudonWeather
+	goto Route118_OnTransition_4
 
-script Route118_EventScript_ReceivedGoodRod {
-    msgbox(Route118_Text_TryCatchingMonWithGoodRod, MSGBOX_DEFAULT)
-    release
-    end
-}
+Route118_OnTransition_8:
+# 18 "data/maps/Route118/scripts.pory"
+	call AbnormalWeather_StartGroudonWeather
+	goto Route118_OnTransition_7
 
-script Route118_EventScript_Girl {
-    msgbox(Route118_Text_CanCrossRiversWithSurf, MSGBOX_NPC)
-    end
-}
 
-script Route118_EventScript_RouteSignMauville {
-    msgbox(Route118_Text_RouteSignMauville, MSGBOX_SIGN)
-    end
-}
+Route118_OnLoad::
+# 24 "data/maps/Route118/scripts.pory"
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_118_EAST
+	goto_if_eq Route118_OnLoad_2
+Route118_OnLoad_1:
+# 27 "data/maps/Route118/scripts.pory"
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_118_WEST
+	goto_if_eq Route118_OnLoad_5
+Route118_OnLoad_4:
+	end
 
-script Route118_EventScript_RouteSign119 {
-    msgbox(Route118_Text_RouteSign119, MSGBOX_SIGN)
-    end
-}
+Route118_OnLoad_2:
+# 25 "data/maps/Route118/scripts.pory"
+	call AbnormalWeather_EventScript_PlaceTilesRoute118East
+	goto Route118_OnLoad_1
 
-script Route118_EventScript_StevenTrigger0 {
-    lockall
-    setvar(VAR_0x8008, 0)
-    applymovement(LOCALID_PLAYER, Common_Movement_FaceUp)
-    waitmovement(0)
-    applymovement(LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenApproachLedge0)
-    waitmovement(0)
-    goto(Route118_EventScript_StevenTrigger)
-    end
-}
+Route118_OnLoad_5:
+# 28 "data/maps/Route118/scripts.pory"
+	call AbnormalWeather_EventScript_PlaceTilesRoute118West
+	goto Route118_OnLoad_4
 
-script Route118_EventScript_StevenTrigger1 {
-    lockall
-    setvar(VAR_0x8008, 1)
-    applymovement(LOCALID_PLAYER, Common_Movement_FaceUp)
-    waitmovement(0)
-    goto(Route118_EventScript_StevenTrigger)
-    end
-}
 
-script Route118_EventScript_StevenTrigger2 {
-    lockall
-    setvar(VAR_0x8008, 2)
-    applymovement(LOCALID_PLAYER, Common_Movement_FaceUp)
-    waitmovement(0)
-    applymovement(LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenApproachLedge2)
-    waitmovement(0)
-    goto(Route118_EventScript_StevenTrigger)
-    end
-}
+Route118_EventScript_GoodRodFisherman::
+# 34 "data/maps/Route118/scripts.pory"
+	lock
+# 35 "data/maps/Route118/scripts.pory"
+	faceplayer
+# 36 "data/maps/Route118/scripts.pory"
+	goto_if_set FLAG_RECEIVED_GOOD_ROD, Route118_EventScript_GoodRodFisherman_2
+Route118_EventScript_GoodRodFisherman_1:
+# 39 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_YouAgreeGoodRodIsGood, MSGBOX_YESNO
+# 40 "data/maps/Route118/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq Route118_EventScript_GoodRodFisherman_5
+Route118_EventScript_GoodRodFisherman_4:
+# 43 "data/maps/Route118/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq Route118_EventScript_GoodRodFisherman_8
+Route118_EventScript_GoodRodFisherman_7:
+	end
 
-script Route118_EventScript_StevenTrigger {
-    playse(SE_LEDGE)
-    applymovement(LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenJumpLedge)
-    waitmovement(0)
-    delay(30)
-    msgbox(Route118_Text_StevenQuestions, MSGBOX_DEFAULT)
-    closemessage
-    if (var(VAR_0x8008) == 0) {
-        call(Route118_EventScript_StevenExit0)
-    }
-    if (var(VAR_0x8008) == 1) {
-        call(Route118_EventScript_StevenExit1)
-    }
-    if (var(VAR_0x8008) == 2) {
-        call(Route118_EventScript_StevenExit2)
-    }
-    setvar(VAR_ROUTE118_STATE, 1)
-    removeobject(LOCALID_ROUTE118_STEVEN)
-    releaseall
-    end
-}
+Route118_EventScript_GoodRodFisherman_2:
+# 37 "data/maps/Route118/scripts.pory"
+	goto Route118_EventScript_ReceivedGoodRod
+	goto Route118_EventScript_GoodRodFisherman_1
 
-script Route118_EventScript_StevenExit0 {
-    applymovement(LOCALID_PLAYER, Route118_Movement_PlayerWatchStevenExit)
-    applymovement(LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenExit0)
-    waitmovement(0)
-    return
-}
+Route118_EventScript_GoodRodFisherman_5:
+# 41 "data/maps/Route118/scripts.pory"
+	goto Route118_EventScript_ReceiveGoodRod
+	goto Route118_EventScript_GoodRodFisherman_4
 
-script Route118_EventScript_StevenExit1 {
-    applymovement(LOCALID_PLAYER, Route118_Movement_PlayerWatchStevenExit)
-    applymovement(LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenExit1)
-    waitmovement(0)
-    return
-}
+Route118_EventScript_GoodRodFisherman_8:
+# 44 "data/maps/Route118/scripts.pory"
+	goto Route118_EventScript_DeclineGoodRod
+	goto Route118_EventScript_GoodRodFisherman_7
 
-script Route118_EventScript_StevenExit2 {
-    applymovement(LOCALID_PLAYER, Route118_Movement_PlayerWatchStevenExit)
-    applymovement(LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenExit2)
-    waitmovement(0)
-    return
-}
 
-movement Route118_Movement_PlayerWatchStevenExit {
-    delay_16
-    walk_in_place_faster_right
-    step_end
-}
+Route118_EventScript_ReceiveGoodRod::
+# 50 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_IdenticalMindsTakeThis, MSGBOX_DEFAULT
+# 51 "data/maps/Route118/scripts.pory"
+	giveitem ITEM_GOOD_ROD
+# 52 "data/maps/Route118/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route118_EventScript_ReceiveGoodRod_2
+Route118_EventScript_ReceiveGoodRod_1:
+# 55 "data/maps/Route118/scripts.pory"
+	setflag FLAG_RECEIVED_GOOD_ROD
+# 56 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_TryYourLuckFishing, MSGBOX_DEFAULT
+# 57 "data/maps/Route118/scripts.pory"
+	release
+	end
 
-movement Route118_Movement_StevenApproachLedge0 {
-    walk_left
-    step_end
-}
+Route118_EventScript_ReceiveGoodRod_2:
+# 53 "data/maps/Route118/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto Route118_EventScript_ReceiveGoodRod_1
 
-movement Route118_Movement_StevenApproachLedge2 {
-    walk_right
-    step_end
-}
 
-script Route118_Movement_StevenJumpLedge {
-    jump_2_down()
-    delay_16()
-    walk_down()
-    step_end()
-}
+Route118_EventScript_DeclineGoodRod::
+# 62 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_DontYouLikeToFish, MSGBOX_DEFAULT
+# 63 "data/maps/Route118/scripts.pory"
+	release
+	end
 
-movement Route118_Movement_StevenExit0 {
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    step_end
-}
 
-movement Route118_Movement_StevenExit1 {
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    step_end
-}
+Route118_EventScript_ReceivedGoodRod::
+# 68 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_TryCatchingMonWithGoodRod, MSGBOX_DEFAULT
+# 69 "data/maps/Route118/scripts.pory"
+	release
+	end
 
-movement Route118_Movement_StevenExit2 {
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    step_end
-}
 
-script Route118_EventScript_Rose {
-    trainerbattle_single(TRAINER_ROSE_1, Route118_Text_RoseIntro, Route118_Text_RoseDefeat, Route118_EventScript_RegisterRose)
-    specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(Route118_EventScript_RematchRose)
-    }
-    msgbox(Route118_Text_RosePostBattle, MSGBOX_DEFAULT)
-    release
-    end
-}
+Route118_EventScript_Girl::
+# 74 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_CanCrossRiversWithSurf, MSGBOX_NPC
+	end
 
-script Route118_EventScript_RegisterRose {
-    special(PlayerFaceTrainerAfterBattle)
-    waitmovement(0)
-    msgbox(Route118_Text_RoseRegister, MSGBOX_DEFAULT)
-    register_matchcall(TRAINER_ROSE_1)
-    release
-    end
-}
 
-script Route118_EventScript_RematchRose {
-    trainerbattle_rematch(TRAINER_ROSE_1, Route118_Text_RoseRematchIntro, Route118_Text_RoseRematchDefeat)
-    msgbox(Route118_Text_RosePostRematch, MSGBOX_AUTOCLOSE)
-    end
-}
+Route118_EventScript_RouteSignMauville::
+# 79 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_RouteSignMauville, MSGBOX_SIGN
+	end
 
-script Route118_EventScript_Barny {
-    trainerbattle_single(TRAINER_BARNY, Route118_Text_BarnyIntro, Route118_Text_BarnyDefeat)
-    msgbox(Route118_Text_BarnyPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
 
-script Route118_EventScript_Wade {
-    trainerbattle_single(TRAINER_WADE, Route118_Text_WadeIntro, Route118_Text_WadeDefeat)
-    msgbox(Route118_Text_WadePostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route118_EventScript_RouteSign119::
+# 84 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_RouteSign119, MSGBOX_SIGN
+	end
 
-script Route118_EventScript_Dalton {
-    trainerbattle_single(TRAINER_DALTON_1, Route118_Text_DaltonIntro, Route118_Text_DaltonDefeat, Route118_EventScript_RegisterDalton)
-    specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(Route118_EventScript_RematchDalton)
-    }
-    msgbox(Route118_Text_DaltonPostBattle, MSGBOX_DEFAULT)
-    release
-    end
-}
 
-script Route118_EventScript_RegisterDalton {
-    special(PlayerFaceTrainerAfterBattle)
-    waitmovement(0)
-    msgbox(Route118_Text_DaltonRegister, MSGBOX_DEFAULT)
-    register_matchcall(TRAINER_DALTON_1)
-    release
-    end
-}
+Route118_EventScript_StevenTrigger0::
+# 89 "data/maps/Route118/scripts.pory"
+	lockall
+# 90 "data/maps/Route118/scripts.pory"
+	setvar VAR_0x8008, 0
+# 91 "data/maps/Route118/scripts.pory"
+	applymovement LOCALID_PLAYER, Common_Movement_FaceUp
+# 92 "data/maps/Route118/scripts.pory"
+	waitmovement 0
+# 93 "data/maps/Route118/scripts.pory"
+	applymovement LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenApproachLedge0
+# 94 "data/maps/Route118/scripts.pory"
+	waitmovement 0
+# 95 "data/maps/Route118/scripts.pory"
+	goto Route118_EventScript_StevenTrigger
+	end
 
-script Route118_EventScript_RematchDalton {
-    trainerbattle_rematch(TRAINER_DALTON_1, Route118_Text_DaltonRematchIntro, Route118_Text_DaltonRematchDefeat)
-    msgbox(Route118_Text_DaltonPostRematch, MSGBOX_AUTOCLOSE)
-    end
-}
 
-script Route118_EventScript_Perry {
-    trainerbattle_single(TRAINER_PERRY, Route118_Text_PerryIntro, Route118_Text_PerryDefeat)
-    msgbox(Route118_Text_PerryPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route118_EventScript_StevenTrigger1::
+# 100 "data/maps/Route118/scripts.pory"
+	lockall
+# 101 "data/maps/Route118/scripts.pory"
+	setvar VAR_0x8008, 1
+# 102 "data/maps/Route118/scripts.pory"
+	applymovement LOCALID_PLAYER, Common_Movement_FaceUp
+# 103 "data/maps/Route118/scripts.pory"
+	waitmovement 0
+# 104 "data/maps/Route118/scripts.pory"
+	goto Route118_EventScript_StevenTrigger
+	end
 
-script Route118_EventScript_Chester {
-    trainerbattle_single(TRAINER_CHESTER, Route118_Text_ChesterIntro, Route118_Text_ChesterDefeat)
-    msgbox(Route118_Text_ChesterPostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
 
-script Route118_EventScript_Deandre {
-    trainerbattle_single(TRAINER_DEANDRE, Route118_Text_DeandreIntro, Route118_Text_DeandreDefeat)
-    msgbox(Route118_Text_DeandrePostBattle, MSGBOX_AUTOCLOSE)
-    end
-}
+Route118_EventScript_StevenTrigger2::
+# 109 "data/maps/Route118/scripts.pory"
+	lockall
+# 110 "data/maps/Route118/scripts.pory"
+	setvar VAR_0x8008, 2
+# 111 "data/maps/Route118/scripts.pory"
+	applymovement LOCALID_PLAYER, Common_Movement_FaceUp
+# 112 "data/maps/Route118/scripts.pory"
+	waitmovement 0
+# 113 "data/maps/Route118/scripts.pory"
+	applymovement LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenApproachLedge2
+# 114 "data/maps/Route118/scripts.pory"
+	waitmovement 0
+# 115 "data/maps/Route118/scripts.pory"
+	goto Route118_EventScript_StevenTrigger
+	end
 
-text Route118_Text_StevenQuestions {
-    "STEVEN: Hi, {PLAYER}{KUN}!\p"
-    "It's me, STEVEN!\n"
-    "We met in the cave near DEWFORD.\p"
-    "Have you met many kinds of POKéMON\n"
-    "since I last saw you?\p"
-    "There are many, many kinds of POKéMON\n"
-    "in this wide world of ours.\p"
-    "If you wanted to raise only your\n"
-    "favorites, that's fine.\p"
-    "Perhaps you find it more fun to raise\n"
-    "all sorts of POKéMON.\p"
-    "As a TRAINER of POKéMON,\n"
-    "what do you think?\p"
-    "Of course, it's not any of my business.\p"
-    "It would be nice if we were to meet\n"
-    "again somewhere.$"
-}
 
-text Route118_Text_YouAgreeGoodRodIsGood {
-    "Hmm!\n"
-    "A GOOD ROD is really good!\p"
-    "Wouldn't you agree?$"
-}
+Route118_EventScript_StevenTrigger::
+# 120 "data/maps/Route118/scripts.pory"
+	playse SE_LEDGE
+# 121 "data/maps/Route118/scripts.pory"
+	applymovement LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenJumpLedge
+# 122 "data/maps/Route118/scripts.pory"
+	waitmovement 0
+# 123 "data/maps/Route118/scripts.pory"
+	delay 30
+# 124 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_StevenQuestions, MSGBOX_DEFAULT
+# 125 "data/maps/Route118/scripts.pory"
+	closemessage
+# 126 "data/maps/Route118/scripts.pory"
+	compare VAR_0x8008, 0
+	goto_if_eq Route118_EventScript_StevenTrigger_2
+Route118_EventScript_StevenTrigger_1:
+# 129 "data/maps/Route118/scripts.pory"
+	compare VAR_0x8008, 1
+	goto_if_eq Route118_EventScript_StevenTrigger_5
+Route118_EventScript_StevenTrigger_4:
+# 132 "data/maps/Route118/scripts.pory"
+	compare VAR_0x8008, 2
+	goto_if_eq Route118_EventScript_StevenTrigger_8
+Route118_EventScript_StevenTrigger_7:
+# 135 "data/maps/Route118/scripts.pory"
+	setvar VAR_ROUTE118_STATE, 1
+# 136 "data/maps/Route118/scripts.pory"
+	removeobject LOCALID_ROUTE118_STEVEN
+# 137 "data/maps/Route118/scripts.pory"
+	releaseall
+	end
 
-text Route118_Text_IdenticalMindsTakeThis {
-    "Hmm!\n"
-    "We're of identical minds!\p"
-    "Hmm!\n"
-    "Take this GOOD ROD!$"
-}
+Route118_EventScript_StevenTrigger_2:
+# 127 "data/maps/Route118/scripts.pory"
+	call Route118_EventScript_StevenExit0
+	goto Route118_EventScript_StevenTrigger_1
 
-text Route118_Text_TryYourLuckFishing {
-    "Wherever there's water, try your luck\n"
-    "at fishing.$"
-}
+Route118_EventScript_StevenTrigger_5:
+# 130 "data/maps/Route118/scripts.pory"
+	call Route118_EventScript_StevenExit1
+	goto Route118_EventScript_StevenTrigger_4
 
-text Route118_Text_DontYouLikeToFish {
-    "Don't you like to fish?$"
-}
+Route118_EventScript_StevenTrigger_8:
+# 133 "data/maps/Route118/scripts.pory"
+	call Route118_EventScript_StevenExit2
+	goto Route118_EventScript_StevenTrigger_7
 
-text Route118_Text_TryCatchingMonWithGoodRod {
-    "Try catching all sorts of POKéMON\n"
-    "with your GOOD ROD.$"
-}
 
-text Route118_Text_CanCrossRiversWithSurf {
-    "Even if there isn't a boat, you can\n"
-    "cross rivers and the sea if you have\l"
-    "a POKéMON that knows SURF.\p"
-    "POKéMON can be counted on to do so\n"
-    "much!$"
-}
+Route118_EventScript_StevenExit0::
+# 142 "data/maps/Route118/scripts.pory"
+	applymovement LOCALID_PLAYER, Route118_Movement_PlayerWatchStevenExit
+# 143 "data/maps/Route118/scripts.pory"
+	applymovement LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenExit0
+# 144 "data/maps/Route118/scripts.pory"
+	waitmovement 0
+	return
 
-text Route118_Text_RouteSignMauville {
-    "ROUTE 118\n"
-    "{LEFT_ARROW} MAUVILLE CITY$"
-}
 
-text Route118_Text_RouteSign119 {
-    "ROUTE 118\n"
-    "{UP_ARROW} ROUTE 119$"
-}
+Route118_EventScript_StevenExit1::
+# 149 "data/maps/Route118/scripts.pory"
+	applymovement LOCALID_PLAYER, Route118_Movement_PlayerWatchStevenExit
+# 150 "data/maps/Route118/scripts.pory"
+	applymovement LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenExit1
+# 151 "data/maps/Route118/scripts.pory"
+	waitmovement 0
+	return
+
+
+Route118_EventScript_StevenExit2::
+# 156 "data/maps/Route118/scripts.pory"
+	applymovement LOCALID_PLAYER, Route118_Movement_PlayerWatchStevenExit
+# 157 "data/maps/Route118/scripts.pory"
+	applymovement LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenExit2
+# 158 "data/maps/Route118/scripts.pory"
+	waitmovement 0
+	return
+
+
+# 162 "data/maps/Route118/scripts.pory"
+Route118_Movement_PlayerWatchStevenExit:
+# 163 "data/maps/Route118/scripts.pory"
+	delay_16
+# 164 "data/maps/Route118/scripts.pory"
+	walk_in_place_faster_right
+# 165 "data/maps/Route118/scripts.pory"
+	step_end
+
+# 168 "data/maps/Route118/scripts.pory"
+Route118_Movement_StevenApproachLedge0:
+# 169 "data/maps/Route118/scripts.pory"
+	walk_left
+# 170 "data/maps/Route118/scripts.pory"
+	step_end
+
+# 173 "data/maps/Route118/scripts.pory"
+Route118_Movement_StevenApproachLedge2:
+# 174 "data/maps/Route118/scripts.pory"
+	walk_right
+# 175 "data/maps/Route118/scripts.pory"
+	step_end
+
+Route118_Movement_StevenJumpLedge::
+# 179 "data/maps/Route118/scripts.pory"
+	jump_2_down
+# 180 "data/maps/Route118/scripts.pory"
+	delay_16
+# 181 "data/maps/Route118/scripts.pory"
+	walk_down
+# 182 "data/maps/Route118/scripts.pory"
+	step_end
+	return
+
+
+# 185 "data/maps/Route118/scripts.pory"
+Route118_Movement_StevenExit0:
+# 186 "data/maps/Route118/scripts.pory"
+	walk_right
+# 187 "data/maps/Route118/scripts.pory"
+	walk_right
+# 188 "data/maps/Route118/scripts.pory"
+	walk_right
+# 189 "data/maps/Route118/scripts.pory"
+	walk_right
+# 190 "data/maps/Route118/scripts.pory"
+	walk_right
+# 191 "data/maps/Route118/scripts.pory"
+	walk_right
+# 192 "data/maps/Route118/scripts.pory"
+	walk_right
+# 193 "data/maps/Route118/scripts.pory"
+	walk_right
+# 194 "data/maps/Route118/scripts.pory"
+	walk_right
+# 195 "data/maps/Route118/scripts.pory"
+	walk_right
+# 196 "data/maps/Route118/scripts.pory"
+	step_end
+
+# 199 "data/maps/Route118/scripts.pory"
+Route118_Movement_StevenExit1:
+# 200 "data/maps/Route118/scripts.pory"
+	walk_right
+# 201 "data/maps/Route118/scripts.pory"
+	walk_right
+# 202 "data/maps/Route118/scripts.pory"
+	walk_right
+# 203 "data/maps/Route118/scripts.pory"
+	walk_right
+# 204 "data/maps/Route118/scripts.pory"
+	walk_right
+# 205 "data/maps/Route118/scripts.pory"
+	walk_right
+# 206 "data/maps/Route118/scripts.pory"
+	walk_right
+# 207 "data/maps/Route118/scripts.pory"
+	walk_right
+# 208 "data/maps/Route118/scripts.pory"
+	walk_right
+# 209 "data/maps/Route118/scripts.pory"
+	step_end
+
+# 212 "data/maps/Route118/scripts.pory"
+Route118_Movement_StevenExit2:
+# 213 "data/maps/Route118/scripts.pory"
+	walk_right
+# 214 "data/maps/Route118/scripts.pory"
+	walk_right
+# 215 "data/maps/Route118/scripts.pory"
+	walk_right
+# 216 "data/maps/Route118/scripts.pory"
+	walk_right
+# 217 "data/maps/Route118/scripts.pory"
+	walk_right
+# 218 "data/maps/Route118/scripts.pory"
+	walk_right
+# 219 "data/maps/Route118/scripts.pory"
+	walk_right
+# 220 "data/maps/Route118/scripts.pory"
+	walk_right
+# 221 "data/maps/Route118/scripts.pory"
+	step_end
+
+Route118_EventScript_Rose::
+# 225 "data/maps/Route118/scripts.pory"
+	trainerbattle_single TRAINER_ROSE_1, Route118_Text_RoseIntro, Route118_Text_RoseDefeat, Route118_EventScript_RegisterRose
+# 226 "data/maps/Route118/scripts.pory"
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+# 227 "data/maps/Route118/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route118_EventScript_Rose_2
+Route118_EventScript_Rose_1:
+# 230 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_RosePostBattle, MSGBOX_DEFAULT
+# 231 "data/maps/Route118/scripts.pory"
+	release
+	end
+
+Route118_EventScript_Rose_2:
+# 228 "data/maps/Route118/scripts.pory"
+	goto Route118_EventScript_RematchRose
+	goto Route118_EventScript_Rose_1
+
+
+Route118_EventScript_RegisterRose::
+# 236 "data/maps/Route118/scripts.pory"
+	special PlayerFaceTrainerAfterBattle
+# 237 "data/maps/Route118/scripts.pory"
+	waitmovement 0
+# 238 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_RoseRegister, MSGBOX_DEFAULT
+# 239 "data/maps/Route118/scripts.pory"
+	register_matchcall TRAINER_ROSE_1
+# 240 "data/maps/Route118/scripts.pory"
+	release
+	end
+
+
+Route118_EventScript_RematchRose::
+# 245 "data/maps/Route118/scripts.pory"
+	trainerbattle_rematch TRAINER_ROSE_1, Route118_Text_RoseRematchIntro, Route118_Text_RoseRematchDefeat
+# 246 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_RosePostRematch, MSGBOX_AUTOCLOSE
+	end
+
+
+Route118_EventScript_Barny::
+# 251 "data/maps/Route118/scripts.pory"
+	trainerbattle_single TRAINER_BARNY, Route118_Text_BarnyIntro, Route118_Text_BarnyDefeat
+# 252 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_BarnyPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route118_EventScript_Wade::
+# 257 "data/maps/Route118/scripts.pory"
+	trainerbattle_single TRAINER_WADE, Route118_Text_WadeIntro, Route118_Text_WadeDefeat
+# 258 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_WadePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route118_EventScript_Dalton::
+# 263 "data/maps/Route118/scripts.pory"
+	trainerbattle_single TRAINER_DALTON_1, Route118_Text_DaltonIntro, Route118_Text_DaltonDefeat, Route118_EventScript_RegisterDalton
+# 264 "data/maps/Route118/scripts.pory"
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+# 265 "data/maps/Route118/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route118_EventScript_Dalton_2
+Route118_EventScript_Dalton_1:
+# 268 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_DaltonPostBattle, MSGBOX_DEFAULT
+# 269 "data/maps/Route118/scripts.pory"
+	release
+	end
+
+Route118_EventScript_Dalton_2:
+# 266 "data/maps/Route118/scripts.pory"
+	goto Route118_EventScript_RematchDalton
+	goto Route118_EventScript_Dalton_1
+
+
+Route118_EventScript_RegisterDalton::
+# 274 "data/maps/Route118/scripts.pory"
+	special PlayerFaceTrainerAfterBattle
+# 275 "data/maps/Route118/scripts.pory"
+	waitmovement 0
+# 276 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_DaltonRegister, MSGBOX_DEFAULT
+# 277 "data/maps/Route118/scripts.pory"
+	register_matchcall TRAINER_DALTON_1
+# 278 "data/maps/Route118/scripts.pory"
+	release
+	end
+
+
+Route118_EventScript_RematchDalton::
+# 283 "data/maps/Route118/scripts.pory"
+	trainerbattle_rematch TRAINER_DALTON_1, Route118_Text_DaltonRematchIntro, Route118_Text_DaltonRematchDefeat
+# 284 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_DaltonPostRematch, MSGBOX_AUTOCLOSE
+	end
+
+
+Route118_EventScript_Perry::
+# 289 "data/maps/Route118/scripts.pory"
+	trainerbattle_single TRAINER_PERRY, Route118_Text_PerryIntro, Route118_Text_PerryDefeat
+# 290 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_PerryPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route118_EventScript_Chester::
+# 295 "data/maps/Route118/scripts.pory"
+	trainerbattle_single TRAINER_CHESTER, Route118_Text_ChesterIntro, Route118_Text_ChesterDefeat
+# 296 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_ChesterPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route118_EventScript_Deandre::
+# 301 "data/maps/Route118/scripts.pory"
+	trainerbattle_single TRAINER_DEANDRE, Route118_Text_DeandreIntro, Route118_Text_DeandreDefeat
+# 302 "data/maps/Route118/scripts.pory"
+	msgbox Route118_Text_DeandrePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route118_Text_StevenQuestions::
+# 306 "data/maps/Route118/scripts.pory"
+	.string "STEVEN: Hi, {PLAYER}{KUN}!\p"
+	.string "It's me, STEVEN!\n"
+	.string "We met in the cave near DEWFORD.\p"
+	.string "Have you met many kinds of POKéMON\n"
+	.string "since I last saw you?\p"
+	.string "There are many, many kinds of POKéMON\n"
+	.string "in this wide world of ours.\p"
+	.string "If you wanted to raise only your\n"
+	.string "favorites, that's fine.\p"
+	.string "Perhaps you find it more fun to raise\n"
+	.string "all sorts of POKéMON.\p"
+	.string "As a TRAINER of POKéMON,\n"
+	.string "what do you think?\p"
+	.string "Of course, it's not any of my business.\p"
+	.string "It would be nice if we were to meet\n"
+	.string "again somewhere.$"
+
+Route118_Text_YouAgreeGoodRodIsGood::
+# 325 "data/maps/Route118/scripts.pory"
+	.string "Hmm!\n"
+	.string "A GOOD ROD is really good!\p"
+	.string "Wouldn't you agree?$"
+
+Route118_Text_IdenticalMindsTakeThis::
+# 331 "data/maps/Route118/scripts.pory"
+	.string "Hmm!\n"
+	.string "We're of identical minds!\p"
+	.string "Hmm!\n"
+	.string "Take this GOOD ROD!$"
+
+Route118_Text_TryYourLuckFishing::
+# 338 "data/maps/Route118/scripts.pory"
+	.string "Wherever there's water, try your luck\n"
+	.string "at fishing.$"
+
+Route118_Text_DontYouLikeToFish::
+# 343 "data/maps/Route118/scripts.pory"
+	.string "Don't you like to fish?$"
+
+Route118_Text_TryCatchingMonWithGoodRod::
+# 347 "data/maps/Route118/scripts.pory"
+	.string "Try catching all sorts of POKéMON\n"
+	.string "with your GOOD ROD.$"
+
+Route118_Text_CanCrossRiversWithSurf::
+# 352 "data/maps/Route118/scripts.pory"
+	.string "Even if there isn't a boat, you can\n"
+	.string "cross rivers and the sea if you have\l"
+	.string "a POKéMON that knows SURF.\p"
+	.string "POKéMON can be counted on to do so\n"
+	.string "much!$"
+
+Route118_Text_RouteSignMauville::
+# 360 "data/maps/Route118/scripts.pory"
+	.string "ROUTE 118\n"
+	.string "{LEFT_ARROW} MAUVILLE CITY$"
+
+Route118_Text_RouteSign119::
+# 365 "data/maps/Route118/scripts.pory"
+	.string "ROUTE 118\n"
+	.string "{UP_ARROW} ROUTE 119$"
+
+`

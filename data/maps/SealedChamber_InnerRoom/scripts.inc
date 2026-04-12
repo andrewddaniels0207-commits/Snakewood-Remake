@@ -1,73 +1,140 @@
 SealedChamber_InnerRoom_MapScripts::
 	.byte 0
 
+
 SealedChamber_InnerRoom_EventScript_BrailleBackWall::
+# 4 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	lockall
+# 5 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	braillemsgbox SealedChamber_InnerRoom_Braille_FirstWailordLastRelicanth
-	goto_if_set FLAG_REGI_DOORS_OPENED, SealedChamber_InnerRoom_EventScript_NoEffect
+# 6 "data/maps/SealedChamber_InnerRoom/scripts.pory"
+	goto_if_set FLAG_REGI_DOORS_OPENED, SealedChamber_InnerRoom_EventScript_BrailleBackWall_2
+SealedChamber_InnerRoom_EventScript_BrailleBackWall_1:
+# 9 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	specialvar VAR_RESULT, CheckRelicanthWailord
-	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_NoEffect
+# 10 "data/maps/SealedChamber_InnerRoom/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq SealedChamber_InnerRoom_EventScript_BrailleBackWall_5
+SealedChamber_InnerRoom_EventScript_BrailleBackWall_4:
+# 13 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	fadeoutbgm 0
+# 14 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	playse SE_TRUCK_MOVE
+# 15 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	special DoSealedChamberShakingEffect_Long
+# 16 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	waitstate
+# 17 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	delay 40
+# 18 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	special DoSealedChamberShakingEffect_Short
+# 19 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	waitstate
+# 20 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	playse SE_DOOR
+# 21 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	delay 40
+# 22 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	special DoSealedChamberShakingEffect_Short
+# 23 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	waitstate
+# 24 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	playse SE_DOOR
+# 25 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	delay 40
+# 26 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	special DoSealedChamberShakingEffect_Short
+# 27 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	waitstate
+# 28 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	playse SE_DOOR
+# 29 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	delay 40
+# 30 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	msgbox gText_DoorOpenedFarAway, MSGBOX_DEFAULT
+# 31 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	closemessage
+# 32 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	fadeinbgm 0
+# 33 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	setflag FLAG_REGI_DOORS_OPENED
+# 34 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	releaseall
 	end
+
+SealedChamber_InnerRoom_EventScript_BrailleBackWall_2:
+# 7 "data/maps/SealedChamber_InnerRoom/scripts.pory"
+	goto SealedChamber_InnerRoom_EventScript_NoEffect
+	goto SealedChamber_InnerRoom_EventScript_BrailleBackWall_1
+
+SealedChamber_InnerRoom_EventScript_BrailleBackWall_5:
+# 11 "data/maps/SealedChamber_InnerRoom/scripts.pory"
+	goto SealedChamber_InnerRoom_EventScript_NoEffect
+	goto SealedChamber_InnerRoom_EventScript_BrailleBackWall_4
+
 
 SealedChamber_InnerRoom_EventScript_NoEffect::
+# 39 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	releaseall
 	end
+
 
 SealedChamber_InnerRoom_EventScript_BrailleStoryPart1::
+# 44 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	lockall
+# 45 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	braillemsgbox SealedChamber_InnerRoom_Braille_InThisCaveWeHaveLived
+# 46 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	releaseall
 	end
+
 
 SealedChamber_InnerRoom_EventScript_BrailleStoryPart2::
+# 51 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	lockall
+# 52 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	braillemsgbox SealedChamber_InnerRoom_Braille_WeOweAllToThePokemon
+# 53 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	releaseall
 	end
+
 
 SealedChamber_InnerRoom_EventScript_BrailleStoryPart3::
+# 58 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	lockall
+# 59 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	braillemsgbox SealedChamber_InnerRoom_Braille_ButWeSealedThePokemonAway
+# 60 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	releaseall
 	end
+
 
 SealedChamber_InnerRoom_EventScript_BrailleStoryPart4::
+# 65 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	lockall
+# 66 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	braillemsgbox SealedChamber_InnerRoom_Braille_WeFearedIt
+# 67 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	releaseall
 	end
+
 
 SealedChamber_InnerRoom_EventScript_BrailleStoryPart5::
+# 72 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	lockall
+# 73 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	braillemsgbox SealedChamber_InnerRoom_Braille_ThoseWithCourageHope
+# 74 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	releaseall
 	end
 
+
 SealedChamber_InnerRoom_EventScript_BrailleStoryPart6::
+# 79 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	lockall
+# 80 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	braillemsgbox SealedChamber_InnerRoom_Braille_OpenDoorEternalPokemonWaits
+# 81 "data/maps/SealedChamber_InnerRoom/scripts.pory"
 	releaseall
 	end
 

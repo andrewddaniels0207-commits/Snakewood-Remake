@@ -1,242 +1,452 @@
-mapscripts FarawayIsland_Interior_MapScripts {
-    MAP_SCRIPT_ON_RESUME: FarawayIsland_Interior_OnResume
-    MAP_SCRIPT_ON_TRANSITION: FarawayIsland_Interior_OnTransition
-    MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_TEMP_1, 0: FarawayIsland_Interior_EventScript_FindMew
-    ]
-    MAP_SCRIPT_ON_RETURN_TO_FIELD: FarawayIsland_Interior_OnReturnToField
-}
+raw `
+FarawayIsland_Interior_MapScripts::
+# 2 "data/maps/FarawayIsland_Interior/scripts.pory"
+	map_script MAP_SCRIPT_ON_RESUME, FarawayIsland_Interior_OnResume
+# 3 "data/maps/FarawayIsland_Interior/scripts.pory"
+	map_script MAP_SCRIPT_ON_TRANSITION, FarawayIsland_Interior_OnTransition
+# 7 "data/maps/FarawayIsland_Interior/scripts.pory"
+	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, FarawayIsland_Interior_OnReturnToField
+# 4 "data/maps/FarawayIsland_Interior/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, FarawayIsland_Interior_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
+	.byte 0
 
-script FarawayIsland_Interior_OnReturnToField {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
-        call(FarawayIsland_Interior_EventScript_TrySetMewAboveGrass)
-    }
-    end
-}
+FarawayIsland_Interior_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 5 "data/maps/FarawayIsland_Interior/scripts.pory"
+	map_script_2 VAR_TEMP_1, 0, FarawayIsland_Interior_EventScript_FindMew
+	.2byte 0
 
-script FarawayIsland_Interior_EventScript_TrySetMewAboveGrass {
-    specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) {
-        goto(FarawayIsland_Interior_EventScript_SetMewAboveGrass)
-    }
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
-        goto(FarawayIsland_Interior_EventScript_SetMewAboveGrass)
-    }
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
-        goto(FarawayIsland_Interior_EventScript_SetMewAboveGrass)
-    }
-    if (var(VAR_RESULT) == B_OUTCOME_MON_TELEPORTED) {
-        goto(FarawayIsland_Interior_EventScript_SetMewAboveGrass)
-    }
-    return
-}
 
-script FarawayIsland_Interior_EventScript_SetMewAboveGrass {
-    setvar(VAR_0x8004, 1)
-    special(SetMewAboveGrass)
-    return
-}
+FarawayIsland_Interior_OnReturnToField::
+# 11 "data/maps/FarawayIsland_Interior/scripts.pory"
+	goto_if_set FLAG_SYS_CTRL_OBJ_DELETE, FarawayIsland_Interior_OnReturnToField_2
+FarawayIsland_Interior_OnReturnToField_1:
+	end
 
-script FarawayIsland_Interior_OnResume {
-    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) {
-        call(FarawayIsland_Interior_EventScript_TryRemoveMew)
-    }
-    end
-}
+FarawayIsland_Interior_OnReturnToField_2:
+# 12 "data/maps/FarawayIsland_Interior/scripts.pory"
+	call FarawayIsland_Interior_EventScript_TrySetMewAboveGrass
+	goto FarawayIsland_Interior_OnReturnToField_1
 
-script FarawayIsland_Interior_EventScript_TryRemoveMew {
-    specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) {
-        goto(Common_EventScript_NopReturn)
-    }
-    removeobject(VAR_LAST_TALKED)
-    return
-}
 
-script FarawayIsland_Interior_OnTransition {
-    setvar(VAR_FARAWAY_ISLAND_STEP_COUNTER, 0)
-    setvar(VAR_TEMP_1, 1)
-    if (!flag(FLAG_CAUGHT_MEW)) {
-        call(FarawayIsland_Interior_EventScript_TryShowMew)
-    }
-    end
-}
+FarawayIsland_Interior_EventScript_TrySetMewAboveGrass::
+# 18 "data/maps/FarawayIsland_Interior/scripts.pory"
+	specialvar VAR_RESULT, GetBattleOutcome
+# 19 "data/maps/FarawayIsland_Interior/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_WON
+	goto_if_eq FarawayIsland_Interior_EventScript_TrySetMewAboveGrass_2
+FarawayIsland_Interior_EventScript_TrySetMewAboveGrass_1:
+# 22 "data/maps/FarawayIsland_Interior/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_RAN
+	goto_if_eq FarawayIsland_Interior_EventScript_TrySetMewAboveGrass_5
+FarawayIsland_Interior_EventScript_TrySetMewAboveGrass_4:
+# 25 "data/maps/FarawayIsland_Interior/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	goto_if_eq FarawayIsland_Interior_EventScript_TrySetMewAboveGrass_8
+FarawayIsland_Interior_EventScript_TrySetMewAboveGrass_7:
+# 28 "data/maps/FarawayIsland_Interior/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_MON_TELEPORTED
+	goto_if_eq FarawayIsland_Interior_EventScript_TrySetMewAboveGrass_11
+FarawayIsland_Interior_EventScript_TrySetMewAboveGrass_10:
+	return
 
-script FarawayIsland_Interior_EventScript_TryShowMew {
-    if (flag(FLAG_DEFEATED_MEW)) {
-        goto(Common_EventScript_NopReturn)
-    }
-    clearflag(FLAG_HIDE_MEW)
-    setvar(VAR_TEMP_1, 0)
-    return
-}
+FarawayIsland_Interior_EventScript_TrySetMewAboveGrass_2:
+# 20 "data/maps/FarawayIsland_Interior/scripts.pory"
+	goto FarawayIsland_Interior_EventScript_SetMewAboveGrass
+	goto FarawayIsland_Interior_EventScript_TrySetMewAboveGrass_1
 
-script FarawayIsland_Interior_EventScript_FindMew {
-    lockall
-    playse(SE_PIN)
-    applymovement(LOCALID_FARAWAY_ISLAND_MEW, Common_Movement_ExclamationMark)
-    waitmovement(0)
-    applymovement(LOCALID_FARAWAY_ISLAND_MEW, Common_Movement_Delay48)
-    waitmovement(0)
-    applymovement(LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewMoveAndHide)
-    waitmovement(0)
-    copyobjectxytoperm(LOCALID_FARAWAY_ISLAND_MEW)
-    setvar(VAR_TEMP_1, 1)
-    releaseall
-    end
-}
+FarawayIsland_Interior_EventScript_TrySetMewAboveGrass_5:
+# 23 "data/maps/FarawayIsland_Interior/scripts.pory"
+	goto FarawayIsland_Interior_EventScript_SetMewAboveGrass
+	goto FarawayIsland_Interior_EventScript_TrySetMewAboveGrass_4
 
-movement FarawayIsland_Interior_Movement_MewMoveAndHide {
-    walk_up
-    walk_up
-    walk_up
-    walk_in_place_faster_down
-    set_invisible
-    step_end
-}
+FarawayIsland_Interior_EventScript_TrySetMewAboveGrass_8:
+# 26 "data/maps/FarawayIsland_Interior/scripts.pory"
+	goto FarawayIsland_Interior_EventScript_SetMewAboveGrass
+	goto FarawayIsland_Interior_EventScript_TrySetMewAboveGrass_7
 
-movement FarawayIsland_Interior_Movement_MewAppear {
-    set_visible
-    step_end
-}
+FarawayIsland_Interior_EventScript_TrySetMewAboveGrass_11:
+# 29 "data/maps/FarawayIsland_Interior/scripts.pory"
+	goto FarawayIsland_Interior_EventScript_SetMewAboveGrass
+	goto FarawayIsland_Interior_EventScript_TrySetMewAboveGrass_10
 
-script FarawayIsland_Interior_Movement_MewFloatUpNorth {
-    lock_facing_direction()
-    walk_fast_up()
-    walk_fast_up()
-    unlock_facing_direction()
-    walk_in_place_down()
-    walk_in_place_down()
-    step_end()
-}
 
-script FarawayIsland_Interior_Movement_MewFloatUpSouth {
-    lock_facing_direction()
-    walk_fast_up()
-    walk_fast_up()
-    unlock_facing_direction()
-    walk_in_place_up()
-    walk_in_place_up()
-    step_end()
-}
+FarawayIsland_Interior_EventScript_SetMewAboveGrass::
+# 35 "data/maps/FarawayIsland_Interior/scripts.pory"
+	setvar VAR_0x8004, 1
+# 36 "data/maps/FarawayIsland_Interior/scripts.pory"
+	special SetMewAboveGrass
+	return
 
-script FarawayIsland_Interior_Movement_MewFloatUpWest {
-    lock_facing_direction()
-    walk_fast_up()
-    walk_fast_up()
-    unlock_facing_direction()
-    walk_in_place_right()
-    walk_in_place_right()
-    step_end()
-}
 
-script FarawayIsland_Interior_Movement_MewFloatUpEast {
-    lock_facing_direction()
-    walk_fast_up()
-    walk_fast_up()
-    unlock_facing_direction()
-    walk_in_place_left()
-    walk_in_place_left()
-    step_end()
-}
+FarawayIsland_Interior_OnResume::
+# 41 "data/maps/FarawayIsland_Interior/scripts.pory"
+	goto_if_set FLAG_SYS_CTRL_OBJ_DELETE, FarawayIsland_Interior_OnResume_2
+FarawayIsland_Interior_OnResume_1:
+	end
 
-script FarawayIsland_Interior_EventScript_Mew {
-    lock
-    faceplayer
-    applymovement(LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewAppear)
-    waitmovement(0)
-    setvar(VAR_0x8004, 0)
-    special(SetMewAboveGrass)
-    message(FarawayIsland_Interior_Text_Mew)
-    waitse()
-    playmoncry(SPECIES_MEW, CRY_MODE_ENCOUNTER)
-    if (var(VAR_FACING) == DIR_NORTH) {
-        call(FarawayIsland_Interior_EventScript_FoundMewNorth)
-    }
-    if (var(VAR_FACING) == DIR_SOUTH) {
-        call(FarawayIsland_Interior_EventScript_FoundMewSouth)
-    }
-    if (var(VAR_FACING) == DIR_WEST) {
-        call(FarawayIsland_Interior_EventScript_FoundMewWest)
-    }
-    if (var(VAR_FACING) == DIR_EAST) {
-        call(FarawayIsland_Interior_EventScript_FoundMewEast)
-    }
-    special(DestroyMewEmergingGrassSprite)
-    delay(40)
-    waitmoncry()
-    seteventmon(SPECIES_MEW, 30)
-    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
-    special(BattleSetup_StartLegendaryBattle)
-    waitstate
-    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
-    specialvar(VAR_RESULT, GetBattleOutcome)
-    if (var(VAR_RESULT) == B_OUTCOME_WON) {
-        goto(FarawayIsland_Interior_EventScript_MewDefeated)
-    }
-    if (var(VAR_RESULT) == B_OUTCOME_RAN) {
-        goto(FarawayIsland_Interior_EventScript_PlayerOrMewRan)
-    }
-    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) {
-        goto(FarawayIsland_Interior_EventScript_PlayerOrMewRan)
-    }
-    if (var(VAR_RESULT) == B_OUTCOME_MON_TELEPORTED) {
-        goto(FarawayIsland_Interior_EventScript_PlayerOrMewRan)
-    }
-    setflag(FLAG_CAUGHT_MEW)
-    release
-    end
-}
+FarawayIsland_Interior_OnResume_2:
+# 42 "data/maps/FarawayIsland_Interior/scripts.pory"
+	call FarawayIsland_Interior_EventScript_TryRemoveMew
+	goto FarawayIsland_Interior_OnResume_1
 
-script FarawayIsland_Interior_EventScript_MewDefeated {
-    setflag(FLAG_DEFEATED_MEW)
-    setvar(VAR_0x8004, SPECIES_MEW)
-    goto(Common_EventScript_LegendaryFlewAway)
-    end
-}
 
-script FarawayIsland_Interior_EventScript_PlayerOrMewRan {
-    setvar(VAR_0x8004, SPECIES_MEW)
-    goto(Common_EventScript_LegendaryFlewAway)
-    end
-}
+FarawayIsland_Interior_EventScript_TryRemoveMew::
+# 48 "data/maps/FarawayIsland_Interior/scripts.pory"
+	specialvar VAR_RESULT, GetBattleOutcome
+# 49 "data/maps/FarawayIsland_Interior/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
+	goto_if_ne FarawayIsland_Interior_EventScript_TryRemoveMew_2
+FarawayIsland_Interior_EventScript_TryRemoveMew_1:
+# 52 "data/maps/FarawayIsland_Interior/scripts.pory"
+	removeobject VAR_LAST_TALKED
+	return
 
-script FarawayIsland_Interior_EventScript_FoundMewNorth {
-    applymovement(LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpNorth)
-    waitmovement(0)
-    return
-}
+FarawayIsland_Interior_EventScript_TryRemoveMew_2:
+# 50 "data/maps/FarawayIsland_Interior/scripts.pory"
+	goto Common_EventScript_NopReturn
+	goto FarawayIsland_Interior_EventScript_TryRemoveMew_1
 
-script FarawayIsland_Interior_EventScript_FoundMewSouth {
-    applymovement(LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpSouth)
-    waitmovement(0)
-    return
-}
 
-script FarawayIsland_Interior_EventScript_FoundMewWest {
-    applymovement(LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpWest)
-    waitmovement(0)
-    return
-}
+FarawayIsland_Interior_OnTransition::
+# 57 "data/maps/FarawayIsland_Interior/scripts.pory"
+	setvar VAR_FARAWAY_ISLAND_STEP_COUNTER, 0
+# 58 "data/maps/FarawayIsland_Interior/scripts.pory"
+	setvar VAR_TEMP_1, 1
+# 59 "data/maps/FarawayIsland_Interior/scripts.pory"
+	goto_if_unset FLAG_CAUGHT_MEW, FarawayIsland_Interior_OnTransition_2
+FarawayIsland_Interior_OnTransition_1:
+	end
 
-script FarawayIsland_Interior_EventScript_FoundMewEast {
-    applymovement(LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpEast)
-    waitmovement(0)
-    return
-}
+FarawayIsland_Interior_OnTransition_2:
+# 60 "data/maps/FarawayIsland_Interior/scripts.pory"
+	call FarawayIsland_Interior_EventScript_TryShowMew
+	goto FarawayIsland_Interior_OnTransition_1
 
-script FarawayIsland_Interior_EventScript_HideMewWhenGrassCut {
-    lockall
-    fadescreenswapbuffers(FADE_TO_BLACK)
-    setflag(FLAG_HIDE_MEW)
-    removeobject(LOCALID_FARAWAY_ISLAND_MEW)
-    fadescreenswapbuffers(FADE_FROM_BLACK)
-    msgbox(FarawayIsland_Interior_Text_TheFeelingOfBeingWatchedFaded, MSGBOX_DEFAULT)
-    closemessage
-    releaseall
-    end
-}
 
-text FarawayIsland_Interior_Text_TheFeelingOfBeingWatchedFaded {
-    "The feeling of being watched faded…$"
-}
+FarawayIsland_Interior_EventScript_TryShowMew::
+# 66 "data/maps/FarawayIsland_Interior/scripts.pory"
+	goto_if_set FLAG_DEFEATED_MEW, FarawayIsland_Interior_EventScript_TryShowMew_2
+FarawayIsland_Interior_EventScript_TryShowMew_1:
+# 69 "data/maps/FarawayIsland_Interior/scripts.pory"
+	clearflag FLAG_HIDE_MEW
+# 70 "data/maps/FarawayIsland_Interior/scripts.pory"
+	setvar VAR_TEMP_1, 0
+	return
+
+FarawayIsland_Interior_EventScript_TryShowMew_2:
+# 67 "data/maps/FarawayIsland_Interior/scripts.pory"
+	goto Common_EventScript_NopReturn
+	goto FarawayIsland_Interior_EventScript_TryShowMew_1
+
+
+FarawayIsland_Interior_EventScript_FindMew::
+# 75 "data/maps/FarawayIsland_Interior/scripts.pory"
+	lockall
+# 76 "data/maps/FarawayIsland_Interior/scripts.pory"
+	playse SE_PIN
+# 77 "data/maps/FarawayIsland_Interior/scripts.pory"
+	applymovement LOCALID_FARAWAY_ISLAND_MEW, Common_Movement_ExclamationMark
+# 78 "data/maps/FarawayIsland_Interior/scripts.pory"
+	waitmovement 0
+# 79 "data/maps/FarawayIsland_Interior/scripts.pory"
+	applymovement LOCALID_FARAWAY_ISLAND_MEW, Common_Movement_Delay48
+# 80 "data/maps/FarawayIsland_Interior/scripts.pory"
+	waitmovement 0
+# 81 "data/maps/FarawayIsland_Interior/scripts.pory"
+	applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewMoveAndHide
+# 82 "data/maps/FarawayIsland_Interior/scripts.pory"
+	waitmovement 0
+# 83 "data/maps/FarawayIsland_Interior/scripts.pory"
+	copyobjectxytoperm LOCALID_FARAWAY_ISLAND_MEW
+# 84 "data/maps/FarawayIsland_Interior/scripts.pory"
+	setvar VAR_TEMP_1, 1
+# 85 "data/maps/FarawayIsland_Interior/scripts.pory"
+	releaseall
+	end
+
+
+# 89 "data/maps/FarawayIsland_Interior/scripts.pory"
+FarawayIsland_Interior_Movement_MewMoveAndHide:
+# 90 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_up
+# 91 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_up
+# 92 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_up
+# 93 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_in_place_faster_down
+# 94 "data/maps/FarawayIsland_Interior/scripts.pory"
+	set_invisible
+# 95 "data/maps/FarawayIsland_Interior/scripts.pory"
+	step_end
+
+# 98 "data/maps/FarawayIsland_Interior/scripts.pory"
+FarawayIsland_Interior_Movement_MewAppear:
+# 99 "data/maps/FarawayIsland_Interior/scripts.pory"
+	set_visible
+# 100 "data/maps/FarawayIsland_Interior/scripts.pory"
+	step_end
+
+FarawayIsland_Interior_Movement_MewFloatUpNorth::
+# 104 "data/maps/FarawayIsland_Interior/scripts.pory"
+	lock_facing_direction
+# 105 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_fast_up
+# 106 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_fast_up
+# 107 "data/maps/FarawayIsland_Interior/scripts.pory"
+	unlock_facing_direction
+# 108 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_in_place_down
+# 109 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_in_place_down
+# 110 "data/maps/FarawayIsland_Interior/scripts.pory"
+	step_end
+	return
+
+
+FarawayIsland_Interior_Movement_MewFloatUpSouth::
+# 114 "data/maps/FarawayIsland_Interior/scripts.pory"
+	lock_facing_direction
+# 115 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_fast_up
+# 116 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_fast_up
+# 117 "data/maps/FarawayIsland_Interior/scripts.pory"
+	unlock_facing_direction
+# 118 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_in_place_up
+# 119 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_in_place_up
+# 120 "data/maps/FarawayIsland_Interior/scripts.pory"
+	step_end
+	return
+
+
+FarawayIsland_Interior_Movement_MewFloatUpWest::
+# 124 "data/maps/FarawayIsland_Interior/scripts.pory"
+	lock_facing_direction
+# 125 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_fast_up
+# 126 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_fast_up
+# 127 "data/maps/FarawayIsland_Interior/scripts.pory"
+	unlock_facing_direction
+# 128 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_in_place_right
+# 129 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_in_place_right
+# 130 "data/maps/FarawayIsland_Interior/scripts.pory"
+	step_end
+	return
+
+
+FarawayIsland_Interior_Movement_MewFloatUpEast::
+# 134 "data/maps/FarawayIsland_Interior/scripts.pory"
+	lock_facing_direction
+# 135 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_fast_up
+# 136 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_fast_up
+# 137 "data/maps/FarawayIsland_Interior/scripts.pory"
+	unlock_facing_direction
+# 138 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_in_place_left
+# 139 "data/maps/FarawayIsland_Interior/scripts.pory"
+	walk_in_place_left
+# 140 "data/maps/FarawayIsland_Interior/scripts.pory"
+	step_end
+	return
+
+
+FarawayIsland_Interior_EventScript_Mew::
+# 144 "data/maps/FarawayIsland_Interior/scripts.pory"
+	lock
+# 145 "data/maps/FarawayIsland_Interior/scripts.pory"
+	faceplayer
+# 146 "data/maps/FarawayIsland_Interior/scripts.pory"
+	applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewAppear
+# 147 "data/maps/FarawayIsland_Interior/scripts.pory"
+	waitmovement 0
+# 148 "data/maps/FarawayIsland_Interior/scripts.pory"
+	setvar VAR_0x8004, 0
+# 149 "data/maps/FarawayIsland_Interior/scripts.pory"
+	special SetMewAboveGrass
+# 150 "data/maps/FarawayIsland_Interior/scripts.pory"
+	message FarawayIsland_Interior_Text_Mew
+# 151 "data/maps/FarawayIsland_Interior/scripts.pory"
+	waitse
+# 152 "data/maps/FarawayIsland_Interior/scripts.pory"
+	playmoncry SPECIES_MEW, CRY_MODE_ENCOUNTER
+# 153 "data/maps/FarawayIsland_Interior/scripts.pory"
+	compare VAR_FACING, DIR_NORTH
+	goto_if_eq FarawayIsland_Interior_EventScript_Mew_2
+FarawayIsland_Interior_EventScript_Mew_1:
+# 156 "data/maps/FarawayIsland_Interior/scripts.pory"
+	compare VAR_FACING, DIR_SOUTH
+	goto_if_eq FarawayIsland_Interior_EventScript_Mew_5
+FarawayIsland_Interior_EventScript_Mew_4:
+# 159 "data/maps/FarawayIsland_Interior/scripts.pory"
+	compare VAR_FACING, DIR_WEST
+	goto_if_eq FarawayIsland_Interior_EventScript_Mew_8
+FarawayIsland_Interior_EventScript_Mew_7:
+# 162 "data/maps/FarawayIsland_Interior/scripts.pory"
+	compare VAR_FACING, DIR_EAST
+	goto_if_eq FarawayIsland_Interior_EventScript_Mew_11
+FarawayIsland_Interior_EventScript_Mew_10:
+# 165 "data/maps/FarawayIsland_Interior/scripts.pory"
+	special DestroyMewEmergingGrassSprite
+# 166 "data/maps/FarawayIsland_Interior/scripts.pory"
+	delay 40
+# 167 "data/maps/FarawayIsland_Interior/scripts.pory"
+	waitmoncry
+# 168 "data/maps/FarawayIsland_Interior/scripts.pory"
+	seteventmon SPECIES_MEW, 30
+# 169 "data/maps/FarawayIsland_Interior/scripts.pory"
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+# 170 "data/maps/FarawayIsland_Interior/scripts.pory"
+	special BattleSetup_StartLegendaryBattle
+# 171 "data/maps/FarawayIsland_Interior/scripts.pory"
+	waitstate
+# 172 "data/maps/FarawayIsland_Interior/scripts.pory"
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+# 173 "data/maps/FarawayIsland_Interior/scripts.pory"
+	specialvar VAR_RESULT, GetBattleOutcome
+# 174 "data/maps/FarawayIsland_Interior/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_WON
+	goto_if_eq FarawayIsland_Interior_EventScript_Mew_14
+FarawayIsland_Interior_EventScript_Mew_13:
+# 177 "data/maps/FarawayIsland_Interior/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_RAN
+	goto_if_eq FarawayIsland_Interior_EventScript_Mew_17
+FarawayIsland_Interior_EventScript_Mew_16:
+# 180 "data/maps/FarawayIsland_Interior/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	goto_if_eq FarawayIsland_Interior_EventScript_Mew_20
+FarawayIsland_Interior_EventScript_Mew_19:
+# 183 "data/maps/FarawayIsland_Interior/scripts.pory"
+	compare VAR_RESULT, B_OUTCOME_MON_TELEPORTED
+	goto_if_eq FarawayIsland_Interior_EventScript_Mew_23
+FarawayIsland_Interior_EventScript_Mew_22:
+# 186 "data/maps/FarawayIsland_Interior/scripts.pory"
+	setflag FLAG_CAUGHT_MEW
+# 187 "data/maps/FarawayIsland_Interior/scripts.pory"
+	release
+	end
+
+FarawayIsland_Interior_EventScript_Mew_2:
+# 154 "data/maps/FarawayIsland_Interior/scripts.pory"
+	call FarawayIsland_Interior_EventScript_FoundMewNorth
+	goto FarawayIsland_Interior_EventScript_Mew_1
+
+FarawayIsland_Interior_EventScript_Mew_5:
+# 157 "data/maps/FarawayIsland_Interior/scripts.pory"
+	call FarawayIsland_Interior_EventScript_FoundMewSouth
+	goto FarawayIsland_Interior_EventScript_Mew_4
+
+FarawayIsland_Interior_EventScript_Mew_8:
+# 160 "data/maps/FarawayIsland_Interior/scripts.pory"
+	call FarawayIsland_Interior_EventScript_FoundMewWest
+	goto FarawayIsland_Interior_EventScript_Mew_7
+
+FarawayIsland_Interior_EventScript_Mew_11:
+# 163 "data/maps/FarawayIsland_Interior/scripts.pory"
+	call FarawayIsland_Interior_EventScript_FoundMewEast
+	goto FarawayIsland_Interior_EventScript_Mew_10
+
+FarawayIsland_Interior_EventScript_Mew_14:
+# 175 "data/maps/FarawayIsland_Interior/scripts.pory"
+	goto FarawayIsland_Interior_EventScript_MewDefeated
+	goto FarawayIsland_Interior_EventScript_Mew_13
+
+FarawayIsland_Interior_EventScript_Mew_17:
+# 178 "data/maps/FarawayIsland_Interior/scripts.pory"
+	goto FarawayIsland_Interior_EventScript_PlayerOrMewRan
+	goto FarawayIsland_Interior_EventScript_Mew_16
+
+FarawayIsland_Interior_EventScript_Mew_20:
+# 181 "data/maps/FarawayIsland_Interior/scripts.pory"
+	goto FarawayIsland_Interior_EventScript_PlayerOrMewRan
+	goto FarawayIsland_Interior_EventScript_Mew_19
+
+FarawayIsland_Interior_EventScript_Mew_23:
+# 184 "data/maps/FarawayIsland_Interior/scripts.pory"
+	goto FarawayIsland_Interior_EventScript_PlayerOrMewRan
+	goto FarawayIsland_Interior_EventScript_Mew_22
+
+
+FarawayIsland_Interior_EventScript_MewDefeated::
+# 192 "data/maps/FarawayIsland_Interior/scripts.pory"
+	setflag FLAG_DEFEATED_MEW
+# 193 "data/maps/FarawayIsland_Interior/scripts.pory"
+	setvar VAR_0x8004, SPECIES_MEW
+# 194 "data/maps/FarawayIsland_Interior/scripts.pory"
+	goto Common_EventScript_LegendaryFlewAway
+	end
+
+
+FarawayIsland_Interior_EventScript_PlayerOrMewRan::
+# 199 "data/maps/FarawayIsland_Interior/scripts.pory"
+	setvar VAR_0x8004, SPECIES_MEW
+# 200 "data/maps/FarawayIsland_Interior/scripts.pory"
+	goto Common_EventScript_LegendaryFlewAway
+	end
+
+
+FarawayIsland_Interior_EventScript_FoundMewNorth::
+# 205 "data/maps/FarawayIsland_Interior/scripts.pory"
+	applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpNorth
+# 206 "data/maps/FarawayIsland_Interior/scripts.pory"
+	waitmovement 0
+	return
+
+
+FarawayIsland_Interior_EventScript_FoundMewSouth::
+# 211 "data/maps/FarawayIsland_Interior/scripts.pory"
+	applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpSouth
+# 212 "data/maps/FarawayIsland_Interior/scripts.pory"
+	waitmovement 0
+	return
+
+
+FarawayIsland_Interior_EventScript_FoundMewWest::
+# 217 "data/maps/FarawayIsland_Interior/scripts.pory"
+	applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpWest
+# 218 "data/maps/FarawayIsland_Interior/scripts.pory"
+	waitmovement 0
+	return
+
+
+FarawayIsland_Interior_EventScript_FoundMewEast::
+# 223 "data/maps/FarawayIsland_Interior/scripts.pory"
+	applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpEast
+# 224 "data/maps/FarawayIsland_Interior/scripts.pory"
+	waitmovement 0
+	return
+
+
+FarawayIsland_Interior_EventScript_HideMewWhenGrassCut::
+# 229 "data/maps/FarawayIsland_Interior/scripts.pory"
+	lockall
+# 230 "data/maps/FarawayIsland_Interior/scripts.pory"
+	fadescreenswapbuffers FADE_TO_BLACK
+# 231 "data/maps/FarawayIsland_Interior/scripts.pory"
+	setflag FLAG_HIDE_MEW
+# 232 "data/maps/FarawayIsland_Interior/scripts.pory"
+	removeobject LOCALID_FARAWAY_ISLAND_MEW
+# 233 "data/maps/FarawayIsland_Interior/scripts.pory"
+	fadescreenswapbuffers FADE_FROM_BLACK
+# 234 "data/maps/FarawayIsland_Interior/scripts.pory"
+	msgbox FarawayIsland_Interior_Text_TheFeelingOfBeingWatchedFaded, MSGBOX_DEFAULT
+# 235 "data/maps/FarawayIsland_Interior/scripts.pory"
+	closemessage
+# 236 "data/maps/FarawayIsland_Interior/scripts.pory"
+	releaseall
+	end
+
+
+FarawayIsland_Interior_Text_TheFeelingOfBeingWatchedFaded::
+# 240 "data/maps/FarawayIsland_Interior/scripts.pory"
+	.string "The feeling of being watched faded…$"
+
+`

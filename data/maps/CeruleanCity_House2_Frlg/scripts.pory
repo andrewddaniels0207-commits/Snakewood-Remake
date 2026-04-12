@@ -1,54 +1,72 @@
-mapscripts CeruleanCity_House2_Frlg_MapScripts {}
+raw `
+CeruleanCity_House2_Frlg_MapScripts::
+	.byte 0
 
-script CeruleanCity_House2_EventScript_Hiker {
-    lock
-    faceplayer
-    if (flag(FLAG_GOT_TM28_FROM_ROCKET)) {
-        goto(CeruleanCity_House2_EventScript_HikerGotTM28)
-    }
-    msgbox(CeruleanCity_House2_Text_RocketsStoleTMForDig)
-    release
-    end
-}
 
-script CeruleanCity_House2_EventScript_HikerGotTM28 {
-    msgbox(CeruleanCity_House2_Text_TeachDiglettDigWithoutTM)
-    release
-    end
-}
+CeruleanCity_House2_EventScript_Hiker::
+# 4 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
+	lock
+# 5 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
+	faceplayer
+# 6 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_TM28_FROM_ROCKET, CeruleanCity_House2_EventScript_Hiker_2
+CeruleanCity_House2_EventScript_Hiker_1:
+# 9 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
+	msgbox CeruleanCity_House2_Text_RocketsStoleTMForDig
+# 10 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
+	release
+	end
 
-script CeruleanCity_House2_EventScript_Lass {
-    msgbox(CeruleanCity_House2_Text_TeamRocketTryingToDigIntoNoGood, MSGBOX_NPC)
-    end
-}
+CeruleanCity_House2_EventScript_Hiker_2:
+# 7 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
+	goto CeruleanCity_House2_EventScript_HikerGotTM28
+	goto CeruleanCity_House2_EventScript_Hiker_1
 
-script CeruleanCity_House2_EventScript_WallHole {
-    msgbox(CeruleanCity_House2_Text_TeamRocketLeftWayOut, MSGBOX_SIGN)
-    end
-}
 
-text CeruleanCity_House2_Text_RocketsStoleTMForDig {
-    "Those miserable ROCKETS!\p"
-    "Look what they've done to my\n"
-    "house!\p"
-    "They stole a TM for teaching\n"
-    "POKéMON how to DIG holes!\p"
-    "I was going to use it on a\n"
-    "MANKEY or a SANDSHREW…\p"
-    "That cost me a bundle, it did!$"
-}
+CeruleanCity_House2_EventScript_HikerGotTM28::
+# 15 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
+	msgbox CeruleanCity_House2_Text_TeachDiglettDigWithoutTM
+# 16 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
+	release
+	end
 
-text CeruleanCity_House2_Text_TeachDiglettDigWithoutTM {
-    "I figure what's lost is lost.\p"
-    "I decided to teach DIGLETT how to\n"
-    "DIG without a TM.$"
-}
 
-text CeruleanCity_House2_Text_TeamRocketTryingToDigIntoNoGood {
-    "TEAM ROCKET must be trying to DIG\n"
-    "their way into no good!$"
-}
+CeruleanCity_House2_EventScript_Lass::
+# 21 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
+	msgbox CeruleanCity_House2_Text_TeamRocketTryingToDigIntoNoGood, MSGBOX_NPC
+	end
 
-text CeruleanCity_House2_Text_TeamRocketLeftWayOut {
-    "TEAM ROCKET left a way out!$"
-}
+
+CeruleanCity_House2_EventScript_WallHole::
+# 26 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
+	msgbox CeruleanCity_House2_Text_TeamRocketLeftWayOut, MSGBOX_SIGN
+	end
+
+
+CeruleanCity_House2_Text_RocketsStoleTMForDig::
+# 30 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
+	.string "Those miserable ROCKETS!\p"
+	.string "Look what they've done to my\n"
+	.string "house!\p"
+	.string "They stole a TM for teaching\n"
+	.string "POKéMON how to DIG holes!\p"
+	.string "I was going to use it on a\n"
+	.string "MANKEY or a SANDSHREW…\p"
+	.string "That cost me a bundle, it did!$"
+
+CeruleanCity_House2_Text_TeachDiglettDigWithoutTM::
+# 41 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
+	.string "I figure what's lost is lost.\p"
+	.string "I decided to teach DIGLETT how to\n"
+	.string "DIG without a TM.$"
+
+CeruleanCity_House2_Text_TeamRocketTryingToDigIntoNoGood::
+# 47 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
+	.string "TEAM ROCKET must be trying to DIG\n"
+	.string "their way into no good!$"
+
+CeruleanCity_House2_Text_TeamRocketLeftWayOut::
+# 52 "data/maps/CeruleanCity_House2_Frlg/scripts.pory"
+	.string "TEAM ROCKET left a way out!$"
+
+`

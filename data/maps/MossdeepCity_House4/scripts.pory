@@ -1,73 +1,110 @@
-mapscripts MossdeepCity_House4_MapScripts {}
+raw `
+MossdeepCity_House4_MapScripts::
+	.byte 0
 
-script MossdeepCity_House4_EventScript_Woman {
-    lock
-    faceplayer
-    if (flag(FLAG_SYS_GAME_CLEAR)) {
-        goto(MossdeepCity_House4_EventScript_CanBattleAtSecretBases)
-    }
-    msgbox(MossdeepCity_House4_Text_BrotherLikesToFindBases, MSGBOX_DEFAULT)
-    release
-    end
-}
 
-script MossdeepCity_House4_EventScript_CanBattleAtSecretBases {
-    msgbox(MossdeepCity_House4_Text_BrotherLikesToVisitBasesAndBattle, MSGBOX_DEFAULT)
-    release
-    end
-}
+MossdeepCity_House4_EventScript_Woman::
+# 4 "data/maps/MossdeepCity_House4/scripts.pory"
+	lock
+# 5 "data/maps/MossdeepCity_House4/scripts.pory"
+	faceplayer
+# 6 "data/maps/MossdeepCity_House4/scripts.pory"
+	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_House4_EventScript_Woman_2
+MossdeepCity_House4_EventScript_Woman_1:
+# 9 "data/maps/MossdeepCity_House4/scripts.pory"
+	msgbox MossdeepCity_House4_Text_BrotherLikesToFindBases, MSGBOX_DEFAULT
+# 10 "data/maps/MossdeepCity_House4/scripts.pory"
+	release
+	end
 
-script MossdeepCity_House4_EventScript_NinjaBoy {
-    lock
-    faceplayer
-    special(CheckPlayerHasSecretBase)
-    if (var(VAR_RESULT) == FALSE) {
-        goto(MossdeepCity_House4_EventScript_NoSecretBase)
-    }
-    special(GetSecretBaseNearbyMapName)
-    msgbox(MossdeepCity_House4_Text_YouMadeSecretBaseNearX, MSGBOX_DEFAULT)
-    release
-    end
-}
+MossdeepCity_House4_EventScript_Woman_2:
+# 7 "data/maps/MossdeepCity_House4/scripts.pory"
+	goto MossdeepCity_House4_EventScript_CanBattleAtSecretBases
+	goto MossdeepCity_House4_EventScript_Woman_1
 
-script MossdeepCity_House4_EventScript_NoSecretBase {
-    msgbox(MossdeepCity_House4_Text_MakeSecretBase, MSGBOX_DEFAULT)
-    release
-    end
-}
 
-script MossdeepCity_House4_EventScript_Skitty {
-    lock
-    faceplayer
-    waitse()
-    playmoncry(SPECIES_SKITTY, CRY_MODE_NORMAL)
-    msgbox(MossdeepCity_House4_Text_Skitty, MSGBOX_DEFAULT)
-    waitmoncry()
-    release
-    end
-}
+MossdeepCity_House4_EventScript_CanBattleAtSecretBases::
+# 15 "data/maps/MossdeepCity_House4/scripts.pory"
+	msgbox MossdeepCity_House4_Text_BrotherLikesToVisitBasesAndBattle, MSGBOX_DEFAULT
+# 16 "data/maps/MossdeepCity_House4/scripts.pory"
+	release
+	end
 
-text MossdeepCity_House4_Text_BrotherLikesToFindBases {
-    "My little brother says he likes to go\n"
-    "find people's SECRET BASES.$"
-}
 
-text MossdeepCity_House4_Text_BrotherLikesToVisitBasesAndBattle {
-    "My little brother says he likes to\n"
-    "visit people's SECRET BASES and have\l"
-    "POKéMON battles.$"
-}
+MossdeepCity_House4_EventScript_NinjaBoy::
+# 21 "data/maps/MossdeepCity_House4/scripts.pory"
+	lock
+# 22 "data/maps/MossdeepCity_House4/scripts.pory"
+	faceplayer
+# 23 "data/maps/MossdeepCity_House4/scripts.pory"
+	special CheckPlayerHasSecretBase
+# 24 "data/maps/MossdeepCity_House4/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq MossdeepCity_House4_EventScript_NinjaBoy_2
+MossdeepCity_House4_EventScript_NinjaBoy_1:
+# 27 "data/maps/MossdeepCity_House4/scripts.pory"
+	special GetSecretBaseNearbyMapName
+# 28 "data/maps/MossdeepCity_House4/scripts.pory"
+	msgbox MossdeepCity_House4_Text_YouMadeSecretBaseNearX, MSGBOX_DEFAULT
+# 29 "data/maps/MossdeepCity_House4/scripts.pory"
+	release
+	end
 
-text MossdeepCity_House4_Text_YouMadeSecretBaseNearX {
-    "Was it you who made a SECRET BASE\n"
-    "near {STR_VAR_1}?$"
-}
+MossdeepCity_House4_EventScript_NinjaBoy_2:
+# 25 "data/maps/MossdeepCity_House4/scripts.pory"
+	goto MossdeepCity_House4_EventScript_NoSecretBase
+	goto MossdeepCity_House4_EventScript_NinjaBoy_1
 
-text MossdeepCity_House4_Text_MakeSecretBase {
-    "You should make a SECRET BASE\n"
-    "somewhere. I'll go find it!$"
-}
 
-text MossdeepCity_House4_Text_Skitty {
-    "SKITTY: Miyaan?$"
-}
+MossdeepCity_House4_EventScript_NoSecretBase::
+# 34 "data/maps/MossdeepCity_House4/scripts.pory"
+	msgbox MossdeepCity_House4_Text_MakeSecretBase, MSGBOX_DEFAULT
+# 35 "data/maps/MossdeepCity_House4/scripts.pory"
+	release
+	end
+
+
+MossdeepCity_House4_EventScript_Skitty::
+# 40 "data/maps/MossdeepCity_House4/scripts.pory"
+	lock
+# 41 "data/maps/MossdeepCity_House4/scripts.pory"
+	faceplayer
+# 42 "data/maps/MossdeepCity_House4/scripts.pory"
+	waitse
+# 43 "data/maps/MossdeepCity_House4/scripts.pory"
+	playmoncry SPECIES_SKITTY, CRY_MODE_NORMAL
+# 44 "data/maps/MossdeepCity_House4/scripts.pory"
+	msgbox MossdeepCity_House4_Text_Skitty, MSGBOX_DEFAULT
+# 45 "data/maps/MossdeepCity_House4/scripts.pory"
+	waitmoncry
+# 46 "data/maps/MossdeepCity_House4/scripts.pory"
+	release
+	end
+
+
+MossdeepCity_House4_Text_BrotherLikesToFindBases::
+# 50 "data/maps/MossdeepCity_House4/scripts.pory"
+	.string "My little brother says he likes to go\n"
+	.string "find people's SECRET BASES.$"
+
+MossdeepCity_House4_Text_BrotherLikesToVisitBasesAndBattle::
+# 55 "data/maps/MossdeepCity_House4/scripts.pory"
+	.string "My little brother says he likes to\n"
+	.string "visit people's SECRET BASES and have\l"
+	.string "POKéMON battles.$"
+
+MossdeepCity_House4_Text_YouMadeSecretBaseNearX::
+# 61 "data/maps/MossdeepCity_House4/scripts.pory"
+	.string "Was it you who made a SECRET BASE\n"
+	.string "near {STR_VAR_1}?$"
+
+MossdeepCity_House4_Text_MakeSecretBase::
+# 66 "data/maps/MossdeepCity_House4/scripts.pory"
+	.string "You should make a SECRET BASE\n"
+	.string "somewhere. I'll go find it!$"
+
+MossdeepCity_House4_Text_Skitty::
+# 71 "data/maps/MossdeepCity_House4/scripts.pory"
+	.string "SKITTY: Miyaan?$"
+
+`

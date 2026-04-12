@@ -1,36 +1,54 @@
 VermilionCity_House3_Frlg_MapScripts::
 	.byte 0
 
+
 VermilionCity_House3_EventScript_Boy::
+# 4 "data/maps/VermilionCity_House3_Frlg/scripts.pory"
 	msgbox VermilionCity_House3_Text_PidgeyFlyLetterToSaffron, MSGBOX_NPC
 	end
 
+
 VermilionCity_House3_EventScript_Lass::
+# 9 "data/maps/VermilionCity_House3_Frlg/scripts.pory"
 	msgbox VermilionCity_House3_Text_SendMyPidgeyToUnionRoom, MSGBOX_NPC
 	end
 
+
 VermilionCity_House3_EventScript_Pidgey::
+# 14 "data/maps/VermilionCity_House3_Frlg/scripts.pory"
 	lock
+# 15 "data/maps/VermilionCity_House3_Frlg/scripts.pory"
 	faceplayer
+# 16 "data/maps/VermilionCity_House3_Frlg/scripts.pory"
 	waitse
+# 17 "data/maps/VermilionCity_House3_Frlg/scripts.pory"
 	playmoncry SPECIES_PIDGEY, CRY_MODE_NORMAL
+# 18 "data/maps/VermilionCity_House3_Frlg/scripts.pory"
 	msgbox VermilionCity_House3_Text_Pidgey
+# 19 "data/maps/VermilionCity_House3_Frlg/scripts.pory"
 	waitmoncry
+# 20 "data/maps/VermilionCity_House3_Frlg/scripts.pory"
 	release
 	end
 
+
 VermilionCity_House3_EventScript_Letter::
+# 25 "data/maps/VermilionCity_House3_Frlg/scripts.pory"
 	msgbox VermilionCity_House3_Text_DearPippiLetter, MSGBOX_SIGN
 	end
 
+
 VermilionCity_House3_Text_PidgeyFlyLetterToSaffron::
+# 29 "data/maps/VermilionCity_House3_Frlg/scripts.pory"
 	.string "I'm getting my PIDGEY to fly a\n"
 	.string "letter to SAFFRON in the north.$"
 
 VermilionCity_House3_Text_Pidgey::
+# 34 "data/maps/VermilionCity_House3_Frlg/scripts.pory"
 	.string "PIDGEY: Kurukkoo!$"
 
 VermilionCity_House3_Text_DearPippiLetter::
+# 38 "data/maps/VermilionCity_House3_Frlg/scripts.pory"
 	.string "Dear PIPPI,\n"
 	.string "I hope to see you soon.\p"
 	.string "I heard SAFFRON has problems with\n"
@@ -38,8 +56,8 @@ VermilionCity_House3_Text_DearPippiLetter::
 	.string "VERMILION appears to be safe.$"
 
 VermilionCity_House3_Text_SendMyPidgeyToUnionRoom::
+# 46 "data/maps/VermilionCity_House3_Frlg/scripts.pory"
 	.string "I want to exchange MAIL with all\n"
 	.string "sorts of people.\p"
 	.string "I send my PIDGEY to a UNION ROOM\n"
 	.string "to exchange MAIL for me.$"
-

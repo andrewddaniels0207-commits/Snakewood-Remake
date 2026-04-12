@@ -1,30 +1,62 @@
 SafariZone_SecretHouse_Frlg_MapScripts::
 	.byte 0
 
+
 SafariZone_SecretHouse_EventScript_Attendant::
+# 4 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
 	lock
+# 5 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
 	faceplayer
-	goto_if_set FLAG_GOT_HM03, SafariZone_SecretHouse_EventScript_ExplainSurf
+# 6 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_HM03, SafariZone_SecretHouse_EventScript_Attendant_2
+SafariZone_SecretHouse_EventScript_Attendant_1:
+# 9 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
 	msgbox SafariZone_SecretHouse_Text_CongratsYouveWon
+# 10 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
 	checkitemspace ITEM_HM03
-	goto_if_eq VAR_RESULT, FALSE, SafariZone_SecretHouse_EventScript_NoRoomForHM03
+# 11 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq SafariZone_SecretHouse_EventScript_Attendant_5
+SafariZone_SecretHouse_EventScript_Attendant_4:
+# 14 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
 	giveitem_msg SafariZone_SecretHouse_Text_ReceivedHM03FromAttendant, ITEM_HM03
+# 15 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
 	msgbox SafariZone_SecretHouse_Text_ExplainSurf
+# 16 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
 	setflag FLAG_GOT_HM03
+# 17 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
 	release
 	end
+
+SafariZone_SecretHouse_EventScript_Attendant_2:
+# 7 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
+	goto SafariZone_SecretHouse_EventScript_ExplainSurf
+	goto SafariZone_SecretHouse_EventScript_Attendant_1
+
+SafariZone_SecretHouse_EventScript_Attendant_5:
+# 12 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
+	goto SafariZone_SecretHouse_EventScript_NoRoomForHM03
+	goto SafariZone_SecretHouse_EventScript_Attendant_4
+
 
 SafariZone_SecretHouse_EventScript_NoRoomForHM03::
+# 22 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
 	msgbox SafariZone_SecretHouse_Text_DontHaveRoomForPrize
+# 23 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
 	release
 	end
+
 
 SafariZone_SecretHouse_EventScript_ExplainSurf::
+# 28 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
 	msgbox SafariZone_SecretHouse_Text_ExplainSurf
+# 29 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
 	release
 	end
 
+
 SafariZone_SecretHouse_Text_CongratsYouveWon::
+# 33 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
 	.string "Ah! Finally!\p"
 	.string "You're the first person to reach\n"
 	.string "the SECRET HOUSE!\p"
@@ -36,10 +68,12 @@ SafariZone_SecretHouse_Text_CongratsYouveWon::
 	.string "You have won!$"
 
 SafariZone_SecretHouse_Text_ReceivedHM03FromAttendant::
+# 45 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
 	.string "{PLAYER} received HM03\n"
 	.string "from the attendant!$"
 
 SafariZone_SecretHouse_Text_ExplainSurf::
+# 50 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
 	.string "HM03 is SURF.\p"
 	.string "POKéMON will be able to ferry you\n"
 	.string "across water using it.\p"
@@ -49,6 +83,6 @@ SafariZone_SecretHouse_Text_ExplainSurf::
 	.string "fabulous prize!$"
 
 SafariZone_SecretHouse_Text_DontHaveRoomForPrize::
+# 60 "data/maps/SafariZone_SecretHouse_Frlg/scripts.pory"
 	.string "You don't have room for this\n"
 	.string "fabulous prize!$"
-

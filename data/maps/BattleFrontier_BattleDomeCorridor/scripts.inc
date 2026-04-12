@@ -10,281 +10,297 @@ BattleFrontier_BattleDomeCorridor_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
 
 
 BattleFrontier_BattleDomeCorridor_EventScript_EnterCorridor::
-# 8 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	delay 16
 # 9 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	setvar VAR_TEMP_0, 1
-# 10 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	frontier_get FRONTIER_DATA_LVL_MODE
+	delay 16
 # 11 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	compare VAR_RESULT, FRONTIER_LVL_OPEN
-	goto_if_eq BattleFrontier_BattleDomeCorridor_EventScript_EnterCorridor_2
-BattleFrontier_BattleDomeCorridor_EventScript_EnterCorridor_1:
-# 14 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	applymovement LOCALID_DOME_CORRIDOR_ATTENDANT, BattleFrontier_BattleDomeCorridor_Movement_AttendantWalkToDoorLv50
+	setvar VAR_TEMP_0, 1
+# 13 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	frontier_get FRONTIER_DATA_LVL_MODE
 # 15 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLv50
+	compare VAR_RESULT, FRONTIER_LVL_OPEN
 # 16 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	waitmovement 0
-# 17 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	opendoor 13, 3
-# 18 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	waitdooranim
-# 19 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	applymovement LOCALID_DOME_CORRIDOR_ATTENDANT, BattleFrontier_BattleDomeCorridor_Movement_AttendantEnterDoorLv50
-# 20 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLv50
+	goto_if_eq BattleFrontier_BattleDomeCorridor_EventScript_EnterCorridor_2
+	return
+
+
+BattleFrontier_BattleDomeCorridor_EventScript_EnterCorridor_1::
 # 21 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	waitmovement 0
-# 22 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	closedoor 13, 3
+	applymovement LOCALID_DOME_CORRIDOR_ATTENDANT, BattleFrontier_BattleDomeCorridor_Movement_AttendantWalkToDoorLv50
 # 23 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLv50
+# 25 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	waitmovement 0
+# 27 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	opendoor 13, 3
+# 29 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	waitdooranim
-# 24 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+# 31 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	applymovement LOCALID_DOME_CORRIDOR_ATTENDANT, BattleFrontier_BattleDomeCorridor_Movement_AttendantEnterDoorLv50
+# 33 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLv50
+# 35 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	waitmovement 0
+# 37 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	closedoor 13, 3
+# 39 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	waitdooranim
+# 41 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	goto BattleFrontier_BattleDomeCorridor_EventScript_WarpToPreBattleRoom
 	return
 
-BattleFrontier_BattleDomeCorridor_EventScript_EnterCorridor_2:
-# 12 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+
+BattleFrontier_BattleDomeCorridor_EventScript_EnterCorridor_2::
+# 47 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	goto BattleFrontier_BattleDomeCorridor_EventScript_WalkToBattleRoomLvOpen
+# 48 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	goto BattleFrontier_BattleDomeCorridor_EventScript_EnterCorridor_1
+	return
 
 
 BattleFrontier_BattleDomeCorridor_EventScript_WalkToBattleRoomLvOpen::
-# 28 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+# 53 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	applymovement LOCALID_DOME_CORRIDOR_ATTENDANT, BattleFrontier_BattleDomeCorridor_Movement_AttendantWalkToDoorLvOpen
-# 29 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+# 55 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	applymovement LOCALID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLvOpen
-# 30 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+# 57 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	waitmovement 0
-# 31 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+# 59 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	opendoor 37, 3
-# 32 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+# 61 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	waitdooranim
-# 33 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+# 63 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	applymovement LOCALID_DOME_CORRIDOR_ATTENDANT, BattleFrontier_BattleDomeCorridor_Movement_AttendantEnterDoorLvOpen
-# 34 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+# 65 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	applymovement LOCALID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLvOpen
-# 35 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+# 67 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	waitmovement 0
-# 36 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+# 69 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	closedoor 37, 3
-# 37 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+# 71 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	waitdooranim
 	return
 
 
 BattleFrontier_BattleDomeCorridor_EventScript_WarpToPreBattleRoom::
-# 41 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+# 77 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	waitmovement 0
-# 42 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+# 79 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	setvar VAR_0x8006, 0
-# 43 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+# 81 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM, 5, 7
-# 44 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+# 83 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	waitstate
 	end
 
 
-# 48 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLv50:
-# 49 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLv50::
+# 90 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	walk_up
-# 50 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 51 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 52 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 53 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 54 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 55 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 56 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 57 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 58 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 59 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 60 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_in_place_faster_up
-# 61 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	step_end
-
-# 64 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLv50:
-# 65 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_up
-# 66 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_up
-# 67 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	set_invisible
-# 68 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	step_end
-
-# 71 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-BattleFrontier_BattleDomeCorridor_Movement_AttendantWalkToDoorLv50:
-# 72 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 73 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 74 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 75 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 76 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 77 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 78 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 79 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 80 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 81 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_left
-# 82 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_up
-# 83 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	step_end
-
-# 86 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-BattleFrontier_BattleDomeCorridor_Movement_AttendantEnterDoorLv50:
-# 87 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_up
-# 88 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	set_invisible
-# 89 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	step_end
-
 # 92 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLvOpen:
-# 93 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_up
+	walk_left
 # 94 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 95 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
+	walk_left
 # 96 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 97 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
+	walk_left
 # 98 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 99 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
+	walk_left
 # 100 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 101 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
+	walk_left
 # 102 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 103 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
+	walk_left
 # 104 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 105 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
+	walk_left
 # 106 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 107 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
+	walk_left
 # 108 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_in_place_faster_up
-# 109 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	step_end
-
+	walk_left
+# 110 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_left
 # 112 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLvOpen:
-# 113 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_up
+	walk_in_place_faster_up
 # 114 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_up
-# 115 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	set_invisible
-# 116 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	step_end
+	return
 
-# 119 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-BattleFrontier_BattleDomeCorridor_Movement_AttendantWalkToDoorLvOpen:
+
+BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLv50::
 # 120 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 121 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
+	walk_up
 # 122 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 123 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
+	walk_up
 # 124 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 125 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
+	set_invisible
 # 126 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 127 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 128 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 129 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 130 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 131 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
+	step_end
+	return
+
+
+BattleFrontier_BattleDomeCorridor_Movement_AttendantWalkToDoorLv50::
 # 132 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 133 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
+	walk_left
 # 134 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_up
-# 135 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	step_end
-
+	walk_left
+# 136 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_left
 # 138 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-BattleFrontier_BattleDomeCorridor_Movement_AttendantEnterDoorLvOpen:
-# 139 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_up
+	walk_left
 # 140 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	set_invisible
-# 141 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	step_end
-
+	walk_left
+# 142 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_left
 # 144 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-BattleFrontier_BattleDomeCorridor_Movement_WalkToBattleRoomMidRight:
-# 145 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_up
+	walk_left
 # 146 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 147 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
+	walk_left
 # 148 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 149 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
+	walk_left
 # 150 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 151 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
+	walk_left
 # 152 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 153 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
+	walk_up
 # 154 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 155 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 156 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_right
-# 157 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_up
-# 158 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	walk_up
-# 159 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
-	set_invisible
-# 160 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
 	step_end
+	return
+
+
+BattleFrontier_BattleDomeCorridor_Movement_AttendantEnterDoorLv50::
+# 160 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_up
+# 162 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	set_invisible
+# 164 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	step_end
+	return
+
+
+BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLvOpen::
+# 170 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_up
+# 172 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 174 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 176 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 178 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 180 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 182 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 184 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 186 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 188 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 190 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 192 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 194 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 196 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 198 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 200 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_in_place_faster_up
+# 202 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	step_end
+	return
+
+
+BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLvOpen::
+# 208 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_up
+# 210 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_up
+# 212 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	set_invisible
+# 214 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	step_end
+	return
+
+
+BattleFrontier_BattleDomeCorridor_Movement_AttendantWalkToDoorLvOpen::
+# 220 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 222 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 224 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 226 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 228 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 230 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 232 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 234 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 236 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 238 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 240 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 242 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 244 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 246 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 248 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_up
+# 250 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	step_end
+	return
+
+
+BattleFrontier_BattleDomeCorridor_Movement_AttendantEnterDoorLvOpen::
+# 256 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_up
+# 258 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	set_invisible
+# 260 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	step_end
+	return
+
+
+BattleFrontier_BattleDomeCorridor_Movement_WalkToBattleRoomMidRight::
+# 266 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_up
+# 268 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 270 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 272 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 274 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 276 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 278 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 280 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 282 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 284 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 286 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 288 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_right
+# 290 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_up
+# 292 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	walk_up
+# 294 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	set_invisible
+# 296 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory"
+	step_end
+	return
+

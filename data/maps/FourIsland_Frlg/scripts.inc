@@ -1,175 +1,363 @@
 FourIsland_Frlg_MapScripts::
+# 2 "data/maps/FourIsland_Frlg/scripts.pory"
 	map_script MAP_SCRIPT_ON_TRANSITION, FourIsland_OnTransition
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, FourIsland_OnFrame
+# 3 "data/maps/FourIsland_Frlg/scripts.pory"
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, FourIsland_Frlg_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
 	.byte 0
 
-FourIsland_OnTransition::
-	setworldmapflag FLAG_WORLD_MAP_FOUR_ISLAND
-	call_if_eq VAR_MAP_SCENE_FOUR_ISLAND, 0, FourIsland_EventScript_ShowRival
-	call FourIsland_EventScript_TrySetDayCareManPos
-	end
-
-FourIsland_EventScript_ShowRival::
-	clearflag FLAG_HIDE_FOUR_ISLAND_RIVAL
-	return
-
-FourIsland_EventScript_TrySetDayCareManPos::
-	goto_if_unset FLAG_PENDING_DAYCARE_EGG, FourIsland_EventScript_EndSetDayCareManPos
-	setobjectxyperm LOCALID_FOUR_ISLAND_DAYCARE_MAN, 16, 14
-FourIsland_EventScript_EndSetDayCareManPos::
-	return
-
-FourIsland_OnFrame::
+FourIsland_Frlg_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+# 4 "data/maps/FourIsland_Frlg/scripts.pory"
 	map_script_2 VAR_MAP_SCENE_FOUR_ISLAND, 0, FourIsland_EventScript_RivalScene
 	.2byte 0
 
+
+FourIsland_OnTransition::
+# 9 "data/maps/FourIsland_Frlg/scripts.pory"
+	setworldmapflag FLAG_WORLD_MAP_FOUR_ISLAND
+# 10 "data/maps/FourIsland_Frlg/scripts.pory"
+	compare VAR_MAP_SCENE_FOUR_ISLAND, 0
+	goto_if_eq FourIsland_OnTransition_2
+FourIsland_OnTransition_1:
+# 13 "data/maps/FourIsland_Frlg/scripts.pory"
+	call FourIsland_EventScript_TrySetDayCareManPos
+	end
+
+FourIsland_OnTransition_2:
+# 11 "data/maps/FourIsland_Frlg/scripts.pory"
+	call FourIsland_EventScript_ShowRival
+	goto FourIsland_OnTransition_1
+
+
+FourIsland_EventScript_ShowRival::
+# 18 "data/maps/FourIsland_Frlg/scripts.pory"
+	clearflag FLAG_HIDE_FOUR_ISLAND_RIVAL
+	return
+
+
+FourIsland_EventScript_TrySetDayCareManPos::
+# 23 "data/maps/FourIsland_Frlg/scripts.pory"
+	goto_if_unset FLAG_PENDING_DAYCARE_EGG, FourIsland_EventScript_TrySetDayCareManPos_2
+FourIsland_EventScript_TrySetDayCareManPos_1:
+# 26 "data/maps/FourIsland_Frlg/scripts.pory"
+	setobjectxyperm LOCALID_FOUR_ISLAND_DAYCARE_MAN, 16, 14
+	return
+
+FourIsland_EventScript_TrySetDayCareManPos_2:
+# 24 "data/maps/FourIsland_Frlg/scripts.pory"
+	goto FourIsland_EventScript_EndSetDayCareManPos
+	goto FourIsland_EventScript_TrySetDayCareManPos_1
+
+
+FourIsland_EventScript_EndSetDayCareManPos::
+	return
+
+
 FourIsland_EventScript_RivalScene::
+# 34 "data/maps/FourIsland_Frlg/scripts.pory"
 	lockall
+# 35 "data/maps/FourIsland_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_MALE
+# 36 "data/maps/FourIsland_Frlg/scripts.pory"
 	applymovement LOCALID_FOUR_ISLAND_RIVAL, Common_Movement_WalkInPlaceFasterDown
+# 37 "data/maps/FourIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 38 "data/maps/FourIsland_Frlg/scripts.pory"
 	playbgm MUS_RG_ENCOUNTER_RIVAL, 0
+# 39 "data/maps/FourIsland_Frlg/scripts.pory"
 	applymovement LOCALID_FOUR_ISLAND_RIVAL, Common_Movement_ExclamationMark
+# 40 "data/maps/FourIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 41 "data/maps/FourIsland_Frlg/scripts.pory"
 	applymovement LOCALID_FOUR_ISLAND_RIVAL, Common_Movement_Delay48
+# 42 "data/maps/FourIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 43 "data/maps/FourIsland_Frlg/scripts.pory"
 	delay 25
+# 44 "data/maps/FourIsland_Frlg/scripts.pory"
 	applymovement LOCALID_FOUR_ISLAND_RIVAL, FourIsland_Movement_RivalApproach
+# 45 "data/maps/FourIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 46 "data/maps/FourIsland_Frlg/scripts.pory"
 	msgbox FourIsland_Text_RivalAlreadyGotEggBeSmellingYa
+# 47 "data/maps/FourIsland_Frlg/scripts.pory"
 	closemessage
+# 48 "data/maps/FourIsland_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, FourIsland_Movement_PlayerWatchRivalExit
+# 49 "data/maps/FourIsland_Frlg/scripts.pory"
 	applymovement LOCALID_FOUR_ISLAND_RIVAL, FourIsland_Movement_RivalExit
+# 50 "data/maps/FourIsland_Frlg/scripts.pory"
 	waitmovement 0
+# 51 "data/maps/FourIsland_Frlg/scripts.pory"
 	fadedefaultbgm
+# 52 "data/maps/FourIsland_Frlg/scripts.pory"
 	playse SE_EXIT
+# 53 "data/maps/FourIsland_Frlg/scripts.pory"
 	delay 35
+# 54 "data/maps/FourIsland_Frlg/scripts.pory"
 	removeobject LOCALID_FOUR_ISLAND_RIVAL
+# 55 "data/maps/FourIsland_Frlg/scripts.pory"
 	setvar VAR_MAP_SCENE_FOUR_ISLAND, 1
+# 56 "data/maps/FourIsland_Frlg/scripts.pory"
 	releaseall
 	end
 
-FourIsland_Movement_RivalApproach::
+
+# 60 "data/maps/FourIsland_Frlg/scripts.pory"
+FourIsland_Movement_RivalApproach:
+# 61 "data/maps/FourIsland_Frlg/scripts.pory"
 	walk_right
+# 62 "data/maps/FourIsland_Frlg/scripts.pory"
 	walk_right
+# 63 "data/maps/FourIsland_Frlg/scripts.pory"
 	walk_down
+# 64 "data/maps/FourIsland_Frlg/scripts.pory"
 	walk_down
+# 65 "data/maps/FourIsland_Frlg/scripts.pory"
 	step_end
 
-FourIsland_Movement_RivalExit::
+# 68 "data/maps/FourIsland_Frlg/scripts.pory"
+FourIsland_Movement_RivalExit:
+# 69 "data/maps/FourIsland_Frlg/scripts.pory"
 	delay_16
+# 70 "data/maps/FourIsland_Frlg/scripts.pory"
 	delay_4
+# 71 "data/maps/FourIsland_Frlg/scripts.pory"
 	walk_down
+# 72 "data/maps/FourIsland_Frlg/scripts.pory"
 	step_end
 
-FourIsland_Movement_PlayerWatchRivalExit::
+# 75 "data/maps/FourIsland_Frlg/scripts.pory"
+FourIsland_Movement_PlayerWatchRivalExit:
+# 76 "data/maps/FourIsland_Frlg/scripts.pory"
 	walk_left
+# 77 "data/maps/FourIsland_Frlg/scripts.pory"
 	walk_in_place_faster_right
+# 78 "data/maps/FourIsland_Frlg/scripts.pory"
 	step_end
 
 FourIsland_EventScript_DaycareMan::
+# 82 "data/maps/FourIsland_Frlg/scripts.pory"
 	lock
+# 83 "data/maps/FourIsland_Frlg/scripts.pory"
 	faceplayer
+# 84 "data/maps/FourIsland_Frlg/scripts.pory"
 	special GetDaycareMonNicknames
+# 85 "data/maps/FourIsland_Frlg/scripts.pory"
 	specialvar VAR_RESULT, GetDaycareState
-	goto_if_eq VAR_RESULT, DAYCARE_EGG_WAITING, FourIsland_EventScript_DaycareEggWaiting
-	goto_if_eq VAR_RESULT, DAYCARE_ONE_MON, FourIsland_EventScript_CheckOnOneMon
-	goto_if_eq VAR_RESULT, DAYCARE_TWO_MONS, FourIsland_EventScript_CheckOnTwoMons
+# 86 "data/maps/FourIsland_Frlg/scripts.pory"
+	compare VAR_RESULT, DAYCARE_EGG_WAITING
+	goto_if_eq FourIsland_EventScript_DaycareMan_2
+FourIsland_EventScript_DaycareMan_1:
+# 89 "data/maps/FourIsland_Frlg/scripts.pory"
+	compare VAR_RESULT, DAYCARE_ONE_MON
+	goto_if_eq FourIsland_EventScript_DaycareMan_5
+FourIsland_EventScript_DaycareMan_4:
+# 92 "data/maps/FourIsland_Frlg/scripts.pory"
+	compare VAR_RESULT, DAYCARE_TWO_MONS
+	goto_if_eq FourIsland_EventScript_DaycareMan_8
+FourIsland_EventScript_DaycareMan_7:
+# 95 "data/maps/FourIsland_Frlg/scripts.pory"
 	msgbox DayCare_Text_ImDaycareManSpeakToMyWife
+# 96 "data/maps/FourIsland_Frlg/scripts.pory"
 	release
 	end
+
+FourIsland_EventScript_DaycareMan_2:
+# 87 "data/maps/FourIsland_Frlg/scripts.pory"
+	goto FourIsland_EventScript_DaycareEggWaiting
+	goto FourIsland_EventScript_DaycareMan_1
+
+FourIsland_EventScript_DaycareMan_5:
+# 90 "data/maps/FourIsland_Frlg/scripts.pory"
+	goto FourIsland_EventScript_CheckOnOneMon
+	goto FourIsland_EventScript_DaycareMan_4
+
+FourIsland_EventScript_DaycareMan_8:
+# 93 "data/maps/FourIsland_Frlg/scripts.pory"
+	goto FourIsland_EventScript_CheckOnTwoMons
+	goto FourIsland_EventScript_DaycareMan_7
+
 
 FourIsland_EventScript_DaycareEggWaiting::
+# 101 "data/maps/FourIsland_Frlg/scripts.pory"
 	msgbox DayCare_Text_DoYouWantEgg, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, FourIsland_EventScript_DaycareAcceptEgg
+# 102 "data/maps/FourIsland_Frlg/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq FourIsland_EventScript_DaycareEggWaiting_2
+FourIsland_EventScript_DaycareEggWaiting_1:
+# 105 "data/maps/FourIsland_Frlg/scripts.pory"
 	msgbox DayCare_Text_IWillKeepDoYouWantIt, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, FourIsland_EventScript_DaycareAcceptEgg
+# 106 "data/maps/FourIsland_Frlg/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq FourIsland_EventScript_DaycareEggWaiting_5
+FourIsland_EventScript_DaycareEggWaiting_4:
+# 109 "data/maps/FourIsland_Frlg/scripts.pory"
 	msgbox DayCare_Text_IllKeepIt
+# 110 "data/maps/FourIsland_Frlg/scripts.pory"
 	clearflag FLAG_PENDING_DAYCARE_EGG
+# 111 "data/maps/FourIsland_Frlg/scripts.pory"
 	special RejectEggFromDayCare
+# 112 "data/maps/FourIsland_Frlg/scripts.pory"
 	release
 	end
+
+FourIsland_EventScript_DaycareEggWaiting_2:
+# 103 "data/maps/FourIsland_Frlg/scripts.pory"
+	goto FourIsland_EventScript_DaycareAcceptEgg
+	goto FourIsland_EventScript_DaycareEggWaiting_1
+
+FourIsland_EventScript_DaycareEggWaiting_5:
+# 107 "data/maps/FourIsland_Frlg/scripts.pory"
+	goto FourIsland_EventScript_DaycareAcceptEgg
+	goto FourIsland_EventScript_DaycareEggWaiting_4
+
 
 FourIsland_EventScript_DaycareAcceptEgg::
+# 117 "data/maps/FourIsland_Frlg/scripts.pory"
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
-	goto_if_ne VAR_RESULT, PARTY_SIZE, FourIsland_EventScript_DaycareReceivedEgg
+# 118 "data/maps/FourIsland_Frlg/scripts.pory"
+	compare VAR_RESULT, PARTY_SIZE
+	goto_if_ne FourIsland_EventScript_DaycareAcceptEgg_2
+FourIsland_EventScript_DaycareAcceptEgg_1:
+# 121 "data/maps/FourIsland_Frlg/scripts.pory"
 	msgbox DayCare_Text_YouHaveNoRoomForIt
+# 122 "data/maps/FourIsland_Frlg/scripts.pory"
 	release
 	end
+
+FourIsland_EventScript_DaycareAcceptEgg_2:
+# 119 "data/maps/FourIsland_Frlg/scripts.pory"
+	goto FourIsland_EventScript_DaycareReceivedEgg
+	goto FourIsland_EventScript_DaycareAcceptEgg_1
+
 
 FourIsland_EventScript_DaycareReceivedEgg::
+# 127 "data/maps/FourIsland_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_NEUTRAL
+# 128 "data/maps/FourIsland_Frlg/scripts.pory"
 	message DayCare_Text_ReceivedEgg
+# 129 "data/maps/FourIsland_Frlg/scripts.pory"
 	call EventScript_RestorePrevTextColor
+# 130 "data/maps/FourIsland_Frlg/scripts.pory"
 	playfanfare MUS_LEVEL_UP
+# 131 "data/maps/FourIsland_Frlg/scripts.pory"
 	waitfanfare
+# 132 "data/maps/FourIsland_Frlg/scripts.pory"
 	waitbuttonpress
+# 133 "data/maps/FourIsland_Frlg/scripts.pory"
 	msgbox DayCare_Text_TakeGoodCareOfIt
+# 134 "data/maps/FourIsland_Frlg/scripts.pory"
 	special GiveEggFromDaycare
+# 135 "data/maps/FourIsland_Frlg/scripts.pory"
 	clearflag FLAG_PENDING_DAYCARE_EGG
+# 136 "data/maps/FourIsland_Frlg/scripts.pory"
 	release
 	end
+
 
 FourIsland_EventScript_CheckOnOneMon::
+# 141 "data/maps/FourIsland_Frlg/scripts.pory"
 	special GetDaycareMonNicknames
+# 142 "data/maps/FourIsland_Frlg/scripts.pory"
 	msgbox DayCare_Text_YourMonIsDoingFine
+# 143 "data/maps/FourIsland_Frlg/scripts.pory"
 	release
 	end
+
 
 FourIsland_EventScript_CheckOnTwoMons::
+# 148 "data/maps/FourIsland_Frlg/scripts.pory"
 	special GetDaycareMonNicknames
+# 149 "data/maps/FourIsland_Frlg/scripts.pory"
 	msgbox DayCare_Text_YourMonsAreDoingFine
+# 150 "data/maps/FourIsland_Frlg/scripts.pory"
 	special SetDaycareCompatibilityString
+# 151 "data/maps/FourIsland_Frlg/scripts.pory"
 	special ShowFieldMessageStringVar4
+# 152 "data/maps/FourIsland_Frlg/scripts.pory"
 	waitmessage
+# 153 "data/maps/FourIsland_Frlg/scripts.pory"
 	waitbuttonpress
+# 154 "data/maps/FourIsland_Frlg/scripts.pory"
 	release
 	end
+
 
 FourIsland_EventScript_OldWoman::
+# 159 "data/maps/FourIsland_Frlg/scripts.pory"
 	lock
+# 160 "data/maps/FourIsland_Frlg/scripts.pory"
 	faceplayer
-	goto_if_set FLAG_IS_CHAMPION, FourIsland_EventScript_OldWomanLoreleiLeft
+# 161 "data/maps/FourIsland_Frlg/scripts.pory"
+	goto_if_set FLAG_IS_CHAMPION, FourIsland_EventScript_OldWoman_2
+FourIsland_EventScript_OldWoman_1:
+# 164 "data/maps/FourIsland_Frlg/scripts.pory"
 	msgbox FourIsland_Text_LoreleiHasReturned
+# 165 "data/maps/FourIsland_Frlg/scripts.pory"
 	release
 	end
+
+FourIsland_EventScript_OldWoman_2:
+# 162 "data/maps/FourIsland_Frlg/scripts.pory"
+	goto FourIsland_EventScript_OldWomanLoreleiLeft
+	goto FourIsland_EventScript_OldWoman_1
+
 
 FourIsland_EventScript_OldWomanLoreleiLeft::
+# 170 "data/maps/FourIsland_Frlg/scripts.pory"
 	famechecker FAMECHECKER_LORELEI, 5
+# 171 "data/maps/FourIsland_Frlg/scripts.pory"
 	msgbox FourIsland_Text_LoreleiMetLaprasAsChild
+# 172 "data/maps/FourIsland_Frlg/scripts.pory"
 	release
 	end
+
 
 FourIsland_EventScript_LittleGirl::
+# 177 "data/maps/FourIsland_Frlg/scripts.pory"
 	lock
+# 178 "data/maps/FourIsland_Frlg/scripts.pory"
 	faceplayer
+# 179 "data/maps/FourIsland_Frlg/scripts.pory"
 	famechecker FAMECHECKER_LORELEI, 4
+# 180 "data/maps/FourIsland_Frlg/scripts.pory"
 	msgbox FourIsland_Text_LoreleiHasLotsOfStuffedDolls
+# 181 "data/maps/FourIsland_Frlg/scripts.pory"
 	release
 	end
 
+
 FourIsland_EventScript_FatMan::
+# 186 "data/maps/FourIsland_Frlg/scripts.pory"
 	msgbox FourIsland_Text_MadeSlushieUsingIcefallCaveIce, MSGBOX_NPC
 	end
 
+
 FourIsland_EventScript_IslandSign::
+# 191 "data/maps/FourIsland_Frlg/scripts.pory"
 	msgbox FourIsland_Text_IslandSign, MSGBOX_SIGN
 	end
 
+
 FourIsland_EventScript_LoreleisHouseSign::
+# 196 "data/maps/FourIsland_Frlg/scripts.pory"
 	msgbox FourIsland_Text_LoreleisHouse, MSGBOX_SIGN
 	end
 
+
 FourIsland_Text_IslandSign::
+# 200 "data/maps/FourIsland_Frlg/scripts.pory"
 	.string "FOUR ISLAND\n"
 	.string "The Warm, Blue, Floe Island$"
 
 FourIsland_Text_LoreleiHasReturned::
+# 205 "data/maps/FourIsland_Frlg/scripts.pory"
 	.string "LORELEI has returned.\p"
 	.string "Did she find the city life too\n"
 	.string "stressful, I wonder?$"
 
 FourIsland_Text_LoreleiMetLaprasAsChild::
+# 211 "data/maps/FourIsland_Frlg/scripts.pory"
 	.string "LORELEI has gone back.\p"
 	.string "The LAPRAS she has, I imagine it\n"
 	.string "to be the one she met as a child.\p"
@@ -179,6 +367,7 @@ FourIsland_Text_LoreleiMetLaprasAsChild::
 	.string "her ever since.$"
 
 FourIsland_Text_RivalAlreadyGotEggBeSmellingYa::
+# 221 "data/maps/FourIsland_Frlg/scripts.pory"
 	.string "{RIVAL}: Hey!\n"
 	.string "{PLAYER}!\p"
 	.string "What are you doing here in the\n"
@@ -200,6 +389,7 @@ FourIsland_Text_RivalAlreadyGotEggBeSmellingYa::
 	.string "Be smelling ya!$"
 
 FourIsland_Text_LoreleiHasLotsOfStuffedDolls::
+# 243 "data/maps/FourIsland_Frlg/scripts.pory"
 	.string "Oh, you found me!\n"
 	.string "Please don't tell LORELEI.\p"
 	.string "Did you know that LORELEI has lots\n"
@@ -208,11 +398,12 @@ FourIsland_Text_LoreleiHasLotsOfStuffedDolls::
 	.string "FOUR ISLAND, her collection grows!$"
 
 FourIsland_Text_MadeSlushieUsingIcefallCaveIce::
+# 252 "data/maps/FourIsland_Frlg/scripts.pory"
 	.string "Ooh, chilly!\p"
 	.string "I made a slushie using ice I\n"
 	.string "shaved inside ICEFALL CAVE.\p"
 	.string "It's chilly and tasty!$"
 
 FourIsland_Text_LoreleisHouse::
+# 259 "data/maps/FourIsland_Frlg/scripts.pory"
 	.string "LORELEI'S HOUSE$"
-

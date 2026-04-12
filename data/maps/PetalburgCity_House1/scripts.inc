@@ -1,20 +1,27 @@
 PetalburgCity_House1_MapScripts::
 	.byte 0
 
+
 PetalburgCity_House1_EventScript_Man::
+# 4 "data/maps/PetalburgCity_House1/scripts.pory"
 	msgbox PetalburgCity_House1_Text_TravelingIsWonderful, MSGBOX_NPC
 	end
 
+
 PetalburgCity_House1_EventScript_Woman::
+# 9 "data/maps/PetalburgCity_House1/scripts.pory"
 	msgbox PetalburgCity_House1_Text_GoOnAdventure, MSGBOX_NPC
 	end
 
-PetalburgCity_House1_Text_TravelingIsWonderful:
+
+PetalburgCity_House1_Text_TravelingIsWonderful::
+# 13 "data/maps/PetalburgCity_House1/scripts.pory"
 	.string "Traveling is wonderful!\p"
 	.string "When I was young, I roamed the seas\n"
 	.string "and the mountains!$"
 
-PetalburgCity_House1_Text_GoOnAdventure:
+PetalburgCity_House1_Text_GoOnAdventure::
+# 19 "data/maps/PetalburgCity_House1/scripts.pory"
 	.string "Sigh…\p"
 	.string "I wish I could go on an adventure\n"
 	.string "with some POKéMON…\p"
@@ -25,4 +32,3 @@ PetalburgCity_House1_Text_GoOnAdventure:
 	.string "And, sometimes, even get a little\n"
 	.string "homesick…\p"
 	.string "It must be fabulous to travel!$"
-

@@ -1,110 +1,203 @@
 Route8_WestEntrance_Frlg_MapScripts::
 	.byte 0
 
+
 Route8_WestEntrance_EventScript_Guard::
+# 4 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	msgbox Route8_WestEntrance_Text_HiHowsItGoing, MSGBOX_NPC
 	end
 
+
 Route8_WestEntrance_EventScript_GuardTriggerTop::
+# 9 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	lockall
+# 10 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 0
+# 11 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	goto Route8_WestEntrance_EventScript_GuardTrigger
 	end
+
 
 Route8_WestEntrance_EventScript_GuardTriggerMid::
+# 16 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	lockall
+# 17 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 1
+# 18 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	goto Route8_WestEntrance_EventScript_GuardTrigger
 	end
+
 
 Route8_WestEntrance_EventScript_GuardTriggerBottom::
+# 23 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	lockall
+# 24 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	setvar VAR_TEMP_1, 2
+# 25 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	goto Route8_WestEntrance_EventScript_GuardTrigger
 	end
 
+
 Route8_WestEntrance_EventScript_GuardTrigger::
+# 30 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	textcolor NPC_TEXT_COLOR_MALE
+# 31 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+# 32 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	waitmovement 0
-	goto_if_set FLAG_GOT_TEA, Route8_WestEntrance_EventScript_GiveTea
+# 33 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
+	goto_if_set FLAG_GOT_TEA, Route8_WestEntrance_EventScript_GuardTrigger_2
+Route8_WestEntrance_EventScript_GuardTrigger_1:
+# 36 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	msgbox Route8_WestEntrance_Text_ThirstyOnGuardDuty
+# 37 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	closemessage
+# 38 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Route8_WestEntrance_Movement_BlockPlayerEntry
+# 39 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	waitmovement 0
+# 40 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	releaseall
 	end
+
+Route8_WestEntrance_EventScript_GuardTrigger_2:
+# 34 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
+	goto Route8_WestEntrance_EventScript_GiveTea
+	goto Route8_WestEntrance_EventScript_GuardTrigger_1
+
 
 Route8_WestEntrance_EventScript_GiveTea::
+# 45 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	removeitem ITEM_TEA
+# 46 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	goto Route8_WestEntrance_EventScript_GuardDrinkTea
 	end
 
-@ Unused
+
 Route8_WestEntrance_EventScript_GiveSodaPop::
+# 51 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	removeitem ITEM_SODA_POP
+# 52 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	goto Route8_WestEntrance_EventScript_GuardDrinkTea
 	end
 
-@ Unused
+
 Route8_WestEntrance_EventScript_GiveLemonade::
+# 57 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	removeitem ITEM_LEMONADE
+# 58 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	goto Route8_WestEntrance_EventScript_GuardDrinkTea
 	end
+
 
 Route8_WestEntrance_EventScript_GuardDrinkTea::
+# 63 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	msgbox Route8_WestEntrance_Text_ThatTeaLooksTasty
+# 64 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	closemessage
-	call_if_eq VAR_TEMP_1, 0, Route8_WestEntrance_EventScript_WalkToGuardTop
-	call_if_eq VAR_TEMP_1, 1, Route8_WestEntrance_EventScript_WalkToGuardMid
-	call_if_eq VAR_TEMP_1, 2, Route8_WestEntrance_EventScript_WalkToGuardBottom
+# 65 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 0
+	goto_if_eq Route8_WestEntrance_EventScript_GuardDrinkTea_2
+Route8_WestEntrance_EventScript_GuardDrinkTea_1:
+# 68 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 1
+	goto_if_eq Route8_WestEntrance_EventScript_GuardDrinkTea_5
+Route8_WestEntrance_EventScript_GuardDrinkTea_4:
+# 71 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
+	compare VAR_TEMP_1, 2
+	goto_if_eq Route8_WestEntrance_EventScript_GuardDrinkTea_8
+Route8_WestEntrance_EventScript_GuardDrinkTea_7:
+# 74 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	msgbox Route8_WestEntrance_Text_ThanksIllShareTeaWithGuards
+# 75 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	setvar VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1
+# 76 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	releaseall
 	end
 
+Route8_WestEntrance_EventScript_GuardDrinkTea_2:
+# 66 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
+	call Route8_WestEntrance_EventScript_WalkToGuardTop
+	goto Route8_WestEntrance_EventScript_GuardDrinkTea_1
+
+Route8_WestEntrance_EventScript_GuardDrinkTea_5:
+# 69 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
+	call Route8_WestEntrance_EventScript_WalkToGuardMid
+	goto Route8_WestEntrance_EventScript_GuardDrinkTea_4
+
+Route8_WestEntrance_EventScript_GuardDrinkTea_8:
+# 72 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
+	call Route8_WestEntrance_EventScript_WalkToGuardBottom
+	goto Route8_WestEntrance_EventScript_GuardDrinkTea_7
+
+
 Route8_WestEntrance_EventScript_WalkToGuardTop::
+# 81 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Route8_WestEntrance_Movement_WalkToGuardTop
+# 82 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 Route8_WestEntrance_EventScript_WalkToGuardMid::
+# 87 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Route8_WestEntrance_Movement_WalkToGuardMid
+# 88 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	waitmovement 0
 	return
+
 
 Route8_WestEntrance_EventScript_WalkToGuardBottom::
+# 93 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	applymovement LOCALID_PLAYER, Route8_WestEntrance_Movement_WalkToGuardBottom
+# 94 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	waitmovement 0
 	return
 
-Route8_WestEntrance_Movement_WalkToGuardMid::
+
+# 98 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
+Route8_WestEntrance_Movement_WalkToGuardMid:
+# 99 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	walk_up
+# 100 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	step_end
 
-Route8_WestEntrance_Movement_WalkToGuardBottom::
+# 103 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
+Route8_WestEntrance_Movement_WalkToGuardBottom:
+# 104 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	walk_up
+# 105 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	walk_up
+# 106 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	step_end
 
-Route8_WestEntrance_Movement_WalkToGuardTop::
+# 109 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
+Route8_WestEntrance_Movement_WalkToGuardTop:
+# 110 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	walk_in_place_up
+# 111 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	step_end
 
-Route8_WestEntrance_Movement_BlockPlayerEntry::
+# 114 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
+Route8_WestEntrance_Movement_BlockPlayerEntry:
+# 115 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	walk_right
+# 116 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	step_end
 
 Route8_WestEntrance_Text_ThirstyOnGuardDuty::
+# 119 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	.string "I'm on guard duty.\n"
 	.string "Gee, I'm thirsty, though!\p"
 	.string "Oh, wait there, the road's closed.$"
 
 Route8_WestEntrance_Text_ThatTeaLooksTasty::
+# 125 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	.string "Oh, that TEA…\n"
 	.string "It looks awfully tasty…$"
 
 Route8_WestEntrance_Text_ThanksIllShareTeaWithGuards::
+# 130 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	.string "Huh? I can have this drink?\n"
 	.string "Gee, thanks!\l"
 	.string "… …\l"
@@ -119,5 +212,5 @@ Route8_WestEntrance_Text_ThanksIllShareTeaWithGuards::
 	.string "guards!$"
 
 Route8_WestEntrance_Text_HiHowsItGoing::
+# 145 "data/maps/Route8_WestEntrance_Frlg/scripts.pory"
 	.string "Hi, how's it going?$"
-

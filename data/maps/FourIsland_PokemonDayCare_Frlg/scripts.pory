@@ -1,249 +1,486 @@
-mapscripts FourIsland_PokemonDayCare_Frlg_MapScripts {}
+raw `
+FourIsland_PokemonDayCare_Frlg_MapScripts::
+	.byte 0
 
-script FourIsland_PokemonDayCare_EventScript_DaycareWoman {
-    lock
-    faceplayer
-    specialvar(VAR_RESULT, GetDaycareState)
-    if (var(VAR_RESULT) == DAYCARE_EGG_WAITING) {
-        goto(FourIsland_PokemonDayCare_EggWaiting)
-    }
-    if (var(VAR_RESULT) == DAYCARE_ONE_MON) {
-        goto(FourIsland_PokemonDayCare_OneMonInDaycare)
-    }
-    if (var(VAR_RESULT) == DAYCARE_TWO_MONS) {
-        goto(FourIsland_PokemonDayCare_TwoMonsInDaycare)
-    }
-    msgbox(DayCare_Text_WouldYouLikeUsToRaiseMon, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) {
-        goto(FourIsland_PokemonDayCare_GiveMonToRaise)
-    }
-    msgbox(DayCare_Text_FineThenComeAgain)
-    release
-    end
-}
 
-script FourIsland_PokemonDayCare_GiveMonToRaise {
-    specialvar(VAR_RESULT, CountPartyNonEggMons)
-    if (var(VAR_RESULT) == 1) {
-        goto(FourIsland_PokemonDayCare_OnlyOneMonInParty)
-    }
-    msgbox(DayCare_Text_WhichMonShouldWeRaise)
-    fadescreen(FADE_TO_BLACK)
-    special(ChooseSendDaycareMon)
-    waitstate
-    if (var(VAR_0x8004) >= PARTY_SIZE) {
-        goto(FourIsland_PokemonDayCare_ComeAgain)
-    }
-    specialvar(VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot)
-    if (var(VAR_RESULT) == 0) {
-        goto(FourIsland_PokemonDayCare_OnlyOneAliveMonInParty)
-    }
-    specialvar(VAR_0x8005, GetSelectedMonNicknameAndSpecies)
-    waitse()
-    playmoncry(VAR_0x8005, CRY_MODE_NORMAL)
-    msgbox(DayCare_Text_WellRaiseYourMon)
-    waitmoncry()
-    special(StoreSelectedPokemonInDaycare)
-    callnative(UpdateFollowingPokemon)
-    incrementgamestat(GAME_STAT_USED_DAYCARE)
-    specialvar(VAR_RESULT, GetDaycareState)
-    if (var(VAR_RESULT) == DAYCARE_ONE_MON) {
-        goto(FourIsland_PokemonDayCare_CanRaiseOneMore)
-    }
-    release
-    end
-}
+FourIsland_PokemonDayCare_EventScript_DaycareWoman::
+# 4 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	lock
+# 5 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	faceplayer
+# 6 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	specialvar VAR_RESULT, GetDaycareState
+# 7 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, DAYCARE_EGG_WAITING
+	goto_if_eq FourIsland_PokemonDayCare_EventScript_DaycareWoman_2
+FourIsland_PokemonDayCare_EventScript_DaycareWoman_1:
+# 10 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, DAYCARE_ONE_MON
+	goto_if_eq FourIsland_PokemonDayCare_EventScript_DaycareWoman_5
+FourIsland_PokemonDayCare_EventScript_DaycareWoman_4:
+# 13 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, DAYCARE_TWO_MONS
+	goto_if_eq FourIsland_PokemonDayCare_EventScript_DaycareWoman_8
+FourIsland_PokemonDayCare_EventScript_DaycareWoman_7:
+# 16 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_WouldYouLikeUsToRaiseMon, MSGBOX_YESNO
+# 17 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq FourIsland_PokemonDayCare_EventScript_DaycareWoman_11
+FourIsland_PokemonDayCare_EventScript_DaycareWoman_10:
+# 20 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_FineThenComeAgain
+# 21 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	release
+	end
 
-script FourIsland_PokemonDayCare_ComeAgain {
-    msgbox(DayCare_Text_ComeAgain)
-    release
-    end
-}
+FourIsland_PokemonDayCare_EventScript_DaycareWoman_2:
+# 8 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_EggWaiting
+	goto FourIsland_PokemonDayCare_EventScript_DaycareWoman_1
 
-script FourIsland_PokemonDayCare_CanRaiseOneMore {
-    msgbox(DayCare_Text_WeCanRaiseOneMore, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) {
-        goto(FourIsland_PokemonDayCare_GiveMonToRaise)
-    }
-    goto(FourIsland_PokemonDayCare_ComeAgain)
-    end
-}
+FourIsland_PokemonDayCare_EventScript_DaycareWoman_5:
+# 11 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_OneMonInDaycare
+	goto FourIsland_PokemonDayCare_EventScript_DaycareWoman_4
 
-script FourIsland_PokemonDayCare_OnlyOneMonInParty {
-    msgbox(DayCare_Text_YouHaveJustOneMon)
-    release
-    end
-}
+FourIsland_PokemonDayCare_EventScript_DaycareWoman_8:
+# 14 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_TwoMonsInDaycare
+	goto FourIsland_PokemonDayCare_EventScript_DaycareWoman_7
 
-script FourIsland_PokemonDayCare_OnlyOneAliveMonInParty {
-    msgbox(DayCare_Text_WhatWillYouBattleWith)
-    release
-    end
-}
+FourIsland_PokemonDayCare_EventScript_DaycareWoman_11:
+# 18 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_GiveMonToRaise
+	goto FourIsland_PokemonDayCare_EventScript_DaycareWoman_10
 
-script FourIsland_PokemonDayCare_EggWaiting {
-    msgbox(DayCare_Text_HusbandWasLookingForYou)
-    release
-    end
-}
 
-script FourIsland_PokemonDayCare_MonHasGrownXLevels {
-    msgbox(DayCare_Text_YourMonHasGrownXLevels)
-    return
-}
+FourIsland_PokemonDayCare_GiveMonToRaise::
+# 26 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	specialvar VAR_RESULT, CountPartyNonEggMons
+# 27 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, 1
+	goto_if_eq FourIsland_PokemonDayCare_GiveMonToRaise_2
+FourIsland_PokemonDayCare_GiveMonToRaise_1:
+# 30 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_WhichMonShouldWeRaise
+# 31 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	fadescreen FADE_TO_BLACK
+# 32 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	special ChooseSendDaycareMon
+# 33 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	waitstate
+# 34 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_0x8004, PARTY_SIZE
+	goto_if_ge FourIsland_PokemonDayCare_GiveMonToRaise_5
+FourIsland_PokemonDayCare_GiveMonToRaise_4:
+# 37 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
+# 38 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, 0
+	goto_if_eq FourIsland_PokemonDayCare_GiveMonToRaise_8
+FourIsland_PokemonDayCare_GiveMonToRaise_7:
+# 41 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	specialvar VAR_0x8005, GetSelectedMonNicknameAndSpecies
+# 42 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	waitse
+# 43 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	playmoncry VAR_0x8005, CRY_MODE_NORMAL
+# 44 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_WellRaiseYourMon
+# 45 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	waitmoncry
+# 46 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	special StoreSelectedPokemonInDaycare
+# 47 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	callnative UpdateFollowingPokemon
+# 48 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	incrementgamestat GAME_STAT_USED_DAYCARE
+# 49 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	specialvar VAR_RESULT, GetDaycareState
+# 50 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, DAYCARE_ONE_MON
+	goto_if_eq FourIsland_PokemonDayCare_GiveMonToRaise_11
+FourIsland_PokemonDayCare_GiveMonToRaise_10:
+# 53 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	release
+	end
 
-script FourIsland_PokemonDayCare_DisplayLevelsGained {
-    specialvar(VAR_RESULT, GetNumLevelsGainedFromDaycare)
-    if (var(VAR_RESULT) != 0) {
-        call(FourIsland_PokemonDayCare_MonHasGrownXLevels)
-    }
-    return
-}
+FourIsland_PokemonDayCare_GiveMonToRaise_2:
+# 28 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_OnlyOneMonInParty
+	goto FourIsland_PokemonDayCare_GiveMonToRaise_1
 
-script FourIsland_PokemonDayCare_OneMonInDaycare {
-    msgbox(DayCare_Text_GoodToSeeYou)
-    setvar(VAR_0x8004, 0)
-    call(FourIsland_PokemonDayCare_DisplayLevelsGained)
-    msgbox(DayCare_Text_WeCanRaiseOneMore, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) {
-        goto(FourIsland_PokemonDayCare_GiveMonToRaise)
-    }
-    msgbox(DayCare_Text_TakeYourMonBack, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) {
-        goto(FourIsland_PokemonDayCare_TryRetrieveMon)
-    }
-    goto(FourIsland_PokemonDayCare_ComeAgain)
-    end
-}
+FourIsland_PokemonDayCare_GiveMonToRaise_5:
+# 35 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_ComeAgain
+	goto FourIsland_PokemonDayCare_GiveMonToRaise_4
 
-script FourIsland_PokemonDayCare_TryRetrieveMon {
-    specialvar(VAR_RESULT, CalculatePlayerPartyCount)
-    if (var(VAR_RESULT) == PARTY_SIZE) {
-        goto(FourIsland_PokemonDayCare_NoRoomInParty)
-    }
-    specialvar(VAR_RESULT, GetDaycareState)
-    setvar(VAR_0x8004, 0)
-    if (var(VAR_RESULT) == DAYCARE_ONE_MON) {
-        goto(FourIsland_PokemonDayCare_CostPrompt)
-    }
-    special(ShowDaycareLevelMenu)
-    waitstate
-    copyvar(VAR_0x8004, VAR_RESULT)
-    if (var(VAR_RESULT) == DAYCARE_EXITED_LEVEL_MENU) {
-        goto(FourIsland_PokemonDayCare_ComeAgain)
-    }
-    goto(FourIsland_PokemonDayCare_CostPrompt)
-    end
-}
+FourIsland_PokemonDayCare_GiveMonToRaise_8:
+# 39 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_OnlyOneAliveMonInParty
+	goto FourIsland_PokemonDayCare_GiveMonToRaise_7
 
-script FourIsland_PokemonDayCare_CostPrompt {
-    special(GetDaycareCost)
-    msgbox(DayCare_Text_ItWillCostX, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) {
-        goto(FourIsland_PokemonDayCare_CheckEnoughMoney)
-    }
-    goto(FourIsland_PokemonDayCare_ComeAgain)
-    end
-}
+FourIsland_PokemonDayCare_GiveMonToRaise_11:
+# 51 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_CanRaiseOneMore
+	goto FourIsland_PokemonDayCare_GiveMonToRaise_10
 
-script FourIsland_PokemonDayCare_CheckEnoughMoney {
-    specialvar(VAR_RESULT, IsEnoughForCostInVar0x8005)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(FourIsland_PokemonDayCare_RetrieveMon)
-    }
-    msgbox(DayCare_Text_NotEnoughMoney)
-    release
-    end
-}
 
-script FourIsland_PokemonDayCare_RetrieveMon {
-    applymovement(LOCALID_FOUR_ISLAND_DAYCARE_WOMAN, FourIsland_PokemonDayCare_Movement_RetrieveMon)
-    waitmovement(0)
-    specialvar(VAR_RESULT, TakePokemonFromDaycare)
-    special(SubtractMoneyFromVar0x8005)
-    playse(SE_SHOP)
-    msgbox(DayCare_Text_HeresYourMon)
-    waitse()
-    playmoncry(VAR_RESULT, CRY_MODE_NORMAL)
-    textcolor(NPC_TEXT_COLOR_NEUTRAL)
-    msgbox(DayCare_Text_TookBackMon)
-    call(EventScript_RestorePrevTextColor)
-    waitmoncry()
-    specialvar(VAR_RESULT, GetDaycareState)
-    if (var(VAR_RESULT) == DAYCARE_ONE_MON) {
-        goto(FourIsland_PokemonDayCare_AskRetrieveOtherMon)
-    }
-    goto(FourIsland_PokemonDayCare_ComeAgain)
-    end
-}
+FourIsland_PokemonDayCare_ComeAgain::
+# 58 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_ComeAgain
+# 59 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	release
+	end
 
-script FourIsland_PokemonDayCare_AskRetrieveOtherMon {
-    msgbox(DayCare_Text_TakeOtherOneBackToo, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) {
-        goto(FourIsland_PokemonDayCare_TryRetrieveMon)
-    }
-    goto(FourIsland_PokemonDayCare_ComeAgain)
-    end
-}
 
-script FourIsland_PokemonDayCare_NoRoomInParty {
-    msgbox(DayCare_Text_YourPartyIsFull)
-    release
-    end
-}
+FourIsland_PokemonDayCare_CanRaiseOneMore::
+# 64 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_WeCanRaiseOneMore, MSGBOX_YESNO
+# 65 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq FourIsland_PokemonDayCare_CanRaiseOneMore_2
+FourIsland_PokemonDayCare_CanRaiseOneMore_1:
+# 68 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_ComeAgain
+	end
 
-movement FourIsland_PokemonDayCare_Movement_RetrieveMon {
-    delay_16
-    delay_16
-    face_right
-    delay_16
-    delay_16
-    face_left
-    delay_16
-    delay_16
-    face_up
-    walk_slow_up
-    set_invisible
-    delay_16
-    delay_16
-    delay_16
-    delay_16
-    delay_16
-    face_down
-    set_visible
-    walk_slow_down
-    step_end
-}
+FourIsland_PokemonDayCare_CanRaiseOneMore_2:
+# 66 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_GiveMonToRaise
+	goto FourIsland_PokemonDayCare_CanRaiseOneMore_1
 
-script FourIsland_PokemonDayCare_EventScript_UnusedEnd {
-    end
-}
 
-script FourIsland_PokemonDayCare_TwoMonsInDaycare {
-    msgbox(DayCare_Text_GoodToSeeYou)
-    setvar(VAR_0x8004, 0)
-    call(FourIsland_PokemonDayCare_DisplayLevelsGained)
-    setvar(VAR_0x8004, 1)
-    call(FourIsland_PokemonDayCare_DisplayLevelsGained)
-    msgbox(DayCare_Text_TakeYourMonBack, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) {
-        goto(FourIsland_PokemonDayCare_TryRetrieveMon)
-    }
-    msgbox(DayCare_Text_ComeAgain)
-    release
-    end
-}
+FourIsland_PokemonDayCare_OnlyOneMonInParty::
+# 73 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_YouHaveJustOneMon
+# 74 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	release
+	end
 
-script FourIsland_PokemonDayCare_EventScript_UnusedRetrieveMon {
-    special(ShowDaycareLevelMenu)
-    waitstate
-    if (var(VAR_RESULT) == 2) {
-        goto(FourIsland_PokemonDayCare_ComeAgain)
-    }
-    copyvar(VAR_0x8004, VAR_RESULT)
-    specialvar(VAR_RESULT, TakePokemonFromDaycare)
-    msgbox(DayCare_Text_HeresYourMon)
-    msgbox(DayCare_Text_ComeAgain)
-    release
-    end
-}
+
+FourIsland_PokemonDayCare_OnlyOneAliveMonInParty::
+# 79 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_WhatWillYouBattleWith
+# 80 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	release
+	end
+
+
+FourIsland_PokemonDayCare_EggWaiting::
+# 85 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_HusbandWasLookingForYou
+# 86 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	release
+	end
+
+
+FourIsland_PokemonDayCare_MonHasGrownXLevels::
+# 91 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_YourMonHasGrownXLevels
+	return
+
+
+FourIsland_PokemonDayCare_DisplayLevelsGained::
+# 96 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	specialvar VAR_RESULT, GetNumLevelsGainedFromDaycare
+# 97 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, 0
+	goto_if_ne FourIsland_PokemonDayCare_DisplayLevelsGained_2
+FourIsland_PokemonDayCare_DisplayLevelsGained_1:
+	return
+
+FourIsland_PokemonDayCare_DisplayLevelsGained_2:
+# 98 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	call FourIsland_PokemonDayCare_MonHasGrownXLevels
+	goto FourIsland_PokemonDayCare_DisplayLevelsGained_1
+
+
+FourIsland_PokemonDayCare_OneMonInDaycare::
+# 104 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_GoodToSeeYou
+# 105 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	setvar VAR_0x8004, 0
+# 106 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	call FourIsland_PokemonDayCare_DisplayLevelsGained
+# 107 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_WeCanRaiseOneMore, MSGBOX_YESNO
+# 108 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq FourIsland_PokemonDayCare_OneMonInDaycare_2
+FourIsland_PokemonDayCare_OneMonInDaycare_1:
+# 111 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_TakeYourMonBack, MSGBOX_YESNO
+# 112 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq FourIsland_PokemonDayCare_OneMonInDaycare_5
+FourIsland_PokemonDayCare_OneMonInDaycare_4:
+# 115 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_ComeAgain
+	end
+
+FourIsland_PokemonDayCare_OneMonInDaycare_2:
+# 109 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_GiveMonToRaise
+	goto FourIsland_PokemonDayCare_OneMonInDaycare_1
+
+FourIsland_PokemonDayCare_OneMonInDaycare_5:
+# 113 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_TryRetrieveMon
+	goto FourIsland_PokemonDayCare_OneMonInDaycare_4
+
+
+FourIsland_PokemonDayCare_TryRetrieveMon::
+# 120 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	specialvar VAR_RESULT, CalculatePlayerPartyCount
+# 121 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, PARTY_SIZE
+	goto_if_eq FourIsland_PokemonDayCare_TryRetrieveMon_2
+FourIsland_PokemonDayCare_TryRetrieveMon_1:
+# 124 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	specialvar VAR_RESULT, GetDaycareState
+# 125 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	setvar VAR_0x8004, 0
+# 126 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, DAYCARE_ONE_MON
+	goto_if_eq FourIsland_PokemonDayCare_TryRetrieveMon_5
+FourIsland_PokemonDayCare_TryRetrieveMon_4:
+# 129 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	special ShowDaycareLevelMenu
+# 130 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	waitstate
+# 131 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	copyvar VAR_0x8004, VAR_RESULT
+# 132 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, DAYCARE_EXITED_LEVEL_MENU
+	goto_if_eq FourIsland_PokemonDayCare_TryRetrieveMon_8
+FourIsland_PokemonDayCare_TryRetrieveMon_7:
+# 135 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_CostPrompt
+	end
+
+FourIsland_PokemonDayCare_TryRetrieveMon_2:
+# 122 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_NoRoomInParty
+	goto FourIsland_PokemonDayCare_TryRetrieveMon_1
+
+FourIsland_PokemonDayCare_TryRetrieveMon_5:
+# 127 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_CostPrompt
+	goto FourIsland_PokemonDayCare_TryRetrieveMon_4
+
+FourIsland_PokemonDayCare_TryRetrieveMon_8:
+# 133 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_ComeAgain
+	goto FourIsland_PokemonDayCare_TryRetrieveMon_7
+
+
+FourIsland_PokemonDayCare_CostPrompt::
+# 140 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	special GetDaycareCost
+# 141 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_ItWillCostX, MSGBOX_YESNO
+# 142 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq FourIsland_PokemonDayCare_CostPrompt_2
+FourIsland_PokemonDayCare_CostPrompt_1:
+# 145 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_ComeAgain
+	end
+
+FourIsland_PokemonDayCare_CostPrompt_2:
+# 143 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_CheckEnoughMoney
+	goto FourIsland_PokemonDayCare_CostPrompt_1
+
+
+FourIsland_PokemonDayCare_CheckEnoughMoney::
+# 150 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	specialvar VAR_RESULT, IsEnoughForCostInVar0x8005
+# 151 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq FourIsland_PokemonDayCare_CheckEnoughMoney_2
+FourIsland_PokemonDayCare_CheckEnoughMoney_1:
+# 154 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_NotEnoughMoney
+# 155 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	release
+	end
+
+FourIsland_PokemonDayCare_CheckEnoughMoney_2:
+# 152 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_RetrieveMon
+	goto FourIsland_PokemonDayCare_CheckEnoughMoney_1
+
+
+FourIsland_PokemonDayCare_RetrieveMon::
+# 160 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	applymovement LOCALID_FOUR_ISLAND_DAYCARE_WOMAN, FourIsland_PokemonDayCare_Movement_RetrieveMon
+# 161 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	waitmovement 0
+# 162 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	specialvar VAR_RESULT, TakePokemonFromDaycare
+# 163 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	special SubtractMoneyFromVar0x8005
+# 164 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	playse SE_SHOP
+# 165 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_HeresYourMon
+# 166 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	waitse
+# 167 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	playmoncry VAR_RESULT, CRY_MODE_NORMAL
+# 168 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+# 169 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_TookBackMon
+# 170 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	call EventScript_RestorePrevTextColor
+# 171 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	waitmoncry
+# 172 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	specialvar VAR_RESULT, GetDaycareState
+# 173 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, DAYCARE_ONE_MON
+	goto_if_eq FourIsland_PokemonDayCare_RetrieveMon_2
+FourIsland_PokemonDayCare_RetrieveMon_1:
+# 176 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_ComeAgain
+	end
+
+FourIsland_PokemonDayCare_RetrieveMon_2:
+# 174 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_AskRetrieveOtherMon
+	goto FourIsland_PokemonDayCare_RetrieveMon_1
+
+
+FourIsland_PokemonDayCare_AskRetrieveOtherMon::
+# 181 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_TakeOtherOneBackToo, MSGBOX_YESNO
+# 182 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq FourIsland_PokemonDayCare_AskRetrieveOtherMon_2
+FourIsland_PokemonDayCare_AskRetrieveOtherMon_1:
+# 185 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_ComeAgain
+	end
+
+FourIsland_PokemonDayCare_AskRetrieveOtherMon_2:
+# 183 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_TryRetrieveMon
+	goto FourIsland_PokemonDayCare_AskRetrieveOtherMon_1
+
+
+FourIsland_PokemonDayCare_NoRoomInParty::
+# 190 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_YourPartyIsFull
+# 191 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	release
+	end
+
+
+# 195 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+FourIsland_PokemonDayCare_Movement_RetrieveMon:
+# 196 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	delay_16
+# 197 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	delay_16
+# 198 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	face_right
+# 199 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	delay_16
+# 200 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	delay_16
+# 201 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	face_left
+# 202 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	delay_16
+# 203 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	delay_16
+# 204 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	face_up
+# 205 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	walk_slow_up
+# 206 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	set_invisible
+# 207 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	delay_16
+# 208 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	delay_16
+# 209 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	delay_16
+# 210 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	delay_16
+# 211 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	delay_16
+# 212 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	face_down
+# 213 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	set_visible
+# 214 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	walk_slow_down
+# 215 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	step_end
+
+FourIsland_PokemonDayCare_EventScript_UnusedEnd::
+	end
+
+
+FourIsland_PokemonDayCare_TwoMonsInDaycare::
+# 223 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_GoodToSeeYou
+# 224 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	setvar VAR_0x8004, 0
+# 225 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	call FourIsland_PokemonDayCare_DisplayLevelsGained
+# 226 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	setvar VAR_0x8004, 1
+# 227 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	call FourIsland_PokemonDayCare_DisplayLevelsGained
+# 228 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_TakeYourMonBack, MSGBOX_YESNO
+# 229 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq FourIsland_PokemonDayCare_TwoMonsInDaycare_2
+FourIsland_PokemonDayCare_TwoMonsInDaycare_1:
+# 232 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_ComeAgain
+# 233 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	release
+	end
+
+FourIsland_PokemonDayCare_TwoMonsInDaycare_2:
+# 230 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_TryRetrieveMon
+	goto FourIsland_PokemonDayCare_TwoMonsInDaycare_1
+
+
+FourIsland_PokemonDayCare_EventScript_UnusedRetrieveMon::
+# 238 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	special ShowDaycareLevelMenu
+# 239 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	waitstate
+# 240 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	compare VAR_RESULT, 2
+	goto_if_eq FourIsland_PokemonDayCare_EventScript_UnusedRetrieveMon_2
+FourIsland_PokemonDayCare_EventScript_UnusedRetrieveMon_1:
+# 243 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	copyvar VAR_0x8004, VAR_RESULT
+# 244 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	specialvar VAR_RESULT, TakePokemonFromDaycare
+# 245 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_HeresYourMon
+# 246 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	msgbox DayCare_Text_ComeAgain
+# 247 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	release
+	end
+
+FourIsland_PokemonDayCare_EventScript_UnusedRetrieveMon_2:
+# 241 "data/maps/FourIsland_PokemonDayCare_Frlg/scripts.pory"
+	goto FourIsland_PokemonDayCare_ComeAgain
+	goto FourIsland_PokemonDayCare_EventScript_UnusedRetrieveMon_1
+
+
+`

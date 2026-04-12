@@ -1,198 +1,469 @@
 MauvilleCity_BikeShop_MapScripts::
 	.byte 0
 
+
 MauvilleCity_BikeShop_EventScript_Rydel::
+# 4 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	lock
+# 5 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	faceplayer
-	goto_if_set FLAG_RECEIVED_BIKE, MauvilleCity_BikeShop_EventScript_AskSwitchBikes
-	goto_if_set FLAG_DECLINED_BIKE, MauvilleCity_BikeShop_EventScript_SkipGreeting
+# 6 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto_if_set FLAG_RECEIVED_BIKE, MauvilleCity_BikeShop_EventScript_Rydel_2
+MauvilleCity_BikeShop_EventScript_Rydel_1:
+# 9 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto_if_set FLAG_DECLINED_BIKE, MauvilleCity_BikeShop_EventScript_Rydel_5
+MauvilleCity_BikeShop_EventScript_Rydel_4:
+# 12 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	msgbox MauvilleCity_BikeShop_Text_RydelGreeting, MSGBOX_DEFAULT
+# 13 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	msgbox MauvilleCity_BikeShop_Text_DidYouComeFromFarAway, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, MauvilleCity_BikeShop_EventScript_YesFar
-	goto_if_eq VAR_RESULT, NO, MauvilleCity_BikeShop_EventScript_NotFar
+# 14 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq MauvilleCity_BikeShop_EventScript_Rydel_8
+MauvilleCity_BikeShop_EventScript_Rydel_7:
+# 17 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq MauvilleCity_BikeShop_EventScript_Rydel_11
+MauvilleCity_BikeShop_EventScript_Rydel_10:
 	end
+
+MauvilleCity_BikeShop_EventScript_Rydel_2:
+# 7 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_AskSwitchBikes
+	goto MauvilleCity_BikeShop_EventScript_Rydel_1
+
+MauvilleCity_BikeShop_EventScript_Rydel_5:
+# 10 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_SkipGreeting
+	goto MauvilleCity_BikeShop_EventScript_Rydel_4
+
+MauvilleCity_BikeShop_EventScript_Rydel_8:
+# 15 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_YesFar
+	goto MauvilleCity_BikeShop_EventScript_Rydel_7
+
+MauvilleCity_BikeShop_EventScript_Rydel_11:
+# 18 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_NotFar
+	goto MauvilleCity_BikeShop_EventScript_Rydel_10
+
 
 MauvilleCity_BikeShop_EventScript_SkipGreeting::
+# 24 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	msgbox MauvilleCity_BikeShop_Text_DidYouComeFromFarAway, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, MauvilleCity_BikeShop_EventScript_YesFar
-	goto_if_eq VAR_RESULT, NO, MauvilleCity_BikeShop_EventScript_NotFar
+# 25 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq MauvilleCity_BikeShop_EventScript_SkipGreeting_2
+MauvilleCity_BikeShop_EventScript_SkipGreeting_1:
+# 28 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq MauvilleCity_BikeShop_EventScript_SkipGreeting_5
+MauvilleCity_BikeShop_EventScript_SkipGreeting_4:
 	end
+
+MauvilleCity_BikeShop_EventScript_SkipGreeting_2:
+# 26 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_YesFar
+	goto MauvilleCity_BikeShop_EventScript_SkipGreeting_1
+
+MauvilleCity_BikeShop_EventScript_SkipGreeting_5:
+# 29 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_NotFar
+	goto MauvilleCity_BikeShop_EventScript_SkipGreeting_4
+
 
 MauvilleCity_BikeShop_EventScript_ChooseBike::
+# 35 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	message MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne
+# 36 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	waitmessage
+# 37 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	multichoice 21, 8, MULTI_BIKE, TRUE
+# 38 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	switch VAR_RESULT
-	case 0, MauvilleCity_BikeShop_EventScript_GetMachBike
-	case 1, MauvilleCity_BikeShop_EventScript_GetAcroBike
+# 39 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	case 0, MauvilleCity_BikeShop_EventScript_ChooseBike_3
+# 41 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	case 1, MauvilleCity_BikeShop_EventScript_ChooseBike_4
+MauvilleCity_BikeShop_EventScript_ChooseBike_1:
 	end
 
+MauvilleCity_BikeShop_EventScript_ChooseBike_3:
+# 40 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_GetMachBike
+	goto MauvilleCity_BikeShop_EventScript_ChooseBike_1
+
+MauvilleCity_BikeShop_EventScript_ChooseBike_4:
+# 42 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_GetAcroBike
+	goto MauvilleCity_BikeShop_EventScript_ChooseBike_1
+
+
 MauvilleCity_BikeShop_EventScript_NotFar::
+# 48 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	setflag FLAG_DECLINED_BIKE
+# 49 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	msgbox MauvilleCity_BikeShop_Text_GuessYouDontNeedBike, MSGBOX_DEFAULT
+# 50 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	release
 	end
 
+
 MauvilleCity_BikeShop_EventScript_YesFar::
+# 55 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	setflag FLAG_RECEIVED_BIKE
+# 56 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	goto MauvilleCity_BikeShop_EventScript_ChooseBike
 	end
 
+
 MauvilleCity_BikeShop_EventScript_GetMachBike::
+# 61 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	msgbox MauvilleCity_BikeShop_Text_ChoseMachBike, MSGBOX_DEFAULT
+# 62 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	giveitem ITEM_MACH_BIKE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+# 63 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq MauvilleCity_BikeShop_EventScript_GetMachBike_2
+MauvilleCity_BikeShop_EventScript_GetMachBike_1:
+# 66 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	goto MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes
 	end
+
+MauvilleCity_BikeShop_EventScript_GetMachBike_2:
+# 64 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto MauvilleCity_BikeShop_EventScript_GetMachBike_1
+
 
 MauvilleCity_BikeShop_EventScript_GetAcroBike::
+# 71 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	msgbox MauvilleCity_BikeShop_Text_ChoseAcroBike, MSGBOX_DEFAULT
+# 72 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	giveitem ITEM_ACRO_BIKE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+# 73 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq MauvilleCity_BikeShop_EventScript_GetAcroBike_2
+MauvilleCity_BikeShop_EventScript_GetAcroBike_1:
+# 76 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	goto MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes
 	end
+
+MauvilleCity_BikeShop_EventScript_GetAcroBike_2:
+# 74 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto MauvilleCity_BikeShop_EventScript_GetAcroBike_1
+
 
 MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes::
+# 81 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	msgbox MauvilleCity_BikeShop_Text_ComeBackToSwitchBikes, MSGBOX_DEFAULT
+# 82 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	special SwapRegisteredBike
+# 83 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	release
 	end
+
 
 MauvilleCity_BikeShop_EventScript_AskSwitchBikes::
+# 88 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	msgbox MauvilleCity_BikeShop_Text_WantToSwitchBikes, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, MauvilleCity_BikeShop_EventScript_SwitchBikes
-	goto_if_eq VAR_RESULT, NO, MauvilleCity_BikeShop_EventScript_KeepBike
+# 89 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq MauvilleCity_BikeShop_EventScript_AskSwitchBikes_2
+MauvilleCity_BikeShop_EventScript_AskSwitchBikes_1:
+# 92 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	compare VAR_RESULT, NO
+	goto_if_eq MauvilleCity_BikeShop_EventScript_AskSwitchBikes_5
+MauvilleCity_BikeShop_EventScript_AskSwitchBikes_4:
 	end
 
-@ If the player does not have a bike on them Rydel assumes its stored in the PC
+MauvilleCity_BikeShop_EventScript_AskSwitchBikes_2:
+# 90 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_SwitchBikes
+	goto MauvilleCity_BikeShop_EventScript_AskSwitchBikes_1
+
+MauvilleCity_BikeShop_EventScript_AskSwitchBikes_5:
+# 93 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_KeepBike
+	goto MauvilleCity_BikeShop_EventScript_AskSwitchBikes_4
+
+
 MauvilleCity_BikeShop_EventScript_SwitchBikes::
+# 99 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	msgbox MauvilleCity_BikeShop_Text_IllSwitchBikes, MSGBOX_DEFAULT
+# 100 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	checkitem ITEM_ACRO_BIKE
-	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_BikeShop_EventScript_SwitchAcroForMach
+# 101 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq MauvilleCity_BikeShop_EventScript_SwitchBikes_2
+MauvilleCity_BikeShop_EventScript_SwitchBikes_1:
+# 104 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	checkitem ITEM_MACH_BIKE
-	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_BikeShop_EventScript_SwitchMachForAcro
+# 105 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	compare VAR_RESULT, TRUE
+	goto_if_eq MauvilleCity_BikeShop_EventScript_SwitchBikes_5
+MauvilleCity_BikeShop_EventScript_SwitchBikes_4:
+# 108 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	msgbox MauvilleCity_BikeShop_Text_OhYourBikeIsInPC, MSGBOX_DEFAULT
+# 109 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	release
 	end
+
+MauvilleCity_BikeShop_EventScript_SwitchBikes_2:
+# 102 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_SwitchAcroForMach
+	goto MauvilleCity_BikeShop_EventScript_SwitchBikes_1
+
+MauvilleCity_BikeShop_EventScript_SwitchBikes_5:
+# 106 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_SwitchMachForAcro
+	goto MauvilleCity_BikeShop_EventScript_SwitchBikes_4
+
 
 MauvilleCity_BikeShop_EventScript_KeepBike::
+# 114 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	msgbox MauvilleCity_BikeShop_Text_HappyYouLikeIt, MSGBOX_DEFAULT
+# 115 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	release
 	end
 
+
 MauvilleCity_BikeShop_EventScript_SwitchAcroForMach::
+# 120 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	incrementgamestat GAME_STAT_TRADED_BIKES
+# 121 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	msgbox MauvilleCity_BikeShop_Text_ExchangedAcroForMach, MSGBOX_DEFAULT
+# 122 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	removeitem ITEM_ACRO_BIKE
+# 123 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	giveitem ITEM_MACH_BIKE
+# 124 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	goto MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes
 	end
+
 
 MauvilleCity_BikeShop_EventScript_SwitchMachForAcro::
+# 129 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	incrementgamestat GAME_STAT_TRADED_BIKES
+# 130 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	msgbox MauvilleCity_BikeShop_Text_ExchangedMachForAcro, MSGBOX_DEFAULT
+# 131 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	removeitem ITEM_MACH_BIKE
+# 132 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	giveitem ITEM_ACRO_BIKE
+# 133 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	goto MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes
 	end
 
+
 MauvilleCity_BikeShop_EventScript_Assistant::
+# 138 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	msgbox MauvilleCity_BikeShop_Text_HandbooksAreInBack, MSGBOX_NPC
 	end
 
+
 MauvilleCity_BikeShop_EventScript_MachBikeHandbook::
+# 143 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	message MauvilleCity_BikeShop_Text_MachHandbookWhichPage
+# 144 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	waitmessage
+# 145 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	goto MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage
 	end
+
 
 MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage::
+# 150 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	multichoice 0, 0, MULTI_MACH_BIKE_INFO, FALSE
+# 151 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	switch VAR_RESULT
-	case 0, MauvilleCity_BikeShop_EventScript_HowToRide
-	case 1, MauvilleCity_BikeShop_EventScript_HowToTurn
-	case 2, MauvilleCity_BikeShop_EventScript_SandySlopes
-	case 3, MauvilleCity_BikeShop_EventScript_ExitMachHandbook
-	case MULTI_B_PRESSED, MauvilleCity_BikeShop_EventScript_ExitMachHandbook
+# 152 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	case 0, MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage_3
+# 154 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	case 1, MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage_4
+# 156 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	case 2, MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage_5
+# 158 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	case 3, MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage_6
+# 160 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	case MULTI_B_PRESSED, MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage_7
+MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage_1:
 	end
+
+MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage_3:
+# 153 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_HowToRide
+	goto MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage_1
+
+MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage_4:
+# 155 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_HowToTurn
+	goto MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage_1
+
+MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage_5:
+# 157 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_SandySlopes
+	goto MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage_1
+
+MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage_6:
+# 159 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_ExitMachHandbook
+	goto MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage_1
+
+MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage_7:
+# 161 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_ExitMachHandbook
+	goto MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage_1
+
 
 MauvilleCity_BikeShop_EventScript_HowToRide::
+# 167 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	message MauvilleCity_BikeShop_Text_HowToRideMachBike
+# 168 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	waitmessage
+# 169 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	goto MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage
 	end
+
 
 MauvilleCity_BikeShop_EventScript_HowToTurn::
+# 174 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	message MauvilleCity_BikeShop_Text_HowToTurnMachBike
+# 175 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	waitmessage
+# 176 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	goto MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage
 	end
+
 
 MauvilleCity_BikeShop_EventScript_SandySlopes::
+# 181 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	message MauvilleCity_BikeShop_Text_SandySlopes
+# 182 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	waitmessage
+# 183 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	goto MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage
 	end
 
+
 MauvilleCity_BikeShop_EventScript_ExitMachHandbook::
+# 188 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	release
 	end
+
 
 MauvilleCity_BikeShop_EventScript_AcroBikeHandbook::
+# 193 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	message MauvilleCity_BikeShop_Text_AcroHandbookWhichPage
+# 194 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	waitmessage
+# 195 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	goto MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage
 	end
+
 
 MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage::
+# 200 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	multichoice 0, 0, MULTI_ACRO_BIKE_INFO, FALSE
+# 201 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	switch VAR_RESULT
-	case 0, MauvilleCity_BikeShop_EventScript_Wheelies
-	case 1, MauvilleCity_BikeShop_EventScript_BunnyHops
-	case 2, MauvilleCity_BikeShop_EventScript_Jumps
-	case 3, MauvilleCity_BikeShop_EventScript_ExitAcroHandbook
-	case MULTI_B_PRESSED, MauvilleCity_BikeShop_EventScript_ExitAcroHandbook
+# 202 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	case 0, MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage_3
+# 204 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	case 1, MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage_4
+# 206 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	case 2, MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage_5
+# 208 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	case 3, MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage_6
+# 210 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	case MULTI_B_PRESSED, MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage_7
+MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage_1:
 	end
+
+MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage_3:
+# 203 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_Wheelies
+	goto MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage_1
+
+MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage_4:
+# 205 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_BunnyHops
+	goto MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage_1
+
+MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage_5:
+# 207 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_Jumps
+	goto MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage_1
+
+MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage_6:
+# 209 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_ExitAcroHandbook
+	goto MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage_1
+
+MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage_7:
+# 211 "data/maps/MauvilleCity_BikeShop/scripts.pory"
+	goto MauvilleCity_BikeShop_EventScript_ExitAcroHandbook
+	goto MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage_1
+
 
 MauvilleCity_BikeShop_EventScript_Wheelies::
+# 217 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	message MauvilleCity_BikeShop_Text_Wheelies
+# 218 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	waitmessage
+# 219 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	goto MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage
 	end
+
 
 MauvilleCity_BikeShop_EventScript_BunnyHops::
+# 224 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	message MauvilleCity_BikeShop_Text_BunnyHops
+# 225 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	waitmessage
+# 226 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	goto MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage
 	end
+
 
 MauvilleCity_BikeShop_EventScript_Jumps::
+# 231 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	message MauvilleCity_BikeShop_Text_Jumps
+# 232 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	waitmessage
+# 233 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	goto MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage
 	end
 
+
 MauvilleCity_BikeShop_EventScript_ExitAcroHandbook::
+# 238 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	release
 	end
 
-MauvilleCity_BikeShop_Text_RydelGreeting:
+
+MauvilleCity_BikeShop_Text_RydelGreeting::
+# 242 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "Well, well, what have we here?\n"
 	.string "A most energetic customer!\p"
 	.string "Me? You may call me RYDEL.\n"
 	.string "I'm the owner of this cycle shop.$"
 
-MauvilleCity_BikeShop_Text_DidYouComeFromFarAway:
+MauvilleCity_BikeShop_Text_DidYouComeFromFarAway::
+# 249 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "RYDEL: Your RUNNING SHOES…\n"
 	.string "They're awfully filthy.\p"
 	.string "Did you come from far away?$"
 
-MauvilleCity_BikeShop_Text_GuessYouDontNeedBike:
+MauvilleCity_BikeShop_Text_GuessYouDontNeedBike::
+# 255 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "RYDEL: Is that right?\p"
 	.string "Then, I guess you have no need for\n"
 	.string "any of my BIKES.$"
 
-MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne:
+MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne::
+# 261 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "RYDEL: Hm, hm… … … … …\p"
 	.string "You're saying that you came all this\n"
 	.string "way from LITTLEROOT?\p"
@@ -216,37 +487,46 @@ MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne:
 	.string "have whichever one you like!\p"
 	.string "Which one will you choose?$"
 
-MauvilleCity_BikeShop_Text_ChoseMachBike:
+MauvilleCity_BikeShop_Text_ChoseMachBike::
+# 286 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "{PLAYER} chose the MACH BIKE.$"
 
-MauvilleCity_BikeShop_Text_ChoseAcroBike:
+MauvilleCity_BikeShop_Text_ChoseAcroBike::
+# 290 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "{PLAYER} chose the ACRO BIKE.$"
 
-MauvilleCity_BikeShop_Text_ComeBackToSwitchBikes:
+MauvilleCity_BikeShop_Text_ComeBackToSwitchBikes::
+# 294 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "RYDEL: If you get the urge to switch\n"
 	.string "BIKES, just come see me!$"
 
-MauvilleCity_BikeShop_Text_WantToSwitchBikes:
+MauvilleCity_BikeShop_Text_WantToSwitchBikes::
+# 299 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "RYDEL: Oh? Were you thinking about\n"
 	.string "switching BIKES?$"
 
-MauvilleCity_BikeShop_Text_IllSwitchBikes:
+MauvilleCity_BikeShop_Text_IllSwitchBikes::
+# 304 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "RYDEL: Okay, no problem!\n"
 	.string "I'll switch BIKES for you!$"
 
-MauvilleCity_BikeShop_Text_ExchangedMachForAcro:
+MauvilleCity_BikeShop_Text_ExchangedMachForAcro::
+# 309 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "{PLAYER} got the MACH BIKE exchanged\n"
 	.string "for an ACRO BIKE.$"
 
-MauvilleCity_BikeShop_Text_ExchangedAcroForMach:
+MauvilleCity_BikeShop_Text_ExchangedAcroForMach::
+# 314 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "{PLAYER} got the ACRO BIKE exchanged\n"
 	.string "for a MACH BIKE.$"
 
-MauvilleCity_BikeShop_Text_HappyYouLikeIt:
+MauvilleCity_BikeShop_Text_HappyYouLikeIt::
+# 319 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "RYDEL: Good, good!\n"
 	.string "I'm happy that you like it!$"
 
-MauvilleCity_BikeShop_Text_OhYourBikeIsInPC:
+MauvilleCity_BikeShop_Text_OhYourBikeIsInPC::
+# 324 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "Oh? What happened to that BIKE\n"
 	.string "I gave you?\p"
 	.string "Oh, I get it, you stored it using your PC.\p"
@@ -255,18 +535,21 @@ MauvilleCity_BikeShop_Text_OhYourBikeIsInPC:
 	.string "May the wind always be at your back\n"
 	.string "on your adventure!$"
 
-MauvilleCity_BikeShop_Text_HandbooksAreInBack:
+MauvilleCity_BikeShop_Text_HandbooksAreInBack::
+# 334 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "I'm learning about BIKES while\n"
 	.string "I work here.\p"
 	.string "If you need advice on how to ride your\n"
 	.string "BIKE, there're a couple handbooks in\l"
 	.string "the back.$"
 
-MauvilleCity_BikeShop_Text_MachHandbookWhichPage:
+MauvilleCity_BikeShop_Text_MachHandbookWhichPage::
+# 342 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "It's a handbook on the MACH BIKE.\p"
 	.string "Which page do you want to read?$"
 
-MauvilleCity_BikeShop_Text_HowToRideMachBike:
+MauvilleCity_BikeShop_Text_HowToRideMachBike::
+# 347 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "A BIKE moves in the direction that\n"
 	.string "the + Control Pad is pressed.\p"
 	.string "It will speed up once it gets rolling.\p"
@@ -274,7 +557,8 @@ MauvilleCity_BikeShop_Text_HowToRideMachBike:
 	.string "The BIKE will slow to a stop.\p"
 	.string "Want to read a different page?$"
 
-MauvilleCity_BikeShop_Text_HowToTurnMachBike:
+MauvilleCity_BikeShop_Text_HowToTurnMachBike::
+# 356 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "A MACH BIKE is speedy, but it can't\n"
 	.string "stop very quickly.\p"
 	.string "It gets a little tricky to get around\n"
@@ -283,7 +567,8 @@ MauvilleCity_BikeShop_Text_HowToTurnMachBike:
 	.string "before the corner and slow down.\p"
 	.string "Want to read a different page?$"
 
-MauvilleCity_BikeShop_Text_SandySlopes:
+MauvilleCity_BikeShop_Text_SandySlopes::
+# 366 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "There are small sandy slopes\n"
 	.string "throughout the HOENN region.\p"
 	.string "The loose, crumbly sand makes it\n"
@@ -292,11 +577,13 @@ MauvilleCity_BikeShop_Text_SandySlopes:
 	.string "zip up a sandy slope.\p"
 	.string "Want to read a different page?$"
 
-MauvilleCity_BikeShop_Text_AcroHandbookWhichPage:
+MauvilleCity_BikeShop_Text_AcroHandbookWhichPage::
+# 376 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "It's a handbook on the ACRO BIKE.\p"
 	.string "Which page do you want to read?$"
 
-MauvilleCity_BikeShop_Text_Wheelies:
+MauvilleCity_BikeShop_Text_Wheelies::
+# 381 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "Press the B Button while riding,\n"
 	.string "and the front wheel lifts up.\p"
 	.string "You can zip around with the front\n"
@@ -304,14 +591,16 @@ MauvilleCity_BikeShop_Text_Wheelies:
 	.string "This technique is called a wheelie.\p"
 	.string "Want to read a different page?$"
 
-MauvilleCity_BikeShop_Text_BunnyHops:
+MauvilleCity_BikeShop_Text_BunnyHops::
+# 390 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "Keeping the B Button pressed,\n"
 	.string "your BIKE can hop on the spot.\p"
 	.string "This technique is called a bunny hop.\p"
 	.string "You can ride while hopping, too.\p"
 	.string "Want to read a different page?$"
 
-MauvilleCity_BikeShop_Text_Jumps:
+MauvilleCity_BikeShop_Text_Jumps::
+# 398 "data/maps/MauvilleCity_BikeShop/scripts.pory"
 	.string "Press the B Button and the + Control\n"
 	.string "Pad at the same time to jump.\p"
 	.string "Press the + Control Pad to the side\n"
@@ -319,4 +608,3 @@ MauvilleCity_BikeShop_Text_Jumps:
 	.string "Press it backwards to make the BIKE\n"
 	.string "change directions while jumping.\p"
 	.string "Want to read a different page?$"
-
