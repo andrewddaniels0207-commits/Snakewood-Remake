@@ -3,13 +3,13 @@ mapscripts AbandonedShip_Rooms_B1F_MapScripts {
 }
 
 script AbandonedShip_Rooms_B1F_OnResume {
-    #(6 "data/maps/AbandonedShip_Rooms_B1F/scripts.pory")
+    #(7 "data/maps/AbandonedShip_Rooms_B1F/scripts.pory")
     setdivewarp(MAP_ABANDONED_SHIP_UNDERWATER2, 17, 4)
     end
 }
 
 script AbandonedShip_Rooms_B1F_EventScript_FatMan {
-    #(11 "data/maps/AbandonedShip_Rooms_B1F/scripts.pory")
+    #(13 "data/maps/AbandonedShip_Rooms_B1F/scripts.pory")
     msgbox(AbandonedShip_Rooms_B1F_Text_GettingQueasy, MSGBOX_NPC)
     end
 }

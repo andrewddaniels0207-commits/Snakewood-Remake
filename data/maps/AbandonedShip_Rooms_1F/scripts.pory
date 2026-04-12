@@ -1,38 +1,61 @@
 mapscripts AbandonedShip_Rooms_1F_MapScripts {}
 
 script AbandonedShip_Rooms_1F_EventScript_Gentleman {
+    #(4 "data/maps/AbandonedShip_Rooms_1F/scripts.pory")
     msgbox(AbandonedShip_Rooms_1F_Text_TakingALookAround, MSGBOX_NPC)
     end
 }
 
 script AbandonedShip_Rooms_1F_EventScript_Demetrius {
+    #(9 "data/maps/AbandonedShip_Rooms_1F/scripts.pory")
     trainerbattle_single(TRAINER_DEMETRIUS, AbandonedShip_Rooms_1F_Text_DemetriusIntro, AbandonedShip_Rooms_1F_Text_DemetriusDefeat)
+    #(10 "data/maps/AbandonedShip_Rooms_1F/scripts.pory")
     msgbox(AbandonedShip_Rooms_1F_Text_DemetriusPostBattle, MSGBOX_AUTOCLOSE)
     end
 }
 
 script AbandonedShip_Rooms_1F_EventScript_Thalia {
+    #(15 "data/maps/AbandonedShip_Rooms_1F/scripts.pory")
     trainerbattle_single(TRAINER_THALIA_1, AbandonedShip_Rooms_1F_Text_ThaliaIntro, AbandonedShip_Rooms_1F_Text_ThaliaDefeat, AbandonedShip_Rooms_1F_EventScript_RegisterThalia)
+    #(16 "data/maps/AbandonedShip_Rooms_1F/scripts.pory")
     specialvar(VAR_RESULT, ShouldTryRematchBattle)
-    if (var(VAR_RESULT) == TRUE) {
-        goto(AbandonedShip_Rooms_1F_EventScript_ThaliaRematch)
-    }
+    #(17 "data/maps/AbandonedShip_Rooms_1F/scripts.pory")
+    compare(VAR_RESULT, TRUE)
+    goto_if_eq(AbandonedShip_Rooms_1F_EventScript_Thalia_2)
+}
+
+script AbandonedShip_Rooms_1F_EventScript_Thalia_1 {
+    #(20 "data/maps/AbandonedShip_Rooms_1F/scripts.pory")
     msgbox(AbandonedShip_Rooms_1F_Text_ThaliaPostBattle, MSGBOX_DEFAULT)
+    #(21 "data/maps/AbandonedShip_Rooms_1F/scripts.pory")
     release
     end
 }
 
+script AbandonedShip_Rooms_1F_EventScript_Thalia_2 {
+    #(18 "data/maps/AbandonedShip_Rooms_1F/scripts.pory")
+    goto(AbandonedShip_Rooms_1F_EventScript_ThaliaRematch)
+    goto(AbandonedShip_Rooms_1F_EventScript_Thalia_1)
+}
+
 script AbandonedShip_Rooms_1F_EventScript_RegisterThalia {
+    #(26 "data/maps/AbandonedShip_Rooms_1F/scripts.pory")
     special(PlayerFaceTrainerAfterBattle)
+    #(27 "data/maps/AbandonedShip_Rooms_1F/scripts.pory")
     waitmovement(0)
+    #(28 "data/maps/AbandonedShip_Rooms_1F/scripts.pory")
     msgbox(AbandonedShip_Rooms_1F_Text_ThaliaRegister, MSGBOX_DEFAULT)
+    #(29 "data/maps/AbandonedShip_Rooms_1F/scripts.pory")
     register_matchcall(TRAINER_THALIA_1)
+    #(30 "data/maps/AbandonedShip_Rooms_1F/scripts.pory")
     release
     end
 }
 
 script AbandonedShip_Rooms_1F_EventScript_ThaliaRematch {
+    #(35 "data/maps/AbandonedShip_Rooms_1F/scripts.pory")
     trainerbattle_rematch(TRAINER_THALIA_1, AbandonedShip_Rooms_1F_Text_ThaliaRematchIntro, AbandonedShip_Rooms_1F_Text_ThaliaRematchDefeat)
+    #(36 "data/maps/AbandonedShip_Rooms_1F/scripts.pory")
     msgbox(AbandonedShip_Rooms_1F_Text_ThaliaPostRematch, MSGBOX_AUTOCLOSE)
     end
 }

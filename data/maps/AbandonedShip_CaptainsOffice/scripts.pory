@@ -1,69 +1,91 @@
 mapscripts AbandonedShip_CaptainsOffice_MapScripts {}
 
 script AbandonedShip_CaptainsOffice_EventScript_CaptSternAide {
-    #(4 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
-    lock
     #(5 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
+    lock
+    #(7 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
     faceplayer
-    #(6 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
+    #(9 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
     if (flag(FLAG_EXCHANGED_SCANNER)) {
-        goto(AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_2)
+        goto(AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_1)
     }
+    return
 }
 
 script AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_1 {
-    #(9 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
-    checkitem(ITEM_SCANNER)
     #(10 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
+    goto(AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_2)
+    return
+}
+
+script AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_1 {
+    #(16 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
+    checkitem(ITEM_SCANNER)
+    #(18 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
     compare(VAR_RESULT, TRUE)
+    #(19 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
     goto_if_eq(AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_5)
+    return
 }
 
 script AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_4 {
-    #(13 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
+    #(24 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
     if (flag(FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_2_SCANNER)) {
-        goto(AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_8)
+        goto(AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_4_1)
     }
+    return
+}
+
+script AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_4_1 {
+    #(25 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
+    goto(AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_8)
+    return
 }
 
 script AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_7 {
-    #(16 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
+    #(31 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
     msgbox(AbandonedShip_CaptainsOffice_Text_NoSuccessFindingScanner, MSGBOX_DEFAULT)
-    #(17 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
+    #(33 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
     release
     end
 }
 
 script AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_2 {
-    #(7 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
+    #(39 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
     goto(AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus)
+    #(40 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
     goto(AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_1)
+    return
 }
 
 script AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_5 {
-    #(11 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
+    #(45 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
     goto(AbandonedShip_CaptainsOffice_EventScript_CanYouDeliverScanner)
+    #(46 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
     goto(AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_4)
+    return
 }
 
 script AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_8 {
-    #(14 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
+    #(51 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
     goto(AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus)
+    #(52 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
     goto(AbandonedShip_CaptainsOffice_EventScript_CaptSternAide_7)
+    return
 }
 
 script AbandonedShip_CaptainsOffice_EventScript_CanYouDeliverScanner {
-    #(22 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
+    #(57 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
     msgbox(AbandonedShip_CaptainsOffice_Text_OhCanYouDeliverScanner, MSGBOX_DEFAULT)
-    #(23 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
+    #(59 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
     release
     end
 }
 
 script AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus {
-    #(28 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
+    #(65 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
     msgbox(AbandonedShip_CaptainsOffice_Text_ThisIsSSCactus, MSGBOX_DEFAULT)
-    #(29 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
+    #(67 "data/maps/AbandonedShip_CaptainsOffice/scripts.pory")
     release
     end
 }

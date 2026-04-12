@@ -5,7 +5,7 @@ AlteringCave_MapScripts::
 
 
 AlteringCave_OnTransition::
-# 6 "data/maps/AlteringCave/scripts.pory"
+# 7 "data/maps/AlteringCave/scripts.pory"
 	setflag FLAG_LANDMARK_ALTERING_CAVE
 	end
 

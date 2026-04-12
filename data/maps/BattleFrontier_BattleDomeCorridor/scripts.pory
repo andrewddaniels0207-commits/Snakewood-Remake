@@ -5,157 +5,293 @@ mapscripts BattleFrontier_BattleDomeCorridor_MapScripts {
 }
 
 script BattleFrontier_BattleDomeCorridor_EventScript_EnterCorridor {
+    #(8 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     delay(16)
+    #(9 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     setvar(VAR_TEMP_0, 1)
+    #(10 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     frontier_get(FRONTIER_DATA_LVL_MODE)
-    if (var(VAR_RESULT) == FRONTIER_LVL_OPEN) {
-        goto(BattleFrontier_BattleDomeCorridor_EventScript_WalkToBattleRoomLvOpen)
-    }
+    #(11 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    compare(VAR_RESULT, FRONTIER_LVL_OPEN)
+    goto_if_eq(BattleFrontier_BattleDomeCorridor_EventScript_EnterCorridor_2)
+}
+
+script BattleFrontier_BattleDomeCorridor_EventScript_EnterCorridor_1 {
+    #(14 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     applymovement(LOCALID_DOME_CORRIDOR_ATTENDANT, BattleFrontier_BattleDomeCorridor_Movement_AttendantWalkToDoorLv50)
+    #(15 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     applymovement(LOCALID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLv50)
+    #(16 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     waitmovement(0)
+    #(17 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     opendoor(13, 3)
+    #(18 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     waitdooranim()
+    #(19 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     applymovement(LOCALID_DOME_CORRIDOR_ATTENDANT, BattleFrontier_BattleDomeCorridor_Movement_AttendantEnterDoorLv50)
+    #(20 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     applymovement(LOCALID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLv50)
+    #(21 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     waitmovement(0)
+    #(22 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     closedoor(13, 3)
+    #(23 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     waitdooranim()
+    #(24 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     goto(BattleFrontier_BattleDomeCorridor_EventScript_WarpToPreBattleRoom)
+    return
+}
+
+script BattleFrontier_BattleDomeCorridor_EventScript_EnterCorridor_2 {
+    #(12 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    goto(BattleFrontier_BattleDomeCorridor_EventScript_WalkToBattleRoomLvOpen)
+    goto(BattleFrontier_BattleDomeCorridor_EventScript_EnterCorridor_1)
 }
 
 script BattleFrontier_BattleDomeCorridor_EventScript_WalkToBattleRoomLvOpen {
+    #(28 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     applymovement(LOCALID_DOME_CORRIDOR_ATTENDANT, BattleFrontier_BattleDomeCorridor_Movement_AttendantWalkToDoorLvOpen)
+    #(29 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     applymovement(LOCALID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLvOpen)
+    #(30 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     waitmovement(0)
+    #(31 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     opendoor(37, 3)
+    #(32 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     waitdooranim()
+    #(33 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     applymovement(LOCALID_DOME_CORRIDOR_ATTENDANT, BattleFrontier_BattleDomeCorridor_Movement_AttendantEnterDoorLvOpen)
+    #(34 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     applymovement(LOCALID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLvOpen)
+    #(35 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     waitmovement(0)
+    #(36 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     closedoor(37, 3)
+    #(37 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     waitdooranim()
+    return
 }
 
 script BattleFrontier_BattleDomeCorridor_EventScript_WarpToPreBattleRoom {
+    #(41 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     waitmovement(0)
+    #(42 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     setvar(VAR_0x8006, 0)
+    #(43 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     warp(MAP_BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM, 5, 7)
+    #(44 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
     waitstate
     end
+    #(48 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
 }
 
-movement BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLv50 {
-    walk_up
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_in_place_faster_up
-    step_end
+script BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLv50 {
+    #(49 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_up()
+    #(50 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(51 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(52 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(53 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(54 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(55 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(56 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(57 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(58 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(59 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(60 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_in_place_faster_up()
+    #(61 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    step_end()
+    #(64 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
 }
 
-movement BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLv50 {
-    walk_up
-    walk_up
-    set_invisible
-    step_end
+script BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLv50 {
+    #(65 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_up()
+    #(66 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_up()
+    #(67 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    set_invisible()
+    #(68 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    step_end()
+    #(71 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
 }
 
-movement BattleFrontier_BattleDomeCorridor_Movement_AttendantWalkToDoorLv50 {
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_left
-    walk_up
-    step_end
+script BattleFrontier_BattleDomeCorridor_Movement_AttendantWalkToDoorLv50 {
+    #(72 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(73 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(74 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(75 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(76 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(77 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(78 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(79 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(80 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(81 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_left()
+    #(82 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_up()
+    #(83 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    step_end()
+    #(86 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
 }
 
-movement BattleFrontier_BattleDomeCorridor_Movement_AttendantEnterDoorLv50 {
-    walk_up
-    set_invisible
-    step_end
+script BattleFrontier_BattleDomeCorridor_Movement_AttendantEnterDoorLv50 {
+    #(87 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_up()
+    #(88 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    set_invisible()
+    #(89 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    step_end()
+    #(92 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
 }
 
-movement BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLvOpen {
-    walk_up
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_in_place_faster_up
-    step_end
+script BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLvOpen {
+    #(93 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_up()
+    #(94 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(95 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(96 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(97 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(98 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(99 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(100 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(101 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(102 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(103 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(104 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(105 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(106 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(107 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(108 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_in_place_faster_up()
+    #(109 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    step_end()
+    #(112 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
 }
 
-movement BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLvOpen {
-    walk_up
-    walk_up
-    set_invisible
-    step_end
+script BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLvOpen {
+    #(113 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_up()
+    #(114 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_up()
+    #(115 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    set_invisible()
+    #(116 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    step_end()
+    #(119 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
 }
 
-movement BattleFrontier_BattleDomeCorridor_Movement_AttendantWalkToDoorLvOpen {
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_up
-    step_end
+script BattleFrontier_BattleDomeCorridor_Movement_AttendantWalkToDoorLvOpen {
+    #(120 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(121 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(122 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(123 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(124 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(125 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(126 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(127 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(128 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(129 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(130 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(131 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(132 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(133 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(134 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_up()
+    #(135 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    step_end()
+    #(138 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
 }
 
-movement BattleFrontier_BattleDomeCorridor_Movement_AttendantEnterDoorLvOpen {
-    walk_up
-    set_invisible
-    step_end
+script BattleFrontier_BattleDomeCorridor_Movement_AttendantEnterDoorLvOpen {
+    #(139 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_up()
+    #(140 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    set_invisible()
+    #(141 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    step_end()
+    #(144 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
 }
 
-movement BattleFrontier_BattleDomeCorridor_Movement_WalkToBattleRoomMidRight {
-    walk_up
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_right
-    walk_up
-    walk_up
-    set_invisible
-    step_end
+script BattleFrontier_BattleDomeCorridor_Movement_WalkToBattleRoomMidRight {
+    #(145 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_up()
+    #(146 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(147 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(148 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(149 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(150 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(151 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(152 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(153 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(154 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(155 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(156 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_right()
+    #(157 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_up()
+    #(158 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    walk_up()
+    #(159 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    set_invisible()
+    #(160 "data/maps/BattleFrontier_BattleDomeCorridor/scripts.pory")
+    step_end()
 }

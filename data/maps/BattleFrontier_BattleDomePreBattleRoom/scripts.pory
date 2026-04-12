@@ -33,8 +33,6 @@ script BattleFrontier_BattleDomePreBattleRoom_EventScript_EnterRoom {
 script BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound {
     call(BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForNextRoundMessage)
     waitmessage()
-    switch (var(VAR_RESULT)) {
-    }
     call(BattleFrontier_EventScript_GetCantRecordBattle)
     if (var(VAR_RESULT) == TRUE) {
         goto(BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRoundNoRecord)

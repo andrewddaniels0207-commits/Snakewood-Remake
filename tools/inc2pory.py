@@ -346,18 +346,23 @@ def format_script(label, lines):
         sm = SWITCH_RE.match(s)
         if sm:
             var_name = sm.group(1)
-            result.append(f'    switch (var({var_name})) {{')
             i += 1
+            cases = []
             while i < len(filtered):
                 cm = CASE_RE.match(filtered[i])
                 if cm:
-                    val, lbl = cm.group(1), cm.group(2)
-                    result.append(f'        case {val}:')
-                    result.append(f'            goto({lbl})')
+                    cases.append((cm.group(1), cm.group(2)))
                     i += 1
                 else:
                     break
-            result.append('    }')
+            # Only emit if there are cases — an empty switch is a poryscript error
+            if cases:
+                result.append(f'    switch (var({var_name})) {{')
+                for val, lbl in cases:
+                    result.append(f'        case {val}:')
+                    result.append(f'            goto({lbl})')
+                result.append('    }')
+            # else: no-op switch, skip silently
             continue
 
         # Bare case outside a switch (shouldn't normally occur, but be safe)

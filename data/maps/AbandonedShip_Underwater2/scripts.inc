@@ -5,7 +5,7 @@ AbandonedShip_Underwater2_MapScripts::
 
 
 AbandonedShip_Underwater2_OnResume::
-# 6 "data/maps/AbandonedShip_Underwater2/scripts.pory"
+# 7 "data/maps/AbandonedShip_Underwater2/scripts.pory"
 	setdivewarp MAP_ABANDONED_SHIP_ROOMS_B1F, 13, 7
 	end
 
