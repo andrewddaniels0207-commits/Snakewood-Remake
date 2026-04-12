@@ -1,0 +1,10 @@
+mapscripts CeladonCity_Condominiums_2F_Frlg_MapScripts {}
+
+script CeladonCity_Condominiums_2F_EventScript_MeetingRoomSign {
+    msgbox(CeladonCity_Condominiums_2F_Text_GameFreakMeetingRoom, MSGBOX_SIGN)
+    end
+}
+
+text CeladonCity_Condominiums_2F_Text_GameFreakMeetingRoom {
+    "GAME FREAK Meeting Room$"
+}

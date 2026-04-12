@@ -1,0 +1,171 @@
+mapscripts MtMoon_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: MtMoon_1F_OnTransition
+}
+
+script MtMoon_1F_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_MT_MOON_1F)
+    end
+}
+
+script MtMoon_1F_EventScript_ZubatSign {
+    msgbox(MtMoon_1F_Text_ZubatIsABloodsucker, MSGBOX_SIGN)
+    end
+}
+
+script MtMoon_1F_EventScript_Marcos {
+    trainerbattle_single(TRAINER_HIKER_MARCOS, MtMoon_1F_Text_MarcosIntro, MtMoon_1F_Text_MarcosDefeat)
+    msgbox(MtMoon_1F_Text_MarcosPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtMoon_1F_EventScript_Josh {
+    trainerbattle_single(TRAINER_YOUNGSTER_JOSH, MtMoon_1F_Text_JoshIntro, MtMoon_1F_Text_JoshDefeat)
+    msgbox(MtMoon_1F_Text_JoshPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtMoon_1F_EventScript_Miriam {
+    trainerbattle_single(TRAINER_LASS_MIRIAM, MtMoon_1F_Text_MiriamIntro, MtMoon_1F_Text_MiriamDefeat)
+    msgbox(MtMoon_1F_Text_MiriamPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtMoon_1F_EventScript_Iris {
+    trainerbattle_single(TRAINER_LASS_IRIS, MtMoon_1F_Text_IrisIntro, MtMoon_1F_Text_IrisDefeat)
+    msgbox(MtMoon_1F_Text_IrisPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtMoon_1F_EventScript_Jovan {
+    trainerbattle_single(TRAINER_SUPER_NERD_JOVAN, MtMoon_1F_Text_JovanIntro, MtMoon_1F_Text_JovanDefeat)
+    msgbox(MtMoon_1F_Text_JovanPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtMoon_1F_EventScript_Kent {
+    trainerbattle_single(TRAINER_BUG_CATCHER_KENT, MtMoon_1F_Text_KentIntro, MtMoon_1F_Text_KentDefeat)
+    msgbox(MtMoon_1F_Text_KentPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtMoon_1F_EventScript_Robby {
+    trainerbattle_single(TRAINER_BUG_CATCHER_ROBBY, MtMoon_1F_Text_RobbyIntro, MtMoon_1F_Text_RobbyDefeat)
+    msgbox(MtMoon_1F_Text_RobbyPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text MtMoon_1F_Text_MarcosIntro {
+    "WHOA!\n"
+    "You shocked me!\l"
+    "…Oh, you're just a kid!$"
+}
+
+text MtMoon_1F_Text_MarcosDefeat {
+    "Wow!\n"
+    "Shocked again!$"
+}
+
+text MtMoon_1F_Text_MarcosPostBattle {
+    "Kids like you shouldn't be\n"
+    "wandering around here in the dark.$"
+}
+
+text MtMoon_1F_Text_JoshIntro {
+    "Did you come to explore the cave,\n"
+    "too?$"
+}
+
+text MtMoon_1F_Text_JoshDefeat {
+    "Losing stinks!\n"
+    "It's so uncool.$"
+}
+
+text MtMoon_1F_Text_JoshPostBattle {
+    "I came all the way down here to\n"
+    "show off to girls.$"
+}
+
+text MtMoon_1F_Text_MiriamIntro {
+    "Wow! It's way bigger in here than\n"
+    "I thought!$"
+}
+
+text MtMoon_1F_Text_MiriamDefeat {
+    "Oh!\n"
+    "I lost it!$"
+}
+
+text MtMoon_1F_Text_MiriamPostBattle {
+    "How do you get out of here?\n"
+    "It's so big, I may get lost.$"
+}
+
+text MtMoon_1F_Text_JovanIntro {
+    "What!\n"
+    "Don't sneak up on me!$"
+}
+
+text MtMoon_1F_Text_JovanDefeat {
+    "My POKéMON won't do!$"
+}
+
+text MtMoon_1F_Text_JovanPostBattle {
+    "I have to find stronger POKéMON.\n"
+    "Where might they be?$"
+}
+
+text MtMoon_1F_Text_IrisIntro {
+    "What?\n"
+    "I'm waiting for my friends to find\l"
+    "me here.$"
+}
+
+text MtMoon_1F_Text_IrisDefeat {
+    "I lost?$"
+}
+
+text MtMoon_1F_Text_IrisPostBattle {
+    "I came because I heard there are\n"
+    "some very rare fossils here.$"
+}
+
+text MtMoon_1F_Text_KentIntro {
+    "Suspicious men are in the cave.\n"
+    "What about you?$"
+}
+
+text MtMoon_1F_Text_KentDefeat {
+    "You got me!$"
+}
+
+text MtMoon_1F_Text_KentPostBattle {
+    "I saw them!\n"
+    "I'm sure they're from TEAM ROCKET!$"
+}
+
+text MtMoon_1F_Text_RobbyIntro {
+    "You need to go through this cave\n"
+    "to get to CERULEAN CITY.$"
+}
+
+text MtMoon_1F_Text_RobbyDefeat {
+    "I lost.$"
+}
+
+text MtMoon_1F_Text_RobbyPostBattle {
+    "ZUBAT is tough!\n"
+    "But if you can catch one, you'll\l"
+    "be able to count on it.$"
+}
+
+text MtMoon_1F_Text_ZubatIsABloodsucker {
+    "Beware!\n"
+    "ZUBAT is a bloodsucker!$"
+}
+
+text MtMoon_1F_Text_BrockHelpsExcavateFossils {
+    "Hi, I'm excavating for fossils here\n"
+    "under MT. MOON.\p"
+    "Sometimes, BROCK of PEWTER GYM\n"
+    "lends me a hand.$"
+}

@@ -1,0 +1,62 @@
+mapscripts Route114_FossilManiacsHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: Route114_FossilManiacsHouse_OnTransition
+}
+
+script Route114_FossilManiacsHouse_OnTransition {
+    setflag(FLAG_LANDMARK_FOSSIL_MANIACS_HOUSE)
+    end
+}
+
+script Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother {
+    lock
+    faceplayer
+    if (flag(FLAG_RECEIVED_TM_DIG)) goto(Route114_FossilManiacsHouse_EventScript_ReceivedDig)
+    msgbox(Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother, MSGBOX_DEFAULT)
+    giveitem(ITEM_TM_DIG)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    setflag(FLAG_RECEIVED_TM_DIG)
+    release
+    end
+}
+
+script Route114_FossilManiacsHouse_EventScript_ReceivedDig {
+    msgbox(Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route114_FossilManiacsHouse_EventScript_RockDisplay {
+    msgbox(Route114_FossilManiacsHouse_Text_RocksFillDisplayCase, MSGBOX_SIGN)
+    end
+}
+
+script Route114_FossilManiacsHouse_EventScript_Bookshelf {
+    msgbox(Route114_FossilManiacsHouse_Text_CrammedWithBooks, MSGBOX_SIGN)
+    end
+}
+
+text Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother {
+    "My big brother's the FOSSIL MANIAC…\n"
+    "He's a nice guy who loves FOSSILS…\p"
+    "He loves digging holes, too…\n"
+    "He dug this hole by himself…\p"
+    "You can have this, so you can DIG\n"
+    "holes just like my big brother…$"
+}
+
+text Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance {
+    "If you make a POKéMON DIG inside a\n"
+    "cave, you're returned to the entrance…$"
+}
+
+text Route114_FossilManiacsHouse_Text_RocksFillDisplayCase {
+    "Rocks in peculiar shapes fill\n"
+    "the display case…$"
+}
+
+text Route114_FossilManiacsHouse_Text_CrammedWithBooks {
+    "THE COMPOSITION OF STRATA…\n"
+    "HOW RAIN SHAPES THE LAND…\l"
+    "STONES, SOIL, AND ROCK…\p"
+    "It's crammed with books.$"
+}

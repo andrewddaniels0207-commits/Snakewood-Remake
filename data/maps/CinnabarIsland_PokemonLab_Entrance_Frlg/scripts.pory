@@ -1,0 +1,72 @@
+mapscripts CinnabarIsland_PokemonLab_Entrance_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: CinnabarIsland_PokemonLab_Entrance_OnTransition
+}
+
+script CinnabarIsland_PokemonLab_Entrance_OnTransition {
+    if (var(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE) == 1) call(CinnabarIsland_PokemonLab_Entrance_EventScript_ReadyFossil)
+    end
+}
+
+script CinnabarIsland_PokemonLab_Entrance_EventScript_ReadyFossil {
+    setvar(VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 2)
+    return
+}
+
+script CinnabarIsland_PokemonLab_Entrance_EventScript_Scientist {
+    msgbox(CinnabarIsland_PokemonLab_Entrance_Text_StudyMonsExtensively, MSGBOX_NPC)
+    end
+}
+
+script CinnabarIsland_PokemonLab_Entrance_EventScript_DrFujiPhoto {
+    msgbox(CinnabarIsland_PokemonLab_Entrance_Text_PhotoOfLabFounderDrFuji, MSGBOX_SIGN)
+    end
+}
+
+script CinnabarIsland_PokemonLab_Entrance_EventScript_MeetingRoomSign {
+    msgbox(CinnabarIsland_PokemonLab_Entrance_Text_MeetingRoomSign, MSGBOX_SIGN)
+    end
+}
+
+script CinnabarIsland_PokemonLab_Entrance_EventScript_RAndDRoomSign {
+    msgbox(CinnabarIsland_PokemonLab_Entrance_Text_RAndDRoomSign, MSGBOX_SIGN)
+    end
+}
+
+script CinnabarIsland_PokemonLab_Entrance_EventScript_TestingRoomSign {
+    msgbox(CinnabarIsland_PokemonLab_Entrance_Text_TestingRoomSign, MSGBOX_SIGN)
+    end
+}
+
+text CinnabarIsland_Gym_Text_PhotoOfBlaineAndFuji {
+    "It's a photo of BLAINE and\n"
+    "MR. FUJI.\p"
+    "They're standing shoulder to\n"
+    "shoulder with big grins.$"
+}
+
+text CinnabarIsland_PokemonLab_Entrance_Text_StudyMonsExtensively {
+    "We study POKéMON extensively\n"
+    "every day.\p"
+    "People often bring us rare POKéMON\n"
+    "for examination.$"
+}
+
+text CinnabarIsland_PokemonLab_Entrance_Text_PhotoOfLabFounderDrFuji {
+    "A photo of the LAB's founder…\n"
+    "DR. FUJI?!$"
+}
+
+text CinnabarIsland_PokemonLab_Entrance_Text_MeetingRoomSign {
+    "POKéMON LAB\n"
+    "Meeting Room$"
+}
+
+text CinnabarIsland_PokemonLab_Entrance_Text_RAndDRoomSign {
+    "POKéMON LAB\n"
+    "R & D Room$"
+}
+
+text CinnabarIsland_PokemonLab_Entrance_Text_TestingRoomSign {
+    "POKéMON LAB\n"
+    "Testing Room$"
+}

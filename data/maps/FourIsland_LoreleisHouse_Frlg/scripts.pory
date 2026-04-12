@@ -1,0 +1,71 @@
+mapscripts FourIsland_LoreleisHouse_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: FourIsland_LoreleisHouse_OnTransition
+}
+
+script FourIsland_LoreleisHouse_OnTransition {
+    special(UpdateLoreleiDollCollection)
+    end
+}
+
+script FourIsland_LoreleisHouse_EventScript_Lorelei {
+    lock
+    faceplayer
+    if (flag(FLAG_TALKED_TO_LORELEI_AFTER_WAREHOUSE)) goto(FourIsland_LoreleisHouse_EventScript_Lorelei3)
+    if (flag(FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE)) goto(FourIsland_LoreleisHouse_EventScript_Lorelei2)
+    msgbox(FourIsland_LoreleisHouse_Text_IfAnythingWereToHappenToIsland)
+    release
+    end
+}
+
+script FourIsland_LoreleisHouse_EventScript_Lorelei2 {
+    setflag(FLAG_TALKED_TO_LORELEI_AFTER_WAREHOUSE)
+    msgbox(FourIsland_LoreleisHouse_Text_IllReturnToLeagueInShortWhile)
+    release
+    end
+}
+
+script FourIsland_LoreleisHouse_EventScript_Lorelei3 {
+    msgbox(FourIsland_LoreleisHouse_Text_WillDoWhatICanHereAndNow)
+    release
+    end
+}
+
+script FourIsland_LoreleisHouse_EventScript_Doll {
+    lock
+    msgbox(FourIsland_LoreleisHouse_Text_StuffedMonDollsGalore)
+    release
+    end
+}
+
+text FourIsland_LoreleisHouse_Text_IfAnythingWereToHappenToIsland {
+    "LORELEI: There's something weighing\n"
+    "heavily on my mind.\p"
+    "If anything were to happen on\n"
+    "the island where I was born…\p"
+    "I wouldn't know about it if I were\n"
+    "in the POKéMON LEAGUE.\p"
+    "I wonder if that would make me\n"
+    "irresponsible to my home…$"
+}
+
+text FourIsland_LoreleisHouse_Text_IllReturnToLeagueInShortWhile {
+    "LORELEI: So, you managed to solve\n"
+    "all the problems here?\p"
+    "That's wonderful.\p"
+    "That means there isn't any reason\n"
+    "for me to be here all the time.\p"
+    "Thank you…\p"
+    "I'll return to the POKéMON LEAGUE\n"
+    "in a short while.$"
+}
+
+text FourIsland_LoreleisHouse_Text_WillDoWhatICanHereAndNow {
+    "I don't know what will happen in\n"
+    "the future, but…\p"
+    "I will do what I can here and now.\n"
+    "That's all I can do.$"
+}
+
+text FourIsland_LoreleisHouse_Text_StuffedMonDollsGalore {
+    "Stuffed POKéMON dolls galore!$"
+}

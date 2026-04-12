@@ -1,0 +1,70 @@
+mapscripts Route116_TunnelersRestHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: Route116_TunnelersRestHouse_OnTransition
+}
+
+script Route116_TunnelersRestHouse_OnTransition {
+    setflag(FLAG_LANDMARK_TUNNELERS_REST_HOUSE)
+    end
+}
+
+script Route116_TunnelersRestHouse_EventScript_Tunneler1 {
+    msgbox(Route116_TunnelersRestHouse_Text_WeHadToStopBoring, MSGBOX_NPC)
+    end
+}
+
+script Route116_TunnelersRestHouse_EventScript_Tunneler2 {
+    msgbox(Route116_TunnelersRestHouse_Text_ManDiggingHisWayToVerdanturf, MSGBOX_NPC)
+    end
+}
+
+script Route116_TunnelersRestHouse_EventScript_Tunneler3 {
+    lock
+    faceplayer
+    if (flag(FLAG_RUSTURF_TUNNEL_OPENED)) goto(Route116_TunnelersRestHouse_EventScript_TunnelOpened)
+    msgbox(Route116_TunnelersRestHouse_Text_GetToVerdanturfWithoutTunnel, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route116_TunnelersRestHouse_EventScript_TunnelOpened {
+    msgbox(Route116_TunnelersRestHouse_Text_TunnelHasGoneThrough, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+text Route116_TunnelersRestHouse_Text_WeHadToStopBoring {
+    "That RUSTURF TUNNEL there…\p"
+    "At first, we had a huge work crew boring\n"
+    "through rock with the latest machinery.\l"
+    "But, we had to stop.\p"
+    "It turns out that we would have had\n"
+    "a negative effect on wild POKéMON in\l"
+    "the area.\p"
+    "So, we've got nothing to do but loll\n"
+    "around here doing nothing.$"
+}
+
+text Route116_TunnelersRestHouse_Text_ManDiggingHisWayToVerdanturf {
+    "There's a man digging his way to\n"
+    "VERDANTURF all by his lonesome.\l"
+    "He's desperate to get through.\p"
+    "He says that if he digs little by little\n"
+    "without using machines, he won't\l"
+    "disturb POKéMON, and he'll avoid\l"
+    "harming the natural environment.\p"
+    "I wonder if he made it through yet.$"
+}
+
+text Route116_TunnelersRestHouse_Text_GetToVerdanturfWithoutTunnel {
+    "To get to VERDANTURF without using\n"
+    "this TUNNEL, you'd have to cross the\l"
+    "sea to DEWFORD, sail on to SLATEPORT,\l"
+    "then travel through MAUVILLE.$"
+}
+
+text Route116_TunnelersRestHouse_Text_TunnelHasGoneThrough {
+    "Did you hear? The TUNNEL to VERDANTURF\n"
+    "has gone through!\p"
+    "Sometimes, if you hope strongly enough,\n"
+    "dreams do come true.$"
+}

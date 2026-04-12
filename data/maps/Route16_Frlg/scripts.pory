@@ -1,0 +1,231 @@
+mapscripts Route16_Frlg_MapScripts {
+    MAP_SCRIPT_ON_RESUME: Route16_OnResume
+    MAP_SCRIPT_ON_TRANSITION: Route16_OnTransition
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: Route16_OnWarp
+}
+
+script Route16_OnResume {
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(Route16_EventScript_RemoveSnorlax)
+    end
+}
+
+script Route16_EventScript_RemoveSnorlax {
+    removeobject(VAR_LAST_TALKED)
+    return
+}
+
+script Route16_OnTransition {
+    if (var(VAR_MAP_SCENE_ROUTE16) == 1) call(Route16_OnTransitionCyclingRoad)
+    end
+}
+
+script Route16_OnTransitionCyclingRoad {
+    setflag(FLAG_SYS_ON_CYCLING_ROAD)
+    return
+}
+
+raw `
+Route16_OnWarp:
+	map_script_2 VAR_MAP_SCENE_ROUTE16, 1, Route16_OnWarpCyclingRoad
+	.2byte 0
+
+`
+
+script Route16_OnWarpCyclingRoad {
+    special(ForcePlayerOntoBike)
+    end
+}
+
+script Route16_EventScript_Snorlax {
+    lock
+    faceplayer
+    if (!flag(FLAG_GOT_POKE_FLUTE)) goto(Route16_EventScript_SnorlaxNoPokeFlute)
+    msgbox(Text_WantToUsePokeFlute, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(Route16_EventScript_DontUsePokeFlute)
+    call(EventScript_AwakenSnorlax)
+    setwildbattle(SPECIES_SNORLAX, 30)
+    waitse()
+    playmoncry(SPECIES_SNORLAX, CRY_MODE_ENCOUNTER)
+    delay(40)
+    waitmoncry()
+    setflag(FLAG_HIDE_ROUTE_16_SNORLAX)
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    dowildbattle()
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(Route16_EventScript_FoughtSnorlax)
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(Route16_EventScript_FoughtSnorlax)
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(Route16_EventScript_FoughtSnorlax)
+    release
+    end
+}
+
+script Route16_EventScript_DontUsePokeFlute {
+    release
+    end
+}
+
+script Route16_EventScript_FoughtSnorlax {
+    msgbox(Text_SnorlaxReturnedToMountains)
+    release
+    end
+}
+
+script Route16_EventScript_SnorlaxNoPokeFlute {
+    msgbox(Route16_Text_MonSprawledOutInSlumber)
+    release
+    end
+}
+
+script Route16_EventScript_CyclingRoadSign {
+    msgbox(Route16_Text_CyclingRoadSign, MSGBOX_SIGN)
+    end
+}
+
+script Route16_EventScript_RouteSign {
+    msgbox(Route16_Text_RouteSign, MSGBOX_SIGN)
+    end
+}
+
+text Route16_Text_LaoIntro {
+    "What do you want?$"
+}
+
+text Route16_Text_LaoDefeat {
+    "Don't you dare laugh!$"
+}
+
+text Route16_Text_LaoPostBattle {
+    "We like just hanging here.\n"
+    "What's it to you?$"
+}
+
+text Route16_Text_KojiIntro {
+    "Nice BIKE!\n"
+    "Hand it over!$"
+}
+
+text Route16_Text_KojiDefeat {
+    "Knockout!$"
+}
+
+text Route16_Text_KojiPostBattle {
+    "Forget it, who needs your BIKE!$"
+}
+
+text Route16_Text_LukeIntro {
+    "Come out and play, little mouse!$"
+}
+
+text Route16_Text_LukeDefeat {
+    "You little rat!$"
+}
+
+text Route16_Text_LukePostBattle {
+    "I hate losing!\n"
+    "Get out of my face!$"
+}
+
+text Route16_Text_HideoIntro {
+    "Hey, you just bumped me!$"
+}
+
+text Route16_Text_HideoDefeat {
+    "Kaboom!$"
+}
+
+text Route16_Text_HideoPostBattle {
+    "We'll always be hanging around here\n"
+    "even if you don't like it.\p"
+    "You can detour to VERMILION from\n"
+    "FUCHSIA going along the coast.$"
+}
+
+text Route16_Text_CamronIntro {
+    "I'm feeling hungry and mean!\n"
+    "I need a punching bag!$"
+}
+
+text Route16_Text_CamronDefeat {
+    "Bad, bad, bad!$"
+}
+
+text Route16_Text_CamronPostBattle {
+    "If I'm going to have POKéMON, they\n"
+    "may as well be ferocious.\p"
+    "I'd use them to leave my enemies\n"
+    "in tatters.$"
+}
+
+text Route16_Text_RubenIntro {
+    "Hey, there!\n"
+    "Let's have ourselves a good time!$"
+}
+
+text Route16_Text_RubenDefeat {
+    "Don't make me mad!$"
+}
+
+text Route16_Text_RubenPostBattle {
+    "I get my kicks by harassing people\n"
+    "with my stinking POKéMON.\p"
+    "They're great for startling people.\n"
+    "And, they bite, too.$"
+}
+
+text Route16_Text_MonSprawledOutInSlumber {
+    "A POKéMON is sprawled out in\n"
+    "a deep and comfortable slumber.$"
+}
+
+text Route16_Text_CyclingRoadSign {
+    "Enjoy the slope!\n"
+    "CYCLING ROAD$"
+}
+
+text Route16_Text_RouteSign {
+    "ROUTE 16\n"
+    "CELADON CITY - FUCHSIA CITY$"
+}
+
+text Route16_Text_JedIntro {
+    "JED: Our love knows no bounds.\n"
+    "We're in love and we show it!$"
+}
+
+text Route16_Text_JedDefeat {
+    "JED: Oh, no!\n"
+    "My love has seen me as a loser!$"
+}
+
+text Route16_Text_JedPostBattle {
+    "JED: Listen, LEA.\n"
+    "You need to focus less on me.$"
+}
+
+text Route16_Text_JedNotEnoughMons {
+    "JED: You have just one POKéMON?\n"
+    "Is there no love in your heart?$"
+}
+
+text Route16_Text_LeaIntro {
+    "LEA: Sometimes, the intensity of\n"
+    "our love scares me.$"
+}
+
+text Route16_Text_LeaDefeat {
+    "LEA: Ohh! But JED looks cool\n"
+    "even in a loss!$"
+}
+
+text Route16_Text_LeaPostBattle {
+    "LEA: Ehehe, I'm sorry.\n"
+    "JED is so cool.$"
+}
+
+text Route16_Text_LeaNotEnoughMons {
+    "LEA: Oh, you don't have two\n"
+    "POKéMON with you?\p"
+    "Doesn't it feel lonely for you or\n"
+    "your POKéMON?$"
+}

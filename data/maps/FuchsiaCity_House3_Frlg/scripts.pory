@@ -1,0 +1,102 @@
+mapscripts FuchsiaCity_House3_Frlg_MapScripts {}
+
+script FuchsiaCity_House3_EventScript_MoveDeleter {
+    lock
+    faceplayer
+    msgbox(FuchsiaCity_House3_Text_WouldYouLikeToForgetMove, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(FuchsiaCity_House3_EventScript_ChooseMonForMoveDeleter)
+    goto(FuchsiaCity_House3_EventScript_CancelForgetMove)
+    end
+}
+
+script FuchsiaCity_House3_EventScript_ChooseMonForMoveDeleter {
+    msgbox(FuchsiaCity_House3_Text_WhichMonShouldForgetMove)
+    special(ChoosePartyMon)
+    waitstate
+    if (var(VAR_0x8004) >= PARTY_SIZE) goto(FuchsiaCity_House3_EventScript_CancelForgetMove)
+    special(IsSelectedMonEgg)
+    if (var(VAR_RESULT) == TRUE) goto(FuchsiaCity_House3_EventScript_CantForgetMoveEgg)
+    special(GetNumMovesSelectedMonHas)
+    if (var(VAR_RESULT) == 1) goto(FuchsiaCity_House3_EventScript_CantForgetOnlyMove)
+    msgbox(FuchsiaCity_House3_Text_WhichMoveShouldBeForgotten)
+    fadescreen(FADE_TO_BLACK)
+    special(MoveDeleterChooseMoveToForget)
+    fadescreen(FADE_FROM_BLACK)
+    if (var(VAR_0x8005) == MAX_MON_MOVES) goto(FuchsiaCity_House3_EventScript_ChooseMonForMoveDeleter)
+    special(BufferMoveDeleterNicknameAndMove)
+    msgbox(FuchsiaCity_House3_Text_MonsMoveShouldBeForgotten, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(FuchsiaCity_House3_EventScript_ForgetMove)
+    goto(FuchsiaCity_House3_EventScript_CancelForgetMove)
+    end
+}
+
+script FuchsiaCity_House3_EventScript_ForgetMove {
+    special(MoveDeleterForgetMove)
+    playfanfare(MUS_MOVE_DELETED)
+    waitfanfare()
+    msgbox(FuchsiaCity_House3_Text_MonHasForgottenMoveCompletely)
+    release
+    end
+}
+
+script FuchsiaCity_House3_EventScript_CantForgetOnlyMove {
+    special(BufferMoveDeleterNicknameAndMove)
+    msgbox(FuchsiaCity_House3_Text_MonOnlyKnowsOneMove)
+    release
+    end
+}
+
+script FuchsiaCity_House3_EventScript_CantForgetMoveEgg {
+    msgbox(FuchsiaCity_House3_Text_NoEggShouldKnowMoves)
+    release
+    end
+}
+
+script FuchsiaCity_House3_EventScript_CancelForgetMove {
+    msgbox(FuchsiaCity_House3_Text_ComeAgainToForgetOtherMoves)
+    release
+    end
+}
+
+text FuchsiaCity_House3_Text_WouldYouLikeToForgetMove {
+    "Uh…\n"
+    "Oh, yes, I'm the MOVE DELETER.\p"
+    "I can make POKéMON forget their\n"
+    "moves.\p"
+    "Would you like me to do that?$"
+}
+
+text FuchsiaCity_House3_Text_WhichMonShouldForgetMove {
+    "Which POKéMON should forget a\n"
+    "move?$"
+}
+
+text FuchsiaCity_House3_Text_WhichMoveShouldBeForgotten {
+    "Which move should be forgotten?$"
+}
+
+text FuchsiaCity_House3_Text_MonOnlyKnowsOneMove {
+    "{STR_VAR_1} seems to know only one\n"
+    "move…$"
+}
+
+text FuchsiaCity_House3_Text_MonsMoveShouldBeForgotten {
+    "Hm! {STR_VAR_1}'s {STR_VAR_2}?\n"
+    "That move should be forgotten?$"
+}
+
+text FuchsiaCity_House3_Text_MonHasForgottenMoveCompletely {
+    "It worked to perfection!\p"
+    "{STR_VAR_1} has forgotten\n"
+    "{STR_VAR_2} completely.$"
+}
+
+text FuchsiaCity_House3_Text_ComeAgainToForgetOtherMoves {
+    "Come again if there are other\n"
+    "moves to be forgotten.$"
+}
+
+text FuchsiaCity_House3_Text_NoEggShouldKnowMoves {
+    "What?\n"
+    "No EGG should know any moves.$"
+}

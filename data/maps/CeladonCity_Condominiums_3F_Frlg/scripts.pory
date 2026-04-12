@@ -1,0 +1,112 @@
+mapscripts CeladonCity_Condominiums_3F_Frlg_MapScripts {}
+
+script CeladonCity_Condominiums_3F_EventScript_Programmer {
+    msgbox(CeladonCity_Condominiums_3F_Text_ImTheProgrammer, MSGBOX_NPC)
+    end
+}
+
+script CeladonCity_Condominiums_3F_EventScript_GraphicArtist {
+    msgbox(CeladonCity_Condominiums_3F_Text_ImTheGraphicArtist, MSGBOX_NPC)
+    end
+}
+
+script CeladonCity_Condominiums_3F_EventScript_Writer {
+    msgbox(CeladonCity_Condominiums_3F_Text_IWroteTheStory, MSGBOX_NPC)
+    end
+}
+
+script CeladonCity_Condominiums_3F_EventScript_Designer {
+    lock
+    faceplayer
+    specialvar(VAR_RESULT, HasAllKantoMons)
+    if (var(VAR_RESULT) == TRUE) goto(CeladonCity_Condominiums_3F_EventScript_CompletedPokedex)
+    msgbox(CeladonCity_Condominiums_3F_Text_ImGameDesignerShowMeFinishedPokedex)
+    release
+    end
+}
+
+script CeladonCity_Condominiums_3F_EventScript_CompletedPokedex {
+    goto(CeladonCity_Condominiums_3F_EventScript_ShowDiploma)
+    end
+}
+
+script CeladonCity_Condominiums_3F_EventScript_ShowDiploma {
+    message(CeladonCity_Condominiums_3F_Text_CompletedPokedexCongratulations)
+    waitmessage()
+    delay(60)
+    special(Special_ShowDiploma)
+    waitstate
+    release
+    end
+}
+
+script CeladonCity_Condominiums_3F_EventScript_DevelopmentRoomSign {
+    msgbox(CeladonCity_Condominiums_3F_Text_GameFreakDevelopmentRoom, MSGBOX_SIGN)
+    end
+}
+
+script CeladonCity_Condominiums_3F_EventScript_Computer1 {
+    msgbox(CeladonCity_Condominiums_3F_Text_ItsTheGameProgram, MSGBOX_SIGN)
+    end
+}
+
+script CeladonCity_Condominiums_3F_EventScript_Computer2 {
+    msgbox(CeladonCity_Condominiums_3F_Text_SomeonesPlayingGame, MSGBOX_SIGN)
+    end
+}
+
+script CeladonCity_Condominiums_3F_EventScript_Computer3 {
+    msgbox(CeladonCity_Condominiums_3F_Text_ItsScriptBetterNotLookAtEnding, MSGBOX_SIGN)
+    end
+}
+
+text CeladonCity_Condominiums_3F_Text_ImTheProgrammer {
+    "Me?\n"
+    "I'm the programmer!$"
+}
+
+text CeladonCity_Condominiums_3F_Text_ImTheGraphicArtist {
+    "I'm the graphic artist!\n"
+    "I drew you!$"
+}
+
+text CeladonCity_Condominiums_3F_Text_IWroteTheStory {
+    "I wrote the story!\n"
+    "Isn't ERIKA cute?\p"
+    "I like MISTY a lot, too!\n"
+    "Oh, and SABRINA, I like her!$"
+}
+
+text CeladonCity_Condominiums_3F_Text_ImGameDesignerShowMeFinishedPokedex {
+    "Is that right?\p"
+    "I'm the game designer!\p"
+    "Filling up your POKéDEX is tough,\n"
+    "but don't quit!\p"
+    "When you finish, come tell me!$"
+}
+
+text CeladonCity_Condominiums_3F_Text_CompletedPokedexCongratulations {
+    "Wow! Excellent!\n"
+    "You completed your POKéDEX!\l"
+    "Congratulations!\l"
+    "…$"
+}
+
+text CeladonCity_Condominiums_3F_Text_ItsTheGameProgram {
+    "It's the game program! Messing with\n"
+    "it could bug out the game!$"
+}
+
+text CeladonCity_Condominiums_3F_Text_SomeonesPlayingGame {
+    "Someone's playing a game instead of\n"
+    "working!$"
+}
+
+text CeladonCity_Condominiums_3F_Text_ItsScriptBetterNotLookAtEnding {
+    "It's the script!\n"
+    "Better not look at the ending!$"
+}
+
+text CeladonCity_Condominiums_3F_Text_GameFreakDevelopmentRoom {
+    "GAME FREAK Development Room$"
+}

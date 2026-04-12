@@ -1,0 +1,12 @@
+mapscripts UndergroundPath_EastEntrance_Frlg_MapScripts {}
+
+script UndergroundPath_EastEntrance_EventScript_Woman {
+    msgbox(UndergroundPath_EastEntrance_Text_DoYouGoToCeladonDeptStore, MSGBOX_NPC)
+    end
+}
+
+text UndergroundPath_EastEntrance_Text_DoYouGoToCeladonDeptStore {
+    "The DEPARTMENT STORE in CELADON\n"
+    "has a great selection.\p"
+    "Do you go there very often?$"
+}

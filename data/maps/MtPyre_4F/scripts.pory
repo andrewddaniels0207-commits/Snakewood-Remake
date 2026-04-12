@@ -1,0 +1,22 @@
+mapscripts MtPyre_4F_MapScripts {}
+
+script MtPyre_5F_EventScript_Atsushi {
+    trainerbattle_single(TRAINER_ATSUSHI, MtPyre_5F_Text_AtsushiIntro, MtPyre_5F_Text_AtsushiDefeat)
+    msgbox(MtPyre_5F_Text_AtsushiPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text MtPyre_5F_Text_AtsushiIntro {
+    "Teacher…\n"
+    "Please watch over my progress!$"
+}
+
+text MtPyre_5F_Text_AtsushiDefeat {
+    "Teacher…\n"
+    "Please forgive me!$"
+}
+
+text MtPyre_5F_Text_AtsushiPostBattle {
+    "Until I improve, my teacher, who rests\n"
+    "here, will never find true peace…$"
+}

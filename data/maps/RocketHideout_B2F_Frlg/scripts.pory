@@ -1,0 +1,22 @@
+mapscripts RocketHideout_B2F_Frlg_MapScripts {}
+
+script RocketHideout_B2F_EventScript_Grunt {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_13, RocketHideout_B2F_Text_GruntIntro, RocketHideout_B2F_Text_GruntDefeat)
+    msgbox(RocketHideout_B2F_Text_GruntPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text RocketHideout_B2F_Text_GruntIntro {
+    "BOSS said you can see ghosts with\n"
+    "the SILPH SCOPE.$"
+}
+
+text RocketHideout_B2F_Text_GruntDefeat {
+    "I surrender!$"
+}
+
+text RocketHideout_B2F_Text_GruntPostBattle {
+    "The TEAM ROCKET HQ has four\n"
+    "underground floors.\p"
+    "Think you can reach the BOSS?$"
+}

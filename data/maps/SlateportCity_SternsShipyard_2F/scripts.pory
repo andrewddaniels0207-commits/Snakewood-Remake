@@ -1,0 +1,24 @@
+mapscripts SlateportCity_SternsShipyard_2F_MapScripts {}
+
+script SlateportCity_SternsShipyard_2F_EventScript_Scientist1 {
+    msgbox(SlateportCity_SternsShipyard_2F_Text_ShipDesignMoreLikeBuilding, MSGBOX_NPC)
+    end
+}
+
+script SlateportCity_SternsShipyard_2F_EventScript_Scientist2 {
+    msgbox(SlateportCity_SternsShipyard_2F_Text_FloatsBecauseBuoyancy, MSGBOX_NPC)
+    end
+}
+
+text SlateportCity_SternsShipyard_2F_Text_ShipDesignMoreLikeBuilding {
+    "Designing a large ship is more like\n"
+    "making a big building than putting\l"
+    "together a transportation vehicle.$"
+}
+
+text SlateportCity_SternsShipyard_2F_Text_FloatsBecauseBuoyancy {
+    "Don't you think it's strange that\n"
+    "a ship made of heavy iron floats?\p"
+    "It floats because of a principle\n"
+    "called buoyancy.$"
+}

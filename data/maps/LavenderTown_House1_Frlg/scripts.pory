@@ -1,0 +1,46 @@
+mapscripts LavenderTown_House1_Frlg_MapScripts {}
+
+script LavenderTown_House1_EventScript_CooltrainerF {
+    lock
+    faceplayer
+    if (flag(FLAG_RESCUED_MR_FUJI)) goto(LavenderTown_House1_EventScript_CooltrainerFGhostGone)
+    msgbox(LavenderTown_House1_Text_RocketsKilledCubonesMother)
+    release
+    end
+}
+
+script LavenderTown_House1_EventScript_CooltrainerFGhostGone {
+    msgbox(LavenderTown_House1_Text_GhostOfPokemonTowerIsGone)
+    release
+    end
+}
+
+script LavenderTown_House1_EventScript_Cubone {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_CUBONE, CRY_MODE_NORMAL)
+    msgbox(LavenderTown_House1_Text_Cubone)
+    waitmoncry()
+    release
+    end
+}
+
+text LavenderTown_House1_Text_Cubone {
+    "CUBONE: Kyarugoo!$"
+}
+
+text LavenderTown_House1_Text_RocketsKilledCubonesMother {
+    "Those horrible ROCKETS!\n"
+    "They deserve no mercy!\p"
+    "That poor CUBONE's mother…\p"
+    "It was killed trying to escape from\n"
+    "TEAM ROCKET.$"
+}
+
+text LavenderTown_House1_Text_GhostOfPokemonTowerIsGone {
+    "The ghost of POKéMON TOWER is\n"
+    "gone!\p"
+    "Someone must have soothed its\n"
+    "restless spirit!$"
+}

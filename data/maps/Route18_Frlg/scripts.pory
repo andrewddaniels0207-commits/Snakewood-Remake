@@ -1,0 +1,87 @@
+mapscripts Route18_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: Route18_OnTransition
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: Route18_OnWarp
+}
+
+script Route18_OnTransition {
+    if (var(VAR_MAP_SCENE_ROUTE16) == 1) call(Route18_OnTransitionCyclingRoad)
+    end
+}
+
+script Route18_OnTransitionCyclingRoad {
+    setflag(FLAG_SYS_ON_CYCLING_ROAD)
+    return
+}
+
+raw `
+Route18_OnWarp:
+	map_script_2 VAR_MAP_SCENE_ROUTE16, 1, Route18_OnWarpCyclingRoad
+	.2byte 0
+
+`
+
+script Route18_OnWarpCyclingRoad {
+    special(ForcePlayerOntoBike)
+    end
+}
+
+script Route18_EventScript_RouteSign {
+    msgbox(Route18_Text_RouteSign, MSGBOX_SIGN)
+    end
+}
+
+script Route18_EventScript_CyclingRoadSign {
+    msgbox(Route18_Text_CyclingRoadSign, MSGBOX_SIGN)
+    end
+}
+
+text Route18_Text_WiltonIntro {
+    "I always check every grassy area\n"
+    "for new POKéMON.$"
+}
+
+text Route18_Text_WiltonDefeat {
+    "Tch!$"
+}
+
+text Route18_Text_WiltonPostBattle {
+    "I wish I had a BIKE!$"
+}
+
+text Route18_Text_RamiroIntro {
+    "Kurukkoo!\n"
+    "How do you like my birdcall?$"
+}
+
+text Route18_Text_RamiroDefeat {
+    "I had to bug you!$"
+}
+
+text Route18_Text_RamiroPostBattle {
+    "I collect sea POKéMON on weekends\n"
+    "because the sea is so close.$"
+}
+
+text Route18_Text_JacobIntro {
+    "This is my turf!\n"
+    "Get out of here!$"
+}
+
+text Route18_Text_JacobDefeat {
+    "Darn!$"
+}
+
+text Route18_Text_JacobPostBattle {
+    "This is my fave area for catching\n"
+    "POKéMON.$"
+}
+
+text Route18_Text_RouteSign {
+    "ROUTE 18\n"
+    "CELADON CITY - FUCHSIA CITY$"
+}
+
+text Route18_Text_CyclingRoadSign {
+    "CYCLING ROAD\n"
+    "No pedestrians permitted!$"
+}

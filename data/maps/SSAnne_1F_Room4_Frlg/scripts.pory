@@ -1,0 +1,27 @@
+mapscripts SSAnne_1F_Room4_Frlg_MapScripts {}
+
+script SSAnne_1F_Room4_EventScript_Woman {
+    lock
+    faceplayer
+    checkplayergender()
+    if (var(VAR_RESULT) == MALE) goto(SSAnne_1F_Room4_EventScript_WomanPlayerMale)
+    msgbox(SSAnne_1F_Room4_Text_WaitressCherryPiePlease)
+    release
+    end
+}
+
+script SSAnne_1F_Room4_EventScript_WomanPlayerMale {
+    msgbox(SSAnne_1F_Room4_Text_WaiterCherryPiePlease)
+    release
+    end
+}
+
+text SSAnne_1F_Room4_Text_WaiterCherryPiePlease {
+    "Waiter, I would like a cherry pie,\n"
+    "please!$"
+}
+
+text SSAnne_1F_Room4_Text_WaitressCherryPiePlease {
+    "Waitress, I would like a cherry\n"
+    "pie, please!$"
+}

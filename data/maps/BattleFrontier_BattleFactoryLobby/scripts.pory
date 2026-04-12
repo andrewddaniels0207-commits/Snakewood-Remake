@@ -1,0 +1,632 @@
+mapscripts BattleFrontier_BattleFactoryLobby_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_CHALLENGE_STATUS, 0: BattleFrontier_BattleFactoryLobby_EventScript_GetChallengeStatus
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING: BattleFrontier_BattleFactoryLobby_EventScript_QuitWithoutSaving
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_PAUSED: BattleFrontier_BattleFactoryLobby_EventScript_ResumeChallenge
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_WON: BattleFrontier_BattleFactoryLobby_EventScript_WonChallenge
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST: BattleFrontier_BattleFactoryLobby_EventScript_LostChallenge
+    ]
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: BattleFrontier_BattleFactoryLobby_OnWarp
+}
+
+raw `
+BattleFrontier_BattleFactoryLobby_OnWarp:
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleFactoryLobby_EventScript_TurnPlayerNorth
+	.2byte 0
+
+`
+
+script BattleFrontier_BattleFactoryLobby_EventScript_TurnPlayerNorth {
+    setvar(VAR_TEMP_1, 1)
+    turnobject(LOCALID_PLAYER, DIR_NORTH)
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_GetChallengeStatus {
+    frontier_getstatus()
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_QuitWithoutSaving {
+    lockall
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_DidntSaveBeforeQuitting, MSGBOX_DEFAULT)
+    closemessage
+    factory_setswapped()
+    factory_set(FACTORY_DATA_WIN_STREAK_SWAPS, 0)
+    factory_set(FACTORY_DATA_WIN_STREAK, 0)
+    factory_set(FACTORY_DATA_WIN_STREAK_ACTIVE, FALSE)
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, 0)
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    releaseall
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_WonChallenge {
+    lockall
+    frontier_isbrain()
+    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleFactoryLobby_EventScript_DefeatedFactoryHead)
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_CongratsSevenWins, MSGBOX_DEFAULT)
+    waitmessage()
+    goto(BattleFrontier_BattleFactoryLobby_EventScript_GiveBattlePoints)
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_DefeatedFactoryHead {
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_CongratsForDefeatingHead, MSGBOX_DEFAULT)
+    waitmessage()
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_GiveBattlePoints {
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_AwardBattlePoints, MSGBOX_DEFAULT)
+    frontier_givepoints()
+    msgbox(BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS)
+    message(BattleFrontier_BattleFactoryLobby_Text_ExchangeMonsAndSave)
+    waitmessage()
+    frontier_checkairshow()
+    special(LoadPlayerParty)
+    callnative(UpdateFollowingPokemon)
+    factory_save(0)
+    playse(SE_SAVE)
+    waitse()
+    goto(BattleFrontier_BattleFactoryLobby_EventScript_AskRecordBattle)
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_LostChallenge {
+    lockall
+    message(BattleFrontier_BattleFactoryLobby_Text_ReturnMonsSaveResults)
+    waitmessage()
+    frontier_checkairshow()
+    special(LoadPlayerParty)
+    callnative(UpdateFollowingPokemon)
+    factory_set(FACTORY_DATA_WIN_STREAK_ACTIVE, FALSE)
+    factory_save(0)
+    playse(SE_SAVE)
+    waitse()
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_AskRecordBattle {
+    call(BattleFrontier_EventScript_GetCantRecordBattle)
+    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle)
+    message(BattleFrontier_BattleFactoryLobby_Text_RecordLastMatch)
+    waitmessage()
+    multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
+    switch(VAR_RESULT)
+    case(1, BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle)
+    case(0, BattleFrontier_BattleFactoryLobby_EventScript_RecordBattle)
+    case(MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle)
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_RecordBattle {
+    call(BattleFrontier_EventScript_SaveBattle)
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle {
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_LookForwardToNextVisit, MSGBOX_DEFAULT)
+    closemessage
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    releaseall
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_ResumeChallenge {
+    lockall
+    message(BattleFrontier_BattleFactoryLobby_Text_WaitingForYouToResume)
+    waitmessage()
+    factory_save(CHALLENGE_STATUS_SAVING)
+    playse(SE_SAVE)
+    waitse()
+    frontier_set(FRONTIER_DATA_PAUSED, FALSE)
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    setvar(VAR_0x8006, 2)
+    goto(BattleFrontier_BattleFactoryLobby_EventScript_EnterChallenge)
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_SinglesAttendant {
+    lock
+    faceplayer
+    setvar(VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_FACTORY)
+    setvar(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES)
+    goto(BattleFrontier_BattleFactoryLobby_EventScript_Attendant)
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_DoublesAttendant {
+    setvar(VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_FACTORY)
+    setvar(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES)
+    goto(BattleFrontier_BattleFactoryLobby_EventScript_Attendant)
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_Attendant {
+    special(SavePlayerParty)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForSingleBattle)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForDoubleBattle)
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_AskTakeChallenge {
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattleFactoryLobby_EventScript_TakeSinglesChallenge)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattleFactoryLobby_EventScript_TakeDoublesChallenge)
+    waitmessage()
+    multichoice(17, 6, MULTI_CHALLENGEINFO, FALSE)
+    switch(VAR_RESULT)
+    case(0, BattleFrontier_BattleFactoryLobby_EventScript_TryEnterChallenge)
+    case(1, BattleFrontier_BattleFactoryLobby_EventScript_ExplainChallenge)
+    case(2, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge)
+    case(MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge)
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_TryEnterChallenge {
+    message(BattleFrontier_BattleFactoryLobby_Text_WhichLevelMode)
+    waitmessage()
+    multichoice(17, 6, MULTI_LEVEL_MODE, FALSE)
+    switch(VAR_RESULT)
+    case(FRONTIER_LVL_TENT, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge)
+    case(MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge)
+    frontier_set(FRONTIER_DATA_LVL_MODE, VAR_RESULT)
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_OkayToSaveBeforeChallenge, MSGBOX_YESNO)
+    switch(VAR_RESULT)
+    case(NO, BattleFrontier_BattleFactoryLobby_EventScript_LoadPartyAndCancelChallenge)
+    case(YES, BattleFrontier_BattleFactoryLobby_EventScript_SaveBeforeChallenge)
+    case(MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_LoadPartyAndCancelChallenge)
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_SaveBeforeChallenge {
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 0)
+    factory_init()
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING)
+    factory_set(FACTORY_DATA_WIN_STREAK_ACTIVE, TRUE)
+    frontier_set(FRONTIER_DATA_PAUSED, FALSE)
+    closemessage
+    delay(2)
+    call(Common_EventScript_SaveGame)
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleFactoryLobby_EventScript_CancelChallengeSaveFailed)
+    setvar(VAR_0x8006, 0)
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_EnterChallenge {
+    special(SavePlayerParty)
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_StepThisWay, MSGBOX_DEFAULT)
+    closemessage
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattleFactoryLobby_EventScript_TalkedToSinglesAttendant)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattleFactoryLobby_EventScript_TalkedToDoublesAttendant)
+    applymovement(VAR_LAST_TALKED, BattleFrontier_BattleFactoryLobby_Movement_AttendantEnterDoor)
+    applymovement(LOCALID_PLAYER, BattleFrontier_BattleFactoryLobby_Movement_PlayerEnterDoor)
+    waitmovement(0)
+    warp(MAP_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM, 8, 13)
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 0)
+    waitstate
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_TalkedToSinglesAttendant {
+    setvar(VAR_LAST_TALKED, LOCALID_FACTORY_ATTENDANT_SINGLES)
+    return
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_TalkedToDoublesAttendant {
+    setvar(VAR_LAST_TALKED, LOCALID_FACTORY_ATTENDANT_DOUBLES)
+    return
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_ExplainChallenge {
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattleFactoryLobby_EventScript_ExplainSinglesChallenge)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattleFactoryLobby_EventScript_ExplainDoublesChallenge)
+    goto(BattleFrontier_BattleFactoryLobby_EventScript_AskTakeChallenge)
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_CancelChallengeSaveFailed {
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, 0)
+    goto(BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge)
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_LoadPartyAndCancelChallenge {
+    special(LoadPlayerParty)
+    callnative(UpdateFollowingPokemon)
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge {
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_LookForwardToNextVisit, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+movement BattleFrontier_BattleFactoryLobby_Movement_AttendantEnterDoor {
+    walk_up
+    walk_up
+    walk_up
+    set_invisible
+    step_end
+}
+
+movement BattleFrontier_BattleFactoryLobby_Movement_PlayerEnterDoor {
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    step_end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForSingleBattle {
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_WelcomeForSingleBattle, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForDoubleBattle {
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_WelcomeForDoubleBattle, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_TakeSinglesChallenge {
+    message(BattleFrontier_BattleFactoryLobby_Text_TakeSinglesChallenge)
+    return
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_TakeDoublesChallenge {
+    message(BattleFrontier_BattleFactoryLobby_Text_TakeDoublesChallenge)
+    return
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_ExplainSinglesChallenge {
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_ExplainSinglesChallenge, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_ExplainDoublesChallenge {
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_ExplainDoublesChallenge, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_ShowSinglesResults {
+    lockall
+    frontier_results(FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_SINGLES)
+    waitbuttonpress()
+    special(RemoveRecordsWindow)
+    releaseall
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_ShowDoublesResults {
+    lockall
+    frontier_results(FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_DOUBLES)
+    waitbuttonpress()
+    special(RemoveRecordsWindow)
+    releaseall
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_Woman {
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_NeedKnowledgeOfMonsMoves, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_Camper {
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_SwappedForWeakMon, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_Picnicker {
+    lock
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_NeedToCheckOpponentsMons, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_FatMan {
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_CantFigureOutStaffHints, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_RulesBoard {
+    lockall
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_RulesAreListed, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard {
+    message(BattleFrontier_BattleFactoryLobby_Text_ReadWhichHeading)
+    waitmessage()
+    multichoice(17, 0, MULTI_BATTLE_FACTORY_RULES, FALSE)
+    switch(VAR_RESULT)
+    case(0, BattleFrontier_BattleFactoryLobby_EventScript_RulesBasics)
+    case(1, BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapPartner)
+    case(2, BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapNumber)
+    case(3, BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapNotes)
+    case(4, BattleFrontier_BattleFactoryLobby_EventScript_RulesOpenLv)
+    case(5, BattleFrontier_BattleFactoryLobby_EventScript_ExitRules)
+    case(MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_ExitRules)
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_RulesBasics {
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_ExplainBasicRules, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapPartner {
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_ExplainSwapPartnerRules, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapNumber {
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_ExplainSwapNumberRules, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapNotes {
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_ExplainSwapNotesRules, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_RulesOpenLv {
+    msgbox(BattleFrontier_BattleFactoryLobby_Text_ExplainOpenLvRules, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattleFactoryLobby_EventScript_ExitRules {
+    releaseall
+    end
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_WelcomeForSingleBattle {
+    "Where the intelligence of TRAINERS\n"
+    "is put to the test!\p"
+    "Welcome to the BATTLE FACTORY!\p"
+    "I am your guide to the Battle Swap\n"
+    "Single Tournament.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_TakeSinglesChallenge {
+    "Would you like to take the Battle\n"
+    "Swap Single challenge?$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_ExplainSinglesChallenge {
+    "The Battle Swap Single Tournament\n"
+    "is a SINGLE BATTLE competition using\l"
+    "only rental POKéMON.\p"
+    "First, you will be loaned three\n"
+    "POKéMON specifically for this event.\p"
+    "Using the supplied rental POKéMON,\n"
+    "you must conduct a SINGLE BATTLE.\p"
+    "If you win, you are permitted to trade\n"
+    "one of your rental POKéMON.\p"
+    "Repeat this cycle of battling and\n"
+    "trading--if you win seven times in\l"
+    "a row, you will earn Battle Points.\p"
+    "If you want to interrupt your\n"
+    "challenge, please save the game.\p"
+    "If you don't save, you will be\n"
+    "disqualified from your challenge.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_LookForwardToNextVisit {
+    "We look forward to your next visit.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_WhichLevelMode {
+    "Which level do you wish to challenge?\n"
+    "Level 50 or Open Level?$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_OkayToSaveBeforeChallenge {
+    "Before you begin your challenge,\n"
+    "I need to save the game. Is that okay?$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_WillHoldMonsForSafekeeping {
+    "Okay, I will hold your POKéMON for\n"
+    "safekeeping while you compete.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_StepThisWay {
+    "Please step this way.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_ReturnMonsSaveResults {
+    "Thank you for participating!\p"
+    "I will return your POKéMON in exchange\n"
+    "for our rental POKéMON.\p"
+    "I must also save the event results.\n"
+    "Please wait.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_ReturnMons {
+    "I will return your POKéMON in exchange\n"
+    "for our rental POKéMON.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_CongratsSevenWins {
+    "Congratulations! You've won seven\n"
+    "straight Battle Swap matches!$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_AwardBattlePointsForStreak {
+    "In recognition of your 7-win streak,\n"
+    "we award you these Battle Point(s).$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_MaxBattlePoints {
+    "Oh, oh, oh!\p"
+    "Your Battle Points are maxed.\p"
+    "Please come back after using\n"
+    "some Battle Points.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_WaitingForYouToResume {
+    "We've been waiting for you!\p"
+    "Before we resume your challenge,\n"
+    "I must save the game.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_DidntSaveBeforeQuitting {
+    "I'm sorry to say this, but you didn't\n"
+    "save before you quit playing last time.\p"
+    "As a result, you have been disqualified\n"
+    "from your challenge.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_WellReturnMons {
+    "We'll return your personal POKéMON.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_ReceivedPrizeItem {
+    "{PLAYER} received the prize\n"
+    "{STR_VAR_1}.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_WelcomeForDoubleBattle {
+    "Where the intelligence of TRAINERS\n"
+    "is put to the test!\p"
+    "Welcome to the BATTLE FACTORY!\p"
+    "I am your guide to the Battle Swap\n"
+    "Double Tournament.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_TakeDoublesChallenge {
+    "Would you like to take the Battle\n"
+    "Swap Double challenge?$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_ExplainDoublesChallenge {
+    "The Battle Swap Double Tournament\n"
+    "is a DOUBLE BATTLE competition using\l"
+    "only rental POKéMON.\p"
+    "First, you will be loaned three\n"
+    "POKéMON specifically for this event.\p"
+    "Using the supplied rental POKéMON,\n"
+    "you must conduct a DOUBLE BATTLE.\p"
+    "If you win, you are permitted to trade\n"
+    "one of your rental POKéMON.\p"
+    "Repeat this cycle of battling and\n"
+    "trading--if you win seven times in\l"
+    "a row, you will earn Battle Points.\p"
+    "If you want to interrupt your\n"
+    "challenge, please save the game.\p"
+    "If you don't save before interrupting,\n"
+    "you will be disqualified.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_CongratsForDefeatingHead {
+    "Congratulations for defeating\n"
+    "the FACTORY HEAD and winning\l"
+    "seven matches in a row!$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_AwardBattlePoints {
+    "In recognition of your wealth of\n"
+    "knowledge and keen intelligence,\l"
+    "we award you these Battle Point(s).$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_ExchangeMonsAndSave {
+    "Let me exchange your POKéMON\n"
+    "for our rental POKéMON.\p"
+    "I need to save the battle data,\n"
+    "so please wait.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_RecordLastMatch {
+    "Would you like to record your last\n"
+    "BATTLE FACTORY match on your\l"
+    "FRONTIER PASS?$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_NeedKnowledgeOfMonsMoves {
+    "Hi!\n"
+    "You, there!\p"
+    "Are you thinking that the events here\n"
+    "are easy since you don't need to have\l"
+    "a raised team of POKéMON?\p"
+    "I wouldn't be too sure about winning\n"
+    "that easily.\p"
+    "If you don't have thorough knowledge\n"
+    "about POKéMON and their moves,\l"
+    "it will be tough to keep winning.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_SwappedForWeakMon {
+    "I swapped for a weak POKéMON…\n"
+    "I thought it was a good kind to have…\p"
+    "They wiped the floor with us…$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_NeedToCheckOpponentsMons {
+    "Things haven't been going my way\n"
+    "at all.\p"
+    "You need to check your opponent's\n"
+    "POKéMON during battle to see if\l"
+    "they're any good.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_CantFigureOutStaffHints {
+    "You know how the staff here give you\n"
+    "a few hints about your next opponent?\p"
+    "Well, I'm a full-grown man, but I have\n"
+    "trouble figuring out their hints.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_RentalMonsAreVaried {
+    "Like, I'm really tough, but I get bored\n"
+    "really easily, so I just kept swapping\l"
+    "and battling over and over.\p"
+    "So anyway, when I kept entering\n"
+    "Battle Swap events, I noticed they\l"
+    "varied the rental POKéMON.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_RulesAreListed {
+    "The Battle Swap rules are listed.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_ReadWhichHeading {
+    "Which heading do you want to read?$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_ExplainBasicRules {
+    "In a Battle Swap event, you may use\n"
+    "only three POKéMON.\p"
+    "Whether you are renting or swapping,\n"
+    "your team may not have two or more\l"
+    "of the same POKéMON.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_ExplainSwapPartnerRules {
+    "You may swap POKéMON only with\n"
+    "the TRAINER you have just defeated.\p"
+    "You may swap for only those POKéMON\n"
+    "used by the beaten TRAINER.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_ExplainSwapNumberRules {
+    "After every battle you win, you may\n"
+    "swap for one of your defeated\l"
+    "opponent's POKéMON.\p"
+    "You will not be able to swap POKéMON\n"
+    "with the seventh TRAINER in the event.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_ExplainSwapNotesRules {
+    "There are two key points to be aware\n"
+    "of when swapping POKéMON.\p"
+    "First, when swapping, you can't check\n"
+    "the stats of the POKéMON you are\l"
+    "about to receive.\p"
+    "Second, the POKéMON on your team\n"
+    "are lined up in sequence, depending on\l"
+    "the order in which you rented them.\p"
+    "This sequence remains unchanged\n"
+    "even when swaps are made.$"
+}
+
+text BattleFrontier_BattleFactoryLobby_Text_ExplainOpenLvRules {
+    "In the Open Level, the rental POKéMON\n"
+    "and the opposing TRAINERS' POKéMON\l"
+    "are all Level 100.$"
+}

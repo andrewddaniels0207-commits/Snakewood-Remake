@@ -1,0 +1,115 @@
+mapscripts MtPyre_3F_MapScripts {}
+
+script MtPyre_3F_EventScript_William {
+    trainerbattle_single(TRAINER_WILLIAM, MtPyre_3F_Text_WilliamIntro, MtPyre_3F_Text_WilliamDefeat)
+    msgbox(MtPyre_3F_Text_WilliamPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtPyre_3F_EventScript_Kayla {
+    trainerbattle_single(TRAINER_KAYLA, MtPyre_3F_Text_KaylaIntro, MtPyre_3F_Text_KaylaDefeat)
+    msgbox(MtPyre_3F_Text_KaylaPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtPyre_3F_EventScript_Gabrielle {
+    trainerbattle_single(TRAINER_GABRIELLE_1, MtPyre_3F_Text_GabrielleIntro, MtPyre_3F_Text_GabrielleDefeat, MtPyre_3F_EventScript_RegisterGabrielle)
+    specialvar(VAR_RESULT, ShouldTryRematchBattle)
+    if (var(VAR_RESULT) == TRUE) goto(MtPyre_3F_EventScript_RematchGabrielle)
+    msgbox(MtPyre_3F_Text_GabriellePostBattle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MtPyre_3F_EventScript_RegisterGabrielle {
+    special(PlayerFaceTrainerAfterBattle)
+    waitmovement(0)
+    msgbox(MtPyre_3F_Text_GabrielleRegister, MSGBOX_DEFAULT)
+    register_matchcall(TRAINER_GABRIELLE_1)
+    release
+    end
+}
+
+script MtPyre_3F_EventScript_RematchGabrielle {
+    trainerbattle_rematch(TRAINER_GABRIELLE_1, MtPyre_3F_Text_GabrielleRematchIntro, MtPyre_3F_Text_GabrielleRematchDefeat)
+    msgbox(MtPyre_3F_Text_GabriellePostRematch, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text MtPyre_3F_Text_WilliamIntro {
+    "The rich atmosphere of the mountain\n"
+    "has elevated my psychic power!\p"
+    "A mere child like you…\n"
+    "You dream of winning?$"
+}
+
+text MtPyre_3F_Text_WilliamDefeat {
+    "I drown in self-pity…$"
+}
+
+text MtPyre_3F_Text_WilliamPostBattle {
+    "My psychic powers have surely\n"
+    "grown several times, but…$"
+}
+
+text MtPyre_3F_Text_KaylaIntro {
+    "Ahahahaha!\p"
+    "This is no place for children, least\n"
+    "of all you!$"
+}
+
+text MtPyre_3F_Text_KaylaDefeat {
+    "I lost that cleanly…$"
+}
+
+text MtPyre_3F_Text_KaylaPostBattle {
+    "This means my training is still not\n"
+    "enough…\p"
+    "I've got to keep working toward the\n"
+    "summit…\p"
+    "Go, me!$"
+}
+
+text MtPyre_3F_Text_GabrielleIntro {
+    "Why have you come here?$"
+}
+
+text MtPyre_3F_Text_GabrielleDefeat {
+    "That was amazing!\n"
+    "You're a very special TRAINER.$"
+}
+
+text MtPyre_3F_Text_GabriellePostBattle {
+    "POKéMON no longer of this world.\n"
+    "POKéMON that are with you now.\p"
+    "And the POKéMON that you will meet\n"
+    "in the future…\p"
+    "They are all to be equally cherished.\n"
+    "Please remember that.$"
+}
+
+text MtPyre_3F_Text_GabrielleRegister {
+    "I would like to see your POKéMON\n"
+    "when they grow up some more…\p"
+    "Please, I need to see your POKéNAV.$"
+}
+
+text MtPyre_3F_Text_GabrielleRematchIntro {
+    "Oh, it's you…\p"
+    "Have you come to show me your grown\n"
+    "POKéMON?$"
+}
+
+text MtPyre_3F_Text_GabrielleRematchDefeat {
+    "How amazing!\n"
+    "You are a special person.$"
+}
+
+text MtPyre_3F_Text_GabriellePostRematch {
+    "POKéMON no longer of this world.\n"
+    "POKéMON that are with you now.\p"
+    "And the POKéMON that you will meet\n"
+    "in the future…\p"
+    "They are all to be equally cherished.\n"
+    "I see that you've remembered that.$"
+}

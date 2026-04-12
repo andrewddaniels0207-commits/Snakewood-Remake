@@ -1,0 +1,84 @@
+mapscripts FourIsland_PokemonCenter_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: FourIsland_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script FourIsland_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_FOUR_ISLAND)
+    end
+}
+
+script FourIsland_PokemonCenter_1F_EventScript_Nurse {
+    lock
+    faceplayer
+    call(EventScript_PkmnCenterNurse_Frlg)
+    release
+    end
+}
+
+script FourIsland_PokemonCenter_1F_EventScript_Man {
+    msgbox(FourIsland_PokemonCenter_1F_Text_RareIceMonsInCave, MSGBOX_NPC)
+    end
+}
+
+script FourIsland_PokemonCenter_1F_EventScript_Woman {
+    msgbox(FourIsland_PokemonCenter_1F_Text_DayCarePeopleFoundEggBefore, MSGBOX_NPC)
+    end
+}
+
+script FourIsland_PokemonCenter_1F_EventScript_Gentleman {
+    msgbox(FourIsland_PokemonCenter_1F_Text_NewPokemonJournalHasntArrived, MSGBOX_NPC)
+    end
+}
+
+text Text_BodySlamTeach {
+    "Ready?\n"
+    "Boing!\p"
+    "We're having a BODY SLAM match\n"
+    "to see who wimps out first.\p"
+    "If you were to join us, you'd be\n"
+    "squashed like a bug, though…\p"
+    "How about I teach BODY SLAM to\n"
+    "a POKéMON of yours instead?$"
+}
+
+text Text_BodySlamDeclined {
+    "Come again!\n"
+    "Boing!$"
+}
+
+text Text_BodySlamWhichMon {
+    "Which POKéMON wants to learn how\n"
+    "to BODY SLAM?$"
+}
+
+text Text_BodySlamTaught {
+    "Boioing!$"
+}
+
+text FourIsland_House1_Text_FatMan {
+    "それ　ぼよーん！\n"
+    "おまえ　おもいなあー！$"
+}
+
+text FourIsland_PokemonCenter_1F_Text_RareIceMonsInCave {
+    "There's a rare kind of ICE POKéMON\n"
+    "that lives in the cave.\p"
+    "We get a lot of visitors hoping to\n"
+    "see that POKéMON.$"
+}
+
+text FourIsland_PokemonCenter_1F_Text_DayCarePeopleFoundEggBefore {
+    "Oh? A POKéMON EGG?\n"
+    "…I have no idea.\p"
+    "…Oh, wait. The DAY-CARE people\n"
+    "in town were saying something.\p"
+    "They said that they'd found EGGS\n"
+    "before on their property.$"
+}
+
+text FourIsland_PokemonCenter_1F_Text_NewPokemonJournalHasntArrived {
+    "What's this?\p"
+    "The new POKéMON JOURNAL hasn't\n"
+    "arrived on this island?$"
+}

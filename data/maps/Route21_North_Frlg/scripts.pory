@@ -1,0 +1,56 @@
+mapscripts Route21_North_Frlg_MapScripts {}
+
+text Route21_North_Text_RonaldIntro {
+    "You want to know if the fish are\n"
+    "biting?$"
+}
+
+text Route21_North_Text_RonaldDefeat {
+    "Dang!$"
+}
+
+text Route21_North_Text_RonaldPostBattle {
+    "I can't catch anything good.\n"
+    "Not one good POKéMON to be had!$"
+}
+
+text Route21_North_Text_WadeIntro {
+    "I got a big haul!\n"
+    "Wanna go for it?$"
+}
+
+text Route21_North_Text_WadeDefeat {
+    "Heheh, MAGIKARP just don't make\n"
+    "the grade, do they?$"
+}
+
+text Route21_North_Text_WadePostBattle {
+    "I seem to only catch MAGIKARP!$"
+}
+
+text Route21_North_Text_SpencerIntro {
+    "The sea cleanses my body and soul!$"
+}
+
+text Route21_North_Text_SpencerDefeat {
+    "Ayah!$"
+}
+
+text Route21_North_Text_SpencerPostBattle {
+    "The sea is great and all, but I\n"
+    "like the mountains, too.$"
+}
+
+text Route21_North_Text_CueBallIntro {
+    "おれだって　たまには\n"
+    "およぎに　くるぜ！$"
+}
+
+text Route21_North_Text_CueBallDefeat {
+    "ぐわわ！$"
+}
+
+text Route21_North_Text_CueBallPostBattle {
+    "うきやすそう　だと？\n"
+    "うるせー　おおきな　おせわだッ！$"
+}

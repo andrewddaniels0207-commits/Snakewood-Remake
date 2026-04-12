@@ -1,0 +1,45 @@
+mapscripts SSAnne_B1F_Room1_Frlg_MapScripts {}
+
+script SSAnne_B1F_Room1_EventScript_Barny {
+    trainerbattle_single(TRAINER_FISHERMAN_BARNY, SSAnne_B1F_Room1_Text_BarnyIntro, SSAnne_B1F_Room1_Text_BarnyDefeat)
+    msgbox(SSAnne_B1F_Room1_Text_BarnyPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SSAnne_B1F_Room1_EventScript_Phillip {
+    trainerbattle_single(TRAINER_SAILOR_PHILLIP, SSAnne_B1F_Room1_Text_PhillipIntro, SSAnne_B1F_Room1_Text_PhillipDefeat)
+    msgbox(SSAnne_B1F_Room1_Text_PhillipPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text SSAnne_B1F_Room1_Text_PhillipIntro {
+    "Matey, you're walking the plank if\n"
+    "you lose!$"
+}
+
+text SSAnne_B1F_Room1_Text_PhillipDefeat {
+    "Argh!\n"
+    "Beaten by a kid!$"
+}
+
+text SSAnne_B1F_Room1_Text_PhillipPostBattle {
+    "When we're out at sea, jellyfish\n"
+    "POKéMON sometimes drift by.$"
+}
+
+text SSAnne_B1F_Room1_Text_BarnyIntro {
+    "Hello, stranger!\p"
+    "I can't tell if you're from the seas\n"
+    "or mountains, but stop and chat.\p"
+    "All my POKéMON are from the sea.$"
+}
+
+text SSAnne_B1F_Room1_Text_BarnyDefeat {
+    "Darn!\n"
+    "I let that one get away!$"
+}
+
+text SSAnne_B1F_Room1_Text_BarnyPostBattle {
+    "I was going to make you my\n"
+    "assistant, too!$"
+}

@@ -1,0 +1,41 @@
+mapscripts RustboroCity_Flat2_2F_MapScripts {}
+
+script RustboroCity_Flat2_2F_EventScript_OldMan {
+    msgbox(RustboroCity_Flat2_2F_Text_DevonWasTinyInOldDays, MSGBOX_NPC)
+    end
+}
+
+script RustboroCity_Flat2_2F_EventScript_NinjaBoy {
+    lock
+    faceplayer
+    if (flag(FLAG_RECEIVED_PREMIER_BALL_RUSTBORO)) goto(RustboroCity_Flat2_2F_EventScript_GavePremierBall)
+    msgbox(RustboroCity_Flat2_2F_Text_MyDaddyMadeThisYouCanHaveIt, MSGBOX_DEFAULT)
+    giveitem(ITEM_PREMIER_BALL)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    setflag(FLAG_RECEIVED_PREMIER_BALL_RUSTBORO)
+    release
+    end
+}
+
+script RustboroCity_Flat2_2F_EventScript_GavePremierBall {
+    msgbox(RustboroCity_Flat2_2F_Text_GoingToWorkAtDevonToo, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+text RustboroCity_Flat2_2F_Text_DevonWasTinyInOldDays {
+    "Way back in the old days, DEVON was just\n"
+    "a teeny, tiny company.$"
+}
+
+text RustboroCity_Flat2_2F_Text_MyDaddyMadeThisYouCanHaveIt {
+    "My daddy's working at the CORPORATION.\p"
+    "My daddy made this!\n"
+    "But I can't use it, so you can have it.$"
+}
+
+text RustboroCity_Flat2_2F_Text_GoingToWorkAtDevonToo {
+    "My daddy's working at the CORPORATION.\p"
+    "When I grow up, I'm going to work for\n"
+    "DEVON, too.$"
+}

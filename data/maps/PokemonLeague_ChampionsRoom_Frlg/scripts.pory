@@ -1,0 +1,360 @@
+mapscripts PokemonLeague_ChampionsRoom_Frlg_MapScripts {
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: PokemonLeague_ChampionsRoom_OnWarp
+    MAP_SCRIPT_ON_RESUME: PokemonLeague_ChampionsRoom_OnResume
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 0: PokemonLeague_ChampionsRoom_EventScript_EnterRoom
+    ]
+}
+
+script PokemonLeague_ChampionsRoom_OnResume {
+    setvar(VAR_0x8004, 4)
+    call(PokemonLeague_EventScript_DoLightingEffect)
+    if (var(VAR_STARTER_MON) == 2) call(PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerSquirtle)
+    if (var(VAR_STARTER_MON) == 1) call(PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerBulbasaur)
+    if (var(VAR_STARTER_MON) == 0) call(PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerCharmander)
+    end
+}
+
+script PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerSquirtle {
+    goto_if_defeated(TRAINER_CHAMPION_FIRST_SQUIRTLE, PokemonLeague_ChampionsRoom_EventScript_StopSceneTrigger)
+    goto_if_defeated(TRAINER_CHAMPION_REMATCH_SQUIRTLE, PokemonLeague_ChampionsRoom_EventScript_StopSceneTrigger)
+    return
+}
+
+script PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerBulbasaur {
+    goto_if_defeated(TRAINER_CHAMPION_FIRST_BULBASAUR, PokemonLeague_ChampionsRoom_EventScript_StopSceneTrigger)
+    goto_if_defeated(TRAINER_CHAMPION_REMATCH_BULBASAUR, PokemonLeague_ChampionsRoom_EventScript_StopSceneTrigger)
+    return
+}
+
+script PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerCharmander {
+    goto_if_defeated(TRAINER_CHAMPION_FIRST_CHARMANDER, PokemonLeague_ChampionsRoom_EventScript_StopSceneTrigger)
+    goto_if_defeated(TRAINER_CHAMPION_REMATCH_CHARMANDER, PokemonLeague_ChampionsRoom_EventScript_StopSceneTrigger)
+    return
+}
+
+script PokemonLeague_ChampionsRoom_EventScript_StopSceneTrigger {
+    setvar(VAR_TEMP_1, 1)
+    return
+}
+
+raw `
+PokemonLeague_ChampionsRoom_OnWarp:
+	map_script_2 VAR_TEMP_1, 0, PokemonLeague_ChampionsRoom_EventScript_TurnPlayerNorth
+	.2byte 0
+
+`
+
+script PokemonLeague_ChampionsRoom_EventScript_TurnPlayerNorth {
+    turnobject(LOCALID_PLAYER, DIR_NORTH)
+    end
+}
+
+script PokemonLeague_ChampionsRoom_EventScript_EnterRoom {
+    lockall
+    textcolor(NPC_TEXT_COLOR_MALE)
+    setflag(FLAG_TEMP_2)
+    applymovement(LOCALID_PLAYER, PokemonLeague_ChampionsRoom_Movement_PlayerEnter)
+    waitmovement(0)
+    delay(20)
+    if (!flag(FLAG_SYS_GAME_CLEAR)) call(PokemonLeague_ChampionsRoom_EventScript_Intro)
+    if (flag(FLAG_SYS_GAME_CLEAR)) call(PokemonLeague_ChampionsRoom_EventScript_RematchIntro)
+    setflag(FLAG_TEMP_3)
+    setflag(FLAG_TEMP_5)
+    savebgm(MUS_VICTORY_GYM_LEADER)
+    if (!flag(FLAG_IS_CHAMPION)) call(PokemonLeague_ChampionsRoom_EventScript_Battle)
+    if (flag(FLAG_IS_CHAMPION)) call(PokemonLeague_ChampionsRoom_EventScript_Rematch)
+    setflag(FLAG_TEMP_4)
+    clearflag(FLAG_TEMP_5)
+    setflag(FLAG_DEFEATED_CHAMP)
+    setflag(FLAG_TEMP_4)
+    msgbox(PokemonLeague_ChampionsRoom_Text_PostBattle)
+    playbgm(MUS_RG_SLOW_PALLET, 0)
+    addobject(LOCALID_CHAMPIONS_ROOM_PROF_OAK)
+    msgbox(PokemonLeague_ChampionsRoom_Text_OakPlayer)
+    closemessage
+    applymovement(LOCALID_PLAYER, PokemonLeague_ChampionsRoom_Movement_PlayerWatchOakEnter)
+    applymovement(LOCALID_KANTO_CHAMPIONS_ROOM_RIVAL, PokemonLeague_ChampionsRoom_Movement_RivalWatchOakEnter)
+    applymovement(LOCALID_CHAMPIONS_ROOM_PROF_OAK, PokemonLeague_ChampionsRoom_Movement_OakEnter)
+    waitmovement(0)
+    delay(25)
+    specialvar(VAR_RESULT, GetStarterPokemon)
+    bufferspeciesname(STR_VAR_1, VAR_RESULT)
+    msgbox(PokemonLeague_ChampionsRoom_Text_OakCongratulations)
+    applymovement(LOCALID_CHAMPIONS_ROOM_PROF_OAK, Common_Movement_WalkInPlaceFasterRight)
+    applymovement(LOCALID_KANTO_CHAMPIONS_ROOM_RIVAL, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    msgbox(PokemonLeague_ChampionsRoom_Text_OakImDisappointedRival)
+    closemessage
+    applymovement(LOCALID_CHAMPIONS_ROOM_PROF_OAK, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    delay(20)
+    msgbox(PokemonLeague_ChampionsRoom_Text_OakPlayerComeWithMe)
+    closemessage
+    delay(13)
+    applymovement(LOCALID_CHAMPIONS_ROOM_PROF_OAK, PokemonLeague_ChampionsRoom_Movement_OakExit)
+    applymovement(LOCALID_PLAYER, PokemonLeague_ChampionsRoom_Movement_PlayerExit)
+    waitmovement(0)
+    setvar(VAR_TEMP_1, 1)
+    warp(MAP_POKEMON_LEAGUE_HALL_OF_FAME, 5, 12)
+    waitstate
+    releaseall
+    end
+}
+
+script PokemonLeague_ChampionsRoom_EventScript_QuestLogEnd {
+    call(PokemonLeague_ChampionsRoom_EventScript_StopSceneTrigger)
+    releaseall
+    end
+}
+
+script PokemonLeague_ChampionsRoom_EventScript_Battle {
+    if (var(VAR_STARTER_MON) == 2) call(PokemonLeague_ChampionsRoom_EventScript_BattleSquirtle)
+    if (var(VAR_STARTER_MON) == 1) call(PokemonLeague_ChampionsRoom_EventScript_BattleBulbasaur)
+    if (var(VAR_STARTER_MON) == 0) call(PokemonLeague_ChampionsRoom_EventScript_BattleCharmander)
+    return
+}
+
+script PokemonLeague_ChampionsRoom_EventScript_Rematch {
+    if (var(VAR_STARTER_MON) == 2) call(PokemonLeague_ChampionsRoom_EventScript_RematchSquirtle)
+    if (var(VAR_STARTER_MON) == 1) call(PokemonLeague_ChampionsRoom_EventScript_RematchBulbasaur)
+    if (var(VAR_STARTER_MON) == 0) call(PokemonLeague_ChampionsRoom_EventScript_RematchCharmander)
+    return
+}
+
+script PokemonLeague_ChampionsRoom_EventScript_Intro {
+    msgbox(PokemonLeague_ChampionsRoom_Text_Intro)
+    return
+}
+
+script PokemonLeague_ChampionsRoom_EventScript_RematchIntro {
+    msgbox(PokemonLeague_ChampionsRoom_Text_RematchIntro)
+    return
+}
+
+script PokemonLeague_ChampionsRoom_EventScript_BattleSquirtle {
+    trainerbattle_no_intro(TRAINER_CHAMPION_FIRST_SQUIRTLE, PokemonLeague_ChampionsRoom_Text_Defeat)
+    return
+}
+
+script PokemonLeague_ChampionsRoom_EventScript_BattleBulbasaur {
+    trainerbattle_no_intro(TRAINER_CHAMPION_FIRST_BULBASAUR, PokemonLeague_ChampionsRoom_Text_Defeat)
+    return
+}
+
+script PokemonLeague_ChampionsRoom_EventScript_BattleCharmander {
+    trainerbattle_no_intro(TRAINER_CHAMPION_FIRST_CHARMANDER, PokemonLeague_ChampionsRoom_Text_Defeat)
+    return
+}
+
+script PokemonLeague_ChampionsRoom_EventScript_RematchSquirtle {
+    trainerbattle_no_intro(TRAINER_CHAMPION_REMATCH_SQUIRTLE, PokemonLeague_ChampionsRoom_Text_Defeat)
+    return
+}
+
+script PokemonLeague_ChampionsRoom_EventScript_RematchBulbasaur {
+    trainerbattle_no_intro(TRAINER_CHAMPION_REMATCH_BULBASAUR, PokemonLeague_ChampionsRoom_Text_Defeat)
+    return
+}
+
+script PokemonLeague_ChampionsRoom_EventScript_RematchCharmander {
+    trainerbattle_no_intro(TRAINER_CHAMPION_REMATCH_CHARMANDER, PokemonLeague_ChampionsRoom_Text_Defeat)
+    return
+}
+
+movement PokemonLeague_ChampionsRoom_Movement_PlayerEnter {
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    step_end
+}
+
+movement PokemonLeague_ChampionsRoom_Movement_PlayerExit {
+    delay_16
+    walk_left
+    walk_up
+    walk_up
+    walk_up
+    walk_right
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    delay_8
+    set_invisible
+    step_end
+}
+
+movement PokemonLeague_ChampionsRoom_Movement_PlayerWatchOakEnter {
+    delay_8
+    walk_in_place_faster_down
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    walk_in_place_faster_left
+    step_end
+}
+
+movement PokemonLeague_ChampionsRoom_Movement_OakEnter {
+    delay_16
+    delay_16
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_left
+    walk_up
+    walk_up
+    walk_in_place_faster_down
+    delay_16
+    step_end
+}
+
+movement PokemonLeague_ChampionsRoom_Movement_OakExit {
+    walk_up
+    walk_up
+    walk_right
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    delay_8
+    set_invisible
+    step_end
+}
+
+movement PokemonLeague_ChampionsRoom_Movement_RivalWatchOakEnter {
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    walk_in_place_faster_left
+    step_end
+}
+
+text PokemonLeague_ChampionsRoom_Text_Intro {
+    "{RIVAL}: Hey, {PLAYER}!\p"
+    "I was looking forward to seeing\n"
+    "you, {PLAYER}.\p"
+    "My rival should be strong to keep\n"
+    "me sharp.\p"
+    "While working on my POKéDEX, I\n"
+    "looked all over for POKéMON.\p"
+    "Not only that, I assembled teams\n"
+    "that would beat any POKéMON type.\p"
+    "And now…\p"
+    "I'm the POKéMON LEAGUE CHAMPION!\p"
+    "{PLAYER}!\n"
+    "Do you know what that means?\p"
+    "I'll tell you.\p"
+    "I am the most powerful TRAINER in\n"
+    "the world!$"
+}
+
+text PokemonLeague_ChampionsRoom_Text_RematchIntro {
+    "{RIVAL}: Hey, {PLAYER}!\p"
+    "You came back, {PLAYER}!\n"
+    "Hahah, that is so great!\p"
+    "My rival should be strong to keep\n"
+    "me sharp.\p"
+    "While working on my POKéDEX, I\n"
+    "looked all over for POKéMON.\p"
+    "Not only that, I assembled teams\n"
+    "that would beat any POKéMON type.\p"
+    "And now…\p"
+    "I'm the POKéMON LEAGUE CHAMPION!\p"
+    "{PLAYER}!\n"
+    "Do you know what that means?\p"
+    "I'll tell you.\p"
+    "I am the most powerful TRAINER in\n"
+    "the world!$"
+}
+
+text PokemonLeague_ChampionsRoom_Text_Defeat {
+    "NO!\n"
+    "That can't be!\l"
+    "You beat me at my best!\p"
+    "After all that work to become\n"
+    "the LEAGUE CHAMP?\p"
+    "My reign is over already?\n"
+    "It's not fair!$"
+}
+
+text PokemonLeague_ChampionsRoom_Text_Victory {
+    "はーはッ！\n"
+    "かった！　かった！　かった！\p"
+    "{PLAYER}に　まける　ような\n"
+    "おれさま　では　なーい！\p"
+    "ま！　ポケモンの\n"
+    "てんさい　{RIVAL}さま　あいてに\l"
+    "ここまで　よく　がんばった！\p"
+    "ほめて　つかわす！\n"
+    "はーッ！　はーはッはッ！$"
+}
+
+text PokemonLeague_ChampionsRoom_Text_PostBattle {
+    "Why?\n"
+    "Why did I lose?\p"
+    "I never made any mistakes raising\n"
+    "my POKéMON…\p"
+    "Darn it! You're the new POKéMON\n"
+    "LEAGUE CHAMPION!\p"
+    "Although I don't like to admit it…$"
+}
+
+text PokemonLeague_ChampionsRoom_Text_OakPlayer {
+    "OAK: {PLAYER}!$"
+}
+
+text PokemonLeague_ChampionsRoom_Text_OakCongratulations {
+    "OAK: So, you've won!\n"
+    "Sincerely, congratulations!\p"
+    "You're the new POKéMON LEAGUE\n"
+    "CHAMPION!\p"
+    "You've grown up so much since you\n"
+    "first left with {STR_VAR_1} to work\l"
+    "on the POKéDEX.\p"
+    "{PLAYER}, you have come of age!$"
+}
+
+text PokemonLeague_ChampionsRoom_Text_OakImDisappointedRival {
+    "OAK: {RIVAL}…\n"
+    "I'm disappointed in you.\p"
+    "I came when I heard you'd beaten\n"
+    "the ELITE FOUR.\p"
+    "But, when I got here, you had\n"
+    "already lost!\p"
+    "{RIVAL}, do you understand why\n"
+    "you lost?\p"
+    "You have forgotten to treat your\n"
+    "POKéMON with love and trust.\p"
+    "Without them, you will never\n"
+    "become a CHAMP again!$"
+}
+
+text PokemonLeague_ChampionsRoom_Text_OakPlayerComeWithMe {
+    "OAK: {PLAYER}.\p"
+    "You understand that your victory\n"
+    "was not just your own doing.\p"
+    "The bond you share with your\n"
+    "POKéMON is marvelous.\p"
+    "{PLAYER}!\n"
+    "Come with me!$"
+}

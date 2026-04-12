@@ -1,0 +1,77 @@
+mapscripts VermilionCity_House1_Frlg_MapScripts {}
+
+script VermilionCity_House1_EventScript_FishingGuru {
+    lock
+    faceplayer
+    if (flag(FLAG_GOT_OLD_ROD)) goto(VermilionCity_House1_EventScript_AlreadyGotOldRod)
+    msgbox(VermilionCity_House1_Text_ImFishingGuruDoYouLikeToFish, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(VermilionCity_House1_EventScript_GiveOldRod)
+    msgbox(VermilionCity_House1_Text_OhThatsSoDisappointing)
+    release
+    end
+}
+
+script VermilionCity_House1_EventScript_AlreadyGotOldRod {
+    msgbox(VermilionCity_House1_Text_HowAreTheFishBiting)
+    release
+    end
+}
+
+script VermilionCity_House1_EventScript_GiveOldRod {
+    checkitemspace(ITEM_OLD_ROD)
+    if (var(VAR_RESULT) == FALSE) goto(VermilionCity_House1_EventScript_NoRoomForOldRod)
+    additem(ITEM_OLD_ROD)
+    msgbox(VermilionCity_House1_Text_TakeThisAndFish)
+    msgreceiveditem(VermilionCity_House1_Text_ReceivedOldRodFromFishingGuru, ITEM_OLD_ROD)
+    setflag(FLAG_GOT_OLD_ROD)
+    msgbox(VermilionCity_House1_Text_FishingIsAWayOfLife)
+    release
+    end
+}
+
+script VermilionCity_House1_EventScript_NoRoomForOldRod {
+    msgbox(VermilionCity_House1_Text_NoRoomForNiceGift)
+    release
+    end
+}
+
+text VermilionCity_House1_Text_ImFishingGuruDoYouLikeToFish {
+    "I'm the FISHING GURU!\p"
+    "I simply looove fishing!\n"
+    "I can't bear to go without.\p"
+    "Tell me, do you like to fish?$"
+}
+
+text VermilionCity_House1_Text_TakeThisAndFish {
+    "Grand! I like your style.\n"
+    "I think we can be friends.\p"
+    "Take this and fish, young friend!$"
+}
+
+text VermilionCity_House1_Text_ReceivedOldRodFromFishingGuru {
+    "{PLAYER} received an OLD ROD from\n"
+    "the FISHING GURU.$"
+}
+
+text VermilionCity_House1_Text_FishingIsAWayOfLife {
+    "Fishing is a way of life!\n"
+    "It is like the finest poetry.\p"
+    "From the seas to rivers, go out\n"
+    "and land the big one, my friend.$"
+}
+
+text VermilionCity_House1_Text_OhThatsSoDisappointing {
+    "Oh…\n"
+    "That's so disappointing…$"
+}
+
+text VermilionCity_House1_Text_HowAreTheFishBiting {
+    "Hello there, {PLAYER}!\p"
+    "How are the fish biting?$"
+}
+
+text VermilionCity_House1_Text_NoRoomForNiceGift {
+    "Oh, no!\p"
+    "I had a nice gift for you, but you\n"
+    "have no room for it!$"
+}

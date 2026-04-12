@@ -1,0 +1,15 @@
+mapscripts FiveIsland_House1_Frlg_MapScripts {}
+
+script FiveIsland_House1_EventScript_Woman {
+    msgbox(FiveIsland_House1_Text_HusbandWentOffFishing, MSGBOX_NPC)
+    end
+}
+
+text FiveIsland_House1_Text_HusbandWentOffFishing {
+    "Don't worry about buying anything\n"
+    "for dinner tonight!\p"
+    "…That's what my husband said when\n"
+    "he went off fishing today.\p"
+    "I'm not sure if I can count on him\n"
+    "to live up to that promise.$"
+}

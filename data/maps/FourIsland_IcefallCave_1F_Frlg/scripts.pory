@@ -1,0 +1,35 @@
+mapscripts FourIsland_IcefallCave_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_RESUME: FourIsland_IcefallCave_1F_OnResume
+    MAP_SCRIPT_ON_LOAD: FourIsland_IcefallCave_1F_OnLoad
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 1: FourIsland_IcefallCave_1F_EventScript_FallDownHole
+    ]
+}
+
+script FourIsland_IcefallCave_1F_OnResume {
+    setstepcallback(STEP_CB_ICEFALL_CAVE)
+    end
+}
+
+script FourIsland_IcefallCave_1F_OnLoad {
+    special(SetIcefallCaveCrackedIceMetatiles)
+    end
+}
+
+script FourIsland_IcefallCave_1F_EventScript_FallDownHole {
+    lockall
+    delay(20)
+    applymovement(LOCALID_PLAYER, FourIsland_IcefallCave_1F_Movement_SetInvisible)
+    waitmovement(0)
+    playse(SE_FALL)
+    delay(60)
+    warphole(MAP_FOUR_ISLAND_ICEFALL_CAVE_B1F)
+    waitstate
+    releaseall
+    end
+}
+
+movement FourIsland_IcefallCave_1F_Movement_SetInvisible {
+    set_invisible
+    step_end
+}

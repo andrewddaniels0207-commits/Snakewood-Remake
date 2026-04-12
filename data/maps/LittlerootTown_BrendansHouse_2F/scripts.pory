@@ -1,0 +1,340 @@
+mapscripts LittlerootTown_BrendansHouse_2F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: LittlerootTown_BrendansHouse_2F_OnTransition
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: LittlerootTown_BrendansHouse_2F_OnWarp
+}
+
+script LittlerootTown_BrendansHouse_2F_OnTransition {
+    if (var(VAR_LITTLEROOT_RIVAL_STATE) < 2) call(LittlerootTown_BrendansHouse_2F_EventScript_CheckSetReadyToMeetBrendan)
+    if (var(VAR_LITTLEROOT_RIVAL_STATE) >= 3) call(LittlerootTown_BrendansHouse_2F_EventScript_CheckShouldUpdateBrendanPos)
+    if (var(VAR_LITTLEROOT_INTRO_STATE) == 4) call(PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet)
+    call(SecretBase_EventScript_SetDecorationFlags)
+    setvar(VAR_SECRET_BASE_INITIALIZED, 0)
+    end
+}
+
+script LittlerootTown_BrendansHouse_2F_EventScript_CheckShouldUpdateBrendanPos {
+    if (flag(FLAG_MET_RIVAL_LILYCOVE)) goto(LittlerootTown_BrendansHouse_2F_EventScript_TryUpdateBrendanPos)
+    if (var(VAR_BIRCH_LAB_STATE) >= 2) goto(LittlerootTown_BrendansHouse_2F_EventScript_Ret)
+    goto(LittlerootTown_BrendansHouse_2F_EventScript_TryUpdateBrendanPos)
+}
+
+script LittlerootTown_BrendansHouse_2F_EventScript_TryUpdateBrendanPos {
+    checkplayergender()
+    if (var(VAR_RESULT) == MALE) goto(LittlerootTown_BrendansHouse_2F_EventScript_Ret)
+    if (var(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 2) goto(LittlerootTown_MaysHouse_2F_EventScript_Ret)
+    setobjectxyperm(LOCALID_RIVALS_HOUSE_2F_RIVAL, 0, 2)
+    setobjectmovementtype(LOCALID_RIVALS_HOUSE_2F_RIVAL, MOVEMENT_TYPE_FACE_UP)
+    return
+}
+
+script LittlerootTown_BrendansHouse_2F_EventScript_Ret {
+    return
+}
+
+script LittlerootTown_BrendansHouse_2F_EventScript_CheckSetReadyToMeetBrendan {
+    checkplayergender()
+    if (var(VAR_RESULT) == FEMALE) goto(LittlerootTown_BrendansHouse_2F_EventScript_SetReadyToMeetBrendan)
+    return
+}
+
+script LittlerootTown_BrendansHouse_2F_EventScript_SetReadyToMeetBrendan {
+    setvar(VAR_LITTLEROOT_RIVAL_STATE, 2)
+    return
+}
+
+raw `
+LittlerootTown_BrendansHouse_2F_OnWarp:
+	map_script_2 VAR_SECRET_BASE_INITIALIZED, 0, LittlerootTown_BrendansHouse_2F_EventScript_CheckInitDecor
+	.2byte 0
+
+`
+
+script LittlerootTown_BrendansHouse_2F_EventScript_CheckInitDecor {
+    checkplayergender()
+    if (var(VAR_RESULT) == MALE) goto(SecretBase_EventScript_InitDecorations)
+    end
+}
+
+script LittlerootTown_BrendansHouse_2F_EventScript_RivalsPokeBall {
+    lockall
+    if (var(VAR_LITTLEROOT_RIVAL_STATE) == 2) goto(LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendan)
+    msgbox(RivalsHouse_2F_Text_ItsRivalsPokeBall, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendan {
+    delay(10)
+    addobject(LOCALID_RIVALS_HOUSE_2F_RIVAL)
+    applymovement(LOCALID_RIVALS_HOUSE_2F_RIVAL, LittlerootTown_BrendansHouse_2F_Movement_BrendanEnters)
+    waitmovement(0)
+    playse(SE_PIN)
+    applymovement(LOCALID_RIVALS_HOUSE_2F_RIVAL, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_RIVALS_HOUSE_2F_RIVAL, Common_Movement_Delay48)
+    waitmovement(0)
+    delay(10)
+    playbgm(MUS_ENCOUNTER_BRENDAN, TRUE)
+    if (var(VAR_FACING) == DIR_NORTH) call(LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanNorth)
+    if (var(VAR_FACING) == DIR_SOUTH) call(LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanSouth)
+    if (var(VAR_FACING) == DIR_WEST) call(LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanWest)
+    if (var(VAR_FACING) == DIR_EAST) call(LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanEast)
+    setvar(VAR_LITTLEROOT_RIVAL_STATE, 3)
+    setflag(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL)
+    clearflag(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM)
+    setvar(VAR_LITTLEROOT_TOWN_STATE, 1)
+    savebgm(MUS_DUMMY)
+    fadedefaultbgm()
+    releaseall
+    end
+}
+
+script LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanNorth {
+    applymovement(LOCALID_RIVALS_HOUSE_2F_RIVAL, LittlerootTown_BrendansHouse_2F_Movement_BrendanApproachPlayerNorth)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    msgbox(RivalsHouse_2F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanNorth)
+    applymovement(LOCALID_RIVALS_HOUSE_2F_RIVAL, LittlerootTown_BrendansHouse_2F_Movement_BrendanWalkToPCNorth)
+    waitmovement(0)
+    return
+}
+
+script LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanSouth {
+    applymovement(LOCALID_RIVALS_HOUSE_2F_RIVAL, LittlerootTown_BrendansHouse_2F_Movement_BrendanApproachPlayerSouth)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    msgbox(RivalsHouse_2F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanSouth)
+    applymovement(LOCALID_RIVALS_HOUSE_2F_RIVAL, LittlerootTown_BrendansHouse_2F_Movement_BrendanWalkToPCSouth)
+    waitmovement(0)
+    return
+}
+
+script LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanWest {
+    applymovement(LOCALID_RIVALS_HOUSE_2F_RIVAL, LittlerootTown_BrendansHouse_2F_Movement_BrendanApproachPlayerWest)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    msgbox(RivalsHouse_2F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanWest)
+    applymovement(LOCALID_RIVALS_HOUSE_2F_RIVAL, LittlerootTown_BrendansHouse_2F_Movement_BrendanWalkToPCWest)
+    waitmovement(0)
+    return
+}
+
+script LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanEast {
+    applymovement(LOCALID_RIVALS_HOUSE_2F_RIVAL, LittlerootTown_BrendansHouse_2F_Movement_BrendanApproachPlayerEast)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    msgbox(RivalsHouse_2F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_RIVALS_HOUSE_2F_RIVAL, LittlerootTown_BrendansHouse_2F_Movement_BrendanWalkToPCEast)
+    waitmovement(0)
+    return
+}
+
+movement LittlerootTown_BrendansHouse_2F_Movement_BrendanEnters {
+    walk_down
+    walk_down
+    walk_in_place_faster_left
+    step_end
+}
+
+movement LittlerootTown_BrendansHouse_2F_Movement_BrendanApproachPlayerNorth {
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    walk_left
+    step_end
+}
+
+movement LittlerootTown_BrendansHouse_2F_Movement_BrendanWalkToPCNorth {
+    walk_up
+    walk_up
+    walk_up
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_in_place_faster_up
+    step_end
+}
+
+movement LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanNorth {
+    delay_16
+    walk_in_place_faster_up
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    walk_in_place_faster_left
+    step_end
+}
+
+movement LittlerootTown_BrendansHouse_2F_Movement_BrendanApproachPlayerSouth {
+    walk_left
+    walk_left
+    walk_left
+    step_end
+}
+
+movement LittlerootTown_BrendansHouse_2F_Movement_BrendanWalkToPCSouth {
+    walk_up
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_in_place_faster_up
+    step_end
+}
+
+movement LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanSouth {
+    delay_16
+    walk_in_place_faster_up
+    delay_16
+    delay_16
+    walk_in_place_faster_left
+    step_end
+}
+
+movement LittlerootTown_BrendansHouse_2F_Movement_BrendanApproachPlayerWest {
+    walk_left
+    walk_left
+    walk_down
+    walk_in_place_faster_left
+    step_end
+}
+
+movement LittlerootTown_BrendansHouse_2F_Movement_BrendanWalkToPCWest {
+    walk_up
+    walk_up
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_in_place_faster_up
+    step_end
+}
+
+movement LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanWest {
+    delay_8
+    delay_16
+    walk_in_place_faster_up
+    delay_16
+    delay_16
+    walk_in_place_faster_left
+    step_end
+}
+
+movement LittlerootTown_BrendansHouse_2F_Movement_BrendanApproachPlayerEast {
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_in_place_faster_down
+    step_end
+}
+
+movement LittlerootTown_BrendansHouse_2F_Movement_BrendanWalkToPCEast {
+    walk_up
+    walk_left
+    walk_left
+    walk_in_place_faster_up
+    step_end
+}
+
+movement LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanEast {
+    delay_16
+    delay_16
+    walk_in_place_faster_left
+    step_end
+}
+
+script LittlerootTown_BrendansHouse_2F_EventScript_PC {
+    lockall
+    checkplayergender()
+    if (var(VAR_RESULT) == MALE) goto(LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC)
+    if (var(VAR_RESULT) == FEMALE) goto(LittlerootTown_BrendansHouse_2F_EventScript_CheckRivalsPC)
+    end
+}
+
+script LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC {
+    setvar(VAR_0x8004, PC_LOCATION_BRENDANS_HOUSE)
+    special(DoPCTurnOnEffect)
+    playse(SE_PC_ON)
+    msgbox(gText_PlayerHouseBootPC, MSGBOX_DEFAULT)
+    special(BedroomPC)
+    waitstate
+    releaseall
+    end
+}
+
+script LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC {
+    setvar(VAR_0x8004, PC_LOCATION_BRENDANS_HOUSE)
+    playse(SE_PC_OFF)
+    special(DoPCTurnOffEffect)
+    releaseall
+    end
+}
+
+script LittlerootTown_BrendansHouse_2F_EventScript_CheckRivalsPC {
+    msgbox(gText_PokemonTrainerSchoolEmail, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script PlayersHouse_2F_EventScript_Notebook {
+    msgbox(PlayersHouse_2F_Text_Notebook, MSGBOX_SIGN)
+    end
+}
+
+script PlayersHouse_2F_EventScript_GameCube {
+    msgbox(PlayersHouse_2F_Text_ItsAGameCube, MSGBOX_SIGN)
+    end
+}
+
+text PlayersHouse_2F_Text_ClockIsStopped {
+    "The clock is stopped…\p"
+    "Better set it and start it!$"
+}
+
+text PlayersHouse_2F_Text_HowDoYouLikeYourRoom {
+    "MOM: {PLAYER}, how do you like your\n"
+    "new room?\p"
+    "Good! Everything's put away neatly!\p"
+    "They finished moving everything in\n"
+    "downstairs, too.\p"
+    "POKéMON movers are so convenient!\p"
+    "Oh, you should make sure that\n"
+    "everything's all there on your desk.$"
+}
+
+text PlayersHouse_2F_Text_Notebook {
+    "{PLAYER} flipped open the notebook.\p"
+    "ADVENTURE RULE NO. 1\n"
+    "Open the MENU with START.\p"
+    "ADVENTURE RULE NO. 2\n"
+    "Record your progress with SAVE.\p"
+    "The remaining pages are blank…$"
+}
+
+text Common_Text_LookCloserAtMap {
+    "{PLAYER} took a closer look at the\n"
+    "{REGION} region map.$"
+}
+
+text PlayersHouse_2F_Text_ItsAGameCube {
+    "It's a Nintendo GameCube.\p"
+    "A Game Boy Advance is connected to\n"
+    "serve as the Controller.$"
+}

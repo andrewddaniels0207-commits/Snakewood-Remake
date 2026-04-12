@@ -1,0 +1,42 @@
+mapscripts MauvilleCity_Mart_MapScripts {}
+
+script MauvilleCity_Mart_EventScript_Clerk {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(MauvilleCity_Mart_Pokemart)
+    msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MauvilleCity_Mart_Pokemart {
+    pokemartlistend()
+}
+
+script MauvilleCity_Mart_EventScript_ExpertM {
+    msgbox(MauvilleCity_Mart_Text_ItemsToTemporarilyElevateStats, MSGBOX_NPC)
+    end
+}
+
+script MauvilleCity_Mart_EventScript_Man {
+    msgbox(MauvilleCity_Mart_Text_DecisionsDetermineBattle, MSGBOX_NPC)
+    end
+}
+
+text MauvilleCity_Mart_Text_ItemsToTemporarilyElevateStats {
+    "There are items that temporarily\n"
+    "elevate the stats of POKéMON.\p"
+    "The ones I know you use in battle\n"
+    "are X ATTACK and X DEFEND…\p"
+    "I do believe that there are others\n"
+    "like them.$"
+}
+
+text MauvilleCity_Mart_Text_DecisionsDetermineBattle {
+    "Use a certain move, or use an item\n"
+    "instead…\p"
+    "The TRAINER's decisions determine how\n"
+    "battles turn out, I think.$"
+}

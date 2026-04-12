@@ -1,0 +1,179 @@
+mapscripts AbandonedShip_Rooms2_1F_MapScripts {}
+
+script AbandonedShip_Rooms2_1F_EventScript_Dan {
+    trainerbattle_double(TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_DanIntro, AbandonedShip_Rooms2_1F_Text_DanDefeat, AbandonedShip_Rooms2_1F_Text_DanNotEnoughMons, AbandonedShip_Rooms2_1F_EventScript_RegisterDan)
+    specialvar(VAR_RESULT, ShouldTryRematchBattle)
+    if (var(VAR_RESULT) == TRUE) goto(AbandonedShip_Rooms2_1F_EventScript_DanRematch)
+    msgbox(AbandonedShip_Rooms2_1F_Text_DanPostBattle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script AbandonedShip_Rooms2_1F_EventScript_RegisterDan {
+    msgbox(AbandonedShip_Rooms2_1F_Text_KiraRegister, MSGBOX_DEFAULT)
+    register_matchcall(TRAINER_KIRA_AND_DAN_1)
+    release
+    end
+}
+
+script AbandonedShip_Rooms2_1F_EventScript_DanRematch {
+    trainerbattle_rematch_double(TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_DanRematchIntro, AbandonedShip_Rooms2_1F_Text_DanRematchDefeat, AbandonedShip_Rooms2_1F_Text_DanRematchNotEnoughMons)
+    msgbox(AbandonedShip_Rooms2_1F_Text_DanPostRematch, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script AbandonedShip_Rooms2_1F_EventScript_Kira {
+    trainerbattle_double(TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_KiraIntro, AbandonedShip_Rooms2_1F_Text_KiraDefeat, AbandonedShip_Rooms2_1F_Text_KiraNotEnoughMons, AbandonedShip_Rooms2_1F_EventScript_RegisterKira)
+    specialvar(VAR_RESULT, ShouldTryRematchBattle)
+    if (var(VAR_RESULT) == TRUE) goto(AbandonedShip_Rooms2_1F_EventScript_KiraRematch)
+    msgbox(AbandonedShip_Rooms2_1F_Text_KiraPostBattle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script AbandonedShip_Rooms2_1F_EventScript_RegisterKira {
+    msgbox(AbandonedShip_Rooms2_1F_Text_KiraRegister, MSGBOX_DEFAULT)
+    register_matchcall(TRAINER_KIRA_AND_DAN_1)
+    release
+    end
+}
+
+script AbandonedShip_Rooms2_1F_EventScript_KiraRematch {
+    trainerbattle_rematch_double(TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_KiraRematchIntro, AbandonedShip_Rooms2_1F_Text_KiraRematchDefeat, AbandonedShip_Rooms2_1F_Text_KiraRematchNotEnoughMons)
+    msgbox(AbandonedShip_Rooms2_1F_Text_KiraPostRematch, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script AbandonedShip_Rooms2_1F_EventScript_Jani {
+    trainerbattle_single(TRAINER_JANI, AbandonedShip_Rooms2_1F_Text_JaniIntro, AbandonedShip_Rooms2_1F_Text_JaniDefeat)
+    msgbox(AbandonedShip_Rooms2_1F_Text_JaniPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script AbandonedShip_Rooms2_1F_EventScript_Garrison {
+    trainerbattle_single(TRAINER_GARRISON, AbandonedShip_Rooms2_1F_Text_GarrisonIntro, AbandonedShip_Rooms2_1F_Text_GarrisonDefeat)
+    msgbox(AbandonedShip_Rooms2_1F_Text_GarrisonPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text AbandonedShip_Rooms2_1F_Text_DanIntro {
+    "DAN: While searching for treasures,\n"
+    "we discovered a TRAINER!$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_DanDefeat {
+    "DAN: We couldn't win even though\n"
+    "we worked together…$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_DanPostBattle {
+    "DAN: We can't find any treasures…\n"
+    "I wonder if someone got them already?$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_DanNotEnoughMons {
+    "DAN: You don't even have two POKéMON.\n"
+    "You can't expect to beat us like that.$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_KiraIntro {
+    "KIRA: Oh?\n"
+    "We were searching for treasures.\l"
+    "But we discovered a TRAINER instead!$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_KiraDefeat {
+    "KIRA: Ooh, so strong!$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_KiraPostBattle {
+    "KIRA: Where could the treasures be?\p"
+    "I've already decided what I'm buying\n"
+    "when we find the treasures!$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_KiraNotEnoughMons {
+    "KIRA: Oh, you don't have two POKéMON?\n"
+    "We'll have to battle some other time!$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_KiraRegister {
+    "KIRA: Oh, you make me so angry!\n"
+    "I'm going to register you for that!$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_DanRematchIntro {
+    "DAN: We've been searching for\n"
+    "treasures all this time.\p"
+    "Our POKéMON have grown stronger, too.\n"
+    "Let us show you, okay?$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_DanRematchDefeat {
+    "DAN: You're strong, as usual!$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_DanPostRematch {
+    "DAN: We can't find any treasures,\n"
+    "we lose at POKéMON…\p"
+    "I want to go home… But if I say that,\n"
+    "she gets all angry with me…$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_DanRematchNotEnoughMons {
+    "DAN: You don't even have two POKéMON.\n"
+    "You can't expect to beat us like that.$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_KiraRematchIntro {
+    "KIRA: Oh? We meet again!\p"
+    "Just like us, you still haven't given up\n"
+    "searching for treasures, have you?\p"
+    "Want to make it so the loser has\n"
+    "to give up searching?$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_KiraRematchDefeat {
+    "KIRA: Oh, we lost again…$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_KiraPostRematch {
+    "KIRA: We're not leaving until we raise\n"
+    "our POKéMON some more and we find\l"
+    "the treasures here!$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_KiraRematchNotEnoughMons {
+    "KIRA: Oh, you don't have two POKéMON?\n"
+    "We'll have to battle some other time!$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_JaniIntro {
+    "I'm not good at swimming,\n"
+    "but I am good at battles!$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_JaniDefeat {
+    "Oops.\n"
+    "That didn't go very well.$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_JaniPostBattle {
+    "Walking around barefoot in this ship\n"
+    "is kind of gross.$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_GarrisonIntro {
+    "Strength and compassion…\n"
+    "Those are a TRAINER's treasures!$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_GarrisonDefeat {
+    "Ah, there is something about you\n"
+    "that sparkles.$"
+}
+
+text AbandonedShip_Rooms2_1F_Text_GarrisonPostBattle {
+    "In a cabin somewhere on board,\n"
+    "I saw something sparkle.$"
+}

@@ -1,0 +1,46 @@
+mapscripts MossdeepCity_House1_MapScripts {}
+
+script MossdeepCity_House1_EventScript_BlackBelt {
+    lock
+    faceplayer
+    bufferleadmonspeciesname(STR_VAR_1)
+    msgbox(MossdeepCity_House1_Text_HmmYourPokemon, MSGBOX_DEFAULT)
+    specialvar(VAR_RESULT, GetPokeblockNameByMonNature)
+    if (var(VAR_RESULT) == 0) goto(MossdeepCity_House1_EventScript_NeutralNature)
+    msgbox(MossdeepCity_House1_Text_ItLikesXPokeblocks, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MossdeepCity_House1_EventScript_NeutralNature {
+    msgbox(MossdeepCity_House1_Text_DoesntLikeOrDislikePokeblocks, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MossdeepCity_House1_EventScript_Woman {
+    msgbox(MossdeepCity_House1_Text_HusbandCanTellPokeblockMonLikes, MSGBOX_NPC)
+    end
+}
+
+text MossdeepCity_House1_Text_HmmYourPokemon {
+    "Hmm!\n"
+    "Your {STR_VAR_1}…$"
+}
+
+text MossdeepCity_House1_Text_ItLikesXPokeblocks {
+    "It likes {STR_VAR_1}S,\n"
+    "doesn't it?\p"
+    "No, I'm positive of it! It definitely\n"
+    "likes {STR_VAR_1}S!$"
+}
+
+text MossdeepCity_House1_Text_DoesntLikeOrDislikePokeblocks {
+    "It doesn't appear to like or dislike\n"
+    "any {POKEBLOCK}S.$"
+}
+
+text MossdeepCity_House1_Text_HusbandCanTellPokeblockMonLikes {
+    "My husband can tell what kind of\n"
+    "{POKEBLOCK}S a POKéMON likes at a glance.$"
+}

@@ -1,0 +1,22 @@
+mapscripts OneIsland_House1_Frlg_MapScripts {}
+
+script OneIsland_House1_EventScript_OldMan {
+    msgbox(OneIsland_House1_Text_GazeUponVolcanoOnSunnyDays, MSGBOX_NPC)
+    end
+}
+
+script OneIsland_House1_EventScript_OldWoman {
+    msgbox(OneIsland_House1_Text_LastTimeMtEmberErupted, MSGBOX_NPC)
+    end
+}
+
+text OneIsland_House1_Text_GazeUponVolcanoOnSunnyDays {
+    "On sunny days, I step out and gaze\n"
+    "upon the volcano.\p"
+    "That's my daily routine.$"
+}
+
+text OneIsland_House1_Text_LastTimeMtEmberErupted {
+    "Let me think… When was the last\n"
+    "time MT. EMBER erupted?$"
+}

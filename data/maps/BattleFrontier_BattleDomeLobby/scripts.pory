@@ -1,0 +1,794 @@
+mapscripts BattleFrontier_BattleDomeLobby_MapScripts {
+    MAP_SCRIPT_ON_RESUME: BattleFrontier_BattleDomeLobby_OnResume
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_CHALLENGE_STATUS, 0: BattleFrontier_BattleDomeLobby_EventScript_GetChallengeStatus
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING: BattleFrontier_BattleDomeLobby_EventScript_QuitWithoutSaving
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_PAUSED: BattleFrontier_BattleDomeLobby_EventScript_ResumeChallenge
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_WON: BattleFrontier_BattleDomeLobby_EventScript_WonChallenge
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST: BattleFrontier_BattleDomeLobby_EventScript_LostChallenge
+    ]
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: BattleFrontier_BattleDomeLobby_OnWarp
+}
+
+script BattleFrontier_BattleDomeLobby_OnResume {
+    dome_initresultstree()
+    end
+}
+
+raw `
+BattleFrontier_BattleDomeLobby_OnWarp:
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleDomeLobby_EventScript_TurnPlayerNorth
+	.2byte 0
+
+`
+
+script BattleFrontier_BattleDomeLobby_EventScript_TurnPlayerNorth {
+    setvar(VAR_TEMP_1, 1)
+    turnobject(LOCALID_PLAYER, DIR_NORTH)
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_GetChallengeStatus {
+    frontier_getstatus()
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_QuitWithoutSaving {
+    lockall
+    msgbox(BattleFrontier_BattleDomeLobby_Text_DidntSaveBeforeQuitting, MSGBOX_DEFAULT)
+    closemessage
+    dome_set(DOME_DATA_WIN_STREAK, 0)
+    dome_set(DOME_DATA_WIN_STREAK_ACTIVE, FALSE)
+    dome_set(DOME_DATA_ATTEMPTED_CHALLENGE, TRUE)
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, 0)
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    releaseall
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_WonChallenge {
+    call(BattleFrontier_EventScript_IncrementWinStreak)
+    lockall
+    frontier_isbrain()
+    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleDomeLobby_EventScript_DefeatedAce)
+    msgbox(BattleFrontier_BattleDomeLobby_Text_CongratsForWinningTourney, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleDomeLobby_EventScript_GiveBattlePoints)
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_DefeatedAce {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_CongratsDefeatedTucker, MSGBOX_DEFAULT)
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_GiveBattlePoints {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_AwardTheseBattlePoints, MSGBOX_DEFAULT)
+    frontier_givepoints()
+    msgbox(BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS)
+    message(BattleFrontier_BattleDomeLobby_Text_RecordWillBeSaved)
+    waitmessage()
+    special(LoadPlayerParty)
+    frontier_setpartyorder(FRONTIER_PARTY_SIZE)
+    frontier_checkairshow()
+    dome_set(DOME_DATA_ATTEMPTED_CHALLENGE, TRUE)
+    dome_set(DOME_DATA_HAS_WON_CHALLENGE, TRUE)
+    dome_set(DOME_DATA_WIN_STREAK_ACTIVE, TRUE)
+    special(LoadPlayerParty)
+    special(HealPlayerParty)
+    callnative(UpdateFollowingPokemon)
+    goto(BattleFrontier_BattleDomeLobby_EventScript_AskRecordBattle)
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_LostChallenge {
+    lockall
+    msgbox(BattleFrontier_BattleDomeLobby_Text_ThankYouForPlaying, MSGBOX_DEFAULT)
+    message(BattleFrontier_BattleDomeLobby_Text_RecordWillBeSaved)
+    waitmessage()
+    special(LoadPlayerParty)
+    frontier_setpartyorder(FRONTIER_PARTY_SIZE)
+    frontier_checkairshow()
+    dome_set(DOME_DATA_WIN_STREAK_ACTIVE, FALSE)
+    dome_set(DOME_DATA_ATTEMPTED_CHALLENGE, TRUE)
+    special(LoadPlayerParty)
+    special(HealPlayerParty)
+    callnative(UpdateFollowingPokemon)
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_AskRecordBattle {
+    dome_save(0)
+    playse(SE_SAVE)
+    waitse()
+    call(BattleFrontier_EventScript_GetCantRecordBattle)
+    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleDomeLobby_EventScript_EndChallenge)
+    message(BattleFrontier_BattleDomeLobby_Text_RecordLastMatch)
+    waitmessage()
+    multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
+    switch(VAR_RESULT)
+    case(1, BattleFrontier_BattleDomeLobby_EventScript_EndChallenge)
+    case(0, BattleFrontier_BattleDomeLobby_EventScript_RecordBattle)
+    case(MULTI_B_PRESSED, BattleFrontier_BattleDomeLobby_EventScript_EndChallenge)
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_RecordBattle {
+    call(BattleFrontier_EventScript_SaveBattle)
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_EndChallenge {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_HopeToSeeYouAgain, MSGBOX_DEFAULT)
+    closemessage
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    releaseall
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_ResumeChallenge {
+    lockall
+    msgbox(BattleFrontier_BattleDomeLobby_Text_WeveBeenWaitingForYou, MSGBOX_DEFAULT)
+    message(BattleFrontier_BattleDomeLobby_Text_OkayToSaveBeforeChallenge2)
+    waitmessage()
+    dome_save(CHALLENGE_STATUS_SAVING)
+    playse(SE_SAVE)
+    waitse()
+    frontier_set(FRONTIER_DATA_PAUSED, FALSE)
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    goto(BattleFrontier_BattleDomeLobby_EventScript_EnterChallenge)
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendant {
+    lock
+    faceplayer
+    setvar(VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_DOME)
+    setvar(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES)
+    goto(BattleFrontier_BattleDomeLobby_EventScript_AttendantWelcome)
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_DoublesAttendant {
+    lock
+    faceplayer
+    setvar(VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_DOME)
+    setvar(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES)
+    goto(BattleFrontier_BattleDomeLobby_EventScript_AttendantWelcome)
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_AttendantWelcome {
+    special(SavePlayerParty)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattleDomeLobby_EventScript_WelcomeSingles)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattleDomeLobby_EventScript_WelcomeDoubles)
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_AskTakeChallenge {
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattleDomeLobby_EventScript_TakeSinglesChallenge)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattleDomeLobby_EventScript_TakeDoublesChallenge)
+    waitmessage()
+    multichoice(17, 6, MULTI_CHALLENGEINFO, FALSE)
+    switch(VAR_RESULT)
+    case(0, BattleFrontier_BattleDomeLobby_EventScript_TryEnterChallenge)
+    case(1, BattleFrontier_BattleDomeLobby_EventScript_ExplainChallenge)
+    case(2, BattleFrontier_BattleDomeLobby_EventScript_CancelChallenge)
+    case(MULTI_B_PRESSED, BattleFrontier_BattleDomeLobby_EventScript_CancelChallenge)
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_TryEnterChallenge {
+    message(BattleFrontier_BattleDomeLobby_Text_WhichLevelMode)
+    waitmessage()
+    multichoice(17, 6, MULTI_LEVEL_MODE, FALSE)
+    switch(VAR_RESULT)
+    case(FRONTIER_LVL_TENT, BattleFrontier_BattleDomeLobby_EventScript_CancelChallenge)
+    case(MULTI_B_PRESSED, BattleFrontier_BattleDomeLobby_EventScript_CancelChallenge)
+    frontier_checkineligible()
+    if (var(VAR_0x8004) == TRUE) goto(BattleFrontier_BattleDomeLobby_EventScript_NotEnoughValidMons)
+    frontier_set(FRONTIER_DATA_LVL_MODE, VAR_RESULT)
+    msgbox(BattleFrontier_BattleDomeLobby_Text_SelectThreeMons, MSGBOX_DEFAULT)
+    fadescreen(FADE_TO_BLACK)
+    callnative(RemoveFollowingPokemon)
+    call(BattleFrontier_EventScript_GetLvlMode)
+    copyvar(VAR_0x8004, VAR_RESULT)
+    setvar(VAR_0x8005, FRONTIER_PARTY_SIZE)
+    special(ChoosePartyForBattleFrontier)
+    waitstate
+    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleDomeLobby_EventScript_LoadPartyCancelChallenge)
+    msgbox(BattleFrontier_BattleDomeLobby_Text_OkayToSaveBeforeChallenge, MSGBOX_YESNO)
+    switch(VAR_RESULT)
+    case(NO, BattleFrontier_BattleDomeLobby_EventScript_LoadPartyCancelChallenge)
+    case(YES, BattleFrontier_BattleDomeLobby_EventScript_SaveBeforeChallenge)
+    case(MULTI_B_PRESSED, BattleFrontier_BattleDomeLobby_EventScript_LoadPartyCancelChallenge)
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_SaveBeforeChallenge {
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 0)
+    frontier_set(FRONTIER_DATA_SELECTED_MON_ORDER)
+    dome_init()
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING)
+    frontier_set(FRONTIER_DATA_PAUSED, FALSE)
+    special(LoadPlayerParty)
+    closemessage
+    delay(2)
+    call(Common_EventScript_SaveGame)
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleDomeLobby_EventScript_CancelChallengeSaveFailed)
+    dome_inittrainers()
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_EnterChallenge {
+    special(SavePlayerParty)
+    frontier_setpartyorder(FRONTIER_PARTY_SIZE)
+    dome_settrainers()
+    msgbox(BattleFrontier_BattleDomeLobby_Text_ShowYouToBattleDome, MSGBOX_DEFAULT)
+    closemessage
+    call(BattleFrontier_BattleDomeLobby_EventScript_WalkToDoor)
+    special(HealPlayerParty)
+    warp(MAP_BATTLE_FRONTIER_BATTLE_DOME_CORRIDOR, 23, 6)
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 0)
+    waitstate
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_ExplainChallenge {
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattleDomeLobby_EventScript_ExplainSinglesChallenge)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattleDomeLobby_EventScript_ExplainDoublesChallenge)
+    goto(BattleFrontier_BattleDomeLobby_EventScript_AskTakeChallenge)
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_NotEnoughValidMons {
+    switch(VAR_RESULT)
+    case(FRONTIER_LVL_50, BattleFrontier_BattleDomeLobby_EventScript_NotEnoughValidMonsLv50)
+    case(FRONTIER_LVL_OPEN, BattleFrontier_BattleDomeLobby_EventScript_NotEnoughValidMonsLvOpen)
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_NotEnoughValidMonsLv50 {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsLv50, MSGBOX_DEFAULT)
+    call(BattleFrontier_ShowCaughtBannedSpecies)
+    msgbox(BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsEnd, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleDomeLobby_EventScript_EndCancelChallenge)
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_NotEnoughValidMonsLvOpen {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsLvOpen, MSGBOX_DEFAULT)
+    call(BattleFrontier_ShowCaughtBannedSpecies)
+    msgbox(BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsEnd, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleDomeLobby_EventScript_EndCancelChallenge)
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_CancelChallengeSaveFailed {
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, 0)
+    goto(BattleFrontier_BattleDomeLobby_EventScript_CancelChallenge)
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_LoadPartyCancelChallenge {
+    special(LoadPlayerParty)
+    callnative(UpdateFollowingPokemon)
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_CancelChallenge {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_HopeToSeeYouAgain, MSGBOX_DEFAULT)
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_EndCancelChallenge {
+    release
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_WalkToDoor {
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendantWalkToDoor)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattleDomeLobby_EventScript_DoublesAttendantWalkToDoor)
+    applymovement(LOCALID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_WalkToDoor)
+    waitmovement(0)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattleDomeLobby_EventScript_OpenSinglesDoor)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattleDomeLobby_EventScript_OpenDoublesDoor)
+    waitdooranim()
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendantEnterDoor)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattleDomeLobby_EventScript_DoublesAttendantEnterDoor)
+    applymovement(LOCALID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_PlayerEnterDoor)
+    waitmovement(0)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_SINGLES) call(BattleFrontier_BattleDomeLobby_EventScript_CloseSinglesDoor)
+    if (var(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES) call(BattleFrontier_BattleDomeLobby_EventScript_CloseDoublesDoor)
+    waitdooranim()
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendantWalkToDoor {
+    applymovement(LOCALID_DOME_ATTENDANT_SINGLES, BattleFrontier_BattleDomeLobby_Movement_WalkToDoor)
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_DoublesAttendantWalkToDoor {
+    applymovement(LOCALID_DOME_ATTENDANT_DOUBLES, BattleFrontier_BattleDomeLobby_Movement_WalkToDoor)
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendantEnterDoor {
+    applymovement(LOCALID_DOME_ATTENDANT_SINGLES, BattleFrontier_BattleDomeLobby_Movement_AttendantEnterDoor)
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_DoublesAttendantEnterDoor {
+    applymovement(LOCALID_DOME_ATTENDANT_DOUBLES, BattleFrontier_BattleDomeLobby_Movement_AttendantEnterDoor)
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_WelcomeSingles {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_WelcomeSingleBattle, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_WelcomeDoubles {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_WelcomeDoubleBattle, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_TakeSinglesChallenge {
+    message(BattleFrontier_BattleDomeLobby_Text_TakeSinglesChallenge)
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_TakeDoublesChallenge {
+    message(BattleFrontier_BattleDomeLobby_Text_TakeDoublesChallenge)
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_ExplainSinglesChallenge {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_ExplainSinglesChallenge, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_ExplainDoublesChallenge {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_ExplainDoublesChallenge, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_OpenSinglesDoor {
+    opendoor(5, 4)
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_OpenDoublesDoor {
+    opendoor(17, 4)
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_CloseSinglesDoor {
+    closedoor(5, 4)
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_CloseDoublesDoor {
+    closedoor(17, 4)
+    return
+}
+
+movement BattleFrontier_BattleDomeLobby_Movement_WalkToDoor {
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    step_end
+}
+
+movement BattleFrontier_BattleDomeLobby_Movement_AttendantEnterDoor {
+    walk_up
+    set_invisible
+    step_end
+}
+
+movement BattleFrontier_BattleDomeLobby_Movement_PlayerEnterDoor {
+    walk_up
+    walk_up
+    set_invisible
+    step_end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_ShowSinglesResults {
+    lockall
+    frontier_results(FRONTIER_FACILITY_DOME, FRONTIER_MODE_SINGLES)
+    waitbuttonpress()
+    special(RemoveRecordsWindow)
+    releaseall
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_ShowDoublesResults {
+    lockall
+    frontier_results(FRONTIER_FACILITY_DOME, FRONTIER_MODE_DOUBLES)
+    waitbuttonpress()
+    special(RemoveRecordsWindow)
+    releaseall
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_ShowPrevTourneyTree {
+    dome_get(DOME_DATA_PREV_TOURNEY_TYPE)
+    if (var(VAR_RESULT) == 0) call(BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLv50)
+    if (var(VAR_RESULT) == 1) call(BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLv50)
+    if (var(VAR_RESULT) == 2) call(BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLvOpen)
+    if (var(VAR_RESULT) == 3) call(BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLvOpen)
+    fadescreen(FADE_TO_BLACK)
+    dome_showprevtourneytree()
+    waitstate
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLv50 {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsSinglesLv50, MSGBOX_SIGN)
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLv50 {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsDoublesLv50, MSGBOX_SIGN)
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLvOpen {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsSinglesLvOpen, MSGBOX_SIGN)
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLvOpen {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsDoublesLvOpen, MSGBOX_SIGN)
+    return
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_Maniac {
+    dome_getwinnersname()
+    msgbox(BattleFrontier_BattleDomeLobby_Text_LastWinnerWasTough, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_Lass {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_WinnersGainReputation, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_FatMan {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_TrashedInFirstRound, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_Man {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_NeedToCheckOpponentCarefully, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideWest_EventScript_Man3 {
+    msgbox(BattleFrontier_OutsideWest_Text_LongDreamedAboutBattleFrontier, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideWest_EventScript_BattleDomeSign2 {
+    msgbox(BattleFrontier_OutsideWest_Text_BattleDomeSign2, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideWest_EventScript_UnderConstructionSign {
+    msgbox(BattleFrontier_OutsideWest_Text_QuestionMarkUnderConstruction, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_RulesBoard {
+    lockall
+    msgbox(BattleFrontier_BattleDomeLobby_Text_RulesAreListed, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleDomeLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_ReadRulesBoard {
+    message(BattleFrontier_BattleDomeLobby_Text_ReadWhichHeading)
+    waitmessage()
+    multichoice(17, 4, MULTI_BATTLE_DOME_RULES, FALSE)
+    switch(VAR_RESULT)
+    case(0, BattleFrontier_BattleDomeLobby_EventScript_RulesMatchup)
+    case(1, BattleFrontier_BattleDomeLobby_EventScript_RulesTourneyTree)
+    case(2, BattleFrontier_BattleDomeLobby_EventScript_RulesDoubleKO)
+    case(3, BattleFrontier_BattleDomeLobby_EventScript_ExitRules)
+    case(MULTI_B_PRESSED, BattleFrontier_BattleDomeLobby_EventScript_ExitRules)
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_RulesMatchup {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_ExplainMatchupRules, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleDomeLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_RulesTourneyTree {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_ExplainTourneyTree, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleDomeLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_RulesDoubleKO {
+    msgbox(BattleFrontier_BattleDomeLobby_Text_ExplainDoubleKORules, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleDomeLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattleDomeLobby_EventScript_ExitRules {
+    releaseall
+    end
+}
+
+text BattleFrontier_BattleDomeLobby_Text_WelcomeSingleBattle {
+    "Where the strategies of TRAINERS\n"
+    "are put to the test!\p"
+    "Welcome to the BATTLE DOME!\p"
+    "I am your guide to the SINGLE BATTLE\n"
+    "Tournament.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_TakeSinglesChallenge {
+    "Would you like to challenge\n"
+    "the SINGLE BATTLE Tournament?$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_HopeToSeeYouAgain {
+    "We hope to see you again.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_ExplainSinglesChallenge {
+    "The SINGLE BATTLE Tournament\n"
+    "is exactly as the name suggests--\l"
+    "a tournament of SINGLE BATTLES.\p"
+    "All participating TRAINERS must\n"
+    "enter three POKéMON each.\p"
+    "In each battle, one of the three\n"
+    "POKéMON must be held in reserve.\p"
+    "The other two POKéMON can battle\n"
+    "one at a time.\p"
+    "Choose the two battling POKéMON after\n"
+    "examining the opponent's trio.\p"
+    "You win the tournament by defeating\n"
+    "four TRAINERS.\p"
+    "Battle Points are awarded to\n"
+    "the tournament winner.\p"
+    "If you want to interrupt your\n"
+    "tournament, please save the game.\p"
+    "If you don't save before interrupting,\n"
+    "you will be disqualified.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_OkayToSaveBeforeChallenge {
+    "Before I show you to the BATTLE DOME,\n"
+    "I must save the data. Is that okay?$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_WhichLevelMode {
+    "The tournament offers two levels\n"
+    "of challenge, Level 50 and Open Level.\l"
+    "Which is your choice?$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_SelectThreeMons {
+    "Now select the three POKéMON that\n"
+    "you wish to enter, please.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsLvOpen {
+    "Excuse me!\p"
+    "You don't have three eligible POKéMON.\p"
+    "Also, the POKéMON must be holding\n"
+    "different kinds of items.\p"
+    "EGGS{STR_VAR_1}.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsEnd {
+    "Please come see me when you are ready.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsLv50 {
+    "Excuse me!\p"
+    "You don't have three eligible POKéMON.\p"
+    "You must have three different POKéMON\n"
+    "of Level 50 or less to enter.\p"
+    "They also must be holding different\n"
+    "kinds of items.\p"
+    "EGGS{STR_VAR_1}.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_ShowYouToBattleDome {
+    "I will now show you to\n"
+    "the BATTLE DOME.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_DidntSaveBeforeQuitting {
+    "Excuse me!\p"
+    "You didn't save before you quit your\n"
+    "challenge last time.\p"
+    "Because of that, your challenge so far\n"
+    "has been disqualified. Sorry!$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_CongratsForWinningTourney {
+    "Congratulations for winning\n"
+    "your Battle Tournament!$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_HereIsYourPrize {
+    "Here is your prize for your Battle\n"
+    "Tournament victory.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_ReceivedPrize {
+    "{PLAYER} received the prize\n"
+    "{STR_VAR_1}.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_BagFullMakeRoom {
+    "Oh, your BAG appears to be full.\p"
+    "Please make room in your BAG, then come\n"
+    "see me.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_ThankYouForPlaying {
+    "Thank you for playing!$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_RecordWillBeSaved {
+    "Your record will be saved.\n"
+    "Please wait.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_WeveBeenWaitingForYou {
+    "We've been waiting for you!$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_OkayToSaveBeforeChallenge2 {
+    "Before I show you to the BATTLE DOME,\n"
+    "I must save the data. Is that okay?$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_WelcomeDoubleBattle {
+    "Where the strategies of TRAINERS\n"
+    "are put to the test!\p"
+    "Welcome to the BATTLE DOME!\p"
+    "I am your guide to the DOUBLE BATTLE\n"
+    "Tournament.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_TakeDoublesChallenge {
+    "Would you like to challenge\n"
+    "the DOUBLE BATTLE Tournament?$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_ExplainDoublesChallenge {
+    "The DOUBLE BATTLE Tournament\n"
+    "is exactly as the name suggests--\l"
+    "a tournament of DOUBLE BATTLES.\p"
+    "All participating TRAINERS must\n"
+    "enter three POKéMON each.\p"
+    "In each battle, one of the three\n"
+    "POKéMON must be held in reserve.\p"
+    "The remaining two POKéMON must take\n"
+    "part in a DOUBLE BATTLE.\p"
+    "Choose the two battling POKéMON after\n"
+    "examining the opponent's trio.\p"
+    "You win the tournament by defeating\n"
+    "four TRAINERS.\p"
+    "Battle Points are awarded to\n"
+    "the tournament winner.\p"
+    "If you want to interrupt your\n"
+    "tournament, please save the game.\p"
+    "If you don't save before interrupting,\n"
+    "you will be disqualified.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsSinglesLv50 {
+    "They're the results of the last\n"
+    "Level 50 SINGLE BATTLE Tournament.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsDoublesLv50 {
+    "They're the results of the last\n"
+    "Level 50 DOUBLE BATTLE Tournament.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsSinglesLvOpen {
+    "They're the results of the last\n"
+    "Open Level SINGLE BATTLE Tournament.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsDoublesLvOpen {
+    "They're the results of the last\n"
+    "Open Level DOUBLE BATTLE Tournament.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_LastWinnerWasTough {
+    "Did you see it?\n"
+    "The last Battle Tournament?\p"
+    "The winner, {STR_VAR_1}, was seriously\n"
+    "tough.\p"
+    "You should check out the results\n"
+    "on the monitor beside the PC.$"
+}
+
+text BattleFrontier_OutsideWest_Text_LongDreamedAboutBattleFrontier {
+    "The BATTLE FRONTIER…\n"
+    "I've long dreamed about a place like it.$"
+}
+
+text BattleFrontier_OutsideWest_Text_BattleDomeSign2 {
+    "The BATTLE DOME\n"
+    "Become the Unbeatable Superstar!$"
+}
+
+text BattleFrontier_OutsideWest_Text_QuestionMarkUnderConstruction {
+    "The ??????\n"
+    "Under Construction!$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_WinnersGainReputation {
+    "When a TRAINER chains tournament\n"
+    "wins at the BATTLE DOME, he or she\l"
+    "gains a reputation as a star.\p"
+    "Tough TRAINERS are drawn by that\n"
+    "reputation to the BATTLE DOME.\p"
+    "A true superstar is a TRAINER who\n"
+    "can keep winning tournaments.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_TrashedInFirstRound {
+    "I ran into one of the tournament\n"
+    "favorites in the very first round.\p"
+    "Of course I got trashed…$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_NeedToCheckOpponentCarefully {
+    "I would've won if I'd kept this POKéMON\n"
+    "held in reserve.\p"
+    "You need to check your opponent's\n"
+    "POKéMON carefully before choosing\l"
+    "your battling POKéMON.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_CongratsDefeatedTucker {
+    "Congratulations!\p"
+    "You defeated the DOME ACE and won\n"
+    "the Battle Tournament!$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_AwardTheseBattlePoints {
+    "In recognition of your strategy--\n"
+    "a thing of beauty it was, too--\l"
+    "we award you these Battle Point(s)!$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_RecordLastMatch {
+    "Would you like to record your\n"
+    "last BATTLE DOME match on your\l"
+    "FRONTIER PASS?$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_RulesAreListed {
+    "The Battle Tournament rules\n"
+    "are listed.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_ReadWhichHeading {
+    "Which heading do you want to read?$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_ExplainMatchupRules {
+    "The tournament matchups are drawn up\n"
+    "based on the toughness of POKéMON\l"
+    "held by TRAINERS.\p"
+    "The matchups avoid having tough\n"
+    "TRAINERS face each other right away.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_ExplainTourneyTree {
+    "The tournament chart, or as we call it,\n"
+    "the “Tree,” is available for viewing\l"
+    "in the Waiting Room from any guide.\p"
+    "The Tournament Tree will provide\n"
+    "several kinds of data.\p"
+    "The data on view includes the previous\n"
+    "tournament's results, the POKéMON held\l"
+    "by TRAINERS, and the battle styles of\l"
+    "TRAINERS.$"
+}
+
+text BattleFrontier_BattleDomeLobby_Text_ExplainDoubleKORules {
+    "If battling POKéMON faint at the same\n"
+    "time--a double KO--in a tournament\l"
+    "match, the REFEREES will review\l"
+    "the match and declare the winner.$"
+}

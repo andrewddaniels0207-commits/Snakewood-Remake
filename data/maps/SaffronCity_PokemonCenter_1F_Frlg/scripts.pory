@@ -1,0 +1,66 @@
+mapscripts SaffronCity_PokemonCenter_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: SaffronCity_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script SaffronCity_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_SAFFRON_CITY)
+    end
+}
+
+script SaffronCity_PokemonCenter_1F_EventScript_Nurse {
+    lock
+    faceplayer
+    call(EventScript_PkmnCenterNurse_Frlg)
+    release
+    end
+}
+
+script SaffronCity_PokemonCenter_1F_EventScript_Gentleman {
+    msgbox(SaffronCity_PokemonCenter_1F_Text_SilphCoVictimOfFame, MSGBOX_NPC)
+    end
+}
+
+script SaffronCity_PokemonCenter_1F_EventScript_Woman {
+    msgbox(SaffronCity_PokemonCenter_1F_Text_GrowthRatesDifferBySpecies, MSGBOX_NPC)
+    end
+}
+
+script SaffronCity_PokemonCenter_1F_EventScript_Youngster {
+    lock
+    faceplayer
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) == 1) goto(SaffronCity_PokemonCenter_1F_EventScript_YoungsterRocketsGone)
+    msgbox(SaffronCity_PokemonCenter_1F_Text_GreatIfEliteFourCameBeatRockets)
+    release
+    end
+}
+
+script SaffronCity_PokemonCenter_1F_EventScript_YoungsterRocketsGone {
+    msgbox(SaffronCity_PokemonCenter_1F_Text_TeamRocketTookOff)
+    release
+    end
+}
+
+text SaffronCity_PokemonCenter_1F_Text_GrowthRatesDifferBySpecies {
+    "POKéMON growth rates differ from\n"
+    "species to species.$"
+}
+
+text SaffronCity_PokemonCenter_1F_Text_SilphCoVictimOfFame {
+    "SILPH CO. is widely known to all.\p"
+    "It's a victim of its own fame - it\n"
+    "attracted TEAM ROCKET.$"
+}
+
+text SaffronCity_PokemonCenter_1F_Text_GreatIfEliteFourCameBeatRockets {
+    "Sigh…\n"
+    "Wouldn't this be great?\p"
+    "If the ELITE FOUR came and\n"
+    "stomped TEAM ROCKET?$"
+}
+
+text SaffronCity_PokemonCenter_1F_Text_TeamRocketTookOff {
+    "TEAM ROCKET took off!\n"
+    "We can go out safely again!\l"
+    "That's great!$"
+}

@@ -1,0 +1,75 @@
+mapscripts LilycoveCity_PokemonCenter_1F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: LilycoveCity_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script LilycoveCity_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_LILYCOVE_CITY)
+    goto(LilycoveCity_PokemonCenter_1F_EventScript_SetLilycoveLadyGfx)
+    end
+}
+
+script LilycoveCity_PokemonCenter_1F_EventScript_SetLilycoveLadyGfx {
+    special(SetLilycoveLadyGfx)
+    if (var(VAR_RESULT) == FALSE) goto(LilycoveCity_PokemonCenter_1F_EventScript_HideContestLadyMon)
+    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_PokemonCenter_1F_EventScript_ShowContestLadyMon)
+    end
+}
+
+script LilycoveCity_PokemonCenter_1F_EventScript_HideContestLadyMon {
+    setflag(FLAG_HIDE_LILYCOVE_POKEMON_CENTER_CONTEST_LADY_MON)
+    end
+}
+
+script LilycoveCity_PokemonCenter_1F_EventScript_ShowContestLadyMon {
+    clearflag(FLAG_HIDE_LILYCOVE_POKEMON_CENTER_CONTEST_LADY_MON)
+    end
+}
+
+script LilycoveCity_PokemonCenter_1F_EventScript_Nurse {
+    setvar(VAR_0x800B, LOCALID_LILYCOVE_NURSE)
+    call(Common_EventScript_PkmnCenterNurse)
+    waitmessage()
+    waitbuttonpress()
+    release
+    end
+}
+
+script LilycoveCity_PokemonCenter_1F_EventScript_Boy {
+    msgbox(LilycoveCity_PokemonCenter_1F_Text_HowManyKindsOfPokemon, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_PokemonCenter_1F_EventScript_Maniac {
+    lock
+    faceplayer
+    if (flag(FLAG_BADGE07_GET)) goto(LilycoveCity_PokemonCenter_1F_EventScript_ManiacBadTeamGone)
+    msgbox(LilycoveCity_PokemonCenter_1F_Text_HeardAboutRottenScoundrels, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script LilycoveCity_PokemonCenter_1F_EventScript_ManiacBadTeamGone {
+    msgbox(LilycoveCity_PokemonCenter_1F_Text_HaventSeenRottenScoundrels, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+text LilycoveCity_PokemonCenter_1F_Text_HowManyKindsOfPokemon {
+    "I wonder how many kinds of POKéMON\n"
+    "there are in the world.\p"
+    "It'd be great to cross seas and\n"
+    "trade POKéMON with people far away.$"
+}
+
+text LilycoveCity_PokemonCenter_1F_Text_HeardAboutRottenScoundrels {
+    "I've been hearing about some rotten\n"
+    "scoundrels who steal POKéMON and rip\l"
+    "off METEORITES.$"
+}
+
+text LilycoveCity_PokemonCenter_1F_Text_HaventSeenRottenScoundrels {
+    "Those rotten scoundrels who steal\n"
+    "POKéMON and rip off METEORITES…\p"
+    "I haven't seen them around recently.$"
+}

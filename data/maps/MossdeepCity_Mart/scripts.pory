@@ -1,0 +1,54 @@
+mapscripts MossdeepCity_Mart_MapScripts {}
+
+script MossdeepCity_Mart_EventScript_Clerk {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(MossdeepCity_Mart_Pokemart)
+    msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MossdeepCity_Mart_Pokemart {
+    pokemartlistend()
+}
+
+script MossdeepCity_Mart_EventScript_Woman {
+    msgbox(MossdeepCity_Mart_Text_ReviveIsFantastic, MSGBOX_NPC)
+    end
+}
+
+script MossdeepCity_Mart_EventScript_Boy {
+    msgbox(MossdeepCity_Mart_Text_MaxRepelLastsLongest, MSGBOX_NPC)
+    end
+}
+
+script MossdeepCity_Mart_EventScript_Sailor {
+    msgbox(MossdeepCity_Mart_Text_NetAndDiveBallsRare, MSGBOX_NPC)
+    end
+}
+
+text MossdeepCity_Mart_Text_ReviveIsFantastic {
+    "REVIVE is fantastic!\p"
+    "Give it to a fainted POKéMON,\n"
+    "and the POKéMON will arise.\p"
+    "But be careful, REVIVE doesn't restore\n"
+    "the used-up PP of moves.$"
+}
+
+text MossdeepCity_Mart_Text_MaxRepelLastsLongest {
+    "MAX REPEL keeps all weak POKéMON away.\p"
+    "Out of all the REPEL sprays, it lasts\n"
+    "the longest.$"
+}
+
+text MossdeepCity_Mart_Text_NetAndDiveBallsRare {
+    "The NET and DIVE BALLS are rare POKé\n"
+    "BALLS that are only made in MOSSDEEP.\p"
+    "A NET BALL is effective against\n"
+    "BUG-type and WATER-type POKéMON.\p"
+    "A DIVE BALL works best on POKéMON\n"
+    "at the bottom of the sea.$"
+}

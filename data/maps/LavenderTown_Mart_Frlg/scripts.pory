@@ -1,0 +1,62 @@
+mapscripts LavenderTown_Mart_Frlg_MapScripts {}
+
+script LavenderTown_Mart_EventScript_BaldingMan {
+    msgbox(LavenderTown_Mart_Text_SearchingForStatRaiseItems, MSGBOX_NPC)
+    end
+}
+
+script LavenderTown_Mart_EventScript_Rocker {
+    msgbox(LavenderTown_Mart_Text_DidYouBuyRevives, MSGBOX_NPC)
+    end
+}
+
+script LavenderTown_Mart_EventScript_Youngster {
+    msgbox(LavenderTown_Mart_Text_TrainerDuosCanChallengeYou, MSGBOX_NPC)
+    end
+}
+
+script LavenderTown_Mart_EventScript_Clerk {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(LavenderTown_Mart_Items)
+    msgbox(gText_PleaseComeAgain)
+    release
+    end
+}
+
+script LavenderTown_Mart_Items {
+    release
+    end
+}
+
+text LavenderTown_Mart_Text_SearchingForStatRaiseItems {
+    "I'm searching for items that raise\n"
+    "the stats of POKéMON.\p"
+    "They're effective over the course\n"
+    "of a single battle.\p"
+    "X ATTACK, X DEFEND, X SPEED, \n"
+    "and X SPECIAL are what I'm after.\p"
+    "Do you know where I can get them?$"
+}
+
+text LavenderTown_Mart_Text_DidYouBuyRevives {
+    "Did you buy some REVIVES?\n"
+    "They revive any fainted POKéMON!$"
+}
+
+text LavenderTown_Mart_Text_TrainerDuosCanChallengeYou {
+    "Sometimes, a TRAINER duo will\n"
+    "challenge you with two POKéMON\l"
+    "at the same time.\p"
+    "If that happens, you have to send\n"
+    "out two POKéMON to battle, too.$"
+}
+
+text LavenderTown_Mart_Text_SoldNuggetFromMountainsFor5000 {
+    "この　あいだ　やまおくで\n"
+    "きんのたまを　ひろい　ましてね！\p"
+    "つかえない　しなもの　ですが\n"
+    "うったら　なんと　5000¥でした$"
+}

@@ -1,0 +1,343 @@
+mapscripts LilycoveCity_LilycoveMuseum_1F_MapScripts {}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_Greeter {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_WelcomeToLilycoveMuseum, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_Curator {
+    lockall
+    applymovement(LOCALID_MUSEUM_1F_CURATOR, Common_Movement_FacePlayer)
+    message(LilycoveCity_LilycoveMuseum_1F_Text_ImCuratorHaveYouViewedOurPaintings)
+    waitmessage()
+    multichoice(20, 8, MULTI_VIEWED_PAINTINGS, TRUE)
+    if (var(VAR_RESULT) == 0) goto(LilycoveCity_LilycoveMuseum_1F_EventScript_SawPaintings)
+    if (var(VAR_RESULT) == 1) goto(LilycoveCity_LilycoveMuseum_1F_EventScript_NotYet)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_NotYet {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_NotDisturbYouTakeYourTime, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_SawPaintings {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_HaveYouAnInterestInPaintings, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(LilycoveCity_LilycoveMuseum_1F_EventScript_NotInterested)
+    if (var(VAR_RESULT) == YES) goto(LilycoveCity_LilycoveMuseum_1F_EventScript_InterestedInPaintings)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_NotInterested {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_HonoredYoudVisitInSpiteOfThat, MSGBOX_SIGN)
+    releaseall
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_InterestedInPaintings {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_ExcellentCanYouComeWithMe, MSGBOX_SIGN)
+    applymovement(LOCALID_MUSEUM_1F_CURATOR, LilycoveCity_LilycoveMuseum_1F_Movement_CuratorEnterStairs)
+    waitmovement(0)
+    removeobject(LOCALID_MUSEUM_1F_CURATOR)
+    switch(VAR_FACING)
+    case(DIR_NORTH, LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorNorth)
+    case(DIR_WEST, LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorWest)
+    case(DIR_EAST, LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorEast)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorNorth {
+    lockall
+    applymovement(LOCALID_PLAYER, LilycoveCity_LilycoveMuseum_1F_Movement_FollowCuratorNorth)
+    waitmovement(0)
+    warp(MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 11, 8)
+    waitstate
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorWest {
+    lockall
+    applymovement(LOCALID_PLAYER, LilycoveCity_LilycoveMuseum_1F_Movement_FollowCuratorWest)
+    waitmovement(0)
+    warp(MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 11, 8)
+    waitstate
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorEast {
+    lockall
+    applymovement(LOCALID_PLAYER, LilycoveCity_LilycoveMuseum_1F_Movement_FollowCuratorEast)
+    waitmovement(0)
+    warp(MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 11, 8)
+    waitstate
+    end
+}
+
+movement LilycoveCity_LilycoveMuseum_1F_Movement_CuratorEnterStairs {
+    walk_up
+    step_end
+}
+
+movement LilycoveCity_LilycoveMuseum_1F_Movement_FollowCuratorWest {
+    walk_left
+    walk_up
+    step_end
+}
+
+movement LilycoveCity_LilycoveMuseum_1F_Movement_FollowCuratorEast {
+    walk_right
+    walk_up
+    step_end
+}
+
+movement LilycoveCity_LilycoveMuseum_1F_Movement_FollowCuratorNorth {
+    walk_up
+    walk_up
+    step_end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_OldPainting {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_VeryOldPainting, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_FantasyPainting {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_OddLandscapeFantasticScenery, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_WomanPainting {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_PaintingOfBeautifulWoman, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_LegendaryPokemonPainting {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_PaintingOfLegendaryPokemon, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_GrassPokemonPainting {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_PaintingOfGrassPokemon, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_BerryPainting {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_PaintingOfBerries, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_EventScript_BirdSculpture {
+    msgbox(LilycoveCity_LilycoveMuseum_Text_BirdPokemonSculptureReplica, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_PokeBallSculpture {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_BigPokeBallCarvedFromStone, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_StoneTablet {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_StoneTabletWithAncientText, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_SchoolKidM {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_MustntForgetLoveForFineArts, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_Artist1 {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_ThisMuseumIsInspiration, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_NinjaBoy {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_ThisLadyIsPretty, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_Woman1 {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_ThisPokemonIsAdorable, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_Woman2 {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_HeardMuseumGotNewPaintings, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_PsychicM {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_CuratorHasBeenCheerful, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_Artist2 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_AimToSeeGreatPaintings, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_MUSEUM_1F_ARTIST_2, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_FatMan {
+    msgbox(LilycoveCity_LilycoveMuseum_1F_Text_MuseumTouristDestination, MSGBOX_NPC)
+    end
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_WelcomeToLilycoveMuseum {
+    "Welcome to LILYCOVE MUSEUM.\p"
+    "Please take the time to enjoy our\n"
+    "collection of fantastic artwork\l"
+    "featuring POKéMON.$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_ImCuratorHaveYouViewedOurPaintings {
+    "I'm the CURATOR of this MUSEUM of\n"
+    "fine arts.\p"
+    "It's heartening to see someone so\n"
+    "young as you in our MUSEUM.\p"
+    "Have you viewed our collection of\n"
+    "paintings already?$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_NotDisturbYouTakeYourTime {
+    "Ah, then let me not disturb you.\n"
+    "Please, do take your time.$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_HaveYouAnInterestInPaintings {
+    "Oh? I do believe that you seem to\n"
+    "be a POKéMON TRAINER.\p"
+    "Have you an interest in paintings,\n"
+    "too?$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_HonoredYoudVisitInSpiteOfThat {
+    "I see…\p"
+    "I'm honored that you would visit\n"
+    "us in spite of that.$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_ExcellentCanYouComeWithMe {
+    "Ah, excellent!\n"
+    "You do like paintings!\p"
+    "Then, may I ask you to come with me?$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_VeryOldPainting {
+    "It's a very old painting.\n"
+    "The paint is peeling here and there.$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_OddLandscapeFantasticScenery {
+    "It's an odd landscape with bizarre\n"
+    "and fantastic scenery.$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_PaintingOfBeautifulWoman {
+    "It's a painting of a beautiful, smiling\n"
+    "woman with a POKéMON on her lap.$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_PaintingOfLegendaryPokemon {
+    "It's a painting of a legendary POKéMON\n"
+    "from long ago.\p"
+    "The artist painted this from\n"
+    "imagination.$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_PaintingOfGrassPokemon {
+    "It's a painting of GRASS POKéMON\n"
+    "swaying in a breeze.\p"
+    "They appear to be enjoying the wind's\n"
+    "gentle caress.$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_PaintingOfBerries {
+    "It's a delicious-looking painting\n"
+    "of BERRIES.\p"
+    "This painting could make you hungry!$"
+}
+
+text LilycoveCity_LilycoveMuseum_Text_BirdPokemonSculptureReplica {
+    "It's a replica of a famous sculpture.\p"
+    "It depicts an ancient BIRD POKéMON.$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_BigPokeBallCarvedFromStone {
+    "It's a big POKé BALL carved from\n"
+    "a black stone.\p"
+    "It was apparently used in festivals\n"
+    "in the olden days.$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_StoneTabletWithAncientText {
+    "It's a huge stone tablet inscribed\n"
+    "with POKéMON and dense text in the\l"
+    "small characters of an ancient,\l"
+    "unreadable language.$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_WorksOfMagnificence {
+    "Hmmm…\n"
+    "What works of great magnificence…$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_MustntForgetLoveForFineArts {
+    "Battling with POKéMON is fun,\n"
+    "I'll grant you that.\p"
+    "But one mustn't forget our love for\n"
+    "the fine arts.$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_ThisMuseumIsInspiration {
+    "This ART MUSEUM… Well, you could\n"
+    "see many fantastic paintings.\p"
+    "And the CURATOR is a wonderful person.\p"
+    "Among artists like myself, this MUSEUM\n"
+    "is an inspiration.$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_ThisLadyIsPretty {
+    "This lady is pretty!\n"
+    "She's like Mommy!$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_ThisPokemonIsAdorable {
+    "This POKéMON is adorable!\n"
+    "Just like our little boy!$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_HeardMuseumGotNewPaintings {
+    "I'd heard that this ART MUSEUM got\n"
+    "in some new paintings.\p"
+    "So, naturally I hurried over.\p"
+    "Are the new paintings up on\n"
+    "the second floor?$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_CuratorHasBeenCheerful {
+    "Lately, the CURATOR has been\n"
+    "unusually cheerful.\p"
+    "I bet something good happened for him.\n"
+    "Definitely.$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_AimToSeeGreatPaintings {
+    "I aim to see many great paintings\n"
+    "here and learn from them.\p"
+    "I have this dream of one day having\n"
+    "my artwork exhibited here.$"
+}
+
+text LilycoveCity_LilycoveMuseum_1F_Text_MuseumTouristDestination {
+    "The ART MUSEUM has become a favorite\n"
+    "tourist destination.\p"
+    "It's great for LILYCOVE…\n"
+    "No, great for the HOENN region!\p"
+    "This is what I've heard--a lone TRAINER\n"
+    "procured all the paintings upstairs.$"
+}

@@ -1,0 +1,89 @@
+mapscripts MagmaHideout_2F_1R_MapScripts {}
+
+script MagmaHideout_2F_1R_EventScript_Grunt14 {
+    trainerbattle_single(TRAINER_GRUNT_MAGMA_HIDEOUT_14, MagmaHideout_2F_1R_Text_Grunt14Intro, MagmaHideout_2F_1R_Text_Grunt14Defeat)
+    msgbox(MagmaHideout_2F_1R_Text_Grunt14PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MagmaHideout_2F_1R_EventScript_Grunt3 {
+    trainerbattle_single(TRAINER_GRUNT_MAGMA_HIDEOUT_3, MagmaHideout_2F_1R_Text_Grunt3Intro, MagmaHideout_2F_1R_Text_Grunt3Defeat)
+    msgbox(MagmaHideout_2F_1R_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MagmaHideout_2F_1R_EventScript_Grunt4 {
+    trainerbattle_single(TRAINER_GRUNT_MAGMA_HIDEOUT_4, MagmaHideout_2F_1R_Text_Grunt4Intro, MagmaHideout_2F_1R_Text_Grunt4Defeat)
+    msgbox(MagmaHideout_2F_1R_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MagmaHideout_2F_1R_EventScript_Grunt5 {
+    trainerbattle_single(TRAINER_GRUNT_MAGMA_HIDEOUT_5, MagmaHideout_2F_1R_Text_Grunt5Intro, MagmaHideout_2F_1R_Text_Grunt5Defeat)
+    msgbox(MagmaHideout_2F_1R_Text_Grunt5PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text MagmaHideout_2F_1R_Text_Grunt14Intro {
+    "What, what, what?\p"
+    "Only TEAM MAGMA members are supposed\n"
+    "to be in here!\p"
+    "But you're not dressed in TEAM MAGMA's\n"
+    "uniform…\p"
+    "You rouse my suspicion!\n"
+    "Battle with me!$"
+}
+
+text MagmaHideout_2F_1R_Text_Grunt14Defeat {
+    "Aiyiyi…\n"
+    "My pride as a TEAM MAGMA member…$"
+}
+
+text MagmaHideout_2F_1R_Text_Grunt14PostBattle {
+    "If you suffer from chills, you should\n"
+    "join TEAM MAGMA.$"
+}
+
+text MagmaHideout_2F_1R_Text_Grunt3Intro {
+    "Hold it right there!\p"
+    "You don't really expect me to keep\n"
+    "my trap shut and let you waltz by me?$"
+}
+
+text MagmaHideout_2F_1R_Text_Grunt3Defeat {
+    "Ooh wow!\n"
+    "I concede!$"
+}
+
+text MagmaHideout_2F_1R_Text_Grunt3PostBattle {
+    "Maybe it would've been better if I did\n"
+    "just let you go unchallenged…$"
+}
+
+text MagmaHideout_2F_1R_Text_Grunt4Intro {
+    "Ahah!\n"
+    "An intruder!$"
+}
+
+text MagmaHideout_2F_1R_Text_Grunt4Defeat {
+    "Graaah!$"
+}
+
+text MagmaHideout_2F_1R_Text_Grunt4PostBattle {
+    "I've already lost.\p"
+    "Do I really need to keep running\n"
+    "around in a circle?$"
+}
+
+text MagmaHideout_2F_1R_Text_Grunt5Intro {
+    "Oh, oh!\n"
+    "An intruder!$"
+}
+
+text MagmaHideout_2F_1R_Text_Grunt5Defeat {
+    "Mutter…$"
+}
+
+text MagmaHideout_2F_1R_Text_Grunt5PostBattle {
+    "Actually, I'm no expert at battling…$"
+}

@@ -1,0 +1,126 @@
+mapscripts SlateportCity_NameRatersHouse_MapScripts {}
+
+script SlateportCity_NameRatersHouse_EventScript_NameRater {
+    lock
+    faceplayer
+    msgbox(SlateportCity_NameRatersHouse_Text_PleasedToRateMonNickname, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(SlateportCity_NameRatersHouse_EventScript_ChooseMonToRate)
+    if (var(VAR_RESULT) == NO) goto(SlateportCity_NameRatersHouse_EventScript_DeclineNameRate)
+    end
+}
+
+script SlateportCity_NameRatersHouse_EventScript_ChooseMonToRate {
+    msgbox(SlateportCity_NameRatersHouse_Text_CritiqueWhichMonNickname, MSGBOX_DEFAULT)
+    chooseboxmon()
+    waitstate
+    if (var(VAR_0x8004) != PARTY_NOTHING_CHOSEN) goto(SlateportCity_NameRatersHouse_EventScript_RateMonNickname)
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) goto(SlateportCity_NameRatersHouse_EventScript_DeclineNameRate)
+    end
+}
+
+script SlateportCity_NameRatersHouse_EventScript_DeclineNameRate {
+    msgbox(SlateportCity_NameRatersHouse_Text_DoVisitAgain, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script SlateportCity_NameRatersHouse_EventScript_RateMonNickname {
+    specialvar(VAR_RESULT, ScriptGetPartyMonSpecies)
+    if (var(VAR_RESULT) == SPECIES_EGG) goto(SlateportCity_NameRatersHouse_EventScript_CantRateEgg)
+    special(BufferMonNickname)
+    special(IsMonOTIDNotPlayers)
+    if (var(VAR_RESULT) == TRUE) goto(SlateportCity_NameRatersHouse_EventScript_PlayerNotMonsOT)
+    specialvar(VAR_RESULT, MonOTNameNotPlayer)
+    special(BufferMonNickname)
+    if (var(VAR_RESULT) == TRUE) goto(SlateportCity_NameRatersHouse_EventScript_PlayerNotMonsOT)
+    msgbox(SlateportCity_NameRatersHouse_Text_FineNameSuggestBetterOne, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(SlateportCity_NameRatersHouse_EventScript_ChangeNickname)
+    if (var(VAR_RESULT) == NO) goto(SlateportCity_NameRatersHouse_EventScript_DeclineNameRate)
+    end
+}
+
+script SlateportCity_NameRatersHouse_EventScript_CantRateEgg {
+    msgbox(SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script SlateportCity_NameRatersHouse_EventScript_PlayerNotMonsOT {
+    msgbox(SlateportCity_NameRatersHouse_Text_MagnificentName, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script SlateportCity_NameRatersHouse_EventScript_ChangeNickname {
+    msgbox(SlateportCity_NameRatersHouse_Text_WhatShallNewNameBe, MSGBOX_DEFAULT)
+    call(Common_EventScript_NameReceivedPartyMon)
+    specialvar(VAR_RESULT, TryPutNameRaterShowOnTheAir)
+    special(BufferMonNickname)
+    if (var(VAR_RESULT) == TRUE) goto(SlateportCity_NameRatersHouse_EventScript_NewNameDifferent)
+    msgbox(SlateportCity_NameRatersHouse_Text_NameNoDifferentYetSuperior, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script SlateportCity_NameRatersHouse_EventScript_NewNameDifferent {
+    msgbox(SlateportCity_NameRatersHouse_Text_MonShallBeKnownAsName, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+text SlateportCity_NameRatersHouse_Text_PleasedToRateMonNickname {
+    "Hi, hi! I'm the NAME RATER!\n"
+    "I'm the fortune-teller of names!\p"
+    "I shall be pleased to rate your\n"
+    "POKéMON's nickname.$"
+}
+
+text SlateportCity_NameRatersHouse_Text_CritiqueWhichMonNickname {
+    "Which POKéMON's nickname should\n"
+    "I critique?$"
+}
+
+text SlateportCity_NameRatersHouse_Text_FineNameSuggestBetterOne {
+    "Hmmm… {STR_VAR_1}, is it? That is\n"
+    "quite a fine name you bestowed.\p"
+    "But! What say you, if I were to\n"
+    "suggest a slightly better name?$"
+}
+
+text SlateportCity_NameRatersHouse_Text_WhatShallNewNameBe {
+    "Ah, good. Then, what shall the new\n"
+    "nickname be?$"
+}
+
+text SlateportCity_NameRatersHouse_Text_MonShallBeKnownAsName {
+    "Done! From now on, this POKéMON\n"
+    "shall be known as {STR_VAR_1}!\p"
+    "It is a better name than before!\n"
+    "How fortunate for you!$"
+}
+
+text SlateportCity_NameRatersHouse_Text_DoVisitAgain {
+    "I see.\n"
+    "Do come visit again.$"
+}
+
+text SlateportCity_NameRatersHouse_Text_NameNoDifferentYetSuperior {
+    "Done! From now on, this POKéMON\n"
+    "shall be known as {STR_VAR_1}!\p"
+    "It looks no different from before,\n"
+    "and yet, this is vastly superior!\p"
+    "How fortunate for you!$"
+}
+
+text SlateportCity_NameRatersHouse_Text_MagnificentName {
+    "Hmmm… {STR_VAR_1} it is!\p"
+    "This is a magnificent nickname!\n"
+    "It is impeccably beyond reproach!\p"
+    "You'll do well to cherish your\n"
+    "{STR_VAR_1} now and beyond.$"
+}
+
+text SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg {
+    "Now, now.\n"
+    "That is merely an EGG!$"
+}

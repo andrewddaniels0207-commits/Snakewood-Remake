@@ -1,0 +1,293 @@
+mapscripts SlateportCity_BattleTentCorridor_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_0, 0: SlateportCity_BattleTentCorridor_EventScript_EnterCorridor
+    ]
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: SlateportCity_BattleTentCorridor_OnWarp
+}
+
+raw `
+SlateportCity_BattleTentCorridor_OnWarp:
+	map_script_2 VAR_TEMP_1, 0, SlateportCity_BattleTentCorridor_EventScript_SetUpObjects
+	.2byte 0
+
+`
+
+script SlateportCity_BattleTentCorridor_EventScript_SetUpObjects {
+    setvar(VAR_TEMP_1, 1)
+    if (var(VAR_0x8006) != 1) goto(SlateportCity_BattleTentCorridor_EventScript_TurnPlayerNorth)
+    setobjectxy(LOCALID_SLATEPORT_TENT_CORRIDOR_ATTENDANT, 2, 2)
+    turnobject(LOCALID_SLATEPORT_TENT_CORRIDOR_ATTENDANT, DIR_SOUTH)
+}
+
+script SlateportCity_BattleTentCorridor_EventScript_TurnPlayerNorth {
+    turnobject(LOCALID_PLAYER, DIR_NORTH)
+    end
+}
+
+script SlateportCity_BattleTentCorridor_EventScript_EnterCorridor {
+    if (var(VAR_0x8006) == 1) goto(SlateportCity_BattleTentCorridor_EventScript_ReturnToRoomFromBattle)
+    setvar(VAR_TEMP_0, 1)
+    applymovement(LOCALID_SLATEPORT_TENT_CORRIDOR_ATTENDANT, SlateportCity_BattleTentCorridor_Movement_AttendantEnter)
+    applymovement(LOCALID_PLAYER, SlateportCity_BattleTentCorridor_Movement_PlayerEnter)
+    waitmovement(0)
+    if (var(VAR_0x8006) == 2) goto(SlateportCity_BattleTentCorridor_EventScript_ResumeChallenge)
+    slateporttent_generaterentalmons()
+    slateporttent_generateopponentmons()
+    msgbox(BattleFrontier_BattleFactoryPreBattleRoom_Text_HoldMonsChooseFromSelection, MSGBOX_DEFAULT)
+    fadescreen(FADE_TO_BLACK)
+    slateporttent_rentmons()
+    waitstate
+}
+
+script SlateportCity_BattleTentCorridor_EventScript_EnterBattleRoom {
+    msgbox(BattleFrontier_BattleFactoryPreBattleRoom_Text_RightThisWay, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_SLATEPORT_TENT_CORRIDOR_ATTENDANT, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    opendoor(2, 1)
+    waitdooranim()
+    applymovement(LOCALID_SLATEPORT_TENT_CORRIDOR_ATTENDANT, SlateportCity_BattleTentCorridor_Movement_AttendantExit)
+    applymovement(LOCALID_PLAYER, SlateportCity_BattleTentCorridor_Movement_PlayerExit)
+    waitmovement(0)
+    closedoor(2, 1)
+    waitdooranim()
+    warp(MAP_SLATEPORT_CITY_BATTLE_TENT_BATTLE_ROOM, 4, 4)
+    waitstate
+    end
+}
+
+script SlateportCity_BattleTentCorridor_EventScript_ReturnToRoomFromBattle {
+    factory_setopponentmons()
+    factory_resethelditems()
+    msgbox(BattleFrontier_BattleFactoryPreBattleRoom_Text_LetUsRestoreMons, MSGBOX_DEFAULT)
+    playfanfare(MUS_HEAL)
+    waitfanfare()
+    special(HealPlayerParty)
+}
+
+script SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent {
+    frontier_get(FRONTIER_DATA_BATTLE_NUM)
+    if (var(VAR_RESULT) == 1) call(SlateportCity_BattleTentCorridor_EventScript_ReadyFor2ndOpponent)
+    if (var(VAR_RESULT) == 2) call(SlateportCity_BattleTentCorridor_EventScript_ReadyFor3rdOpponent)
+    multichoice(20, 6, MULTI_GO_ON_REST_RETIRE, TRUE)
+    switch(VAR_RESULT)
+    case(0, SlateportCity_BattleTentCorridor_EventScript_AskSwapMon)
+    case(1, SlateportCity_BattleTentCorridor_EventScript_AskPauseChallenge)
+    case(2, SlateportCity_BattleTentCorridor_EventScript_AskRetireChallenge)
+}
+
+script SlateportCity_BattleTentCorridor_EventScript_AskPauseChallenge {
+    msgbox(BattleFrontier_BattleFactoryPreBattleRoom_Text_SaveAndQuitGame, MSGBOX_YESNO)
+    switch(VAR_RESULT)
+    case(NO, SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent)
+    case(YES, SlateportCity_BattleTentCorridor_EventScript_PauseChallenge)
+    case(MULTI_B_PRESSED, SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent)
+}
+
+script SlateportCity_BattleTentCorridor_EventScript_AskRetireChallenge {
+    message(BattleFrontier_BattleFactoryPreBattleRoom_Text_RetireFromChallenge)
+    waitmessage()
+    multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
+    switch(VAR_RESULT)
+    case(1, SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent)
+    case(0, SlateportCity_BattleTent_EventScript_WarpToLobbyLost)
+    case(MULTI_B_PRESSED, SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent)
+}
+
+script SlateportCity_BattleTentCorridor_EventScript_AskSwapMon {
+    slateporttent_generateopponentmons()
+    msgbox(BattleFrontier_BattleFactoryPreBattleRoom_Text_LikeToSwapMon, MSGBOX_YESNO)
+    switch(VAR_RESULT)
+    case(NO, SlateportCity_BattleTentCorridor_EventScript_EnterBattleRoom)
+    case(YES, SlateportCity_BattleTentCorridor_EventScript_SwapMons)
+    case(MULTI_B_PRESSED, SlateportCity_BattleTentCorridor_EventScript_EnterBattleRoom)
+}
+
+script SlateportCity_BattleTentCorridor_EventScript_SwapMons {
+    fadescreen(FADE_TO_BLACK)
+    slateporttent_swapmons()
+    waitstate
+    if (var(VAR_RESULT) == 1) goto(SlateportCity_BattleTentCorridor_EventScript_EnterBattleRoom)
+    msgbox(BattleFrontier_BattleFactoryPreBattleRoom_Text_YourSwapIsComplete, MSGBOX_DEFAULT)
+    goto(SlateportCity_BattleTentCorridor_EventScript_EnterBattleRoom)
+}
+
+script SlateportCity_BattleTentCorridor_EventScript_ReadyFor2ndOpponent {
+    message(BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor2ndOpponent)
+    waitmessage()
+    return
+}
+
+script SlateportCity_BattleTentCorridor_EventScript_ReadyFor3rdOpponent {
+    message(BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor3rdOpponent)
+    waitmessage()
+    return
+}
+
+script SlateportCity_BattleTentCorridor_EventScript_PauseChallenge {
+    message(BattleFrontier_BattleFactoryPreBattleRoom_Text_SavingDataPleaseWait)
+    waitmessage()
+    slateporttent_save(CHALLENGE_STATUS_PAUSED)
+    playse(SE_SAVE)
+    waitse()
+    fadescreen(FADE_TO_BLACK)
+    frontier_reset()
+    end
+}
+
+script SlateportCity_BattleTentCorridor_EventScript_ResumeChallenge {
+    special(SavePlayerParty)
+    factory_setparties(0)
+    goto(SlateportCity_BattleTentCorridor_EventScript_AskReadyForOpponent)
+}
+
+movement SlateportCity_BattleTentCorridor_Movement_PlayerEnter {
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    step_end
+}
+
+movement SlateportCity_BattleTentCorridor_Movement_PlayerExit {
+    walk_up
+    walk_up
+    set_invisible
+    step_end
+}
+
+movement SlateportCity_BattleTentCorridor_Movement_AttendantEnter {
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_in_place_faster_down
+    step_end
+}
+
+movement SlateportCity_BattleTentCorridor_Movement_AttendantExit {
+    walk_up
+    set_invisible
+    step_end
+}
+
+text SlateportCity_ContestHall_Text_AdviceForContests {
+    "Want a tasty little bit of advice\n"
+    "for CONTESTS?\p"
+    "Using a certain move after another\n"
+    "certain kind of move sometimes gets\l"
+    "you extra attention.\p"
+    "If you know what you're doing,\n"
+    "you can score big in appeal.\p"
+    "Of course, your opponents might try\n"
+    "disrupting your POKéMON's showing.$"
+}
+
+text SlateportCity_ContestHall_Text_MyPapaIsContestJudge {
+    "My papa, he's a CONTEST JUDGE.\p"
+    "I wonder what I should be when I\n"
+    "grow up, a JUDGE or a GYM LEADER?$"
+}
+
+text SlateportCity_ContestHall_Text_ImLikeMajorlyCheesed {
+    "Hey, man, I'm like majorly cheesed,\n"
+    "you know. Like, you know, I just\l"
+    "wanted to know why my POKéMON\l"
+    "never won, you know, like, hey?\p"
+    "So, like, I gave the JUDGE my two\n"
+    "cents, you know, they're free.\p"
+    "And he wouldn't hear me out, like, hey!\n"
+    "So, like, total bummer, man!\p"
+    "Hey, like, you! Zip it, you know?\n"
+    "Just, you know, take this!$"
+}
+
+text SlateportCity_ContestHall_Text_ExplainTorment {
+    "That's, like, TM41, you know?\n"
+    "Hey, it's TORMENT, you hearing me?\p"
+    "Like, it won't let the other guy\n"
+    "use the same move twice in a row, see?\p"
+    "Hey, now, you listen here, like,\n"
+    "I'm not laying a torment on you!$"
+}
+
+text SlateportCity_ContestHall_Text_MCStepUpTakePartInContest {
+    "MC: Oh, my, my!\n"
+    "Now isn't that a dandy of a POKéMON?\p"
+    "Please! Do step right up and take\n"
+    "part in our splendid CONTESTS!\p"
+    "You'll do well! I'm sure of it!\n"
+    "My eyes have never failed me!$"
+}
+
+text SlateportCity_ContestHall_Text_JudgeWouldntDoToMissContest {
+    "JUDGE: Well, hello there!\n"
+    "I see that you're a TRAINER!\p"
+    "Then, it just wouldn't do for you\n"
+    "to miss a POKéMON CONTEST!\p"
+    "Get a CONTEST PASS in VERDANTURF\n"
+    "CITY and enter anytime!$"
+}
+
+text SlateportCity_ContestHall_Text_ItsAppealTime {
+    "It's appeal time!\n"
+    "What should I lead with?$"
+}
+
+text SlateportCity_ContestHall_Text_DidntPayAttentionToAppeal {
+    "They didn't pay much attention to\n"
+    "my POKéMON's appeal…\p"
+    "Humph, that JUDGE, he doesn't know\n"
+    "a good thing when he sees it.$"
+}
+
+text SlateportCity_ContestHall_Text_RewardWithSageAdvice {
+    "Oh, hi! You must be a serious fan to get\n"
+    "this close to the action.\p"
+    "I'll reward your enthusiasm with\n"
+    "this sage advice.\p"
+    "If a move goes over really well,\n"
+    "the audience will get excited.\p"
+    "The POKéMON that makes its appeal\n"
+    "right when everyone's excited…\p"
+    "Well, you'd think something good has\n"
+    "to happen!$"
+}
+
+text SlateportCity_ContestHall_Text_MoreFreakedOutThanMon {
+    "I can't do this! I'm more freaked out\n"
+    "than my POKéMON.\p"
+    "I'm shivering and my heart is racing!$"
+}
+
+text SlateportCity_ContestHall_Text_BattleAndContestAlike {
+    "A battle and a CONTEST aren't the\n"
+    "same, but they are alike, too.\p"
+    "You need to work hard and believe\n"
+    "in the POKéMON you've raised.$"
+}
+
+text SlateportCity_ContestHall_Text_MonLooksOnTopOfGame {
+    "That POKéMON looks like it's on top\n"
+    "of its game, huh?\p"
+    "A POKéMON that does good in the\n"
+    "secondary judging seems to be more\l"
+    "relaxed when it's doing appeals.$"
+}
+
+text SlateportCity_ContestHall_Text_MyMonBetterThanThatLot {
+    "Will you look at that sorry sight?\p"
+    "Heh, my POKéMON's absolutely better\n"
+    "than that lot!$"
+}
+
+text SlateportCity_ContestHall_Text_GetUrgeToMoveWithMon {
+    "Don't you get the urge to move with\n"
+    "POKéMON if they're putting on an\l"
+    "energetic appeal?$"
+}
+
+text SlateportCity_ContestHall_Text_HyperRankStage {
+    "POKéMON CONTESTS\n"
+    "HYPER RANK STAGE!$"
+}

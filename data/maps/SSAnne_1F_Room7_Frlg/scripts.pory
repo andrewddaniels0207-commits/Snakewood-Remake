@@ -1,0 +1,21 @@
+mapscripts SSAnne_1F_Room7_Frlg_MapScripts {}
+
+script SSAnne_1F_Room7_EventScript_Thomas {
+    trainerbattle_single(TRAINER_GENTLEMAN_THOMAS, SSAnne_1F_Room7_Text_ThomasIntro, SSAnne_1F_Room7_Text_ThomasDefeat)
+    msgbox(SSAnne_1F_Room7_Text_ThomasPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text SSAnne_1F_Room7_Text_ThomasIntro {
+    "I am but a solitary traveler…\p"
+    "My sole companions and friends are\n"
+    "POKéMON I caught on my journeys…$"
+}
+
+text SSAnne_1F_Room7_Text_ThomasDefeat {
+    "My, my friends…$"
+}
+
+text SSAnne_1F_Room7_Text_ThomasPostBattle {
+    "You should be nice to friends!$"
+}

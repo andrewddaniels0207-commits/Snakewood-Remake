@@ -1,0 +1,102 @@
+mapscripts EverGrandeCity_DrakesRoom_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_ELITE_4_STATE, 3: EverGrandeCity_DrakesRoom_EventScript_WalkInCloseDoor
+    ]
+    MAP_SCRIPT_ON_LOAD: EverGrandeCity_DrakesRoom_OnLoad
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: EverGrandeCity_SidneysRoom_OnWarp
+}
+
+raw `
+EverGrandeCity_DrakesRoom_OnWarp:
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_DrakesRoom_EventScript_PlayerTurnNorth
+	.2byte 0
+
+`
+
+script EverGrandeCity_DrakesRoom_EventScript_PlayerTurnNorth {
+    turnobject(LOCALID_PLAYER, DIR_NORTH)
+    end
+}
+
+script EverGrandeCity_DrakesRoom_EventScript_WalkInCloseDoor {
+    lockall
+    call(PokemonLeague_EliteFour_EventScript_WalkInCloseDoor)
+    setvar(VAR_ELITE_4_STATE, 4)
+    releaseall
+    end
+}
+
+script EverGrandeCity_DrakesRoom_OnLoad {
+    if (flag(FLAG_DEFEATED_ELITE_4_DRAKE)) call(EverGrandeCity_DrakesRoom_EventScript_ResetAdvanceToNextRoom)
+    if (var(VAR_ELITE_4_STATE) == 4) call(EverGrandeCity_DrakesRoom_EventScript_CloseDoor)
+    end
+}
+
+script EverGrandeCity_DrakesRoom_EventScript_ResetAdvanceToNextRoom {
+    call(PokemonLeague_EliteFour_EventScript_ResetAdvanceToNextRoom)
+    return
+}
+
+script EverGrandeCity_DrakesRoom_EventScript_CloseDoor {
+    call(PokemonLeague_EliteFour_EventScript_CloseDoor)
+    return
+}
+
+script EverGrandeCity_DrakesRoom_EventScript_Drake {
+    lock
+    faceplayer
+    if (flag(FLAG_DEFEATED_ELITE_4_DRAKE)) goto(EverGrandeCity_DrakesRoom_EventScript_PostBattleSpeech)
+    playbgm(MUS_ENCOUNTER_ELITE_FOUR, FALSE)
+    msgbox(EverGrandeCity_DrakesRoom_Text_IntroSpeech, MSGBOX_DEFAULT)
+    trainerbattle_no_intro(TRAINER_DRAKE, EverGrandeCity_DrakesRoom_Text_Defeat)
+    goto(EverGrandeCity_DrakesRoom_EventScript_Defeated)
+    end
+}
+
+script EverGrandeCity_DrakesRoom_EventScript_PostBattleSpeech {
+    msgbox(EverGrandeCity_DrakesRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script EverGrandeCity_DrakesRoom_EventScript_Defeated {
+    setvar(VAR_0x8004, FANCOUNTER_DEFEATED_DRAKE)
+    special(Script_TryGainNewFanFromCounter)
+    setflag(FLAG_DEFEATED_ELITE_4_DRAKE)
+    call(PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles)
+    msgbox(EverGrandeCity_DrakesRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+text EverGrandeCity_DrakesRoom_Text_IntroSpeech {
+    "I am the last of the POKéMON LEAGUE\n"
+    "ELITE FOUR, DRAKE the DRAGON master!\p"
+    "In their natural state, POKéMON are\n"
+    "wild living things. They are free.\p"
+    "At times, they hinder us.\n"
+    "At times, they help us.\p"
+    "For us to battle with POKéMON as\n"
+    "partners, do you know what it takes?\p"
+    "Do you know what is needed?\p"
+    "If you don't, then you will never\n"
+    "prevail over me!$"
+}
+
+text EverGrandeCity_DrakesRoom_Text_Defeat {
+    "Superb, it should be said.$"
+}
+
+text EverGrandeCity_DrakesRoom_Text_PostBattleSpeech {
+    "You deserve every credit for coming\n"
+    "this far as a TRAINER of POKéMON.\p"
+    "You do seem to know what is needed.\p"
+    "Yes, what a TRAINER needs is a\n"
+    "virtuous heart.\p"
+    "POKéMON touch the good hearts of\n"
+    "TRAINERS and learn good from wrong.\p"
+    "They touch the good hearts of\n"
+    "TRAINERS and grow strong.\p"
+    "Go! Go onwards!\n"
+    "The CHAMPION is waiting!$"
+}

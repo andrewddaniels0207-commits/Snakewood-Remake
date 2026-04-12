@@ -1,0 +1,26 @@
+mapscripts PetalburgCity_House2_MapScripts {}
+
+script PetalburgCity_House2_EventScript_Woman {
+    msgbox(PetalburgCity_House2_Text_NormanBecameGymLeader, MSGBOX_NPC)
+    end
+}
+
+script PetalburgCity_House2_EventScript_SchoolKid {
+    msgbox(PetalburgCity_House2_Text_BattledNormanOnce, MSGBOX_NPC)
+    end
+}
+
+text PetalburgCity_House2_Text_NormanBecameGymLeader {
+    "NORMAN became our town's new\n"
+    "GYM LEADER.\p"
+    "I think he called his family over from\n"
+    "somewhere far away.$"
+}
+
+text PetalburgCity_House2_Text_BattledNormanOnce {
+    "I battled NORMAN once, but, whew,\n"
+    "he was way too strong.\p"
+    "How would I put it?\p"
+    "I just got the feeling that he\n"
+    "lives for POKéMON.$"
+}

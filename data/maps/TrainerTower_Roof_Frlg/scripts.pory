@@ -1,0 +1,9 @@
+mapscripts TrainerTower_Roof_Frlg_MapScripts {
+    MAP_SCRIPT_ON_RESUME: TrainerTower_OnResume
+    MAP_SCRIPT_ON_FRAME_TABLE: TrainerTower_OnFrame
+}
+
+script TrainerTower_Roof_EventScript_Owner {
+    call(TrainerTower_EventScript_SpeakToOwner)
+    end
+}

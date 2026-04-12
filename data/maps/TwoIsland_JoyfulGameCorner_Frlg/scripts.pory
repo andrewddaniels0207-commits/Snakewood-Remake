@@ -1,0 +1,337 @@
+mapscripts TwoIsland_JoyfulGameCorner_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: TwoIsland_JoyfulGameCorner_OnTransition
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: TwoIsland_JoyfulGameCorner_OnWarp
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 0: TwoIsland_JoyfulGameCorner_EventScript_HelpFindLostelleScene
+        VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 2: TwoIsland_JoyfulGameCorner_EventScript_FoundLostelleScene
+        VAR_CABLE_CLUB_STATE, USING_MINIGAME: CableClub_EventScript_ExitMinigameRoom
+    ]
+    MAP_SCRIPT_ON_LOAD: CableClub_OnLoad_Frlg
+}
+
+script TwoIsland_JoyfulGameCorner_OnTransition {
+    if (flag(FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER)) call(TwoIsland_JoyfulGameCorner_EventScript_SetLostelleReturnedPos)
+    end
+}
+
+script TwoIsland_JoyfulGameCorner_EventScript_SetLostelleReturnedPos {
+    setobjectxyperm(LOCALID_JOYFUL_GAME_CORNER_DADDY, 6, 2)
+    setobjectmovementtype(LOCALID_JOYFUL_GAME_CORNER_DADDY, MOVEMENT_TYPE_FACE_DOWN)
+    setobjectmovementtype(LOCALID_JOYFUL_GAME_CORNER_LOSTELLE, MOVEMENT_TYPE_LOOK_AROUND)
+    setvar(VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4)
+    return
+}
+
+raw `
+TwoIsland_JoyfulGameCorner_OnWarp:
+	map_script_2 VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 2, TwoIsland_JoyfulGameCorner_EventScript_TurnPlayerNorth
+	map_script_2 VAR_CABLE_CLUB_STATE, USING_MINIGAME, EventScript_CheckTurnAttendant_Frlg
+	.2byte 0
+
+`
+
+script TwoIsland_JoyfulGameCorner_EventScript_TurnPlayerNorth {
+    turnobject(LOCALID_PLAYER, DIR_NORTH)
+    end
+}
+
+script TwoIsland_JoyfulGameCorner_EventScript_FoundLostelleScene {
+    lockall
+    textcolor(NPC_TEXT_COLOR_MALE)
+    msgbox(TwoIsland_JoyfulGameCorner_Text_YouRescuedLostelle)
+    textcolor(NPC_TEXT_COLOR_FEMALE)
+    special(GetPlayerBigGuyGirlString)
+    msgbox(TwoIsland_JoyfulGameCorner_Text_LostelleItsOkayDaddy)
+    closemessage
+    applymovement(LOCALID_JOYFUL_GAME_CORNER_LOSTELLE, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    setvar(VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 3)
+    releaseall
+    end
+}
+
+script TwoIsland_JoyfulGameCorner_EventScript_HelpFindLostelleScene {
+    lockall
+    textcolor(NPC_TEXT_COLOR_MALE)
+    applymovement(LOCALID_JOYFUL_GAME_CORNER_DADDY, TwoIsland_JoyfulGameCorner_Movement_DaddyPacing)
+    waitmovement(0)
+    msgbox(TwoIsland_JoyfulGameCorner_Text_WhereHasLostelleGottenTo)
+    closemessage
+    applymovement(LOCALID_JOYFUL_GAME_CORNER_DADDY, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    playse(SE_PIN)
+    applymovement(LOCALID_JOYFUL_GAME_CORNER_DADDY, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_JOYFUL_GAME_CORNER_DADDY, Common_Movement_Delay48)
+    waitmovement(0)
+    applymovement(LOCALID_JOYFUL_GAME_CORNER_DADDY, TwoIsland_JoyfulGameCorner_Movement_DaddyApproachPlayer)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    msgbox(TwoIsland_JoyfulGameCorner_Text_PleaseHelpFindLostelle)
+    closemessage
+    playse(SE_DOOR)
+    waitse()
+    applymovement(LOCALID_PLAYER, TwoIsland_JoyfulGameCorner_Movement_PlayerFaceDaddy)
+    waitmovement(0)
+    playbgm(MUS_RG_ENCOUNTER_BOY, 0)
+    addobject(LOCALID_JOYFUL_GAME_CORNER_BIKER)
+    applymovement(LOCALID_JOYFUL_GAME_CORNER_BIKER, TwoIsland_JoyfulGameCorner_Movement_BikerLookAround)
+    waitmovement(0)
+    msgbox(TwoIsland_JoyfulGameCorner_Text_IsThisOnlyThreeIsland)
+    applymovement(LOCALID_JOYFUL_GAME_CORNER_BIKER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    msgbox(TwoIsland_JoyfulGameCorner_Text_ThisIsTwoIslandMoveIt)
+    msgbox(TwoIsland_JoyfulGameCorner_Text_TheseIslandsAreConfusing)
+    closemessage
+    applymovement(LOCALID_JOYFUL_GAME_CORNER_BIKER, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    playse(SE_EXIT)
+    removeobject(LOCALID_JOYFUL_GAME_CORNER_BIKER)
+    fadedefaultbgm()
+    delay(60)
+    msgbox(TwoIsland_JoyfulGameCorner_Text_PunkScuffedUpMyFloor)
+    clearflag(FLAG_HIDE_THREE_ISLAND_LONE_BIKER)
+    setvar(VAR_MAP_SCENE_THREE_ISLAND, 2)
+    setvar(VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 1)
+    releaseall
+    end
+}
+
+movement TwoIsland_JoyfulGameCorner_Movement_DaddyPacing {
+    walk_left
+    walk_right
+    walk_right
+    delay_8
+    walk_in_place_faster_up
+    delay_16
+    step_end
+}
+
+movement TwoIsland_JoyfulGameCorner_Movement_DaddyApproachPlayer {
+    walk_down
+    walk_down
+    walk_down
+    walk_in_place_faster_left
+    step_end
+}
+
+movement TwoIsland_JoyfulGameCorner_Movement_PlayerFaceDaddy {
+    walk_left
+    walk_in_place_faster_right
+    step_end
+}
+
+movement TwoIsland_JoyfulGameCorner_Movement_BikerLookAround {
+    walk_in_place_faster_left
+    delay_8
+    walk_in_place_faster_right
+    delay_8
+    walk_in_place_faster_up
+    step_end
+}
+
+script TwoIsland_JoyfulGameCorner_EventScript_InfoMan {
+    lock
+    faceplayer
+    if (var(VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER) == 4) goto(JoyfulGameCorner_EventScript_InfoMan2_Frlg)
+    if (flag(FLAG_RESCUED_LOSTELLE)) goto(TwoIsland_JoyfulGameCorner_EventScript_GetGamesGoingSoon)
+    msgbox(TwoIsland_JoyfulGameCorner_Text_NotRunningAnyGamesToday)
+    release
+    end
+}
+
+script TwoIsland_JoyfulGameCorner_EventScript_GetGamesGoingSoon {
+    msgbox(TwoIsland_JoyfulGameCorner_Text_GetGamesGoingSoon)
+    release
+    end
+}
+
+script TwoIsland_JoyfulGameCorner_EventScript_LostellesDaddy {
+    lock
+    faceplayer
+    if (var(VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER) == 4) goto(JoyfulGameCorner_EventScript_MinigameAttendant_Frlg)
+    if (flag(FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER)) goto(TwoIsland_JoyfulGameCorner_EventScript_GetGameCornerRunning)
+    if (var(VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER) == 3) goto(TwoIsland_JoyfulGameCorner_EventScript_GiveDaddyMeteorite)
+    msgbox(TwoIsland_JoyfulGameCorner_Text_PleaseGoToThreeIsland)
+    release
+    end
+}
+
+script TwoIsland_JoyfulGameCorner_EventScript_GiveDaddyMeteorite {
+    if (flag(FLAG_NO_ROOM_FOR_JOYFUL_GAME_CORNER_MOON_STONE)) goto(TwoIsland_JoyfulGameCorner_EventScript_ReceiveMoonStone)
+    msgbox(TwoIsland_JoyfulGameCorner_Text_ThisIsForMe)
+    setvar(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 2)
+    textcolor(NPC_TEXT_COLOR_NEUTRAL)
+    playfanfare(MUS_OBTAIN_TMHM)
+    message(TwoIsland_JoyfulGameCorner_Text_HandedMeteoriteToLostellesDaddy)
+    waitmessage()
+    waitfanfare()
+    call(EventScript_RestorePrevTextColor)
+    removeitem(ITEM_METEORITE)
+    msgbox(TwoIsland_JoyfulGameCorner_Text_OhThisIsFromBill)
+    goto(TwoIsland_JoyfulGameCorner_EventScript_ReceiveMoonStone)
+    end
+}
+
+script TwoIsland_JoyfulGameCorner_EventScript_ReceiveMoonStone {
+    checkitemspace(ITEM_MOON_STONE)
+    if (var(VAR_RESULT) == FALSE) goto(TwoIsland_JoyfulGameCorner_EventScript_NoRoomForMoonStone)
+    additem(ITEM_MOON_STONE)
+    setflag(FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER)
+    msgreceiveditem(TwoIsland_JoyfulGameCorner_Text_ReceivedMoonStoneFromLostellesDaddy, ITEM_MOON_STONE)
+    release
+    end
+}
+
+script TwoIsland_JoyfulGameCorner_EventScript_GetGameCornerRunning {
+    msgbox(TwoIsland_JoyfulGameCorner_Text_IllGetGameCornerRunning)
+    release
+    end
+}
+
+script TwoIsland_JoyfulGameCorner_EventScript_NoRoomForMoonStone {
+    setflag(FLAG_NO_ROOM_FOR_JOYFUL_GAME_CORNER_MOON_STONE)
+    msgbox(TwoIsland_JoyfulGameCorner_Text_NotGoingToFitInBag)
+    release
+    end
+}
+
+script TwoIsland_JoyfulGameCorner_EventScript_Lostelle {
+    lock
+    faceplayer
+    msgbox(TwoIsland_JoyfulGameCorner_Text_PleaseShowMeYouBeingCool)
+    release
+    end
+}
+
+text TwoIsland_JoyfulGameCorner_Text_WhereHasLostelleGottenTo {
+    "Now, where's LOSTELLE gotten to\n"
+    "today?\p"
+    "She always brings me lunch every\n"
+    "day right about now…$"
+}
+
+text TwoIsland_JoyfulGameCorner_Text_PleaseHelpFindLostelle {
+    "Hm? You, there!\n"
+    "Are you a friend of LOSTELLE's?\p"
+    "Have you seen LOSTELLE around?\n"
+    "I don't know where she might be.\l"
+    "She should've been here long ago.\p"
+    "LOSTELLE's a cutie - she got my\n"
+    "looks - so what if someone…\p"
+    "What if something's happened to\n"
+    "my LOSTELLE?!\p"
+    "Please, help me find her!\n"
+    "Please go search THREE ISLAND!$"
+}
+
+text TwoIsland_JoyfulGameCorner_Text_IsThisOnlyThreeIsland {
+    "Hah? What is this GAME CORNER?\n"
+    "How much sadder can this get?\p"
+    "Those clowns…\p"
+    "They said they'd be waiting on the\n"
+    "island, so where are they?\p"
+    "Hey, you! Is this the only THREE\n"
+    "ISLAND around here?$"
+}
+
+text TwoIsland_JoyfulGameCorner_Text_ThisIsTwoIslandMoveIt {
+    "Try waking up before you crawl out\n"
+    "of bed, you punk.\p"
+    "This is TWO ISLAND!\p"
+    "Move it! Get your filthy motorbike\n"
+    "out of my place!$"
+}
+
+text TwoIsland_JoyfulGameCorner_Text_TheseIslandsAreConfusing {
+    "Huh…\n"
+    "Oh, oh, gotcha.\p"
+    "Tch…\n"
+    "These islands are confusing…$"
+}
+
+text TwoIsland_JoyfulGameCorner_Text_PunkScuffedUpMyFloor {
+    "Would you look at that?\n"
+    "That punk scuffed up my floor.$"
+}
+
+text TwoIsland_JoyfulGameCorner_Text_PleaseGoToThreeIsland {
+    "Hey, but listen! I'm begging you,\n"
+    "you have to go to THREE ISLAND.\p"
+    "If anything were to happen to my\n"
+    "LOSTELLE…\p"
+    "My place is the house with the red\n"
+    "roof on THREE ISLAND.\p"
+    "She may just show up late here,\n"
+    "so I can't run off anywhere.\p"
+    "That's why I have to get you to do\n"
+    "me this big favor.$"
+}
+
+text TwoIsland_JoyfulGameCorner_Text_NotRunningAnyGamesToday {
+    "I'm sorry.\n"
+    "We're not running any games today.$"
+}
+
+text TwoIsland_JoyfulGameCorner_Text_GetGamesGoingSoon {
+    "We'll get the games going soon\n"
+    "for you!$"
+}
+
+text TwoIsland_JoyfulGameCorner_Text_YouRescuedLostelle {
+    "So you rescued LOSTELLE?\n"
+    "How can I thank you?\p"
+    "LOSTELLE, darling, forgive me!\p"
+    "Daddy didn't know you were scared\n"
+    "and in trouble!$"
+}
+
+text TwoIsland_JoyfulGameCorner_Text_LostelleItsOkayDaddy {
+    "LOSTELLE: It's okay, Daddy.\n"
+    "I got to be friends with {PLAYER}!$"
+}
+
+text TwoIsland_JoyfulGameCorner_Text_ThisIsForMe {
+    "Oh, what's that?\n"
+    "You're saying that this is for me?\p"
+    "How did you know that I love rare\n"
+    "rocks and gems?\p"
+    "You sure know how to make a guy\n"
+    "happy.$"
+}
+
+text TwoIsland_JoyfulGameCorner_Text_HandedMeteoriteToLostellesDaddy {
+    "{PLAYER} handed the METEORITE\n"
+    "to LOSTELLE's daddy.$"
+}
+
+text TwoIsland_JoyfulGameCorner_Text_OhThisIsFromBill {
+    "Oh, I see, this is from BILL!\n"
+    "You have to thank him for me!\p"
+    "You know, you've been fantastic.\n"
+    "I want you to have this.$"
+}
+
+text TwoIsland_JoyfulGameCorner_Text_ReceivedMoonStoneFromLostellesDaddy {
+    "{PLAYER} received a MOON STONE\n"
+    "from LOSTELLE's daddy.$"
+}
+
+text TwoIsland_JoyfulGameCorner_Text_NotGoingToFitInBag {
+    "Your BAG's not going to fit another\n"
+    "thing…$"
+}
+
+text TwoIsland_JoyfulGameCorner_Text_IllGetGameCornerRunning {
+    "All right, I'll get the GAME CORNER\n"
+    "running right away.\p"
+    "You have to come visit with a\n"
+    "friend.$"
+}
+
+text TwoIsland_JoyfulGameCorner_Text_PleaseShowMeYouBeingCool {
+    "Listen, listen!\p"
+    "Please show me you being cool\n"
+    "again!$"
+}

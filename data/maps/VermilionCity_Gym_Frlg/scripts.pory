@@ -1,0 +1,478 @@
+mapscripts VermilionCity_Gym_Frlg_MapScripts {
+    MAP_SCRIPT_ON_LOAD: VermilionCity_Gym_OnLoad
+    MAP_SCRIPT_ON_TRANSITION: VermilionCity_Gym_OnTransition
+}
+
+script VermilionCity_Gym_OnLoad {
+    if (flag(FOUND_FIRST_SWITCH)) call(VermilionCity_Gym_EventScript_SetOneBeamOff)
+    if (flag(FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES)) call(VermilionCity_Gym_EventScript_SetBeamsOff)
+    end
+}
+
+script VermilionCity_Gym_EventScript_SetOneBeamOff {
+    setmetatile(3, 6, METATILE_VermilionGym_Beam_Node_TopLeft_HalfOn, 1)
+    setmetatile(4, 6, METATILE_VermilionGym_Beam_Node_TopLeft_Edge_HalfOn, 1)
+    setmetatile(5, 6, METATILE_VermilionGym_Beam_MidTop_HalfOn, 1)
+    setmetatile(6, 6, METATILE_VermilionGym_Beam_Node_TopRight_Edge_HalfOn, 1)
+    setmetatile(7, 6, METATILE_VermilionGym_Beam_Node_TopRight_HalfOn, 1)
+    setmetatile(3, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_HalfOn, 1)
+    setmetatile(4, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_Edge_HalfOn, 1)
+    setmetatile(5, 7, METATILE_VermilionGym_Beam_MidBottom_HalfOn, 1)
+    setmetatile(6, 7, METATILE_VermilionGym_Beam_Node_BottomRight_Edge_HalfOn, 1)
+    setmetatile(7, 7, METATILE_VermilionGym_Beam_Node_BottomRight_HalfOn, 1)
+    return
+}
+
+script VermilionCity_Gym_EventScript_SetBeamsOff {
+    setmetatile(3, 6, METATILE_VermilionGym_Beam_Node_TopLeft_Off, 1)
+    setmetatile(4, 6, METATILE_VermilionGym_Beam_Node_TopLeft_Edge_Off, 0)
+    setmetatile(5, 6, METATILE_VermilionGym_Floor, 0)
+    setmetatile(6, 6, METATILE_VermilionGym_Beam_Node_TopRight_Edge_Off, 0)
+    setmetatile(7, 6, METATILE_VermilionGym_Beam_Node_TopRight_Off, 1)
+    setmetatile(3, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_Off, 1)
+    setmetatile(4, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_Edge_Off, 0)
+    setmetatile(5, 7, METATILE_VermilionGym_Floor, 0)
+    setmetatile(6, 7, METATILE_VermilionGym_Beam_Node_BottomRight_Edge_Off, 0)
+    setmetatile(7, 7, METATILE_VermilionGym_Beam_Node_BottomRight_Off, 1)
+    return
+}
+
+script VermilionCity_Gym_OnTransition {
+    call(VermilionCity_Gym_EventScript_InitTrashCans)
+    end
+}
+
+script VermilionCity_Gym_EventScript_InitTrashCans {
+    if (flag(FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES)) goto(Common_EventScript_NopReturn)
+    special(SetVermilionTrashCans)
+    copyvar(VAR_TEMP_0, SWITCH1_ID)
+    copyvar(VAR_TEMP_1, SWITCH2_ID)
+    return
+}
+
+script VermilionCity_Gym_EventScript_TrashCan1 {
+    lockall
+    setvar(TRASH_CAN_ID, 1)
+    goto(VermilionCity_Gym_EventScript_TrashCan)
+    end
+}
+
+script VermilionCity_Gym_EventScript_TrashCan2 {
+    lockall
+    setvar(TRASH_CAN_ID, 2)
+    goto(VermilionCity_Gym_EventScript_TrashCan)
+    end
+}
+
+script VermilionCity_Gym_EventScript_TrashCan3 {
+    lockall
+    setvar(TRASH_CAN_ID, 3)
+    goto(VermilionCity_Gym_EventScript_TrashCan)
+    end
+}
+
+script VermilionCity_Gym_EventScript_TrashCan4 {
+    lockall
+    setvar(TRASH_CAN_ID, 4)
+    goto(VermilionCity_Gym_EventScript_TrashCan)
+    end
+}
+
+script VermilionCity_Gym_EventScript_TrashCan5 {
+    lockall
+    setvar(TRASH_CAN_ID, 5)
+    goto(VermilionCity_Gym_EventScript_TrashCan)
+    end
+}
+
+script VermilionCity_Gym_EventScript_TrashCan6 {
+    lockall
+    setvar(TRASH_CAN_ID, 6)
+    goto(VermilionCity_Gym_EventScript_TrashCan)
+    end
+}
+
+script VermilionCity_Gym_EventScript_TrashCan7 {
+    lockall
+    setvar(TRASH_CAN_ID, 7)
+    goto(VermilionCity_Gym_EventScript_TrashCan)
+    end
+}
+
+script VermilionCity_Gym_EventScript_TrashCan8 {
+    lockall
+    setvar(TRASH_CAN_ID, 8)
+    goto(VermilionCity_Gym_EventScript_TrashCan)
+    end
+}
+
+script VermilionCity_Gym_EventScript_TrashCan9 {
+    lockall
+    setvar(TRASH_CAN_ID, 9)
+    goto(VermilionCity_Gym_EventScript_TrashCan)
+    end
+}
+
+script VermilionCity_Gym_EventScript_TrashCan10 {
+    lockall
+    setvar(TRASH_CAN_ID, 10)
+    goto(VermilionCity_Gym_EventScript_TrashCan)
+    end
+}
+
+script VermilionCity_Gym_EventScript_TrashCan11 {
+    lockall
+    setvar(TRASH_CAN_ID, 11)
+    goto(VermilionCity_Gym_EventScript_TrashCan)
+    end
+}
+
+script VermilionCity_Gym_EventScript_TrashCan12 {
+    lockall
+    setvar(TRASH_CAN_ID, 12)
+    goto(VermilionCity_Gym_EventScript_TrashCan)
+    end
+}
+
+script VermilionCity_Gym_EventScript_TrashCan13 {
+    lockall
+    setvar(TRASH_CAN_ID, 13)
+    goto(VermilionCity_Gym_EventScript_TrashCan)
+    end
+}
+
+script VermilionCity_Gym_EventScript_TrashCan14 {
+    lockall
+    setvar(TRASH_CAN_ID, 14)
+    goto(VermilionCity_Gym_EventScript_TrashCan)
+    end
+}
+
+script VermilionCity_Gym_EventScript_TrashCan15 {
+    lockall
+    setvar(TRASH_CAN_ID, 15)
+    goto(VermilionCity_Gym_EventScript_TrashCan)
+    end
+}
+
+script VermilionCity_Gym_EventScript_TrashCan {
+    copyvar(SWITCH1_ID, VAR_TEMP_0)
+    copyvar(SWITCH2_ID, VAR_TEMP_1)
+    if (flag(FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES)) goto(VermilionCity_Gym_EventScript_LocksAlreadyOpen)
+    if (flag(FOUND_FIRST_SWITCH)) goto(VermilionCity_Gym_EventScript_TrySwitchTwo)
+    if (var(SWITCH1_ID) == TRASH_CAN_ID) goto(VermilionCity_Gym_EventScript_FoundSwitchOne)
+    msgbox(VermilionCity_Gym_Text_NopeOnlyTrashHere)
+    releaseall
+    end
+}
+
+script VermilionCity_Gym_EventScript_FoundSwitchOne {
+    msgbox(VermilionCity_Gym_Text_SwitchUnderTrashFirstLockOpened)
+    playse(SE_PIN)
+    waitse()
+    call(VermilionCity_Gym_EventScript_SetOneBeamOff)
+    special(DrawWholeMapView)
+    setflag(FOUND_FIRST_SWITCH)
+    releaseall
+    end
+}
+
+script VermilionCity_Gym_EventScript_TrySwitchTwo {
+    if (var(SWITCH2_ID) == TRASH_CAN_ID) goto(VermilionCity_Gym_EventScript_FoundSwitchTwo)
+    msgbox(VermilionCity_Gym_Text_OnlyTrashLocksWereReset)
+    clearflag(FOUND_FIRST_SWITCH)
+    special(SetVermilionTrashCans)
+    copyvar(VAR_TEMP_0, SWITCH1_ID)
+    copyvar(VAR_TEMP_1, SWITCH2_ID)
+    call(VermilionCity_Gym_EventScript_SetBeamsOn)
+    special(DrawWholeMapView)
+    releaseall
+    end
+}
+
+script VermilionCity_Gym_EventScript_FoundSwitchTwo {
+    msgbox(VermilionCity_Gym_Text_SecondLockOpened)
+    closemessage
+    call(VermilionCity_Gym_EventScript_SetBeamsOff)
+    special(DrawWholeMapView)
+    playse(SE_UNLOCK)
+    waitse()
+    setflag(FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES)
+    releaseall
+    end
+}
+
+script VermilionCity_Gym_EventScript_LocksAlreadyOpen {
+    msgbox(VermilionCity_Gym_Text_NopeOnlyTrashHere)
+    releaseall
+    end
+}
+
+script VermilionCity_Gym_EventScript_SetBeamsOn {
+    setmetatile(3, 6, METATILE_VermilionGym_Beam_Node_TopLeft_On, 1)
+    setmetatile(4, 6, METATILE_VermilionGym_Beam_Node_TopLeft_Edge_On, 1)
+    setmetatile(5, 6, METATILE_VermilionGym_Beam_MidTop, 1)
+    setmetatile(6, 6, METATILE_VermilionGym_Beam_Node_TopRight_Edge_On, 1)
+    setmetatile(7, 6, METATILE_VermilionGym_Beam_Node_TopRight_On, 1)
+    setmetatile(3, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_On, 1)
+    setmetatile(4, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_Edge_On, 1)
+    setmetatile(5, 7, METATILE_VermilionGym_Beam_MidBottom, 1)
+    setmetatile(6, 7, METATILE_VermilionGym_Beam_Node_BottomRight_Edge_On, 1)
+    setmetatile(7, 7, METATILE_VermilionGym_Beam_Node_BottomRight_On, 1)
+    return
+}
+
+script VermilionCity_Gym_EventScript_LtSurge {
+    famechecker(FAMECHECKER_LTSURGE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
+    trainerbattle_single(TRAINER_LEADER_LT_SURGE, VermilionCity_Gym_Text_LtSurgeIntro, VermilionCity_Gym_Text_LtSurgeDefeat, VermilionCity_Gym_EventScript_DefeatedLtSurge, NO_MUSIC)
+    if (!flag(FLAG_GOT_TM34_FROM_SURGE)) goto(VermilionCity_Gym_EventScript_GiveTM34)
+    msgbox(VermilionCity_Gym_Text_LtSurgePostBattle)
+    release
+    end
+}
+
+script VermilionCity_Gym_EventScript_DefeatedLtSurge {
+    famechecker(FAMECHECKER_LTSURGE, 1)
+    if (!flag(FLAG_GOT_HM05)) call(VermilionCity_Gym_EventScript_ShowOaksAide)
+    clearflag(FLAG_HIDE_FAME_CHECKER_LT_SURGE_JOURNAL)
+    setflag(FLAG_DEFEATED_LT_SURGE)
+    setflag(FLAG_BADGE03_GET)
+    set_gym_trainers_frlg(3)
+    goto(VermilionCity_Gym_EventScript_GiveTM34)
+    end
+}
+
+script VermilionCity_Gym_EventScript_ShowOaksAide {
+    clearflag(FLAG_HIDE_VERMILION_CITY_OAKS_AIDE)
+    return
+}
+
+script VermilionCity_Gym_EventScript_GiveTM34 {
+    msgbox(VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis)
+    checkitemspace(ITEM_TM34)
+    if (var(VAR_RESULT) == FALSE) goto(VermilionCity_Gym_EventScript_NoRoomForTM34)
+    giveitem_msg(VermilionCity_Gym_Text_ReceivedTM34FromLtSurge, ITEM_TM34)
+    setflag(FLAG_GOT_TM34_FROM_SURGE)
+    msgbox(VermilionCity_Gym_Text_ExplainTM34)
+    release
+    end
+}
+
+script VermilionCity_Gym_EventScript_NoRoomForTM34 {
+    msgbox(VermilionCity_Gym_Text_MakeRoomInYourBag)
+    release
+    end
+}
+
+script VermilionCity_Gym_EventScript_Dwayne {
+    trainerbattle_single(TRAINER_SAILOR_DWAYNE, VermilionCity_Gym_Text_DwayneIntro, VermilionCity_Gym_Text_DwayneDefeat)
+    famechecker(FAMECHECKER_LTSURGE, 4)
+    msgbox(VermilionCity_Gym_Text_DwaynePostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script VermilionCity_Gym_EventScript_Baily {
+    trainerbattle_single(TRAINER_ENGINEER_BAILY, VermilionCity_Gym_Text_BailyIntro, VermilionCity_Gym_Text_BailyDefeat)
+    msgbox(VermilionCity_Gym_Text_BailyPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script VermilionCity_Gym_EventScript_Tucker {
+    trainerbattle_single(TRAINER_GENTLEMAN_TUCKER, VermilionCity_Gym_Text_TuckerIntro, VermilionCity_Gym_Text_TuckerDefeat, VermilionCity_Gym_EventScript_DefeatedTucker)
+    famechecker(FAMECHECKER_LTSURGE, 3)
+    msgbox(VermilionCity_Gym_Text_TuckerPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script VermilionCity_Gym_EventScript_DefeatedTucker {
+    famechecker(FAMECHECKER_LTSURGE, 2)
+    release
+    end
+}
+
+script VermilionCity_Gym_EventScript_GymGuy {
+    lock
+    faceplayer
+    if (flag(FLAG_DEFEATED_LT_SURGE)) goto(VermilionCity_Gym_EventScript_GymGuyPostVictory)
+    msgbox(VermilionCity_Gym_Text_GymGuyAdvice)
+    release
+    end
+}
+
+script VermilionCity_Gym_EventScript_GymGuyPostVictory {
+    msgbox(VermilionCity_Gym_Text_GymGuyPostVictory)
+    release
+    end
+}
+
+script VermilionCity_Gym_EventScript_GymStatue {
+    lockall
+    if (flag(FLAG_BADGE03_GET)) goto(VermilionCity_Gym_EventScript_GymStatuePostVictory)
+    msgbox(VermilionCity_Gym_Text_GymStatue)
+    releaseall
+    end
+}
+
+script VermilionCity_Gym_EventScript_GymStatuePostVictory {
+    msgbox(VermilionCity_Gym_Text_GymStatuePlayerWon)
+    releaseall
+    end
+}
+
+text VermilionCity_Gym_Text_LtSurgeIntro {
+    "Hey, kid! What do you think you're\n"
+    "doing here?\p"
+    "You won't live long in combat!\n"
+    "Not with your puny power!\p"
+    "I tell you, kid, electric POKéMON\n"
+    "saved me during the war!\p"
+    "They zapped my enemies into\n"
+    "paralysis!\p"
+    "The same as I'll do to you!{PLAY_BGM}{MUS_RG_ENCOUNTER_GYM_LEADER}$"
+}
+
+text VermilionCity_Gym_Text_LtSurgePostBattle {
+    "A little word of advice, kid!\p"
+    "Electricity is sure powerful!\p"
+    "But, it's useless against GROUND-\n"
+    "type POKéMON!$"
+}
+
+text VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis {
+    "The THUNDERBADGE cranks up your\n"
+    "POKéMON's SPEED!\p"
+    "It also lets your POKéMON FLY\n"
+    "lightning-quick anytime, kid!\p"
+    "You're special, kid!\n"
+    "Take this!$"
+}
+
+text VermilionCity_Gym_Text_ReceivedTM34FromLtSurge {
+    "{PLAYER} received TM34\n"
+    "from LT. SURGE.$"
+}
+
+text VermilionCity_Gym_Text_ExplainTM34 {
+    "TM34 contains SHOCK WAVE!\p"
+    "Teach it to an ELECTRIC POKéMON!$"
+}
+
+text VermilionCity_Gym_Text_MakeRoomInYourBag {
+    "Yo, kid, make room in your BAG!$"
+}
+
+text VermilionCity_Gym_Text_LtSurgeDefeat {
+    "Now that's a shocker!\p"
+    "You're the real deal, kid!\p"
+    "Fine, then, take the THUNDERBADGE!$"
+}
+
+text VermilionCity_Gym_Text_TuckerIntro {
+    "When I was in the Army, LT. SURGE\n"
+    "was my strict CO.\p"
+    "He was a hard taskmaster.$"
+}
+
+text VermilionCity_Gym_Text_TuckerDefeat {
+    "Stop!\n"
+    "You're very good!$"
+}
+
+text VermilionCity_Gym_Text_TuckerPostBattle {
+    "It's not easy opening that door.\p"
+    "LT. SURGE was always famous for\n"
+    "his cautious nature in the Army.$"
+}
+
+text VermilionCity_Gym_Text_BailyIntro {
+    "I'm a lightweight, but I'm good\n"
+    "with electricity!\p"
+    "That's why I joined this GYM.$"
+}
+
+text VermilionCity_Gym_Text_BailyDefeat {
+    "Fried!$"
+}
+
+text VermilionCity_Gym_Text_BailyPostBattle {
+    "Okay, I'll talk!\p"
+    "LT. SURGE said he hid door\n"
+    "switches inside something.$"
+}
+
+text VermilionCity_Gym_Text_DwayneIntro {
+    "This is no place for kids!\n"
+    "Not even if you're good!$"
+}
+
+text VermilionCity_Gym_Text_DwayneDefeat {
+    "Wow!\n"
+    "Surprised me!$"
+}
+
+text VermilionCity_Gym_Text_DwaynePostBattle {
+    "LT. SURGE installed the traps in\n"
+    "the GYM himself.\p"
+    "He set up double locks everywhere.\n"
+    "Let me give you a hint.\p"
+    "When you open the first lock, the\n"
+    "second lock is right next to it.$"
+}
+
+text VermilionCity_Gym_Text_GymGuyAdvice {
+    "Yo!\n"
+    "Champ in the making!\p"
+    "LT. SURGE has a nickname.\p"
+    "People refer to him as the\n"
+    "Lightning American!\p"
+    "He's an expert on electric\n"
+    "POKéMON.\p"
+    "BIRD/WATER-type POKéMON match\n"
+    "poorly against the ELECTRIC type.\p"
+    "Beware of paralysis, too.\p"
+    "LT. SURGE is very cautious.\p"
+    "He's locked himself in, so it won't\n"
+    "be easy getting to him.$"
+}
+
+text VermilionCity_Gym_Text_GymGuyPostVictory {
+    "Whew!\n"
+    "That match was electric!$"
+}
+
+text VermilionCity_Gym_Text_GymStatue {
+    "VERMILION POKéMON GYM\n"
+    "LEADER: LT. SURGE\p"
+    "WINNING TRAINERS:\n"
+    "{RIVAL}$"
+}
+
+text VermilionCity_Gym_Text_GymStatuePlayerWon {
+    "VERMILION POKéMON GYM\n"
+    "LEADER: LT. SURGE\p"
+    "WINNING TRAINERS:\n"
+    "{RIVAL}, {PLAYER}$"
+}
+
+text VermilionCity_Gym_Text_NopeOnlyTrashHere {
+    "Nope!\n"
+    "There's only trash here.$"
+}
+
+text VermilionCity_Gym_Text_SwitchUnderTrashFirstLockOpened {
+    "Hey! There's a switch under the\n"
+    "trash! Turn it on!\p"
+    "The first electric lock opened!$"
+}
+
+text VermilionCity_Gym_Text_SecondLockOpened {
+    "The second electric lock opened!\n"
+    "The motorized door opened!$"
+}
+
+text VermilionCity_Gym_Text_OnlyTrashLocksWereReset {
+    "Nope!\n"
+    "There's only trash here.\p"
+    "Hey!\n"
+    "The electric locks were reset!$"
+}

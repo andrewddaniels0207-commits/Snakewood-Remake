@@ -1,0 +1,376 @@
+mapscripts BattleFrontier_BattlePyramidTop_MapScripts {
+    MAP_SCRIPT_ON_RESUME: BattleFrontier_BattlePyramidTop_OnResume
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0: BattleFrontier_BattlePyramidTop_EventScript_PlayPyramidMusic
+        VAR_TEMP_F, 1: BattleFrontier_BattlePyramidTop_EventScript_ShowMapName
+    ]
+    MAP_SCRIPT_ON_TRANSITION: BattleFrontier_BattlePyramidTop_OnTransition
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: BattleFrontier_BattlePyramidTop_OnWarp
+}
+
+script BattleFrontier_BattlePyramidTop_OnTransition {
+    pyramid_updatelight(200, PYRAMID_LIGHT_SET_RADIUS)
+    setvar(VAR_TEMP_F, 1)
+    end
+}
+
+raw `
+BattleFrontier_BattlePyramidTop_OnWarp:
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattlePyramidTop_EventScript_SetUpObjects
+	.2byte 0
+
+`
+
+script BattleFrontier_BattlePyramidTop_EventScript_SetUpObjects {
+    setvar(VAR_TEMP_1, 1)
+    turnobject(LOCALID_PLAYER, DIR_NORTH)
+    if (var(VAR_TEMP_C) != 0) goto(BattleFrontier_BattlePyramidTop_EventScript_EndSetUpObjects)
+    setobjectxyperm(LOCALID_BRANDON, 0, 0)
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_EndSetUpObjects {
+    end
+}
+
+script BattleFrontier_BattlePyramidTop_OnResume {
+    frontier_getbrainstatus()
+    if (var(VAR_RESULT) == FRONTIER_BRAIN_NOT_READY) goto(BattleFrontier_BattlePyramidTop_EventScript_CheckChallengeStatus)
+    call(BattleFrontier_EventScript_SetBrainObjectGfx)
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_CheckChallengeStatus {
+    copyvar(VAR_TEMP_C, VAR_RESULT)
+    frontier_getstatus()
+    switch(VAR_TEMP_CHALLENGE_STATUS)
+    case(0, BattleFrontier_BattlePyramidTop_EventScript_ReadyChallenge)
+    case(CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePyramid_EventScript_WarpToLobby)
+    case(CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePyramidTop_EventScript_ReadyChallenge)
+    frontier_get(FRONTIER_DATA_BATTLE_OUTCOME)
+    if (var(VAR_RESULT) == B_OUTCOME_LOST) goto(BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost)
+    if (var(VAR_RESULT) == B_OUTCOME_DREW) goto(BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost)
+    if (var(VAR_RESULT) == B_OUTCOME_FORFEITED) goto(BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost)
+    end
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_PlayPyramidMusic {
+    playbgm(MUS_B_PYRAMID_TOP, FALSE)
+    setvar(VAR_TEMP_PLAYING_PYRAMID_MUSIC, 1)
+    end
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_ShowMapName {
+    special(ShowMapNamePopup)
+    setvar(VAR_TEMP_F, 0)
+    end
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_ReadyChallenge {
+    pyramid_save(CHALLENGE_STATUS_SAVING)
+    special(SavePlayerParty)
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, 0)
+    pyramid_settrainers()
+    frontier_setpartyorder(FRONTIER_PARTY_SIZE)
+    setvar(VAR_TEMP_F, 1)
+    end
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_Attendant {
+    lock
+    faceplayer
+    if (var(VAR_TEMP_D) != 0) goto(BattleFrontier_BattlePyramidTop_EventScript_StepForwardWhenReady)
+    if (var(VAR_TEMP_C) != FRONTIER_BRAIN_NOT_READY) goto(BattleFrontier_BattlePyramidTop_EventScript_BrandonHereMoveAside)
+    msgbox(BattleFrontier_BattlePyramidTop_Text_ReachedSummitUpYouGo, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_PYRAMID_TOP_ATTENDANT, BattleFrontier_BattlePyramidTop_Movement_AttendantMoveAside)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, BattleFrontier_BattlePyramidTop_Movement_PlayerClimbToTop)
+    waitmovement(0)
+    applymovement(LOCALID_PYRAMID_TOP_ATTENDANT, BattleFrontier_BattlePyramidTop_Movement_AttendantBlockPath)
+    waitmovement(0)
+    message(BattleFrontier_BattlePyramidTop_Text_PlayerConqueredPyramid)
+    waitmessage()
+    playfanfare(MUS_OBTAIN_B_POINTS)
+    waitfanfare()
+    closemessage
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_WarpToLobbyWon {
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON)
+    warp(MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY, 7, 13)
+    waitstate
+    end
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_StepForwardWhenReady {
+    msgbox(BattleFrontier_BattlePyramidTop_Text_StepForwardWhenReady, MSGBOX_DEFAULT)
+    closemessage
+    end
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_BrandonHereMoveAside {
+    msgbox(BattleFrontier_BattlePyramidTop_Text_ChiefBeatYouHere, MSGBOX_DEFAULT)
+    applymovement(LOCALID_PYRAMID_TOP_ATTENDANT, BattleFrontier_BattlePyramidTop_Movement_AttendantMoveAside)
+    setvar(VAR_TEMP_D, 1)
+    closemessage
+    end
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_BattleBrandon {
+    lockall
+    switch(VAR_TEMP_C)
+    case(FRONTIER_BRAIN_GOLD, BattleFrontier_BattlePyramidTop_EventScript_BrandonIntroGold)
+    case(FRONTIER_BRAIN_STREAK, BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardSilverSpeech)
+    case(FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardGoldSpeech)
+    frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
+    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardSilverSpeech)
+    special(SpawnCameraObject)
+    applymovement(LOCALID_CAMERA, BattleFrontier_BattlePyramidTop_Movement_CameraPanUp)
+    waitmovement(0)
+    msgbox(BattleFrontier_BattlePyramidTop_Text_ExplorationsAreGrandestAdventure, MSGBOX_DEFAULT)
+    closemessage
+    frontier_set(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
+    applymovement(LOCALID_BRANDON, BattleFrontier_BattlePyramidTop_Movement_BrandonApproachPlayer)
+    waitmovement(0)
+    msgbox(BattleFrontier_BattlePyramidTop_Text_ImPyramidKingBrandon, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePyramidTop_EventScript_BattleBrandonSilver)
+    end
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardSilverSpeech {
+    applymovement(LOCALID_BRANDON, BattleFrontier_BattlePyramidTop_Movement_BrandonApproachPlayer)
+    waitmovement(0)
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_BattleBrandonSilver {
+    msgbox(BattleFrontier_BattlePyramidTop_Text_BringCourageToOurBattle, MSGBOX_DEFAULT)
+    call(BattleFrontier_BattlePyramidTop_EventScript_DoBrandonBattle)
+    playbgm(MUS_B_PYRAMID_TOP, FALSE)
+    if (var(VAR_RESULT) == 1) goto(BattleFrontier_BattlePyramidTop_EventScript_DefeatedBrandonSilver)
+    goto(BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost)
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_DefeatedBrandonSilver {
+    frontier_getsymbols()
+    if (var(VAR_RESULT) != 0) goto(BattleFrontier_BattlePyramidTop_EventScript_WarpToLobbyWon)
+    msgbox(BattleFrontier_BattlePyramidTop_Text_BrandonFrontierPassPlease, MSGBOX_DEFAULT)
+    playfanfare(MUS_OBTAIN_SYMBOL)
+    message(BattleFrontier_BattlePyramidTop_Text_ReceivedBraveSymbol)
+    waitmessage()
+    waitfanfare()
+    frontier_givesymbol()
+    msgbox(BattleFrontier_BattlePyramidTop_Text_LookForwardToNextMeeting, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePyramidTop_EventScript_WarpToLobbyWon)
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_BrandonIntroGold {
+    frontier_get(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
+    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardGoldSpeech)
+    special(SpawnCameraObject)
+    applymovement(LOCALID_CAMERA, BattleFrontier_BattlePyramidTop_Movement_CameraPanUp)
+    waitmovement(0)
+    msgbox(BattleFrontier_BattlePyramidTop_Text_BrandonYouveReturned, MSGBOX_DEFAULT)
+    closemessage
+    frontier_set(FRONTIER_DATA_HEARD_BRAIN_SPEECH)
+    applymovement(LOCALID_BRANDON, BattleFrontier_BattlePyramidTop_Movement_BrandonApproachPlayer)
+    waitmovement(0)
+    msgbox(BattleFrontier_BattlePyramidTop_Text_MyCourageIsOffMeter, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePyramidTop_EventScript_BattleBrandonGold)
+    end
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardGoldSpeech {
+    applymovement(LOCALID_BRANDON, BattleFrontier_BattlePyramidTop_Movement_BrandonApproachPlayer)
+    waitmovement(0)
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_BattleBrandonGold {
+    msgbox(BattleFrontier_BattlePyramidTop_Text_EverythingYouHave, MSGBOX_DEFAULT)
+    call(BattleFrontier_BattlePyramidTop_EventScript_DoBrandonBattle)
+    playbgm(MUS_B_PYRAMID_TOP, FALSE)
+    if (var(VAR_RESULT) == 1) goto(BattleFrontier_BattlePyramidTop_EventScript_DefeatedBrandonGold)
+    goto(BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost)
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_DefeatedBrandonGold {
+    frontier_getsymbols()
+    if (var(VAR_RESULT) == 2) goto(BattleFrontier_BattlePyramidTop_EventScript_WarpToLobbyWon)
+    msgbox(BattleFrontier_BattlePyramidTop_Text_BrandonRemarkableHaveThis, MSGBOX_DEFAULT)
+    playfanfare(MUS_OBTAIN_SYMBOL)
+    message(BattleFrontier_BattlePyramidTop_Text_BraveSymbolTookGoldenShine)
+    waitmessage()
+    waitfanfare()
+    frontier_givesymbol()
+    msgbox(BattleFrontier_BattlePyramidTop_Text_FarewellForNow, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePyramidTop_EventScript_WarpToLobbyWon)
+}
+
+script BattleFrontier_BattlePyramidTop_EventScript_DoBrandonBattle {
+    closemessage
+    dofacilitytrainerbattle(FACILITY_BATTLE_PYRAMID)
+    waitstate
+    return
+}
+
+movement BattleFrontier_BattlePyramidTop_Movement_AttendantMoveAside {
+    walk_right
+    walk_in_place_faster_left
+    step_end
+}
+
+movement BattleFrontier_BattlePyramidTop_Movement_AttendantBlockPath {
+    walk_left
+    walk_in_place_faster_up
+    step_end
+}
+
+movement BattleFrontier_BattlePyramidTop_Movement_PlayerClimbToTop {
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_in_place_faster_down
+    step_end
+}
+
+movement BattleFrontier_BattlePyramidTop_Movement_BrandonApproachPlayer {
+    walk_fast_down
+    step_end
+}
+
+movement BattleFrontier_BattlePyramidTop_Movement_CameraPanUp {
+    walk_slow_up
+    walk_slow_up
+    delay_16
+    step_end
+}
+
+text BattleFrontier_BattlePyramidTop_Text_ReachedSummitUpYouGo {
+    "It is a delight to see you here!\n"
+    "You have reached the summit of\l"
+    "the BATTLE PYRAMID!\p"
+    "Above here is the PYRAMID's\n"
+    "lookout point.\p"
+    "It is a place open only to those\n"
+    "who have conquered the PYRAMID.\p"
+    "Now, please!\n"
+    "Up you go!$"
+}
+
+text BattleFrontier_BattlePyramidTop_Text_PlayerConqueredPyramid {
+    "The PYRAMID's new conqueror!\n"
+    "Let the name {PLAYER} be known!$"
+}
+
+text BattleFrontier_BattlePyramidTop_Text_ChiefBeatYouHere {
+    "It is a delight to see you here!\p"
+    "Unfortunately, you were second by\n"
+    "a mere fraction of time!\p"
+    "Our chief has already conquered\n"
+    "the PYRAMID ahead of you.\p"
+    "However, my young explorer…\n"
+    "You are a TRAINER!\p"
+    "Assert your power and take the glory\n"
+    "of the pinnacle from our chief!\p"
+    "Now, please! When you are ready,\n"
+    "take one more step of courage!$"
+}
+
+text BattleFrontier_BattlePyramidTop_Text_ExplorationsAreGrandestAdventure {
+    "Young adventurer…\p"
+    "Wouldn't you agree that explorations\n"
+    "are the grandest of adventures?\p"
+    "Your own wits!\p"
+    "Your own strength!\p"
+    "Your own POKéMON!\p"
+    "And, above all, only your own courage\n"
+    "to lead you through unknown worlds…$"
+}
+
+text BattleFrontier_BattlePyramidTop_Text_ImPyramidKingBrandon {
+    "Aah, yes, indeed this life is grand!\n"
+    "Grand, it is! Eh?\p"
+    "I'm BRANDON!\p"
+    "I'm the PYRAMID KING, which means\n"
+    "I'm in charge here.\p"
+    "Most people call me the chief!\p"
+    "You coming here means you have\n"
+    "that much confidence in yourself,\l"
+    "am I right?\p"
+    "Hahahah!\n"
+    "This should be exciting!$"
+}
+
+text BattleFrontier_BattlePyramidTop_Text_BringCourageToOurBattle {
+    "Now, then!\n"
+    "Bring your courage to our battle!$"
+}
+
+text BattleFrontier_BattlePyramidTop_Text_BrandonFrontierPassPlease {
+    "BRANDON: Hahahah! Grand it was!\n"
+    "Grand, yes, indeed!\p"
+    "Well done! You've earned recognition!\n"
+    "Your FRONTIER PASS, please!$"
+}
+
+text BattleFrontier_BattlePyramidTop_Text_ReceivedBraveSymbol {
+    "The Brave Symbol was embossed on\n"
+    "the FRONTIER PASS!$"
+}
+
+text BattleFrontier_BattlePyramidTop_Text_LookForwardToNextMeeting {
+    "Young explorer!\n"
+    "I look forward to our next meeting!$"
+}
+
+text BattleFrontier_BattlePyramidTop_Text_BrandonYouveReturned {
+    "BRANDON: …You've finally returned,\n"
+    "young explorer…\p"
+    "Your love of adventure seems to come\n"
+    "deep from within your heart…\p"
+    "Yes… You are exactly as I was in\n"
+    "my own youth…\p"
+    "… … …Ah…\p"
+    "The passionate!\p"
+    "The dangerous!\p"
+    "The desperate!\p"
+    "Those days of death-defying,\n"
+    "life-affirming adventures are back…$"
+}
+
+text BattleFrontier_BattlePyramidTop_Text_MyCourageIsOffMeter {
+    "Now, then!\p"
+    "I sense my own courage is off\n"
+    "the meter!$"
+}
+
+text BattleFrontier_BattlePyramidTop_Text_EverythingYouHave {
+    "Everything you have!\n"
+    "I'm braced for it all!$"
+}
+
+text BattleFrontier_BattlePyramidTop_Text_BrandonRemarkableHaveThis {
+    "BRANDON: Hahahah!\n"
+    "Remarkable!\l"
+    "Yes, it's grand, indeed!\p"
+    "Young explorer!\p"
+    "You've bested me through and through!\n"
+    "Here! I want you to have this!$"
+}
+
+text BattleFrontier_BattlePyramidTop_Text_BraveSymbolTookGoldenShine {
+    "The Brave Symbol took on\n"
+    "a golden shine!$"
+}
+
+text BattleFrontier_BattlePyramidTop_Text_FarewellForNow {
+    "Ah, yes! It just goes to show that\n"
+    "I have much to learn still!\p"
+    "May our paths cross again!\n"
+    "Farewell for now, young explorer!$"
+}
+
+text BattleFrontier_BattlePyramidTop_Text_StepForwardWhenReady {
+    "Now, when you are ready, take courage\n"
+    "and step forward.$"
+}

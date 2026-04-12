@@ -1,0 +1,127 @@
+mapscripts Route5_SouthEntrance_Frlg_MapScripts {}
+
+script Route5_SouthEntrance_EventScript_Guard {
+    msgbox(Route5_SouthEntrance_Text_HiHowsItGoing, MSGBOX_NPC)
+    end
+}
+
+script Route5_SouthEntrance_EventScript_GuardTriggerLeft {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    goto(Route5_SouthEntrance_EventScript_GuardTrigger)
+    end
+}
+
+script Route5_SouthEntrance_EventScript_GuardTriggerMid {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    goto(Route5_SouthEntrance_EventScript_GuardTrigger)
+    end
+}
+
+script Route5_SouthEntrance_EventScript_GuardTriggerRight {
+    lockall
+    setvar(VAR_TEMP_1, 2)
+    goto(Route5_SouthEntrance_EventScript_GuardTrigger)
+    end
+}
+
+script Route5_SouthEntrance_EventScript_GuardTrigger {
+    textcolor(NPC_TEXT_COLOR_MALE)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    if (flag(FLAG_GOT_TEA)) goto(Route5_SouthEntrance_EventScript_GiveTea)
+    msgbox(Route5_SouthEntrance_Text_ThirstyOnGuardDuty)
+    closemessage
+    applymovement(LOCALID_PLAYER, Route5_SouthEntrance_Movement_BlockPlayerEntry)
+    waitmovement(0)
+    releaseall
+    end
+}
+
+script Route5_SouthEntrance_EventScript_GiveTea {
+    removeitem(ITEM_TEA)
+    goto(Route5_SouthEntrance_EventScript_GuardDrinkTea)
+    end
+}
+
+script Route5_SouthEntrance_EventScript_GuardDrinkTea {
+    msgbox(Route5_SouthEntrance_Text_ThatTeaLooksTasty)
+    closemessage
+    if (var(VAR_TEMP_1) == 0) call(Route5_SouthEntrance_EventScript_WalkToGuardLeft)
+    if (var(VAR_TEMP_1) == 1) call(Route5_SouthEntrance_EventScript_WalkToGuardMid)
+    if (var(VAR_TEMP_1) == 2) call(Route5_SouthEntrance_EventScript_WalkToGuardRight)
+    msgbox(Route5_SouthEntrance_Text_ThanksIllShareTeaWithGuards)
+    setvar(VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1)
+    releaseall
+    end
+}
+
+script Route5_SouthEntrance_EventScript_WalkToGuardLeft {
+    applymovement(LOCALID_PLAYER, Route5_SouthEntrance_Movement_WalkToGuardLeft)
+    waitmovement(0)
+    return
+}
+
+script Route5_SouthEntrance_EventScript_WalkToGuardMid {
+    applymovement(LOCALID_PLAYER, Route5_SouthEntrance_Movement_WalkToGuardMid)
+    waitmovement(0)
+    return
+}
+
+script Route5_SouthEntrance_EventScript_WalkToGuardRight {
+    applymovement(LOCALID_PLAYER, Route5_SouthEntrance_Movement_WalkToGuardRight)
+    waitmovement(0)
+    return
+}
+
+movement Route5_SouthEntrance_Movement_WalkToGuardMid {
+    walk_left
+    step_end
+}
+
+movement Route5_SouthEntrance_Movement_WalkToGuardRight {
+    walk_left
+    walk_left
+    step_end
+}
+
+movement Route5_SouthEntrance_Movement_WalkToGuardLeft {
+    walk_in_place_left
+    step_end
+}
+
+movement Route5_SouthEntrance_Movement_BlockPlayerEntry {
+    walk_up
+    step_end
+}
+
+text Route5_SouthEntrance_Text_ThirstyOnGuardDuty {
+    "I'm on guard duty.\n"
+    "Gee, I'm thirsty, though!\p"
+    "Oh, wait there, the road's closed.$"
+}
+
+text Route5_SouthEntrance_Text_ThatTeaLooksTasty {
+    "Oh, that TEA…\n"
+    "It looks awfully tasty…$"
+}
+
+text Route5_SouthEntrance_Text_ThanksIllShareTeaWithGuards {
+    "Huh? I can have this drink?\n"
+    "Gee, thanks!\l"
+    "… …\l"
+    "Glug, glug…\l"
+    "… …\l"
+    "Gulp…\l"
+    "If you want to go to SAFFRON\l"
+    "CITY…\l"
+    "… …\l"
+    "You can go on through.\p"
+    "I'll share this TEA with the other\n"
+    "guards!$"
+}
+
+text Route5_SouthEntrance_Text_HiHowsItGoing {
+    "Hi, how's it going?$"
+}

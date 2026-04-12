@@ -1,0 +1,65 @@
+mapscripts LilycoveCity_DepartmentStore_3F_MapScripts {}
+
+script LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins)
+    msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins {
+    pokemartlistend()
+}
+
+script LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters)
+    msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters {
+    pokemartlistend()
+}
+
+script LilycoveCity_DepartmentStore_3F_EventScript_TriathleteM {
+    msgbox(LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_DepartmentStore_3F_EventScript_PokefanM {
+    msgbox(LilycoveCity_DepartmentStore_3F_Text_WantMoreEndurance, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_DepartmentStore_3F_EventScript_Woman {
+    msgbox(LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon, MSGBOX_NPC)
+    end
+}
+
+text LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon {
+    "For quickly toughening up POKéMON,\n"
+    "items are the best.\p"
+    "PROTEIN boosts ATTACK,\n"
+    "and CALCIUM raises SP. ATK.$"
+}
+
+text LilycoveCity_DepartmentStore_3F_Text_WantMoreEndurance {
+    "I want my POKéMON to have more\n"
+    "endurance.\p"
+    "I'm trying to decide whether to raise\n"
+    "DEFENSE with IRON, or SP. DEF with ZINC.$"
+}
+
+text LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon {
+    "I gave a CARBOS to my POKéMON,\n"
+    "and its SPEED went up.$"
+}

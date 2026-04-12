@@ -1,0 +1,28 @@
+mapscripts SootopolisCity_House7_MapScripts {}
+
+script SootopolisCity_House7_EventScript_OldMan {
+    msgbox(SootopolisCity_House7_Text_CityFromEruptedVolcano, MSGBOX_NPC)
+    end
+}
+
+script SootopolisCity_House7_EventScript_PokefanF {
+    msgbox(SootopolisCity_House7_Text_CaveMadeToKeepSomething, MSGBOX_NPC)
+    end
+}
+
+text SootopolisCity_House7_Text_CityFromEruptedVolcano {
+    "An underwater volcano erupted and\n"
+    "forced itself up from the depths.\p"
+    "Its crater emerged from the sea and\n"
+    "became filled with rainwater.\p"
+    "That's how SOOTOPOLIS CITY came into\n"
+    "being.$"
+}
+
+text SootopolisCity_House7_Text_CaveMadeToKeepSomething {
+    "The cave that links SOOTOPOLIS and\n"
+    "the outside world…\p"
+    "It seems as if the cave was made to\n"
+    "keep something from getting out.\p"
+    "Or am I just imagining things?$"
+}

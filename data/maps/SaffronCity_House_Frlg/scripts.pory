@@ -1,0 +1,51 @@
+mapscripts SaffronCity_House_Frlg_MapScripts {}
+
+script SaffronCity_House_EventScript_Lass {
+    msgbox(SaffronCity_House_Text_DontLookAtMyLetter, MSGBOX_NPC)
+    end
+}
+
+script SaffronCity_House_EventScript_Youngster {
+    msgbox(SaffronCity_House_Text_GettingCopycatPokeDoll, MSGBOX_NPC)
+    end
+}
+
+script SaffronCity_House_EventScript_Pidgey {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_PIDGEY, CRY_MODE_NORMAL)
+    msgbox(SaffronCity_House_Text_Pidgey)
+    waitmoncry()
+    release
+    end
+}
+
+script SaffronCity_House_EventScript_Letter {
+    msgbox(SaffronCity_House_Text_ExplainPPUp, MSGBOX_SIGN)
+    end
+}
+
+text SaffronCity_House_Text_DontLookAtMyLetter {
+    "…Thank you for writing.\n"
+    "I hope to see you soon!\p"
+    "…Hey!\n"
+    "Don't look at my letter!$"
+}
+
+text SaffronCity_House_Text_Pidgey {
+    "PIDGEY: Kurukkoo!$"
+}
+
+text SaffronCity_House_Text_GettingCopycatPokeDoll {
+    "The COPYCAT is cute!\n"
+    "I'm getting her a POKé DOLL.$"
+}
+
+text SaffronCity_House_Text_ExplainPPUp {
+    "I was given a PP UP as a gift.\p"
+    "It's used to increase the PP of\n"
+    "a POKéMON's move.\p"
+    "I should use it on a powerful move\n"
+    "with only a few PP.$"
+}

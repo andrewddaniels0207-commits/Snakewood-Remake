@@ -1,0 +1,62 @@
+mapscripts MauvilleCity_PokemonCenter_1F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: MauvilleCity_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script MauvilleCity_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_MAUVILLE_CITY)
+    call(Common_EventScript_UpdateBrineyLocation)
+    goto(MauvilleCity_PokemonCenter_1F_EventScript_SetMauvilleOldManGfx)
+    end
+}
+
+script MauvilleCity_PokemonCenter_1F_EventScript_SetMauvilleOldManGfx {
+    special(SetMauvilleOldManObjEventGfx)
+    end
+}
+
+script MauvilleCity_PokemonCenter_1F_EventScript_Nurse {
+    setvar(VAR_0x800B, LOCALID_MAUVILLE_NURSE)
+    call(Common_EventScript_PkmnCenterNurse)
+    waitmessage()
+    waitbuttonpress()
+    release
+    end
+}
+
+script MauvilleCity_PokemonCenter_1F_EventScript_Woman1 {
+    msgbox(MauvilleCity_PokemonCenter_1F_Text_ManOverThereSaysWeirdThings, MSGBOX_NPC)
+    end
+}
+
+script MauvilleCity_PokemonCenter_1F_EventScript_Woman2 {
+    msgbox(MauvilleCity_PokemonCenter_1F_Text_MyDataUpdatedFromRecordCorner, MSGBOX_NPC)
+    end
+}
+
+script MauvilleCity_PokemonCenter_1F_EventScript_Youngster {
+    msgbox(MauvilleCity_PokemonCenter_1F_Text_RecordCornerSoundsFun, MSGBOX_NPC)
+    end
+}
+
+text MauvilleCity_PokemonCenter_1F_Text_ManOverThereSaysWeirdThings {
+    "That man over there, he says weird\n"
+    "things!\p"
+    "He's funny in a weird way.\n"
+    "I doubt I'll forget about him!$"
+}
+
+text MauvilleCity_PokemonCenter_1F_Text_MyDataUpdatedFromRecordCorner {
+    "When I accessed the RECORD CORNER,\n"
+    "the data for what's hot in DEWFORD\l"
+    "got updated.\p"
+    "Now that bit of data is the same\n"
+    "as my friend's!$"
+}
+
+text MauvilleCity_PokemonCenter_1F_Text_RecordCornerSoundsFun {
+    "A RECORD CORNER opened upstairs in\n"
+    "the POKéMON CENTER.\p"
+    "I don't know what it's about, but it\n"
+    "sounds fun. I'll go check it out!$"
+}

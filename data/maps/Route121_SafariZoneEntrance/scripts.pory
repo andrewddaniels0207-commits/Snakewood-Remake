@@ -1,0 +1,143 @@
+mapscripts Route121_SafariZoneEntrance_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_SAFARI_ZONE_STATE, 1: Route121_SafariZoneEntrance_EventScript_ExitSafariZone
+    ]
+}
+
+script Route121_SafariZoneEntrance_EventScript_ExitSafariZone {
+    lockall
+    applymovement(LOCALID_PLAYER, Route121_SafariZoneEntrance_Movement_ExitSafariZone)
+    waitmovement(0)
+    setvar(VAR_SAFARI_ZONE_STATE, 0)
+    releaseall
+    end
+}
+
+movement Route121_SafariZoneEntrance_Movement_ExitSafariZone {
+    walk_up
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    step_end
+}
+
+script Route121_SafariZoneEntrance_EventScript_WelcomeAttendant {
+    msgbox(Route121_SafariZoneEntrance_Text_WelcomeToSafariZone, MSGBOX_NPC)
+    end
+}
+
+script Route121_SafariZoneEntrance_EventScript_InfoAttendant {
+    lock
+    faceplayer
+    msgbox(Route121_SafariZoneEntrance_Text_WelcomeFirstTime, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(Route121_SafariZoneEntrance_EventScript_FirstTimeInfo)
+    msgbox(Route121_SafariZoneEntrance_Text_ComeInAndEnjoy, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route121_SafariZoneEntrance_EventScript_FirstTimeInfo {
+    msgbox(Route121_SafariZoneEntrance_Text_FirstTimeInfo, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route121_SafariZoneEntrance_EventScript_EntranceCounterTrigger {
+    lockall
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    showmoneybox(0, 0)
+    msgbox(Route121_SafariZoneEntrance_Text_WouldYouLikeToPlay, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(Route121_SafariZoneEntrance_EventScript_TryEnterSafariZone)
+    msgbox(Route121_SafariZoneEntrance_Text_PlayAnotherTime, MSGBOX_DEFAULT)
+    goto(Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter)
+    end
+}
+
+script Route121_SafariZoneEntrance_EventScript_TryEnterSafariZone {
+    checkitem(ITEM_POKEBLOCK_CASE)
+    if (var(VAR_RESULT) == 0) goto(Route121_SafariZoneEntrance_EventScript_NoPokeblockCase)
+    call(Route121_SafariZoneEntrance_EventScript_CheckHasRoomForPokemon)
+    checkmoney(500)
+    if (var(VAR_RESULT) == 0) goto(Route121_SafariZoneEntrance_EventScript_NotEnoughMoney)
+    playse(SE_SHOP)
+    msgbox(Route121_SafariZoneEntrance_Text_ThatWillBe500Please, MSGBOX_DEFAULT)
+    removemoney(500)
+    updatemoneybox()
+    msgbox(Route121_SafariZoneEntrance_Text_HereAreYourSafariBalls, MSGBOX_DEFAULT)
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(Route121_SafariZoneEntrance_Text_Received30SafariBalls)
+    waitfanfare()
+    msgbox(Route121_SafariZoneEntrance_Text_PleaseEnjoyYourself, MSGBOX_DEFAULT)
+    closemessage
+    hidemoneybox()
+    applymovement(LOCALID_PLAYER, Route121_SafariZoneEntrance_Movement_EnterSafariZone)
+    waitmovement(0)
+    special(EnterSafariMode)
+    setvar(VAR_SAFARI_ZONE_STATE, 2)
+    clearflag(FLAG_GOOD_LUCK_SAFARI_ZONE)
+    warp(MAP_SAFARI_ZONE_SOUTH, 32, 33)
+    waitstate
+    end
+}
+
+script Route121_SafariZoneEntrance_EventScript_CheckHasRoomForPokemon {
+    getpartysize()
+    if (var(VAR_RESULT) != PARTY_SIZE) goto(Route121_SafariZoneEntrance_EventScript_HasRoomForPokemon)
+    specialvar(VAR_RESULT, ScriptCheckFreePokemonStorageSpace)
+    if (var(VAR_RESULT) == 1) goto(Route121_SafariZoneEntrance_EventScript_HasRoomForPokemon)
+    msgbox(Route121_SafariZoneEntrance_Text_PCIsFull, MSGBOX_DEFAULT)
+    goto(Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter)
+    end
+}
+
+script Route121_SafariZoneEntrance_EventScript_HasRoomForPokemon {
+    return
+}
+
+script Route121_SafariZoneEntrance_EventScript_NoPokeblockCase {
+    msgbox(Route121_SafariZoneEntrance_Text_YouNeedPokeblockCase, MSGBOX_DEFAULT)
+    goto(Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter)
+    end
+}
+
+script Route121_SafariZoneEntrance_EventScript_NotEnoughMoney {
+    msgbox(Route121_SafariZoneEntrance_Text_NotEnoughMoney, MSGBOX_DEFAULT)
+    goto(Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter)
+    end
+}
+
+script Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter {
+    closemessage
+    hidemoneybox()
+    applymovement(LOCALID_PLAYER, Route121_SafariZoneEntrance_Movement_BackAwayFromCounter)
+    waitmovement(0)
+    releaseall
+    end
+}
+
+movement Route121_SafariZoneEntrance_Movement_BackAwayFromCounter {
+    walk_right
+    step_end
+}
+
+movement Route121_SafariZoneEntrance_Movement_EnterSafariZone {
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    delay_16
+    step_end
+}
+
+script Route121_SafariZoneEntrance_EventScript_TrainerTipSign {
+    msgbox(Route121_SafariZoneEntrance_Text_TrainerTip, MSGBOX_SIGN)
+    end
+}

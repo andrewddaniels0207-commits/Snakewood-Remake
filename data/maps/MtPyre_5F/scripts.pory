@@ -1,0 +1,25 @@
+mapscripts MtPyre_5F_MapScripts {}
+
+script MtPyre_4F_EventScript_Tasha {
+    trainerbattle_single(TRAINER_TASHA, MtPyre_4F_Text_TashaIntro, MtPyre_4F_Text_TashaDefeat)
+    msgbox(MtPyre_4F_Text_TashaPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text MtPyre_4F_Text_TashaIntro {
+    "I love all things horrifying…\n"
+    "It's like a disease…\p"
+    "When I'm here…\n"
+    "I shiver with fear…$"
+}
+
+text MtPyre_4F_Text_TashaDefeat {
+    "Losing, I dislike…$"
+}
+
+text MtPyre_4F_Text_TashaPostBattle {
+    "I want to see dreadful things…\n"
+    "I can't leave…\p"
+    "Stay…\n"
+    "Won't you stay with me?$"
+}

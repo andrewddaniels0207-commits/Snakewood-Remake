@@ -1,0 +1,36 @@
+mapscripts CeladonCity_DepartmentStore_1F_Frlg_MapScripts {}
+
+script CeladonCity_DepartmentStore_1F_EventScript_Receptionist {
+    msgbox(CeladonCity_DepartmentStore_1F_Text_WelcomeToDeptStore, MSGBOX_NPC)
+    end
+}
+
+script CeladonCity_DepartmentStore_1F_EventScript_LayoutSign {
+    msgbox(CeladonCity_DepartmentStore_1F_Text_FloorDescriptions, MSGBOX_SIGN)
+    end
+}
+
+script CeladonCity_DepartmentStore_1F_EventScript_FloorSign {
+    msgbox(CeladonCity_DepartmentStore_1F_Text_ServiceCounter, MSGBOX_SIGN)
+    end
+}
+
+text CeladonCity_DepartmentStore_1F_Text_WelcomeToDeptStore {
+    "Hello!\n"
+    "Welcome to CELADON DEPT. STORE.\p"
+    "The board on the right describes\n"
+    "the store layout.$"
+}
+
+text CeladonCity_DepartmentStore_1F_Text_FloorDescriptions {
+    "1F: SERVICE COUNTER\p"
+    "2F: TRAINER'S MARKET\p"
+    "3F: TV GAME SHOP\p"
+    "4F: WISE MAN GIFTS\p"
+    "5F: DRUGSTORE\p"
+    "ROOFTOP SQUARE: VENDING MACHINES$"
+}
+
+text CeladonCity_DepartmentStore_1F_Text_ServiceCounter {
+    "1F: SERVICE COUNTER$"
+}

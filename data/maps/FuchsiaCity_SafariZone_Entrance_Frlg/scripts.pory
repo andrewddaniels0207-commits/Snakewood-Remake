@@ -1,0 +1,313 @@
+mapscripts FuchsiaCity_SafariZone_Entrance_Frlg_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 1: FuchsiaCity_SafariZone_Entrance_EventScript_ExitWarpIn
+        VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 2: FuchsiaCity_SafariZone_Entrance_EventScript_ExitEarly
+        VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 3: FuchsiaCity_SafariZone_Entrance_EventScript_ExitWalkIn
+    ]
+}
+
+script FuchsiaCity_SafariZone_Entrance_EventScript_ExitWalkIn {
+    lockall
+    textcolor(NPC_TEXT_COLOR_MALE)
+    applymovement(LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_ApproachCounter)
+    waitmovement(0)
+    msgbox(FuchsiaCity_SafariZone_Entrance_Text_CatchFairShareComeAgain)
+    closemessage
+    applymovement(LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_Exit2)
+    waitmovement(0)
+    special(ExitSafariMode)
+    setvar(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0)
+    releaseall
+    end
+}
+
+script FuchsiaCity_SafariZone_Entrance_EventScript_ExitWarpIn {
+    lockall
+    textcolor(NPC_TEXT_COLOR_MALE)
+    msgbox(FuchsiaCity_SafariZone_Entrance_Text_CatchFairShareComeAgain)
+    closemessage
+    applymovement(LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_Exit)
+    waitmovement(0)
+    special(ExitSafariMode)
+    setvar(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0)
+    releaseall
+    end
+}
+
+script FuchsiaCity_SafariZone_Entrance_EventScript_ExitEarly {
+    lockall
+    textcolor(NPC_TEXT_COLOR_MALE)
+    msgbox(FuchsiaCity_SafariZone_Entrance_Text_GoingToLeaveSafariZoneEarly, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(FuchsiaCity_SafariZone_Entrance_EventScript_ReturnToSafariZone)
+    msgbox(FuchsiaCity_SafariZone_Entrance_Text_PleaseReturnSafariBalls)
+    closemessage
+    applymovement(LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_Exit)
+    waitmovement(0)
+    special(ExitSafariMode)
+    setvar(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0)
+    releaseall
+    end
+}
+
+script FuchsiaCity_SafariZone_Entrance_EventScript_ReturnToSafariZone {
+    msgbox(FuchsiaCity_SafariZone_Entrance_Text_GoodLuck)
+    closemessage
+    applymovement(LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_ReEnter)
+    waitmovement(0)
+    warp(MAP_SAFARI_ZONE_CENTER, 26, 30)
+    waitstate
+    end
+}
+
+movement FuchsiaCity_SafariZone_Entrance_Movement_Exit {
+    walk_down
+    walk_down
+    step_end
+}
+
+movement FuchsiaCity_SafariZone_Entrance_Movement_ReEnter {
+    walk_up
+    step_end
+}
+
+movement FuchsiaCity_SafariZone_Entrance_Movement_Exit2 {
+    walk_down
+    walk_down
+    step_end
+}
+
+movement FuchsiaCity_SafariZone_Entrance_Movement_ApproachCounter {
+    walk_down
+    delay_8
+    step_end
+}
+
+script FuchsiaCity_SafariZone_Entrance_EventScript_EntryTriggerMid {
+    lockall
+    setvar(VAR_TEMP_2, 0)
+    goto(FuchsiaCity_SafariZone_Entrance_EventScript_AskEnterSafariZone)
+    end
+}
+
+script FuchsiaCity_SafariZone_Entrance_EventScript_EntryTriggerRight {
+    lockall
+    setvar(VAR_TEMP_2, 1)
+    goto(FuchsiaCity_SafariZone_Entrance_EventScript_AskEnterSafariZone)
+    end
+}
+
+script FuchsiaCity_SafariZone_Entrance_EventScript_EntryTriggerLeft {
+    lockall
+    setvar(VAR_TEMP_2, 2)
+    goto(FuchsiaCity_SafariZone_Entrance_EventScript_AskEnterSafariZone)
+    end
+}
+
+script FuchsiaCity_SafariZone_Entrance_EventScript_AskEnterSafariZone {
+    textcolor(NPC_TEXT_COLOR_MALE)
+    msgbox(FuchsiaCity_SafariZone_Entrance_Text_WelcomeToSafariZone)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    showmoneybox(0, 0)
+    msgbox(FuchsiaCity_SafariZone_Entrance_Text_PlaySafariGameFor500, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(FuchsiaCity_SafariZone_Entrance_EventScript_TryEnterSafariZone)
+    msgbox(FuchsiaCity_SafariZone_Entrance_Text_OkayPleaseComeAgain)
+    goto(FuchsiaCity_SafariZone_Entrance_EventScript_ForcePlayerBack)
+    end
+}
+
+script FuchsiaCity_SafariZone_Entrance_EventScript_TryEnterSafariZone {
+    call(FuchsiaCity_SafariZone_Entrance_EventScript_CheckSpaceForMons)
+    checkmoney(500)
+    if (var(VAR_RESULT) == FALSE) goto(FuchsiaCity_SafariZone_Entrance_EventScript_NotEnoughMoney)
+    removemoney(500)
+    updatemoneybox()
+    msgbox(FuchsiaCity_SafariZone_Entrance_Text_ThatllBe500WeOnlyUseSpecialBalls)
+    textcolor(NPC_TEXT_COLOR_NEUTRAL)
+    playfanfare(MUS_LEVEL_UP)
+    message(FuchsiaCity_SafariZone_Entrance_Text_PlayerReceived30SafariBalls)
+    waitfanfare()
+    call(EventScript_RestorePrevTextColor)
+    msgbox(FuchsiaCity_SafariZone_Entrance_Text_CallYouOnPAWhenYouRunOut)
+    closemessage
+    hidemoneybox()
+    if (var(VAR_TEMP_2) == 0) call(FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneMid)
+    if (var(VAR_TEMP_2) == 1) call(FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneRight)
+    if (var(VAR_TEMP_2) == 2) call(FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneLeft)
+    special(EnterSafariMode)
+    setvar(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 2)
+    warp(MAP_SAFARI_ZONE_CENTER, 255, 26, 30)
+    waitstate
+    end
+}
+
+script FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneRight {
+    applymovement(LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneRight)
+    waitmovement(0)
+    return
+}
+
+script FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneMid {
+    applymovement(LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneMid)
+    waitmovement(0)
+    return
+}
+
+script FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneLeft {
+    applymovement(LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneLeft)
+    waitmovement(0)
+    return
+}
+
+script FuchsiaCity_SafariZone_Entrance_EventScript_CheckSpaceForMons {
+    getpartysize()
+    if (var(VAR_RESULT) != PARTY_SIZE) goto(Common_EventScript_NopReturn)
+    specialvar(VAR_RESULT, ScriptCheckFreePokemonStorageSpace)
+    if (var(VAR_RESULT) == TRUE) goto(Common_EventScript_NopReturn)
+    msgbox(Route121_SafariZoneEntrance_Text_PCIsFull)
+    goto(FuchsiaCity_SafariZone_Entrance_EventScript_ForcePlayerBack)
+    end
+}
+
+script FuchsiaCity_SafariZone_Entrance_EventScript_NotEnoughMoney {
+    msgbox(FuchsiaCity_SafariZone_Entrance_Text_OopsNotEnoughMoney)
+    goto(FuchsiaCity_SafariZone_Entrance_EventScript_ForcePlayerBack)
+    end
+}
+
+script FuchsiaCity_SafariZone_Entrance_EventScript_ForcePlayerBack {
+    closemessage
+    hidemoneybox()
+    applymovement(LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_ForceBack)
+    waitmovement(0)
+    releaseall
+    end
+}
+
+movement FuchsiaCity_SafariZone_Entrance_Movement_ForceBack {
+    walk_down
+    step_end
+}
+
+movement FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneMid {
+    walk_up
+    walk_up
+    step_end
+}
+
+movement FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneRight {
+    walk_up
+    walk_left
+    walk_up
+    step_end
+}
+
+movement FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneLeft {
+    walk_up
+    walk_right
+    walk_up
+    step_end
+}
+
+script FuchsiaCity_SafariZone_Entrance_EventScript_InfoAttendant {
+    lock
+    faceplayer
+    msgbox(FuchsiaCity_SafariZone_Entrance_Text_FirstTimeAtSafariZone, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(FuchsiaCity_SafariZone_Entrance_EventScript_ExplainSafariZone)
+    msgbox(FuchsiaCity_SafariZone_Entrance_Text_SorryYoureARegularHere)
+    release
+    end
+}
+
+script FuchsiaCity_SafariZone_Entrance_EventScript_ExplainSafariZone {
+    msgbox(FuchsiaCity_SafariZone_Entrance_Text_ExplainSafariZone)
+    release
+    end
+}
+
+text FuchsiaCity_SafariZone_Entrance_Text_WelcomeToSafariZone {
+    "Welcome to the SAFARI ZONE!$"
+}
+
+text FuchsiaCity_SafariZone_Entrance_Text_PlaySafariGameFor500 {
+    "For just ¥500, you can play the\n"
+    "SAFARI GAME.\p"
+    "You can roam the wide-open safari\n"
+    "and catch what you like.\p"
+    "Would you like to play?$"
+}
+
+text FuchsiaCity_SafariZone_Entrance_Text_ThatllBe500WeOnlyUseSpecialBalls {
+    "That'll be ¥500, please!\p"
+    "We only use a special kind of \n"
+    "POKé BALLS here.$"
+}
+
+text FuchsiaCity_SafariZone_Entrance_Text_PlayerReceived30SafariBalls {
+    "{PLAYER} received 30 SAFARI BALLS\n"
+    "from the attendant.$"
+}
+
+text FuchsiaCity_SafariZone_Entrance_Text_CallYouOnPAWhenYouRunOut {
+    "We'll call you on the PA when you\n"
+    "run out of time or SAFARI BALLS.\p"
+    "Well, I'll wish you the best of\n"
+    "luck!$"
+}
+
+text FuchsiaCity_SafariZone_Entrance_Text_OkayPleaseComeAgain {
+    "Okay.\n"
+    "Please come again!$"
+}
+
+text FuchsiaCity_SafariZone_Entrance_Text_OopsNotEnoughMoney {
+    "Oops!\n"
+    "Not enough money!$"
+}
+
+text FuchsiaCity_SafariZone_Entrance_Text_GoingToLeaveSafariZoneEarly {
+    "Are you going to leave the\n"
+    "SAFARI ZONE early?$"
+}
+
+text FuchsiaCity_SafariZone_Entrance_Text_PleaseReturnSafariBalls {
+    "Please return any SAFARI BALLS\n"
+    "you may have left.$"
+}
+
+text FuchsiaCity_SafariZone_Entrance_Text_GoodLuck {
+    "Good luck!$"
+}
+
+text FuchsiaCity_SafariZone_Entrance_Text_CatchFairShareComeAgain {
+    "Did you catch your fair share?\n"
+    "Come again!$"
+}
+
+text FuchsiaCity_SafariZone_Entrance_Text_FirstTimeAtSafariZone {
+    "Hi! Is it your first time here at\n"
+    "the SAFARI ZONE?$"
+}
+
+text FuchsiaCity_SafariZone_Entrance_Text_ExplainSafariZone {
+    "The SAFARI ZONE actually has\n"
+    "four zones in it.\p"
+    "Each zone has different kinds of\n"
+    "POKéMON, even some rare ones.\p"
+    "Use the supplied SAFARI BALLS to\n"
+    "catch them.\p"
+    "You can also throw BAIT or ROCKS\n"
+    "besides the SAFARI BALLS.\p"
+    "If you throw BAIT, the POKéMON\n"
+    "becomes less likely to flee, but\l"
+    "harder to catch.\p"
+    "If you throw ROCKS, the POKéMON\n"
+    "becomes more likely to flee, but\l"
+    "easier to catch.\p"
+    "When you run out of time or SAFARI\n"
+    "BALLS, it's game over for you!$"
+}
+
+text FuchsiaCity_SafariZone_Entrance_Text_SorryYoureARegularHere {
+    "Sorry, you're a regular here!$"
+}

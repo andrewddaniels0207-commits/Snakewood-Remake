@@ -1,0 +1,99 @@
+mapscripts CinnabarIsland_PokemonLab_Lounge_Frlg_MapScripts {}
+
+script CinnabarIsland_PokemonLab_Lounge_EventScript_Scientist {
+    msgbox(CinnabarIsland_PokemonLab_Lounge_Text_FoundFossilInMtMoon, MSGBOX_NPC)
+    end
+}
+
+script CinnabarIsland_PokemonLab_Lounge_EventScript_Clifton {
+    lock
+    faceplayer
+    setvar(VAR_0x8008, INGAME_TRADE_ELECTRODE)
+    call(EventScript_GetInGameTradeSpeciesInfo)
+    if (flag(FLAG_DID_ESPHERE_TRADE)) goto(CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonAlreadyTraded)
+    msgbox(Trade_Text_DoYouHaveMonWouldYouTradeForMon, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonDeclineTrade)
+    call(EventScript_ChooseMonForInGameTrade)
+    if (var(VAR_0x8004) >= PARTY_SIZE) goto(CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonDeclineTrade)
+    call(EventScript_GetInGameTradeSpecies)
+    if (var(VAR_RESULT) != VAR_0x8009) goto(CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonNotRequestedMon)
+    call(EventScript_DoInGameTrade)
+    msgbox(Trade_Text_Thanks)
+    setflag(FLAG_DID_ESPHERE_TRADE)
+    release
+    end
+}
+
+script CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonDeclineTrade {
+    msgbox(Trade_Text_WellIfYouDontWantTo)
+    release
+    end
+}
+
+script CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonNotRequestedMon {
+    bufferspeciesname(STR_VAR_1, VAR_0x8009)
+    msgbox(Trade_Text_ThisIsntMon)
+    release
+    end
+}
+
+script CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonAlreadyTraded {
+    msgbox(Trade_Text_HasTradedMonGrownStronger)
+    release
+    end
+}
+
+script CinnabarIsland_PokemonLab_Lounge_EventScript_Norma {
+    lock
+    faceplayer
+    setvar(VAR_0x8008, INGAME_TRADE_TANGELA)
+    copyvar(VAR_0x8004, VAR_0x8008)
+    specialvar(VAR_RESULT, GetInGameTradeSpeciesInfo)
+    copyvar(VAR_0x8009, VAR_RESULT)
+    if (flag(FLAG_DID_TANGENY_TRADE)) goto(CinnabarIsland_PokemonLab_Lounge_EventScript_NormaAlreadyTraded)
+    msgbox(Trade_Text_DoYouHaveMonWantToTradeForMon, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(CinnabarIsland_PokemonLab_Lounge_EventScript_NormaDeclineTrade)
+    special(ChoosePartyMon)
+    waitstate
+    copyvar(VAR_0x800A, VAR_0x8004)
+    if (var(VAR_0x8004) >= PARTY_SIZE) goto(CinnabarIsland_PokemonLab_Lounge_EventScript_NormaDeclineTrade)
+    copyvar(VAR_0x8005, VAR_0x800A)
+    specialvar(VAR_RESULT, GetTradeSpecies)
+    copyvar(VAR_0x800B, VAR_RESULT)
+    if (var(VAR_RESULT) != VAR_0x8009) goto(CinnabarIsland_PokemonLab_Lounge_EventScript_NormaNotRequestedMon)
+    copyvar(VAR_0x8004, VAR_0x8008)
+    copyvar(VAR_0x8005, VAR_0x800A)
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    waitstate
+    msgbox(Trade_Text_ThanksYoureAPal)
+    setflag(FLAG_DID_TANGENY_TRADE)
+    release
+    end
+}
+
+script CinnabarIsland_PokemonLab_Lounge_EventScript_NormaDeclineTrade {
+    msgbox(Trade_Text_ThatsTooBad)
+    release
+    end
+}
+
+script CinnabarIsland_PokemonLab_Lounge_EventScript_NormaNotRequestedMon {
+    bufferspeciesname(STR_VAR_1, VAR_0x8009)
+    msgbox(Trade_Text_ThisIsNoMon)
+    release
+    end
+}
+
+script CinnabarIsland_PokemonLab_Lounge_EventScript_NormaAlreadyTraded {
+    msgbox(Trade_Text_HowIsMyOldMon)
+    release
+    end
+}
+
+text CinnabarIsland_PokemonLab_Lounge_Text_FoundFossilInMtMoon {
+    "I found this most remarkable fossil\n"
+    "inside MT. MOON.\p"
+    "I think it's of a rare, prehistoric\n"
+    "POKéMON.$"
+}

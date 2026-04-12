@@ -1,0 +1,61 @@
+mapscripts LilycoveCity_DepartmentStore_2F_MapScripts {}
+
+script LilycoveCity_DepartmentStore_2F_EventScript_Cook {
+    msgbox(LilycoveCity_DepartmentStore_2F_Text_LearnToUseItemsProperly, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_DepartmentStore_2F_EventScript_PokefanF {
+    msgbox(LilycoveCity_DepartmentStore_2F_Text_GoodGiftForHusband, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_DepartmentStore_2F_EventScript_Sailor {
+    msgbox(LilycoveCity_DepartmentStore_2F_Text_StockUpOnItems, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_DepartmentStore_2F_EventScript_ClerkLeft {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(LilycoveCity_DepartmentStore_2F_Pokemart1)
+    msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script LilycoveCity_DepartmentStore_2F_Pokemart1 {
+    pokemartlistend()
+}
+
+script LilycoveCity_DepartmentStore_2F_EventScript_ClerkRight {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(LilycoveCity_DepartmentStore_2F_Pokemart2)
+    msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script LilycoveCity_DepartmentStore_2F_Pokemart2 {
+    pokemartlistend()
+}
+
+text LilycoveCity_DepartmentStore_2F_Text_LearnToUseItemsProperly {
+    "Learn to use items properly.\n"
+    "That's basic, really.$"
+}
+
+text LilycoveCity_DepartmentStore_2F_Text_GoodGiftForHusband {
+    "My husband is waiting at home.\n"
+    "What would make a good gift for him?$"
+}
+
+text LilycoveCity_DepartmentStore_2F_Text_StockUpOnItems {
+    "I'm leaving on a long journey soon.\n"
+    "I need to stock up on items.$"
+}

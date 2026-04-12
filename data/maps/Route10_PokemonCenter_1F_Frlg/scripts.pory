@@ -1,0 +1,122 @@
+mapscripts Route10_PokemonCenter_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: Route10_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script Route10_PokemonCenter_1F_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F)
+    setrespawn(HEAL_LOCATION_ROUTE10)
+    end
+}
+
+script Route10_PokemonCenter_1F_EventScript_Nurse {
+    lock
+    faceplayer
+    call(EventScript_PkmnCenterNurse_Frlg)
+    release
+    end
+}
+
+script Route10_PokemonCenter_1F_EventScript_FatMan {
+    msgbox(Route10_PokemonCenter_1F_Text_NuggetUselessSoldFor5000, MSGBOX_NPC)
+    end
+}
+
+script Route10_PokemonCenter_1F_EventScript_Gentleman {
+    msgbox(Route10_PokemonCenter_1F_Text_EveryTypeStrongerThanOthers, MSGBOX_NPC)
+    end
+}
+
+script Route10_PokemonCenter_1F_EventScript_Youngster {
+    msgbox(Route10_PokemonCenter_1F_Text_HeardGhostsHauntLavender, MSGBOX_NPC)
+    end
+}
+
+script Route10_PokemonCenter_1F_EventScript_Aide {
+    lock
+    faceplayer
+    call(Route10_PokemonCenter_1F_EventScript_GetAideRequestInfo)
+    if (flag(FLAG_GOT_EVERSTONE_FROM_OAKS_AIDE)) goto(Route10_PokemonCenter_1F_EventScript_AlreadyGotEverstone)
+    msgbox(Route10_PokemonCenter_1F_Text_GiveEverstoneIfCaught20Mons, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(Aide_EventScript_DeclineCheckMons)
+    setvar(VAR_0x8004, 0)
+    specialvar(VAR_RESULT, GetFrlgPokedexCount)
+    buffernumberstring(STR_VAR_3, VAR_0x8006)
+    call(Route10_PokemonCenter_1F_EventScript_GetAideRequestInfo)
+    if (var(VAR_0x8006) < REQUIRED_OWNED_MONS) goto(Aide_EventScript_HaventCaughtEnough)
+    msgbox(Route10_PokemonCenter_1F_Text_GreatHereYouGo)
+    checkitemspace(ITEM_EVERSTONE)
+    if (var(VAR_RESULT) == FALSE) goto(Aide_EventScript_NoRoomForItem)
+    giveitem_msg(Route10_PokemonCenter_1F_Text_ReceivedEverstoneFromAide, ITEM_EVERSTONE)
+    setflag(FLAG_GOT_EVERSTONE_FROM_OAKS_AIDE)
+    msgbox(Route10_PokemonCenter_1F_Text_ExplainEverstone)
+    release
+    end
+}
+
+script Route10_PokemonCenter_1F_EventScript_AlreadyGotEverstone {
+    msgbox(Route10_PokemonCenter_1F_Text_ExplainEverstone)
+    release
+    end
+}
+
+script Route10_PokemonCenter_1F_EventScript_GetAideRequestInfo {
+    buffernumberstring(STR_VAR_1, REQUIRED_OWNED_MONS)
+    bufferitemname(STR_VAR_2, ITEM_EVERSTONE)
+    return
+}
+
+text Route10_PokemonCenter_1F_Text_EveryTypeStrongerThanOthers {
+    "The types of POKéMON match up\n"
+    "differently with each other.\p"
+    "Every type is stronger than some\n"
+    "types and weaker than others.$"
+}
+
+text Route10_PokemonCenter_1F_Text_NuggetUselessSoldFor5000 {
+    "A NUGGET is totally useless.\n"
+    "So I sold it for ¥5000.$"
+}
+
+text Route10_PokemonCenter_1F_Text_HeardGhostsHauntLavender {
+    "I heard that ghosts haunt\n"
+    "LAVENDER TOWN.$"
+}
+
+text Route10_PokemonCenter_1F_Text_GiveEverstoneIfCaught20Mons {
+    "Oh… {PLAYER}!\n"
+    "I've been looking for you!\p"
+    "It's me, one of the ever-present\n"
+    "AIDES to PROF. OAK.\p"
+    "If your POKéDEX has complete data\n"
+    "on twenty species, I'm supposed to\l"
+    "give you a reward from PROF. OAK.\p"
+    "He entrusted me with this\n"
+    "EVERSTONE.\p"
+    "So, {PLAYER}, let me ask you.\p"
+    "Have you gathered data on at least\n"
+    "twenty kinds of POKéMON?$"
+}
+
+text Route10_PokemonCenter_1F_Text_GreatHereYouGo {
+    "Great! You have caught or owned\n"
+    "{STR_VAR_3} kinds of POKéMON!\p"
+    "Congratulations!\n"
+    "Here you go!$"
+}
+
+text Route10_PokemonCenter_1F_Text_ReceivedEverstoneFromAide {
+    "{PLAYER} received the EVERSTONE\n"
+    "from the AIDE.$"
+}
+
+text Route10_PokemonCenter_1F_Text_ExplainEverstone {
+    "Making POKéMON evolve certainly\n"
+    "can add to the POKéDEX.\p"
+    "However, at times, you may not\n"
+    "want a certain POKéMON to evolve.\p"
+    "In that case, give the EVERSTONE\n"
+    "to that POKéMON.\p"
+    "It will prevent evolution according\n"
+    "to the PROFESSOR.$"
+}

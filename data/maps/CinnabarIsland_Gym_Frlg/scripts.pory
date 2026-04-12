@@ -1,0 +1,1052 @@
+mapscripts CinnabarIsland_Gym_Frlg_MapScripts {
+    MAP_SCRIPT_ON_LOAD: CinnabarIsland_Gym_OnLoad
+}
+
+script CinnabarIsland_Gym_OnLoad {
+    if (flag(FLAG_DEFEATED_BLAINE)) goto(CinnabarIsland_Gym_OnLoadOpenAllDoors)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_1)) call(CinnabarIsland_Gym_OnLoadOpenDoor1)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_2)) call(CinnabarIsland_Gym_OnLoadOpenDoor2)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_3)) call(CinnabarIsland_Gym_OnLoadOpenDoor3)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_4)) call(CinnabarIsland_Gym_OnLoadOpenDoor4)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_5)) call(CinnabarIsland_Gym_OnLoadOpenDoor5)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_6)) call(CinnabarIsland_Gym_OnLoadOpenDoor6)
+    end
+}
+
+script CinnabarIsland_Gym_OnLoadOpenAllDoors {
+    call(CinnabarIsland_Gym_EventScript_OpenDoor1)
+    call(CinnabarIsland_Gym_EventScript_OpenDoor2)
+    call(CinnabarIsland_Gym_EventScript_OpenDoor3)
+    call(CinnabarIsland_Gym_EventScript_OpenDoor4)
+    call(CinnabarIsland_Gym_EventScript_OpenDoor5)
+    call(CinnabarIsland_Gym_EventScript_OpenDoor6)
+    end
+}
+
+script CinnabarIsland_Gym_OnLoadOpenDoor1 {
+    call(CinnabarIsland_Gym_EventScript_OpenDoor1)
+    return
+}
+
+script CinnabarIsland_Gym_OnLoadOpenDoor2 {
+    call(CinnabarIsland_Gym_EventScript_OpenDoor2)
+    return
+}
+
+script CinnabarIsland_Gym_OnLoadOpenDoor3 {
+    call(CinnabarIsland_Gym_EventScript_OpenDoor3)
+    return
+}
+
+script CinnabarIsland_Gym_OnLoadOpenDoor4 {
+    call(CinnabarIsland_Gym_EventScript_OpenDoor4)
+    return
+}
+
+script CinnabarIsland_Gym_OnLoadOpenDoor5 {
+    call(CinnabarIsland_Gym_EventScript_OpenDoor5)
+    return
+}
+
+script CinnabarIsland_Gym_OnLoadOpenDoor6 {
+    call(CinnabarIsland_Gym_EventScript_OpenDoor6)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_Blaine {
+    famechecker(FAMECHECKER_BLAINE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
+    trainerbattle_single(TRAINER_LEADER_BLAINE, CinnabarIsland_Gym_Text_BlaineIntro, CinnabarIsland_Gym_Text_BlaineDefeat, CinnabarIsland_Gym_EventScript_DefeatedBlaine, NO_MUSIC)
+    if (!flag(FLAG_GOT_TM38_FROM_BLAINE)) goto(CinnabarIsland_Gym_EventScript_GiveTM38)
+    msgbox(CinnabarIsland_Gym_Text_BlainePostBattle)
+    release
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_DefeatedBlaine {
+    famechecker(FAMECHECKER_BLAINE, 1)
+    setflag(FLAG_DEFEATED_BLAINE)
+    setflag(FLAG_BADGE07_GET)
+    setrespawn(HEAL_LOCATION_CINNABAR_ISLAND)
+    setvar(VAR_MAP_SCENE_CINNABAR_ISLAND, 1)
+    clearflag(FLAG_HIDE_CINNABAR_BILL)
+    set_gym_trainers_frlg(7)
+    goto(CinnabarIsland_Gym_EventScript_GiveTM38)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_GiveTM38 {
+    msgbox(CinnabarIsland_Gym_Text_ExplainVolcanoBadge)
+    checkitemspace(ITEM_TM38)
+    if (var(VAR_RESULT) == FALSE) goto(CinnabarIsland_Gym_EventScript_NoRoomForTM38)
+    giveitem_msg(CinnabarIsland_Gym_Text_ReceivedTM38FromBlaine, ITEM_TM38)
+    setflag(FLAG_GOT_TM38_FROM_BLAINE)
+    msgbox(CinnabarIsland_Gym_Text_FireBlastIsUltimateFireMove)
+    release
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_NoRoomForTM38 {
+    msgbox(CinnabarIsland_Gym_Text_MakeSpaceForThis)
+    release
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Erik {
+    trainerbattle_single(TRAINER_SUPER_NERD_ERIK, CinnabarIsland_Gym_Text_ErikIntro, CinnabarIsland_Gym_Text_ErikDefeat)
+    msgbox(CinnabarIsland_Gym_Text_ErikPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Avery {
+    trainerbattle_single(TRAINER_SUPER_NERD_AVERY, CinnabarIsland_Gym_Text_AveryIntro, CinnabarIsland_Gym_Text_AveryDefeat, CinnabarIsland_Gym_EventScript_DefeatedAvery)
+    msgbox(CinnabarIsland_Gym_Text_AveryPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_DefeatedAvery {
+    if (!flag(FLAG_CINNABAR_GYM_QUIZ_2)) call(CinnabarIsland_Gym_EventScript_Quiz2CompleteTrainer)
+    release
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz2CompleteTrainer {
+    call(CinnabarIsland_Gym_EventScript_Quiz2Complete)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_Derek {
+    trainerbattle_single(TRAINER_SUPER_NERD_DEREK, CinnabarIsland_Gym_Text_DerekIntro, CinnabarIsland_Gym_Text_DerekDefeat, CinnabarIsland_Gym_EventScript_DefeatedDerek)
+    famechecker(FAMECHECKER_BLAINE, 2)
+    msgbox(CinnabarIsland_Gym_Text_DerekPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_DefeatedDerek {
+    if (!flag(FLAG_CINNABAR_GYM_QUIZ_4)) call(CinnabarIsland_Gym_EventScript_Quiz4CompleteTrainer)
+    release
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz4CompleteTrainer {
+    call(CinnabarIsland_Gym_EventScript_Quiz4Complete)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_Zac {
+    trainerbattle_single(TRAINER_SUPER_NERD_ZAC, CinnabarIsland_Gym_Text_ZacIntro, CinnabarIsland_Gym_Text_ZacDefeat, CinnabarIsland_Gym_EventScript_DefeatedZac)
+    msgbox(CinnabarIsland_Gym_Text_ZacPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_DefeatedZac {
+    if (!flag(FLAG_CINNABAR_GYM_QUIZ_6)) call(CinnabarIsland_Gym_EventScript_Quiz6CompleteTrainer)
+    release
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz6CompleteTrainer {
+    call(CinnabarIsland_Gym_EventScript_Quiz6Complete)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_Quinn {
+    trainerbattle_single(TRAINER_BURGLAR_QUINN, CinnabarIsland_Gym_Text_QuinnIntro, CinnabarIsland_Gym_Text_QuinnDefeat, CinnabarIsland_Gym_EventScript_DefeatedQuinn)
+    msgbox(CinnabarIsland_Gym_Text_QuinnPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_DefeatedQuinn {
+    if (!flag(FLAG_CINNABAR_GYM_QUIZ_1)) call(CinnabarIsland_Gym_EventScript_Quiz1CompleteTrainer)
+    release
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz1CompleteTrainer {
+    call(CinnabarIsland_Gym_EventScript_Quiz1Complete)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_Ramon {
+    trainerbattle_single(TRAINER_BURGLAR_RAMON, CinnabarIsland_Gym_Text_RamonIntro, CinnabarIsland_Gym_Text_RamonDefeat, CinnabarIsland_Gym_EventScript_DefeatedRamon)
+    msgbox(CinnabarIsland_Gym_Text_RamonPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_DefeatedRamon {
+    if (!flag(FLAG_CINNABAR_GYM_QUIZ_3)) call(CinnabarIsland_Gym_EventScript_Quiz3CompleteTrainer)
+    release
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz3CompleteTrainer {
+    call(CinnabarIsland_Gym_EventScript_Quiz3Complete)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_Dusty {
+    trainerbattle_single(TRAINER_BURGLAR_DUSTY, CinnabarIsland_Gym_Text_DustyIntro, CinnabarIsland_Gym_Text_DustyDefeat, CinnabarIsland_Gym_EventScript_DefeatedDusty)
+    msgbox(CinnabarIsland_Gym_Text_DustyPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_DefeatedDusty {
+    if (!flag(FLAG_CINNABAR_GYM_QUIZ_5)) call(CinnabarIsland_Gym_EventScript_Quiz5CompleteTrainer)
+    release
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz5CompleteTrainer {
+    call(CinnabarIsland_Gym_EventScript_Quiz5Complete)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_GymGuy {
+    lock
+    faceplayer
+    if (flag(FLAG_DEFEATED_BLAINE)) goto(CinnabarIsland_Gym_EventScript_GymGuyPostVictory)
+    msgbox(CinnabarIsland_Gym_Text_GymGuyAdvice)
+    release
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_GymGuyPostVictory {
+    msgbox(CinnabarIsland_Gym_Text_GymGuyPostVictory)
+    release
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_GymStatue {
+    lockall
+    if (flag(FLAG_BADGE07_GET)) goto(CinnabarIsland_Gym_EventScript_GymStatuePostVictory)
+    msgbox(CinnabarIsland_Gym_Text_GymStatue)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_GymStatuePostVictory {
+    msgbox(CinnabarIsland_Gym_Text_GymStatuePlayerWon)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quz1Left {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    goto(CinnabarIsland_Gym_EventScript_Quiz1)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quz1Right {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    goto(CinnabarIsland_Gym_EventScript_Quiz1)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz1 {
+    msgbox(CinnabarIsland_Gym_Text_PokemonQuizRules)
+    msgbox(CinnabarIsland_Gym_Text_QuizQuestion1, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(CinnabarIsland_Gym_EventScript_Quiz1Correct)
+    if (var(VAR_RESULT) == NO) goto(CinnabarIsland_Gym_EventScript_Quiz1Incorrect)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_CorrectAnswer {
+    playfanfare(MUS_LEVEL_UP)
+    waitfanfare()
+    msgbox(CinnabarIsland_Gym_Text_CorrectGoOnThrough)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_IncorrectAnswer {
+    waitse()
+    playse(SE_BOO)
+    waitse()
+    msgbox(CinnabarIsland_Gym_Text_SorryBadCall)
+    closemessage
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz1Correct {
+    call(CinnabarIsland_Gym_EventScript_CorrectAnswer)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_1)) goto(CinnabarIsland_Gym_EventScript_DoorAlreadyOpen)
+    call(CinnabarIsland_Gym_EventScript_Quiz1Complete)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz1Complete {
+    playse(SE_UNLOCK)
+    waitse()
+    call(CinnabarIsland_Gym_EventScript_OpenDoor1)
+    special(DrawWholeMapView)
+    setflag(FLAG_CINNABAR_GYM_QUIZ_1)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_DoorAlreadyOpen {
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz1Incorrect {
+    call(CinnabarIsland_Gym_EventScript_IncorrectAnswer)
+    goto_if_not_defeated(TRAINER_BURGLAR_QUINN, CinnabarIsland_Gym_EventScript_BattleQuinn)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_BattleQuinn {
+    if (var(VAR_TEMP_1) == 0) call(CinnabarIsland_Gym_EventScript_QuinnApproachLeft)
+    if (var(VAR_TEMP_1) == 1) call(CinnabarIsland_Gym_EventScript_QuinnApproachRight)
+    textcolor(NPC_TEXT_COLOR_MALE)
+    msgbox(CinnabarIsland_Gym_Text_QuinnIntro)
+    trainerbattle_no_intro(TRAINER_BURGLAR_QUINN, CinnabarIsland_Gym_Text_QuinnDefeat)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_1)) goto(CinnabarIsland_Gym_EventScript_DoorAlreadyOpen)
+    call(CinnabarIsland_Gym_EventScript_Quiz1Complete)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_QuinnApproachLeft {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    applymovement(LOCALID_QUINN, CinnabarIsland_Gym_Movement_QuinnApproachLeft)
+    waitmovement(0)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_QuinnApproachRight {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    applymovement(LOCALID_QUINN, CinnabarIsland_Gym_Movement_QuinnApproachRight)
+    waitmovement(0)
+    return
+}
+
+movement CinnabarIsland_Gym_Movement_QuinnApproachLeft {
+    walk_left
+    walk_left
+    step_end
+}
+
+movement CinnabarIsland_Gym_Movement_QuinnApproachRight {
+    walk_left
+    step_end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz2Left {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    goto(CinnabarIsland_Gym_EventScript_Quiz2)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz2Right {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    goto(CinnabarIsland_Gym_EventScript_Quiz2)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz2 {
+    msgbox(CinnabarIsland_Gym_Text_PokemonQuizRules)
+    msgbox(CinnabarIsland_Gym_Text_QuizQuestion2, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(CinnabarIsland_Gym_EventScript_Quiz2Incorrect)
+    if (var(VAR_RESULT) == NO) goto(CinnabarIsland_Gym_EventScript_Quiz2Correct)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz2Correct {
+    call(CinnabarIsland_Gym_EventScript_CorrectAnswer)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_2)) goto(CinnabarIsland_Gym_EventScript_DoorAlreadyOpen)
+    call(CinnabarIsland_Gym_EventScript_Quiz2Complete)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz2Complete {
+    playse(SE_UNLOCK)
+    waitse()
+    call(CinnabarIsland_Gym_EventScript_OpenDoor2)
+    special(DrawWholeMapView)
+    setflag(FLAG_CINNABAR_GYM_QUIZ_2)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz2Incorrect {
+    call(CinnabarIsland_Gym_EventScript_IncorrectAnswer)
+    goto_if_not_defeated(TRAINER_SUPER_NERD_AVERY, CinnabarIsland_Gym_EventScript_BattleAvery)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_BattleAvery {
+    if (var(VAR_TEMP_1) == 0) call(CinnabarIsland_Gym_EventScript_AveryApproachLeft)
+    if (var(VAR_TEMP_1) == 1) call(CinnabarIsland_Gym_EventScript_AveryApproachRight)
+    textcolor(NPC_TEXT_COLOR_MALE)
+    msgbox(CinnabarIsland_Gym_Text_AveryIntro)
+    trainerbattle_no_intro(TRAINER_SUPER_NERD_AVERY, CinnabarIsland_Gym_Text_AveryDefeat)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_2)) goto(CinnabarIsland_Gym_EventScript_DoorAlreadyOpen)
+    call(CinnabarIsland_Gym_EventScript_Quiz2Complete)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_AveryApproachLeft {
+    applymovement(LOCALID_PLAYER, CinnabarIsland_Gym_Movement_PlayerFaceAvery)
+    applymovement(LOCALID_AVERY, CinnabarIsland_Gym_Movement_AveryApproachLeft)
+    waitmovement(0)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_AveryApproachRight {
+    applymovement(LOCALID_PLAYER, CinnabarIsland_Gym_Movement_PlayerFaceAvery)
+    applymovement(LOCALID_AVERY, CinnabarIsland_Gym_Movement_AveryApproachRight)
+    waitmovement(0)
+    return
+}
+
+movement CinnabarIsland_Gym_Movement_AveryApproachLeft {
+    walk_up
+    walk_up
+    walk_left
+    step_end
+}
+
+movement CinnabarIsland_Gym_Movement_AveryApproachRight {
+    walk_up
+    walk_up
+    walk_in_place_faster_left
+    step_end
+}
+
+movement CinnabarIsland_Gym_Movement_PlayerFaceAvery {
+    delay_16
+    delay_16
+    walk_in_place_faster_right
+    step_end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz3Left {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    goto(CinnabarIsland_Gym_EventScript_Quiz3)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz3Right {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    goto(CinnabarIsland_Gym_EventScript_Quiz3)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz3 {
+    msgbox(CinnabarIsland_Gym_Text_PokemonQuizRules)
+    msgbox(CinnabarIsland_Gym_Text_QuizQuestion3, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(CinnabarIsland_Gym_EventScript_Quiz3Incorrect)
+    if (var(VAR_RESULT) == NO) goto(CinnabarIsland_Gym_EventScript_Quiz3Correct)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz3Correct {
+    call(CinnabarIsland_Gym_EventScript_CorrectAnswer)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_3)) goto(CinnabarIsland_Gym_EventScript_DoorAlreadyOpen)
+    call(CinnabarIsland_Gym_EventScript_Quiz3Complete)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz3Complete {
+    playse(SE_UNLOCK)
+    waitse()
+    call(CinnabarIsland_Gym_EventScript_OpenDoor3)
+    special(DrawWholeMapView)
+    setflag(FLAG_CINNABAR_GYM_QUIZ_3)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz3Incorrect {
+    call(CinnabarIsland_Gym_EventScript_IncorrectAnswer)
+    goto_if_not_defeated(TRAINER_BURGLAR_RAMON, CinnabarIsland_Gym_EventScript_BattleRamon)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_BattleRamon {
+    if (var(VAR_TEMP_1) == 0) call(CinnabarIsland_Gym_EventScript_RamonApproachLeft)
+    if (var(VAR_TEMP_1) == 1) call(CinnabarIsland_Gym_EventScript_RamonApproachRight)
+    textcolor(NPC_TEXT_COLOR_MALE)
+    msgbox(CinnabarIsland_Gym_Text_RamonIntro)
+    trainerbattle_no_intro(TRAINER_BURGLAR_RAMON, CinnabarIsland_Gym_Text_RamonDefeat)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_3)) goto(CinnabarIsland_Gym_EventScript_DoorAlreadyOpen)
+    call(CinnabarIsland_Gym_EventScript_Quiz3Complete)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_RamonApproachLeft {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    applymovement(LOCALID_RAMON, CinnabarIsland_Gym_Movement_RamonApproachLeft)
+    waitmovement(0)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_RamonApproachRight {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    applymovement(LOCALID_RAMON, CinnabarIsland_Gym_Movement_RamonApproachRight)
+    waitmovement(0)
+    return
+}
+
+movement CinnabarIsland_Gym_Movement_RamonApproachLeft {
+    walk_left
+    walk_left
+    step_end
+}
+
+movement CinnabarIsland_Gym_Movement_RamonApproachRight {
+    walk_left
+    step_end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz4Left {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    goto(CinnabarIsland_Gym_EventScript_Quiz4)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz4Right {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    goto(CinnabarIsland_Gym_EventScript_Quiz4)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz4 {
+    msgbox(CinnabarIsland_Gym_Text_PokemonQuizRules)
+    msgbox(CinnabarIsland_Gym_Text_QuizQuestion4, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(CinnabarIsland_Gym_EventScript_Quiz4Incorrect)
+    if (var(VAR_RESULT) == NO) goto(CinnabarIsland_Gym_EventScript_Quiz4Correct)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz4Correct {
+    call(CinnabarIsland_Gym_EventScript_CorrectAnswer)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_4)) goto(CinnabarIsland_Gym_EventScript_DoorAlreadyOpen)
+    call(CinnabarIsland_Gym_EventScript_Quiz4Complete)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz4Complete {
+    playse(SE_UNLOCK)
+    waitse()
+    call(CinnabarIsland_Gym_EventScript_OpenDoor4)
+    special(DrawWholeMapView)
+    setflag(FLAG_CINNABAR_GYM_QUIZ_4)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz4Incorrect {
+    call(CinnabarIsland_Gym_EventScript_IncorrectAnswer)
+    goto_if_not_defeated(TRAINER_SUPER_NERD_DEREK, CinnabarIsland_Gym_EventScript_BattleDerek)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_BattleDerek {
+    if (var(VAR_TEMP_1) == 0) call(CinnabarIsland_Gym_EventScript_DerekApproachLeft)
+    if (var(VAR_TEMP_1) == 1) call(CinnabarIsland_Gym_EventScript_DerekApproachRight)
+    textcolor(NPC_TEXT_COLOR_MALE)
+    msgbox(CinnabarIsland_Gym_Text_DerekIntro)
+    trainerbattle_no_intro(TRAINER_SUPER_NERD_DEREK, CinnabarIsland_Gym_Text_DerekDefeat)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_4)) goto(CinnabarIsland_Gym_EventScript_DoorAlreadyOpen)
+    call(CinnabarIsland_Gym_EventScript_Quiz4Complete)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_DerekApproachLeft {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    applymovement(LOCALID_DEREK, CinnabarIsland_Gym_Movement_DerekApproachLeft)
+    waitmovement(0)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_DerekApproachRight {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    applymovement(LOCALID_DEREK, CinnabarIsland_Gym_Movement_DerekApproachRight)
+    waitmovement(0)
+    return
+}
+
+movement CinnabarIsland_Gym_Movement_DerekApproachLeft {
+    walk_left
+    walk_left
+    step_end
+}
+
+movement CinnabarIsland_Gym_Movement_DerekApproachRight {
+    walk_left
+    step_end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz5Left {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    goto(CinnabarIsland_Gym_EventScript_Quiz5)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz5Right {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    goto(CinnabarIsland_Gym_EventScript_Quiz5)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz5 {
+    msgbox(CinnabarIsland_Gym_Text_PokemonQuizRules)
+    msgbox(CinnabarIsland_Gym_Text_QuizQuestion5, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(CinnabarIsland_Gym_EventScript_Quiz5Correct)
+    if (var(VAR_RESULT) == NO) goto(CinnabarIsland_Gym_EventScript_Quiz5Incorrect)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz5Correct {
+    call(CinnabarIsland_Gym_EventScript_CorrectAnswer)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_5)) goto(CinnabarIsland_Gym_EventScript_DoorAlreadyOpen)
+    call(CinnabarIsland_Gym_EventScript_Quiz5Complete)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz5Complete {
+    playse(SE_UNLOCK)
+    waitse()
+    call(CinnabarIsland_Gym_EventScript_OpenDoor5)
+    special(DrawWholeMapView)
+    setflag(FLAG_CINNABAR_GYM_QUIZ_5)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz5Incorrect {
+    call(CinnabarIsland_Gym_EventScript_IncorrectAnswer)
+    goto_if_not_defeated(TRAINER_BURGLAR_DUSTY, CinnabarIsland_Gym_EventScript_BattleDusty)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_BattleDusty {
+    if (var(VAR_TEMP_1) == 0) call(CinnabarIsland_Gym_EventScript_DustyApproachLeft)
+    if (var(VAR_TEMP_1) == 1) call(CinnabarIsland_Gym_EventScript_DustyApproachRight)
+    textcolor(NPC_TEXT_COLOR_MALE)
+    msgbox(CinnabarIsland_Gym_Text_DustyIntro)
+    trainerbattle_no_intro(TRAINER_BURGLAR_DUSTY, CinnabarIsland_Gym_Text_DustyDefeat)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_5)) goto(CinnabarIsland_Gym_EventScript_DoorAlreadyOpen)
+    call(CinnabarIsland_Gym_EventScript_Quiz5Complete)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_DustyApproachLeft {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    applymovement(LOCALID_DUSTY, CinnabarIsland_Gym_Movement_DustyApproachLeft)
+    waitmovement(0)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_DustyApproachRight {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    applymovement(LOCALID_DUSTY, CinnabarIsland_Gym_Movement_DustyApproachRight)
+    waitmovement(0)
+    return
+}
+
+movement CinnabarIsland_Gym_Movement_DustyApproachLeft {
+    walk_left
+    walk_left
+    step_end
+}
+
+movement CinnabarIsland_Gym_Movement_DustyApproachRight {
+    walk_left
+    step_end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz6Left {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    goto(CinnabarIsland_Gym_EventScript_Quiz6)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz6Right {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    goto(CinnabarIsland_Gym_EventScript_Quiz6)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz6 {
+    msgbox(CinnabarIsland_Gym_Text_PokemonQuizRules)
+    msgbox(CinnabarIsland_Gym_Text_QuizQuestion6, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(CinnabarIsland_Gym_EventScript_Quiz6Incorrect)
+    if (var(VAR_RESULT) == NO) goto(CinnabarIsland_Gym_EventScript_Quiz6Correct)
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz6Correct {
+    call(CinnabarIsland_Gym_EventScript_CorrectAnswer)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_6)) goto(CinnabarIsland_Gym_EventScript_DoorAlreadyOpen)
+    call(CinnabarIsland_Gym_EventScript_Quiz6Complete)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz6Complete {
+    playse(SE_UNLOCK)
+    waitse()
+    call(CinnabarIsland_Gym_EventScript_OpenDoor6)
+    special(DrawWholeMapView)
+    setflag(FLAG_CINNABAR_GYM_QUIZ_6)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_Quiz6Incorrect {
+    call(CinnabarIsland_Gym_EventScript_IncorrectAnswer)
+    goto_if_not_defeated(TRAINER_SUPER_NERD_ZAC, CinnabarIsland_Gym_EventScript_BattleZac)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_BattleZac {
+    if (var(VAR_TEMP_1) == 0) call(CinnabarIsland_Gym_EventScript_ZacApproachLeft)
+    if (var(VAR_TEMP_1) == 1) call(CinnabarIsland_Gym_EventScript_ZacApproachRight)
+    textcolor(NPC_TEXT_COLOR_MALE)
+    msgbox(CinnabarIsland_Gym_Text_ZacIntro)
+    trainerbattle_no_intro(TRAINER_SUPER_NERD_ZAC, CinnabarIsland_Gym_Text_ZacDefeat)
+    if (flag(FLAG_CINNABAR_GYM_QUIZ_6)) goto(CinnabarIsland_Gym_EventScript_DoorAlreadyOpen)
+    call(CinnabarIsland_Gym_EventScript_Quiz6Complete)
+    releaseall
+    end
+}
+
+script CinnabarIsland_Gym_EventScript_ZacApproachLeft {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    applymovement(LOCALID_ZAC, CinnabarIsland_Gym_Movement_ZacApproachLeft)
+    waitmovement(0)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_ZacApproachRight {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    applymovement(LOCALID_ZAC, CinnabarIsland_Gym_Movement_ZacApproachRight)
+    waitmovement(0)
+    return
+}
+
+movement CinnabarIsland_Gym_Movement_ZacApproachLeft {
+    walk_left
+    walk_left
+    step_end
+}
+
+movement CinnabarIsland_Gym_Movement_ZacApproachRight {
+    walk_left
+    step_end
+}
+
+script CinnabarIsland_Gym_EventScript_OpenDoor1 {
+    setmetatile(26,  8, METATILE_CinnabarGym_Floor_WallLeftCorner, 0)
+    setmetatile(27,  8, METATILE_CinnabarGym_Floor_WallRightCorner, 0)
+    setmetatile(26,  9, METATILE_CinnabarGym_Floor_WallLeftEdge, 0)
+    setmetatile(27,  9, METATILE_CinnabarGym_Floor_WallRightEdge, 0)
+    setmetatile(26, 10, METATILE_CinnabarGym_Floor_ShadeFull, 0)
+    setmetatile(27, 10, METATILE_CinnabarGym_Floor, 0)
+    setmetatile(28, 10, METATILE_CinnabarGym_Floor_ShadeDiagonal, 0)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_OpenDoor2 {
+    setmetatile(17,  8, METATILE_CinnabarGym_Floor_WallLeftCorner, 0)
+    setmetatile(18,  8, METATILE_CinnabarGym_Floor_WallRightCorner, 0)
+    setmetatile(17,  9, METATILE_CinnabarGym_Floor_WallLeftEdge, 0)
+    setmetatile(18,  9, METATILE_CinnabarGym_Floor_WallRightEdge, 0)
+    setmetatile(17, 10, METATILE_CinnabarGym_Floor_ShadeFull, 0)
+    setmetatile(18, 10, METATILE_CinnabarGym_Floor, 0)
+    setmetatile(19, 10, METATILE_CinnabarGym_Floor_ShadeDiagonal, 0)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_OpenDoor3 {
+    setmetatile(17, 15, METATILE_CinnabarGym_Floor_WallLeftCorner, 0)
+    setmetatile(18, 15, METATILE_CinnabarGym_Floor_WallRightCorner, 0)
+    setmetatile(17, 16, METATILE_CinnabarGym_Floor_WallLeftEdge, 0)
+    setmetatile(18, 16, METATILE_CinnabarGym_Floor_WallRightEdge, 0)
+    setmetatile(17, 17, METATILE_CinnabarGym_Floor_ShadeFull, 0)
+    setmetatile(18, 17, METATILE_CinnabarGym_Floor, 0)
+    setmetatile(19, 17, METATILE_CinnabarGym_Floor_ShadeDiagonal, 0)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_OpenDoor4 {
+    setmetatile(11, 21, METATILE_CinnabarGym_Wall_RetractedBarrier, 1)
+    setmetatile(11, 22, METATILE_CinnabarGym_Floor_ShadeFull, 0)
+    setmetatile(11, 23, METATILE_CinnabarGym_Floor, 0)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_OpenDoor5 {
+    setmetatile(5, 16, METATILE_CinnabarGym_Floor_WallLeftCorner, 0)
+    setmetatile(6, 16, METATILE_CinnabarGym_Floor_WallRightCorner, 0)
+    setmetatile(5, 17, METATILE_CinnabarGym_Floor_WallLeftEdge, 0)
+    setmetatile(6, 17, METATILE_CinnabarGym_Floor_WallRightEdge, 0)
+    setmetatile(5, 18, METATILE_CinnabarGym_Floor_ShadeFull, 0)
+    setmetatile(6, 18, METATILE_CinnabarGym_Floor, 0)
+    setmetatile(7, 18, METATILE_CinnabarGym_Floor_ShadeDiagonal, 0)
+    return
+}
+
+script CinnabarIsland_Gym_EventScript_OpenDoor6 {
+    setmetatile(5,  8, METATILE_CinnabarGym_Floor_WallLeftCorner, 0)
+    setmetatile(6,  8, METATILE_CinnabarGym_Floor_WallRightCorner, 0)
+    setmetatile(5,  9, METATILE_CinnabarGym_Floor_WallLeftEdge, 0)
+    setmetatile(6,  9, METATILE_CinnabarGym_Floor_WallRightEdge, 0)
+    setmetatile(5, 10, METATILE_CinnabarGym_Floor_ShadeFull, 0)
+    setmetatile(6, 10, METATILE_CinnabarGym_Floor, 0)
+    setmetatile(7, 10, METATILE_CinnabarGym_Floor_ShadeDiagonal, 0)
+    return
+}
+
+text CinnabarIsland_Gym_Text_BlaineIntro {
+    "Hah!\p"
+    "I am BLAINE, the red-hot LEADER\n"
+    "of CINNABAR GYM!\p"
+    "My fiery POKéMON are all rough\n"
+    "and ready with intense heat!\p"
+    "They incinerate all challengers!\p"
+    "Hah!\n"
+    "You better have BURN HEAL!{PLAY_BGM}{MUS_RG_ENCOUNTER_GYM_LEADER}$"
+}
+
+text CinnabarIsland_Gym_Text_BlaineDefeat {
+    "I have burned down to nothing!\n"
+    "Not even ashes remain!\p"
+    "You have earned the VOLCANOBADGE.$"
+}
+
+text CinnabarIsland_Gym_Text_FireBlastIsUltimateFireMove {
+    "FIRE BLAST is the ultimate fire\n"
+    "technique.\p"
+    "Don't waste it on WATER POKéMON.$"
+}
+
+text CinnabarIsland_Gym_Text_ExplainVolcanoBadge {
+    "Hah!\p"
+    "The VOLCANOBADGE heightens the\n"
+    "SPECIAL stats of your POKéMON.\p"
+    "Here, you can have this, too!$"
+}
+
+text CinnabarIsland_Gym_Text_ReceivedTM38FromBlaine {
+    "{PLAYER} received TM38\n"
+    "from BLAINE.$"
+}
+
+text CinnabarIsland_Gym_Text_BlainePostBattle {
+    "TM38 contains FIRE BLAST.\n"
+    "Teach it to FIRE-type POKéMON.\p"
+    "VULPIX or CHARMELEON would be\n"
+    "ideal for that move.$"
+}
+
+text CinnabarIsland_Gym_Text_MakeSpaceForThis {
+    "Make space for this, child!$"
+}
+
+text CinnabarIsland_Gym_Text_ErikIntro {
+    "Do you know how hot POKéMON fire\n"
+    "breath can get?$"
+}
+
+text CinnabarIsland_Gym_Text_ErikDefeat {
+    "Yow!\n"
+    "Hot, hot, hot!$"
+}
+
+text CinnabarIsland_Gym_Text_ErikPostBattle {
+    "Fire, or to be more precise,\n"
+    "combustion…\p"
+    "…Oxygen in the air…\n"
+    "Blah, blah, blah, blah…$"
+}
+
+text CinnabarIsland_Gym_Text_QuinnIntro {
+    "I was a thief, but I went straight\n"
+    "as a TRAINER.$"
+}
+
+text CinnabarIsland_Gym_Text_QuinnDefeat {
+    "I surrender!$"
+}
+
+text CinnabarIsland_Gym_Text_QuinnPostBattle {
+    "I get this uncontrollable urge to\n"
+    "steal other people's POKéMON.$"
+}
+
+text CinnabarIsland_Gym_Text_AveryIntro {
+    "I've studied POKéMON thoroughly.\n"
+    "You can't win!$"
+}
+
+text CinnabarIsland_Gym_Text_AveryDefeat {
+    "Waah!\n"
+    "My studies were insufficient!$"
+}
+
+text CinnabarIsland_Gym_Text_AveryPostBattle {
+    "My theories are too complicated\n"
+    "for you to understand.$"
+}
+
+text CinnabarIsland_Gym_Text_RamonIntro {
+    "I like using FIRE-type POKéMON.\n"
+    "I just do.$"
+}
+
+text CinnabarIsland_Gym_Text_RamonDefeat {
+    "Too hot to handle!$"
+}
+
+text CinnabarIsland_Gym_Text_RamonPostBattle {
+    "I wish there were a thief POKéMON.\n"
+    "I'd use that!$"
+}
+
+text CinnabarIsland_Gym_Text_DerekIntro {
+    "I know why BLAINE became a\n"
+    "TRAINER.$"
+}
+
+text CinnabarIsland_Gym_Text_DerekDefeat {
+    "Ow!$"
+}
+
+text CinnabarIsland_Gym_Text_DerekPostBattle {
+    "Our LEADER, BLAINE, became lost\n"
+    "in the mountains but good.\p"
+    "Night fell when a fiery bird\n"
+    "POKéMON appeared.\p"
+    "Its light allowed BLAINE to find\n"
+    "his way down safely.$"
+}
+
+text CinnabarIsland_Gym_Text_DustyIntro {
+    "I've been to many GYMS, but this\n"
+    "one best suits my style.$"
+}
+
+text CinnabarIsland_Gym_Text_DustyDefeat {
+    "Yowza!\n"
+    "Too hot!$"
+}
+
+text CinnabarIsland_Gym_Text_DustyPostBattle {
+    "PONYTA, NINETALES…\n"
+    "Those are popular FIRE POKéMON.$"
+}
+
+text CinnabarIsland_Gym_Text_ZacIntro {
+    "Fire is weak against H2O.$"
+}
+
+text CinnabarIsland_Gym_Text_ZacDefeat {
+    "Oh!\n"
+    "Snuffed out!$"
+}
+
+text CinnabarIsland_Gym_Text_ZacPostBattle {
+    "Water beats fire, of course.\p"
+    "But fire melts ice, so the FIRE\n"
+    "type beats ICE-type POKéMON.$"
+}
+
+text CinnabarIsland_Gym_Text_GymGuyAdvice {
+    "Yo!\n"
+    "Champ in the making!\p"
+    "The hotheaded BLAINE is a FIRE\n"
+    "POKéMON pro.\p"
+    "Douse his spirits with water!\p"
+    "You'd better take some\n"
+    "BURN HEALS, too.$"
+}
+
+text CinnabarIsland_Gym_Text_GymGuyPostVictory {
+    "{PLAYER}!\n"
+    "You beat that firebrand!$"
+}
+
+text CinnabarIsland_Gym_Text_GymStatue {
+    "CINNABAR POKéMON GYM\n"
+    "LEADER: BLAINE\p"
+    "WINNING TRAINERS:\n"
+    "{RIVAL}$"
+}
+
+text CinnabarIsland_Gym_Text_GymStatuePlayerWon {
+    "CINNABAR POKéMON GYM\n"
+    "LEADER: BLAINE\p"
+    "WINNING TRAINERS:\n"
+    "{RIVAL}, {PLAYER}$"
+}
+
+text CinnabarIsland_Gym_Text_PokemonQuizRules {
+    "POKéMON Quiz!\p"
+    "Get it right, and the door opens to\n"
+    "the next room.\p"
+    "Get it wrong, and face a TRAINER!\p"
+    "If you want to conserve your\n"
+    "POKéMON for the GYM LEADER…\p"
+    "Then get it right!\n"
+    "Here we go!$"
+}
+
+text CinnabarIsland_Gym_Text_QuizQuestion1 {
+    "CATERPIE evolves into METAPOD?$"
+}
+
+text CinnabarIsland_Gym_Text_QuizQuestion2 {
+    "There are nine certified POKéMON\n"
+    "LEAGUE BADGES?$"
+}
+
+text CinnabarIsland_Gym_Text_QuizQuestion3 {
+    "POLIWAG evolves three times?$"
+}
+
+text CinnabarIsland_Gym_Text_QuizQuestion4 {
+    "Are electric moves effective\n"
+    "against GROUND-type POKéMON?$"
+}
+
+text CinnabarIsland_Gym_Text_QuizQuestion5 {
+    "POKéMON of the same kind and level\n"
+    "are not identical?$"
+}
+
+text CinnabarIsland_Gym_Text_QuizQuestion6 {
+    "TM28 contains TOMBSTONY?$"
+}
+
+text CinnabarIsland_Gym_Text_CorrectGoOnThrough {
+    "You're absolutely correct!\p"
+    "Go on through!$"
+}
+
+text CinnabarIsland_Gym_Text_SorryBadCall {
+    "Sorry!\n"
+    "Bad call!$"
+}

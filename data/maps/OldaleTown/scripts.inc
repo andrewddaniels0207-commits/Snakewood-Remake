@@ -507,60 +507,52 @@ OldaleTown_EventScript_Guard1::
 # 272 "data/maps/OldaleTown/scripts.pory"
 	lockall
 # 273 "data/maps/OldaleTown/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
-# 274 "data/maps/OldaleTown/scripts.pory"
-	waitmovement 0
-# 275 "data/maps/OldaleTown/scripts.pory"
 	msgbox OldaleTown_EventScript_Guard1_Text_0
-# 276 "data/maps/OldaleTown/scripts.pory"
+# 274 "data/maps/OldaleTown/scripts.pory"
 	closemessage
-# 277 "data/maps/OldaleTown/scripts.pory"
+# 275 "data/maps/OldaleTown/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PushNorth
-# 278 "data/maps/OldaleTown/scripts.pory"
+# 276 "data/maps/OldaleTown/scripts.pory"
 	waitmovement 0
-# 279 "data/maps/OldaleTown/scripts.pory"
+# 277 "data/maps/OldaleTown/scripts.pory"
 	releaseall
 	end
 
 
 OldaleTown_EventScript_Guard2::
-# 284 "data/maps/OldaleTown/scripts.pory"
+# 282 "data/maps/OldaleTown/scripts.pory"
 	lockall
+# 283 "data/maps/OldaleTown/scripts.pory"
+	msgbox OldaleTown_EventScript_Guard2_Text_0
+# 284 "data/maps/OldaleTown/scripts.pory"
+	closemessage
 # 285 "data/maps/OldaleTown/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PushNorth
 # 286 "data/maps/OldaleTown/scripts.pory"
 	waitmovement 0
 # 287 "data/maps/OldaleTown/scripts.pory"
-	msgbox OldaleTown_EventScript_Guard2_Text_0
-# 288 "data/maps/OldaleTown/scripts.pory"
-	closemessage
-# 289 "data/maps/OldaleTown/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PushNorth
-# 290 "data/maps/OldaleTown/scripts.pory"
-	waitmovement 0
-# 291 "data/maps/OldaleTown/scripts.pory"
 	releaseall
 	end
 
 
-# 295 "data/maps/OldaleTown/scripts.pory"
+# 291 "data/maps/OldaleTown/scripts.pory"
 OldaleTown_Movement_PushNorth:
-# 296 "data/maps/OldaleTown/scripts.pory"
+# 292 "data/maps/OldaleTown/scripts.pory"
 	walk_up
 	step_end
 
 OldaleTown_EventScript_BirchNicknameStarter::
-# 306 "data/maps/OldaleTown/scripts.pory"
+# 302 "data/maps/OldaleTown/scripts.pory"
 	setvar VAR_SNAKEWOOD_INTRO_STATE, 3
-# 307 "data/maps/OldaleTown/scripts.pory"
+# 303 "data/maps/OldaleTown/scripts.pory"
 	lockall
-# 308 "data/maps/OldaleTown/scripts.pory"
+# 304 "data/maps/OldaleTown/scripts.pory"
 	msgbox OldaleTown_EventScript_BirchNicknameStarter_Text_0
-# 311 "data/maps/OldaleTown/scripts.pory"
+# 307 "data/maps/OldaleTown/scripts.pory"
 	closemessage
-# 314 "data/maps/OldaleTown/scripts.pory"
+# 310 "data/maps/OldaleTown/scripts.pory"
 	msgbox OldaleTown_EventScript_BirchNicknameStarter_Text_1
-# 315 "data/maps/OldaleTown/scripts.pory"
+# 311 "data/maps/OldaleTown/scripts.pory"
 	releaseall
 	end
 
@@ -612,19 +604,19 @@ OldaleTown_EventScript_RivalAlicia_Text_3:
 	.string "Fine, you may pass.$"
 
 OldaleTown_EventScript_Guard1_Text_0:
-# 275 "data/maps/OldaleTown/scripts.pory"
+# 273 "data/maps/OldaleTown/scripts.pory"
 	.string "Placeholder: Guard 1 - You can't go south from here.$"
 
 OldaleTown_EventScript_Guard2_Text_0:
-# 287 "data/maps/OldaleTown/scripts.pory"
+# 283 "data/maps/OldaleTown/scripts.pory"
 	.string "Placeholder: Guard 2 - This road is blocked.$"
 
 OldaleTown_EventScript_BirchNicknameStarter_Text_0:
-# 308 "data/maps/OldaleTown/scripts.pory"
-	.string "Placeholder: Birch arrives in Oldale.\p"
+# 304 "data/maps/OldaleTown/scripts.pory"
+	.string "Placeholder: Birch arrives in Oldale.\n"
 	.string "You handled that really well back there!\p"
 	.string "Would you like to give your Pokémon a nickname?$"
 
 OldaleTown_EventScript_BirchNicknameStarter_Text_1:
-# 314 "data/maps/OldaleTown/scripts.pory"
+# 310 "data/maps/OldaleTown/scripts.pory"
 	.string "Placeholder: Birch - Take care of yourself out there.$"

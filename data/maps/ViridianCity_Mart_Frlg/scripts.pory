@@ -1,0 +1,118 @@
+mapscripts ViridianCity_Mart_Frlg_MapScripts {
+    MAP_SCRIPT_ON_LOAD: ViridianCity_Mart_OnLoad
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 0: ViridianCity_Mart_EventScript_ParcelScene
+    ]
+}
+
+script ViridianCity_Mart_OnLoad {
+    if (!flag(FLAG_SYS_POKEDEX_GET)) goto(ViridianCity_Mart_EventScript_HideQuestionnaire)
+    end
+}
+
+script ViridianCity_Mart_EventScript_HideQuestionnaire {
+    setmetatile(1, 3, METATILE_Mart_CounterMid_Top, 1)
+    setmetatile(1, 4, METATILE_Mart_CounterMid_Bottom, 1)
+    end
+}
+
+script ViridianCity_Mart_EventScript_ParcelScene {
+    lockall
+    textcolor(NPC_TEXT_COLOR_MALE)
+    applymovement(LOCALID_VIRIDIAN_MART_CLERK, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    msgbox(ViridianCity_Mart_Text_YouCameFromPallet)
+    closemessage
+    applymovement(LOCALID_VIRIDIAN_MART_CLERK, ViridianCity_Mart_Movement_FacePlayer)
+    applymovement(LOCALID_PLAYER, ViridianCity_Mart_Movement_ApproachCounter)
+    waitmovement(0)
+    msgbox(ViridianCity_Mart_Text_TakeThisToProfOak)
+    setvar(VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1)
+    giveitem_msg(ViridianCity_Mart_Text_ReceivedOaksParcelFromClerk, ITEM_OAKS_PARCEL, 1, MUS_RG_OBTAIN_KEY_ITEM)
+    setvar(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 5)
+    releaseall
+    end
+}
+
+movement ViridianCity_Mart_Movement_ApproachCounter {
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_in_place_faster_left
+    step_end
+}
+
+movement ViridianCity_Mart_Movement_FacePlayer {
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    walk_in_place_faster_right
+    step_end
+}
+
+script ViridianCity_Mart_EventScript_Clerk {
+    lock
+    faceplayer
+    if (var(VAR_MAP_SCENE_VIRIDIAN_CITY_MART) == 1) goto(ViridianCity_Mart_EventScript_SayHiToOak)
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(ViridianCity_Mart_Items)
+    msgbox(gText_PleaseComeAgain)
+    release
+    end
+}
+
+script ViridianCity_Mart_Items {
+    release
+    end
+}
+
+script ViridianCity_Mart_EventScript_SayHiToOak {
+    msgbox(ViridianCity_Mart_Text_SayHiToOakForMe)
+    release
+    end
+}
+
+script ViridianCity_Mart_EventScript_Woman {
+    msgbox(ViridianCity_Mart_Text_ShopDoesGoodBusinessInAntidotes, MSGBOX_NPC)
+    end
+}
+
+script ViridianCity_Mart_EventScript_Youngster {
+    msgbox(ViridianCity_Mart_Text_GotToBuySomePotions, MSGBOX_NPC)
+    end
+}
+
+text ViridianCity_Mart_Text_YouCameFromPallet {
+    "Hey!\n"
+    "You came from PALLET TOWN?$"
+}
+
+text ViridianCity_Mart_Text_TakeThisToProfOak {
+    "You know PROF. OAK, right?\p"
+    "His order came in.\n"
+    "Can I get you to take it to him?$"
+}
+
+text ViridianCity_Mart_Text_ReceivedOaksParcelFromClerk {
+    "{PLAYER} received OAK'S PARCEL\n"
+    "from the POKéMON MART clerk.$"
+}
+
+text ViridianCity_Mart_Text_SayHiToOakForMe {
+    "Okay, thanks! Please say hi to\n"
+    "PROF. OAK for me, too.$"
+}
+
+text ViridianCity_Mart_Text_ShopDoesGoodBusinessInAntidotes {
+    "This shop does good business in\n"
+    "ANTIDOTES, I've heard.$"
+}
+
+text ViridianCity_Mart_Text_GotToBuySomePotions {
+    "I've got to buy some POTIONS.\p"
+    "You never know when your POKéMON\n"
+    "will need quick healing.$"
+}

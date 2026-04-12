@@ -1,0 +1,47 @@
+mapscripts SootopolisCity_House3_MapScripts {}
+
+script SootopolisCity_House3_EventScript_Woman {
+    lock
+    faceplayer
+    msgbox(SootopolisCity_House3_Text_JuanHasManyFansDoYou, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(SootopolisCity_House3_EventScript_HaveFans)
+    msgbox(SootopolisCity_House3_Text_LonesomeTryWorkingHarder, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script SootopolisCity_House3_EventScript_HaveFans {
+    msgbox(SootopolisCity_House3_Text_YouMustBePrettyStrong, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script SootopolisCity_House3_EventScript_Girl {
+    msgbox(SootopolisCity_House3_Text_TrainerFanClubWasWild, MSGBOX_NPC)
+    end
+}
+
+text SootopolisCity_House3_Text_JuanHasManyFansDoYou {
+    "You're a POKéMON TRAINER, aren't you?\p"
+    "SOOTOPOLIS's JUAN has many fans.\n"
+    "Even more than his student WALLACE!\p"
+    "Do you have any?$"
+}
+
+text SootopolisCity_House3_Text_YouMustBePrettyStrong {
+    "Oh, then you must be pretty strong.$"
+}
+
+text SootopolisCity_House3_Text_LonesomeTryWorkingHarder {
+    "Oh, dear…\n"
+    "That's a little lonesome.\p"
+    "Try working a little harder to get\n"
+    "a fan following.$"
+}
+
+text SootopolisCity_House3_Text_TrainerFanClubWasWild {
+    "Dedicated fans come over from even\n"
+    "outside of HOENN.\p"
+    "It was really wild when I went to the\n"
+    "TRAINER FAN CLUB in LILYCOVE.$"
+}

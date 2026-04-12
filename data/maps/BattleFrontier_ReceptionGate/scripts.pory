@@ -1,0 +1,571 @@
+mapscripts BattleFrontier_ReceptionGate_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_HAS_ENTERED_BATTLE_FRONTIER, 0: BattleFrontier_ReceptionGate_EventScript_FirstTimeEntering
+    ]
+    MAP_SCRIPT_ON_TRANSITION: BattleFrontier_ReceptionGate_OnTransition
+}
+
+script BattleFrontier_ReceptionGate_OnTransition {
+    setflag(FLAG_LANDMARK_BATTLE_FRONTIER)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_FirstTimeEntering {
+    lockall
+    setvar(VAR_HAS_ENTERED_BATTLE_FRONTIER, 1)
+    playse(SE_PIN)
+    applymovement(LOCALID_FRONTIER_RECEPTION_GREETER, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_FRONTIER_RECEPTION_GREETER, Common_Movement_Delay48)
+    waitmovement(0)
+    msgbox(BattleFrontier_ReceptionGate_Text_FirstTimeHereThisWay, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_PLAYER, BattleFrontier_ReceptionGate_Movement_PlayerApproachCounter)
+    waitmovement(0)
+    goto(BattleFrontier_ReceptionGate_EventScript_ScottScene)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_ScottScene {
+    msgbox(BattleFrontier_ReceptionGate_Text_WelcomeToBattleFrontier, MSGBOX_DEFAULT)
+    msgbox(BattleFrontier_ReceptionGate_Text_IssueFrontierPass, MSGBOX_DEFAULT)
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(BattleFrontier_ReceptionGate_Text_ObtainedFrontierPass)
+    waitfanfare()
+    waitmessage()
+    msgbox(BattleFrontier_ReceptionGate_Text_PlacedTrainerCardInFrontierPass, MSGBOX_DEFAULT)
+    setflag(FLAG_SYS_FRONTIER_PASS)
+    msgbox(BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier, MSGBOX_DEFAULT)
+    msgbox(BattleFrontier_ReceptionGate_Text_IfItIsntPlayerYouCame, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_FRONTIER_RECEPTION_GREETER, Common_Movement_WalkInPlaceFasterUp)
+    applymovement(LOCALID_FRONTIER_RECEPTION_GUIDE, Common_Movement_WalkInPlaceFasterUp)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    playse(SE_PIN)
+    applymovement(LOCALID_FRONTIER_RECEPTION_GREETER, Common_Movement_ExclamationMark)
+    applymovement(LOCALID_FRONTIER_RECEPTION_GUIDE, Common_Movement_ExclamationMark)
+    applymovement(LOCALID_PLAYER, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    msgbox(BattleFrontier_ReceptionGate_Text_OhMrScottGoodDay, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_FRONTIER_RECEPTION_GREETER, BattleFrontier_ReceptionGate_Movement_GreeterFaceScott)
+    applymovement(LOCALID_FRONTIER_RECEPTION_GUIDE, BattleFrontier_ReceptionGate_Movement_FacilityGuideFaceScott)
+    applymovement(LOCALID_PLAYER, BattleFrontier_ReceptionGate_Movement_PlayerFaceScott)
+    applymovement(LOCALID_FRONTIER_RECEPTION_SCOTT, BattleFrontier_ReceptionGate_Movement_ScottEnter)
+    waitmovement(0)
+    msgbox(BattleFrontier_ReceptionGate_Text_ScottGreatToSeeYouHere, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_FRONTIER_RECEPTION_SCOTT, BattleFrontier_ReceptionGate_Movement_ScottExit)
+    waitmovement(0)
+    removeobject(LOCALID_FRONTIER_RECEPTION_SCOTT)
+    releaseall
+    end
+}
+
+movement BattleFrontier_ReceptionGate_Movement_PlayerApproachCounter {
+    walk_up
+    walk_up
+    walk_left
+    walk_left
+    step_end
+}
+
+movement BattleFrontier_ReceptionGate_Movement_PlayerFaceScott {
+    delay_16
+    delay_16
+    delay_16
+    delay_8
+    walk_in_place_faster_right
+    step_end
+}
+
+movement BattleFrontier_ReceptionGate_Movement_WalkDown {
+    walk_down
+    walk_down
+    step_end
+}
+
+movement BattleFrontier_ReceptionGate_Movement_ScottEnter {
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_left
+    step_end
+}
+
+movement BattleFrontier_ReceptionGate_Movement_ScottExit {
+    walk_right
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    step_end
+}
+
+movement BattleFrontier_ReceptionGate_Movement_GreeterFaceScott {
+    delay_16
+    delay_16
+    delay_16
+    delay_8
+    walk_in_place_faster_right
+    step_end
+}
+
+movement BattleFrontier_ReceptionGate_Movement_FacilityGuideFaceScott {
+    delay_16
+    delay_16
+    delay_16
+    delay_8
+    walk_in_place_faster_left
+    step_end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_Greeter {
+    lock
+    faceplayer
+    msgbox(BattleFrontier_ReceptionGate_Text_WelcomeToBattleFrontier, MSGBOX_DEFAULT)
+    msgbox(BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_FacilityGuide {
+    lock
+    faceplayer
+    msgbox(BattleFrontier_ReceptionGate_Text_YourGuideToFacilities, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout {
+    message(BattleFrontier_ReceptionGate_Text_LearnAboutWhich2)
+    waitmessage()
+    setvar(VAR_0x8004, SCROLL_MULTI_BF_RECEPTIONIST)
+    special(ShowScrollableMultichoice)
+    waitstate
+    switch(VAR_RESULT)
+    case(0, BattleFrontier_ReceptionGate_EventScript_BattleTower)
+    case(1, BattleFrontier_ReceptionGate_EventScript_BattleDome)
+    case(2, BattleFrontier_ReceptionGate_EventScript_BattlePalace)
+    case(3, BattleFrontier_ReceptionGate_EventScript_BattleArena)
+    case(4, BattleFrontier_ReceptionGate_EventScript_BattleFactory)
+    case(5, BattleFrontier_ReceptionGate_EventScript_BattlePike)
+    case(6, BattleFrontier_ReceptionGate_EventScript_BattlePyramid)
+    case(7, BattleFrontier_ReceptionGate_EventScript_RankingHall)
+    case(8, BattleFrontier_ReceptionGate_EventScript_ExchangeCorner)
+    case(9, BattleFrontier_ReceptionGate_EventScript_ExitFacilityGuide)
+    case(MULTI_B_PRESSED, BattleFrontier_ReceptionGate_EventScript_ExitFacilityGuide)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_BattleTower {
+    msgbox(BattleFrontier_ReceptionGate_Text_BattleTowerInfo, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_BattleDome {
+    msgbox(BattleFrontier_ReceptionGate_Text_BattleDomeInfo, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_BattlePalace {
+    msgbox(BattleFrontier_ReceptionGate_Text_BattlePalaceInfo, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_BattleArena {
+    msgbox(BattleFrontier_ReceptionGate_Text_BattleArenaInfo, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_BattleFactory {
+    msgbox(BattleFrontier_ReceptionGate_Text_BattleFactoryInfo, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_BattlePike {
+    msgbox(BattleFrontier_ReceptionGate_Text_BattlePikeInfo, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_BattlePyramid {
+    msgbox(BattleFrontier_ReceptionGate_Text_BattlePyramidInfo, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_RankingHall {
+    msgbox(BattleFrontier_ReceptionGate_Text_RankingHallInfo, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_ExchangeCorner {
+    msgbox(BattleFrontier_ReceptionGate_Text_ExchangeCornerInfo, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_ExitFacilityGuide {
+    msgbox(BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_RulesGuide {
+    lock
+    faceplayer
+    msgbox(BattleFrontier_ReceptionGate_Text_YourGuideToRules, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout {
+    message(BattleFrontier_ReceptionGate_Text_LearnAboutWhat)
+    waitmessage()
+    multichoice(15, 0, MULTI_FRONTIER_RULES, FALSE)
+    switch(VAR_RESULT)
+    case(0, BattleFrontier_ReceptionGate_EventScript_LevelMode)
+    case(1, BattleFrontier_ReceptionGate_EventScript_Level50)
+    case(2, BattleFrontier_ReceptionGate_EventScript_OpenLevel)
+    case(3, BattleFrontier_ReceptionGate_EventScript_MonEntry)
+    case(4, BattleFrontier_ReceptionGate_EventScript_HoldItems)
+    case(5, BattleFrontier_ReceptionGate_EventScript_ExitRulesGuide)
+    case(MULTI_B_PRESSED, BattleFrontier_ReceptionGate_EventScript_ExitRulesGuide)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_LevelMode {
+    msgbox(BattleFrontier_ReceptionGate_Text_LevelModeInfo, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_Level50 {
+    msgbox(BattleFrontier_ReceptionGate_Text_Level50Info, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_OpenLevel {
+    msgbox(BattleFrontier_ReceptionGate_Text_OpenLevelInfo, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_MonEntry {
+    msgbox(BattleFrontier_ReceptionGate_Text_MonEntryInfo, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_HoldItems {
+    msgbox(BattleFrontier_ReceptionGate_Text_HoldItemsInfo, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_ExitRulesGuide {
+    msgbox(BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_FrontierPassGuide {
+    lock
+    faceplayer
+    msgbox(BattleFrontier_ReceptionGate_Text_YourGuideToFrontierPass, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout {
+    message(BattleFrontier_ReceptionGate_Text_LearnAboutWhich1)
+    waitmessage()
+    multichoice(16, 4, MULTI_FRONTIER_PASS_INFO, FALSE)
+    switch(VAR_RESULT)
+    case(0, BattleFrontier_ReceptionGate_EventScript_Symbols)
+    case(1, BattleFrontier_ReceptionGate_EventScript_RecordBattle)
+    case(2, BattleFrontier_ReceptionGate_EventScript_BattlePoints)
+    case(3, BattleFrontier_ReceptionGate_EventScript_ExitFrontierPassGuide)
+    case(MULTI_B_PRESSED, BattleFrontier_ReceptionGate_EventScript_ExitFrontierPassGuide)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_Symbols {
+    msgbox(BattleFrontier_ReceptionGate_Text_SymbolsInfo, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_RecordBattle {
+    msgbox(BattleFrontier_ReceptionGate_Text_RecordedBattleInfo, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_BattlePoints {
+    msgbox(BattleFrontier_ReceptionGate_Text_BattlePointsInfo, MSGBOX_DEFAULT)
+    goto(BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout)
+    end
+}
+
+script BattleFrontier_ReceptionGate_EventScript_ExitFrontierPassGuide {
+    msgbox(BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+text BattleFrontier_ReceptionGate_Text_FirstTimeHereThisWay {
+    "Is it your first time here?\n"
+    "Please step this way!$"
+}
+
+text BattleFrontier_ReceptionGate_Text_WelcomeToBattleFrontier {
+    "The front lines of POKéMON battling!\n"
+    "Welcome to the BATTLE FRONTIER!$"
+}
+
+text BattleFrontier_ReceptionGate_Text_IssueFrontierPass {
+    "For a first-time visitor, we issue\n"
+    "the FRONTIER PASS.\p"
+    "It's for use at all the facilities\n"
+    "in the BATTLE FRONTIER.\p"
+    "Here you are!$"
+}
+
+text BattleFrontier_ReceptionGate_Text_ObtainedFrontierPass {
+    "{PLAYER} obtained\n"
+    "the FRONTIER PASS.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_PlacedTrainerCardInFrontierPass {
+    "{PLAYER} placed the TRAINER CARD\n"
+    "in the FRONTIER PASS.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier {
+    "We hope you enjoy all that the BATTLE\n"
+    "FRONTIER has to offer!$"
+}
+
+text BattleFrontier_ReceptionGate_Text_IfItIsntPlayerYouCame {
+    "???: Well, if it isn't {PLAYER}{KUN}!\n"
+    "You came out here!$"
+}
+
+text BattleFrontier_ReceptionGate_Text_OhMrScottGoodDay {
+    "GUIDE: Oh! MR. SCOTT, sir!\n"
+    "Good day to you, sir!$"
+}
+
+text BattleFrontier_ReceptionGate_Text_ScottGreatToSeeYouHere {
+    "SCOTT: It's great to see you here,\n"
+    "it really is!\p"
+    "I hope you'll take your time and\n"
+    "explore everywhere.\p"
+    "Naturally, I hope you'll also experience\n"
+    "the pure essence of battling.\p"
+    "I also have my quarters here, so feel\n"
+    "free to visit if you have time.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_YourGuideToFacilities {
+    "I'm your guide to the various facilities\n"
+    "here in the BATTLE FRONTIER.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_LearnAboutWhich2 {
+    "Which would you like to learn about?$"
+}
+
+text BattleFrontier_ReceptionGate_Text_BattleTowerInfo {
+    "It is the gigantic tower considered\n"
+    "to be the BATTLE FRONTIER's symbol.\p"
+    "There are four kinds of BATTLE ROOMS\n"
+    "in the tower for SINGLE, DOUBLE, MULTI,\l"
+    "and LINK MULTI BATTLES.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_BattleDomeInfo {
+    "The BATTLE DOME is the large building\n"
+    "shaped like a huge egg.\p"
+    "Events named Battle Tourneys are held\n"
+    "in this facility.\p"
+    "The Battle Tourneys are offered in\n"
+    "two courses--for SINGLE and DOUBLE\l"
+    "BATTLES.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_BattlePalaceInfo {
+    "The BATTLE PALACE is the red building\n"
+    "on the right of the BATTLE FRONTIER.\p"
+    "There are two kinds of BATTLE HALLS\n"
+    "for SINGLE and DOUBLE BATTLES.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_BattleArenaInfo {
+    "The BATTLE ARENA is the dojo-like\n"
+    "building at the center-right of\l"
+    "the BATTLE FRONTIER.\p"
+    "An event called the Set KO Tourney\n"
+    "takes place at the BATTLE ARENA.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_BattleFactoryInfo {
+    "The BATTLE FACTORY is the large\n"
+    "building that is the closest to us.\p"
+    "An event called the Battle Swap\n"
+    "is conducted there.\p"
+    "The Battle Swap event is offered in\n"
+    "two courses for SINGLE and DOUBLE\l"
+    "BATTLES.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_BattlePikeInfo {
+    "The BATTLE PIKE is the building shaped\n"
+    "like a POKéMON at the center-left of\l"
+    "the BATTLE FRONTIER.\p"
+    "An event called the Battle Choice\n"
+    "is conducted there.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_BattlePyramidInfo {
+    "The BATTLE PYRAMID is the enormous\n"
+    "pyramid.\p"
+    "An event called the Battle Quest\n"
+    "is conducted there.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_RankingHallInfo {
+    "The RANKING HALL is located near\n"
+    "the BATTLE TOWER.\p"
+    "There, you may see the most fantastic\n"
+    "records left by the TRAINERS that\l"
+    "took on the many challenges of\l"
+    "the BATTLE FRONTIER.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_ExchangeCornerInfo {
+    "The EXCHANGE SERVICE CORNER is near\n"
+    "the BATTLE TOWER.\p"
+    "The Battle Points you have earned in\n"
+    "the BATTLE FRONTIER may be exchanged\l"
+    "for fabulous prizes there.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_YourGuideToRules {
+    "I'm your guide to the basic rules that\n"
+    "are common to all the challenges\l"
+    "offered by the facilities in the BATTLE\l"
+    "FRONTIER.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_LearnAboutWhat {
+    "What would you like to learn about?$"
+}
+
+text BattleFrontier_ReceptionGate_Text_LevelModeInfo {
+    "All the challenges at the BATTLE\n"
+    "FRONTIER's facilities come in\l"
+    "two courses--Level 50 and Open Level.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_Level50Info {
+    "The Level 50 course is open to POKéMON\n"
+    "up to and including Level 50.\p"
+    "Please keep in mind, however, that\n"
+    "no TRAINER you face will have any\l"
+    "POKéMON below Level 50.\p"
+    "This course is the entry level for\n"
+    "battles at the BATTLE FRONTIER.\p"
+    "To begin, we hope you will challenge\n"
+    "this course.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_OpenLevelInfo {
+    "The Open Level course places no limit\n"
+    "on the levels of POKéMON entering\l"
+    "challenges.\p"
+    "The levels of your opponents will\n"
+    "be adjusted to match the levels of\l"
+    "your POKéMON.\p"
+    "However, no TRAINER you face will\n"
+    "have any POKéMON below Level 60.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_MonEntryInfo {
+    "Virtually any kind of POKéMON may take\n"
+    "on the challenges at all facilities.\p"
+    "EGGS and certain kinds of POKéMON,\n"
+    "however, are not permitted.\p"
+    "The numbers of POKéMON required for\n"
+    "challenges will depend on the facility.\p"
+    "At all facilities, however, two or more\n"
+    "of the same kind of POKéMON are not\l"
+    "permitted.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_HoldItemsInfo {
+    "When entering a challenge at a BATTLE\n"
+    "FRONTIER facility, POKéMON may not\l"
+    "be holding the same kind of item.\p"
+    "Please make sure that all POKéMON\n"
+    "entering a challenge are holding\l"
+    "different items.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_YourGuideToFrontierPass {
+    "I'm your guide to the FRONTIER PASS.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_LearnAboutWhich1 {
+    "Which would you like to learn about?$"
+}
+
+text BattleFrontier_ReceptionGate_Text_SymbolsInfo {
+    "There are seven facilities at\n"
+    "the BATTLE FRONTIER.\p"
+    "TRAINERS who gain recognition for\n"
+    "their abilities may be rewarded with\l"
+    "symbols from each of the facilities.\p"
+    "To earn a symbol, TRAINERS may need\n"
+    "to defeat other TRAINERS in a row,\l"
+    "and may need to win events repeatedly.\p"
+    "It's certainly not easy to win symbols.\n"
+    "I wish you the best of luck!$"
+}
+
+text BattleFrontier_ReceptionGate_Text_RecordedBattleInfo {
+    "It is possible to record one battle\n"
+    "on your FRONTIER PASS.\p"
+    "You may record a battle you had with\n"
+    "a friend or friends.\p"
+    "Or you may record a battle conducted\n"
+    "at the BATTLE FRONTIER excluding\l"
+    "matches at the BATTLE PIKE or\l"
+    "the BATTLE PYRAMID.\p"
+    "You may choose to record your match\n"
+    "at the end of a battle.$"
+}
+
+text BattleFrontier_ReceptionGate_Text_BattlePointsInfo {
+    "Battle Points are rewards given to\n"
+    "TRAINERS who battled outstandingly\l"
+    "at the BATTLE FRONTIER.\p"
+    "You may trade in your Battle Points\n"
+    "for prizes at the EXCHANGE SERVICE\l"
+    "CORNER.$"
+}

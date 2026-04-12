@@ -1,0 +1,8 @@
+mapscripts AbandonedShip_Underwater1_MapScripts {
+    MAP_SCRIPT_ON_RESUME: AbandonedShip_Underwater1_OnResume
+}
+
+script AbandonedShip_Underwater1_OnResume {
+    setdivewarp(MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS, 0, 10)
+    end
+}

@@ -1,0 +1,296 @@
+mapscripts SevenIsland_House_Room1_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: SevenIsland_House_Room1_OnTransition
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1: SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle
+        VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2: SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle
+        VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3: SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle
+    ]
+}
+
+script SevenIsland_House_Room1_OnTransition {
+    special(ValidateEReaderTrainer)
+    if (var(VAR_RESULT) == 0) call(SevenIsland_House_Room1_EventScript_SetTrainerVisitingLayout)
+    if (var(VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1) != 0) call(SevenIsland_House_Room1_EventScript_MoveOldWomanToDoor)
+    end
+}
+
+script SevenIsland_House_Room1_EventScript_SetTrainerVisitingLayout {
+    setvar(TRAINER_VISITING, TRUE)
+    setobjectxyperm(LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, 4, 2)
+    setobjectmovementtype(LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, MOVEMENT_TYPE_FACE_DOWN)
+    setmaplayoutindex(LAYOUT_SEVEN_ISLAND_HOUSE_ROOM1_DOOR_OPEN)
+    return
+}
+
+script SevenIsland_House_Room1_EventScript_MoveOldWomanToDoor {
+    setobjectxyperm(LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, 3, 2)
+    setobjectmovementtype(LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, MOVEMENT_TYPE_FACE_RIGHT)
+    return
+}
+
+script SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle {
+    lockall
+    textcolor(NPC_TEXT_COLOR_FEMALE)
+    applymovement(LOCALID_PLAYER, SevenIsland_House_Room1_Movement_PlayerReEnterRoom)
+    waitmovement(0)
+    applymovement(LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, SevenIsland_House_Room1_Movement_OldWomanWalkBehindPlayer)
+    waitmovement(0)
+    copyobjectxytoperm(LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    if (var(VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1) == 1) call(SevenIsland_House_Room1_EventScript_BattleWonComment)
+    if (var(VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1) == 2) call(SevenIsland_House_Room1_EventScript_BattleLostComment)
+    if (var(VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1) == 3) call(SevenIsland_House_Room1_EventScript_BattleTiedComment)
+    special(LoadPlayerParty)
+    setvar(VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 0)
+    releaseall
+    end
+}
+
+script SevenIsland_House_Room1_EventScript_BattleWonComment {
+    msgbox(SevenIsland_House_Room1_Text_AstoundingBattle)
+    return
+}
+
+script SevenIsland_House_Room1_EventScript_BattleLostComment {
+    msgbox(SevenIsland_House_Room1_Text_FeelYourDisappointment)
+    return
+}
+
+script SevenIsland_House_Room1_EventScript_BattleTiedComment {
+    msgbox(SevenIsland_House_Room1_Text_DrawWasIt)
+    return
+}
+
+movement SevenIsland_House_Room1_Movement_PlayerReEnterRoom {
+    walk_down
+    step_end
+}
+
+movement SevenIsland_House_Room1_Movement_OldWomanWalkBehindPlayer {
+    walk_right
+    walk_in_place_faster_down
+    step_end
+}
+
+script SevenIsland_House_Room1_EventScript_OldWoman {
+    lock
+    faceplayer
+    special(ValidateEReaderTrainer)
+    if (var(VAR_RESULT) == 1) call(SevenIsland_House_Room1_EventScript_InvalidVisitingTrainer)
+    if (var(TRAINER_VISITING) == TRUE) goto(SevenIsland_House_Room1_EventScript_TrainerVisiting)
+    msgbox(SevenIsland_House_Room1_Text_OnlyEnjoymentWatchingBattles)
+    release
+    end
+}
+
+script SevenIsland_House_Room1_EventScript_InvalidVisitingTrainer {
+    msgbox(SevenIsland_House_Room1_Text_OnlyEnjoymentWatchingBattles)
+    release
+    end
+}
+
+script SevenIsland_House_Room1_EventScript_TrainerVisiting {
+    special(SavePlayerParty)
+    special(BufferEReaderTrainerName)
+    msgbox(SevenIsland_House_Room1_Text_ChallengeVisitingTrainer, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(SevenIsland_House_Room1_EventScript_DeclineBattle)
+    call(SevenIsland_House_Room1_EventScript_ChooseParty)
+    if (var(VAR_RESULT) == 0) goto(SevenIsland_House_Room1_EventScript_DeclineBattle)
+    msgbox(SevenIsland_House_Room1_Text_SaveProgressBeforeBattle, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(SevenIsland_House_Room1_EventScript_DeclineBattle)
+    special(LoadPlayerParty)
+    call(Common_EventScript_SaveGame)
+    if (var(VAR_RESULT) == 0) goto(SevenIsland_House_Room1_EventScript_DeclineBattle)
+    special(SavePlayerParty)
+    special(ReducePlayerPartyToSelectedMons)
+    msgbox(SevenIsland_House_Room1_Text_DontHoldAnythingBack)
+    closemessage
+    if (var(VAR_FACING) == DIR_NORTH) call(SevenIsland_House_Room1_EventScript_EnterBattleRoomNorth)
+    if (var(VAR_FACING) == DIR_EAST) call(SevenIsland_House_Room1_EventScript_EnterBattleRoomEast)
+    if (var(VAR_FACING) == DIR_WEST) call(SevenIsland_House_Room1_EventScript_EnterBattleRoomWest)
+    warp(MAP_SEVEN_ISLAND_HOUSE_ROOM2, 3, 1)
+    waitstate
+    release
+    end
+}
+
+script SevenIsland_House_Room1_EventScript_DeclineBattle {
+    special(LoadPlayerParty)
+    msgbox(SevenIsland_House_Room1_Text_OhYouWontBattle)
+    release
+    end
+}
+
+script SevenIsland_House_Room1_EventScript_ChooseParty {
+    msgbox(SevenIsland_House_Room1_Text_LimitThreeMonsPerSide)
+    fadescreen(FADE_TO_BLACK)
+    special(ChooseHalfPartyForBattle)
+    waitstate
+    return
+}
+
+script SevenIsland_House_Room1_EventScript_EnterBattleRoomNorth {
+    applymovement(VAR_LAST_TALKED, SevenIsland_House_Room1_Movement_OldWomanMoveAsideLeft)
+    applymovement(LOCALID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomNorth)
+    waitmovement(0)
+    return
+}
+
+script SevenIsland_House_Room1_EventScript_EnterBattleRoomEast {
+    applymovement(VAR_LAST_TALKED, SevenIsland_House_Room1_Movement_OldWomanMoveAsideRight)
+    applymovement(LOCALID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomEast)
+    waitmovement(0)
+    return
+}
+
+script SevenIsland_House_Room1_EventScript_EnterBattleRoomWest {
+    applymovement(VAR_LAST_TALKED, SevenIsland_House_Room1_Movement_OldWomanMoveAsideLeft)
+    applymovement(LOCALID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomWest)
+    waitmovement(0)
+    return
+}
+
+movement SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomNorth {
+    delay_16
+    walk_up
+    walk_up
+    step_end
+}
+
+movement SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomEast {
+    delay_16
+    walk_right
+    walk_up
+    step_end
+}
+
+movement SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomWest {
+    delay_16
+    walk_left
+    walk_up
+    step_end
+}
+
+movement SevenIsland_House_Room1_Movement_OldWomanMoveAsideLeft {
+    walk_left
+    walk_in_place_faster_right
+    step_end
+}
+
+movement SevenIsland_House_Room1_Movement_OldWomanMoveAsideRight {
+    walk_right
+    walk_in_place_faster_left
+    step_end
+}
+
+script SevenIsland_House_Room1_EventScript_Box {
+    msgbox(SevenIsland_House_Room1_Text_SlightBreezeAroundBox, MSGBOX_SIGN)
+    end
+}
+
+text SevenIsland_House_Room1_Text_OnlyEnjoymentWatchingBattles {
+    "I may not look like much now,\n"
+    "but when I was younger…\p"
+    "I flew everywhere, challenging\n"
+    "TRAINERS wherever I found them.\p"
+    "Now, my only source of enjoyment\n"
+    "is reminiscing about the past while\l"
+    "watching battles.$"
+}
+
+text SevenIsland_House_Room1_Text_SlightBreezeAroundBox {
+    "There is a slight breeze blowing\n"
+    "around the box.$"
+}
+
+text SevenIsland_House_Room1_Text_ChallengeVisitingTrainer {
+    "Ah!\n"
+    "Welcome, my friend!\p"
+    "Let me tell you something. There's\n"
+    "a hidden room in the basement.\p"
+    "A TRAINER named {STR_VAR_1} is\n"
+    "waiting there now.\p"
+    "Tell me, you did come to challenge\n"
+    "{STR_VAR_1}, am I right?$"
+}
+
+text SevenIsland_House_Room1_Text_OhYouWontBattle {
+    "Oh…\n"
+    "You won't battle…\p"
+    "I see, I see.\n"
+    "… …\p"
+    "Well, perhaps if you change your\n"
+    "mind, do come back.$"
+}
+
+text SevenIsland_House_Room1_Text_LimitThreeMonsPerSide {
+    "Ah!\n"
+    "You will battle for me?\p"
+    "It was worth my time moving the\n"
+    "box aside, then.\p"
+    "… …\n"
+    "But there is one slight problem.\p"
+    "This hidden room is not built very\n"
+    "sturdy.\p"
+    "Can I get you to limit it to\n"
+    "battles of three POKéMON per side?$"
+}
+
+text SevenIsland_House_Room1_Text_SaveProgressBeforeBattle {
+    "Fine! Before your battle, would\n"
+    "you like to save your game?$"
+}
+
+text SevenIsland_House_Room1_Text_DontHoldAnythingBack {
+    "All right.\n"
+    "Don't hold anything back!$"
+}
+
+text SevenIsland_House_Room1_Text_StrVar1_1 {
+    "{STR_VAR_1}$"
+}
+
+text SevenIsland_House_Room2_Text_MatchEndedUpDraw {
+    "The match ended up a draw.$"
+}
+
+text SevenIsland_House_Room1_Text_DrawWasIt {
+    "A draw, was it?\p"
+    "However, let me say that it was\n"
+    "a worthy spectacle.\p"
+    "I'd say it was a wonderful battle\n"
+    "with a real sense of depth!$"
+}
+
+text SevenIsland_House_Room1_Text_StrVar1_2 {
+    "{STR_VAR_1}$"
+}
+
+text SevenIsland_House_Room1_Text_AstoundingBattle {
+    "Bravo!\p"
+    "Bravo, indeed!\n"
+    "What an astounding battle!\p"
+    "It was so astounding, why, it keeps\n"
+    "filling my eyes with tears!\p"
+    "The thrust and parry of expertly\n"
+    "used techniques!\p"
+    "The clash of power upon power!\p"
+    "Yes!\n"
+    "It was sheer magnificence!$"
+}
+
+text SevenIsland_House_Room1_Text_StrVar1_3 {
+    "{STR_VAR_1}$"
+}
+
+text SevenIsland_House_Room1_Text_FeelYourDisappointment {
+    "Too bad!\n"
+    "I feel your disappointment.\p"
+    "However, that disappointment is\n"
+    "what will make you better.\p"
+    "Use it, learn from it, and make it\n"
+    "motivate you to seek greatness.\p"
+    "Forget not this disappointment\n"
+    "and redouble your training!$"
+}

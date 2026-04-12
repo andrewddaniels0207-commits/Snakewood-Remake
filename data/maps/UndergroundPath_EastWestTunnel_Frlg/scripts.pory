@@ -1,0 +1,8 @@
+mapscripts UndergroundPath_EastWestTunnel_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: UndergroundPath_EastWestTunnel_OnTransition
+}
+
+script UndergroundPath_EastWestTunnel_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_UNDERGROUND_PATH_EAST_WEST_TUNNEL)
+    end
+}

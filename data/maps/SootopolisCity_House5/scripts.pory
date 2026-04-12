@@ -1,0 +1,22 @@
+mapscripts SootopolisCity_House5_MapScripts {}
+
+script SootopolisCity_House5_EventScript_Maniac {
+    msgbox(SootopolisCity_House5_Text_SootopolisMtPyreConnection, MSGBOX_NPC)
+    end
+}
+
+script SootopolisCity_House5_EventScript_Girl {
+    msgbox(SootopolisCity_House5_Text_BrotherUsedToStudySea, MSGBOX_NPC)
+    end
+}
+
+text SootopolisCity_House5_Text_SootopolisMtPyreConnection {
+    "There appears to be some connection\n"
+    "between SOOTOPOLIS and MT. PYRE.\p"
+    "My friends and I did some research on\n"
+    "it at the lab where I used to work.$"
+}
+
+text SootopolisCity_House5_Text_BrotherUsedToStudySea {
+    "My big brother used to study the sea.$"
+}

@@ -1,0 +1,199 @@
+mapscripts CinnabarIsland_PokemonCenter_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: CinnabarIsland_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script CinnabarIsland_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_CINNABAR_ISLAND)
+    end
+}
+
+script CinnabarIsland_PokemonCenter_1F_EventScript_Nurse {
+    lock
+    faceplayer
+    call(EventScript_PkmnCenterNurse_Frlg)
+    release
+    end
+}
+
+script CinnabarIsland_PokemonCenter_1F_EventScript_Gentleman {
+    msgbox(CinnabarIsland_PokemonCenter_1F_Text_VisitUnionRoom, MSGBOX_NPC)
+    end
+}
+
+script CinnabarIsland_PokemonCenter_1F_EventScript_CooltrainerF {
+    msgbox(CinnabarIsland_PokemonCenter_1F_Text_CinnabarGymLocked, MSGBOX_NPC)
+    end
+}
+
+script CinnabarIsland_PokemonCenter_1F_EventScript_Youngster {
+    msgbox(CinnabarIsland_PokemonCenter_1F_Text_EvolutionCanWaitForNewMoves, MSGBOX_NPC)
+    end
+}
+
+script CinnabarIsland_PokemonCenter_1F_EventScript_Bill {
+    lock
+    faceplayer
+    msgbox(CinnabarIsland_PokemonCenter_1F_Text_ReadyToSailToOneIsland, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(CinnabarIsland_PokemonCenter_1F_EventScript_NotReadyToSail)
+    msgbox(CinnabarIsland_PokemonCenter_1F_Text_LetsGo)
+    closemessage
+    playbgm(MUS_FOLLOW_ME, 1)
+    savebgm(MUS_FOLLOW_ME)
+    setflag(FLAG_DONT_TRANSITION_MUSIC)
+    setflag(FLAG_HIDE_CINNABAR_POKECENTER_BILL)
+    delay(20)
+    if (var(VAR_FACING) == DIR_SOUTH) call(CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillSouth)
+    if (var(VAR_FACING) == DIR_EAST) call(CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillEast)
+    if (var(VAR_FACING) == DIR_WEST) call(CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillWest)
+    removeobject(LOCALID_CINNABAR_POKEMON_CENTER_BILL)
+    setvar(VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1)
+    clearflag(FLAG_HIDE_CINNABAR_BILL)
+    warp(MAP_CINNABAR_ISLAND, 14, 11)
+    waitstate
+    release
+    end
+}
+
+script CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillSouth {
+    applymovement(LOCALID_CINNABAR_POKEMON_CENTER_BILL, CinnabarIsland_PokemonCenter_1F_Movement_BillExit)
+    applymovement(LOCALID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitSouth)
+    waitmovement(0)
+    return
+}
+
+script CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillEast {
+    applymovement(LOCALID_CINNABAR_POKEMON_CENTER_BILL, CinnabarIsland_PokemonCenter_1F_Movement_BillExitEast)
+    applymovement(LOCALID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitEast)
+    waitmovement(0)
+    return
+}
+
+script CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillWest {
+    applymovement(LOCALID_CINNABAR_POKEMON_CENTER_BILL, CinnabarIsland_PokemonCenter_1F_Movement_BillExit)
+    applymovement(LOCALID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitWest)
+    waitmovement(0)
+    return
+}
+
+script CinnabarIsland_PokemonCenter_1F_EventScript_NotReadyToSail {
+    msgbox(CinnabarIsland_PokemonCenter_1F_Text_OhNotDoneYet)
+    release
+    end
+}
+
+movement CinnabarIsland_PokemonCenter_1F_Movement_BillExit {
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    walk_down
+    delay_8
+    set_invisible
+    step_end
+}
+
+movement CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitSouth {
+    walk_down
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    delay_16
+    walk_down
+    step_end
+}
+
+movement CinnabarIsland_PokemonCenter_1F_Movement_BillExitEast {
+    walk_up
+    walk_left
+    walk_left
+    walk_down
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    walk_down
+    delay_8
+    set_invisible
+    step_end
+}
+
+movement CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitEast {
+    delay_16
+    delay_16
+    delay_16
+    face_left
+    delay_16
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    delay_8
+    walk_down
+    delay_8
+    set_invisible
+    step_end
+}
+
+movement CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitWest {
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    delay_16
+    walk_down
+    step_end
+}
+
+text CinnabarIsland_PokemonCenter_1F_Text_CinnabarGymLocked {
+    "I came to visit the CINNABAR GYM,\n"
+    "but the door is locked tight.\p"
+    "There should be a key for it\n"
+    "somewhere.\p"
+    "Could it be in that burned-out\n"
+    "mansion?\p"
+    "The GYM LEADER's friend used to\n"
+    "live there, they say.$"
+}
+
+text CinnabarIsland_PokemonCenter_1F_Text_VisitUnionRoom {
+    "Do you have lots of friends?\p"
+    "Linking up with the usual friends\n"
+    "is fun, of course.\p"
+    "But how about visiting the\n"
+    "UNION ROOM every so often?\p"
+    "Who knows, you may end up making\n"
+    "new friends.\p"
+    "I think it would be worth your time\n"
+    "to check the UNION ROOM.$"
+}
+
+text CinnabarIsland_PokemonCenter_1F_Text_EvolutionCanWaitForNewMoves {
+    "POKéMON can still learn techniques\n"
+    "after canceling evolution.\p"
+    "Evolution can wait until new moves\n"
+    "have been learned.$"
+}
+
+text CinnabarIsland_PokemonCenter_1F_Text_ReadyToSailToOneIsland {
+    "BILL: Hey, you kept me waiting!\n"
+    "Ready to set sail to ONE ISLAND?$"
+}
+
+text CinnabarIsland_PokemonCenter_1F_Text_OhNotDoneYet {
+    "Oh, you're still not done yet?$"
+}
+
+text CinnabarIsland_PokemonCenter_1F_Text_LetsGo {
+    "Well, that's it.\n"
+    "Let's go!$"
+}

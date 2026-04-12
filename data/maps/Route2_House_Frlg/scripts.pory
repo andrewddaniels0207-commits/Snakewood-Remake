@@ -1,0 +1,51 @@
+mapscripts Route2_House_Frlg_MapScripts {}
+
+script Route2_House_EventScript_Scientist {
+    msgbox(Route2_House_Text_FaintedMonsCanUseFieldMoves, MSGBOX_NPC)
+    end
+}
+
+script Route2_House_EventScript_Reyley {
+    lock
+    faceplayer
+    setvar(VAR_0x8008, INGAME_TRADE_MR_MIME)
+    call(EventScript_GetInGameTradeSpeciesInfo)
+    if (flag(FLAG_DID_MIMIEN_TRADE)) goto(Route2_House_EventScript_AlreadyTraded)
+    msgbox(Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(Route2_House_EventScript_DeclineTrade)
+    call(EventScript_ChooseMonForInGameTrade)
+    if (var(VAR_0x8004) >= PARTY_SIZE) goto(Route2_House_EventScript_DeclineTrade)
+    call(EventScript_GetInGameTradeSpecies)
+    if (var(VAR_RESULT) != VAR_0x8009) goto(Route2_House_EventScript_NotRequestedMon)
+    call(EventScript_DoInGameTrade)
+    msgbox(Trade_Text_HeyThanks)
+    setflag(FLAG_DID_MIMIEN_TRADE)
+    release
+    end
+}
+
+script Route2_House_EventScript_DeclineTrade {
+    msgbox(Trade_Text_AwwOhWell)
+    release
+    end
+}
+
+script Route2_House_EventScript_NotRequestedMon {
+    bufferspeciesname(STR_VAR_1, VAR_0x8009)
+    msgbox(Trade_Text_WhatThatsNoMon)
+    release
+    end
+}
+
+script Route2_House_EventScript_AlreadyTraded {
+    msgbox(Trade_Text_IsntMyOldMonGreat)
+    release
+    end
+}
+
+text Route2_House_Text_FaintedMonsCanUseFieldMoves {
+    "A fainted POKéMON just has no\n"
+    "energy left to battle.\p"
+    "It can still use moves like CUT\n"
+    "outside of battle.$"
+}

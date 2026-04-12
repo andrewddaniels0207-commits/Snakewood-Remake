@@ -1,0 +1,72 @@
+mapscripts CeladonCity_DepartmentStore_2F_Frlg_MapScripts {}
+
+script CeladonCity_DepartmentStore_2F_EventScript_UnusedNPC {
+    msgbox(CeladonCity_DepartmentStore_2F_Text_SuperRepelMorePowerfulRepel, MSGBOX_NPC)
+    end
+}
+
+script CeladonCity_DepartmentStore_2F_EventScript_Lass {
+    msgbox(CeladonCity_DepartmentStore_2F_Text_BuyReviveForLongOutings, MSGBOX_NPC)
+    end
+}
+
+script CeladonCity_DepartmentStore_2F_EventScript_FloorSign {
+    msgbox(CeladonCity_DepartmentStore_2F_Text_FloorSign, MSGBOX_SIGN)
+    end
+}
+
+script CeladonCity_DepartmentStore_2F_EventScript_ClerkItems {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(CeladonCity_DepartmentStore_2F_Items)
+    msgbox(gText_PleaseComeAgain)
+    release
+    end
+}
+
+script CeladonCity_DepartmentStore_2F_Items {
+    release
+    end
+}
+
+script CeladonCity_DepartmentStore_2F_EventScript_ClerkTMs {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(CeladonCity_DepartmentStore_2F_TMs)
+    msgbox(gText_PleaseComeAgain)
+    release
+    end
+}
+
+script CeladonCity_DepartmentStore_2F_TMs {
+    release
+    end
+}
+
+text CeladonCity_DepartmentStore_2F_Text_SuperRepelMorePowerfulRepel {
+    "SUPER REPEL keeps weak POKéMON at\n"
+    "bay…\p"
+    "Hmm, it's a more powerful REPEL.$"
+}
+
+text CeladonCity_DepartmentStore_2F_Text_BuyReviveForLongOutings {
+    "For long outings, you should buy\n"
+    "REVIVE.$"
+}
+
+text CeladonCity_DepartmentStore_2F_Text_FloorSign {
+    "Top-Grade Items for TRAINERS!\p"
+    "2F: TRAINER'S MARKET$"
+}
+
+text CeladonCity_DepartmentStore_2F_Text_LanceComesToBuyCapes {
+    "We have a customer, LANCE, who\n"
+    "occasionally comes.\p"
+    "He always buys capes.\p"
+    "I wonder… Does he have many\n"
+    "identical capes at home?$"
+}

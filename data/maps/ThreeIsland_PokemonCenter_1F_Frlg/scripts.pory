@@ -1,0 +1,54 @@
+mapscripts ThreeIsland_PokemonCenter_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: ThreeIsland_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script ThreeIsland_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_THREE_ISLAND)
+    end
+}
+
+script ThreeIsland_PokemonCenter_1F_EventScript_Nurse {
+    lock
+    faceplayer
+    call(EventScript_PkmnCenterNurse_Frlg)
+    release
+    end
+}
+
+script ThreeIsland_PokemonCenter_1F_EventScript_Sailor {
+    msgbox(ThreeIsland_PokemonCenter_1F_Text_ImpossibleToSurfBetweenIslands, MSGBOX_NPC)
+    end
+}
+
+script ThreeIsland_PokemonCenter_1F_EventScript_Lass {
+    msgbox(ThreeIsland_PokemonCenter_1F_Text_AlwaysBerriesInBerryForest, MSGBOX_NPC)
+    end
+}
+
+script ThreeIsland_PokemonCenter_1F_EventScript_Rocker {
+    msgbox(ThreeIsland_PokemonCenter_1F_Text_PCNetworkCanLinkWithKanto, MSGBOX_NPC)
+    end
+}
+
+text ThreeIsland_PokemonCenter_1F_Text_PCNetworkCanLinkWithKanto {
+    "Hey, did you hear the news?\p"
+    "The PC network here can now link\n"
+    "with PCs in KANTO.\p"
+    "I don't know how that came about,\n"
+    "but it's fantastic!$"
+}
+
+text ThreeIsland_PokemonCenter_1F_Text_ImpossibleToSurfBetweenIslands {
+    "It's impossible to SURF between the\n"
+    "islands around these parts.\p"
+    "The tides are too fast and\n"
+    "treacherous.$"
+}
+
+text ThreeIsland_PokemonCenter_1F_Text_AlwaysBerriesInBerryForest {
+    "Let's crush BERRIES!\n"
+    "…That'd be wasting BERRIES?\p"
+    "You can always find some BERRIES\n"
+    "on the ground in BERRY FOREST.$"
+}

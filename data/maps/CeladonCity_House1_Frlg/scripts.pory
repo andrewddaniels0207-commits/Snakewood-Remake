@@ -1,0 +1,35 @@
+mapscripts CeladonCity_House1_Frlg_MapScripts {}
+
+script CeladonCity_House1_EventScript_RocketChief {
+    msgbox(CeladonCity_House1_Text_SlotsReelInTheDough, MSGBOX_NPC)
+    end
+}
+
+script CeladonCity_House1_EventScript_Rocket1 {
+    msgbox(CeladonCity_House1_Text_ShippedMonsAsSlotPrizes, MSGBOX_NPC)
+    end
+}
+
+script CeladonCity_House1_EventScript_Rocket2 {
+    msgbox(CeladonCity_House1_Text_DontTouchGameCornerPoster, MSGBOX_NPC)
+    end
+}
+
+text CeladonCity_House1_Text_SlotsReelInTheDough {
+    "Hehehe!\p"
+    "The slots just reel in the dough,\n"
+    "big-time!$"
+}
+
+text CeladonCity_House1_Text_ShippedMonsAsSlotPrizes {
+    "CHIEF!\p"
+    "We just shipped two thousand\n"
+    "more POKéMON as slot prizes\l"
+    "again today!$"
+}
+
+text CeladonCity_House1_Text_DontTouchGameCornerPoster {
+    "Don't touch the poster at the GAME\n"
+    "CORNER!\p"
+    "There's no secret switch behind it!$"
+}

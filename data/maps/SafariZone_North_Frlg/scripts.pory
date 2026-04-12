@@ -1,0 +1,52 @@
+mapscripts SafariZone_North_Frlg_MapScripts {}
+
+script SafariZone_North_EventScript_RestHouseSign {
+    msgbox(SafariZone_North_Text_RestHouse, MSGBOX_SIGN)
+    end
+}
+
+script SafariZone_North_EventScript_TrainerTips1 {
+    msgbox(SafariZone_North_Text_SecretHouseStillAhead, MSGBOX_SIGN)
+    end
+}
+
+script SafariZone_North_EventScript_AreaSign {
+    msgbox(SafariZone_North_Text_Area2, MSGBOX_SIGN)
+    end
+}
+
+script SafariZone_North_EventScript_TrainerTips2 {
+    msgbox(SafariZone_North_Text_ZigzagThroughTallGrass, MSGBOX_SIGN)
+    end
+}
+
+script SafariZone_North_EventScript_TrainerTips3 {
+    msgbox(SafariZone_North_Text_WinFreeHMFindSecretHouse, MSGBOX_SIGN)
+    end
+}
+
+text SafariZone_North_Text_RestHouse {
+    "REST HOUSE$"
+}
+
+text SafariZone_North_Text_SecretHouseStillAhead {
+    "TRAINER TIPS\p"
+    "The SECRET HOUSE is still ahead.$"
+}
+
+text SafariZone_North_Text_Area2 {
+    "AREA 2$"
+}
+
+text SafariZone_North_Text_ZigzagThroughTallGrass {
+    "TRAINER TIPS\p"
+    "POKéMON hide in tall grass.\p"
+    "Zigzag through grassy areas to\n"
+    "flush them out.$"
+}
+
+text SafariZone_North_Text_WinFreeHMFindSecretHouse {
+    "TRAINER TIPS\p"
+    "Win a free HM for finding the\n"
+    "SECRET HOUSE.$"
+}

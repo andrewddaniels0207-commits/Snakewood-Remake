@@ -1,0 +1,65 @@
+mapscripts VermilionCity_House2_Frlg_MapScripts {}
+
+script VermilionCity_House2_EventScript_Elyssa {
+    lock
+    faceplayer
+    setvar(VAR_0x8008, INGAME_TRADE_FARFETCHD)
+    call(EventScript_GetInGameTradeSpeciesInfo)
+    if (flag(FLAG_DID_CH_DING_TRADE)) goto(VermilionCity_House2_EventScript_AlreadyTraded)
+    msgbox(VermilionCity_House2_Text_DoYouHaveMonWantToTradeForMyMon, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(VermilionCity_House2_EventScript_DeclineTrade)
+    call(EventScript_ChooseMonForInGameTrade)
+    if (var(VAR_0x8004) >= PARTY_SIZE) goto(VermilionCity_House2_EventScript_DeclineTrade)
+    call(EventScript_GetInGameTradeSpecies)
+    if (var(VAR_RESULT) != VAR_0x8009) goto(VermilionCity_House2_EventScript_NotRequestedMon)
+    call(EventScript_DoInGameTrade)
+    msgbox(VermilionCity_House2_Text_ThankYou)
+    setflag(FLAG_DID_CH_DING_TRADE)
+    release
+    end
+}
+
+script VermilionCity_House2_EventScript_DeclineTrade {
+    msgbox(VermilionCity_House2_Text_ThatsTooBad)
+    release
+    end
+}
+
+script VermilionCity_House2_EventScript_NotRequestedMon {
+    bufferspeciesname(STR_VAR_1, VAR_0x8009)
+    msgbox(VermilionCity_House2_Text_ThisIsNoMon)
+    release
+    end
+}
+
+script VermilionCity_House2_EventScript_AlreadyTraded {
+    msgbox(VermilionCity_House2_Text_HowIsMyOldMon)
+    release
+    end
+}
+
+text VermilionCity_House2_Text_DoYouHaveMonWantToTradeForMyMon {
+    "Hi!\n"
+    "Do you have a {STR_VAR_1}?\p"
+    "Want to trade it for my\n"
+    "{STR_VAR_2}?$"
+}
+
+text VermilionCity_House2_Text_ThatsTooBad {
+    "That's too bad.$"
+}
+
+text VermilionCity_House2_Text_ThisIsNoMon {
+    "…This is no {STR_VAR_1}.\p"
+    "If you get one, please trade it\n"
+    "to me!$"
+}
+
+text VermilionCity_House2_Text_ThankYou {
+    "Thank you!$"
+}
+
+text VermilionCity_House2_Text_HowIsMyOldMon {
+    "How is my old {STR_VAR_2}?\p"
+    "My {STR_VAR_1} is doing great!$"
+}

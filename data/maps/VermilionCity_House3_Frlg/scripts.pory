@@ -1,0 +1,51 @@
+mapscripts VermilionCity_House3_Frlg_MapScripts {}
+
+script VermilionCity_House3_EventScript_Boy {
+    msgbox(VermilionCity_House3_Text_PidgeyFlyLetterToSaffron, MSGBOX_NPC)
+    end
+}
+
+script VermilionCity_House3_EventScript_Lass {
+    msgbox(VermilionCity_House3_Text_SendMyPidgeyToUnionRoom, MSGBOX_NPC)
+    end
+}
+
+script VermilionCity_House3_EventScript_Pidgey {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_PIDGEY, CRY_MODE_NORMAL)
+    msgbox(VermilionCity_House3_Text_Pidgey)
+    waitmoncry()
+    release
+    end
+}
+
+script VermilionCity_House3_EventScript_Letter {
+    msgbox(VermilionCity_House3_Text_DearPippiLetter, MSGBOX_SIGN)
+    end
+}
+
+text VermilionCity_House3_Text_PidgeyFlyLetterToSaffron {
+    "I'm getting my PIDGEY to fly a\n"
+    "letter to SAFFRON in the north.$"
+}
+
+text VermilionCity_House3_Text_Pidgey {
+    "PIDGEY: Kurukkoo!$"
+}
+
+text VermilionCity_House3_Text_DearPippiLetter {
+    "Dear PIPPI,\n"
+    "I hope to see you soon.\p"
+    "I heard SAFFRON has problems with\n"
+    "TEAM ROCKET.\p"
+    "VERMILION appears to be safe.$"
+}
+
+text VermilionCity_House3_Text_SendMyPidgeyToUnionRoom {
+    "I want to exchange MAIL with all\n"
+    "sorts of people.\p"
+    "I send my PIDGEY to a UNION ROOM\n"
+    "to exchange MAIL for me.$"
+}

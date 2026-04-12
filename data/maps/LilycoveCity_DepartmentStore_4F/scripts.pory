@@ -1,0 +1,66 @@
+mapscripts LilycoveCity_DepartmentStore_4F_MapScripts {}
+
+script LilycoveCity_DepartmentStore_4F_EventScript_Gentleman {
+    msgbox(LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_DepartmentStore_4F_EventScript_Woman {
+    msgbox(LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_DepartmentStore_4F_EventScript_Youngster {
+    msgbox(LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_DepartmentStore_4F_EventScript_ClerkLeft {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(LilycoveCity_DepartmentStore_4F_Pokemart_AttackTMs)
+    msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script LilycoveCity_DepartmentStore_4F_Pokemart_AttackTMs {
+    pokemartlistend()
+}
+
+script LilycoveCity_DepartmentStore_4F_EventScript_ClerkRight {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs)
+    msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs {
+    pokemartlistend()
+}
+
+text LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM {
+    "Hmm…\p"
+    "An attacking move…\n"
+    "Or a defensive move…\p"
+    "It's no easy matter to decide which TM\n"
+    "moves should be taught to POKéMON…$"
+}
+
+text LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs {
+    "There are so many different kinds of\n"
+    "TM moves.\p"
+    "A catalog I read said there are fifty\n"
+    "different kinds.$"
+}
+
+text LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves {
+    "I'd like to get all the different TMs,\n"
+    "but a POKéMON learns only four moves.$"
+}

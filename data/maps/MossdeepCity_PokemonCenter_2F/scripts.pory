@@ -1,0 +1,32 @@
+mapscripts MossdeepCity_PokemonCenter_2F_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE: CableClub_OnFrame
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: CableClub_OnWarp
+    MAP_SCRIPT_ON_LOAD: CableClub_OnLoad
+    MAP_SCRIPT_ON_TRANSITION: CableClub_OnTransition
+}
+
+script MossdeepCity_PokemonCenter_2F_EventScript_Colosseum {
+    call(CableClub_EventScript_Colosseum)
+    end
+}
+
+script MossdeepCity_PokemonCenter_2F_EventScript_TradeCenter {
+    call(CableClub_EventScript_TradeCenter)
+    end
+}
+
+script MossdeepCity_PokemonCenter_2F_EventScript_RecordCorner {
+    call(CableClub_EventScript_RecordCorner)
+    end
+}
+
+script MossdeepCity_PokemonCenter_2F_EventScript_Woman5 {
+    msgbox(MossdeepCity_PokemonCenter_2F_Text_Woman5, MSGBOX_NPC)
+    end
+}
+
+text MossdeepCity_PokemonCenter_2F_Text_Woman5 {
+    "If I win a whole lot of link battles\n"
+    "and show everyone how good I am,\l"
+    "I might get a fan following!$"
+}

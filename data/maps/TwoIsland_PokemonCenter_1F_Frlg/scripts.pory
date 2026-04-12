@@ -1,0 +1,43 @@
+mapscripts TwoIsland_PokemonCenter_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: TwoIsland_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script TwoIsland_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_TWO_ISLAND)
+    end
+}
+
+script TwoIsland_PokemonCenter_1F_EventScript_Nurse {
+    lock
+    faceplayer
+    call(EventScript_PkmnCenterNurse_Frlg)
+    release
+    end
+}
+
+script TwoIsland_PokemonCenter_1F_EventScript_GBAKid {
+    msgbox(TwoIsland_PokemonCenter_1F_Text_HaveYouVisitedGameCorner, MSGBOX_NPC)
+    end
+}
+
+script TwoIsland_PokemonCenter_1F_EventScript_BugCatcher {
+    msgbox(TwoIsland_PokemonCenter_1F_Text_OldLadyLivesOutOnCape, MSGBOX_NPC)
+    end
+}
+
+text TwoIsland_PokemonCenter_1F_Text_HaveYouVisitedGameCorner {
+    "Have you visited the GAME CORNER\n"
+    "already?\p"
+    "It's no good to go alone.\n"
+    "You have to take a friend along.$"
+}
+
+text TwoIsland_PokemonCenter_1F_Text_OldLadyLivesOutOnCape {
+    "Not many people live on\n"
+    "TWO ISLAND.\p"
+    "There is this old lady who lives\n"
+    "out on the cape.\p"
+    "She's been there since I don't know\n"
+    "when.$"
+}

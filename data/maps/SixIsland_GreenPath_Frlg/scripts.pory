@@ -1,0 +1,37 @@
+mapscripts SixIsland_GreenPath_Frlg_MapScripts {}
+
+script SixIsland_GreenPath_EventScript_RightRouteSign {
+    msgbox(SixIsland_GreenPath_Text_LeftRouteSign, MSGBOX_SIGN)
+    end
+}
+
+script SixIsland_GreenPath_EventScript_LeftRouteSign {
+    msgbox(SixIsland_GreenPath_Text_RightRouteSign, MSGBOX_SIGN)
+    end
+}
+
+text SixIsland_GreenPath_Text_JaclynIntro {
+    "…Huh?\p"
+    "I was envisioning my house, but\n"
+    "this is where I TELEPORT?$"
+}
+
+text SixIsland_GreenPath_Text_JaclynDefeat {
+    "Big boo-boo!$"
+}
+
+text SixIsland_GreenPath_Text_JaclynPostBattle {
+    "I am so scatterbrained!\p"
+    "I need to focus so I can TELEPORT\n"
+    "properly to my house!$"
+}
+
+text SixIsland_GreenPath_Text_LeftRouteSign {
+    "GREEN PATH\n"
+    "PATTERN BUSH AHEAD$"
+}
+
+text SixIsland_GreenPath_Text_RightRouteSign {
+    "GREEN PATH\n"
+    "Think Green, Keep Nature Clean!$"
+}

@@ -1,0 +1,31 @@
+mapscripts FortreeCity_House3_MapScripts {}
+
+script FortreeCity_House3_EventScript_Maniac {
+    msgbox(FortreeCity_House3_Text_MetStevenHadAmazingPokemon, MSGBOX_NPC)
+    end
+}
+
+script FortreeCity_House3_EventScript_SchoolKidM {
+    msgbox(FortreeCity_House3_Text_OhYouHavePokedex, MSGBOX_NPC)
+    end
+}
+
+text FortreeCity_House3_Text_MetStevenHadAmazingPokemon {
+    "While speaking about POKéDEXES,\n"
+    "I remembered something.\p"
+    "I met this TRAINER, STEVEN, when\n"
+    "I was searching for rare stones.\p"
+    "Hoo, boy, he had some amazing POKéMON\n"
+    "with him.\p"
+    "They weren't just rare, they were\n"
+    "trained to terrifying extremes!\p"
+    "He might even be stronger than the\n"
+    "GYM LEADER in this town…$"
+}
+
+text FortreeCity_House3_Text_OhYouHavePokedex {
+    "What's that thing you have there?\p"
+    "… … … … … …\p"
+    "Oh, it's called a POKéDEX?\n"
+    "It's really awesome!$"
+}

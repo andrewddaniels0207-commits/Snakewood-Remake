@@ -1,0 +1,62 @@
+mapscripts FortreeCity_PokemonCenter_1F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: FortreeCity_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script FortreeCity_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_FORTREE_CITY)
+    end
+}
+
+script FortreeCity_PokemonCenter_1F_EventScript_Nurse {
+    setvar(VAR_0x800B, LOCALID_FORTREE_NURSE)
+    call(Common_EventScript_PkmnCenterNurse)
+    waitmessage()
+    waitbuttonpress()
+    release
+    end
+}
+
+script FortreeCity_PokemonCenter_1F_EventScript_Gentleman {
+    msgbox(FortreeCity_PokemonCenter_1F_Text_GoToSafariZone, MSGBOX_NPC)
+    end
+}
+
+script FortreeCity_PokemonCenter_1F_EventScript_Man {
+    msgbox(FortreeCity_PokemonCenter_1F_Text_RecordCornerIsNeat, MSGBOX_NPC)
+    end
+}
+
+script FortreeCity_PokemonCenter_1F_EventScript_Boy {
+    msgbox(FortreeCity_PokemonCenter_1F_Text_DoYouKnowAboutPokenav, MSGBOX_NPC)
+    end
+}
+
+text FortreeCity_PokemonCenter_1F_Text_GoToSafariZone {
+    "Listen, kid, are you working\n"
+    "on a POKéDEX?\p"
+    "Hmm… Go to the SAFARI ZONE.\n"
+    "That's my suggestion.$"
+}
+
+text FortreeCity_PokemonCenter_1F_Text_RecordCornerIsNeat {
+    "Have you done anything at\n"
+    "the RECORD CORNER?\p"
+    "It's pretty neat. It mixes and matches\n"
+    "the records of TRAINERS.\p"
+    "I don't know quite how it works,\n"
+    "but it's cool. It's exciting, even!$"
+}
+
+text FortreeCity_PokemonCenter_1F_Text_DoYouKnowAboutPokenav {
+    "Oh, wow, you have a POKéNAV!\n"
+    "And it's just like mine!\p"
+    "Do you know about POKéNAV's\n"
+    "MATCH CALL system?\p"
+    "Access it, and you can chat with\n"
+    "registered TRAINERS anytime.\p"
+    "It also shows you which TRAINERS\n"
+    "want a rematch with you.\p"
+    "It's really nifty! Those DEVON guys\n"
+    "sure know what they're doing!$"
+}

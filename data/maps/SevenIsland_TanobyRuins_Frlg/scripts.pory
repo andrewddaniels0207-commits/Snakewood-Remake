@@ -1,0 +1,66 @@
+mapscripts SevenIsland_TanobyRuins_Frlg_MapScripts {}
+
+text SevenIsland_TanobyRuins_Text_BrandonIntro {
+    "Do you know anything about this\n"
+    "stone chamber?$"
+}
+
+text SevenIsland_TanobyRuins_Text_BrandonDefeat {
+    "That was uncalled for.\n"
+    "You didn't have to be so rough.$"
+}
+
+text SevenIsland_TanobyRuins_Text_BrandonPostBattle {
+    "The TANOBY RUINS date back at\n"
+    "least 1,500 years.\p"
+    "But it's a baffling mystery as to\n"
+    "why it was built in the first place.$"
+}
+
+text SevenIsland_TanobyRuins_Text_BenjaminIntro {
+    "A mystic POKéMON is said to sleep\n"
+    "inside here.$"
+}
+
+text SevenIsland_TanobyRuins_Text_BenjaminDefeat {
+    "I'm not much good in battle.$"
+}
+
+text SevenIsland_TanobyRuins_Text_BenjaminPostBattle {
+    "I hear there are other ruins like\n"
+    "the one here.\p"
+    "Might they be the resting places\n"
+    "of other mystic POKéMON?$"
+}
+
+text SevenIsland_TanobyRuins_Text_EdnaIntro {
+    "CLIFFORD is teaching me how to\n"
+    "paint.$"
+}
+
+text SevenIsland_TanobyRuins_Text_EdnaDefeat {
+    "We might get in trouble for being\n"
+    "noisy here.$"
+}
+
+text SevenIsland_TanobyRuins_Text_EdnaPostBattle {
+    "I said that I wanted to paint an\n"
+    "old building.\p"
+    "So CLIFFORD brought me here.$"
+}
+
+text SevenIsland_TanobyRuins_Text_CliffordIntro {
+    "Today, in addition to our lesson,\n"
+    "we came to see the chamber.$"
+}
+
+text SevenIsland_TanobyRuins_Text_CliffordDefeat {
+    "My, how extraordinary.$"
+}
+
+text SevenIsland_TanobyRuins_Text_CliffordPostBattle {
+    "Ah, so you are studying POKéMON\n"
+    "on your own…\p"
+    "Yes, you certainly are quite the\n"
+    "extraordinary person, indeed.$"
+}

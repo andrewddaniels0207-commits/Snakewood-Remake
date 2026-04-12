@@ -1,0 +1,20 @@
+mapscripts Route2_Frlg_MapScripts {}
+
+script Route2_EventScript_RouteSign {
+    msgbox(Route2_Text_RouteSign, MSGBOX_SIGN)
+    end
+}
+
+script Route2_EventScript_DiglettsCaveSign {
+    msgbox(Route2_Text_DiglettsCave, MSGBOX_SIGN)
+    end
+}
+
+text Route2_Text_RouteSign {
+    "ROUTE 2\n"
+    "VIRIDIAN CITY - PEWTER CITY$"
+}
+
+text Route2_Text_DiglettsCave {
+    "DIGLETT'S CAVE$"
+}

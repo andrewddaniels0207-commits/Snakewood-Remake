@@ -1,0 +1,145 @@
+mapscripts PokemonLeague_LoreleisRoom_Frlg_MapScripts {
+    MAP_SCRIPT_ON_RESUME: PokemonLeague_LoreleisRoom_OnResume
+    MAP_SCRIPT_ON_LOAD: PokemonLeague_LoreleisRoom_OnLoad
+    MAP_SCRIPT_ON_TRANSITION: PokemonLeague_LoreleisRoom_OnTransition
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: PokemonLeague_LoreleisRoom_OnWarp
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_MAP_SCENE_POKEMON_LEAGUE, 0: PokemonLeague_LoreleisRoom_EventScript_EnterRoom
+    ]
+}
+
+script PokemonLeague_LoreleisRoom_OnResume {
+    setvar(VAR_0x8004, 0)
+    call(PokemonLeague_EventScript_DoLightingEffect)
+    end
+}
+
+script PokemonLeague_LoreleisRoom_OnLoad {
+    if (flag(FLAG_DEFEATED_LORELEI)) call(PokemonLeague_LoreleisRoom_EventScript_SetDoorOpen)
+    if (var(VAR_MAP_SCENE_POKEMON_LEAGUE) == 1) call(PokemonLeague_LoreleisRoom_EventScript_CloseEntry)
+    end
+}
+
+script PokemonLeague_LoreleisRoom_EventScript_CloseEntry {
+    call(PokemonLeague_EventScript_CloseEntry)
+    return
+}
+
+script PokemonLeague_LoreleisRoom_EventScript_SetDoorOpen {
+    call(PokemonLeague_EventScript_SetDoorOpen)
+    return
+}
+
+script PokemonLeague_LoreleisRoom_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_POKEMON_LEAGUE_LORELEIS_ROOM)
+    end
+}
+
+raw `
+PokemonLeague_LoreleisRoom_OnWarp:
+	map_script_2 VAR_TEMP_1, 0, PokemonLeague_LoreleisRoom_EventScript_TurnPlayerNorth
+	.2byte 0
+
+`
+
+script PokemonLeague_LoreleisRoom_EventScript_TurnPlayerNorth {
+    turnobject(LOCALID_PLAYER, DIR_NORTH)
+    end
+}
+
+script PokemonLeague_LoreleisRoom_EventScript_EnterRoom {
+    lockall
+    call(PokemonLeague_EventScript_EnterRoom)
+    setvar(VAR_MAP_SCENE_POKEMON_LEAGUE, 1)
+    releaseall
+    end
+}
+
+script PokemonLeague_LoreleisRoom_EventScript_Lorelei {
+    lock
+    faceplayer
+    famechecker(FAMECHECKER_LORELEI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
+    if (flag(FLAG_DEFEATED_LORELEI)) goto(PokemonLeague_LoreleisRoom_EventScript_PostBattle)
+    famechecker(FAMECHECKER_LORELEI, 0)
+    famechecker(FAMECHECKER_LORELEI, 1)
+    if (!flag(FLAG_IS_CHAMPION)) call(PokemonLeague_LoreleisRoom_EventScript_Intro)
+    if (flag(FLAG_IS_CHAMPION)) call(PokemonLeague_LoreleisRoom_EventScript_RematchIntro)
+    setflag(FLAG_TEMP_3)
+    setflag(FLAG_TEMP_5)
+    if (!flag(FLAG_IS_CHAMPION)) call(PokemonLeague_LoreleisRoom_EventScript_Battle)
+    if (flag(FLAG_IS_CHAMPION)) call(PokemonLeague_LoreleisRoom_EventScript_Rematch)
+    clearflag(FLAG_TEMP_5)
+    goto(PokemonLeague_LoreleisRoom_EventScript_DefeatedLorelei)
+    end
+}
+
+script PokemonLeague_LoreleisRoom_EventScript_Intro {
+    msgbox(PokemonLeague_LoreleisRoom_Text_Intro)
+    return
+}
+
+script PokemonLeague_LoreleisRoom_EventScript_RematchIntro {
+    msgbox(PokemonLeague_LoreleisRoom_Text_RematchIntro)
+    return
+}
+
+script PokemonLeague_LoreleisRoom_EventScript_Battle {
+    trainerbattle_no_intro(TRAINER_ELITE_FOUR_LORELEI, PokemonLeague_LoreleisRoom_Text_Defeat)
+    return
+}
+
+script PokemonLeague_LoreleisRoom_EventScript_Rematch {
+    trainerbattle_no_intro(TRAINER_ELITE_FOUR_LORELEI_2, PokemonLeague_LoreleisRoom_Text_Defeat)
+    return
+}
+
+script PokemonLeague_LoreleisRoom_EventScript_PostBattle {
+    msgbox(PokemonLeague_LoreleisRoom_Text_PostBattle)
+    release
+    end
+}
+
+script PokemonLeague_LoreleisRoom_EventScript_DefeatedLorelei {
+    setflag(FLAG_DEFEATED_LORELEI)
+    call(PokemonLeague_EventScript_OpenDoor)
+    msgbox(PokemonLeague_LoreleisRoom_Text_PostBattle)
+    release
+    end
+}
+
+text PokemonLeague_LoreleisRoom_Text_Intro {
+    "Welcome to the POKéMON LEAGUE.\p"
+    "I am LORELEI of the ELITE FOUR.\p"
+    "No one can best me when it comes\n"
+    "to icy POKéMON.\p"
+    "Freezing moves are powerful.\p"
+    "Your POKéMON will be at my mercy\n"
+    "when they are frozen solid.\p"
+    "Hahaha!\n"
+    "Are you ready?{PLAY_BGM}{MUS_RG_ENCOUNTER_GYM_LEADER}$"
+}
+
+text PokemonLeague_LoreleisRoom_Text_RematchIntro {
+    "Welcome to the POKéMON LEAGUE.\p"
+    "I, LORELEI of the ELITE FOUR,\n"
+    "have returned!\p"
+    "You know how it goes.\n"
+    "No one can best me when it comes\l"
+    "to icy POKéMON.\p"
+    "Freezing moves are powerful.\p"
+    "Your POKéMON will be at my mercy\n"
+    "when they are frozen solid.\p"
+    "Hahaha!\n"
+    "Are you ready?{PLAY_BGM}{MUS_RG_ENCOUNTER_GYM_LEADER}$"
+}
+
+text PokemonLeague_LoreleisRoom_Text_Defeat {
+    "…Things shouldn't be this way!$"
+}
+
+text PokemonLeague_LoreleisRoom_Text_PostBattle {
+    "You're better than I thought.\n"
+    "Go on ahead.\p"
+    "You only got a taste of the\n"
+    "POKéMON LEAGUE's power.$"
+}

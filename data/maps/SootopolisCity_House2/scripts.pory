@@ -1,0 +1,38 @@
+mapscripts SootopolisCity_House2_MapScripts {}
+
+script SootopolisCity_House2_EventScript_ExpertF {
+    lock
+    faceplayer
+    msgbox(SootopolisCity_House2_Text_DidYouKnowAboutMtPyreOrbs, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) call(SootopolisCity_House2_EventScript_KnowAboutOrbs)
+    if (var(VAR_RESULT) == NO) call(SootopolisCity_House2_EventScript_DontKnowAboutOrbs)
+    release
+    end
+}
+
+script SootopolisCity_House2_EventScript_KnowAboutOrbs {
+    msgbox(SootopolisCity_House2_Text_YesTwoOrbsSideBySide, MSGBOX_DEFAULT)
+    return
+}
+
+script SootopolisCity_House2_EventScript_DontKnowAboutOrbs {
+    msgbox(SootopolisCity_House2_Text_OughtToVisitAndSee, MSGBOX_DEFAULT)
+    return
+}
+
+text SootopolisCity_House2_Text_DidYouKnowAboutMtPyreOrbs {
+    "MT. PYRE…\p"
+    "At its peak are two orbs placed side\n"
+    "by side. Did you know?$"
+}
+
+text SootopolisCity_House2_Text_YesTwoOrbsSideBySide {
+    "Yes, two orbs side by side…\p"
+    "The sight of them together…\n"
+    "It is somehow soothing…$"
+}
+
+text SootopolisCity_House2_Text_OughtToVisitAndSee {
+    "Is that so?\n"
+    "Perhaps you ought to visit and see…$"
+}

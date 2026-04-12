@@ -1,0 +1,112 @@
+mapscripts FallarborTown_MoveRelearnersHouse_MapScripts {}
+
+script FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner {
+    lockall
+    applymovement(LOCALID_MOVE_RELEARNER, Common_Movement_FacePlayer)
+    waitmovement(0)
+    if (flag(FLAG_TEMP_1)) goto(FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove)
+    msgbox(FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor, MSGBOX_DEFAULT)
+    setflag(FLAG_TEMP_1)
+    goto(FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove)
+    end
+}
+
+script FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove {
+    checkitem(ITEM_HEART_SCALE)
+    if (var(VAR_RESULT) == FALSE) goto(FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale)
+    msgbox(FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove, MSGBOX_YESNO)
+    switch(VAR_RESULT)
+    case(NO, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale)
+    goto(FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon)
+    end
+}
+
+script FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon {
+    msgbox(FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon, MSGBOX_DEFAULT)
+    setmoverelearnerstate(MOVE_RELEARNER_LEVEL_UP_MOVES)
+    chooseboxmon(SELECT_PC_MON_MOVE_RELEARNER)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) goto(FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale)
+    special(IsSelectedMonEgg)
+    if (var(VAR_RESULT) == TRUE) goto(FallarborTown_MoveRelearnersHouse_EventScript_CantTeachEgg)
+    special(HasMovesToRelearn)
+    if (var(VAR_RESULT) == FALSE) goto(FallarborTown_MoveRelearnersHouse_EventScript_NoMoveToTeachMon)
+    goto(FallarborTown_MoveRelearnersHouse_EventScript_ChooseMove)
+    end
+}
+
+script FallarborTown_MoveRelearnersHouse_EventScript_ChooseMove {
+    msgbox(FallarborTown_MoveRelearnersHouse_Text_TeachWhichMove, MSGBOX_DEFAULT)
+    special(TeachMoveRelearnerMove)
+    waitstate
+    if (var(VAR_0x8004) == 0) goto(FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon)
+    msgbox(FallarborTown_MoveRelearnersHouse_Text_HandedOverHeartScale, MSGBOX_DEFAULT)
+    removeitem(ITEM_HEART_SCALE)
+    goto(FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale)
+    end
+}
+
+script FallarborTown_MoveRelearnersHouse_EventScript_NoMoveToTeachMon {
+    msgbox(FallarborTown_MoveRelearnersHouse_Text_DontHaveMoveToTeachPokemon, MSGBOX_DEFAULT)
+    goto(FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon)
+    end
+}
+
+script FallarborTown_MoveRelearnersHouse_EventScript_CantTeachEgg {
+    msgbox(FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg, MSGBOX_DEFAULT)
+    goto(FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon)
+    end
+}
+
+script FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale {
+    msgbox(FallarborTown_MoveRelearnersHouse_Text_ComeBackWithHeartScale, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+text FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor {
+    "I'm the MOVE TUTOR.\p"
+    "I know all the moves that POKéMON\n"
+    "learn--every one of them--and I can\l"
+    "teach POKéMON those moves.\p"
+    "I can teach a move to a POKéMON\n"
+    "of yours if you'd like.\p"
+    "I'll do it for a HEART SCALE.\n"
+    "I'm collecting those now.$"
+}
+
+text FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove {
+    "Oh! That's it! That's an honest to\n"
+    "goodness HEART SCALE!\p"
+    "Let me guess, you want me to teach\n"
+    "a move?$"
+}
+
+text FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon {
+    "Which POKéMON needs tutoring?$"
+}
+
+text FallarborTown_MoveRelearnersHouse_Text_TeachWhichMove {
+    "Which move should I teach?$"
+}
+
+text FallarborTown_MoveRelearnersHouse_Text_DontHaveMoveToTeachPokemon {
+    "Sorry…\p"
+    "It doesn't appear as if I have any move\n"
+    "I can teach that POKéMON.$"
+}
+
+text FallarborTown_MoveRelearnersHouse_Text_HandedOverHeartScale {
+    "{PLAYER} handed over one HEART SCALE\n"
+    "in exchange.$"
+}
+
+text FallarborTown_MoveRelearnersHouse_Text_ComeBackWithHeartScale {
+    "If your POKéMON need to learn a move,\n"
+    "come back with a HEART SCALE.$"
+}
+
+text FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg {
+    "Hunh? There isn't a single move that\n"
+    "I can teach an EGG.$"
+}

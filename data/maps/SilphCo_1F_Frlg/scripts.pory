@@ -1,0 +1,29 @@
+mapscripts SilphCo_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: SilphCo_1F_OnTransition
+}
+
+script SilphCo_1F_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_SILPH_CO_1F)
+    end
+}
+
+script SilphCo_1F_EventScript_Receptionist {
+    msgbox(SilphCo_1F_Text_WelcomePresidentInBoardroom, MSGBOX_NPC)
+    end
+}
+
+script SilphCo_1F_EventScript_FloorSign {
+    msgbox(SilphCo_1F_Text_FloorSign, MSGBOX_SIGN)
+    end
+}
+
+text SilphCo_1F_Text_WelcomePresidentInBoardroom {
+    "Welcome.\p"
+    "The PRESIDENT is in the boardroom\n"
+    "on 11F.$"
+}
+
+text SilphCo_1F_Text_FloorSign {
+    "SILPH CO. HEAD OFFICE\n"
+    "1F$"
+}

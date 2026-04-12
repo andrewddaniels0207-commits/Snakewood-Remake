@@ -1,0 +1,450 @@
+mapscripts LittlerootTown_MaysHouse_1F_MapScripts {
+    MAP_SCRIPT_ON_LOAD: LittlerootTown_MaysHouse_1F_OnLoad
+    MAP_SCRIPT_ON_TRANSITION: LittlerootTown_MaysHouse_1F_OnTransition
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_LITTLEROOT_INTRO_STATE, 3: LittlerootTown_MaysHouse_1F_EventScript_EnterHouseMovingIn
+        VAR_LITTLEROOT_INTRO_STATE, 5: LittlerootTown_MaysHouse_1F_EventScript_GoUpstairsToSetClock
+        VAR_LITTLEROOT_INTRO_STATE, 6: LittlerootTown_MaysHouse_1F_EventScript_PetalburgGymReport
+        VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 1: LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor
+        VAR_LITTLEROOT_HOUSES_STATE_MAY, 3: PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV
+    ]
+}
+
+script LittlerootTown_MaysHouse_1F_OnLoad {
+    if (var(VAR_LITTLEROOT_INTRO_STATE) < 6) call(LittlerootTown_MaysHouse_1F_EventScript_SetMovingBoxes)
+    if (flag(FLAG_RECEIVED_RUNNING_SHOES)) call(LittlerootTown_MaysHouse_1F_EventScript_CheckShowShoesManual)
+    end
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_SetMovingBoxes {
+    setmetatile(5, 4, METATILE_BrendansMaysHouse_MovingBox_Open, TRUE)
+    setmetatile(5, 2, METATILE_BrendansMaysHouse_MovingBox_Closed, TRUE)
+    return
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_CheckShowShoesManual {
+    checkplayergender()
+    if (var(VAR_RESULT) == FEMALE) goto(LittlerootTown_MaysHouse_1F_EventScript_ShowRunningShoesManual)
+    return
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_ShowRunningShoesManual {
+    setmetatile(6, 7, METATILE_BrendansMaysHouse_BookOnTable, TRUE)
+    return
+}
+
+script LittlerootTown_MaysHouse_1F_OnTransition {
+    if (var(VAR_LITTLEROOT_INTRO_STATE) == 3) call(LittlerootTown_MaysHouse_1F_EventScript_MoveMomToDoor)
+    if (var(VAR_LITTLEROOT_INTRO_STATE) == 5) call(LittlerootTown_MaysHouse_1F_EventScript_MoveMomToStairs)
+    if (var(VAR_LITTLEROOT_INTRO_STATE) == 6) call(LittlerootTown_MaysHouse_1F_EventScript_MoveMomToTV)
+    end
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_MoveMomToStairs {
+    setobjectxyperm(LOCALID_PLAYERS_HOUSE_1F_MOM, 2, 4)
+    setobjectmovementtype(LOCALID_PLAYERS_HOUSE_1F_MOM, MOVEMENT_TYPE_FACE_UP)
+    return
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_MoveMomToTV {
+    setobjectxyperm(LOCALID_PLAYERS_HOUSE_1F_MOM, 6, 5)
+    setobjectmovementtype(LOCALID_PLAYERS_HOUSE_1F_MOM, MOVEMENT_TYPE_FACE_UP)
+    return
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_MoveMomToDoor {
+    setobjectxyperm(LOCALID_PLAYERS_HOUSE_1F_MOM, 1, 8)
+    setobjectmovementtype(LOCALID_PLAYERS_HOUSE_1F_MOM, MOVEMENT_TYPE_FACE_UP)
+    return
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_GoUpstairsToSetClock {
+    lockall
+    msgbox(PlayersHouse_1F_Text_GoSetTheClock, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs)
+    applymovement(LOCALID_PLAYERS_HOUSE_1F_MOM, LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs)
+    waitmovement(0)
+    warp(MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F, 1, 1)
+    waitstate
+    releaseall
+    end
+}
+
+movement LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs {
+    walk_up
+    step_end
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_EnterHouseMovingIn {
+    lockall
+    setvar(VAR_0x8004, LOCALID_PLAYERS_HOUSE_1F_MOM)
+    setvar(VAR_0x8005, FEMALE)
+    goto(PlayersHouse_1F_EventScript_EnterHouseMovingIn)
+    end
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_PetalburgGymReport {
+    lockall
+    setvar(VAR_0x8004, FEMALE)
+    setvar(VAR_0x8005, LOCALID_PLAYERS_HOUSE_1F_MOM)
+    goto(PlayersHouse_1F_EventScript_PetalburgGymReportFemale)
+    end
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor {
+    lockall
+    playse(SE_PIN)
+    applymovement(LOCALID_RIVALS_HOUSE_1F_MOM, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_RIVALS_HOUSE_1F_MOM, Common_Movement_Delay48)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    applymovement(LOCALID_RIVALS_HOUSE_1F_MOM, LittlerootTown_MaysHouse_1F_Movement_RivalMomApproach)
+    waitmovement(0)
+    special(GetRivalSonDaughterString)
+    msgbox(RivalsHouse_1F_Text_OhYoureTheNewNeighbor, MSGBOX_DEFAULT)
+    setflag(FLAG_MET_RIVAL_MOM)
+    setvar(VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 2)
+    releaseall
+    end
+}
+
+movement LittlerootTown_MaysHouse_1F_Movement_RivalMomApproach {
+    walk_down
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    step_end
+}
+
+script RivalsHouse_1F_EventScript_RivalMom {
+    lock
+    faceplayer
+    if (flag(FLAG_DEFEATED_RIVAL_ROUTE103)) goto(RivalsHouse_1F_EventScript_GoHomeEverySoOften)
+    if (flag(FLAG_SYS_POKEMON_GET)) goto(RivalsHouse_1F_EventScript_RivalIsOnRoute103)
+    if (var(VAR_LITTLEROOT_RIVAL_STATE) == 3) goto(RivalsHouse_1F_EventScript_RivalTooBusy)
+    special(GetRivalSonDaughterString)
+    msgbox(RivalsHouse_1F_Text_LikeChildLikeFather, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RivalsHouse_1F_EventScript_RivalTooBusy {
+    msgbox(RivalsHouse_1F_Text_TooBusyToNoticeVisit, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RivalsHouse_1F_EventScript_RivalIsOnRoute103 {
+    msgbox(RivalsHouse_1F_Text_WentOutToRoute103, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RivalsHouse_1F_EventScript_GoHomeEverySoOften {
+    msgbox(RivalsHouse_1F_Text_ShouldGoHomeEverySoOften, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RivalsHouse_1F_EventScript_RivalSibling {
+    lock
+    faceplayer
+    special(GetPlayerBigGuyGirlString)
+    msgbox(RivalsHouse_1F_Text_DoYouHavePokemon, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_GoSeeRoom {
+    lockall
+    setvar(VAR_0x8004, LOCALID_PLAYERS_HOUSE_1F_MOM)
+    setvar(VAR_0x8005, FEMALE)
+    applymovement(VAR_0x8004, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    goto(PlayersHouse_1F_EventScript_MomGoSeeRoom)
+    end
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_MeetRival0 {
+    lockall
+    setvar(VAR_0x8008, 0)
+    goto(LittlerootTown_MaysHouse_1F_EventScript_MeetRival)
+    end
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_MeetRival1 {
+    lockall
+    setvar(VAR_0x8008, 1)
+    goto(LittlerootTown_MaysHouse_1F_EventScript_MeetRival)
+    end
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_MeetRival2 {
+    lockall
+    setvar(VAR_0x8008, 2)
+    goto(LittlerootTown_MaysHouse_1F_EventScript_MeetRival)
+    end
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_MeetRival {
+    playse(SE_EXIT)
+    delay(10)
+    addobject(LOCALID_RIVALS_HOUSE_1F_RIVAL)
+    delay(30)
+    playse(SE_PIN)
+    applymovement(LOCALID_RIVALS_HOUSE_1F_RIVAL, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_RIVALS_HOUSE_1F_RIVAL, Common_Movement_Delay48)
+    waitmovement(0)
+    if (var(VAR_0x8008) != 1) call(LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay)
+    playbgm(MUS_ENCOUNTER_MAY, TRUE)
+    if (var(VAR_0x8008) == 0) call(LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0)
+    if (var(VAR_0x8008) == 1) call(LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1)
+    if (var(VAR_0x8008) == 2) call(LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2)
+    msgbox(RivalsHouse_1F_Text_MayWhoAreYou, MSGBOX_DEFAULT)
+    closemessage
+    if (var(VAR_0x8008) == 0) call(LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs0)
+    if (var(VAR_0x8008) == 1) call(LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs1)
+    if (var(VAR_0x8008) == 2) call(LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2)
+    playse(SE_EXIT)
+    removeobject(LOCALID_RIVALS_HOUSE_1F_RIVAL)
+    setflag(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MAY)
+    setflag(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL)
+    clearflag(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM)
+    delay(30)
+    setvar(VAR_LITTLEROOT_RIVAL_STATE, 3)
+    setvar(VAR_LITTLEROOT_TOWN_STATE, 1)
+    savebgm(MUS_DUMMY)
+    fadedefaultbgm()
+    releaseall
+    end
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    return
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0 {
+    applymovement(LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer0)
+    waitmovement(0)
+    return
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1 {
+    applymovement(LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer1)
+    waitmovement(0)
+    return
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2 {
+    applymovement(LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer2)
+    waitmovement(0)
+    return
+}
+
+movement LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer0 {
+    walk_in_place_faster_left
+    walk_left
+    walk_in_place_faster_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    step_end
+}
+
+movement LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer1 {
+    walk_up
+    walk_up
+    walk_up
+    step_end
+}
+
+movement LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer2 {
+    walk_in_place_faster_right
+    walk_right
+    walk_in_place_faster_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    step_end
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs0 {
+    applymovement(LOCALID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_PlayerWatchMayExit0)
+    applymovement(LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs0)
+    waitmovement(0)
+    return
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs1 {
+    applymovement(LOCALID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_PlayerWatchMayExit1)
+    applymovement(LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs1)
+    waitmovement(0)
+    return
+}
+
+script LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2 {
+    applymovement(LOCALID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_PlayerWatchMayExit2)
+    applymovement(LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2)
+    waitmovement(0)
+    return
+}
+
+movement LittlerootTown_MaysHouse_1F_Movement_PlayerWatchMayExit0 {
+    delay_16
+    delay_8
+    walk_in_place_faster_right
+    step_end
+}
+
+movement LittlerootTown_MaysHouse_1F_Movement_PlayerWatchMayExit1 {
+    delay_16
+    delay_8
+    walk_in_place_faster_right
+    delay_16
+    delay_16
+    walk_in_place_faster_up
+    step_end
+}
+
+movement LittlerootTown_MaysHouse_1F_Movement_PlayerWatchMayExit2 {
+    delay_16
+    delay_8
+    walk_in_place_faster_left
+    step_end
+}
+
+movement LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs0 {
+    walk_in_place_faster_right
+    walk_right
+    walk_in_place_faster_up
+    walk_up
+    walk_up
+    step_end
+}
+
+movement LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs1 {
+    walk_in_place_faster_right
+    walk_right
+    walk_in_place_faster_up
+    walk_up
+    walk_up
+    walk_in_place_faster_left
+    walk_left
+    walk_in_place_faster_up
+    walk_up
+    step_end
+}
+
+movement LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2 {
+    walk_in_place_faster_left
+    walk_left
+    walk_in_place_faster_up
+    walk_up
+    walk_up
+    step_end
+}
+
+text RivalsHouse_1F_Text_OhYoureTheNewNeighbor {
+    "Oh, hello. And you are?\p"
+    "… … … … … … … … …\n"
+    "… … … … … … … … …\p"
+    "Oh, you're {PLAYER}{KUN}, our new next-door\n"
+    "neighbor! Hi!\p"
+    "We have a {STR_VAR_1} about the same\n"
+    "age as you.\p"
+    "Our {STR_VAR_1} was excited about making\n"
+    "a new friend.\p"
+    "Our {STR_VAR_1} is upstairs, I think.$"
+}
+
+text RivalsHouse_1F_Text_LikeChildLikeFather {
+    "Like child, like father.\p"
+    "My husband is as wild about POKéMON\n"
+    "as our child.\p"
+    "If he's not at his LAB, he's likely\n"
+    "scrabbling about in grassy places.$"
+}
+
+text RivalsHouse_1F_Text_TooBusyToNoticeVisit {
+    "That {RIVAL}!\p"
+    "I guess our child is too busy with\n"
+    "POKéMON to notice that you came\l"
+    "to visit, {PLAYER}{KUN}.$"
+}
+
+text RivalsHouse_1F_Text_WentOutToRoute103 {
+    "Oh, {RIVAL} went out to ROUTE 103\n"
+    "just a little while ago.\p"
+    "Like father, like child.\n"
+    "{RIVAL} can't stay quietly at home.$"
+}
+
+text RivalsHouse_1F_Text_ShouldGoHomeEverySoOften {
+    "I think it's wonderful for people to\n"
+    "travel with POKéMON.\p"
+    "But you should go home every so often\n"
+    "to let your mother know you're okay.\p"
+    "She might not say it, but I'm sure she\n"
+    "worries about you, {PLAYER}{KUN}.$"
+}
+
+text RivalsHouse_1F_Text_MayWhoAreYou {
+    "Huh?\n"
+    "Who… Who are you?\p"
+    "… … … … … … … …\n"
+    "… … … … … … … …\p"
+    "Oh, you're {PLAYER}{KUN}.\n"
+    "So your move was today.\p"
+    "Um… I'm MAY.\n"
+    "Glad to meet you!\p"
+    "I…\n"
+    "I have this dream of becoming friends\l"
+    "with POKéMON all over the world.\p"
+    "I… I heard about you, {PLAYER}{KUN}, from\n"
+    "my dad, PROF. BIRCH.\p"
+    "I was hoping that you would be nice,\n"
+    "{PLAYER}{KUN}, and that we could be friends.\p"
+    "Oh, this is silly, isn't it?\n"
+    "I… I've just met you, {PLAYER}{KUN}.\p"
+    "Eheheh…\p"
+    "Oh, no! I forgot!\p"
+    "I was supposed to go help Dad catch\n"
+    "some wild POKéMON!\p"
+    "{PLAYER}{KUN}, I'll catch you later!$"
+}
+
+text RivalsHouse_1F_Text_BrendanWhoAreYou {
+    "Hey!\n"
+    "You…\p"
+    "Who are you?\p"
+    "Oh, you're {PLAYER}, aren't you?\n"
+    "Moved in next door, right?\p"
+    "I didn't know that you're a girl.\p"
+    "Dad, PROF. BIRCH, said that our new\n"
+    "next-door neighbor is a GYM LEADER's\l"
+    "kid, so I assumed you'd be a guy.\p"
+    "My name's BRENDAN.\n"
+    "So, hi, neighbor!\p"
+    "Huh? Hey, {PLAYER}, don't you have\n"
+    "a POKéMON?\p"
+    "Do you want me to go catch you one?\p"
+    "Aw, darn, I forgot…\p"
+    "I'm supposed to go help my dad catch\n"
+    "some wild POKéMON.\p"
+    "Some other time, okay?$"
+}
+
+text RivalsHouse_1F_Text_DoYouHavePokemon {
+    "Hi, neighbor!\p"
+    "Do you already have your\n"
+    "own POKéMON?$"
+}

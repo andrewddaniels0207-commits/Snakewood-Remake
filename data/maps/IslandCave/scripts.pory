@@ -1,0 +1,133 @@
+mapscripts IslandCave_MapScripts {
+    MAP_SCRIPT_ON_RESUME: IslandCave_OnResume
+    MAP_SCRIPT_ON_LOAD: IslandCave_OnLoad
+    MAP_SCRIPT_ON_TRANSITION: IslandCave_OnTransition
+}
+
+script IslandCave_OnResume {
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(IslandCave_EventScript_TryRemoveRegice)
+    end
+}
+
+script IslandCave_EventScript_TryRemoveRegice {
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    removeobject(VAR_LAST_TALKED)
+    return
+}
+
+script IslandCave_OnLoad {
+    if (!flag(FLAG_SYS_BRAILLE_REGICE_COMPLETED)) call(IslandCave_EventScript_HideRegiEntrance)
+    end
+}
+
+script IslandCave_EventScript_HideRegiEntrance {
+    setmetatile(7, 19, METATILE_Cave_EntranceCover, TRUE)
+    setmetatile(8, 19, METATILE_Cave_EntranceCover, TRUE)
+    setmetatile(9, 19, METATILE_Cave_EntranceCover, TRUE)
+    setmetatile(7, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE)
+    setmetatile(8, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE)
+    setmetatile(9, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE)
+    return
+}
+
+script IslandCave_OnTransition {
+    setflag(FLAG_LANDMARK_ISLAND_CAVE)
+    call(IslandCave_EventScript_ClearSteps)
+    if (!flag(FLAG_DEFEATED_REGICE)) call(IslandCave_EventScript_ShowRegice)
+    end
+}
+
+script IslandCave_EventScript_ShowRegice {
+    clearflag(FLAG_HIDE_REGICE)
+    return
+}
+
+script IslandCave_EventScript_OpenRegiEntrance {
+    setmetatile(7, 19, METATILE_Cave_SealedChamberEntrance_TopLeft, TRUE)
+    setmetatile(8, 19, METATILE_Cave_SealedChamberEntrance_TopMid, TRUE)
+    setmetatile(9, 19, METATILE_Cave_SealedChamberEntrance_TopRight, TRUE)
+    setmetatile(7, 20, METATILE_Cave_SealedChamberEntrance_BottomLeft, TRUE)
+    setmetatile(8, 20, METATILE_Cave_SealedChamberEntrance_BottomMid, FALSE)
+    setmetatile(9, 20, METATILE_Cave_SealedChamberEntrance_BottomRight, TRUE)
+    special(DrawWholeMapView)
+    playse(SE_BANG)
+    setflag(FLAG_SYS_BRAILLE_REGICE_COMPLETED)
+    end
+}
+
+script IslandCave_EventScript_CaveEntranceMiddle {
+    lockall
+    if (flag(FLAG_TEMP_REGICE_PUZZLE_FAILED)) call(IslandCave_EventScript_ClearSteps)
+    if (flag(FLAG_SYS_BRAILLE_REGICE_COMPLETED)) goto(IslandCave_EventScript_BigHoleInWall)
+    braillemessage(IslandCave_Braille_RunLapAroundWall)
+    setflag(FLAG_TEMP_REGICE_PUZZLE_STARTED)
+    special(ShouldDoBrailleRegicePuzzle)
+    goto(IslandCave_EventScript_CloseBrailleMsg)
+    end
+}
+
+script IslandCave_EventScript_BigHoleInWall {
+    msgbox(gText_BigHoleInTheWall, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script IslandCave_EventScript_CaveEntranceSide {
+    lockall
+    if (flag(FLAG_TEMP_REGICE_PUZZLE_FAILED)) call(IslandCave_EventScript_ClearSteps)
+    braillemessage(IslandCave_Braille_RunLapAroundWall)
+    if (flag(FLAG_SYS_BRAILLE_REGICE_COMPLETED)) goto(IslandCave_EventScript_CloseBrailleMsg)
+    setflag(FLAG_TEMP_REGICE_PUZZLE_STARTED)
+    special(ShouldDoBrailleRegicePuzzle)
+    goto(IslandCave_EventScript_CloseBrailleMsg)
+    end
+}
+
+script IslandCave_EventScript_CloseBrailleMsg {
+    waitbuttonpress()
+    closebraillemessage()
+    releaseall
+    end
+}
+
+script IslandCave_EventScript_ClearSteps {
+    setvar(VAR_REGICE_STEPS_1, 0)
+    setvar(VAR_REGICE_STEPS_2, 0)
+    setvar(VAR_REGICE_STEPS_3, 0)
+    clearflag(FLAG_TEMP_REGICE_PUZZLE_FAILED)
+    return
+}
+
+script IslandCave_EventScript_Regice {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_REGICE, CRY_MODE_ENCOUNTER)
+    delay(40)
+    waitmoncry()
+    setwildbattle(SPECIES_REGICE, 40)
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    special(StartRegiBattle)
+    waitstate
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(IslandCave_EventScript_DefeatedRegice)
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(IslandCave_EventScript_RanFromRegice)
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(IslandCave_EventScript_RanFromRegice)
+    setflag(FLAG_DEFEATED_REGICE)
+    release
+    end
+}
+
+script IslandCave_EventScript_DefeatedRegice {
+    setflag(FLAG_DEFEATED_REGICE)
+    goto(Common_EventScript_RemoveStaticPokemon)
+    end
+}
+
+script IslandCave_EventScript_RanFromRegice {
+    setvar(VAR_0x8004, SPECIES_REGICE)
+    goto(Common_EventScript_LegendaryFlewAway)
+    end
+}

@@ -1,0 +1,105 @@
+mapscripts PalletTown_PlayersHouse_1F_Frlg_MapScripts {}
+
+script PalletTown_PlayersHouse_1F_EventScript_Mom {
+    lock
+    faceplayer
+    if (flag(FLAG_BEAT_RIVAL_IN_OAKS_LAB)) goto(PalletTown_PlayersHouse_1F_EventScript_MomHeal)
+    checkplayergender()
+    if (var(VAR_RESULT) == MALE) call(PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale)
+    if (var(VAR_RESULT) == FEMALE) call(PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouFemale)
+    closemessage
+    applymovement(LOCALID_PLAYERS_HOUSE_1F_MOM, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale {
+    msgbox(PalletTown_PlayersHouse_1F_Text_AllBoysLeaveOakLookingForYou)
+    return
+}
+
+script PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouFemale {
+    msgbox(PalletTown_PlayersHouse_1F_Text_AllGirlsLeaveOakLookingForYou)
+    return
+}
+
+script PalletTown_PlayersHouse_1F_EventScript_MomHeal {
+    msgbox(PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest)
+    closemessage
+    call(Common_EventScript_OutOfCenterPartyHeal)
+    msgbox(PalletTown_PlayersHouse_1F_Text_LookingGreatTakeCare)
+    release
+    end
+}
+
+script PalletTown_PlayersHouse_1F_EventScript_TV {
+    lockall
+    if (var(VAR_FACING) == DIR_NORTH) goto(PalletTown_PlayersHouse_1F_EventScript_TVScreen)
+    msgbox(PalletTown_PlayersHouse_1F_Text_OopsWrongSide)
+    releaseall
+    end
+}
+
+script PalletTown_PlayersHouse_1F_EventScript_TVScreen {
+    checkplayergender()
+    if (var(VAR_RESULT) == MALE) call(PalletTown_PlayersHouse_1F_EventScript_TVScreenMale)
+    if (var(VAR_RESULT) == FEMALE) call(PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale)
+    releaseall
+    end
+}
+
+script PalletTown_PlayersHouse_1F_EventScript_TVScreenMale {
+    msgbox(PalletTown_PlayersHouse_1F_Text_MovieOnTVFourBoysOnRailroad)
+    return
+}
+
+script PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale {
+    msgbox(PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad)
+    return
+}
+
+text PalletTown_PlayersHouse_1F_Text_AllBoysLeaveOakLookingForYou {
+    "MOM: …Right.\n"
+    "All boys leave home someday.\l"
+    "It said so on TV.\p"
+    "Oh, yes. PROF. OAK, next door, was\n"
+    "looking for you.$"
+}
+
+text PalletTown_PlayersHouse_1F_Text_AllGirlsLeaveOakLookingForYou {
+    "MOM: …Right.\n"
+    "All girls dream of traveling.\l"
+    "It said so on TV.\p"
+    "Oh, yes. PROF. OAK, next door, was\n"
+    "looking for you.$"
+}
+
+text PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest {
+    "MOM: {PLAYER}!\n"
+    "You should take a quick rest.$"
+}
+
+text PalletTown_PlayersHouse_1F_Text_LookingGreatTakeCare {
+    "MOM: Oh, good! You and your\n"
+    "POKéMON are looking great.\l"
+    "Take care now!$"
+}
+
+text PalletTown_PlayersHouse_1F_Text_MovieOnTVFourBoysOnRailroad {
+    "There's a movie on TV.\n"
+    "Four boys are walking on railroad\l"
+    "tracks.\p"
+    "…I better go, too.$"
+}
+
+text PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad {
+    "There's a movie on TV.\n"
+    "A girl with her hair in pigtails is\l"
+    "walking up a brick road.\p"
+    "…I better go, too.$"
+}
+
+text PalletTown_PlayersHouse_1F_Text_OopsWrongSide {
+    "Oops, wrong side…$"
+}

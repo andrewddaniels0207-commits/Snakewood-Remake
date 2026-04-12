@@ -24,368 +24,384 @@ Route101_EventScript_HideMapNamePopup::
 
 
 Route101_EventScript_StartBirchRescue::
-# 24 "data/maps/Route101/scripts.pory"
-	lockall
-# 25 "data/maps/Route101/scripts.pory"
-	playbgm MUS_HELP, TRUE
-# 26 "data/maps/Route101/scripts.pory"
-	msgbox Route101_EventScript_StartBirchRescue_Text_0
 # 27 "data/maps/Route101/scripts.pory"
-	closemessage
+	lockall
 # 28 "data/maps/Route101/scripts.pory"
-	applymovement LOCALID_PLAYER, Route101_Movement_EnterScene
+	playbgm MUS_HELP, TRUE
 # 29 "data/maps/Route101/scripts.pory"
-	waitmovement 0
+	msgbox Route101_EventScript_StartBirchRescue_Text_0
 # 30 "data/maps/Route101/scripts.pory"
-	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunAway
+	closemessage
 # 31 "data/maps/Route101/scripts.pory"
-	applymovement LOCALID_ROUTE101_ZOMBIE, Route101_Movement_ZombieChase
+	applymovement LOCALID_PLAYER, Route101_Movement_EnterScene
 # 32 "data/maps/Route101/scripts.pory"
 	waitmovement 0
 # 33 "data/maps/Route101/scripts.pory"
-	applymovement LOCALID_ROUTE101_ZOMBIE, Route101_Movement_ZombieChaseInCircles
+	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunAway
 # 34 "data/maps/Route101/scripts.pory"
-	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunInCircles
+	applymovement LOCALID_ROUTE101_ZOMBIE, Route101_Movement_ZombieChase
 # 35 "data/maps/Route101/scripts.pory"
 	waitmovement 0
 # 36 "data/maps/Route101/scripts.pory"
-	applymovement LOCALID_ROUTE101_ZOMBIE, Route101_Movement_ZombieFaceBirch
+	applymovement LOCALID_ROUTE101_ZOMBIE, Route101_Movement_ZombieChaseInCircles
 # 37 "data/maps/Route101/scripts.pory"
-	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchFaceZombie
+	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunInCircles
 # 38 "data/maps/Route101/scripts.pory"
 	waitmovement 0
 # 39 "data/maps/Route101/scripts.pory"
-	msgbox Route101_EventScript_StartBirchRescue_Text_1
+	applymovement LOCALID_ROUTE101_ZOMBIE, Route101_Movement_ZombieFaceBirch
 # 40 "data/maps/Route101/scripts.pory"
-	closemessage
+	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchFaceZombie
 # 41 "data/maps/Route101/scripts.pory"
-	setvar VAR_ROUTE101_STATE, 2
+	waitmovement 0
 # 42 "data/maps/Route101/scripts.pory"
+	msgbox Route101_EventScript_StartBirchRescue_Text_1
+# 43 "data/maps/Route101/scripts.pory"
+	closemessage
+# 45 "data/maps/Route101/scripts.pory"
+	applymovement LOCALID_PLAYER, Route101_Movement_PlayerApproachZombie
+# 46 "data/maps/Route101/scripts.pory"
+	applymovement LOCALID_ROUTE101_ZOMBIE, Route101_Movement_ZombieTurnToPlayer
+# 47 "data/maps/Route101/scripts.pory"
+	waitmovement 0
+# 48 "data/maps/Route101/scripts.pory"
+	msgbox Route101_EventScript_StartBirchRescue_Text_2
+# 49 "data/maps/Route101/scripts.pory"
+	closemessage
+# 50 "data/maps/Route101/scripts.pory"
+	trainerbattle_single TRAINER_ROUTE101_ZOMBIE, Route101_EventScript_StartBirchRescue_Text_3, Route101_EventScript_StartBirchRescue_Text_4
+# 51 "data/maps/Route101/scripts.pory"
+	msgbox Route101_EventScript_StartBirchRescue_Text_5
+# 52 "data/maps/Route101/scripts.pory"
+	closemessage
+# 53 "data/maps/Route101/scripts.pory"
+	setflag FLAG_HIDE_ROUTE_101_ZIGZAGOON
+# 54 "data/maps/Route101/scripts.pory"
+	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchApproachPlayer
+# 55 "data/maps/Route101/scripts.pory"
+	waitmovement 0
+# 56 "data/maps/Route101/scripts.pory"
+	msgbox Route101_EventScript_StartBirchRescue_Text_6
+# 57 "data/maps/Route101/scripts.pory"
+	closemessage
+# 58 "data/maps/Route101/scripts.pory"
+	special HealPlayerParty
+# 59 "data/maps/Route101/scripts.pory"
+	setflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
+# 60 "data/maps/Route101/scripts.pory"
+	setvar VAR_ROUTE101_STATE, 3
+# 61 "data/maps/Route101/scripts.pory"
+	setvar VAR_SNAKEWOOD_INTRO_STATE, 2
+# 62 "data/maps/Route101/scripts.pory"
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
+# 63 "data/maps/Route101/scripts.pory"
+	warp MAP_OLDALE_TOWN, 6, 17
+# 64 "data/maps/Route101/scripts.pory"
+	waitstate
+# 65 "data/maps/Route101/scripts.pory"
 	releaseall
 	end
 
 
 Route101_EventScript_PreventExitSouth::
-# 51 "data/maps/Route101/scripts.pory"
+# 74 "data/maps/Route101/scripts.pory"
 	lockall
-# 52 "data/maps/Route101/scripts.pory"
+# 75 "data/maps/Route101/scripts.pory"
 	msgbox Route101_EventScript_PreventExitSouth_Text_0
-# 53 "data/maps/Route101/scripts.pory"
+# 76 "data/maps/Route101/scripts.pory"
 	closemessage
-# 54 "data/maps/Route101/scripts.pory"
+# 77 "data/maps/Route101/scripts.pory"
 	applymovement LOCALID_PLAYER, Route101_Movement_PreventExitSouth
-# 55 "data/maps/Route101/scripts.pory"
+# 78 "data/maps/Route101/scripts.pory"
 	waitmovement 0
-# 56 "data/maps/Route101/scripts.pory"
+# 79 "data/maps/Route101/scripts.pory"
 	releaseall
 	end
 
 
 Route101_EventScript_PreventExitWest::
-# 61 "data/maps/Route101/scripts.pory"
+# 84 "data/maps/Route101/scripts.pory"
 	lockall
-# 62 "data/maps/Route101/scripts.pory"
+# 85 "data/maps/Route101/scripts.pory"
 	msgbox Route101_EventScript_PreventExitSouth_Text_0
-# 63 "data/maps/Route101/scripts.pory"
+# 86 "data/maps/Route101/scripts.pory"
 	closemessage
-# 64 "data/maps/Route101/scripts.pory"
+# 87 "data/maps/Route101/scripts.pory"
 	applymovement LOCALID_PLAYER, Route101_Movement_PreventExitWest
-# 65 "data/maps/Route101/scripts.pory"
+# 88 "data/maps/Route101/scripts.pory"
 	waitmovement 0
-# 66 "data/maps/Route101/scripts.pory"
+# 89 "data/maps/Route101/scripts.pory"
 	releaseall
 	end
 
 
 Route101_EventScript_PreventExitNorth::
-# 71 "data/maps/Route101/scripts.pory"
+# 94 "data/maps/Route101/scripts.pory"
 	lockall
-# 72 "data/maps/Route101/scripts.pory"
+# 95 "data/maps/Route101/scripts.pory"
 	msgbox Route101_EventScript_PreventExitSouth_Text_0
-# 73 "data/maps/Route101/scripts.pory"
+# 96 "data/maps/Route101/scripts.pory"
 	closemessage
-# 74 "data/maps/Route101/scripts.pory"
+# 97 "data/maps/Route101/scripts.pory"
 	applymovement LOCALID_PLAYER, Route101_Movement_PreventExitNorth
-# 75 "data/maps/Route101/scripts.pory"
+# 98 "data/maps/Route101/scripts.pory"
 	waitmovement 0
-# 76 "data/maps/Route101/scripts.pory"
+# 99 "data/maps/Route101/scripts.pory"
 	releaseall
 	end
 
 
-# 80 "data/maps/Route101/scripts.pory"
+# 103 "data/maps/Route101/scripts.pory"
 Route101_Movement_PreventExitSouth:
-# 81 "data/maps/Route101/scripts.pory"
+# 104 "data/maps/Route101/scripts.pory"
 	walk_up
 	step_end
 
-# 84 "data/maps/Route101/scripts.pory"
+# 107 "data/maps/Route101/scripts.pory"
 Route101_Movement_PreventExitWest:
-# 85 "data/maps/Route101/scripts.pory"
+# 108 "data/maps/Route101/scripts.pory"
 	walk_right
 	step_end
 
-# 88 "data/maps/Route101/scripts.pory"
+# 111 "data/maps/Route101/scripts.pory"
 Route101_Movement_PreventExitNorth:
-# 89 "data/maps/Route101/scripts.pory"
+# 112 "data/maps/Route101/scripts.pory"
 	walk_down
 	step_end
 
 Route101_EventScript_ZombieTrainer::
-# 98 "data/maps/Route101/scripts.pory"
-	lockall
-# 99 "data/maps/Route101/scripts.pory"
-	applymovement LOCALID_ROUTE101_ZOMBIE, Common_Movement_WalkInPlaceFasterRight
-# 100 "data/maps/Route101/scripts.pory"
-	waitmovement 0
-# 101 "data/maps/Route101/scripts.pory"
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
-# 102 "data/maps/Route101/scripts.pory"
-	waitmovement 0
-# 103 "data/maps/Route101/scripts.pory"
-	msgbox Route101_EventScript_ZombieTrainer_Text_0
-# 104 "data/maps/Route101/scripts.pory"
-	closemessage
-# 105 "data/maps/Route101/scripts.pory"
-	trainerbattle_single TRAINER_ROUTE101_ZOMBIE, Route101_EventScript_ZombieTrainer_Text_1, Route101_EventScript_ZombieTrainer_Text_2
-# 106 "data/maps/Route101/scripts.pory"
-	msgbox Route101_EventScript_ZombieTrainer_Text_3
-# 107 "data/maps/Route101/scripts.pory"
-	closemessage
-# 108 "data/maps/Route101/scripts.pory"
-	setflag FLAG_HIDE_ROUTE_101_ZIGZAGOON
-# 109 "data/maps/Route101/scripts.pory"
-	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchApproachPlayer
-# 110 "data/maps/Route101/scripts.pory"
-	waitmovement 0
-# 111 "data/maps/Route101/scripts.pory"
-	msgbox Route101_EventScript_ZombieTrainer_Text_4
-# 112 "data/maps/Route101/scripts.pory"
-	closemessage
-# 113 "data/maps/Route101/scripts.pory"
-	special HealPlayerParty
-# 114 "data/maps/Route101/scripts.pory"
-	setflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
-# 115 "data/maps/Route101/scripts.pory"
-	setvar VAR_ROUTE101_STATE, 3
-# 116 "data/maps/Route101/scripts.pory"
-	setvar VAR_SNAKEWOOD_INTRO_STATE, 2
-# 117 "data/maps/Route101/scripts.pory"
-	clearflag FLAG_HIDE_MAP_NAME_POPUP
-# 118 "data/maps/Route101/scripts.pory"
-	warp MAP_OLDALE_TOWN, 6, 17
-# 119 "data/maps/Route101/scripts.pory"
-	waitstate
-# 120 "data/maps/Route101/scripts.pory"
-	releaseall
+# 122 "data/maps/Route101/scripts.pory"
+	msgbox Route101_EventScript_ZombieTrainer_Text_0, MSGBOX_NPC
 	end
 
 
-# 128 "data/maps/Route101/scripts.pory"
-Route101_Movement_EnterScene:
-# 129 "data/maps/Route101/scripts.pory"
-	walk_in_place_faster_up
 # 130 "data/maps/Route101/scripts.pory"
+Route101_Movement_EnterScene:
+# 131 "data/maps/Route101/scripts.pory"
+	walk_in_place_faster_up
+# 132 "data/maps/Route101/scripts.pory"
 	walk_in_place_faster_left
 	step_end
 
-# 134 "data/maps/Route101/scripts.pory"
-Route101_Movement_BirchRunAway:
-# 135 "data/maps/Route101/scripts.pory"
-	walk_fast_right
 # 136 "data/maps/Route101/scripts.pory"
-	walk_fast_right
+Route101_Movement_BirchRunAway:
 # 137 "data/maps/Route101/scripts.pory"
 	walk_fast_right
 # 138 "data/maps/Route101/scripts.pory"
 	walk_fast_right
 # 139 "data/maps/Route101/scripts.pory"
-	walk_fast_down
+	walk_fast_right
 # 140 "data/maps/Route101/scripts.pory"
-	walk_fast_left
+	walk_fast_right
 # 141 "data/maps/Route101/scripts.pory"
-	walk_fast_left
+	walk_fast_down
 # 142 "data/maps/Route101/scripts.pory"
 	walk_fast_left
 # 143 "data/maps/Route101/scripts.pory"
 	walk_fast_left
 # 144 "data/maps/Route101/scripts.pory"
+	walk_fast_left
+# 145 "data/maps/Route101/scripts.pory"
+	walk_fast_left
+# 146 "data/maps/Route101/scripts.pory"
 	walk_fast_up
 	step_end
 
-# 148 "data/maps/Route101/scripts.pory"
-Route101_Movement_ZombieChase:
-# 149 "data/maps/Route101/scripts.pory"
-	walk_fast_right
 # 150 "data/maps/Route101/scripts.pory"
-	walk_fast_right
+Route101_Movement_ZombieChase:
 # 151 "data/maps/Route101/scripts.pory"
 	walk_fast_right
 # 152 "data/maps/Route101/scripts.pory"
 	walk_fast_right
 # 153 "data/maps/Route101/scripts.pory"
-	walk_fast_down
+	walk_fast_right
 # 154 "data/maps/Route101/scripts.pory"
-	walk_fast_left
+	walk_fast_right
 # 155 "data/maps/Route101/scripts.pory"
-	walk_fast_left
+	walk_fast_down
 # 156 "data/maps/Route101/scripts.pory"
 	walk_fast_left
 # 157 "data/maps/Route101/scripts.pory"
 	walk_fast_left
 # 158 "data/maps/Route101/scripts.pory"
+	walk_fast_left
+# 159 "data/maps/Route101/scripts.pory"
+	walk_fast_left
+# 160 "data/maps/Route101/scripts.pory"
 	walk_fast_up
 	step_end
 
-# 162 "data/maps/Route101/scripts.pory"
-Route101_Movement_ZombieChaseInCircles:
-# 163 "data/maps/Route101/scripts.pory"
-	walk_fast_right
 # 164 "data/maps/Route101/scripts.pory"
-	walk_fast_right
+Route101_Movement_ZombieChaseInCircles:
 # 165 "data/maps/Route101/scripts.pory"
 	walk_fast_right
 # 166 "data/maps/Route101/scripts.pory"
-	walk_fast_down
+	walk_fast_right
 # 167 "data/maps/Route101/scripts.pory"
-	walk_fast_left
+	walk_fast_right
 # 168 "data/maps/Route101/scripts.pory"
-	walk_fast_left
+	walk_fast_down
 # 169 "data/maps/Route101/scripts.pory"
 	walk_fast_left
 # 170 "data/maps/Route101/scripts.pory"
-	walk_fast_up
+	walk_fast_left
 # 171 "data/maps/Route101/scripts.pory"
-	walk_fast_right
+	walk_fast_left
 # 172 "data/maps/Route101/scripts.pory"
-	walk_fast_right
+	walk_fast_up
 # 173 "data/maps/Route101/scripts.pory"
 	walk_fast_right
 # 174 "data/maps/Route101/scripts.pory"
-	walk_fast_down
+	walk_fast_right
 # 175 "data/maps/Route101/scripts.pory"
-	walk_fast_left
+	walk_fast_right
 # 176 "data/maps/Route101/scripts.pory"
-	walk_fast_left
+	walk_fast_down
 # 177 "data/maps/Route101/scripts.pory"
 	walk_fast_left
 # 178 "data/maps/Route101/scripts.pory"
+	walk_fast_left
+# 179 "data/maps/Route101/scripts.pory"
+	walk_fast_left
+# 180 "data/maps/Route101/scripts.pory"
 	walk_fast_up
 	step_end
 
-# 182 "data/maps/Route101/scripts.pory"
-Route101_Movement_BirchRunInCircles:
-# 183 "data/maps/Route101/scripts.pory"
-	walk_fast_left
 # 184 "data/maps/Route101/scripts.pory"
-	walk_fast_left
+Route101_Movement_BirchRunInCircles:
 # 185 "data/maps/Route101/scripts.pory"
 	walk_fast_left
 # 186 "data/maps/Route101/scripts.pory"
-	walk_fast_down
+	walk_fast_left
 # 187 "data/maps/Route101/scripts.pory"
-	walk_fast_right
+	walk_fast_left
 # 188 "data/maps/Route101/scripts.pory"
-	walk_fast_right
+	walk_fast_down
 # 189 "data/maps/Route101/scripts.pory"
 	walk_fast_right
 # 190 "data/maps/Route101/scripts.pory"
-	walk_fast_up
+	walk_fast_right
 # 191 "data/maps/Route101/scripts.pory"
-	walk_fast_left
+	walk_fast_right
 # 192 "data/maps/Route101/scripts.pory"
-	walk_fast_left
+	walk_fast_up
 # 193 "data/maps/Route101/scripts.pory"
 	walk_fast_left
 # 194 "data/maps/Route101/scripts.pory"
-	walk_fast_down
+	walk_fast_left
 # 195 "data/maps/Route101/scripts.pory"
-	walk_fast_right
+	walk_fast_left
 # 196 "data/maps/Route101/scripts.pory"
-	walk_fast_right
+	walk_fast_down
 # 197 "data/maps/Route101/scripts.pory"
 	walk_fast_right
 # 198 "data/maps/Route101/scripts.pory"
+	walk_fast_right
+# 199 "data/maps/Route101/scripts.pory"
+	walk_fast_right
+# 200 "data/maps/Route101/scripts.pory"
 	walk_fast_up
 	step_end
 
-# 202 "data/maps/Route101/scripts.pory"
+# 204 "data/maps/Route101/scripts.pory"
 Route101_Movement_ZombieFaceBirch:
-# 203 "data/maps/Route101/scripts.pory"
+# 205 "data/maps/Route101/scripts.pory"
 	walk_in_place_faster_left
 	step_end
 
-# 207 "data/maps/Route101/scripts.pory"
+# 209 "data/maps/Route101/scripts.pory"
 Route101_Movement_BirchFaceZombie:
-# 208 "data/maps/Route101/scripts.pory"
+# 210 "data/maps/Route101/scripts.pory"
 	walk_in_place_faster_right
 	step_end
 
-# 211 "data/maps/Route101/scripts.pory"
+# 213 "data/maps/Route101/scripts.pory"
+Route101_Movement_PlayerApproachZombie:
+# 214 "data/maps/Route101/scripts.pory"
+	walk_up
+# 214 "data/maps/Route101/scripts.pory"
+	walk_up
+# 214 "data/maps/Route101/scripts.pory"
+	walk_up
+# 215 "data/maps/Route101/scripts.pory"
+	walk_in_place_faster_left
+	step_end
+
+# 218 "data/maps/Route101/scripts.pory"
+Route101_Movement_ZombieTurnToPlayer:
+# 219 "data/maps/Route101/scripts.pory"
+	walk_in_place_faster_right
+	step_end
+
+# 222 "data/maps/Route101/scripts.pory"
 Route101_Movement_BirchApproachPlayer:
-# 212 "data/maps/Route101/scripts.pory"
+# 223 "data/maps/Route101/scripts.pory"
 	walk_right
 	step_end
 
 Route101_EventScript_RouteSign::
-# 220 "data/maps/Route101/scripts.pory"
+# 231 "data/maps/Route101/scripts.pory"
 	msgbox Route101_EventScript_RouteSign_Text_0, MSGBOX_SIGN
 	end
 
 
 Route101_EventScript_Youngster::
-# 226 "data/maps/Route101/scripts.pory"
+# 237 "data/maps/Route101/scripts.pory"
 	msgbox Route101_EventScript_Youngster_Text_0, MSGBOX_NPC
 	end
 
 
 Route101_EventScript_Boy::
-# 231 "data/maps/Route101/scripts.pory"
+# 242 "data/maps/Route101/scripts.pory"
 	msgbox Route101_EventScript_Boy_Text_0, MSGBOX_NPC
 	end
 
 
 Route101_EventScript_StartBirchRescue_Text_0:
-# 26 "data/maps/Route101/scripts.pory"
+# 29 "data/maps/Route101/scripts.pory"
 	.string "Placeholder: Birch crying for help.$"
 
 Route101_EventScript_StartBirchRescue_Text_1:
-# 39 "data/maps/Route101/scripts.pory"
+# 42 "data/maps/Route101/scripts.pory"
 	.string "Placeholder: Birch pleads for help.$"
 
+Route101_EventScript_StartBirchRescue_Text_2:
+# 48 "data/maps/Route101/scripts.pory"
+	.string "Placeholder: Zombie trainer intro.$"
+
+Route101_EventScript_StartBirchRescue_Text_3:
+# 50 "data/maps/Route101/scripts.pory"
+	.string "Placeholder: Zombie intro.$"
+
+Route101_EventScript_StartBirchRescue_Text_4:
+# 50 "data/maps/Route101/scripts.pory"
+	.string "Placeholder: Zombie defeat text.$"
+
+Route101_EventScript_StartBirchRescue_Text_5:
+# 51 "data/maps/Route101/scripts.pory"
+	.string "The Zombie crumbled to dust.$"
+
+Route101_EventScript_StartBirchRescue_Text_6:
+# 56 "data/maps/Route101/scripts.pory"
+	.string "Placeholder: Birch thanks player and says let's go to Oldale.$"
+
 Route101_EventScript_PreventExitSouth_Text_0:
-# 52 "data/maps/Route101/scripts.pory"
+# 75 "data/maps/Route101/scripts.pory"
 	.string "Placeholder: Don't leave me.$"
 
 Route101_EventScript_ZombieTrainer_Text_0:
-# 103 "data/maps/Route101/scripts.pory"
-	.string "Placeholder: Zombie trainer intro.$"
-
-Route101_EventScript_ZombieTrainer_Text_1:
-# 105 "data/maps/Route101/scripts.pory"
-	.string "Placeholder: Zombie intro.$"
-
-Route101_EventScript_ZombieTrainer_Text_2:
-# 105 "data/maps/Route101/scripts.pory"
-	.string "Placeholder: Zombie defeat text.$"
-
-Route101_EventScript_ZombieTrainer_Text_3:
-# 106 "data/maps/Route101/scripts.pory"
-	.string "The Zombie crumbled to dust.$"
-
-Route101_EventScript_ZombieTrainer_Text_4:
-# 111 "data/maps/Route101/scripts.pory"
-	.string "Placeholder: Birch thanks player and says let's go to Oldale.$"
+# 122 "data/maps/Route101/scripts.pory"
+	.string "Placeholder: Zombie trainer fallback.$"
 
 Route101_EventScript_RouteSign_Text_0:
-# 220 "data/maps/Route101/scripts.pory"
+# 231 "data/maps/Route101/scripts.pory"
 	.string "ROUTE 101\n"
 	.string "{UP_ARROW} OLDALE TOWN$"
 
 Route101_EventScript_Youngster_Text_0:
-# 226 "data/maps/Route101/scripts.pory"
+# 237 "data/maps/Route101/scripts.pory"
 	.string "Bruhhh.$"
 
 Route101_EventScript_Boy_Text_0:
-# 231 "data/maps/Route101/scripts.pory"
+# 242 "data/maps/Route101/scripts.pory"
 	.string "Placeholder: Boy dialogue.$"

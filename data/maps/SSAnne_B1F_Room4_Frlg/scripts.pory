@@ -1,0 +1,42 @@
+mapscripts SSAnne_B1F_Room4_Frlg_MapScripts {}
+
+script SSAnne_B1F_Room4_EventScript_Leonard {
+    trainerbattle_single(TRAINER_SAILOR_LEONARD, SSAnne_B1F_Room4_Text_LeonardIntro, SSAnne_B1F_Room4_Text_LeonardDefeat)
+    msgbox(SSAnne_B1F_Room4_Text_LeonardPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SSAnne_B1F_Room4_EventScript_Duncan {
+    trainerbattle_single(TRAINER_SAILOR_DUNCAN, SSAnne_B1F_Room4_Text_DuncanIntro, SSAnne_B1F_Room4_Text_DuncanDefeat)
+    msgbox(SSAnne_B1F_Room4_Text_DuncanPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text SSAnne_B1F_Room4_Text_LeonardIntro {
+    "You know what they say about\n"
+    "sailors and battling!$"
+}
+
+text SSAnne_B1F_Room4_Text_LeonardDefeat {
+    "Right!\n"
+    "Good battle, mate!$"
+}
+
+text SSAnne_B1F_Room4_Text_LeonardPostBattle {
+    "Hahaha!\n"
+    "Want to be a sailor, mate?$"
+}
+
+text SSAnne_B1F_Room4_Text_DuncanIntro {
+    "Come on, then!\n"
+    "My sailor's pride is at stake!$"
+}
+
+text SSAnne_B1F_Room4_Text_DuncanDefeat {
+    "Your spirit sank me!$"
+}
+
+text SSAnne_B1F_Room4_Text_DuncanPostBattle {
+    "Did you see the FISHING GURU in\n"
+    "VERMILION CITY?$"
+}

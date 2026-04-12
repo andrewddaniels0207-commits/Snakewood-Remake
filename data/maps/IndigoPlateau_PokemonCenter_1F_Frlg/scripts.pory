@@ -1,0 +1,117 @@
+mapscripts IndigoPlateau_PokemonCenter_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: IndigoPlateau_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script IndigoPlateau_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_INDIGO_PLATEAU)
+    specialvar(VAR_RESULT, IsNationalPokedexEnabled)
+    if (var(VAR_RESULT) == TRUE) call(IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor)
+    end
+}
+
+script IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor {
+    if (flag(FLAG_IS_CHAMPION)) goto(Common_EventScript_NopReturn)
+    setobjectxyperm(LOCALID_LEAGUE_DOOR_GUARD, 4, 2)
+    return
+}
+
+script IndigoPlateau_PokemonCenter_1F_EventScript_DoorGuard {
+    lock
+    faceplayer
+    specialvar(VAR_RESULT, IsNationalPokedexEnabled)
+    if (var(VAR_RESULT) == TRUE) goto(IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete)
+    msgbox(IndigoPlateau_PokemonCenter_1F_Text_FaceEliteFourGoodLuck)
+    release
+    end
+}
+
+script IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete {
+    if (flag(FLAG_IS_CHAMPION)) goto(IndigoPlateau_PokemonCenter_1F_EventScript_SeviiIslandComplete)
+    msgbox(IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing)
+    release
+    end
+}
+
+script IndigoPlateau_PokemonCenter_1F_EventScript_SeviiIslandComplete {
+    msgbox(IndigoPlateau_PokemonCenter_1F_Text_FaceEliteFourGoodLuck)
+    release
+    end
+}
+
+script IndigoPlateau_PokemonCenter_1F_EventScript_GymGuy {
+    msgbox(IndigoPlateau_PokemonCenter_1F_Text_GymGuyAdvice, MSGBOX_NPC)
+    end
+}
+
+script IndigoPlateau_PokemonCenter_1F_EventScript_Clerk {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(IndigoPlateau_PokemonCenter_1F_Items)
+    msgbox(gText_PleaseComeAgain)
+    release
+    end
+}
+
+script IndigoPlateau_PokemonCenter_1F_Items {
+    release
+    end
+}
+
+script IndigoPlateau_PokemonCenter_1F_EventScript_Nurse {
+    lock
+    faceplayer
+    call(EventScript_PkmnCenterNurse_Frlg)
+    release
+    end
+}
+
+text IndigoPlateau_PokemonCenter_1F_Text_GymGuyAdvice {
+    "Yo!\n"
+    "Champ in the making!\p"
+    "At the POKéMON LEAGUE, you will\n"
+    "face the ELITE FOUR all in a row.\p"
+    "If you lose, you have to start all\n"
+    "over again!\p"
+    "This is it!\n"
+    "Go for it!$"
+}
+
+text IndigoPlateau_PokemonCenter_1F_Text_FaceEliteFourGoodLuck {
+    "From here on, you face the\n"
+    "ELITE FOUR one by one.\p"
+    "If you win, a door opens to the\n"
+    "next TRAINER. Good luck!$"
+}
+
+text IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing {
+    "I am so sorry, but you've wasted\n"
+    "your time coming here.\p"
+    "LORELEI of the ELITE FOUR is\n"
+    "absent, you see.\p"
+    "As a result, the POKéMON LEAGUE is\n"
+    "closed for the time being.$"
+}
+
+text IndigoPlateau_PokemonCenter_1F_Text_AgathaWhuppedUs {
+    "AGATHA's GHOST-type POKéMON are\n"
+    "horrifically terrifying in toughness.\p"
+    "I took my FIGHTING-type POKéMON\n"
+    "and raised them to the max.\p"
+    "I went at AGATHA feeling pretty\n"
+    "confident, but she whupped us.\p"
+    "That old lady's also got a really\n"
+    "short fuse, too.\p"
+    "It doesn't take anything to get\n"
+    "that scary lady hollering.$"
+}
+
+text IndigoPlateau_PokemonCenter_1F_Text_LancesCousinGymLeaderFarAway {
+    "Maybe becoming an ELITE FOUR\n"
+    "member is in the blood.\p"
+    "From what I've heard, LANCE has\n"
+    "a cousin who's a GYM LEADER\l"
+    "somewhere far away.$"
+}

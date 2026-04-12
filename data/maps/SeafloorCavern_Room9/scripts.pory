@@ -1,0 +1,345 @@
+mapscripts SeafloorCavern_Room9_MapScripts {}
+
+script SeafloorCavern_Room9_EventScript_ArchieAwakenKyogre {
+    lockall
+    setvar(VAR_0x8004, LOCALID_SEAFLOOR_CAVERN_ARCHIE)
+    setvar(VAR_0x8005, LOCALID_SEAFLOOR_CAVERN_MAXIE)
+    setvar(VAR_0x8006, LOCALID_SEAFLOOR_CAVERN_GRUNT_1)
+    setvar(VAR_0x8007, LOCALID_SEAFLOOR_CAVERN_GRUNT_2)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, SeafloorCavern_Room9_Movement_Delay32)
+    waitmovement(0)
+    playbgm(MUS_ENCOUNTER_AQUA, FALSE)
+    msgbox(SeafloorCavern_Room9_Text_ArchieHoldItRightThere, MSGBOX_DEFAULT)
+    closemessage
+    addobject(VAR_0x8004)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    applymovement(VAR_0x8004, SeafloorCavern_Room9_Movement_ArchieApproachPlayer)
+    waitmovement(0)
+    msgbox(SeafloorCavern_Room9_Text_ArchieSoItWasYou, MSGBOX_DEFAULT)
+    applymovement(VAR_0x8004, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    msgbox(SeafloorCavern_Room9_Text_ArchieBeholdKyogre, MSGBOX_DEFAULT)
+    applymovement(VAR_0x8004, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(SeafloorCavern_Room9_Text_ArchieYouMustDisappear, MSGBOX_DEFAULT)
+    trainerbattle_no_intro(TRAINER_ARCHIE, SeafloorCavern_Room9_Text_ArchieDefeat)
+    msgbox(SeafloorCavern_Room9_Text_ArchieWithThisRedOrb, MSGBOX_DEFAULT)
+    setweather(WEATHER_NONE)
+    doweather()
+    special(Script_FadeOutMapMusic)
+    waitstate
+    msgbox(SeafloorCavern_Room9_Text_RedOrbShinesByItself, MSGBOX_DEFAULT)
+    special(WaitWeather)
+    waitstate
+    setvar(VAR_RESULT, 1)
+    playse(SE_M_DETECT)
+    dofieldeffectsparkle(16, 42, 0)
+    waitfieldeffect(FLDEFF_SPARKLE)
+    closemessage
+    setvar(VAR_RESULT, 0)
+    playfanfare(MUS_AWAKEN_LEGEND)
+    playse(SE_ORB)
+    special(DoOrbEffect)
+    applymovement(VAR_0x8004, Common_Movement_WalkInPlaceFasterUp)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    delay(150)
+    removeobject(LOCALID_SEAFLOOR_CAVERN_KYOGRE_SLEEPING)
+    addobject(LOCALID_SEAFLOOR_CAVERN_KYOGRE)
+    waitstate
+    delay(60)
+    applymovement(LOCALID_SEAFLOOR_CAVERN_KYOGRE, SeafloorCavern_Room9_Movement_KyogreApproach)
+    waitmovement(0)
+    special(FadeOutOrbEffect)
+    waitstate
+    setvar(VAR_0x8004, 1)
+    setvar(VAR_0x8005, 1)
+    setvar(VAR_0x8006, 8)
+    setvar(VAR_0x8007, 5)
+    special(ShakeCamera)
+    waitstate
+    applymovement(LOCALID_SEAFLOOR_CAVERN_KYOGRE, SeafloorCavern_Room9_Movement_KyogreExit)
+    waitmovement(0)
+    removeobject(LOCALID_SEAFLOOR_CAVERN_KYOGRE)
+    delay(4)
+    setvar(VAR_0x8004, 2)
+    setvar(VAR_0x8005, 2)
+    setvar(VAR_0x8006, 8)
+    setvar(VAR_0x8007, 5)
+    special(ShakeCamera)
+    waitstate
+    delay(30)
+    setvar(VAR_0x8004, LOCALID_SEAFLOOR_CAVERN_ARCHIE)
+    setvar(VAR_0x8005, LOCALID_SEAFLOOR_CAVERN_MAXIE)
+    setvar(VAR_0x8006, LOCALID_SEAFLOOR_CAVERN_GRUNT_1)
+    setvar(VAR_0x8007, LOCALID_SEAFLOOR_CAVERN_GRUNT_2)
+    msgbox(SeafloorCavern_Room9_Text_ArchieWhereDidKyogreGo, MSGBOX_DEFAULT)
+    playse(SE_PC_LOGIN)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    msgbox(SeafloorCavern_Room9_Text_ArchieAMessageFromOutside, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(VAR_0x8004, SeafloorCavern_Room9_Movement_ArchieListenMessage)
+    waitmovement(0)
+    msgbox(SeafloorCavern_Room9_Text_ArchieWhatRainingTooHard, MSGBOX_DEFAULT)
+    closemessage
+    playse(SE_PC_OFF)
+    delay(20)
+    applymovement(VAR_0x8004, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    msgbox(SeafloorCavern_Room9_Text_ArchieWhyDidKyogreDisappear, MSGBOX_DEFAULT)
+    closemessage
+    addobject(VAR_0x8005)
+    addobject(VAR_0x8006)
+    addobject(VAR_0x8007)
+    applymovement(VAR_0x8007, SeafloorCavern_Room9_Movement_MagmaGruntArrive)
+    applymovement(VAR_0x8006, SeafloorCavern_Room9_Movement_MagmaGruntArrive)
+    applymovement(VAR_0x8005, SeafloorCavern_Room9_Movement_MaxieArrive)
+    waitmovement(0)
+    applymovement(VAR_0x8004, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    msgbox(SeafloorCavern_Room9_Text_MaxieWhatHaveYouWrought, MSGBOX_DEFAULT)
+    playse(SE_PIN)
+    applymovement(VAR_0x8004, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(VAR_0x8004, Common_Movement_Delay48)
+    waitmovement(0)
+    msgbox(SeafloorCavern_Room9_Text_ArchieDontGetAllHighAndMighty, MSGBOX_DEFAULT)
+    msgbox(SeafloorCavern_Room9_Text_MaxieWeDontHaveTimeToArgue, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(VAR_0x8005, SeafloorCavern_Room9_Movement_MaxieExit)
+    applymovement(VAR_0x8004, SeafloorCavern_Room9_Movement_ArchieExit)
+    waitmovement(0)
+    msgbox(SeafloorCavern_Room9_Text_MaxieComeOnPlayer, MSGBOX_DEFAULT)
+    setvar(VAR_ROUTE128_STATE, 1)
+    setvar(VAR_SOOTOPOLIS_CITY_STATE, 1)
+    clearflag(FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN)
+    clearflag(FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE)
+    clearflag(FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE)
+    clearflag(FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS)
+    clearflag(FLAG_HIDE_SOOTOPOLIS_CITY_GROUDON)
+    clearflag(FLAG_HIDE_SOOTOPOLIS_CITY_KYOGRE)
+    setflag(FLAG_HIDE_SOOTOPOLIS_CITY_MAN_1)
+    setflag(FLAG_LEGENDARIES_IN_SOOTOPOLIS)
+    clearflag(FLAG_HIDE_ROUTE_128_ARCHIE)
+    clearflag(FLAG_HIDE_ROUTE_128_MAXIE)
+    setflag(FLAG_SYS_WEATHER_CTRL)
+    setflag(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN)
+    setflag(FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN)
+    setvar(VAR_STEVENS_HOUSE_STATE, 2)
+    setvar(VAR_SEAFLOOR_CAVERN_STATE, 1)
+    setflag(FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_ARCHIE)
+    setflag(FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_MAXIE)
+    setflag(FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_MAGMA_GRUNTS)
+    setflag(FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_KYOGRE)
+    setflag(FLAG_HIDE_SEAFLOOR_CAVERN_AQUA_GRUNTS)
+    setflag(FLAG_HIDE_MAP_NAME_POPUP)
+    warp(MAP_ROUTE128, 38, 22)
+    waitstate
+    releaseall
+    end
+}
+
+movement SeafloorCavern_Room9_Movement_ArchieApproachPlayer {
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    step_end
+}
+
+movement SeafloorCavern_Room9_Movement_Unused1 {
+    walk_left
+    walk_left
+    step_end
+}
+
+movement SeafloorCavern_Room9_Movement_ArchieListenMessage {
+    walk_left
+    delay_16
+    step_end
+}
+
+movement SeafloorCavern_Room9_Movement_Unused2 {
+    walk_right
+    step_end
+}
+
+script SeafloorCavern_Room9_Movement_ArchieExit {
+    face_up()
+    lock_facing_direction()
+    walk_down()
+    unlock_facing_direction()
+    walk_in_place_faster_right()
+    step_end()
+}
+
+movement SeafloorCavern_Room9_Movement_KyogreApproach {
+    delay_16
+    delay_16
+    walk_slow_down
+    delay_16
+    delay_16
+    delay_16
+    walk_slow_down
+    delay_16
+    delay_16
+    delay_16
+    step_end
+}
+
+movement SeafloorCavern_Room9_Movement_KyogreExit {
+    slide_up
+    slide_up
+    step_end
+}
+
+movement SeafloorCavern_Room9_Movement_MaxieArrive {
+    walk_fast_right
+    walk_fast_right
+    walk_fast_right
+    walk_fast_right
+    walk_fast_right
+    step_end
+}
+
+movement SeafloorCavern_Room9_Movement_MaxieExit {
+    walk_right
+    walk_right
+    step_end
+}
+
+movement SeafloorCavern_Room9_Movement_MagmaGruntArrive {
+    walk_fast_right
+    walk_fast_right
+    walk_fast_right
+    walk_fast_right
+    step_end
+}
+
+movement SeafloorCavern_Room9_Movement_Delay32 {
+    delay_16
+    delay_16
+    step_end
+}
+
+text SeafloorCavern_Room9_Text_ArchieHoldItRightThere {
+    "ARCHIE: Hold it right there.$"
+}
+
+text SeafloorCavern_Room9_Text_ArchieSoItWasYou {
+    "ARCHIE: Fufufu…\n"
+    "So it was you, after all.$"
+}
+
+text SeafloorCavern_Room9_Text_ArchieBeholdKyogre {
+    "ARCHIE: Behold!\p"
+    "See how beautiful it is, the sleeping\n"
+    "form of the ancient POKéMON KYOGRE!\p"
+    "I have waited so long for this day to\n"
+    "come…$"
+}
+
+text SeafloorCavern_Room9_Text_ArchieYouMustDisappear {
+    "ARCHIE: It surprises me, how you've\n"
+    "managed to chase me here.\p"
+    "But that's all over now.\p"
+    "For the realization of my dream,\n"
+    "you must disappear now!$"
+}
+
+text SeafloorCavern_Room9_Text_ArchieDefeat {
+    "What?!\n"
+    "I lost to a mere child like you?!$"
+}
+
+text SeafloorCavern_Room9_Text_ArchieWithThisRedOrb {
+    "ARCHIE: Fufufu…\p"
+    "I commend you. I must recognize that\n"
+    "you are truly gifted.\p"
+    "But!\n"
+    "I have this in my possession!\p"
+    "With this RED ORB, I can make KYOGRE…$"
+}
+
+text SeafloorCavern_Room9_Text_RedOrbShinesByItself {
+    "The RED ORB suddenly began shining\n"
+    "by itself!$"
+}
+
+text SeafloorCavern_Room9_Text_ArchieWhereDidKyogreGo {
+    "ARCHIE: What?!\p"
+    "I didn't do anything.\n"
+    "Why did the RED ORB…\p"
+    "Where did KYOGRE go?$"
+}
+
+text SeafloorCavern_Room9_Text_ArchieAMessageFromOutside {
+    "ARCHIE: Hm? It's a message from our\n"
+    "members outside…$"
+}
+
+text SeafloorCavern_Room9_Text_ArchieWhatRainingTooHard {
+    "ARCHIE: Yes, what is it?\p"
+    "Hm…\n"
+    "It's raining heavily?\p"
+    "Good… That should have happened.\n"
+    "That is why we awakened KYOGRE,\l"
+    "to realize TEAM AQUA's vision of\l"
+    "expanding the sea.\p"
+    "What?!\p"
+    "It's raining far harder than we\n"
+    "envisioned? You're in danger?\p"
+    "That can't be…\n"
+    "That's just not possible…\p"
+    "Hold your position and monitor\n"
+    "the situation!$"
+}
+
+text SeafloorCavern_Room9_Text_ArchieWhyDidKyogreDisappear {
+    "ARCHIE: There's something wrong…\p"
+    "The RED ORB is supposed to awaken\n"
+    "and control KYOGRE…\p"
+    "But… Why?\n"
+    "Why did KYOGRE disappear?\p"
+    "Why?!$"
+}
+
+text SeafloorCavern_Room9_Text_MaxieWhatHaveYouWrought {
+    "MAXIE: What have you wrought?\p"
+    "ARCHIE… You've finally awoken KYOGRE,\n"
+    "haven't you?\p"
+    "What will happen to the world if this\n"
+    "downpour continues for all eternity?\p"
+    "The world's landmass will drown in\n"
+    "the deepening sea…$"
+}
+
+text SeafloorCavern_Room9_Text_ArchieDontGetAllHighAndMighty {
+    "ARCHIE: W-what?!\n"
+    "Don't get all high and mighty with me!\p"
+    "Wasn't it you, TEAM MAGMA, that\n"
+    "infuriated GROUDON?\p"
+    "So long as I have this RED ORB,\n"
+    "I should be able to control KYOGRE…\p"
+    "I should be able to control it…$"
+}
+
+text SeafloorCavern_Room9_Text_MaxieWeDontHaveTimeToArgue {
+    "MAXIE: We don't have the time to\n"
+    "argue about it here!\p"
+    "Get outside and see for yourself!\p"
+    "See if what you've wrought is the\n"
+    "world that we desired!$"
+}
+
+text SeafloorCavern_Room9_Text_MaxieComeOnPlayer {
+    "MAXIE: {PLAYER}, come on, you have\n"
+    "to get out of here, too!$"
+}

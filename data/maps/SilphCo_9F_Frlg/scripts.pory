@@ -1,0 +1,112 @@
+mapscripts SilphCo_9F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_LOAD: SilphCo_9F_OnLoad
+}
+
+script SilphCo_9F_OnLoad {
+    if (!flag(FLAG_SILPH_9F_DOOR_1)) call(EventScript_Close9FDoor1)
+    if (!flag(FLAG_SILPH_9F_DOOR_2)) call(EventScript_Close9FDoor2)
+    if (!flag(FLAG_SILPH_9F_DOOR_3)) call(EventScript_Close9FDoor3)
+    if (!flag(FLAG_SILPH_9F_DOOR_4)) call(EventScript_Close9FDoor4)
+    end
+}
+
+script SilphCo_9F_EventScript_HealWoman {
+    lock
+    faceplayer
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) goto(SilphCo_9F_EventScript_HealWomanRocketsGone)
+    msgbox(SilphCo_9F_Text_YouShouldTakeQuickNap)
+    closemessage
+    call(Common_EventScript_OutOfCenterPartyHeal)
+    msgbox(SilphCo_9F_Text_DontGiveUp)
+    release
+    end
+}
+
+script SilphCo_9F_EventScript_HealWomanRocketsGone {
+    msgbox(SilphCo_9F_Text_ThankYouSoMuch)
+    release
+    end
+}
+
+script SilphCo_9F_EventScript_FloorSign {
+    msgbox(SilphCo_9F_Text_FloorSign, MSGBOX_SIGN)
+    end
+}
+
+script SilphCo_9F_EventScript_Ed {
+    trainerbattle_single(TRAINER_SCIENTIST_ED, SilphCo_9F_Text_EdIntro, SilphCo_9F_Text_EdDefeat)
+    msgbox(SilphCo_9F_Text_EdPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SilphCo_9F_EventScript_Grunt1 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_37, SilphCo_9F_Text_Grunt1Intro, SilphCo_9F_Text_Grunt1Defeat)
+    msgbox(SilphCo_9F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SilphCo_9F_EventScript_Grunt2 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_38, SilphCo_9F_Text_Grunt2Intro, SilphCo_9F_Text_Grunt2Defeat)
+    msgbox(SilphCo_9F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text SilphCo_9F_Text_YouShouldTakeQuickNap {
+    "You look tired.\n"
+    "You should take a quick nap.$"
+}
+
+text SilphCo_9F_Text_DontGiveUp {
+    "Don't give up!$"
+}
+
+text SilphCo_9F_Text_ThankYouSoMuch {
+    "Thank you so much.$"
+}
+
+text SilphCo_9F_Text_Grunt1Intro {
+    "Your POKéMON seem to adore you,\n"
+    "kid!$"
+}
+
+text SilphCo_9F_Text_Grunt1Defeat {
+    "Ghaaah!$"
+}
+
+text SilphCo_9F_Text_Grunt1PostBattle {
+    "If I had started as a TRAINER at\n"
+    "your age…$"
+}
+
+text SilphCo_9F_Text_EdIntro {
+    "Your POKéMON have weak points!\n"
+    "I can nail them!$"
+}
+
+text SilphCo_9F_Text_EdDefeat {
+    "You hammered me!$"
+}
+
+text SilphCo_9F_Text_EdPostBattle {
+    "Exploiting weak spots does work.\n"
+    "Think about type advantages.$"
+}
+
+text SilphCo_9F_Text_Grunt2Intro {
+    "I am one of the four ROCKET\n"
+    "BROTHERS!$"
+}
+
+text SilphCo_9F_Text_Grunt2Defeat {
+    "Warg!\n"
+    "Brothers, I lost!$"
+}
+
+text SilphCo_9F_Text_Grunt2PostBattle {
+    "My brothers will avenge me!$"
+}
+
+text SilphCo_9F_Text_FloorSign {
+    "SILPH CO. HEAD OFFICE\n"
+    "9F$"
+}

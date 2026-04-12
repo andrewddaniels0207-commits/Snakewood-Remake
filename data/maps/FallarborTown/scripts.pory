@@ -1,0 +1,111 @@
+mapscripts FallarborTown_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: FallarborTown_OnTransition
+}
+
+script FallarborTown_OnTransition {
+    setflag(FLAG_VISITED_FALLARBOR_TOWN)
+    setvar(VAR_CONTEST_HALL_STATE, 0)
+    clearflag(FLAG_CONTEST_SKETCH_CREATED)
+    end
+}
+
+script FallarborTown_EventScript_ExpertM {
+    lock
+    faceplayer
+    if (flag(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY)) goto(FallarborTown_EventScript_ExpertMNormal)
+    msgbox(FallarborTown_Text_ShadyCharactersCozmosHome, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script FallarborTown_EventScript_ExpertMNormal {
+    msgbox(FallarborTown_Text_RegionKnownForMeteors, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script FallarborTown_EventScript_Girl {
+    msgbox(FallarborTown_Text_MyPreciousAzurill, MSGBOX_NPC)
+    end
+}
+
+script FallarborTown_EventScript_Gentleman {
+    msgbox(FallarborTown_Text_HaveYouChallengedFlannery, MSGBOX_NPC)
+    end
+}
+
+script FallarborTown_EventScript_Azurill {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_AZURILL, CRY_MODE_NORMAL)
+    msgbox(FallarborTown_Text_Azurill, MSGBOX_DEFAULT)
+    waitmoncry()
+    release
+    end
+}
+
+script FallarborTown_EventScript_BattleTentSign {
+    msgbox(FallarborTown_Text_BattleTentSign, MSGBOX_SIGN)
+    end
+}
+
+script FallarborTown_EventScript_TownSign {
+    msgbox(FallarborTown_Text_TownSign, MSGBOX_SIGN)
+    end
+}
+
+script FallarborTown_EventScript_MoveTutorSign {
+    msgbox(FallarborTown_Text_MoveTutorSign, MSGBOX_SIGN)
+    end
+}
+
+text FallarborTown_Text_ShadyCharactersCozmosHome {
+    "Something's happening,\n"
+    "and I don't like it!\p"
+    "I've seen shady characters wandering\n"
+    "in and out of PROF. COZMO's home…$"
+}
+
+text FallarborTown_Text_RegionKnownForMeteors {
+    "This region's been known for meteors\n"
+    "since the olden days.\p"
+    "They say METEOR FALLS was gouged out\n"
+    "by a falling meteorite long ago.$"
+}
+
+text FallarborTown_Text_MyPreciousAzurill {
+    "See! Take a look!\n"
+    "This is my precious AZURILL!\p"
+    "It's slick and smooth and plushy, too!$"
+}
+
+text FallarborTown_Text_Azurill {
+    "AZURILL: Rooreelooo.$"
+}
+
+text FallarborTown_Text_HaveYouChallengedFlannery {
+    "Have you already challenged FLANNERY,\n"
+    "the LEADER of LAVARIDGE GYM?\p"
+    "The girl's grandfather was famous.\n"
+    "He was one of the ELITE FOUR in the\l"
+    "POKéMON LEAGUE at one point.\p"
+    "It wouldn't surprise me to see FLANNERY\n"
+    "become a great TRAINER in her own\l"
+    "right.$"
+}
+
+text FallarborTown_Text_BattleTentSign {
+    "BATTLE TENT FALLARBOR SITE\n"
+    "“May the Greatest Teams Gather!”$"
+}
+
+text FallarborTown_Text_TownSign {
+    "FALLARBOR TOWN\n"
+    "“A farm community with small gardens.”$"
+}
+
+text FallarborTown_Text_MoveTutorSign {
+    "MOVE TUTOR'S HOUSE\n"
+    "“New moves taught to POKéMON.”$"
+}

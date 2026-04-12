@@ -1,0 +1,143 @@
+mapscripts FuchsiaCity_WardensHouse_Frlg_MapScripts {}
+
+script FuchsiaCity_WardensHouse_EventScript_Warden {
+    lock
+    faceplayer
+    if (flag(FLAG_GOT_HM04)) goto(FuchsiaCity_WardensHouse_EventScript_ExplainStrength)
+    if (flag(FLAG_HIDE_SAFARI_ZONE_WEST_GOLD_TEETH)) goto(FuchsiaCity_WardensHouse_EventScript_GiveGoldTeeth)
+    msgbox(FuchsiaCity_WardensHouse_Text_HifFuffHefifoo, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) call(FuchsiaCity_WardensHouse_EventScript_WardenYes)
+    if (var(VAR_RESULT) == NO) call(FuchsiaCity_WardensHouse_EventScript_WardenNo)
+    release
+    end
+}
+
+script FuchsiaCity_WardensHouse_EventScript_GiveGoldTeeth {
+    textcolor(NPC_TEXT_COLOR_NEUTRAL)
+    playfanfare(MUS_OBTAIN_TMHM)
+    message(FuchsiaCity_WardensHouse_Text_GaveGoldTeethToWarden)
+    waitmessage()
+    waitfanfare()
+    msgbox(FuchsiaCity_WardensHouse_Text_WardenPoppedInHisTeeth)
+    call(EventScript_RestorePrevTextColor)
+    checkplayergender()
+    if (var(VAR_RESULT) == MALE) call(FuchsiaCity_WardensHouse_EventScript_WardenThanksMale)
+    if (var(VAR_RESULT) == FEMALE) call(FuchsiaCity_WardensHouse_EventScript_WardenThanksFemale)
+    giveitem_msg(FuchsiaCity_WardensHouse_Text_ReceivedHM04FromWarden, ITEM_HM04)
+    setflag(FLAG_GOT_HM04)
+    removeitem(ITEM_GOLD_TEETH)
+    release
+    end
+}
+
+script FuchsiaCity_WardensHouse_EventScript_WardenThanksMale {
+    msgbox(FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething)
+    return
+}
+
+script FuchsiaCity_WardensHouse_EventScript_WardenThanksFemale {
+    msgbox(FuchsiaCity_WardensHouse_Text_ThanksLassieGiveYouSomething)
+    return
+}
+
+script FuchsiaCity_WardensHouse_EventScript_WardenYes {
+    msgbox(FuchsiaCity_WardensHouse_Text_AhHowheeHoHoo)
+    return
+}
+
+script FuchsiaCity_WardensHouse_EventScript_WardenNo {
+    msgbox(FuchsiaCity_WardensHouse_Text_HeOhayHeHaHoo)
+    return
+}
+
+script FuchsiaCity_WardensHouse_EventScript_ExplainStrength {
+    msgbox(FuchsiaCity_WardensHouse_Text_ExplainStrength)
+    release
+    end
+}
+
+script FuchsiaCity_WardensHouse_EventScript_DisplaySign1 {
+    msgbox(FuchsiaCity_WardensHouse_Text_MonPhotosFossilsOnDisplay, MSGBOX_SIGN)
+    end
+}
+
+script FuchsiaCity_WardensHouse_EventScript_DisplaySign2 {
+    msgbox(FuchsiaCity_WardensHouse_Text_OldMonMerchandiseOnDisplay, MSGBOX_SIGN)
+    end
+}
+
+text FuchsiaCity_WardensHouse_Text_HifFuffHefifoo {
+    "WARDEN: Hif fuff hefifoo!\p"
+    "Ha lof ha feef ee hafahi ho.\n"
+    "Heff hee fwee!$"
+}
+
+text FuchsiaCity_WardensHouse_Text_AhHowheeHoHoo {
+    "Ah howhee ho hoo!\n"
+    "Eef ee hafahi ho!$"
+}
+
+text FuchsiaCity_WardensHouse_Text_HeOhayHeHaHoo {
+    "Ha?\n"
+    "He ohay heh ha hoo ee haheh!$"
+}
+
+text FuchsiaCity_WardensHouse_Text_GaveGoldTeethToWarden {
+    "{PLAYER} gave the GOLD TEETH\n"
+    "to the WARDEN.$"
+}
+
+text FuchsiaCity_WardensHouse_Text_WardenPoppedInHisTeeth {
+    "The WARDEN popped in his teeth!$"
+}
+
+text FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething {
+    "WARDEN: Thanks, son!\n"
+    "You're a real lifesaver!\p"
+    "No one could understand a word\n"
+    "that I said, not a one!\p"
+    "I was too ashamed to show my face\n"
+    "around the OFFICE, even.\p"
+    "Let me give you something for your\n"
+    "trouble.$"
+}
+
+text FuchsiaCity_WardensHouse_Text_ThanksLassieGiveYouSomething {
+    "WARDEN: Thank you, lassie!\n"
+    "You're a real lifesaver!\p"
+    "No one could understand a word\n"
+    "that I said, not a one!\p"
+    "I was too ashamed to show my face\n"
+    "around the OFFICE, even.\p"
+    "Let me give you something for your\n"
+    "trouble.$"
+}
+
+text FuchsiaCity_WardensHouse_Text_ReceivedHM04FromWarden {
+    "{PLAYER} received HM04\n"
+    "from the WARDEN.$"
+}
+
+text FuchsiaCity_WardensHouse_Text_ExplainStrength {
+    "WARDEN: Inside HM04 you'll find\n"
+    "STRENGTH.\p"
+    "It lets POKéMON move boulders when\n"
+    "you're outside of battle.\p"
+    "Oh yes, did you find the SECRET\n"
+    "HOUSE in the SAFARI ZONE?$"
+}
+
+text FuchsiaCity_WardensHouse_Text_YouHaveTooMuchStuff {
+    "なんや　にもつ\n"
+    "いっぱいやんけ！$"
+}
+
+text FuchsiaCity_WardensHouse_Text_MonPhotosFossilsOnDisplay {
+    "POKéMON photos and fossils are on\n"
+    "display.$"
+}
+
+text FuchsiaCity_WardensHouse_Text_OldMonMerchandiseOnDisplay {
+    "Old POKéMON merchandise is on\n"
+    "display.$"
+}

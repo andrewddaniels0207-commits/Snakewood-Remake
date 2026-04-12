@@ -1,0 +1,120 @@
+mapscripts LilycoveCity_MoveDeletersHouse_MapScripts {}
+
+script LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter {
+    lockall
+    applymovement(LOCALID_MOVE_DELETER, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove, MSGBOX_YESNO)
+    switch(VAR_RESULT)
+    case(YES, LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget)
+    case(NO, LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain)
+    releaseall
+    end
+}
+
+script LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget {
+    msgbox(LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget, MSGBOX_DEFAULT)
+    chooseboxmon(SELECT_PC_MON_MOVE_DELETER)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) goto(LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain)
+    special(IsSelectedMonEgg)
+    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_MoveDeletersHouse_EventScript_EggCantForgetMoves)
+    special(GetNumMovesSelectedMonHas)
+    if (var(VAR_RESULT) == 1) goto(LilycoveCity_MoveDeletersHouse_EventScript_MonOnlyKnowsOneMove)
+    msgbox(LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten, MSGBOX_DEFAULT)
+    fadescreen(FADE_TO_BLACK)
+    special(MoveDeleterChooseMoveToForget)
+    fadescreen(FADE_FROM_BLACK)
+    if (var(VAR_0x8005) == MAX_MON_MOVES) goto(LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget)
+    special(BufferMoveDeleterNicknameAndMove)
+    msgbox(LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten, MSGBOX_YESNO)
+    switch(VAR_RESULT)
+    case(YES, LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove)
+    case(NO, LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain)
+    releaseall
+    end
+}
+
+script LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove {
+    special(IsLastMonThatKnowsSurf)
+    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf)
+    special(MoveDeleterForgetMove)
+    playfanfare(MUS_MOVE_DELETED)
+    waitfanfare()
+    msgbox(LilycoveCity_MoveDeletersHouse_Text_MonHasForgottenMove, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script LilycoveCity_MoveDeletersHouse_EventScript_MonOnlyKnowsOneMove {
+    special(BufferMoveDeleterNicknameAndMove)
+    msgbox(LilycoveCity_MoveDeletersHouse_Text_MonOnlyKnowsOneMove, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script LilycoveCity_MoveDeletersHouse_EventScript_EggCantForgetMoves {
+    msgbox(LilycoveCity_MoveDeletersHouse_Text_EggCantForgetMoves, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain {
+    msgbox(LilycoveCity_MoveDeletersHouse_Text_ComeAgain, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf {
+    special(BufferMoveDeleterNicknameAndMove)
+    msgbox(LilycoveCity_MoveDeletersHouse_Text_CantForgetSurf, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+text LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove {
+    "Uh…\n"
+    "Oh, yes, I'm the MOVE DELETER.\p"
+    "I can make POKéMON forget their moves.\p"
+    "Would you like me to do that?$"
+}
+
+text LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget {
+    "Which POKéMON should forget a move?$"
+}
+
+text LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten {
+    "Which move should be forgotten?$"
+}
+
+text LilycoveCity_MoveDeletersHouse_Text_MonOnlyKnowsOneMove {
+    "{STR_VAR_1} knows only one move\n"
+    "so it can't be forgotten…$"
+}
+
+text LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten {
+    "Hm! {STR_VAR_1}'s {STR_VAR_2}?\n"
+    "That move should be forgotten?$"
+}
+
+text LilycoveCity_MoveDeletersHouse_Text_MonHasForgottenMove {
+    "It worked to perfection!\p"
+    "{STR_VAR_1} has forgotten\n"
+    "{STR_VAR_2} completely.$"
+}
+
+text LilycoveCity_MoveDeletersHouse_Text_ComeAgain {
+    "Come again if there are moves that\n"
+    "need to be forgotten.$"
+}
+
+text LilycoveCity_MoveDeletersHouse_Text_EggCantForgetMoves {
+    "What?\n"
+    "No EGG should know any moves.$"
+}
+
+text LilycoveCity_MoveDeletersHouse_Text_CantForgetSurf {
+    "Hm!\p"
+    "Your {STR_VAR_1} doesn't seem willing\n"
+    "to forget SURF.$"
+}

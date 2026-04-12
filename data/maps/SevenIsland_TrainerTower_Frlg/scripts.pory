@@ -1,0 +1,58 @@
+mapscripts SevenIsland_TrainerTower_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: SevenIsland_TrainerTower_OnTransition
+}
+
+script SevenIsland_TrainerTower_OnTransition {
+    setvar(VAR_MAP_SCENE_TRAINER_TOWER, 0)
+    end
+}
+
+script SevenIsland_TrainerTower_EventScript_TrainerTowerSign {
+    msgbox(SevenIsland_TrainerTower_Text_TrainerTowerSign, MSGBOX_SIGN)
+    end
+}
+
+script SevenIsland_TrainerTower_EventScript_TrainerTowerAheadSign {
+    msgbox(SevenIsland_TrainerTower_Text_TrainerTowerAhead, MSGBOX_SIGN)
+    end
+}
+
+text SevenIsland_TrainerTower_Text_DarioIntro {
+    "I sensed your approach.$"
+}
+
+text SevenIsland_TrainerTower_Text_DarioDefeat {
+    "Give up…$"
+}
+
+text SevenIsland_TrainerTower_Text_DarioPostBattle {
+    "In your future, I sense that you\n"
+    "will meet many others.\p"
+    "I think you will be linked to each\n"
+    "other by a strange power.$"
+}
+
+text SevenIsland_TrainerTower_Text_RodetteIntro {
+    "Somewhere on this island, peculiar\n"
+    "POKéMON are sleeping.$"
+}
+
+text SevenIsland_TrainerTower_Text_RodetteDefeat {
+    "What an amazing TRAINER!$"
+}
+
+text SevenIsland_TrainerTower_Text_RodettePostBattle {
+    "Somewhere on this island, peculiar\n"
+    "POKéMON are sleeping.\p"
+    "Could it be that they're waiting\n"
+    "for you?$"
+}
+
+text SevenIsland_TrainerTower_Text_TrainerTowerSign {
+    "TRAINER TOWER ENTRANCE\n"
+    "Rise to the Challenge, TRAINERS!$"
+}
+
+text SevenIsland_TrainerTower_Text_TrainerTowerAhead {
+    "TRAINER TOWER AHEAD$"
+}

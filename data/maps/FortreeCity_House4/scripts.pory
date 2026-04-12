@@ -1,0 +1,106 @@
+mapscripts FortreeCity_House4_MapScripts {}
+
+script FortreeCity_House4_EventScript_Woman {
+    msgbox(FortreeCity_House4_Text_BringsWorldCloserTogether, MSGBOX_NPC)
+    end
+}
+
+script FortreeCity_House4_EventScript_Boy {
+    lockall
+    if (flag(FLAG_RECEIVED_MENTAL_HERB)) goto(FortreeCity_House4_EventScript_ReceivedMentalHerb)
+    if (flag(FLAG_WINGULL_DELIVERED_MAIL)) goto(FortreeCity_House4_EventScript_WingullReturned)
+    if (flag(FLAG_WINGULL_SENT_ON_ERRAND)) goto(FortreeCity_House4_EventScript_WingullOnErrand)
+    msgbox(FortreeCity_House4_Text_GoBirdPokemon, MSGBOX_DEFAULT)
+    closemessage
+    setflag(FLAG_WINGULL_SENT_ON_ERRAND)
+    clearflag(FLAG_HIDE_MOSSDEEP_CITY_HOUSE_2_WINGULL)
+    applymovement(LOCALID_FORTREE_HOUSE_WINGULL, FortreeCity_House4_Movement_WingullExit)
+    waitmovement(0)
+    removeobject(LOCALID_FORTREE_HOUSE_WINGULL)
+    releaseall
+    end
+}
+
+script FortreeCity_House4_EventScript_WingullOnErrand {
+    applymovement(VAR_LAST_TALKED, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(FortreeCity_House4_Text_AskedWingullToRunErrand, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script FortreeCity_House4_EventScript_WingullReturned {
+    applymovement(VAR_LAST_TALKED, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb, MSGBOX_DEFAULT)
+    giveitem(ITEM_MENTAL_HERB)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    setflag(FLAG_RECEIVED_MENTAL_HERB)
+    releaseall
+    end
+}
+
+script FortreeCity_House4_EventScript_ReceivedMentalHerb {
+    applymovement(VAR_LAST_TALKED, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(FortreeCity_House4_Text_FriendsFarAwayThanksToWingull, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+movement FortreeCity_House4_Movement_WingullExit {
+    walk_fast_down
+    walk_fast_down
+    walk_fast_right
+    walk_in_place_faster_down
+    delay_8
+    step_end
+}
+
+script FortreeCity_House4_EventScript_Wingull {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_WINGULL, CRY_MODE_NORMAL)
+    msgbox(FortreeCity_House4_Text_Wingull, MSGBOX_DEFAULT)
+    waitmoncry()
+    release
+    end
+}
+
+text FortreeCity_House4_Text_BringsWorldCloserTogether {
+    "By being together with POKéMON,\n"
+    "people make more and more friends.\p"
+    "And that brings the world closer\n"
+    "together. I think it's wonderful!$"
+}
+
+text FortreeCity_House4_Text_GoBirdPokemon {
+    "There!\n"
+    "Go, BIRD POKéMON!$"
+}
+
+text FortreeCity_House4_Text_AskedWingullToRunErrand {
+    "Heheh, I asked my WINGULL to run\n"
+    "an errand for me.$"
+}
+
+text FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb {
+    "Good!\n"
+    "Welcome back, WINGULL!\p"
+    "Huh? What is this?\n"
+    "What is it holding?\p"
+    "A MENTAL HERB?\n"
+    "It must have picked it up somewhere.\p"
+    "But I'm not a TRAINER, so you can\n"
+    "have it.$"
+}
+
+text FortreeCity_House4_Text_FriendsFarAwayThanksToWingull {
+    "Thanks to my WINGULL, I have friends\n"
+    "who live far away.$"
+}
+
+text FortreeCity_House4_Text_Wingull {
+    "WINGULL: Pihyoh!$"
+}

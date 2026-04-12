@@ -1,0 +1,112 @@
+mapscripts SSAnne_CaptainsOffice_Frlg_MapScripts {}
+
+script SSAnne_CaptainsOffice_EventScript_Captain {
+    lock
+    if (flag(FLAG_GOT_HM01)) goto(SSAnne_CaptainsOffice_EventScript_AlreadyGotCut)
+    msgbox(SSAnne_CaptainsOffice_Text_CaptainIFeelSeasick)
+    textcolor(NPC_TEXT_COLOR_NEUTRAL)
+    message(SSAnne_CaptainsOffice_Text_RubbedCaptainsBack)
+    waitmessage()
+    playfanfare(MUS_HEAL)
+    waitfanfare()
+    call(EventScript_RestorePrevTextColor)
+    delay(50)
+    applymovement(LOCALID_SS_ANNE_CAPTAIN, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(SSAnne_CaptainsOffice_Text_ThankYouHaveHMForCut)
+    giveitem_msg(SSAnne_CaptainsOffice_Text_ObtainedHM01FromCaptain, ITEM_HM01, 1, MUS_RG_OBTAIN_KEY_ITEM)
+    msgbox(SSAnne_CaptainsOffice_Text_ExplainCut)
+    setflag(FLAG_GOT_HM01)
+    setvar(VAR_MAP_SCENE_VERMILION_CITY, 1)
+    release
+    end
+}
+
+script SSAnne_CaptainsOffice_EventScript_NoRoomForCut {
+    msgbox(SSAnne_CaptainsOffice_Text_YouHaveNoRoomForThis)
+    closemessage
+    applymovement(LOCALID_SS_ANNE_CAPTAIN, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script SSAnne_CaptainsOffice_EventScript_AlreadyGotCut {
+    applymovement(LOCALID_SS_ANNE_CAPTAIN, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(SSAnne_CaptainsOffice_Text_SSAnneWillSetSailSoon)
+    release
+    end
+}
+
+script SSAnne_CaptainsOffice_EventScript_TrashCan {
+    msgbox(SSAnne_CaptainsOffice_Text_YuckShouldntHaveLooked, MSGBOX_SIGN)
+    end
+}
+
+script SSAnne_CaptainsOffice_EventScript_Book {
+    msgbox(SSAnne_CaptainsOffice_Text_HowToConquerSeasickness, MSGBOX_SIGN)
+    end
+}
+
+text SSAnne_CaptainsOffice_Text_CaptainIFeelSeasick {
+    "CAPTAIN: Ooargh…\n"
+    "I feel hideous…\l"
+    "Urrp! Seasick…$"
+}
+
+text SSAnne_CaptainsOffice_Text_RubbedCaptainsBack {
+    "{PLAYER} rubbed the CAPTAIN's\n"
+    "back!\p"
+    "Rub-rub…\n"
+    "Rub-rub…$"
+}
+
+text SSAnne_CaptainsOffice_Text_ThankYouHaveHMForCut {
+    "CAPTAIN: Whew! Thank you!\n"
+    "I'm feeling much better now.\p"
+    "You want to see my hidden CUT\n"
+    "technique?\p"
+    "I could show you my prized CUT\n"
+    "technique if I weren't so ill…\p"
+    "I know! You can have this!\n"
+    "This HIDDEN MACHINE!\p"
+    "Teach CUT to your POKéMON, and\n"
+    "you can see it CUT anytime!$"
+}
+
+text SSAnne_CaptainsOffice_Text_ObtainedHM01FromCaptain {
+    "{PLAYER} obtained HM01\n"
+    "from the CAPTAIN!$"
+}
+
+text SSAnne_CaptainsOffice_Text_ExplainCut {
+    "Using CUT, you can chop down\n"
+    "small trees.\p"
+    "Why not try it with the trees\n"
+    "around VERMILION CITY?$"
+}
+
+text SSAnne_CaptainsOffice_Text_SSAnneWillSetSailSoon {
+    "CAPTAIN: …Whew!\p"
+    "Now that I'm not sick anymore,\n"
+    "I guess it's time.\p"
+    "The S.S. ANNE will set sail soon!\p"
+    "Farewell, until our return to\n"
+    "VERMILION CITY!$"
+}
+
+text SSAnne_CaptainsOffice_Text_YouHaveNoRoomForThis {
+    "Oh, no!\n"
+    "You have no room for this!$"
+}
+
+text SSAnne_CaptainsOffice_Text_YuckShouldntHaveLooked {
+    "Yuck!\n"
+    "Shouldn't have looked!$"
+}
+
+text SSAnne_CaptainsOffice_Text_HowToConquerSeasickness {
+    "How to Conquer Seasickness…\n"
+    "The CAPTAIN's reading this!$"
+}

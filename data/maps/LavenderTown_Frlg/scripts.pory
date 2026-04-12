@@ -1,0 +1,105 @@
+mapscripts LavenderTown_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: LavenderTown_OnTransition
+}
+
+script LavenderTown_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_LAVENDER_TOWN)
+    setvar(VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR, 1)
+    setflag(FLAG_HIDE_SS_ANNE_RIVAL)
+    end
+}
+
+script LavenderTown_EventScript_LittleGirl {
+    lock
+    faceplayer
+    msgbox(LavenderTown_Text_DoYouBelieveInGhosts, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(LavenderTown_EventScript_LittleGirlBelieve)
+    msgbox(LavenderTown_Text_JustImaginingWhiteHand)
+    release
+    end
+}
+
+script LavenderTown_EventScript_LittleGirlBelieve {
+    msgbox(LavenderTown_Text_SoThereAreBelievers)
+    release
+    end
+}
+
+script LavenderTown_EventScript_WorkerM {
+    msgbox(LavenderTown_Text_TownKnownAsMonGraveSite, MSGBOX_NPC)
+    end
+}
+
+script LavenderTown_EventScript_Boy {
+    msgbox(LavenderTown_Text_GhostsAppearedInTower, MSGBOX_NPC)
+    end
+}
+
+script LavenderTown_EventScript_TownSign {
+    msgbox(LavenderTown_Text_TownSign, MSGBOX_SIGN)
+    end
+}
+
+script LavenderTown_EventScript_SilphScopeNotice {
+    msgbox(LavenderTown_Text_SilphScopeNotice, MSGBOX_SIGN)
+    end
+}
+
+script LavenderTown_EventScript_VolunteerHouseSign {
+    msgbox(LavenderTown_Text_VolunteerPokemonHouse, MSGBOX_SIGN)
+    end
+}
+
+script LavenderTown_EventScript_PokemonTowerSign {
+    msgbox(LavenderTown_Text_PokemonTowerSign, MSGBOX_SIGN)
+    end
+}
+
+text LavenderTown_Text_DoYouBelieveInGhosts {
+    "Do you believe in ghosts?$"
+}
+
+text LavenderTown_Text_SoThereAreBelievers {
+    "Really?\n"
+    "So there are believers…$"
+}
+
+text LavenderTown_Text_JustImaginingWhiteHand {
+    "Hahaha, I guess not.\p"
+    "That white hand on your shoulder…\n"
+    "I'm just imagining it.$"
+}
+
+text LavenderTown_Text_TownKnownAsMonGraveSite {
+    "This town is known as the grave\n"
+    "site of POKéMON.\p"
+    "Memorial services are held in\n"
+    "POKéMON TOWER.$"
+}
+
+text LavenderTown_Text_GhostsAppearedInTower {
+    "Ghosts appeared in POKéMON TOWER.\p"
+    "I think they're the spirits of\n"
+    "POKéMON that the ROCKETS killed.$"
+}
+
+text LavenderTown_Text_TownSign {
+    "LAVENDER TOWN\n"
+    "The Noble Purple Town$"
+}
+
+text LavenderTown_Text_SilphScopeNotice {
+    "New SILPH SCOPE!\n"
+    "Make the Invisible Plain to See!\p"
+    "SILPH CO.$"
+}
+
+text LavenderTown_Text_VolunteerPokemonHouse {
+    "LAVENDER VOLUNTEER\n"
+    "POKéMON HOUSE$"
+}
+
+text LavenderTown_Text_PokemonTowerSign {
+    "POKéMON TOWER\n"
+    "Becalm the Spirits of POKéMON$"
+}

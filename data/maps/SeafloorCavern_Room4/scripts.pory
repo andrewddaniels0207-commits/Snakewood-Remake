@@ -1,0 +1,42 @@
+mapscripts SeafloorCavern_Room4_MapScripts {}
+
+script SeafloorCavern_Room4_EventScript_Grunt3 {
+    trainerbattle_single(TRAINER_GRUNT_SEAFLOOR_CAVERN_3, SeafloorCavern_Room4_Text_Grunt3Intro, SeafloorCavern_Room4_Text_Grunt3Defeat)
+    msgbox(SeafloorCavern_Room4_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SeafloorCavern_Room4_EventScript_Grunt4 {
+    trainerbattle_single(TRAINER_GRUNT_SEAFLOOR_CAVERN_4, SeafloorCavern_Room4_Text_Grunt4Intro, SeafloorCavern_Room4_Text_Grunt4Defeat)
+    msgbox(SeafloorCavern_Room4_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text SeafloorCavern_Room4_Text_Grunt3Intro {
+    "Who are you?\n"
+    "Where did you come in from?$"
+}
+
+text SeafloorCavern_Room4_Text_Grunt3Defeat {
+    "Lost it…$"
+}
+
+text SeafloorCavern_Room4_Text_Grunt3PostBattle {
+    "I can't find the way out!\p"
+    "I'm not afraid. Don't get me wrong!$"
+}
+
+text SeafloorCavern_Room4_Text_Grunt4Intro {
+    "Who are you?\n"
+    "Where do you think you're going?$"
+}
+
+text SeafloorCavern_Room4_Text_Grunt4Defeat {
+    "I failed to win!$"
+}
+
+text SeafloorCavern_Room4_Text_Grunt4PostBattle {
+    "My partner forgot the map in that\n"
+    "submarine!\p"
+    "How's that for being useless?$"
+}

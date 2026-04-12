@@ -1,0 +1,20 @@
+mapscripts RustboroCity_Flat1_1F_MapScripts {}
+
+script RustboroCity_Flat1_1F_EventScript_Man {
+    msgbox(RustboroCity_Flat1_1F_Text_EveryPokemonHasAbility, MSGBOX_NPC)
+    end
+}
+
+script RustboroCity_Flat1_1F_EventScript_Woman {
+    msgbox(RustboroCity_Flat1_1F_Text_PokemonStrange, MSGBOX_NPC)
+    end
+}
+
+text RustboroCity_Flat1_1F_Text_EveryPokemonHasAbility {
+    "Every POKéMON has a special ability\n"
+    "that it can use.$"
+}
+
+text RustboroCity_Flat1_1F_Text_PokemonStrange {
+    "POKéMON are such strange creatures.$"
+}

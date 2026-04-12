@@ -1,0 +1,381 @@
+mapscripts TrainerTower_Lobby_Frlg_MapScripts {
+    MAP_SCRIPT_ON_RESUME: TrainerTower_Lobby_OnResume
+    MAP_SCRIPT_ON_RETURN_TO_FIELD: TrainerTower_Lobby_OnReturnToField
+    MAP_SCRIPT_ON_TRANSITION: TrainerTower_Lobby_OnTransition
+    MAP_SCRIPT_ON_LOAD: TrainerTower_Lobby_OnLoad
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_0, 0: TrainerTower_Lobby_EventScript_Enter
+        VAR_TEMP_D, 17: TrainerTower_Lobby_EventScript_ExitElevator
+    ]
+}
+
+script TrainerTower_Lobby_OnResume {
+    setvar(VAR_TEMP_2, 0)
+    ttower_resumetimer()
+    ttower_shouldexit()
+    if (var(VAR_RESULT) == FALSE) goto(TrainerTower_Lobby_OnResumeEnd)
+    setvar(VAR_TEMP_0, 0)
+    setobjectxy(LOCALID_PLAYER, 9, 7)
+    applymovement(LOCALID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist)
+}
+
+script TrainerTower_Lobby_OnResumeEnd {
+    end
+}
+
+script TrainerTower_Lobby_OnReturnToField {
+    addobject(LOCALID_TOWER_NURSE)
+    addobject(LOCALID_TOWER_MART_CLERK)
+    addobject(LOCALID_TOWER_RECEPTIONIST)
+    addobject(LOCALID_TOWER_COOLTRAINER_F)
+    addobject(LOCALID_TOWER_BALDING_MAN)
+    end
+}
+
+script TrainerTower_Lobby_OnLoad {
+    if (var(VAR_TEMP_D) == 17) call(TrainerTower_Lobby_OpenCounterBarrier)
+    end
+}
+
+script TrainerTower_Lobby_OpenCounterBarrier {
+    setmetatile(17, 10, METATILE_TrainerTower_Floor_ShadeBottomLeft, 0)
+    return
+}
+
+script TrainerTower_Lobby_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_TRAINER_TOWER_LOBBY)
+    getplayerxy(VAR_TEMP_D, VAR_RESULT)
+    end
+}
+
+script TrainerTower_Lobby_EventScript_ExitElevator {
+    lockall
+    applymovement(LOCALID_PLAYER, TrainerTower_Lobby_Movement_ExitElevator)
+    waitmovement(0)
+    setmetatile(17, 10, METATILE_TrainerTower_CounterBarrier, 1)
+    special(DrawWholeMapView)
+    playse(SE_CLICK)
+    waitse()
+    setvar(VAR_TEMP_D, 0)
+    releaseall
+    end
+}
+
+movement TrainerTower_Lobby_Movement_ExitElevator {
+    walk_down
+    walk_down
+    step_end
+}
+
+script TrainerTower_Lobby_EventScript_Enter {
+    setvar(VAR_TEMP_0, 1)
+    ttower_getchallengestatus()
+    switch(VAR_RESULT)
+    case(TT_CHALLENGE_STATUS_LOST, TrainerTower_Lobby_EventScript_LostChallenge)
+    case(TT_CHALLENGE_STATUS_UNK, TrainerTower_Lobby_EventScript_ExitChallengeSpeakToReceptionist)
+    case(TT_CHALLENGE_STATUS_NORMAL, TrainerTower_Lobby_EventScript_EnterEnd)
+}
+
+script TrainerTower_Lobby_EventScript_LostChallenge {
+    lock
+    faceplayer
+    applymovement(LOCALID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist)
+    textcolor(NPC_TEXT_COLOR_FEMALE)
+    msgbox(TrainerTower_Lobby_Text_TooBadComeBackTryAgain)
+    goto(TrainerTower_Lobby_EventScript_ExitChallenge)
+}
+
+script TrainerTower_Lobby_EventScript_ExitChallengeSpeakToReceptionist {
+    lock
+    faceplayer
+    applymovement(LOCALID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist)
+    textcolor(NPC_TEXT_COLOR_FEMALE)
+    msgbox(TrainerTower_Lobby_Text_MoveCounterHereWhenTrainersSwitch)
+}
+
+script TrainerTower_Lobby_EventScript_ExitChallenge {
+    closemessage
+    applymovement(LOCALID_PLAYER, TrainerTower_Lobby_Movement_WalkDown)
+    waitmovement(0)
+    setvar(VAR_MAP_SCENE_TRAINER_TOWER, 0)
+    release
+}
+
+script TrainerTower_Lobby_EventScript_EnterEnd {
+    end
+}
+
+script TrainerTower_Lobby_EventScript_Nurse {
+    lock
+    faceplayer
+    call(EventScript_PkmnCenterNurse_Frlg)
+    release
+    end
+}
+
+script TrainerTower_Lobby_EventScript_Receptionist {
+    lock
+    faceplayer
+    ttower_getbeatchallenge()
+    if (var(VAR_RESULT) == TRUE) goto(TrainerTower_Lobby_EventScript_ThanksForCompeting)
+    msgbox(TrainerTower_Lobby_Text_GiveItYourBest)
+    goto(TrainerTower_Lobby_EventScript_ReceptionistEnd)
+}
+
+script TrainerTower_Lobby_EventScript_ThanksForCompeting {
+    msgbox(TrainerTower_Lobby_Text_ThanksForCompeting)
+}
+
+script TrainerTower_Lobby_EventScript_ReceptionistEnd {
+    release
+    end
+}
+
+script TrainerTower_Lobby_EventScript_MartClerk {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(TrainerTower_Lobby_Mart_Items)
+    msgbox(gText_PleaseComeAgain)
+    release
+    end
+}
+
+script TrainerTower_Lobby_Mart_Items {
+    release
+    end
+}
+
+script TrainerTower_Lobby_EventScript_EntryTrigger {
+    lockall
+    applymovement(LOCALID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist)
+    textcolor(NPC_TEXT_COLOR_FEMALE)
+    msgbox(TrainerTower_Lobby_Text_WelcomeToTrainerTower)
+    ttower_getnumfloors()
+    if (var(VAR_RESULT) == FALSE) goto(TrainerTower_Lobby_EventScript_AllFloorsUsed)
+    msgbox(TrainerTower_Lobby_Text_TrainersUpToFloorNum)
+    goto(TrainerTower_Lobby_EventScript_AskEnterChallenge)
+}
+
+script TrainerTower_Lobby_EventScript_AllFloorsUsed {
+    msgbox(TrainerTower_Lobby_Text_TrainersUpEighthFloor)
+}
+
+script TrainerTower_Lobby_EventScript_AskEnterChallenge {
+    message(TrainerTower_Lobby_Text_LikeToChallengeTrainers)
+    waitmessage()
+    multichoice(18, 6, MULTI_YESNOINFO, FALSE)
+    switch(VAR_RESULT)
+    case(0, TrainerTower_Lobby_EventScript_ChooseChallenge)
+    case(1, TrainerTower_Lobby_EventScript_DeclineChallenge)
+    case(2, TrainerTower_Lobby_EventScript_ChallengeInfo)
+    case(MULTI_B_PRESSED, TrainerTower_Lobby_EventScript_DeclineChallenge)
+    end
+}
+
+script TrainerTower_Lobby_EventScript_ChallengeInfo {
+    msgbox(TrainerTower_Lobby_Text_ExplainTrainerTower)
+    goto(TrainerTower_Lobby_EventScript_AskEnterChallenge)
+    end
+}
+
+script TrainerTower_Lobby_EventScript_ChooseChallenge {
+    multichoice(13, 3, MULTI_TRAINER_TOWER_MODE, FALSE)
+    switch(VAR_RESULT)
+    case(0, TrainerTower_Lobby_EventScript_BeginChallenge)
+    case(1, TrainerTower_Lobby_EventScript_BeginChallenge)
+    case(2, TrainerTower_Lobby_EventScript_BeginChallenge)
+    case(3, TrainerTower_Lobby_EventScript_BeginChallenge)
+    case(4, TrainerTower_Lobby_EventScript_DeclineChallenge)
+    case(MULTI_B_PRESSED, TrainerTower_Lobby_EventScript_DeclineChallenge)
+    end
+}
+
+script TrainerTower_Lobby_EventScript_BeginChallenge {
+    copyvar(VAR_0x8005, VAR_RESULT)
+    setvar(VAR_MAP_SCENE_TRAINER_TOWER, 1)
+    special(HealPlayerParty)
+    msgbox(TrainerTower_Lobby_Text_StartClockGetSetGo)
+    ttower_startchallenge()
+    releaseall
+    end
+}
+
+script TrainerTower_Lobby_EventScript_DeclineChallenge {
+    msgbox(TrainerTower_Lobby_Text_PleaseVisitUsAgain)
+    closemessage
+    applymovement(LOCALID_PLAYER, TrainerTower_Lobby_Movement_WalkDown)
+    waitmovement(0)
+    releaseall
+    end
+}
+
+movement TrainerTower_Lobby_Movement_FaceReceptionist {
+    face_right
+    step_end
+}
+
+movement TrainerTower_Lobby_Movement_WalkDown {
+    walk_down
+    step_end
+}
+
+script TrainerTower_Lobby_EventScript_ShowRecords {
+    lockall
+    fadescreen(FADE_TO_BLACK)
+    setvar(VAR_0x8004, 1)
+    special(ShowTrainerHillRecords)
+    waitstate
+    releaseall
+    end
+}
+
+script TrainerTower_Lobby_EventScript_CooltrainerF {
+    msgbox(TrainerTower_Lobby_Text_WonderWhatKindsOfTrainers, MSGBOX_NPC)
+    end
+}
+
+script TrainerTower_Lobby_EventScript_BaldingMan {
+    msgbox(TrainerTower_Lobby_Text_StairsTougherThanAnyBattle, MSGBOX_NPC)
+    end
+}
+
+text TrainerTower_Lobby_Text_WelcomeToTrainerTower {
+    "Hello!\p"
+    "Welcome to TRAINER TOWER where\n"
+    "TRAINERS gather from all over!$"
+}
+
+text TrainerTower_Lobby_Text_TrainersUpToFloorNum {
+    "TRAINERS from all over the world\n"
+    "gather here to battle.\p"
+    "Let me see…\p"
+    "Right now, there are TRAINERS only\n"
+    "up to Floor {STR_VAR_1}.$"
+}
+
+text TrainerTower_Lobby_Text_TrainersUpEighthFloor {
+    "TRAINERS are awaiting your\n"
+    "challenge up to the eighth floor.$"
+}
+
+text TrainerTower_Lobby_Text_LikeToChallengeTrainers {
+    "Would you like to challenge the\n"
+    "waiting TRAINERS?$"
+}
+
+text TrainerTower_Lobby_Text_StartClockGetSetGo {
+    "Okay, I'll get the clock started,\n"
+    "so give it everything you have.\p"
+    "On your marks…\p"
+    "Get set…\p"
+    "Go!$"
+}
+
+text TrainerTower_Lobby_Text_PleaseVisitUsAgain {
+    "Please do visit us again!$"
+}
+
+text TrainerTower_Lobby_Text_TooBadComeBackTryAgain {
+    "That was too bad.\p"
+    "I think you put in a tremendous\n"
+    "effort in your battling.\p"
+    "Please come back and try again!$"
+}
+
+text TrainerTower_Lobby_Text_GiveItYourBest {
+    "I hope you give it your best.$"
+}
+
+text TrainerTower_Lobby_Text_MoveCounterHereWhenTrainersSwitch {
+    "When the TRAINERS switch places,\n"
+    "the movement can be hectic.\p"
+    "To avoid the stampede, we moved\n"
+    "the reception counter here.\p"
+    "I'm sorry for the inconvenience.$"
+}
+
+text TrainerTower_Roof_Text_ImOwnerBattledPerfectly {
+    "Hello…\p"
+    "I am the owner of this TOWER…\p"
+    "How the sky soars above this\n"
+    "rooftop…\p"
+    "The caress of the winds up here…\p"
+    "It's all so perfect…\p"
+    "The way you battled…\n"
+    "It, too, was perfection…$"
+}
+
+text TrainerTower_Roof_Text_ThisIsForYou {
+    "This is for you…$"
+}
+
+text TrainerTower_Roof_Text_DoneItInRecordTime {
+    "Oh!\n"
+    "Stupendous!\p"
+    "It's marvelous how you've come up\n"
+    "here so quickly.\p"
+    "The fact is, you've done it in\n"
+    "record time…\p"
+    "I'll have your record posted at\n"
+    "the reception counter.$"
+}
+
+text TrainerTower_Roof_Text_TookSweetTimeGettingHere {
+    "You seem to have taken your sweet\n"
+    "time getting here…$"
+}
+
+text TrainerTower_Roof_Text_IdLikeToSeeBetterTime {
+    "What I would like to see is a\n"
+    "better time out of you…\p"
+    "I'm counting on you.\p"
+    "Until then, farewell…$"
+}
+
+text TrainerTower_Text_XMinYZSec {
+    "{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.$"
+}
+
+text TrainerTower_Lobby_Text_HereAreTheResults {
+    "せいせきひょうです$"
+}
+
+text TrainerTower_Lobby_Text_NeedTwoMonsForDouble {
+    "This is a two-on-two battle.\p"
+    "You may not battle unless you have\n"
+    "at least two POKéMON.$"
+}
+
+text TrainerTower_Lobby_Text_ExplainTrainerTower {
+    "Here at TRAINER TOWER, there is an\n"
+    "event called TIME ATTACK.\p"
+    "You will be timed on how quickly\n"
+    "you can get from the reception\l"
+    "counter to the OWNER on the roof.\p"
+    "The best times will be recorded on\n"
+    "the Time Board.\p"
+    "Try competing with friends to see\n"
+    "who can beat it the fastest.\p"
+    "You will not earn any EXP. Points\n"
+    "or money by beating TRAINERS here.$"
+}
+
+text TrainerTower_Lobby_Text_ThanksForCompeting {
+    "Thank you for competing!$"
+}
+
+text TrainerTower_Lobby_Text_WonderWhatKindsOfTrainers {
+    "I'm here to see how good I am.\p"
+    "I wonder what kinds of TRAINERS\n"
+    "are waiting for me?\p"
+    "It's nerve-racking!$"
+}
+
+text TrainerTower_Lobby_Text_StairsTougherThanAnyBattle {
+    "Gasp, gasp…\n"
+    "Gasp…\p"
+    "Never mind battling! These stairs…\n"
+    "They're tougher than any battle…$"
+}

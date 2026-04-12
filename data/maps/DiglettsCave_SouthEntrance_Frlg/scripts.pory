@@ -1,0 +1,13 @@
+mapscripts DiglettsCave_SouthEntrance_Frlg_MapScripts {}
+
+script DiglettsCave_SouthEntrance_EventScript_OldMan {
+    msgbox(DiglettsCave_SouthEntrance_Text_DiglettDugThisTunnel, MSGBOX_NPC)
+    end
+}
+
+text DiglettsCave_SouthEntrance_Text_DiglettDugThisTunnel {
+    "Well, isn't this a surprise!\n"
+    "DIGLETT dug this long tunnel!\p"
+    "It goes right to VIRIDIAN CITY,\n"
+    "they tell me.$"
+}

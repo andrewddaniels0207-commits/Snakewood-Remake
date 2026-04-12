@@ -1,0 +1,39 @@
+mapscripts SaffronCity_Mart_Frlg_MapScripts {}
+
+script SaffronCity_Mart_EventScript_Lass {
+    msgbox(SaffronCity_Mart_Text_ReviveIsCostly, MSGBOX_NPC)
+    end
+}
+
+script SaffronCity_Mart_EventScript_Youngster {
+    msgbox(SaffronCity_Mart_Text_MaxRepelMoreEffectiveThanSuper, MSGBOX_NPC)
+    end
+}
+
+script SaffronCity_Mart_EventScript_Clerk {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(SaffronCity_Mart_Items)
+    msgbox(gText_PleaseComeAgain)
+    release
+    end
+}
+
+script SaffronCity_Mart_Items {
+    release
+    end
+}
+
+text SaffronCity_Mart_Text_MaxRepelMoreEffectiveThanSuper {
+    "MAX REPEL keeps weaker POKéMON\n"
+    "from appearing.\p"
+    "MAX REPEL stays effective longer\n"
+    "than SUPER REPEL.$"
+}
+
+text SaffronCity_Mart_Text_ReviveIsCostly {
+    "REVIVE is costly, but it revives\n"
+    "fainted POKéMON!$"
+}

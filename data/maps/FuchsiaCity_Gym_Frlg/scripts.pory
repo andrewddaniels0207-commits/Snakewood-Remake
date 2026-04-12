@@ -1,0 +1,288 @@
+mapscripts FuchsiaCity_Gym_Frlg_MapScripts {}
+
+script FuchsiaCity_Gym_EventScript_Koga {
+    famechecker(FAMECHECKER_KOGA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
+    trainerbattle_single(TRAINER_LEADER_KOGA, FuchsiaCity_Gym_Text_KogaIntro, FuchsiaCity_Gym_Text_KogaDefeat, FuchsiaCity_Gym_EventScript_DefeatedKoga, NO_MUSIC)
+    if (!flag(FLAG_GOT_TM06_FROM_KOGA)) goto(FuchsiaCity_Gym_EventScript_GiveTM06)
+    msgbox(FuchsiaCity_Gym_Text_KogaPostBattle)
+    release
+    end
+}
+
+script FuchsiaCity_Gym_EventScript_DefeatedKoga {
+    famechecker(FAMECHECKER_KOGA, 1)
+    clearflag(FLAG_HIDE_FAME_CHECKER_KOGA_JOURNAL)
+    setflag(FLAG_DEFEATED_KOGA)
+    setflag(FLAG_BADGE05_GET)
+    set_gym_trainers_frlg(5)
+    goto(FuchsiaCity_Gym_EventScript_GiveTM06)
+    end
+}
+
+script FuchsiaCity_Gym_EventScript_GiveTM06 {
+    msgbox(FuchsiaCity_Gym_Text_KogaExplainSoulBadge)
+    checkitemspace(ITEM_TM06)
+    if (var(VAR_RESULT) == FALSE) goto(FuchsiaCity_Gym_EventScript_NoRoomForTM06)
+    giveitem_msg(FuchsiaCity_Gym_Text_ReceivedTM06FromKoga, ITEM_TM06)
+    setflag(FLAG_GOT_TM06_FROM_KOGA)
+    msgbox(FuchsiaCity_Gym_Text_KogaExplainTM06)
+    release
+    end
+}
+
+script FuchsiaCity_Gym_EventScript_NoRoomForTM06 {
+    msgbox(FuchsiaCity_Gym_Text_MakeSpaceForThis)
+    release
+    end
+}
+
+script FuchsiaCity_Gym_EventScript_Phil {
+    trainerbattle_single(TRAINER_TAMER_PHIL, FuchsiaCity_Gym_Text_PhilIntro, FuchsiaCity_Gym_Text_PhilDefeat)
+    msgbox(FuchsiaCity_Gym_Text_PhilPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FuchsiaCity_Gym_EventScript_Edgar {
+    trainerbattle_single(TRAINER_TAMER_EDGAR, FuchsiaCity_Gym_Text_EdgarIntro, FuchsiaCity_Gym_Text_EdgarDefeat)
+    msgbox(FuchsiaCity_Gym_Text_EdgarPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FuchsiaCity_Gym_EventScript_Kirk {
+    trainerbattle_single(TRAINER_JUGGLER_KIRK, FuchsiaCity_Gym_Text_KirkIntro, FuchsiaCity_Gym_Text_KirkDefeat)
+    famechecker(FAMECHECKER_KOGA, 2)
+    msgbox(FuchsiaCity_Gym_Text_KirkPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FuchsiaCity_Gym_EventScript_Shawn {
+    trainerbattle_single(TRAINER_JUGGLER_SHAWN, FuchsiaCity_Gym_Text_ShawnIntro, FuchsiaCity_Gym_Text_ShawnDefeat)
+    msgbox(FuchsiaCity_Gym_Text_ShawnPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FuchsiaCity_Gym_EventScript_Kayden {
+    trainerbattle_single(TRAINER_JUGGLER_KAYDEN, FuchsiaCity_Gym_Text_KaydenIntro, FuchsiaCity_Gym_Text_KaydenDefeat)
+    msgbox(FuchsiaCity_Gym_Text_KaydenPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FuchsiaCity_Gym_EventScript_Nate {
+    trainerbattle_single(TRAINER_JUGGLER_NATE, FuchsiaCity_Gym_Text_NateIntro, FuchsiaCity_Gym_Text_NateDefeat)
+    msgbox(FuchsiaCity_Gym_Text_NatePostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FuchsiaCity_Gym_EventScript_GymGuy {
+    lock
+    faceplayer
+    if (flag(FLAG_DEFEATED_KOGA)) goto(FuchsiaCity_Gym_EventScript_GymGuyPostVictory)
+    msgbox(FuchsiaCity_Gym_Text_GymGuyAdvice)
+    release
+    end
+}
+
+script FuchsiaCity_Gym_EventScript_GymGuyPostVictory {
+    msgbox(FuchsiaCity_Gym_Text_GymGuyPostVictory)
+    release
+    end
+}
+
+script FuchsiaCity_Gym_EventScript_GymStatue {
+    lockall
+    if (flag(FLAG_BADGE05_GET)) goto(FuchsiaCity_Gym_EventScript_GymStatuePostVictory)
+    msgbox(FuchsiaCity_Gym_Text_GymStatue)
+    releaseall
+    end
+}
+
+script FuchsiaCity_Gym_EventScript_GymStatuePostVictory {
+    msgbox(FuchsiaCity_Gym_Text_GymStatuePlayerWon)
+    releaseall
+    end
+}
+
+text FuchsiaCity_Gym_Text_KogaIntro {
+    "KOGA: Fwahahaha!\p"
+    "A mere child like you dares to\n"
+    "challenge me?\p"
+    "The very idea makes me shiver\n"
+    "with mirth!\p"
+    "Very well, I shall show you true\n"
+    "terror as a ninja master.\p"
+    "Poison brings steady doom.\n"
+    "Sleep renders foes helpless.\p"
+    "Despair to the creeping horror of\n"
+    "POISON-type POKéMON!{PLAY_BGM}{MUS_RG_ENCOUNTER_GYM_LEADER}$"
+}
+
+text FuchsiaCity_Gym_Text_KogaDefeat {
+    "Humph!\n"
+    "You have proven your worth!\p"
+    "Here!\n"
+    "Take the SOULBADGE!$"
+}
+
+text FuchsiaCity_Gym_Text_KogaPostBattle {
+    "When afflicted by TOXIC, a POKéMON\n"
+    "suffers more and more.\p"
+    "It suffers worsening damage as the\n"
+    "battle wears on!\p"
+    "It will surely terrorize foes!$"
+}
+
+text FuchsiaCity_Gym_Text_KogaExplainSoulBadge {
+    "Now that you have the SOULBADGE,\n"
+    "the DEFENSE of your POKéMON rises.\p"
+    "It also lets you SURF outside of\n"
+    "battle.\p"
+    "Ah!\n"
+    "Take this, too!$"
+}
+
+text FuchsiaCity_Gym_Text_ReceivedTM06FromKoga {
+    "{PLAYER} received TM06\n"
+    "from KOGA.$"
+}
+
+text FuchsiaCity_Gym_Text_KogaExplainTM06 {
+    "Sealed within that TM06 lies\n"
+    "TOXIC!\p"
+    "It is a secret technique dating\n"
+    "back some four hundred years.$"
+}
+
+text FuchsiaCity_Gym_Text_MakeSpaceForThis {
+    "Make space for this, child!$"
+}
+
+text FuchsiaCity_Gym_Text_KaydenIntro {
+    "Strength isn't the key for POKéMON.\n"
+    "Do you understand this?\p"
+    "POKéMON is about strategy!\p"
+    "I'll show you how strategy can\n"
+    "beat brute strength.$"
+}
+
+text FuchsiaCity_Gym_Text_KaydenDefeat {
+    "What?\n"
+    "Extraordinary!$"
+}
+
+text FuchsiaCity_Gym_Text_KaydenPostBattle {
+    "So, you mix brawn with brains?\n"
+    "Good strategy!\p"
+    "That's remarkable for a child\n"
+    "TRAINER.$"
+}
+
+text FuchsiaCity_Gym_Text_KirkIntro {
+    "I was a magician once upon a time.\p"
+    "But I dreamt of becoming a ninja,\n"
+    "so I joined this GYM.$"
+}
+
+text FuchsiaCity_Gym_Text_KirkDefeat {
+    "I'm done for!$"
+}
+
+text FuchsiaCity_Gym_Text_KirkPostBattle {
+    "Even though I've lost, I will keep\n"
+    "training according to the teachings\l"
+    "of KOGA, my ninja master.$"
+}
+
+text FuchsiaCity_Gym_Text_NateIntro {
+    "Let's see you beat my special\n"
+    "techniques!$"
+}
+
+text FuchsiaCity_Gym_Text_NateDefeat {
+    "You had me fooled!$"
+}
+
+text FuchsiaCity_Gym_Text_NatePostBattle {
+    "I like poison and sleep techniques,\n"
+    "as they linger after battle!$"
+}
+
+text FuchsiaCity_Gym_Text_PhilIntro {
+    "Stop right there!\p"
+    "The famed invisible walls of\n"
+    "FUCHSIA GYM have you frustrated?$"
+}
+
+text FuchsiaCity_Gym_Text_PhilDefeat {
+    "Whoa!\n"
+    "You've got it!$"
+}
+
+text FuchsiaCity_Gym_Text_PhilPostBattle {
+    "You impressed me!\n"
+    "Here's a hint!\p"
+    "Look very closely for gaps in the\n"
+    "invisible walls!$"
+}
+
+text FuchsiaCity_Gym_Text_EdgarIntro {
+    "I also study the way of the ninja\n"
+    "with Master KOGA!\p"
+    "Ninja have a long history of using\n"
+    "animals!$"
+}
+
+text FuchsiaCity_Gym_Text_EdgarDefeat {
+    "Awoo!$"
+}
+
+text FuchsiaCity_Gym_Text_EdgarPostBattle {
+    "I still have much to learn.$"
+}
+
+text FuchsiaCity_Gym_Text_ShawnIntro {
+    "Master KOGA comes from a long line\n"
+    "of ninjas.\p"
+    "What did you descend from?$"
+}
+
+text FuchsiaCity_Gym_Text_ShawnDefeat {
+    "You're more skilled than I'd\n"
+    "thought!$"
+}
+
+text FuchsiaCity_Gym_Text_ShawnPostBattle {
+    "Where there is light, there is\n"
+    "shadow!\p"
+    "Light and shadow!\n"
+    "Which do you choose?$"
+}
+
+text FuchsiaCity_Gym_Text_GymGuyAdvice {
+    "Yo!\n"
+    "Champ in the making!\p"
+    "FUCHSIA GYM is a tricked-up place.\n"
+    "It's riddled with invisible walls!\p"
+    "KOGA might appear close, but he's\n"
+    "blocked off.\p"
+    "You have to find gaps in the walls\n"
+    "to reach him.$"
+}
+
+text FuchsiaCity_Gym_Text_GymGuyPostVictory {
+    "It's amazing how ninja can terrify,\n"
+    "even now!$"
+}
+
+text FuchsiaCity_Gym_Text_GymStatue {
+    "FUCHSIA POKéMON GYM\n"
+    "LEADER: KOGA\p"
+    "WINNING TRAINERS:\n"
+    "{RIVAL}$"
+}
+
+text FuchsiaCity_Gym_Text_GymStatuePlayerWon {
+    "FUCHSIA POKéMON GYM\n"
+    "LEADER: KOGA\p"
+    "WINNING TRAINERS:\n"
+    "{RIVAL}, {PLAYER}$"
+}

@@ -1,0 +1,479 @@
+mapscripts MossdeepCity_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: MossdeepCity_OnTransition
+}
+
+script MossdeepCity_OnTransition {
+    clearflag(FLAG_MOSSDEEP_GYM_SWITCH_1)
+    clearflag(FLAG_MOSSDEEP_GYM_SWITCH_2)
+    clearflag(FLAG_MOSSDEEP_GYM_SWITCH_3)
+    clearflag(FLAG_MOSSDEEP_GYM_SWITCH_4)
+    if (flag(FLAG_SYS_WEATHER_CTRL)) call(Common_EventScript_SetAbnormalWeather)
+    end
+}
+
+script MossdeepCity_EventScript_PokefanF {
+    lock
+    faceplayer
+    if (flag(FLAG_RECEIVED_HM_DIVE)) goto(MossdeepCity_EventScript_PokefanFMagmaGone)
+    msgbox(MossdeepCity_Text_SpaceCenterReceivedLetter, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MossdeepCity_EventScript_PokefanFMagmaGone {
+    msgbox(MossdeepCity_Text_SpaceCenterLaunchingRockets, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MossdeepCity_EventScript_Sailor {
+    lock
+    faceplayer
+    if (flag(FLAG_RECEIVED_HM_DIVE)) goto(MossdeepCity_EventScript_SailorMagmaGone)
+    msgbox(MossdeepCity_Text_MossdeepTargetedByMagma, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MossdeepCity_EventScript_SailorMagmaGone {
+    msgbox(MossdeepCity_Text_FeelReliefOnLand, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MossdeepCity_EventScript_NinjaBoy {
+    msgbox(MossdeepCity_Text_WailmerWatching, MSGBOX_NPC)
+    end
+}
+
+script MossdeepCity_EventScript_ExpertM {
+    msgbox(MossdeepCity_Text_LifeNeedsSeaToLive, MSGBOX_NPC)
+    end
+}
+
+script MossdeepCity_EventScript_Girl {
+    msgbox(MossdeepCity_Text_NiceIfWorldCoveredByFlowers, MSGBOX_NPC)
+    end
+}
+
+script MossdeepCity_EventScript_Woman {
+    msgbox(MossdeepCity_Text_SpecialSpaceCenterRock, MSGBOX_NPC)
+    end
+}
+
+script MossdeepCity_EventScript_WhiteRock {
+    msgbox(MossdeepCity_Text_ItsAWhiteRock, MSGBOX_SIGN)
+    end
+}
+
+script MossdeepCity_EventScript_GymSign {
+    msgbox(MossdeepCity_Text_GymSign, MSGBOX_SIGN)
+    end
+}
+
+script MossdeepCity_EventScript_CitySign {
+    msgbox(MossdeepCity_Text_CitySign, MSGBOX_SIGN)
+    end
+}
+
+script MossdeepCity_EventScript_SpaceCenterSign {
+    msgbox(MossdeepCity_Text_SpaceCenterSign, MSGBOX_SIGN)
+    end
+}
+
+script MossdeepCity_EventScript_VisitedMossdeep {
+    setflag(FLAG_VISITED_MOSSDEEP_CITY)
+    setvar(VAR_TEMP_1, 1)
+    end
+}
+
+script MossdeepCity_EventScript_TeamMagmaEnterSpaceCenter {
+    lockall
+    applymovement(LOCALID_MOSSDEEP_MAXIE, MossdeepCity_Movement_MaxieGestureToSpaceCenter)
+    waitmovement(0)
+    applymovement(LOCALID_MOSSDEEP_GRUNT_1, MossdeepCity_Movement_GruntFaceSpaceCenter)
+    applymovement(LOCALID_MOSSDEEP_GRUNT_2, MossdeepCity_Movement_GruntFaceSpaceCenter)
+    applymovement(LOCALID_MOSSDEEP_GRUNT_3, MossdeepCity_Movement_GruntFaceSpaceCenter)
+    applymovement(LOCALID_MOSSDEEP_GRUNT_4, MossdeepCity_Movement_GruntFaceSpaceCenter)
+    waitmovement(0)
+    applymovement(LOCALID_MOSSDEEP_MAXIE, MossdeepCity_Movement_MaxieEnterSpaceCenter)
+    applymovement(LOCALID_MOSSDEEP_GRUNT_1, MossdeepCity_Movement_Grunt1EnterSpaceCenter)
+    applymovement(LOCALID_MOSSDEEP_GRUNT_2, MossdeepCity_Movement_Grunt2EnterSpaceCenter)
+    applymovement(LOCALID_MOSSDEEP_GRUNT_3, MossdeepCity_Movement_Grunt3EnterSpaceCenter)
+    applymovement(LOCALID_MOSSDEEP_GRUNT_4, MossdeepCity_Movement_Grunt4EnterSpaceCenter)
+    waitmovement(0)
+    removeobject(LOCALID_MOSSDEEP_MAXIE)
+    removeobject(LOCALID_MOSSDEEP_GRUNT_1)
+    removeobject(LOCALID_MOSSDEEP_GRUNT_2)
+    removeobject(LOCALID_MOSSDEEP_GRUNT_3)
+    removeobject(LOCALID_MOSSDEEP_GRUNT_4)
+    delay(30)
+    setvar(VAR_MOSSDEEP_CITY_STATE, 2)
+    setflag(FLAG_HIDE_MOSSDEEP_CITY_TEAM_MAGMA)
+    releaseall
+    end
+}
+
+movement MossdeepCity_Movement_MaxieGestureToSpaceCenter {
+    delay_16
+    face_right
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    face_left
+    delay_16
+    delay_16
+    step_end
+}
+
+movement MossdeepCity_Movement_GruntFaceSpaceCenter {
+    face_right
+    delay_16
+    delay_16
+    delay_16
+    step_end
+}
+
+movement MossdeepCity_Movement_MaxieEnterSpaceCenter {
+    walk_down
+    walk_right
+    walk_right
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    step_end
+}
+
+movement MossdeepCity_Movement_Grunt1EnterSpaceCenter {
+    delay_16
+    delay_8
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    walk_right
+    walk_right
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    step_end
+}
+
+movement MossdeepCity_Movement_Grunt2EnterSpaceCenter {
+    delay_16
+    delay_8
+    walk_down
+    walk_down
+    walk_right
+    walk_right
+    walk_right
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    step_end
+}
+
+movement MossdeepCity_Movement_Grunt3EnterSpaceCenter {
+    delay_16
+    delay_8
+    walk_down
+    walk_right
+    walk_right
+    walk_right
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    step_end
+}
+
+movement MossdeepCity_Movement_Grunt4EnterSpaceCenter {
+    delay_16
+    delay_8
+    walk_right
+    walk_right
+    walk_right
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    step_end
+}
+
+script MossdeepCity_EventScript_Man {
+    lock
+    faceplayer
+    msgbox(MossdeepCity_Text_SurfExhilarating, MSGBOX_DEFAULT)
+    applymovement(VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script MossdeepCity_EventScript_KingsRockBoy {
+    lock
+    faceplayer
+    if (flag(FLAG_RECEIVED_KINGS_ROCK)) goto(MossdeepCity_EventScript_ReceivedKingsRock)
+    msgbox(MossdeepCity_Text_WantKingsRockStevenGaveMe, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(MossdeepCity_EventScript_DeclineKingsRock)
+    msgbox(MossdeepCity_Text_YouCanKeepIt, MSGBOX_DEFAULT)
+    giveitem(ITEM_KINGS_ROCK)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    setflag(FLAG_RECEIVED_KINGS_ROCK)
+    release
+    end
+}
+
+script MossdeepCity_EventScript_ReceivedKingsRock {
+    msgbox(MossdeepCity_Text_StevensHouseOverThere, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MossdeepCity_EventScript_DeclineKingsRock {
+    msgbox(MossdeepCity_Text_WhatToDoWithWeirdRock, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MossdeepCity_EventScript_BlackBelt {
+    msgbox(MossdeepCity_Text_SootopolisNewGymLeader, MSGBOX_NPC)
+    end
+}
+
+script MossdeepCity_EventScript_Scott {
+    lock
+    faceplayer
+    msgbox(MossdeepCity_Text_ScottSomethingWrongWithTown, MSGBOX_DEFAULT)
+    closemessage
+    if (var(VAR_FACING) == DIR_NORTH) call(MossdeepCity_EventScript_ScottExitNorth)
+    if (var(VAR_FACING) == DIR_EAST) call(MossdeepCity_EventScript_ScottExitEast)
+    addvar(VAR_SCOTT_STATE, 1)
+    removeobject(LOCALID_MOSSDEEP_SCOTT)
+    release
+    end
+}
+
+script MossdeepCity_EventScript_ScottExitNorth {
+    applymovement(LOCALID_PLAYER, MossdeepCity_Movement_PlayerWatchScottExit)
+    applymovement(LOCALID_MOSSDEEP_SCOTT, MossdeepCity_Movement_ScottExitNorth)
+    waitmovement(0)
+    return
+}
+
+script MossdeepCity_EventScript_ScottExitEast {
+    applymovement(LOCALID_PLAYER, MossdeepCity_Movement_PlayerWatchScottExit)
+    applymovement(LOCALID_MOSSDEEP_SCOTT, MossdeepCity_Movement_ScottExitEast)
+    waitmovement(0)
+    return
+}
+
+movement MossdeepCity_Movement_PlayerWatchScottExit {
+    delay_16
+    delay_16
+    walk_in_place_faster_left
+    step_end
+}
+
+movement MossdeepCity_Movement_ScottExitNorth {
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    step_end
+}
+
+movement MossdeepCity_Movement_ScottExitEast {
+    walk_down
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    step_end
+}
+
+text MossdeepCity_Text_WantKingsRockStevenGaveMe {
+    "I got this from STEVEN, but I don't\n"
+    "know what it's good for.\p"
+    "I think it's called KING'S ROCK.\n"
+    "Do you want it?$"
+}
+
+text MossdeepCity_Text_YouCanKeepIt {
+    "Why would you want it?\n"
+    "You're weird.\p"
+    "You can keep it, but keep it a secret\n"
+    "from STEVEN.$"
+}
+
+text MossdeepCity_Text_StevensHouseOverThere {
+    "STEVEN's house is right over there!$"
+}
+
+text MossdeepCity_Text_WhatToDoWithWeirdRock {
+    "Yeah, you think so, too! What are you\n"
+    "supposed to do with some weird rock?$"
+}
+
+text MossdeepCity_Text_WailmerWatching {
+    "Around MOSSDEEP, you can see wild\n"
+    "WAILMER.\p"
+    "It's called, uh…\n"
+    "What was it now…\p"
+    "WAI, WAI, WAI…\p"
+    "WAILMER watching!$"
+}
+
+text MossdeepCity_Text_SpaceCenterReceivedLetter {
+    "The island's SPACE CENTER has been\n"
+    "launching huge rockets.\p"
+    "There's been some kind of an uproar\n"
+    "over a letter they received recently.$"
+}
+
+text MossdeepCity_Text_SpaceCenterLaunchingRockets {
+    "The island's SPACE CENTER has been\n"
+    "launching huge rockets.$"
+}
+
+text MossdeepCity_Text_MossdeepTargetedByMagma {
+    "I heard from a SAILOR buddy that\n"
+    "TEAM AQUA set up shop in LILYCOVE.\p"
+    "I also heard that someone came along\n"
+    "and wiped the floor with them!\p"
+    "But MOSSDEEP here's been targeted\n"
+    "by that TEAM MAGMA.\p"
+    "If you want to know what they're up to,\n"
+    "go visit the SPACE CENTER.$"
+}
+
+text MossdeepCity_Text_FeelReliefOnLand {
+    "I'm a SAILOR, so the sea's obviously\n"
+    "more important to me.\p"
+    "But you know? When I get back on land\n"
+    "after a long voyage, I do feel relief!$"
+}
+
+text MossdeepCity_Text_NiceIfWorldCoveredByFlowers {
+    "Wouldn't it be nice?\p"
+    "If the whole world was covered in\n"
+    "plants and flowers like this island?$"
+}
+
+text MossdeepCity_Text_LifeNeedsSeaToLive {
+    "All life needs the sea to live, even\n"
+    "though it makes its home on the land.\p"
+    "Life, having run its course, becomes\n"
+    "soil and returns to the land.\p"
+    "And the sea is always connected to\n"
+    "the land.\p"
+    "Yes, like the very shoreline here.$"
+}
+
+text MossdeepCity_Text_SurfExhilarating {
+    "A voyage on a ship is fine.\p"
+    "But crossing the sea with POKéMON\n"
+    "using SURF…\p"
+    "Now that's an exhilarating trip!\n"
+    "Wouldn't you agree, youngster?$"
+}
+
+text MossdeepCity_Text_SpecialSpaceCenterRock {
+    "This rock has a special meaning to\n"
+    "the people at the SPACE CENTER.\p"
+    "They put it here as their wish for\n"
+    "their rockets to fly safely.\p"
+    "When you make a wish, what do you use?\n"
+    "Do you wish upon a star?\p"
+    "I use a wish tag to make it happen.\n"
+    "That's what I do.$"
+}
+
+text MossdeepCity_Text_ItsAWhiteRock {
+    "It's a white rock.$"
+}
+
+text MossdeepCity_Text_GymSign {
+    "MOSSDEEP CITY POKéMON GYM\n"
+    "LEADERS: LIZA & TATE\p"
+    "“The mystic combination!”$"
+}
+
+text MossdeepCity_Text_CitySign {
+    "MOSSDEEP CITY\n"
+    "“Our slogan: Cherish POKéMON!”$"
+}
+
+text MossdeepCity_Text_SpaceCenterSign {
+    "MOSSDEEP SPACE CENTER\n"
+    "“The closest place to space.”$"
+}
+
+text MossdeepCity_Text_ScottSomethingWrongWithTown {
+    "SCOTT: {PLAYER}{KUN}, feeling good?\n"
+    "I'm doing great!\p"
+    "I'd heard MOSSDEEP's GYM LEADER is\n"
+    "pretty strong, so I decided to come\l"
+    "take a look-see for myself.\p"
+    "But there's something wrong about\n"
+    "this town.\p"
+    "People are going on about a warning\n"
+    "letter and the SPACE CENTER…\p"
+    "I don't think it concerns me in any\n"
+    "way, though.$"
+}
+
+text MossdeepCity_Text_SootopolisNewGymLeader {
+    "Ahh… It feels great letting the waves\n"
+    "wash over my feet…\p"
+    "Speaking of the waves, you know that\n"
+    "island city SOOTOPOLIS?\p"
+    "I think the GYM there had a new\n"
+    "LEADER come in.\p"
+    "People tell me the new LEADER once\n"
+    "mentored WALLACE.$"
+}

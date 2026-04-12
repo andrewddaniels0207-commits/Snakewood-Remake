@@ -1,0 +1,11 @@
+mapscripts GraniteCave_B1F_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE: CaveHole_CheckFallDownHole
+    MAP_SCRIPT_ON_TRANSITION: CaveHole_FixCrackedGround
+    MAP_SCRIPT_ON_RESUME: GraniteCave_B1F_SetHoleWarp
+}
+
+script GraniteCave_B1F_SetHoleWarp {
+    setstepcallback(STEP_CB_CRACKED_FLOOR)
+    setholewarp(MAP_GRANITE_CAVE_B2F)
+    end
+}

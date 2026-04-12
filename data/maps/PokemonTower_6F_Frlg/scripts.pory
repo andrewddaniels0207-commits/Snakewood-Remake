@@ -1,0 +1,106 @@
+mapscripts PokemonTower_6F_Frlg_MapScripts {}
+
+script PokemonTower_6F_EventScript_MarowakGhost {
+    lockall
+    textcolor(NPC_TEXT_COLOR_MON)
+    msgbox(PokemonTower_6F_Text_BeGoneIntruders)
+    setwildbattle(SPECIES_MAROWAK, 30)
+    special(StartMarowakBattle)
+    waitstate
+    if (var(VAR_RESULT) == FALSE) goto(PokemonTower_6F_EventScript_DefeatedMarowakGhost)
+    applymovement(LOCALID_PLAYER, PokemonTower_6F_Movement_ForcePlayerUp)
+    waitmovement(0)
+    releaseall
+    end
+}
+
+script PokemonTower_6F_EventScript_DefeatedMarowakGhost {
+    message(PokemonTower_6F_Text_GhostWasCubonesMother)
+    waitmessage()
+    waitse()
+    playmoncry(SPECIES_MAROWAK, CRY_MODE_NORMAL)
+    waitbuttonpress()
+    waitmoncry()
+    msgbox(PokemonTower_6F_Text_MothersSpiritWasCalmed)
+    setvar(VAR_MAP_SCENE_POKEMON_TOWER_6F, 1)
+    releaseall
+    end
+}
+
+movement PokemonTower_6F_Movement_ForcePlayerUp {
+    walk_up
+    step_end
+}
+
+script PokemonTower_6F_EventScript_Angelica {
+    trainerbattle_single(TRAINER_CHANNELER_ANGELICA, PokemonTower_6F_Text_AngelicaIntro, PokemonTower_6F_Text_AngelicaDefeat)
+    msgbox(PokemonTower_6F_Text_AngelicaPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script PokemonTower_6F_EventScript_Emilia {
+    trainerbattle_single(TRAINER_CHANNELER_EMILIA, PokemonTower_6F_Text_EmiliaIntro, PokemonTower_6F_Text_EmiliaDefeat)
+    msgbox(PokemonTower_6F_Text_EmiliaPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script PokemonTower_6F_EventScript_Jennifer {
+    trainerbattle_single(TRAINER_CHANNELER_JENNIFER, PokemonTower_6F_Text_JenniferIntro, PokemonTower_6F_Text_JenniferDefeat)
+    msgbox(PokemonTower_6F_Text_JenniferPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text PokemonTower_6F_Text_AngelicaIntro {
+    "Give…me…\n"
+    "blood…$"
+}
+
+text PokemonTower_6F_Text_AngelicaDefeat {
+    "Groan!$"
+}
+
+text PokemonTower_6F_Text_AngelicaPostBattle {
+    "I feel anemic and weak…$"
+}
+
+text PokemonTower_6F_Text_EmiliaIntro {
+    "Urff…\n"
+    "Kwaah!$"
+}
+
+text PokemonTower_6F_Text_EmiliaDefeat {
+    "Something fell out!$"
+}
+
+text PokemonTower_6F_Text_EmiliaPostBattle {
+    "My hair didn't fall out!\n"
+    "It was a malevolent spirit!$"
+}
+
+text PokemonTower_6F_Text_JenniferIntro {
+    "Ke…ke…ke…\n"
+    "ke…ke…ke!$"
+}
+
+text PokemonTower_6F_Text_JenniferDefeat {
+    "Keee!$"
+}
+
+text PokemonTower_6F_Text_JenniferPostBattle {
+    "What's going on here?$"
+}
+
+text PokemonTower_6F_Text_BeGoneIntruders {
+    "Be gone…\n"
+    "Intruders…$"
+}
+
+text PokemonTower_6F_Text_GhostWasCubonesMother {
+    "The ghost was the restless spirit\n"
+    "of CUBONE's mother!$"
+}
+
+text PokemonTower_6F_Text_MothersSpiritWasCalmed {
+    "The mother's spirit was calmed.\p"
+    "It departed to the afterlife…$"
+}

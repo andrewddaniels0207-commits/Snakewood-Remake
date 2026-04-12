@@ -1,0 +1,243 @@
+mapscripts FourIsland_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: FourIsland_OnTransition
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_MAP_SCENE_FOUR_ISLAND, 0: FourIsland_EventScript_RivalScene
+    ]
+}
+
+script FourIsland_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_FOUR_ISLAND)
+    if (var(VAR_MAP_SCENE_FOUR_ISLAND) == 0) call(FourIsland_EventScript_ShowRival)
+    call(FourIsland_EventScript_TrySetDayCareManPos)
+    end
+}
+
+script FourIsland_EventScript_ShowRival {
+    clearflag(FLAG_HIDE_FOUR_ISLAND_RIVAL)
+    return
+}
+
+script FourIsland_EventScript_TrySetDayCareManPos {
+    if (!flag(FLAG_PENDING_DAYCARE_EGG)) goto(FourIsland_EventScript_EndSetDayCareManPos)
+    setobjectxyperm(LOCALID_FOUR_ISLAND_DAYCARE_MAN, 16, 14)
+}
+
+script FourIsland_EventScript_EndSetDayCareManPos {
+    return
+}
+
+script FourIsland_EventScript_RivalScene {
+    lockall
+    textcolor(NPC_TEXT_COLOR_MALE)
+    applymovement(LOCALID_FOUR_ISLAND_RIVAL, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    playbgm(MUS_RG_ENCOUNTER_RIVAL, 0)
+    applymovement(LOCALID_FOUR_ISLAND_RIVAL, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_FOUR_ISLAND_RIVAL, Common_Movement_Delay48)
+    waitmovement(0)
+    delay(25)
+    applymovement(LOCALID_FOUR_ISLAND_RIVAL, FourIsland_Movement_RivalApproach)
+    waitmovement(0)
+    msgbox(FourIsland_Text_RivalAlreadyGotEggBeSmellingYa)
+    closemessage
+    applymovement(LOCALID_PLAYER, FourIsland_Movement_PlayerWatchRivalExit)
+    applymovement(LOCALID_FOUR_ISLAND_RIVAL, FourIsland_Movement_RivalExit)
+    waitmovement(0)
+    fadedefaultbgm()
+    playse(SE_EXIT)
+    delay(35)
+    removeobject(LOCALID_FOUR_ISLAND_RIVAL)
+    setvar(VAR_MAP_SCENE_FOUR_ISLAND, 1)
+    releaseall
+    end
+}
+
+movement FourIsland_Movement_RivalApproach {
+    walk_right
+    walk_right
+    walk_down
+    walk_down
+    step_end
+}
+
+movement FourIsland_Movement_RivalExit {
+    delay_16
+    delay_4
+    walk_down
+    step_end
+}
+
+movement FourIsland_Movement_PlayerWatchRivalExit {
+    walk_left
+    walk_in_place_faster_right
+    step_end
+}
+
+script FourIsland_EventScript_DaycareMan {
+    lock
+    faceplayer
+    special(GetDaycareMonNicknames)
+    specialvar(VAR_RESULT, GetDaycareState)
+    if (var(VAR_RESULT) == DAYCARE_EGG_WAITING) goto(FourIsland_EventScript_DaycareEggWaiting)
+    if (var(VAR_RESULT) == DAYCARE_ONE_MON) goto(FourIsland_EventScript_CheckOnOneMon)
+    if (var(VAR_RESULT) == DAYCARE_TWO_MONS) goto(FourIsland_EventScript_CheckOnTwoMons)
+    msgbox(DayCare_Text_ImDaycareManSpeakToMyWife)
+    release
+    end
+}
+
+script FourIsland_EventScript_DaycareEggWaiting {
+    msgbox(DayCare_Text_DoYouWantEgg, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(FourIsland_EventScript_DaycareAcceptEgg)
+    msgbox(DayCare_Text_IWillKeepDoYouWantIt, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(FourIsland_EventScript_DaycareAcceptEgg)
+    msgbox(DayCare_Text_IllKeepIt)
+    clearflag(FLAG_PENDING_DAYCARE_EGG)
+    special(RejectEggFromDayCare)
+    release
+    end
+}
+
+script FourIsland_EventScript_DaycareAcceptEgg {
+    specialvar(VAR_RESULT, CalculatePlayerPartyCount)
+    if (var(VAR_RESULT) != PARTY_SIZE) goto(FourIsland_EventScript_DaycareReceivedEgg)
+    msgbox(DayCare_Text_YouHaveNoRoomForIt)
+    release
+    end
+}
+
+script FourIsland_EventScript_DaycareReceivedEgg {
+    textcolor(NPC_TEXT_COLOR_NEUTRAL)
+    message(DayCare_Text_ReceivedEgg)
+    call(EventScript_RestorePrevTextColor)
+    playfanfare(MUS_LEVEL_UP)
+    waitfanfare()
+    waitbuttonpress()
+    msgbox(DayCare_Text_TakeGoodCareOfIt)
+    special(GiveEggFromDaycare)
+    clearflag(FLAG_PENDING_DAYCARE_EGG)
+    release
+    end
+}
+
+script FourIsland_EventScript_CheckOnOneMon {
+    special(GetDaycareMonNicknames)
+    msgbox(DayCare_Text_YourMonIsDoingFine)
+    release
+    end
+}
+
+script FourIsland_EventScript_CheckOnTwoMons {
+    special(GetDaycareMonNicknames)
+    msgbox(DayCare_Text_YourMonsAreDoingFine)
+    special(SetDaycareCompatibilityString)
+    special(ShowFieldMessageStringVar4)
+    waitmessage()
+    waitbuttonpress()
+    release
+    end
+}
+
+script FourIsland_EventScript_OldWoman {
+    lock
+    faceplayer
+    if (flag(FLAG_IS_CHAMPION)) goto(FourIsland_EventScript_OldWomanLoreleiLeft)
+    msgbox(FourIsland_Text_LoreleiHasReturned)
+    release
+    end
+}
+
+script FourIsland_EventScript_OldWomanLoreleiLeft {
+    famechecker(FAMECHECKER_LORELEI, 5)
+    msgbox(FourIsland_Text_LoreleiMetLaprasAsChild)
+    release
+    end
+}
+
+script FourIsland_EventScript_LittleGirl {
+    lock
+    faceplayer
+    famechecker(FAMECHECKER_LORELEI, 4)
+    msgbox(FourIsland_Text_LoreleiHasLotsOfStuffedDolls)
+    release
+    end
+}
+
+script FourIsland_EventScript_FatMan {
+    msgbox(FourIsland_Text_MadeSlushieUsingIcefallCaveIce, MSGBOX_NPC)
+    end
+}
+
+script FourIsland_EventScript_IslandSign {
+    msgbox(FourIsland_Text_IslandSign, MSGBOX_SIGN)
+    end
+}
+
+script FourIsland_EventScript_LoreleisHouseSign {
+    msgbox(FourIsland_Text_LoreleisHouse, MSGBOX_SIGN)
+    end
+}
+
+text FourIsland_Text_IslandSign {
+    "FOUR ISLAND\n"
+    "The Warm, Blue, Floe Island$"
+}
+
+text FourIsland_Text_LoreleiHasReturned {
+    "LORELEI has returned.\p"
+    "Did she find the city life too\n"
+    "stressful, I wonder?$"
+}
+
+text FourIsland_Text_LoreleiMetLaprasAsChild {
+    "LORELEI has gone back.\p"
+    "The LAPRAS she has, I imagine it\n"
+    "to be the one she met as a child.\p"
+    "I believe it was in ICEFALL CAVE\n"
+    "that she caught it.\p"
+    "Perhaps that POKéMON has been with\n"
+    "her ever since.$"
+}
+
+text FourIsland_Text_RivalAlreadyGotEggBeSmellingYa {
+    "{RIVAL}: Hey!\n"
+    "{PLAYER}!\p"
+    "What are you doing here in the\n"
+    "SEVII ISLANDS?\p"
+    "You should quit copying me,\n"
+    "you know?\p"
+    "Anyways, I already got my POKéMON\n"
+    "EGG, so I'm done with this island.\p"
+    "Heh, I bet you don't even know\n"
+    "about POKéMON EGGS.\p"
+    "You'll never fill your NATIONAL\n"
+    "POKéDEX that way.\p"
+    "By the way, I saw someone we both\n"
+    "know on this island.\p"
+    "Why don't you go look around if\n"
+    "it makes you curious?\p"
+    "Me, I don't have the time to\n"
+    "waste.\p"
+    "Be smelling ya!$"
+}
+
+text FourIsland_Text_LoreleiHasLotsOfStuffedDolls {
+    "Oh, you found me!\n"
+    "Please don't tell LORELEI.\p"
+    "Did you know that LORELEI has lots\n"
+    "and lots of stuffed dolls?\p"
+    "Every time she comes back to\n"
+    "FOUR ISLAND, her collection grows!$"
+}
+
+text FourIsland_Text_MadeSlushieUsingIcefallCaveIce {
+    "Ooh, chilly!\p"
+    "I made a slushie using ice I\n"
+    "shaved inside ICEFALL CAVE.\p"
+    "It's chilly and tasty!$"
+}
+
+text FourIsland_Text_LoreleisHouse {
+    "LORELEI'S HOUSE$"
+}

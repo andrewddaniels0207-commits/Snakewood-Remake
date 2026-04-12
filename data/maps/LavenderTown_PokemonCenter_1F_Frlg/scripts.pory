@@ -1,0 +1,51 @@
+mapscripts LavenderTown_PokemonCenter_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: LavenderTown_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script LavenderTown_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_LAVENDER_TOWN)
+    end
+}
+
+script LavenderTown_PokemonCenter_1F_EventScript_Nurse {
+    lock
+    faceplayer
+    call(EventScript_PkmnCenterNurse_Frlg)
+    release
+    end
+}
+
+script LavenderTown_PokemonCenter_1F_EventScript_Gentleman {
+    msgbox(LavenderTown_PokemonCenter_1F_Text_RocketsDoAnythingForMoney, MSGBOX_NPC)
+    end
+}
+
+script LavenderTown_PokemonCenter_1F_EventScript_Lass {
+    msgbox(LavenderTown_PokemonCenter_1F_Text_CubonesMotherKilledByRockets, MSGBOX_NPC)
+    end
+}
+
+script LavenderTown_PokemonCenter_1F_EventScript_Youngster {
+    msgbox(LavenderTown_PokemonCenter_1F_Text_PeoplePayForCuboneSkulls, MSGBOX_NPC)
+    end
+}
+
+text LavenderTown_PokemonCenter_1F_Text_RocketsDoAnythingForMoney {
+    "TEAM ROCKET will do anything for\n"
+    "the sake of money!\p"
+    "There is no job too dirty, no deed\n"
+    "too heinous, no crime too wicked!$"
+}
+
+text LavenderTown_PokemonCenter_1F_Text_CubonesMotherKilledByRockets {
+    "I saw CUBONE's mother trying to\n"
+    "escape from TEAM ROCKET.\p"
+    "She was killed trying to get away…$"
+}
+
+text LavenderTown_PokemonCenter_1F_Text_PeoplePayForCuboneSkulls {
+    "You know how the CUBONE species\n"
+    "wears skulls, right?\p"
+    "People will pay a lot for one.$"
+}

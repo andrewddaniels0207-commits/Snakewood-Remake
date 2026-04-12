@@ -1,0 +1,144 @@
+mapscripts BattleFrontier_Lounge5_MapScripts {}
+
+script BattleFrontier_Lounge5_EventScript_NatureGirl {
+    lock
+    faceplayer
+    msgbox(BattleFrontier_Lounge5_Text_NatureGirlGreeting, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown)
+    chooseboxmon()
+    waitstate
+    lock
+    faceplayer
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) goto(BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown)
+    specialvar(VAR_RESULT, ScriptGetPartyMonSpecies)
+    if (var(VAR_RESULT) == SPECIES_EGG) goto(BattleFrontier_Lounge5_EventScript_NatureGirlEgg)
+    special(ShowNatureGirlMessage)
+    waitmessage()
+    waitbuttonpress()
+    release
+    end
+}
+
+script BattleFrontier_Lounge5_EventScript_NatureGirlEgg {
+    msgbox(BattleFrontier_Lounge5_Text_NatureGirlEgg, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown {
+    msgbox(BattleFrontier_Lounge5_Text_NatureGirlNoneShown, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_Lounge5_EventScript_Gentleman {
+    msgbox(BattleFrontier_Lounge5_Text_LadyClaimsSheUnderstandsPokemon, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_Lounge5_EventScript_BlackBelt {
+    msgbox(BattleFrontier_Lounge5_Text_GirlSayingSomethingProfound, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_Lounge5_EventScript_LittleBoy {
+    msgbox(BattleFrontier_Lounge5_Text_GirlPlaysAtRedHouseALot, MSGBOX_NPC)
+    end
+}
+
+text BattleFrontier_Lounge5_Text_NatureGirlGreeting {
+    "Ehehe!\n"
+    "I can tell what POKéMON are thinking!\p"
+    "Please!\n"
+    "Can I see your POKéMON?$"
+}
+
+text BattleFrontier_Lounge5_Text_NatureGirlNoneShown {
+    "Boo!\n"
+    "Cheapie!$"
+}
+
+text BattleFrontier_Lounge5_Text_NatureGirlAttackHighAttackLow {
+    "Hmhm…\p"
+    "This one says it likes to battle!\n"
+    "It will battle even if it has a lot\l"
+    "of ouchies!$"
+}
+
+text BattleFrontier_Lounge5_Text_NatureGirlAttackHighDefenseLow {
+    "Hmhm…\p"
+    "This one says it likes to battle!\n"
+    "But if it gets enough ouchies,\l"
+    "it will worry about itself!$"
+}
+
+text BattleFrontier_Lounge5_Text_NatureGirlAttackHighSupportLow {
+    "Hmhm…\p"
+    "This one says it likes to battle!\n"
+    "But if it gets enough ouchies,\l"
+    "it will turn sneaky!$"
+}
+
+text BattleFrontier_Lounge5_Text_NatureGirlDefenseHighAttackLow {
+    "Hmhm…\p"
+    "This one says it looks after itself!\n"
+    "But if it gets enough ouchies,\l"
+    "it will hit back!$"
+}
+
+text BattleFrontier_Lounge5_Text_NatureGirlDefenseHighDefenseLow {
+    "Hmhm…\p"
+    "This one says it looks after itself!\n"
+    "It says it worries about itself whether\l"
+    "or not it has a lot of ouchies!$"
+}
+
+text BattleFrontier_Lounge5_Text_NatureGirlDefenseHighSupportLow {
+    "Hmhm…\p"
+    "This one says it looks after itself!\n"
+    "But if it gets enough ouchies,\l"
+    "it will turn sneaky!$"
+}
+
+text BattleFrontier_Lounge5_Text_NatureGirlSupportHighAttackLow {
+    "Hmhm…\p"
+    "This one says it likes to be sneaky!\n"
+    "But if it gets enough ouchies,\l"
+    "it will hit back!$"
+}
+
+text BattleFrontier_Lounge5_Text_NatureGirlSupportHighDefenseLow {
+    "Hmhm…\p"
+    "This one says it likes to be sneaky!\n"
+    "But if it gets enough ouchies,\l"
+    "it will worry about itself!$"
+}
+
+text BattleFrontier_Lounge5_Text_NatureGirlSupportHighSupportLow {
+    "Hmhm…\p"
+    "This one says it likes to be sneaky!\n"
+    "It says it likes to be sneaky even\l"
+    "if it has a lot of ouchies!$"
+}
+
+text BattleFrontier_Lounge5_Text_NatureGirlEgg {
+    "That's silly! An EGG is asleep!\n"
+    "I can't talk to it!$"
+}
+
+text BattleFrontier_Lounge5_Text_LadyClaimsSheUnderstandsPokemon {
+    "How charming!\n"
+    "That little lady claims she can\l"
+    "understand POKéMON!$"
+}
+
+text BattleFrontier_Lounge5_Text_GirlSayingSomethingProfound {
+    "I have this feeling that the little girl\n"
+    "is saying something profound.$"
+}
+
+text BattleFrontier_Lounge5_Text_GirlPlaysAtRedHouseALot {
+    "I know something!\p"
+    "That little girl plays at the red house\n"
+    "a lot!$"
+}

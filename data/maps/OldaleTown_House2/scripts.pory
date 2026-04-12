@@ -1,0 +1,22 @@
+mapscripts OldaleTown_House2_MapScripts {}
+
+script OldaleTown_House2_EventScript_Woman {
+    msgbox(OldaleTown_House2_Text_PokemonLevelUp, MSGBOX_NPC)
+    end
+}
+
+script OldaleTown_House2_EventScript_Man {
+    msgbox(OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon, MSGBOX_NPC)
+    end
+}
+
+text OldaleTown_House2_Text_PokemonLevelUp {
+    "When POKéMON battle, they eventually\n"
+    "level up and become stronger.$"
+}
+
+text OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon {
+    "If the POKéMON with you become\n"
+    "stronger, you'll be able to go farther\l"
+    "away from here.$"
+}

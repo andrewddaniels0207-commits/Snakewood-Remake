@@ -1,0 +1,27 @@
+mapscripts SSAnne_1F_Corridor_Frlg_MapScripts {}
+
+script SSAnne_1F_Corridor_EventScript_WorkerM {
+    msgbox(SSAnne_1F_Corridor_Text_LeStrongSilentType, MSGBOX_NPC)
+    end
+}
+
+script SSAnne_1F_Corridor_EventScript_Sailor {
+    msgbox(SSAnne_1F_Corridor_Text_PassengersAreRestless, MSGBOX_NPC)
+    end
+}
+
+text SSAnne_1F_Corridor_Text_LeStrongSilentType {
+    "Bonjour!\n"
+    "I am le waiter on this ship!\p"
+    "I will be happy to serve you\n"
+    "anything you please!\p"
+    "… … …\n"
+    "Ah! Le strong silent type!$"
+}
+
+text SSAnne_1F_Corridor_Text_PassengersAreRestless {
+    "The passengers are restless from\n"
+    "this long voyage.\p"
+    "You might be challenged by the\n"
+    "more bored ones!$"
+}

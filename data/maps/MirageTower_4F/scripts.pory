@@ -1,0 +1,86 @@
+mapscripts MirageTower_4F_MapScripts {}
+
+script MirageTower_4F_EventScript_RootFossil {
+    lock
+    faceplayer
+    msgbox(MirageTower_4F_Text_TakeRootFossil, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(MirageTower_4F_EventScript_LeaveRootFossil)
+    giveitem(ITEM_ROOT_FOSSIL)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    closemessage
+    setflag(FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL)
+    setflag(FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL)
+    removeobject(LOCALID_MIRAGE_ROOT_FOSSIL)
+    delay(30)
+    setflag(FLAG_CHOSE_ROOT_FOSSIL)
+    goto(MirageTower_4F_EventScript_CollapseMirageTower)
+    end
+}
+
+script MirageTower_4F_EventScript_LeaveRootFossil {
+    msgbox(MirageTower_4F_Text_LeftRootFossilAlone, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MirageTower_4F_EventScript_ClawFossil {
+    lock
+    faceplayer
+    msgbox(MirageTower_4F_Text_TakeClawFossil, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(MirageTower_4F_EventScript_LeaveClawFossil)
+    giveitem(ITEM_CLAW_FOSSIL)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    closemessage
+    setflag(FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL)
+    setflag(FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL)
+    removeobject(LOCALID_MIRAGE_CLAW_FOSSIL)
+    delay(30)
+    setflag(FLAG_CHOSE_CLAW_FOSSIL)
+    goto(MirageTower_4F_EventScript_CollapseMirageTower)
+    end
+}
+
+script MirageTower_4F_EventScript_LeaveClawFossil {
+    msgbox(MirageTower_4F_Text_LeaveClawFossilAlone, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MirageTower_4F_EventScript_CollapseMirageTower {
+    setvar(VAR_0x8004, 1)
+    setvar(VAR_0x8005, 1)
+    setvar(VAR_0x8006, 32)
+    setvar(VAR_0x8007, 2)
+    special(ShakeCamera)
+    waitstate
+    special(DoMirageTowerCeilingCrumble)
+    waitstate
+    setvar(VAR_MIRAGE_TOWER_STATE, 1)
+    clearflag(FLAG_LANDMARK_MIRAGE_TOWER)
+    warp(MAP_ROUTE111, 19, 59)
+    waitstate
+    release
+    end
+}
+
+text MirageTower_4F_Text_TakeRootFossil {
+    "You found the ROOT FOSSIL.\p"
+    "If this FOSSIL is taken, the ground\n"
+    "around it will likely crumble away…\p"
+    "Take the ROOT FOSSIL anyway?$"
+}
+
+text MirageTower_4F_Text_LeftRootFossilAlone {
+    "{PLAYER} left the ROOT FOSSIL alone.$"
+}
+
+text MirageTower_4F_Text_TakeClawFossil {
+    "You found the CLAW FOSSIL.\p"
+    "If this FOSSIL is taken, the ground\n"
+    "around it will likely crumble away…\p"
+    "Take the CLAW FOSSIL anyway?$"
+}
+
+text MirageTower_4F_Text_LeaveClawFossilAlone {
+    "{PLAYER} left the CLAW FOSSIL alone.$"
+}

@@ -1,0 +1,60 @@
+mapscripts SootopolisCity_House6_MapScripts {}
+
+script SootopolisCity_House6_EventScript_Woman {
+    lock
+    faceplayer
+    if (flag(FLAG_RECEIVED_WAILMER_DOLL)) goto(SootopolisCity_House6_EventScript_ReceivedWailmerDoll)
+    msgbox(SootopolisCity_House6_Text_FirstGuestInWhileTakeDoll, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) call(SootopolisCity_House6_EventScript_DeclineWailmerDoll)
+    msgbox(SootopolisCity_House6_Text_TakeGoodCareOfIt, MSGBOX_DEFAULT)
+    givedecoration(DECOR_WAILMER_DOLL)
+    if (var(VAR_RESULT) == FALSE) goto(SootopolisCity_House6_EventScript_NoRoomForWailmerDoll)
+    setflag(FLAG_RECEIVED_WAILMER_DOLL)
+    release
+    end
+}
+
+script SootopolisCity_House6_EventScript_DeclineWailmerDoll {
+    msgbox(SootopolisCity_House6_Text_DontWantThisDoll, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script SootopolisCity_House6_EventScript_ReceivedWailmerDoll {
+    msgbox(SootopolisCity_House6_Text_LovePlushDolls, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script SootopolisCity_House6_EventScript_NoRoomForWailmerDoll {
+    bufferdecorationname(STR_VAR_2, DECOR_WAILMER_DOLL)
+    msgbox(gText_NoRoomLeftForAnother, MSGBOX_DEFAULT)
+    msgbox(SootopolisCity_House6_Text_IllHoldItForYou, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+text SootopolisCity_House6_Text_FirstGuestInWhileTakeDoll {
+    "Hello! You're our first guest in\n"
+    "a good while.\p"
+    "You've brightened up my day, so I'll\n"
+    "give you a big WAILMER DOLL.$"
+}
+
+text SootopolisCity_House6_Text_TakeGoodCareOfIt {
+    "Take good care of it!$"
+}
+
+text SootopolisCity_House6_Text_IllHoldItForYou {
+    "Oh, you want it, but not right now?\n"
+    "Okay, then I'll hold it for you.$"
+}
+
+text SootopolisCity_House6_Text_DontWantThisDoll {
+    "Are you sure?\n"
+    "You don't want this DOLL?$"
+}
+
+text SootopolisCity_House6_Text_LovePlushDolls {
+    "I love plush DOLLS!$"
+}

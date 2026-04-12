@@ -1,0 +1,42 @@
+mapscripts FiveIsland_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: FiveIsland_OnTransition
+}
+
+script FiveIsland_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_FIVE_ISLAND)
+    end
+}
+
+script FiveIsland_EventScript_IslandSign {
+    msgbox(FiveIsland_Text_IslandSign, MSGBOX_SIGN)
+    end
+}
+
+script FiveIsland_EventScript_BugCatcher {
+    msgbox(FiveIsland_Text_WeirdBuildingInMeadow, MSGBOX_NPC)
+    end
+}
+
+script FiveIsland_EventScript_Fisher {
+    msgbox(FiveIsland_Text_BeenGettingBusierAroundHere, MSGBOX_NPC)
+    end
+}
+
+text FiveIsland_Text_IslandSign {
+    "FIVE ISLAND\n"
+    "Chrono Island: Where Time Goes$"
+}
+
+text FiveIsland_Text_WeirdBuildingInMeadow {
+    "Oh, this stinks. I wanted to play in\n"
+    "the MEADOW.\p"
+    "But they put up a weird building\n"
+    "on it, so I can't play there.$"
+}
+
+text FiveIsland_Text_BeenGettingBusierAroundHere {
+    "It's been getting busier around\n"
+    "these parts lately.\p"
+    "I haven't been catching many good\n"
+    "fish lately, either.$"
+}

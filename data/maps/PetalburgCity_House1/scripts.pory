@@ -1,0 +1,30 @@
+mapscripts PetalburgCity_House1_MapScripts {}
+
+script PetalburgCity_House1_EventScript_Man {
+    msgbox(PetalburgCity_House1_Text_TravelingIsWonderful, MSGBOX_NPC)
+    end
+}
+
+script PetalburgCity_House1_EventScript_Woman {
+    msgbox(PetalburgCity_House1_Text_GoOnAdventure, MSGBOX_NPC)
+    end
+}
+
+text PetalburgCity_House1_Text_TravelingIsWonderful {
+    "Traveling is wonderful!\p"
+    "When I was young, I roamed the seas\n"
+    "and the mountains!$"
+}
+
+text PetalburgCity_House1_Text_GoOnAdventure {
+    "Sigh…\p"
+    "I wish I could go on an adventure\n"
+    "with some POKéMON…\p"
+    "Crawl through some damp grass…\n"
+    "Climb rocky, rugged mountains…\p"
+    "Cross the raging seas…\n"
+    "Wander about in dark caves…\p"
+    "And, sometimes, even get a little\n"
+    "homesick…\p"
+    "It must be fabulous to travel!$"
+}

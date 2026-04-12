@@ -1,0 +1,8 @@
+mapscripts ScorchedSlab_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: ScorchedSlab_OnTransition
+}
+
+script ScorchedSlab_OnTransition {
+    setflag(FLAG_LANDMARK_SCORCHED_SLAB)
+    end
+}

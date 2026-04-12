@@ -1,0 +1,56 @@
+mapscripts SSAnne_1F_Room2_Frlg_MapScripts {}
+
+script SSAnne_1F_Room2_EventScript_Woman {
+    msgbox(SSAnne_1F_Room2_Text_CruisingAroundWorld, MSGBOX_NPC)
+    end
+}
+
+script SSAnne_1F_Room2_EventScript_Ann {
+    trainerbattle_single(TRAINER_LASS_ANN, SSAnne_1F_Room2_Text_AnnIntro, SSAnne_1F_Room2_Text_AnnDefeat)
+    msgbox(SSAnne_1F_Room2_Text_AnnPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SSAnne_1F_Room2_EventScript_Tyler {
+    trainerbattle_single(TRAINER_YOUNGSTER_TYLER, SSAnne_1F_Room2_Text_TylerIntro, SSAnne_1F_Room2_Text_TylerDefeat)
+    msgbox(SSAnne_1F_Room2_Text_TylerPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text SSAnne_1F_Room2_Text_TylerIntro {
+    "I love POKéMON!\n"
+    "Do you?$"
+}
+
+text SSAnne_1F_Room2_Text_TylerDefeat {
+    "Wow! \n"
+    "You're great!$"
+}
+
+text SSAnne_1F_Room2_Text_TylerPostBattle {
+    "Listen, listen!\n"
+    "Let me be your friend, okay?\p"
+    "Then we can trade POKéMON and\n"
+    "do stuff.$"
+}
+
+text SSAnne_1F_Room2_Text_AnnIntro {
+    "I collected these POKéMON\n"
+    "from all around the world!$"
+}
+
+text SSAnne_1F_Room2_Text_AnnDefeat {
+    "Oh, no!\n"
+    "I went around the world for these!$"
+}
+
+text SSAnne_1F_Room2_Text_AnnPostBattle {
+    "You hurt my poor POKéMON!\p"
+    "I demand that you heal them at a\n"
+    "POKéMON CENTER!$"
+}
+
+text SSAnne_1F_Room2_Text_CruisingAroundWorld {
+    "We are cruising around the world,\n"
+    "my children and I.$"
+}

@@ -1,0 +1,168 @@
+mapscripts BattleFrontier_BattlePalaceCorridor_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_0, 0: BattleFrontier_BattlePalaceCorridor_EventScript_WalkThroughCorridor
+    ]
+}
+
+script BattleFrontier_BattlePalaceCorridor_EventScript_WalkThroughCorridor {
+    delay(16)
+    applymovement(LOCALID_PALACE_CORRIDOR_ATTENDANT, BattleFrontier_BattlePalaceCorridor_Movement_EnterCorridor)
+    applymovement(LOCALID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_EnterCorridor)
+    waitmovement(0)
+    lockall
+    palace_getcomment()
+    if (var(VAR_RESULT) == 0) call(BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment1)
+    if (var(VAR_RESULT) == 1) call(BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment2)
+    if (var(VAR_RESULT) == 2) call(BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment3)
+    if (var(VAR_RESULT) == 3) call(BattleFrontier_BattlePalaceCorridor_EventScript_StreakComment)
+    if (var(VAR_RESULT) == 4) call(BattleFrontier_BattlePalaceCorridor_EventScript_LongStreakComment)
+    closemessage
+    frontier_get(FRONTIER_DATA_LVL_MODE)
+    if (var(VAR_RESULT) == FRONTIER_LVL_OPEN) goto(BattleFrontier_BattlePalaceCorridor_EventScript_WalkToOpenBattleRoom)
+    applymovement(LOCALID_PALACE_CORRIDOR_ATTENDANT, BattleFrontier_BattlePalaceCorridor_Movement_AttendantWalkTo50BattleRoom)
+    applymovement(LOCALID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_PlayerWalkTo50BattleRoom)
+    waitmovement(0)
+    opendoor(6, 3)
+    waitdooranim()
+    applymovement(LOCALID_PALACE_CORRIDOR_ATTENDANT, BattleFrontier_BattlePalaceCorridor_Movement_AttendantEnterBattleRoom)
+    applymovement(LOCALID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_PlayerEnterBattleRoom)
+    waitmovement(0)
+    closedoor(6, 3)
+    waitdooranim()
+    goto(BattleFrontier_BattlePalaceCorridor_EventScript_WarpToBattleRoom)
+}
+
+script BattleFrontier_BattlePalaceCorridor_EventScript_WalkToOpenBattleRoom {
+    applymovement(LOCALID_PALACE_CORRIDOR_ATTENDANT, BattleFrontier_BattlePalaceCorridor_Movement_AttendantWalkToOpenBattleRoom)
+    applymovement(LOCALID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_PlayerWalkToOpenBattleRoom)
+    waitmovement(0)
+    opendoor(10, 3)
+    waitdooranim()
+    applymovement(LOCALID_PALACE_CORRIDOR_ATTENDANT, BattleFrontier_BattlePalaceCorridor_Movement_AttendantEnterBattleRoom)
+    applymovement(LOCALID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_PlayerEnterBattleRoom)
+    waitmovement(0)
+    closedoor(10, 3)
+    waitdooranim()
+}
+
+script BattleFrontier_BattlePalaceCorridor_EventScript_WarpToBattleRoom {
+    warp(MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM, 7, 4)
+    waitstate
+    end
+}
+
+script BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment1 {
+    msgbox(BattleFrontier_BattlePalaceCorridor_Text_PeopleAndMonAreSame, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment2 {
+    msgbox(BattleFrontier_BattlePalaceCorridor_Text_LetMonDoWhatItLikes, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePalaceCorridor_EventScript_RandomComment3 {
+    msgbox(BattleFrontier_BattlePalaceCorridor_Text_MonDifferentWhenCornered, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePalaceCorridor_EventScript_StreakComment {
+    msgbox(BattleFrontier_BattlePalaceCorridor_Text_BeginningToUnderstandNature, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePalaceCorridor_EventScript_LongStreakComment {
+    msgbox(BattleFrontier_BattlePalaceCorridor_Text_HeartfeltBondBetweenYouAndMons, MSGBOX_DEFAULT)
+    return
+}
+
+movement BattleFrontier_BattlePalaceCorridor_Movement_EnterCorridor {
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    step_end
+}
+
+movement BattleFrontier_BattlePalaceCorridor_Movement_AttendantWalkTo50BattleRoom {
+    walk_up
+    walk_up
+    walk_left
+    walk_left
+    walk_up
+    walk_up
+    step_end
+}
+
+movement BattleFrontier_BattlePalaceCorridor_Movement_PlayerWalkTo50BattleRoom {
+    walk_up
+    walk_up
+    walk_up
+    walk_left
+    walk_left
+    walk_up
+    step_end
+}
+
+movement BattleFrontier_BattlePalaceCorridor_Movement_AttendantWalkToOpenBattleRoom {
+    walk_up
+    walk_right
+    walk_right
+    walk_up
+    walk_up
+    walk_up
+    step_end
+}
+
+movement BattleFrontier_BattlePalaceCorridor_Movement_PlayerWalkToOpenBattleRoom {
+    walk_up
+    walk_up
+    walk_right
+    walk_right
+    walk_up
+    walk_up
+    step_end
+}
+
+script BattleFrontier_BattlePalaceCorridor_Movement_PlayerEnterBattleRoom {
+    walk_up()
+}
+
+movement BattleFrontier_BattlePalaceCorridor_Movement_AttendantEnterBattleRoom {
+    walk_up
+    set_invisible
+    step_end
+}
+
+text BattleFrontier_BattlePalaceCorridor_Text_PeopleAndMonAreSame {
+    "People and POKéMON, they are but\n"
+    "the same…\p"
+    "Their individual nature makes them\n"
+    "good at certain things, and not good\l"
+    "at others.$"
+}
+
+text BattleFrontier_BattlePalaceCorridor_Text_LetMonDoWhatItLikes {
+    "Rather than trying to make a POKéMON\n"
+    "do what it dislikes, try to let it do\l"
+    "what it likes and is good at doing.\p"
+    "Put yourself in the POKéMON's position\n"
+    "and consider what moves it would like.$"
+}
+
+text BattleFrontier_BattlePalaceCorridor_Text_MonDifferentWhenCornered {
+    "A POKéMON's nature is a remarkable\n"
+    "thing…\p"
+    "Some POKéMON behave in a completely\n"
+    "different way when they are cornered.$"
+}
+
+text BattleFrontier_BattlePalaceCorridor_Text_BeginningToUnderstandNature {
+    "Are you beginning to understand how\n"
+    "a POKéMON's nature makes it behave?$"
+}
+
+text BattleFrontier_BattlePalaceCorridor_Text_HeartfeltBondBetweenYouAndMons {
+    "Ah… I see a strong, heartfelt bond\n"
+    "between you and your POKéMON…$"
+}

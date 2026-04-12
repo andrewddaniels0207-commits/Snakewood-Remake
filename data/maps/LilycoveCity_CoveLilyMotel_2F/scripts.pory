@@ -1,0 +1,154 @@
+mapscripts LilycoveCity_CoveLilyMotel_2F_MapScripts {}
+
+script LilycoveCity_CoveLilyMotel_2F_EventScript_GameDesigner {
+    lock
+    faceplayer
+    if (!flag(FLAG_TEMP_2)) call(LilycoveCity_CoveLilyMotel_2F_EventScript_ShowMeCompletedDex)
+    if (flag(FLAG_TEMP_2)) call(LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma)
+    specialvar(VAR_RESULT, HasAllHoennMons)
+    if (var(VAR_RESULT) == TRUE) goto(LilycoveCity_CoveLilyMotel_2F_EventScript_AllHoennMonsFanfare)
+    release
+    end
+}
+
+script LilycoveCity_CoveLilyMotel_2F_EventScript_ShowMeCompletedDex {
+    msgbox(LilycoveCity_CoveLilyMotel_2F_Text_ShowMeCompletedDex, MSGBOX_DEFAULT)
+    return
+}
+
+script LilycoveCity_CoveLilyMotel_2F_EventScript_AllHoennMonsFanfare {
+    setflag(FLAG_TEMP_2)
+    playfanfare(MUS_OBTAIN_ITEM)
+    waitfanfare()
+    goto(LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma)
+    end
+}
+
+script LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma {
+    message(LilycoveCity_CoveLilyMotel_2F_Text_FilledPokedexGiveYouThis)
+    waitmessage()
+    call(Common_EventScript_PlayGymBadgeFanfare)
+    special(Special_ShowDiploma)
+    waitstate
+    release
+    end
+}
+
+script LilycoveCity_CoveLilyMotel_2F_EventScript_Programmer {
+    msgbox(LilycoveCity_CoveLilyMotel_2F_Text_ImTheProgrammer, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_CoveLilyMotel_2F_EventScript_GraphicArtist {
+    msgbox(LilycoveCity_CoveLilyMotel_2F_Text_ImTheGraphicArtist, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_CoveLilyMotel_2F_EventScript_FatMan {
+    msgbox(LilycoveCity_CoveLilyMotel_2F_Text_GirlsAreCute, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_CoveLilyMotel_2F_EventScript_Woman {
+    msgbox(LilycoveCity_CoveLilyMotel_2F_Text_SeaBreezeTicklesHeart, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_CoveLilyMotel_2F_EventScript_GameBoyKid {
+    msgbox(LilycoveCity_CoveLilyMotel_2F_Text_NeverLeaveWithoutGameBoy, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_CoveLilyMotel_2F_EventScript_Scott {
+    lock
+    faceplayer
+    if (flag(FLAG_MET_SCOTT_IN_LILYCOVE)) goto(LilycoveCity_CoveLilyMotel_2F_EventScript_MetScott)
+    msgbox(LilycoveCity_CoveLilyMotel_2F_Text_SnoozingPreferBattles, MSGBOX_DEFAULT)
+    addvar(VAR_SCOTT_STATE, 1)
+    setflag(FLAG_MET_SCOTT_IN_LILYCOVE)
+    release
+    end
+}
+
+script LilycoveCity_CoveLilyMotel_2F_EventScript_MetScott {
+    msgbox(LilycoveCity_CoveLilyMotel_2F_Text_ContestsDoTakeStrategy, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+text LilycoveCity_CoveLilyMotel_2F_Text_ShowMeCompletedDex {
+    "I'm the GAME DESIGNER.\p"
+    "Oh, is that right?\n"
+    "You're working on a POKéDEX?\p"
+    "It's tough trying to complete it,\n"
+    "but don't give up.\p"
+    "If you do complete it, please come\n"
+    "show me.$"
+}
+
+text LilycoveCity_CoveLilyMotel_2F_Text_FilledPokedexGiveYouThis {
+    "Wow! That's awesome!\n"
+    "Yep, it's totally awesome!\p"
+    "This POKéDEX is completely filled!\n"
+    "You really must love POKéMON!\p"
+    "I'm so impressed!\p"
+    "Let me give you something in\n"
+    "recognition of your feat!$"
+}
+
+text LilycoveCity_CoveLilyMotel_2F_Text_ImTheProgrammer {
+    "Me? You're talking to me?\n"
+    "I'm the PROGRAMMER.\p"
+    "I wonder what the SLOTS are\n"
+    "like here.$"
+}
+
+text LilycoveCity_CoveLilyMotel_2F_Text_ImTheGraphicArtist {
+    "I'm the GRAPHIC ARTIST! Aren't the\n"
+    "POKéMON of HOENN interesting?$"
+}
+
+text LilycoveCity_CoveLilyMotel_2F_Text_GirlsAreCute {
+    "The girl TUBERS, they're cute, hey?\n"
+    "To battle against a cute TUBER…\p"
+    "Whoop, it's so awesome!\p"
+    "And the TWINS! Aren't they cute?\n"
+    "A 2-on-2 battle with TWINS…\p"
+    "Whoop, it's unbearably fun!$"
+}
+
+text LilycoveCity_CoveLilyMotel_2F_Text_SeaBreezeTicklesHeart {
+    "The sea breeze tickles my heart.\n"
+    "It feels wonderful here!$"
+}
+
+text LilycoveCity_CoveLilyMotel_2F_Text_NeverLeaveWithoutGameBoy {
+    "You never know when and where\n"
+    "people will challenge you.\p"
+    "That's why I never leave home without\n"
+    "my GAME BOY ADVANCE.$"
+}
+
+text LilycoveCity_CoveLilyMotel_2F_Text_SnoozingPreferBattles {
+    "SCOTT: … … … … …\n"
+    "… … … … … Zzz…\p"
+    "… … … … … Huh?!\n"
+    "Oh, sorry, sorry! I was snoozing!\p"
+    "I came to check out this POKéMON\n"
+    "CONTEST thing.\p"
+    "I have to admit, it does look quite\n"
+    "entertaining, but…\p"
+    "Consider me a purist--I prefer\n"
+    "battles and tough TRAINERS.\p"
+    "But that's just me.\p"
+    "{PLAYER}{KUN}, I hope you'll enjoy everything\n"
+    "like the GYMS, CONTESTS, BATTLE TENT,\l"
+    "the whole works!$"
+}
+
+text LilycoveCity_CoveLilyMotel_2F_Text_ContestsDoTakeStrategy {
+    "SCOTT: I think it does take strategy\n"
+    "to win a CONTEST.\p"
+    "Devising CONTEST strategies is one way\n"
+    "of becoming a better TRAINER, I'd say.$"
+}

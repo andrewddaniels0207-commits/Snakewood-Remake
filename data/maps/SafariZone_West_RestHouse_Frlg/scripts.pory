@@ -1,0 +1,42 @@
+mapscripts SafariZone_West_RestHouse_Frlg_MapScripts {}
+
+script SafariZone_West_RestHouse_EventScript_Man {
+    msgbox(SafariZone_West_Text_BaitMakesMonStickAround, MSGBOX_NPC)
+    end
+}
+
+script SafariZone_West_RestHouse_EventScript_Scientist {
+    msgbox(SafariZone_West_Text_RocksMakeMonRunButEasierCatch, MSGBOX_NPC)
+    end
+}
+
+script SafariZone_West_RestHouse_EventScript_CooltrainerF {
+    msgbox(SafariZone_West_Text_HikedLotsDidntSeeMonIWanted, MSGBOX_NPC)
+    end
+}
+
+text SafariZone_West_Text_KogaPatrolsSafariEverySoOften {
+    "The SAFARI ZONE's huge, wouldn't\n"
+    "you say?\p"
+    "FUCHSIA's GYM LEADER, KOGA, \n"
+    "patrols the grounds every so often.\p"
+    "Thanks to him, we can play here\n"
+    "knowing that we're safe.$"
+}
+
+text SafariZone_West_Text_RocksMakeMonRunButEasierCatch {
+    "Tossing ROCKS at POKéMON might\n"
+    "make them run, but they'll be\l"
+    "easier to catch.$"
+}
+
+text SafariZone_West_Text_BaitMakesMonStickAround {
+    "Using BAIT will make POKéMON more\n"
+    "likely to stick around if they get\l"
+    "busy eating.$"
+}
+
+text SafariZone_West_Text_HikedLotsDidntSeeMonIWanted {
+    "I hiked a lot, but I didn't see any\n"
+    "POKéMON I wanted.$"
+}

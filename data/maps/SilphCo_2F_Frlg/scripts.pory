@@ -1,0 +1,134 @@
+mapscripts SilphCo_2F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_LOAD: SilphCo_2F_OnLoad
+}
+
+script SilphCo_2F_OnLoad {
+    if (!flag(FLAG_SILPH_2F_DOOR_1)) call(EventScript_Close2FDoor1)
+    if (!flag(FLAG_SILPH_2F_DOOR_2)) call(EventScript_Close2FDoor2)
+    end
+}
+
+script SilphCo_2F_EventScript_ThunderWaveTutor {
+    goto(EventScript_ThunderWaveTutor)
+    end
+}
+
+script SilphCo_2F_EventScript_FloorSign {
+    msgbox(SilphCo_2F_Text_FloorSign, MSGBOX_SIGN)
+    end
+}
+
+script SilphCo_2F_EventScript_Connor {
+    trainerbattle_single(TRAINER_SCIENTIST_CONNOR, SilphCo_2F_Text_ConnorIntro, SilphCo_2F_Text_ConnorDefeat)
+    msgbox(SilphCo_2F_Text_ConnorPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SilphCo_2F_EventScript_Jerry {
+    trainerbattle_single(TRAINER_SCIENTIST_JERRY, SilphCo_2F_Text_JerryIntro, SilphCo_2F_Text_JerryDefeat)
+    msgbox(SilphCo_2F_Text_JerryPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SilphCo_2F_EventScript_Grunt1 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_23, SilphCo_2F_Text_Grunt1Intro, SilphCo_2F_Text_Grunt1Defeat)
+    msgbox(SilphCo_2F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SilphCo_2F_EventScript_Grunt2 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_24, SilphCo_2F_Text_Grunt2Intro, SilphCo_2F_Text_Grunt2Defeat)
+    msgbox(SilphCo_2F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text SilphCo_2F_Text_ConnorIntro {
+    "Help!\n"
+    "I'm a SILPH employee.$"
+}
+
+text SilphCo_2F_Text_ConnorDefeat {
+    "How did you know\n"
+    "I was a ROCKET?$"
+}
+
+text SilphCo_2F_Text_ConnorPostBattle {
+    "I work for both SILPH and TEAM\n"
+    "ROCKET.$"
+}
+
+text SilphCo_2F_Text_JerryIntro {
+    "It's off-limits here!\n"
+    "Go home!$"
+}
+
+text SilphCo_2F_Text_JerryDefeat {
+    "You're good.$"
+}
+
+text SilphCo_2F_Text_JerryPostBattle {
+    "Can you solve the maze in here?\n"
+    "It's not easy, I tell you!$"
+}
+
+text SilphCo_2F_Text_Grunt1Intro {
+    "No kids are allowed in here!$"
+}
+
+text SilphCo_2F_Text_Grunt1Defeat {
+    "Tough!$"
+}
+
+text SilphCo_2F_Text_Grunt1PostBattle {
+    "Diamond-shaped tiles are teleport\n"
+    "blocks.\p"
+    "They're transporters for this\n"
+    "high-tech building.$"
+}
+
+text SilphCo_2F_Text_Grunt2Intro {
+    "Hey, kid!\n"
+    "What are you wandering here for?$"
+}
+
+text SilphCo_2F_Text_Grunt2Defeat {
+    "I goofed!$"
+}
+
+text SilphCo_2F_Text_Grunt2PostBattle {
+    "SILPH CO. will be associated with\n"
+    "TEAM ROCKET!$"
+}
+
+text Text_ThunderWaveTeach {
+    "Eeek!\n"
+    "No! Stop! Help!\p"
+    "Oh, you're not with TEAM ROCKET.\n"
+    "I'm sorry, I thought…\p"
+    "Will you forgive me if I teach\n"
+    "you the THUNDER WAVE technique?$"
+}
+
+text Text_ThunderWaveDeclined {
+    "Oh…\n"
+    "But THUNDER WAVE is convenient…$"
+}
+
+text Text_ThunderWaveWhichMon {
+    "Which POKéMON should I teach\n"
+    "THUNDER WAVE?$"
+}
+
+text Text_ThunderWaveTaught {
+    "THUNDER WAVE causes paralysis in\n"
+    "the target POKéMON.\p"
+    "A paralyzed POKéMON may be unable\n"
+    "to move in battle.\p"
+    "It's an ELECTRIC-type move, so it\n"
+    "won't work on some POKéMON.$"
+}
+
+text SilphCo_2F_Text_FloorSign {
+    "SILPH CO. HEAD OFFICE\n"
+    "2F$"
+}

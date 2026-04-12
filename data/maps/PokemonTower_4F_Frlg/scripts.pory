@@ -1,0 +1,61 @@
+mapscripts PokemonTower_4F_Frlg_MapScripts {}
+
+script PokemonTower_4F_EventScript_Paula {
+    trainerbattle_single(TRAINER_CHANNELER_PAULA, PokemonTower_4F_Text_PaulaIntro, PokemonTower_4F_Text_PaulaDefeat)
+    msgbox(PokemonTower_4F_Text_PaulaPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script PokemonTower_4F_EventScript_Laurel {
+    trainerbattle_single(TRAINER_CHANNELER_LAUREL, PokemonTower_4F_Text_LaurelIntro, PokemonTower_4F_Text_LaurelDefeat)
+    msgbox(PokemonTower_4F_Text_LaurelPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script PokemonTower_4F_EventScript_Jody {
+    trainerbattle_single(TRAINER_CHANNELER_JODY, PokemonTower_4F_Text_JodyIntro, PokemonTower_4F_Text_JodyDefeat)
+    msgbox(PokemonTower_4F_Text_JodyPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text PokemonTower_4F_Text_PaulaIntro {
+    "Ghost! No!\n"
+    "Kwaaah!$"
+}
+
+text PokemonTower_4F_Text_PaulaDefeat {
+    "Where is the ghost?$"
+}
+
+text PokemonTower_4F_Text_PaulaPostBattle {
+    "I must have been dreaming…$"
+}
+
+text PokemonTower_4F_Text_LaurelIntro {
+    "Be cursed with me!\n"
+    "Kwaaah!$"
+}
+
+text PokemonTower_4F_Text_LaurelDefeat {
+    "What!$"
+}
+
+text PokemonTower_4F_Text_LaurelPostBattle {
+    "We can't determine the identity of\n"
+    "the ghosts…$"
+}
+
+text PokemonTower_4F_Text_JodyIntro {
+    "Huhuhu…\n"
+    "Beat me not!$"
+}
+
+text PokemonTower_4F_Text_JodyDefeat {
+    "Huh?\n"
+    "Who? What?$"
+}
+
+text PokemonTower_4F_Text_JodyPostBattle {
+    "May the departed POKéMON rest in\n"
+    "peace…$"
+}

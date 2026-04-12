@@ -1,0 +1,53 @@
+mapscripts ViridianCity_PokemonCenter_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: ViridianCity_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script ViridianCity_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_VIRIDIAN_CITY)
+    end
+}
+
+script ViridianCity_PokemonCenter_1F_EventScript_Nurse {
+    lock
+    faceplayer
+    call(EventScript_PkmnCenterNurse_Frlg)
+    release
+    end
+}
+
+script ViridianCity_PokemonCenter_1F_EventScript_Boy {
+    msgbox(ViridianCity_PokemonCenter_1F_Text_PokeCenterInEveryTown, MSGBOX_NPC)
+    end
+}
+
+script ViridianCity_PokemonCenter_1F_EventScript_Gentleman {
+    msgbox(ViridianCity_PokemonCenter_1F_Text_FeelFreeToUsePC, MSGBOX_NPC)
+    end
+}
+
+script ViridianCity_PokemonCenter_1F_EventScript_Youngster {
+    msgbox(ViridianCity_PokemonCenter_1F_Text_PokeCentersHealMons, MSGBOX_NPC)
+    end
+}
+
+text ViridianCity_PokemonCenter_1F_Text_FeelFreeToUsePC {
+    "Please feel free to use that PC in\n"
+    "the corner.\p"
+    "The receptionist told me so.\n"
+    "It's so kind of her!$"
+}
+
+text ViridianCity_PokemonCenter_1F_Text_PokeCenterInEveryTown {
+    "There's a POKéMON CENTER in every\n"
+    "town ahead.\p"
+    "They charge no money, so don't\n"
+    "be shy about healing POKéMON.$"
+}
+
+text ViridianCity_PokemonCenter_1F_Text_PokeCentersHealMons {
+    "POKéMON CENTERS heal your tired,\n"
+    "hurt, or fainted POKéMON.\p"
+    "They make all POKéMON completely\n"
+    "healthy.$"
+}

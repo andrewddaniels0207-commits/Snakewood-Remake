@@ -1,0 +1,113 @@
+mapscripts SixIsland_OutcastIsland_Frlg_MapScripts {}
+
+script SixIsland_OutcastIsland_EventScript_Rocket {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_46, SixIsland_OutcastIsland_Text_RocketIntro, SixIsland_OutcastIsland_Text_RocketDefeat)
+    msgbox(SixIsland_OutcastIsland_Text_RocketPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text SixIsland_OutcastIsland_Text_RocketIntro {
+    "There're no rare POKéMON around\n"
+    "these parts! Not a one!\p"
+    "That burns me up, man.\n"
+    "I'll take it out on you!$"
+}
+
+text SixIsland_OutcastIsland_Text_RocketDefeat {
+    "…Huh?$"
+}
+
+text SixIsland_OutcastIsland_Text_RocketPostBattle {
+    "So listen, you haven't seen any\n"
+    "rare POKéMON, have you?$"
+}
+
+text SixIsland_OutcastIsland_Text_TylorIntro {
+    "I'm having no luck at all.\n"
+    "A battle'd be a change of pace!$"
+}
+
+text SixIsland_OutcastIsland_Text_TylorDefeat {
+    "Nope, no luck at all…$"
+}
+
+text SixIsland_OutcastIsland_Text_TylorPostBattle {
+    "I can't very well go home without\n"
+    "catching something, though.$"
+}
+
+text SixIsland_OutcastIsland_Text_MymoIntro {
+    "Gasp… Gasp…\p"
+    "I swam here from SIX ISLE PORT\n"
+    "in one go.$"
+}
+
+text SixIsland_OutcastIsland_Text_MymoDefeat {
+    "Gasp…\n"
+    "Gasp…$"
+}
+
+text SixIsland_OutcastIsland_Text_MymoPostBattle {
+    "I'm only at the halfway point…\n"
+    "I'm beat…$"
+}
+
+text SixIsland_OutcastIsland_Text_NicoleIntro {
+    "It's not so easy sending POKéMON\n"
+    "out while swimming, you know?$"
+}
+
+text SixIsland_OutcastIsland_Text_NicoleDefeat {
+    "I didn't lose to you at swimming.\n"
+    "This doesn't bother me.$"
+}
+
+text SixIsland_OutcastIsland_Text_NicolePostBattle {
+    "Are you headed for the island up\n"
+    "past here?\p"
+    "I didn't see anything interesting\n"
+    "there.$"
+}
+
+text SixIsland_OutcastIsland_Text_AvaIntro {
+    "AVA: Let's have a two-on-two\n"
+    "marine battle!$"
+}
+
+text SixIsland_OutcastIsland_Text_AvaDefeat {
+    "AVA: Oh, you're amazing!\n"
+    "Even better, you're on your own!$"
+}
+
+text SixIsland_OutcastIsland_Text_AvaPostBattle {
+    "AVA: You know, I do prefer the\n"
+    "sea over any pool.$"
+}
+
+text SixIsland_OutcastIsland_Text_AvaNotEnoughMons {
+    "AVA: You're challenging us to\n"
+    "a battle?\p"
+    "You'll need at least two POKéMON\n"
+    "if you want to do that.$"
+}
+
+text SixIsland_OutcastIsland_Text_GebIntro {
+    "GEB: Big Sister, help!\n"
+    "Please battle with me!$"
+}
+
+text SixIsland_OutcastIsland_Text_GebDefeat {
+    "GEB: Wow, Big Sister, this person's\n"
+    "really good!$"
+}
+
+text SixIsland_OutcastIsland_Text_GebPostBattle {
+    "GEB: I'm hanging onto my sister\n"
+    "because I can't touch the bottom.$"
+}
+
+text SixIsland_OutcastIsland_Text_GebNotEnoughMons {
+    "GEB: Please battle against me and\n"
+    "my sister!\p"
+    "…Oh, you don't have two POKéMON?$"
+}

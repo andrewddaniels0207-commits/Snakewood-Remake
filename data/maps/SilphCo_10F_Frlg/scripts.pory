@@ -1,0 +1,82 @@
+mapscripts SilphCo_10F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_LOAD: SilphCo_10F_OnLoad
+}
+
+script SilphCo_10F_OnLoad {
+    if (!flag(FLAG_SILPH_10F_DOOR)) call(EventScript_Close10FDoor)
+    end
+}
+
+script SilphCo_10F_EventScript_WorkerF {
+    lock
+    faceplayer
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) goto(SilphCo_10F_EventScript_WorkerFRocketsGone)
+    msgbox(SilphCo_10F_Text_WaaaImScared)
+    release
+    end
+}
+
+script SilphCo_10F_EventScript_WorkerFRocketsGone {
+    msgbox(SilphCo_10F_Text_KeepMeCryingASecret)
+    release
+    end
+}
+
+script SilphCo_10F_EventScript_FloorSign {
+    msgbox(SilphCo_10F_Text_FloorSign, MSGBOX_SIGN)
+    end
+}
+
+script SilphCo_10F_EventScript_Travis {
+    trainerbattle_single(TRAINER_SCIENTIST_TRAVIS, SilphCo_10F_Text_TravisIntro, SilphCo_10F_Text_TravisDefeat)
+    msgbox(SilphCo_10F_Text_TravisPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SilphCo_10F_EventScript_Grunt {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_39, SilphCo_10F_Text_GruntIntro, SilphCo_10F_Text_GruntDefeat)
+    msgbox(SilphCo_10F_Text_GruntPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text SilphCo_10F_Text_GruntIntro {
+    "Welcome to 10F!\n"
+    "So good of you to join me!$"
+}
+
+text SilphCo_10F_Text_GruntDefeat {
+    "I'm stunned!$"
+}
+
+text SilphCo_10F_Text_GruntPostBattle {
+    "Nice try, but the boardroom is up\n"
+    "one more floor.$"
+}
+
+text SilphCo_10F_Text_TravisIntro {
+    "Enough of your silly games!$"
+}
+
+text SilphCo_10F_Text_TravisDefeat {
+    "No continues left!$"
+}
+
+text SilphCo_10F_Text_TravisPostBattle {
+    "Are you satisfied with beating me?\n"
+    "Then go on home!$"
+}
+
+text SilphCo_10F_Text_WaaaImScared {
+    "Waaaaa!\n"
+    "I'm scared!$"
+}
+
+text SilphCo_10F_Text_KeepMeCryingASecret {
+    "About me crying…\n"
+    "Please keep it a secret.$"
+}
+
+text SilphCo_10F_Text_FloorSign {
+    "SILPH CO. HEAD OFFICE\n"
+    "10F$"
+}

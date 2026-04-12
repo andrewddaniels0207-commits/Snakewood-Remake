@@ -1,0 +1,145 @@
+mapscripts SixIsland_WaterPath_House1_Frlg_MapScripts {}
+
+script SixIsland_WaterPath_House1_EventScript_Beauty {
+    lock
+    faceplayer
+    setvar(VAR_0x8004, SPECIES_HERACROSS)
+    specialvar(VAR_RESULT, DoesPlayerPartyContainSpecies)
+    if (var(VAR_RESULT) == FALSE) goto(SixIsland_WaterPath_House1_EventScript_NoHeracrossInParty)
+    special(GetHeracrossSizeRecordInfo)
+    msgbox(SixIsland_WaterPath_House1_Text_MayIMeasureHeracross)
+    special(ChoosePartyMon)
+    waitstate
+    copyvar(VAR_RESULT, VAR_0x8004)
+    if (var(VAR_RESULT) >= PARTY_SIZE) goto(SixIsland_WaterPath_House1_EventScript_DontShowMon)
+    special(CompareHeracrossSize)
+    if (var(VAR_RESULT) == 1) goto(SixIsland_WaterPath_House1_EventScript_ShownNonHeracross)
+    if (var(VAR_RESULT) == 2) goto(SixIsland_WaterPath_House1_EventScript_ShownSmallHeracross)
+    if (var(VAR_RESULT) == 3) goto(SixIsland_WaterPath_House1_EventScript_ShownBigHeracross)
+    if (var(VAR_RESULT) == 4) goto(SixIsland_WaterPath_House1_EventScript_ShownTiedHeracross)
+    release
+    end
+}
+
+script SixIsland_WaterPath_House1_EventScript_NoHeracrossInParty {
+    msgbox(SixIsland_WaterPath_House1_Text_LoveItNeedItHeracross)
+    release
+    end
+}
+
+script SixIsland_WaterPath_House1_EventScript_DontShowMon {
+    release
+    end
+}
+
+script SixIsland_WaterPath_House1_EventScript_ShownNonHeracross {
+    msgbox(SixIsland_WaterPath_House1_Text_ThisWontDo)
+    release
+    end
+}
+
+script SixIsland_WaterPath_House1_EventScript_ShownSmallHeracross {
+    if (!flag(FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1)) goto(SixIsland_WaterPath_House1_EventScript_ShownBigHeracross)
+    msgbox(SixIsland_WaterPath_House1_Text_ItsXInchesYInchesWasBiggest)
+    release
+    end
+}
+
+script SixIsland_WaterPath_House1_EventScript_ShownTiedHeracross {
+    if (!flag(FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1)) goto(SixIsland_WaterPath_House1_EventScript_ShownBigHeracross)
+    msgbox(SixIsland_WaterPath_House1_Text_ItsXInchesSameAsBefore)
+    release
+    end
+}
+
+script SixIsland_WaterPath_House1_EventScript_ShownBigHeracross {
+    setflag(FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1)
+    msgbox(SixIsland_WaterPath_House1_Text_ItsXInchesDeserveReward)
+    giveitem(ITEM_NEST_BALL)
+    if (var(VAR_RESULT) == FALSE) goto(SixIsland_WaterPath_House1_EventScript_NoRoomForNestBall)
+    msgbox(SixIsland_WaterPath_House1_Text_WantToSeeBiggerOne)
+    release
+    end
+}
+
+script SixIsland_WaterPath_House1_EventScript_NoRoomForNestBall {
+    msgbox(SixIsland_WaterPath_House1_Text_YourBagIsFull)
+    release
+    end
+}
+
+script SixIsland_WaterPath_House1_EventScript_SizeRecord {
+    lockall
+    if (flag(FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1)) goto(SixIsland_WaterPath_House1_EventScript_SizeRecordNonEmpty)
+    msgbox(SixIsland_WaterPath_House1_Text_BlankChartOfSomeSort)
+    releaseall
+    end
+}
+
+script SixIsland_WaterPath_House1_EventScript_SizeRecordNonEmpty {
+    special(GetHeracrossSizeRecordInfo)
+    msgbox(SixIsland_WaterPath_House1_Text_BiggestHeracrossIsXInches)
+    releaseall
+    end
+}
+
+text SixIsland_WaterPath_House1_Text_LoveItNeedItHeracross {
+    "Hera, hera, HERACROSS!\n"
+    "Big and shiny, it's the bug boss!\l"
+    "Love it, need it, HERACROSS!$"
+}
+
+text SixIsland_WaterPath_House1_Text_MayIMeasureHeracross {
+    "Eeeeek!\n"
+    "That's a HERACROSS!\p"
+    "Please, please, may I measure how\n"
+    "big it is?$"
+}
+
+text SixIsland_WaterPath_House1_Text_ItsXInchesDeserveReward {
+    "Eeeek, it's {STR_VAR_2} inches!\n"
+    "I've never seen anything like this!\l"
+    "You deserve a reward!$"
+}
+
+text SixIsland_WaterPath_House1_Text_WantToSeeBiggerOne {
+    "I want to see a much, much bigger\n"
+    "HERACROSS than that one.\p"
+    "Oh, how I adore them, big\n"
+    "HERACROSS!$"
+}
+
+text SixIsland_WaterPath_House1_Text_ItsXInchesSameAsBefore {
+    "Huh? This {STR_VAR_2}-inch measurement…\n"
+    "Oh, boo! It's the same as before.$"
+}
+
+text SixIsland_WaterPath_House1_Text_ItsXInchesYInchesWasBiggest {
+    "Oh, it's just {STR_VAR_2} inches.\n"
+    "The HERACROSS before was bigger.\p"
+    "It was {STR_VAR_3} inches, the biggest\n"
+    "HERACROSS you've brought me.$"
+}
+
+text SixIsland_WaterPath_House1_Text_ThisWontDo {
+    "Oh, no! This won't do!\p"
+    "HERACROSS looks much more macho\n"
+    "and cool, and has a lovely horn!$"
+}
+
+text SixIsland_WaterPath_House1_Text_YourBagIsFull {
+    "Your BAG is full.\n"
+    "My reward won't fit.$"
+}
+
+text SixIsland_WaterPath_House1_Text_BiggestHeracrossIsXInches {
+    "The biggest HERACROSS that I have\n"
+    "ever seen measured so far is:\p"
+    "{STR_VAR_3} inches!$"
+}
+
+text SixIsland_WaterPath_House1_Text_BlankChartOfSomeSort {
+    "It's a blank chart of some sort.\p"
+    "It has spaces for writing in\n"
+    "records of some kind.$"
+}

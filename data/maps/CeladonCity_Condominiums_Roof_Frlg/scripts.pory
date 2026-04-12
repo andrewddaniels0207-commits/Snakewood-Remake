@@ -1,0 +1,10 @@
+mapscripts CeladonCity_Condominiums_Roof_Frlg_MapScripts {}
+
+script CeladonCity_Condominiums_Roof_EventScript_Sign {
+    msgbox(CeladonCity_Condominiums_Roof_Text_IKnowEverything, MSGBOX_SIGN)
+    end
+}
+
+text CeladonCity_Condominiums_Roof_Text_IKnowEverything {
+    "I KNOW EVERYTHING!$"
+}

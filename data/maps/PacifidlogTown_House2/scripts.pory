@@ -1,0 +1,167 @@
+mapscripts PacifidlogTown_House2_MapScripts {}
+
+script PacifidlogTown_House2_EventScript_FanClubYoungerBrother {
+    lock
+    faceplayer
+    dotimebasedevents()
+    call(PacifidlogTown_House2_EventScript_UpdateFanClubTMFlag)
+    if (flag(FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK)) goto(PacifidlogTown_House2_EventScript_ComeBackInXDays)
+    if (flag(FLAG_MET_FANCLUB_YOUNGER_BROTHER)) call(PacifidlogTown_House2_EventScript_MonAssessment)
+    if (!flag(FLAG_MET_FANCLUB_YOUNGER_BROTHER)) call(PacifidlogTown_House2_EventScript_FirstMonAssessment)
+    setflag(FLAG_MET_FANCLUB_YOUNGER_BROTHER)
+    specialvar(VAR_RESULT, GetLeadMonFriendshipScore)
+    if (var(VAR_RESULT) >= FRIENDSHIP_150_TO_199) goto(PacifidlogTown_House2_EventScript_GiveReturn)
+    specialvar(VAR_RESULT, GetLeadMonFriendshipScore)
+    if (var(VAR_RESULT) >= FRIENDSHIP_50_TO_99) goto(PacifidlogTown_House2_EventScript_PutInEffort)
+    goto(PacifidlogTown_House2_EventScript_GiveFrustration)
+    end
+}
+
+script PacifidlogTown_House2_EventScript_UpdateFanClubTMFlag {
+    if (!flag(FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK)) goto(Common_EventScript_NopReturn)
+    specialvar(VAR_RESULT, GetDaysUntilPacifidlogTMAvailable)
+    if (var(VAR_RESULT) == 0) call(PacifidlogTown_House2_EventScript_ClearReceivedFanClubTM)
+    return
+}
+
+script PacifidlogTown_House2_EventScript_MonAssessment {
+    msgbox(PacifidlogTown_House2_Text_AhYourPokemon, MSGBOX_DEFAULT)
+    return
+}
+
+script PacifidlogTown_House2_EventScript_FirstMonAssessment {
+    msgbox(PacifidlogTown_House2_Text_ChairmansYoungerBrotherOnVacation, MSGBOX_DEFAULT)
+    msgbox(PacifidlogTown_House2_Text_AhYourPokemon, MSGBOX_DEFAULT)
+    return
+}
+
+script PacifidlogTown_House2_EventScript_ClearReceivedFanClubTM {
+    clearflag(FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK)
+    return
+}
+
+script PacifidlogTown_House2_EventScript_GiveReturn {
+    msgbox(PacifidlogTown_House2_Text_AdoringPokemonTakeThis, MSGBOX_DEFAULT)
+    giveitem(ITEM_TM_RETURN)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    setflag(FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK)
+    special(SetPacifidlogTMReceivedDay)
+    msgbox(PacifidlogTown_House2_Text_ExplainReturnFrustration, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script PacifidlogTown_House2_EventScript_PutInEffort {
+    msgbox(PacifidlogTown_House2_Text_PutInSomeMoreEffort, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script PacifidlogTown_House2_EventScript_GiveFrustration {
+    msgbox(PacifidlogTown_House2_Text_ViciousPokemonTakeThis, MSGBOX_DEFAULT)
+    giveitem(ITEM_TM_FRUSTRATION)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    setflag(FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK)
+    special(SetPacifidlogTMReceivedDay)
+    msgbox(PacifidlogTown_House2_Text_ExplainReturnFrustration, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script PacifidlogTown_House2_EventScript_ComeBackInXDays {
+    specialvar(VAR_RESULT, GetDaysUntilPacifidlogTMAvailable)
+    buffernumberstring(STR_VAR_1, VAR_RESULT)
+    msgbox(PacifidlogTown_House2_Text_GetGoodTMInXDays, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script PacifidlogTown_House2_EventScript_HappyAzurill {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_AZURILL, CRY_MODE_NORMAL)
+    msgbox(PacifidlogTown_House2_Text_Rurii, MSGBOX_DEFAULT)
+    waitmoncry()
+    msgbox(PacifidlogTown_House2_Text_VeryFriendlyWithTrainer, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script PacifidlogTown_House2_EventScript_UnhappyAzurill {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_AZURILL, CRY_MODE_ENCOUNTER)
+    msgbox(PacifidlogTown_House2_Text_Rururi, MSGBOX_DEFAULT)
+    waitmoncry()
+    msgbox(PacifidlogTown_House2_Text_DoesntLikeTrainerVeryMuch, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+text PacifidlogTown_House2_Text_ChairmansYoungerBrotherOnVacation {
+    "Er-hem!\p"
+    "I am the POKéMON FAN CLUB's most\n"
+    "important person, the CHAIRMAN's\l"
+    "younger brother.\p"
+    "I'm here enjoying my vacation with\n"
+    "POKéMON, yes, indeed.$"
+}
+
+text PacifidlogTown_House2_Text_AhYourPokemon {
+    "Ah!\n"
+    "Your POKéMON…$"
+}
+
+text PacifidlogTown_House2_Text_AdoringPokemonTakeThis {
+    "It clearly likes you very much.\p"
+    "A POKéMON that adoring and adorable\n"
+    "deserves a TM like this, no?$"
+}
+
+text PacifidlogTown_House2_Text_PutInSomeMoreEffort {
+    "Hmm…\n"
+    "It's not bad, but it's also not good.\p"
+    "You, as the TRAINER, need to put in\n"
+    "some more effort.$"
+}
+
+text PacifidlogTown_House2_Text_ViciousPokemonTakeThis {
+    "It has a vicious look to it.\p"
+    "A frightening POKéMON like that\n"
+    "deserves a TM like this.$"
+}
+
+text PacifidlogTown_House2_Text_ExplainReturnFrustration {
+    "If a POKéMON likes you a lot, RETURN's\n"
+    "power is enhanced.\p"
+    "If it doesn't like you, FRUSTRATION's\n"
+    "power goes up.$"
+}
+
+text PacifidlogTown_House2_Text_GetGoodTMInXDays {
+    "Oh, yes. In about {STR_VAR_1} or so days,\n"
+    "I should be getting a good TM or two.\p"
+    "You should come see me then.\n"
+    "I'll give you a TM that's suitable for\l"
+    "your POKéMON.$"
+}
+
+text PacifidlogTown_House2_Text_Rurii {
+    "AZURILL: Rurii.$"
+}
+
+text PacifidlogTown_House2_Text_VeryFriendlyWithTrainer {
+    "It appears to be very friendly with the\n"
+    "TRAINER.$"
+}
+
+text PacifidlogTown_House2_Text_Rururi {
+    "AZURILL: Rururi!$"
+}
+
+text PacifidlogTown_House2_Text_DoesntLikeTrainerVeryMuch {
+    "It doesn't appear to like the TRAINER\n"
+    "very much.$"
+}

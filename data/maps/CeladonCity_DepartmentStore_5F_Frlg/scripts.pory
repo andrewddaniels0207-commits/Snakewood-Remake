@@ -1,0 +1,74 @@
+mapscripts CeladonCity_DepartmentStore_5F_Frlg_MapScripts {}
+
+script CeladonCity_DepartmentStore_5F_EventScript_Gentleman {
+    msgbox(CeladonCity_DepartmentStore_5F_Text_ExplainStatEnhancers, MSGBOX_NPC)
+    end
+}
+
+script CeladonCity_DepartmentStore_5F_EventScript_Sailor {
+    msgbox(CeladonCity_DepartmentStore_5F_Text_HereForStatEnhancers, MSGBOX_NPC)
+    end
+}
+
+script CeladonCity_DepartmentStore_5F_EventScript_FloorSign {
+    msgbox(CeladonCity_DepartmentStore_5F_Text_Drugstore, MSGBOX_SIGN)
+    end
+}
+
+script CeladonCity_DepartmentStore_5F_EventScript_ClerkXItems {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(CeladonCity_DepartmentStore_5F_XItems)
+    msgbox(gText_PleaseComeAgain)
+    release
+    end
+}
+
+script CeladonCity_DepartmentStore_5F_XItems {
+    release
+    end
+}
+
+script CeladonCity_DepartmentStore_5F_EventScript_ClerkVitamins {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(CeladonCity_DepartmentStore_5F_Vitamins)
+    msgbox(gText_PleaseComeAgain)
+    release
+    end
+}
+
+script CeladonCity_DepartmentStore_5F_Vitamins {
+    release
+    end
+}
+
+text CeladonCity_DepartmentStore_5F_Text_ExplainStatEnhancers {
+    "POKéMON stat enhancers can be\n"
+    "bought only here.\p"
+    "HP UP increases the base HP of a\n"
+    "POKéMON.\p"
+    "CALCIUM raises the base SP. ATK\n"
+    "stat of one POKéMON.\p"
+    "ZINC boosts the base SP. DEF stat\n"
+    "of one POKéMON.\p"
+    "CARBOS enhances the base SPEED\n"
+    "stat.$"
+}
+
+text CeladonCity_DepartmentStore_5F_Text_HereForStatEnhancers {
+    "I'm here for POKéMON stat\n"
+    "enhancers.\p"
+    "PROTEIN increases the base ATTACK\n"
+    "power.\p"
+    "IRON increases the base DEFENSE\n"
+    "stat.$"
+}
+
+text CeladonCity_DepartmentStore_5F_Text_Drugstore {
+    "5F: DRUGSTORE$"
+}

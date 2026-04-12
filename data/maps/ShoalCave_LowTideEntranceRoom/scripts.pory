@@ -1,0 +1,102 @@
+mapscripts ShoalCave_LowTideEntranceRoom_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: ShoalCave_LowTideEntranceRoom_OnTransition
+}
+
+script ShoalCave_LowTideEntranceRoom_OnTransition {
+    special(UpdateShoalTideFlag)
+    if (flag(FLAG_SYS_SHOAL_TIDE)) goto(ShoalCave_LowTideEntranceRoom_EventScript_SetHighTide)
+    goto(ShoalCave_LowTideEntranceRoom_EventScript_SetLowTide)
+}
+
+script ShoalCave_LowTideEntranceRoom_EventScript_SetHighTide {
+    setmaplayoutindex(LAYOUT_SHOAL_CAVE_HIGH_TIDE_ENTRANCE_ROOM)
+    end
+}
+
+script ShoalCave_LowTideEntranceRoom_EventScript_SetLowTide {
+    setmaplayoutindex(LAYOUT_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM)
+    end
+}
+
+script ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert {
+    lock
+    faceplayer
+    dotimebasedevents()
+    if (flag(FLAG_SYS_SHOAL_ITEM)) call(ShoalCave_LowTideEntranceRoom_EventScript_ResetShoalItems)
+    checkitem(ITEM_SHOAL_SALT, 4)
+    if (var(VAR_RESULT) == FALSE) goto(ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells)
+    checkitem(ITEM_SHOAL_SHELL, 4)
+    if (var(VAR_RESULT) == FALSE) goto(ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells)
+    msgbox(ShoalCave_LowTideEntranceRoom_Text_WouldYouLikeShellBell, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(ShoalCave_LowTideEntranceRoom_EventScript_DeclineShellBell)
+    checkitemspace(ITEM_SHELL_BELL)
+    if (var(VAR_RESULT) == FALSE) call(ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreed)
+    if (var(VAR_RESULT) == 2) goto(ShoalCave_LowTideEntranceRoom_EventScript_NoRoomForShellBell)
+    msgbox(ShoalCave_LowTideEntranceRoom_Text_MakeShellBellRightAway, MSGBOX_DEFAULT)
+    removeitem(ITEM_SHOAL_SALT, 4)
+    removeitem(ITEM_SHOAL_SHELL, 4)
+    giveitem(ITEM_SHELL_BELL)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    msgbox(ShoalCave_LowTideEntranceRoom_Text_ExplainShellBell, MSGBOX_DEFAULT)
+    setflag(FLAG_TEMP_2)
+    release
+    end
+}
+
+script ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreed {
+    checkitem(ITEM_SHOAL_SALT, 5)
+    if (var(VAR_RESULT) == TRUE) goto(ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreedShells)
+    return
+}
+
+script ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreedShells {
+    checkitem(ITEM_SHOAL_SHELL, 5)
+    if (var(VAR_RESULT) == TRUE) goto(ShoalCave_LowTideEntranceRoom_EventScript_NoSpaceWillBeFreed)
+    return
+}
+
+script ShoalCave_LowTideEntranceRoom_EventScript_NoSpaceWillBeFreed {
+    setvar(VAR_RESULT, 2)
+    return
+}
+
+script ShoalCave_LowTideEntranceRoom_EventScript_NoRoomForShellBell {
+    msgbox(ShoalCave_LowTideEntranceRoom_Text_NoSpaceInYourBag, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells {
+    checkitem(ITEM_SHOAL_SALT)
+    if (var(VAR_RESULT) == TRUE) goto(ShoalCave_LowTideEntranceRoom_EventScript_HasSomeShoalSaltOrShell)
+    checkitem(ITEM_SHOAL_SHELL)
+    if (var(VAR_RESULT) == TRUE) goto(ShoalCave_LowTideEntranceRoom_EventScript_HasSomeShoalSaltOrShell)
+    msgbox(ShoalCave_LowTideEntranceRoom_Text_AreYouPlanningOnGoingInThere, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script ShoalCave_LowTideEntranceRoom_EventScript_HasSomeShoalSaltOrShell {
+    msgbox(ShoalCave_LowTideEntranceRoom_Text_BringMe4ShoalSaltAndShells, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script ShoalCave_LowTideEntranceRoom_EventScript_DeclineShellBell {
+    msgbox(ShoalCave_LowTideEntranceRoom_Text_WantedToMakeShellBell, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script ShoalCave_LowTideEntranceRoom_EventScript_ResetShoalItems {
+    clearflag(FLAG_RECEIVED_SHOAL_SALT_1)
+    clearflag(FLAG_RECEIVED_SHOAL_SALT_2)
+    clearflag(FLAG_RECEIVED_SHOAL_SALT_3)
+    clearflag(FLAG_RECEIVED_SHOAL_SALT_4)
+    clearflag(FLAG_RECEIVED_SHOAL_SHELL_1)
+    clearflag(FLAG_RECEIVED_SHOAL_SHELL_2)
+    clearflag(FLAG_RECEIVED_SHOAL_SHELL_3)
+    clearflag(FLAG_RECEIVED_SHOAL_SHELL_4)
+    clearflag(FLAG_SYS_SHOAL_ITEM)
+    return
+}

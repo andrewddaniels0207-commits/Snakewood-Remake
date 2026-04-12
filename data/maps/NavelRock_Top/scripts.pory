@@ -1,0 +1,127 @@
+mapscripts NavelRock_Top_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: NavelRock_Top_OnTransition
+    MAP_SCRIPT_ON_RESUME: NavelRock_Top_OnResume
+}
+
+script NavelRock_Top_OnTransition {
+    if (flag(FLAG_CAUGHT_HO_OH)) call(NavelRock_Top_EventScript_HideHoOh)
+    if (!flag(FLAG_CAUGHT_HO_OH)) call(NavelRock_Top_EventScript_TryShowHoOh)
+    end
+}
+
+script NavelRock_Top_EventScript_HideHoOh {
+    setvar(VAR_TEMP_1, 1)
+    setflag(FLAG_HIDE_HO_OH)
+    return
+}
+
+script NavelRock_Top_EventScript_TryShowHoOh {
+    setvar(VAR_TEMP_1, 1)
+    if (flag(FLAG_DEFEATED_HO_OH)) goto(Common_EventScript_NopReturn)
+    setvar(VAR_TEMP_1, 0)
+    clearflag(FLAG_HIDE_HO_OH)
+    return
+}
+
+script NavelRock_Top_OnResume {
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(NavelRock_Top_EventScript_TryRemoveHoOh)
+    end
+}
+
+script NavelRock_Top_EventScript_TryRemoveHoOh {
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    removeobject(LOCALID_NAVEL_ROCK_HO_OH)
+    return
+}
+
+script NavelRock_Top_EventScript_HoOh {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    special(SpawnCameraObject)
+    setvar(VAR_0x8004, 3)
+    setvar(VAR_0x8005, 35)
+    special(LoopWingFlapSE)
+    applymovement(LOCALID_NAVEL_ROCK_HO_OH, NavelRock_Top_Movement_HoOhAppear)
+    applymovement(LOCALID_CAMERA, NavelRock_Top_Movement_CameraPanUp)
+    waitmovement(0)
+    delay(50)
+    setweather(WEATHER_NONE)
+    doweather()
+    waitse()
+    playmoncry(SPECIES_HO_OH, CRY_MODE_ENCOUNTER)
+    delay(30)
+    waitmoncry()
+    delay(60)
+    setvar(VAR_0x8004, 3)
+    setvar(VAR_0x8005, 35)
+    special(LoopWingFlapSE)
+    applymovement(LOCALID_CAMERA, NavelRock_Top_Movement_CameraPanDown)
+    applymovement(LOCALID_NAVEL_ROCK_HO_OH, NavelRock_Top_Movement_HoOhApproach)
+    waitmovement(0)
+    special(RemoveCameraObject)
+    seteventmon(SPECIES_HO_OH, 70)
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    special(BattleSetup_StartLegendaryBattle)
+    waitstate
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    setvar(VAR_LAST_TALKED, LOCALID_NAVEL_ROCK_HO_OH)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(NavelRock_Top_EventScript_DefeatedHoOh)
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(NavelRock_Top_EventScript_RanFromHoOh)
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(NavelRock_Top_EventScript_RanFromHoOh)
+    setflag(FLAG_CAUGHT_HO_OH)
+    releaseall
+    end
+}
+
+script NavelRock_Top_EventScript_DefeatedHoOh {
+    setflag(FLAG_DEFEATED_HO_OH)
+    setvar(VAR_0x8004, SPECIES_HO_OH)
+    goto(Common_EventScript_LegendaryFlewAway)
+    end
+}
+
+script NavelRock_Top_EventScript_RanFromHoOh {
+    setvar(VAR_0x8004, SPECIES_HO_OH)
+    goto(Common_EventScript_LegendaryFlewAway)
+    end
+}
+
+movement NavelRock_Top_Movement_CameraPanUp {
+    walk_up
+    walk_up
+    walk_up
+    step_end
+}
+
+movement NavelRock_Top_Movement_CameraPanDown {
+    delay_16
+    delay_16
+    walk_down
+    walk_down
+    walk_down
+    step_end
+}
+
+movement NavelRock_Top_Movement_HoOhApproach {
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_in_place_down
+    delay_16
+    delay_16
+    step_end
+}
+
+movement NavelRock_Top_Movement_HoOhAppear {
+    delay_16
+    delay_16
+    walk_in_place_down
+    walk_in_place_down
+    walk_in_place_down
+    walk_in_place_down
+    step_end
+}

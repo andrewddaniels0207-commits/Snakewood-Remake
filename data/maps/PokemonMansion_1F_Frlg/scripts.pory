@@ -1,0 +1,67 @@
+mapscripts PokemonMansion_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_LOAD: PokemonMansion_1F_OnLoad
+    MAP_SCRIPT_ON_TRANSITION: PokemonMansion_1F_OnTransition
+}
+
+script PokemonMansion_1F_OnLoad {
+    if (flag(FLAG_POKEMON_MANSION_SWITCH_STATE)) call(PokemonMansion_EventScript_PressSwitch_1F)
+    end
+}
+
+script PokemonMansion_1F_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_POKEMON_MANSION_1F)
+    end
+}
+
+script PokemonMansion_1F_EventScript_Statue {
+    lockall
+    setvar(VAR_0x8004, 0)
+    call(PokemonMansion_EventScript_SecretSwitch)
+    playse(SE_UNLOCK)
+    special(DrawWholeMapView)
+    waitse()
+    releaseall
+    end
+}
+
+script PokemonMansion_1F_EventScript_Ted {
+    trainerbattle_single(TRAINER_SCIENTIST_TED, PokemonMansion_1F_Text_TedIntro, PokemonMansion_1F_Text_TedDefeat)
+    msgbox(PokemonMansion_1F_Text_TedPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script PokemonMansion_1F_EventScript_Johnson {
+    trainerbattle_single(TRAINER_YOUNGSTER_JOHNSON, PokemonMansion_1F_Text_JohnsonIntro, PokemonMansion_1F_Text_JohnsonDefeat)
+    msgbox(PokemonMansion_1F_Text_JohnsonPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text PokemonMansion_1F_Text_TedIntro {
+    "Who are you?\n"
+    "There shouldn't be anyone here.$"
+}
+
+text PokemonMansion_1F_Text_TedDefeat {
+    "Ouch!$"
+}
+
+text PokemonMansion_1F_Text_TedPostBattle {
+    "A key? I don't know what you're\n"
+    "talking about.$"
+}
+
+text PokemonMansion_1F_Text_JohnsonIntro {
+    "W-w-waah! You startled me!\n"
+    "I thought you were a ghost.$"
+}
+
+text PokemonMansion_1F_Text_JohnsonDefeat {
+    "Tch!\n"
+    "I can't get any wins.$"
+}
+
+text PokemonMansion_1F_Text_JohnsonPostBattle {
+    "I was exploring here by myself,\n"
+    "but I feel spooked.\p"
+    "I ought to go soon.$"
+}

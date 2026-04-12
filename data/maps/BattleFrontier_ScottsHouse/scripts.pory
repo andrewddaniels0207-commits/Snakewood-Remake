@@ -1,0 +1,389 @@
+mapscripts BattleFrontier_ScottsHouse_MapScripts {}
+
+script BattleFrontier_ScottsHouse_EventScript_Scott {
+    lock
+    faceplayer
+    if (flag(FLAG_TEMP_4)) goto(BattleFrontier_ScottsHouse_EventScript_GivenBerry)
+    if (flag(FLAG_TEMP_3)) goto(BattleFrontier_ScottsHouse_EventScript_GivenShield)
+    if (flag(FLAG_TEMP_2)) goto(BattleFrontier_ScottsHouse_EventScript_GivenBattlePoints)
+    goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveItems)
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_CheckGiveItems {
+    if (!flag(FLAG_SCOTT_GIVES_BATTLE_POINTS)) goto(BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier)
+    if (!flag(FLAG_COLLECTED_ALL_SILVER_SYMBOLS)) goto(BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols)
+    if (!flag(FLAG_COLLECTED_ALL_GOLD_SYMBOLS)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols)
+    goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_CheckGiveShield {
+    if (!flag(FLAG_RECEIVED_SILVER_SHIELD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield)
+    if (!flag(FLAG_RECEIVED_GOLD_SHIELD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield)
+    goto(BattleFrontier_ScottsHouse_EventScript_RandomComment)
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols {
+    if (!flag(FLAG_SYS_TOWER_SILVER)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    if (!flag(FLAG_SYS_DOME_SILVER)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    if (!flag(FLAG_SYS_PALACE_SILVER)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    if (!flag(FLAG_SYS_ARENA_SILVER)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    if (!flag(FLAG_SYS_FACTORY_SILVER)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    if (!flag(FLAG_SYS_PIKE_SILVER)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    if (!flag(FLAG_SYS_PYRAMID_SILVER)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    msgbox(BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols, MSGBOX_DEFAULT)
+    giveitem(ITEM_LANSAT_BERRY)
+    if (var(VAR_RESULT) == FALSE) goto(BattleFrontier_ScottsHouse_EventScript_BerryPocketFull)
+    setflag(FLAG_COLLECTED_ALL_SILVER_SYMBOLS)
+    setflag(FLAG_TEMP_4)
+    release
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols {
+    if (!flag(FLAG_SYS_TOWER_GOLD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    if (!flag(FLAG_SYS_DOME_GOLD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    if (!flag(FLAG_SYS_PALACE_GOLD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    if (!flag(FLAG_SYS_ARENA_GOLD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    if (!flag(FLAG_SYS_FACTORY_GOLD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    if (!flag(FLAG_SYS_PIKE_GOLD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    if (!flag(FLAG_SYS_PYRAMID_GOLD)) goto(BattleFrontier_ScottsHouse_EventScript_CheckGiveShield)
+    msgbox(BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols, MSGBOX_DEFAULT)
+    giveitem(ITEM_STARF_BERRY)
+    if (var(VAR_RESULT) == FALSE) goto(BattleFrontier_ScottsHouse_EventScript_BerryPocketFull)
+    setflag(FLAG_COLLECTED_ALL_GOLD_SYMBOLS)
+    setflag(FLAG_TEMP_4)
+    release
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_BerryPocketFull {
+    msgbox(BattleFrontier_ScottsHouse_Text_BerryPocketStuffed, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_GivenBerry {
+    msgbox(BattleFrontier_ScottsHouse_Text_SoGladIBroughtYouHere, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_RandomComment {
+    random(3)
+    if (var(VAR_RESULT) == 1) goto(BattleFrontier_ScottsHouse_EventScript_FrontierBrainComment)
+    if (var(VAR_RESULT) == 2) goto(BattleFrontier_ScottsHouse_EventScript_ArtisanCaveComment)
+    msgbox(BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_FrontierBrainComment {
+    msgbox(BattleFrontier_ScottsHouse_Text_HaveYouMetFrontierBrain, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_ArtisanCaveComment {
+    msgbox(BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield {
+    setvar(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES)
+    frontier_set(FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50)
+    tower_get(TOWER_DATA_WIN_STREAK)
+    if (var(VAR_RESULT) >= 50) goto(BattleFrontier_ScottsHouse_EventScript_GiveSilverShield)
+    frontier_set(FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_OPEN)
+    tower_get(TOWER_DATA_WIN_STREAK)
+    if (var(VAR_RESULT) >= 50) goto(BattleFrontier_ScottsHouse_EventScript_GiveSilverShield)
+    goto(BattleFrontier_ScottsHouse_EventScript_RandomComment)
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_GiveSilverShield {
+    msgbox(BattleFrontier_ScottsHouse_Text_Beat50TrainersInARow, MSGBOX_DEFAULT)
+    givedecoration(DECOR_SILVER_SHIELD)
+    if (var(VAR_RESULT) == FALSE) goto(BattleFrontier_ScottsHouse_EventScript_NoRoomForShield)
+    setflag(FLAG_RECEIVED_SILVER_SHIELD)
+    setflag(FLAG_TEMP_3)
+    goto(BattleFrontier_ScottsHouse_EventScript_GivenShield)
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_NoRoomForShield {
+    msgbox(BattleFrontier_ScottsHouse_Text_ComeBackForThisLater, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_GivenShield {
+    msgbox(BattleFrontier_ScottsHouse_Text_ExpectingToHearEvenGreaterThings, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield {
+    setvar(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES)
+    frontier_set(FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50)
+    tower_get(TOWER_DATA_WIN_STREAK)
+    if (var(VAR_RESULT) >= 100) goto(BattleFrontier_ScottsHouse_EventScript_GiveGoldShield)
+    frontier_set(FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_OPEN)
+    tower_get(TOWER_DATA_WIN_STREAK)
+    if (var(VAR_RESULT) >= 100) goto(BattleFrontier_ScottsHouse_EventScript_GiveGoldShield)
+    goto(BattleFrontier_ScottsHouse_EventScript_RandomComment)
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_GiveGoldShield {
+    msgbox(BattleFrontier_ScottsHouse_Text_Beat100TrainersInARow, MSGBOX_DEFAULT)
+    givedecoration(DECOR_GOLD_SHIELD)
+    if (var(VAR_RESULT) == FALSE) goto(BattleFrontier_ScottsHouse_EventScript_NoRoomForShield)
+    setflag(FLAG_RECEIVED_GOLD_SHIELD)
+    setflag(FLAG_TEMP_3)
+    goto(BattleFrontier_ScottsHouse_EventScript_GivenShield)
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_GivenBattlePoints {
+    msgbox(BattleFrontier_ScottsHouse_Text_ExpectingGreatThings, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier {
+    msgbox(BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier, MSGBOX_DEFAULT)
+    closemessage
+    delay(30)
+    if (var(VAR_FACING) == DIR_NORTH) call(BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayNorth)
+    if (var(VAR_FACING) == DIR_SOUTH) call(BattleFrontier_ScottsHouse_EventScript_ScottFaceAwaySouth)
+    if (var(VAR_FACING) == DIR_EAST) call(BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayEast)
+    if (var(VAR_FACING) == DIR_WEST) call(BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest)
+    msgbox(BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal, MSGBOX_DEFAULT)
+    applymovement(LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing, MSGBOX_DEFAULT)
+    if (var(VAR_SCOTT_STATE) == 13) goto(BattleFrontier_ScottsHouse_EventScript_Give4BattlePoints)
+    if (var(VAR_SCOTT_STATE) >= 9) goto(BattleFrontier_ScottsHouse_EventScript_Give3BattlePoints)
+    if (var(VAR_SCOTT_STATE) >= 6) goto(BattleFrontier_ScottsHouse_EventScript_Give2BattlePoints)
+    goto(BattleFrontier_ScottsHouse_EventScript_Give1BattlePoint)
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_Give4BattlePoints {
+    buffernumberstring(STR_VAR_1, 4)
+    setvar(VAR_0x8004, 4)
+    goto(BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints)
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_Give3BattlePoints {
+    buffernumberstring(STR_VAR_1, 3)
+    setvar(VAR_0x8004, 3)
+    goto(BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints)
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_Give2BattlePoints {
+    buffernumberstring(STR_VAR_1, 2)
+    setvar(VAR_0x8004, 2)
+    goto(BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints)
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_Give1BattlePoint {
+    buffernumberstring(STR_VAR_1, 1)
+    setvar(VAR_0x8004, 1)
+    goto(BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints)
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints {
+    special(GiveFrontierBattlePoints)
+    msgbox(BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS)
+    msgbox(BattleFrontier_ScottsHouse_Text_ExplainBattlePoints, MSGBOX_DEFAULT)
+    setflag(FLAG_SCOTT_GIVES_BATTLE_POINTS)
+    setflag(FLAG_TEMP_2)
+    release
+    end
+}
+
+script BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayNorth {
+    applymovement(LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    return
+}
+
+script BattleFrontier_ScottsHouse_EventScript_ScottFaceAwaySouth {
+    applymovement(LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    return
+}
+
+script BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayEast {
+    applymovement(LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    return
+}
+
+script BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest {
+    applymovement(LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    return
+}
+
+text BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier {
+    "SCOTT: Well, hello and welcome!\n"
+    "Heheh… Sorry about the cramped space.\p"
+    "Anyway, {PLAYER}{KUN}, let me formally\n"
+    "welcome you to the BATTLE FRONTIER.\p"
+    "This is my dream come true.\n"
+    "It took me years and years, but I've\l"
+    "finally given shape to my dream.$"
+}
+
+text BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal {
+    "On reflection, it was a terribly long\n"
+    "journey…\p"
+    "I left home alone on a quest to find\n"
+    "strong TRAINERS.\p"
+    "No one can imagine how much effort\n"
+    "or time it took to make this real.$"
+}
+
+text BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing {
+    "But that's all in the past.\n"
+    "No point dwelling on that!\p"
+    "All I want for you is to enjoy battling\n"
+    "to your heart's content here.\p"
+    "{PLAYER}{KUN}, I want you to have this\n"
+    "as a memento for all the time our\l"
+    "paths crossed on our journeys.$"
+}
+
+text BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints {
+    "{PLAYER} obtained\n"
+    "{STR_VAR_1} Battle Point(s).$"
+}
+
+text BattleFrontier_ScottsHouse_Text_ExplainBattlePoints {
+    "SCOTT: You can check your Battle\n"
+    "Points on your FRONTIER PASS.\p"
+    "The more success you have here at\n"
+    "the BATTLE FRONTIER, the more Battle\l"
+    "Points you will collect.\p"
+    "Use your Battle Points the way you\n"
+    "see fit, like trading them for items.$"
+}
+
+text BattleFrontier_ScottsHouse_Text_ExpectingGreatThings {
+    "I'm expecting great things from you!$"
+}
+
+text BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers {
+    "SCOTT: Every TRAINER is an individual.\n"
+    "They all lead lives of their own.\p"
+    "But when they're in a battle,\n"
+    "it doesn't matter who they are.\p"
+    "They're all the same!\p"
+    "I love the purity of battle,\n"
+    "where everyone is equal.\p"
+    "That's why I go everywhere seeking\n"
+    "TRAINERS who are serious about\l"
+    "battling, and invite them here.$"
+}
+
+text BattleFrontier_ScottsHouse_Text_HaveYouMetFrontierBrain {
+    "SCOTT: Have you met any of\n"
+    "the FRONTIER BRAINS?\p"
+    "Better yet, have you obtained any\n"
+    "symbols from them?\p"
+    "I handpicked the FRONTIER BRAINS\n"
+    "as the toughest TRAINERS anywhere.\p"
+    "But I'm sure that seeing how tough\n"
+    "you are will startle even them!$"
+}
+
+text BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier {
+    "SCOTT: You don't just train for battle,\n"
+    "right?\p"
+    "I think I remember you working on\n"
+    "a POKéDEX as well.\p"
+    "Well, guess what?\p"
+    "You may run into wild POKéMON in\n"
+    "the BATTLE FRONTIER somewhere…\l"
+    "Fufufu!$"
+}
+
+text BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols {
+    "SCOTT: Are you enjoying things in\n"
+    "the BATTLE FRONTIER?\p"
+    "…Wait a second…\n"
+    "Oh!\p"
+    "Your FRONTIER PASS!\n"
+    "You've collected the full set\l"
+    "of silver symbols!\p"
+    "That's more than impressive!\n"
+    "You are tough, just as I suspected!\p"
+    "Normally, I wouldn't do something\n"
+    "like this, but this is a special time!\p"
+    "I want you to have this.\n"
+    "I'm sure you can put it to proper use.$"
+}
+
+text BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols {
+    "SCOTT: I hope you're enjoying\n"
+    "everything in the BATTLE FRONTIER.\p"
+    "…Wait a second…\n"
+    "Oh, my disbelieving eyes!\p"
+    "Your FRONTIER PASS!\n"
+    "You've gathered up the full set\l"
+    "of gold symbols!\p"
+    "That's more than stupendous!\n"
+    "You're incredible, just as I suspected!\p"
+    "… … … … … …\p"
+    "{PLAYER}, you've got to accept this!\p"
+    "I think you will be able to\n"
+    "appreciate the value of my gift!$"
+}
+
+text BattleFrontier_ScottsHouse_Text_SoGladIBroughtYouHere {
+    "I must say I have the gift of knowing\n"
+    "a good TRAINER when I see one.\p"
+    "I'm so glad I had the foresight to\n"
+    "bring you here!$"
+}
+
+text BattleFrontier_ScottsHouse_Text_BerryPocketStuffed {
+    "Your BERRY POCKET seems to\n"
+    "be stuffed.$"
+}
+
+text BattleFrontier_ScottsHouse_Text_Beat50TrainersInARow {
+    "SCOTT: Oh, I heard about you!\n"
+    "How you ruled the BATTLE TOWER!\l"
+    "You beat over 50 TRAINERS in a row?\p"
+    "That's fantastic!\n"
+    "I want you to have this!$"
+}
+
+text BattleFrontier_ScottsHouse_Text_Beat100TrainersInARow {
+    "SCOTT: Oh, my! I heard about you!\n"
+    "How you overwhelmed the BATTLE TOWER!\l"
+    "You beat over 100 TRAINERS in a row?\p"
+    "That's ridiculously spectacular!\n"
+    "You've got to have this!$"
+}
+
+text BattleFrontier_ScottsHouse_Text_ExpectingToHearEvenGreaterThings {
+    "I'll be expecting to hear even greater\n"
+    "things about you now!$"
+}
+
+text BattleFrontier_ScottsHouse_Text_ComeBackForThisLater {
+    "Oops, well, if you have too much\n"
+    "stuff, come back for this later.$"
+}

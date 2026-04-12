@@ -1,0 +1,43 @@
+mapscripts CeladonCity_Hotel_Frlg_MapScripts {}
+
+script CeladonCity_Hotel_EventScript_Receptionist {
+    msgbox(CeladonCity_Hotel_Text_ThisHotelIsForPeople, MSGBOX_NPC)
+    end
+}
+
+script CeladonCity_Hotel_EventScript_Beauty {
+    msgbox(CeladonCity_Hotel_Text_OnVacationWithBrotherAndBoyfriend, MSGBOX_NPC)
+    end
+}
+
+script CeladonCity_Hotel_EventScript_BeautyBoyfriend {
+    msgbox(CeladonCity_Hotel_Text_WhyDidSheBringBrother, MSGBOX_NPC)
+    end
+}
+
+script CeladonCity_Hotel_EventScript_BeautyBrother {
+    msgbox(CeladonCity_Hotel_Text_SisBroughtMeOnVacation, MSGBOX_NPC)
+    end
+}
+
+text CeladonCity_Hotel_Text_ThisHotelIsForPeople {
+    "POKéMON?\n"
+    "No, this is a hotel for people.\p"
+    "We're full up, unfortunately.$"
+}
+
+text CeladonCity_Hotel_Text_OnVacationWithBrotherAndBoyfriend {
+    "I'm on vacation with my brother and\n"
+    "boyfriend.\p"
+    "CELADON is such a pretty city!$"
+}
+
+text CeladonCity_Hotel_Text_WhyDidSheBringBrother {
+    "Why?\n"
+    "Why did she bring her brother?$"
+}
+
+text CeladonCity_Hotel_Text_SisBroughtMeOnVacation {
+    "Yippee! I'm on vacation!\n"
+    "My sis brought me along! Awesome!$"
+}

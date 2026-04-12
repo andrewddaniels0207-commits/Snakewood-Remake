@@ -1,0 +1,11 @@
+mapscripts SafariZone_Southwest_MapScripts {}
+
+script SafariZone_Southwest_EventScript_Woman {
+    msgbox(SafariZone_Southwest_Text_Woman, MSGBOX_NPC)
+    end
+}
+
+script SafariZone_Southwest_EventScript_RestHouseSign {
+    msgbox(SafariZone_Southwest_Text_RestHouseSign, MSGBOX_SIGN)
+    end
+}

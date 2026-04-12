@@ -1,0 +1,209 @@
+mapscripts SSTidalRooms_MapScripts {}
+
+script SSTidalRooms_EventScript_SnatchGiver {
+    lock
+    faceplayer
+    if (flag(FLAG_RECEIVED_TM_SNATCH)) goto(SSTidalRooms_EventScript_ExplainSnatch)
+    msgbox(SSTidalRooms_Text_NotSuspiciousTakeThis, MSGBOX_DEFAULT)
+    giveitem(ITEM_TM_SNATCH)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    setflag(FLAG_RECEIVED_TM_SNATCH)
+    msgbox(SSTidalRooms_Text_ExplainSnatch, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script SSTidalRooms_EventScript_ExplainSnatch {
+    msgbox(SSTidalRooms_Text_ExplainSnatch, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script SSTidalRooms_EventScript_Bed {
+    lockall
+    msgbox(SSTidalRooms_Text_TakeRestOnBed, MSGBOX_DEFAULT)
+    closemessage
+    call(Common_EventScript_OutOfCenterPartyHeal)
+    call(SSTidalRooms_EventScript_ProgessCruiseAfterBed)
+    releaseall
+    end
+}
+
+script SSTidalRooms_EventScript_Colton {
+    trainerbattle_single(TRAINER_COLTON, SSTidalRooms_Text_ColtonIntro, SSTidalRooms_Text_ColtonDefeat)
+    msgbox(SSTidalRooms_Text_ColtonPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SSTidalRooms_EventScript_Micah {
+    trainerbattle_single(TRAINER_MICAH, SSTidalRooms_Text_MicahIntro, SSTidalRooms_Text_MicahDefeat)
+    msgbox(SSTidalRooms_Text_MicahPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SSTidalRooms_EventScript_Thomas {
+    trainerbattle_single(TRAINER_THOMAS, SSTidalRooms_Text_ThomasIntro, SSTidalRooms_Text_ThomasDefeat)
+    msgbox(SSTidalRooms_Text_ThomasPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SSTidalRooms_EventScript_Jed {
+    trainerbattle_double(TRAINER_LEA_AND_JED, SSTidalRooms_Text_JedIntro, SSTidalRooms_Text_JedDefeat, SSTidalRooms_Text_JedNotEnoughMons)
+    msgbox(SSTidalRooms_Text_JedPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SSTidalRooms_EventScript_Lea {
+    trainerbattle_double(TRAINER_LEA_AND_JED, SSTidalRooms_Text_LeaIntro, SSTidalRooms_Text_LeaDefeat, SSTidalRooms_Text_LeaNotEnoughMons)
+    msgbox(SSTidalRooms_Text_LeaPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SSTidalRooms_EventScript_Garret {
+    trainerbattle_single(TRAINER_GARRET, SSTidalRooms_Text_GarretIntro, SSTidalRooms_Text_GarretDefeat)
+    msgbox(SSTidalRooms_Text_GarretPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SSTidalRooms_EventScript_Naomi {
+    trainerbattle_single(TRAINER_NAOMI, SSTidalRooms_Text_NaomiIntro, SSTidalRooms_Text_NaomiDefeat)
+    msgbox(SSTidalRooms_Text_NaomiPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text SSTidalRooms_Text_TakeRestOnBed {
+    "There's a bed…\n"
+    "Let's take a rest.$"
+}
+
+text SSTidalRooms_Text_ColtonIntro {
+    "I often sail to LILYCOVE CITY.\p"
+    "I enjoy attending CONTESTS,\n"
+    "you see.$"
+}
+
+text SSTidalRooms_Text_ColtonDefeat {
+    "That was an enjoyable match!$"
+}
+
+text SSTidalRooms_Text_ColtonPostBattle {
+    "I get so excited imagining what kinds\n"
+    "of POKéMON I'll get to see in the next\l"
+    "CONTEST. The anticipation of it thrills!$"
+}
+
+text SSTidalRooms_Text_MicahIntro {
+    "Are your friends strong?$"
+}
+
+text SSTidalRooms_Text_MicahDefeat {
+    "Your friends are, indeed, strong.$"
+}
+
+text SSTidalRooms_Text_MicahPostBattle {
+    "Friends need not be human.\n"
+    "For me, POKéMON are treasured friends!$"
+}
+
+text SSTidalRooms_Text_ThomasIntro {
+    "Child…\n"
+    "Did you knock on the door?$"
+}
+
+text SSTidalRooms_Text_ThomasDefeat {
+    "A loss is to be accepted without haste\n"
+    "or panic.$"
+}
+
+text SSTidalRooms_Text_ThomasPostBattle {
+    "To be never ruffled in any situation is\n"
+    "the GENTLEMAN's code of conduct.$"
+}
+
+text SSTidalRooms_Text_JedIntro {
+    "JED: I feel a little shy about this, but…\n"
+    "We'll show you our lovey-dovey power!$"
+}
+
+text SSTidalRooms_Text_JedDefeat {
+    "JED: Sigh…$"
+}
+
+text SSTidalRooms_Text_JedPostBattle {
+    "JED: It's the first time that our lovey-\n"
+    "dovey power couldn't prevail!\l"
+    "You must be an awesome TRAINER!$"
+}
+
+text SSTidalRooms_Text_JedNotEnoughMons {
+    "JED: You only have one POKéMON?\n"
+    "Isn't that just too lonesome?$"
+}
+
+text SSTidalRooms_Text_LeaIntro {
+    "LEA: I feel a little silly, but…\n"
+    "We'll show you our lovey-dovey power!$"
+}
+
+text SSTidalRooms_Text_LeaDefeat {
+    "LEA: Oh, boo!$"
+}
+
+text SSTidalRooms_Text_LeaPostBattle {
+    "LEA: I can't believe it!\n"
+    "Our lovey-dovey power failed…\l"
+    "You must be an awesome TRAINER!$"
+}
+
+text SSTidalRooms_Text_LeaNotEnoughMons {
+    "LEA: I wanted to battle…\n"
+    "But you don't even have two POKéMON…$"
+}
+
+text SSTidalRooms_Text_GarretIntro {
+    "Ah, you've come just in time.\p"
+    "I'm bored, you see.\n"
+    "You may entertain me.$"
+}
+
+text SSTidalRooms_Text_GarretDefeat {
+    "…That will do.$"
+}
+
+text SSTidalRooms_Text_GarretPostBattle {
+    "Perhaps I shall get Father to acquire\n"
+    "a yacht for me.\l"
+    "A yacht for me and POKéMON!$"
+}
+
+text SSTidalRooms_Text_NaomiIntro {
+    "Oh, you're such an adorable TRAINER.\n"
+    "Would you like to have tea?\l"
+    "Or would you rather battle?$"
+}
+
+text SSTidalRooms_Text_NaomiDefeat {
+    "I see.\n"
+    "You're the active sort.$"
+}
+
+text SSTidalRooms_Text_NaomiPostBattle {
+    "A world cruise on a luxury liner has its\n"
+    "charms, I must say…\p"
+    "But, I will admit there is an appealing\n"
+    "side to touring HOENN by ferry.$"
+}
+
+text SSTidalRooms_Text_NotSuspiciousTakeThis {
+    "Uh… Hi! I… I'm not acting suspicious!\n"
+    "Uh… You can have this! For free!\p"
+    "It… Honestly, I didn't SNATCH it from\n"
+    "someone! I'd never do such a thing!\l"
+    "It's clean! You can use it!$"
+}
+
+text SSTidalRooms_Text_ExplainSnatch {
+    "SNATCH steals the beneficial effects\n"
+    "of certain moves before they can be\l"
+    "used by a foe or ally.$"
+}

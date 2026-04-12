@@ -1,0 +1,150 @@
+mapscripts Route11_Frlg_MapScripts {}
+
+script Route11_EventScript_DiglettsCaveSign {
+    msgbox(Route11_Text_DiglettsCave, MSGBOX_SIGN)
+    end
+}
+
+text Route11_Text_HugoIntro {
+    "Win, lose, or draw!$"
+}
+
+text Route11_Text_HugoDefeat {
+    "Atcha!\n"
+    "Didn't go my way!$"
+}
+
+text Route11_Text_HugoPostBattle {
+    "POKéMON is life!\n"
+    "And to live is to play games!$"
+}
+
+text Route11_Text_JasperIntro {
+    "Competition!\n"
+    "I can't get enough!$"
+}
+
+text Route11_Text_JasperDefeat {
+    "I had a chance!$"
+}
+
+text Route11_Text_JasperPostBattle {
+    "You can't be a coward in the world\n"
+    "of POKéMON!$"
+}
+
+text Route11_Text_EddieIntro {
+    "Let's go, but don't cheat!$"
+}
+
+text Route11_Text_EddieDefeat {
+    "Huh?\n"
+    "That's not right!$"
+}
+
+text Route11_Text_EddiePostBattle {
+    "I did my best.\n"
+    "I have no regrets.$"
+}
+
+text Route11_Text_BraxtonIntro {
+    "Careful!\n"
+    "I'm laying down some cables!$"
+}
+
+text Route11_Text_BraxtonDefeat {
+    "That was electric!$"
+}
+
+text Route11_Text_BraxtonPostBattle {
+    "Spread the word to save energy!$"
+}
+
+text Route11_Text_DillonIntro {
+    "I just became a TRAINER.\n"
+    "But, I think I can win.$"
+}
+
+text Route11_Text_DillonDefeat {
+    "My POKéMON couldn't win…\n"
+    "Haven't they grown enough?$"
+}
+
+text Route11_Text_DillonPostBattle {
+    "What now?\n"
+    "Leave me alone!$"
+}
+
+text Route11_Text_DirkIntro {
+    "Fwahaha!\n"
+    "I have never lost!$"
+}
+
+text Route11_Text_DirkDefeat {
+    "My first loss!$"
+}
+
+text Route11_Text_DirkPostBattle {
+    "You were just lucky, that's all.$"
+}
+
+text Route11_Text_DarianIntro {
+    "I have never won before…$"
+}
+
+text Route11_Text_DarianDefeat {
+    "I saw this coming…$"
+}
+
+text Route11_Text_DarianPostBattle {
+    "I was unlucky, as always.$"
+}
+
+text Route11_Text_YasuIntro {
+    "I'm the best in my class.\n"
+    "I train every morning.$"
+}
+
+text Route11_Text_YasuDefeat {
+    "Darn!\n"
+    "My POKéMON need to be stronger!$"
+}
+
+text Route11_Text_YasuPostBattle {
+    "There's a fat POKéMON that comes\n"
+    "down from the mountains.\p"
+    "I bet it'd be strong if you can\n"
+    "catch it.$"
+}
+
+text Route11_Text_BernieIntro {
+    "Watch out for live wires!$"
+}
+
+text Route11_Text_BernieDefeat {
+    "Whoa!\n"
+    "You spark plug!$"
+}
+
+text Route11_Text_BerniePostBattle {
+    "Well, better get back to work.$"
+}
+
+text Route11_Text_DaveIntro {
+    "I raised my POKéMON carefully.\n"
+    "They should be ready by now!$"
+}
+
+text Route11_Text_DaveDefeat {
+    "Bye-bye!\n"
+    "Thank you, and good-bye!$"
+}
+
+text Route11_Text_DavePostBattle {
+    "Tch…\n"
+    "I better go find stronger ones!$"
+}
+
+text Route11_Text_DiglettsCave {
+    "DIGLETT'S CAVE$"
+}

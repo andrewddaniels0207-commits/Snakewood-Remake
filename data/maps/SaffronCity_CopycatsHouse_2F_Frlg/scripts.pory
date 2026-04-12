@@ -1,0 +1,135 @@
+mapscripts SaffronCity_CopycatsHouse_2F_Frlg_MapScripts {}
+
+script SaffronCity_CopycatsHouse_2F_EventScript_Doduo {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_DODUO, CRY_MODE_NORMAL)
+    msgbox(SaffronCity_CopycatsHouse_2F_Text_Doduo)
+    waitmoncry()
+    release
+    end
+}
+
+script SaffronCity_CopycatsHouse_2F_EventScript_Doll {
+    lock
+    msgbox(SaffronCity_CopycatsHouse_2F_Text_RareMonOnlyDoll)
+    release
+    end
+}
+
+script SaffronCity_CopycatsHouse_2F_EventScript_Copycat {
+    lock
+    faceplayer
+    checkitem(ITEM_POKE_DOLL)
+    if (var(VAR_RESULT) == TRUE) goto(EventScript_MimicTutor)
+    checkplayergender()
+    if (var(VAR_RESULT) == MALE) call(SaffronCity_CopycatsHouse_2F_EventScript_MimicPlayerMale)
+    if (var(VAR_RESULT) == FEMALE) call(SaffronCity_CopycatsHouse_2F_EventScript_MimicPlayerFemale)
+    release
+    end
+}
+
+script SaffronCity_CopycatsHouse_2F_EventScript_MimicPlayerMale {
+    msgbox(SaffronCity_CopycatsHouse_2F_Text_MimickingFavoriteHobbyMale)
+    return
+}
+
+script SaffronCity_CopycatsHouse_2F_EventScript_MimicPlayerFemale {
+    msgbox(SaffronCity_CopycatsHouse_2F_Text_MimickingFavoriteHobbyFemale)
+    return
+}
+
+script SaffronCity_CopycatsHouse_2F_EventScript_Computer {
+    msgbox(SaffronCity_CopycatsHouse_2F_Text_MySecrets, MSGBOX_SIGN)
+    end
+}
+
+script SaffronCity_CopycatsHouse_2F_EventScript_Game {
+    msgbox(SaffronCity_CopycatsHouse_2F_Text_MarioWearingABucket, MSGBOX_SIGN)
+    end
+}
+
+text SaffronCity_CopycatsHouse_2F_Text_MimickingFavoriteHobbyMale {
+    "{PLAYER}: Hi!\n"
+    "Do you like POKéMON?\p"
+    "{PLAYER}: Uh, no, I just asked you.\p"
+    "{PLAYER}: Huh?\n"
+    "You're strange!\p"
+    "COPYCAT: Hmm? Quit mimicking?\n"
+    "But, that's my favorite hobby!$"
+}
+
+text SaffronCity_CopycatsHouse_2F_Text_MimickingFavoriteHobbyFemale {
+    "{PLAYER}: Hi.\n"
+    "You must like POKéMON.\p"
+    "{PLAYER}: No, not me.\n"
+    "I asked you.\p"
+    "{PLAYER}: Pardon?\n"
+    "You're weird!\l"
+    " \l"
+    "COPYCAT: Hmm? Quit mimicking?\l"
+    "But that's my favorite hobby!$"
+}
+
+text Text_MimicTeach {
+    "Oh wow!\n"
+    "A POKé DOLL!\p"
+    "For me?\n"
+    "Thank you!\p"
+    "You know what?\n"
+    "I can teach the move MIMIC.$"
+}
+
+text Text_MimicDeclined {
+    "Don't you like MIMIC?$"
+}
+
+text Text_MimicWhichMon {
+    "I really love MIMIC!\n"
+    "Who's going to learn it?$"
+}
+
+text Text_MimicTaughtMale {
+    "{PLAYER}: Hi!\n"
+    "Thanks for earlier!\p"
+    "{PLAYER}: Pardon?\p"
+    "{PLAYER}: Is it that fun to mimic my\n"
+    "every move?\p"
+    "COPYCAT: You bet!\n"
+    "It's a scream!$"
+}
+
+text Text_MimicTaughtFemale {
+    "{PLAYER}: Hi!\n"
+    "Thanks for what you did for us.\p"
+    "{PLAYER}: Pardon?\p"
+    "{PLAYER}: Is it really that fun to\n"
+    "copy what I say and do?\p"
+    "COPYCAT: You bet!\n"
+    "It's a scream!$"
+}
+
+text SaffronCity_CopycatsHouse_2F_Text_Doduo {
+    "DODUO: Giiih!\p"
+    "PRETTY MIRROR LOOK AT ME,\n"
+    "SEE HOW PRETTY I CAN BE?$"
+}
+
+text SaffronCity_CopycatsHouse_2F_Text_RareMonOnlyDoll {
+    "This is a rare POKéMON!\n"
+    "Huh? It's only a doll!$"
+}
+
+text SaffronCity_CopycatsHouse_2F_Text_MarioWearingABucket {
+    "A game with MARIO wearing a bucket\n"
+    "on his head!$"
+}
+
+text SaffronCity_CopycatsHouse_2F_Text_MySecrets {
+    "…\p"
+    "My Secrets!\p"
+    "Skill: Mimicry!\n"
+    "Hobby: Collecting dolls!\l"
+    "Favorite POKéMON: CLEFAIRY!$"
+}

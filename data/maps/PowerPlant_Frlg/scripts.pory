@@ -1,0 +1,128 @@
+mapscripts PowerPlant_Frlg_MapScripts {
+    MAP_SCRIPT_ON_RESUME: PowerPlant_OnResume
+    MAP_SCRIPT_ON_TRANSITION: PowerPlant_OnTransition
+}
+
+script PowerPlant_OnResume {
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(PowerPlant_EventScript_TryRemoveStaticMon)
+    end
+}
+
+script PowerPlant_EventScript_TryRemoveStaticMon {
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    removeobject(VAR_LAST_TALKED)
+    return
+}
+
+script PowerPlant_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_POWER_PLANT)
+    if (!flag(FLAG_FOUGHT_ZAPDOS)) call(PowerPlant_EventScript_ShowZapdos)
+    if (!flag(FLAG_FOUGHT_POWER_PLANT_ELECTRODE_1)) call(PowerPlant_EventScript_ShowElectrode1)
+    if (!flag(FLAG_FOUGHT_POWER_PLANT_ELECTRODE_2)) call(PowerPlant_EventScript_ShowElectrode2)
+    end
+}
+
+script PowerPlant_EventScript_ShowZapdos {
+    clearflag(FLAG_HIDE_ZAPDOS)
+    return
+}
+
+script PowerPlant_EventScript_ShowElectrode1 {
+    clearflag(FLAG_HIDE_POWER_PLANT_ELECTRODE_1)
+    return
+}
+
+script PowerPlant_EventScript_ShowElectrode2 {
+    clearflag(FLAG_HIDE_POWER_PLANT_ELECTRODE_2)
+    return
+}
+
+script PowerPlant_EventScript_Zapdos {
+    lock
+    faceplayer
+    setwildbattle(SPECIES_ZAPDOS, 50)
+    waitse()
+    playmoncry(SPECIES_ZAPDOS, CRY_MODE_ENCOUNTER)
+    message(Text_Gyaoo)
+    waitmessage()
+    waitmoncry()
+    delay(10)
+    playbgm(MUS_RG_ENCOUNTER_GYM_LEADER, 0)
+    waitbuttonpress()
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    special(BattleSetup_StartLegendaryBattle)
+    waitstate
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(PowerPlant_EventScript_DefeatedZapdos)
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(PowerPlant_EventScript_RanFromZapdos)
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(PowerPlant_EventScript_RanFromZapdos)
+    setflag(FLAG_FOUGHT_ZAPDOS)
+    release
+    end
+}
+
+script PowerPlant_EventScript_DefeatedZapdos {
+    setflag(FLAG_FOUGHT_ZAPDOS)
+    goto(EventScript_RemoveStaticMon)
+    end
+}
+
+script PowerPlant_EventScript_RanFromZapdos {
+    setvar(VAR_0x8004, SPECIES_ZAPDOS)
+    goto(EventScript_MonFlewAway)
+    end
+}
+
+script PowerPlant_EventScript_Electrode1 {
+    lock
+    faceplayer
+    setwildbattle(SPECIES_ELECTRODE, 34)
+    waitse()
+    playmoncry(SPECIES_ELECTRODE, CRY_MODE_ENCOUNTER)
+    delay(40)
+    waitmoncry()
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    dowildbattle()
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(PowerPlant_EventScript_FoughtElectrode1)
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(PowerPlant_EventScript_FoughtElectrode1)
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(PowerPlant_EventScript_FoughtElectrode1)
+    setflag(FLAG_FOUGHT_POWER_PLANT_ELECTRODE_1)
+    release
+    end
+}
+
+script PowerPlant_EventScript_FoughtElectrode1 {
+    setflag(FLAG_FOUGHT_POWER_PLANT_ELECTRODE_1)
+    goto(EventScript_RemoveStaticMon)
+    end
+}
+
+script PowerPlant_EventScript_Electrode2 {
+    lock
+    faceplayer
+    setwildbattle(SPECIES_ELECTRODE, 34)
+    waitse()
+    playmoncry(SPECIES_ELECTRODE, CRY_MODE_ENCOUNTER)
+    delay(40)
+    waitmoncry()
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    dowildbattle()
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(PowerPlant_EventScript_FoughtElectrode2)
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(PowerPlant_EventScript_FoughtElectrode2)
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(PowerPlant_EventScript_FoughtElectrode2)
+    setflag(FLAG_FOUGHT_POWER_PLANT_ELECTRODE_2)
+    release
+    end
+}
+
+script PowerPlant_EventScript_FoughtElectrode2 {
+    setflag(FLAG_FOUGHT_POWER_PLANT_ELECTRODE_2)
+    goto(EventScript_RemoveStaticMon)
+    end
+}

@@ -1,0 +1,237 @@
+mapscripts MossdeepCity_StevensHouse_MapScripts {
+    MAP_SCRIPT_ON_LOAD: MossdeepCity_StevensHouse_OnLoad
+    MAP_SCRIPT_ON_TRANSITION: MossdeepCity_StevensHouse_OnTransition
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_STEVENS_HOUSE_STATE, 1: MossdeepCity_StevensHouse_EventScript_StevenGivesDive
+    ]
+}
+
+script MossdeepCity_StevensHouse_OnLoad {
+    if (!flag(FLAG_SYS_GAME_CLEAR)) call(MossdeepCity_StevensHouse_EventScript_HideStevensNote)
+    end
+}
+
+script MossdeepCity_StevensHouse_EventScript_HideStevensNote {
+    setmetatile(6, 4, METATILE_GenericBuilding_TableEdge, TRUE)
+    return
+}
+
+script MossdeepCity_StevensHouse_OnTransition {
+    if (var(VAR_STEVENS_HOUSE_STATE) == 2) call(MossdeepCity_StevensHouse_EventScript_SetStevenPos)
+    end
+}
+
+script MossdeepCity_StevensHouse_EventScript_SetStevenPos {
+    setobjectxyperm(LOCALID_STEVENS_HOUSE_STEVEN, 6, 5)
+    setobjectmovementtype(LOCALID_STEVENS_HOUSE_STEVEN, MOVEMENT_TYPE_FACE_UP)
+    return
+}
+
+script MossdeepCity_StevensHouse_EventScript_StevenGivesDive {
+    lockall
+    applymovement(LOCALID_STEVENS_HOUSE_STEVEN, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    playse(SE_PIN)
+    applymovement(LOCALID_STEVENS_HOUSE_STEVEN, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_STEVENS_HOUSE_STEVEN, Common_Movement_Delay48)
+    waitmovement(0)
+    applymovement(LOCALID_STEVENS_HOUSE_STEVEN, MossdeepCity_StevensHouse_Movement_StevenApproachPlayer)
+    waitmovement(0)
+    msgbox(MossdeepCity_StevensHouse_Text_YouveEarnedHMDive, MSGBOX_DEFAULT)
+    giveitem(ITEM_HM_DIVE)
+    setflag(FLAG_RECEIVED_HM_DIVE)
+    setflag(FLAG_OMIT_DIVE_FROM_STEVEN_LETTER)
+    msgbox(MossdeepCity_StevensHouse_Text_ExplainDive, MSGBOX_DEFAULT)
+    closemessage
+    delay(20)
+    applymovement(LOCALID_STEVENS_HOUSE_STEVEN, MossdeepCity_StevensHouse_Movement_StevenReturn)
+    waitmovement(0)
+    setflag(FLAG_HIDE_MOSSDEEP_CITY_SCOTT)
+    setflag(FLAG_HIDE_SEAFLOOR_CAVERN_ENTRANCE_AQUA_GRUNT)
+    setvar(VAR_STEVENS_HOUSE_STATE, 2)
+    releaseall
+    end
+}
+
+movement MossdeepCity_StevensHouse_Movement_StevenApproachPlayer {
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_in_place_faster_down
+    step_end
+}
+
+movement MossdeepCity_StevensHouse_Movement_StevenReturn {
+    walk_up
+    walk_right
+    walk_right
+    walk_right
+    walk_in_place_faster_up
+    step_end
+}
+
+script MossdeepCity_StevensHouse_EventScript_BeldumPokeball {
+    lockall
+    msgbox(MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(MossdeepCity_StevensHouse_EventScript_LeaveBeldum)
+    goto(MossdeepCity_StevensHouse_EventScript_GiveBeldum)
+    end
+}
+
+script MossdeepCity_StevensHouse_EventScript_LeaveBeldum {
+    msgbox(MossdeepCity_StevensHouse_Text_LeftPokeBallWhereItWas, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script MossdeepCity_StevensHouse_EventScript_GiveBeldum {
+    setvar(VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_BELDUM)
+    givemon(SPECIES_BELDUM, 5)
+    if (var(VAR_RESULT) == MON_GIVEN_TO_PARTY) goto(MossdeepCity_StevensHouse_EventScript_SendBeldumParty)
+    if (var(VAR_RESULT) == MON_GIVEN_TO_PC) goto(MossdeepCity_StevensHouse_EventScript_SendBeldumPC)
+    goto(Common_EventScript_NoMoreRoomForPokemon)
+    end
+}
+
+script MossdeepCity_StevensHouse_EventScript_SendBeldumParty {
+    call(MossdeepCity_StevensHouse_EventScript_ReceivedBeldumFanfare)
+    msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(MossdeepCity_StevensHouse_EventScript_ReceivedBeldum)
+    call(Common_EventScript_GetGiftMonPartySlot)
+    call(Common_EventScript_NameReceivedPartyMon)
+    goto(MossdeepCity_StevensHouse_EventScript_ReceivedBeldum)
+    end
+}
+
+script MossdeepCity_StevensHouse_EventScript_SendBeldumPC {
+    call(MossdeepCity_StevensHouse_EventScript_ReceivedBeldumFanfare)
+    msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(MossdeepCity_StevensHouse_EventScript_BeldumTransferredToPC)
+    call(Common_EventScript_NameReceivedBoxMon)
+    goto(MossdeepCity_StevensHouse_EventScript_BeldumTransferredToPC)
+    end
+}
+
+script MossdeepCity_StevensHouse_EventScript_BeldumTransferredToPC {
+    call(Common_EventScript_TransferredToPC)
+    goto(MossdeepCity_StevensHouse_EventScript_ReceivedBeldum)
+    end
+}
+
+script MossdeepCity_StevensHouse_EventScript_ReceivedBeldumFanfare {
+    bufferspeciesname(STR_VAR_2, SPECIES_BELDUM)
+    removeobject(LOCALID_STEVENS_HOUSE_BALL)
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(MossdeepCity_StevensHouse_Text_ObtainedBeldum)
+    waitmessage()
+    waitfanfare()
+    bufferspeciesname(STR_VAR_1, SPECIES_BELDUM)
+    return
+}
+
+script MossdeepCity_StevensHouse_EventScript_ReceivedBeldum {
+    setflag(FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_BELDUM_POKEBALL)
+    setflag(FLAG_RECEIVED_BELDUM)
+    releaseall
+    end
+}
+
+script MossdeepCity_StevensHouse_EventScript_RockDisplay {
+    msgbox(MossdeepCity_StevensHouse_Text_CollectionOfRareRocks, MSGBOX_SIGN)
+    end
+}
+
+script MossdeepCity_StevensHouse_EventScript_Steven {
+    msgbox(MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis, MSGBOX_NPC)
+    end
+}
+
+script MossdeepCity_StevensHouse_EventScript_Letter {
+    lockall
+    msgbox(MossdeepCity_StevensHouse_Text_LetterFromSteven, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script MossdeepCity_StevensHouse_EventScript_DiveItemBall {
+    finditem(ITEM_HM_DIVE)
+    setflag(FLAG_RECEIVED_HM_DIVE)
+    end
+}
+
+text MossdeepCity_StevensHouse_Text_YouveEarnedHMDive {
+    "STEVEN: {PLAYER}{KUN}…\p"
+    "As you can see, there's not much here,\n"
+    "but this is my home.\p"
+    "Thank you for all that you've done.\p"
+    "This is my token of appreciation.\n"
+    "It's the HIDDEN MACHINE DIVE.\p"
+    "No need to be shy--you've earned\n"
+    "this HM.$"
+}
+
+text MossdeepCity_StevensHouse_Text_ExplainDive {
+    "STEVEN: While you're using SURF, you\n"
+    "should notice dark patches of water.\p"
+    "Use DIVE if you come to deep water\n"
+    "like it. You'll drop to the seafloor.\p"
+    "When you want to come back up, use\n"
+    "DIVE again.\p"
+    "In some places, it won't be possible\n"
+    "for you to surface, though.$"
+}
+
+text MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis {
+    "STEVEN: Apparently, there's an\n"
+    "underwater cavern between\l"
+    "MOSSDEEP and SOOTOPOLIS.\p"
+    "You know, the one that CAPT. STERN\n"
+    "found in his submarine.$"
+}
+
+text MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum {
+    "{PLAYER} checked the POKé BALL.\p"
+    "It contained the POKéMON\n"
+    "BELDUM.\p"
+    "Take the POKé BALL?$"
+}
+
+text MossdeepCity_StevensHouse_Text_ObtainedBeldum {
+    "{PLAYER} obtained a BELDUM.$"
+}
+
+text MossdeepCity_StevensHouse_Text_NoSpaceForAnotherMon {
+    "There is no space for another POKéMON.$"
+}
+
+text MossdeepCity_StevensHouse_Text_LeftPokeBallWhereItWas {
+    "{PLAYER} left the POKé BALL where\n"
+    "it was.$"
+}
+
+text MossdeepCity_StevensHouse_Text_LetterFromSteven {
+    "It's a letter.\p"
+    "… … … … … …\p"
+    "To {PLAYER}{KUN}…\p"
+    "I've decided to do a little soul-\n"
+    "searching and train on the road.\p"
+    "I don't plan to return home for some\n"
+    "time.\p"
+    "I have a favor to ask of you.\p"
+    "I want you to take the POKé BALL on\n"
+    "the desk.\p"
+    "Inside it is a BELDUM, my favorite\n"
+    "POKéMON.\p"
+    "I'm counting on you.\p"
+    "May our paths cross someday.\p"
+    "STEVEN STONE$"
+}
+
+text MossdeepCity_StevensHouse_Text_CollectionOfRareRocks {
+    "It's a collection of rare rocks and\n"
+    "stones assembled by STEVEN.$"
+}

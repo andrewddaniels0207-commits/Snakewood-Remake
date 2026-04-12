@@ -1,0 +1,662 @@
+mapscripts BattleFrontier_BattleArenaLobby_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_CHALLENGE_STATUS, 0: BattleFrontier_BattleArenaLobby_EventScript_GetChallengeStatus
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING: BattleFrontier_BattleArenaLobby_EventScript_QuitWithoutSaving
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_PAUSED: BattleFrontier_BattleArenaLobby_EventScript_ResumeChallenge
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_WON: BattleFrontier_BattleArenaLobby_EventScript_WonChallenge
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST: BattleFrontier_BattleArenaLobby_EventScript_LostChallenge
+    ]
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: BattleFrontier_BattleArenaLobby_OnWarp
+}
+
+raw `
+BattleFrontier_BattleArenaLobby_OnWarp:
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleArenaLobby_EventScript_TurnPlayerNorth
+	.2byte 0
+
+`
+
+script BattleFrontier_BattleArenaLobby_EventScript_TurnPlayerNorth {
+    setvar(VAR_TEMP_1, 1)
+    turnobject(LOCALID_PLAYER, DIR_NORTH)
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_GetChallengeStatus {
+    frontier_getstatus()
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_QuitWithoutSaving {
+    lockall
+    msgbox(BattleFrontier_BattleArenaLobby_Text_DidntSaveBeforeShuttingDown, MSGBOX_DEFAULT)
+    closemessage
+    arena_set(ARENA_DATA_WIN_STREAK, 0)
+    arena_set(ARENA_DATA_WIN_STREAK_ACTIVE, FALSE)
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, 0)
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    releaseall
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_WonChallenge {
+    lockall
+    frontier_isbrain()
+    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleArenaLobby_EventScript_DefeatedTycoon)
+    msgbox(BattleFrontier_BattleArenaLobby_Text_CongratsOnSevenWins, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleArenaLobby_EventScript_GiveBattlePoints)
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_DefeatedTycoon {
+    msgbox(BattleFrontier_BattleArenaLobby_Text_CongratsOnDefeatingTycoon, MSGBOX_DEFAULT)
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_GiveBattlePoints {
+    msgbox(BattleFrontier_BattleArenaLobby_Text_PleaseAcceptBattlePoints, MSGBOX_DEFAULT)
+    frontier_givepoints()
+    msgbox(BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS)
+    message(BattleFrontier_BattleArenaLobby_Text_RecordAchievement)
+    waitmessage()
+    call(BattleFrontier_BattleArenaLobby_EventScript_SaveAfterChallenge)
+    msgbox(BattleFrontier_BattleArenaLobby_Text_AwaitAnotherChallenge2, MSGBOX_DEFAULT)
+    closemessage
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    releaseall
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_LostChallenge {
+    lockall
+    message(BattleFrontier_BattleArenaLobby_Text_ThankYouWaitWhileSave)
+    waitmessage()
+    arena_set(ARENA_DATA_WIN_STREAK_ACTIVE, FALSE)
+    call(BattleFrontier_BattleArenaLobby_EventScript_SaveAfterChallenge)
+    msgbox(BattleFrontier_BattleArenaLobby_Text_AwaitAnotherChallenge2, MSGBOX_DEFAULT)
+    closemessage
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    releaseall
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_SaveAfterChallenge {
+    frontier_checkairshow()
+    special(LoadPlayerParty)
+    special(HealPlayerParty)
+    callnative(UpdateFollowingPokemon)
+    arena_save(0)
+    playse(SE_SAVE)
+    waitse()
+    call(BattleFrontier_EventScript_GetCantRecordBattle)
+    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge)
+    message(BattleFrontier_BattleArenaLobby_Text_RecordLastMatch)
+    waitmessage()
+    multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
+    switch(VAR_RESULT)
+    case(1, BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge)
+    case(0, BattleFrontier_BattleArenaLobby_EventScript_RecordMatch)
+    case(MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge)
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_RecordMatch {
+    call(BattleFrontier_EventScript_SaveBattle)
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge {
+    return
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_ResumeChallenge {
+    lockall
+    message(BattleFrontier_BattleArenaLobby_Text_LookingForwardToArrivalSaveGame)
+    waitmessage()
+    arena_save(CHALLENGE_STATUS_SAVING)
+    playse(SE_SAVE)
+    waitse()
+    frontier_set(FRONTIER_DATA_PAUSED, FALSE)
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    goto(BattleFrontier_BattleArenaLobby_EventScript_EnterChallenge)
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_Attendant {
+    lock
+    faceplayer
+    setvar(VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_ARENA)
+    setvar(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES)
+    special(SavePlayerParty)
+    msgbox(BattleFrontier_BattleArenaLobby_Text_WelcomeToBattleArena, MSGBOX_DEFAULT)
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_AskTakeChallenge {
+    message(BattleFrontier_BattleArenaLobby_Text_WishToTakeChallenge)
+    waitmessage()
+    multichoice(17, 6, MULTI_CHALLENGEINFO, FALSE)
+    switch(VAR_RESULT)
+    case(0, BattleFrontier_BattleArenaLobby_EventScript_TryEnterChallenge)
+    case(1, BattleFrontier_BattleArenaLobby_EventScript_ExplainChallenge)
+    case(2, BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge)
+    case(MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge)
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_TryEnterChallenge {
+    message(BattleFrontier_BattleArenaLobby_Text_WhichLevelMode)
+    waitmessage()
+    multichoice(17, 6, MULTI_LEVEL_MODE, FALSE)
+    switch(VAR_RESULT)
+    case(FRONTIER_LVL_TENT, BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge)
+    case(MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge)
+    frontier_checkineligible()
+    if (var(VAR_0x8004) == TRUE) goto(BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMons)
+    frontier_set(FRONTIER_DATA_LVL_MODE, VAR_RESULT)
+    msgbox(BattleFrontier_BattleArenaLobby_Text_SelectThreeMons, MSGBOX_DEFAULT)
+    fadescreen(FADE_TO_BLACK)
+    callnative(RemoveFollowingPokemon)
+    call(BattleFrontier_EventScript_GetLvlMode)
+    copyvar(VAR_0x8004, VAR_RESULT)
+    setvar(VAR_0x8005, FRONTIER_PARTY_SIZE)
+    special(ChoosePartyForBattleFrontier)
+    waitstate
+    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge)
+    msgbox(BattleFrontier_BattleArenaLobby_Text_OkayToSave, MSGBOX_YESNO)
+    switch(VAR_RESULT)
+    case(NO, BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge)
+    case(YES, BattleFrontier_BattleArenaLobby_EventScript_SaveBeforeChallenge)
+    case(MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge)
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_SaveBeforeChallenge {
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 0)
+    frontier_set(FRONTIER_DATA_SELECTED_MON_ORDER)
+    arena_init()
+    arena_set(ARENA_DATA_WIN_STREAK_ACTIVE, TRUE)
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING)
+    frontier_set(FRONTIER_DATA_PAUSED, FALSE)
+    special(LoadPlayerParty)
+    closemessage
+    delay(2)
+    call(Common_EventScript_SaveGame)
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattleArenaLobby_EventScript_CancelChallengeSaveFailed)
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_EnterChallenge {
+    special(SavePlayerParty)
+    frontier_setpartyorder(FRONTIER_PARTY_SIZE)
+    msgbox(BattleFrontier_BattleArenaLobby_Text_GuideYouToArena, MSGBOX_DEFAULT)
+    closemessage
+    frontier_get(FRONTIER_DATA_LVL_MODE)
+    if (var(VAR_RESULT) == FRONTIER_LVL_50) call(BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLv50)
+    if (var(VAR_RESULT) == FRONTIER_LVL_OPEN) call(BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLvOpen)
+    warp(MAP_BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR, 9, 13)
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 0)
+    waitstate
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_ExplainChallenge {
+    msgbox(BattleFrontier_BattleArenaLobby_Text_ExplainChallenge, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleArenaLobby_EventScript_AskTakeChallenge)
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMons {
+    switch(VAR_RESULT)
+    case(FRONTIER_LVL_50, BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMonsLv50)
+    case(FRONTIER_LVL_OPEN, BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMonsLvOpen)
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMonsLv50 {
+    msgbox(BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsLv50, MSGBOX_DEFAULT)
+    call(BattleFrontier_ShowCaughtBannedSpecies)
+    msgbox(BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsEnd, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleArenaLobby_EventScript_EndCancelChallenge)
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMonsLvOpen {
+    msgbox(BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsLvOpen, MSGBOX_DEFAULT)
+    call(BattleFrontier_ShowCaughtBannedSpecies)
+    msgbox(BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsEnd, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleArenaLobby_EventScript_EndCancelChallenge)
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_CancelChallengeSaveFailed {
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, 0)
+    goto(BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge)
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge {
+    special(LoadPlayerParty)
+    callnative(UpdateFollowingPokemon)
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge {
+    msgbox(BattleFrontier_BattleArenaLobby_Text_AwaitAnotherChallenge, MSGBOX_DEFAULT)
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_EndCancelChallenge {
+    release
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLv50 {
+    applymovement(LOCALID_ARENA_ATTENDANT, BattleFrontier_BattleArenaLobby_Movement_AttendantWalkToLeftDoor)
+    applymovement(LOCALID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_PlayerWalkToLeftDoor)
+    waitmovement(0)
+    opendoor(2, 2)
+    waitdooranim()
+    applymovement(LOCALID_ARENA_ATTENDANT, BattleFrontier_BattleArenaLobby_Movement_AttendantEnterDoor)
+    applymovement(LOCALID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_PlayerEnterDoor)
+    waitmovement(0)
+    closedoor(2, 2)
+    waitdooranim()
+    return
+}
+
+movement BattleFrontier_BattleArenaLobby_Movement_AttendantWalkToLeftDoor {
+    walk_up
+    walk_up
+    walk_up
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_up
+    step_end
+}
+
+movement BattleFrontier_BattleArenaLobby_Movement_AttendantEnterDoor {
+    walk_up
+    set_invisible
+    step_end
+}
+
+movement BattleFrontier_BattleArenaLobby_Movement_PlayerWalkToLeftDoor {
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_in_place_faster_up
+    step_end
+}
+
+movement BattleFrontier_BattleArenaLobby_Movement_PlayerEnterDoor {
+    walk_up
+    walk_up
+    set_invisible
+    step_end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLvOpen {
+    applymovement(LOCALID_ARENA_ATTENDANT, BattleFrontier_BattleArenaLobby_Movement_AttendantWalkToRightDoor)
+    applymovement(LOCALID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_PlayerWalkToRightDoor)
+    waitmovement(0)
+    opendoor(11, 2)
+    waitdooranim()
+    applymovement(LOCALID_ARENA_ATTENDANT, BattleFrontier_BattleArenaLobby_Movement_AttendantEnterDoor)
+    applymovement(LOCALID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_PlayerEnterDoor)
+    waitmovement(0)
+    closedoor(11, 2)
+    waitdooranim()
+    return
+}
+
+movement BattleFrontier_BattleArenaLobby_Movement_AttendantWalkToRightDoor {
+    walk_up
+    walk_up
+    walk_up
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_up
+    step_end
+}
+
+movement BattleFrontier_BattleArenaLobby_Movement_PlayerWalkToRightDoor {
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_in_place_faster_up
+    step_end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_ShowResults {
+    lockall
+    frontier_results(FRONTIER_FACILITY_ARENA)
+    waitbuttonpress()
+    special(RemoveRecordsWindow)
+    releaseall
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_Youngster {
+    msgbox(BattleFrontier_BattleArenaLobby_Text_BadIdeaToNotAttack, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_Man {
+    msgbox(BattleFrontier_BattleArenaLobby_Text_LandingHitsWorked, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_Camper {
+    msgbox(BattleFrontier_BattleArenaLobby_Text_MatchWasDeclaredDraw, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_Woman {
+    msgbox(BattleFrontier_BattleArenaLobby_Text_OrderOfMonsImportant, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_RulesBoard {
+    lockall
+    msgbox(BattleFrontier_BattleArenaLobby_Text_RulesAreListed, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard {
+    message(BattleFrontier_BattleArenaLobby_Text_ReadWhichHeading)
+    waitmessage()
+    multichoice(17, 2, MULTI_BATTLE_ARENA_RULES, FALSE)
+    switch(VAR_RESULT)
+    case(0, BattleFrontier_BattleArenaLobby_EventScript_BattleRules)
+    case(1, BattleFrontier_BattleArenaLobby_EventScript_MindRules)
+    case(2, BattleFrontier_BattleArenaLobby_EventScript_SkillRules)
+    case(3, BattleFrontier_BattleArenaLobby_EventScript_BodyRules)
+    case(4, BattleFrontier_BattleArenaLobby_EventScript_ExitRules)
+    case(MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_ExitRules)
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_BattleRules {
+    msgbox(BattleFrontier_BattleArenaLobby_Text_ExplainBattleRules, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_MindRules {
+    msgbox(BattleFrontier_BattleArenaLobby_Text_ExplainMindRules, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_SkillRules {
+    msgbox(BattleFrontier_BattleArenaLobby_Text_ExplainSkillRules, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_BodyRules {
+    msgbox(BattleFrontier_BattleArenaLobby_Text_ExplainBodyRules, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattleArenaLobby_EventScript_ExitRules {
+    releaseall
+    end
+}
+
+text BattleFrontier_BattleArenaLobby_Text_WelcomeToBattleArena {
+    "Where the battling spirit of TRAINERS\n"
+    "is put to the test!\p"
+    "I welcome you to the BATTLE ARENA!\p"
+    "I am your guide to the Set KO Tourney!$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_WishToTakeChallenge {
+    "Now, do you wish to take\n"
+    "the BATTLE ARENA challenge?$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_AwaitAnotherChallenge {
+    "We await your challenge on\n"
+    "another occasion!$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_ExplainChallenge {
+    "In the BATTLE ARENA, we undertake\n"
+    "the Set KO Tourney.\p"
+    "All participants enter with a team of\n"
+    "three POKéMON.\p"
+    "The three POKéMON must be lined up in\n"
+    "the order in which they are to appear.\p"
+    "During battle, the POKéMON will appear\n"
+    "one at a time in the preset order.\p"
+    "Once a POKéMON enters battle, it must\n"
+    "remain out until the match is decided.\p"
+    "If a match remains undecided in\n"
+    "three turns, it goes to judging.\p"
+    "If you wish to interrupt your challenge,\n"
+    "please save the game.\p"
+    "If you don't save, you will not be able\n"
+    "to continue with your challenge.\p"
+    "If you pull off the feat of beating\n"
+    "seven TRAINERS in succession,\l"
+    "we will present you with Battle Points.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_OkayToSave {
+    "Before showing you to the BATTLE\n"
+    "ARENA, you must save. Is that okay?$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_WhichLevelMode {
+    "The BATTLE ARENA offers two levels\n"
+    "of challenge, Level 50 and Open Level.\l"
+    "Which is your choice?$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_SelectThreeMons {
+    "Very well, now select your\n"
+    "three POKéMON, please.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsLvOpen {
+    "My dear challenger!\p"
+    "You do not have the three POKéMON\n"
+    "required for entry.\p"
+    "To qualify, you must bring three\n"
+    "different kinds of POKéMON.\p"
+    "They also must not hold the same\n"
+    "kinds of items.\p"
+    "EGGS{STR_VAR_1}.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsEnd {
+    "When you have made your preparations,\n"
+    "please do return.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsLv50 {
+    "My dear challenger!\p"
+    "You do not have the three POKéMON\n"
+    "required for entry.\p"
+    "To qualify, you must bring three\n"
+    "different kinds of POKéMON.\p"
+    "The three different POKéMON\n"
+    "must all be Level 50 or lower.\p"
+    "They also must not hold the same\n"
+    "kinds of items.\p"
+    "EGGS{STR_VAR_1}.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_GuideYouToArena {
+    "I shall now guide you to\n"
+    "the BATTLE ARENA.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_DidntSaveBeforeShuttingDown {
+    "My dear challenger!\p"
+    "You did not save the game before\n"
+    "shutting down, did you?\p"
+    "It is unfortunate, but that has\n"
+    "resulted in your disqualification\l"
+    "from your challenge.\p"
+    "You may, of course, start with a fresh\n"
+    "challenge.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_CongratsOnSevenWins {
+    "We congratulate you for your splendid\n"
+    "string of wins over seven TRAINERS!$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_RecordAchievement {
+    "Your achievement will be recorded.\n"
+    "Please wait while I save the game.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_PresentYouWithPrize {
+    "In commemoration of your 7-win streak,\n"
+    "we present you with this prize.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_ReceivedPrize {
+    "{PLAYER} received the prize\n"
+    "{STR_VAR_1}.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_BagFullReturnForPrize {
+    "Oh?\n"
+    "Your BAG seems to be full.\p"
+    "I urge you to clear space and\n"
+    "return for your prize.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_ThankYouWaitWhileSave {
+    "Thank you so much for participating!\p"
+    "Please wait while I save the game.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_AwaitAnotherChallenge2 {
+    "We await your challenge on\n"
+    "another occasion!$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_LookingForwardToArrivalSaveGame {
+    "We have been looking forward to\n"
+    "your arrival.\p"
+    "Before I show you to the BATTLE\n"
+    "ARENA, I must save the game.\l"
+    "Please wait.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_RecordLastMatch {
+    "Shall I record your last BATTLE ARENA\n"
+    "match on your FRONTIER PASS?$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_BadIdeaToNotAttack {
+    "I lost on the REFEREE's decision…\p"
+    "I don't think it was a good idea to only\n"
+    "use defensive moves and not attack…$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_LandingHitsWorked {
+    "I won in judging!\p"
+    "Landing hits consistently on\n"
+    "the opponent's POKéMON worked!$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_MatchWasDeclaredDraw {
+    "Our match was declared a draw.\p"
+    "When we ran out of time, both my\n"
+    "POKéMON and the opponent's had about\l"
+    "the same amount of HP left.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_OrderOfMonsImportant {
+    "In the BATTLE ARENA, the order of\n"
+    "POKéMON is totally important.\p"
+    "For example, if your first POKéMON\n"
+    "has certain type disadvantages,\l"
+    "try making your second POKéMON one\l"
+    "with moves that are super effective\l"
+    "against the first one.\p"
+    "I think that will be a good way of\n"
+    "making an effective team.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_RulesAreListed {
+    "The Set KO Tourney's rules are listed.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_ReadWhichHeading {
+    "Which heading do you want to read?$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_ExplainBattleRules {
+    "The Set KO Tourney has special rules,\n"
+    "unlike standard battles.\p"
+    "First, one battle lasts only\n"
+    "three turns.\p"
+    "If the outcome is not decided after\n"
+    "three turns, it goes to judging.\p"
+    "The REFEREE will choose the winner\n"
+    "based on how the POKéMON battled.\p"
+    "Also, a POKéMON cannot be switched out\n"
+    "until its battle's outcome is decided.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_ExplainMindRules {
+    "The first judging factor is “Mind.”\n"
+    "This factor evaluates how aggressive\l"
+    "the battlers were.\p"
+    "The judging is based on how often\n"
+    "the TRAINERS ordered the use of\l"
+    "offensive moves.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_ExplainSkillRules {
+    "The second judging factor is “Skill.”\n"
+    "This factor evaluates how effectively\l"
+    "POKéMON moves were used.\p"
+    "If a move worked successfully,\n"
+    "the Skill rating goes up.\p"
+    "If a move failed, the Skill rating\n"
+    "is lowered.\p"
+    "If it was an offensive move, the Skill\n"
+    "rating goes up if the move was “super\l"
+    "effective” and goes down if it was\l"
+    "“not very effective.”\p"
+    "The Skill rating will not go up for\n"
+    "moves such as PROTECT and DETECT.\p"
+    "If the opponent used PROTECT or\n"
+    "DETECT, and your POKéMON failed to\l"
+    "hit with a move, its Skill rating will not\l"
+    "go down.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_ExplainBodyRules {
+    "The third judging factor is “Body.”\n"
+    "This factor is based on how much HP\l"
+    "remained at the end of a battle.\p"
+    "The rating takes into account how much\n"
+    "HP a POKéMON had at the start of\l"
+    "battle, and what remained at the end.$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_CongratsOnDefeatingTycoon {
+    "A victory snatched from the ARENA\n"
+    "TYCOON, and a seven-TRAINER sweep!\p"
+    "We congratulate you on your most\n"
+    "splendid challenge!$"
+}
+
+text BattleFrontier_BattleArenaLobby_Text_PleaseAcceptBattlePoints {
+    "My dear challenger, in recognition of\n"
+    "your indefatigable spirit, please\l"
+    "accept these Battle Point(s).$"
+}

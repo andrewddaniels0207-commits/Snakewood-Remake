@@ -1,0 +1,334 @@
+mapscripts PalletTown_RivalsHouse_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: PalletTown_RivalsHouse_OnTransition
+}
+
+script PalletTown_RivalsHouse_OnTransition {
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) < 2) call(PalletTown_RivalsHouse_EventScript_MoveDaisyToTable)
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) >= 2) call(PalletTown_RivalsHouse_EventScript_AlreadyReceivedTownMap)
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_MoveDaisyToTable {
+    setobjectmovementtype(LOCALID_DAISY, MOVEMENT_TYPE_FACE_RIGHT)
+    setobjectxyperm(LOCALID_DAISY, 5, 4)
+    return
+}
+
+script PalletTown_RivalsHouse_EventScript_AlreadyReceivedTownMap {
+    setvar(RECEIVED_TOWN_MAP, TRUE)
+    return
+}
+
+script PalletTown_RivalsHouse_EventScript_Daisy {
+    lock
+    faceplayer
+    famechecker(FAMECHECKER_DAISY, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
+    if (flag(FLAG_SYS_GAME_CLEAR)) goto(PalletTown_RivalsHouse_EventScript_GroomMon)
+    if (var(RECEIVED_TOWN_MAP) == TRUE) goto(PalletTown_RivalsHouse_EventScript_PleaseGiveMonsRest)
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) == 2) goto(PalletTown_RivalsHouse_EventScript_ExplainTownMap)
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) == 1) goto(PalletTown_RivalsHouse_EventScript_GiveTownMap)
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) >= 1) goto(PalletTown_RivalsHouse_EventScript_HeardBattledRival)
+    msgbox(PalletTown_RivalsHouse_Text_HiBrothersAtLab)
+    closemessage
+    applymovement(LOCALID_DAISY, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_HeardBattledRival {
+    msgbox(PalletTown_RivalsHouse_Text_HeardYouBattledRival)
+    release
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_GroomMon {
+    if (var(VAR_MASSAGE_COOLDOWN_STEP_COUNTER) < 500) goto(PalletTown_RivalsHouse_EventScript_RateMonFriendship)
+    msgbox(PalletTown_RivalsHouse_Text_LikeMeToGroomMon, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(PalletTown_RivalsHouse_EventScript_DeclineGrooming)
+    msgbox(PalletTown_RivalsHouse_Text_GroomWhichOne)
+    special(ChoosePartyMon)
+    waitstate
+    lock
+    faceplayer
+    if (var(VAR_0x8004) >= PARTY_SIZE) goto(PalletTown_RivalsHouse_EventScript_DeclineGrooming)
+    specialvar(VAR_RESULT, ScriptGetPartyMonSpecies)
+    if (var(VAR_RESULT) == SPECIES_EGG) goto(PalletTown_RivalsHouse_EventScript_CantGroomEgg)
+    msgbox(PalletTown_RivalsHouse_Text_LookingNiceInNoTime)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    playfanfare(MUS_HEAL)
+    waitfanfare()
+    special(DaisyMassageServices)
+    fadescreen(FADE_FROM_BLACK)
+    special(BufferMonNickname)
+    msgbox(PalletTown_RivalsHouse_Text_ThereYouGoAllDone)
+    release
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_CantGroomEgg {
+    msgbox(PalletTown_RivalsHouse_Text_CantGroomAnEgg)
+    release
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_DeclineGrooming {
+    msgbox(PalletTown_RivalsHouse_Text_DontNeedAnyGrooming)
+    release
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_RateMonFriendship {
+    msgbox(PalletTown_RivalsHouse_Text_MayISeeFirstMon)
+    specialvar(VAR_RESULT, GetLeadMonFriendship)
+    switch(VAR_RESULT)
+    case(0, PalletTown_RivalsHouse_EventScript_MonFriendshipLowest)
+    case(1, PalletTown_RivalsHouse_EventScript_MonFriendshipLower)
+    case(2, PalletTown_RivalsHouse_EventScript_MonFriendshipLow)
+    case(3, PalletTown_RivalsHouse_EventScript_MonFriendshipMid)
+    case(4, PalletTown_RivalsHouse_EventScript_MonFriendshipHigh)
+    case(5, PalletTown_RivalsHouse_EventScript_MonFriendshipHigher)
+    case(6, PalletTown_RivalsHouse_EventScript_MonFriendshipHighest)
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_MonFriendshipLowest {
+    msgbox(PalletTown_RivalsHouse_Text_WhyWouldMonHateYouSoMuch)
+    release
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_MonFriendshipLower {
+    msgbox(PalletTown_RivalsHouse_Text_DontLikeWayItGlaresAtYou)
+    release
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_MonFriendshipLow {
+    msgbox(PalletTown_RivalsHouse_Text_NotFamiliarWithYouYet)
+    release
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_MonFriendshipMid {
+    msgbox(PalletTown_RivalsHouse_Text_ItsWarmingUpToYou)
+    release
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_MonFriendshipHigh {
+    msgbox(PalletTown_RivalsHouse_Text_ItsQuiteFriendly)
+    release
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_MonFriendshipHigher {
+    msgbox(PalletTown_RivalsHouse_Text_ItLooksVeryHappy)
+    release
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_MonFriendshipHighest {
+    msgbox(PalletTown_RivalsHouse_Text_CouldntLoveYouMore)
+    release
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_PleaseGiveMonsRest {
+    msgbox(PalletTown_RivalsHouse_Text_PleaseGiveMonsRest)
+    release
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_GiveTownMap {
+    msgbox(PalletTown_RivalsHouse_Text_ErrandForGrandpaThisWillHelp)
+    closemessage
+    checkitemspace(ITEM_TOWN_MAP)
+    if (var(VAR_RESULT) == FALSE) goto(PalletTown_RivalsHouse_EventScript_NoRoomForTownMap)
+    applymovement(LOCALID_DAISY, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    removeobject(LOCALID_TOWN_MAP)
+    setvar(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 2)
+    delay(15)
+    applymovement(LOCALID_DAISY, Common_Movement_FacePlayer)
+    waitmovement(0)
+    delay(12)
+    giveitem_msg(PalletTown_RivalsHouse_Text_ReceivedTownMapFromDaisy, ITEM_TOWN_MAP, 1, MUS_RG_OBTAIN_KEY_ITEM)
+    release
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_NoRoomForTownMap {
+    msgbox(PalletTown_RivalsHouse_Text_DontHaveSpaceForThis)
+    release
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_ExplainTownMap {
+    msgbox(PalletTown_RivalsHouse_Text_ExplainTownMap)
+    release
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_TownMap {
+    msgbox(PalletTown_RivalsHouse_Text_ItsBigMapOfKanto, MSGBOX_NPC)
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_Bookshelf {
+    msgbox(PalletTown_RivalsHouse_Text_ShelvesCrammedFullOfBooks, MSGBOX_SIGN)
+    end
+}
+
+script PalletTown_RivalsHouse_EventScript_Picture {
+    msgbox(PalletTown_RivalsHouse_Text_LovelyAndSweetClefairy, MSGBOX_SIGN)
+    end
+}
+
+text PalletTown_RivalsHouse_Text_HiBrothersAtLab {
+    "DAISY: Hi, {PLAYER}!\p"
+    "My brother, {RIVAL}, is out at\n"
+    "Grandpa's LAB.$"
+}
+
+text PalletTown_RivalsHouse_Text_HeardYouBattledRival {
+    "DAISY: {PLAYER}, I heard you had\n"
+    "a battle against {RIVAL}.\p"
+    "I wish I'd seen that!$"
+}
+
+text PalletTown_RivalsHouse_Text_ErrandForGrandpaThisWillHelp {
+    "Grandpa asked you to run an\n"
+    "errand?\p"
+    "Gee, that's lazy of him.\n"
+    "Here, this will help you.$"
+}
+
+text PalletTown_RivalsHouse_Text_ReceivedTownMapFromDaisy {
+    "{PLAYER} received a TOWN MAP\n"
+    "from DAISY.$"
+}
+
+text PalletTown_RivalsHouse_Text_DontHaveSpaceForThis {
+    "You don't have space for this in\n"
+    "your BAG.$"
+}
+
+text PalletTown_RivalsHouse_Text_ExplainTownMap {
+    "You can use the TOWN MAP to find\n"
+    "out where you are, or check the\l"
+    "names of places.$"
+}
+
+text PalletTown_RivalsHouse_Text_PleaseGiveMonsRest {
+    "DAISY: Just like people, POKéMON\n"
+    "are living things.\p"
+    "When they get tired, please give\n"
+    "them a rest.$"
+}
+
+text PalletTown_RivalsHouse_Text_ItsBigMapOfKanto {
+    "It's a big map of the KANTO region.\n"
+    "Now this would be useful!$"
+}
+
+text PalletTown_RivalsHouse_Text_ShelvesCrammedFullOfBooks {
+    "The shelves are crammed full of\n"
+    "books on POKéMON.$"
+}
+
+text PalletTown_RivalsHouse_Text_LikeMeToGroomMon {
+    "DAISY: Hi, {PLAYER}!\n"
+    "Good timing.\p"
+    "I'm about to have some tea.\n"
+    "Would you like to join me?\p"
+    "Oh, but look.\n"
+    "Your POKéMON are a little dirty.\p"
+    "Would you like me to groom one?$"
+}
+
+text PalletTown_RivalsHouse_Text_DontNeedAnyGrooming {
+    "You don't need any grooming done?\n"
+    "Okay, we'll just have tea.$"
+}
+
+text PalletTown_RivalsHouse_Text_GroomWhichOne {
+    "Which one should I groom?$"
+}
+
+text PalletTown_RivalsHouse_Text_LookingNiceInNoTime {
+    "DAISY: Okay, I'll get it looking\n"
+    "nice in no time.$"
+}
+
+text PalletTown_RivalsHouse_Text_ThereYouGoAllDone {
+    "{COLOR DARK_GRAY}{STR_VAR_1} looks dreamily content…\p"
+    "{COLOR RED}DAISY: There you go! All done.\n"
+    "{FONT_NORMAL}{STR_VAR_1} looks dreamily content…\p"
+    "{FONT_FEMALE}DAISY: There you go! All done.\n"
+    "See? Doesn't it look nice?\p"
+    "Giggle…\n"
+    "It's such a cute POKéMON.$"
+}
+
+text PalletTown_RivalsHouse_Text_CantGroomAnEgg {
+    "Oh, sorry. I honestly can't\n"
+    "groom an EGG.$"
+}
+
+text PalletTown_RivalsHouse_Text_MayISeeFirstMon {
+    "DAISY: Your POKéMON grow to love\n"
+    "you if you raise them with love.\p"
+    "For example, {PLAYER}, may I see\n"
+    "your first POKéMON?$"
+}
+
+text PalletTown_RivalsHouse_Text_CouldntLoveYouMore {
+    "It couldn't possibly love you\n"
+    "any more than it does now.\p"
+    "Your POKéMON is happy beyond\n"
+    "words.$"
+}
+
+text PalletTown_RivalsHouse_Text_ItLooksVeryHappy {
+    "It looks very happy.\p"
+    "I wish {RIVAL} could see this and\n"
+    "learn something from it.$"
+}
+
+text PalletTown_RivalsHouse_Text_ItsQuiteFriendly {
+    "It's quite friendly with you.\n"
+    "Keep being good to it!$"
+}
+
+text PalletTown_RivalsHouse_Text_ItsWarmingUpToYou {
+    "It's warming up to you.\n"
+    "Trust must be growing between you.$"
+}
+
+text PalletTown_RivalsHouse_Text_NotFamiliarWithYouYet {
+    "It's not quite familiar with you\n"
+    "yet.\p"
+    "POKéMON are all quite wary when\n"
+    "you first get them.$"
+}
+
+text PalletTown_RivalsHouse_Text_DontLikeWayItGlaresAtYou {
+    "{PLAYER}, I don't like the way it\n"
+    "glares at you.\p"
+    "Could you try being a little nicer\n"
+    "to it?$"
+}
+
+text PalletTown_RivalsHouse_Text_WhyWouldMonHateYouSoMuch {
+    "…Um, it's not easy for me to say\n"
+    "this, but…\p"
+    "Is there some reason why your\n"
+    "POKéMON would hate you so much?$"
+}
+
+text PalletTown_RivalsHouse_Text_LovelyAndSweetClefairy {
+    "“The lovely and sweet\n"
+    "CLEFAIRY”$"
+}

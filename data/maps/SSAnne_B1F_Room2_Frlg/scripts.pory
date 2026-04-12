@@ -1,0 +1,20 @@
+mapscripts SSAnne_B1F_Room2_Frlg_MapScripts {}
+
+script SSAnne_B1F_Room2_EventScript_Huey {
+    trainerbattle_single(TRAINER_SAILOR_HUEY, SSAnne_B1F_Room2_Text_HueyIntro, SSAnne_B1F_Room2_Text_HueyDefeat)
+    msgbox(SSAnne_B1F_Room2_Text_HueyPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text SSAnne_B1F_Room2_Text_HueyIntro {
+    "Even us sailors have POKéMON, too!$"
+}
+
+text SSAnne_B1F_Room2_Text_HueyDefeat {
+    "Okay, you're not bad.$"
+}
+
+text SSAnne_B1F_Room2_Text_HueyPostBattle {
+    "We caught all our POKéMON while\n"
+    "we were out at sea.$"
+}

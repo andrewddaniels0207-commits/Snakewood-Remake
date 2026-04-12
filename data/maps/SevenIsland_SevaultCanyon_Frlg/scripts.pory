@@ -1,0 +1,165 @@
+mapscripts SevenIsland_SevaultCanyon_Frlg_MapScripts {}
+
+script SevenIsland_SevaultCanyon_EventScript_RouteSign {
+    msgbox(SevenIsland_SevaultCanyon_Text_RouteSign, MSGBOX_SIGN)
+    end
+}
+
+text SevenIsland_SevaultCanyon_Text_CyndyIntro {
+    "My conditioning's in top form!$"
+}
+
+text SevenIsland_SevaultCanyon_Text_CyndyDefeat {
+    "Huh?\n"
+    "Something's not right…$"
+}
+
+text SevenIsland_SevaultCanyon_Text_CyndyPostBattle {
+    "The way I am now, I may have to\n"
+    "hold off on TRAINER TOWER…$"
+}
+
+text SevenIsland_SevaultCanyon_Text_EvanIntro {
+    "It doesn't matter if you happen to\n"
+    "have the strongest POKéMON…\p"
+    "It doesn't mean a thing if you don't\n"
+    "know how to use them properly!$"
+}
+
+text SevenIsland_SevaultCanyon_Text_EvanDefeat {
+    "You're a master at this.$"
+}
+
+text SevenIsland_SevaultCanyon_Text_EvanPostBattle {
+    "You see them every so often,\n"
+    "TRAINERS with awesome POKéMON\l"
+    "who have no idea what to do.\p"
+    "Before training POKéMON, TRAINERS\n"
+    "themselves need to grow up.$"
+}
+
+text SevenIsland_SevaultCanyon_Text_JacksonIntro {
+    "I work to protect the environment.\n"
+    "In turn, nature protects me!$"
+}
+
+text SevenIsland_SevaultCanyon_Text_JacksonDefeat {
+    "Whoa! You're tough!\n"
+    "How about protecting me?$"
+}
+
+text SevenIsland_SevaultCanyon_Text_JacksonPostBattle {
+    "From far out among the stars, our\n"
+    "planet is just a drop of water.\p"
+    "But we want to protect that drop\n"
+    "of water for everyone.$"
+}
+
+text SevenIsland_SevaultCanyon_Text_KatelynIntro {
+    "Those shoes you have are pretty\n"
+    "snazzy.$"
+}
+
+text SevenIsland_SevaultCanyon_Text_KatelynDefeat {
+    "You're hot stuff in spite of your\n"
+    "cute looks.$"
+}
+
+text SevenIsland_SevaultCanyon_Text_KatelynPostBattle {
+    "Your mom bought those snazzy\n"
+    "RUNNING SHOES for you?\p"
+    "She must adore you.$"
+}
+
+text SevenIsland_SevaultCanyon_Text_LeroyIntro {
+    "You look strong.\n"
+    "Let me battle you, please!$"
+}
+
+text SevenIsland_SevaultCanyon_Text_LeroyDefeat {
+    "I knew it!\n"
+    "You're as tough as I thought!$"
+}
+
+text SevenIsland_SevaultCanyon_Text_LeroyPostBattle {
+    "The way you battle has given me\n"
+    "a lot of useful data.\p"
+    "Thanks so much!$"
+}
+
+text SevenIsland_SevaultCanyon_Text_MichelleIntro {
+    "I was given the best possible\n"
+    "education to become this strong.\p"
+    "I don't want to lose to anyone!$"
+}
+
+text SevenIsland_SevaultCanyon_Text_MichelleDefeat {
+    "Thank you. I feel like I've been\n"
+    "set free by losing to you.$"
+}
+
+text SevenIsland_SevaultCanyon_Text_MichellePostBattle {
+    "For some reason, I get furious\n"
+    "over the slightest thing.\p"
+    "I'll calm myself by breathing\n"
+    "deeply.$"
+}
+
+text SevenIsland_SevaultCanyon_Text_LexIntro {
+    "LEX: My darling NYA, together\n"
+    "we could win!$"
+}
+
+text SevenIsland_SevaultCanyon_Text_LexDefeat {
+    "LEX: I seem to have been too\n"
+    "careless…$"
+}
+
+text SevenIsland_SevaultCanyon_Text_LexPostBattle {
+    "LEX: I think it was a good\n"
+    "experience for NYA.\p"
+    "You have my gratitude.$"
+}
+
+text SevenIsland_SevaultCanyon_Text_LexNotEnoughMons {
+    "LEX: May I ask you to battle the\n"
+    "both of us at the same time?$"
+}
+
+text SevenIsland_SevaultCanyon_Text_NyaIntro {
+    "NYA: I'll do my best so I won't\n"
+    "drag down my mentor, LEX!$"
+}
+
+text SevenIsland_SevaultCanyon_Text_NyaDefeat {
+    "NYA: Oh, no…\n"
+    "I'm so sorry, I…$"
+}
+
+text SevenIsland_SevaultCanyon_Text_NyaPostBattle {
+    "NYA: I think I'm going to need\n"
+    "much more seasoning and tutoring\l"
+    "under LEX…\p"
+    "…So, LEX, please, may I stay with\n"
+    "you like this?$"
+}
+
+text SevenIsland_SevaultCanyon_Text_NyaNotEnoughMons {
+    "NYA: I'm sorry, but may we battle\n"
+    "in two-on-two style?$"
+}
+
+text SevenIsland_SevaultCanyon_Text_RouteSign {
+    "SEVAULT CANYON\n"
+    "TANOBY RUINS AHEAD$"
+}
+
+text SevenIsland_SevaultCanyon_Text_BrunoTrainedWithBrawly {
+    "Training by oneself is certainly\n"
+    "not a bad thing.\p"
+    "But it's also not bad to aim for\n"
+    "the top with a partner.\p"
+    "Even BRUNO…\n"
+    "He trained with a fellow by the\l"
+    "name of BRAWLY before.$"
+}

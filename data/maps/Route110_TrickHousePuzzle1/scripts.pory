@@ -1,0 +1,93 @@
+mapscripts Route110_TrickHousePuzzle1_MapScripts {
+    MAP_SCRIPT_ON_LOAD: Route110_TrickHousePuzzle1_OnLoad
+}
+
+script Route110_TrickHousePuzzle1_OnLoad {
+    if (var(VAR_TRICK_HOUSE_PUZZLE_1_STATE) == 2) goto(Route110_TrickHousePuzzle1_EventScript_OpenDoor)
+    end
+}
+
+script Route110_TrickHousePuzzle1_EventScript_OpenDoor {
+    setmetatile(13, 1, METATILE_TrickHousePuzzle_Stairs_Down, FALSE)
+    end
+}
+
+script Route110_TrickHousePuzzle1_EventScript_Scroll {
+    lockall
+    if (var(VAR_TRICK_HOUSE_PUZZLE_1_STATE) == 0) goto(Route110_TrickHousePuzzle1_EventScript_FoundScroll)
+    goto(Route110_TrickHousePuzzle_EventScript_ReadScrollAgain)
+    end
+}
+
+script Route110_TrickHousePuzzle1_EventScript_FoundScroll {
+    setvar(VAR_TRICK_HOUSE_PUZZLE_1_STATE, 1)
+    goto(Route110_TrickHousePuzzle_EventScript_FoundScroll)
+    end
+}
+
+script Route110_TrickHousePuzzle1_EventScript_Sally {
+    trainerbattle_single(TRAINER_SALLY, Route110_TrickHousePuzzle1_Text_SallyIntro, Route110_TrickHousePuzzle1_Text_SallyDefeat)
+    msgbox(Route110_TrickHousePuzzle1_Text_SallyPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route110_TrickHousePuzzle1_EventScript_Eddie {
+    trainerbattle_single(TRAINER_EDDIE, Route110_TrickHousePuzzle1_Text_EddieIntro, Route110_TrickHousePuzzle1_Text_EddieDefeat)
+    msgbox(Route110_TrickHousePuzzle1_Text_EddiePostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route110_TrickHousePuzzle1_EventScript_Robin {
+    trainerbattle_single(TRAINER_ROBIN, Route110_TrickHousePuzzle1_Text_RobinIntro, Route110_TrickHousePuzzle1_Text_RobinDefeat)
+    msgbox(Route110_TrickHousePuzzle1_Text_RobinPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text Route110_TrickHousePuzzle1_Text_WroteSecretCodeLockOpened {
+    "{PLAYER} wrote down the secret code\n"
+    "on the door.\p"
+    "“TRICK MASTER is fabulous.”\n"
+    "… … … … … … … …\p"
+    "The lock clicked open!$"
+}
+
+text Route110_TrickHousePuzzle1_Text_SallyIntro {
+    "I'll hack and slash my way to victory\n"
+    "with the CUT we just learned!$"
+}
+
+text Route110_TrickHousePuzzle1_Text_SallyDefeat {
+    "Why are you so serious?$"
+}
+
+text Route110_TrickHousePuzzle1_Text_SallyPostBattle {
+    "I never get tired of hacking\n"
+    "and slashing!$"
+}
+
+text Route110_TrickHousePuzzle1_Text_EddieIntro {
+    "I wandered into this weird house\n"
+    "by accident…$"
+}
+
+text Route110_TrickHousePuzzle1_Text_EddieDefeat {
+    "And now I've lost…$"
+}
+
+text Route110_TrickHousePuzzle1_Text_EddiePostBattle {
+    "I lost my way, I lost a battle, and I'm\n"
+    "now even more lost… I can't get out…$"
+}
+
+text Route110_TrickHousePuzzle1_Text_RobinIntro {
+    "Just who is the TRICK MASTER?$"
+}
+
+text Route110_TrickHousePuzzle1_Text_RobinDefeat {
+    "I lost while I was lost in thought!$"
+}
+
+text Route110_TrickHousePuzzle1_Text_RobinPostBattle {
+    "You're strong!\n"
+    "Just who are you?$"
+}

@@ -1,0 +1,59 @@
+mapscripts SafariZone_SecretHouse_Frlg_MapScripts {}
+
+script SafariZone_SecretHouse_EventScript_Attendant {
+    lock
+    faceplayer
+    if (flag(FLAG_GOT_HM03)) goto(SafariZone_SecretHouse_EventScript_ExplainSurf)
+    msgbox(SafariZone_SecretHouse_Text_CongratsYouveWon)
+    checkitemspace(ITEM_HM03)
+    if (var(VAR_RESULT) == FALSE) goto(SafariZone_SecretHouse_EventScript_NoRoomForHM03)
+    giveitem_msg(SafariZone_SecretHouse_Text_ReceivedHM03FromAttendant, ITEM_HM03)
+    msgbox(SafariZone_SecretHouse_Text_ExplainSurf)
+    setflag(FLAG_GOT_HM03)
+    release
+    end
+}
+
+script SafariZone_SecretHouse_EventScript_NoRoomForHM03 {
+    msgbox(SafariZone_SecretHouse_Text_DontHaveRoomForPrize)
+    release
+    end
+}
+
+script SafariZone_SecretHouse_EventScript_ExplainSurf {
+    msgbox(SafariZone_SecretHouse_Text_ExplainSurf)
+    release
+    end
+}
+
+text SafariZone_SecretHouse_Text_CongratsYouveWon {
+    "Ah! Finally!\p"
+    "You're the first person to reach\n"
+    "the SECRET HOUSE!\p"
+    "Although I made a campaign\n"
+    "for our grand opening,\p"
+    "I was getting worried that no one\n"
+    "would win our campaign prize.\p"
+    "Congratulations!\n"
+    "You have won!$"
+}
+
+text SafariZone_SecretHouse_Text_ReceivedHM03FromAttendant {
+    "{PLAYER} received HM03\n"
+    "from the attendant!$"
+}
+
+text SafariZone_SecretHouse_Text_ExplainSurf {
+    "HM03 is SURF.\p"
+    "POKéMON will be able to ferry you\n"
+    "across water using it.\p"
+    "And, this HM isn't disposable, so\n"
+    "you can use it over and over.\p"
+    "You're super lucky for winning this\n"
+    "fabulous prize!$"
+}
+
+text SafariZone_SecretHouse_Text_DontHaveRoomForPrize {
+    "You don't have room for this\n"
+    "fabulous prize!$"
+}

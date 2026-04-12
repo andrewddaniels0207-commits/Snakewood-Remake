@@ -1,0 +1,747 @@
+mapscripts MossdeepCity_Gym_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: MossdeepCity_Gym_OnTransition
+    MAP_SCRIPT_ON_LOAD: MossdeepCity_Gym_OnLoad
+}
+
+script MossdeepCity_Gym_OnTransition {
+    setflag(FLAG_TEMP_HIDE_FOLLOWER)
+    end
+}
+
+script MossdeepCity_Gym_OnLoad {
+    if (flag(FLAG_MOSSDEEP_GYM_SWITCH_1)) goto(MossdeepCity_Gym_EventScript_SetSwitch1Metatiles)
+    goto(MossdeepCity_Gym_EventScript_CheckSwitch2)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_CheckSwitch2 {
+    if (flag(FLAG_MOSSDEEP_GYM_SWITCH_2)) goto(MossdeepCity_Gym_EventScript_SetSwitch2Metatiles)
+    goto(MossdeepCity_Gym_EventScript_CheckSwitch3)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_CheckSwitch3 {
+    if (flag(FLAG_MOSSDEEP_GYM_SWITCH_3)) goto(MossdeepCity_Gym_EventScript_SetSwitch3Metatiles)
+    goto(MossdeepCity_Gym_EventScript_CheckSwitch4)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_CheckSwitch4 {
+    if (flag(FLAG_MOSSDEEP_GYM_SWITCH_4)) goto(MossdeepCity_Gym_EventScript_SetSwitch4Metatiles)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_SetSwitch1Metatiles {
+    setmetatile(5, 5, METATILE_RSMossdeepGym_RedArrow_Right, FALSE)
+    setmetatile(2, 7, METATILE_RSMossdeepGym_Switch_Down, TRUE)
+    goto(MossdeepCity_Gym_EventScript_CheckSwitch2)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_SetSwitch2Metatiles {
+    setmetatile(8, 14, METATILE_RSMossdeepGym_RedArrow_Right, FALSE)
+    setmetatile(8, 10, METATILE_RSMossdeepGym_Switch_Down, TRUE)
+    goto(MossdeepCity_Gym_EventScript_CheckSwitch3)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_SetSwitch3Metatiles {
+    setmetatile(15, 17, METATILE_RSMossdeepGym_RedArrow_Left, FALSE)
+    setmetatile(17, 15, METATILE_RSMossdeepGym_Switch_Down, TRUE)
+    goto(MossdeepCity_Gym_EventScript_CheckSwitch4)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_SetSwitch4Metatiles {
+    setmetatile(1, 23, METATILE_RSMossdeepGym_RedArrow_Up, FALSE)
+    setmetatile(5, 24, METATILE_RSMossdeepGym_Switch_Down, TRUE)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_TateAndLiza {
+    trainerbattle_double(TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_TateAndLizaIntro, MossdeepCity_Gym_Text_TateAndLizaDefeat, MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons, MossdeepCity_Gym_EventScript_TateAndLizaDefeated, NO_MUSIC)
+    specialvar(VAR_RESULT, ShouldTryRematchBattle)
+    if (var(VAR_RESULT) == TRUE) goto(MossdeepCity_Gym_EventScript_TateAndLizaRematch)
+    if (!flag(FLAG_RECEIVED_TM_CALM_MIND)) goto(MossdeepCity_Gym_EventScript_GiveCalmMind2)
+    msgbox(MossdeepCity_Gym_Text_TateAndLizaPostBattle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MossdeepCity_Gym_EventScript_TateAndLizaDefeated {
+    message(MossdeepCity_Gym_Text_ReceivedMindBadge)
+    waitmessage()
+    call(Common_EventScript_PlayGymBadgeFanfare)
+    msgbox(MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis, MSGBOX_DEFAULT)
+    setflag(FLAG_DEFEATED_MOSSDEEP_GYM)
+    setflag(FLAG_BADGE07_GET)
+    setflag(FLAG_HIDE_AQUA_HIDEOUT_GRUNTS)
+    clearflag(FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY)
+    clearflag(FLAG_UNKNOWN_0x393)
+    setvar(VAR_0x8008, 7)
+    call(Common_EventScript_SetGymTrainers)
+    clearflag(FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS)
+    clearflag(FLAG_HIDE_MOSSDEEP_CITY_TEAM_MAGMA)
+    clearflag(FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA)
+    clearflag(FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_TEAM_MAGMA)
+    clearflag(FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_STEVEN)
+    setvar(VAR_MOSSDEEP_CITY_STATE, 1)
+    setflag(FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_STEVEN)
+    setvar(VAR_MOSSDEEP_SPACE_CENTER_STATE, 1)
+    call(MossdeepCity_Gym_EventScript_GiveCalmMind)
+    closemessage
+    delay(30)
+    playfanfare(MUS_REGISTER_MATCH_CALL)
+    msgbox(MossdeepCity_Gym_Text_RegisteredTateAndLiza, MSGBOX_DEFAULT)
+    waitfanfare()
+    closemessage
+    delay(30)
+    setflag(FLAG_ENABLE_TATE_AND_LIZA_MATCH_CALL)
+    release
+    end
+}
+
+script MossdeepCity_Gym_EventScript_GiveCalmMind2 {
+    giveitem(ITEM_TM_CALM_MIND)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    msgbox(MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT)
+    setflag(FLAG_RECEIVED_TM_CALM_MIND)
+    release
+    end
+}
+
+script MossdeepCity_Gym_EventScript_GiveCalmMind {
+    giveitem(ITEM_TM_CALM_MIND)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_BagIsFull)
+    msgbox(MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT)
+    setflag(FLAG_RECEIVED_TM_CALM_MIND)
+    return
+}
+
+script MossdeepCity_Gym_EventScript_TateAndLizaRematch {
+    trainerbattle_rematch_double(TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_TateAndLizaPreRematch, MossdeepCity_Gym_Text_TateAndLizaRematchDefeat, MossdeepCity_Gym_Text_TateAndLizaRematchNeedTwoMons)
+    msgbox(MossdeepCity_Gym_Text_TateAndLizaPostRematch, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_Switch1 {
+    lockall
+    if (flag(FLAG_MOSSDEEP_GYM_SWITCH_1)) goto(MossdeepCity_Gym_EventScript_ClearSwitch1)
+    setflag(FLAG_MOSSDEEP_GYM_SWITCH_1)
+    applymovement(LOCALID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse)
+    waitmovement(0)
+    setmetatile(5, 5, METATILE_RSMossdeepGym_RedArrow_Right, FALSE)
+    setmetatile(2, 7, METATILE_RSMossdeepGym_Switch_Down, TRUE)
+    goto(MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed {
+    special(DrawWholeMapView)
+    playse(SE_CLICK)
+    releaseall
+    end
+}
+
+script MossdeepCity_Gym_EventScript_ClearSwitch1 {
+    clearflag(FLAG_MOSSDEEP_GYM_SWITCH_1)
+    applymovement(LOCALID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse)
+    waitmovement(0)
+    setmetatile(5, 5, METATILE_RSMossdeepGym_RedArrow_Left, FALSE)
+    setmetatile(2, 7, METATILE_RSMossdeepGym_Switch_Up, TRUE)
+    goto(MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_Switch2 {
+    lockall
+    if (flag(FLAG_MOSSDEEP_GYM_SWITCH_2)) goto(MossdeepCity_Gym_EventScript_ClearSwitch2)
+    setflag(FLAG_MOSSDEEP_GYM_SWITCH_2)
+    applymovement(LOCALID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse)
+    waitmovement(0)
+    setmetatile(8, 14, METATILE_RSMossdeepGym_RedArrow_Right, FALSE)
+    setmetatile(8, 10, METATILE_RSMossdeepGym_Switch_Down, TRUE)
+    goto(MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_ClearSwitch2 {
+    clearflag(FLAG_MOSSDEEP_GYM_SWITCH_2)
+    applymovement(LOCALID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse)
+    waitmovement(0)
+    setmetatile(8, 14, METATILE_RSMossdeepGym_RedArrow_Down, FALSE)
+    setmetatile(8, 10, METATILE_RSMossdeepGym_Switch_Up, TRUE)
+    goto(MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_Switch3 {
+    lockall
+    if (flag(FLAG_MOSSDEEP_GYM_SWITCH_3)) goto(MossdeepCity_Gym_EventScript_ClearSwitch3)
+    setflag(FLAG_MOSSDEEP_GYM_SWITCH_3)
+    applymovement(LOCALID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse)
+    waitmovement(0)
+    setmetatile(15, 17, METATILE_RSMossdeepGym_RedArrow_Left, FALSE)
+    setmetatile(17, 15, METATILE_RSMossdeepGym_Switch_Down, TRUE)
+    goto(MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_ClearSwitch3 {
+    clearflag(FLAG_MOSSDEEP_GYM_SWITCH_3)
+    applymovement(LOCALID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse)
+    waitmovement(0)
+    setmetatile(15, 17, METATILE_RSMossdeepGym_RedArrow_Right, FALSE)
+    setmetatile(17, 15, METATILE_RSMossdeepGym_Switch_Up, TRUE)
+    goto(MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_Switch4 {
+    lockall
+    if (flag(FLAG_MOSSDEEP_GYM_SWITCH_4)) goto(MossdeepCity_Gym_EventScript_ClearSwitch4)
+    setflag(FLAG_MOSSDEEP_GYM_SWITCH_4)
+    applymovement(LOCALID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse)
+    waitmovement(0)
+    setmetatile(1, 23, METATILE_RSMossdeepGym_RedArrow_Up, FALSE)
+    setmetatile(5, 24, METATILE_RSMossdeepGym_Switch_Down, TRUE)
+    goto(MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_ClearSwitch4 {
+    clearflag(FLAG_MOSSDEEP_GYM_SWITCH_4)
+    applymovement(LOCALID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse)
+    waitmovement(0)
+    setmetatile(1, 23, METATILE_RSMossdeepGym_RedArrow_Right, FALSE)
+    setmetatile(5, 24, METATILE_RSMossdeepGym_Switch_Up, TRUE)
+    goto(MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_WarpToEntrance {
+    lockall
+    warpmossdeepgym(MAP_MOSSDEEP_CITY_GYM, 7, 30)
+    waitstate
+    releaseall
+    end
+}
+
+script MossdeepCity_Gym_EventScript_Preston {
+    trainerbattle_single(TRAINER_PRESTON, MossdeepCity_Gym_Text_PrestonIntro, MossdeepCity_Gym_Text_PrestonDefeat)
+    msgbox(MossdeepCity_Gym_Text_PrestonPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_Virgil {
+    trainerbattle_single(TRAINER_VIRGIL, MossdeepCity_Gym_Text_VirgilIntro, MossdeepCity_Gym_Text_VirgilDefeat)
+    msgbox(MossdeepCity_Gym_Text_VirgilPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_Blake {
+    trainerbattle_single(TRAINER_BLAKE, MossdeepCity_Gym_Text_BlakeIntro, MossdeepCity_Gym_Text_BlakeDefeat)
+    msgbox(MossdeepCity_Gym_Text_BlakePostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_Hannah {
+    trainerbattle_single(TRAINER_HANNAH, MossdeepCity_Gym_Text_HannahIntro, MossdeepCity_Gym_Text_HannahDefeat)
+    msgbox(MossdeepCity_Gym_Text_HannahPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_Samantha {
+    trainerbattle_single(TRAINER_SAMANTHA, MossdeepCity_Gym_Text_SamanthaIntro, MossdeepCity_Gym_Text_SamanthaDefeat)
+    msgbox(MossdeepCity_Gym_Text_SamanthaPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_Maura {
+    trainerbattle_single(TRAINER_MAURA, MossdeepCity_Gym_Text_MauraIntro, MossdeepCity_Gym_Text_MauraDefeat)
+    msgbox(MossdeepCity_Gym_Text_MauraPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_Sylvia {
+    trainerbattle_single(TRAINER_SYLVIA, MossdeepCity_Gym_Text_SylviaIntro, MossdeepCity_Gym_Text_SylviaDefeat)
+    msgbox(MossdeepCity_Gym_Text_SylviaPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_Nate {
+    trainerbattle_single(TRAINER_NATE, MossdeepCity_Gym_Text_NateIntro, MossdeepCity_Gym_Text_NateDefeat)
+    msgbox(MossdeepCity_Gym_Text_NatePostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_Macey {
+    trainerbattle_single(TRAINER_MACEY, MossdeepCity_Gym_Text_MaceyIntro, MossdeepCity_Gym_Text_MaceyDefeat)
+    msgbox(MossdeepCity_Gym_Text_MaceyPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_Clifford {
+    trainerbattle_single(TRAINER_CLIFFORD, MossdeepCity_Gym_Text_CliffordIntro, MossdeepCity_Gym_Text_CliffordDefeat)
+    msgbox(MossdeepCity_Gym_Text_CliffordPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_Nicholas {
+    trainerbattle_single(TRAINER_NICHOLAS, MossdeepCity_Gym_Text_NicholasIntro, MossdeepCity_Gym_Text_NicholasDefeat)
+    msgbox(MossdeepCity_Gym_Text_NicholasPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_Kathleen {
+    trainerbattle_single(TRAINER_KATHLEEN, MossdeepCity_Gym_Text_KathleenIntro, MossdeepCity_Gym_Text_KathleenDefeat)
+    msgbox(MossdeepCity_Gym_Text_KathleenPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_GymGuide {
+    lock
+    faceplayer
+    if (flag(FLAG_DEFEATED_MOSSDEEP_GYM)) goto(MossdeepCity_Gym_EventScript_GymGuidePostVictory)
+    msgbox(MossdeepCity_Gym_Text_GymGuideAdvice, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MossdeepCity_Gym_EventScript_GymGuidePostVictory {
+    msgbox(MossdeepCity_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+movement MossdeepCity_Gym_Movement_WaitAfterSwitchUse {
+    delay_16
+    delay_16
+    step_end
+}
+
+script MossdeepCity_Gym_EventScript_LeftGymStatue {
+    lockall
+    if (flag(FLAG_BADGE07_GET)) goto(MossdeepCity_Gym_EventScript_GymStatueCertified)
+    goto(MossdeepCity_Gym_EventScript_GymStatue)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_RightGymStatue {
+    lockall
+    if (flag(FLAG_BADGE07_GET)) goto(MossdeepCity_Gym_EventScript_GymStatueCertified)
+    goto(MossdeepCity_Gym_EventScript_GymStatue)
+    end
+}
+
+script MossdeepCity_Gym_EventScript_GymStatueCertified {
+    msgbox(MossdeepCity_Gym_Text_GymStatueCertified, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script MossdeepCity_Gym_EventScript_GymStatue {
+    msgbox(MossdeepCity_Gym_Text_GymStatue, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script MossdeepCity_Gym_EventScript_YellowFloorSwitch {
+    playse(SE_SWITCH)
+    waitse()
+    playse(SE_REPEL)
+    initrotatingtilepuzzle(FALSE)
+    moverotatingtileobjects(0)
+    waitmovement(0)
+    turnrotatingtileobjects()
+    waitmovement(0)
+    freerotatingtilepuzzle()
+    end
+}
+
+script MossdeepCity_Gym_EventScript_BlueFloorSwitch {
+    playse(SE_SWITCH)
+    waitse()
+    playse(SE_REPEL)
+    initrotatingtilepuzzle(FALSE)
+    moverotatingtileobjects(1)
+    waitmovement(0)
+    turnrotatingtileobjects()
+    waitmovement(0)
+    freerotatingtilepuzzle()
+    end
+}
+
+script MossdeepCity_Gym_EventScript_GreenFloorSwitch {
+    playse(SE_SWITCH)
+    waitse()
+    playse(SE_REPEL)
+    initrotatingtilepuzzle(FALSE)
+    moverotatingtileobjects(2)
+    waitmovement(0)
+    turnrotatingtileobjects()
+    waitmovement(0)
+    freerotatingtilepuzzle()
+    end
+}
+
+script MossdeepCity_Gym_EventScript_PurpleFloorSwitch {
+    playse(SE_SWITCH)
+    waitse()
+    playse(SE_REPEL)
+    initrotatingtilepuzzle(FALSE)
+    moverotatingtileobjects(3)
+    waitmovement(0)
+    turnrotatingtileobjects()
+    waitmovement(0)
+    freerotatingtilepuzzle()
+    end
+}
+
+script MossdeepCity_Gym_EventScript_RedFloorSwitch {
+    playse(SE_SWITCH)
+    waitse()
+    playse(SE_REPEL)
+    initrotatingtilepuzzle(FALSE)
+    moverotatingtileobjects(4)
+    waitmovement(0)
+    turnrotatingtileobjects()
+    waitmovement(0)
+    freerotatingtilepuzzle()
+    end
+}
+
+text MossdeepCity_Gym_Text_GymGuideAdvice {
+    "Yo, how's it going, CHAMPION-bound\n"
+    "{PLAYER}?\p"
+    "The GYM LEADERS here use\n"
+    "PSYCHIC-type POKéMON.\p"
+    "If you go up against them with\n"
+    "FIGHTING- or POISON-type POKéMON,\l"
+    "they'll inflict horrible damage!\p"
+    "Plus, they'll come at you with\n"
+    "outstanding combination attacks.\p"
+    "If you want to win, you'll need to show\n"
+    "them how tight you are with your\l"
+    "POKéMON. Go for it!$"
+}
+
+text MossdeepCity_Gym_Text_GymGuidePostVictory {
+    "Wow, you're astounding!\n"
+    "You're one great TRAINER!$"
+}
+
+text MossdeepCity_Gym_Text_PrestonIntro {
+    "Battles hinge on the strength of your\n"
+    "spirit! The weak-spirited will never win!$"
+}
+
+text MossdeepCity_Gym_Text_PrestonDefeat {
+    "I lost!\n"
+    "I must temper my spirit again!$"
+}
+
+text MossdeepCity_Gym_Text_PrestonPostBattle {
+    "The indecisive lose.\n"
+    "That's my warning to you.$"
+}
+
+text MossdeepCity_Gym_Text_VirgilIntro {
+    "Let me see your talent!$"
+}
+
+text MossdeepCity_Gym_Text_VirgilDefeat {
+    "You possess spectacular talent!$"
+}
+
+text MossdeepCity_Gym_Text_VirgilPostBattle {
+    "If there are prodigies in the world,\n"
+    "then our GYM LEADERS are them!\p"
+    "However, you may be even more talented\n"
+    "than them…$"
+}
+
+text MossdeepCity_Gym_Text_BlakeIntro {
+    "Fufufufu… Watch me levitate a POKé\n"
+    "BALL telekinetically!\p"
+    "Wrooooooooaaaar!\n"
+    "… … … … … … …\p"
+    "Sometimes, I'm out of sync…$"
+}
+
+text MossdeepCity_Gym_Text_BlakeDefeat {
+    "My POKéMON battling skills are out\n"
+    "of sync, too!$"
+}
+
+text MossdeepCity_Gym_Text_BlakePostBattle {
+    "A POKé BALL was too heavy to lift\n"
+    "psychically. But this dust bunny…\p"
+    "Whoooooooooooooooh!\n"
+    "… … … … … …\p"
+    "No, I'm not cheating!\n"
+    "I didn't blow on it! Honestly!$"
+}
+
+text MossdeepCity_Gym_Text_HannahIntro {
+    "When you lose to me, don't be too hard\n"
+    "on yourself.\p"
+    "It's not that you're weak--I'm just\n"
+    "too strong!$"
+}
+
+text MossdeepCity_Gym_Text_HannahDefeat {
+    "You're just too strong!$"
+}
+
+text MossdeepCity_Gym_Text_HannahPostBattle {
+    "I'm not going to get down on myself for\n"
+    "losing. I just need to train harder.\p"
+    "Positive thinking--that's my strong\n"
+    "point!$"
+}
+
+text MossdeepCity_Gym_Text_SamanthaIntro {
+    "I see it…\n"
+    "I see your future…\p"
+    "If you can beat me, I will tell you\n"
+    "your future!$"
+}
+
+text MossdeepCity_Gym_Text_SamanthaDefeat {
+    "I surrender!$"
+}
+
+text MossdeepCity_Gym_Text_SamanthaPostBattle {
+    "You will wage a terrifically intense\n"
+    "battle with our GYM LEADERS…\p"
+    "The result…\n"
+    "You won't hear it from me!$"
+}
+
+text MossdeepCity_Gym_Text_MauraIntro {
+    "The roads you have traveled…\n"
+    "What you have experienced…\p"
+    "Come at me with everything you've\n"
+    "learned!$"
+}
+
+text MossdeepCity_Gym_Text_MauraDefeat {
+    "You've traveled a path of greatness!$"
+}
+
+text MossdeepCity_Gym_Text_MauraPostBattle {
+    "A bright future awaits those who have\n"
+    "worked diligently.\p"
+    "For those who lazed idly, there is\n"
+    "only despair at the end.\p"
+    "What goes around comes around…$"
+}
+
+text MossdeepCity_Gym_Text_SylviaIntro {
+    "Even at the risk of life, I will win\n"
+    "this battle!$"
+}
+
+text MossdeepCity_Gym_Text_SylviaDefeat {
+    "What you do…\n"
+    "It horrifies me…$"
+}
+
+text MossdeepCity_Gym_Text_SylviaPostBattle {
+    "How dare you beat me…\p"
+    "It won't be my fault if something\n"
+    "horrible befalls you…$"
+}
+
+text MossdeepCity_Gym_Text_NateIntro {
+    "Hohoho.\p"
+    "You need me to show you how tenacious\n"
+    "the PSYCHIC type can be.$"
+}
+
+text MossdeepCity_Gym_Text_NateDefeat {
+    "Oh! My, my!\n"
+    "Your battle style is fantastic!$"
+}
+
+text MossdeepCity_Gym_Text_NatePostBattle {
+    "I… I don't let defeat rattle m-me,\n"
+    "however b-badly.$"
+}
+
+text MossdeepCity_Gym_Text_KathleenIntro {
+    "Let me show you a perfectly awful,\n"
+    "horrifying time!$"
+}
+
+text MossdeepCity_Gym_Text_KathleenDefeat {
+    "N-nooooo!$"
+}
+
+text MossdeepCity_Gym_Text_KathleenPostBattle {
+    "Your vitality is contagious!\n"
+    "Get away from me quickly!$"
+}
+
+text MossdeepCity_Gym_Text_CliffordIntro {
+    "I may be past my prime, but I suggest\n"
+    "you not patronize me.$"
+}
+
+text MossdeepCity_Gym_Text_CliffordDefeat {
+    "Ah, you overflow with the power\n"
+    "of youth!$"
+}
+
+text MossdeepCity_Gym_Text_CliffordPostBattle {
+    "It seems that I could not overcome\n"
+    "your youthful energy.$"
+}
+
+text MossdeepCity_Gym_Text_MaceyIntro {
+    "You're not getting through to the end!\n"
+    "Not if I can help it!$"
+}
+
+text MossdeepCity_Gym_Text_MaceyDefeat {
+    "How could you be so ludicrously\n"
+    "strong?$"
+}
+
+text MossdeepCity_Gym_Text_MaceyPostBattle {
+    "Humph! You may be strong, but you're\n"
+    "not suitable for the PSYCHIC type!\p"
+    "The way you battle is somehow brutal!$"
+}
+
+text MossdeepCity_Gym_Text_NicholasIntro {
+    "Wroooar! Have a taste of my super\n"
+    "POKéMON hard-battling power!$"
+}
+
+text MossdeepCity_Gym_Text_NicholasDefeat {
+    "Oh!\n"
+    "Done in!$"
+}
+
+text MossdeepCity_Gym_Text_NicholasPostBattle {
+    "All right! I think I'll develop a special\n"
+    "invincible POKéMON power next.$"
+}
+
+text MossdeepCity_Gym_Text_TateAndLizaIntro {
+    "TATE: Hehehe… Were you surprised?\p"
+    "LIZA: Fufufu… Were you surprised?\p"
+    "TATE: That there are two GYM LEADERS?\n"
+    "LIZA: That there are two GYM LEADERS?\p"
+    "TATE: We're twins!\n"
+    "LIZA: We're twins!\p"
+    "TATE: We don't need to talk because…\n"
+    "LIZA: We can each determine what…\p"
+    "TATE: The other is thinking…\n"
+    "LIZA: All in our minds!\p"
+    "TATE: This combination of ours…\n"
+    "LIZA: Can you beat it?$"
+}
+
+text MossdeepCity_Gym_Text_TateAndLizaDefeat {
+    "TATE: What?! Our combination…\n"
+    "LIZA: Was shattered!\p"
+    "TATE: It can't be helped. You've won…\n"
+    "LIZA: So, in recognition, take this.$"
+}
+
+text MossdeepCity_Gym_Text_ReceivedMindBadge {
+    "{PLAYER} received the MIND BADGE\n"
+    "from TATE and LIZA.$"
+}
+
+text MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis {
+    "TATE: The MIND BADGE enhances the\n"
+    "SP. ATK and SP. DEF of POKéMON.\p"
+    "LIZA: It also lets you use the HM move\n"
+    "DIVE outside of battle.\p"
+    "TATE: You should also take this, too.$"
+}
+
+text MossdeepCity_Gym_Text_ExplainCalmMind {
+    "TATE: That TM04 contains…\n"
+    "LIZA: CALM MIND!\p"
+    "TATE: It raises SP. ATK and…\n"
+    "LIZA: It raises SP. DEF!\p"
+    "TATE: It's a move that's perfect…\n"
+    "LIZA: For PSYCHIC POKéMON!\p"
+    "… … … … … …$"
+}
+
+text MossdeepCity_Gym_Text_RegisteredTateAndLiza {
+    "Registered GYM LEADERS TATE & LIZA\n"
+    "in the POKéNAV.$"
+}
+
+text MossdeepCity_Gym_Text_TateAndLizaPostBattle {
+    "TATE: Looks like the bond between you\n"
+    "and your POKéMON is far stronger than\l"
+    "the bond that we share as twins.\p"
+    "LIZA: You will become even stronger!\n"
+    "We've battled you, so we know.$"
+}
+
+text MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons {
+    "TATE: Hehehe… Were you surprised?\p"
+    "LIZA: That there are two GYM LEADERS?\p"
+    "TATE: Oops, you have only one…\n"
+    "LIZA: POKéMON that can battle.\p"
+    "TATE: We can't battle that way!\p"
+    "LIZA: If you want to challenge us,\n"
+    "bring some more POKéMON.$"
+}
+
+text MossdeepCity_Gym_Text_GymStatue {
+    "MOSSDEEP CITY POKéMON GYM$"
+}
+
+text MossdeepCity_Gym_Text_GymStatueCertified {
+    "MOSSDEEP CITY POKéMON GYM\p"
+    "LIZA AND TATE'S CERTIFIED TRAINERS:\n"
+    "{PLAYER}$"
+}
+
+text MossdeepCity_Gym_Text_TateAndLizaPreRematch {
+    "TATE: POKéMON…\n"
+    "LIZA: POKéMON…\p"
+    "TATE: By changing the party's mix…\n"
+    "LIZA: The battle style changes.\p"
+    "TATE: But me…\n"
+    "LIZA: But me…\p"
+    "TATE: I'll always be with LIZA!\n"
+    "LIZA: I'll always be with TATE!\p"
+    "TATE: Our combination…\n"
+    "LIZA: We'll show you again and again!$"
+}
+
+text MossdeepCity_Gym_Text_TateAndLizaRematchDefeat {
+    "TATE: You and your POKéMON…\n"
+    "LIZA: It's as if you were siblings!$"
+}
+
+text MossdeepCity_Gym_Text_TateAndLizaPostRematch {
+    "TATE: You can knock us down,\n"
+    "but we'll never stay down!\p"
+    "LIZA: Because the two of us,\n"
+    "we always support each other!$"
+}
+
+text MossdeepCity_Gym_Text_TateAndLizaRematchNeedTwoMons {
+    "TATE: You're back again…\n"
+    "LIZA: You're back again…\p"
+    "TATE: To give us a rematch.\n"
+    "LIZA: To give us a rematch.\p"
+    "TATE: But…\n"
+    "LIZA: For our match…\p"
+    "TATE: You brought just one POKéMON!\n"
+    "LIZA: You brought just one POKéMON!\p"
+    "TATE: We need you to bring at least…\n"
+    "LIZA: Two POKéMON when you come back.$"
+}

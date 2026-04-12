@@ -1,0 +1,28 @@
+mapscripts LavaridgeTown_House_MapScripts {}
+
+script LavaridgeTown_House_EventScript_OldMan {
+    msgbox(LavaridgeTown_House_Text_WifeWarmingEggInHotSprings, MSGBOX_NPC)
+    end
+}
+
+script LavaridgeTown_House_EventScript_Zigzagoon {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_ZIGZAGOON, CRY_MODE_NORMAL)
+    msgbox(LavaridgeTown_House_Text_Zigzagoon, MSGBOX_DEFAULT)
+    waitmoncry()
+    release
+    end
+}
+
+text LavaridgeTown_House_Text_WifeWarmingEggInHotSprings {
+    "My wife's warming an EGG in the hot\n"
+    "springs. This is what she told me.\p"
+    "She left two POKéMON with the DAY CARE.\n"
+    "And they discovered that EGG!$"
+}
+
+text LavaridgeTown_House_Text_Zigzagoon {
+    "ZIGZAGOON: Pshoo!$"
+}

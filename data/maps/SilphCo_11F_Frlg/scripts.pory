@@ -1,0 +1,262 @@
+mapscripts SilphCo_11F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_LOAD: SilphCo_11F_OnLoad
+}
+
+script SilphCo_11F_OnLoad {
+    if (!flag(FLAG_SILPH_11F_DOOR)) call(EventScript_Close11FDoor)
+    end
+}
+
+script SilphCo_11F_EventScript_President {
+    lock
+    faceplayer
+    if (flag(FLAG_GOT_MASTER_BALL_FROM_SILPH)) goto(SilphCo_11F_EventScript_AlreadyGotMasterBall)
+    checkplayergender()
+    if (var(VAR_RESULT) == MALE) call(SilphCo_11F_EventScript_PresidentThanksMale)
+    if (var(VAR_RESULT) == FEMALE) call(SilphCo_11F_EventScript_PresidentThanksFemale)
+    checkitemspace(ITEM_MASTER_BALL)
+    if (var(VAR_RESULT) == FALSE) goto(SilphCo_11F_EventScript_NoRoomForMasterBall)
+    giveitem_msg(SilphCo_11F_Text_ObtainedMasterBallFromPresident, ITEM_MASTER_BALL, 1, MUS_RG_OBTAIN_KEY_ITEM)
+    msgbox(SilphCo_11F_Text_ThatsOurSecretPrototype)
+    setflag(FLAG_GOT_MASTER_BALL_FROM_SILPH)
+    release
+    end
+}
+
+script SilphCo_11F_EventScript_PresidentThanksMale {
+    msgbox(SilphCo_11F_Text_ThanksForSavingMeDearBoy)
+    return
+}
+
+script SilphCo_11F_EventScript_PresidentThanksFemale {
+    msgbox(SilphCo_11F_Text_ThanksForSavingMeDearGirl)
+    return
+}
+
+script SilphCo_11F_EventScript_NoRoomForMasterBall {
+    msgbox(SilphCo_11F_Text_YouHaveNoRoomForThis)
+    release
+    end
+}
+
+script SilphCo_11F_EventScript_AlreadyGotMasterBall {
+    msgbox(SilphCo_11F_Text_ThatsOurSecretPrototype)
+    release
+    end
+}
+
+script SilphCo_11F_EventScript_Secretary {
+    msgbox(SilphCo_11F_Text_ThanksForRescuingUs, MSGBOX_NPC)
+    end
+}
+
+script SilphCo_11F_EventScript_GiovanniTriggerLeft {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    goto(SilphCo_11F_EventScript_BattleGiovanni)
+    end
+}
+
+script SilphCo_11F_EventScript_GiovanniTriggerRight {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    goto(SilphCo_11F_EventScript_BattleGiovanni)
+    end
+}
+
+script SilphCo_11F_EventScript_BattleGiovanni {
+    textcolor(NPC_TEXT_COLOR_MALE)
+    applymovement(LOCALID_SILPH_CO_GIOVANNI, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    delay(25)
+    msgbox(SilphCo_11F_Text_GiovanniIntro)
+    closemessage
+    if (var(VAR_TEMP_1) == 0) call(SilphCo_11F_EventScript_GiovanniApproachLeft)
+    if (var(VAR_TEMP_1) == 1) call(SilphCo_11F_EventScript_GiovanniApproachRight)
+    setvar(VAR_LAST_TALKED, LOCALID_SILPH_CO_GIOVANNI)
+    trainerbattle_no_intro(TRAINER_BOSS_GIOVANNI_2, SilphCo_11F_Text_GiovanniDefeat)
+    msgbox(SilphCo_11F_Text_GiovanniPostBattle)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_SILPH_CO_GIOVANNI)
+    removeobject(LOCALID_SILPH_CO_11F_GRUNT1)
+    removeobject(LOCALID_SILPH_CO_11F_GRUNT2)
+    fadescreen(FADE_FROM_BLACK)
+    setvar(VAR_MAP_SCENE_SILPH_CO_11F, 1)
+    setflag(FLAG_HIDE_SAFFRON_ROCKETS)
+    clearflag(FLAG_HIDE_SAFFRON_CIVILIANS)
+    releaseall
+    end
+}
+
+script SilphCo_11F_EventScript_GiovanniApproachLeft {
+    applymovement(LOCALID_SILPH_CO_GIOVANNI, SilphCo_11F_Movement_GiovanniApproachLeft)
+    applymovement(LOCALID_PLAYER, SilphCo_11F_Movement_PlayerFaceGiovanni)
+    waitmovement(0)
+    return
+}
+
+script SilphCo_11F_EventScript_GiovanniApproachRight {
+    applymovement(LOCALID_SILPH_CO_GIOVANNI, SilphCo_11F_Movement_GiovanniApproachRight)
+    waitmovement(0)
+    return
+}
+
+movement SilphCo_11F_Movement_GiovanniApproachLeft {
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_in_place_faster_left
+    step_end
+}
+
+movement SilphCo_11F_Movement_GiovanniApproachRight {
+    walk_down
+    walk_down
+    walk_down
+    step_end
+}
+
+movement SilphCo_11F_Movement_PlayerFaceGiovanni {
+    delay_16
+    delay_16
+    delay_16
+    delay_8
+    delay_4
+    walk_in_place_faster_right
+    step_end
+}
+
+script SilphCo_11F_EventScript_Monitor {
+    msgbox(SilphCo_11F_Text_MonitorHasMonsOnIt, MSGBOX_SIGN)
+    end
+}
+
+script SilphCo_11F_EventScript_FloorSign {
+    msgbox(SilphCo_11F_Text_FloorSign, MSGBOX_SIGN)
+    end
+}
+
+script SilphCo_11F_EventScript_Grunt1 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_40, SilphCo_11F_Text_Grunt1Intro, SilphCo_11F_Text_Grunt1Defeat)
+    msgbox(SilphCo_11F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SilphCo_11F_EventScript_Grunt2 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_41, SilphCo_11F_Text_Grunt2Intro, SilphCo_11F_Text_Grunt2Defeat)
+    msgbox(SilphCo_11F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text SilphCo_11F_Text_ThanksForSavingMeDearBoy {
+    "PRESIDENT: Oh, dear boy!\n"
+    "Thank you for saving SILPH.\p"
+    "I will never forget you saved us in\n"
+    "our moment of peril.\p"
+    "I have to thank you in some way.\p"
+    "Because I am rich, I can give you\n"
+    "anything.\p"
+    "Here, maybe this will do.$"
+}
+
+text SilphCo_11F_Text_ThanksForSavingMeDearGirl {
+    "PRESIDENT: Oh, dear girl!\n"
+    "Thank you for saving SILPH.\p"
+    "I will never forget you saved us in\n"
+    "our moment of peril.\p"
+    "I have to thank you in some way.\p"
+    "Because I am rich, I can give you\n"
+    "anything.\p"
+    "Here, maybe this will do.$"
+}
+
+text SilphCo_11F_Text_ObtainedMasterBallFromPresident {
+    "{PLAYER} obtained a MASTER BALL\n"
+    "from the PRESIDENT!$"
+}
+
+text SilphCo_11F_Text_ThatsOurSecretPrototype {
+    "PRESIDENT: You can't buy that\n"
+    "anywhere.\p"
+    "It's our secret prototype MASTER\n"
+    "BALL.\p"
+    "It will catch any POKéMON without\n"
+    "fail!\p"
+    "You should be quiet about using it,\n"
+    "though.$"
+}
+
+text SilphCo_11F_Text_YouHaveNoRoomForThis {
+    "You have no room for this.$"
+}
+
+text SilphCo_11F_Text_ThanksForRescuingUs {
+    "SECRETARY: Thank you for rescuing\n"
+    "all of us.\p"
+    "We, from the PRESIDENT down,\n"
+    "are indebted to you.$"
+}
+
+text SilphCo_11F_Text_GiovanniIntro {
+    "Ah, {PLAYER}!\n"
+    "So we meet again!\p"
+    "The PRESIDENT and I are discussing\n"
+    "a vital business proposition.\p"
+    "Keep your nose out of grown-up\n"
+    "matters…\p"
+    "Or, experience a world of pain!$"
+}
+
+text SilphCo_11F_Text_GiovanniDefeat {
+    "Arrgh!!\n"
+    "I lost again!?$"
+}
+
+text SilphCo_11F_Text_GiovanniPostBattle {
+    "Blast it all!\n"
+    "You ruined our plans for SILPH!\p"
+    "But, TEAM ROCKET will never fall!\p"
+    "{PLAYER}! Never forget that all\n"
+    "POKéMON exist for TEAM ROCKET!\p"
+    "I must go, but I shall return!$"
+}
+
+text SilphCo_11F_Text_Grunt2Intro {
+    "Stop right there!\n"
+    "Don't you move!$"
+}
+
+text SilphCo_11F_Text_Grunt2Defeat {
+    "Don't…\n"
+    "Please!$"
+}
+
+text SilphCo_11F_Text_Grunt2PostBattle {
+    "So, you want to see my BOSS?$"
+}
+
+text SilphCo_11F_Text_Grunt1Intro {
+    "Halt! Do you have an appointment\n"
+    "with my BOSS?$"
+}
+
+text SilphCo_11F_Text_Grunt1Defeat {
+    "Gaah!\n"
+    "Demolished!$"
+}
+
+text SilphCo_11F_Text_Grunt1PostBattle {
+    "Watch your step…\n"
+    "My BOSS likes his POKéMON tough!$"
+}
+
+text SilphCo_11F_Text_MonitorHasMonsOnIt {
+    "The monitor has POKéMON on it!$"
+}
+
+text SilphCo_11F_Text_FloorSign {
+    "SILPH CO. HEAD OFFICE\n"
+    "11F$"
+}

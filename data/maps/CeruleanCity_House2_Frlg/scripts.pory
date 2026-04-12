@@ -1,0 +1,52 @@
+mapscripts CeruleanCity_House2_Frlg_MapScripts {}
+
+script CeruleanCity_House2_EventScript_Hiker {
+    lock
+    faceplayer
+    if (flag(FLAG_GOT_TM28_FROM_ROCKET)) goto(CeruleanCity_House2_EventScript_HikerGotTM28)
+    msgbox(CeruleanCity_House2_Text_RocketsStoleTMForDig)
+    release
+    end
+}
+
+script CeruleanCity_House2_EventScript_HikerGotTM28 {
+    msgbox(CeruleanCity_House2_Text_TeachDiglettDigWithoutTM)
+    release
+    end
+}
+
+script CeruleanCity_House2_EventScript_Lass {
+    msgbox(CeruleanCity_House2_Text_TeamRocketTryingToDigIntoNoGood, MSGBOX_NPC)
+    end
+}
+
+script CeruleanCity_House2_EventScript_WallHole {
+    msgbox(CeruleanCity_House2_Text_TeamRocketLeftWayOut, MSGBOX_SIGN)
+    end
+}
+
+text CeruleanCity_House2_Text_RocketsStoleTMForDig {
+    "Those miserable ROCKETS!\p"
+    "Look what they've done to my\n"
+    "house!\p"
+    "They stole a TM for teaching\n"
+    "POKéMON how to DIG holes!\p"
+    "I was going to use it on a\n"
+    "MANKEY or a SANDSHREW…\p"
+    "That cost me a bundle, it did!$"
+}
+
+text CeruleanCity_House2_Text_TeachDiglettDigWithoutTM {
+    "I figure what's lost is lost.\p"
+    "I decided to teach DIGLETT how to\n"
+    "DIG without a TM.$"
+}
+
+text CeruleanCity_House2_Text_TeamRocketTryingToDigIntoNoGood {
+    "TEAM ROCKET must be trying to DIG\n"
+    "their way into no good!$"
+}
+
+text CeruleanCity_House2_Text_TeamRocketLeftWayOut {
+    "TEAM ROCKET left a way out!$"
+}

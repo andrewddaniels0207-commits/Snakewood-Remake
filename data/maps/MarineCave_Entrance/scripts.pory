@@ -1,0 +1,8 @@
+mapscripts MarineCave_Entrance_MapScripts {
+    MAP_SCRIPT_ON_RESUME: MarineCave_Entrance_OnResume
+}
+
+script MarineCave_Entrance_OnResume {
+    setdivewarp(MAP_UNDERWATER_MARINE_CAVE, 9, 6)
+    end
+}

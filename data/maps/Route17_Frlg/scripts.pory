@@ -1,0 +1,198 @@
+mapscripts Route17_Frlg_MapScripts {}
+
+script Route17_EventScript_ItemsNotice {
+    msgbox(Route17_Text_WatchOutForDiscardedItems, MSGBOX_SIGN)
+    end
+}
+
+script Route17_EventScript_TrainerTips1 {
+    msgbox(Route17_Text_SameSpeciesGrowDifferentRates, MSGBOX_SIGN)
+    end
+}
+
+script Route17_EventScript_TrainerTips2 {
+    msgbox(Route17_Text_PressBToStayInPlace, MSGBOX_SIGN)
+    end
+}
+
+script Route17_EventScript_RouteSign {
+    msgbox(Route17_Text_RouteSign, MSGBOX_SIGN)
+    end
+}
+
+script Route17_EventScript_BallsNotice {
+    msgbox(Route17_Text_DontThrowGameThrowBalls, MSGBOX_SIGN)
+    end
+}
+
+script Route17_EventScript_CyclingRoadSign {
+    msgbox(Route17_Text_CyclingRoadSign, MSGBOX_SIGN)
+    end
+}
+
+text Route17_Text_RaulIntro {
+    "There's no getting rich quick in\n"
+    "battling kids.$"
+}
+
+text Route17_Text_RaulDefeat {
+    "Burned out!$"
+}
+
+text Route17_Text_RaulPostBattle {
+    "You can find good stuff lying\n"
+    "around on CYCLING ROAD.\p"
+    "There's good money in picking them\n"
+    "up and selling them.$"
+}
+
+text Route17_Text_IsaiahIntro {
+    "I'm mighty proud of my bod, kiddo.\n"
+    "Come on!$"
+}
+
+text Route17_Text_IsaiahDefeat {
+    "Whoo!$"
+}
+
+text Route17_Text_IsaiahPostBattle {
+    "I could belly-bump you outta\n"
+    "here!$"
+}
+
+text Route17_Text_VirgilIntro {
+    "You heading to FUCHSIA?$"
+}
+
+text Route17_Text_VirgilDefeat {
+    "Crash and burn!$"
+}
+
+text Route17_Text_VirgilPostBattle {
+    "I love racing downhill!$"
+}
+
+text Route17_Text_BillyIntro {
+    "We're BIKERS!\n"
+    "We rule the roads, man!$"
+}
+
+text Route17_Text_BillyDefeat {
+    "Smoked!$"
+}
+
+text Route17_Text_BillyPostBattle {
+    "Are you looking for adventure?$"
+}
+
+text Route17_Text_NikolasIntro {
+    "Let VOLTORB electrify you!$"
+}
+
+text Route17_Text_NikolasDefeat {
+    "Grounded out!$"
+}
+
+text Route17_Text_NikolasPostBattle {
+    "I got my VOLTORB at the abandoned\n"
+    "POWER PLANT.$"
+}
+
+text Route17_Text_ZeekIntro {
+    "I leveled up my POKéMON, but it\n"
+    "won't evolve. Why?$"
+}
+
+text Route17_Text_ZeekDefeat {
+    "Why, you!$"
+}
+
+text Route17_Text_ZeekPostBattle {
+    "Maybe some POKéMON need element\n"
+    "STONES to evolve.$"
+}
+
+text Route17_Text_JamalIntro {
+    "I need a little exercise!$"
+}
+
+text Route17_Text_JamalDefeat {
+    "Whew!\n"
+    "Good workout!$"
+}
+
+text Route17_Text_JamalPostBattle {
+    "I'm sure I lost weight there!$"
+}
+
+text Route17_Text_CoreyIntro {
+    "Be a rebel!$"
+}
+
+text Route17_Text_CoreyDefeat {
+    "Aaaargh!$"
+}
+
+text Route17_Text_CoreyPostBattle {
+    "Be ready to fight for your beliefs!$"
+}
+
+text Route17_Text_JaxonIntro {
+    "Nice BIKE!\n"
+    "How's it handle?$"
+}
+
+text Route17_Text_JaxonDefeat {
+    "Shoot!$"
+}
+
+text Route17_Text_JaxonPostBattle {
+    "The slope makes it hard to steer.$"
+}
+
+text Route17_Text_WilliamIntro {
+    "Get lost, kid!\n"
+    "I'm bushed!$"
+}
+
+text Route17_Text_WilliamDefeat {
+    "Are you satisfied?$"
+}
+
+text Route17_Text_WilliamPostBattle {
+    "I need to catch a few z's!$"
+}
+
+text Route17_Text_WatchOutForDiscardedItems {
+    "It's a notice.\p"
+    "Watch out for discarded items.$"
+}
+
+text Route17_Text_SameSpeciesGrowDifferentRates {
+    "TRAINER TIPS\p"
+    "All POKéMON are unique.\p"
+    "Even POKéMON of the same species\n"
+    "and level grow at different rates.$"
+}
+
+text Route17_Text_PressBToStayInPlace {
+    "TRAINER TIPS\p"
+    "Press the B Button to stay in place\n"
+    "while on a slope.$"
+}
+
+text Route17_Text_RouteSign {
+    "ROUTE 17\n"
+    "CELADON CITY - FUCHSIA CITY$"
+}
+
+text Route17_Text_DontThrowGameThrowBalls {
+    "It's a notice!\p"
+    "Don't throw the game, throw POKé\n"
+    "BALLS instead!$"
+}
+
+text Route17_Text_CyclingRoadSign {
+    "CYCLING ROAD\n"
+    "Slope ends here!$"
+}

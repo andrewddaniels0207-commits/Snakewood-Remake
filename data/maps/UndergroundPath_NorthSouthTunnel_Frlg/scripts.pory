@@ -1,0 +1,8 @@
+mapscripts UndergroundPath_NorthSouthTunnel_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: UndergroundPath_NorthSouthTunnel_OnTransition
+}
+
+script UndergroundPath_NorthSouthTunnel_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL)
+    end
+}

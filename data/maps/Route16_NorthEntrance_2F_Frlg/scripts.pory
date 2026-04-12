@@ -1,0 +1,110 @@
+mapscripts Route16_NorthEntrance_2F_Frlg_MapScripts {}
+
+script Route16_NorthEntrance_2F_EventScript_LittleBoy {
+    msgbox(Route16_NorthEntrance_2F_Text_OnBikeRideWithGirlfriend, MSGBOX_NPC)
+    end
+}
+
+script Route16_NorthEntrance_2F_EventScript_LittleGirl {
+    msgbox(Route16_NorthEntrance_2F_Text_RidingTogetherOnNewBikes, MSGBOX_NPC)
+    end
+}
+
+script Route16_NorthEntrance_2F_EventScript_LeftBinoculars {
+    msgbox(Route16_NorthEntrance_2F_Text_ItsCeladonDeptStore, MSGBOX_SIGN)
+    end
+}
+
+script Route16_NorthEntrance_2F_EventScript_RightBinoculars {
+    msgbox(Route16_NorthEntrance_2F_Text_LongPathOverWater, MSGBOX_SIGN)
+    end
+}
+
+script Route16_NorthEntrance_2F_EventScript_Aide {
+    lock
+    faceplayer
+    call(Route16_NorthEntrance_2F_EventScript_GetAideRequestInfo)
+    if (flag(FLAG_GOT_AMULET_COIN_FROM_OAKS_AIDE)) goto(Route16_NorthEntrance_2F_EventScript_AlreadyGotAmuletCoin)
+    msgbox(Route16_NorthEntrance_2F_Text_GiveAmuletCoinIfCaught40, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(Aide_EventScript_DeclineCheckMons)
+    setvar(VAR_0x8004, 0)
+    specialvar(VAR_RESULT, GetFrlgPokedexCount)
+    buffernumberstring(STR_VAR_3, VAR_0x8006)
+    call(Route16_NorthEntrance_2F_EventScript_GetAideRequestInfo)
+    if (var(VAR_0x8006) < REQUIRED_CAUGHT_MONS) goto(Aide_EventScript_HaventCaughtEnough)
+    msgbox(Route16_NorthEntrance_2F_Text_GreatHereYouGo)
+    checkitemspace(ITEM_AMULET_COIN)
+    if (var(VAR_RESULT) == FALSE) goto(Aide_EventScript_NoRoomForItem)
+    giveitem_msg(Route16_NorthEntrance_2F_Text_ReceivedAmuletCoinFromAide, ITEM_AMULET_COIN)
+    setflag(FLAG_GOT_AMULET_COIN_FROM_OAKS_AIDE)
+    msgbox(Route16_NorthEntrance_2F_Text_ExplainAmuletCoin)
+    release
+    end
+}
+
+script Route16_NorthEntrance_2F_EventScript_AlreadyGotAmuletCoin {
+    msgbox(Route16_NorthEntrance_2F_Text_ExplainAmuletCoin)
+    release
+    end
+}
+
+script Route16_NorthEntrance_2F_EventScript_GetAideRequestInfo {
+    buffernumberstring(STR_VAR_1, REQUIRED_CAUGHT_MONS)
+    bufferitemname(STR_VAR_2, ITEM_AMULET_COIN)
+    return
+}
+
+text Route16_NorthEntrance_2F_Text_OnBikeRideWithGirlfriend {
+    "I'm on a relaxing ride on my new\n"
+    "bike with my girlfriend.$"
+}
+
+text Route16_NorthEntrance_2F_Text_RidingTogetherOnNewBikes {
+    "We're going riding together on our\n"
+    "new bikes.$"
+}
+
+text Route16_NorthEntrance_2F_Text_ItsCeladonDeptStore {
+    "Let's see what the binoculars have\n"
+    "to show…\p"
+    "It's the CELADON DEPT. STORE!$"
+}
+
+text Route16_NorthEntrance_2F_Text_LongPathOverWater {
+    "Let's see what the binoculars have\n"
+    "to show…\p"
+    "There's a long path over water far\n"
+    "away.$"
+}
+
+text Route16_NorthEntrance_2F_Text_GiveAmuletCoinIfCaught40 {
+    "Hi! Remember me?\n"
+    "I'm one of PROF. OAK's AIDES.\p"
+    "If your POKéDEX has complete data\n"
+    "on 40 species, I'm supposed to\l"
+    "give you a reward.\p"
+    "PROF. OAK entrusted me with an\n"
+    "AMULET COIN for you.\p"
+    "So, {PLAYER}, let me ask you.\p"
+    "Have you gathered data on at least\n"
+    "40 kinds of POKéMON?$"
+}
+
+text Route16_NorthEntrance_2F_Text_GreatHereYouGo {
+    "Great! You have caught or owned\n"
+    "{STR_VAR_3} kinds of POKéMON!\p"
+    "Congratulations!\n"
+    "Here you go!$"
+}
+
+text Route16_NorthEntrance_2F_Text_ReceivedAmuletCoinFromAide {
+    "{PLAYER} received the AMULET COIN\n"
+    "from the AIDE.$"
+}
+
+text Route16_NorthEntrance_2F_Text_ExplainAmuletCoin {
+    "An AMULET COIN is an item to be\n"
+    "held by a POKéMON.\p"
+    "If the POKéMON appears in a winning\n"
+    "battle, you will earn more money.$"
+}

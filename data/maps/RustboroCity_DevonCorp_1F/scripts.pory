@@ -1,0 +1,166 @@
+mapscripts RustboroCity_DevonCorp_1F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: RustboroCity_DevonCorp_1F_OnTransition
+}
+
+script RustboroCity_DevonCorp_1F_OnTransition {
+    if (!flag(FLAG_RETURNED_DEVON_GOODS)) call(RustboroCity_DevonCorp_1F_EventScript_BlockStairs)
+    end
+}
+
+script RustboroCity_DevonCorp_1F_EventScript_BlockStairs {
+    setobjectxyperm(LOCALID_DEVON_CORP_STAIR_GUARD, 14, 2)
+    setobjectmovementtype(LOCALID_DEVON_CORP_STAIR_GUARD, MOVEMENT_TYPE_FACE_DOWN)
+    return
+}
+
+script RustboroCity_DevonCorp_1F_EventScript_Employee {
+    lock
+    faceplayer
+    if (flag(FLAG_RETURNED_DEVON_GOODS)) goto(RustboroCity_DevonCorp_1F_EventScript_GoodsRecovered)
+    if (flag(FLAG_DEVON_GOODS_STOLEN)) goto(RustboroCity_DevonCorp_1F_EventScript_RobberWasntBright)
+    msgbox(RustboroCity_DevonCorp_1F_Text_ThoseShoesAreOurProduct, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RustboroCity_DevonCorp_1F_EventScript_RobberWasntBright {
+    msgbox(RustboroCity_DevonCorp_1F_Text_RobberWasntVeryBright, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RustboroCity_DevonCorp_1F_EventScript_GoodsRecovered {
+    msgbox(RustboroCity_DevonCorp_1F_Text_SoundsLikeStolenGoodsRecovered, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RustboroCity_DevonCorp_1F_EventScript_StairGuard {
+    lock
+    faceplayer
+    if (flag(FLAG_RETURNED_DEVON_GOODS)) goto(RustboroCity_DevonCorp_1F_EventScript_AlwaysWelcome)
+    if (flag(FLAG_RECOVERED_DEVON_GOODS)) goto(RustboroCity_DevonCorp_1F_EventScript_GotRobbed)
+    if (flag(FLAG_DEVON_GOODS_STOLEN)) goto(RustboroCity_DevonCorp_1F_EventScript_GotRobbed)
+    msgbox(RustboroCity_DevonCorp_1F_Text_OnlyAuthorizedPeopleEnter, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RustboroCity_DevonCorp_1F_EventScript_AlwaysWelcome {
+    msgbox(RustboroCity_DevonCorp_1F_Text_YoureAlwaysWelcomeHere, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RustboroCity_DevonCorp_1F_EventScript_GotRobbed {
+    msgbox(RustboroCity_DevonCorp_1F_Text_HowCouldWeGetRobbed, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RustboroCity_DevonCorp_1F_EventScript_Greeter {
+    lock
+    faceplayer
+    if (flag(FLAG_RETURNED_DEVON_GOODS)) goto(RustboroCity_DevonCorp_1F_EventScript_WelcomeToDevonCorp)
+    if (flag(FLAG_RECOVERED_DEVON_GOODS)) goto(RustboroCity_DevonCorp_1F_EventScript_StaffGotRobbed)
+    if (flag(FLAG_DEVON_GOODS_STOLEN)) goto(RustboroCity_DevonCorp_1F_EventScript_StaffGotRobbed)
+    msgbox(RustboroCity_DevonCorp_1F_Text_WelcomeToDevonCorp, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RustboroCity_DevonCorp_1F_EventScript_WelcomeToDevonCorp {
+    msgbox(RustboroCity_DevonCorp_1F_Text_WelcomeToDevonCorp, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RustboroCity_DevonCorp_1F_EventScript_StaffGotRobbed {
+    msgbox(RustboroCity_DevonCorp_1F_Text_StaffGotRobbed, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RustboroCity_DevonCorp_1F_EventScript_RocksMetalDisplay {
+    msgbox(RustboroCity_DevonCorp_1F_Text_RocksMetalDisplay, MSGBOX_SIGN)
+    end
+}
+
+script RustboroCity_DevonCorp_1F_EventScript_ProductsDisplay {
+    msgbox(RustboroCity_DevonCorp_1F_Text_ProductDisplay, MSGBOX_SIGN)
+    end
+}
+
+text RustboroCity_DevonCorp_1F_Text_WelcomeToDevonCorp {
+    "Hello and welcome to the DEVON\n"
+    "CORPORATION.\p"
+    "We're proud producers of items and\n"
+    "medicine that enhance your life.$"
+}
+
+text RustboroCity_DevonCorp_1F_Text_StaffGotRobbed {
+    "One of our research staff stupidly\n"
+    "got robbed of an important parcel.$"
+}
+
+text RustboroCity_DevonCorp_1F_Text_ThoseShoesAreOurProduct {
+    "Hey, those RUNNING SHOES!\n"
+    "They're one of our products!\p"
+    "It makes me happy when I see someone\n"
+    "using something we made.$"
+}
+
+text RustboroCity_DevonCorp_1F_Text_RobberWasntVeryBright {
+    "That stolen parcel…\p"
+    "Well, sure it's important, but it's not\n"
+    "anything that anyone can use.\p"
+    "In my estimation, that robber must not\n"
+    "have been very bright.$"
+}
+
+text RustboroCity_DevonCorp_1F_Text_SoundsLikeStolenGoodsRecovered {
+    "It sounds like they've recovered\n"
+    "the ripped-off DEVON GOODS.$"
+}
+
+text RustboroCity_DevonCorp_1F_Text_OnlyAuthorizedPeopleEnter {
+    "I'm sorry, only authorized people\n"
+    "are allowed to enter here.$"
+}
+
+text RustboroCity_DevonCorp_1F_Text_HowCouldWeGetRobbed {
+    "It's beyond stupid.\n"
+    "How could we get robbed?$"
+}
+
+text RustboroCity_DevonCorp_1F_Text_YoureAlwaysWelcomeHere {
+    "Hi, there!\n"
+    "You're always welcome here!$"
+}
+
+text RustboroCity_DevonCorp_1F_Text_RocksMetalDisplay {
+    "Samples of rocks and metal are\n"
+    "displayed in the glass case.\p"
+    "There's a panel with some writing\n"
+    "on it…\p"
+    "“DEVON CORPORATION got its start as\n"
+    "a producer of stones from quarries.\p"
+    "“The company also produced iron from\n"
+    "filings in the sand.\p"
+    "“From that humble start as a producer\n"
+    "of raw materials, DEVON developed.\p"
+    "“DEVON is now a manufacturer of a wide\n"
+    "range of industrial products.”$"
+}
+
+text RustboroCity_DevonCorp_1F_Text_ProductDisplay {
+    "Prototypes and test products fill\n"
+    "the glass display case.\p"
+    "There's a panel with a description…\p"
+    "“In addition to industrial products,\n"
+    "DEVON now markets sundries and\l"
+    "pharmaceuticals for better lifestyles.\p"
+    "“Recently, DEVON has begun marketing\n"
+    "tools for POKéMON TRAINERS, including\l"
+    "POKé BALLS and POKéNAV systems.”$"
+}

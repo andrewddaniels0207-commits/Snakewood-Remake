@@ -1,0 +1,39 @@
+mapscripts Route2_ViridianForest_NorthEntrance_Frlg_MapScripts {}
+
+script Route2_ViridianForest_NorthEntrance_EventScript_Youngster {
+    msgbox(Route2_ViridianForest_NorthEntrance_Text_ManyMonsOnlyInForests, MSGBOX_NPC)
+    end
+}
+
+script Route2_ViridianForest_NorthEntrance_EventScript_OldMan {
+    msgbox(Route2_ViridianForest_NorthEntrance_Text_CanCutSkinnyTrees, MSGBOX_NPC)
+    end
+}
+
+script Route2_ViridianForest_NorthEntrance_EventScript_CooltrainerF {
+    msgbox(Route2_ViridianForest_NorthEntrance_Text_CanCancelEvolution, MSGBOX_NPC)
+    end
+}
+
+text Route2_ViridianForest_NorthEntrance_Text_ManyMonsOnlyInForests {
+    "Many POKéMON live only in forests \n"
+    "and caves.\p"
+    "You need to be persistent and look\n"
+    "everywhere to get different kinds.$"
+}
+
+text Route2_ViridianForest_NorthEntrance_Text_CanCutSkinnyTrees {
+    "Have you noticed the skinny trees\n"
+    "on the roadside?\p"
+    "They can be cut down by a special\n"
+    "POKéMON move, I hear.$"
+}
+
+text Route2_ViridianForest_NorthEntrance_Text_CanCancelEvolution {
+    "Do you know the evolution-cancel\n"
+    "technique?\p"
+    "When a POKéMON is evolving, you\n"
+    "can stop the process.\p"
+    "It's a technique for raising\n"
+    "POKéMON the way they are.$"
+}

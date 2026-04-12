@@ -1,0 +1,109 @@
+mapscripts SilphCo_8F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_LOAD: SilphCo_8F_OnLoad
+}
+
+script SilphCo_8F_OnLoad {
+    if (!flag(FLAG_SILPH_8F_DOOR)) call(EventScript_Close8FDoor)
+    end
+}
+
+script SilphCo_8F_EventScript_WorkerM {
+    lock
+    faceplayer
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) goto(SilphCo_8F_EventScript_WorkerMRocketsGone)
+    msgbox(SilphCo_8F_Text_WonderIfSilphIsFinished)
+    release
+    end
+}
+
+script SilphCo_8F_EventScript_WorkerMRocketsGone {
+    msgbox(SilphCo_8F_Text_ThanksForSavingUs)
+    release
+    end
+}
+
+script SilphCo_8F_EventScript_FloorSign {
+    msgbox(SilphCo_8F_Text_FloorSign, MSGBOX_SIGN)
+    end
+}
+
+script SilphCo_8F_EventScript_Parker {
+    trainerbattle_single(TRAINER_SCIENTIST_PARKER, SilphCo_8F_Text_ParkerIntro, SilphCo_8F_Text_ParkerDefeat)
+    msgbox(SilphCo_8F_Text_ParkerPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SilphCo_8F_EventScript_Grunt1 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_32, SilphCo_8F_Text_Grunt1Intro, SilphCo_8F_Text_Grunt1Defeat)
+    msgbox(SilphCo_8F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SilphCo_8F_EventScript_Grunt2 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_36, SilphCo_8F_Text_Grunt2Intro, SilphCo_8F_Text_Grunt2Defeat)
+    msgbox(SilphCo_8F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text SilphCo_8F_Text_WonderIfSilphIsFinished {
+    "I wonder if SILPH is finished…$"
+}
+
+text SilphCo_8F_Text_ThanksForSavingUs {
+    "Thanks for saving us!$"
+}
+
+text SilphCo_8F_Text_Grunt1Intro {
+    "That's as far as you'll go!$"
+}
+
+text SilphCo_8F_Text_Grunt1Defeat {
+    "Not enough grit!$"
+}
+
+text SilphCo_8F_Text_Grunt1PostBattle {
+    "If you don't turn back…\n"
+    "I'll call for backup!$"
+}
+
+text SilphCo_8F_Text_ParkerIntro {
+    "You're causing us problems!$"
+}
+
+text SilphCo_8F_Text_ParkerDefeat {
+    "Huh?\n"
+    "I lost?$"
+}
+
+text SilphCo_8F_Text_ParkerPostBattle {
+    "So, what do you think of SILPH\n"
+    "BUILDING's maze?$"
+}
+
+text SilphCo_8F_Text_Grunt2Intro {
+    "I am one of the four ROCKET\n"
+    "BROTHERS!$"
+}
+
+text SilphCo_8F_Text_Grunt2Defeat {
+    "Whoo!\n"
+    "Oh, Brothers!$"
+}
+
+text SilphCo_8F_Text_Grunt2PostBattle {
+    "I'll leave you up to my brothers.$"
+}
+
+text SilphCo_8F_Text_FloorSign {
+    "SILPH CO. HEAD OFFICE\n"
+    "8F$"
+}
+
+text SilphCo_8F_Text_ToRocketBossMonsAreTools {
+    "TEAM ROCKET's BOSS is terribly\n"
+    "cruel!\p"
+    "To him, POKéMON are just tools to\n"
+    "be used.\p"
+    "What will happen if that tyrant\n"
+    "takes over our company…$"
+}

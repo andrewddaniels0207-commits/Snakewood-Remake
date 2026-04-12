@@ -1,0 +1,79 @@
+mapscripts PokemonTower_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: PokemonTower_1F_OnTransition
+}
+
+script PokemonTower_1F_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_POKEMON_TOWER_1F)
+    end
+}
+
+script PokemonTower_1F_EventScript_Channeler {
+    msgbox(PokemonTower_1F_Text_SenseSpiritsUpToMischief, MSGBOX_NPC)
+    end
+}
+
+script PokemonTower_1F_EventScript_Woman1 {
+    msgbox(PokemonTower_1F_Text_GrowlitheWhyDidYouDie, MSGBOX_NPC)
+    end
+}
+
+script PokemonTower_1F_EventScript_BaldingMan {
+    msgbox(PokemonTower_1F_Text_CameToPrayForDepartedClefairy, MSGBOX_NPC)
+    end
+}
+
+script PokemonTower_1F_EventScript_Woman2 {
+    lock
+    faceplayer
+    checkplayergender()
+    if (var(VAR_RESULT) == MALE) goto(PokemonTower_1F_EventScript_Woman2MalePlayer)
+    msgbox(PokemonTower_1F_Text_ComeToPayRespectsGirl)
+    release
+    end
+}
+
+script PokemonTower_1F_EventScript_Woman2MalePlayer {
+    msgbox(PokemonTower_1F_Text_ComeToPayRespectsSon)
+    release
+    end
+}
+
+script PokemonTower_1F_EventScript_WorkerF {
+    msgbox(PokemonTower_1F_Text_ErectedInMemoryOfDeadMons, MSGBOX_NPC)
+    end
+}
+
+text PokemonTower_1F_Text_ErectedInMemoryOfDeadMons {
+    "POKéMON TOWER was erected in the\n"
+    "memory of POKéMON that died.$"
+}
+
+text PokemonTower_1F_Text_ComeToPayRespectsSon {
+    "Did you come to pay respects?\p"
+    "Bless your POKéMON-loving heart,\n"
+    "son.$"
+}
+
+text PokemonTower_1F_Text_ComeToPayRespectsGirl {
+    "Did you come to pay respects?\p"
+    "Bless your POKéMON-loving heart,\n"
+    "girl.$"
+}
+
+text PokemonTower_1F_Text_CameToPrayForDepartedClefairy {
+    "I came to pray for my dearly\n"
+    "departed CLEFAIRY.\p"
+    "Sniff!\n"
+    "I'm awash in tears…$"
+}
+
+text PokemonTower_1F_Text_GrowlitheWhyDidYouDie {
+    "My GROWLITHE…\n"
+    "Why did you die?$"
+}
+
+text PokemonTower_1F_Text_SenseSpiritsUpToMischief {
+    "I am a CHANNELER.\p"
+    "There are spirits up to mischief.\n"
+    "I sense them high in the TOWER.$"
+}

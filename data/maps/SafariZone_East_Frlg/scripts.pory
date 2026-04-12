@@ -1,0 +1,31 @@
+mapscripts SafariZone_East_Frlg_MapScripts {}
+
+script SafariZone_East_EventScript_RestHouseSign {
+    msgbox(SafariZone_East_Text_RestHouse, MSGBOX_SIGN)
+    end
+}
+
+script SafariZone_East_EventScript_TrainerTips {
+    msgbox(SafariZone_East_Text_TimeDeclinesOnlyWhileYouWalk, MSGBOX_SIGN)
+    end
+}
+
+script SafariZone_East_EventScript_AreaSign {
+    msgbox(SafariZone_East_Text_AreaSign, MSGBOX_SIGN)
+    end
+}
+
+text SafariZone_East_Text_RestHouse {
+    "REST HOUSE$"
+}
+
+text SafariZone_East_Text_TimeDeclinesOnlyWhileYouWalk {
+    "TRAINER TIPS\p"
+    "The remaining time declines only\n"
+    "while you walk.$"
+}
+
+text SafariZone_East_Text_AreaSign {
+    "AREA 1\n"
+    "WEST: CENTER AREA$"
+}

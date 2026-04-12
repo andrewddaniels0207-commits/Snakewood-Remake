@@ -1,0 +1,759 @@
+mapscripts SaffronCity_PokemonTrainerFanClub_Frlg_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 1: SaffronCity_PokemonTrainerFanClub_EventScript_MeetFirstFans
+    ]
+    MAP_SCRIPT_ON_TRANSITION: SaffronCity_PokemonTrainerFanClub_OnTransition
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_MeetFirstFans {
+    lockall
+    textcolor(NPC_TEXT_COLOR_FEMALE)
+    applymovement(LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    playse(SE_PIN)
+    applymovement(LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, Common_Movement_Delay48)
+    waitmovement(0)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_HuhYou)
+    closemessage
+    applymovement(LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, SaffronCity_PokemonTrainerFanClub_Movement_FanApproachPlayer)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_YourePlayerWereYourFansNow)
+    setvar(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 2)
+    releaseall
+    end
+}
+
+movement SaffronCity_PokemonTrainerFanClub_Movement_FanApproachPlayer {
+    delay_16
+    delay_8
+    walk_down
+    delay_16
+    walk_down
+    delay_8
+    walk_left
+    step_end
+}
+
+script SaffronCity_PokemonTrainerFanClub_OnTransition {
+    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_SetMemberPosForFirstMeeting)
+    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 2) goto(SaffronCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions)
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions {
+    special(Script_TryLoseFansFromPlayTime)
+    setvar(VAR_0x8004, FANCLUB_MEMBER1)
+    specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
+    if (var(VAR_RESULT) == FALSE) call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable)
+    setvar(VAR_0x8004, FANCLUB_MEMBER2)
+    specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
+    if (var(VAR_RESULT) == FALSE) call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable)
+    setvar(VAR_0x8004, FANCLUB_MEMBER3)
+    specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
+    if (var(VAR_RESULT) == FALSE) call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable)
+    setvar(VAR_0x8004, FANCLUB_MEMBER4)
+    specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
+    if (var(VAR_RESULT) == FALSE) call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable)
+    setvar(VAR_0x8004, FANCLUB_MEMBER5)
+    specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
+    if (var(VAR_RESULT) == FALSE) call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable)
+    setvar(VAR_0x8004, FANCLUB_MEMBER6)
+    specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
+    if (var(VAR_RESULT) == FALSE) call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable)
+    setvar(VAR_0x8004, FANCLUB_MEMBER7)
+    specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
+    if (var(VAR_RESULT) == FALSE) call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable)
+    setvar(VAR_0x8004, FANCLUB_MEMBER8)
+    specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
+    if (var(VAR_RESULT) == FALSE) call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable)
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable {
+    setobjectxyperm(LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, 5, 2)
+    setobjectmovementtype(LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, MOVEMENT_TYPE_FACE_UP)
+    return
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable {
+    setobjectxyperm(LOCALID_TRAINER_FAN_CLUB_YOUNGSTER, 7, 4)
+    setobjectmovementtype(LOCALID_TRAINER_FAN_CLUB_YOUNGSTER, MOVEMENT_TYPE_FACE_LEFT)
+    return
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable {
+    setobjectxyperm(LOCALID_TRAINER_FAN_CLUB_GENTLEMAN, 2, 2)
+    setobjectmovementtype(LOCALID_TRAINER_FAN_CLUB_GENTLEMAN, MOVEMENT_TYPE_FACE_UP)
+    return
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable {
+    setobjectxyperm(LOCALID_TRAINER_FAN_CLUB_LITTLE_GIRL, 3, 4)
+    setobjectmovementtype(LOCALID_TRAINER_FAN_CLUB_LITTLE_GIRL, MOVEMENT_TYPE_FACE_RIGHT)
+    return
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable {
+    setobjectxyperm(LOCALID_TRAINER_FAN_CLUB_ROCKER, 4, 6)
+    setobjectmovementtype(LOCALID_TRAINER_FAN_CLUB_ROCKER, MOVEMENT_TYPE_FACE_UP)
+    return
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable {
+    setobjectxyperm(LOCALID_TRAINER_FAN_CLUB_WOMAN, 10, 3)
+    setobjectmovementtype(LOCALID_TRAINER_FAN_CLUB_WOMAN, MOVEMENT_TYPE_FACE_UP)
+    return
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable {
+    setobjectxyperm(LOCALID_TRAINER_FAN_CLUB_BEAUTY, 7, 5)
+    setobjectmovementtype(LOCALID_TRAINER_FAN_CLUB_BEAUTY, MOVEMENT_TYPE_FACE_LEFT)
+    return
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable {
+    setobjectxyperm(LOCALID_TRAINER_FAN_CLUB_BLACK_BELT, 9, 6)
+    setobjectmovementtype(LOCALID_TRAINER_FAN_CLUB_BLACK_BELT, MOVEMENT_TYPE_FACE_LEFT)
+    return
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_SetMemberPosForFirstMeeting {
+    call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable)
+    call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable)
+    call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable)
+    call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable)
+    call(SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable)
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirl {
+    lock
+    faceplayer
+    setvar(VAR_0x8004, FANCLUB_MEMBER1)
+    special(Script_BufferFanClubTrainerName)
+    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 0) goto(SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayerNotChampion)
+    specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
+    if (var(VAR_RESULT) == TRUE) goto(SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayersFan)
+    specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
+    goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyNonFan)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_WasYourFanNotAnymore)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayersFan {
+    specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
+    if (var(VAR_RESULT) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyFan)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_AlwaysCheerForYou)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyFan {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_IllAlwaysBelieveInYou)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyNonFan {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_EveryonesYourFanButICantBe)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayerNotChampion {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_TrainersCoolWhenBattling)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirl {
+    lock
+    faceplayer
+    setvar(VAR_0x8004, FANCLUB_MEMBER4)
+    special(Script_BufferFanClubTrainerName)
+    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 0) goto(SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion)
+    specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
+    if (var(VAR_RESULT) == TRUE) goto(SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan)
+    specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
+    goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyNonFan)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_WantToBeLikeSabrina)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan {
+    specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
+    if (var(VAR_RESULT) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_WantToBeLikeYouOneDay)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_EveryoneButMeStoppedBeingYourFan)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyNonFan {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_WontStopBeingSabrinasFan)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_CanIBecomeCoolTrainerOneDay)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_Youngster {
+    lock
+    faceplayer
+    setvar(VAR_0x8004, FANCLUB_MEMBER2)
+    special(Script_BufferFanClubTrainerName)
+    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 0) goto(SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayerNotChampion)
+    specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
+    if (var(VAR_RESULT) == TRUE) goto(SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayersFan)
+    specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
+    goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyNonFan)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_BrocksMyHero)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayersFan {
+    specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
+    if (var(VAR_RESULT) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyFan)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_CanYouAutographShorts)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyFan {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_CountingOnYou)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyNonFan {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_BrocksFanToBitterEnd)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayerNotChampion {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_BrocksLastWordOnCool)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_Gentleman {
+    lock
+    faceplayer
+    setvar(VAR_0x8004, FANCLUB_MEMBER3)
+    special(Script_BufferFanClubTrainerName)
+    if (var(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 0) goto(SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayerNotChampion)
+    specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
+    if (var(VAR_RESULT) == TRUE) goto(SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayersFan)
+    specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
+    goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyNonFan)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_HmmAndYouAre)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayersFan {
+    specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
+    if (var(VAR_RESULT) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyFan)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_HadPleasureOfWatchingYouBattle)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyFan {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_NeverSeenTrainerOfYourMagnificence)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyNonFan {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_YouveStillAWaysToGo)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayerNotChampion {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_YoullBeTalkedAboutIfYouKeepWinning)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_Woman {
+    lock
+    faceplayer
+    setvar(VAR_0x8004, FANCLUB_MEMBER6)
+    special(Script_BufferFanClubTrainerName)
+    specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
+    if (var(VAR_RESULT) == TRUE) goto(SaffronCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan)
+    specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
+    goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyNonFan)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_TrainerHasBeenOnFire)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan {
+    specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
+    if (var(VAR_RESULT) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_AdoreWayYouBattle)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_ImYourNumberOneFan)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyNonFan {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_EveryoneTalksAboutYou)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_Rocker {
+    lock
+    faceplayer
+    setvar(VAR_0x8004, FANCLUB_MEMBER5)
+    special(Script_BufferFanClubTrainerName)
+    specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
+    if (var(VAR_RESULT) == TRUE) goto(SaffronCity_PokemonTrainerFanClub_EventScript_RockerPlayersFan)
+    specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
+    goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyNonFan)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_LoveWayTrainerTalks)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_RockerPlayersFan {
+    specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
+    if (var(VAR_RESULT) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyFan)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_TheWayYouBattleIsCool)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyFan {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_ImOnlyOneLeftOfYourFans)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyNonFan {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_ImLoneTrainerFan)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_Beauty {
+    lock
+    faceplayer
+    setvar(VAR_0x8004, FANCLUB_MEMBER7)
+    special(Script_BufferFanClubTrainerName)
+    specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
+    if (var(VAR_RESULT) == TRUE) goto(SaffronCity_PokemonTrainerFanClub_EventScript_BeautyPlayersFan)
+    specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
+    goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyNonFan)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_WhyCantOthersSeeMastersDignity)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_BeautyPlayersFan {
+    specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
+    if (var(VAR_RESULT) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyFan)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_YouReallyAreAmazing)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyFan {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_ImYourOnlyFan)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyNonFan {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_BelieveInMasterWithAllMyHeart)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_BlackBelt {
+    lock
+    faceplayer
+    setvar(VAR_0x8004, FANCLUB_MEMBER8)
+    special(Script_BufferFanClubTrainerName)
+    specialvar(VAR_RESULT, Script_IsFanClubMemberFanOfPlayer)
+    if (var(VAR_RESULT) == TRUE) goto(SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltPlayersFan)
+    specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
+    goto_if_eq(VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyNonFan)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_OnlyMasterHasMyRespect)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltPlayersFan {
+    specialvar(VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub)
+    if (var(VAR_RESULT) == 1) goto(SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyFan)
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_YourBattleStyleIsEducational)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyFan {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_WontStopBeingYourFan)
+    release
+    end
+}
+
+script SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyNonFan {
+    msgbox(SaffronCity_PokemonTrainerFanClub_Text_NeverBeFanOfAnyoneButMaster)
+    release
+    end
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_HuhYou {
+    "Huh?\n"
+    "You…$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_YourePlayerWereYourFansNow {
+    "Are you maybe…\n"
+    "… …\p"
+    "You are!\n"
+    "You are {PLAYER}!\p"
+    "We were just talking about you!\p"
+    "We were talking about how an\n"
+    "incredibly good TRAINER appeared.\p"
+    "And that someone is you!\n"
+    "You're so cool!\p"
+    "So, we decided that we'll become\n"
+    "your FAN CLUB!\p"
+    "We all hope you'll keep battling\n"
+    "and show us how cool you are.\p"
+    "That way, maybe other people will\n"
+    "become fans just like me.$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_AlwaysCheerForYou {
+    "I'll always be cheering for you!\p"
+    "Go, {PLAYER}, go!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_IllAlwaysBelieveInYou {
+    "I'll always believe in you,\n"
+    "{PLAYER}.\p"
+    "Please show the others what you're\n"
+    "like when you battle seriously.$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_WasYourFanNotAnymore {
+    "I'm sorry.\n"
+    "I was your fan before.\p"
+    "But now, you seem to have lost\n"
+    "the drive you had before.\p"
+    "Lately, I think {STR_VAR_1} has been\n"
+    "a lot cooler.$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_EveryonesYourFanButICantBe {
+    "Oh!\n"
+    "{PLAYER}!\p"
+    "Everyone's been all excited about\n"
+    "you recently.\p"
+    "I can understand why.\n"
+    "I know that you're strong.\p"
+    "But, do you know what?\p"
+    "Once I became {STR_VAR_1}'s fan,\n"
+    "I can't just stop being a fan.$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_TrainersCoolWhenBattling {
+    "I think TRAINERS are so cool when\n"
+    "they're battling.\p"
+    "Don't you think so, too?$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_CanYouAutographShorts {
+    "Oh! It's {PLAYER}!\n"
+    "Too cool!\p"
+    "Oh!\n"
+    "Oh, yeah!\p"
+    "Can you autograph something?\n"
+    "How about my shorts?$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_CountingOnYou {
+    "However hot it's been…\p"
+    "And however cold it may get…\p"
+    "I've always believed in, and worn,\n"
+    "shorts!\p"
+    "I'm counting on you to keep\n"
+    "winning!\p"
+    "I believe in you just as much as\n"
+    "I believe in shorts!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_BrocksMyHero {
+    "BROCK's my hero!\n"
+    "He's a man among men!\p"
+    "Heheh, I got my mom to do\n"
+    "something for me.\p"
+    "I got her to embroider “BROCK”\n"
+    "on my shorts!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_BrocksFanToBitterEnd {
+    "…  …\p"
+    "…  …\n"
+    "I'm BROCK's fan!\p"
+    "Even if I were his only fan,\n"
+    "I swear it on my rock-hard will,\l"
+    "and on my shorts!\p"
+    "I'll be his fan to the bitter end!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_BrocksLastWordOnCool {
+    "BROCK's the last word on cool,\n"
+    "end of story!\p"
+    "Now there's a guy who I want to\n"
+    "be like!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_HadPleasureOfWatchingYouBattle {
+    "{PLAYER}, I've had the pleasure of\n"
+    "watching you battle.\p"
+    "It brings back sweet memories of\n"
+    "my own long-lost youth.\p"
+    "May you continue to find success.\n"
+    "You have a fan in me!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_NeverSeenTrainerOfYourMagnificence {
+    "I have journeyed far and wide\n"
+    "across the lands.\p"
+    "But never have I seen a TRAINER\n"
+    "of your magnificence.\p"
+    "Take courage in your abilities\n"
+    "and keep battling on!\p"
+    "Make that a promise to me,\n"
+    "my young idol!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_HmmAndYouAre {
+    "Hmm…\n"
+    "And you are?\p"
+    "Were you hoping to sign up for\n"
+    "a membership in our FAN CLUB?$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_YouveStillAWaysToGo {
+    "Ah, so you are the much-\n"
+    "talked-about {PLAYER}.\p"
+    "You certainly do have the look of\n"
+    "a winner.\p"
+    "But for me to accept you as\n"
+    "a true POKéMON great…\p"
+    "… …\p"
+    "You've still a ways to go!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_YoullBeTalkedAboutIfYouKeepWinning {
+    "All of us gathered here are fans\n"
+    "of POKéMON TRAINERS.\p"
+    "The way they look in battle…\n"
+    "They are the picture of coolness.\p"
+    "Perhaps you will be talked about\n"
+    "here, too, if you keep winning.$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_WantToBeLikeYouOneDay {
+    "It's {PLAYER}!\n"
+    "It's {PLAYER}!\p"
+    "I want to be like {PLAYER} one day!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_EveryoneButMeStoppedBeingYourFan {
+    "Everyone stopped being {PLAYER}'s\n"
+    "fan…\p"
+    "But that means I can have {PLAYER}\n"
+    "all to myself!\p"
+    "Yay! Go for it!\n"
+    "My one and only {PLAYER}!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_WantToBeLikeSabrina {
+    "Do you know what?\n"
+    "I want to be like SABRINA!\p"
+    "I want to be a psychic girl just\n"
+    "like her!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_WontStopBeingSabrinasFan {
+    "Even if I'm the only one, I won't\n"
+    "stop being SABRINA's fan.\p"
+    "My dream is to be like SABRINA,\n"
+    "cute, but cool.\p"
+    "I want to be a psychic girl just\n"
+    "like her!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_CanIBecomeCoolTrainerOneDay {
+    "I wonder if I can become a cool\n"
+    "TRAINER one day?$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_TheWayYouBattleIsCool {
+    "Oh, man, oh, man!\n"
+    "Cool! Too cool!\p"
+    "…Huh?\n"
+    "No, not you.\p"
+    "Just the way you battle.\n"
+    "That's cool.$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_ImOnlyOneLeftOfYourFans {
+    "Yo, {PLAYER}!\p"
+    "Looks like I'm the only one left\n"
+    "out of your fans.\p"
+    "But, you know, I like being an only\n"
+    "fan… It's less stressful.\p"
+    "Keep up and at it!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_LoveWayTrainerTalks {
+    "{STR_VAR_1}'s cool, huh?\n"
+    "I love the way he talks.\p"
+    "I'd really relish a chance to meet\n"
+    "him in person once.$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_ImLoneTrainerFan {
+    "Huh, can you believe it?\n"
+    "Everyone turned into your fans.\p"
+    "So after all we've been through,\n"
+    "I'm the lone {STR_VAR_1} fan?\p"
+    "Eh, being the one and only\n"
+    "{STR_VAR_1} fan's my style, anyway.$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_AdoreWayYouBattle {
+    "Oh, my goodness!\n"
+    "Is it really you, {PLAYER}?\p"
+    "I have to tell you, I adore the\n"
+    "way you battle.\p"
+    "I hope you'll keep at it.\n"
+    "I'll be your number one fan!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_ImYourNumberOneFan {
+    "Oh, my goodness!\n"
+    "If it isn't {PLAYER}!\p"
+    "It's so disappointing… I realized\n"
+    "I'm your number-one-and-only fan!\p"
+    "Well, it can't be helped!\n"
+    "Let me cheer you on, at least!\p"
+    "Hurray, hurray, {PLAYER}!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_TrainerHasBeenOnFire {
+    "Recently, {STR_VAR_1} has been on\n"
+    "fire.\p"
+    "The way he battles… It's just \n"
+    "the way that I like it!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_EveryoneTalksAboutYou {
+    "Oh, hello!\n"
+    "If it isn't {PLAYER}!\p"
+    "Lately, all everyone talks about\n"
+    "is you.\p"
+    "I'm feeling lonesome because I\n"
+    "prefer {STR_VAR_1}.$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_YouReallyAreAmazing {
+    "Amazing!\n"
+    "{PLAYER}, you really are amazing!\p"
+    "Instead of just watching, maybe\n"
+    "I should become a TRAINER, too.$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_ImYourOnlyFan {
+    "I'm your only fan…\n"
+    "Sigh… This is lonely…\p"
+    "Can't you try harder and make the\n"
+    "others take notice of you?$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_WhyCantOthersSeeMastersDignity {
+    "Master {STR_VAR_1} is so dignified…\n"
+    "He is so my type.\p"
+    "Why can't the others see the\n"
+    "dignity he simply oozes?$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_BelieveInMasterWithAllMyHeart {
+    "I believe in Master {STR_VAR_1}\n"
+    "with all my heart.\p"
+    "Even if I am the only one to\n"
+    "believe in him.\p"
+    "I won't ever feel lonesome, though.\p"
+    "Not if I keep thinking about Master\n"
+    "{STR_VAR_1}.$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_YourBattleStyleIsEducational {
+    "Hiyah!\p"
+    "Your battling style is most\n"
+    "educational.\p"
+    "I hope that you will keep plugging\n"
+    "away at success, hiyah!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_WontStopBeingYourFan {
+    "Instead of just watching others\n"
+    "battle, battle yourself!\p"
+    "…My DOJO's MASTER chewed me out\n"
+    "like that…\p"
+    "But I won't let that stop me from\n"
+    "being your fan!\p"
+    "I can't stop being your fan!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_OnlyMasterHasMyRespect {
+    "Hiyah! There is but one TRAINER\n"
+    "who has my respect.\p"
+    "And that is none other than my\n"
+    "MASTER at the FIGHTING DOJO.\p"
+    "You should become a fan of my\n"
+    "MASTER like me! Hiyah!$"
+}
+
+text SaffronCity_PokemonTrainerFanClub_Text_NeverBeFanOfAnyoneButMaster {
+    "Hiyah! I respect my MASTER at the\n"
+    "FIGHTING DOJO.\p"
+    "I will never become a fan of\n"
+    "anyone other than my MASTER!\p"
+    "I will even sneak out of the DOJO\n"
+    "to spread word of his greatness.\p"
+    "Hiyah!$"
+}

@@ -1,0 +1,84 @@
+mapscripts NavelRock_Bottom_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: NavelRock_Bottom_OnTransition
+    MAP_SCRIPT_ON_RESUME: NavelRock_Bottom_OnResume
+}
+
+script NavelRock_Bottom_OnTransition {
+    if (flag(FLAG_CAUGHT_LUGIA)) call(NavelRock_Bottom_EventScript_HideLugia)
+    if (!flag(FLAG_CAUGHT_LUGIA)) call(NavelRock_Bottom_EventScript_TryShowLugia)
+    end
+}
+
+script NavelRock_Bottom_EventScript_HideLugia {
+    setflag(FLAG_HIDE_LUGIA)
+    return
+}
+
+script NavelRock_Bottom_EventScript_TryShowLugia {
+    if (flag(FLAG_DEFEATED_LUGIA)) goto(Common_EventScript_NopReturn)
+    clearflag(FLAG_HIDE_LUGIA)
+    return
+}
+
+script NavelRock_Bottom_OnResume {
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(NavelRock_Bottom_EventScript_TryRemoveLugia)
+    end
+}
+
+script NavelRock_Bottom_EventScript_TryRemoveLugia {
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    removeobject(LOCALID_NAVEL_ROCK_LUGIA)
+    return
+}
+
+script NavelRock_Bottom_EventScript_Lugia {
+    lock
+    faceplayer
+    waitse()
+    delay(20)
+    playse(SE_THUNDERSTORM_STOP)
+    setvar(VAR_0x8004, 0)
+    setvar(VAR_0x8005, 3)
+    setvar(VAR_0x8006, 4)
+    setvar(VAR_0x8007, 2)
+    special(ShakeCamera)
+    delay(30)
+    playse(SE_THUNDERSTORM_STOP)
+    setvar(VAR_0x8004, 0)
+    setvar(VAR_0x8005, 3)
+    setvar(VAR_0x8006, 4)
+    setvar(VAR_0x8007, 2)
+    special(ShakeCamera)
+    delay(30)
+    delay(50)
+    waitse()
+    playmoncry(SPECIES_LUGIA, CRY_MODE_ENCOUNTER)
+    waitmoncry()
+    delay(20)
+    seteventmon(SPECIES_LUGIA, 70)
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    special(BattleSetup_StartLegendaryBattle)
+    waitstate
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(NavelRock_Bottom_EventScript_DefeatedLugia)
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(NavelRock_Bottom_EventScript_RanFromLugia)
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(NavelRock_Bottom_EventScript_RanFromLugia)
+    setflag(FLAG_CAUGHT_LUGIA)
+    release
+    end
+}
+
+script NavelRock_Bottom_EventScript_DefeatedLugia {
+    setflag(FLAG_DEFEATED_LUGIA)
+    setvar(VAR_0x8004, SPECIES_LUGIA)
+    goto(Common_EventScript_LegendaryFlewAway)
+    end
+}
+
+script NavelRock_Bottom_EventScript_RanFromLugia {
+    setvar(VAR_0x8004, SPECIES_LUGIA)
+    goto(Common_EventScript_LegendaryFlewAway)
+    end
+}

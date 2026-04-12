@@ -1,0 +1,40 @@
+mapscripts PacifidlogTown_House5_MapScripts {}
+
+script PacifidlogTown_House5_EventScript_MirageIslandWatcher {
+    lock
+    faceplayer
+    specialvar(VAR_RESULT, IsMirageIslandPresent)
+    if (var(VAR_RESULT) == TRUE) goto(PacifidlogTown_House5_EventScript_MirageIslandPresent)
+    msgbox(PacifidlogTown_House5_Text_CantSeeMirageIslandToday, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script PacifidlogTown_House5_EventScript_MirageIslandPresent {
+    msgbox(PacifidlogTown_House5_Text_CanSeeMirageIslandToday, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script PacifidlogTown_House5_EventScript_Gentleman {
+    msgbox(PacifidlogTown_House5_Text_MirageIslandAppearDependingOnWeather, MSGBOX_NPC)
+    end
+}
+
+text PacifidlogTown_House5_Text_CantSeeMirageIslandToday {
+    "I can't see MIRAGE ISLAND today…$"
+}
+
+text PacifidlogTown_House5_Text_CanSeeMirageIslandToday {
+    "Oh! Oh my!\n"
+    "I can see MIRAGE ISLAND today!$"
+}
+
+text PacifidlogTown_House5_Text_MirageIslandAppearDependingOnWeather {
+    "MIRAGE ISLAND…\p"
+    "It must become visible and invisible\n"
+    "depending on the weather conditions\l"
+    "that make mirages appear.\p"
+    "Or is it really appearing and\n"
+    "disappearing?$"
+}

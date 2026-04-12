@@ -1,0 +1,8 @@
+mapscripts SevenIsland_TanobyRuins_ViapoisChamber_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: SevenIsland_TanobyRuins_ViapoisChamber_OnTransition
+}
+
+script SevenIsland_TanobyRuins_ViapoisChamber_OnTransition {
+    call(EventScript_TryDarkenRuins)
+    end
+}

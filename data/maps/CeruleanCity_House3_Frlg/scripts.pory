@@ -1,0 +1,51 @@
+mapscripts CeruleanCity_House3_Frlg_MapScripts {}
+
+script CeruleanCity_House3_EventScript_OldWoman {
+    msgbox(CeruleanCity_House3_Text_PleaseTradeWithMyHusband, MSGBOX_NPC)
+    end
+}
+
+script CeruleanCity_House3_EventScript_Dontae {
+    lock
+    faceplayer
+    setvar(VAR_0x8008, INGAME_TRADE_JYNX)
+    call(EventScript_GetInGameTradeSpeciesInfo)
+    if (flag(FLAG_DID_ZYNX_TRADE)) goto(CeruleanCity_House3_EventScript_AlreadyTraded)
+    msgbox(Trade_Text_DoYouHaveMonWouldYouTradeForMon, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(CeruleanCity_House3_EventScript_DeclineTrade)
+    call(EventScript_ChooseMonForInGameTrade)
+    if (var(VAR_0x8004) >= PARTY_SIZE) goto(CeruleanCity_House3_EventScript_DeclineTrade)
+    call(EventScript_GetInGameTradeSpecies)
+    if (var(VAR_RESULT) != VAR_0x8009) goto(CeruleanCity_House3_EventScript_NotRequestedMon)
+    call(EventScript_DoInGameTrade)
+    msgbox(Trade_Text_Thanks)
+    setflag(FLAG_DID_ZYNX_TRADE)
+    release
+    end
+}
+
+script CeruleanCity_House3_EventScript_DeclineTrade {
+    msgbox(Trade_Text_WellIfYouDontWantTo)
+    release
+    end
+}
+
+script CeruleanCity_House3_EventScript_NotRequestedMon {
+    bufferspeciesname(STR_VAR_1, VAR_0x8009)
+    msgbox(Trade_Text_ThisIsntMon)
+    release
+    end
+}
+
+script CeruleanCity_House3_EventScript_AlreadyTraded {
+    msgbox(Trade_Text_HasTradedMonGrownStronger)
+    release
+    end
+}
+
+text CeruleanCity_House3_Text_PleaseTradeWithMyHusband {
+    "My husband likes trading POKéMON.\p"
+    "You're collecting POKéMON for your\n"
+    "POKéDEX, aren't you?\p"
+    "Would you please trade with him?$"
+}

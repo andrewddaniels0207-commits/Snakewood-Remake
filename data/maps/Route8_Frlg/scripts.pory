@@ -1,0 +1,211 @@
+mapscripts Route8_Frlg_MapScripts {}
+
+script Route8_EventScript_UndergroundPathSign {
+    msgbox(Route8_Text_UndergroundPathSign, MSGBOX_SIGN)
+    end
+}
+
+text Route8_Text_AidanIntro {
+    "You look good at POKéMON, but how\n"
+    "is your chemistry grade?$"
+}
+
+text Route8_Text_AidanDefeat {
+    "Ow!\n"
+    "Meltdown!$"
+}
+
+text Route8_Text_AidanPostBattle {
+    "I am better at school than this!$"
+}
+
+text Route8_Text_StanIntro {
+    "All right!\n"
+    "Let's play a game!$"
+}
+
+text Route8_Text_StanDefeat {
+    "Drat!\n"
+    "Came up short!$"
+}
+
+text Route8_Text_StanPostBattle {
+    "Things didn't work today.$"
+}
+
+text Route8_Text_GlennIntro {
+    "You should be informed.\n"
+    "You need strategy to win at this!$"
+}
+
+text Route8_Text_GlennDefeat {
+    "It's not logical!$"
+}
+
+text Route8_Text_GlennPostBattle {
+    "Go with GRIMER first…and…\n"
+    "…and…then…$"
+}
+
+text Route8_Text_PaigeIntro {
+    "I like NIDORAN, so I collect them!$"
+}
+
+text Route8_Text_PaigeDefeat {
+    "Why?\n"
+    "Why??$"
+}
+
+text Route8_Text_PaigePostBattle {
+    "When POKéMON grow up, they get\n"
+    "ugly! They shouldn't evolve.$"
+}
+
+text Route8_Text_LeslieIntro {
+    "School is fun, but so are POKéMON.$"
+}
+
+text Route8_Text_LeslieDefeat {
+    "You made it clear to me that\n"
+    "I should stick with school.$"
+}
+
+text Route8_Text_LesliePostBattle {
+    "I was planning on getting some\n"
+    "fresh air for a change, but…\p"
+    "We're stuck here because of the\n"
+    "gates at SAFFRON.$"
+}
+
+text Route8_Text_AndreaIntro {
+    "MEOWTH is so cute, meow, meow,\n"
+    "meow!$"
+}
+
+text Route8_Text_AndreaDefeat {
+    "Meeeeyow!$"
+}
+
+text Route8_Text_AndreaPostBattle {
+    "I think PIDGEY and RATTATA are\n"
+    "cute, too!$"
+}
+
+text Route8_Text_MeganIntro {
+    "We must look silly standing here\n"
+    "like this.$"
+}
+
+text Route8_Text_MeganDefeat {
+    "Look what you did to my poor, cute\n"
+    "POKéMON!$"
+}
+
+text Route8_Text_MeganPostBattle {
+    "SAFFRON's gatekeeper won't let us\n"
+    "go through.\p"
+    "I know he's doing his job, but I\n"
+    "think he's mean.$"
+}
+
+text Route8_Text_RichIntro {
+    "I'm a rambling, gaming dude!$"
+}
+
+text Route8_Text_RichDefeat {
+    "Missed the big chance!$"
+}
+
+text Route8_Text_RichPostBattle {
+    "Playing games and POKéMON are like\n"
+    "eating peanuts! I just can't stop!$"
+}
+
+text Route8_Text_JuliaIntro {
+    "What's a cute, round, and fluffy\n"
+    "POKéMON?$"
+}
+
+text Route8_Text_JuliaDefeat {
+    "Stop!\p"
+    "Don't be so mean to my CLEFAIRY!$"
+}
+
+text Route8_Text_JuliaPostBattle {
+    "I read that CLEFAIRY evolves when\n"
+    "it's exposed to a MOON STONE.\p"
+    "I read that in a POKéMON JOURNAL.\n"
+    "I wonder if it's true?$"
+}
+
+text Route8_Text_UndergroundPathSign {
+    "UNDERGROUND PATH\n"
+    "CELADON CITY - LAVENDER TOWN$"
+}
+
+text Route8_Text_EliIntro {
+    "ELI: Twin power is fantastic.\n"
+    "Did you know?$"
+}
+
+text Route8_Text_EliDefeat {
+    "ELI: But…\n"
+    "We used our twin power…$"
+}
+
+text Route8_Text_EliPostBattle {
+    "ELI: I caught my POKéMON with\n"
+    "ANNE!$"
+}
+
+text Route8_Text_EliNotEnoughMons {
+    "ELI: We can't battle if you don't\n"
+    "have two POKéMON.$"
+}
+
+text Route8_Text_AnneIntro {
+    "ANNE: We'll shock you with our twin\n"
+    "power!$"
+}
+
+text Route8_Text_AnneDefeat {
+    "ANNE: Our twin power…$"
+}
+
+text Route8_Text_AnnePostBattle {
+    "ANNE: I'm raising POKéMON with\n"
+    "ELI.$"
+}
+
+text Route8_Text_AnneNotEnoughMons {
+    "ANNE: Hi, hi! Let's battle!\n"
+    "But bring two POKéMON.$"
+}
+
+text Route8_Text_RicardoIntro {
+    "My bike's acting up, man.$"
+}
+
+text Route8_Text_RicardoDefeat {
+    "Aww, man.\n"
+    "I'm not into this.$"
+}
+
+text Route8_Text_RicardoPostBattle {
+    "I got grass caught up in my\n"
+    "spokes, man.$"
+}
+
+text Route8_Text_JarenIntro {
+    "Clear the way, or I'll run you\n"
+    "down!$"
+}
+
+text Route8_Text_JarenDefeat {
+    "You for real, kid?$"
+}
+
+text Route8_Text_JarenPostBattle {
+    "Don't think you're all special and\n"
+    "all just because of this.$"
+}

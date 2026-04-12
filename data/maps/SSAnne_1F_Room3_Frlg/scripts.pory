@@ -1,0 +1,36 @@
+mapscripts SSAnne_1F_Room3_Frlg_MapScripts {}
+
+script SSAnne_1F_Room3_EventScript_LittleGirl {
+    msgbox(SSAnne_1F_Room3_Text_AlwaysTravelWithWigglytuff, MSGBOX_NPC)
+    end
+}
+
+script SSAnne_1F_Room3_EventScript_BaldingMan {
+    msgbox(SSAnne_1F_Room3_Text_CruiseIsElegantAndCozy, MSGBOX_NPC)
+    end
+}
+
+script SSAnne_1F_Room3_EventScript_Wigglytuff {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_WIGGLYTUFF, CRY_MODE_NORMAL)
+    msgbox(SSAnne_1F_Room3_Text_Wigglytuff)
+    waitmoncry()
+    release
+    end
+}
+
+text SSAnne_1F_Room3_Text_CruiseIsElegantAndCozy {
+    "A world cruise is so elegant yet\n"
+    "cozy!$"
+}
+
+text SSAnne_1F_Room3_Text_AlwaysTravelWithWigglytuff {
+    "I always travel with WIGGLYTUFF.\n"
+    "I never leave home without it.$"
+}
+
+text SSAnne_1F_Room3_Text_Wigglytuff {
+    "WIGGLYTUFF: Puup pupuu!$"
+}

@@ -1,0 +1,221 @@
+mapscripts SootopolisCity_Gym_B1F_MapScripts {}
+
+script SootopolisCity_Gym_B1F_EventScript_Andrea {
+    trainerbattle_single(TRAINER_ANDREA, SootopolisCity_Gym_B1F_Text_AndreaIntro, SootopolisCity_Gym_B1F_Text_AndreaDefeat)
+    msgbox(SootopolisCity_Gym_B1F_Text_AndreaPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SootopolisCity_Gym_B1F_EventScript_Crissy {
+    trainerbattle_single(TRAINER_CRISSY, SootopolisCity_Gym_B1F_Text_CrissyIntro, SootopolisCity_Gym_B1F_Text_CrissyDefeat)
+    msgbox(SootopolisCity_Gym_B1F_Text_CrissyPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SootopolisCity_Gym_B1F_EventScript_Brianna {
+    trainerbattle_single(TRAINER_BRIANNA, SootopolisCity_Gym_B1F_Text_BriannaIntro, SootopolisCity_Gym_B1F_Text_BriannaDefeat)
+    msgbox(SootopolisCity_Gym_B1F_Text_BriannaPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SootopolisCity_Gym_B1F_EventScript_Connie {
+    trainerbattle_single(TRAINER_CONNIE, SootopolisCity_Gym_B1F_Text_ConnieIntro, SootopolisCity_Gym_B1F_Text_ConnieDefeat)
+    msgbox(SootopolisCity_Gym_B1F_Text_ConniePostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SootopolisCity_Gym_B1F_EventScript_Bridget {
+    trainerbattle_single(TRAINER_BRIDGET, SootopolisCity_Gym_B1F_Text_BridgetIntro, SootopolisCity_Gym_B1F_Text_BridgetDefeat)
+    msgbox(SootopolisCity_Gym_B1F_Text_BridgetPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SootopolisCity_Gym_B1F_EventScript_Olivia {
+    trainerbattle_single(TRAINER_OLIVIA, SootopolisCity_Gym_B1F_Text_OliviaIntro, SootopolisCity_Gym_B1F_Text_OliviaDefeat)
+    msgbox(SootopolisCity_Gym_B1F_Text_OliviaPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SootopolisCity_Gym_B1F_EventScript_Tiffany {
+    trainerbattle_single(TRAINER_TIFFANY, SootopolisCity_Gym_B1F_Text_TiffanyIntro, SootopolisCity_Gym_B1F_Text_TiffanyDefeat)
+    msgbox(SootopolisCity_Gym_B1F_Text_TiffanyPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SootopolisCity_Gym_B1F_EventScript_Bethany {
+    trainerbattle_single(TRAINER_BETHANY, SootopolisCity_Gym_B1F_Text_BethanyIntro, SootopolisCity_Gym_B1F_Text_BethanyDefeat)
+    msgbox(SootopolisCity_Gym_B1F_Text_BethanyPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SootopolisCity_Gym_B1F_EventScript_Annika {
+    trainerbattle_single(TRAINER_ANNIKA, SootopolisCity_Gym_B1F_Text_AnnikaIntro, SootopolisCity_Gym_B1F_Text_AnnikaDefeat)
+    msgbox(SootopolisCity_Gym_B1F_Text_AnnikaPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SootopolisCity_Gym_B1F_EventScript_Daphne {
+    trainerbattle_single(TRAINER_DAPHNE, SootopolisCity_Gym_B1F_Text_DaphneIntro, SootopolisCity_Gym_B1F_Text_DaphneDefeat)
+    msgbox(SootopolisCity_Gym_B1F_Text_DaphnePostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text SootopolisCity_Gym_B1F_Text_AndreaIntro {
+    "I'll show you the sublime techniques\n"
+    "I learned from our LEADER JUAN!$"
+}
+
+text SootopolisCity_Gym_B1F_Text_AndreaDefeat {
+    "Please forgive me, JUAN…$"
+}
+
+text SootopolisCity_Gym_B1F_Text_AndreaPostBattle {
+    "Watch what happens if you crack all\n"
+    "the floor tiles.$"
+}
+
+text SootopolisCity_Gym_B1F_Text_CrissyIntro {
+    "You came all the way here, but you won't\n"
+    "get to see JUAN.\p"
+    "Not if you lose to me, you won't!$"
+}
+
+text SootopolisCity_Gym_B1F_Text_CrissyDefeat {
+    "You're strong!\n"
+    "I was fooled by your cute looks!$"
+}
+
+text SootopolisCity_Gym_B1F_Text_CrissyPostBattle {
+    "You might be good enough to avoid\n"
+    "being wiped out in one hit by JUAN.$"
+}
+
+text SootopolisCity_Gym_B1F_Text_DaphneIntro {
+    "The sight of JUAN conducting\n"
+    "a battle…\p"
+    "The very beauty of it compelled me to\n"
+    "become a TRAINER.$"
+}
+
+text SootopolisCity_Gym_B1F_Text_DaphneDefeat {
+    "You battled with more beauty than\n"
+    "I could muster…$"
+}
+
+text SootopolisCity_Gym_B1F_Text_DaphnePostBattle {
+    "The grace you bring to battle is\n"
+    "fabulous.\p"
+    "Oh… I'm so fortunate to have found\n"
+    "POKéMON.$"
+}
+
+text SootopolisCity_Gym_B1F_Text_ConnieIntro {
+    "I should teach you how harsh battles\n"
+    "can be.$"
+}
+
+text SootopolisCity_Gym_B1F_Text_ConnieDefeat {
+    "Oh.\n"
+    "You're strong.$"
+}
+
+text SootopolisCity_Gym_B1F_Text_ConniePostBattle {
+    "I'll tell you something good.\p"
+    "If you want to reach JUAN, you\n"
+    "need to walk on each floor tile once.$"
+}
+
+text SootopolisCity_Gym_B1F_Text_BridgetIntro {
+    "The POKéMON GYM of the highest level\n"
+    "in the HOENN region…\p"
+    "That's the SOOTOPOLIS GYM.$"
+}
+
+text SootopolisCity_Gym_B1F_Text_BridgetDefeat {
+    "What a high level you are!$"
+}
+
+text SootopolisCity_Gym_B1F_Text_BridgetPostBattle {
+    "Rather than being satisfied by being\n"
+    "in a strong GYM, I imagine training in\l"
+    "other places will make you stronger.\l"
+    "But above all, it looks more fun.$"
+}
+
+text SootopolisCity_Gym_B1F_Text_OliviaIntro {
+    "I train my POKéMON together with\n"
+    "JUAN.\p"
+    "Don't think I'm a pushover.$"
+}
+
+text SootopolisCity_Gym_B1F_Text_OliviaDefeat {
+    "I was beaten…$"
+}
+
+text SootopolisCity_Gym_B1F_Text_OliviaPostBattle {
+    "I think you have potential.\n"
+    "Why don't you stay and train with us?$"
+}
+
+text SootopolisCity_Gym_B1F_Text_TiffanyIntro {
+    "A graceful glide across the ice while\n"
+    "crossing no lines…\p"
+    "A TRAINER putting on that performance\n"
+    "would be elegantly beautiful!$"
+}
+
+text SootopolisCity_Gym_B1F_Text_TiffanyDefeat {
+    "Well, excuse me?!$"
+}
+
+text SootopolisCity_Gym_B1F_Text_TiffanyPostBattle {
+    "This is really obvious, but how strong\n"
+    "you are as a TRAINER has nothing to do\l"
+    "with how young or old you are.$"
+}
+
+text SootopolisCity_Gym_B1F_Text_BethanyIntro {
+    "When I'm with my POKéMON, the time\n"
+    "flies by before you can say, “Oops!”$"
+}
+
+text SootopolisCity_Gym_B1F_Text_BethanyDefeat {
+    "Oops!$"
+}
+
+text SootopolisCity_Gym_B1F_Text_BethanyPostBattle {
+    "I wish I could forget about lost causes\n"
+    "before I can manage an “Oops!”$"
+}
+
+text SootopolisCity_Gym_B1F_Text_AnnikaIntro {
+    "I can battle with really rare POKéMON\n"
+    "if you'd like.$"
+}
+
+text SootopolisCity_Gym_B1F_Text_AnnikaDefeat {
+    "Oh, there now! Did you have a good look\n"
+    "at my POKéMON?$"
+}
+
+text SootopolisCity_Gym_B1F_Text_AnnikaPostBattle {
+    "I came to this GYM because JUAN\n"
+    "praised me for my darling POKéMON.\p"
+    "Oh, if only I'd met JUAN years ago\n"
+    "when I was younger…$"
+}
+
+text SootopolisCity_Gym_B1F_Text_BriannaIntro {
+    "Giggle…\n"
+    "Your grim look is so charming.$"
+}
+
+text SootopolisCity_Gym_B1F_Text_BriannaDefeat {
+    "Oh, dear.\n"
+    "I went much too easy on you.$"
+}
+
+text SootopolisCity_Gym_B1F_Text_BriannaPostBattle {
+    "You couldn't lay a finger on JUAN,\n"
+    "I'm sure. Giggle…$"
+}

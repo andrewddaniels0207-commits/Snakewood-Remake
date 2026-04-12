@@ -1,0 +1,509 @@
+mapscripts BattleFrontier_OutsideEast_MapScripts {
+    MAP_SCRIPT_ON_RESUME: BattleFrontier_OutsideEast_OnResume
+    MAP_SCRIPT_ON_TRANSITION: BattleFrontier_OutsideEast_OnTransition
+}
+
+script BattleFrontier_OutsideEast_OnResume {
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(BattleFrontier_OutsideEast_EventScript_TryRemoveSudowoodo)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_TryRemoveSudowoodo {
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    removeobject(VAR_LAST_TALKED)
+    return
+}
+
+script BattleFrontier_OutsideEast_OnTransition {
+    setvar(VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0)
+    setflag(FLAG_HIDE_BATTLE_TOWER_REPORTER)
+    if (!flag(FLAG_DEFEATED_SUDOWOODO)) call(BattleFrontier_OutsideEast_EventScript_ShowSudowoodo)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_ShowSudowoodo {
+    clearflag(FLAG_HIDE_BATTLE_FRONTIER_SUDOWOODO)
+    return
+}
+
+script BattleFrontier_OutsideEast_EventScript_BattleTowerSign {
+    msgbox(BattleFrontier_OutsideEast_Text_BattleTowerSign, MSGBOX_SIGN)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_BattlePalaceSign {
+    msgbox(BattleFrontier_OutsideEast_Text_BattlePalaceSign, MSGBOX_SIGN)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_BattleArenaSign {
+    msgbox(BattleFrontier_OutsideEast_Text_BattleArenaSign, MSGBOX_SIGN)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_BattlePyramidSign {
+    msgbox(BattleFrontier_OutsideEast_Text_BattlePyramidSign, MSGBOX_SIGN)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_NinjaBoy {
+    msgbox(BattleFrontier_OutsideEast_Text_BattleTowerFeelsSpecial, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_Man1 {
+    msgbox(BattleFrontier_OutsideEast_Text_ConquerLeagueAndFrontier, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_Hiker {
+    msgbox(BattleFrontier_OutsideEast_Text_PyramidTooHarsh, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_HexManiac {
+    msgbox(BattleFrontier_OutsideEast_Text_ThriveInDarkness, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_BlackBelt1 {
+    msgbox(BattleFrontier_OutsideEast_Text_PutTogetherUltimateTeam, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_Cook {
+    lock
+    msgbox(BattleFrontier_OutsideEast_Text_BelieveInYouBuddy, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_Zigzagoon {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_ZIGZAGOON, CRY_MODE_NORMAL)
+    msgbox(BattleFrontier_OutsideEast_Text_ZigzagoonLooksVacant, MSGBOX_DEFAULT)
+    waitmoncry()
+    release
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_RichBoy {
+    msgbox(BattleFrontier_OutsideEast_Text_PeopleCallMeBusybody, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_ExpertF {
+    msgbox(BattleFrontier_OutsideEast_Text_OnceBeatGymLeader, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_TriathleteF {
+    msgbox(BattleFrontier_OutsideEast_Text_FastOnBikeAndBattles, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_Twin {
+    msgbox(BattleFrontier_OutsideEast_Text_BetterThanDaddyAtPokemon, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_Man2 {
+    lock
+    msgbox(BattleFrontier_OutsideEast_Text_GoRackUpSomeWinsForDaddy, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_TriathleteM {
+    msgbox(BattleFrontier_OutsideEast_Text_DidScottBringYouHere, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_Sudowoodo {
+    lock
+    faceplayer
+    waitse()
+    playse(SE_SUDOWOODO_SHAKE)
+    applymovement(LOCALID_FRONTIER_SUDOWOODO, BattleFrontier_OutsideEast_Movement_SudowoodoShake)
+    waitmovement(0)
+    release
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_WaterSudowoodo {
+    lock
+    faceplayer
+    special(DoWateringBerryTreeAnim)
+    waitstate
+    waitse()
+    playse(SE_SUDOWOODO_SHAKE)
+    applymovement(LOCALID_FRONTIER_SUDOWOODO, BattleFrontier_OutsideEast_Movement_SudowoodoShake)
+    waitmovement(0)
+    msgbox(gText_Sudowoodo_Attacked, MSGBOX_DEFAULT)
+    closemessage
+    waitse()
+    playmoncry(SPECIES_SUDOWOODO, CRY_MODE_ENCOUNTER)
+    delay(40)
+    waitmoncry()
+    setvar(VAR_LAST_TALKED, LOCALID_FRONTIER_SUDOWOODO)
+    setwildbattle(SPECIES_SUDOWOODO, 40)
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    dowildbattle()
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo)
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo)
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo)
+    setflag(FLAG_DEFEATED_SUDOWOODO)
+    release
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo {
+    setflag(FLAG_DEFEATED_SUDOWOODO)
+    goto(Common_EventScript_RemoveStaticPokemon)
+    end
+}
+
+movement BattleFrontier_OutsideEast_Movement_SudowoodoShake {
+    face_right
+    delay_8
+    face_down
+    delay_8
+    face_left
+    delay_8
+    face_down
+    delay_8
+    face_right
+    delay_8
+    face_down
+    delay_8
+    face_left
+    delay_8
+    face_down
+    step_end
+}
+
+script BattleFrontier_OutsideEast_EventScript_Maniac1 {
+    msgbox(BattleFrontier_OutsideEast_Text_HeardPrettyGirlAtBattleArena, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_Girl {
+    msgbox(BattleFrontier_OutsideEast_Text_SometimesImportantOldManInThere, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_PsychicM {
+    msgbox(BattleFrontier_OutsideEast_Text_LegendOfBattlePyramid, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_Man3 {
+    msgbox(BattleFrontier_OutsideEast_Text_GotWipedOut, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_Woman1 {
+    msgbox(BattleFrontier_OutsideEast_Text_ToughTrainerInBattleTower, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_Woman2 {
+    msgbox(BattleFrontier_OutsideEast_Text_EnoughBattlePointsForDoll, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_BlackBelt2 {
+    msgbox(BattleFrontier_OutsideEast_Text_LikeToHaveNameRecordedHere, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_Maniac2 {
+    lock
+    msgbox(BattleFrontier_OutsideEast_Text_CanDoAnythingWithYou, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_Woman3 {
+    lock
+    msgbox(BattleFrontier_OutsideEast_Text_PowerOfOurLoveWillOvercome, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_RankingHallSign {
+    msgbox(BattleFrontier_OutsideEast_Text_RankingHallSign, MSGBOX_SIGN)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_ExchangeCornerSign {
+    msgbox(BattleFrontier_OutsideEast_Text_ExchangeCornerSign, MSGBOX_SIGN)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_Gentleman {
+    msgbox(BattleFrontier_OutsideEast_Text_FrontierNotExclusivelyForToughTrainers, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_OldWoman {
+    lock
+    faceplayer
+    if (flag(FLAG_DEFEATED_SUDOWOODO)) goto(BattleFrontier_OutsideEast_EventScript_OldWomanSudowoodoGone)
+    msgbox(BattleFrontier_OutsideEast_Text_OddTreeHereSeemsToWiggle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_OldWomanSudowoodoGone {
+    msgbox(BattleFrontier_OutsideEast_Text_OnceAnOddTreePastHere, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_OutsideEast_EventScript_Camper {
+    msgbox(BattleFrontier_OutsideEast_Text_StickyMonWithLongTail, MSGBOX_NPC)
+    end
+}
+
+text BattleFrontier_OutsideEast_Text_BattleTowerSign {
+    "This is the BATTLE TOWER!\n"
+    "Keep the win streak as the toughest\l"
+    "TRAINER!$"
+}
+
+text BattleFrontier_OutsideEast_Text_BattlePalaceSign {
+    "This is the BATTLE PALACE!\n"
+    "Keep your eyes on POKéMON battles!$"
+}
+
+text BattleFrontier_OutsideEast_Text_BattleArenaSign {
+    "This is the BATTLE ARENA!\n"
+    "Let the toughest teams gather!$"
+}
+
+text BattleFrontier_OutsideEast_Text_BattlePyramidSign {
+    "This is the BATTLE PYRAMID!\n"
+    "Advance through the Battle Quest!$"
+}
+
+text BattleFrontier_OutsideEast_Text_RankingHallSign {
+    "BATTLE FRONTIER RANKING HALL\n"
+    "Set your sights on new records!$"
+}
+
+text BattleFrontier_OutsideEast_Text_ExchangeCornerSign {
+    "BATTLE POINT EXCHANGE SERVICE CORNER\n"
+    "Exchange your Battle Points!$"
+}
+
+text BattleFrontier_OutsideEast_Text_BattleTowerFeelsSpecial {
+    "Wow!\n"
+    "It's huge!\p"
+    "The BATTLE TOWER feels special.\n"
+    "It's different from the others.$"
+}
+
+text BattleFrontier_OutsideEast_Text_ConquerLeagueAndFrontier {
+    "My grand ambition is to conquer both\n"
+    "the BATTLE FRONTIER and the POKéMON\l"
+    "LEAGUE.\p"
+    "And if my dream comes true…\p"
+    "I… I'm going to ask MIMI next door\n"
+    "if she will be friends with me!$"
+}
+
+text BattleFrontier_OutsideEast_Text_PyramidTooHarsh {
+    "The BATTLE PYRAMID's too harsh!\n"
+    "I just can't make it to the top!\p"
+    "Since I'm out of options, maybe I can\n"
+    "climb the outside…$"
+}
+
+text BattleFrontier_OutsideEast_Text_ThriveInDarkness {
+    "I thrive in darkness…\n"
+    "Yes… What is worthy of me?\l"
+    "None other than the BATTLE PYRAMID…\p"
+    "What say you to wandering in darkness\n"
+    "and in utter and total desperation?$"
+}
+
+text BattleFrontier_OutsideEast_Text_PutTogetherUltimateTeam {
+    "I didn't sleep for a week, but then\n"
+    "I put together the ultimate team!\p"
+    "I can't see myself losing, no joke.\n"
+    "We're storming the BATTLE ARENA!$"
+}
+
+text BattleFrontier_OutsideEast_Text_DidScottBringYouHere {
+    "Did SCOTT bring you here, too?\n"
+    "What is it with that guy?\p"
+    "It sounds like he really does know\n"
+    "how to spot talented TRAINERS, but…\p"
+    "I've never seen him battling in person\n"
+    "ever.$"
+}
+
+text BattleFrontier_OutsideEast_Text_BelieveInYouBuddy {
+    "ZIGG!\n"
+    "I believe in you, little buddy!\p"
+    "I'll make my little ZIGG any favorite\n"
+    "tasty treats you like if you win!$"
+}
+
+text BattleFrontier_OutsideEast_Text_ZigzagoonLooksVacant {
+    "ZIGZAGOON looks vacant…$"
+}
+
+text BattleFrontier_OutsideEast_Text_PeopleCallMeBusybody {
+    "People call me a busybody,\n"
+    "but I can't help it.\p"
+    "Your hat's on crooked!\n"
+    "Oh, no, trash on the ground!\l"
+    "Oops, it's almost dinnertime!\p"
+    "I don't know if I can stand to just\n"
+    "watch at the BATTLE PALACE…$"
+}
+
+text BattleFrontier_OutsideEast_Text_OnceBeatGymLeader {
+    "I may not look that impressive now,\n"
+    "but I once beat a GYM LEADER.\p"
+    "Who knows, maybe I should give it\n"
+    "another shot at glory.$"
+}
+
+text BattleFrontier_OutsideEast_Text_FastOnBikeAndBattles {
+    "I'm fast on my BIKE, and that goes for\n"
+    "the way I battle, too.\p"
+    "I win matches in the blink of\n"
+    "an eye!$"
+}
+
+text BattleFrontier_OutsideEast_Text_BetterThanDaddyAtPokemon {
+    "I'm better than my daddy\n"
+    "at POKéMON.$"
+}
+
+text BattleFrontier_OutsideEast_Text_GoRackUpSomeWinsForDaddy {
+    "Go on, my baby sweetie!\n"
+    "Go rack up some wins for Daddy!\p"
+    "You're just like your mother,\n"
+    "so you'll be dominating!$"
+}
+
+text BattleFrontier_OutsideEast_Text_HeardPrettyGirlAtBattleArena {
+    "It wasn't easy getting here,\n"
+    "but I'd heard about this knockout\l"
+    "pretty girl at the BATTLE ARENA.\p"
+    "Instead of her, do you know what\n"
+    "I found?\p"
+    "A whole teeming mob of sweaty,\n"
+    "stinky, and primitive martial artists!$"
+}
+
+text BattleFrontier_OutsideEast_Text_SometimesImportantOldManInThere {
+    "I sometimes see this really important-\n"
+    "looking old man going in there.\p"
+    "He has these really awesome POKéMON.\n"
+    "He seems really nice, though.$"
+}
+
+text BattleFrontier_OutsideEast_Text_LegendOfBattlePyramid {
+    "Do you know it?\n"
+    "The legend of the BATTLE PYRAMID?\p"
+    "When there comes a confident TRAINER\n"
+    "reaching for the golden pinnacle,\l"
+    "there shall appear a man among men.\p"
+    "Don't know that legend?\n"
+    "Well, of course not!\l"
+    "I just made it up!\p"
+    "What's it supposed to mean?\n"
+    "That, my friend, I can't say!$"
+}
+
+text BattleFrontier_OutsideEast_Text_GotWipedOut {
+    "Man! Oh man!\n"
+    "I've never lost once before!\p"
+    "But I got wiped out with no saving\n"
+    "grace at all!\p"
+    "And then I'm told I don't have any\n"
+    "talent?! Man!$"
+}
+
+text BattleFrontier_OutsideEast_Text_ToughTrainerInBattleTower {
+    "This guy ran into a horribly tough\n"
+    "TRAINER while he was on the BATTLE\l"
+    "TOWER challenge.\p"
+    "Now look at him…\p"
+    "You need to be cautious if you ever\n"
+    "decide to go to the BATTLE TOWER.$"
+}
+
+text BattleFrontier_OutsideEast_Text_EnoughBattlePointsForDoll {
+    "Yes!\n"
+    "I've finally got enough Battle Points!\p"
+    "I guess I'll trade for another giant\n"
+    "plush DOLL!$"
+}
+
+text BattleFrontier_OutsideEast_Text_LikeToHaveNameRecordedHere {
+    "Oh, yeah, okay!\n"
+    "So this is the RANKING HALL!\p"
+    "I'd like to go down in history as\n"
+    "a super champ and have my name\l"
+    "recorded here for posterity.$"
+}
+
+text BattleFrontier_OutsideEast_Text_CanDoAnythingWithYou {
+    "With you by my side, I can do anything.$"
+}
+
+text BattleFrontier_OutsideEast_Text_PowerOfOurLoveWillOvercome {
+    "Ooh, darling, you are so wonderful!\p"
+    "Ooh, I just can't wait anymore!\p"
+    "Let's go to a MULTI BATTLE ROOM\n"
+    "right this instant!\p"
+    "If we get together in the BATTLE SALON,\n"
+    "the power of our love will overcome\l"
+    "everyone we meet.\p"
+    "Why, before us, darling, everything\n"
+    "will topple like dominoes!$"
+}
+
+text BattleFrontier_OutsideEast_Text_FrontierNotExclusivelyForToughTrainers {
+    "The BATTLE FRONTIER isn't exclusively\n"
+    "for tough TRAINERS.\p"
+    "Many people with special abilities\n"
+    "have been invited, it seems.\p"
+    "That man SCOTT…\p"
+    "He may have built this place to serve\n"
+    "a bigger objective…$"
+}
+
+text BattleFrontier_OutsideEast_Text_OddTreeHereSeemsToWiggle {
+    "Excuse me, young one.\n"
+    "Have you good eyesight?\p"
+    "There is an odd tree past here, and to\n"
+    "my tired eyes it seems to wiggle.$"
+}
+
+text BattleFrontier_OutsideEast_Text_OnceAnOddTreePastHere {
+    "Excuse me, young one.\n"
+    "Have you a good memory?\p"
+    "I have this feeling there once was\n"
+    "an odd tree past here.$"
+}
+
+text BattleFrontier_OutsideEast_Text_StickyMonWithLongTail {
+    "I…\n"
+    "I saw it!\p"
+    "There was a sticky sort of a POKéMON\n"
+    "with a long tail up ahead!\p"
+    "It was hiding under a boulder, and\n"
+    "it kept staring at me!$"
+}

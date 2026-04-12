@@ -1,0 +1,21 @@
+mapscripts LilycoveCity_PokemonCenter_2F_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE: CableClub_OnFrame
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: CableClub_OnWarp
+    MAP_SCRIPT_ON_LOAD: CableClub_OnLoad
+    MAP_SCRIPT_ON_TRANSITION: CableClub_OnTransition
+}
+
+script LilycoveCity_PokemonCenter_2F_EventScript_Colosseum {
+    call(CableClub_EventScript_Colosseum)
+    end
+}
+
+script LilycoveCity_PokemonCenter_2F_EventScript_TradeCenter {
+    call(CableClub_EventScript_TradeCenter)
+    end
+}
+
+script LilycoveCity_PokemonCenter_2F_EventScript_RecordCorner {
+    call(CableClub_EventScript_RecordCorner)
+    end
+}

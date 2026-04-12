@@ -1,0 +1,72 @@
+mapscripts CeruleanCity_PokemonCenter_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: CeruleanCity_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script CeruleanCity_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_CERULEAN_CITY)
+    end
+}
+
+script CeruleanCity_PokemonCenter_1F_EventScript_Nurse {
+    lock
+    faceplayer
+    call(EventScript_PkmnCenterNurse_Frlg)
+    release
+    end
+}
+
+script CeruleanCity_PokemonCenter_1F_EventScript_Gentleman {
+    msgbox(CeruleanCity_PokemonCenter_1F_Text_EveryoneCallsBillPokemaniac, MSGBOX_NPC)
+    end
+}
+
+script CeruleanCity_PokemonCenter_1F_EventScript_Rocker {
+    msgbox(CeruleanCity_PokemonCenter_1F_Text_BillDoesWhateverForRareMons, MSGBOX_NPC)
+    end
+}
+
+script CeruleanCity_PokemonCenter_1F_EventScript_Youngster {
+    lock
+    faceplayer
+    famechecker(FAMECHECKER_BILL, 1)
+    msgbox(CeruleanCity_PokemonCenter_1F_Text_BillCollectsRareMons)
+    release
+    end
+}
+
+script CeruleanCity_PokemonCenter_1F_EventScript_Lass {
+    msgbox(CeruleanCity_PokemonCenter_1F_Text_TryTradingUpstairs, MSGBOX_NPC)
+    end
+}
+
+text CeruleanCity_PokemonCenter_1F_Text_BillDoesWhateverForRareMons {
+    "That BILL!\p"
+    "I heard that he'll do whatever it\n"
+    "takes to get rare POKéMON.\p"
+    "He's not above doing all sorts\n"
+    "of things, I've heard.$"
+}
+
+text CeruleanCity_PokemonCenter_1F_Text_EveryoneCallsBillPokemaniac {
+    "Have you heard about BILL?\p"
+    "Everyone calls him a POKéMANIAC!\p"
+    "I think people are just jealous of\n"
+    "BILL, though.\p"
+    "Who wouldn't want to boast about\n"
+    "their POKéMON?$"
+}
+
+text CeruleanCity_PokemonCenter_1F_Text_BillCollectsRareMons {
+    "BILL has lots of POKéMON!\n"
+    "He collects rare ones, too!$"
+}
+
+text CeruleanCity_PokemonCenter_1F_Text_TryTradingUpstairs {
+    "Why don't you go upstairs and try\n"
+    "trading POKéMON with your friends?\p"
+    "You could get a lot more variety\n"
+    "by trading.\p"
+    "The POKéMON you get in trades grow\n"
+    "quickly, too.$"
+}

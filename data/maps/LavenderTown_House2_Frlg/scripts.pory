@@ -1,0 +1,125 @@
+mapscripts LavenderTown_House2_Frlg_MapScripts {}
+
+script LavenderTown_House2_EventScript_NameRater {
+    lock
+    faceplayer
+    msgbox(LavenderTown_House2_Text_WantMeToRateNicknames, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(LavenderTown_House2_EventScript_ChooseMon)
+    if (var(VAR_RESULT) == NO) goto(LavenderTown_House2_EventScript_DontRateNickname)
+    end
+}
+
+script LavenderTown_House2_EventScript_ChooseMon {
+    msgbox(LavenderTown_House2_Text_CritiqueWhichMonsNickname)
+    special(ChoosePartyMon)
+    waitstate
+    if (var(VAR_0x8004) < PARTY_SIZE) goto(LavenderTown_House2_EventScript_CheckCanRateMon)
+    if (var(VAR_0x8004) >= PARTY_SIZE) goto(LavenderTown_House2_EventScript_DontRateNickname)
+    end
+}
+
+script LavenderTown_House2_EventScript_DontRateNickname {
+    msgbox(LavenderTown_House2_Text_ISeeComeVisitAgain)
+    release
+    end
+}
+
+script LavenderTown_House2_EventScript_CheckCanRateMon {
+    specialvar(VAR_RESULT, ScriptGetPartyMonSpecies)
+    if (var(VAR_RESULT) == SPECIES_EGG) goto(LavenderTown_House2_EventScript_CantNicknameEgg)
+    special(BufferMonNickname)
+    special(IsMonOTIDNotPlayers)
+    if (var(VAR_RESULT) == TRUE) goto(LavenderTown_House2_EventScript_CantNicknameTradeMon)
+    specialvar(VAR_RESULT, MonOTNameNotPlayer)
+    special(BufferMonNickname)
+    if (var(VAR_RESULT) == TRUE) goto(LavenderTown_House2_EventScript_CantNicknameTradeMon)
+    msgbox(LavenderTown_House2_Text_GiveItANicerName, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(LavenderTown_House2_EventScript_ChooseNewNickname)
+    if (var(VAR_RESULT) == NO) goto(LavenderTown_House2_EventScript_DontRateNickname)
+    end
+}
+
+script LavenderTown_House2_EventScript_CantNicknameEgg {
+    msgbox(LavenderTown_House2_Text_ThatIsMerelyAnEgg)
+    release
+    end
+}
+
+script LavenderTown_House2_EventScript_CantNicknameTradeMon {
+    msgbox(LavenderTown_House2_Text_TrulyImpeccableName)
+    release
+    end
+}
+
+script LavenderTown_House2_EventScript_ChooseNewNickname {
+    msgbox(LavenderTown_House2_Text_WhatShallNewNicknameBe)
+    call(Common_EventScript_NameReceivedPartyMon)
+    specialvar(VAR_RESULT, TryPutNameRaterShowOnTheAir)
+    special(BufferMonNickname)
+    if (var(VAR_RESULT) == TRUE) goto(LavenderTown_House2_EventScript_ChoseNewNickname)
+    msgbox(LavenderTown_House2_Text_FromNowOnShallBeKnownAsSameName)
+    release
+    end
+}
+
+script LavenderTown_House2_EventScript_ChoseNewNickname {
+    msgbox(LavenderTown_House2_Text_FromNowOnShallBeKnownAsName)
+    release
+    end
+}
+
+text LavenderTown_House2_Text_WantMeToRateNicknames {
+    "Hello, hello!\n"
+    "I am the official NAME RATER!\p"
+    "Want me to rate the nicknames of\n"
+    "your POKéMON?$"
+}
+
+text LavenderTown_House2_Text_CritiqueWhichMonsNickname {
+    "Which POKéMON's nickname should\n"
+    "I critique?$"
+}
+
+text LavenderTown_House2_Text_GiveItANicerName {
+    "{STR_VAR_1}, is it?\n"
+    "That is a decent nickname!\p"
+    "But, would you like me to give it\n"
+    "a nicer name?\p"
+    "How about it?$"
+}
+
+text LavenderTown_House2_Text_WhatShallNewNicknameBe {
+    "Ah, good. Then, what shall the new\n"
+    "nickname be?$"
+}
+
+text LavenderTown_House2_Text_FromNowOnShallBeKnownAsName {
+    "Done! From now on, this POKéMON\n"
+    "shall be known as {STR_VAR_1}!\p"
+    "It is a better name than before!\n"
+    "How fortunate for you!$"
+}
+
+text LavenderTown_House2_Text_ISeeComeVisitAgain {
+    "I see.\n"
+    "Do come visit again.$"
+}
+
+text LavenderTown_House2_Text_FromNowOnShallBeKnownAsSameName {
+    "Done! From now on, this POKéMON\n"
+    "shall be known as {STR_VAR_1}!\p"
+    "It looks no different from before,\n"
+    "and yet, this is vastly superior!\p"
+    "How fortunate for you!$"
+}
+
+text LavenderTown_House2_Text_TrulyImpeccableName {
+    "{STR_VAR_1}, is it?\n"
+    "That is a truly impeccable name!\p"
+    "Take good care of {STR_VAR_1}!$"
+}
+
+text LavenderTown_House2_Text_ThatIsMerelyAnEgg {
+    "Now, now.\n"
+    "That is merely an EGG!$"
+}

@@ -1,0 +1,55 @@
+mapscripts LavaridgeTown_PokemonCenter_1F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: LavaridgeTown_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script LavaridgeTown_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_LAVARIDGE_TOWN)
+    call(Common_EventScript_UpdateBrineyLocation)
+    end
+}
+
+script LavaridgeTown_PokemonCenter_1F_EventScript_Nurse {
+    setvar(VAR_0x800B, LOCALID_LAVARIDGE_NURSE)
+    call(Common_EventScript_PkmnCenterNurse)
+    waitmessage()
+    waitbuttonpress()
+    release
+    end
+}
+
+script LavaridgeTown_PokemonCenter_1F_EventScript_Youngster {
+    msgbox(LavaridgeTown_PokemonCenter_1F_Text_HotSpringCanInvigorate, MSGBOX_NPC)
+    end
+}
+
+script LavaridgeTown_PokemonCenter_1F_EventScript_Woman {
+    msgbox(LavaridgeTown_PokemonCenter_1F_Text_TrainersPokemonSpendTimeTogether, MSGBOX_NPC)
+    end
+}
+
+script LavaridgeTown_PokemonCenter_1F_EventScript_Gentleman {
+    msgbox(LavaridgeTown_PokemonCenter_1F_Text_TrainersShouldRestToo, MSGBOX_NPC)
+    end
+}
+
+text LavaridgeTown_PokemonCenter_1F_Text_TrainersPokemonSpendTimeTogether {
+    "I think POKéMON get closer to their\n"
+    "TRAINERS if they spend time together.\p"
+    "The longer the better.\n"
+    "That's what I think.$"
+}
+
+text LavaridgeTown_PokemonCenter_1F_Text_HotSpringCanInvigorate {
+    "It's sort of magical how just sitting\n"
+    "in a hot-spring pool can invigorate.\p"
+    "I wish I could let my POKéMON\n"
+    "soak, too.$"
+}
+
+text LavaridgeTown_PokemonCenter_1F_Text_TrainersShouldRestToo {
+    "Hohoho! Hey, kid, you can reach\n"
+    "the hot springs from here.\p"
+    "If POKéMON are getting rest, so too\n"
+    "should their TRAINERS.$"
+}

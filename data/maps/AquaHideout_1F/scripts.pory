@@ -1,0 +1,133 @@
+mapscripts AquaHideout_1F_MapScripts {}
+
+script AquaHideout_1F_EventScript_HideoutEntranceGrunt1 {
+    lock
+    faceplayer
+    if (flag(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT)) goto(AquaHideout_1F_EventScript_SlateportHint1)
+    if (flag(FLAG_RECEIVED_RED_OR_BLUE_ORB)) goto(AquaHideout_1F_EventScript_MagmaHideoutHint1)
+    msgbox(AquaHideout_1F_Text_OurBossIsSnatchingSomething, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script AquaHideout_1F_EventScript_MagmaHideoutHint1 {
+    msgbox(AquaHideout_1F_Text_WhereMightMagmaHideoutBe, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script AquaHideout_1F_EventScript_SlateportHint1 {
+    msgbox(AquaHideout_1F_Text_BossWentToJackASubmarine, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script AquaHideout_1F_EventScript_HideoutEntranceGrunt2 {
+    lock
+    faceplayer
+    if (flag(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT)) goto(AquaHideout_1F_EventScript_SlateportHint2)
+    if (flag(FLAG_RECEIVED_RED_OR_BLUE_ORB)) goto(AquaHideout_1F_EventScript_MagmaHideoutHint2)
+    msgbox(AquaHideout_1F_Text_BossIsOnRoute122, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script AquaHideout_1F_EventScript_MagmaHideoutHint2 {
+    msgbox(AquaHideout_1F_Text_TeamMagmaAtMtChimney, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script AquaHideout_1F_EventScript_SlateportHint2 {
+    msgbox(AquaHideout_1F_Text_BossIsInSlateportCity, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script AquaHideout_1F_EventScript_Grunt1 {
+    trainerbattle_single(TRAINER_GRUNT_AQUA_HIDEOUT_1, AquaHideout_1F_Text_Grunt1Intro, AquaHideout_1F_Text_Grunt1Defeat, AquaHideout_1F_EventScript_Grunt1Defeated)
+    msgbox(AquaHideout_1F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script AquaHideout_1F_EventScript_Grunt1Defeated {
+    msgbox(AquaHideout_1F_Text_Grunt1PostBattle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+text AquaHideout_1F_Text_OurBossIsSnatchingSomething {
+    "What? What? What do you want with \n"
+    "TEAM AQUA?\p"
+    "Our BOSS isn't here! He's gone off to\n"
+    "snatch something important!\p"
+    "… …\n"
+    "Where did he go?\p"
+    "Wahaha! Do you really think I'd tell\n"
+    "you something that crucial?$"
+}
+
+text AquaHideout_1F_Text_WhereMightMagmaHideoutBe {
+    "What? What?\n"
+    "Are you a TEAM MAGMA grunt?\p"
+    "I hear that TEAM MAGMA is trying to\n"
+    "awaken an awesome POKéMON at their\l"
+    "HIDEOUT.\p"
+    "But where might their HIDEOUT be?$"
+}
+
+text AquaHideout_1F_Text_BossWentToJackASubmarine {
+    "What? What? What do you want with \n"
+    "TEAM AQUA?\p"
+    "Our BOSS isn't here!\n"
+    "He's gone off to jack a submarine!\p"
+    "… …\n"
+    "Where did he go?\p"
+    "Wahaha! Do you really think I'd tell\n"
+    "you something that crucial?$"
+}
+
+text AquaHideout_1F_Text_BossIsOnRoute122 {
+    "What? What? What do you want with \n"
+    "TEAM AQUA?\p"
+    "Our BOSS isn't here! He's on his way to\n"
+    "MT. PYRE on ROUTE 122!\p"
+    "… …\n"
+    "Why did he go?\p"
+    "Wahaha! Do you really think I'd tell\n"
+    "you something that crucial?$"
+}
+
+text AquaHideout_1F_Text_TeamMagmaAtMtChimney {
+    "What? What?\n"
+    "Are you a TEAM MAGMA grunt?\p"
+    "I hear that TEAM MAGMA is after\n"
+    "an awesome POKéMON at MT. CHIMNEY.\p"
+    "But what is that POKéMON like?$"
+}
+
+text AquaHideout_1F_Text_BossIsInSlateportCity {
+    "What? What? What do you want with\n"
+    "TEAM AQUA?\p"
+    "Our BOSS isn't here!\n"
+    "He's on his way to SLATEPORT CITY!\p"
+    "… …\n"
+    "Why did he go?\p"
+    "Wahaha! Do you really think I'd tell\n"
+    "you something that crucial?$"
+}
+
+text AquaHideout_1F_Text_Grunt1Intro {
+    "Ayiyiyi!\n"
+    "Suspicious character spotted!$"
+}
+
+text AquaHideout_1F_Text_Grunt1Defeat {
+    "Grrrrr…\n"
+    "I lost it!$"
+}
+
+text AquaHideout_1F_Text_Grunt1PostBattle {
+    "I took the loss for the TEAM,\n"
+    "but I did my job…$"
+}

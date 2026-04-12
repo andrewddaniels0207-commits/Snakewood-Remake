@@ -1,0 +1,72 @@
+mapscripts SSAnne_Deck_Frlg_MapScripts {}
+
+script SSAnne_Deck_EventScript_Youngster {
+    msgbox(SSAnne_Deck_Text_ShipDepartingSoon, MSGBOX_NPC)
+    end
+}
+
+script SSAnne_Deck_EventScript_BaldingMan {
+    msgbox(SSAnne_Deck_Text_FeelSeasick, MSGBOX_NPC)
+    end
+}
+
+script SSAnne_Deck_EventScript_Sailor {
+    msgbox(SSAnne_Deck_Text_ScrubbingDecksHardWork, MSGBOX_NPC)
+    end
+}
+
+script SSAnne_Deck_EventScript_Edmond {
+    trainerbattle_single(TRAINER_SAILOR_EDMOND, SSAnne_Deck_Text_EdmondIntro, SSAnne_Deck_Text_EdmondDefeat)
+    msgbox(SSAnne_Deck_Text_EdmondPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SSAnne_Deck_EventScript_Trevor {
+    trainerbattle_single(TRAINER_SAILOR_TREVOR, SSAnne_Deck_Text_TrevorIntro, SSAnne_Deck_Text_TrevorDefeat)
+    msgbox(SSAnne_Deck_Text_TrevorPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text SSAnne_Deck_Text_ShipDepartingSoon {
+    "The party's over.\n"
+    "The ship will be departing soon.$"
+}
+
+text SSAnne_Deck_Text_ScrubbingDecksHardWork {
+    "Whew!\n"
+    "Scrubbing decks is hard work!$"
+}
+
+text SSAnne_Deck_Text_FeelSeasick {
+    "Urf… I feel ill…\p"
+    "I got seasick, so I stepped out to\n"
+    "get some air…$"
+}
+
+text SSAnne_Deck_Text_EdmondIntro {
+    "Hey, matey!\p"
+    "Let's do a little jig!$"
+}
+
+text SSAnne_Deck_Text_EdmondDefeat {
+    "You're impressive!$"
+}
+
+text SSAnne_Deck_Text_EdmondPostBattle {
+    "How many kinds of POKéMON do you\n"
+    "think there are in this big world?$"
+}
+
+text SSAnne_Deck_Text_TrevorIntro {
+    "Ahoy, there!\n"
+    "Are you seasick?$"
+}
+
+text SSAnne_Deck_Text_TrevorDefeat {
+    "I was just careless!$"
+}
+
+text SSAnne_Deck_Text_TrevorPostBattle {
+    "My pa said there are 100 kinds of\n"
+    "POKéMON. I think there are more.$"
+}

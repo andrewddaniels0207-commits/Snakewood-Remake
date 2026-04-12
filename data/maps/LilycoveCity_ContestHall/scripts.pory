@@ -1,0 +1,578 @@
+mapscripts LilycoveCity_ContestHall_MapScripts {}
+
+script LilycoveCity_ContestHall_EventScript_Boy1 {
+    msgbox(LilycoveCity_ContestHall_Text_TodayWonSmartnessContest, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_Boy2 {
+    msgbox(LilycoveCity_ContestHall_Text_EnteredBunchOfContests, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_Girl {
+    msgbox(LilycoveCity_ContestHall_Text_ManWhoWonEarlierHadPokeblocks, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_Sailor {
+    msgbox(LilycoveCity_ContestHall_Text_IsntThisPlaceHumongous, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_SmartContestMC {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_GiveItBestSmartAppeal, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_SMART_MC, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_SmartContestJudge {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_AreYouEnjoyingThisContest, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_SMART_JUDGE, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_SmartContestant1 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_EnteredWrongContest, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_SMART_CONTESTANT_1, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_SmartContestant2 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_RaisedMonToBeSmart, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_SMART_CONTESTANT_2, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_SmartContestant3 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_IfMonPullsSmartMoveNext, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_SMART_CONTESTANT_3, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_SmartContestant4 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_DontAppreciateCuteLeechLife, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_SMART_CONTESTANT_4, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_SmartContestAudience1 {
+    msgbox(LilycoveCity_ContestHall_Text_YoureBeautifulGrandpa, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_SmartContestAudience2 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_AllSeemToUseDifferentMoves, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_SMART_AUDIENCE_2, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_SmartContestAudience3 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_PokemonSmarterThanTrainers, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_SMART_AUDIENCE_3, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_SmartContestAudience4 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_StillLoveSmartnessContests, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_SMART_AUDIENCE_4, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_BeautyContestMC {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_AreYouEnteringBeautyContest, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_BEAUTY_MC, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_BeautyContestJudge {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_EveryPokemonPristineBeauty, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_BEAUTY_JUDGE, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_BeautyContestant1 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_EyesWillBeGluedToMyBeauty, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_BEAUTY_CONTESTANT_1, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_BeautyContestant2 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_OverdidGrooming, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_BEAUTY_CONTESTANT_2, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_BeautyContestant3 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_JudgeWontSeeAuroraBeam, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_BEAUTY_CONTESTANT_3, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_BeautyContestant4 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_PokemonLooksLikeYoungerMe, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_BEAUTY_CONTESTANT_4, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_BeautyContestAudience1 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_WinBeautyContestMakesMeHappy, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_BEAUTY_AUDIENCE_1, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_BeautyContestAudience2 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_GanderAtAllThosePrettyPokemon, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_BEAUTY_AUDIENCE_2, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_BeautyContestAudience3 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_CantWinOnBeautyAlone, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_BEAUTY_AUDIENCE_3, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_CuteContestMC {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_InTheMiddleOfContest, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_CUTE_MC, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_CuteContestJudge {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_SuchCharmingCuteAppeals, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_CUTE_JUDGE, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_CuteContestant1 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_MyAzurillWasDistracted, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_CUTE_CONTESTANT_1, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_CuteContestant2 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_NeverWonBattleButContest, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_CUTE_CONTESTANT_2, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_CuteContestant3 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_PetalDanceIsMarvel, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_CUTE_CONTESTANT_3, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_CuteContestant4 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_MyMonAppealSoMuchCuter, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_CUTE_CONTESTANT_4, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_CuteContestAudience1 {
+    lockall
+    applymovement(LOCALID_CUTE_AUDIENCE_1, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(LilycoveCity_ContestHall_Text_MyChildIsInContest, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_CUTE_AUDIENCE_1, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    delay(25)
+    msgbox(LilycoveCity_ContestHall_Text_ComeOnDear, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_CuteContestAudience2 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_WantCuteMonOfMyOwn, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_CUTE_AUDIENCE_2, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_CuteContestAudience3 {
+    lock
+    faceplayer
+    msgbox(LilycoveCity_ContestHall_Text_ThatGirlThereIsCutest, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_CUTE_AUDIENCE_3, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_BeautyStageSign {
+    msgbox(LilycoveCity_ContestHall_Text_BeautyContestStage, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_CuteStageSign {
+    msgbox(LilycoveCity_ContestHall_Text_CuteContestStage, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_ContestHall_EventScript_SmartStageSign {
+    msgbox(LilycoveCity_ContestHall_Text_SmartContestStage, MSGBOX_SIGN)
+    end
+}
+
+text LilycoveCity_ContestHall_Text_TodayWonSmartnessContest {
+    "This POKéMON won the BEAUTY CONTEST\n"
+    "here before.\p"
+    "Well, guess what? Today, I made it\n"
+    "win a SMARTNESS CONTEST!\p"
+    "My abilities scare even me…$"
+}
+
+text LilycoveCity_ContestHall_Text_EnteredBunchOfContests {
+    "I've entered a bunch of CONTESTS,\n"
+    "so I'm seeing how things work.\p"
+    "If you're in a COOLNESS CONTEST,\n"
+    "cool moves go over as appeals.\p"
+    "But smart moves and cute moves\n"
+    "don't go over well, for instance.$"
+}
+
+text LilycoveCity_ContestHall_Text_ManWhoWonEarlierHadPokeblocks {
+    "That young man who won earlier had\n"
+    "a whole bunch of different {POKEBLOCK}S.\p"
+    "Can you win if you had that many\n"
+    "of those things?$"
+}
+
+text LilycoveCity_ContestHall_Text_IsntThisPlaceHumongous {
+    "Whoa, isn't this place humongous!\p"
+    "The tension in the air… It's not\n"
+    "like a CONTEST hall in the sticks.$"
+}
+
+text LilycoveCity_ContestHall_Text_GiveItBestSmartAppeal {
+    "MC: Okay, SMART POKéMON and their\n"
+    "TRAINERS, are you ready?!\p"
+    "Give it your best showing!\n"
+    "Let's appeal!$"
+}
+
+text LilycoveCity_ContestHall_Text_AreYouEnjoyingThisContest {
+    "JUDGE: Are you enjoying this CONTEST?\p"
+    "Come back with three friends, and\n"
+    "all of you may enter a CONTEST!$"
+}
+
+text LilycoveCity_ContestHall_Text_EnteredWrongContest {
+    "Ayayayay…\n"
+    "I entered the wrong CONTEST.\p"
+    "I entered this tough POKéMON in\n"
+    "the SMARTNESS CONTEST…\p"
+    "Come on, wow them with a smart-looking\n"
+    "ROCK SMASH.$"
+}
+
+text LilycoveCity_ContestHall_Text_RaisedMonToBeSmart {
+    "I've spent many a year, and all my\n"
+    "wisdom besides, raising this POKéMON\l"
+    "to be smart.\p"
+    "It won't be easily bested by some\n"
+    "young pup's POKéMON.\p"
+    "My dear wife, are you seeing this?$"
+}
+
+text LilycoveCity_ContestHall_Text_IfMonPullsSmartMoveNext {
+    "There it is!\p"
+    "If my POKéMON pulls a smart move next,\n"
+    "the audience's excitement will peak!$"
+}
+
+text LilycoveCity_ContestHall_Text_DontAppreciateCuteLeechLife {
+    "Oh, dear, no!\p"
+    "My darling ZUBAT's LEECH LIFE is so\n"
+    "cute I kept using it over and over!\p"
+    "But these mean people don't appreciate\n"
+    "it at all!$"
+}
+
+text LilycoveCity_ContestHall_Text_YoureBeautifulGrandpa {
+    "Kiyaaah! You're beautiful, Grandpa!$"
+}
+
+text LilycoveCity_ContestHall_Text_AllSeemToUseDifferentMoves {
+    "Even when TRAINERS enter the same\n"
+    "kind of POKéMON, they all seem to use\l"
+    "different moves for appeals.\p"
+    "It's just like the way people have\n"
+    "different styles for battling.$"
+}
+
+text LilycoveCity_ContestHall_Text_PokemonSmarterThanTrainers {
+    "I think the POKéMON look smarter\n"
+    "than their TRAINERS. By a lot.$"
+}
+
+text LilycoveCity_ContestHall_Text_StillLoveSmartnessContests {
+    "When all's said and done, I still love\n"
+    "SMARTNESS CONTESTS.\p"
+    "That intellectual green color…\n"
+    "It's so… So… Cool.$"
+}
+
+text LilycoveCity_ContestHall_Text_AreYouEnteringBeautyContest {
+    "MC: Are you entering the BEAUTY\n"
+    "CONTEST, too? Good luck!$"
+}
+
+text LilycoveCity_ContestHall_Text_EveryPokemonPristineBeauty {
+    "JUDGE: Ah, every POKéMON here is\n"
+    "a model of pristine beauty!\p"
+    "Why, I almost forgot to score them!$"
+}
+
+text LilycoveCity_ContestHall_Text_EyesWillBeGluedToMyBeauty {
+    "A POKéMON this beautiful…\n"
+    "There isn't another one like it.\p"
+    "Everyone's eyes will be glued to\n"
+    "my beauty.$"
+}
+
+text LilycoveCity_ContestHall_Text_OverdidGrooming {
+    "Waaaah!\p"
+    "I brushed and groomed my POKéMON\n"
+    "carefully for this CONTEST…\p"
+    "But I overdid it…\n"
+    "My POKéMON's coat turned all scraggly…\p"
+    "What should I do?$"
+}
+
+text LilycoveCity_ContestHall_Text_JudgeWontSeeAuroraBeam {
+    "This AURORA BEAM is so dazzling,\n"
+    "the JUDGE won't be able to see it.\p"
+    "Uh, wait a second…\n"
+    "That'll be meaningless, then!$"
+}
+
+text LilycoveCity_ContestHall_Text_PokemonLooksLikeYoungerMe {
+    "This pretty POKéMON looks just like\n"
+    "me when I was younger.\p"
+    "Right when I said that, my husband\n"
+    "spewed the coffee he was drinking.\p"
+    "Did I say something funny?$"
+}
+
+text LilycoveCity_ContestHall_Text_WinBeautyContestMakesMeHappy {
+    "You know, if I win at a BEAUTY\n"
+    "CONTEST, sure it makes me\l"
+    "happy. More than usual, anyway.$"
+}
+
+text LilycoveCity_ContestHall_Text_GanderAtAllThosePrettyPokemon {
+    "Wahahahah!\p"
+    "Will you take a gander at all those\n"
+    "pretty POKéMON!\l"
+    "I just love this sort of glitz!$"
+}
+
+text LilycoveCity_ContestHall_Text_CantWinOnBeautyAlone {
+    "You can't always win on just beauty\n"
+    "alone.\p"
+    "You have to groom your POKéMON so\n"
+    "it's nice and glossy like mine.$"
+}
+
+text LilycoveCity_ContestHall_Text_InTheMiddleOfContest {
+    "MC: Uh-oh! Hello!\n"
+    "We're in the middle of a CONTEST!\p"
+    "Please enter at our registration\n"
+    "counter and come out, okay?$"
+}
+
+text LilycoveCity_ContestHall_Text_SuchCharmingCuteAppeals {
+    "JUDGE: Oh, such charming and cute\n"
+    "appeals!\p"
+    "Oh, my goodness! What a perfectly\n"
+    "adorable WATER SPORT appeal!$"
+}
+
+text LilycoveCity_ContestHall_Text_MyAzurillWasDistracted {
+    "Oh, no… My sweet AZURILL was\n"
+    "distracted by another POKéMON.$"
+}
+
+text LilycoveCity_ContestHall_Text_NeverWonBattleButContest {
+    "My POKéMON has never won in a battle,\n"
+    "but put it in a CONTEST and look out!$"
+}
+
+text LilycoveCity_ContestHall_Text_PetalDanceIsMarvel {
+    "My POKéMON's PETAL DANCE is a marvel\n"
+    "of elegance.\p"
+    "I won't let anyone disturb its\n"
+    "performance.$"
+}
+
+text LilycoveCity_ContestHall_Text_MyMonAppealSoMuchCuter {
+    "Everyone's POKéMON are very cute.\p"
+    "However, if my POKéMON were to make\n"
+    "a cute appeal…\p"
+    "I'm sure that it would be so much \n"
+    "cuter than the others.$"
+}
+
+text LilycoveCity_ContestHall_Text_MyChildIsInContest {
+    "My child is in this CONTEST.$"
+}
+
+text LilycoveCity_ContestHall_Text_ComeOnDear {
+    "Come on, dear. Go for it!\n"
+    "Your POKéMON is the best!$"
+}
+
+text LilycoveCity_ContestHall_Text_ThatGirlThereIsCutest {
+    "I think that girl over there is\n"
+    "the cutest of the lot.\p"
+    "What's that? They're judging\n"
+    "POKéMON by their looks?$"
+}
+
+text LilycoveCity_ContestHall_Text_WantCuteMonOfMyOwn {
+    "Ohh, seeing all these cute POKéMON,\n"
+    "they make we want to get my own!\p"
+    "I'm going to go catch some!$"
+}
+
+text LilycoveCity_ContestHall_Text_BeautyContestStage {
+    "BEAUTY CONTEST STAGE\n"
+    "BE ALLURED BY BEAUTIFUL POKéMON!$"
+}
+
+text LilycoveCity_ContestHall_Text_CuteContestStage {
+    "CUTENESS CONTEST STAGE\n"
+    "BE CHARMED BY CUTE POKéMON!$"
+}
+
+text LilycoveCity_ContestHall_Text_SmartContestStage {
+    "SMARTNESS CONTEST STAGE\n"
+    "BE IMPRESSED BY SMART POKéMON!$"
+}

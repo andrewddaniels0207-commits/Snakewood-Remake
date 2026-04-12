@@ -1,0 +1,632 @@
+mapscripts ThreeIsland_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: ThreeIsland_OnTransition
+}
+
+script ThreeIsland_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_THREE_ISLAND)
+    if (flag(FLAG_RESCUED_LOSTELLE)) call(ThreeIsland_EventScript_HideAntiBikers)
+    if (var(VAR_MAP_SCENE_THREE_ISLAND) == 4) call(ThreeIsland_EventScript_SetAntiBikersMovementAfterBikers)
+    end
+}
+
+script ThreeIsland_EventScript_HideAntiBikers {
+    setflag(FLAG_HIDE_THREE_ISLAND_ANTIBIKERS)
+    return
+}
+
+script ThreeIsland_EventScript_SetAntiBikersMovementAfterBikers {
+    setobjectmovementtype(LOCALID_THREE_ISLAND_ANTIBIKER1, MOVEMENT_TYPE_LOOK_AROUND)
+    setobjectmovementtype(LOCALID_THREE_ISLAND_ANTIBIKER2, MOVEMENT_TYPE_LOOK_AROUND)
+    return
+}
+
+script ThreeIsland_EventScript_Biker {
+    lock
+    setvar(VAR_TEMP_1, 2)
+    call(ThreeIsland_EventScript_BikerArgumentScene)
+    release
+    end
+}
+
+script ThreeIsland_EventScript_AntiBiker1 {
+    lock
+    if (flag(FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER)) goto(ThreeIsland_EventScript_AntiBiker1GotFullRestore)
+    if (var(VAR_MAP_SCENE_THREE_ISLAND) == 4) goto(ThreeIsland_EventScript_GiveFullRestore)
+    setvar(VAR_TEMP_1, 0)
+    call(ThreeIsland_EventScript_BikerArgumentScene)
+    release
+    end
+}
+
+script ThreeIsland_EventScript_AntiBiker1GotFullRestore {
+    applymovement(LOCALID_THREE_ISLAND_ANTIBIKER1, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(ThreeIsland_Text_YouveGotImpressiveMons)
+    release
+    end
+}
+
+script ThreeIsland_EventScript_GiveFullRestore {
+    applymovement(LOCALID_THREE_ISLAND_ANTIBIKER1, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(ThreeIsland_Text_ThankYouOhYourMonGotHurt)
+    checkitemspace(ITEM_FULL_RESTORE)
+    if (var(VAR_RESULT) == FALSE) goto(ThreeIsland_EventScript_NoRoomForFullRestore)
+    msgreceiveditem(ThreeIsland_Text_GivenFullRestore, ITEM_FULL_RESTORE)
+    additem(ITEM_FULL_RESTORE)
+    setflag(FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER)
+    msgbox(ThreeIsland_Text_YouveGotImpressiveMons)
+    release
+    end
+}
+
+script ThreeIsland_EventScript_NoRoomForFullRestore {
+    msgbox(ThreeIsland_Text_OhYourBagIsFull)
+    release
+    end
+}
+
+script ThreeIsland_EventScript_BikerArgumentScene {
+    if (var(VAR_TEMP_1) == 1) call(ThreeIsland_EventScript_PlayerFaceLeft)
+    if (var(VAR_TEMP_1) == 2) call(ThreeIsland_EventScript_PlayerFaceLeft)
+    applymovement(LOCALID_THREE_ISLAND_ANTIBIKER1, ThreeIsland_Movement_SpeakRight)
+    waitmovement(0)
+    msgbox(ThreeIsland_Text_GoBackToKanto)
+    if (var(VAR_TEMP_1) == 0) call(ThreeIsland_EventScript_PlayerFaceRight)
+    if (var(VAR_TEMP_1) == 1) call(ThreeIsland_EventScript_PlayerFaceRight)
+    if (var(VAR_TEMP_1) == 2) call(ThreeIsland_EventScript_PlayerFaceBiker)
+    applymovement(LOCALID_THREE_ISLAND_BIKER1, ThreeIsland_Movement_SpeakLeft)
+    waitmovement(0)
+    msgbox(ThreeIsland_Text_BossIsOnHisWay)
+    if (var(VAR_TEMP_1) == 0) call(ThreeIsland_EventScript_PlayerFaceUp)
+    if (var(VAR_TEMP_1) == 1) call(ThreeIsland_EventScript_PlayerFaceUp)
+    if (var(VAR_TEMP_1) == 2) call(ThreeIsland_EventScript_PlayerFaceAntiBiker)
+    applymovement(LOCALID_THREE_ISLAND_ANTIBIKER2, ThreeIsland_Movement_SpeakRight)
+    waitmovement(0)
+    msgbox(ThreeIsland_Text_GetOffIslandNow)
+    if (var(VAR_TEMP_1) == 0) call(ThreeIsland_EventScript_PlayerFaceRight)
+    if (var(VAR_TEMP_1) == 1) call(ThreeIsland_EventScript_PlayerFaceRight)
+    if (var(VAR_TEMP_1) == 2) call(ThreeIsland_EventScript_PlayerFaceBiker)
+    applymovement(LOCALID_THREE_ISLAND_BIKER3, ThreeIsland_Movement_SpeakLeft)
+    waitmovement(0)
+    msgbox(ThreeIsland_Text_WhosGonnaMakeMe)
+    return
+}
+
+script ThreeIsland_EventScript_PlayerFaceUp {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    return
+}
+
+script ThreeIsland_EventScript_PlayerFaceDown {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    return
+}
+
+script ThreeIsland_EventScript_PlayerFaceLeft {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    return
+}
+
+script ThreeIsland_EventScript_PlayerFaceRight {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    return
+}
+
+script ThreeIsland_EventScript_PlayerFaceBiker {
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8004) >= 9) goto(ThreeIsland_EventScript_PlayerFaceUp)
+    goto(ThreeIsland_EventScript_PlayerFaceRight)
+    end
+}
+
+script ThreeIsland_EventScript_PlayerFaceAntiBiker {
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8004) >= 9) goto(ThreeIsland_EventScript_PlayerFaceLeft)
+    goto(ThreeIsland_EventScript_PlayerFaceUp)
+    end
+}
+
+script ThreeIsland_EventScript_AntiBiker2 {
+    lock
+    if (var(VAR_MAP_SCENE_THREE_ISLAND) == 4) goto(ThreeIsland_EventScript_AntiBiker2BikersGone)
+    setvar(VAR_TEMP_1, 1)
+    call(ThreeIsland_EventScript_BikerArgumentScene)
+    release
+    end
+}
+
+script ThreeIsland_EventScript_AntiBiker2BikersGone {
+    applymovement(LOCALID_THREE_ISLAND_ANTIBIKER2, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(ThreeIsland_Text_LostelleWentOffTowardsBondBridge)
+    release
+    end
+}
+
+script ThreeIsland_EventScript_BikerBossIntroTrigger {
+    lockall
+    textcolor(NPC_TEXT_COLOR_MALE)
+    applymovement(LOCALID_THREE_ISLAND_ANTIBIKER1, ThreeIsland_Movement_SpeakRight)
+    waitmovement(0)
+    msgbox(ThreeIsland_Text_AreYouBossGoBackToKanto)
+    applymovement(LOCALID_PAXTON, ThreeIsland_Movement_SpeakLeft)
+    waitmovement(0)
+    msgbox(ThreeIsland_Text_JustGotHerePal)
+    applymovement(LOCALID_THREE_ISLAND_ANTIBIKER1, ThreeIsland_Movement_SpeakRight)
+    waitmovement(0)
+    msgbox(ThreeIsland_Text_FollowersRaisingHavoc)
+    applymovement(LOCALID_PAXTON, ThreeIsland_Movement_SpeakLeft)
+    waitmovement(0)
+    msgbox(ThreeIsland_Text_OughtToBeThankingUs)
+    applymovement(LOCALID_THREE_ISLAND_ANTIBIKER1, ThreeIsland_Movement_SpeakRight)
+    waitmovement(0)
+    msgbox(ThreeIsland_Text_YouCowardsToughInPack)
+    setvar(VAR_MAP_SCENE_THREE_ISLAND, 3)
+    releaseall
+    end
+}
+
+movement ThreeIsland_Movement_SpeakLeft {
+    walk_in_place_left
+    step_end
+}
+
+movement ThreeIsland_Movement_SpeakRight {
+    walk_in_place_right
+    step_end
+}
+
+script ThreeIsland_EventScript_BattleBikersTriggerLeft {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    goto(ThreeIsland_EventScript_BattleBikersScene)
+    end
+}
+
+script ThreeIsland_EventScript_BattleBikersTriggerMidLeft {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    goto(ThreeIsland_EventScript_BattleBikersScene)
+    end
+}
+
+script ThreeIsland_EventScript_BattleBikersTriggerMid {
+    lockall
+    setvar(VAR_TEMP_1, 2)
+    goto(ThreeIsland_EventScript_BattleBikersScene)
+    end
+}
+
+script ThreeIsland_EventScript_BattleBikersTriggerMidRight {
+    lockall
+    setvar(VAR_TEMP_1, 3)
+    goto(ThreeIsland_EventScript_BattleBikersScene)
+    end
+}
+
+script ThreeIsland_EventScript_BattleBikersTriggerRight {
+    lockall
+    setvar(VAR_TEMP_1, 4)
+    goto(ThreeIsland_EventScript_BattleBikersScene)
+    end
+}
+
+script ThreeIsland_EventScript_BattleBikersScene {
+    textcolor(NPC_TEXT_COLOR_MALE)
+    applymovement(LOCALID_THREE_ISLAND_BIKER1, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    playse(SE_PIN)
+    applymovement(LOCALID_THREE_ISLAND_BIKER1, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_THREE_ISLAND_BIKER1, Common_Movement_Delay48)
+    waitmovement(0)
+    applymovement(LOCALID_THREE_ISLAND_BIKER1, ThreeIsland_Movement_BikerApproach)
+    waitmovement(0)
+    playbgm(MUS_RG_ENCOUNTER_BOY, 0)
+    msgbox(ThreeIsland_Text_WannaMakeSomethingOfYourStaring, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(ThreeIsland_EventScript_LeaveBikersAlone)
+    msgbox(ThreeIsland_Text_Biker1Intro)
+    setvar(VAR_LAST_TALKED, LOCALID_THREE_ISLAND_BIKER1)
+    trainerbattle_no_intro(TRAINER_BIKER_GOON, ThreeIsland_Text_Biker1Defeat)
+    applymovement(LOCALID_THREE_ISLAND_BIKER1, ThreeIsland_Movement_BikerSpeak)
+    waitmovement(0)
+    msgbox(ThreeIsland_Text_Biker1PostBattle)
+    closemessage
+    applymovement(LOCALID_THREE_ISLAND_BIKER2, ThreeIsland_Movement_BikerApproach)
+    waitmovement(0)
+    playbgm(MUS_RG_ENCOUNTER_BOY, 0)
+    msgbox(ThreeIsland_Text_Biker2Intro)
+    setvar(VAR_LAST_TALKED, LOCALID_THREE_ISLAND_BIKER2)
+    trainerbattle_no_intro(TRAINER_BIKER_GOON_2, ThreeIsland_Text_Biker2Defeat)
+    applymovement(LOCALID_THREE_ISLAND_BIKER2, ThreeIsland_Movement_BikerSpeak)
+    waitmovement(0)
+    msgbox(ThreeIsland_Text_Biker2PostBattle)
+    closemessage
+    applymovement(LOCALID_THREE_ISLAND_BIKER3, ThreeIsland_Movement_BikerApproach)
+    waitmovement(0)
+    playbgm(MUS_RG_ENCOUNTER_BOY, 0)
+    msgbox(ThreeIsland_Text_Biker3Intro)
+    setvar(VAR_LAST_TALKED, LOCALID_THREE_ISLAND_BIKER3)
+    trainerbattle_no_intro(TRAINER_BIKER_GOON_3, ThreeIsland_Text_Biker3Defeat)
+    applymovement(LOCALID_THREE_ISLAND_BIKER3, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    applymovement(LOCALID_THREE_ISLAND_BIKER4, Common_Movement_WalkInPlaceFasterDown)
+    applymovement(LOCALID_THREE_ISLAND_BIKER5, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    msgbox(ThreeIsland_Text_Biker3PostBattle)
+    closemessage
+    delay(45)
+    if (var(VAR_TEMP_1) == 0) call(ThreeIsland_EventScript_PaxtonApproachLeft)
+    if (var(VAR_TEMP_1) == 1) call(ThreeIsland_EventScript_PaxtonApproachMidLeft)
+    if (var(VAR_TEMP_1) == 2) call(ThreeIsland_EventScript_PaxtonApproachMid)
+    if (var(VAR_TEMP_1) == 3) call(ThreeIsland_EventScript_PaxtonApproachMidRight)
+    if (var(VAR_TEMP_1) == 4) call(ThreeIsland_EventScript_PaxtonApproachRight)
+    playbgm(MUS_RG_ENCOUNTER_BOY, 0)
+    msgbox(ThreeIsland_Text_PaxtonIntro)
+    setvar(VAR_LAST_TALKED, LOCALID_PAXTON)
+    trainerbattle_no_intro(TRAINER_CUE_BALL_PAXTON, ThreeIsland_Text_PaxtonDefeat)
+    msgbox(ThreeIsland_Text_PaxtonPostBattle)
+    closemessage
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_PAXTON)
+    removeobject(LOCALID_THREE_ISLAND_BIKER1)
+    removeobject(LOCALID_THREE_ISLAND_BIKER2)
+    removeobject(LOCALID_THREE_ISLAND_BIKER3)
+    removeobject(LOCALID_THREE_ISLAND_BIKER4)
+    removeobject(LOCALID_THREE_ISLAND_BIKER5)
+    removeobject(LOCALID_THREE_ISLAND_BIKER6)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    setvar(VAR_MAP_SCENE_THREE_ISLAND, 4)
+    releaseall
+    end
+}
+
+script ThreeIsland_EventScript_PaxtonApproachLeft {
+    applymovement(LOCALID_THREE_ISLAND_BIKER3, Common_Movement_WalkInPlaceFasterDown)
+    applymovement(LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachLeft)
+    waitmovement(0)
+    return
+}
+
+script ThreeIsland_EventScript_PaxtonApproachMidLeft {
+    applymovement(LOCALID_THREE_ISLAND_BIKER3, Common_Movement_WalkInPlaceFasterDown)
+    applymovement(LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachMidLeft)
+    waitmovement(0)
+    return
+}
+
+script ThreeIsland_EventScript_PaxtonApproachMid {
+    applymovement(LOCALID_THREE_ISLAND_BIKER3, Common_Movement_WalkInPlaceFasterDown)
+    applymovement(LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachMid)
+    applymovement(LOCALID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton)
+    waitmovement(0)
+    return
+}
+
+script ThreeIsland_EventScript_PaxtonApproachMidRight {
+    applymovement(LOCALID_THREE_ISLAND_BIKER3, Common_Movement_WalkInPlaceFasterDown)
+    applymovement(LOCALID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton)
+    applymovement(LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachMidRight)
+    waitmovement(0)
+    return
+}
+
+script ThreeIsland_EventScript_PaxtonApproachRight {
+    applymovement(LOCALID_THREE_ISLAND_BIKER3, Common_Movement_WalkInPlaceFasterDown)
+    applymovement(LOCALID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton)
+    applymovement(LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachRight)
+    waitmovement(0)
+    return
+}
+
+script ThreeIsland_EventScript_LeaveBikersAlone {
+    msgbox(ThreeIsland_Text_ThatsSmart)
+    closemessage
+    applymovement(LOCALID_PLAYER, ThreeIsland_Movement_PlayerLeaveBikers)
+    waitmovement(0)
+    applymovement(LOCALID_THREE_ISLAND_BIKER1, ThreeIsland_Movement_Biker1ReturnToPack)
+    waitmovement(0)
+    fadedefaultbgm()
+    releaseall
+    end
+}
+
+movement ThreeIsland_Movement_PlayerLeaveBikers {
+    walk_down
+    step_end
+}
+
+movement ThreeIsland_Movement_BikerApproach {
+    walk_down
+    step_end
+}
+
+movement ThreeIsland_Movement_Biker1ReturnToPack {
+    walk_up
+    walk_in_place_faster_left
+    step_end
+}
+
+movement ThreeIsland_Movement_BikerSpeak {
+    walk_in_place_down
+    step_end
+}
+
+movement ThreeIsland_Movement_PaxtonApproachLeft {
+    walk_down
+    walk_left
+    walk_in_place_faster_down
+    step_end
+}
+
+movement ThreeIsland_Movement_PaxtonApproachMidLeft {
+    walk_down
+    step_end
+}
+
+movement ThreeIsland_Movement_PaxtonApproachMid {
+    walk_down
+    walk_down
+    walk_in_place_faster_right
+    step_end
+}
+
+movement ThreeIsland_Movement_PlayerFacePaxton {
+    delay_16
+    delay_16
+    walk_in_place_faster_left
+    step_end
+}
+
+movement ThreeIsland_Movement_PaxtonApproachMidRight {
+    walk_down
+    walk_down
+    walk_right
+    walk_in_place_faster_right
+    step_end
+}
+
+movement ThreeIsland_Movement_PaxtonApproachRight {
+    walk_down
+    walk_down
+    walk_right
+    walk_right
+    walk_in_place_faster_right
+    step_end
+}
+
+script ThreeIsland_EventScript_Woman {
+    msgbox(ThreeIsland_Text_WouldntWantToSeeBikersHereAgain, MSGBOX_NPC)
+    end
+}
+
+script ThreeIsland_EventScript_LittleBoy {
+    msgbox(ThreeIsland_Text_WhenDodouEvolvesGoingToPlayGame, MSGBOX_NPC)
+    end
+}
+
+script ThreeIsland_EventScript_Doduo {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_DODUO, CRY_MODE_NORMAL)
+    msgbox(ThreeIsland_Text_Doduo)
+    waitmoncry()
+    release
+    end
+}
+
+script ThreeIsland_EventScript_IslandSign {
+    msgbox(ThreeIsland_Text_IslandSign, MSGBOX_SIGN)
+    end
+}
+
+script ThreeIsland_EventScript_Biker6 {
+    msgbox(ThreeIsland_Text_IslandBelongsToUs, MSGBOX_NPC)
+    end
+}
+
+text ThreeIsland_Text_IslandSign {
+    "THREE ISLAND\n"
+    "Kin Island of Family Bonding$"
+}
+
+text ThreeIsland_Text_IslandBelongsToUs {
+    "Hyahoo!\p"
+    "From this day on, this island\n"
+    "belongs to us!$"
+}
+
+text ThreeIsland_Text_GoBackToKanto {
+    "We don't need you people bringing\n"
+    "your noise and trouble here!\p"
+    "We're asking you to go back to\n"
+    "KANTO!$"
+}
+
+text ThreeIsland_Text_BossIsOnHisWay {
+    "Hey, go cry somewhere else.\n"
+    "Our boss is on his way.\p"
+    "When he gets here, we'll give you\n"
+    "a k-rad motorbike show you won't\l"
+    "soon forget!$"
+}
+
+text ThreeIsland_Text_GetOffIslandNow {
+    "W-what!? Not on your life!\n"
+    "Get off the island now!$"
+}
+
+text ThreeIsland_Text_WhosGonnaMakeMe {
+    "Who's gonna make me?$"
+}
+
+text ThreeIsland_Text_AreYouBossGoBackToKanto {
+    "Are you the boss?\n"
+    "Go back to KANTO right now!$"
+}
+
+text ThreeIsland_Text_JustGotHerePal {
+    "Hah?\p"
+    "I just got here, pal.\p"
+    "What's with the hostile attitude?\n"
+    "It's mighty cold of you!$"
+}
+
+text ThreeIsland_Text_FollowersRaisingHavoc {
+    "Your gang of followers have been\n"
+    "raising havoc on their bikes.\p"
+    "Do you have any idea how much\n"
+    "trouble they've caused us on the\l"
+    "island?$"
+}
+
+text ThreeIsland_Text_OughtToBeThankingUs {
+    "No, man, I don't get it at all.\p"
+    "Look at this place.\n"
+    "What do you do for entertainment?\p"
+    "You ought to be thanking us for\n"
+    "livening up this sleepy village.\p"
+    "But hey, if you insist, you can try\n"
+    "making us leave.$"
+}
+
+text ThreeIsland_Text_YouCowardsToughInPack {
+    "Grr… You cowards…\n"
+    "So tough in a pack…$"
+}
+
+text ThreeIsland_Text_WannaMakeSomethingOfYourStaring {
+    "You, what are you staring at?\n"
+    "Don't you know it's not polite?\p"
+    "You wanna make something of it\n"
+    "or what?$"
+}
+
+text ThreeIsland_Text_ThatsSmart {
+    "That's smart.\n"
+    "Keep your nose out of this.$"
+}
+
+text ThreeIsland_Text_Biker1Intro {
+    "Heh, I like your guts.\n"
+    "You'll be losing money to me, but…$"
+}
+
+text ThreeIsland_Text_Biker1Defeat {
+    "Wha…\n"
+    "What is this kid?!$"
+}
+
+text ThreeIsland_Text_Biker1PostBattle {
+    "Aww, man…\n"
+    "Don't you dare laugh!$"
+}
+
+text ThreeIsland_Text_Biker2Intro {
+    "Aren't you from KANTO?\n"
+    "You should be on our side!$"
+}
+
+text ThreeIsland_Text_Biker2Defeat {
+    "Stop fooling around!$"
+}
+
+text ThreeIsland_Text_Biker2PostBattle {
+    "What's the matter with you,\n"
+    "getting all hot like that?\p"
+    "Totally uncool, man!$"
+}
+
+text ThreeIsland_Text_Biker3Intro {
+    "We invited the boss out here,\n"
+    "but you had to mess it up!\p"
+    "You embarrassed us, man!$"
+}
+
+text ThreeIsland_Text_Biker3Defeat {
+    "… … …   … … …$"
+}
+
+text ThreeIsland_Text_Biker3PostBattle {
+    "Boss, I'm telling you, you've gotta\n"
+    "do something about this kid!$"
+}
+
+text ThreeIsland_Text_PaxtonIntro {
+    "I've been watching you, and I'd say\n"
+    "you've done enough.\p"
+    "What are you, their friend or\n"
+    "something?\p"
+    "Then I guess you'll be battling me\n"
+    "in their place.$"
+}
+
+text ThreeIsland_Text_PaxtonDefeat {
+    "All right, enough!\n"
+    "We'll leave like you wanted!\p"
+    "We'll be happy to see the last of\n"
+    "this boring island!$"
+}
+
+text ThreeIsland_Text_PaxtonPostBattle {
+    "Humph! Yeah, go right on hanging\n"
+    "around with these hayseeds!$"
+}
+
+text ThreeIsland_Text_ThankYouOhYourMonGotHurt {
+    "Thank you! Those goons were\n"
+    "nothing but bad trouble.\p"
+    "Oh, look, your POKéMON got hurt\n"
+    "on my account.$"
+}
+
+text ThreeIsland_Text_GivenFullRestore {
+    "{PLAYER} was given\n"
+    "a FULL RESTORE.$"
+}
+
+text ThreeIsland_Text_OhYourBagIsFull {
+    "Oh?\n"
+    "Your BAG is full.$"
+}
+
+text ThreeIsland_Text_YouveGotImpressiveMons {
+    "You've got seriously impressive\n"
+    "POKéMON with you.$"
+}
+
+text ThreeIsland_Text_LostelleWentOffTowardsBondBridge {
+    "It'd be fantastic if someone as\n"
+    "strong as you lived here.\p"
+    "I hope you'll at least stay here\n"
+    "a while.\p"
+    "…I beg your pardon?\n"
+    "You're looking for LOSTELLE?\p"
+    "LOSTELLE went off towards BOND\n"
+    "BRIDGE a while ago.$"
+}
+
+text ThreeIsland_Text_WouldntWantToSeeBikersHereAgain {
+    "THREE ISLAND is actually the most\n"
+    "populous of the islands here.\p"
+    "Still, it could be less sleepy.\p"
+    "But I wouldn't want to see goons\n"
+    "like those BIKERS here again.$"
+}
+
+text ThreeIsland_Text_WhenDodouEvolvesGoingToPlayGame {
+    "I'm going to train my DODUO in the\n"
+    "BERRY FOREST.\p"
+    "When it evolves, I'm going to play\n"
+    "a game on TWO ISLAND.$"
+}
+
+text ThreeIsland_Text_Doduo {
+    "DODUO: Gigiih!$"
+}

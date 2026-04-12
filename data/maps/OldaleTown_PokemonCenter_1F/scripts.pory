@@ -1,0 +1,71 @@
+mapscripts OldaleTown_PokemonCenter_1F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: OldaleTown_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script OldaleTown_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_OLDALE_TOWN)
+    call(Common_EventScript_UpdateBrineyLocation)
+    end
+}
+
+script OldaleTown_PokemonCenter_1F_EventScript_Nurse {
+    setvar(VAR_0x800B, LOCALID_OLDALE_NURSE)
+    call(Common_EventScript_PkmnCenterNurse)
+    waitmessage()
+    waitbuttonpress()
+    release
+    end
+}
+
+script OldaleTown_PokemonCenter_1F_EventScript_Gentleman {
+    msgbox(OldaleTown_PokemonCenter_1F_Text_TrainersCanUsePC, MSGBOX_NPC)
+    end
+}
+
+script OldaleTown_PokemonCenter_1F_EventScript_Boy {
+    msgbox(OldaleTown_PokemonCenter_1F_Text_PokemonCentersAreGreat, MSGBOX_NPC)
+    end
+}
+
+script OldaleTown_PokemonCenter_1F_EventScript_Girl {
+    lock
+    faceplayer
+    if (flag(FLAG_SYS_POKEDEX_GET)) goto(OldaleTown_PokemonCenter_1F_EventScript_WirelessClubAvailable)
+    msgbox(OldaleTown_PokemonCenter_1F_Text_WirelessClubNotAvailable, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script OldaleTown_PokemonCenter_1F_EventScript_WirelessClubAvailable {
+    msgbox(OldaleTown_PokemonCenter_1F_Text_TradedInWirelessClub, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+text OldaleTown_PokemonCenter_1F_Text_TrainersCanUsePC {
+    "That PC in the corner there is\n"
+    "for any POKéMON TRAINER to use.\p"
+    "Naturally, that means you're welcome\n"
+    "to use it, too.$"
+}
+
+text OldaleTown_PokemonCenter_1F_Text_PokemonCentersAreGreat {
+    "POKéMON CENTERS are great!\p"
+    "You can use their services as much\n"
+    "as you like, and it's all for free.\l"
+    "You never have to worry!$"
+}
+
+text OldaleTown_PokemonCenter_1F_Text_WirelessClubNotAvailable {
+    "The POKéMON WIRELESS CLUB on\n"
+    "the second floor was built recently.\p"
+    "But they say they're still making\n"
+    "adjustments.$"
+}
+
+text OldaleTown_PokemonCenter_1F_Text_TradedInWirelessClub {
+    "The POKéMON WIRELESS CLUB on\n"
+    "the second floor was built recently.\p"
+    "I traded POKéMON right away.$"
+}

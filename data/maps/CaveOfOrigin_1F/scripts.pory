@@ -1,0 +1,8 @@
+mapscripts CaveOfOrigin_1F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: CaveOfOrigin_1F_OnTransition
+}
+
+script CaveOfOrigin_1F_OnTransition {
+    if (flag(FLAG_UNUSED_RS_LEGENDARY_BATTLE_DONE)) call(CaveOfOrigin_EventScript_DisableTriggers)
+    end
+}

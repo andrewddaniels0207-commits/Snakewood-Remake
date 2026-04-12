@@ -1,0 +1,121 @@
+mapscripts OneIsland_KindleRoad_EmberSpa_Frlg_MapScripts {}
+
+script OneIsland_KindleRoad_EmberSpa_EventScript_OldMan {
+    msgbox(OneIsland_KindleRoad_EmberSpa_Text_WaterWarmsMeToCore, MSGBOX_NPC)
+    end
+}
+
+script OneIsland_KindleRoad_EmberSpa_EventScript_BaldingMan1 {
+    msgbox(OneIsland_KindleRoad_EmberSpa_Text_EnjoyBowlOfChowder, MSGBOX_NPC)
+    end
+}
+
+script OneIsland_KindleRoad_EmberSpa_EventScript_BaldingMan2 {
+    msgbox(OneIsland_KindleRoad_EmberSpa_Text_HotSpringIsTherapeutic, MSGBOX_NPC)
+    end
+}
+
+script OneIsland_KindleRoad_EmberSpa_EventScript_OldWoman {
+    msgbox(OneIsland_KindleRoad_EmberSpa_Text_SeeHowSmoothMySkinIs, MSGBOX_NPC)
+    end
+}
+
+script OneIsland_KindleRoad_EmberSpa_EventScript_BlackBelt {
+    lock
+    faceplayer
+    famechecker(FAMECHECKER_BRUNO, 3)
+    msgbox(OneIsland_KindleRoad_EmberSpa_Text_BrunoVisitsSpaOnOccasion)
+    release
+    end
+}
+
+script OneIsland_KindleRoad_EmberSpa_EventScript_RockSmashMan {
+    lock
+    faceplayer
+    if (flag(FLAG_GOT_HM06)) goto(OneIsland_KindleRoad_EmberSpa_EventScript_AlreadyGotHM06)
+    msgbox(OneIsland_KindleRoad_EmberSpa_Text_UsedThisToMakeEmberSpa)
+    giveitem(ITEM_HM06)
+    setflag(FLAG_GOT_HM06)
+    msgbox(OneIsland_KindleRoad_EmberSpa_Text_ExplainHM06)
+    release
+    end
+}
+
+script OneIsland_KindleRoad_EmberSpa_EventScript_AlreadyGotHM06 {
+    msgbox(OneIsland_KindleRoad_EmberSpa_Text_ExplainHM06)
+    release
+    end
+}
+
+script OneIsland_KindleRoad_EmberSpa_EventScript_SpaHeal {
+    lockall
+    fadescreen(FADE_TO_WHITE)
+    special(HealPlayerParty)
+    fadescreen(FADE_FROM_WHITE)
+    msgbox(OneIsland_KindleRoad_EmberSpa_Text_WaterExquisiteFullyRefreshed)
+    setvar(VAR_TEMP_1, 1)
+    releaseall
+    end
+}
+
+text OneIsland_KindleRoad_EmberSpa_Text_WaterWarmsMeToCore {
+    "Hm!\n"
+    "Haaaaaaaaaaah!\p"
+    "Aaaah! This is heavenly!\n"
+    "The water warms me to my core!\p"
+    "You should jump in, too.\p"
+    "Go to the middle, relax, and get\n"
+    "good and warm!$"
+}
+
+text OneIsland_KindleRoad_EmberSpa_Text_EnjoyBowlOfChowder {
+    "My favorite part of bathing comes\n"
+    "up right after this.\p"
+    "I enjoy a bowl of chowder to\n"
+    "warm me from the inside, too!$"
+}
+
+text OneIsland_KindleRoad_EmberSpa_Text_WaterExquisiteFullyRefreshed {
+    "The water is perfectly warm.\n"
+    "It feels exquisite…\p"
+    "{PLAYER} and the POKéMON were\n"
+    "fully refreshed!$"
+}
+
+text OneIsland_KindleRoad_EmberSpa_Text_HotSpringIsTherapeutic {
+    "Soaking in a hot spring pool is\n"
+    "therapeutic, people say.$"
+}
+
+text OneIsland_KindleRoad_EmberSpa_Text_SeeHowSmoothMySkinIs {
+    "Have a look at my face.\n"
+    "See how smooth my skin is?\p"
+    "The hot spring's water keeps my\n"
+    "skin younger than my age.$"
+}
+
+text OneIsland_KindleRoad_EmberSpa_Text_BrunoVisitsSpaOnOccasion {
+    "After an honest day of training,\n"
+    "nothing beats a relaxing soak in\l"
+    "the hot spring pool.\p"
+    "BRUNO, who's a senior ahead of me,\n"
+    "visits the SPA on occasion.\p"
+    "He comes to rehab injuries, both\n"
+    "his own and his POKéMON's.$"
+}
+
+text OneIsland_KindleRoad_EmberSpa_Text_UsedThisToMakeEmberSpa {
+    "Hot springs go hand-in-hand with\n"
+    "volcanoes.\p"
+    "The EMBER SPA here, well,\n"
+    "I made it years ago.\p"
+    "I hewed the pool right out of a\n"
+    "gigantic boulder by hand.\p"
+    "I was using this at the time.\n"
+    "I suppose I can part with it.$"
+}
+
+text OneIsland_KindleRoad_EmberSpa_Text_ExplainHM06 {
+    "That shatters boulders as if they\n"
+    "were made of crackers.$"
+}

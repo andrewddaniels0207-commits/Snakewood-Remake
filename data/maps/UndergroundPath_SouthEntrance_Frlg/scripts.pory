@@ -1,0 +1,11 @@
+mapscripts UndergroundPath_SouthEntrance_Frlg_MapScripts {}
+
+script UndergroundPath_SouthEntrance_EventScript_Woman {
+    msgbox(UndergroundPath_SouthEntrance_Text_PeopleLoseThingsInTheDarkness, MSGBOX_NPC)
+    end
+}
+
+text UndergroundPath_SouthEntrance_Text_PeopleLoseThingsInTheDarkness {
+    "People often lose things in the\n"
+    "darkness of the UNDERGROUND PATH.$"
+}

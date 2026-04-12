@@ -1,0 +1,11 @@
+mapscripts Route5_Frlg_MapScripts {}
+
+script Route5_EventScript_UndergroundPathSign {
+    msgbox(Route5_Text_UndergroundPathSign, MSGBOX_SIGN)
+    end
+}
+
+text Route5_Text_UndergroundPathSign {
+    "UNDERGROUND PATH\n"
+    "CERULEAN CITY - VERMILION CITY$"
+}

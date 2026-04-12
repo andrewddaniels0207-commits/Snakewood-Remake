@@ -1,0 +1,380 @@
+mapscripts LilycoveCity_LilycoveMuseum_2F_MapScripts {
+    MAP_SCRIPT_ON_LOAD: LilycoveCity_LilycoveMuseum_2F_OnLoad
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_LILYCOVE_MUSEUM_2F_STATE, 0: LilycoveCity_LilycoveMuseum_2F_EventScript_ShowExhibitHall
+    ]
+}
+
+script LilycoveCity_LilycoveMuseum_2F_OnLoad {
+    if (flag(FLAG_COOL_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_SetCoolPainting)
+    goto(LilycoveCity_LilycoveMuseum_2F_EventScript_CheckBeautyPainting)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_CheckBeautyPainting {
+    if (flag(FLAG_BEAUTY_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_SetBeautyPainting)
+    goto(LilycoveCity_LilycoveMuseum_2F_EventScript_CheckCutePainting)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_CheckCutePainting {
+    if (flag(FLAG_CUTE_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_SetCutePainting)
+    goto(LilycoveCity_LilycoveMuseum_2F_EventScript_CheckSmartPainting)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_CheckSmartPainting {
+    if (flag(FLAG_SMART_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_SetSmartPainting)
+    goto(LilycoveCity_LilycoveMuseum_2F_EventScript_CheckToughPainting)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_CheckToughPainting {
+    if (flag(FLAG_TOUGH_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_SetToughPainting)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_SetCoolPainting {
+    setmetatile(10, 6, METATILE_LilycoveMuseum_Painting2_Left, TRUE)
+    setmetatile(11, 6, METATILE_LilycoveMuseum_Painting2_Right, TRUE)
+    goto(LilycoveCity_LilycoveMuseum_2F_EventScript_CheckBeautyPainting)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_SetBeautyPainting {
+    setmetatile(18, 6, METATILE_LilycoveMuseum_Painting1_Left, TRUE)
+    setmetatile(19, 6, METATILE_LilycoveMuseum_Painting1_Right, TRUE)
+    goto(LilycoveCity_LilycoveMuseum_2F_EventScript_CheckCutePainting)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_SetCutePainting {
+    setmetatile(14, 10, METATILE_LilycoveMuseum_Painting3_Left, TRUE)
+    setmetatile(15, 10, METATILE_LilycoveMuseum_Painting3_Right, TRUE)
+    goto(LilycoveCity_LilycoveMuseum_2F_EventScript_CheckSmartPainting)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_SetSmartPainting {
+    setmetatile(6, 10, METATILE_LilycoveMuseum_Painting0_Left, TRUE)
+    setmetatile(7, 10, METATILE_LilycoveMuseum_Painting0_Right, TRUE)
+    goto(LilycoveCity_LilycoveMuseum_2F_EventScript_CheckToughPainting)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_SetToughPainting {
+    setmetatile(2, 6, METATILE_LilycoveMuseum_Painting4_Left, TRUE)
+    setmetatile(3, 6, METATILE_LilycoveMuseum_Painting4_Right, TRUE)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_ShowExhibitHall {
+    lockall
+    applymovement(LOCALID_MUSEUM_2F_CURATOR, Common_Movement_FacePlayer)
+    applymovement(LOCALID_PLAYER, LilycoveCity_LilycoveMuseum_2F_Movement_PlayerWalkInPlaceLeft)
+    waitmovement(0)
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ThisIsExhibitHall, MSGBOX_SIGN)
+    applymovement(LOCALID_MUSEUM_2F_CURATOR, LilycoveCity_LilycoveMuseum_2F_Movement_FaceExhibitHall)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, LilycoveCity_LilycoveMuseum_2F_Movement_FaceExhibitHall)
+    waitmovement(0)
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ExplainExhibitHall, MSGBOX_SIGN)
+    applymovement(LOCALID_MUSEUM_2F_CURATOR, Common_Movement_FacePlayer)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, LilycoveCity_LilycoveMuseum_2F_Movement_PlayerWalkInPlaceLeft)
+    waitmovement(0)
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_PleaseObtainPaintingsForExhibit, MSGBOX_SIGN)
+    #ifdef(UBFIX)
+    setvar(VAR_LILYCOVE_MUSEUM_2F_STATE, 1)
+    #else()
+    copyvar(VAR_LILYCOVE_MUSEUM_2F_STATE, 1, warn=FALSE)
+    #endif()
+    releaseall
+    end
+}
+
+movement LilycoveCity_LilycoveMuseum_2F_Movement_PlayerWalkInPlaceLeft {
+    walk_in_place_faster_left
+    step_end
+}
+
+movement LilycoveCity_LilycoveMuseum_2F_Movement_FaceExhibitHall {
+    face_up
+    delay_16
+    step_end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_Curator {
+    lockall
+    if (flag(FLAG_RECEIVED_GLASS_ORNAMENT)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ReceivedGlassOrnament)
+    specialvar(VAR_0x8004, CountPlayerMuseumPaintings)
+    switch(VAR_0x8004)
+    case(1, LilycoveCity_LilycoveMuseum_2F_EventScript_AddedPainting)
+    case(2, LilycoveCity_LilycoveMuseum_2F_EventScript_AddedPainting)
+    case(3, LilycoveCity_LilycoveMuseum_2F_EventScript_AddedPainting)
+    case(4, LilycoveCity_LilycoveMuseum_2F_EventScript_AddedPainting)
+    case(5, LilycoveCity_LilycoveMuseum_2F_EventScript_ThankPlayer)
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_WishToFillExhibit, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_AddedPainting {
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ThanksAddedNewPainting, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_ThankPlayer {
+    applymovement(LOCALID_MUSEUM_2F_CURATOR, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ItsYouPlayer, MSGBOX_DEFAULT)
+    applymovement(LOCALID_MUSEUM_2F_CURATOR, LilycoveCity_LilycoveMuseum_2F_Movement_FaceExhibitHall)
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_PaintingsAttractedMoreGuests, MSGBOX_DEFAULT)
+    goto(LilycoveCity_LilycoveMuseum_2F_EventScript_GiveGlassOrnament)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_GiveGlassOrnament {
+    applymovement(LOCALID_MUSEUM_2F_CURATOR, Common_Movement_FacePlayer)
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_TokenOfGratitude, MSGBOX_DEFAULT)
+    givedecoration(DECOR_GLASS_ORNAMENT)
+    if (var(VAR_RESULT) == FALSE) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_NoRoomForGlassOrnament)
+    setflag(FLAG_RECEIVED_GLASS_ORNAMENT)
+    closemessage
+    releaseall
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_NoRoomForGlassOrnament {
+    call(Common_EventScript_NoRoomForDecor)
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_KeepThisForYou, MSGBOX_DEFAULT)
+    closemessage
+    releaseall
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_ReceivedGlassOrnament {
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_HonorToHaveYouVisit, MSGBOX_NPC)
+    releaseall
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_CutePainting {
+    lockall
+    if (flag(FLAG_CUTE_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCutePainting)
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ItsPinkPictureFrame, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_ToughPainting {
+    lockall
+    if (flag(FLAG_TOUGH_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting)
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ItsYellowPictureFrame, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_CoolPainting {
+    lockall
+    if (flag(FLAG_COOL_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCoolPainting)
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ItsRedPictureFrame, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_BeautyPainting {
+    lockall
+    if (flag(FLAG_BEAUTY_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ShowBeautyPainting)
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ItsBluePictureFrame, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_SmartPainting {
+    lockall
+    if (flag(FLAG_SMART_PAINTING_MADE)) goto(LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting)
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ItsGreenPictureFrame, MSGBOX_SIGN)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_Girl {
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_NewPaintingsSurprisedMe, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_ExpertM {
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_NewPaintingsRatherAmusing, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_RichBoy {
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ThesePaintingsOfYourPokemon, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCoolPainting {
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN)
+    fadescreen(FADE_TO_BLACK)
+    showcontestpainting(CONTEST_WINNER_MUSEUM_COOL)
+    releaseall
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_ShowBeautyPainting {
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN)
+    fadescreen(FADE_TO_BLACK)
+    showcontestpainting(CONTEST_WINNER_MUSEUM_BEAUTY)
+    releaseall
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCutePainting {
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN)
+    fadescreen(FADE_TO_BLACK)
+    showcontestpainting(CONTEST_WINNER_MUSEUM_CUTE)
+    releaseall
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting {
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN)
+    fadescreen(FADE_TO_BLACK)
+    showcontestpainting(CONTEST_WINNER_MUSEUM_SMART)
+    releaseall
+    end
+}
+
+script LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting {
+    msgbox(LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN)
+    fadescreen(FADE_TO_BLACK)
+    showcontestpainting(CONTEST_WINNER_MUSEUM_TOUGH)
+    releaseall
+    end
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_ThisIsExhibitHall {
+    "This is our special exhibit hall.$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_ExplainExhibitHall {
+    "As you can plainly see, there is not\n"
+    "a single painting on exhibit.\p"
+    "Here, I don't wish to exhibit works of\n"
+    "so-called classical art.\p"
+    "Such classical works you can see on\n"
+    "our ground floor.\p"
+    "I wish to exhibit work that is far\n"
+    "different from the classics.\p"
+    "Art, after all, is not restricted to old,\n"
+    "famous works!\p"
+    "This exhibit hall, I wish to fill it with…\p"
+    "Modern and vibrant artworks of\n"
+    "POKéMON seemingly ready to spring\l"
+    "forth into glorious life!$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_PleaseObtainPaintingsForExhibit {
+    "I beg your pardon. I didn't intend\n"
+    "to monopolize the conversation.\p"
+    "Now, as you are young, and yet\n"
+    "obviously well traveled…\p"
+    "You must encounter lively POKéMON\n"
+    "and works of art depicting them.\p"
+    "If you were to come across such\n"
+    "a painting, may we ask you to obtain\l"
+    "the artist's permission to exhibit\l"
+    "it here?$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_WishToFillExhibit {
+    "I wish to fill this exhibit hall with\n"
+    "modern and vibrant paintings of\l"
+    "POKéMON.$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_ThanksAddedNewPainting {
+    "Thanks to you, we've added a new\n"
+    "painting to our collection!\p"
+    "I've heard it depicts your POKéMON.\n"
+    "Truly magnificent!\p"
+    "Thank you so very, very much!$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_ItsYouPlayer {
+    "Ah! It's you!\n"
+    "{PLAYER}!$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_PaintingsAttractedMoreGuests {
+    "Isn't this marvelous?\n"
+    "This collection of paintings!\p"
+    "Each one of them flawless!\n"
+    "None better than another!\p"
+    "These paintings have attracted\n"
+    "more guests to our ART MUSEUM.\p"
+    "Sincerely, I thank you, {PLAYER}.\n"
+    "This is my dream come true!$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_TokenOfGratitude {
+    "This is merely a token of my gratitude.$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_KeepThisForYou {
+    "I will keep this for you until we\n"
+    "meet again.$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_HonorToHaveYouVisit {
+    "Ah, so good to see you, {PLAYER}!\p"
+    "It's an honor to have you visit us\n"
+    "on your busy journeys.\p"
+    "Please, relax and do enjoy your\n"
+    "visit with us.$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_ItsPinkPictureFrame {
+    "It's a picture frame with pink-colored\n"
+    "adornments.$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_ItsYellowPictureFrame {
+    "It's a picture frame with\n"
+    "yellow-colored adornments.$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_ItsBluePictureFrame {
+    "It's a picture frame with\n"
+    "blue-colored adornments.$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_ItsRedPictureFrame {
+    "It's a picture frame with\n"
+    "red-colored adornments.$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_ItsGreenPictureFrame {
+    "It's a picture frame with\n"
+    "green-colored adornments.$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon {
+    "It's a painting of POKéMON.$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_NewPaintingsSurprisedMe {
+    "I've been away awhile, so the new\n"
+    "paintings up here surprised me.\p"
+    "I wish someone would paint my POKéMON\n"
+    "this pretty.$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_NewPaintingsRatherAmusing {
+    "Well… So this is where they show\n"
+    "the topical POKéMON paintings.\p"
+    "I see, these new paintings are indeed\n"
+    "rather amusing.$"
+}
+
+text LilycoveCity_LilycoveMuseum_2F_Text_ThesePaintingsOfYourPokemon {
+    "Wow, is that right?\n"
+    "These paintings are of your POKéMON.\p"
+    "Isn't that just the ultimate joy for\n"
+    "a TRAINER?$"
+}

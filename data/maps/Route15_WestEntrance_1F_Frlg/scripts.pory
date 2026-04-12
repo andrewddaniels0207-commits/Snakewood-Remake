@@ -1,0 +1,12 @@
+mapscripts Route15_WestEntrance_1F_Frlg_MapScripts {}
+
+script Route15_WestEntrance_1F_EventScript_Guard {
+    msgbox(Route15_WestEntrance_1F_Text_OaksAideCameByHere, MSGBOX_NPC)
+    end
+}
+
+text Route15_WestEntrance_1F_Text_OaksAideCameByHere {
+    "Are you the kid who's working on\n"
+    "a POKéDEX?\p"
+    "PROF. OAK's AIDE came by here.$"
+}

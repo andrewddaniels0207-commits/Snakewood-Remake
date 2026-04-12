@@ -1,0 +1,140 @@
+mapscripts FiveIsland_WaterLabyrinth_Frlg_MapScripts {}
+
+script FiveIsland_WaterLabyrinth_EventScript_EggGentleman {
+    lock
+    faceplayer
+    if (flag(FLAG_GOT_TOGEPI_EGG)) goto(FiveIsland_WaterLabyrinth_EventScript_PostEggComment)
+    if (flag(FLAG_NO_ROOM_FOR_TOGEPI_EGG)) goto(FiveIsland_WaterLabyrinth_EventScript_ReturnForEgg)
+    msgbox(FiveIsland_WaterLabyrinth_Text_LetMeTakeLookAtMons)
+    specialvar(VAR_RESULT, GetLeadMonFriendship)
+    if (var(VAR_RESULT) == 6) goto(FiveIsland_WaterLabyrinth_EventScript_LeadMonMaxFriendship)
+    msgbox(FiveIsland_WaterLabyrinth_Text_HmmISeeIsee)
+    release
+    end
+}
+
+script FiveIsland_WaterLabyrinth_EventScript_MonDaisyComment {
+    famechecker(FAMECHECKER_DAISY, 2)
+    msgbox(FiveIsland_WaterLabyrinth_Text_CuteMonRemindsMeOfDaisy)
+    release
+    end
+}
+
+script FiveIsland_WaterLabyrinth_EventScript_LeadMonMaxFriendship {
+    msgbox(FiveIsland_WaterLabyrinth_Text_TreatMonRightHaveThis)
+    goto(FiveIsland_WaterLabyrinth_EventScript_TryGiveEgg)
+    end
+}
+
+script FiveIsland_WaterLabyrinth_EventScript_TryGiveEgg {
+    getpartysize()
+    if (var(VAR_RESULT) == PARTY_SIZE) goto(FiveIsland_WaterLabyrinth_EventScript_NoRoomForEgg)
+    setflag(FLAG_GOT_TOGEPI_EGG)
+    giveegg(SPECIES_TOGEPI)
+    textcolor(NPC_TEXT_COLOR_NEUTRAL)
+    playfanfare(MUS_LEVEL_UP)
+    message(FiveIsland_WaterLabyrinth_Text_ReceivedEggFromMan)
+    waitfanfare()
+    waitmessage()
+    call(EventScript_RestorePrevTextColor)
+    goto(FiveIsland_WaterLabyrinth_EventScript_PostEggComment)
+    end
+}
+
+script FiveIsland_WaterLabyrinth_EventScript_PostEggComment {
+    bufferspeciesname(STR_VAR_2, SPECIES_TOGEPI)
+    setvar(VAR_0x8004, SPECIES_TOGEPI)
+    specialvar(VAR_RESULT, PlayerPartyContainsSpeciesWithPlayerID)
+    if (var(VAR_RESULT) == TRUE) goto(FiveIsland_WaterLabyrinth_EventScript_MonDaisyComment)
+    bufferspeciesname(STR_VAR_2, SPECIES_TOGETIC)
+    setvar(VAR_0x8004, SPECIES_TOGETIC)
+    specialvar(VAR_RESULT, PlayerPartyContainsSpeciesWithPlayerID)
+    if (var(VAR_RESULT) == TRUE) goto(FiveIsland_WaterLabyrinth_EventScript_MonDaisyComment)
+    msgbox(FiveIsland_WaterLabyrinth_Text_GladIMetSomeoneLikeYou)
+    release
+    end
+}
+
+script FiveIsland_WaterLabyrinth_EventScript_NoRoomForEgg {
+    setflag(FLAG_NO_ROOM_FOR_TOGEPI_EGG)
+    msgbox(FiveIsland_WaterLabyrinth_Text_DontHaveSpaceInYourParty)
+    release
+    end
+}
+
+script FiveIsland_WaterLabyrinth_EventScript_ReturnForEgg {
+    goto(FiveIsland_WaterLabyrinth_EventScript_TryGiveEgg)
+    end
+}
+
+text FiveIsland_WaterLabyrinth_Text_LetMeTakeLookAtMons {
+    "You travel all over the place,\n"
+    "don't you?\p"
+    "You're not driving your POKéMON\n"
+    "too harshly, are you?\p"
+    "Let me take a look.\n"
+    "… … …   … … …$"
+}
+
+text FiveIsland_WaterLabyrinth_Text_HmmISeeIsee {
+    "Ah, hmm…\n"
+    "I see, I see…$"
+}
+
+text FiveIsland_WaterLabyrinth_Text_TreatMonRightHaveThis {
+    "Oh, impressive.\n"
+    "You treat your POKéMON right.\p"
+    "I think you can be entrusted with\n"
+    "this.\p"
+    "Please, I'd like you to have this.$"
+}
+
+text FiveIsland_WaterLabyrinth_Text_ReceivedEggFromMan {
+    "{PLAYER} received an EGG\n"
+    "from the man!$"
+}
+
+text FiveIsland_WaterLabyrinth_Text_DontHaveSpaceInYourParty {
+    "…Unfortunately, you don't have\n"
+    "space for this in your party.\p"
+    "You'd better come back for it\n"
+    "another time.$"
+}
+
+text FiveIsland_WaterLabyrinth_Text_YouveComeBackForTheEgg {
+    "やあ\n"
+    "タマゴを　もらいに\l"
+    "きて　くれたんだね$"
+}
+
+text FiveIsland_WaterLabyrinth_Text_GladIMetSomeoneLikeYou {
+    "I received that EGG while I was\n"
+    "traveling.\p"
+    "I'm glad I met someone like you.$"
+}
+
+text FiveIsland_WaterLabyrinth_Text_CuteMonRemindsMeOfDaisy {
+    "Oh, hello.\n"
+    "That's a cute {STR_VAR_2}.\p"
+    "Seeing it reminds me of a sweet \n"
+    "little girl I met while traveling.\p"
+    "She was gently grooming POKéMON…\n"
+    "She was a little angel.\p"
+    "That little girl's name…\n"
+    "I think it was DAISY.$"
+}
+
+text FiveIsland_WaterLabyrinth_Text_AlizeIntro {
+    "This is an excellent environment\n"
+    "for raising POKéMON.$"
+}
+
+text FiveIsland_WaterLabyrinth_Text_AlizeDefeat {
+    "Your POKéMON are growing up\n"
+    "admirably well!$"
+}
+
+text FiveIsland_WaterLabyrinth_Text_AlizePostBattle {
+    "You know, I think you have the\n"
+    "talent to be a good BREEDER.$"
+}

@@ -1,0 +1,189 @@
+mapscripts Route20_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: Route20_OnTransition
+}
+
+script Route20_OnTransition {
+    if (!flag(FLAG_STOPPED_SEAFOAM_B3F_CURRENT)) call(Route20_EventScript_ResetSeafoamBouldersForB3F)
+    if (!flag(FLAG_STOPPED_SEAFOAM_B4F_CURRENT)) call(Route20_EventScript_ResetSeafoamBouldersForB4F)
+    end
+}
+
+script Route20_EventScript_ResetSeafoamBouldersForB3F {
+    clearflag(FLAG_HIDE_SEAFOAM_1F_BOULDER_1)
+    clearflag(FLAG_HIDE_SEAFOAM_1F_BOULDER_2)
+    setflag(FLAG_HIDE_SEAFOAM_B1F_BOULDER_1)
+    setflag(FLAG_HIDE_SEAFOAM_B1F_BOULDER_2)
+    setflag(FLAG_HIDE_SEAFOAM_B2F_BOULDER_1)
+    setflag(FLAG_HIDE_SEAFOAM_B2F_BOULDER_2)
+    setflag(FLAG_HIDE_SEAFOAM_B3F_BOULDER_1)
+    setflag(FLAG_HIDE_SEAFOAM_B3F_BOULDER_2)
+    return
+}
+
+script Route20_EventScript_ResetSeafoamBouldersForB4F {
+    clearflag(FLAG_HIDE_SEAFOAM_B3F_BOULDER_3)
+    clearflag(FLAG_HIDE_SEAFOAM_B3F_BOULDER_4)
+    clearflag(FLAG_HIDE_SEAFOAM_B3F_BOULDER_5)
+    clearflag(FLAG_HIDE_SEAFOAM_B3F_BOULDER_6)
+    setflag(FLAG_HIDE_SEAFOAM_B4F_BOULDER_1)
+    setflag(FLAG_HIDE_SEAFOAM_B4F_BOULDER_2)
+    return
+}
+
+script Route20_EventScript_SeafoamIslandsSign {
+    msgbox(Route20_Text_SeafoamIslands, MSGBOX_SIGN)
+    end
+}
+
+text Route20_Text_BarryIntro {
+    "The water is shallow here.\n"
+    "There are many people swimming.$"
+}
+
+text Route20_Text_BarryDefeat {
+    "Splash!$"
+}
+
+text Route20_Text_BarryPostBattle {
+    "I wish I could ride my POKéMON.\n"
+    "I bet you're not tired.$"
+}
+
+text Route20_Text_ShirleyIntro {
+    "SEAFOAM is a quiet getaway.\n"
+    "I'm vacationing here.$"
+}
+
+text Route20_Text_ShirleyDefeat {
+    "Quit it!$"
+}
+
+text Route20_Text_ShirleyPostBattle {
+    "There's a huge cavern underneath\n"
+    "this island.$"
+}
+
+text Route20_Text_TiffanyIntro {
+    "I love floating with the fishes\n"
+    "here among the waves.$"
+}
+
+text Route20_Text_TiffanyDefeat {
+    "Yowch!$"
+}
+
+text Route20_Text_TiffanyPostBattle {
+    "Want to float with me?$"
+}
+
+text Route20_Text_IreneIntro {
+    "Are you on vacation, too?$"
+}
+
+text Route20_Text_IreneDefeat {
+    "No mercy at all!$"
+}
+
+text Route20_Text_IrenePostBattle {
+    "SEAFOAM used to be a single island\n"
+    "in the distant past.$"
+}
+
+text Route20_Text_DeanIntro {
+    "Check out my buff physique!$"
+}
+
+text Route20_Text_DeanDefeat {
+    "Wimpy!$"
+}
+
+text Route20_Text_DeanPostBattle {
+    "I should've been buffing up my\n"
+    "POKéMON, not me!$"
+}
+
+text Route20_Text_DarrinIntro {
+    "Why are you riding a POKéMON?\n"
+    "Can't you swim?$"
+}
+
+text Route20_Text_DarrinDefeat {
+    "Ouch!\n"
+    "Torpedoed!$"
+}
+
+text Route20_Text_DarrinPostBattle {
+    "Riding a POKéMON sure looks fun!$"
+}
+
+text Route20_Text_RogerIntro {
+    "I rode my bird POKéMON here.$"
+}
+
+text Route20_Text_RogerDefeat {
+    "Oh, no!\n"
+    "Now what am I to do?$"
+}
+
+text Route20_Text_RogerPostBattle {
+    "My birds are exhausted.\n"
+    "They can't FLY me back!$"
+}
+
+text Route20_Text_NoraIntro {
+    "My boyfriend gave me big pearls.$"
+}
+
+text Route20_Text_NoraDefeat {
+    "Oh, no!\n"
+    "My pearls were in them!$"
+}
+
+text Route20_Text_NoraPostBattle {
+    "Will my pearls grow bigger inside\n"
+    "CLOYSTER?$"
+}
+
+text Route20_Text_MissyIntro {
+    "I swam here from CINNABAR ISLAND.\n"
+    "It wasn't easy, I tell you.$"
+}
+
+text Route20_Text_MissyDefeat {
+    "I'm so disappointed!$"
+}
+
+text Route20_Text_MissyPostBattle {
+    "POKéMON have taken over an\n"
+    "abandoned mansion on CINNABAR.\p"
+    "They call it the POKéMON MANSION\n"
+    "now.$"
+}
+
+text Route20_Text_MelissaIntro {
+    "CINNABAR, in the west, has a LAB\n"
+    "for POKéMON.\p"
+    "My daddy works there.$"
+}
+
+text Route20_Text_MelissaDefeat {
+    "Wait!\n"
+    "You're supposed to wait!$"
+}
+
+text Route20_Text_MelissaPostBattle {
+    "CINNABAR is a volcanic island.\p"
+    "I heard it rose out of the sea\n"
+    "when a volcano erupted.$"
+}
+
+text Route20_Text_SeafoamIslands {
+    "SEAFOAM ISLANDS$"
+}
+
+text Route20_Text_MistyTrainsHere {
+    "Strong TRAINERS and WATER POKéMON\n"
+    "are common sights in these parts.\p"
+    "They say that MISTY of the\n"
+    "CERULEAN GYM trains here.$"
+}

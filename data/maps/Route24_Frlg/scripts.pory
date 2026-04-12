@@ -1,0 +1,235 @@
+mapscripts Route24_Frlg_MapScripts {}
+
+script Route24_EventScript_Rocket {
+    lock
+    faceplayer
+    if (var(VAR_MAP_SCENE_ROUTE24) == 1) goto(Route24_EventScript_RocketPostBattle)
+    msgbox(Route24_Text_JustEarnedFabulousPrize)
+    checkitemspace(ITEM_NUGGET)
+    if (var(VAR_RESULT) == FALSE) goto(Route24_EventScript_NoRoomForNugget)
+    call(Route24_EventScript_BattleRocket)
+    release
+    end
+}
+
+script Route24_EventScript_NoRoomForNugget {
+    msgbox(Route24_Text_YouDontHaveAnyRoom)
+    release
+    end
+}
+
+script Route24_EventScript_RocketPostBattle {
+    msgbox(Route24_Text_YoudBecomeTopRocketLeader)
+    release
+    end
+}
+
+script Route24_EventScript_RocketTriggerLeft {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    goto(Route24_EventScript_RocketTrigger)
+    end
+}
+
+script Route24_EventScript_RocketTriggerRight {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    goto(Route24_EventScript_RocketTrigger)
+    end
+}
+
+script Route24_EventScript_RocketTrigger {
+    textcolor(NPC_TEXT_COLOR_MALE)
+    if (var(VAR_TEMP_1) == 0) call(Route24_EventScript_RocketApproachPlayer)
+    if (var(VAR_TEMP_1) == 1) call(Route24_EventScript_RocketMotionToPlayer)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    msgbox(Route24_Text_JustEarnedFabulousPrize)
+    checkitemspace(ITEM_NUGGET)
+    if (var(VAR_RESULT) == FALSE) goto(Route24_EventScript_NoRoomForNuggetTrigger)
+    call(Route24_EventScript_BattleRocket)
+    releaseall
+    end
+}
+
+script Route24_EventScript_BattleRocket {
+    giveitem_msg(Route24_Text_ReceivedNuggetFromMysteryTrainer, ITEM_NUGGET)
+    message(Route24_Text_JoinTeamRocket)
+    waitmessage()
+    playbgm(MUS_RG_ENCOUNTER_ROCKET, 0)
+    waitbuttonpress()
+    setvar(VAR_LAST_TALKED, LOCALID_ROUTE24_ROCKET)
+    trainerbattle_no_intro(TRAINER_TEAM_ROCKET_GRUNT_6, Route24_Text_RocketDefeat)
+    msgbox(Route24_Text_YoudBecomeTopRocketLeader)
+    setvar(VAR_MAP_SCENE_ROUTE24, 1)
+    return
+}
+
+script Route24_EventScript_RocketApproachPlayer {
+    applymovement(LOCALID_ROUTE24_ROCKET, Route24_Movement_RocketApproachPlayer)
+    waitmovement(0)
+    return
+}
+
+script Route24_EventScript_RocketMotionToPlayer {
+    applymovement(LOCALID_ROUTE24_ROCKET, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    return
+}
+
+script Route24_EventScript_NoRoomForNuggetTrigger {
+    msgbox(Route24_Text_YouDontHaveAnyRoom)
+    closemessage
+    applymovement(LOCALID_PLAYER, Route24_Movement_WalkDown)
+    waitmovement(0)
+    if (var(VAR_TEMP_1) == 0) call(Route24_EventScript_RocketWalkBackToPos)
+    release
+    end
+}
+
+script Route24_EventScript_RocketWalkBackToPos {
+    applymovement(LOCALID_ROUTE24_ROCKET, Route24_Movement_RocketWalkBackToPos)
+    waitmovement(0)
+    return
+}
+
+movement Route24_Movement_RocketApproachPlayer {
+    walk_left
+    step_end
+}
+
+movement Route24_Movement_RocketWalkBackToPos {
+    walk_right
+    walk_in_place_faster_left
+    step_end
+}
+
+movement Route24_Movement_WalkDown {
+    walk_down
+    step_end
+}
+
+text Route24_Text_JustEarnedFabulousPrize {
+    "Congratulations! You beat our\n"
+    "five contest TRAINERS!\p"
+    "You just earned a fabulous prize!$"
+}
+
+text Route24_Text_ReceivedNuggetFromMysteryTrainer {
+    "{PLAYER} received a NUGGET\n"
+    "from the mystery TRAINER!$"
+}
+
+text Route24_Text_YouDontHaveAnyRoom {
+    "You don't have any room!$"
+}
+
+text Route24_Text_JoinTeamRocket {
+    "By the way, how would you like to\n"
+    "join TEAM ROCKET?\p"
+    "We're a group of professional\n"
+    "criminals specializing in POKéMON!\p"
+    "Want to join?\p"
+    "Are you sure?\p"
+    "Come on, join us!\p"
+    "I'm telling you to join!\p"
+    "…Okay, you need convincing!\p"
+    "I'll make you an offer you can't\n"
+    "refuse!$"
+}
+
+text Route24_Text_RocketDefeat {
+    "Arrgh!\n"
+    "You are good!$"
+}
+
+text Route24_Text_YoudBecomeTopRocketLeader {
+    "With your ability, you'd become\n"
+    "a top leader in TEAM ROCKET.\p"
+    "Come on, think of the opportunity!\n"
+    "Don't let this chance go to waste.$"
+}
+
+text Route24_Text_ShaneIntro {
+    "I saw your feat from the grass!$"
+}
+
+text Route24_Text_ShaneDefeat {
+    "I thought not!$"
+}
+
+text Route24_Text_ShanePostBattle {
+    "I hid because the people on the\n"
+    "bridge frightened me.$"
+}
+
+text Route24_Text_EthanIntro {
+    "Okay! I'm No. 5!\n"
+    "I'll stomp you!$"
+}
+
+text Route24_Text_EthanDefeat {
+    "Whoa!\n"
+    "Too much!$"
+}
+
+text Route24_Text_EthanPostBattle {
+    "I did my best. I have no regrets!$"
+}
+
+text Route24_Text_ReliIntro {
+    "I'm No. 4!\n"
+    "Getting tired?$"
+}
+
+text Route24_Text_ReliDefeat {
+    "I lost, too!$"
+}
+
+text Route24_Text_ReliPostBattle {
+    "I did my best, so I've no regrets!$"
+}
+
+text Route24_Text_TimmyIntro {
+    "Here's No. 3!\n"
+    "I won't be easy!$"
+}
+
+text Route24_Text_TimmyDefeat {
+    "Ow!\n"
+    "Stomped flat!$"
+}
+
+text Route24_Text_TimmyPostBattle {
+    "I did my best. I have no regrets!$"
+}
+
+text Route24_Text_AliIntro {
+    "I'm second!\n"
+    "Now it's serious!$"
+}
+
+text Route24_Text_AliDefeat {
+    "How could I lose?$"
+}
+
+text Route24_Text_AliPostBattle {
+    "I did my best. I have no regrets!$"
+}
+
+text Route24_Text_CaleIntro {
+    "People call this the NUGGET\n"
+    "BRIDGE!\p"
+    "Beat us five TRAINERS and win\n"
+    "a fabulous prize!\p"
+    "Think you got what it takes?$"
+}
+
+text Route24_Text_CaleDefeat {
+    "Whoo!\n"
+    "Good stuff!$"
+}
+
+text Route24_Text_CalePostBattle {
+    "I did my best. I have no regrets!$"
+}

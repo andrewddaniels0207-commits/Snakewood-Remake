@@ -1,0 +1,53 @@
+mapscripts MtPyre_1F_MapScripts {}
+
+script MtPyre_1F_EventScript_CleanseTagWoman {
+    lock
+    faceplayer
+    if (flag(FLAG_RECEIVED_CLEANSE_TAG)) goto(MtPyre_1F_EventScript_ReceivedCleanseTag)
+    msgbox(MtPyre_1F_Text_TakeThisForYourOwnGood, MSGBOX_DEFAULT)
+    giveitem(ITEM_CLEANSE_TAG)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    setflag(FLAG_RECEIVED_CLEANSE_TAG)
+    release
+    end
+}
+
+script MtPyre_1F_EventScript_ReceivedCleanseTag {
+    msgbox(MtPyre_1F_Text_ExplainCleanseTag, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MtPyre_1F_EventScript_PokefanF {
+    msgbox(MtPyre_1F_Text_ComeToPayRespects, MSGBOX_NPC)
+    end
+}
+
+script MtPyre_1F_EventScript_Man {
+    msgbox(MtPyre_1F_Text_RestingPlaceOfZigzagoon, MSGBOX_NPC)
+    end
+}
+
+text MtPyre_1F_Text_TakeThisForYourOwnGood {
+    "All sorts of beings wander the slopes\n"
+    "of MT. PYRE…\p"
+    "There is no telling what may happen.\n"
+    "Take this. It's for your own good.$"
+}
+
+text MtPyre_1F_Text_ExplainCleanseTag {
+    "Have a POKéMON hold that\n"
+    "CLEANSE TAG.\p"
+    "It will help ward off wild POKéMON.$"
+}
+
+text MtPyre_1F_Text_ComeToPayRespects {
+    "Did you come to pay your respect\n"
+    "to the spirits of departed POKéMON?\p"
+    "You must care for your POKéMON a lot.$"
+}
+
+text MtPyre_1F_Text_RestingPlaceOfZigzagoon {
+    "This is the final resting place of my\n"
+    "ZIGZAGOON. I cherished it…$"
+}

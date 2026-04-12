@@ -1,0 +1,229 @@
+mapscripts PewterCity_Gym_Frlg_MapScripts {}
+
+script PewterCity_Gym_EventScript_Brock {
+    famechecker(FAMECHECKER_BROCK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
+    trainerbattle_single(TRAINER_LEADER_BROCK, PewterCity_Gym_Text_BrockIntro, PewterCity_Gym_Text_BrockDefeat, PewterCity_Gym_EventScript_DefeatedBrock, NO_MUSIC)
+    if (!flag(FLAG_GOT_TM39_FROM_BROCK)) goto(PewterCity_Gym_EventScript_GiveTM39)
+    msgbox(PewterCity_Gym_Text_BrockPostBattle)
+    release
+    end
+}
+
+script PewterCity_Gym_EventScript_DefeatedBrock {
+    famechecker(FAMECHECKER_BROCK, 1)
+    setflag(FLAG_DEFEATED_BROCK)
+    setflag(FLAG_BADGE01_GET)
+    setvar(VAR_MAP_SCENE_PEWTER_CITY, 1)
+    setflag(FLAG_HIDE_PEWTER_CITY_GYM_GUIDE)
+    clearflag(FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY)
+    set_gym_trainers_frlg(1)
+    goto(PewterCity_Gym_EventScript_GiveTM39)
+    end
+}
+
+script PewterCity_Gym_EventScript_GiveTM39 {
+    msgbox(PewterCity_Gym_Text_TakeThisWithYou)
+    checkitemspace(ITEM_TM39)
+    if (var(VAR_RESULT) == FALSE) goto(PewterCity_Gym_EventScript_NoRoomForTM39)
+    giveitem_msg(PewterCity_Gym_Text_ReceivedTM39FromBrock, ITEM_TM39)
+    setflag(FLAG_GOT_TM39_FROM_BROCK)
+    msgbox(PewterCity_Gym_Text_ExplainTM39)
+    release
+    end
+}
+
+script PewterCity_Gym_EventScript_NoRoomForTM39 {
+    msgbox(PewterCity_Gym_Text_DontHaveRoomForThis)
+    release
+    end
+}
+
+script PewterCity_Gym_EventScript_Liam {
+    trainerbattle_single(TRAINER_CAMPER_LIAM, PewterCity_Gym_Text_LiamIntro, PewterCity_Gym_Text_LiamDefeat)
+    msgbox(PewterCity_Gym_Text_LiamPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script PewterCity_Gym_EventScript_GymGuy {
+    lock
+    faceplayer
+    if (flag(FLAG_DEFEATED_BROCK)) goto(PewterCity_Gym_EventScript_GymGuyPostVictory)
+    msgbox(PewterCity_Gym_Text_LetMeTakeYouToTheTop, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(PewterCity_Gym_EventScript_GymGuyTakeMeToTop)
+    if (var(VAR_RESULT) == NO) goto(PewterCity_Gym_EventScript_GymGuyDontTakeMeToTop)
+    end
+}
+
+script PewterCity_Gym_EventScript_GymGuyPostVictory {
+    msgbox(PewterCity_Gym_Text_YoureChampMaterial)
+    release
+    end
+}
+
+script PewterCity_Gym_EventScript_GymGuyTakeMeToTop {
+    msgbox(PewterCity_Gym_Text_LetsGetHappening)
+    goto(PewterCity_Gym_EventScript_GymGuyAdvice)
+    end
+}
+
+script PewterCity_Gym_EventScript_GymGuyDontTakeMeToTop {
+    msgbox(PewterCity_Gym_Text_ItsFreeLetsGetHappening)
+    goto(PewterCity_Gym_EventScript_GymGuyAdvice)
+    end
+}
+
+script PewterCity_Gym_EventScript_GymGuyAdvice {
+    msgbox(PewterCity_Gym_Text_TryDifferentPartyOrders)
+    release
+    end
+}
+
+script PewterCity_Gym_EventScript_GymStatue {
+    lockall
+    if (flag(FLAG_BADGE01_GET)) goto(PewterCity_Gym_EventScript_GymStatuePostVictory)
+    msgbox(PewterCity_Gym_Text_GymStatue)
+    releaseall
+    end
+}
+
+script PewterCity_Gym_EventScript_GymStatuePostVictory {
+    msgbox(PewterCity_Gym_Text_GymStatuePlayerWon)
+    releaseall
+    end
+}
+
+text PewterCity_Gym_Text_BrockIntro {
+    "So, you're here. I'm BROCK.\n"
+    "I'm PEWTER's GYM LEADER.\p"
+    "My rock-hard willpower is evident\n"
+    "even in my POKéMON.\p"
+    "My POKéMON are all rock hard, and\n"
+    "have true-grit determination.\p"
+    "That's right - my POKéMON are all\n"
+    "the ROCK type!\p"
+    "Fuhaha! You're going to challenge\n"
+    "me knowing that you'll lose?\p"
+    "That's the TRAINER's honor that\n"
+    "compels you to challenge me.\p"
+    "Fine, then!\n"
+    "Show me your best!{PLAY_BGM}{MUS_RG_ENCOUNTER_GYM_LEADER}$"
+}
+
+text PewterCity_Gym_Text_BrockDefeat {
+    "I took you for granted, and so\n"
+    "I lost.\p"
+    "As proof of your victory, I confer\n"
+    "on you this…the official POKéMON\l"
+    "LEAGUE BOULDERBADGE.\p"
+    "{FONT_NORMAL}{PLAYER} received the BOULDERBADGE\n"
+    "from BROCK!{PAUSE_MUSIC}{PLAY_BGM}{MUS_OBTAIN_BADGE}{PAUSE 0xFE}{PAUSE 0x56}{RESUME_MUSIC}\p"
+    "{FONT_MALE}Just having the BOULDERBADGE makes\n"
+    "your POKéMON more powerful.\p"
+    "It also enables the use of the\n"
+    "move FLASH outside of battle.\p"
+    "Of course, a POKéMON must know the\n"
+    "move FLASH to use it.$"
+}
+
+text PewterCity_Gym_Text_TakeThisWithYou {
+    "Wait!\n"
+    "Take this with you.$"
+}
+
+text PewterCity_Gym_Text_ReceivedTM39FromBrock {
+    "{PLAYER} received TM39\n"
+    "from BROCK.$"
+}
+
+text PewterCity_Gym_Text_ExplainTM39 {
+    "A TM, Technical Machine, contains a\n"
+    "technique for POKéMON.\p"
+    "Using a TM teaches the move it\n"
+    "contains to a POKéMON.\p"
+    "A TM is good for only one use.\p"
+    "So, when you use one, pick the\n"
+    "POKéMON carefully.\p"
+    "Anyways…\n"
+    "TM39 contains ROCK TOMB.\p"
+    "It hurls boulders at the foe and\n"
+    "lowers its SPEED.$"
+}
+
+text PewterCity_Gym_Text_BrockPostBattle {
+    "There are all kinds of TRAINERS in\n"
+    "this huge world of ours.\p"
+    "You appear to be very gifted as a\n"
+    "POKéMON TRAINER.\p"
+    "So let me make a suggestion.\p"
+    "Go to the GYM in CERULEAN and test\n"
+    "your abilities.$"
+}
+
+text PewterCity_Gym_Text_DontHaveRoomForThis {
+    "You don't have room for this.$"
+}
+
+text PewterCity_Gym_Text_LiamIntro {
+    "Stop right there, kid!\p"
+    "You're ten thousand light-years \n"
+    "from facing BROCK!$"
+}
+
+text PewterCity_Gym_Text_LiamDefeat {
+    "Darn!\p"
+    "Light-years isn't time…\n"
+    "It measures distance!$"
+}
+
+text PewterCity_Gym_Text_LiamPostBattle {
+    "You're pretty hot.\n"
+    "…But not as hot as BROCK!$"
+}
+
+text PewterCity_Gym_Text_LetMeTakeYouToTheTop {
+    "Hiya!\n"
+    "Do you want to dream big?\p"
+    "Do you dare to dream of becoming\n"
+    "the POKéMON champ?\p"
+    "I'm no TRAINER, but I can advise\n"
+    "you on how to win.\p"
+    "Let me take you to the top!$"
+}
+
+text PewterCity_Gym_Text_LetsGetHappening {
+    "All right!\n"
+    "Let's get happening!$"
+}
+
+text PewterCity_Gym_Text_TryDifferentPartyOrders {
+    "The first POKéMON out in a match is\n"
+    "at the left of the POKéMON LIST.\p"
+    "By changing the order of POKéMON,\n"
+    "you may gain an advantage.\p"
+    "Try different orders to suit your\n"
+    "opponent's party.$"
+}
+
+text PewterCity_Gym_Text_ItsFreeLetsGetHappening {
+    "It's a free service!\n"
+    "Let's get happening!$"
+}
+
+text PewterCity_Gym_Text_YoureChampMaterial {
+    "Just as I thought!\n"
+    "You're POKéMON champ material!$"
+}
+
+text PewterCity_Gym_Text_GymStatue {
+    "PEWTER POKéMON GYM\n"
+    "LEADER: BROCK\p"
+    "WINNING TRAINERS:\n"
+    "{RIVAL}$"
+}
+
+text PewterCity_Gym_Text_GymStatuePlayerWon {
+    "PEWTER POKéMON GYM\n"
+    "LEADER: BROCK\p"
+    "WINNING TRAINERS:\n"
+    "{RIVAL}, {PLAYER}$"
+}

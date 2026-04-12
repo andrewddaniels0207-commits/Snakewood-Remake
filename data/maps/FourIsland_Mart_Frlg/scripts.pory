@@ -1,0 +1,40 @@
+mapscripts FourIsland_Mart_Frlg_MapScripts {}
+
+script FourIsland_Mart_EventScript_Clerk {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(FourIsland_Mart_Items)
+    msgbox(gText_PleaseComeAgain)
+    release
+    end
+}
+
+script FourIsland_Mart_Items {
+    release
+    end
+}
+
+script FourIsland_Mart_EventScript_Camper {
+    msgbox(FourIsland_Mart_Text_IcefallCaveIsFrigid, MSGBOX_NPC)
+    end
+}
+
+text FourIsland_Mart_Text_LoreleiGrewUpOnThisIsland {
+    "We've had a great and powerful\n"
+    "TRAINER grow up on this island.\p"
+    "I bet even you'd know her.\n"
+    "It's LORELEI of the ELITE FOUR!\p"
+    "When LORELEI was just a tyke,\n"
+    "I taught her about POKéMON.$"
+}
+
+text FourIsland_Mart_Text_IcefallCaveIsFrigid {
+    "The SEVII ISLANDS are in a warm\n"
+    "region overall.\p"
+    "But there is one exception you\n"
+    "need to know about.\p"
+    "The ICEFALL CAVE is frigid because\n"
+    "of the POKéMON that live in it.$"
+}

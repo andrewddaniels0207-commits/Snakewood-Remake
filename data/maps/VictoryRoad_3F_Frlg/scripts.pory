@@ -1,0 +1,194 @@
+mapscripts VictoryRoad_3F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_LOAD: VictoryRoad_3F_OnLoad
+}
+
+script VictoryRoad_3F_OnLoad {
+    if (var(VAR_MAP_SCENE_VICTORY_ROAD_3F) != 100) call(VictoryRoad_3F_EventScript_SetRockBarrier)
+    end
+}
+
+script VictoryRoad_3F_EventScript_SetRockBarrier {
+    setmetatile(12, 12, METATILE_Cave_RockBarrier_Top, 1)
+    setmetatile(12, 13, METATILE_Cave_RockBarrier_Bottom, 1)
+    return
+}
+
+script VictoryRoad_3F_EventScript_FloorSwitch {
+    lockall
+    if (var(VAR_MAP_SCENE_VICTORY_ROAD_3F) == 100) goto(VictoryRoad_3F_EventScript_FloorSwitchAlreadyPressed)
+    setmetatile(12, 12, METATILE_Cave_Floor_Ledge_Top, 0)
+    setmetatile(12, 13, METATILE_Cave_Floor_Ledge_Bottom, 0)
+    playse(SE_ICE_BREAK)
+    special(DrawWholeMapView)
+    waitse()
+    copyobjectxytoperm(LOCALID_VICTORY_ROAD_3F_BOULDER1)
+    copyobjectxytoperm(LOCALID_VICTORY_ROAD_3F_BOULDER2)
+    setvar(VAR_MAP_SCENE_VICTORY_ROAD_3F, 100)
+    releaseall
+    end
+}
+
+script VictoryRoad_3F_EventScript_FloorSwitchAlreadyPressed {
+    releaseall
+    end
+}
+
+script VictoryRoad_3F_EventScript_George {
+    trainerbattle_single(TRAINER_COOLTRAINER_GEORGE, VictoryRoad_3F_Text_GeorgeIntro, VictoryRoad_3F_Text_GeorgeDefeat)
+    msgbox(VictoryRoad_3F_Text_GeorgePostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script VictoryRoad_3F_EventScript_Colby {
+    trainerbattle_single(TRAINER_COOLTRAINER_COLBY, VictoryRoad_3F_Text_ColbyIntro, VictoryRoad_3F_Text_ColbyDefeat)
+    msgbox(VictoryRoad_3F_Text_ColbyPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script VictoryRoad_3F_EventScript_Caroline {
+    trainerbattle_single(TRAINER_COOLTRAINER_CAROLINE, VictoryRoad_3F_Text_CarolineIntro, VictoryRoad_3F_Text_CarolineDefeat)
+    msgbox(VictoryRoad_3F_Text_CarolinePostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script VictoryRoad_3F_EventScript_Alexa {
+    trainerbattle_single(TRAINER_COOLTRAINER_ALEXA, VictoryRoad_3F_Text_AlexaIntro, VictoryRoad_3F_Text_AlexaDefeat)
+    msgbox(VictoryRoad_3F_Text_AlexaPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script VictoryRoad_3F_EventScript_Ray {
+    trainerbattle_double(TRAINER_COOL_COUPLE_RAY_TYRA, VictoryRoad_3F_Text_RayIntro, VictoryRoad_3F_Text_RayDefeat, VictoryRoad_3F_Text_RayNotEnoughMons)
+    msgbox(VictoryRoad_3F_Text_RayPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script VictoryRoad_3F_EventScript_Tyra {
+    trainerbattle_double(TRAINER_COOL_COUPLE_RAY_TYRA, VictoryRoad_3F_Text_TyraIntro, VictoryRoad_3F_Text_TyraDefeat, VictoryRoad_3F_Text_TyraNotEnoughMons)
+    msgbox(VictoryRoad_3F_Text_TyraPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text Text_DoubleEdgeTeach {
+    "You should be proud of yourself,\n"
+    "having battled your way through\l"
+    "VICTORY ROAD so courageously.\p"
+    "In recognition of your feat,\n"
+    "I'll teach you DOUBLE-EDGE.\p"
+    "Would you like me to teach that\n"
+    "technique?$"
+}
+
+text Text_DoubleEdgeDeclined {
+    "I'll teach you the technique\n"
+    "anytime.$"
+}
+
+text Text_DoubleEdgeWhichMon {
+    "Which POKéMON should I teach\n"
+    "DOUBLE-EDGE?$"
+}
+
+text Text_DoubleEdgeTaught {
+    "Keep that drive going for the\n"
+    "POKéMON LEAGUE!\p"
+    "Take a run at them and knock 'em\n"
+    "out!$"
+}
+
+text VictoryRoad_3F_Text_GeorgeIntro {
+    "I heard rumors of a child prodigy.$"
+}
+
+text VictoryRoad_3F_Text_GeorgeDefeat {
+    "The rumors were true!$"
+}
+
+text VictoryRoad_3F_Text_GeorgePostBattle {
+    "So, it was you who beat GIOVANNI\n"
+    "of TEAM ROCKET?$"
+}
+
+text VictoryRoad_3F_Text_AlexaIntro {
+    "TRAINERS live to seek stronger\n"
+    "opponents.$"
+}
+
+text VictoryRoad_3F_Text_AlexaDefeat {
+    "Oh!\n"
+    "So strong!$"
+}
+
+text VictoryRoad_3F_Text_AlexaPostBattle {
+    "By fighting tough battles, you get\n"
+    "stronger.$"
+}
+
+text VictoryRoad_3F_Text_CarolineIntro {
+    "I'll show you just how good you\n"
+    "are. Not!$"
+}
+
+text VictoryRoad_3F_Text_CarolineDefeat {
+    "I'm furious!$"
+}
+
+text VictoryRoad_3F_Text_CarolinePostBattle {
+    "You showed me just how good\n"
+    "I was…$"
+}
+
+text VictoryRoad_3F_Text_ColbyIntro {
+    "Only the chosen can pass here!$"
+}
+
+text VictoryRoad_3F_Text_ColbyDefeat {
+    "I don't believe it!$"
+}
+
+text VictoryRoad_3F_Text_ColbyPostBattle {
+    "All TRAINERS here are headed to\n"
+    "the POKéMON LEAGUE.\p"
+    "Don't let down your guard.$"
+}
+
+text VictoryRoad_3F_Text_RayIntro {
+    "RAY: Together, the two of us are\n"
+    "destined for greatness!$"
+}
+
+text VictoryRoad_3F_Text_RayDefeat {
+    "RAY: Ludicrous!\n"
+    "This can't be!$"
+}
+
+text VictoryRoad_3F_Text_RayPostBattle {
+    "RAY: You've beaten us.\n"
+    "Greatness remains elusive…$"
+}
+
+text VictoryRoad_3F_Text_RayNotEnoughMons {
+    "RAY: Together, the two of us are\n"
+    "striving for the pinnacle.\p"
+    "We need you to bring two POKéMON\n"
+    "into battle with us.$"
+}
+
+text VictoryRoad_3F_Text_TyraIntro {
+    "TYRA: We're trying to become\n"
+    "champions together.$"
+}
+
+text VictoryRoad_3F_Text_TyraDefeat {
+    "TYRA: Oh, but…$"
+}
+
+text VictoryRoad_3F_Text_TyraPostBattle {
+    "TYRA: You've taught me that power\n"
+    "can be infinite in shape and form.$"
+}
+
+text VictoryRoad_3F_Text_TyraNotEnoughMons {
+    "TYRA: You can't battle with us if\n"
+    "you have only one POKéMON.$"
+}

@@ -1,0 +1,78 @@
+mapscripts PacifidlogTown_House3_MapScripts {}
+
+script PacifidlogTown_House3_EventScript_Trader {
+    lock
+    faceplayer
+    if (flag(FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED)) goto(PacifidlogTown_House3_EventScript_TradeCompleted)
+    ingame_trade(INGAME_TRADE_HORSEA, PacifidlogTown_House3_Text_WillingToTradeIt, PacifidlogTown_House3_EventScript_DeclineTrade, PacifidlogTown_House3_EventScript_NotRequestedMon, PacifidlogTown_House3_Text_ItsSubtlyDifferentThankYou)
+    setflag(FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED)
+    release
+    end
+}
+
+script PacifidlogTown_House3_EventScript_DeclineTrade {
+    msgbox(PacifidlogTown_House3_Text_NotDesperateOrAnything, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script PacifidlogTown_House3_EventScript_NotRequestedMon {
+    bufferspeciesname(STR_VAR_1, VAR_0x8009)
+    msgbox(PacifidlogTown_House3_Text_WontAcceptAnyLessThanRealMon, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script PacifidlogTown_House3_EventScript_TradeCompleted {
+    msgbox(PacifidlogTown_House3_Text_ReallyWantedToGetBagon, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script PacifidlogTown_House3_EventScript_Girl {
+    msgbox(PacifidlogTown_House3_Text_IsThatAPokedex, MSGBOX_NPC)
+    end
+}
+
+text PacifidlogTown_House3_Text_WillingToTradeIt {
+    "Check out this {STR_VAR_2}!\p"
+    "It's the {STR_VAR_2} that I caught\n"
+    "yesterday to celebrate my birthday!\p"
+    "Oh, I can see that you want it!\n"
+    "After all, it's priceless!\p"
+    "I'll tell you what. I might be willing\n"
+    "to trade it for a {STR_VAR_1}.$"
+}
+
+text PacifidlogTown_House3_Text_ItsSubtlyDifferentThankYou {
+    "Oh, so this is a {STR_VAR_1}?\p"
+    "It's sort of like a {STR_VAR_2},\n"
+    "and yet it's subtly different.\p"
+    "Thank you!$"
+}
+
+text PacifidlogTown_House3_Text_WontAcceptAnyLessThanRealMon {
+    "No, no, no! I won't accept any\n"
+    "less than a real {STR_VAR_1}!$"
+}
+
+text PacifidlogTown_House3_Text_NotDesperateOrAnything {
+    "Oh, so you're not going to go through\n"
+    "with this?\p"
+    "That's cool. I'm not desperate to make\n"
+    "a trade or anything.$"
+}
+
+text PacifidlogTown_House3_Text_ReallyWantedToGetBagon {
+    "I know I could go looking for one\n"
+    "on my own, but…\p"
+    "But I really wanted to get a BAGON\n"
+    "that another TRAINER caught…$"
+}
+
+text PacifidlogTown_House3_Text_IsThatAPokedex {
+    "Is that a POKéDEX?\p"
+    "Did you get to meet a lot of different\n"
+    "POKéMON?\p"
+    "I wish I was like you.$"
+}

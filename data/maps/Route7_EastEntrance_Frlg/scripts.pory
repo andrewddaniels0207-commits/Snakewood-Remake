@@ -1,0 +1,127 @@
+mapscripts Route7_EastEntrance_Frlg_MapScripts {}
+
+script Route7_EastEntrance_EventScript_Guard {
+    msgbox(Route7_EastEntrance_Text_HiHowsItGoing, MSGBOX_NPC)
+    end
+}
+
+script Route7_EastEntrance_EventScript_GuardTriggerTop {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    goto(Route7_EastEntrance_EventScript_GuardTrigger)
+    end
+}
+
+script Route7_EastEntrance_EventScript_GuardTriggerMid {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    goto(Route7_EastEntrance_EventScript_GuardTrigger)
+    end
+}
+
+script Route7_EastEntrance_EventScript_GuardTriggerBottom {
+    lockall
+    setvar(VAR_TEMP_1, 2)
+    goto(Route7_EastEntrance_EventScript_GuardTrigger)
+    end
+}
+
+script Route7_EastEntrance_EventScript_GuardTrigger {
+    textcolor(NPC_TEXT_COLOR_MALE)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    if (flag(FLAG_GOT_TEA)) goto(Route7_EastEntrance_EventScript_GiveTea)
+    msgbox(Route7_EastEntrance_Text_ThirstyOnGuardDuty)
+    closemessage
+    applymovement(LOCALID_PLAYER, Route7_EastEntrance_Movement_BlockPlayerEntry)
+    waitmovement(0)
+    releaseall
+    end
+}
+
+script Route7_EastEntrance_EventScript_GiveTea {
+    removeitem(ITEM_TEA)
+    goto(Route7_EastEntrance_EventScript_GuardDrinkTea)
+    end
+}
+
+script Route7_EastEntrance_EventScript_GuardDrinkTea {
+    msgbox(Route7_EastEntrance_Text_ThatTeaLooksTasty)
+    closemessage
+    if (var(VAR_TEMP_1) == 0) call(Route7_EastEntrance_WalkToGuardTop)
+    if (var(VAR_TEMP_1) == 1) call(Route7_EastEntrance_WalkToGuardMid)
+    if (var(VAR_TEMP_1) == 2) call(Route7_EastEntrance_WalkToGuardBottom)
+    msgbox(Route7_EastEntrance_Text_ThanksIllShareTeaWithGuards)
+    setvar(VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1)
+    releaseall
+    end
+}
+
+script Route7_EastEntrance_WalkToGuardTop {
+    applymovement(LOCALID_PLAYER, Route7_EastEntrance_Movement_WalkToGuardTop)
+    waitmovement(0)
+    return
+}
+
+script Route7_EastEntrance_WalkToGuardMid {
+    applymovement(LOCALID_PLAYER, Route7_EastEntrance_Movement_WalkToGuardMid)
+    waitmovement(0)
+    return
+}
+
+script Route7_EastEntrance_WalkToGuardBottom {
+    applymovement(LOCALID_PLAYER, Route7_EastEntrance_Movement_WalkToGuardBottom)
+    waitmovement(0)
+    return
+}
+
+movement Route7_EastEntrance_Movement_WalkToGuardMid {
+    walk_up
+    step_end
+}
+
+movement Route7_EastEntrance_Movement_WalkToGuardBottom {
+    walk_up
+    walk_up
+    step_end
+}
+
+movement Route7_EastEntrance_Movement_WalkToGuardTop {
+    walk_in_place_up
+    step_end
+}
+
+movement Route7_EastEntrance_Movement_BlockPlayerEntry {
+    walk_left
+    step_end
+}
+
+text Route7_EastEntrance_Text_ThirstyOnGuardDuty {
+    "I'm on guard duty.\n"
+    "Gee, I'm thirsty, though!\p"
+    "Oh, wait there, the road's closed.$"
+}
+
+text Route7_EastEntrance_Text_ThatTeaLooksTasty {
+    "Oh, that TEA…\n"
+    "It looks awfully tasty…$"
+}
+
+text Route7_EastEntrance_Text_ThanksIllShareTeaWithGuards {
+    "Huh? I can have this drink?\n"
+    "Gee, thanks!\l"
+    "… …\l"
+    "Glug, glug…\l"
+    "… …\l"
+    "Gulp…\l"
+    "If you want to go to SAFFRON\l"
+    "CITY…\l"
+    "… …\l"
+    "You can go on through.\p"
+    "I'll share this TEA with the other\n"
+    "guards!$"
+}
+
+text Route7_EastEntrance_Text_HiHowsItGoing {
+    "Hi, how's it going?$"
+}

@@ -1,0 +1,11 @@
+mapscripts UndergroundPath_WestEntrance_Frlg_MapScripts {}
+
+script UndergroundPath_WestEntrance_EventScript_BaldingMan {
+    msgbox(UndergroundPath_WestEntrance_Text_SleepyMonNearCeladon, MSGBOX_NPC)
+    end
+}
+
+text UndergroundPath_WestEntrance_Text_SleepyMonNearCeladon {
+    "I heard a sleepy POKéMON appeared\n"
+    "out near CELADON CITY, too.$"
+}

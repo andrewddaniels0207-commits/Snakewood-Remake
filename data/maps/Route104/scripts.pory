@@ -1,0 +1,1282 @@
+mapscripts Route104_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_BOARD_BRINEY_BOAT_STATE, 1: Route104_EventScript_StartSailToDewford
+    ]
+    MAP_SCRIPT_ON_TRANSITION: Route104_OnTransition
+}
+
+script Route104_EventScript_StartSailToDewford {
+    lockall
+    goto(Route104_EventScript_SailToDewford)
+    end
+}
+
+script Route104_OnTransition {
+    call(Common_EventScript_SetupRivalGfxId)
+    call(Route104_EventScript_TrySetRivalPos)
+    call(Route104_EventScript_ShowOrHideWhiteHerbFlorist)
+    end
+}
+
+script Route104_EventScript_ShowOrHideWhiteHerbFlorist {
+    if (!flag(FLAG_MET_PRETTY_PETAL_SHOP_OWNER)) goto(Route104_EventScript_HideWhiteHerbFlorist)
+    if (!flag(FLAG_BADGE03_GET)) goto(Route104_EventScript_HideWhiteHerbFlorist)
+    clearflag(FLAG_HIDE_ROUTE_104_WHITE_HERB_FLORIST)
+    return
+}
+
+script Route104_EventScript_HideWhiteHerbFlorist {
+    setflag(FLAG_HIDE_ROUTE_104_WHITE_HERB_FLORIST)
+    return
+}
+
+script Route104_EventScript_TrySetRivalPos {
+    if (var(VAR_BOARD_BRINEY_BOAT_STATE) >= 1) goto(Route104_EventScript_DontSetRivalPos)
+    if (flag(FLAG_MET_RIVAL_RUSTBORO)) goto(Route104_EventScript_DontSetRivalPos)
+    if (!flag(FLAG_REGISTER_RIVAL_POKENAV)) goto(Route104_EventScript_DontSetRivalPos)
+    setobjectxyperm(LOCALID_ROUTE104_RIVAL, 17, 52)
+    return
+}
+
+script Route104_EventScript_DontSetRivalPos {
+    return
+}
+
+script Route104_EventScript_Rival {
+    lockall
+    setvar(VAR_0x8008, 1)
+    applymovement(LOCALID_ROUTE104_RIVAL, Common_Movement_FacePlayer)
+    waitmovement(0)
+    goto(Route104_EventScript_RivalEncounter)
+}
+
+script Route104_EventScript_RivalTrigger {
+    lockall
+    setflag(FLAG_HIDE_RUSTBORO_CITY_RIVAL)
+    setvar(VAR_RUSTBORO_CITY_STATE, 8)
+    setvar(VAR_ROUTE104_STATE, 2)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    delay(10)
+    addobject(LOCALID_ROUTE104_RIVAL)
+    clearflag(FLAG_HIDE_ROUTE_104_RIVAL)
+    applymovement(LOCALID_PLAYER, Route104_Movement_PlayerBackUp)
+    waitmovement(0)
+    applymovement(LOCALID_ROUTE104_RIVAL, Route104_Movement_RivalExitBrineysCottage)
+    waitmovement(0)
+    delay(20)
+    setvar(VAR_0x8008, 0)
+    call(RustboroCity_EventScript_PlayRivalMusic)
+    playse(SE_PIN)
+    applymovement(LOCALID_ROUTE104_RIVAL, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_ROUTE104_RIVAL, Common_Movement_Delay48)
+    waitmovement(0)
+    goto(Route104_EventScript_RivalEncounter)
+}
+
+script Route104_EventScript_PlayRivalMusic {
+    checkplayergender()
+    if (var(VAR_RESULT) == MALE) goto(Route104_EventScript_PlayMayMusic)
+    if (var(VAR_RESULT) == FEMALE) goto(Route104_EventScript_PlayBrendanMusic)
+    return
+}
+
+script Route104_EventScript_PlayMayMusic {
+    playbgm(MUS_ENCOUNTER_MAY, TRUE)
+    return
+}
+
+script Route104_EventScript_PlayBrendanMusic {
+    playbgm(MUS_ENCOUNTER_BRENDAN, TRUE)
+    return
+}
+
+script Route104_EventScript_RivalEncounter {
+    checkplayergender()
+    if (var(VAR_RESULT) == MALE) goto(Route104_EventScript_MayEncounter)
+    if (var(VAR_RESULT) == FEMALE) goto(Route104_EventScript_BrendanEncounter)
+    end
+}
+
+script Route104_EventScript_MayEncounter {
+    if (flag(FLAG_DEFEATED_RIVAL_ROUTE_104)) goto(Route104_EventScript_MayDefeated)
+    if (flag(FLAG_REGISTER_RIVAL_POKENAV)) goto(Route104_EventScript_MayAskToBattle)
+    setflag(FLAG_REGISTER_RIVAL_POKENAV)
+    msgbox(Route104_Text_MayWeShouldRegister, MSGBOX_DEFAULT)
+    closemessage
+    delay(30)
+    playfanfare(MUS_REGISTER_MATCH_CALL)
+    msgbox(Route104_Text_RegisteredMay, MSGBOX_DEFAULT)
+    waitfanfare()
+    closemessage
+    delay(30)
+    setflag(FLAG_ENABLE_RIVAL_MATCH_CALL)
+    applymovement(LOCALID_PLAYER, Route104_Movement_PlayerFaceRival)
+    applymovement(LOCALID_ROUTE104_RIVAL, Route104_Movement_RivalWalkSlowLeft)
+    msgbox(Route104_Text_MayHowsYourPokedex, MSGBOX_DEFAULT)
+    closemessage
+    waitmovement(0)
+    applymovement(LOCALID_ROUTE104_RIVAL, Route104_Movement_RivalApproachPlayer)
+    waitmovement(0)
+    copyobjectxytoperm(LOCALID_ROUTE104_RIVAL)
+    msgbox(Route104_Text_MayMinesDecentLetsBattle, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(Route104_EventScript_BattleMay)
+    msgbox(Route104_Text_MayHaventRaisedPokemon, MSGBOX_DEFAULT)
+    call(Route104_EventScript_RestoreMusic)
+    releaseall
+    end
+}
+
+movement Route104_Movement_RivalWalkSlowLeft {
+    walk_slow_left
+    step_end
+}
+
+movement Route104_Movement_RivalApproachPlayer {
+    walk_down
+    face_right
+    step_end
+}
+
+movement Route104_Movement_PlayerFaceRival {
+    delay_4
+    walk_in_place_faster_left
+    step_end
+}
+
+script Route104_EventScript_MayAskToBattle {
+    msgbox(Route104_Text_MayLetsBattle, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(Route104_EventScript_BattleMay)
+    msgbox(Route104_Text_MayHaventRaisedPokemon, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script Route104_EventScript_BattleMay {
+    msgbox(Route104_Text_MayIntro, MSGBOX_DEFAULT)
+    switch(VAR_STARTER_MON)
+    case(0, Route104_EventScript_BattleMayTreecko)
+    case(1, Route104_EventScript_BattleMayTorchic)
+    case(2, Route104_EventScript_BattleMayMudkip)
+    end
+}
+
+script Route104_EventScript_MayDefeated {
+    msgbox(Route104_Text_MayPostBattle, MSGBOX_DEFAULT)
+    if (var(VAR_0x8008) == 0) call(Route104_EventScript_RestoreMusic)
+    releaseall
+    end
+}
+
+script Route104_EventScript_RestoreMusic {
+    savebgm(MUS_DUMMY)
+    fadedefaultbgm()
+    return
+}
+
+script Route104_EventScript_BattleMayTreecko {
+    trainerbattle_no_intro(TRAINER_MAY_RUSTBORO_TREECKO, Route104_Text_MayDefeat)
+    setflag(FLAG_DEFEATED_RIVAL_ROUTE_104)
+    goto(Route104_EventScript_MayDefeated)
+    end
+}
+
+script Route104_EventScript_BattleMayTorchic {
+    trainerbattle_no_intro(TRAINER_MAY_RUSTBORO_TORCHIC, Route104_Text_MayDefeat)
+    setflag(FLAG_DEFEATED_RIVAL_ROUTE_104)
+    goto(Route104_EventScript_MayDefeated)
+    end
+}
+
+script Route104_EventScript_BattleMayMudkip {
+    trainerbattle_no_intro(TRAINER_MAY_RUSTBORO_MUDKIP, Route104_Text_MayDefeat)
+    setflag(FLAG_DEFEATED_RIVAL_ROUTE_104)
+    goto(Route104_EventScript_MayDefeated)
+    end
+}
+
+script Route104_EventScript_BrendanEncounter {
+    if (flag(FLAG_DEFEATED_RIVAL_ROUTE_104)) goto(Route104_EventScript_BrendanDefeated)
+    if (flag(FLAG_REGISTER_RIVAL_POKENAV)) goto(Route104_EventScript_BrendanAskToBattle)
+    setflag(FLAG_REGISTER_RIVAL_POKENAV)
+    msgbox(Route104_Text_BrendanWeShouldRegister, MSGBOX_DEFAULT)
+    closemessage
+    delay(30)
+    playfanfare(MUS_REGISTER_MATCH_CALL)
+    msgbox(Route104_Text_RegisteredBrendan, MSGBOX_DEFAULT)
+    waitfanfare()
+    closemessage
+    delay(30)
+    setflag(FLAG_ENABLE_RIVAL_MATCH_CALL)
+    applymovement(LOCALID_PLAYER, Route104_Movement_PlayerFaceRival)
+    applymovement(LOCALID_ROUTE104_RIVAL, Route104_Movement_RivalWalkSlowLeft)
+    msgbox(Route104_Text_BrendanHowsYourPokedex, MSGBOX_DEFAULT)
+    closemessage
+    waitmovement(0)
+    applymovement(LOCALID_ROUTE104_RIVAL, Route104_Movement_RivalApproachPlayer)
+    waitmovement(0)
+    copyobjectxytoperm(LOCALID_ROUTE104_RIVAL)
+    msgbox(Route104_Text_BrendanDoingGreatLetsBattle, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(Route104_EventScript_BattleBrendan)
+    msgbox(Route104_Text_BrendanNoConfidence, MSGBOX_DEFAULT)
+    call(Route104_EventScript_RestoreMusic)
+    releaseall
+    end
+}
+
+script Route104_EventScript_BrendanAskToBattle {
+    msgbox(Route104_Text_BrendanLetsBattle, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(Route104_EventScript_BattleBrendan)
+    msgbox(Route104_Text_BrendanNoConfidence, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script Route104_EventScript_BattleBrendan {
+    msgbox(Route104_Text_BrendanIntro, MSGBOX_DEFAULT)
+    switch(VAR_STARTER_MON)
+    case(0, Route104_EventScript_BattleBrendanTreecko)
+    case(1, Route104_EventScript_BattleBrendanTorchic)
+    case(2, Route104_EventScript_BattleBrendanMudkip)
+    end
+}
+
+script Route104_EventScript_BrendanDefeated {
+    msgbox(Route104_Text_BrendanPostBattle, MSGBOX_DEFAULT)
+    if (var(VAR_0x8008) == 0) call(Route104_EventScript_RestoreMusic)
+    releaseall
+    end
+}
+
+script Route104_EventScript_BattleBrendanTreecko {
+    trainerbattle_no_intro(TRAINER_BRENDAN_RUSTBORO_TREECKO, Route104_Text_BrendanDefeat)
+    setflag(FLAG_DEFEATED_RIVAL_ROUTE_104)
+    goto(Route104_EventScript_BrendanDefeated)
+    end
+}
+
+script Route104_EventScript_BattleBrendanTorchic {
+    trainerbattle_no_intro(TRAINER_BRENDAN_RUSTBORO_TORCHIC, Route104_Text_BrendanDefeat)
+    setflag(FLAG_DEFEATED_RIVAL_ROUTE_104)
+    goto(Route104_EventScript_BrendanDefeated)
+    end
+}
+
+script Route104_EventScript_BattleBrendanMudkip {
+    trainerbattle_no_intro(TRAINER_BRENDAN_RUSTBORO_MUDKIP, Route104_Text_BrendanDefeat)
+    setflag(FLAG_DEFEATED_RIVAL_ROUTE_104)
+    goto(Route104_EventScript_BrendanDefeated)
+    end
+}
+
+script Route104_Movement_PlayerBackUp {
+    lock_facing_direction()
+    walk_down()
+    unlock_facing_direction()
+    step_end()
+}
+
+movement Route104_Movement_RivalExitBrineysCottage {
+    walk_down
+    step_end
+}
+
+script Route104_EventScript_ExpertF {
+    lock
+    faceplayer
+    if (flag(FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104)) goto(Route104_EventScript_ReceivedBerry)
+    msgbox(Route104_Text_PlantBerriesInSoilTakeThis, MSGBOX_DEFAULT)
+    giveitem(ITEM_CHESTO_BERRY)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    setflag(FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104)
+    msgbox(Route104_Text_TrainersOftenMakeMonHoldBerries, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route104_EventScript_ReceivedBerry {
+    msgbox(Route104_Text_TrainersOftenMakeMonHoldBerries, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route104_EventScript_WhiteHerbFlorist {
+    lock
+    faceplayer
+    if (flag(FLAG_RECEIVED_WHITE_HERB)) goto(Route104_EventScript_ReceivedWhiteHerb)
+    msgbox(Route104_Text_DontNeedThisTakeIt, MSGBOX_DEFAULT)
+    giveitem(ITEM_WHITE_HERB)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    setflag(FLAG_RECEIVED_WHITE_HERB)
+    release
+    end
+}
+
+script Route104_EventScript_ReceivedWhiteHerb {
+    msgbox(Route104_Text_FlowerShopSellingSaplings, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route104_EventScript_Girl1 {
+    msgbox(Route104_Text_BrineyLivesInSeasideCottage, MSGBOX_NPC)
+    end
+}
+
+script Route104_EventScript_BugCatcher {
+    msgbox(Route104_Text_WhatsItLikeAtBottomOfSea, MSGBOX_SIGN)
+    end
+}
+
+script Route104_EventScript_BrineysCottageSign {
+    msgbox(Route104_Text_MrBrineysCottage, MSGBOX_SIGN)
+    end
+}
+
+script Route104_EventScript_RouteSignPetalburg {
+    msgbox(Route104_Text_RouteSignPetalburg, MSGBOX_SIGN)
+    end
+}
+
+script Route104_EventScript_RouteSignRustboro {
+    msgbox(Route104_Text_RouteSignRustboro, MSGBOX_SIGN)
+    end
+}
+
+script Route104_EventScript_FlowerShopSign {
+    msgbox(Route104_Text_PrettyPetalFlowShop, MSGBOX_SIGN)
+    end
+}
+
+script Route104_EventScript_TrainerTipsDoubleBattles {
+    msgbox(Route104_Text_TrainerTipsDoubleBattles, MSGBOX_SIGN)
+    end
+}
+
+script Route104_EventScript_Boy1 {
+    msgbox(Route104_Text_ThrowBallAtWeakenedPokemon, MSGBOX_NPC)
+    end
+}
+
+script Route104_EventScript_Woman {
+    msgbox(Route104_Text_OnlyThrowBallAtWildPokemon, MSGBOX_NPC)
+    end
+}
+
+script Route104_EventScript_Boy2 {
+    lock
+    faceplayer
+    if (flag(FLAG_RECEIVED_TM_BULLET_SEED)) goto(Route104_EventScript_ReceivedBulletSeed)
+    msgbox(Route104_Text_LikeFillingMouthWithSeedsTakeThis, MSGBOX_DEFAULT)
+    giveitem(ITEM_TM_BULLET_SEED)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    setflag(FLAG_RECEIVED_TM_BULLET_SEED)
+    release
+    end
+}
+
+script Route104_EventScript_ReceivedBulletSeed {
+    msgbox(Route104_Text_TMsAreOneTimeUse, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route104_EventScript_Girl2 {
+    msgbox(Route104_Text_ImNotATrainer, MSGBOX_NPC)
+    end
+}
+
+script Route104_EventScript_SailToDewford {
+    setobjectsubpriority(LOCALID_ROUTE104_BRINEY, MAP_ROUTE104, 0)
+    setobjectsubpriority(LOCALID_PLAYER, MAP_ROUTE104, 0)
+    applymovement(LOCALID_ROUTE104_BRINEY, Route104_Movement_BrineyBoardBoat)
+    waitmovement(0)
+    removeobject(LOCALID_ROUTE104_BRINEY)
+    applymovement(LOCALID_PLAYER, Route104_Movement_PlayerBoardBoat)
+    waitmovement(0)
+    hideobjectat(LOCALID_PLAYER, MAP_ROUTE104)
+    call(Common_EventScript_PlayBrineysBoatMusic)
+    if (flag(FLAG_ENABLE_NORMAN_MATCH_CALL)) goto(Route104_EventScript_SailToDewfordNoCall)
+    if (!flag(FLAG_ENABLE_NORMAN_MATCH_CALL)) goto(Route104_EventScript_SailToDewfordDadCalls)
+    end
+}
+
+script Route104_EventScript_SailToDewfordNoCall {
+    applymovement(LOCALID_ROUTE104_BOAT, Route104_Movement_SailToDewford)
+    applymovement(LOCALID_PLAYER, Route104_Movement_SailToDewford)
+    waitmovement(0)
+    goto(Route104_EventScript_ArriveInDewford)
+}
+
+script Route104_EventScript_SailToDewfordDadCalls {
+    applymovement(LOCALID_ROUTE104_BOAT, Route104_Movement_SailToDewfordBeforeDadCalls)
+    applymovement(LOCALID_PLAYER, Route104_Movement_SailToDewfordBeforeDadCalls)
+    waitmovement(0)
+    pokenavcall(Route104_Text_DadPokenavCall)
+    waitmessage()
+    delay(30)
+    playfanfare(MUS_REGISTER_MATCH_CALL)
+    msgbox(Route104_Text_RegisteredDadInPokenav, MSGBOX_DEFAULT)
+    waitfanfare()
+    closemessage
+    delay(30)
+    setflag(FLAG_ENABLE_NORMAN_MATCH_CALL)
+    applymovement(LOCALID_PLAYER, Route104_Movement_SailToDewfordAfterDadCalls)
+    applymovement(LOCALID_ROUTE104_BOAT, Route104_Movement_SailToDewfordAfterDadCalls, MAP_ROUTE104)
+    waitmovement(LOCALID_ROUTE104_BOAT, MAP_ROUTE104)
+    waitmovement(0)
+    goto(Route104_EventScript_ArriveInDewford)
+}
+
+script Route104_EventScript_ArriveInDewford {
+    delay(50)
+    applymovement(LOCALID_PLAYER, Route104_Movement_PlayerExitBoat)
+    waitmovement(0)
+    call(Common_EventScript_StopBrineysBoatMusic)
+    showobjectat(LOCALID_PLAYER, MAP_DEWFORD_TOWN)
+    applymovement(LOCALID_PLAYER, Route104_Movement_PlayerMoveForBriney)
+    waitmovement(0)
+    setobjectxyperm(LOCALID_DEWFORD_BRINEY, 12, 8)
+    addobject(LOCALID_DEWFORD_BRINEY)
+    setobjectsubpriority(LOCALID_DEWFORD_BRINEY, MAP_DEWFORD_TOWN, 0)
+    clearflag(FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN)
+    applymovement(LOCALID_DEWFORD_BRINEY, Route104_Movement_BrineyExitBoat)
+    waitmovement(0)
+    addobject(LOCALID_DEWFORD_BOAT)
+    clearflag(FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN)
+    call(Common_EventScript_StopBrineysBoatMusic)
+    setflag(FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT)
+    hideobjectat(LOCALID_ROUTE104_BOAT, MAP_ROUTE104)
+    copyvar(VAR_BRINEY_LOCATION, VAR_0x8008)
+    resetobjectsubpriority(LOCALID_PLAYER, MAP_ROUTE104)
+    resetobjectsubpriority(LOCALID_DEWFORD_BRINEY, MAP_DEWFORD_TOWN)
+    copyobjectxytoperm(LOCALID_DEWFORD_BRINEY)
+    setvar(VAR_BOARD_BRINEY_BOAT_STATE, 0)
+    if (!flag(FLAG_DELIVERED_STEVEN_LETTER)) goto(Route104_EventScript_DeliverLetterReminder)
+    if (flag(FLAG_DELIVERED_STEVEN_LETTER)) goto(Route104_EventScript_LandedInDewford)
+    end
+}
+
+script Route104_EventScript_DeliverLetterReminder {
+    msgbox(Route104_Text_LandedInDewfordDeliverLetter, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script Route104_EventScript_LandedInDewford {
+    msgbox(DewfordTown_Text_BrineyLandedInDewford, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+movement Route104_Movement_SailToDewfordBeforeDadCalls {
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_right
+    walk_fast_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_fast_right
+    walk_fast_right
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    step_end
+}
+
+movement Route104_Movement_SailToDewfordAfterDadCalls {
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_right
+    walk_fast_right
+    walk_fast_right
+    walk_fast_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_fast_right
+    walk_fast_right
+    walk_fast_right
+    walk_fast_right
+    walk_right
+    walk_right
+    walk_down
+    walk_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_down
+    walk_down
+    step_end
+}
+
+movement Route104_Movement_SailToDewford {
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_right
+    walk_fast_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_fast_right
+    walk_fast_right
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_right
+    walk_fast_right
+    walk_fast_right
+    walk_fast_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_fast_right
+    walk_fast_right
+    walk_fast_right
+    walk_fast_right
+    walk_right
+    walk_right
+    walk_down
+    walk_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_down
+    walk_down
+    step_end
+}
+
+movement Route104_Movement_PlayerBoardBoat {
+    walk_left
+    walk_down
+    walk_down
+    step_end
+}
+
+movement Route104_Movement_PlayerExitBoat {
+    walk_down
+    step_end
+}
+
+movement Route104_Movement_PlayerMoveForBriney {
+    walk_down
+    walk_left
+    walk_in_place_faster_right
+    step_end
+}
+
+movement Route104_Movement_BrineyBoardBoat {
+    walk_down
+    walk_down
+    step_end
+}
+
+movement Route104_Movement_BrineyExitBoat {
+    walk_down
+    walk_in_place_faster_left
+    step_end
+}
+
+script Route104_EventScript_Ivan {
+    trainerbattle_single(TRAINER_IVAN, Route104_Text_IvanIntro, Route104_Text_IvanDefeat)
+    msgbox(Route104_Text_IvanPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route104_EventScript_Billy {
+    trainerbattle_single(TRAINER_BILLY, Route104_Text_BillyIntro, Route104_Text_BillyDefeat)
+    msgbox(Route104_Text_BillyPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route104_EventScript_Haley {
+    trainerbattle_single(TRAINER_HALEY_1, Route104_Text_HaleyIntro, Route104_Text_HaleyDefeat, Route104_EventScript_TryRegisterHaleyAfterBattle)
+    specialvar(VAR_RESULT, ShouldTryRematchBattle)
+    if (var(VAR_RESULT) == TRUE) goto(Route104_EventScript_RematchHaley)
+    setvar(VAR_0x8004, TRAINER_HALEY_1)
+    specialvar(VAR_RESULT, IsTrainerRegistered)
+    if (var(VAR_RESULT) == FALSE) goto(Route104_EventScript_TryRegisterHaley)
+    msgbox(Route104_Text_HaleyPostBattle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route104_EventScript_TryRegisterHaleyAfterBattle {
+    special(PlayerFaceTrainerAfterBattle)
+    waitmovement(0)
+    if (flag(FLAG_HAS_MATCH_CALL)) goto(Route104_EventScript_RegisterHaleyAfterBattle)
+    release
+    end
+}
+
+script Route104_EventScript_RegisterHaleyAfterBattle {
+    msgbox(Route104_Text_HaleyRegister2, MSGBOX_DEFAULT)
+    register_matchcall(TRAINER_HALEY_1)
+    release
+    end
+}
+
+script Route104_EventScript_TryRegisterHaley {
+    if (flag(FLAG_HAS_MATCH_CALL)) goto(Route104_EventScript_RegisterHaley)
+    msgbox(Route104_Text_HaleyPostBattle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route104_EventScript_RegisterHaley {
+    msgbox(Route104_Text_HaleyRegister1, MSGBOX_DEFAULT)
+    register_matchcall(TRAINER_HALEY_1)
+    release
+    end
+}
+
+script Route104_EventScript_RematchHaley {
+    trainerbattle_rematch(TRAINER_HALEY_1, Route104_Text_HaleyRematchIntro, Route104_Text_HaleyRematchDefeat)
+    msgbox(Route104_Text_HaleyPostRematch, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route104_EventScript_Winston {
+    trainerbattle_single(TRAINER_WINSTON_1, Route104_Text_WinstonIntro, Route104_Text_WinstonDefeat, Route104_EventScript_TryRegisterWinstonAfterBattle)
+    specialvar(VAR_RESULT, ShouldTryRematchBattle)
+    if (var(VAR_RESULT) == TRUE) goto(Route104_EventScript_RematchWinston)
+    setvar(VAR_0x8004, TRAINER_WINSTON_1)
+    specialvar(VAR_RESULT, IsTrainerRegistered)
+    if (var(VAR_RESULT) == FALSE) goto(Route104_EventScript_TryRegisterWinston)
+    msgbox(Route104_Text_WinstonPostBattle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route104_EventScript_TryRegisterWinstonAfterBattle {
+    special(PlayerFaceTrainerAfterBattle)
+    waitmovement(0)
+    if (flag(FLAG_HAS_MATCH_CALL)) goto(Route104_EventScript_RegisterWinstonAfterBattle)
+    release
+    end
+}
+
+script Route104_EventScript_RegisterWinstonAfterBattle {
+    msgbox(Route104_Text_WinstonRegister2, MSGBOX_DEFAULT)
+    register_matchcall(TRAINER_WINSTON_1)
+    release
+    end
+}
+
+script Route104_EventScript_TryRegisterWinston {
+    if (flag(FLAG_HAS_MATCH_CALL)) goto(Route104_EventScript_RegisterWinston)
+    msgbox(Route104_Text_WinstonPostBattle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route104_EventScript_RegisterWinston {
+    msgbox(Route104_Text_WinstonRegister1, MSGBOX_DEFAULT)
+    register_matchcall(TRAINER_WINSTON_1)
+    release
+    end
+}
+
+script Route104_EventScript_RematchWinston {
+    trainerbattle_rematch(TRAINER_WINSTON_1, Route104_Text_WinstonRematchIntro, Route104_Text_WinstonRematchDefeat)
+    msgbox(Route104_Text_WinstonPostRematch, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route104_EventScript_Cindy {
+    trainerbattle_single(TRAINER_CINDY_1, Route104_Text_CindyIntro, Route104_Text_CindyDefeat, Route104_EventScript_TryRegisterCindyAfterBattle)
+    specialvar(VAR_RESULT, ShouldTryRematchBattle)
+    if (var(VAR_RESULT) == TRUE) goto(Route104_EventScript_RematchCindy)
+    setvar(VAR_0x8004, TRAINER_CINDY_1)
+    specialvar(VAR_RESULT, IsTrainerRegistered)
+    if (var(VAR_RESULT) == FALSE) goto(Route104_EventScript_TryRegisterCindy)
+    msgbox(Route104_Text_CindyPostBattle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route104_EventScript_TryRegisterCindyAfterBattle {
+    special(PlayerFaceTrainerAfterBattle)
+    waitmovement(0)
+    if (flag(FLAG_HAS_MATCH_CALL)) goto(Route104_EventScript_RegisterCindyAfterBattle)
+    release
+    end
+}
+
+script Route104_EventScript_RegisterCindyAfterBattle {
+    msgbox(Route104_Text_CindyRegister2, MSGBOX_DEFAULT)
+    register_matchcall(TRAINER_CINDY_1)
+    release
+    end
+}
+
+script Route104_EventScript_TryRegisterCindy {
+    if (flag(FLAG_HAS_MATCH_CALL)) goto(Route104_EventScript_RegisterCindy)
+    msgbox(Route104_Text_CindyPostBattle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route104_EventScript_RegisterCindy {
+    msgbox(Route104_Text_CindyRegister1, MSGBOX_DEFAULT)
+    register_matchcall(TRAINER_CINDY_1)
+    release
+    end
+}
+
+script Route104_EventScript_RematchCindy {
+    trainerbattle_rematch(TRAINER_CINDY_1, Route104_Text_CindyRematchIntro, Route104_Text_CindyRematchDefeat)
+    msgbox(Route104_Text_CindyPostRematch, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route104_EventScript_Gina {
+    trainerbattle_double(TRAINER_GINA_AND_MIA_1, Route104_Text_GinaIntro, Route104_Text_GinaDefeat, Route104_Text_GinaNotEnoughMons)
+    special(GetPlayerBigGuyGirlString)
+    msgbox(Route104_Text_GinaPostBattle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route104_EventScript_Mia {
+    trainerbattle_double(TRAINER_GINA_AND_MIA_1, Route104_Text_MiaIntro, Route104_Text_MiaDefeat, Route104_Text_MiaNotEnoughMons)
+    special(GetPlayerBigGuyGirlString)
+    msgbox(Route104_Text_MiaPostBattle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route104_EventScript_Darian {
+    trainerbattle_single(TRAINER_DARIAN, Route104_Text_DarianIntro, Route104_Text_DarianDefeat)
+    msgbox(Route104_Text_DarianPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text Route104_Text_BrineyLivesInSeasideCottage {
+    "That seaside cottage is where\n"
+    "MR. BRINEY lives.\p"
+    "He was once a mighty sailor who never\n"
+    "feared the sea, however stormy.$"
+}
+
+text Route104_Text_WhatsItLikeAtBottomOfSea {
+    "The sea, huh?\p"
+    "I wonder what it's like at the bottom\n"
+    "of the sea?$"
+}
+
+text Route104_Text_ThrowBallAtWeakenedPokemon {
+    "If you're going to throw a POKé BALL,\n"
+    "weaken the wild POKéMON first.\p"
+    "It will be easier to catch if it's been\n"
+    "poisoned, burned, or lulled to sleep.$"
+}
+
+text Route104_Text_OnlyThrowBallAtWildPokemon {
+    "You're a thief if you try to steal\n"
+    "someone else's POKéMON.\p"
+    "You should throw POKé BALLS only at\n"
+    "wild POKéMON.$"
+}
+
+text Route104_Text_ImNotATrainer {
+    "Oh, no, I'm not a TRAINER.\p"
+    "But that's right, if TRAINERS lock eyes,\n"
+    "it's a challenge to battle.\p"
+    "If you don't want to battle, stay out\n"
+    "of their sight.$"
+}
+
+text Route104_Text_LikeFillingMouthWithSeedsTakeThis {
+    "I like filling my mouth with seeds,\n"
+    "then spitting them out fast!\p"
+    "You can have this, so you try it out!\p"
+    "Use it on a POKéMON, and it will learn\n"
+    "a move for firing seeds rapidly.$"
+}
+
+text Route104_Text_TMsAreOneTimeUse {
+    "A word of advice!\p"
+    "A TM, TECHNICAL MACHINE, is good only\n"
+    "for one-time use.\p"
+    "Once you use it, it's gone.\n"
+    "Think twice before using it!$"
+}
+
+text Route104_Text_DontNeedThisTakeIt {
+    "This FLOWER SHOP started selling\n"
+    "saplings recently.\p"
+    "It made me so happy, I went overboard\n"
+    "shopping.\p"
+    "I don't need this WHITE HERB anymore.\n"
+    "Would you take it, please?$"
+}
+
+text Route104_Text_FlowerShopSellingSaplings {
+    "This FLOWER SHOP started selling\n"
+    "saplings recently.\p"
+    "It made me so happy, I went overboard\n"
+    "shopping. Where should I put them?$"
+}
+
+text Route104_Text_MrBrineysCottage {
+    "MR. BRINEY'S COTTAGE$"
+}
+
+text Route104_Text_RouteSignPetalburg {
+    "ROUTE 1O4\n"
+    "{RIGHT_ARROW} PETALBURG CITY$"
+}
+
+text Route104_Text_RouteSignRustboro {
+    "ROUTE 1O4\n"
+    "{UP_ARROW} RUSTBORO CITY$"
+}
+
+text Route104_Text_PrettyPetalFlowShop {
+    "PRETTY PETAL FLOWER SHOP$"
+}
+
+text Route104_Text_TrainerTipsDoubleBattles {
+    "TRAINER TIPS\p"
+    "In the HOENN region there are pairs\n"
+    "of TRAINERS who challenge others\l"
+    "for 2-on-2 POKéMON battles called\l"
+    "DOUBLE BATTLES.\p"
+    "In a DOUBLE BATTLE, the TRAINER must\n"
+    "send out two POKéMON, the one at the\l"
+    "left of the list and the top one.\l"
+    "Watch how POKéMON are lined up.$"
+}
+
+text Route104_Text_MayWeShouldRegister {
+    "MAY: Oh, hi, {PLAYER}{KUN}!\p"
+    "DEVON upgraded your POKéNAV with\n"
+    "the MATCH CALL system, huh?\p"
+    "We should register each other so we\n"
+    "can get in contact anytime.$"
+}
+
+text Route104_Text_RegisteredMay {
+    "{PLAYER} registered MAY\n"
+    "in the POKéNAV.$"
+}
+
+text Route104_Text_MayHowsYourPokedex {
+    "MAY: Oh, by the way, {PLAYER}{KUN},\n"
+    "how's your POKéDEX coming along?$"
+}
+
+text Route104_Text_MayMinesDecentLetsBattle {
+    "Mine's looking pretty decent.\n"
+    "So…\l"
+    "How about a little battle?$"
+}
+
+text Route104_Text_MayHaventRaisedPokemon {
+    "MAY: Oh, what's the matter?\p"
+    "Haven't you caught or raised your\n"
+    "POKéMON very much?\p"
+    "That's not very good for a TRAINER!$"
+}
+
+text Route104_Text_MayLetsBattle {
+    "MAY: So, what do you think?\n"
+    "How about a little battle here?$"
+}
+
+text Route104_Text_MayIntro {
+    "MAY: You just became a TRAINER,\n"
+    "{PLAYER}{KUN}. I'm not going to lose!$"
+}
+
+text Route104_Text_MayDefeat {
+    "Yikes!\n"
+    "You're better than I expected!$"
+}
+
+text Route104_Text_MayPostBattle {
+    "MAY: I can tell you've gotten pretty\n"
+    "good with the way you handle POKéMON.\p"
+    "But instead of only making them\n"
+    "battle, you should be like MR. BRINEY.\p"
+    "It's important to become friends with\n"
+    "POKéMON, too.$"
+}
+
+text Route104_Text_BrendanWeShouldRegister {
+    "BRENDAN: Oh, hey, {PLAYER}!\p"
+    "Cool, you had DEVON install the MATCH\n"
+    "CALL system on your POKéNAV!\p"
+    "Let's register each other in our\n"
+    "POKéNAVS so we can keep in touch.$"
+}
+
+text Route104_Text_RegisteredBrendan {
+    "{PLAYER} registered BRENDAN\n"
+    "in the POKéNAV.$"
+}
+
+text Route104_Text_BrendanHowsYourPokedex {
+    "BRENDAN: {PLAYER}, how's your POKéDEX?\n"
+    "Have you filled in any pages yet?$"
+}
+
+text Route104_Text_BrendanDoingGreatLetsBattle {
+    "Me, I'm doing great!\p"
+    "Want to check out how good I am with\n"
+    "a battle?$"
+}
+
+text Route104_Text_BrendanNoConfidence {
+    "BRENDAN: What's the matter? Don't have\n"
+    "any confidence in your POKéMON?$"
+}
+
+text Route104_Text_BrendanLetsBattle {
+    "BRENDAN: What's up?\n"
+    "Want to have a battle with me?$"
+}
+
+text Route104_Text_BrendanIntro {
+    "BRENDAN: I know you just became\n"
+    "a TRAINER, but I won't go easy!$"
+}
+
+text Route104_Text_BrendanDefeat {
+    "Hmm…\n"
+    "You're pretty good.$"
+}
+
+text Route104_Text_BrendanPostBattle {
+    "BRENDAN: You've gotten pretty decent\n"
+    "at handling POKéMON.\p"
+    "But, you know, you shouldn't just be\n"
+    "making POKéMON battle.\p"
+    "Like MR. BRINEY, it's important to\n"
+    "become friends with your POKéMON.$"
+}

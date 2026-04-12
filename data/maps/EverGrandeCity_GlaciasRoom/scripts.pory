@@ -1,0 +1,94 @@
+mapscripts EverGrandeCity_GlaciasRoom_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_ELITE_4_STATE, 2: EverGrandeCity_GlaciasRoom_EventScript_WalkInCloseDoor
+    ]
+    MAP_SCRIPT_ON_LOAD: EverGrandeCity_GlaciasRoom_OnLoad
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: EverGrandeCity_GlaciasRoom_OnWarp
+}
+
+raw `
+EverGrandeCity_GlaciasRoom_OnWarp:
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_GlaciasRoom_EventScript_PlayerTurnNorth
+	.2byte 0
+
+`
+
+script EverGrandeCity_GlaciasRoom_EventScript_PlayerTurnNorth {
+    turnobject(LOCALID_PLAYER, DIR_NORTH)
+    end
+}
+
+script EverGrandeCity_GlaciasRoom_EventScript_WalkInCloseDoor {
+    lockall
+    call(PokemonLeague_EliteFour_EventScript_WalkInCloseDoor)
+    setvar(VAR_ELITE_4_STATE, 3)
+    releaseall
+    end
+}
+
+script EverGrandeCity_GlaciasRoom_OnLoad {
+    if (flag(FLAG_DEFEATED_ELITE_4_GLACIA)) call(EverGrandeCity_GlaciasRoom_EventScript_ResetAdvanceToNextRoom)
+    if (var(VAR_ELITE_4_STATE) == 3) call(EverGrandeCity_GlaciasRoom_EventScript_CloseDoor)
+    end
+}
+
+script EverGrandeCity_GlaciasRoom_EventScript_ResetAdvanceToNextRoom {
+    call(PokemonLeague_EliteFour_EventScript_ResetAdvanceToNextRoom)
+    return
+}
+
+script EverGrandeCity_GlaciasRoom_EventScript_CloseDoor {
+    call(PokemonLeague_EliteFour_EventScript_CloseDoor)
+    return
+}
+
+script EverGrandeCity_GlaciasRoom_EventScript_Glacia {
+    lock
+    faceplayer
+    if (flag(FLAG_DEFEATED_ELITE_4_GLACIA)) goto(EverGrandeCity_GlaciasRoom_EventScript_PostBattleSpeech)
+    playbgm(MUS_ENCOUNTER_ELITE_FOUR, FALSE)
+    msgbox(EverGrandeCity_GlaciasRoom_Text_IntroSpeech, MSGBOX_DEFAULT)
+    trainerbattle_no_intro(TRAINER_GLACIA, EverGrandeCity_GlaciasRoom_Text_Defeat)
+    goto(EverGrandeCity_GlaciasRoom_EventScript_Defeated)
+    end
+}
+
+script EverGrandeCity_GlaciasRoom_EventScript_PostBattleSpeech {
+    msgbox(EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script EverGrandeCity_GlaciasRoom_EventScript_Defeated {
+    setflag(FLAG_DEFEATED_ELITE_4_GLACIA)
+    call(PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles)
+    msgbox(EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+text EverGrandeCity_GlaciasRoom_Text_IntroSpeech {
+    "Welcome, my name is GLACIA\n"
+    "of the ELITE FOUR.\p"
+    "I've traveled from afar to HOENN\n"
+    "so that I may hone my ice skills.\p"
+    "But all I have seen are challenges by\n"
+    "weak TRAINERS and their POKéMON.\p"
+    "What about you?\p"
+    "It would please me to no end if I could\n"
+    "go all out against you!$"
+}
+
+text EverGrandeCity_GlaciasRoom_Text_Defeat {
+    "You and your POKéMON…\n"
+    "How hot your spirits burn!\p"
+    "The all-consuming heat overwhelms.\p"
+    "It's no surprise that my icy skills\n"
+    "failed to harm you.$"
+}
+
+text EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech {
+    "Advance to the next room.\p"
+    "And there, confirm the truly fearsome\n"
+    "side of the POKéMON LEAGUE.$"
+}

@@ -1,0 +1,47 @@
+mapscripts SSAnne_1F_Room6_Frlg_MapScripts {}
+
+script SSAnne_1F_Room6_EventScript_Woman {
+    lock
+    faceplayer
+    msgbox(SSAnne_1F_Room6_Text_TakeAShortRest, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(SSAnne_1F_Room6_EventScript_DeclineHeal)
+    closemessage
+    call(Common_EventScript_OutOfCenterPartyHeal)
+    msgbox(SSAnne_1F_Room6_Text_GladEveryoneIsRefreshed)
+    release
+    end
+}
+
+script SSAnne_1F_Room6_EventScript_DeclineHeal {
+    checkplayergender()
+    if (var(VAR_RESULT) == MALE) goto(SSAnne_1F_Room6_EventScript_DeclineHealMale)
+    msgbox(SSAnne_1F_Room6_Text_SorryYouLookLikeMySister)
+    release
+    end
+}
+
+script SSAnne_1F_Room6_EventScript_DeclineHealMale {
+    msgbox(SSAnne_1F_Room6_Text_SorryYouLookLikeMyBrother)
+    release
+    end
+}
+
+text SSAnne_1F_Room6_Text_TakeAShortRest {
+    "You look tired. Would you like to\n"
+    "take a short rest?$"
+}
+
+text SSAnne_1F_Room6_Text_GladEveryoneIsRefreshed {
+    "I'm glad to see that everyone is\n"
+    "looking refreshed and chipper.$"
+}
+
+text SSAnne_1F_Room6_Text_SorryYouLookLikeMyBrother {
+    "Oh, I'm sorry for fussing over you.\n"
+    "You look like my little brother…$"
+}
+
+text SSAnne_1F_Room6_Text_SorryYouLookLikeMySister {
+    "Oh, I'm sorry for fussing over you.\n"
+    "You look like my little sister…$"
+}

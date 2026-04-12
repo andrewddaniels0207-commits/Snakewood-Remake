@@ -1,0 +1,108 @@
+mapscripts PetalburgCity_PokemonCenter_1F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: PetalburgCity_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script PetalburgCity_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_PETALBURG_CITY)
+    call(Common_EventScript_UpdateBrineyLocation)
+    end
+}
+
+script PetalburgCity_PokemonCenter_1F_EventScript_Nurse {
+    setvar(VAR_0x800B, LOCALID_PETALBURG_NURSE)
+    call(Common_EventScript_PkmnCenterNurse)
+    waitmessage()
+    waitbuttonpress()
+    release
+    end
+}
+
+script PetalburgCity_PokemonCenter_1F_EventScript_FatMan {
+    msgbox(PetalburgCity_PokemonCenter_1F_Text_PCStorageSystem, MSGBOX_NPC)
+    end
+}
+
+script PetalburgCity_PokemonCenter_1F_EventScript_Youngster {
+    msgbox(PetalburgCity_PokemonCenter_1F_Text_OranBerryRegainedHP, MSGBOX_NPC)
+    end
+}
+
+script PetalburgCity_PokemonCenter_1F_EventScript_Woman {
+    lock
+    faceplayer
+    msgbox(PetalburgCity_PokemonCenter_1F_Text_ManyTypesOfPokemon, MSGBOX_DEFAULT)
+    specialvar(VAR_RESULT, IsStarterInParty)
+    if (var(VAR_RESULT) == TRUE) goto(PetalburgCity_PokemonCenter_1F_EventScript_SayStarterTypeInfo)
+    release
+    end
+}
+
+script PetalburgCity_PokemonCenter_1F_EventScript_SayStarterTypeInfo {
+    if (var(VAR_STARTER_MON) == 0) call(PetalburgCity_PokemonCenter_1F_EventScript_SayTreeckoType)
+    if (var(VAR_STARTER_MON) == 1) call(PetalburgCity_PokemonCenter_1F_EventScript_SayTorchicType)
+    if (var(VAR_STARTER_MON) == 2) call(PetalburgCity_PokemonCenter_1F_EventScript_SayMudkipType)
+    release
+    end
+}
+
+script PetalburgCity_PokemonCenter_1F_EventScript_SayTreeckoType {
+    msgbox(PetalburgCity_PokemonCenter_1F_Text_TreeckoIsGrassType, MSGBOX_DEFAULT)
+    return
+}
+
+script PetalburgCity_PokemonCenter_1F_EventScript_SayTorchicType {
+    msgbox(PetalburgCity_PokemonCenter_1F_Text_TorchicIsFireType, MSGBOX_DEFAULT)
+    return
+}
+
+script PetalburgCity_PokemonCenter_1F_EventScript_SayMudkipType {
+    msgbox(PetalburgCity_PokemonCenter_1F_Text_MudkipIsWaterType, MSGBOX_DEFAULT)
+    return
+}
+
+text PetalburgCity_PokemonCenter_1F_Text_PCStorageSystem {
+    "That PC-based POKéMON Storage\n"
+    "System…\p"
+    "Whoever made it must be some kind\n"
+    "of a scientific wizard!$"
+}
+
+text PetalburgCity_PokemonCenter_1F_Text_OranBerryRegainedHP {
+    "When my POKéMON ate an\n"
+    "ORAN BERRY, it regained HP!$"
+}
+
+text PetalburgCity_PokemonCenter_1F_Text_ManyTypesOfPokemon {
+    "There are many types of POKéMON.\p"
+    "All types have their strengths and\n"
+    "weaknesses against other types.\p"
+    "Depending on the types of POKéMON,\n"
+    "a battle could be easy or hard.$"
+}
+
+text PetalburgCity_PokemonCenter_1F_Text_TreeckoIsGrassType {
+    "For example, your TREECKO\n"
+    "is a GRASS type.\p"
+    "It's strong against the WATER and\n"
+    "GROUND types.\p"
+    "But, it's weak against FIRE-type\n"
+    "POKéMON.$"
+}
+
+text PetalburgCity_PokemonCenter_1F_Text_TorchicIsFireType {
+    "For example, your TORCHIC\n"
+    "is a FIRE type.\p"
+    "It's strong against the GRASS and\n"
+    "BUG types.\p"
+    "But, it's weak against WATER-type\n"
+    "POKéMON.$"
+}
+
+text PetalburgCity_PokemonCenter_1F_Text_MudkipIsWaterType {
+    "For example, your MUDKIP\n"
+    "is a WATER type.\p"
+    "It's strong against the FIRE type.\p"
+    "But, it's weak against GRASS-type\n"
+    "and ELECTRIC-type POKéMON.$"
+}

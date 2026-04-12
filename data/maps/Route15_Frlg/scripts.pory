@@ -1,0 +1,200 @@
+mapscripts Route15_Frlg_MapScripts {}
+
+script Route15_EventScript_RouteSign {
+    msgbox(Route15_Text_RouteSign, MSGBOX_SIGN)
+    end
+}
+
+text Route15_Text_KindraIntro {
+    "I just got some POKéMON in trades.\n"
+    "Can I try them out on you?$"
+}
+
+text Route15_Text_KindraDefeat {
+    "Not good enough!$"
+}
+
+text Route15_Text_KindraPostBattle {
+    "You can't change the nickname of\n"
+    "any POKéMON you get in a trade.\p"
+    "Only the Original TRAINER can get\n"
+    "the nickname changed.$"
+}
+
+text Route15_Text_BeckyIntro {
+    "You look gentle, so I think I can\n"
+    "beat you.\p"
+    "I'll give it a go!$"
+}
+
+text Route15_Text_BeckyDefeat {
+    "No, wrong!$"
+}
+
+text Route15_Text_BeckyPostBattle {
+    "I'm afraid of BIKERS. They look so\n"
+    "ugly and mean!$"
+}
+
+text Route15_Text_EdwinIntro {
+    "When I whistle, I can summon bird\n"
+    "POKéMON.$"
+}
+
+text Route15_Text_EdwinDefeat {
+    "Ow!\n"
+    "That's tragic!$"
+}
+
+text Route15_Text_EdwinPostBattle {
+    "Maybe I'm not cut out for battles.\n"
+    "I'm not the right type, I guess.$"
+}
+
+text Route15_Text_ChesterIntro {
+    "Hmm? My birds are shivering!\n"
+    "You're good, aren't you?$"
+}
+
+text Route15_Text_ChesterDefeat {
+    "Just as I thought!$"
+}
+
+text Route15_Text_ChesterPostBattle {
+    "This is so obvious, you should know\n"
+    "this, but…\p"
+    "Moves like EARTHQUAKE and FISSURE\n"
+    "have no effect on bird POKéMON.$"
+}
+
+text Route15_Text_GraceIntro {
+    "Oh, you're a little cutie!\n"
+    "So like a darling POKéMON!$"
+}
+
+text Route15_Text_GraceDefeat {
+    "You looked so cute, too!$"
+}
+
+text Route15_Text_GracePostBattle {
+    "I forgive you.\n"
+    "I can take it.\l"
+    "I'm a big girl now.$"
+}
+
+text Route15_Text_OliviaIntro {
+    "I raise POKéMON for protection\n"
+    "because I live alone.$"
+}
+
+text Route15_Text_OliviaDefeat {
+    "POKéMON isn't about winning or\n"
+    "losing for me.$"
+}
+
+text Route15_Text_OliviaPostBattle {
+    "I love having my POKéMON greet me\n"
+    "when I get home.\p"
+    "It's so reassuring.$"
+}
+
+text Route15_Text_ErnestIntro {
+    "Hey, kid! C'mon!\n"
+    "I just got these off some loser!$"
+}
+
+text Route15_Text_ErnestDefeat {
+    "Why not?$"
+}
+
+text Route15_Text_ErnestPostBattle {
+    "Life's too short.\n"
+    "It's cool to live as an outlaw.\l"
+    "TEAM ROCKET RULES!$"
+}
+
+text Route15_Text_AlexIntro {
+    "Fork over all your cash when you\n"
+    "lose to me, kid!$"
+}
+
+text Route15_Text_AlexDefeat {
+    "That can't be true!$"
+}
+
+text Route15_Text_AlexPostBattle {
+    "I was just joking about the money.\n"
+    "Don't take me all serious.$"
+}
+
+text Route15_Text_CeliaIntro {
+    "What's cool and happening?\n"
+    "Trading POKéMON!$"
+}
+
+text Route15_Text_CeliaDefeat {
+    "I said trade!$"
+}
+
+text Route15_Text_CeliaPostBattle {
+    "I trade POKéMON with my friends\n"
+    "all the time.$"
+}
+
+text Route15_Text_YazminIntro {
+    "Want to play with my POKéMON?$"
+}
+
+text Route15_Text_YazminDefeat {
+    "I was too impatient!$"
+}
+
+text Route15_Text_YazminPostBattle {
+    "I'll go train with weaker people.$"
+}
+
+text Route15_Text_RouteSign {
+    "ROUTE 15\n"
+    "West to FUCHSIA CITY$"
+}
+
+text Route15_Text_MyaIntro {
+    "MYA: You're perfect.\n"
+    "Help me train my little brother?$"
+}
+
+text Route15_Text_MyaDefeat {
+    "MYA: RON, you have to focus!\n"
+    "Concentrate on what you're doing!$"
+}
+
+text Route15_Text_MyaPostBattle {
+    "MYA: Okay, we'll turn it up.\n"
+    "I'll add to our training menu!$"
+}
+
+text Route15_Text_MyaNotEnoughMons {
+    "MYA: Do you want to challenge us?\n"
+    "You'll need two POKéMON, though.$"
+}
+
+text Route15_Text_RonIntro {
+    "RON: My sister gets scary when we\n"
+    "lose.$"
+}
+
+text Route15_Text_RonDefeat {
+    "RON: Oh, no, no…\n"
+    "Sis, I'm sorry!$"
+}
+
+text Route15_Text_RonPostBattle {
+    "RON: Oh, bleah…\n"
+    "I wish I had a nice sister…$"
+}
+
+text Route15_Text_RonNotEnoughMons {
+    "RON: Did you want to battle with\n"
+    "my sister and me?\p"
+    "You need two POKéMON, then.$"
+}

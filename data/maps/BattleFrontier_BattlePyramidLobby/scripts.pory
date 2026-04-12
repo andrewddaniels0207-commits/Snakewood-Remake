@@ -1,0 +1,1044 @@
+mapscripts BattleFrontier_BattlePyramidLobby_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_CHALLENGE_STATUS, 0: BattleFrontier_BattlePyramidLobby_EventScript_GetChallengeStatus
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING: BattleFrontier_BattlePyramidLobby_EventScript_QuitWithoutSaving
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_PAUSED: BattleFrontier_BattlePyramidLobby_EventScript_ResumeChallenge
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_WON: BattleFrontier_BattlePyramidLobby_EventScript_WonChallenge
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST: BattleFrontier_BattlePyramidLobby_EventScript_LostChallenge
+    ]
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: BattleFrontier_BattleDomeLobby_OnWarp
+}
+
+raw `
+BattleFrontier_BattlePyramidLobby_OnWarp:
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattlePyramidLobby_EventScript_TurnPlayerNorth
+	.2byte 0
+
+`
+
+script BattleFrontier_BattlePyramidLobby_EventScript_TurnPlayerNorth {
+    setvar(VAR_TEMP_1, 1)
+    turnobject(LOCALID_PLAYER, DIR_NORTH)
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_GetChallengeStatus {
+    frontier_getstatus()
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_QuitWithoutSaving {
+    lockall
+    message(BattleFrontier_BattlePyramidLobby_Text_DidntSaveBeforeQuittingTakeBag)
+    waitmessage()
+    playse(SE_EXP_MAX)
+    waitse()
+    closemessage
+    pyramid_set(PYRAMID_DATA_WIN_STREAK, 0)
+    pyramid_set(PYRAMID_DATA_WIN_STREAK_ACTIVE, FALSE)
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, 0)
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    releaseall
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_WonChallenge {
+    lockall
+    frontier_isbrain()
+    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattlePyramidLobby_EventScript_DefeatedKing)
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_YouveConqueredPyramid, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_GiveBattlePoints)
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_DefeatedKing {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_YouveDefeatedPyramidKing, MSGBOX_DEFAULT)
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_GiveBattlePoints {
+    special(DoBattlePyramidMonsHaveHeldItem)
+    if (var(VAR_RESULT) == TRUE) call(BattleFrontier_BattlePyramidLobby_EventScript_StoreHeldItemsInPyramidBag)
+    clearflag(FLAG_STORING_ITEMS_IN_PYRAMID_BAG)
+    frontier_checkairshow()
+    special(LoadPlayerParty)
+    pyramid_clearhelditems()
+    special(HealPlayerParty)
+    callnative(UpdateFollowingPokemon)
+    message(BattleFrontier_BattlePyramidLobby_Text_UsedBattleBagWillBeKept)
+    waitmessage()
+    playse(SE_EXP_MAX)
+    waitse()
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_GiveYouTheseBattlePoints, MSGBOX_DEFAULT)
+    frontier_givepoints()
+    msgbox(BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS)
+    message(BattleFrontier_BattlePyramidLobby_Text_RecordResultsWait)
+    waitmessage()
+    pyramid_setprize()
+    pyramid_save(0)
+    playse(SE_SAVE)
+    waitse()
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_LookForwardToNextChallenge, MSGBOX_DEFAULT)
+    closemessage
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    releaseall
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_LostChallenge {
+    frontier_checkairshow()
+    special(LoadPlayerParty)
+    pyramid_clearhelditems()
+    special(HealPlayerParty)
+    callnative(UpdateFollowingPokemon)
+    lockall
+    message(BattleFrontier_BattlePyramidLobby_Text_DisappointingHereIsBag)
+    waitmessage()
+    playse(SE_EXP_MAX)
+    waitse()
+    message(BattleFrontier_BattlePyramidLobby_Text_RecordResultsWait)
+    waitmessage()
+    pyramid_set(PYRAMID_DATA_WIN_STREAK_ACTIVE, FALSE)
+    pyramid_save(0)
+    playse(SE_SAVE)
+    waitse()
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_LookForwardToNextChallenge, MSGBOX_DEFAULT)
+    closemessage
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    releaseall
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_ResumeChallenge {
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_EnterChallenge)
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_Attendant {
+    lock
+    faceplayer
+    setvar(VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PYRAMID)
+    setvar(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES)
+    special(SavePlayerParty)
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_WelcomeToBattlePyramid, MSGBOX_DEFAULT)
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_AskTakeChallenge {
+    message(BattleFrontier_BattlePyramidLobby_Text_EmbarkOnChallenge)
+    waitmessage()
+    multichoice(17, 6, MULTI_CHALLENGEINFO, FALSE)
+    switch(VAR_RESULT)
+    case(0, BattleFrontier_BattlePyramidLobby_EventScript_TryEnterChallenge)
+    case(1, BattleFrontier_BattlePyramidLobby_EventScript_ExplainChallenge)
+    case(2, BattleFrontier_BattlePyramidLobby_EventScript_CancelChallenge)
+    case(MULTI_B_PRESSED, BattleFrontier_BattlePyramidLobby_EventScript_CancelChallenge)
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_TryEnterChallenge {
+    message(BattleFrontier_BattlePyramidLobby_Text_WhichLevelMode)
+    waitmessage()
+    multichoice(17, 6, MULTI_LEVEL_MODE, FALSE)
+    switch(VAR_RESULT)
+    case(FRONTIER_LVL_TENT, BattleFrontier_BattlePyramidLobby_EventScript_CancelChallenge)
+    case(MULTI_B_PRESSED, BattleFrontier_BattlePyramidLobby_EventScript_CancelChallenge)
+    frontier_checkineligible()
+    if (var(VAR_0x8004) == TRUE) goto(BattleFrontier_BattlePyramidLobby_EventScript_NotEnoughValidMons)
+    frontier_set(FRONTIER_DATA_LVL_MODE, VAR_RESULT)
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_SelectThreeMons, MSGBOX_DEFAULT)
+    fadescreen(FADE_TO_BLACK)
+    callnative(RemoveFollowingPokemon)
+    call(BattleFrontier_EventScript_GetLvlMode)
+    copyvar(VAR_0x8004, VAR_RESULT)
+    setvar(VAR_0x8005, FRONTIER_PARTY_SIZE)
+    special(ChoosePartyForBattleFrontier)
+    waitstate
+    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattlePyramidLobby_EventScript_LoadPartyAndCancelChallenge)
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_OkayToSaveBeforeChallenge, MSGBOX_YESNO)
+    switch(VAR_RESULT)
+    case(NO, BattleFrontier_BattlePyramidLobby_EventScript_LoadPartyAndCancelChallenge)
+    case(YES, BattleFrontier_BattlePyramidLobby_EventScript_SaveBeforeChallenge)
+    case(MULTI_B_PRESSED, BattleFrontier_BattlePyramidLobby_EventScript_LoadPartyAndCancelChallenge)
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_SaveBeforeChallenge {
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 0)
+    frontier_set(FRONTIER_DATA_SELECTED_MON_ORDER)
+    pyramid_init()
+    pyramid_set(PYRAMID_DATA_WIN_STREAK_ACTIVE, TRUE)
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING)
+    frontier_set(FRONTIER_DATA_PAUSED, FALSE)
+    pyramid_seedfloor()
+    pyramid_settrainers()
+    special(LoadPlayerParty)
+    closemessage
+    delay(2)
+    call(Common_EventScript_SaveGame)
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattlePyramidLobby_EventScript_CancelChallengeSaveFailed)
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_EnterChallenge {
+    special(SavePlayerParty)
+    frontier_setpartyorder(FRONTIER_PARTY_SIZE)
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_ShowYouIntoPyramid, MSGBOX_DEFAULT)
+    closemessage
+    call(BattleFrontier_BattlePyramidLobby_EventScript_WalkToPanelAndReceiveBag)
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, 0)
+    setvar(VAR_RESULT, 0)
+    special(HealPlayerParty)
+    warp(MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR, 1, 1)
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 0)
+    waitstate
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_ExplainChallenge {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_ExplainBattlePyramid, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_AskTakeChallenge)
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_NotEnoughValidMons {
+    switch(VAR_RESULT)
+    case(FRONTIER_LVL_50, BattleFrontier_BattlePyramidLobby_EventScript_NotEnoughValidMonsLv50)
+    case(FRONTIER_LVL_OPEN, BattleFrontier_BattlePyramidLobby_EventScript_NotEnoughValidMonsLvOpen)
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_NotEnoughValidMonsLv50 {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLv50, MSGBOX_DEFAULT)
+    call(BattleFrontier_ShowCaughtBannedSpecies)
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsEnd, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_EndCancelChallenge)
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_NotEnoughValidMonsLvOpen {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLvOpen, MSGBOX_DEFAULT)
+    call(BattleFrontier_ShowCaughtBannedSpecies)
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsEnd, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_EndCancelChallenge)
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_CancelChallengeSaveFailed {
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, 0)
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_CancelChallenge)
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_LoadPartyAndCancelChallenge {
+    special(LoadPlayerParty)
+    callnative(UpdateFollowingPokemon)
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_CancelChallenge {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_AwaitFutureChallenge, MSGBOX_DEFAULT)
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_EndCancelChallenge {
+    release
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintGiver {
+    lockall
+    applymovement(LOCALID_PYRAMID_LOBBY_HINT_GIVER, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_TellYouWhatMisfortunesAwait, MSGBOX_DEFAULT)
+    call(BattleFrontier_BattlePyramidLobby_EventScript_GiveHint)
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_BelieveMyFortunesOrNot, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_GiveHint {
+    multichoice(17, 6, MULTI_LEVEL_MODE, FALSE)
+    switch(VAR_RESULT)
+    case(FRONTIER_LVL_50, BattleFrontier_BattlePyramidLobby_EventScript_GiveHintLv50)
+    case(FRONTIER_LVL_OPEN, BattleFrontier_BattlePyramidLobby_EventScript_GiveHintLvOpen)
+    case(FRONTIER_LVL_TENT, BattleFrontier_BattlePyramidLobby_EventScript_NoHint)
+    case(MULTI_B_PRESSED, BattleFrontier_BattlePyramidLobby_EventScript_NoHint)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_NoHint {
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_GiveHintLv50 {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_Aah, MSGBOX_DEFAULT)
+    pyramid_get(PYRAMID_DATA_WIN_STREAK_ACTIVE_50)
+    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattlePyramidLobby_EventScript_GiveHintGetLv50Streak)
+    setvar(VAR_RESULT, 0)
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_DoHintComment)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_GiveHintGetLv50Streak {
+    pyramid_get(PYRAMID_DATA_WIN_STREAK_50)
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_DoHintComment)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_GiveHintLvOpen {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_Aah, MSGBOX_DEFAULT)
+    pyramid_get(PYRAMID_DATA_WIN_STREAK_ACTIVE_OPEN)
+    if (var(VAR_RESULT) != FALSE) goto(BattleFrontier_BattlePyramidLobby_EventScript_GiveHintGetLvOpenStreak)
+    setvar(VAR_RESULT, 0)
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_DoHintComment)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_GiveHintGetLvOpenStreak {
+    pyramid_get(PYRAMID_DATA_WIN_STREAK_OPEN)
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_DoHintComment)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_DoHintComment {
+    copyvar(VAR_0x8004, VAR_RESULT)
+    special(GetBattlePyramidHint)
+    switch(VAR_RESULT)
+    case(0, BattleFrontier_BattlePyramidLobby_EventScript_HintParalysis)
+    case(1, BattleFrontier_BattlePyramidLobby_EventScript_HintPoison)
+    case(2, BattleFrontier_BattlePyramidLobby_EventScript_HintBurn)
+    case(3, BattleFrontier_BattlePyramidLobby_EventScript_HintPPWaste)
+    case(4, BattleFrontier_BattlePyramidLobby_EventScript_HintLevitate)
+    case(5, BattleFrontier_BattlePyramidLobby_EventScript_HintTrapAbility)
+    case(6, BattleFrontier_BattlePyramidLobby_EventScript_HintIce)
+    case(7, BattleFrontier_BattlePyramidLobby_EventScript_HintExplosion)
+    case(8, BattleFrontier_BattlePyramidLobby_EventScript_HintPsychic)
+    case(9, BattleFrontier_BattlePyramidLobby_EventScript_HintRock)
+    case(10, BattleFrontier_BattlePyramidLobby_EventScript_HintFighting)
+    case(11, BattleFrontier_BattlePyramidLobby_EventScript_HintWeather)
+    case(12, BattleFrontier_BattlePyramidLobby_EventScript_HintBug)
+    case(13, BattleFrontier_BattlePyramidLobby_EventScript_HintDark)
+    case(14, BattleFrontier_BattlePyramidLobby_EventScript_HintWater)
+    case(15, BattleFrontier_BattlePyramidLobby_EventScript_HintGhost)
+    case(16, BattleFrontier_BattlePyramidLobby_EventScript_HintSteel)
+    case(17, BattleFrontier_BattlePyramidLobby_EventScript_HintFlyingDragon)
+    case(18, BattleFrontier_BattlePyramidLobby_EventScript_HintStoneEvolve)
+    case(19, BattleFrontier_BattlePyramidLobby_EventScript_HintNormal)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintParalysis {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintParalysis, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintPoison {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintPoison, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintBurn {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintBurn, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintPPWaste {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintPPWaste, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintLevitate {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintLevitate, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintTrapAbility {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintTrapAbility, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintIce {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintIce, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintExplosion {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintExplosion, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintPsychic {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintPsychic, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintRock {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintRock, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintFighting {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintFighting, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintWeather {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintWeather, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintBug {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintBug, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintDark {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintDark, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintWater {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintWater, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintGhost {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintGhost, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintSteel {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintSteel, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintFlyingDragon {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintFlyingDragon, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintStoneEvolve {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintStoneEvolve, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HintNormal {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HintNormal, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_ShowResults {
+    lockall
+    frontier_results(FRONTIER_FACILITY_PYRAMID)
+    waitbuttonpress()
+    special(RemoveRecordsWindow)
+    releaseall
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_WalkToPanelAndReceiveBag {
+    applymovement(LOCALID_PYRAMID_LOBBY_ATTENDANT, BattleFrontier_BattlePyramidLobby_Movement_AttendantWalkToPanel)
+    applymovement(LOCALID_PLAYER, BattleFrontier_BattlePyramidLobby_Movement_PlayerWalkToPanel)
+    waitmovement(0)
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_WeWillHoldBagForSafekeeping, MSGBOX_DEFAULT)
+    pyramid_get(PYRAMID_DATA_WIN_STREAK)
+    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattlePyramidLobby_EventScript_ReceiveNewBattleBag)
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_PleaseTakePreviousBattleBag, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_ReceiveBattleBag)
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_ReceiveNewBattleBag {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_PleaseTakeThisBattleBag, MSGBOX_DEFAULT)
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_ReceiveBattleBag {
+    message(BattleFrontier_BattlePyramidLobby_Text_ExchangedBagForBattleBag)
+    waitmessage()
+    playse(SE_EXP_MAX)
+    waitse()
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_StepOnFloorPanel, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_PYRAMID_LOBBY_ATTENDANT, BattleFrontier_BattlePyramidLobby_Movement_AttendantMoveAside)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, BattleFrontier_BattlePyramidLobby_Movement_PlayerStepOnPanel)
+    waitmovement(0)
+    return
+}
+
+movement BattleFrontier_BattlePyramidLobby_Movement_AttendantWalkToPanel {
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    face_down
+    step_end
+}
+
+movement BattleFrontier_BattlePyramidLobby_Movement_PlayerWalkToPanel {
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    step_end
+}
+
+movement BattleFrontier_BattlePyramidLobby_Movement_AttendantMoveAside {
+    walk_right
+    face_left
+    step_end
+}
+
+movement BattleFrontier_BattlePyramidLobby_Movement_PlayerStepOnPanel {
+    walk_up
+    walk_up
+    step_end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_StoreHeldItemsInPyramidBag {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_MonHoldingItemCannotTake, MSGBOX_DEFAULT)
+    setflag(FLAG_STORING_ITEMS_IN_PYRAMID_BAG)
+    special(TryStoreHeldItemsInPyramidBag)
+    if (var(VAR_RESULT) == 0) goto(BattleFrontier_BattlePyramidLobby_EventScript_HeldItemsStoredInPyramidBag)
+    message(BattleFrontier_BattlePyramidLobby_Text_BagCannotHoldPickItemsToKeep)
+    waitmessage()
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_PickItemsToKeep)
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_HeldItemsStoredInPyramidBag {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_HeldItemsMovedToBag, MSGBOX_DEFAULT)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_PickItemsToKeep {
+    multichoice(17, 6, MULTI_FRONTIER_ITEM_CHOOSE, FALSE)
+    switch(VAR_RESULT)
+    case(0, BattleFrontier_BattlePyramidLobby_EventScript_PickItemsFromBag)
+    case(1, BattleFrontier_BattlePyramidLobby_EventScript_PickItemsFromParty)
+    case(2, BattleFrontier_BattlePyramidLobby_EventScript_ExitPickItems)
+    case(MULTI_B_PRESSED, BattleFrontier_BattlePyramidLobby_EventScript_ExitPickItems)
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_PickItemsFromBag {
+    special(ChooseItemsToTossFromPyramidBag)
+    waitstate
+    message(BattleFrontier_BattlePyramidLobby_Text_PickItemsToKeep)
+    waitmessage()
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_PickItemsToKeep)
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_PickItemsFromParty {
+    special(BattlePyramidChooseMonHeldItems)
+    waitstate
+    message(BattleFrontier_BattlePyramidLobby_Text_PickItemsToKeep)
+    waitmessage()
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_PickItemsToKeep)
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_ExitPickItems {
+    special(DoBattlePyramidMonsHaveHeldItem)
+    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattlePyramidLobby_EventScript_PartyStillHasHeldItems)
+    return
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_PartyStillHasHeldItems {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_LeastOneMonHoldingItem, MSGBOX_DEFAULT)
+    message(BattleFrontier_BattlePyramidLobby_Text_PickItemsToKeep)
+    waitmessage()
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_PickItemsToKeep)
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_Woman {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_TrainersNoticeRunning, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_FatMan {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_LostLotOfItems, MSGBOX_NPC)
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_RulesBoard {
+    lockall
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_RulesAreListed, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard {
+    message(BattleFrontier_BattlePyramidLobby_Text_ReadWhichHeading)
+    waitmessage()
+    multichoice(15, 2, MULTI_BATTLE_PYRAMID_RULES, FALSE)
+    switch(VAR_RESULT)
+    case(0, BattleFrontier_BattlePyramidLobby_EventScript_RulesPokemon)
+    case(1, BattleFrontier_BattlePyramidLobby_EventScript_RulesTrainers)
+    case(2, BattleFrontier_BattlePyramidLobby_EventScript_RulesMaze)
+    case(3, BattleFrontier_BattlePyramidLobby_EventScript_RulesBag)
+    case(4, BattleFrontier_BattlePyramidLobby_EventScript_ExitRules)
+    case(MULTI_B_PRESSED, BattleFrontier_BattlePyramidLobby_EventScript_ExitRules)
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_RulesPokemon {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_ExplainMonRules, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_RulesTrainers {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_ExplainTrainerRules, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_RulesMaze {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_ExplainMazeRules, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_RulesBag {
+    msgbox(BattleFrontier_BattlePyramidLobby_Text_ExplainBagRules, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard)
+    end
+}
+
+script BattleFrontier_BattlePyramidLobby_EventScript_ExitRules {
+    releaseall
+    end
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_WelcomeToBattlePyramid {
+    "Where the courage of TRAINERS\n"
+    "is put to the test!\p"
+    "Welcome to the BATTLE PYRAMID!\p"
+    "I am your guide to\n"
+    "the Battle Quest.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_EmbarkOnChallenge {
+    "Have you the courage to embark on\n"
+    "the Battle Quest challenge?$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_AwaitFutureChallenge {
+    "We await your challenge in the future!$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_ExplainBattlePyramid {
+    "The Battle Quest is a battling\n"
+    "event in which you must explore\l"
+    "the PYRAMID and try to reach the top.\p"
+    "In the PYRAMID are seven floors of\n"
+    "mazes, all of them filled with not only\l"
+    "skilled TRAINERS but also wild POKéMON.\p"
+    "You must enter with three POKéMON,\n"
+    "none of them holding an item.\p"
+    "On your ascent, you will be provided\n"
+    "with a BATTLE BAG for items.\p"
+    "If you fail in your challenge, any item\n"
+    "placed in the BATTLE BAG disappears.\p"
+    "If you want to interrupt your\n"
+    "challenge, you must select “REST”\l"
+    "and save the game.\p"
+    "If you don't save before interrupting,\n"
+    "you will be disqualified.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_WhichLevelMode {
+    "The PYRAMID offers two courses,\n"
+    "Level 50 and Open Level.\l"
+    "Which will you enter?$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_SelectThreeMons {
+    "Very good. Now, please select the three\n"
+    "POKéMON you wish to accompany you.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLvOpen {
+    "A slight problem, adventurer!\p"
+    "You seem to not have the three\n"
+    "POKéMON qualified for the challenge.\p"
+    "Please also remember to take all\n"
+    "items from your POKéMON.\p"
+    "EGGS{STR_VAR_1}.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLv50 {
+    "A slight problem, adventurer!\p"
+    "You seem to not have the three\n"
+    "POKéMON qualified for the challenge.\p"
+    "The three POKéMON must be different\n"
+    "and each no higher than Level 50.\p"
+    "Please also remember to take all\n"
+    "items from your POKéMON.\p"
+    "EGGS{STR_VAR_1}.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsEnd {
+    "When you are ready, please have\n"
+    "a word with me.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_OkayToSaveBeforeChallenge {
+    "Before you enter the BATTLE PYRAMID,\n"
+    "the game must be saved. Is that okay?$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_ShowYouIntoPyramid {
+    "Very good. I will now show you into\n"
+    "the BATTLE PYRAMID.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_WeWillHoldBagForSafekeeping {
+    "We will hold your BAG for safekeeping,\n"
+    "{PLAYER}, while you are exploring.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_PleaseTakePreviousBattleBag {
+    "In exchange, please take this BATTLE\n"
+    "BAG, the one you used previously.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_PleaseTakeThisBattleBag {
+    "In exchange, please take this\n"
+    "BATTLE BAG.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_ExchangedBagForBattleBag {
+    "{PLAYER} exchanged the BAG for\n"
+    "the BATTLE BAG.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_StepOnFloorPanel {
+    "When you step on this floor panel,\n"
+    "you will be transported to a higher\l"
+    "floor in the PYRAMID.\p"
+    "I hope for your sake that your\n"
+    "quest goes safely!$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_DidntSaveBeforeQuittingTakeBag {
+    "A major problem, explorer!\p"
+    "You did not save before ending\n"
+    "your challenge the last time.\p"
+    "Consequently, your challenge has\n"
+    "been disqualified, I'm sorry to say.\p"
+    "Here is the BAG we've been holding\n"
+    "for you.\p"
+    "{PLAYER} got the BAG back.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_YouveConqueredPyramid {
+    "Excellent to see you back!\p"
+    "You've conquered the PYRAMID!\n"
+    "How splendid!$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_MonHoldingItemCannotTake {
+    "Ah, a slight problem.\p"
+    "At least one POKéMON is holding\n"
+    "an item.\p"
+    "I'm sorry to say, items obtained in\n"
+    "the PYRAMID cannot be taken away.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HeldItemsMovedToBag {
+    "All items held by your POKéMON will be\n"
+    "moved to your BATTLE BAG, {PLAYER}.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_BagCannotHoldPickItemsToKeep {
+    "The BATTLE BAG cannot hold all your\n"
+    "items, I'm sorry to say.\p"
+    "Please pick the items you'll keep in the\n"
+    "BATTLE BAG, and with your POKéMON.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_LeastOneMonHoldingItem {
+    "At least one POKéMON is still\n"
+    "holding an item.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_PickItemsToKeep {
+    "Please pick the items you'll keep in the\n"
+    "BATTLE BAG, and with your POKéMON.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_ReturnedEverythingMonsHeld {
+    "{PLAYER} returned everything that\n"
+    "the POKéMON held.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_UsedBattleBagWillBeKept {
+    "The BATTLE BAG you used will be kept\n"
+    "in readiness for your next challenge.\p"
+    "{PLAYER} turned the BATTLE BAG over\n"
+    "for the BAG's return.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_RecordResultsWait {
+    "I must record your results.\n"
+    "Please wait.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_ForConqueringPyramidTakeThis {
+    "As a memento for conquering\n"
+    "the BATTLE PYRAMID, please take this.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_ReceivedPrizeItem {
+    "{PLAYER} received the prize\n"
+    "{STR_VAR_1}.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_BagIsFull {
+    "…Ah…\n"
+    "Your BAG appears to be filled.\p"
+    "Please return after you've organized\n"
+    "your BAG's contents.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_DisappointingHereIsBag {
+    "How disappointing for you…\p"
+    "Here is the BAG we've been holding\n"
+    "for you.\p"
+    "{PLAYER} got the BAG back.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_LookForwardToNextChallenge {
+    "We look forward to your\n"
+    "next challenge!$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HereIsPrize {
+    "We have been looking forward to\n"
+    "your arrival!\p"
+    "Here is your prize for conquering\n"
+    "the PYRAMID.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_TellYouWhatMisfortunesAwait {
+    "Welcome…\p"
+    "I shall be pleased to tell you what\n"
+    "misfortunes await in the PYRAMID…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_Aah {
+    "… … … … … …\n"
+    "… … … … … …\p"
+    "… … … … … …\n"
+    "Aah!$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintParalysis {
+    "I see a shower of sparks…\p"
+    "…And in it, I see your POKéMON\n"
+    "struggling with paralysis…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintPoison {
+    "I see poison…\p"
+    "…And, I see your POKéMON suffering\n"
+    "from the effects of poison…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintBurn {
+    "I see bright red flames…\p"
+    "…And, I see your POKéMON suffering\n"
+    "from burns…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintPPWaste {
+    "I sense the tremendous pressure of\n"
+    "unrequited anger…\p"
+    "It is a curse…\p"
+    "…And, I see your POKéMON drained of\n"
+    "Power Points and having no recourse\l"
+    "but to use STRUGGLE…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintLevitate {
+    "I see POKéMON loftily airborne…\p"
+    "…And, I see your POKéMON frustrated\n"
+    "by powerless GROUND-type moves…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintTrapAbility {
+    "I sense terrific energy rising from\n"
+    "the ground below…\p"
+    "…And, I see your POKéMON unable to\n"
+    "escape the power's clutches…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintIce {
+    "I see ICE-type POKéMON…\p"
+    "…And, I see your POKéMON fighting\n"
+    "the freezing effects of ice…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintExplosion {
+    "I see a flurry of moves that imperil\n"
+    "the user…\p"
+    "…And, I see your POKéMON falling\n"
+    "to them…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintPsychic {
+    "I see PSYCHIC-type POKéMON…\p"
+    "…And, I see your POKéMON in torment\n"
+    "from PSYCHIC moves…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintRock {
+    "I see ROCK-type POKéMON…\p"
+    "…And, I see your POKéMON suffering\n"
+    "from ROCK moves…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintFighting {
+    "I see FIGHTING-type POKéMON…\p"
+    "…And, I see your POKéMON pummeled\n"
+    "by FIGHTING moves…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintWeather {
+    "RAIN DANCE… SUNNY DAY…\n"
+    "SANDSTORM… HAIL…\p"
+    "I see POKéMON that become stronger\n"
+    "with the weather…\p"
+    "…And, I see your POKéMON confounded\n"
+    "by different types of moves…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintBug {
+    "I see BUG-type POKéMON…\p"
+    "…And, I see your POKéMON suffering\n"
+    "from different kinds of attacks…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintDark {
+    "I see DARK-type POKéMON…\p"
+    "…And, I see your POKéMON suffering\n"
+    "from DARK-type moves…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintWater {
+    "I see WATER-type POKéMON…\p"
+    "…And, I see your POKéMON suffering\n"
+    "from WATER-type moves…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintGhost {
+    "I see GHOST-type POKéMON…\p"
+    "…And, I see your POKéMON suffering\n"
+    "from GHOST-type moves…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintSteel {
+    "I see STEEL-type POKéMON…\p"
+    "…And, I see your POKéMON suffering\n"
+    "from enormously powerful moves…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintFlyingDragon {
+    "I see flying POKéMON…\p"
+    "…And, I see your POKéMON suffering\n"
+    "from enormously powerful moves…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintStoneEvolve {
+    "I see those that have evolved from\n"
+    "the power of stones…\p"
+    "I also sense fire, water,\n"
+    "and electricity…\p"
+    "…And, I see your POKéMON suffering\n"
+    "from those three powers…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_HintNormal {
+    "I see NORMAL-type POKéMON…\p"
+    "…And, I see your POKéMON suffering\n"
+    "from enormously powerful moves…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_BelieveMyFortunesOrNot {
+    "Whether you believe my fortunes\n"
+    "or not, the choice is yours…\p"
+    "The future can be changed anytime…\n"
+    "I wish you safe passage…$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_TrainersNoticeRunning {
+    "Did you know?\p"
+    "If you run fast, TRAINERS may notice\n"
+    "and come after you for a battle.\p"
+    "So, if you want to avoid TRAINERS,\n"
+    "don't catch their eyes, but sneak\l"
+    "cautiously and quietly past them.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_LostLotOfItems {
+    "Awaaaaaaarrrrgh!\p"
+    "I had a whole lot of items, but I lost\n"
+    "them all when I lost!\p"
+    "Awaaaaaaarrrrgh!$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_YouveDefeatedPyramidKing {
+    "Welcome back!\n"
+    "You've done the unthinkable!\p"
+    "You've defeated the PYRAMID KING\n"
+    "and conquered the BATTLE PYRAMID!$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_GiveYouTheseBattlePoints {
+    "Young explorer!\n"
+    "In commendation of your courage,\l"
+    "we give you these Battle Point(s)!$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_RulesAreListed {
+    "The Battle Quest rules are listed.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_ReadWhichHeading {
+    "Which heading do you want to read?$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_ExplainMonRules {
+    "When the PYRAMID is conquered,\n"
+    "the wild POKéMON that appear in it\l"
+    "are replaced by different kinds.\p"
+    "Explore, observe, and learn what kinds\n"
+    "of wild POKéMON you may encounter.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_ExplainTrainerRules {
+    "TRAINERS are lying in wait for you\n"
+    "inside the PYRAMID.\p"
+    "On each floor, there are up to\n"
+    "eight TRAINERS.\p"
+    "When you defeat a TRAINER, you will\n"
+    "get a helpful hint for your adventure.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_ExplainMazeRules {
+    "The mazes in the PYRAMID rearrange\n"
+    "themselves every time you enter it.\p"
+    "The mazes are poorly lit.\n"
+    "You must advance with caution.\p"
+    "The light grows brighter whenever you\n"
+    "defeat a wild POKéMON or a TRAINER.$"
+}
+
+text BattleFrontier_BattlePyramidLobby_Text_ExplainBagRules {
+    "The BATTLE BAG serves as your BAG\n"
+    "while in the PYRAMID.\p"
+    "There are two separate BATTLE BAGS--\n"
+    "one each for the Level 50 and\l"
+    "Open Level adventures.\p"
+    "They each can hold up to 99 pieces\n"
+    "of ten kinds of items.\p"
+    "The contents of the BATTLE BAG are\n"
+    "lost if you fail in your quest.$"
+}

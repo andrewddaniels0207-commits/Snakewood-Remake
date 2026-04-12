@@ -1,0 +1,113 @@
+mapscripts CeladonCity_Condominiums_1F_Frlg_MapScripts {}
+
+script CeladonCity_Condominiums_1F_EventScript_TeaWoman {
+    lock
+    faceplayer
+    if (flag(FLAG_TALKED_TO_TEA_LADY_AFTER_HOF)) goto(CeladonCity_Condominiums_1F_EventScript_TeaWomanAfterTea)
+    if (flag(FLAG_SYS_GAME_CLEAR)) goto(CeladonCity_Condominiums_1F_EventScript_TeaWomanMentionDaisy)
+    if (flag(FLAG_GOT_TEA)) goto(CeladonCity_Condominiums_1F_EventScript_TeaWomanAfterTea)
+    msgbox(CeladonCity_Condominiums_1F_Text_TryThisDrinkInstead)
+    setflag(FLAG_GOT_TEA)
+    giveitem(ITEM_TEA)
+    if (var(VAR_RESULT) == FALSE) goto(EventScript_BagIsFull)
+    msgbox(CeladonCity_Condominiums_1F_Text_NothingBeatsThirstLikeTea)
+    release
+    end
+}
+
+script CeladonCity_Condominiums_1F_EventScript_TeaWomanAfterTea {
+    msgbox(CeladonCity_Condominiums_1F_Text_MyDearMonsKeepMeCompany)
+    release
+    end
+}
+
+script CeladonCity_Condominiums_1F_EventScript_TeaWomanMentionDaisy {
+    famechecker(FAMECHECKER_DAISY, 4)
+    setflag(FLAG_TALKED_TO_TEA_LADY_AFTER_HOF)
+    msgbox(CeladonCity_Condominiums_1F_Text_DaisyComesToBuyTea)
+    release
+    end
+}
+
+script CeladonCity_Condominiums_1F_EventScript_Meowth {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_MEOWTH, CRY_MODE_NORMAL)
+    msgbox(CeladonCity_Condominiums_1F_Text_Meowth)
+    waitmoncry()
+    release
+    end
+}
+
+script CeladonCity_Condominiums_1F_EventScript_Clefairy {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_CLEFAIRY, CRY_MODE_NORMAL)
+    msgbox(CeladonCity_Condominiums_1F_Text_Clefairy)
+    waitmoncry()
+    release
+    end
+}
+
+script CeladonCity_Condominiums_1F_EventScript_Nidoran {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_NIDORAN_F, CRY_MODE_NORMAL)
+    msgbox(CeladonCity_Condominiums_1F_Text_Nidoran)
+    waitmoncry()
+    release
+    end
+}
+
+script CeladonCity_Condominiums_1F_EventScript_SuiteSign {
+    msgbox(CeladonCity_Condominiums_1F_Text_ManagersSuite, MSGBOX_SIGN)
+    end
+}
+
+text CeladonCity_Condominiums_1F_Text_Meowth {
+    "MEOWTH: Meow!$"
+}
+
+text CeladonCity_Condominiums_1F_Text_TryThisDrinkInstead {
+    "You shouldn't spend all your money\n"
+    "on drinks.\p"
+    "Try this instead.$"
+}
+
+text CeladonCity_Condominiums_1F_Text_NothingBeatsThirstLikeTea {
+    "Nothing beats thirst like some hot\n"
+    "TEA.\p"
+    "It really is the best.$"
+}
+
+text CeladonCity_Condominiums_1F_Text_MyDearMonsKeepMeCompany {
+    "My dear POKéMON keep me company.\n"
+    "MEOWTH even brings money home!$"
+}
+
+text CeladonCity_Condominiums_1F_Text_DaisyComesToBuyTea {
+    "Oh, hello, dearie.\n"
+    "Did you enjoy my TEA?\p"
+    "By the way, dear. Are you, by any\n"
+    "chance, from PALLET TOWN?\p"
+    "A girl from PALLET TOWN, DAISY,\n"
+    "she enjoys TEA every day.\p"
+    "She visits the CELADON DEPT. STORE\n"
+    "to buy some TEA.$"
+}
+
+text CeladonCity_Condominiums_1F_Text_Clefairy {
+    "CLEFAIRY: Pi pippippi!$"
+}
+
+text CeladonCity_Condominiums_1F_Text_Nidoran {
+    "NIDORAN♀: Kya kyaoo!$"
+}
+
+text CeladonCity_Condominiums_1F_Text_ManagersSuite {
+    "CELADON MANSION\n"
+    "Manager's Suite$"
+}

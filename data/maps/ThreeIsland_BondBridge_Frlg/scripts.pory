@@ -1,0 +1,137 @@
+mapscripts ThreeIsland_BondBridge_Frlg_MapScripts {}
+
+script ThreeIsland_BondBridge_EventScript_BerryForestSign {
+    msgbox(ThreeIsland_BondBridge_Text_BerryForestAhead, MSGBOX_SIGN)
+    end
+}
+
+script ThreeIsland_BondBridge_EventScript_BondBridgeSign {
+    msgbox(ThreeIsland_BondBridge_Text_BondBridgeSign, MSGBOX_SIGN)
+    end
+}
+
+text ThreeIsland_BondBridge_Text_NikkiIntro {
+    "The salty tang of the sea…\n"
+    "It tickles my heart.$"
+}
+
+text ThreeIsland_BondBridge_Text_NikkiDefeat {
+    "…Sniff, sniff…\n"
+    "Something smells unpleasant…$"
+}
+
+text ThreeIsland_BondBridge_Text_NikkiPostBattle {
+    "Perhaps that reek is your sweaty\n"
+    "POKéMON's body odor…$"
+}
+
+text ThreeIsland_BondBridge_Text_VioletIntro {
+    "Where are you off to in such\n"
+    "a hurry?$"
+}
+
+text ThreeIsland_BondBridge_Text_VioletDefeat {
+    "You're raising some wonderful\n"
+    "POKéMON.$"
+}
+
+text ThreeIsland_BondBridge_Text_VioletPostBattle {
+    "If you keep going this way, you'll\n"
+    "eventually reach BERRY FOREST.$"
+}
+
+text ThreeIsland_BondBridge_Text_AmiraIntro {
+    "My mommy said that I can't swim\n"
+    "without my float ring.$"
+}
+
+text ThreeIsland_BondBridge_Text_AmiraDefeat {
+    "Waaah!\n"
+    "Waaah!$"
+}
+
+text ThreeIsland_BondBridge_Text_AmiraPostBattle {
+    "This year, I'm going to finally\n"
+    "learn how to swim!$"
+}
+
+text ThreeIsland_BondBridge_Text_AlexisIntro {
+    "Yay, yay!\n"
+    "POKéMON!$"
+}
+
+text ThreeIsland_BondBridge_Text_AlexisDefeat {
+    "What happens now?$"
+}
+
+text ThreeIsland_BondBridge_Text_AlexisPostBattle {
+    "Did I just win?\n"
+    "Or did I lose?$"
+}
+
+text ThreeIsland_BondBridge_Text_TishaIntro {
+    "Oh, no, don't come here!\n"
+    "Please, stay away from me!$"
+}
+
+text ThreeIsland_BondBridge_Text_TishaDefeat {
+    "Okay, you've won!\n"
+    "Now will you please go away?$"
+}
+
+text ThreeIsland_BondBridge_Text_TishaPostBattle {
+    "A POKéMON bit through my \n"
+    "swimsuit.\p"
+    "I can't get out of the water!$"
+}
+
+text ThreeIsland_BondBridge_Text_JoyIntro {
+    "JOY: We'll teach you what our\n"
+    "favorite POKéMON is!$"
+}
+
+text ThreeIsland_BondBridge_Text_JoyDefeat {
+    "JOY: Ohh…\n"
+    "MEG!$"
+}
+
+text ThreeIsland_BondBridge_Text_JoyPostBattle {
+    "JOY: Wasn't that fun?\n"
+    "I hope we can battle again!$"
+}
+
+text ThreeIsland_BondBridge_Text_JoyNotEnoughMons {
+    "JOY: I really want to battle with\n"
+    "MEG.\p"
+    "One POKéMON isn't enough.$"
+}
+
+text ThreeIsland_BondBridge_Text_MegIntro {
+    "MEG: We'll show you our favorite\n"
+    "POKéMON.$"
+}
+
+text ThreeIsland_BondBridge_Text_MegDefeat {
+    "MEG: Ohh…\n"
+    "JOY!$"
+}
+
+text ThreeIsland_BondBridge_Text_MegPostBattle {
+    "MEG: JOY, wasn't that fun?$"
+}
+
+text ThreeIsland_BondBridge_Text_MegNotEnoughMons {
+    "MEG: I want to battle together\n"
+    "with JOY.\p"
+    "One POKéMON isn't enough.$"
+}
+
+text ThreeIsland_BondBridge_Text_BerryForestAhead {
+    "BERRY FOREST AHEAD$"
+}
+
+text ThreeIsland_BondBridge_Text_BondBridgeSign {
+    "BOND BRIDGE\n"
+    "Please be quiet when crossing.\p"
+    "BERRY FOREST AHEAD$"
+}

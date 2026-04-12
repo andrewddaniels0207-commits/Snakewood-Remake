@@ -1,0 +1,8 @@
+mapscripts SkyPillar_Entrance_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: SkyPillar_Entrance_OnTransition
+}
+
+script SkyPillar_Entrance_OnTransition {
+    setflag(FLAG_LANDMARK_SKY_PILLAR)
+    end
+}

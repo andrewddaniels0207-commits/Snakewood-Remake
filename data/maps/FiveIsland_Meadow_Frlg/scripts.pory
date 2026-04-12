@@ -1,0 +1,130 @@
+mapscripts FiveIsland_Meadow_Frlg_MapScripts {
+    MAP_SCRIPT_ON_LOAD: FiveIsland_Meadow_OnLoad
+}
+
+script FiveIsland_Meadow_OnLoad {
+    if (flag(FLAG_UNLOCKED_ROCKET_WAREHOUSE)) call(FiveIsland_Meadow_EventScript_SetWarehouseDoorUnlocked)
+    end
+}
+
+script FiveIsland_Meadow_EventScript_WarehouseDoor {
+    lockall
+    if (flag(FLAG_UNLOCKED_ROCKET_WAREHOUSE)) goto(FiveIsland_Meadow_EventScript_WarehouseDoorAlreadyOpen)
+    if (flag(FLAG_LEARNED_YES_NAH_CHANSEY)) goto(FiveIsland_Meadow_EventScript_OpenWarehouseDoor)
+    msgbox(FiveIsland_Meadow_Text_EnteredPasswordAnotherNeeded)
+    releaseall
+    end
+}
+
+script FiveIsland_Meadow_EventScript_OpenWarehouseDoor {
+    setflag(FLAG_UNLOCKED_ROCKET_WAREHOUSE)
+    message(FiveIsland_Meadow_Text_EnteredPasswordDoorOpened)
+    waitmessage()
+    delay(60)
+    call(FiveIsland_Meadow_EventScript_SetWarehouseDoorUnlocked)
+    special(DrawWholeMapView)
+    playse(SE_PIN)
+    waitse()
+    releaseall
+    end
+}
+
+script FiveIsland_Meadow_EventScript_WarehouseDoorAlreadyOpen {
+    msgbox(FiveIsland_Meadow_Text_WarehouseDoorAlreadyOpen)
+    releaseall
+    end
+}
+
+script FiveIsland_Meadow_EventScript_SetWarehouseDoorUnlocked {
+    setmetatile(12, 21, METATILE_SeviiIslands45_RocketWarehouseDoor_Unlocked, 1)
+    return
+}
+
+script FiveIsland_Meadow_EventScript_Rocket1 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_49, FiveIsland_Meadow_Text_Rocket1Intro, FiveIsland_Meadow_Text_Rocket1Defeat)
+    msgbox(FiveIsland_Meadow_Text_Rocket1PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FiveIsland_Meadow_EventScript_Rocket2 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_50, FiveIsland_Meadow_Text_Rocket2Intro, FiveIsland_Meadow_Text_Rocket2Defeat)
+    msgbox(FiveIsland_Meadow_Text_Rocket2PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FiveIsland_Meadow_EventScript_Rocket3 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_51, FiveIsland_Meadow_Text_Rocket3Intro, FiveIsland_Meadow_Text_Rocket3Defeat)
+    msgbox(FiveIsland_Meadow_Text_Rocket3PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text FiveIsland_Meadow_Text_DoorNeedsTwoPasswords {
+    "とびらを　あけるには\n"
+    "パスワードが　2つ　いるようだ$"
+}
+
+text FiveIsland_Meadow_Text_EnteredPasswordAnotherNeeded {
+    "{PLAYER} entered a password.\p"
+    "“GOLDEEN need log.”\p"
+    "… …  … …  … …\p"
+    "Another password is needed to\n"
+    "open the door…$"
+}
+
+text FiveIsland_Meadow_Text_EnteredPasswordDoorOpened {
+    "{PLAYER} entered two passwords.\p"
+    "“GOLDEEN need log.”\n"
+    "“Yes, nah, CHANSEY.”\p"
+    "… …  … …  … …\p"
+    "The WAREHOUSE's door opened!$"
+}
+
+text FiveIsland_Meadow_Text_WarehouseDoorAlreadyOpen {
+    "The WAREHOUSE's door is already\n"
+    "open.$"
+}
+
+text FiveIsland_Meadow_Text_Rocket1Intro {
+    "This area's strictly off-limits!\n"
+    "Out, out!$"
+}
+
+text FiveIsland_Meadow_Text_Rocket1Defeat {
+    "Is this for real?$"
+}
+
+text FiveIsland_Meadow_Text_Rocket1PostBattle {
+    "You don't have any business here!\n"
+    "Go home!$"
+}
+
+text FiveIsland_Meadow_Text_Rocket2Intro {
+    "There's nothing past here except\n"
+    "our WAREHOUSE.\p"
+    "So what brings you here?$"
+}
+
+text FiveIsland_Meadow_Text_Rocket2Defeat {
+    "That wasn't supposed to happen…$"
+}
+
+text FiveIsland_Meadow_Text_Rocket2PostBattle {
+    "You're wanting to know what's inside\n"
+    "this WAREHOUSE?\p"
+    "It's better you didn't know.\n"
+    "For your own sake, I mean.$"
+}
+
+text FiveIsland_Meadow_Text_Rocket3Intro {
+    "You'd be wasting time even if you\n"
+    "were to get by me.$"
+}
+
+text FiveIsland_Meadow_Text_Rocket3Defeat {
+    "Oh, that makes me furious!$"
+}
+
+text FiveIsland_Meadow_Text_Rocket3PostBattle {
+    "You won't be able to get in without\n"
+    "the passwords anyway.$"
+}

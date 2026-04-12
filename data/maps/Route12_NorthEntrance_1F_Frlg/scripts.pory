@@ -1,0 +1,11 @@
+mapscripts Route12_NorthEntrance_1F_Frlg_MapScripts {}
+
+script Route12_NorthEntrance_1F_EventScript_Guard {
+    msgbox(Route12_NorthEntrance_1F_Text_LookoutSpotUpstairs, MSGBOX_NPC)
+    end
+}
+
+text Route12_NorthEntrance_1F_Text_LookoutSpotUpstairs {
+    "There's a lookout spot upstairs.\n"
+    "The view is magnificent.$"
+}

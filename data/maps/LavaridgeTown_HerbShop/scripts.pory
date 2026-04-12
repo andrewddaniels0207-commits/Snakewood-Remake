@@ -1,0 +1,66 @@
+mapscripts LavaridgeTown_HerbShop_MapScripts {}
+
+script LavaridgeTown_HerbShop_EventScript_Clerk {
+    lock
+    faceplayer
+    message(LavaridgeTown_HerbShop_Text_WelcomeToHerbShop)
+    waitmessage()
+    pokemart(LavaridgeTown_HerbShop_Pokemart)
+    msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script LavaridgeTown_HerbShop_Pokemart {
+    pokemartlistend()
+}
+
+script LavaridgeTown_HerbShop_EventScript_ExpertM {
+    msgbox(LavaridgeTown_HerbShop_Text_HerbalMedicineWorksButMonWillDislike, MSGBOX_NPC)
+    end
+}
+
+script LavaridgeTown_HerbShop_EventScript_OldMan {
+    lock
+    faceplayer
+    if (flag(FLAG_RECEIVED_CHARCOAL)) goto(LavaridgeTown_HerbShop_EventScript_ExplainCharcoal)
+    msgbox(LavaridgeTown_HerbShop_Text_YouveComeToLookAtHerbalMedicine, MSGBOX_DEFAULT)
+    giveitem(ITEM_CHARCOAL)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    setflag(FLAG_RECEIVED_CHARCOAL)
+    release
+    end
+}
+
+script LavaridgeTown_HerbShop_EventScript_ExplainCharcoal {
+    msgbox(LavaridgeTown_HerbShop_Text_ExplainCharcoal, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+text LavaridgeTown_HerbShop_Text_WelcomeToHerbShop {
+    "Welcome to the HERB SHOP, home of\n"
+    "effective and inexpensive medicine!$"
+}
+
+text LavaridgeTown_HerbShop_Text_YouveComeToLookAtHerbalMedicine {
+    "You've come to look at herbal medicine\n"
+    "in LAVARIDGE?\p"
+    "That's rather commendable.\p"
+    "I like you! Take this!$"
+}
+
+text LavaridgeTown_HerbShop_Text_ExplainCharcoal {
+    "That CHARCOAL I gave you, it's used\n"
+    "for making herbal medicine.\p"
+    "It also does wonders when held by\n"
+    "a POKéMON.\p"
+    "It intensifies the power of FIRE-type\n"
+    "moves.$"
+}
+
+text LavaridgeTown_HerbShop_Text_HerbalMedicineWorksButMonWillDislike {
+    "Herbal medicine works impressively well.\n"
+    "But your POKéMON will dislike you for it.\l"
+    "It must be horribly bitter!$"
+}

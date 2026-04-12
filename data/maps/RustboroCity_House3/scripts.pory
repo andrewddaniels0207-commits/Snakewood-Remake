@@ -1,0 +1,40 @@
+mapscripts RustboroCity_House3_MapScripts {}
+
+script RustboroCity_House3_EventScript_OldMan {
+    msgbox(RustboroCity_House3_Text_IGivePerfectlySuitedNicknames, MSGBOX_NPC)
+    end
+}
+
+script RustboroCity_House3_EventScript_OldWoman {
+    msgbox(RustboroCity_House3_Text_NamingPikachuPekachu, MSGBOX_NPC)
+    end
+}
+
+script RustboroCity_House3_EventScript_Pekachu {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_PIKACHU, CRY_MODE_NORMAL)
+    msgbox(RustboroCity_House3_Text_Pekachu, MSGBOX_DEFAULT)
+    waitmoncry()
+    release
+    end
+}
+
+text RustboroCity_House3_Text_IGivePerfectlySuitedNicknames {
+    "For my own POKéMON, I give them\n"
+    "perfectly suited nicknames!\p"
+    "It's my expression of, uh…\n"
+    "originality, yes, that's it!$"
+}
+
+text RustboroCity_House3_Text_NamingPikachuPekachu {
+    "But giving the name PEKACHU to\n"
+    "a PIKACHU? It seems pointless.\p"
+    "I suppose it is good to use a name\n"
+    "that's easy to understand, but…$"
+}
+
+text RustboroCity_House3_Text_Pekachu {
+    "PEKACHU: Peka!$"
+}

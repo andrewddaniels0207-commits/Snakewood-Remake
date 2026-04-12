@@ -1,0 +1,491 @@
+mapscripts SlateportCity_OceanicMuseum_2F_MapScripts {}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_CaptStern {
+    lock
+    faceplayer
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_ThankYouForTheParts, MSGBOX_DEFAULT)
+    closemessage
+    playbgm(MUS_ENCOUNTER_AQUA, TRUE)
+    addobject(LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1)
+    applymovement(LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1, SlateportCity_OceanicMuseum_2F_Movement_FirstGruntEnter)
+    waitmovement(0)
+    addobject(LOCALID_OCEANIC_MUSEUM_2F_GRUNT_2)
+    applymovement(LOCALID_OCEANIC_MUSEUM_2F_GRUNT_2, SlateportCity_OceanicMuseum_2F_Movement_SecondGruntEnter)
+    waitmovement(0)
+    applymovement(LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1, SlateportCity_OceanicMuseum_2F_Movement_FirstGruntApproach)
+    applymovement(LOCALID_OCEANIC_MUSEUM_2F_GRUNT_2, SlateportCity_OceanicMuseum_2F_Movement_SecondGruntApproach)
+    waitmovement(0)
+    if (var(VAR_FACING) == DIR_SOUTH) call(SlateportCity_OceanicMuseum_2F_EventScript_PlayerFaceGrunts)
+    if (var(VAR_FACING) == DIR_EAST) call(SlateportCity_OceanicMuseum_2F_EventScript_PlayerFaceGrunts)
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_WellTakeThoseParts, MSGBOX_DEFAULT)
+    if (var(VAR_FACING) != DIR_EAST) call(SlateportCity_OceanicMuseum_2F_EventScript_SternFaceGrunts)
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_SternWhoAreYou, MSGBOX_DEFAULT)
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_WereTeamAqua, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_OCEANIC_MUSEUM_2F_GRUNT_2, SlateportCity_OceanicMuseum_2F_Movement_GruntApproachToBattle)
+    waitmovement(0)
+    if (var(VAR_FACING) == DIR_SOUTH) call(SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntSouth)
+    if (var(VAR_FACING) == DIR_WEST) call(SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntWest)
+    trainerbattle_no_intro(TRAINER_GRUNT_MUSEUM_1, SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat)
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_BossGoingToBeFurious, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_OCEANIC_MUSEUM_2F_GRUNT_2, SlateportCity_OceanicMuseum_2F_Movement_GruntDefeated)
+    waitmovement(0)
+    applymovement(LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1, SlateportCity_OceanicMuseum_2F_Movement_GruntApproachToBattle)
+    waitmovement(0)
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis, MSGBOX_DEFAULT)
+    trainerbattle_no_intro(TRAINER_GRUNT_MUSEUM_2, SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat)
+    applymovement(LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1, SlateportCity_OceanicMuseum_2F_Movement_GruntDefeated)
+    waitmovement(0)
+    applymovement(LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1, Common_Movement_WalkInPlaceFasterDown)
+    applymovement(LOCALID_OCEANIC_MUSEUM_2F_GRUNT_2, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_MeddlingKid, MSGBOX_DEFAULT)
+    closemessage
+    delay(35)
+    addobject(LOCALID_OCEANIC_MUSEUM_2F_ARCHIE)
+    applymovement(LOCALID_OCEANIC_MUSEUM_2F_ARCHIE, SlateportCity_OceanicMuseum_2F_Movement_ArchieEnter)
+    applymovement(LOCALID_OCEANIC_MUSEUM_2F_GRUNT_2, SlateportCity_OceanicMuseum_2F_Movement_GruntMoveForArchie)
+    waitmovement(0)
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_CameToSeeWhatsTakingSoLong, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_OCEANIC_MUSEUM_2F_ARCHIE, SlateportCity_OceanicMuseum_2F_Movement_ArchieApproachPlayer)
+    waitmovement(0)
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_ArchieWarning, MSGBOX_DEFAULT)
+    closemessage
+    savebgm(MUS_DUMMY)
+    fadedefaultbgm()
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_OCEANIC_MUSEUM_2F_ARCHIE)
+    removeobject(LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1)
+    removeobject(LOCALID_OCEANIC_MUSEUM_2F_GRUNT_2)
+    fadescreen(FADE_FROM_BLACK)
+    delay(30)
+    setflag(FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_SternThankYouForSavingUs, MSGBOX_DEFAULT)
+    setvar(VAR_0x8004, ITEM_DEVON_PARTS)
+    call(Common_EventScript_PlayerHandedOverTheItem)
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_SternIveGotToGo, MSGBOX_DEFAULT)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    playfanfare(MUS_HEAL)
+    waitfanfare()
+    special(HealPlayerParty)
+    callnative(UpdateFollowingPokemon)
+    removeobject(LOCALID_OCEANIC_MUSEUM_2F_CAPT_STERN)
+    setflag(FLAG_HIDE_ROUTE_110_TEAM_AQUA)
+    if (var(VAR_REGISTER_BIRCH_STATE) == 0) call(SlateportCity_OceanicMuseum_2F_EventScript_ReadyRegisterBirch)
+    setflag(FLAG_DELIVERED_DEVON_GOODS)
+    clearflag(FLAG_HIDE_ROUTE_116_DEVON_EMPLOYEE)
+    setflag(FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE)
+    setvar(VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 1)
+    fadescreen(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_ReadyRegisterBirch {
+    setvar(VAR_REGISTER_BIRCH_STATE, 1)
+    return
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_PlayerFaceGrunts {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    return
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_SternFaceGrunts {
+    applymovement(LOCALID_OCEANIC_MUSEUM_2F_CAPT_STERN, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    return
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntSouth {
+    applymovement(LOCALID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntSouth)
+    waitmovement(0)
+    return
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntWest {
+    applymovement(LOCALID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntWest)
+    waitmovement(0)
+    return
+}
+
+movement SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntSouth {
+    walk_left
+    walk_down
+    walk_in_place_faster_left
+    step_end
+}
+
+movement SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntWest {
+    walk_up
+    walk_left
+    walk_left
+    walk_down
+    walk_in_place_faster_left
+    step_end
+}
+
+movement SlateportCity_OceanicMuseum_2F_Movement_Unused {
+    walk_up
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_up
+    walk_up
+    walk_left
+    walk_left
+    walk_up
+    walk_up
+    delay_8
+    step_end
+}
+
+movement SlateportCity_OceanicMuseum_2F_Movement_ArchieApproachPlayer {
+    walk_right
+    step_end
+}
+
+movement SlateportCity_OceanicMuseum_2F_Movement_ArchieEnter {
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    step_end
+}
+
+movement SlateportCity_OceanicMuseum_2F_Movement_GruntApproachToBattle {
+    walk_right
+    step_end
+}
+
+movement SlateportCity_OceanicMuseum_2F_Movement_FirstGruntEnter {
+    walk_down
+    walk_right
+    walk_in_place_faster_down
+    step_end
+}
+
+movement SlateportCity_OceanicMuseum_2F_Movement_FirstGruntApproach {
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    walk_right
+    walk_right
+    step_end
+}
+
+script SlateportCity_OceanicMuseum_2F_Movement_GruntDefeated {
+    lock_facing_direction()
+    walk_left()
+    unlock_facing_direction()
+    step_end()
+}
+
+movement SlateportCity_OceanicMuseum_2F_Movement_SecondGruntEnter {
+    walk_down
+    step_end
+}
+
+movement SlateportCity_OceanicMuseum_2F_Movement_SecondGruntApproach {
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    step_end
+}
+
+movement SlateportCity_OceanicMuseum_2F_Movement_GruntMoveForArchie {
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_8
+    walk_fast_down
+    walk_in_place_faster_up
+    step_end
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_WaterQualitySample1 {
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_WaterQualitySample1, MSGBOX_SIGN)
+    end
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_WaterQualitySample2 {
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_WaterQualitySample2, MSGBOX_SIGN)
+    end
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_PressureExperiment {
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_PressureExperiment, MSGBOX_SIGN)
+    end
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_HoennModel {
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_HoennModel, MSGBOX_SIGN)
+    end
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_DeepSeawaterDisplay {
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_DeepSeawaterDisplay, MSGBOX_SIGN)
+    end
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_SurfaceSeawaterDisplay {
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_SurfaceSeawaterDisplay, MSGBOX_SIGN)
+    end
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_SSTidalReplica {
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_SSTidalReplica, MSGBOX_SIGN)
+    end
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_SubmarineReplica {
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_SubmarineReplica, MSGBOX_SIGN)
+    end
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_SubmersibleReplica {
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_SumbersibleReplica, MSGBOX_SIGN)
+    end
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_SSAnneReplica {
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_SSAnneReplica, MSGBOX_SIGN)
+    end
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_MuseumPatron1 {
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_RemindsMeOfAbandonedShip, MSGBOX_NPC)
+    end
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_MuseumPatron2 {
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_DontRunInMuseum, MSGBOX_NPC)
+    end
+}
+
+script SlateportCity_OceanicMuseum_2F_EventScript_MuseumPatron3 {
+    lock
+    faceplayer
+    msgbox(SlateportCity_OceanicMuseum_2F_Text_WantToRideSubmarine, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_ThankYouForTheParts {
+    "Yes? If you're looking for STERN,\n"
+    "that would be me.\p"
+    "Ah! Those must be the parts I ordered\n"
+    "from MR. STONE of DEVON.\p"
+    "Thank you! That's great!\n"
+    "We can prepare for our expedition now.$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_WellTakeThoseParts {
+    "Hehehe, hold it!\n"
+    "We'll take those parts!$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_SternWhoAreYou {
+    "CAPT. STERN: Wh-what?\n"
+    "Who are you people?$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_WereTeamAqua {
+    "We're TEAM AQUA!\p"
+    "Our BOSS wants those parts!\n"
+    "Shut your yap and fork them over!$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat {
+    "Awaaaah!\n"
+    "A kid beat me!$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_BossGoingToBeFurious {
+    "Oh, man, what a disaster…\n"
+    "The BOSS is going to be furious…$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis {
+    "Humph, sniveling wimp!\n"
+    "Let me take care of this!$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat {
+    "What?!\n"
+    "I lost, too!$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_MeddlingKid {
+    "Now what? If we don't get the parts,\n"
+    "we're in for it!\p"
+    "Arrgh, I didn't count on being meddled\n"
+    "with by some meddling kid!$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_CameToSeeWhatsTakingSoLong {
+    "I came to see what was taking so\n"
+    "long to snatch some parts, and you\l"
+    "simps are held up by a mere child?$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_ArchieWarning {
+    "We are TEAM AQUA,\n"
+    "and we love the sea!\p"
+    "And I am TEAM AQUA's leader,\n"
+    "ARCHIE!\p"
+    "What makes you interfere with us?\p"
+    "…No! You can't be!\n"
+    "You're not one of TEAM MAGMA?\p"
+    "Wait, that can't be right.\n"
+    "You're not dressed for the part.\p"
+    "… … … … … …\n"
+    "… … … … … …\p"
+    "POKéMON, people… All life depends on\n"
+    "the sea.\p"
+    "So, TEAM AQUA is dedicated to\n"
+    "the expansion of the sea.\p"
+    "Don't you agree? What we are doing\n"
+    "is a magnificent undertaking.\p"
+    "Ah, fine…\n"
+    "You're still too young to understand\l"
+    "our noble objective.\p"
+    "But, I warn you, don't even consider\n"
+    "interfering with our plans again.\p"
+    "The consequences will cost you\n"
+    "dearly!\p"
+    "And don't you forget it!$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_SternThankYouForSavingUs {
+    "CAPT. STERN: You're…\n"
+    "Ah, okay, you're {PLAYER}{KUN}…\p"
+    "Anyway, that was a tense situation!\n"
+    "Thank you for saving us!\p"
+    "Oh, yes, I almost forgot that you\n"
+    "even brought the parts from DEVON!$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_SternIveGotToGo {
+    "CAPT. STERN: Whoops!\n"
+    "There's no time to lose!\p"
+    "We have to set out on our ocean-floor\n"
+    "expedition really soon.\p"
+    "Thanks again, but now I've got\n"
+    "to go!\p"
+    "Feel free to wander around and check\n"
+    "out our facilities, though.$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_RemindsMeOfAbandonedShip {
+    "I saw a model of a ship here.\p"
+    "It reminded me of the ABANDONED SHIP\n"
+    "near DEWFORD TOWN…$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_DontRunInMuseum {
+    "Don't you dare run around inside\n"
+    "the MUSEUM!$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_WantToRideSubmarine {
+    "Wow, the submarine's awesome!\n"
+    "I want to go for a ride!$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_WaterQualitySample1 {
+    "“WATER QUALITY SAMPLE 1,” the\n"
+    "label says.\p"
+    "The sea is all connected, but the\n"
+    "water seems to differ by region.$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_WaterQualitySample2 {
+    "“WATER QUALITY SAMPLE 2,” the\n"
+    "label says.\p"
+    "Does the saltiness of seawater differ\n"
+    "by region, too?$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_PressureExperiment {
+    "A rubber ball is expanding and\n"
+    "shrinking.\p"
+    "“In the sea, the weight of water itself\n"
+    "exerts pressure.\p"
+    "“In shallow water, the pressure is not\n"
+    "very heavy.\p"
+    "“However, in extremely deep water,\n"
+    "the pressure can reach even tens of\l"
+    "thousands of tons on a small area.”$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_HoennModel {
+    "“MODEL OF HOENN REGION”\p"
+    "It's a miniature diorama of the\n"
+    "HOENN region.\p"
+    "Where is LITTLEROOT TOWN on this?$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_DeepSeawaterDisplay {
+    "It's a display on the flow of seawater.\p"
+    "“Near the bottom of the sea, water\n"
+    "flows due to differences in such\l"
+    "factors as temperature and salinity.”$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_SurfaceSeawaterDisplay {
+    "It's a display on the flow of seawater.\p"
+    "“Toward the surface, seawater flows\n"
+    "as currents driven by the winds.”$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_SSTidalReplica {
+    "“THE FERRY S.S. TIDAL\p"
+    "“A scale replica of the ship under\n"
+    "construction at STERN'S SHIPYARD.”$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_SubmarineReplica {
+    "“SUBMARINE EXPLORER 1\p"
+    "“A replica of the high-performance\n"
+    "ocean floor exploration submarine.”$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_SumbersibleReplica {
+    "“SUBMERSIBLE POD\p"
+    "“A replica of a compact, unmanned\n"
+    "pod for seafloor exploration.”$"
+}
+
+text SlateportCity_OceanicMuseum_2F_Text_SSAnneReplica {
+    "“S.S. ANNE\p"
+    "“A replica of the luxury liner that\n"
+    "circles the globe.”$"
+}

@@ -1,0 +1,12 @@
+mapscripts OneIsland_House2_Frlg_MapScripts {}
+
+script OneIsland_House2_EventScript_Lass {
+    msgbox(OneIsland_House2_Text_IWantToStayHereForever, MSGBOX_NPC)
+    end
+}
+
+text OneIsland_House2_Text_IWantToStayHereForever {
+    "Young people all want to go off to\n"
+    "big cities.\p"
+    "But I want to stay here forever!$"
+}

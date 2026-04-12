@@ -1,0 +1,160 @@
+mapscripts CeruleanCity_House4_Frlg_MapScripts {}
+
+script CeruleanCity_House4_EventScript_WonderNewsBerryMan {
+    lock
+    specialvar(REWARD_TYPE, WonderNews_GetRewardInfo)
+    copyvar(REWARD_ITEM, VAR_RESULT)
+    if (var(REWARD_TYPE) == NEWS_REWARD_NONE) goto(CeruleanCity_House4_EventScript_NoNews)
+    if (var(REWARD_TYPE) == NEWS_REWARD_RECV_SMALL) goto(CeruleanCity_House4_EventScript_Reward_RecvSmall)
+    if (var(REWARD_TYPE) == NEWS_REWARD_RECV_BIG) goto(CeruleanCity_House4_EventScript_Reward_RecvBig)
+    if (var(REWARD_TYPE) == NEWS_REWARD_WAITING) goto(CeruleanCity_House4_EventScript_Waiting)
+    if (var(REWARD_TYPE) == NEWS_REWARD_SENT_SMALL) goto(CeruleanCity_House4_EventScript_Reward_SentSmall)
+    if (var(REWARD_TYPE) == NEWS_REWARD_SENT_BIG) goto(CeruleanCity_House4_EventScript_Reward_SentBig)
+    if (var(REWARD_TYPE) == NEWS_REWARD_AT_MAX) goto(CeruleanCity_House4_EventScript_AtMax)
+    end
+}
+
+script CeruleanCity_House4_EventScript_NoNews {
+    msgbox(CeruleanCity_House4_Text_NothingEntertaining)
+    release
+    end
+}
+
+script CeruleanCity_House4_EventScript_Reward_RecvSmall {
+    call(CeruleanCity_House4_EventScript_MovementReactionToNews)
+    msgbox(CeruleanCity_House4_Text_NewNewsInformativeHaveThis)
+    giveitem(REWARD_ITEM)
+    if (var(VAR_RESULT) == FALSE) goto(CeruleanCity_House4_EventScript_NoRoomForBerries)
+    release
+    end
+}
+
+script CeruleanCity_House4_EventScript_Reward_RecvBig {
+    call(CeruleanCity_House4_EventScript_MovementReactionToNews)
+    msgbox(CeruleanCity_House4_Text_IncredibleNewsHaveBerries)
+    giveitem(REWARD_ITEM, 4)
+    if (var(VAR_RESULT) == FALSE) goto(CeruleanCity_House4_EventScript_NoRoomForBerries)
+    release
+    end
+}
+
+script CeruleanCity_House4_EventScript_Waiting {
+    applymovement(LOCALID_WONDER_NEWS_BERRY_MAN, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(CeruleanCity_House4_Text_WishCouldShareNewsWithOthers)
+    release
+    end
+}
+
+script CeruleanCity_House4_EventScript_Reward_SentSmall {
+    call(CeruleanCity_House4_EventScript_MovementReactionToNews)
+    msgbox(CeruleanCity_House4_Text_ThanksForSpreadingNewsTakeThis)
+    giveitem(REWARD_ITEM)
+    if (var(VAR_RESULT) == FALSE) goto(CeruleanCity_House4_EventScript_NoRoomForBerries)
+    release
+    end
+}
+
+script CeruleanCity_House4_EventScript_Reward_SentBig {
+    call(CeruleanCity_House4_EventScript_MovementReactionToNews)
+    msgbox(CeruleanCity_House4_Text_MagnificentNewsSpreadHaveBerries)
+    giveitem(REWARD_ITEM, 4)
+    if (var(VAR_RESULT) == FALSE) goto(CeruleanCity_House4_EventScript_NoRoomForBerries)
+    release
+    end
+}
+
+script CeruleanCity_House4_EventScript_AtMax {
+    applymovement(LOCALID_WONDER_NEWS_BERRY_MAN, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(CeruleanCity_House4_Text_EnjoyingMyselfWithAllSortsOfNews)
+    release
+    end
+}
+
+script CeruleanCity_House4_EventScript_MovementReactionToNews {
+    playse(SE_PIN)
+    applymovement(LOCALID_WONDER_NEWS_BERRY_MAN, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_WONDER_NEWS_BERRY_MAN, Common_Movement_FacePlayer)
+    waitmovement(0)
+    applymovement(LOCALID_WONDER_NEWS_BERRY_MAN, Common_Movement_Delay48)
+    waitmovement(0)
+    return
+}
+
+script CeruleanCity_House4_EventScript_NoRoomForBerries {
+    msgbox(CeruleanCity_House4_Text_YourBerryPouchIsFull)
+    release
+    end
+}
+
+text CeruleanCity_House4_Text_NothingEntertaining {
+    "Sigh…\n"
+    "Too much time, too little to do…\p"
+    "Is nothing entertaining happening\n"
+    "anywhere?$"
+}
+
+text CeruleanCity_House4_Text_NewNewsInformativeHaveThis {
+    "Ah!\n"
+    "A new news report!\p"
+    "Hmm…\p"
+    "I see!\n"
+    "That was quite informative!\p"
+    "I applaud you for taking interest\n"
+    "in the news at your young age.\p"
+    "As my thanks for sharing the news\n"
+    "with me, I want you to have this.$"
+}
+
+text CeruleanCity_House4_Text_IncredibleNewsHaveBerries {
+    "Oh, oh!\n"
+    "Th-this news report!\p"
+    "Hmm…\p"
+    "Amazing!\n"
+    "What an incredible piece of news!\p"
+    "I haven't seen a news story this\n"
+    "incredible in too long a time!\p"
+    "Thanks for sharing this fantastic\n"
+    "news. Have a bunch of BERRIES!$"
+}
+
+text CeruleanCity_House4_Text_WishCouldShareNewsWithOthers {
+    "It seems such a shame to not share\n"
+    "this news with other folks…\p"
+    "I wish I could tell someone…\n"
+    "Let others know the news…$"
+}
+
+text CeruleanCity_House4_Text_ThanksForSpreadingNewsTakeThis {
+    "Ah, you've spread the news for me?\p"
+    "Good news becomes worthwhile when\n"
+    "all sorts of people share it.\p"
+    "As my thanks for your spreading\n"
+    "the news, take this!$"
+}
+
+text CeruleanCity_House4_Text_MagnificentNewsSpreadHaveBerries {
+    "You've spread the news some more?\n"
+    "Magnificent!\p"
+    "That piece of news must be\n"
+    "delighted to be passed around so.\p"
+    "Yes, indeed!\p"
+    "Consider this a show of\n"
+    "appreciation from me and the news.\p"
+    "I'll give you more BERRIES than\n"
+    "I usually do.$"
+}
+
+text CeruleanCity_House4_Text_EnjoyingMyselfWithAllSortsOfNews {
+    "I'm quite enjoying myself with all\n"
+    "sorts of news.\p"
+    "Yes, I am satisfied!\n"
+    "I won't be bored for a while.$"
+}
+
+text CeruleanCity_House4_Text_YourBerryPouchIsFull {
+    "Hm? Your BERRY POUCH is full.\n"
+    "My gift remains ungiven, then.$"
+}

@@ -1,0 +1,56 @@
+mapscripts FortreeCity_DecorationShop_MapScripts {}
+
+script FortreeCity_DecorationShop_EventScript_PokefanM {
+    msgbox(FortreeCity_DecorationShop_Text_MerchandiseSentToPC, MSGBOX_NPC)
+    end
+}
+
+script FortreeCity_DecorationShop_EventScript_Girl {
+    msgbox(FortreeCity_DecorationShop_Text_BuyingDeskForDolls, MSGBOX_NPC)
+    end
+}
+
+script FortreeCity_DecorationShop_EventScript_ClerkDesks {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemartdecoration(FortreeCity_DecorationShop_PokemartDecor_Desks)
+    msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script FortreeCity_DecorationShop_PokemartDecor_Desks {
+    pokemartlistend()
+}
+
+script FortreeCity_DecorationShop_EventScript_ClerkChairs {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemartdecoration(FortreeCity_DecorationShop_PokemartDecor_Chairs)
+    msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script FortreeCity_DecorationShop_PokemartDecor_Chairs {
+    pokemartlistend()
+}
+
+text FortreeCity_DecorationShop_Text_MerchandiseSentToPC {
+    "Merchandise you buy here is sent to\n"
+    "your own PC.\p"
+    "That's fantastic! I wish they could\n"
+    "also deliver me home like that.$"
+}
+
+text FortreeCity_DecorationShop_Text_BuyingDeskForDolls {
+    "I'm buying a pretty desk and I'm\n"
+    "putting my cute DOLLS on it.\p"
+    "If I don't, when I decorate my\n"
+    "SECRET BASE, my DOLLS will get\l"
+    "dirty or poked with splinters.$"
+}

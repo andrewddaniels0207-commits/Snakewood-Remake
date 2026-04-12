@@ -1,0 +1,26 @@
+mapscripts ThreeIsland_House1_Frlg_MapScripts {}
+
+script ThreeIsland_House1_EventScript_Lostelle {
+    lock
+    faceplayer
+    special(GetPlayerBigGuyGirlString)
+    msgbox(ThreeIsland_House1_Text_YoureAlwaysSoCool)
+    release
+    end
+}
+
+script ThreeIsland_House1_EventScript_DisplayCase {
+    msgbox(ThreeIsland_House1_Text_RareRocksGemsDisplayed, MSGBOX_SIGN)
+    end
+}
+
+text ThreeIsland_House1_Text_YoureAlwaysSoCool {
+    "LOSTELLE: Hi, {PLAYER}!\n"
+    "You're always so cool!\p"
+    "I'll make lunch for you, too, one\n"
+    "day, {PLAYER}.$"
+}
+
+text ThreeIsland_House1_Text_RareRocksGemsDisplayed {
+    "Rare rocks and gems are displayed.$"
+}

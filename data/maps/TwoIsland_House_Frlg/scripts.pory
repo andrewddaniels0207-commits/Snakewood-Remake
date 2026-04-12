@@ -1,0 +1,185 @@
+mapscripts TwoIsland_House_Frlg_MapScripts {}
+
+script TwoIsland_House_EventScript_MoveManiac {
+    lock
+    faceplayer
+    clearflag(HAS_BIG_MUSHROOM)
+    clearflag(HAS_TINY_MUSHROOMS)
+    clearflag(HAS_BOTH_MUSHROOMS)
+    if (flag(CHECKED_MUSHROOMS)) goto(TwoIsland_House_EventScript_CheckPlayerHasMushrooms)
+    msgbox(TwoIsland_House_Text_TeachMonMoveForMushroom)
+    setflag(CHECKED_MUSHROOMS)
+    goto(TwoIsland_House_EventScript_CheckPlayerHasMushrooms)
+    end
+}
+
+script TwoIsland_House_EventScript_CheckPlayerHasMushrooms {
+    checkitem(ITEM_BIG_MUSHROOM)
+    if (var(VAR_RESULT) == TRUE) call(TwoIsland_House_EventScript_SetHasBigMushroom)
+    checkitem(ITEM_TINY_MUSHROOM, 2)
+    if (var(VAR_RESULT) == TRUE) call(TwoIsland_House_EventScript_SetHasTinyMushrooms)
+    if (flag(HAS_BIG_MUSHROOM)) goto(TwoIsland_House_EventScript_CheckAlsoHasTinyMushrooms)
+    if (flag(HAS_TINY_MUSHROOMS)) goto(TwoIsland_House_EventScript_CheckAlsoHasBigMushroom)
+    goto(TwoIsland_House_EventScript_EndTutorMove)
+    end
+}
+
+script TwoIsland_House_EventScript_CheckAlsoHasTinyMushrooms {
+    if (flag(HAS_TINY_MUSHROOMS)) call(TwoIsland_House_EventScript_SetHasBothMushrooms)
+    goto(TwoIsland_House_EventScript_AskTutorMon)
+    end
+}
+
+script TwoIsland_House_EventScript_CheckAlsoHasBigMushroom {
+    if (flag(HAS_BIG_MUSHROOM)) call(TwoIsland_House_EventScript_SetHasBothMushrooms)
+    goto(TwoIsland_House_EventScript_AskTutorMon)
+    end
+}
+
+script TwoIsland_House_EventScript_AskTutorMon {
+    msgbox(TwoIsland_House_Text_WantMeToTeachMove, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(TwoIsland_House_EventScript_EndTutorMove)
+    goto(TwoIsland_House_EventScript_ChooseMonToTutor)
+    end
+}
+
+script TwoIsland_House_EventScript_ChooseMonToTutor {
+    msgbox(TwoIsland_House_Text_TutorWhichMon)
+    special(ChooseMonForMoveRelearner)
+    waitstate
+    if (var(VAR_0x8004) >= PARTY_SIZE) goto(TwoIsland_House_EventScript_EndTutorMove)
+    special(IsSelectedMonEgg)
+    if (var(VAR_RESULT) == TRUE) goto(TwoIsland_House_EventScript_CantTutorEgg)
+    if (var(VAR_0x8005) == 0) goto(TwoIsland_House_EventScript_NoMoveToTutorMon)
+    goto(TwoIsland_House_EventScript_ChooseMoveToTeach)
+    end
+}
+
+script TwoIsland_House_EventScript_ChooseMoveToTeach {
+    msgbox(TwoIsland_House_Text_TeachWhichMove)
+    special(TeachMoveRelearnerMove)
+    waitstate
+    if (var(VAR_0x8004) == 0) goto(TwoIsland_House_EventScript_ChooseMonToTutor)
+    if (flag(HAS_BOTH_MUSHROOMS)) goto(TwoIsland_House_EventScript_ChooseMushroom)
+    if (flag(HAS_BIG_MUSHROOM)) goto(TwoIsland_House_EventScript_GiveBigMushroom)
+    if (flag(HAS_TINY_MUSHROOMS)) goto(TwoIsland_House_EventScript_GiveTinyMushrooms)
+    end
+}
+
+script TwoIsland_House_EventScript_GiveBigMushroom {
+    removeitem(ITEM_BIG_MUSHROOM)
+    textcolor(NPC_TEXT_COLOR_NEUTRAL)
+    msgbox(TwoIsland_House_Text_HandedOverOneBigMushroom)
+    call(EventScript_RestorePrevTextColor)
+    goto(TwoIsland_House_EventScript_EndTutorMove)
+    end
+}
+
+script TwoIsland_House_EventScript_GiveTinyMushrooms {
+    removeitem(ITEM_TINY_MUSHROOM, 2)
+    textcolor(NPC_TEXT_COLOR_NEUTRAL)
+    msgbox(TwoIsland_House_Text_HandedOverTwoTinyMushrooms)
+    call(EventScript_RestorePrevTextColor)
+    goto(TwoIsland_House_EventScript_EndTutorMove)
+    end
+}
+
+script TwoIsland_House_EventScript_ChooseMushroom {
+    message(TwoIsland_House_Text_IllNeedMushroomOrTwo)
+    waitmessage()
+    multichoice(0, 0, MULTI_MUSHROOMS, TRUE)
+    switch(VAR_RESULT)
+    case(0, TwoIsland_House_EventScript_GiveTinyMushrooms)
+    case(1, TwoIsland_House_EventScript_GiveBigMushroom)
+    end
+}
+
+script TwoIsland_House_EventScript_NoMoveToTutorMon {
+    msgbox(TwoIsland_House_Text_NoMoveICanTeachThatMon)
+    goto(TwoIsland_House_EventScript_ChooseMonToTutor)
+    end
+}
+
+script TwoIsland_House_EventScript_CantTutorEgg {
+    msgbox(TwoIsland_House_Text_CantTeachAnEgg)
+    goto(TwoIsland_House_EventScript_ChooseMonToTutor)
+    end
+}
+
+script TwoIsland_House_EventScript_EndTutorMove {
+    msgbox(TwoIsland_House_Text_NeedMushroomOrTwoToLearnMove)
+    release
+    end
+}
+
+script TwoIsland_House_EventScript_SetHasBigMushroom {
+    setflag(HAS_BIG_MUSHROOM)
+    return
+}
+
+script TwoIsland_House_EventScript_SetHasTinyMushrooms {
+    setflag(HAS_TINY_MUSHROOMS)
+    return
+}
+
+script TwoIsland_House_EventScript_SetHasBothMushrooms {
+    setflag(HAS_BOTH_MUSHROOMS)
+    return
+}
+
+text TwoIsland_House_Text_TeachMonMoveForMushroom {
+    "I'm the POKéMON MOVE MANIAC.\p"
+    "I know every single move that\n"
+    "POKéMON learn growing up.\p"
+    "I'm also a mushroom maniac.\p"
+    "Bring me two TINYMUSHROOMS,\n"
+    "or one BIG MUSHROOM.\p"
+    "If you do that for me, I'll teach\n"
+    "a move to one POKéMON.$"
+}
+
+text TwoIsland_House_Text_WantMeToTeachMove {
+    "Sniff, sniff…\n"
+    "Hm! You smell of MUSHROOMS!\p"
+    "Do you want me to teach a move\n"
+    "to a POKéMON of yours?$"
+}
+
+text TwoIsland_House_Text_TutorWhichMon {
+    "Which POKéMON needs tutoring?$"
+}
+
+text TwoIsland_House_Text_TeachWhichMove {
+    "Which move should I teach?$"
+}
+
+text TwoIsland_House_Text_NoMoveICanTeachThatMon {
+    "Sorry…\p"
+    "It doesn't appear as if I have a\n"
+    "move I can teach that POKéMON.$"
+}
+
+text TwoIsland_House_Text_IllNeedMushroomOrTwo {
+    "Then, I'll need a MUSHROOM or two.\n"
+    "What are you going to give me?$"
+}
+
+text TwoIsland_House_Text_HandedOverTwoTinyMushrooms {
+    "{PLAYER} handed over two\n"
+    "TINYMUSHROOMS in exchange.$"
+}
+
+text TwoIsland_House_Text_HandedOverOneBigMushroom {
+    "{PLAYER} handed over one\n"
+    "BIG MUSHROOM in exchange.$"
+}
+
+text TwoIsland_House_Text_NeedMushroomOrTwoToLearnMove {
+    "If your POKéMON need to learn a\n"
+    "move, I need a MUSHROOM or two.$"
+}
+
+text TwoIsland_House_Text_CantTeachAnEgg {
+    "Hunh? There isn't a single move\n"
+    "that I can teach an EGG.$"
+}

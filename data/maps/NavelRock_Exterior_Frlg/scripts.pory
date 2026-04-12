@@ -1,0 +1,8 @@
+mapscripts NavelRock_Exterior_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: NavelRock_Exterior_OnTransition
+}
+
+script NavelRock_Exterior_Frlg_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_NAVEL_ROCK_EXTERIOR)
+    end
+}

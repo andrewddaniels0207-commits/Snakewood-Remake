@@ -1,0 +1,27 @@
+mapscripts SSAnne_B1F_Room5_Frlg_MapScripts {}
+
+script SSAnne_B1F_Room5_EventScript_Boy {
+    msgbox(SSAnne_B1F_Room5_Text_MachokeHasStrengthToMoveRocks, MSGBOX_NPC)
+    end
+}
+
+script SSAnne_B1F_Room5_EventScript_Machoke {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_MACHOKE, CRY_MODE_NORMAL)
+    msgbox(SSAnne_B1F_Room5_Text_Machoke)
+    waitmoncry()
+    release
+    end
+}
+
+text SSAnne_B1F_Room5_Text_MachokeHasStrengthToMoveRocks {
+    "My buddy MACHOKE is super strong!\p"
+    "He has enough STRENGTH to move\n"
+    "big rocks!$"
+}
+
+text SSAnne_B1F_Room5_Text_Machoke {
+    "MACHOKE: Gwoh! Goggoh!$"
+}

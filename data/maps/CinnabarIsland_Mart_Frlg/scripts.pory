@@ -1,0 +1,38 @@
+mapscripts CinnabarIsland_Mart_Frlg_MapScripts {}
+
+script CinnabarIsland_Mart_EventScript_Woman {
+    msgbox(CinnabarIsland_Mart_Text_DontTheyHaveXAttack, MSGBOX_NPC)
+    end
+}
+
+script CinnabarIsland_Mart_EventScript_Scientist {
+    msgbox(CinnabarIsland_Mart_Text_ExtraItemsNeverHurt, MSGBOX_NPC)
+    end
+}
+
+script CinnabarIsland_Mart_EventScript_Clerk {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(CinnabarIsland_Mart_Items)
+    msgbox(gText_PleaseComeAgain)
+    release
+    end
+}
+
+script CinnabarIsland_Mart_Items {
+    release
+    end
+}
+
+text CinnabarIsland_Mart_Text_DontTheyHaveXAttack {
+    "Don't they have X ATTACK?\p"
+    "I like it because it raises the\n"
+    "ATTACK stat in battle.$"
+}
+
+text CinnabarIsland_Mart_Text_ExtraItemsNeverHurt {
+    "It never hurts to have extra items.\n"
+    "You never know what might happen.$"
+}

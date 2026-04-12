@@ -1,0 +1,28 @@
+mapscripts OneIsland_TreasureBeach_Frlg_MapScripts {}
+
+script OneIsland_TreasureBeach_EventScript_Boy {
+    msgbox(OneIsland_TreasureBeach_Text_GoodThingsWashUpOnBeach, MSGBOX_NPC)
+    end
+}
+
+text OneIsland_TreasureBeach_Text_AmaraIntro {
+    "Lying back, rocked by the waves…\n"
+    "It's exquisite.$"
+}
+
+text OneIsland_TreasureBeach_Text_AmaraDefeat {
+    "I lost…\n"
+    "It feels awful.$"
+}
+
+text OneIsland_TreasureBeach_Text_AmaraPostBattle {
+    "The sea is pleasantly warm in these\n"
+    "parts.$"
+}
+
+text OneIsland_TreasureBeach_Text_GoodThingsWashUpOnBeach {
+    "Good things get washed up by the\n"
+    "ocean current onto this beach.\p"
+    "That's why I often come here for\n"
+    "some beachcombing.$"
+}

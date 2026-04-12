@@ -1,0 +1,102 @@
+mapscripts VermilionCity_PokemonCenter_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: VermilionCity_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script VermilionCity_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_VERMILION_CITY)
+    end
+}
+
+script VermilionCity_PokemonCenter_1F_EventScript_Nurse {
+    lock
+    faceplayer
+    call(EventScript_PkmnCenterNurse_Frlg)
+    release
+    end
+}
+
+script VermilionCity_PokemonCenter_1F_EventScript_Man {
+    msgbox(VermilionCity_PokemonCenter_1F_Text_PoisonedMonFaintedWhileWalking, MSGBOX_NPC)
+    end
+}
+
+script VermilionCity_PokemonCenter_1F_EventScript_Hiker {
+    msgbox(VermilionCity_PokemonCenter_1F_Text_TrainerMonsStrongerThanWild, MSGBOX_NPC)
+    end
+}
+
+script VermilionCity_PokemonCenter_1F_EventScript_Youngster {
+    msgbox(VermilionCity_PokemonCenter_1F_Text_AllMonWeakToSpecificTypes, MSGBOX_NPC)
+    end
+}
+
+script VermilionCity_PokemonCenter_1F_EventScript_VSSeekerWoman {
+    lock
+    faceplayer
+    if (flag(FLAG_GOT_VS_SEEKER)) goto(VermilionCity_PokemonCenter_1F_EventScript_ExplainVSSeeker)
+    msgbox(VermilionCity_PokemonCenter_1F_Text_UrgeToBattleSomeoneAgain)
+    setflag(FLAG_GOT_VS_SEEKER)
+    giveitem(ITEM_VS_SEEKER)
+    if (var(VAR_RESULT) == FALSE) goto(EventScript_BagIsFull)
+    msgbox(VermilionCity_PokemonCenter_1F_Text_UseDeviceForRematches)
+    release
+    end
+}
+
+script VermilionCity_PokemonCenter_1F_EventScript_ExplainVSSeeker {
+    msgbox(VermilionCity_PokemonCenter_1F_Text_ExplainVSSeeker)
+    release
+    end
+}
+
+text VermilionCity_PokemonCenter_1F_Text_TrainerMonsStrongerThanWild {
+    "Even if they are the same level,\n"
+    "POKéMON can have very different\l"
+    "stats and abilities.\p"
+    "A POKéMON raised by a TRAINER is\n"
+    "stronger than one in the wild.$"
+}
+
+text VermilionCity_PokemonCenter_1F_Text_PoisonedMonFaintedWhileWalking {
+    "My POKéMON was poisoned!\n"
+    "It fainted while we were walking!$"
+}
+
+text VermilionCity_PokemonCenter_1F_Text_AllMonWeakToSpecificTypes {
+    "It is true that a higher-level\n"
+    "POKéMON will be more powerful…\p"
+    "But, all POKéMON will have weak\n"
+    "points against specific types.\p"
+    "So, there appears to be no\n"
+    "universally strong POKéMON.$"
+}
+
+text VermilionCity_PokemonCenter_1F_Text_UrgeToBattleSomeoneAgain {
+    "The urge to battle with someone\n"
+    "you've tangled with before…\p"
+    "Have you ever had that urge?\n"
+    "I'm sure you have.\p"
+    "I wanted to battle certain people\n"
+    "again over and over, too.\p"
+    "So, I've been giving these away.\n"
+    "Please, take one!$"
+}
+
+text VermilionCity_PokemonCenter_1F_Text_UseDeviceForRematches {
+    "Use that device and you'll find\n"
+    "TRAINERS looking for a rematch.\p"
+    "You have to charge its battery to\n"
+    "use it, though.$"
+}
+
+text VermilionCity_PokemonCenter_1F_Text_ExplainVSSeeker {
+    "How do you use the VS SEEKER?\n"
+    "There's nothing to it.\p"
+    "Use it like beep-beep-beep, and\n"
+    "TRAINERS around you will notice.\p"
+    "If any TRAINER wants a rematch,\n"
+    "it will let you know immediately.\p"
+    "Charge its battery and use it\n"
+    "while you're on a road.$"
+}

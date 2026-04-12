@@ -1,0 +1,38 @@
+mapscripts SaffronCity_CopycatsHouse_1F_Frlg_MapScripts {}
+
+script SaffronCity_CopycatsHouse_1F_EventScript_CopycatsMom {
+    msgbox(SaffronCity_CopycatsHouse_1F_Text_DaughterIsSelfCentered, MSGBOX_NPC)
+    end
+}
+
+script SaffronCity_CopycatsHouse_1F_EventScript_CopycatsDad {
+    msgbox(SaffronCity_CopycatsHouse_1F_Text_DaughterLikesToMimicPeople, MSGBOX_NPC)
+    end
+}
+
+script SaffronCity_CopycatsHouse_1F_EventScript_Chansey {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_CHANSEY, CRY_MODE_NORMAL)
+    msgbox(SaffronCity_CopycatsHouse_1F_Text_Chansey)
+    waitmoncry()
+    release
+    end
+}
+
+text SaffronCity_CopycatsHouse_1F_Text_DaughterIsSelfCentered {
+    "My daughter is so self-centered.\n"
+    "She has but a few friends.$"
+}
+
+text SaffronCity_CopycatsHouse_1F_Text_DaughterLikesToMimicPeople {
+    "My daughter likes to mimic people.\n"
+    "It's rather vexing.\p"
+    "Her mimicry has earned her the\n"
+    "nickname COPYCAT around here.$"
+}
+
+text SaffronCity_CopycatsHouse_1F_Text_Chansey {
+    "CHANSEY: Chaan! Sii!$"
+}

@@ -1,0 +1,295 @@
+mapscripts SaffronCity_Dojo_Frlg_MapScripts {}
+
+script SaffronCity_Dojo_EventScript_TriggerMasterBattleLeft {
+    lockall
+    setvar(VAR_MAP_SCENE_SAFFRON_CITY_DOJO, 1)
+    applymovement(LOCALID_KARATE_MASTER, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    releaseall
+    end
+}
+
+script SaffronCity_Dojo_EventScript_TriggerMasterBattleRight {
+    lockall
+    setvar(VAR_MAP_SCENE_SAFFRON_CITY_DOJO, 1)
+    applymovement(LOCALID_KARATE_MASTER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    releaseall
+    end
+}
+
+script SaffronCity_Dojo_EventScript_HitmonleeBall {
+    lock
+    faceplayer
+    if (flag(FLAG_GOT_HITMON_FROM_DOJO)) goto(SaffronCity_Dojo_EventScript_AlreadyGotHitmon)
+    showmonpic(SPECIES_HITMONLEE, 10, 3)
+    setvar(VAR_TEMP_1, SPECIES_HITMONLEE)
+    applymovement(LOCALID_KARATE_MASTER, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    textcolor(NPC_TEXT_COLOR_MALE)
+    msgbox(SaffronCity_Dojo_Text_YouWantHitmonlee, MSGBOX_YESNO)
+    call(EventScript_RestorePrevTextColor)
+    if (var(VAR_RESULT) == YES) goto(SaffronCity_Dojo_EventScript_GiveHitmon)
+    hidemonpic()
+    release
+    end
+}
+
+script SaffronCity_Dojo_EventScript_AlreadyGotHitmon {
+    msgbox(SaffronCity_Dojo_Text_BetterNotGetGreedy)
+    release
+    end
+}
+
+script SaffronCity_Dojo_EventScript_HitmonchanBall {
+    lock
+    faceplayer
+    if (flag(FLAG_GOT_HITMON_FROM_DOJO)) goto(SaffronCity_Dojo_EventScript_AlreadyGotHitmon)
+    showmonpic(SPECIES_HITMONCHAN, 10, 3)
+    setvar(VAR_TEMP_1, SPECIES_HITMONCHAN)
+    applymovement(LOCALID_KARATE_MASTER, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    textcolor(NPC_TEXT_COLOR_MALE)
+    msgbox(SaffronCity_Dojo_Text_YouWantHitmonchan, MSGBOX_YESNO)
+    call(EventScript_RestorePrevTextColor)
+    if (var(VAR_RESULT) == YES) goto(SaffronCity_Dojo_EventScript_GiveHitmon)
+    hidemonpic()
+    release
+    end
+}
+
+script SaffronCity_Dojo_EventScript_GiveHitmon {
+    hidemonpic()
+    givemon(VAR_TEMP_1, 25)
+    if (var(VAR_RESULT) == 0) goto(SaffronCity_Dojo_EventScript_ReceivedHitmonParty)
+    if (var(VAR_RESULT) == 1) goto(SaffronCity_Dojo_EventScript_ReceivedHitmonPC)
+    if (var(VAR_RESULT) == 2) goto(Common_EventScript_NoMoreRoomForPokemon)
+    release
+    end
+}
+
+script SaffronCity_Dojo_EventScript_ReceivedHitmonParty {
+    removeobject(VAR_LAST_TALKED)
+    bufferspeciesname(STR_VAR_1, VAR_TEMP_1)
+    playfanfare(MUS_LEVEL_UP)
+    message(SaffronCity_Dojo_Text_ReceivedMonFromKarateMaster)
+    waitmessage()
+    waitfanfare()
+    setflag(FLAG_GOT_HITMON_FROM_DOJO)
+    msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(SaffronCity_Dojo_EventScript_EndGiveMon)
+    call(Common_EventScript_GetGiftMonPartySlot)
+    call(Common_EventScript_NameReceivedPartyMon)
+    goto(SaffronCity_Dojo_EventScript_EndGiveMon)
+    end
+}
+
+script SaffronCity_Dojo_EventScript_ReceivedHitmonPC {
+    removeobject(VAR_LAST_TALKED)
+    bufferspeciesname(STR_VAR_1, VAR_TEMP_1)
+    playfanfare(MUS_LEVEL_UP)
+    message(SaffronCity_Dojo_Text_ReceivedMonFromKarateMaster)
+    waitmessage()
+    waitfanfare()
+    setflag(FLAG_GOT_HITMON_FROM_DOJO)
+    msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(SaffronCity_Dojo_EventScript_TransferredHitmonToPC)
+    call(Common_EventScript_NameReceivedBoxMon)
+    goto(SaffronCity_Dojo_EventScript_TransferredHitmonToPC)
+    end
+}
+
+script SaffronCity_Dojo_EventScript_TransferredHitmonToPC {
+    call(Common_EventScript_TransferredToPC)
+    goto(SaffronCity_Dojo_EventScript_EndGiveMon)
+    end
+}
+
+script SaffronCity_Dojo_EventScript_EndGiveMon {
+    release
+    end
+}
+
+script SaffronCity_Dojo_EventScript_Statue {
+    msgbox(SaffronCity_Dojo_Text_FightingDojo, MSGBOX_SIGN)
+    end
+}
+
+script SaffronCity_Dojo_EventScript_LeftScroll {
+    msgbox(SaffronCity_Dojo_Text_EnemiesOnEverySide, MSGBOX_SIGN)
+    end
+}
+
+script SaffronCity_Dojo_EventScript_RightScroll {
+    msgbox(SaffronCity_Dojo_Text_GoesAroundComesAround, MSGBOX_SIGN)
+    end
+}
+
+script SaffronCity_Dojo_EventScript_Hitoshi {
+    trainerbattle_single(TRAINER_BLACK_BELT_HITOSHI, SaffronCity_Dojo_Text_HitoshiIntro, SaffronCity_Dojo_Text_HitoshiDefeat)
+    msgbox(SaffronCity_Dojo_Text_HitoshiPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SaffronCity_Dojo_EventScript_Hideki {
+    trainerbattle_single(TRAINER_BLACK_BELT_HIDEKI, SaffronCity_Dojo_Text_HidekiIntro, SaffronCity_Dojo_Text_HidekiDefeat)
+    msgbox(SaffronCity_Dojo_Text_HidekiPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SaffronCity_Dojo_EventScript_Aaron {
+    trainerbattle_single(TRAINER_BLACK_BELT_AARON, SaffronCity_Dojo_Text_AaronIntro, SaffronCity_Dojo_Text_AaronDefeat)
+    msgbox(SaffronCity_Dojo_Text_AaronPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SaffronCity_Dojo_EventScript_Mike {
+    trainerbattle_single(TRAINER_BLACK_BELT_MIKE, SaffronCity_Dojo_Text_MikeIntro, SaffronCity_Dojo_Text_MikeDefeat)
+    msgbox(SaffronCity_Dojo_Text_MikePostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SaffronCity_Dojo_EventScript_MasterKoichi {
+    trainerbattle_single(TRAINER_BLACK_BELT_KOICHI, SaffronCity_Dojo_Text_MasterKoichiIntro, SaffronCity_Dojo_Text_MasterKoichiDefeat, SaffronCity_Dojo_EventScript_DefeatedMasterKoichi)
+    if (flag(FLAG_GOT_HITMON_FROM_DOJO)) goto(SaffronCity_Dojo_EventScript_MasterKoichiAlreadyGotHitmon)
+    msgbox(SaffronCity_Dojo_Text_ChoosePrizedFightingMon, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SaffronCity_Dojo_EventScript_MasterKoichiAlreadyGotHitmon {
+    msgbox(SaffronCity_Dojo_Text_StayAndTrainWithUs)
+    release
+    end
+}
+
+script SaffronCity_Dojo_EventScript_DefeatedMasterKoichi {
+    setvar(VAR_MAP_SCENE_SAFFRON_CITY_DOJO, 1)
+    release
+    end
+}
+
+text SaffronCity_Dojo_Text_MasterKoichiIntro {
+    "Grunt!\p"
+    "I am the KARATE MASTER!\n"
+    "I am the LEADER here!\p"
+    "You wish to challenge us?\n"
+    "Expect no mercy!\p"
+    "Fwaaa!$"
+}
+
+text SaffronCity_Dojo_Text_MasterKoichiDefeat {
+    "Hwa!\n"
+    "Arrgh! Beaten!$"
+}
+
+text SaffronCity_Dojo_Text_ChoosePrizedFightingMon {
+    "Indeed, I have lost!\p"
+    "But, I beseech you, do not take\n"
+    "our emblem as your trophy!\p"
+    "In return, I will give you a prized\n"
+    "FIGHTING POKéMON!\p"
+    "Choose whichever one you like!$"
+}
+
+text SaffronCity_Dojo_Text_StayAndTrainWithUs {
+    "Grunt!\n"
+    "Stay and train at karate with us!$"
+}
+
+text SaffronCity_Dojo_Text_MikeIntro {
+    "Hoargh!\n"
+    "Take your shoes off!$"
+}
+
+text SaffronCity_Dojo_Text_MikeDefeat {
+    "I give up!$"
+}
+
+text SaffronCity_Dojo_Text_MikePostBattle {
+    "You wait 'til you see our MASTER!\n"
+    "I'm a small fry compared to him!$"
+}
+
+text SaffronCity_Dojo_Text_HidekiIntro {
+    "I hear you're good!\n"
+    "Show me!$"
+}
+
+text SaffronCity_Dojo_Text_HidekiDefeat {
+    "Judge!\n"
+    "One point!$"
+}
+
+text SaffronCity_Dojo_Text_HidekiPostBattle {
+    "Our MASTER is a pro fighter.\n"
+    "Be prepared to lose!$"
+}
+
+text SaffronCity_Dojo_Text_AaronIntro {
+    "Hiyah!\n"
+    "I have no fear for anything tough!\p"
+    "I shatter boulders for training\n"
+    "every day!$"
+}
+
+text SaffronCity_Dojo_Text_AaronDefeat {
+    "Yow!\n"
+    "Stubbed fingers!$"
+}
+
+text SaffronCity_Dojo_Text_AaronPostBattle {
+    "The only thing that frightens us is\n"
+    "psychic power!$"
+}
+
+text SaffronCity_Dojo_Text_HitoshiIntro {
+    "Hwaah!\p"
+    "You're trespassing in our\n"
+    "FIGHTING DOJO!$"
+}
+
+text SaffronCity_Dojo_Text_HitoshiDefeat {
+    "Oof!\n"
+    "I give up!$"
+}
+
+text SaffronCity_Dojo_Text_HitoshiPostBattle {
+    "The prime fighters across the land\n"
+    "train here.$"
+}
+
+text SaffronCity_Dojo_Text_YouWantHitmonlee {
+    "You want the hard-kicking\n"
+    "HITMONLEE?$"
+}
+
+text SaffronCity_Dojo_Text_ReceivedMonFromKarateMaster {
+    "{PLAYER} received the {STR_VAR_1}\n"
+    "from the KARATE MASTER.$"
+}
+
+text SaffronCity_Dojo_Text_YouWantHitmonchan {
+    "You want the piston-punching\n"
+    "HITMONCHAN?$"
+}
+
+text SaffronCity_Dojo_Text_ReceivedMonFromKarateMaster2 {
+    "{PLAYER}は　カラテ　だいおう　から\n"
+    "{STR_VAR_1}を　もらった！$"
+}
+
+text SaffronCity_Dojo_Text_BetterNotGetGreedy {
+    "Better not get greedy…$"
+}
+
+text SaffronCity_Dojo_Text_EnemiesOnEverySide {
+    "Enemies on every side!$"
+}
+
+text SaffronCity_Dojo_Text_GoesAroundComesAround {
+    "What goes around comes around.$"
+}
+
+text SaffronCity_Dojo_Text_FightingDojo {
+    "FIGHTING DOJO$"
+}

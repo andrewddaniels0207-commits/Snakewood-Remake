@@ -1,0 +1,8 @@
+mapscripts CaveOfOrigin_UnusedRubySapphireMap2_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: CaveOfOrigin_UnusedRubySapphireMap2_OnTransition
+}
+
+script CaveOfOrigin_UnusedRubySapphireMap2_OnTransition {
+    if (flag(FLAG_UNUSED_RS_LEGENDARY_BATTLE_DONE)) call(CaveOfOrigin_EventScript_DisableTriggers)
+    end
+}

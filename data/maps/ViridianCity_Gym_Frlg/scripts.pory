@@ -1,0 +1,326 @@
+mapscripts ViridianCity_Gym_Frlg_MapScripts {}
+
+script ViridianCity_Gym_EventScript_Giovanni {
+    famechecker(FAMECHECKER_GIOVANNI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
+    trainerbattle_single(TRAINER_LEADER_GIOVANNI, ViridianCity_Gym_Text_GiovanniIntro, ViridianCity_Gym_Text_GiovanniDefeat, ViridianCity_Gym_EventScript_DefeatedGiovanni, NO_MUSIC)
+    if (!flag(FLAG_GOT_TM26_FROM_GIOVANNI)) goto(ViridianCity_Gym_EventScript_GiveTM26)
+    msgbox(ViridianCity_Gym_Text_GiovanniPostBattle)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_VIRIDIAN_GIOVANNI)
+    fadescreen(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script ViridianCity_Gym_EventScript_DefeatedGiovanni {
+    famechecker(FAMECHECKER_GIOVANNI, 3)
+    setflag(FLAG_HIDE_MISC_KANTO_ROCKETS)
+    setflag(FLAG_DEFEATED_LEADER_GIOVANNI)
+    setflag(FLAG_BADGE08_GET)
+    setvar(VAR_MAP_SCENE_ROUTE22, 3)
+    set_gym_trainers_frlg(8)
+    goto(ViridianCity_Gym_EventScript_GiveTM26)
+    end
+}
+
+script ViridianCity_Gym_EventScript_GiveTM26 {
+    msgbox(ViridianCity_Gym_Text_ExplainEarthBadgeTakeThis)
+    checkitemspace(ITEM_TM26)
+    if (var(VAR_RESULT) == FALSE) goto(ViridianCity_Gym_EventScript_NoRoomForTM26)
+    giveitem_msg(ViridianCity_Gym_Text_ReceivedTM26FromGiovanni, ITEM_TM26)
+    setflag(FLAG_GOT_TM26_FROM_GIOVANNI)
+    msgbox(ViridianCity_Gym_Text_ExplainTM26)
+    release
+    end
+}
+
+script ViridianCity_Gym_EventScript_NoRoomForTM26 {
+    msgbox(ViridianCity_Gym_Text_YouDoNotHaveSpace)
+    release
+    end
+}
+
+script ViridianCity_Gym_EventScript_Jason {
+    trainerbattle_single(TRAINER_TAMER_JASON, ViridianCity_Gym_Text_JasonIntro, ViridianCity_Gym_Text_JasonDefeat)
+    msgbox(ViridianCity_Gym_Text_JasonPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script ViridianCity_Gym_EventScript_Cole {
+    trainerbattle_single(TRAINER_TAMER_COLE, ViridianCity_Gym_Text_ColeIntro, ViridianCity_Gym_Text_ColeDefeat)
+    msgbox(ViridianCity_Gym_Text_ColePostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script ViridianCity_Gym_EventScript_Atsushi {
+    trainerbattle_single(TRAINER_BLACK_BELT_ATSUSHI, ViridianCity_Gym_Text_AtsushiIntro, ViridianCity_Gym_Text_AtsushiDefeat)
+    msgbox(ViridianCity_Gym_Text_AtsushiPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script ViridianCity_Gym_EventScript_Kiyo {
+    trainerbattle_single(TRAINER_BLACK_BELT_KIYO, ViridianCity_Gym_Text_KiyoIntro, ViridianCity_Gym_Text_KiyoDefeat)
+    msgbox(ViridianCity_Gym_Text_KiyoPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script ViridianCity_Gym_EventScript_Takashi {
+    trainerbattle_single(TRAINER_BLACK_BELT_TAKASHI, ViridianCity_Gym_Text_TakashiIntro, ViridianCity_Gym_Text_TakashiDefeat)
+    msgbox(ViridianCity_Gym_Text_TakashiPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script ViridianCity_Gym_EventScript_Samuel {
+    trainerbattle_single(TRAINER_COOLTRAINER_SAMUEL, ViridianCity_Gym_Text_SamuelIntro, ViridianCity_Gym_Text_SamuelDefeat)
+    msgbox(ViridianCity_Gym_Text_SamuelPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script ViridianCity_Gym_EventScript_Yuji {
+    trainerbattle_single(TRAINER_COOLTRAINER_YUJI, ViridianCity_Gym_Text_YujiIntro, ViridianCity_Gym_Text_YujiDefeat)
+    msgbox(ViridianCity_Gym_Text_YujiPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script ViridianCity_Gym_EventScript_Warren {
+    trainerbattle_single(TRAINER_COOLTRAINER_WARREN, ViridianCity_Gym_Text_WarrenIntro, ViridianCity_Gym_Text_WarrenDefeat)
+    msgbox(ViridianCity_Gym_Text_WarrenPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script ViridianCity_Gym_EventScript_GymGuy {
+    lock
+    faceplayer
+    if (flag(FLAG_DEFEATED_LEADER_GIOVANNI)) goto(ViridianCity_Gym_EventScript_GymGuyPostVictory)
+    msgbox(ViridianCity_Gym_Text_GymGuyAdvice)
+    release
+    end
+}
+
+script ViridianCity_Gym_EventScript_GymGuyPostVictory {
+    famechecker(FAMECHECKER_GIOVANNI, 4)
+    msgbox(ViridianCity_Gym_Text_GymGuyPostVictory)
+    release
+    end
+}
+
+script ViridianCity_Gym_EventScript_GymStatue {
+    lockall
+    if (flag(FLAG_BADGE08_GET)) goto(ViridianCity_Gym_EventScript_GymStatuePostVictory)
+    msgbox(ViridianCity_Gym_Text_GymStatue)
+    releaseall
+    end
+}
+
+script ViridianCity_Gym_EventScript_GymStatuePostVictory {
+    msgbox(ViridianCity_Gym_Text_GymStatuePlayerWon)
+    releaseall
+    end
+}
+
+text ViridianCity_Gym_Text_GiovanniIntro {
+    "Fwahahaha!\n"
+    "Welcome to my hideout!\p"
+    "It shall be so until I can restore\n"
+    "TEAM ROCKET to its former glory.\p"
+    "But, you have found me again.\n"
+    "So be it.\l"
+    "This time, I'm not holding back!\p"
+    "Once more, you shall face\n"
+    "GIOVANNI, the greatest TRAINER!{PLAY_BGM}{MUS_RG_ENCOUNTER_ROCKET}$"
+}
+
+text ViridianCity_Gym_Text_GiovanniDefeat {
+    "Ha!\n"
+    "That was a truly intense fight.\l"
+    "You have won!\p"
+    "As proof, here is the EARTHBADGE!\n"
+    "{PAUSE_MUSIC}{PLAY_BGM}{MUS_OBTAIN_BADGE}{PAUSE 0xFE}{PAUSE 0x56}{RESUME_MUSIC}$"
+}
+
+text ViridianCity_Gym_Text_GiovanniPostBattle {
+    "Having lost in this fashion, \n"
+    "I can't face my followers.\l"
+    "I have betrayed their trust.\p"
+    "As of today, TEAM ROCKET is\n"
+    "finished forever!\p"
+    "As for myself, I shall dedicate\n"
+    "my life to training again.\p"
+    "Let us meet again someday!\n"
+    "Farewell!$"
+}
+
+text ViridianCity_Gym_Text_ExplainEarthBadgeTakeThis {
+    "The EARTHBADGE makes POKéMON of\n"
+    "any level obey without question.\p"
+    "It is evidence of your mastery as\n"
+    "a POKéMON TRAINER.\p"
+    "With it, you can challenge the\n"
+    "POKéMON LEAGUE.\p"
+    "Also, take this TM.\p"
+    "Consider it a gift for your POKéMON\n"
+    "LEAGUE challenge.$"
+}
+
+text ViridianCity_Gym_Text_ReceivedTM26FromGiovanni {
+    "{PLAYER} received TM26\n"
+    "from GIOVANNI.$"
+}
+
+text ViridianCity_Gym_Text_ExplainTM26 {
+    "TM26 contains EARTHQUAKE.\p"
+    "It is a powerful attack that causes\n"
+    "a massive tremor.\p"
+    "I made it when I ran the GYM here,\n"
+    "far too long ago… $"
+}
+
+text ViridianCity_Gym_Text_YouDoNotHaveSpace {
+    "You do not have space for this!$"
+}
+
+text ViridianCity_Gym_Text_YujiIntro {
+    "Heh!\n"
+    "You must be running out of steam\l"
+    "by now!$"
+}
+
+text ViridianCity_Gym_Text_YujiDefeat {
+    "I ran out of gas!$"
+}
+
+text ViridianCity_Gym_Text_YujiPostBattle {
+    "You'll need power to keep up with\n"
+    "our GYM LEADER.$"
+}
+
+text ViridianCity_Gym_Text_AtsushiIntro {
+    "Rrrroar!\n"
+    "I'm working myself into a rage!$"
+}
+
+text ViridianCity_Gym_Text_AtsushiDefeat {
+    "Wargh!$"
+}
+
+text ViridianCity_Gym_Text_AtsushiPostBattle {
+    "I'm still not worthy!$"
+}
+
+text ViridianCity_Gym_Text_JasonIntro {
+    "POKéMON and I, we make wonderful\n"
+    "music together!$"
+}
+
+text ViridianCity_Gym_Text_JasonDefeat {
+    "You are in perfect harmony!$"
+}
+
+text ViridianCity_Gym_Text_JasonPostBattle {
+    "Do you know the identity of our\n"
+    "GYM LEADER?$"
+}
+
+text ViridianCity_Gym_Text_KiyoIntro {
+    "Karate is the ultimate form of\n"
+    "martial arts!$"
+}
+
+text ViridianCity_Gym_Text_KiyoDefeat {
+    "Aiyah!$"
+}
+
+text ViridianCity_Gym_Text_KiyoPostBattle {
+    "If my POKéMON were as good at\n"
+    "karate as I…$"
+}
+
+text ViridianCity_Gym_Text_WarrenIntro {
+    "The truly talented win with style.$"
+}
+
+text ViridianCity_Gym_Text_WarrenDefeat {
+    "I lost my grip!$"
+}
+
+text ViridianCity_Gym_Text_WarrenPostBattle {
+    "The LEADER will scold me for\n"
+    "losing this way…$"
+}
+
+text ViridianCity_Gym_Text_TakashiIntro {
+    "I'm the KARATE KING!\n"
+    "Your fate rests with me!$"
+}
+
+text ViridianCity_Gym_Text_TakashiDefeat {
+    "Ayah!$"
+}
+
+text ViridianCity_Gym_Text_TakashiPostBattle {
+    "The POKéMON LEAGUE?\n"
+    "You? Don't get cocky!$"
+}
+
+text ViridianCity_Gym_Text_ColeIntro {
+    "Your POKéMON will cower at the\n"
+    "crack of my whip!$"
+}
+
+text ViridianCity_Gym_Text_ColeDefeat {
+    "Yowch!\n"
+    "Whiplash!$"
+}
+
+text ViridianCity_Gym_Text_ColePostBattle {
+    "Wait!\n"
+    "I was just careless!$"
+}
+
+text ViridianCity_Gym_Text_SamuelIntro {
+    "VIRIDIAN GYM was closed for a\n"
+    "long time.\p"
+    "But now, our LEADER is back!$"
+}
+
+text ViridianCity_Gym_Text_SamuelDefeat {
+    "I was beaten?$"
+}
+
+text ViridianCity_Gym_Text_SamuelPostBattle {
+    "You can go on to the POKéMON\n"
+    "LEAGUE only by defeating our GYM\l"
+    "LEADER!$"
+}
+
+text ViridianCity_Gym_Text_GymGuyAdvice {
+    "Yo!\n"
+    "Champ in the making!\p"
+    "Even I don't know the VIRIDIAN\n"
+    "LEADER's identity.\p"
+    "But one thing's certain.\n"
+    "This will be the toughest of all\l"
+    "the GYM LEADERS.\p"
+    "Also, I heard that the TRAINERS\n"
+    "here like GROUND-type POKéMON.$"
+}
+
+text ViridianCity_Gym_Text_GymGuyPostVictory {
+    "Blow me away! GIOVANNI was the\n"
+    "GYM LEADER of VIRIDIAN?$"
+}
+
+text ViridianCity_Gym_Text_GymStatue {
+    "VIRIDIAN POKéMON GYM\n"
+    "LEADER: ?\p"
+    "WINNING TRAINERS:\n"
+    "{RIVAL}$"
+}
+
+text ViridianCity_Gym_Text_GymStatuePlayerWon {
+    "VIRIDIAN POKéMON GYM\n"
+    "LEADER: GIOVANNI\p"
+    "WINNING TRAINERS:\n"
+    "{RIVAL}, {PLAYER}$"
+}

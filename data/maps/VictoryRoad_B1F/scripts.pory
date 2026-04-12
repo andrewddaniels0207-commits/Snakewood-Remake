@@ -1,0 +1,109 @@
+mapscripts VictoryRoad_B1F_MapScripts {}
+
+script VictoryRoad_B1F_EventScript_Samuel {
+    trainerbattle_single(TRAINER_SAMUEL, VictoryRoad_B1F_Text_SamuelIntro, VictoryRoad_B1F_Text_SamuelDefeat)
+    msgbox(VictoryRoad_B1F_Text_SamuelPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script VictoryRoad_B1F_EventScript_Shannon {
+    trainerbattle_single(TRAINER_SHANNON, VictoryRoad_B1F_Text_ShannonIntro, VictoryRoad_B1F_Text_ShannonDefeat)
+    msgbox(VictoryRoad_B1F_Text_ShannonPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script VictoryRoad_B1F_EventScript_Michelle {
+    trainerbattle_single(TRAINER_MICHELLE, VictoryRoad_B1F_Text_MichelleIntro, VictoryRoad_B1F_Text_MichelleDefeat)
+    msgbox(VictoryRoad_B1F_Text_MichellePostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script VictoryRoad_B1F_EventScript_Mitchell {
+    trainerbattle_single(TRAINER_MITCHELL, VictoryRoad_B1F_Text_MitchellIntro, VictoryRoad_B1F_Text_MitchellDefeat)
+    msgbox(VictoryRoad_B1F_Text_MitchellPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script VictoryRoad_B1F_EventScript_Halle {
+    trainerbattle_single(TRAINER_HALLE, VictoryRoad_B1F_Text_HalleIntro, VictoryRoad_B1F_Text_HalleDefeat)
+    msgbox(VictoryRoad_B1F_Text_HallePostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text VictoryRoad_B1F_Text_SamuelIntro {
+    "The thought that I'm getting closer to\n"
+    "the POKéMON LEAGUE…\p"
+    "I'm getting stage fright…$"
+}
+
+text VictoryRoad_B1F_Text_SamuelDefeat {
+    "I couldn't do a thing…$"
+}
+
+text VictoryRoad_B1F_Text_SamuelPostBattle {
+    "The POKéMON LEAGUE became distant\n"
+    "again… What a letdown…$"
+}
+
+text VictoryRoad_B1F_Text_ShannonIntro {
+    "To win your way through the POKéMON\n"
+    "LEAGUE, you need the trust of your\l"
+    "POKéMON.$"
+}
+
+text VictoryRoad_B1F_Text_ShannonDefeat {
+    "Your relationship is based on\n"
+    "solid trust.$"
+}
+
+text VictoryRoad_B1F_Text_ShannonPostBattle {
+    "By being together all the time, trust\n"
+    "grows between POKéMON and TRAINERS.$"
+}
+
+text VictoryRoad_B1F_Text_MichelleIntro {
+    "This isn't the goal. It's only a place\n"
+    "on the way to the POKéMON LEAGUE.$"
+}
+
+text VictoryRoad_B1F_Text_MichelleDefeat {
+    "That's the way!$"
+}
+
+text VictoryRoad_B1F_Text_MichellePostBattle {
+    "You'll do fine, for sure!\n"
+    "Your POKéMON are all eager to go!$"
+}
+
+text VictoryRoad_B1F_Text_MitchellIntro {
+    "My POKéMON are cosmically\n"
+    "awe inspiring!$"
+}
+
+text VictoryRoad_B1F_Text_MitchellDefeat {
+    "I've never met anyone like you before.$"
+}
+
+text VictoryRoad_B1F_Text_MitchellPostBattle {
+    "Even outside of battle, I sense\n"
+    "incredible power emanating from you\l"
+    "and your POKéMON.$"
+}
+
+text VictoryRoad_B1F_Text_HalleIntro {
+    "Okay, no need to get your back up!\n"
+    "Relax, let's take it easy!$"
+}
+
+text VictoryRoad_B1F_Text_HalleDefeat {
+    "Whoa!\n"
+    "Wonderful!$"
+}
+
+text VictoryRoad_B1F_Text_HallePostBattle {
+    "Sure, this is VICTORY ROAD.\p"
+    "But it's not all that different from\n"
+    "the path you've taken so far.\p"
+    "Try to enjoy things the rest of\n"
+    "the way!$"
+}

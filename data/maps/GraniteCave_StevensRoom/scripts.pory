@@ -1,0 +1,131 @@
+mapscripts GraniteCave_StevensRoom_MapScripts {}
+
+script GraniteCave_StevensRoom_EventScript_Steven {
+    lock
+    faceplayer
+    msgbox(GraniteCave_StevensRoom_Text_ImStevenLetterForMe, MSGBOX_DEFAULT)
+    setvar(VAR_0x8004, ITEM_LETTER)
+    call(Common_EventScript_PlayerHandedOverTheItem)
+    setflag(FLAG_DELIVERED_STEVEN_LETTER)
+    msgbox(GraniteCave_StevensRoom_Text_ThankYouTakeThis, MSGBOX_DEFAULT)
+    giveitem(ITEM_TM_STEEL_WING)
+    if (var(VAR_RESULT) == FALSE) call(GraniteCave_StevensRoom_EventScript_BagFull)
+    msgbox(GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister, MSGBOX_DEFAULT)
+    closemessage
+    delay(30)
+    playfanfare(MUS_REGISTER_MATCH_CALL)
+    msgbox(GraniteCave_StevensRoom_Text_RegisteredSteven, MSGBOX_DEFAULT)
+    waitfanfare()
+    closemessage
+    delay(30)
+    setflag(FLAG_REGISTERED_STEVEN_POKENAV)
+    msgbox(GraniteCave_StevensRoom_Text_IveGotToHurryAlong, MSGBOX_DEFAULT)
+    closemessage
+    if (var(VAR_FACING) == DIR_NORTH) call(GraniteCave_StevensRoom_EventScript_StevenExitNorth)
+    if (var(VAR_FACING) == DIR_SOUTH) call(GraniteCave_StevensRoom_EventScript_StevenExitSouth)
+    if (var(VAR_FACING) == DIR_WEST) call(GraniteCave_StevensRoom_EventScript_StevenExitWestEast)
+    if (var(VAR_FACING) == DIR_EAST) call(GraniteCave_StevensRoom_EventScript_StevenExitWestEast)
+    playse(SE_EXIT)
+    removeobject(LOCALID_GRANITE_CAVE_STEVEN)
+    release
+    end
+}
+
+script GraniteCave_StevensRoom_EventScript_StevenExitNorth {
+    applymovement(LOCALID_GRANITE_CAVE_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit)
+    waitmovement(0)
+    return
+}
+
+script GraniteCave_StevensRoom_EventScript_StevenExitWestEast {
+    applymovement(LOCALID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit)
+    applymovement(LOCALID_GRANITE_CAVE_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit)
+    waitmovement(0)
+    return
+}
+
+script GraniteCave_StevensRoom_EventScript_StevenExitSouth {
+    applymovement(LOCALID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit)
+    applymovement(LOCALID_GRANITE_CAVE_STEVEN, GraniteCave_StevensRoom_Movement_StevenExitSouth)
+    waitmovement(0)
+    return
+}
+
+script GraniteCave_StevensRoom_EventScript_BagFull {
+    msgbox(GraniteCave_StevensRoom_Text_OhBagIsFull, MSGBOX_DEFAULT)
+    return
+}
+
+movement GraniteCave_StevensRoom_Movement_StevenExit {
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    delay_8
+    step_end
+}
+
+movement GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit {
+    delay_16
+    delay_16
+    delay_16
+    walk_in_place_faster_up
+    step_end
+}
+
+movement GraniteCave_StevensRoom_Movement_StevenExitSouth {
+    walk_left
+    walk_up
+    walk_up
+    walk_up
+    walk_right
+    walk_up
+    walk_up
+    delay_8
+    step_end
+}
+
+text GraniteCave_StevensRoom_Text_ImStevenLetterForMe {
+    "My name is STEVEN.\p"
+    "I'm interested in rare stones,\n"
+    "so I travel here and there.\p"
+    "Oh?\n"
+    "A LETTER for me?$"
+}
+
+text GraniteCave_StevensRoom_Text_ThankYouTakeThis {
+    "STEVEN: Okay, thank you.\p"
+    "You went through all this trouble to\n"
+    "deliver that. I need to thank you.\p"
+    "Let me see…\n"
+    "I'll give you this TM.\p"
+    "It contains my favorite move,\n"
+    "STEEL WING.$"
+}
+
+text GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister {
+    "STEVEN: Your POKéMON appear quite\n"
+    "capable.\p"
+    "If you keep training, you could even\n"
+    "become the CHAMPION of the POKéMON\l"
+    "LEAGUE one day. That's what I think.\p"
+    "I know, since we've gotten to know each\n"
+    "other, let's register one another in\l"
+    "our POKéNAVS.\p"
+    "… … … … … …$"
+}
+
+text GraniteCave_StevensRoom_Text_RegisteredSteven {
+    "Registered STEVEN\n"
+    "in the POKéNAV.$"
+}
+
+text GraniteCave_StevensRoom_Text_IveGotToHurryAlong {
+    "Now, I've got to hurry along.$"
+}
+
+text GraniteCave_StevensRoom_Text_OhBagIsFull {
+    "Oh, your BAG is full…\n"
+    "That's too bad, then.$"
+}

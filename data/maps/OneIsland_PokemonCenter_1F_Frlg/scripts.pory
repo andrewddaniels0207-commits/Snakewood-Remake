@@ -1,0 +1,1032 @@
+mapscripts OneIsland_PokemonCenter_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: OneIsland_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+    MAP_SCRIPT_ON_LOAD: OneIsland_PokemonCenter_1F_OnLoad
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 0: OneIsland_PokemonCenter_1F_EventScript_MeetCelioScene
+    ]
+}
+
+script OneIsland_PokemonCenter_1F_OnLoad {
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) >= 5) call(OneIsland_PokemonCenter_1F_EventScript_SetRubyMetatile)
+    if (flag(FLAG_IS_CHAMPION)) call(OneIsland_PokemonCenter_1F_EventScript_SetNetworkMachineOn)
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_SetRubyMetatile {
+    setmetatile(13, 4, METATILE_PokemonCenterFrlg_NetworkMachine_Ruby, 1)
+    return
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_SetSapphireMetatile {
+    setmetatile(16, 4, METATILE_PokemonCenterFrlg_NetworkMachine_Sapphire, 1)
+    return
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_SetNetworkMachineOn {
+    call(OneIsland_PokemonCenter_1F_EventScript_SetSapphireMetatile)
+    setmetatile(14, 4, METATILE_PokemonCenterFrlg_NetworkMachine_ScreenLeft_On, 1)
+    setmetatile(15, 4, METATILE_PokemonCenterFrlg_NetworkMachine_ScreenRight_On, 1)
+    return
+}
+
+script OneIsland_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_ONE_ISLAND)
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 6) call(OneIsland_PokemonCenter_1F_EventScript_SetCelioQuestDone)
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 0) call(OneIsland_PokemonCenter_1F_EventScript_SetBillCelioFirstMeetingPos)
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 2) call(OneIsland_PokemonCenter_1F_EventScript_SetBillCelioReadyToLeavePos)
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_SetCelioQuestDone {
+    setvar(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 7)
+    return
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_SetBillCelioFirstMeetingPos {
+    setobjectxyperm(LOCALID_ONE_ISLAND_POKEMON_CENTER_BILL, 9, 8)
+    setobjectmovementtype(LOCALID_ONE_ISLAND_POKEMON_CENTER_BILL, MOVEMENT_TYPE_FACE_UP)
+    setobjectxyperm(LOCALID_CELIO, 15, 6)
+    setobjectmovementtype(LOCALID_CELIO, MOVEMENT_TYPE_FACE_UP)
+    return
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_SetBillCelioReadyToLeavePos {
+    setobjectxyperm(LOCALID_ONE_ISLAND_POKEMON_CENTER_BILL, 14, 7)
+    setobjectmovementtype(LOCALID_ONE_ISLAND_POKEMON_CENTER_BILL, MOVEMENT_TYPE_FACE_LEFT)
+    setobjectxyperm(LOCALID_CELIO, 14, 8)
+    setobjectmovementtype(LOCALID_CELIO, MOVEMENT_TYPE_FACE_LEFT)
+    return
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_MeetCelioScene {
+    lockall
+    textcolor(NPC_TEXT_COLOR_MALE)
+    applymovement(LOCALID_PLAYER, OneIsland_PokemonCenter_1F_Movement_PlayerWalkToCelio)
+    applymovement(LOCALID_ONE_ISLAND_POKEMON_CENTER_BILL, OneIsland_PokemonCenter_1F_Movement_BillWalkToCelio)
+    waitmovement(0)
+    msgbox(OneIsland_PokemonCenter_1F_Text_BillHeyThereCelio)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    playse(SE_PIN)
+    applymovement(LOCALID_CELIO, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_CELIO, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    applymovement(LOCALID_CELIO, Common_Movement_Delay48)
+    waitmovement(0)
+    msgbox(OneIsland_PokemonCenter_1F_Text_CelioCantBelieveYouCameOut)
+    msgbox(OneIsland_PokemonCenter_1F_Text_BillHowsYourResearchComing)
+    applymovement(LOCALID_ONE_ISLAND_POKEMON_CENTER_BILL, Common_Movement_WalkInPlaceFasterDown)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    msgbox(OneIsland_PokemonCenter_1F_Text_ThisIsMyBuddyCelio)
+    applymovement(LOCALID_ONE_ISLAND_POKEMON_CENTER_BILL, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    if (flag(FLAG_SYS_GAME_CLEAR)) call(OneIsland_PokemonCenter_1F_EventScript_IntroducePlayerChamp)
+    if (!flag(FLAG_SYS_GAME_CLEAR)) call(OneIsland_PokemonCenter_1F_EventScript_IntroducePlayerNotChamp)
+    applymovement(LOCALID_CELIO, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    msgbox(OneIsland_PokemonCenter_1F_Text_CelioThatsReallyImpressive)
+    msgbox(OneIsland_PokemonCenter_1F_Text_BillBringMeUpToSpeed)
+    applymovement(LOCALID_CELIO, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    msgbox(OneIsland_PokemonCenter_1F_Text_CelioPCsCantLinkWithYours)
+    closemessage
+    applymovement(LOCALID_ONE_ISLAND_POKEMON_CENTER_BILL, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    msgbox(OneIsland_PokemonCenter_1F_Text_BillLetMeHelpYou)
+    applymovement(LOCALID_ONE_ISLAND_POKEMON_CENTER_BILL, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    msgbox(OneIsland_PokemonCenter_1F_Text_CanYouDeliverThisMeteoritePlayer)
+    msgreceiveditem(OneIsland_PokemonCenter_1F_Text_AcceptedMeteoriteFromBill, ITEM_METEORITE, 1, MUS_RG_OBTAIN_KEY_ITEM)
+    additem(ITEM_METEORITE)
+    applymovement(LOCALID_CELIO, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    msgbox(OneIsland_PokemonCenter_1F_Text_CelioPleaseTakeThis)
+    giveitem_msg(OneIsland_PokemonCenter_1F_Text_ObtainedTriPass, ITEM_TRI_PASS, 1, MUS_RG_OBTAIN_KEY_ITEM)
+    msgbox(OneIsland_PokemonCenter_1F_Text_PassLetsYouTravelBetweenIslands)
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) >= 2) call(OneIsland_PokemonCenter_1F_EventScript_ReceiveTownMapPage)
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE) < 2) call(OneIsland_PokemonCenter_1F_EventScript_ReceiveTownMap)
+    setflag(FLAG_SYS_SEVII_MAP_123)
+    msgbox(OneIsland_PokemonCenter_1F_Text_BillCatchYouLater)
+    closemessage
+    applymovement(LOCALID_ONE_ISLAND_POKEMON_CENTER_BILL, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    applymovement(LOCALID_CELIO, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    setflag(FLAG_SYS_PC_STORAGE_DISABLED)
+    setvar(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1)
+    releaseall
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_IntroducePlayerChamp {
+    msgbox(OneIsland_PokemonCenter_1F_Text_PlayerIsReigningPokemonChamp)
+    return
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_IntroducePlayerNotChamp {
+    msgbox(OneIsland_PokemonCenter_1F_Text_PlayerIsRisingPokemonChamp)
+    return
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_ReceiveTownMapPage {
+    textcolor(NPC_TEXT_COLOR_NEUTRAL)
+    playfanfare(MUS_RG_OBTAIN_KEY_ITEM)
+    message(OneIsland_PokemonCenter_1F_Text_ReceivedExtraPageForTownMap)
+    waitmessage()
+    waitfanfare()
+    call(EventScript_RestorePrevTextColor)
+    return
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_ReceiveTownMap {
+    setflag(FLAG_HIDE_TOWN_MAP)
+    setvar(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 2)
+    giveitem_msg(OneIsland_PokemonCenter_1F_Text_ReceivedTownMap, ITEM_TOWN_MAP, 1, MUS_RG_OBTAIN_KEY_ITEM)
+    return
+}
+
+movement OneIsland_PokemonCenter_1F_Movement_PlayerWalkToCelio {
+    walk_up
+    walk_up
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_in_place_faster_up
+    step_end
+}
+
+movement OneIsland_PokemonCenter_1F_Movement_BillWalkToCelio {
+    walk_up
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_up
+    walk_in_place_faster_right
+    step_end
+}
+
+movement OneIsland_PokemonCenter_1F_Movement_WalkUp {
+    walk_up
+    step_end
+}
+
+movement OneIsland_PokemonCenter_1F_Movement_StepAsideLeft {
+    walk_left
+    walk_in_place_faster_right
+    step_end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_Nurse {
+    lock
+    faceplayer
+    call(EventScript_PkmnCenterNurse_Frlg)
+    release
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_Bill {
+    lock
+    if (flag(FLAG_SEVII_DETOUR_FINISHED)) goto(OneIsland_PokemonCenter_1F_EventScript_BillGoTakeStroll)
+    msgbox(OneIsland_PokemonCenter_1F_Text_HmmHowAboutLikeThis)
+    release
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_BillGoTakeStroll {
+    applymovement(LOCALID_ONE_ISLAND_POKEMON_CENTER_BILL, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(OneIsland_PokemonCenter_1F_Text_GotPCWorkingStrollAWhileMore)
+    release
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_Celio {
+    lock
+    faceplayer
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 7) goto(OneIsland_PokemonCenter_1F_EventScript_CelioGiveBillFact)
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 6) goto(OneIsland_PokemonCenter_1F_EventScript_CelioJustGivenSapphire)
+    if (flag(FLAG_RECOVERED_SAPPHIRE)) goto(OneIsland_PokemonCenter_1F_EventScript_GiveCelioSapphire)
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 5) goto(OneIsland_PokemonCenter_1F_EventScript_ExplainRainbowPass)
+    if (flag(FLAG_GOT_RUBY)) goto(OneIsland_PokemonCenter_1F_EventScript_GiveCelioRuby)
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 4) goto(OneIsland_PokemonCenter_1F_EventScript_CelioWaitingForRuby)
+    specialvar(VAR_RESULT, IsNationalPokedexEnabled)
+    if (var(VAR_RESULT) == TRUE) goto(OneIsland_PokemonCenter_1F_EventScript_CelioRequestRuby)
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 3) goto(OneIsland_PokemonCenter_1F_EventScript_CelioPlayerMissingNationalDex)
+    msgbox(OneIsland_PokemonCenter_1F_Text_SorryForBeingPoorHost)
+    closemessage
+    applymovement(LOCALID_CELIO, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_CelioGiveBillFact {
+    msgbox(OneIsland_PokemonCenter_1F_Text_CelioHearingRumorsAboutYou)
+    random(3)
+    if (var(VAR_RESULT) == 0) goto(OneIsland_PokemonCenter_1F_EventScript_BillFact1)
+    if (var(VAR_RESULT) == 1) goto(OneIsland_PokemonCenter_1F_EventScript_BillFact2)
+    famechecker(FAMECHECKER_BILL, 5)
+    msgbox(OneIsland_PokemonCenter_1F_Text_BillCantStomachMilk)
+    release
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_BillFact1 {
+    famechecker(FAMECHECKER_BILL, 3)
+    msgbox(OneIsland_PokemonCenter_1F_Text_BillsFirstMonWasAbra)
+    release
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_BillFact2 {
+    famechecker(FAMECHECKER_BILL, 4)
+    msgbox(OneIsland_PokemonCenter_1F_Text_BillsHometownInGoldenrod)
+    release
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_CelioJustGivenSapphire {
+    msgbox(OneIsland_PokemonCenter_1F_Text_WishYouBestOfLuck)
+    release
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_GiveCelioSapphire {
+    textcolor(NPC_TEXT_COLOR_NEUTRAL)
+    playfanfare(MUS_OBTAIN_TMHM)
+    message(OneIsland_PokemonCenter_1F_Text_HandedSapphireToCelio)
+    waitmessage()
+    waitfanfare()
+    call(EventScript_RestorePrevTextColor)
+    removeitem(ITEM_SAPPHIRE)
+    msgbox(OneIsland_PokemonCenter_1F_Text_ThankYouGiveMeTime)
+    closemessage
+    applymovement(LOCALID_CELIO, OneIsland_PokemonCenter_1F_Movement_CelioPutGemInMachine)
+    waitmovement(0)
+    playse(SE_CLICK)
+    call(OneIsland_PokemonCenter_1F_EventScript_SetSapphireMetatile)
+    special(DrawWholeMapView)
+    msgbox(OneIsland_PokemonCenter_1F_Text_OkayThisIsGood)
+    closemessage
+    delay(60)
+    applymovement(LOCALID_CELIO, OneIsland_PokemonCenter_1F_Movement_CelioCheckMachine)
+    waitmovement(0)
+    delay(30)
+    applymovement(LOCALID_CELIO, OneIsland_PokemonCenter_1F_Movement_CelioCheckMachine)
+    waitmovement(0)
+    delay(40)
+    playse(SE_PC_ON)
+    call(OneIsland_PokemonCenter_1F_EventScript_SetNetworkMachineOn)
+    special(DrawWholeMapView)
+    msgbox(OneIsland_PokemonCenter_1F_Text_LinkedUpWithLanette)
+    applymovement(LOCALID_CELIO, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(OneIsland_PokemonCenter_1F_Text_ManagedToLinkWithHoennThankYou)
+    special(SetPostgameFlags)
+    setflag(FLAG_IS_CHAMPION)
+    setflag(FLAG_HIDE_CERULEAN_CAVE_GUARD)
+    setflag(FLAG_HIDE_LORELEI_IN_HER_HOUSE)
+    setvar(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6)
+    special(InitRoamer)
+    release
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_ExplainRainbowPass {
+    msgbox(OneIsland_PokemonCenter_1F_Text_PassLetYouGetToAllIslands)
+    release
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_GiveCelioRuby {
+    msgbox(OneIsland_PokemonCenter_1F_Text_OhThats)
+    textcolor(NPC_TEXT_COLOR_NEUTRAL)
+    playfanfare(MUS_OBTAIN_TMHM)
+    message(OneIsland_PokemonCenter_1F_Text_HandedRubyToCelio)
+    waitmessage()
+    waitfanfare()
+    call(EventScript_RestorePrevTextColor)
+    closemessage
+    applymovement(LOCALID_CELIO, OneIsland_PokemonCenter_1F_Movement_CelioPutGemInMachine)
+    waitmovement(0)
+    playse(SE_CLICK)
+    call(OneIsland_PokemonCenter_1F_EventScript_SetRubyMetatile)
+    special(DrawWholeMapView)
+    delay(30)
+    applymovement(LOCALID_CELIO, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(OneIsland_PokemonCenter_1F_Text_MayIAskOneMoreFavor, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(OneIsland_PokemonCenter_1F_EventScript_DeclineHelpCelio)
+    goto(OneIsland_PokemonCenter_1F_EventScript_GiveRainbowPass)
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_DeclineHelpCelio {
+    msgbox(OneIsland_PokemonCenter_1F_Text_PleaseINeedYourHelp, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(OneIsland_PokemonCenter_1F_EventScript_DeclineHelpCelio)
+    goto(OneIsland_PokemonCenter_1F_EventScript_GiveRainbowPass)
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_GiveRainbowPass {
+    msgbox(OneIsland_PokemonCenter_1F_Text_AnotherGemstoneInSeviiIslands)
+    removeitem(ITEM_RUBY)
+    removeitem(ITEM_TRI_PASS)
+    setvar(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5)
+    additem(ITEM_RAINBOW_PASS)
+    setflag(FLAG_SYS_SEVII_MAP_4567)
+    textcolor(NPC_TEXT_COLOR_NEUTRAL)
+    playfanfare(MUS_RG_OBTAIN_KEY_ITEM)
+    message(OneIsland_PokemonCenter_1F_Text_ReturnedTriPassForRainbowPass)
+    waitmessage()
+    waitfanfare()
+    playfanfare(MUS_RG_OBTAIN_KEY_ITEM)
+    message(OneIsland_PokemonCenter_1F_Text_ObtainedExtraMapPage)
+    waitmessage()
+    waitfanfare()
+    call(EventScript_RestorePrevTextColor)
+    goto(OneIsland_PokemonCenter_1F_EventScript_ExplainRainbowPass)
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_CelioWaitingForRuby {
+    msgbox(OneIsland_PokemonCenter_1F_Text_TryingToFindGem)
+    release
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_CelioRequestRuby {
+    msgbox(OneIsland_PokemonCenter_1F_Text_CelioCaughtMoreMonMaybeICanBeUseful)
+    applymovement(LOCALID_CELIO, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    msgbox(OneIsland_PokemonCenter_1F_Text_YoullBeTradingFromTrainersFarAway)
+    applymovement(LOCALID_CELIO, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(OneIsland_PokemonCenter_1F_Text_NeedsSpecialGemstone)
+    setvar(VAR_MAP_SCENE_MT_EMBER_EXTERIOR, 1)
+    setvar(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4)
+    release
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_CelioPlayerMissingNationalDex {
+    msgbox(OneIsland_PokemonCenter_1F_Text_CelioImModifyingMyNetworkMachine)
+    release
+    end
+}
+
+movement OneIsland_PokemonCenter_1F_Movement_CelioCheckMachine {
+    walk_in_place_up
+    delay_8
+    walk_in_place_up
+    step_end
+}
+
+movement OneIsland_PokemonCenter_1F_Movement_CelioPutGemInMachine {
+    walk_in_place_faster_up
+    walk_in_place_up
+    delay_16
+    walk_in_place_up
+    walk_in_place_up
+    step_end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_LittleBoy {
+    msgbox(OneIsland_PokemonCenter_1F_Text_CameFromPalletDontKnowIt, MSGBOX_NPC)
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_Hiker {
+    msgbox(OneIsland_PokemonCenter_1F_Text_EnormousVolcanoOnIsland, MSGBOX_NPC)
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_BattleGirl {
+    lock
+    faceplayer
+    if (flag(FLAG_IS_CHAMPION)) goto(OneIsland_PokemonCenter_1F_EventScript_BattleGirlHoennLinked)
+    msgbox(OneIsland_PokemonCenter_1F_Text_WishICouldTradeWithBoyfriend)
+    release
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_BattleGirlHoennLinked {
+    msgbox(OneIsland_PokemonCenter_1F_Text_TradedWithFarAwayBoyfriend)
+    release
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_NetworkMachine {
+    lockall
+    if (flag(FLAG_IS_CHAMPION)) goto(OneIsland_PokemonCenter_1F_EventScript_NetworkMachineLinkedWithHoenn)
+    if (flag(FLAG_SEVII_DETOUR_FINISHED)) goto(OneIsland_PokemonCenter_1F_EventScript_NetworkMachineLinkedWithKanto)
+    msgbox(OneIsland_PokemonCenter_1F_Text_MachineUnderAdjustment)
+    releaseall
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_NetworkMachineLinkedWithKanto {
+    msgbox(OneIsland_PokemonCenter_1F_Text_MachineLinkedWithKanto)
+    releaseall
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_NetworkMachineLinkedWithHoenn {
+    msgbox(OneIsland_PokemonCenter_1F_Text_MachineLinkedWithKantoAndHoenn)
+    releaseall
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_LeaveOneIslandTriggerTop {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    goto(OneIsland_PokemonCenter_1F_EventScript_LeaveOneIslandScene)
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_LeaveOneIslandTriggerMidTop {
+    lockall
+    setvar(VAR_TEMP_1, 2)
+    goto(OneIsland_PokemonCenter_1F_EventScript_LeaveOneIslandScene)
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_LeaveOneIslandTriggerMidBottom {
+    lockall
+    setvar(VAR_TEMP_1, 3)
+    goto(OneIsland_PokemonCenter_1F_EventScript_LeaveOneIslandScene)
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_LeaveOneIslandTriggerBottom {
+    lockall
+    setvar(VAR_TEMP_1, 4)
+    goto(OneIsland_PokemonCenter_1F_EventScript_LeaveOneIslandScene)
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_LeaveOneIslandScene {
+    textcolor(NPC_TEXT_COLOR_MALE)
+    playse(SE_PIN)
+    applymovement(LOCALID_ONE_ISLAND_POKEMON_CENTER_BILL, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    msgbox(OneIsland_PokemonCenter_1F_Text_BillOhHeyPlayer)
+    closemessage
+    if (var(VAR_TEMP_1) == 1) call(OneIsland_PokemonCenter_1F_EventScript_PlayerWalkToBillTop)
+    if (var(VAR_TEMP_1) == 2) call(OneIsland_PokemonCenter_1F_EventScript_PlayerWalkToBillMidTop)
+    if (var(VAR_TEMP_1) == 3) call(OneIsland_PokemonCenter_1F_EventScript_PlayerWalkToBillMidBottom)
+    if (var(VAR_TEMP_1) == 4) call(OneIsland_PokemonCenter_1F_EventScript_PlayerWalkToBillBottom)
+    delay(10)
+    msgbox(OneIsland_PokemonCenter_1F_Text_BillWeGotItDone)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    msgbox(OneIsland_PokemonCenter_1F_Text_CelioJobWentQuick)
+    applymovement(LOCALID_ONE_ISLAND_POKEMON_CENTER_BILL, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    applymovement(LOCALID_CELIO, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    msgbox(OneIsland_PokemonCenter_1F_Text_BillYouveLearnedALot)
+    msgbox(OneIsland_PokemonCenter_1F_Text_CelioOhReallyEhehe)
+    closemessage
+    applymovement(LOCALID_ONE_ISLAND_POKEMON_CENTER_BILL, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    delay(10)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    delay(15)
+    msgbox(OneIsland_PokemonCenter_1F_Text_BillWeShouldHeadBackToKanto)
+    closemessage
+    applymovement(LOCALID_ONE_ISLAND_POKEMON_CENTER_BILL, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    delay(15)
+    applymovement(LOCALID_CELIO, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    msgbox(OneIsland_PokemonCenter_1F_Text_CelioPromiseIllShowYouAroundSometime)
+    closemessage
+    delay(25)
+    applymovement(LOCALID_PLAYER, OneIsland_PokemonCenter_1F_Movement_PlayerExit)
+    applymovement(LOCALID_ONE_ISLAND_POKEMON_CENTER_BILL, OneIsland_PokemonCenter_1F_Movement_BillExit)
+    waitmovement(0)
+    playse(SE_EXIT)
+    setflag(FLAG_HIDE_ONE_ISLAND_POKECENTER_BILL)
+    setvar(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 3)
+    clearflag(FLAG_HIDE_CINNABAR_BILL)
+    setvar(VAR_MAP_SCENE_CINNABAR_ISLAND, 3)
+    setvar(VAR_0x8004, SEAGALLOP_ONE_ISLAND)
+    setvar(VAR_0x8006, SEAGALLOP_CINNABAR_ISLAND)
+    goto(EventScript_SetSail)
+    end
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_PlayerWalkToBillTop {
+    applymovement(LOCALID_PLAYER, OneIsland_PokemonCenter_1F_Movement_PlayerWalkToBillTop)
+    waitmovement(0)
+    return
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_PlayerWalkToBillMidTop {
+    applymovement(LOCALID_PLAYER, OneIsland_PokemonCenter_1F_Movement_PlayerWalkToBillMidTop)
+    waitmovement(0)
+    return
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_PlayerWalkToBillMidBottom {
+    applymovement(LOCALID_PLAYER, OneIsland_PokemonCenter_1F_Movement_PlayerWalkToBillMidBottom)
+    waitmovement(0)
+    return
+}
+
+script OneIsland_PokemonCenter_1F_EventScript_PlayerWalkToBillBottom {
+    applymovement(LOCALID_PLAYER, OneIsland_PokemonCenter_1F_Movement_PlayerWalkToBillBottom)
+    waitmovement(0)
+    return
+}
+
+movement OneIsland_PokemonCenter_1F_Movement_PlayerWalkToBillTop {
+    walk_right
+    walk_down
+    walk_in_place_faster_right
+    step_end
+}
+
+movement OneIsland_PokemonCenter_1F_Movement_PlayerWalkToBillMidTop {
+    walk_right
+    step_end
+}
+
+movement OneIsland_PokemonCenter_1F_Movement_PlayerWalkToBillMidBottom {
+    walk_right
+    walk_up
+    walk_in_place_faster_right
+    step_end
+}
+
+movement OneIsland_PokemonCenter_1F_Movement_PlayerWalkToBillBottom {
+    walk_right
+    walk_up
+    walk_up
+    walk_in_place_faster_right
+    step_end
+}
+
+movement OneIsland_PokemonCenter_1F_Movement_DelayWalkInPlaceLeft {
+    delay_16
+    delay_16
+    delay_4
+    walk_in_place_faster_left
+    step_end
+}
+
+script OneIsland_PokemonCenter_1F_Movement_WalkInPlaceDown {
+    walk_in_place_fast_down()
+    step_end()
+}
+
+movement OneIsland_PokemonCenter_1F_Movement_PlayerExit {
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    step_end
+}
+
+movement OneIsland_PokemonCenter_1F_Movement_BillExit {
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    step_end
+}
+
+text OneIsland_PokemonCenter_1F_Text_BillHeyThereCelio {
+    "BILL: Hey, there!\n"
+    "CELIO!$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_CelioCantBelieveYouCameOut {
+    "CELIO: BILL!\n"
+    "I can't believe you came out here.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_BillHowsYourResearchComing {
+    "BILL: Well, absolutely!\n"
+    "How's your research coming along?\p"
+    "…Oh, wait a sec.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_ThisIsMyBuddyCelio {
+    "{PLAYER}, this is my buddy CELIO.\n"
+    "He's one dedicated PC MANIAC!$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_PlayerIsRisingPokemonChamp {
+    "CELIO, this is {PLAYER}, a rising\n"
+    "contender as the POKéMON CHAMP!$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_PlayerIsReigningPokemonChamp {
+    "CELIO, this is {PLAYER}, the\n"
+    "reigning POKéMON CHAMP!$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_CelioThatsReallyImpressive {
+    "CELIO: That's really impressive.\p"
+    "I hate to say it, but I have zero\n"
+    "aptitude for battling.\p"
+    "Anyways, I'm glad to meet you.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_BillBringMeUpToSpeed {
+    "BILL: So, bring me up to speed.\n"
+    "How's your machine running?$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_CelioPCsCantLinkWithYours {
+    "CELIO: It's running fine, but we're\n"
+    "too remote out here.\p"
+    "The PCs on this island just can't\n"
+    "link with your PC, BILL.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_BillLetMeHelpYou {
+    "BILL: Oh, yeah?\n"
+    "Okay, let me take a look-see.\p"
+    "…Hang on here…\n"
+    "I think we can make it work.\l"
+    "Let me help you, okay?$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_CanYouDeliverThisMeteoritePlayer {
+    "{PLAYER}, can I get you to wait for\n"
+    "me just a bit?\p"
+    "…Actually, can I get you to do\n"
+    "me a favor?\p"
+    "The island next to this one's\n"
+    "called TWO ISLAND.\p"
+    "There's a guy there that runs\n"
+    "a GAME CORNER.\p"
+    "He has this thing for rare rocks\n"
+    "and gems.\p"
+    "We keep in touch, being fellow\n"
+    "maniacs.\p"
+    "So, can I get you to deliver this\n"
+    "METEORITE to him?$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_AcceptedMeteoriteFromBill {
+    "{PLAYER} accepted the METEORITE\n"
+    "from BILL.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_CelioPleaseTakeThis {
+    "CELIO: {PLAYER}, if you are going\n"
+    "to TWO ISLAND, please take this.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_PassLetsYouTravelBetweenIslands {
+    "It's a PASS for the ferry service\n"
+    "serving the local islands.\p"
+    "It will let you travel between the\n"
+    "ISLANDS ONE, TWO, and THREE.\p"
+    "Oh, you should have this, too.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_ReceivedExtraPageForTownMap {
+    "{PLAYER} received an extra page\n"
+    "for the TOWN MAP!$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_ReceivedTownMap {
+    "{PLAYER} received\n"
+    "a TOWN MAP!$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_BillCatchYouLater {
+    "BILL: I'll catch you later!\n"
+    "Say hi to the guy for me!$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_HmmHowAboutLikeThis {
+    "Hmm…\p"
+    "How about we try this like this…$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_GotPCWorkingStrollAWhileMore {
+    "Oh, hey, {PLAYER}!\p"
+    "Did you see?\n"
+    "We got the PC working!\p"
+    "I've got a few things to show\n"
+    "CELIO here.\p"
+    "Can you go out on a stroll or\n"
+    "something for a while more?$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_SorryForBeingPoorHost {
+    "I'm sorry for taking up so much of\n"
+    "BILL's time.\p"
+    "I'm also sorry for being such a \n"
+    "poor host on your visit here.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_UsualPCServicesUnavailable {
+    "The usual PC services aren't\n"
+    "available…$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_BillOhHeyPlayer {
+    "BILL: Oh, hey!\n"
+    "{PLAYER}!$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_BillWeGotItDone {
+    "BILL: What kept you so long?\n"
+    "Been out having a good time?\p"
+    "We got it done.\n"
+    "The PCs are up and running!$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_CelioJobWentQuick {
+    "CELIO: The job went incredibly\n"
+    "quick.\p"
+    "BILL is one amazing guy…$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_BillYouveLearnedALot {
+    "BILL: No, no! There was almost\n"
+    "nothing left for me to do.\p"
+    "CELIO, I have to hand it to you.\n"
+    "You've learned a lot.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_CelioOhReallyEhehe {
+    "CELIO: Oh, really?\n"
+    "Ehehe…$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_BillWeShouldHeadBackToKanto {
+    "BILL: Well, there you have it.\n"
+    "I'm finished with the job.\l"
+    "We should head back to KANTO.\p"
+    "CELIO, I'll be seeing you again.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_CelioPromiseIllShowYouAroundSometime {
+    "CELIO: {PLAYER}, I'm really sorry\n"
+    "that we sent you off alone today.\p"
+    "I promise, I will show you around\n"
+    "these islands sometime.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_CelioImModifyingMyNetworkMachine {
+    "CELIO: Hello!\n"
+    "You look awfully busy as always.\p"
+    "How am I doing?\p"
+    "Well, I'm modifying my Network\n"
+    "Machine.\p"
+    "When I get done with the machine,\n"
+    "I hope you'll be first to use it,\l"
+    "{PLAYER}.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_CelioCaughtMoreMonMaybeICanBeUseful {
+    "CELIO: {PLAYER}, how have things\n"
+    "been for you?\p"
+    "Oh, is that right?\n"
+    "You've caught more POKéMON.\p"
+    "Do you know what?\n"
+    "Maybe I can be useful to you.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_YoullBeTradingFromTrainersFarAway {
+    "I'm modifying the Network Machine\n"
+    "right now.\p"
+    "I'm changing it so it can handle\n"
+    "trades over long distances.\p"
+    "When I get finished, you'll be\n"
+    "trading for exotic POKéMON from\l"
+    "TRAINERS far away.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_NeedsSpecialGemstone {
+    "But, there is a slight catch.\p"
+    "For the link to work, the Machine\n"
+    "needs a special gemstone.\p"
+    "It's supposed to be on ONE ISLAND,\n"
+    "but I haven't found one yet.\p"
+    "Who knows where it could be.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_TryingToFindGem {
+    "I was trying to find the gem\n"
+    "even while I was studying.\p"
+    "As a result, I've made no headway\n"
+    "in both my search and studies…\p"
+    "If I relied on BILL, I'm sure my\n"
+    "research would progress.\p"
+    "But this time, I want to try to do\n"
+    "things by myself.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_OhThats {
+    "Oh!\n"
+    "Th-that's…$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_HandedRubyToCelio {
+    "{PLAYER} handed the RUBY\n"
+    "to CELIO.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_MayIAskOneMoreFavor {
+    "Thank you!\n"
+    "{PLAYER}, you're simply amazing.\p"
+    "… … …  … … …\p"
+    "Um… May I ask one more giant favor\n"
+    "of you?$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_PleaseINeedYourHelp {
+    "It… It's not anything weird.\n"
+    "Please, I need your help.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_AnotherGemstoneInSeviiIslands {
+    "While I was studying gemstones,\n"
+    "I discovered something important.\p"
+    "There is another gem that forms\n"
+    "a pair with this RUBY.\p"
+    "That other gemstone is supposed to\n"
+    "be in the SEVII ISLANDS.\p"
+    "{PLAYER}, please, I need you to go\n"
+    "find the other gem.\p"
+    "{PLAYER}, may I have your ferry\n"
+    "PASS and the TOWN MAP?$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_ReturnedTriPassForRainbowPass {
+    "{PLAYER} returned the TRI-PASS and\n"
+    "received the RAINBOW PASS.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_ObtainedExtraMapPage {
+    "Obtained an extra page for the\n"
+    "TOWN MAP!$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_PassLetYouGetToAllIslands {
+    "This is my own ferry PASS.\p"
+    "It will let you get to all the\n"
+    "SEVII ISLANDS.\p"
+    "{PLAYER}, please, I can't do\n"
+    "it without your help.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_HandedSapphireToCelio {
+    "{PLAYER} handed the SAPPHIRE\n"
+    "to CELIO.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_ThankYouGiveMeTime {
+    "CELIO: So this is the gem that\n"
+    "forms a pair with the RUBY…\p"
+    "{PLAYER}, you've gone through a lot\n"
+    "to get this, didn't you?\p"
+    "You don't have to tell me. I know\n"
+    "it wasn't easy.\p"
+    "Thank you so much!\p"
+    "Now it's my turn to work for you!\n"
+    "Please give me a little time.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_OkayThisIsGood {
+    "Okay, this is good…$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_LinkedUpWithLanette {
+    "I did it!\n"
+    "I linked up with LANETTE!$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_ManagedToLinkWithHoennThankYou {
+    "{PLAYER}…\n"
+    "{PLAYER}, I did it!\p"
+    "I've managed to link up with\n"
+    "TRAINERS in the HOENN region!\p"
+    "Finally, the Network Machine is\n"
+    "fully operational!\p"
+    "{PLAYER}, I owe it all to you!\p"
+    "Thanks to you, my dream came\n"
+    "true…$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_WishYouBestOfLuck {
+    "I…\n"
+    "I'm not crying.\p"
+    "That's enough about me!\p"
+    "{PLAYER}, you're going to keep\n"
+    "looking for exotic POKéMON, right?\p"
+    "I wish you the best of luck!$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_CelioHearingRumorsAboutYou {
+    "CELIO: Hello!\p"
+    "{PLAYER}, I've been hearing rumors\n"
+    "about you.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_BillsFirstMonWasAbra {
+    "{PLAYER}, what's your favorite kind\n"
+    "of POKéMON?\p"
+    "BILL is a POKéMANIAC, so he loves\n"
+    "every kind.\p"
+    "Apparently, the first one he caught\n"
+    "was an ABRA.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_BillsHometownInGoldenrod {
+    "By the way, {PLAYER}, you're from\n"
+    "PALLET TOWN, aren't you?\p"
+    "I've heard that it's a quiet and\n"
+    "pleasant place.\p"
+    "BILL's hometown is GOLDENROD CITY,\n"
+    "where his folks still live.\p"
+    "I've heard that it's quite the\n"
+    "festive, bustling city.\p"
+    "I'd like to go there one day.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_BillCantStomachMilk {
+    "{PLAYER}, is there anything that\n"
+    "you can't stand?\p"
+    "Apparently, BILL simply can't\n"
+    "stomach milk at all.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_CameFromPalletDontKnowIt {
+    "Oh, you're a stranger here!\n"
+    "Hi! Where did you come from?\p"
+    "…PALLET TOWN?\n"
+    "I don't know it!$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_EnormousVolcanoOnIsland {
+    "On this island, there's an enormous\n"
+    "volcano.\p"
+    "It hasn't erupted lately, so why\n"
+    "not enjoy a hike?$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_WishICouldTradeWithBoyfriend {
+    "I wish I could trade POKéMON with\n"
+    "my boyfriend who lives far away…$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_TradedWithFarAwayBoyfriend {
+    "I traded POKéMON with my boyfriend\n"
+    "far away!\p"
+    "Everyone's saying that we can\n"
+    "thank you and CELIO.\p"
+    "So, thank you!$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_MachineUnderAdjustment {
+    "Network Machine\n"
+    "Link Level 0\p"
+    "…POKéMON Storage System under\n"
+    "adjustment…$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_MachineLinkedWithKanto {
+    "Network Machine\n"
+    "Link Level 1\p"
+    "Link established with the KANTO\n"
+    "region.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_MachineLinkedWithKantoAndHoenn {
+    "Network Machine\n"
+    "Link Level 2\p"
+    "Link established with the KANTO\n"
+    "and HOENN regions.$"
+}
+
+text OneIsland_PokemonCenter_1F_Text_ObtainedTriPass {
+    "Obtained the TRI-PASS!$"
+}

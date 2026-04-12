@@ -1,0 +1,200 @@
+mapscripts RustboroCity_Flat1_2F_MapScripts {}
+
+script RustboroCity_Flat1_2F_EventScript_WaldasDad {
+    lock
+    faceplayer
+    specialvar(VAR_RESULT, TryBufferWaldaPhrase)
+    if (var(VAR_RESULT) == FALSE) goto(RustboroCity_Flat1_2F_EventScript_WaldasDadFirstPhrase)
+    if (var(VAR_RESULT) == TRUE) goto(RustboroCity_Flat1_2F_EventScript_WaldasDadNewPhrase)
+}
+
+script RustboroCity_Flat1_2F_EventScript_GivePhrase {
+    special(DoWaldaNamingScreen)
+    waitstate
+    if (var(VAR_0x8004) == 1) goto(RustboroCity_Flat1_2F_EventScript_CancelGivePhrase)
+    if (var(VAR_0x8004) == 2) goto(RustboroCity_Flat1_2F_EventScript_CancelGiveFirstPhrase)
+    specialvar(VAR_RESULT, TryGetWallpaperWithWaldaPhrase)
+    if (var(VAR_RESULT) == TRUE) goto(RustboroCity_Flat1_2F_EventScript_WaldaLikesPhrase)
+    if (var(VAR_RESULT) == FALSE) goto(RustboroCity_Flat1_2F_EventScript_WaldaDoesntLikePhrase)
+    end
+}
+
+script RustboroCity_Flat1_2F_EventScript_WaldasDadFirstPhrase {
+    msgbox(RustboroCity_Flat1_2F_Text_HelloDoYouKnowFunnyPhrase, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(RustboroCity_Flat1_2F_EventScript_DeclineGivePhrase)
+    msgbox(RustboroCity_Flat1_2F_Text_WonderfulLetsHearSuggestion, MSGBOX_DEFAULT)
+    goto(RustboroCity_Flat1_2F_EventScript_GivePhrase)
+}
+
+script RustboroCity_Flat1_2F_EventScript_WaldasDadNewPhrase {
+    msgbox(RustboroCity_Flat1_2F_Text_BeenSayingXDoYouKnowBetterPhrase, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(RustboroCity_Flat1_2F_EventScript_DeclineGivePhrase)
+    msgbox(RustboroCity_Flat1_2F_Text_WonderfulLetsHearSuggestion, MSGBOX_DEFAULT)
+    goto(RustboroCity_Flat1_2F_EventScript_GivePhrase)
+}
+
+script RustboroCity_Flat1_2F_EventScript_DeclineGivePhrase {
+    msgbox(RustboroCity_Flat1_2F_Text_OhIsThatRight, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RustboroCity_Flat1_2F_EventScript_CancelGivePhrase {
+    msgbox(RustboroCity_Flat1_2F_Text_OhYouDontKnowAny, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RustboroCity_Flat1_2F_EventScript_CancelGiveFirstPhrase {
+    msgbox(RustboroCity_Flat1_2F_Text_ThinkOfMyOwnPhrase, MSGBOX_DEFAULT)
+    call(RustboroCity_Flat1_2F_EventScript_WaldasDadFaceWalda)
+    msgbox(RustboroCity_Flat1_2F_Text_ShesNotSmilingAtAll2, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RustboroCity_Flat1_2F_EventScript_WaldaLikesPhrase {
+    msgbox(RustboroCity_Flat1_2F_Text_LetsGiveItATry2, MSGBOX_DEFAULT)
+    call(RustboroCity_Flat1_2F_EventScript_WaldasDadFaceWalda)
+    msgbox(RustboroCity_Flat1_2F_Text_OhShesLaughing, MSGBOX_DEFAULT)
+    applymovement(LOCALID_WALDAS_DAD, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(RustboroCity_Flat1_2F_Text_ThankYouIllGiveYouWallpaper, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RustboroCity_Flat1_2F_EventScript_WaldaDoesntLikePhrase {
+    msgbox(RustboroCity_Flat1_2F_Text_LetsGiveItATry, MSGBOX_DEFAULT)
+    call(RustboroCity_Flat1_2F_EventScript_WaldasDadFaceWalda)
+    msgbox(RustboroCity_Flat1_2F_Text_ShesNotSmilingAtAll, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script RustboroCity_Flat1_2F_EventScript_WaldasDadFaceWalda {
+    turnobject(LOCALID_WALDAS_DAD, DIR_EAST)
+    return
+}
+
+script RustboroCity_Flat1_2F_EventScript_WaldasMom {
+    msgbox(RustboroCity_Flat1_2F_Text_ComingUpWithMealsIsHard, MSGBOX_NPC)
+    end
+}
+
+script RustboroCity_Flat1_2F_EventScript_PokeDoll {
+    msgbox(RustboroCity_Flat1_2F_Text_ItsAPokemonPlushDoll, MSGBOX_SIGN)
+    end
+}
+
+text RustboroCity_Flat1_2F_Text_ComingUpWithMealsIsHard {
+    "Oh, it's so hard every day…\p"
+    "What's hard?\n"
+    "You need to ask?\p"
+    "It's trying to figure out what to\n"
+    "make for meals every day.\p"
+    "It really isn't easy coming up with\n"
+    "meals every day.$"
+}
+
+text RustboroCity_Flat1_2F_Text_HelloDoYouKnowFunnyPhrase {
+    "Oh, hello!\n"
+    "Welcome to the PEPPER household.\p"
+    "I have a question for you.\n"
+    "Have you ever baby-sat?\p"
+    "You see, I'm a new father, so raising\n"
+    "a child is all new to me.\p"
+    "And I have a problem. My daughter\n"
+    "WALDA doesn't laugh enough.\p"
+    "I think she'd laugh for me if I told\n"
+    "her something funny.\p"
+    "Do you know of a funny word or\n"
+    "phrase you can tell me?$"
+}
+
+text RustboroCity_Flat1_2F_Text_BeenSayingXDoYouKnowBetterPhrase {
+    "I've been saying “{STR_VAR_1}”\n"
+    "to amuse her lately.\p"
+    "Do you know of a better word or\n"
+    "a phrase that might work?$"
+}
+
+text RustboroCity_Flat1_2F_Text_WonderfulLetsHearSuggestion {
+    "Oh, that's wonderful.\n"
+    "So, let's hear it, your suggestion.$"
+}
+
+text RustboroCity_Flat1_2F_Text_OhIsThatRight {
+    "Oh, is that right?\p"
+    "Well, if you come up with a good\n"
+    "suggestion, I'm all ears.$"
+}
+
+text RustboroCity_Flat1_2F_Text_LetsGiveItATry2 {
+    "Ah, I see.\n"
+    "Well, let's give it a try, shall we?$"
+}
+
+text RustboroCity_Flat1_2F_Text_OhShesLaughing {
+    "{STR_VAR_1}.\n"
+    "{STR_VAR_1}.\p"
+    "Oh, yes! She's laughing!\n"
+    "Oh, I am as delighted as she!$"
+}
+
+text RustboroCity_Flat1_2F_Text_LetsGiveItATry {
+    "Ah, I see.\n"
+    "Well, let's give it a try, shall we?$"
+}
+
+text RustboroCity_Flat1_2F_Text_ShesNotSmilingAtAll {
+    "{STR_VAR_1}.\n"
+    "{STR_VAR_1}.\p"
+    "Hmmm… She's not smiling at all.\n"
+    "Maybe WALDA is one serious child…$"
+}
+
+text RustboroCity_Flat1_2F_Text_ThinkOfMyOwnPhrase {
+    "Oh, so you don't know any good words.\n"
+    "I'd better think for myself, then.\p"
+    "Hmm…\n"
+    "How about “{STR_VAR_1}”?\l"
+    "Let's see if that will work.$"
+}
+
+text RustboroCity_Flat1_2F_Text_ShesNotSmilingAtAll2 {
+    "{STR_VAR_1}.\n"
+    "{STR_VAR_1}.\p"
+    "Hmmm… She's not smiling at all.\n"
+    "Maybe WALDA is one serious child…$"
+}
+
+text RustboroCity_Flat1_2F_Text_OhYouDontKnowAny {
+    "Oh, so you don't know any good words.\n"
+    "I guess I'll try to amuse her with\l"
+    "the saying I used before.\p"
+    "Anyways, if you have a good suggestion,\n"
+    "don't hesitate in telling me, okay?$"
+}
+
+text RustboroCity_Flat1_2F_Text_ThankYouIllGiveYouWallpaper {
+    "Thank you!\p"
+    "Thanks to you, my darling WALDA\n"
+    "laughed for me!\p"
+    "Actually, I may not look all that\n"
+    "special, but I'm one of DEVON\l"
+    "CORPORATION's top researchers.\p"
+    "So, how about I do something in return\n"
+    "for you?\p"
+    "I know, I'll add some new wallpaper\n"
+    "patterns for the BOXES in the PC\l"
+    "POKéMON Storage System.\p"
+    "In the wallpaper pattern menu,\n"
+    "select “FRIENDS.”\p"
+    "That will give you access to the new\n"
+    "wallpaper patterns.$"
+}
+
+text RustboroCity_Flat1_2F_Text_ItsAPokemonPlushDoll {
+    "It's a POKéMON plush DOLL!$"
+}

@@ -1,0 +1,27 @@
+mapscripts PacifidlogTown_House1_MapScripts {}
+
+script PacifidlogTown_House1_EventScript_Man {
+    msgbox(PacifidlogTown_House1_Text_RegiStory, MSGBOX_NPC)
+    end
+}
+
+script PacifidlogTown_House1_EventScript_Woman {
+    msgbox(PacifidlogTown_House1_Text_SixDotsOpenThreeDoors, MSGBOX_NPC)
+    end
+}
+
+text PacifidlogTown_House1_Text_RegiStory {
+    "In the HOENN region, there are three\n"
+    "POKéMON that represent the power of\l"
+    "rock, ice, and steel.\p"
+    "Each of them is said to hide away deep\n"
+    "inside caves.\p"
+    "That's the story I heard when I was\n"
+    "just a little kid.$"
+}
+
+text PacifidlogTown_House1_Text_SixDotsOpenThreeDoors {
+    "“Six dots open three doors.”\p"
+    "Grandpa used to say that, but I don't\n"
+    "know what he meant.$"
+}

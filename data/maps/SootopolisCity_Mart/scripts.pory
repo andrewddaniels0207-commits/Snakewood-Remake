@@ -1,0 +1,73 @@
+mapscripts SootopolisCity_Mart_MapScripts {}
+
+script SootopolisCity_Mart_EventScript_Clerk {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(SootopolisCity_Mart_Pokemart)
+    msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script SootopolisCity_Mart_Pokemart {
+    pokemartlistend()
+}
+
+script SootopolisCity_Mart_EventScript_FatMan {
+    lock
+    faceplayer
+    if (var(VAR_SKY_PILLAR_STATE) >= 2) goto(SootopolisCity_Mart_EventScript_FatManNoLegendaries)
+    if (!flag(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN)) goto(SootopolisCity_Mart_EventScript_FatManNoLegendaries)
+    msgbox(SootopolisCity_Mart_Text_TooScaryOutside, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script SootopolisCity_Mart_EventScript_FatManNoLegendaries {
+    msgbox(SootopolisCity_Mart_Text_PPUpIsGreat, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script SootopolisCity_Mart_EventScript_Gentleman {
+    lock
+    faceplayer
+    if (var(VAR_SKY_PILLAR_STATE) >= 2) goto(SootopolisCity_Mart_EventScript_GentlemanNoLegendaries)
+    if (!flag(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN)) goto(SootopolisCity_Mart_EventScript_GentlemanNoLegendaries)
+    msgbox(SootopolisCity_Mart_Text_DidSomethingAwaken, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script SootopolisCity_Mart_EventScript_GentlemanNoLegendaries {
+    msgbox(SootopolisCity_Mart_Text_FullRestoreItemOfDreams, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+text SootopolisCity_Mart_Text_PPUpIsGreat {
+    "PP UP is great!\p"
+    "It raises the POWER POINTS, the PP,\n"
+    "of a POKéMON move.$"
+}
+
+text SootopolisCity_Mart_Text_TooScaryOutside {
+    "What…\n"
+    "What is happening?\p"
+    "I really want to know, but it's too\n"
+    "scary to go outside.$"
+}
+
+text SootopolisCity_Mart_Text_FullRestoreItemOfDreams {
+    "Do you know FULL RESTORE?\p"
+    "Full restoration of HP!\n"
+    "Eradication of all status problems!\p"
+    "It's truly an item of your dreams!$"
+}
+
+text SootopolisCity_Mart_Text_DidSomethingAwaken {
+    "This weather…\n"
+    "Did something awaken?$"
+}

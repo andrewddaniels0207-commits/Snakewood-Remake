@@ -1,0 +1,106 @@
+mapscripts Route112_CableCarStation_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: Route112_CableCarStation_OnTransition
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_CABLE_CAR_STATION_STATE, 2: Route112_CableCarStation_EventScript_ExitCableCar
+    ]
+}
+
+script Route112_CableCarStation_OnTransition {
+    setescapewarp(MAP_ROUTE112, 28, 28)
+    if (var(VAR_CABLE_CAR_STATION_STATE) == 2) call(Route112_CableCarStation_EventScript_MoveAttendantAside)
+    end
+}
+
+script Route112_CableCarStation_EventScript_MoveAttendantAside {
+    setobjectxyperm(LOCALID_ROUTE112_CABLE_CAR_ATTENDANT, 7, 4)
+    setobjectmovementtype(LOCALID_ROUTE112_CABLE_CAR_ATTENDANT, MOVEMENT_TYPE_FACE_LEFT)
+    return
+}
+
+script Route112_CableCarStation_EventScript_ExitCableCar {
+    lockall
+    applymovement(LOCALID_PLAYER, Route112_CableCarStation_Movement_ExitCableCar)
+    applymovement(LOCALID_ROUTE112_CABLE_CAR_ATTENDANT, Route112_CableCarStation_Movement_FollowPlayerOutFromCableCar)
+    waitmovement(0)
+    setvar(VAR_CABLE_CAR_STATION_STATE, 0)
+    setobjectxyperm(LOCALID_ROUTE112_CABLE_CAR_ATTENDANT, 6, 7)
+    setobjectmovementtype(LOCALID_ROUTE112_CABLE_CAR_ATTENDANT, MOVEMENT_TYPE_FACE_DOWN)
+    releaseall
+    end
+}
+
+script Route112_CableCarStation_EventScript_Attendant {
+    lock
+    faceplayer
+    msgbox(Route112_CableCarStation_Text_CableCarReadyGetOn, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(Route112_CableCarStation_EventScript_RideCableCar)
+    if (var(VAR_RESULT) == NO) goto(Route112_CableCarStation_EventScript_DeclineRide)
+    end
+}
+
+script Route112_CableCarStation_EventScript_RideCableCar {
+    msgbox(Route112_CableCarStation_Text_StepThisWay, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_ROUTE112_CABLE_CAR_ATTENDANT, Route112_CableCarStation_Movement_LeadPlayerToCableCar)
+    applymovement(LOCALID_PLAYER, Route112_CableCarStation_Movement_BoardCableCar)
+    waitmovement(0)
+    setvar(VAR_0x8004, FALSE)
+    setvar(VAR_CABLE_CAR_STATION_STATE, 1)
+    incrementgamestat(GAME_STAT_RODE_CABLE_CAR)
+    special(CableCarWarp)
+    special(CableCar)
+    waitstate
+    release
+    end
+}
+
+script Route112_CableCarStation_EventScript_DeclineRide {
+    msgbox(Route112_CableCarStation_Text_RideAnotherTime, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+movement Route112_CableCarStation_Movement_LeadPlayerToCableCar {
+    walk_up
+    walk_up
+    walk_right
+    walk_in_place_faster_left
+    step_end
+}
+
+movement Route112_CableCarStation_Movement_FollowPlayerOutFromCableCar {
+    delay_16
+    walk_left
+    walk_down
+    walk_down
+    step_end
+}
+
+movement Route112_CableCarStation_Movement_BoardCableCar {
+    walk_up
+    walk_up
+    walk_up
+    delay_16
+    step_end
+}
+
+movement Route112_CableCarStation_Movement_ExitCableCar {
+    walk_down
+    walk_down
+    walk_down
+    delay_16
+    step_end
+}
+
+text Route112_CableCarStation_Text_CableCarReadyGetOn {
+    "The CABLE CAR is ready to go up.\n"
+    "Would you like to be on it?$"
+}
+
+text Route112_CableCarStation_Text_StepThisWay {
+    "Please step this way.$"
+}
+
+text Route112_CableCarStation_Text_RideAnotherTime {
+    "Please ride with us another time.$"
+}

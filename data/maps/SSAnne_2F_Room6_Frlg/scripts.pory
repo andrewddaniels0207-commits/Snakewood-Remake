@@ -1,0 +1,20 @@
+mapscripts SSAnne_2F_Room6_Frlg_MapScripts {}
+
+script SSAnne_2F_Room6_EventScript_Woman1 {
+    msgbox(SSAnne_2F_Room6_Text_CaptainIsAwfullySick, MSGBOX_NPC)
+    end
+}
+
+script SSAnne_2F_Room6_EventScript_Woman2 {
+    msgbox(SSAnne_2F_Room6_Text_ManyPeopleGetSeasick, MSGBOX_NPC)
+    end
+}
+
+text SSAnne_2F_Room6_Text_CaptainIsAwfullySick {
+    "The CAPTAIN said he's awfully sick.\n"
+    "He was all pale.$"
+}
+
+text SSAnne_2F_Room6_Text_ManyPeopleGetSeasick {
+    "I hear many people get seasick.$"
+}

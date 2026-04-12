@@ -1,0 +1,40 @@
+mapscripts FuchsiaCity_House1_Frlg_MapScripts {}
+
+script FuchsiaCity_House1_EventScript_Woman {
+    msgbox(FuchsiaCity_House1_Text_WardenIsOldHasFalseTeeth, MSGBOX_NPC)
+    end
+}
+
+script FuchsiaCity_House1_EventScript_OldMan {
+    lock
+    faceplayer
+    famechecker(FAMECHECKER_BILL, 2)
+    msgbox(FuchsiaCity_House1_Text_BillIsMyGrandson)
+    release
+    end
+}
+
+script FuchsiaCity_House1_EventScript_LittleBoy {
+    msgbox(FuchsiaCity_House1_Text_BillFilesHisOwnMonData, MSGBOX_NPC)
+    end
+}
+
+text FuchsiaCity_House1_Text_WardenIsOldHasFalseTeeth {
+    "The SAFARI ZONE's WARDEN is old, \n"
+    "but he's still very much active.\p"
+    "All his teeth are false, though.$"
+}
+
+text FuchsiaCity_House1_Text_BillIsMyGrandson {
+    "Hmm?\n"
+    "You've met BILL?\p"
+    "He's my grandson!\p"
+    "He always liked collecting things,\n"
+    "even as a child!$"
+}
+
+text FuchsiaCity_House1_Text_BillFilesHisOwnMonData {
+    "BILL files his own POKéMON data on\n"
+    "his PC.\p"
+    "Did he show you?$"
+}

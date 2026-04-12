@@ -1,0 +1,45 @@
+mapscripts AbandonedShip_CaptainsOffice_MapScripts {}
+
+script AbandonedShip_CaptainsOffice_EventScript_CaptSternAide {
+    lock
+    faceplayer
+    if (flag(FLAG_EXCHANGED_SCANNER)) goto(AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus)
+    checkitem(ITEM_SCANNER)
+    if (var(VAR_RESULT) == TRUE) goto(AbandonedShip_CaptainsOffice_EventScript_CanYouDeliverScanner)
+    if (flag(FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_2_SCANNER)) goto(AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus)
+    msgbox(AbandonedShip_CaptainsOffice_Text_NoSuccessFindingScanner, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script AbandonedShip_CaptainsOffice_EventScript_CanYouDeliverScanner {
+    msgbox(AbandonedShip_CaptainsOffice_Text_OhCanYouDeliverScanner, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus {
+    msgbox(AbandonedShip_CaptainsOffice_Text_ThisIsSSCactus, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+text AbandonedShip_CaptainsOffice_Text_NoSuccessFindingScanner {
+    "I'm investigating this ship on behalf\n"
+    "of CAPT. STERN.\p"
+    "He also asked me to find a SCANNER,\n"
+    "but I haven't had any success…$"
+}
+
+text AbandonedShip_CaptainsOffice_Text_OhCanYouDeliverScanner {
+    "Oh! That's a SCANNER!\p"
+    "Listen, can I get you to deliver that\n"
+    "to CAPT. STERN?\p"
+    "I want to investigate this ship a\n"
+    "little more.$"
+}
+
+text AbandonedShip_CaptainsOffice_Text_ThisIsSSCactus {
+    "This ship is called S.S. CACTUS.\n"
+    "It seems to be from an earlier era.$"
+}

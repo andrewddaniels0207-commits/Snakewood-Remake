@@ -1,0 +1,84 @@
+mapscripts Route110_TrickHousePuzzle8_MapScripts {}
+
+script Route110_TrickHousePuzzle8_EventScript_Scroll {
+    lockall
+    if (var(VAR_TRICK_HOUSE_PUZZLE_8_STATE) == 0) goto(Route110_TrickHousePuzzle8_EventScript_FoundScroll)
+    goto(Route110_TrickHousePuzzle_EventScript_ReadScrollAgain)
+    end
+}
+
+script Route110_TrickHousePuzzle8_EventScript_FoundScroll {
+    setvar(VAR_TRICK_HOUSE_PUZZLE_8_STATE, 1)
+    goto(Route110_TrickHousePuzzle_EventScript_FoundScroll)
+    end
+}
+
+script Route110_TrickHousePuzzle8_EventScript_Vincent {
+    trainerbattle_single(TRAINER_VINCENT, Route110_TrickHousePuzzle8_Text_VincentIntro, Route110_TrickHousePuzzle8_Text_VincentDefeat)
+    msgbox(Route110_TrickHousePuzzle8_Text_VincentPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route110_TrickHousePuzzle8_EventScript_Keira {
+    trainerbattle_single(TRAINER_KEIRA, Route110_TrickHousePuzzle8_Text_KeiraIntro, Route110_TrickHousePuzzle8_Text_KeiraDefeat)
+    msgbox(Route110_TrickHousePuzzle8_Text_KeiraPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route110_TrickHousePuzzle8_EventScript_Leroy {
+    trainerbattle_single(TRAINER_LEROY, Route110_TrickHousePuzzle8_Text_LeroyIntro, Route110_TrickHousePuzzle8_Text_LeroyDefeat)
+    msgbox(Route110_TrickHousePuzzle8_Text_LeroyPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text Route110_TrickHousePuzzle8_Text_WroteSecretCodeLockOpened {
+    "{PLAYER} wrote down the secret code\n"
+    "on the door.\p"
+    "“TRICK MASTER I love.”\n"
+    "… … … … … … … …\p"
+    "The lock clicked open!$"
+}
+
+text Route110_TrickHousePuzzle8_Text_VincentIntro {
+    "Not many TRAINERS have made it\n"
+    "this far.$"
+}
+
+text Route110_TrickHousePuzzle8_Text_VincentDefeat {
+    "That must mean you're tough, too…$"
+}
+
+text Route110_TrickHousePuzzle8_Text_VincentPostBattle {
+    "You've beaten the POKéMON LEAGUE\n"
+    "CHAMPION? That's too much!$"
+}
+
+text Route110_TrickHousePuzzle8_Text_KeiraIntro {
+    "Consider yourself lucky to be\n"
+    "battling me!$"
+}
+
+text Route110_TrickHousePuzzle8_Text_KeiraDefeat {
+    "This isn't right!\n"
+    "I can't lose!$"
+}
+
+text Route110_TrickHousePuzzle8_Text_KeiraPostBattle {
+    "It's a miracle that you beat me.\n"
+    "You can brag about it.$"
+}
+
+text Route110_TrickHousePuzzle8_Text_LeroyIntro {
+    "You've been slugging through the TRICK\n"
+    "HOUSE challenge, too.$"
+}
+
+text Route110_TrickHousePuzzle8_Text_LeroyDefeat {
+    "I see…\n"
+    "You possess an extraordinary style.$"
+}
+
+text Route110_TrickHousePuzzle8_Text_LeroyPostBattle {
+    "Seeing someone like you should please\n"
+    "the TRICK MASTER.$"
+}

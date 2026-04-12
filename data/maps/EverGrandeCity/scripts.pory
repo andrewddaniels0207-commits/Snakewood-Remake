@@ -1,0 +1,44 @@
+mapscripts EverGrandeCity_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: EverGrandeCity_OnTransition
+}
+
+script EverGrandeCity_OnTransition {
+    if (flag(FLAG_SYS_WEATHER_CTRL)) call(Common_EventScript_SetAbnormalWeather)
+    end
+}
+
+script EverGrandeCity_EventScript_VictoryRoadSign {
+    msgbox(EverGrandeCity_Text_EnteringVictoryRoad, MSGBOX_SIGN)
+    end
+}
+
+script EverGrandeCity_EventScript_CitySign {
+    msgbox(EverGrandeCity_Text_CitySign, MSGBOX_SIGN)
+    end
+}
+
+script EverGrandeCity_EventScript_PokemonLeagueSign {
+    msgbox(EverGrandeCity_Text_EnteringPokemonLeague, MSGBOX_SIGN)
+    end
+}
+
+script EverGrandeCity_EventScript_SetVisitedEverGrande {
+    setflag(FLAG_VISITED_EVER_GRANDE_CITY)
+    setvar(VAR_TEMP_1, 1)
+    end
+}
+
+text EverGrandeCity_Text_EnteringVictoryRoad {
+    "ENTERING VICTORY ROAD$"
+}
+
+text EverGrandeCity_Text_EnteringPokemonLeague {
+    "ENTERING POKéMON LEAGUE\n"
+    "CENTER GATE$"
+}
+
+text EverGrandeCity_Text_CitySign {
+    "EVER GRANDE CITY\p"
+    "“The paradise of flowers, the sea,\n"
+    "and POKéMON.”$"
+}

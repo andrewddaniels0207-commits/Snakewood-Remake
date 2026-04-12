@@ -1,0 +1,52 @@
+mapscripts PewterCity_House1_Frlg_MapScripts {}
+
+script PewterCity_House1_EventScript_BaldingMan {
+    msgbox(PewterCity_House1_Text_TradeMonsAreFinicky, MSGBOX_NPC)
+    end
+}
+
+script PewterCity_House1_EventScript_LittleBoy {
+    lock
+    msgbox(PewterCity_House1_Text_NidoranSit)
+    call(PewterCity_House1_EventScript_DoNidoranCry)
+    release
+    end
+}
+
+script PewterCity_House1_EventScript_Nidoran {
+    lock
+    faceplayer
+    call(PewterCity_House1_EventScript_DoNidoranCry)
+    applymovement(LOCALID_PEWTER_HOUSE_NIDORAN, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script PewterCity_House1_EventScript_DoNidoranCry {
+    textcolor(NPC_TEXT_COLOR_NEUTRAL)
+    waitse()
+    playmoncry(SPECIES_NIDORAN_M, CRY_MODE_NORMAL)
+    msgbox(PewterCity_House1_Text_Nidoran)
+    waitmoncry()
+    call(EventScript_RestorePrevTextColor)
+    return
+}
+
+text PewterCity_House1_Text_Nidoran {
+    "NIDORAN♂: Bowbow!$"
+}
+
+text PewterCity_House1_Text_NidoranSit {
+    "NIDORAN, sit!$"
+}
+
+text PewterCity_House1_Text_TradeMonsAreFinicky {
+    "Our POKéMON's an outsider, so it's\n"
+    "finicky and hard to handle.\p"
+    "An outsider is a POKéMON that you\n"
+    "get in a trade.\p"
+    "It grows fast, but it may ignore an\n"
+    "unskilled TRAINER in battle.\p"
+    "If only we had some BADGES…$"
+}

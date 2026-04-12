@@ -1,0 +1,357 @@
+mapscripts FiveIsland_RocketWarehouse_Frlg_MapScripts {
+    MAP_SCRIPT_ON_LOAD: FiveIsland_RocketWarehouse_OnLoad
+    MAP_SCRIPT_ON_TRANSITION: FiveIsland_RocketWarehouse_OnTransition
+}
+
+script FiveIsland_RocketWarehouse_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_FIVE_ISLAND_ROCKET_WAREHOUSE)
+    end
+}
+
+script FiveIsland_RocketWarehouse_OnLoad {
+    call_if_defeated(TRAINER_TEAM_ROCKET_ADMIN, FiveIsland_RocketWarehouse_EventScript_SetArrowsForReEntry)
+    end
+}
+
+script FiveIsland_RocketWarehouse_EventScript_SetArrowsForReEntry {
+    setmetatile(26, 20, METATILE_SilphCo_Arrow_Up, 0)
+    setmetatile(27, 20, METATILE_SilphCo_Arrow_Up, 0)
+    return
+}
+
+script FiveIsland_RocketWarehouse_EventScript_Cage {
+    lockall
+    if (flag(FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE)) goto(FiveIsland_RocketWarehouse_EventScript_CageUnlocked)
+    msgbox(FiveIsland_RocketWarehouse_Text_ManyMonsLockedInPen)
+    releaseall
+    end
+}
+
+script FiveIsland_RocketWarehouse_EventScript_CageUnlocked {
+    msgbox(FiveIsland_RocketWarehouse_Text_PenUnlockedMonsFled)
+    releaseall
+    end
+}
+
+script FiveIsland_RocketWarehouse_EventScript_Computer {
+    msgbox(FiveIsland_RocketWarehouse_Text_ReportWithGraphsAndText, MSGBOX_SIGN)
+    end
+}
+
+script FiveIsland_RocketWarehouse_EventScript_Admin2Trigger {
+    lockall
+    applymovement(LOCALID_WAREHOUSE_ADMIN2, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    setvar(VAR_MAP_SCENE_ROCKET_WAREHOUSE, 1)
+    releaseall
+    end
+}
+
+script FiveIsland_RocketWarehouse_EventScript_Gideon {
+    trainerbattle_single(TRAINER_SCIENTIST_GIDEON, FiveIsland_RocketWarehouse_Text_GideonIntro, FiveIsland_RocketWarehouse_Text_GideonDefeat, FiveIsland_RocketWarehouse_EventScript_DefeatedGideon)
+    if (flag(FLAG_IS_CHAMPION)) goto(FiveIsland_RocketWarehouse_EventScript_MentionGiovannisKid)
+    msgbox(FiveIsland_RocketWarehouse_Text_GetLostLeaveMeBe, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FiveIsland_RocketWarehouse_EventScript_MentionGiovannisKid {
+    famechecker(FAMECHECKER_GIOVANNI, 5)
+    msgbox(FiveIsland_RocketWarehouse_Text_GiovannisKidHasRedHair, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FiveIsland_RocketWarehouse_EventScript_DefeatedGideon {
+    msgbox(FiveIsland_RocketWarehouse_Text_GideonPostBattle)
+    setflag(FLAG_RECOVERED_SAPPHIRE)
+    giveitem(ITEM_SAPPHIRE)
+    release
+    end
+}
+
+script FiveIsland_RocketWarehouse_EventScript_Grunt2 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_47, FiveIsland_RocketWarehouse_Text_Grunt2Intro, FiveIsland_RocketWarehouse_Text_Grunt2Defeat)
+    msgbox(FiveIsland_RocketWarehouse_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FiveIsland_RocketWarehouse_EventScript_Grunt3 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_48, FiveIsland_RocketWarehouse_Text_Grunt3Intro, FiveIsland_RocketWarehouse_Text_Grunt3Defeat)
+    msgbox(FiveIsland_RocketWarehouse_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FiveIsland_RocketWarehouse_EventScript_Admin2 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_ADMIN_2, FiveIsland_RocketWarehouse_Text_Admin2Intro, FiveIsland_RocketWarehouse_Text_Admin2Defeat, FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin2)
+    msgbox(FiveIsland_RocketWarehouse_Text_Admin2PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin2 {
+    getplayerxy(PLAYER_X_POS, PLAYER_Y_POS)
+    if (var(PLAYER_X_POS) <= 24) call(FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin2)
+    msgbox(FiveIsland_RocketWarehouse_Text_Admin2PostBattle)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_WAREHOUSE_GRUNT2)
+    removeobject(LOCALID_WAREHOUSE_GRUNT3)
+    removeobject(LOCALID_WAREHOUSE_ADMIN2)
+    removeobject(LOCALID_WAREHOUSE_ADMIN1)
+    setflag(FLAG_HIDE_FIVE_ISLAND_ROCKETS)
+    fadescreen(FADE_FROM_BLACK)
+    setvar(VAR_MAP_SCENE_ROCKET_WAREHOUSE, 1)
+    setflag(FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE)
+    release
+    end
+}
+
+script FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin2 {
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    return
+}
+
+script FiveIsland_RocketWarehouse_EventScript_Grunt1 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_42, FiveIsland_RocketWarehouse_Text_Grunt1Intro, FiveIsland_RocketWarehouse_Text_Grunt1Defeat)
+    msgbox(FiveIsland_RocketWarehouse_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FiveIsland_RocketWarehouse_EventScript_Admin1 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_ADMIN, FiveIsland_RocketWarehouse_Text_Admin1Intro, FiveIsland_RocketWarehouse_Text_Admin1Defeat, FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin1)
+    msgbox(FiveIsland_RocketWarehouse_Text_MadeItSoYouCanComeBackThrough, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin1 {
+    getplayerxy(PLAYER_X_POS, PLAYER_Y_POS)
+    specialvar(VAR_RESULT, GetPlayerFacingDirection)
+    if (var(VAR_RESULT) == DIR_NORTH) call(FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin1)
+    msgbox(FiveIsland_RocketWarehouse_Text_Admin1PostBattle)
+    closemessage
+    if (var(PLAYER_X_POS) <= 24) call(FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitchFar)
+    if (var(PLAYER_X_POS) == 25) call(FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitch)
+    if (var(PLAYER_X_POS) == 26) call(FiveIsland_RocketWarehouse_EventScript_AdminFaceSwitch)
+    if (var(PLAYER_X_POS) == 27) call(FiveIsland_RocketWarehouse_EventScript_AdminFaceSwitch)
+    playse(SE_PIN)
+    call(FiveIsland_RocketWarehouse_EventScript_SetArrowsForReEntry)
+    special(DrawWholeMapView)
+    waitse()
+    if (var(PLAYER_X_POS) <= 24) call(FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft)
+    if (var(PLAYER_X_POS) == 25) call(FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft)
+    if (var(PLAYER_X_POS) == 26) call(FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft)
+    if (var(PLAYER_X_POS) == 27) call(FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerDown)
+    msgbox(FiveIsland_RocketWarehouse_Text_MadeItSoYouCanComeBackThrough)
+    release
+    end
+}
+
+script FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin1 {
+    if (var(PLAYER_X_POS) == 27) goto(Common_EventScript_NopReturn)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    return
+}
+
+script FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitchFar {
+    applymovement(LOCALID_WAREHOUSE_ADMIN1, FiveIsland_RocketWarehouse_Movement_AdminWalkToSwitchFar)
+    waitmovement(0)
+    return
+}
+
+script FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitch {
+    applymovement(LOCALID_WAREHOUSE_ADMIN1, FiveIsland_RocketWarehouse_Movement_AdminWalkToSwitch)
+    waitmovement(0)
+    return
+}
+
+script FiveIsland_RocketWarehouse_EventScript_AdminFaceSwitch {
+    applymovement(LOCALID_WAREHOUSE_ADMIN1, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    return
+}
+
+script FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft {
+    applymovement(LOCALID_WAREHOUSE_ADMIN1, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    return
+}
+
+script FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerDown {
+    applymovement(LOCALID_WAREHOUSE_ADMIN1, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    return
+}
+
+movement FiveIsland_RocketWarehouse_Movement_AdminWalkToSwitchFar {
+    walk_right
+    walk_right
+    walk_in_place_faster_up
+    step_end
+}
+
+movement FiveIsland_RocketWarehouse_Movement_AdminWalkToSwitch {
+    walk_right
+    walk_in_place_faster_up
+    step_end
+}
+
+text FiveIsland_RocketWarehouse_Text_ManyMonsLockedInPen {
+    "There are many POKéMON locked\n"
+    "away in the pen…$"
+}
+
+text FiveIsland_RocketWarehouse_Text_PenUnlockedMonsFled {
+    "The pen door is unlocked.\n"
+    "The POKéMON appear to have fled.$"
+}
+
+text FiveIsland_RocketWarehouse_Text_Grunt2Intro {
+    "Did you come here knowing it's\n"
+    "TEAM ROCKET's WAREHOUSE?$"
+}
+
+text FiveIsland_RocketWarehouse_Text_Grunt2Defeat {
+    "What do you think you're doing?!$"
+}
+
+text FiveIsland_RocketWarehouse_Text_Grunt2PostBattle {
+    "TEAM ROCKET broke up?\n"
+    "What planet are you from?$"
+}
+
+text FiveIsland_RocketWarehouse_Text_Grunt1Intro {
+    "Oh, now your POKéMON look strong.\n"
+    "You're willing to sell them?\p"
+    "Oh?\n"
+    "You wanted to battle?$"
+}
+
+text FiveIsland_RocketWarehouse_Text_Grunt1Defeat {
+    "Oh, but…\n"
+    "Too much!$"
+}
+
+text FiveIsland_RocketWarehouse_Text_Grunt1PostBattle {
+    "We can give you a great price.\n"
+    "Sell us your POKéMON!$"
+}
+
+text FiveIsland_RocketWarehouse_Text_Grunt3Intro {
+    "I got word about you from the\n"
+    "others.\p"
+    "But there's no way a kid like you'd\n"
+    "know our BOSS GIOVANNI!$"
+}
+
+text FiveIsland_RocketWarehouse_Text_Grunt3Defeat {
+    "Don't…you…dare…laugh…$"
+}
+
+text FiveIsland_RocketWarehouse_Text_Grunt3PostBattle {
+    "Don't mess in the doings of adults,\n"
+    "you jumped-up pip-squeak!$"
+}
+
+text FiveIsland_RocketWarehouse_Text_Admin1Intro {
+    "I don't know or care if what I'm\n"
+    "doing is right or wrong…\p"
+    "I just put my faith in GIOVANNI\n"
+    "and do as I am told.$"
+}
+
+text FiveIsland_RocketWarehouse_Text_Admin1Defeat {
+    "I…\n"
+    "I'm shattered…$"
+}
+
+text FiveIsland_RocketWarehouse_Text_Admin1PostBattle {
+    "You're doing things according to\n"
+    "your beliefs and morals.\p"
+    "I understand now…$"
+}
+
+text FiveIsland_RocketWarehouse_Text_MadeItSoYouCanComeBackThrough {
+    "I've made it so you can come back\n"
+    "in through there.\p"
+    "Why don't you go get rested and\n"
+    "refreshed for what lies ahead?\p"
+    "The ADMIN after me outranks me\n"
+    "thoroughly as a TRAINER.\p"
+    "You'd better steel yourself for one\n"
+    "harsh challenge.$"
+}
+
+text FiveIsland_RocketWarehouse_Text_Admin2Intro {
+    "That's quite enough of you \n"
+    "playing the hero, kid.\p"
+    "Spreading lies about how TEAM\n"
+    "ROCKET has disbanded…\p"
+    "It's such an obvious attempt to\n"
+    "cause confusion in our ranks.\p"
+    "Fortunately, we're not so ignorant\n"
+    "to fall for the lies of a child!\p"
+    "And now, I'll show you how scary\n"
+    "an angry adult can be!$"
+}
+
+text FiveIsland_RocketWarehouse_Text_Admin2Defeat {
+    "Urgh…\n"
+    "You were too strong…\p"
+    "…\n"
+    "Th-that's GIOVANNI's BADGE!\p"
+    "So it's true?\n"
+    "TEAM ROCKET really has disbanded?$"
+}
+
+text FiveIsland_RocketWarehouse_Text_Admin2PostBattle {
+    "We will abandon this WAREHOUSE…\p"
+    "But don't think this is over.\n"
+    "I won't let this be the end.\p"
+    "I will find GIOVANNI.\n"
+    "And I will resurrect TEAM ROCKET!\l"
+    "I will…\p"
+    "Until then, farewell!$"
+}
+
+text FiveIsland_RocketWarehouse_Text_ReportWithGraphsAndText {
+    "A report with graphs and text is on\n"
+    "the PC monitor.\p"
+    "“The Influence of Magnetic Waves\n"
+    "on POKéMON Evolution”…\p"
+    "… … … … … …\p"
+    "It's too difficult to understand…$"
+}
+
+text FiveIsland_RocketWarehouse_Text_GideonIntro {
+    "I almost managed to sell the\n"
+    "SAPPHIRE for huge money…\p"
+    "Then, you just had to come along\n"
+    "and blow the whole deal apart!\p"
+    "Fufu… Fufufufu…\n"
+    "There's no forgiveness for you!$"
+}
+
+text FiveIsland_RocketWarehouse_Text_GideonDefeat {
+    "Gah! Darn!\n"
+    "Darn! Darn!$"
+}
+
+text FiveIsland_RocketWarehouse_Text_GideonPostBattle {
+    "If I can't sell it, it's worthless!\n"
+    "Go ahead, take it!$"
+}
+
+text FiveIsland_RocketWarehouse_Text_GetLostLeaveMeBe {
+    "What do you want now?\n"
+    "Go on, get lost, leave me be.$"
+}
+
+text FiveIsland_RocketWarehouse_Text_GiovannisKidHasRedHair {
+    "What, you again?\p"
+    "You… You're not GIOVANNI's kid,\n"
+    "are you?\p"
+    "No, that can't be right!\n"
+    "GIOVANNI's kid has red hair.\p"
+    "You don't have any reasons for\n"
+    "bugging me. Leave me alone!$"
+}

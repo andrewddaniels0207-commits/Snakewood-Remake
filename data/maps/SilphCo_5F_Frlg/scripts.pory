@@ -1,0 +1,170 @@
+mapscripts SilphCo_5F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_LOAD: SilphCo_5F_OnLoad
+}
+
+script SilphCo_5F_OnLoad {
+    if (!flag(FLAG_SILPH_5F_DOOR_1)) call(EventScript_Close5FDoor1)
+    if (!flag(FLAG_SILPH_5F_DOOR_2)) call(EventScript_Close5FDoor2)
+    if (!flag(FLAG_SILPH_5F_DOOR_3)) call(EventScript_Close5FDoor3)
+    end
+}
+
+script SilphCo_5F_EventScript_WorkerM {
+    lock
+    faceplayer
+    if (var(VAR_MAP_SCENE_SILPH_CO_11F) >= 1) goto(SilphCo_5F_EventScript_WorkerMRocketsGone)
+    msgbox(SilphCo_5F_Text_RocketsInUproarAboutIntruder)
+    release
+    end
+}
+
+script SilphCo_5F_EventScript_WorkerMRocketsGone {
+    msgbox(SilphCo_5F_Text_YoureOurHeroThankYou)
+    release
+    end
+}
+
+script SilphCo_5F_EventScript_PokemonReport1 {
+    msgbox(SilphCo_5F_Text_PorygonFirstVRMon, MSGBOX_SIGN)
+    end
+}
+
+script SilphCo_5F_EventScript_PokemonReport2 {
+    msgbox(SilphCo_5F_Text_Over350TechniquesConfirmed, MSGBOX_SIGN)
+    end
+}
+
+script SilphCo_5F_EventScript_PokemonReport3 {
+    msgbox(SilphCo_5F_Text_SomeMonsEvolveWhenTraded, MSGBOX_SIGN)
+    end
+}
+
+script SilphCo_5F_EventScript_FloorSign {
+    msgbox(SilphCo_5F_Text_FloorSign, MSGBOX_SIGN)
+    end
+}
+
+script SilphCo_5F_EventScript_Beau {
+    trainerbattle_single(TRAINER_SCIENTIST_BEAU, SilphCo_5F_Text_BeauIntro, SilphCo_5F_Text_BeauDefeat)
+    msgbox(SilphCo_5F_Text_BeauPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SilphCo_5F_EventScript_Grunt1 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_28, SilphCo_5F_Text_Grunt1Intro, SilphCo_5F_Text_Grunt1Defeat)
+    msgbox(SilphCo_5F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SilphCo_5F_EventScript_Grunt2 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_29, SilphCo_5F_Text_Grunt2Intro, SilphCo_5F_Text_Grunt2Defeat)
+    msgbox(SilphCo_5F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script SilphCo_5F_EventScript_Dalton {
+    trainerbattle_single(TRAINER_JUGGLER_DALTON, SilphCo_5F_Text_DaltonIntro, SilphCo_5F_Text_DaltonDefeat)
+    msgbox(SilphCo_5F_Text_DaltonPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text SilphCo_5F_Text_RocketsInUproarAboutIntruder {
+    "TEAM ROCKET is in an uproar over\n"
+    "some intruder.\p"
+    "That's you, right?$"
+}
+
+text SilphCo_5F_Text_YoureOurHeroThankYou {
+    "TEAM ROCKET took off!\n"
+    "You're our hero! Thank you!$"
+}
+
+text SilphCo_5F_Text_Grunt1Intro {
+    "I heard a kid was wandering\n"
+    "around.$"
+}
+
+text SilphCo_5F_Text_Grunt1Defeat {
+    "Boom!$"
+}
+
+text SilphCo_5F_Text_Grunt1PostBattle {
+    "It's not smart to pick a fight with\n"
+    "TEAM ROCKET!$"
+}
+
+text SilphCo_5F_Text_BeauIntro {
+    "We study POKé BALL technology on\n"
+    "this floor.$"
+}
+
+text SilphCo_5F_Text_BeauDefeat {
+    "Dang!\n"
+    "Blast it!$"
+}
+
+text SilphCo_5F_Text_BeauPostBattle {
+    "We worked on the ultimate POKé\n"
+    "BALL which would catch anything.$"
+}
+
+text SilphCo_5F_Text_DaltonIntro {
+    "Whaaat?\p"
+    "There shouldn't be any children\n"
+    "here!$"
+}
+
+text SilphCo_5F_Text_DaltonDefeat {
+    "Oh, goodness!$"
+}
+
+text SilphCo_5F_Text_DaltonPostBattle {
+    "You're only on 5F.\n"
+    "It's a long way to my BOSS!$"
+}
+
+text SilphCo_5F_Text_Grunt2Intro {
+    "Show TEAM ROCKET a little respect!$"
+}
+
+text SilphCo_5F_Text_Grunt2Defeat {
+    "Cough…\n"
+    "Cough…$"
+}
+
+text SilphCo_5F_Text_Grunt2PostBattle {
+    "Which reminds me.\p"
+    "KOFFING evolves into WEEZING!$"
+}
+
+text SilphCo_5F_Text_PorygonFirstVRMon {
+    "It's a POKéMON REPORT!\p"
+    "POKéMON LAB created PORYGON,\n"
+    "the first virtual-reality POKéMON.$"
+}
+
+text SilphCo_5F_Text_Over350TechniquesConfirmed {
+    "It's a POKéMON REPORT!\p"
+    "Over 350 POKéMON techniques have\n"
+    "been confirmed.$"
+}
+
+text SilphCo_5F_Text_SomeMonsEvolveWhenTraded {
+    "It's a POKéMON REPORT!\p"
+    "Some POKéMON have been confirmed\n"
+    "to evolve when they are traded.$"
+}
+
+text SilphCo_5F_Text_FloorSign {
+    "SILPH CO. HEAD OFFICE\n"
+    "5F$"
+}
+
+text SilphCo_5F_Text_RocketBossLookingForStrongMons {
+    "Those thugs that took over our\n"
+    "building…\p"
+    "Their BOSS said he was looking for\n"
+    "strong POKéMON.\p"
+    "I hope our PRESIDENT managed to\n"
+    "avoid trouble…$"
+}

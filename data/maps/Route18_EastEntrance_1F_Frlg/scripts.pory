@@ -1,0 +1,142 @@
+mapscripts Route18_EastEntrance_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: Route18_EastEntrance_1F_OnTransition
+}
+
+script Route18_EastEntrance_1F_OnTransition {
+    clearflag(FLAG_SYS_ON_CYCLING_ROAD)
+    if (flag(FLAG_GOT_BICYCLE)) call(Route18_EastEntrance_1F_EventScript_DisableNeedBikeTrigger)
+    end
+}
+
+script Route18_EastEntrance_1F_EventScript_DisableNeedBikeTrigger {
+    setvar(VAR_TEMP_1, 1)
+    return
+}
+
+script Route18_EastEntrance_1F_EventScript_Guard {
+    msgbox(Route18_EastEntrance_1F_Text_CyclingRoadAllUphillFromHere, MSGBOX_NPC)
+    end
+}
+
+script Route18_EastEntrance_1F_EventScript_NeedBikeTriggerTop {
+    lockall
+    setvar(VAR_0x8008, 0)
+    goto(Route18_EastEntrance_1F_EventScript_NeedBikeTrigger)
+    end
+}
+
+script Route18_EastEntrance_1F_EventScript_NeedBikeTriggerMidTop {
+    lockall
+    setvar(VAR_0x8008, 1)
+    goto(Route18_EastEntrance_1F_EventScript_NeedBikeTrigger)
+    end
+}
+
+script Route18_EastEntrance_1F_EventScript_NeedBikeTriggerMid {
+    lockall
+    setvar(VAR_0x8008, 2)
+    goto(Route18_EastEntrance_1F_EventScript_NeedBikeTrigger)
+    end
+}
+
+script Route18_EastEntrance_1F_EventScript_NeedBikeTriggerMidBottom {
+    lockall
+    setvar(VAR_0x8008, 3)
+    goto(Route18_EastEntrance_1F_EventScript_NeedBikeTrigger)
+    end
+}
+
+script Route18_EastEntrance_1F_EventScript_NeedBikeTriggerBottom {
+    lockall
+    setvar(VAR_0x8008, 4)
+    goto(Route18_EastEntrance_1F_EventScript_NeedBikeTrigger)
+    end
+}
+
+script Route18_EastEntrance_1F_EventScript_NeedBikeTrigger {
+    textcolor(NPC_TEXT_COLOR_MALE)
+    msgbox(Route18_EastEntrance_1F_Text_ExcuseMe)
+    closemessage
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    delay(20)
+    if (var(VAR_0x8008) == 1) call(Route18_EastEntrance_1F_EventScript_PlayerWalkToCounterMidTop)
+    if (var(VAR_0x8008) == 2) call(Route18_EastEntrance_1F_EventScript_PlayerWalkToCounterMid)
+    if (var(VAR_0x8008) == 3) call(Route18_EastEntrance_1F_EventScript_PlayerWalkToCounterMidBottom)
+    if (var(VAR_0x8008) == 4) call(Route18_EastEntrance_1F_EventScript_PlayerWalkToCounterBottom)
+    msgbox(Route18_EastEntrance_1F_Text_NeedBicycleForCyclingRoad)
+    closemessage
+    applymovement(LOCALID_PLAYER, Route18_EastEntrance_1F_Movement_WalkRight)
+    waitmovement(0)
+    releaseall
+    end
+}
+
+script Route18_EastEntrance_1F_EventScript_PlayerWalkToCounterMidTop {
+    applymovement(LOCALID_PLAYER, Route18_EastEntrance_1F_Movement_WalkUp)
+    waitmovement(0)
+    return
+}
+
+script Route18_EastEntrance_1F_EventScript_PlayerWalkToCounterMid {
+    applymovement(LOCALID_PLAYER, Route18_EastEntrance_1F_Movement_WalkUp2)
+    waitmovement(0)
+    return
+}
+
+script Route18_EastEntrance_1F_EventScript_PlayerWalkToCounterMidBottom {
+    applymovement(LOCALID_PLAYER, Route18_EastEntrance_1F_Movement_WalkUp3)
+    waitmovement(0)
+    return
+}
+
+script Route18_EastEntrance_1F_EventScript_PlayerWalkToCounterBottom {
+    applymovement(LOCALID_PLAYER, Route18_EastEntrance_1F_Movement_WalkUp4)
+    waitmovement(0)
+    return
+}
+
+movement Route18_EastEntrance_1F_Movement_WalkUp {
+    walk_up
+    step_end
+}
+
+movement Route18_EastEntrance_1F_Movement_WalkUp2 {
+    walk_up
+    walk_up
+    step_end
+}
+
+movement Route18_EastEntrance_1F_Movement_WalkUp3 {
+    walk_up
+    walk_up
+    walk_up
+    step_end
+}
+
+movement Route18_EastEntrance_1F_Movement_WalkUp4 {
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    step_end
+}
+
+movement Route18_EastEntrance_1F_Movement_WalkRight {
+    walk_right
+    step_end
+}
+
+text Route18_EastEntrance_1F_Text_NeedBicycleForCyclingRoad {
+    "You need a BICYCLE to go out on\n"
+    "CYCLING ROAD!$"
+}
+
+text Route18_EastEntrance_1F_Text_CyclingRoadAllUphillFromHere {
+    "CYCLING ROAD is all uphill from\n"
+    "here.$"
+}
+
+text Route18_EastEntrance_1F_Text_ExcuseMe {
+    "Excuse me!$"
+}

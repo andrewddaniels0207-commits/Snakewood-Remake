@@ -1,0 +1,64 @@
+mapscripts TwoIsland_CapeBrink_House_Frlg_MapScripts {}
+
+text Text_UltimateMoveThatMon {
+    "I perfected the ultimate move of\n"
+    "its type…\p"
+    "But will no one take it for\n"
+    "future use?\p"
+    "…Hm? Hmmm!\p"
+    "Y-you…\n"
+    "Th-that {STR_VAR_1}…$"
+}
+
+text Text_JustMistaken {
+    "…No…\n"
+    "I was just mistaken.$"
+}
+
+text Text_AllowMeToTeachMonUltimateMove {
+    "Oh! This is the one!\n"
+    "This is the POKéMON!\p"
+    "This {STR_VAR_1} is worthy of\n"
+    "learning my ultimate move!\p"
+    "Will you allow it?\p"
+    "Will you allow your {STR_VAR_1} to\n"
+    "learn my {STR_VAR_2}?$"
+}
+
+text Text_YouRejectIt {
+    "Gaah! You reject it?\n"
+    "No, I won't be dissuaded!$"
+}
+
+text Text_LetMeConferUltimateMove {
+    "You will allow it?\p"
+    "Then, let me confer my ultimate\n"
+    "{STR_VAR_2} on your {STR_VAR_1}.\p"
+    "Ggggrah-awooo!$"
+}
+
+text Text_TaughtMove {
+    "Gasp, gasp, gasp…\p"
+    "I didn't think I could teach that\n"
+    "move while I still lived…$"
+}
+
+text Text_MakeBestUseOfMove {
+    "I implore you to make the best\n"
+    "use of that move and gain power!$"
+}
+
+text Text_PassedOnEverythingIKnow {
+    "Gasp, gasp, gasp…\p"
+    "I have no regrets now.\n"
+    "I've passed on everything I know.\p"
+    "Now I can live out my life knowing\n"
+    "my work is done.$"
+}
+
+text Text_FeelRejuvenated {
+    "After I passed on my knowledge to\n"
+    "you, I felt so much relief.\p"
+    "In fact, I feel rejuvenated,\n"
+    "as if I were younger again!$"
+}

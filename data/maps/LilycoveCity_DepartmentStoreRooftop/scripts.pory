@@ -1,0 +1,235 @@
+mapscripts LilycoveCity_DepartmentStoreRooftop_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: LilycoveCity_DepartmentStoreRooftop_OnTransition
+}
+
+script LilycoveCity_DepartmentStoreRooftop_OnTransition {
+    getpokenewsactive(POKENEWS_LILYCOVE)
+    if (var(VAR_RESULT) == TRUE) call(LilycoveCity_DepartmentStoreRooftop_EventScript_ShowSaleWoman)
+    if (var(VAR_RESULT) == FALSE) call(LilycoveCity_DepartmentStoreRooftop_EventScript_HideSaleWoman)
+    end
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_ShowSaleWoman {
+    clearflag(FLAG_HIDE_LILYCOVE_DEPARTMENT_STORE_ROOFTOP_SALE_WOMAN)
+    return
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_HideSaleWoman {
+    setflag(FLAG_HIDE_LILYCOVE_DEPARTMENT_STORE_ROOFTOP_SALE_WOMAN)
+    return
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_SaleWoman {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemartdecoration(LilycoveCity_DepartmentStoreRooftop_PokemartDecor_ClearOutSale)
+    msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script LilycoveCity_DepartmentStoreRooftop_PokemartDecor_ClearOutSale {
+    release
+    end
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_Man {
+    lock
+    faceplayer
+    getpokenewsactive(POKENEWS_LILYCOVE)
+    if (var(VAR_RESULT) == TRUE) call(LilycoveCity_DepartmentStoreRooftop_EventScript_ManClearOutSale)
+    msgbox(LilycoveCity_DepartmentStoreRooftop_Text_SetDatesForClearOutSales, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_ManClearOutSale {
+    msgbox(LilycoveCity_DepartmentStoreRooftop_Text_BeenWaitingForClearOutSale, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_ThirstyMan {
+    msgbox(LilycoveCity_DepartmentStoreRooftop_Text_BoneDryThirsty, MSGBOX_NPC)
+    end
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_VendingMachine {
+    lockall
+    message(LilycoveCity_DepartmentStoreRooftop_Text_WhichDrinkWouldYouLike)
+    waitmessage()
+    showmoneybox(0, 0)
+    goto(LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseDrink)
+    end
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseDrink {
+    multichoice(16, 0, MULTI_VENDING_MACHINE, FALSE)
+    copyvar(VAR_TEMP_1, VAR_RESULT)
+    switch(VAR_TEMP_1)
+    case(0, LilycoveCity_DepartmentStoreRooftop_EventScript_FreshWater)
+    case(1, LilycoveCity_DepartmentStoreRooftop_EventScript_SodaPop)
+    case(2, LilycoveCity_DepartmentStoreRooftop_EventScript_Lemonade)
+    msgbox(LilycoveCity_DepartmentStoreRooftop_Text_DecidedAgainstBuyingDrink, MSGBOX_DEFAULT)
+    goto(LilycoveCity_DepartmentStoreRooftop_EventScript_ExitVendingMachine)
+    end
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_FreshWater {
+    setvar(VAR_TEMP_0, ITEM_FRESH_WATER)
+    goto(LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink)
+    end
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_SodaPop {
+    setvar(VAR_TEMP_0, ITEM_SODA_POP)
+    goto(LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink)
+    end
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_Lemonade {
+    setvar(VAR_TEMP_0, ITEM_LEMONADE)
+    goto(LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink)
+    end
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneyFreshWater {
+    checkmoney(200)
+    return
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneySodaPop {
+    checkmoney(300)
+    return
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneyLemonade {
+    checkmoney(350)
+    return
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneyFreshWater {
+    removemoney(200)
+    return
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneySodaPop {
+    removemoney(300)
+    return
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneyLemonade {
+    removemoney(350)
+    return
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink {
+    if (var(VAR_TEMP_1) == 0) call(LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneyFreshWater)
+    if (var(VAR_TEMP_1) == 1) call(LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneySodaPop)
+    if (var(VAR_TEMP_1) == 2) call(LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneyLemonade)
+    if (var(VAR_RESULT) == FALSE) goto(LilycoveCity_DepartmentStoreRooftop_EventScript_NotEnoughMoneyForDrink)
+    checkitemspace(VAR_TEMP_0)
+    if (var(VAR_RESULT) == FALSE) goto(LilycoveCity_DepartmentStoreRooftop_EventScript_NoRoomForDrink)
+    if (var(VAR_TEMP_1) == 0) call(LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneyFreshWater)
+    if (var(VAR_TEMP_1) == 1) call(LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneySodaPop)
+    if (var(VAR_TEMP_1) == 2) call(LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneyLemonade)
+    updatemoneybox()
+    bufferitemname(STR_VAR_1, VAR_TEMP_0)
+    playse(SE_VEND)
+    msgbox(LilycoveCity_DepartmentStoreRooftop_Text_CanOfDrinkDroppedDown, MSGBOX_DEFAULT)
+    additem(VAR_TEMP_0)
+    bufferitemname(STR_VAR_2, VAR_TEMP_0)
+    bufferstdstring(STR_VAR_3, STDSTRING_ITEMS)
+    msgbox(gText_PutItemInPocket, MSGBOX_DEFAULT)
+    random(64)
+    if (var(VAR_RESULT) != 0) goto(LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseNewDrink)
+    checkitemspace(VAR_TEMP_0)
+    if (var(VAR_RESULT) == FALSE) goto(LilycoveCity_DepartmentStoreRooftop_EventScript_NoRoomForDrink)
+    playse(SE_VEND)
+    msgbox(LilycoveCity_DepartmentStoreRooftop_Text_ExtraCanOfDrinkDroppedDown, MSGBOX_DEFAULT)
+    additem(VAR_TEMP_0)
+    bufferitemname(STR_VAR_2, VAR_TEMP_0)
+    bufferstdstring(STR_VAR_3, STDSTRING_ITEMS)
+    msgbox(gText_PutItemInPocket, MSGBOX_DEFAULT)
+    random(64)
+    if (var(VAR_RESULT) != 0) goto(LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseNewDrink)
+    checkitemspace(VAR_TEMP_0)
+    if (var(VAR_RESULT) == 0) goto(LilycoveCity_DepartmentStoreRooftop_EventScript_NoRoomForDrink)
+    playse(SE_VEND)
+    msgbox(LilycoveCity_DepartmentStoreRooftop_Text_ExtraCanOfDrinkDroppedDown, MSGBOX_DEFAULT)
+    additem(VAR_TEMP_0)
+    bufferitemname(STR_VAR_2, VAR_TEMP_0)
+    bufferstdstring(STR_VAR_3, STDSTRING_ITEMS)
+    msgbox(gText_PutItemInPocket, MSGBOX_DEFAULT)
+    goto(LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseNewDrink)
+    end
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseNewDrink {
+    message(LilycoveCity_DepartmentStoreRooftop_Text_WhichDrinkWouldYouLike)
+    waitmessage()
+    goto(LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseDrink)
+    end
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_NotEnoughMoneyForDrink {
+    msgbox(LilycoveCity_DepartmentStoreRooftop_Text_NotEnoughMoney, MSGBOX_DEFAULT)
+    goto(LilycoveCity_DepartmentStoreRooftop_EventScript_ExitVendingMachine)
+    end
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_NoRoomForDrink {
+    msgbox(gText_TheBagIsFull, MSGBOX_DEFAULT)
+    goto(LilycoveCity_DepartmentStoreRooftop_EventScript_ExitVendingMachine)
+    end
+}
+
+script LilycoveCity_DepartmentStoreRooftop_EventScript_ExitVendingMachine {
+    hidemoneybox()
+    releaseall
+    end
+}
+
+text LilycoveCity_DepartmentStoreRooftop_Text_SetDatesForClearOutSales {
+    "Don't they have set dates for their\n"
+    "clear-out sales?\p"
+    "I watch TV, but they never show any\n"
+    "commercials.$"
+}
+
+text LilycoveCity_DepartmentStoreRooftop_Text_BeenWaitingForClearOutSale {
+    "Yes! I've been waiting a long time for\n"
+    "this clear-out sale.\p"
+    "They have items that you can only get\n"
+    "here. I'm going to load up, that I am!$"
+}
+
+text LilycoveCity_DepartmentStoreRooftop_Text_BoneDryThirsty {
+    "Ohh… I'm bone-dry thirsty!$"
+}
+
+text LilycoveCity_DepartmentStoreRooftop_Text_WhichDrinkWouldYouLike {
+    "It's a VENDING MACHINE.\n"
+    "Which drink would you like?$"
+}
+
+text LilycoveCity_DepartmentStoreRooftop_Text_CanOfDrinkDroppedDown {
+    "Clang!\p"
+    "A can of {STR_VAR_1} dropped down.$"
+}
+
+text LilycoveCity_DepartmentStoreRooftop_Text_ExtraCanOfDrinkDroppedDown {
+    "Clang!\p"
+    "Score! An extra can of {STR_VAR_1}\n"
+    "dropped down!$"
+}
+
+text LilycoveCity_DepartmentStoreRooftop_Text_NotEnoughMoney {
+    "Not enough money…$"
+}
+
+text LilycoveCity_DepartmentStoreRooftop_Text_DecidedAgainstBuyingDrink {
+    "Decided against buying a drink.$"
+}

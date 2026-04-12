@@ -1,0 +1,31 @@
+mapscripts AbandonedShip_Corridors_1F_MapScripts {}
+
+script AbandonedShip_Corridors_1F_EventScript_Youngster {
+    msgbox(AbandonedShip_Corridors_1F_Text_IsntItFunHere, MSGBOX_NPC)
+    end
+}
+
+script AbandonedShip_Corridors_1F_EventScript_Charlie {
+    trainerbattle_single(TRAINER_CHARLIE, AbandonedShip_Corridors_1F_Text_CharlieIntro, AbandonedShip_Corridors_1F_Text_CharlieDefeat)
+    msgbox(AbandonedShip_Corridors_1F_Text_CharliePostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text AbandonedShip_Corridors_1F_Text_CharlieIntro {
+    "What's so funny about having my inner\n"
+    "tube aboard the ship?$"
+}
+
+text AbandonedShip_Corridors_1F_Text_CharlieDefeat {
+    "Whoa, you overwhelmed me!$"
+}
+
+text AbandonedShip_Corridors_1F_Text_CharliePostBattle {
+    "It's not easy throwing POKé BALLS\n"
+    "while hanging on to an inner tube!$"
+}
+
+text AbandonedShip_Corridors_1F_Text_IsntItFunHere {
+    "Isn't it fun here?\n"
+    "I get excited just being here!$"
+}

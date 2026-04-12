@@ -1,0 +1,163 @@
+mapscripts SouthernIsland_Interior_MapScripts {
+    MAP_SCRIPT_ON_RESUME: SouthernIsland_Interior_OnResume
+    MAP_SCRIPT_ON_TRANSITION: SouthernIsland_Interior_OnTransition
+}
+
+script SouthernIsland_Interior_OnResume {
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(SouthernIsland_Interior_EventScript_TryRemoveLati)
+    end
+}
+
+script SouthernIsland_Interior_EventScript_TryRemoveLati {
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) != B_OUTCOME_CAUGHT) goto(Common_EventScript_NopReturn)
+    removeobject(LOCALID_SOUTHERN_ISLAND_LATI)
+    return
+}
+
+script SouthernIsland_Interior_OnTransition {
+    if (var(VAR_ROAMER_POKEMON) == 0) call(SouthernIsland_Interior_EventScript_SetUpLatios)
+    if (var(VAR_ROAMER_POKEMON) != 0) call(SouthernIsland_Interior_EventScript_SetUpLatias)
+    call(SouthernIsland_Interior_EventScript_SetUpPlayerGfx)
+    end
+}
+
+script SouthernIsland_Interior_EventScript_SetUpLatios {
+    setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_LATIOS)
+    setvar(VAR_TEMP_4, SPECIES_LATIOS)
+    return
+}
+
+script SouthernIsland_Interior_EventScript_SetUpLatias {
+    setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_LATIAS)
+    setvar(VAR_TEMP_4, SPECIES_LATIAS)
+    return
+}
+
+script SouthernIsland_Interior_EventScript_SetUpPlayerGfx {
+    checkplayergender()
+    if (var(VAR_RESULT) == MALE) goto(SouthernIsland_Interior_EventScript_SetBrendanGfx)
+    if (var(VAR_RESULT) == FEMALE) goto(SouthernIsland_Interior_EventScript_SetMayGfx)
+    end
+}
+
+script SouthernIsland_Interior_EventScript_SetBrendanGfx {
+    setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL)
+    return
+}
+
+script SouthernIsland_Interior_EventScript_SetMayGfx {
+    setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL)
+    return
+}
+
+script SouthernIsland_Interior_EventScript_TryLatiEncounter {
+    lockall
+    setvar(VAR_0x8008, 12)
+    goto(SouthernIsland_Interior_EventScript_Lati)
+    end
+}
+
+script SouthernIsland_Interior_EventScript_Lati {
+    if (flag(FLAG_TEMP_2)) goto(SouthernIsland_Interior_EventScript_Sign)
+    if (flag(FLAG_DEFEATED_LATIAS_OR_LATIOS)) goto(SouthernIsland_Interior_EventScript_Sign)
+    if (flag(FLAG_CAUGHT_LATIAS_OR_LATIOS)) goto(SouthernIsland_Interior_EventScript_Sign)
+    if (!flag(FLAG_ENABLE_SHIP_SOUTHERN_ISLAND)) goto(SouthernIsland_Interior_EventScript_Sign)
+    setflag(FLAG_ENCOUNTERED_LATIAS_OR_LATIOS)
+    setflag(FLAG_TEMP_2)
+    special(SpawnCameraObject)
+    applymovement(LOCALID_CAMERA, SouthernIsland_Interior_Movement_CameraPanUp)
+    waitmovement(0)
+    delay(50)
+    waitse()
+    playmoncry(VAR_TEMP_4, CRY_MODE_NORMAL)
+    delay(30)
+    waitmoncry()
+    addobject(LOCALID_SOUTHERN_ISLAND_LATI)
+    delay(30)
+    applymovement(LOCALID_CAMERA, SouthernIsland_Interior_Movement_CameraPanDown)
+    applymovement(LOCALID_SOUTHERN_ISLAND_LATI, SouthernIsland_Interior_Movement_LatiApproach)
+    waitmovement(0)
+    delay(50)
+    special(RemoveCameraObject)
+    setvar(VAR_LAST_TALKED, LOCALID_SOUTHERN_ISLAND_LATI)
+    if (var(VAR_ROAMER_POKEMON) == 0) call(SouthernIsland_Interior_EventScript_SetLatiosBattleVars)
+    if (var(VAR_ROAMER_POKEMON) != 0) call(SouthernIsland_Interior_EventScript_SetLatiasBattleVars)
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    special(BattleSetup_StartLatiBattle)
+    waitstate
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(SouthernIsland_Interior_EventScript_LatiDefeated)
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(SouthernIsland_Interior_EventScript_RanFromLati)
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(SouthernIsland_Interior_EventScript_RanFromLati)
+    setflag(FLAG_CAUGHT_LATIAS_OR_LATIOS)
+    releaseall
+    end
+}
+
+script SouthernIsland_Interior_EventScript_LatiDefeated {
+    setflag(FLAG_DEFEATED_LATIAS_OR_LATIOS)
+    copyvar(VAR_0x8004, VAR_TEMP_4)
+    goto(Common_EventScript_LegendaryFlewAway)
+    end
+}
+
+script SouthernIsland_Interior_EventScript_RanFromLati {
+    copyvar(VAR_0x8004, VAR_TEMP_4)
+    goto(Common_EventScript_LegendaryFlewAway)
+    end
+}
+
+script SouthernIsland_Interior_EventScript_Sign {
+    msgbox(SouthernIsland_Interior_Text_Sign, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script SouthernIsland_Interior_EventScript_SetLatiosBattleVars {
+    seteventmon(SPECIES_LATIOS, 50, ITEM_SOUL_DEW)
+    return
+}
+
+script SouthernIsland_Interior_EventScript_SetLatiasBattleVars {
+    seteventmon(SPECIES_LATIAS, 50, ITEM_SOUL_DEW)
+    return
+}
+
+movement SouthernIsland_Interior_Movement_CameraPanUp {
+    walk_up
+    walk_up
+    walk_up
+    step_end
+}
+
+movement SouthernIsland_Interior_Movement_CameraPanDown {
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    walk_down
+    walk_down
+    walk_down
+    walk_in_place_faster_up
+    step_end
+}
+
+movement SouthernIsland_Interior_Movement_LatiApproach {
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    delay_16
+    delay_16
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end
+}

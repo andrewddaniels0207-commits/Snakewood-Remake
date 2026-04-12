@@ -1,0 +1,49 @@
+mapscripts MagmaHideout_3F_1R_MapScripts {}
+
+script MagmaHideout_3F_1R_EventScript_Grunt9 {
+    trainerbattle_single(TRAINER_GRUNT_MAGMA_HIDEOUT_9, MagmaHideout_3F_1R_Text_Grunt9Intro, MagmaHideout_3F_1R_Text_Grunt9Defeat)
+    msgbox(MagmaHideout_3F_1R_Text_Grunt9PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MagmaHideout_3F_1R_EventScript_Grunt16 {
+    trainerbattle_single(TRAINER_GRUNT_MAGMA_HIDEOUT_16, MagmaHideout_3F_1R_Text_Grunt16Intro, MagmaHideout_3F_1R_Text_Grunt16Defeat)
+    msgbox(MagmaHideout_3F_1R_Text_Grunt16PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text MagmaHideout_3F_1R_Text_Grunt9Intro {
+    "What did I do to deserve this guard\n"
+    "posting?\p"
+    "My left ear is burning up!$"
+}
+
+text MagmaHideout_3F_1R_Text_Grunt9Defeat {
+    "I'm getting heat exhaustion…$"
+}
+
+text MagmaHideout_3F_1R_Text_Grunt9PostBattle {
+    "Do you think it's odd that we're wearing\n"
+    "hoods in this magma-filled volcano?$"
+}
+
+text MagmaHideout_3F_1R_Text_Grunt16Intro {
+    "We joined so we can help our leader\n"
+    "achieve his fantastic vision.\p"
+    "I don't care if you're with TEAM AQUA\n"
+    "or if you're just some kid passing by.\p"
+    "No one interferes with us and gets\n"
+    "away with it!$"
+}
+
+text MagmaHideout_3F_1R_Text_Grunt16Defeat {
+    "Oh, no!\n"
+    "You're not to be trusted at all!$"
+}
+
+text MagmaHideout_3F_1R_Text_Grunt16PostBattle {
+    "Listen to me.\n"
+    "TEAM MAGMA is right!\p"
+    "Don't listen to TEAM AQUA.\n"
+    "Don't believe their lies!$"
+}

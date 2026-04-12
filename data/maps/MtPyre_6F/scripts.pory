@@ -1,0 +1,81 @@
+mapscripts MtPyre_6F_MapScripts {}
+
+script MtPyre_6F_EventScript_Valerie {
+    trainerbattle_single(TRAINER_VALERIE_1, MtPyre_6F_Text_ValerieIntro, MtPyre_6F_Text_ValerieDefeat, MtPyre_6F_EventScript_RegisterValerie)
+    specialvar(VAR_RESULT, ShouldTryRematchBattle)
+    if (var(VAR_RESULT) == TRUE) goto(MtPyre_6F_EventScript_RematchValerie)
+    msgbox(MtPyre_6F_Text_ValeriePostBattle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MtPyre_6F_EventScript_RegisterValerie {
+    special(PlayerFaceTrainerAfterBattle)
+    waitmovement(0)
+    msgbox(MtPyre_6F_Text_ValerieRegister, MSGBOX_DEFAULT)
+    register_matchcall(TRAINER_VALERIE_1)
+    release
+    end
+}
+
+script MtPyre_6F_EventScript_RematchValerie {
+    trainerbattle_rematch(TRAINER_VALERIE_1, MtPyre_6F_Text_ValerieRematchIntro, MtPyre_6F_Text_ValerieRematchDefeat)
+    msgbox(MtPyre_6F_Text_ValeriePostRematch, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtPyre_6F_EventScript_Cedric {
+    trainerbattle_single(TRAINER_CEDRIC, MtPyre_6F_Text_CedricIntro, MtPyre_6F_Text_CedricDefeat)
+    msgbox(MtPyre_6F_Text_CedricPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text MtPyre_6F_Text_ValerieIntro {
+    "When I'm here…\n"
+    "A curious power flows into me…$"
+}
+
+text MtPyre_6F_Text_ValerieDefeat {
+    "The power is ebbing away…$"
+}
+
+text MtPyre_6F_Text_ValeriePostBattle {
+    "Perhaps the power is from the spirits\n"
+    "of POKéMON in fitful sleep here…$"
+}
+
+text MtPyre_6F_Text_ValerieRegister {
+    "Fufufu… I lost the match, but…\n"
+    "I have this little ability…\p"
+    "Without ever laying my hands on\n"
+    "your POKéNAV… Hiyah!$"
+}
+
+text MtPyre_6F_Text_ValerieRematchIntro {
+    "Behind you…\n"
+    "What is it…$"
+}
+
+text MtPyre_6F_Text_ValerieRematchDefeat {
+    "Something faded away…$"
+}
+
+text MtPyre_6F_Text_ValeriePostRematch {
+    "The POKéMON at rest here…\n"
+    "Sometimes, they play…$"
+}
+
+text MtPyre_6F_Text_CedricIntro {
+    "Have you lost your bearings?\n"
+    "Have no fear for I am here!$"
+}
+
+text MtPyre_6F_Text_CedricDefeat {
+    "Weren't you lost?$"
+}
+
+text MtPyre_6F_Text_CedricPostBattle {
+    "I had this feeling that a lost TRAINER\n"
+    "would be panicked and easy to beat.\p"
+    "It's dirty and I won't try it again…$"
+}

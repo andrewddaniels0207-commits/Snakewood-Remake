@@ -1,0 +1,177 @@
+mapscripts Route13_Frlg_MapScripts {}
+
+script Route13_EventScript_TrainerTips1 {
+    msgbox(Route13_Text_LookToLeftOfThatPost, MSGBOX_SIGN)
+    end
+}
+
+script Route13_EventScript_TrainerTips2 {
+    msgbox(Route13_Text_SelectToSwitchItems, MSGBOX_SIGN)
+    end
+}
+
+script Route13_EventScript_RouteSign {
+    msgbox(Route13_Text_RouteSign, MSGBOX_SIGN)
+    end
+}
+
+text Route13_Text_SebastianIntro {
+    "My bird POKéMON want to battle\n"
+    "with you!$"
+}
+
+text Route13_Text_SebastianDefeat {
+    "My PIDGEY and PIDGEOTTO combo\n"
+    "lost?$"
+}
+
+text Route13_Text_SebastianPostBattle {
+    "My POKéMON look happy even though\n"
+    "they lost.$"
+}
+
+text Route13_Text_SusieIntro {
+    "I'm told I'm good for a kid.$"
+}
+
+text Route13_Text_SusieDefeat {
+    "Ohh!\n"
+    "I lost!$"
+}
+
+text Route13_Text_SusiePostBattle {
+    "I want to become a good TRAINER.\n"
+    "I'll train hard, just watch.$"
+}
+
+text Route13_Text_ValerieIntro {
+    "Wow!\n"
+    "Your BADGES are too cool!$"
+}
+
+text Route13_Text_ValerieDefeat {
+    "Not enough!$"
+}
+
+text Route13_Text_ValeriePostBattle {
+    "You got those BADGES from GYM\n"
+    "LEADERS. I know!$"
+}
+
+text Route13_Text_GwenIntro {
+    "My cute POKéMON wish to make your\n"
+    "acquaintance.$"
+}
+
+text Route13_Text_GwenDefeat {
+    "Good going!\n"
+    "You totally won!$"
+}
+
+text Route13_Text_GwenPostBattle {
+    "You have to make POKéMON battle\n"
+    "to toughen them up.$"
+}
+
+text Route13_Text_AlmaIntro {
+    "I found CARBOS in a cave once\n"
+    "while I was spelunking.$"
+}
+
+text Route13_Text_AlmaDefeat {
+    "Oh, too bad!\n"
+    "I just messed up!$"
+}
+
+text Route13_Text_AlmaPostBattle {
+    "CARBOS boosted the SPEED of my\n"
+    "POKéMON.$"
+}
+
+text Route13_Text_PerryIntro {
+    "I'm not going to lose.\n"
+    "Not when the wind's blowing my way!$"
+}
+
+text Route13_Text_PerryDefeat {
+    "The wind turned!$"
+}
+
+text Route13_Text_PerryPostBattle {
+    "I'm beat.\n"
+    "I guess I'll FLY home.$"
+}
+
+text Route13_Text_LolaIntro {
+    "Sure, I'll play with you, sweetie.$"
+}
+
+text Route13_Text_LolaDefeat {
+    "Oh!\n"
+    "You little beast!$"
+}
+
+text Route13_Text_LolaPostBattle {
+    "I wonder which is stronger, male or\n"
+    "female POKéMON?$"
+}
+
+text Route13_Text_SheilaIntro {
+    "Do you want to battle some\n"
+    "POKéMON with me?$"
+}
+
+text Route13_Text_SheilaDefeat {
+    "It's over already?$"
+}
+
+text Route13_Text_SheilaPostBattle {
+    "I don't know anything about\n"
+    "POKéMON actually.\p"
+    "The ones I use… I picked them\n"
+    "for their looks!$"
+}
+
+text Route13_Text_JaredIntro {
+    "What're you lookin' at?$"
+}
+
+text Route13_Text_JaredDefeat {
+    "Dang!\n"
+    "Stripped gears!$"
+}
+
+text Route13_Text_JaredPostBattle {
+    "Get lost!$"
+}
+
+text Route13_Text_RobertIntro {
+    "I always go with bird POKéMON.\n"
+    "I've dedicated myself to them.$"
+}
+
+text Route13_Text_RobertDefeat {
+    "Out of power!$"
+}
+
+text Route13_Text_RobertPostBattle {
+    "I wish I could fly like PIDGEY and\n"
+    "PIDGEOTTO…$"
+}
+
+text Route13_Text_LookToLeftOfThatPost {
+    "TRAINER TIPS\p"
+    "Look, look!\n"
+    "Look to the left of that post!$"
+}
+
+text Route13_Text_SelectToSwitchItems {
+    "TRAINER TIPS\p"
+    "Use SELECT to switch items in the\n"
+    "ITEMS window.$"
+}
+
+text Route13_Text_RouteSign {
+    "ROUTE 13\n"
+    "North to SILENCE BRIDGE$"
+}

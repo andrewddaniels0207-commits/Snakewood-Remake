@@ -1,0 +1,87 @@
+mapscripts Route5_PokemonDayCare_Frlg_MapScripts {}
+
+text Route5_PokemonDayCare_Text_WantMeToRaiseMon {
+    "I run the DAY-CARE service.\p"
+    "Would you like me to raise one of\n"
+    "your POKéMON?$"
+}
+
+text Route5_PokemonDayCare_Text_ComeAgain {
+    "Come again.$"
+}
+
+text Route5_PokemonDayCare_Text_WhichMonShouldIRaise {
+    "Which POKéMON should I raise?$"
+}
+
+text Route5_PokemonDayCare_Text_ComeAnytimeYouLike {
+    "Fine.\n"
+    "Come anytime you like.$"
+}
+
+text Route5_PokemonDayCare_Text_LookAfterMonForAWhile {
+    "Fine, I'll look after your\n"
+    "{STR_VAR_1} for a while.$"
+}
+
+text Route5_PokemonDayCare_Text_ComeSeeMeInAWhile {
+    "Come see me in a while.$"
+}
+
+text Route5_PokemonDayCare_Text_MonNeedsToSpendMoreTime {
+    "You're back already?\p"
+    "Your {STR_VAR_1} needs to spend\n"
+    "some more time with me.$"
+}
+
+text Route5_PokemonDayCare_Text_OweMeXForMonsReturn {
+    "You owe me ¥{STR_VAR_2} for the return\n"
+    "of this POKéMON.$"
+}
+
+text Route5_PokemonDayCare_Text_ThankYouHeresMon {
+    "Thank you!\n"
+    "Here's your POKéMON.$"
+}
+
+text Route5_PokemonDayCare_Text_PlayerGotMonBack {
+    "{PLAYER} got {STR_VAR_1} back\n"
+    "from the DAY-CARE MAN.$"
+}
+
+text Route5_PokemonDayCare_Text_OnlyHaveOneMonWithYou {
+    "Oh? You only have one POKéMON\n"
+    "with you.$"
+}
+
+text Route5_PokemonDayCare_Text_WhatWillYouBattleWith {
+    "If you leave me that POKéMON,\n"
+    "what will you battle with?$"
+}
+
+text Route5_PokemonDayCare_Text_MonHasGrownByXLevels {
+    "Your {STR_VAR_1} has grown a lot.\n"
+    "Yes, quite a lot, I'd say.\p"
+    "Let me see…\n"
+    "By level, it's grown by {STR_VAR_2}.\p"
+    "Aren't I great?$"
+}
+
+text Route5_PokemonDayCare_Text_YouveGotNoRoomForIt {
+    "You can't take this POKéMON back\n"
+    "if you've got no room for it.$"
+}
+
+text Route5_PokemonDayCare_Text_DontHaveEnoughMoney {
+    "You don't have enough money.$"
+}
+
+text Route5_PokemonDayCare_Text_WantMeToTakeALookAtYours {
+    "きみの\n"
+    "みてみるかね？$"
+}
+
+text Route5_PokemonDayCare_Text_CantAcceptMonWithHM {
+    "わるいけど　ひでんのわざを　もった\n"
+    "ポケモンは　あずかれないなぁ$"
+}

@@ -1,0 +1,69 @@
+mapscripts MossdeepCity_House4_MapScripts {}
+
+script MossdeepCity_House4_EventScript_Woman {
+    lock
+    faceplayer
+    if (flag(FLAG_SYS_GAME_CLEAR)) goto(MossdeepCity_House4_EventScript_CanBattleAtSecretBases)
+    msgbox(MossdeepCity_House4_Text_BrotherLikesToFindBases, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MossdeepCity_House4_EventScript_CanBattleAtSecretBases {
+    msgbox(MossdeepCity_House4_Text_BrotherLikesToVisitBasesAndBattle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MossdeepCity_House4_EventScript_NinjaBoy {
+    lock
+    faceplayer
+    special(CheckPlayerHasSecretBase)
+    if (var(VAR_RESULT) == FALSE) goto(MossdeepCity_House4_EventScript_NoSecretBase)
+    special(GetSecretBaseNearbyMapName)
+    msgbox(MossdeepCity_House4_Text_YouMadeSecretBaseNearX, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MossdeepCity_House4_EventScript_NoSecretBase {
+    msgbox(MossdeepCity_House4_Text_MakeSecretBase, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MossdeepCity_House4_EventScript_Skitty {
+    lock
+    faceplayer
+    waitse()
+    playmoncry(SPECIES_SKITTY, CRY_MODE_NORMAL)
+    msgbox(MossdeepCity_House4_Text_Skitty, MSGBOX_DEFAULT)
+    waitmoncry()
+    release
+    end
+}
+
+text MossdeepCity_House4_Text_BrotherLikesToFindBases {
+    "My little brother says he likes to go\n"
+    "find people's SECRET BASES.$"
+}
+
+text MossdeepCity_House4_Text_BrotherLikesToVisitBasesAndBattle {
+    "My little brother says he likes to\n"
+    "visit people's SECRET BASES and have\l"
+    "POKéMON battles.$"
+}
+
+text MossdeepCity_House4_Text_YouMadeSecretBaseNearX {
+    "Was it you who made a SECRET BASE\n"
+    "near {STR_VAR_1}?$"
+}
+
+text MossdeepCity_House4_Text_MakeSecretBase {
+    "You should make a SECRET BASE\n"
+    "somewhere. I'll go find it!$"
+}
+
+text MossdeepCity_House4_Text_Skitty {
+    "SKITTY: Miyaan?$"
+}

@@ -1,0 +1,320 @@
+mapscripts TwoIsland_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: TwoIsland_OnTransition
+}
+
+script TwoIsland_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_TWO_ISLAND)
+    setflag(FLAG_VISITED_TWO_ISLAND)
+    call(TwoIsland_EventScript_SetShopState)
+    end
+}
+
+script TwoIsland_EventScript_SetShopState {
+    if (flag(FLAG_IS_CHAMPION)) goto(TwoIsland_EventScript_SetShopStateAfterHoennLink)
+    if (flag(FLAG_SYS_GAME_CLEAR)) goto(TwoIsland_EventScript_SetShopStateAfterChampion)
+    if (flag(FLAG_RESCUED_LOSTELLE)) goto(TwoIsland_EventScript_SetShopStateAfterLostelleRescue)
+    goto(TwoIsland_EventScript_SetShopStateDefault)
+    end
+}
+
+script TwoIsland_EventScript_SetShopStateAfterHoennLink {
+    if (!flag(FLAG_TWO_ISLAND_SHOP_INTRODUCED)) goto(TwoIsland_EventScript_SetShopInitial)
+    if (!flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_1)) goto(TwoIsland_EventScript_SetShopExpanded1)
+    if (!flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_2)) goto(TwoIsland_EventScript_SetShopExpanded2)
+    goto(TwoIsland_EventScript_SetShopExpanded3)
+    end
+}
+
+script TwoIsland_EventScript_SetShopStateAfterChampion {
+    if (!flag(FLAG_TWO_ISLAND_SHOP_INTRODUCED)) goto(TwoIsland_EventScript_SetShopInitial)
+    if (!flag(FLAG_RESCUED_LOSTELLE)) goto(TwoIsland_EventScript_SetShopInitial)
+    if (!flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_1)) goto(TwoIsland_EventScript_SetShopExpanded1)
+    goto(TwoIsland_EventScript_SetShopExpanded2)
+    end
+}
+
+script TwoIsland_EventScript_SetShopStateAfterLostelleRescue {
+    if (!flag(FLAG_TWO_ISLAND_SHOP_INTRODUCED)) goto(TwoIsland_EventScript_SetShopInitial)
+    goto(TwoIsland_EventScript_SetShopExpanded1)
+    end
+}
+
+script TwoIsland_EventScript_SetShopStateDefault {
+    goto(TwoIsland_EventScript_SetShopInitial)
+    end
+}
+
+script TwoIsland_EventScript_SetShopInitial {
+    setvar(VAR_MAP_SCENE_TWO_ISLAND, 1)
+    return
+}
+
+script TwoIsland_EventScript_SetShopExpanded1 {
+    setvar(VAR_MAP_SCENE_TWO_ISLAND, 2)
+    clearflag(FLAG_HIDE_TWO_ISLAND_WOMAN)
+    return
+}
+
+script TwoIsland_EventScript_SetShopExpanded2 {
+    setvar(VAR_MAP_SCENE_TWO_ISLAND, 3)
+    clearflag(FLAG_HIDE_TWO_ISLAND_BEAUTY)
+    return
+}
+
+script TwoIsland_EventScript_SetShopExpanded3 {
+    setvar(VAR_MAP_SCENE_TWO_ISLAND, 4)
+    clearflag(FLAG_HIDE_TWO_ISLAND_SUPER_NERD)
+    return
+}
+
+script TwoIsland_EventScript_Clerk {
+    lock
+    faceplayer
+    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 4) goto(TwoIsland_EventScript_ClerkShopExpanded3)
+    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 3) goto(TwoIsland_EventScript_ClerkShopExpanded2)
+    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 2) goto(TwoIsland_EventScript_ClerkShopExpanded1)
+    goto(TwoIsland_EventScript_ClerkShopInitial)
+    end
+}
+
+script TwoIsland_EventScript_ClerkShopExpanded3 {
+    if (flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_3)) goto(TwoIsland_EventScript_ClerkShopSkipIntro)
+    setflag(FLAG_TWO_ISLAND_SHOP_EXPANDED_3)
+    message(TwoIsland_Text_BringingItemsFromDistantLands)
+    waitmessage()
+    goto(TwoIsland_EventScript_ShopExpanded3)
+    end
+}
+
+script TwoIsland_EventScript_ClerkShopExpanded2 {
+    if (flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_2)) goto(TwoIsland_EventScript_ClerkShopSkipIntro)
+    setflag(FLAG_TWO_ISLAND_SHOP_EXPANDED_2)
+    message(TwoIsland_Text_HopeYouGiveItYourBest)
+    waitmessage()
+    goto(TwoIsland_EventScript_ShopExpanded2)
+    end
+}
+
+script TwoIsland_EventScript_ClerkShopExpanded1 {
+    if (flag(FLAG_TWO_ISLAND_SHOP_EXPANDED_1)) goto(TwoIsland_EventScript_ClerkShopSkipIntro)
+    setflag(FLAG_TWO_ISLAND_SHOP_EXPANDED_1)
+    message(TwoIsland_Text_AddedMerchandiseForLostelle)
+    waitmessage()
+    goto(TwoIsland_EventScript_ShopExpanded1)
+    end
+}
+
+script TwoIsland_EventScript_ClerkShopInitial {
+    if (flag(FLAG_TWO_ISLAND_SHOP_INTRODUCED)) goto(TwoIsland_EventScript_ClerkShopSkipIntro)
+    setflag(FLAG_TWO_ISLAND_SHOP_INTRODUCED)
+    message(TwoIsland_Text_WelcomeToShopMerchandiseLimited)
+    waitmessage()
+    goto(TwoIsland_EventScript_ShopInitial)
+    end
+}
+
+script TwoIsland_EventScript_ClerkShopSkipIntro {
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 4) goto(TwoIsland_EventScript_ShopExpanded3)
+    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 3) goto(TwoIsland_EventScript_ShopExpanded2)
+    if (var(VAR_MAP_SCENE_TWO_ISLAND) == 2) goto(TwoIsland_EventScript_ShopExpanded1)
+    goto(TwoIsland_EventScript_ShopInitial)
+    end
+}
+
+script TwoIsland_EventScript_ShopInitial {
+    pokemart(TwoIsland_Items_ShopInitial)
+    msgbox(gText_PleaseComeAgain)
+    release
+    end
+}
+
+script TwoIsland_Items_ShopInitial {
+    release
+    end
+}
+
+script TwoIsland_EventScript_ShopExpanded1 {
+    pokemart(TwoIsland_Items_ShopExpanded1)
+    msgbox(gText_PleaseComeAgain)
+    release
+    end
+}
+
+script TwoIsland_Items_ShopExpanded1 {
+    release
+    end
+}
+
+script TwoIsland_EventScript_ShopExpanded2 {
+    pokemart(TwoIsland_Items_ShopExpanded2)
+    msgbox(gText_PleaseComeAgain)
+    release
+    end
+}
+
+script TwoIsland_Items_ShopExpanded2 {
+    release
+    end
+}
+
+script TwoIsland_EventScript_ShopExpanded3 {
+    pokemart(TwoIsland_Items_ShopExpanded3)
+    msgbox(gText_PleaseComeAgain)
+    release
+    end
+}
+
+script TwoIsland_Items_ShopExpanded3 {
+    release
+    end
+}
+
+script TwoIsland_EventScript_Sailor {
+    msgbox(TwoIsland_Text_FellowMovedFromCeladonCity, MSGBOX_NPC)
+    end
+}
+
+script TwoIsland_EventScript_Woman {
+    msgbox(TwoIsland_Text_ShopkeepersBrotherWorksGameCorner, MSGBOX_NPC)
+    end
+}
+
+script TwoIsland_EventScript_Beauty {
+    lock
+    faceplayer
+    famechecker(FAMECHECKER_BRUNO, 4)
+    msgbox(TwoIsland_Text_BrunoCameToIslandWhileBack)
+    release
+    end
+}
+
+script TwoIsland_EventScript_SuperNerd {
+    msgbox(TwoIsland_Text_BuyRareItemsHere, MSGBOX_NPC)
+    end
+}
+
+script TwoIsland_EventScript_Boy {
+    msgbox(TwoIsland_Text_OldWomanLivesOutOnCape, MSGBOX_NPC)
+    end
+}
+
+script TwoIsland_EventScript_LittleBoy {
+    msgbox(TwoIsland_Text_HaveYouTriedJumpingGame, MSGBOX_NPC)
+    end
+}
+
+script TwoIsland_EventScript_IslandSign {
+    msgbox(TwoIsland_Text_IslandSign, MSGBOX_SIGN)
+    end
+}
+
+script TwoIsland_EventScript_JoyfulGameCornerSign {
+    msgbox(TwoIsland_Text_JoyfulGameCornerSign, MSGBOX_SIGN)
+    end
+}
+
+script TwoIsland_EventScript_FastCurrentSign {
+    msgbox(TwoIsland_Text_DangerFastCurrent, MSGBOX_SIGN)
+    end
+}
+
+text TwoIsland_Text_IslandSign {
+    "TWO ISLAND\n"
+    "Boon Island for Two$"
+}
+
+text TwoIsland_Text_JoyfulGameCornerSign {
+    "Skip & Chomp!\n"
+    "Joyful GAME CORNER$"
+}
+
+text TwoIsland_Text_DangerFastCurrent {
+    "DANGER! FAST CURRENT!\n"
+    "Fishing and surfing prohibited!$"
+}
+
+text TwoIsland_Text_WelcomeToShopMerchandiseLimited {
+    "Oh!\n"
+    "Hello, welcome to my shop!\p"
+    "We've only opened up recently.\p"
+    "Our merchandise is limited, but I\n"
+    "hope we can serve your needs.$"
+}
+
+text TwoIsland_Text_AddedMerchandiseForLostelle {
+    "I can't tell you how grateful I am\n"
+    "for your rescue of LOSTELLE.\p"
+    "Thanks to your feat, the people of\n"
+    "THREE ISLAND have changed their\l"
+    "attitudes about KANTO people.\p"
+    "And, I'm from KANTO, you see.\p"
+    "The people of THREE ISLAND\n"
+    "helped me add to my merchandise.$"
+}
+
+text TwoIsland_Text_HopeYouGiveItYourBest {
+    "Hi! I'm giving it my best here.\n"
+    "I hope you do too, {PLAYER}.$"
+}
+
+text TwoIsland_Text_BringingItemsFromDistantLands {
+    "Oh, hello, {PLAYER}!\n"
+    "Welcome!\p"
+    "I've started bringing in items from\n"
+    "distant lands.\p"
+    "I've got some rare items in, too.\n"
+    "Please have a look!$"
+}
+
+text TwoIsland_Text_FellowMovedFromCeladonCity {
+    "That fellow there, he moved here\n"
+    "from CELADON CITY.\p"
+    "He started up a shop with his\n"
+    "younger brother.\p"
+    "You have to wonder if he knew what\n"
+    "he was getting into.$"
+}
+
+text TwoIsland_Text_ShopkeepersBrotherWorksGameCorner {
+    "The shopkeeper's brother took\n"
+    "a job at the GAME CORNER.\p"
+    "He's trying to pull together money\n"
+    "so they can buy more merchandise.$"
+}
+
+text TwoIsland_Text_BrunoCameToIslandWhileBack {
+    "Listen, listen.\n"
+    "Did you know?\p"
+    "A famous TRAINER came to the\n"
+    "ISLAND a little while back.\p"
+    "He's one of the ELITE FOUR.\n"
+    "His name is BRUNO.\p"
+    "He went away disappointed when he\n"
+    "found out that they were all sold\l"
+    "out of Rage Candybars.$"
+}
+
+text TwoIsland_Text_BuyRareItemsHere {
+    "The discerning TRAINER knows to\n"
+    "buy rare items here!$"
+}
+
+text TwoIsland_Text_OldWomanLivesOutOnCape {
+    "There's an old woman who lives in\n"
+    "a cottage out on the cape.\p"
+    "She gives the eye to POKéMON.\n"
+    "It's a bit unnerving.$"
+}
+
+text TwoIsland_Text_HaveYouTriedJumpingGame {
+    "Boing! Boing!\n"
+    "Have you tried the jumping game?\p"
+    "The POKéMON you can enter…\n"
+    "Boing!\p"
+    "Some go boing!\p"
+    "And some go boooooooing!\p"
+    "Did you know that?\n"
+    "Boing!$"
+}

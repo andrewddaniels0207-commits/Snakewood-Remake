@@ -1,0 +1,318 @@
+mapscripts PokemonTower_7F_Frlg_MapScripts {}
+
+script PokemonTower_7F_EventScript_MrFuji {
+    lock
+    faceplayer
+    famechecker(FAMECHECKER_MRFUJI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005)
+    setflag(FLAG_HIDE_TOWER_FUJI)
+    clearflag(FLAG_HIDE_POKEHOUSE_FUJI)
+    setflag(FLAG_RESCUED_MR_FUJI)
+    msgbox(PokemonTower_7F_Text_MrFujiThankYouFollowMe)
+    closemessage
+    warp(MAP_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE, 4, 7)
+    waitstate
+    release
+    end
+}
+
+script PokemonTower_7F_EventScript_Grunt1 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_19, PokemonTower_7F_Text_Grunt1Intro, PokemonTower_7F_Text_Grunt1Defeat, PokemonTower_7F_EventScript_DefeatedGrunt1)
+    msgbox(PokemonTower_7F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script PokemonTower_7F_EventScript_DefeatedGrunt1 {
+    msgbox(PokemonTower_7F_Text_Grunt1PostBattle)
+    closemessage
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8004) == 10) goto(PokemonTower_7F_EventScript_Grunt1ExitMid)
+    if (var(VAR_0x8004) == 11) goto(PokemonTower_7F_EventScript_Grunt1ExitRight)
+    if (var(VAR_0x8004) == 9) goto(PokemonTower_7F_EventScript_Grunt1ExitLeft)
+    applymovement(LOCALID_POKEMON_TOWER_GRUNT1, PokemonTower_7F_Movement_Grunt1Exit)
+    waitmovement(0)
+    goto(PokemonTower_7F_EventScript_RemoveGrunt1)
+    end
+}
+
+script PokemonTower_7F_EventScript_Grunt1ExitMid {
+    applymovement(LOCALID_POKEMON_TOWER_GRUNT1, PokemonTower_7F_Movement_Grunt1ExitMid)
+    waitmovement(0)
+    goto(PokemonTower_7F_EventScript_RemoveGrunt1)
+    end
+}
+
+script PokemonTower_7F_EventScript_Grunt1ExitRight {
+    applymovement(LOCALID_POKEMON_TOWER_GRUNT1, PokemonTower_7F_Movement_Grunt1ExitRight)
+    waitmovement(0)
+    goto(PokemonTower_7F_EventScript_RemoveGrunt1)
+    end
+}
+
+script PokemonTower_7F_EventScript_Grunt1ExitLeft {
+    applymovement(LOCALID_POKEMON_TOWER_GRUNT1, PokemonTower_7F_Movement_Grunt1ExitLeft)
+    waitmovement(0)
+    playse(SE_EXIT)
+    delay(25)
+    goto(PokemonTower_7F_EventScript_RemoveGrunt1)
+    end
+}
+
+script PokemonTower_7F_EventScript_RemoveGrunt1 {
+    removeobject(LOCALID_POKEMON_TOWER_GRUNT1)
+    release
+    end
+}
+
+movement PokemonTower_7F_Movement_Grunt1ExitMid {
+    walk_down
+    walk_right
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    walk_down
+    walk_down
+    step_end
+}
+
+movement PokemonTower_7F_Movement_Grunt1ExitRight {
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    walk_down
+    walk_down
+    step_end
+}
+
+movement PokemonTower_7F_Movement_Grunt1Exit {
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end
+}
+
+movement PokemonTower_7F_Movement_Grunt1ExitLeft {
+    walk_right
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    walk_down
+    walk_down
+    walk_in_place_faster_left
+    step_end
+}
+
+script PokemonTower_7F_EventScript_Grunt2 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_20, PokemonTower_7F_Text_Grunt2Intro, PokemonTower_7F_Text_Grunt2Defeat, PokemonTower_7F_EventScript_DefeatedGrunt2)
+    msgbox(PokemonTower_7F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script PokemonTower_7F_EventScript_DefeatedGrunt2 {
+    famechecker(FAMECHECKER_MRFUJI, 1)
+    msgbox(PokemonTower_7F_Text_Grunt2PostBattle)
+    closemessage
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8004) == 12) goto(PokemonTower_7F_EventScript_Grunt2ExitLeft)
+    if (var(VAR_0x8004) == 13) goto(PokemonTower_7F_EventScript_Grunt2ExitRight)
+    applymovement(LOCALID_POKEMON_TOWER_GRUNT2, PokemonTower_7F_Movement_Grunt2Exit)
+    waitmovement(0)
+    goto(PokemonTower_7F_EventScript_RemoveGrunt2)
+    end
+}
+
+script PokemonTower_7F_EventScript_Grunt2ExitLeft {
+    applymovement(LOCALID_POKEMON_TOWER_GRUNT2, PokemonTower_7F_Movement_Grunt2ExitLeft)
+    waitmovement(0)
+    goto(PokemonTower_7F_EventScript_RemoveGrunt2)
+    end
+}
+
+script PokemonTower_7F_EventScript_Grunt2ExitRight {
+    applymovement(LOCALID_POKEMON_TOWER_GRUNT2, PokemonTower_7F_Movement_Grunt2ExitRight)
+    waitmovement(0)
+    goto(PokemonTower_7F_EventScript_RemoveGrunt2)
+    end
+}
+
+script PokemonTower_7F_EventScript_RemoveGrunt2 {
+    removeobject(LOCALID_POKEMON_TOWER_GRUNT2)
+    release
+    end
+}
+
+movement PokemonTower_7F_Movement_Grunt2ExitLeft {
+    walk_down
+    walk_down
+    walk_down
+    walk_left
+    walk_down
+    walk_down
+    walk_down
+    step_end
+}
+
+movement PokemonTower_7F_Movement_Grunt2Exit {
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end
+}
+
+movement PokemonTower_7F_Movement_Grunt2ExitRight {
+    walk_left
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end
+}
+
+script PokemonTower_7F_EventScript_Grunt3 {
+    trainerbattle_single(TRAINER_TEAM_ROCKET_GRUNT_21, PokemonTower_7F_Text_Grunt3Intro, PokemonTower_7F_Text_Grunt3Defeat, PokemonTower_7F_EventScript_DefeatedGrunt3)
+    msgbox(PokemonTower_7F_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script PokemonTower_7F_EventScript_DefeatedGrunt3 {
+    msgbox(PokemonTower_7F_Text_Grunt3PostBattle)
+    closemessage
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8004) == 10) goto(PokemonTower_7F_EventScript_Grunt3ExitRight)
+    if (var(VAR_0x8004) == 9) goto(PokemonTower_7F_EventScript_Grunt3ExitLeft)
+    applymovement(LOCALID_POKEMON_TOWER_GRUNT3, PokemonTower_7F_Movement_Grunt3Exit)
+    waitmovement(0)
+    goto(PokemonTower_7F_EventScript_RemoveGrunt3)
+    end
+}
+
+script PokemonTower_7F_EventScript_Grunt3ExitRight {
+    applymovement(LOCALID_POKEMON_TOWER_GRUNT3, PokemonTower_7F_Movement_Grunt3ExitRight)
+    waitmovement(0)
+    goto(PokemonTower_7F_EventScript_RemoveGrunt3)
+    end
+}
+
+script PokemonTower_7F_EventScript_Grunt3ExitLeft {
+    applymovement(LOCALID_POKEMON_TOWER_GRUNT3, PokemonTower_7F_Movement_Grunt3ExitLeft)
+    waitmovement(0)
+    goto(PokemonTower_7F_EventScript_RemoveGrunt3)
+    end
+}
+
+script PokemonTower_7F_EventScript_RemoveGrunt3 {
+    removeobject(LOCALID_POKEMON_TOWER_GRUNT3)
+    release
+    end
+}
+
+script PokemonTower_7F_EventScript_Unused {
+    release
+    end
+}
+
+movement PokemonTower_7F_Movement_Grunt3ExitRight {
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_right
+    walk_down
+    step_end
+}
+
+movement PokemonTower_7F_Movement_Grunt3Exit {
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end
+}
+
+movement PokemonTower_7F_Movement_Grunt3ExitLeft {
+    walk_right
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end
+}
+
+text PokemonTower_7F_Text_Grunt1Intro {
+    "What do you want?\n"
+    "Why are you here?$"
+}
+
+text PokemonTower_7F_Text_Grunt1Defeat {
+    "I give up!$"
+}
+
+text PokemonTower_7F_Text_Grunt1PostBattle {
+    "I'm not going to forget this!$"
+}
+
+text PokemonTower_7F_Text_Grunt2Intro {
+    "This old guy marched right up to\n"
+    "our HIDEOUT.\p"
+    "Then, he starts ranting about how\n"
+    "TEAM ROCKET's abusing POKéMON.\p"
+    "So, we're just talking it over as\n"
+    "adults.$"
+}
+
+text PokemonTower_7F_Text_Grunt2Defeat {
+    "Please!\n"
+    "No more!$"
+}
+
+text PokemonTower_7F_Text_Grunt2PostBattle {
+    "POKéMON are only good for making\n"
+    "money. Why not use them?\p"
+    "You stay out of our business!$"
+}
+
+text PokemonTower_7F_Text_Grunt3Intro {
+    "You're not saving anyone, kid!$"
+}
+
+text PokemonTower_7F_Text_Grunt3Defeat {
+    "Don't fight us ROCKETS!$"
+}
+
+text PokemonTower_7F_Text_Grunt3PostBattle {
+    "You're not getting away with this!$"
+}
+
+text PokemonTower_7F_Text_MrFujiThankYouFollowMe {
+    "MR. FUJI: Heh?\n"
+    "You came to save me?\p"
+    "Thank you. But, I came here of my\n"
+    "own free will.\p"
+    "I came to calm the spirit of\n"
+    "CUBONE's mother.\p"
+    "I think MAROWAK's spirit has\n"
+    "finally left us.\p"
+    "I must thank you for your kind\n"
+    "concern.\p"
+    "Follow me to my home, POKéMON\n"
+    "HOUSE, at the foot of this tower.$"
+}

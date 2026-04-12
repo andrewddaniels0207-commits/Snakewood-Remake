@@ -1,0 +1,30 @@
+mapscripts ThreeIsland_House5_Frlg_MapScripts {}
+
+script ThreeIsland_House5_EventScript_LittleGirl {
+    lock
+    faceplayer
+    if (flag(FLAG_RESCUED_LOSTELLE)) goto(ThreeIsland_House5_EventScript_LittleGirlLostelleFound)
+    msgbox(ThreeIsland_House5_Text_ImNotLostelle)
+    release
+    end
+}
+
+script ThreeIsland_House5_EventScript_LittleGirlLostelleFound {
+    msgbox(ThreeIsland_House5_Text_IllGoPlayWithLostelle)
+    release
+    end
+}
+
+text ThreeIsland_House5_Text_ImNotLostelle {
+    "Me?\n"
+    "I'm not LOSTELLE.\p"
+    "She's probably gone to the\n"
+    "BERRY FOREST, I think.\p"
+    "She picks BERRIES there for making\n"
+    "lunch.$"
+}
+
+text ThreeIsland_House5_Text_IllGoPlayWithLostelle {
+    "I think I'll go play with LOSTELLE\n"
+    "today.$"
+}

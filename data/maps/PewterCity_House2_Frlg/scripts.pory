@@ -1,0 +1,27 @@
+mapscripts PewterCity_House2_Frlg_MapScripts {}
+
+script PewterCity_House2_EventScript_OldMan {
+    msgbox(PewterCity_House2_Text_MonsLearnTechniquesAsTheyGrow, MSGBOX_NPC)
+    end
+}
+
+script PewterCity_House2_EventScript_LittleBoy {
+    msgbox(PewterCity_House2_Text_MonsEasierCatchIfStatused, MSGBOX_NPC)
+    end
+}
+
+text PewterCity_House2_Text_MonsLearnTechniquesAsTheyGrow {
+    "POKéMON learn new techniques as\n"
+    "they grow.\p"
+    "But some moves must be taught to\n"
+    "them by people.$"
+}
+
+text PewterCity_House2_Text_MonsEasierCatchIfStatused {
+    "A POKéMON becomes easier to \n"
+    "catch if it has a status problem.\p"
+    "Sleep, poison, burn, or paralysis…\n"
+    "Those are all effective.\p"
+    "But catching POKéMON is never\n"
+    "a sure thing!$"
+}

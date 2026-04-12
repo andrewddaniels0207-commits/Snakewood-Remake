@@ -1,0 +1,71 @@
+mapscripts PokemonMansion_B1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_LOAD: PokemonMansion_B1F_OnLoad
+}
+
+script PokemonMansion_B1F_OnLoad {
+    if (flag(FLAG_POKEMON_MANSION_SWITCH_STATE)) call(PokemonMansion_EventScript_PressSwitch_B1F)
+    end
+}
+
+script PokemonMansion_B1F_EventScript_Statue {
+    lockall
+    setvar(VAR_0x8004, 3)
+    call(PokemonMansion_EventScript_SecretSwitch)
+    playse(SE_UNLOCK)
+    special(DrawWholeMapView)
+    waitse()
+    releaseall
+    end
+}
+
+script PokemonMansion_B1F_EventScript_DiarySep1st {
+    msgbox(PokemonMansion_B1F_Text_MewtwoIsFarTooPowerful, MSGBOX_SIGN)
+    end
+}
+
+script PokemonMansion_B1F_EventScript_Lewis {
+    trainerbattle_single(TRAINER_BURGLAR_LEWIS, PokemonMansion_B1F_Text_LewisIntro, PokemonMansion_B1F_Text_LewisDefeat)
+    msgbox(PokemonMansion_B1F_Text_LewisPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script PokemonMansion_B1F_EventScript_Ivan {
+    trainerbattle_single(TRAINER_SCIENTIST_IVAN, PokemonMansion_B1F_Text_IvanIntro, PokemonMansion_B1F_Text_IvanDefeat)
+    msgbox(PokemonMansion_B1F_Text_IvanPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text PokemonMansion_B1F_Text_LewisIntro {
+    "Uh-oh…\n"
+    "Where am I now?$"
+}
+
+text PokemonMansion_B1F_Text_LewisDefeat {
+    "Awooh!$"
+}
+
+text PokemonMansion_B1F_Text_LewisPostBattle {
+    "You can find stuff lying around.\n"
+    "The residents must've left them.$"
+}
+
+text PokemonMansion_B1F_Text_IvanIntro {
+    "This place is ideal for a lab.\n"
+    "Look at all this space.$"
+}
+
+text PokemonMansion_B1F_Text_IvanDefeat {
+    "What was that for?$"
+}
+
+text PokemonMansion_B1F_Text_IvanPostBattle {
+    "I like it here.\n"
+    "It's conducive to my studies.$"
+}
+
+text PokemonMansion_B1F_Text_MewtwoIsFarTooPowerful {
+    "Diary: Sept. 1\n"
+    "MEWTWO is far too powerful.\p"
+    "We have failed to curb its vicious\n"
+    "tendencies…$"
+}

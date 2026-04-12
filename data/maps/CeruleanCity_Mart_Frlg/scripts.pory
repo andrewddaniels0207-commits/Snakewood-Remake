@@ -1,0 +1,43 @@
+mapscripts CeruleanCity_Mart_Frlg_MapScripts {}
+
+script CeruleanCity_Mart_EventScript_Youngster {
+    msgbox(CeruleanCity_Mart_Text_RepelWorksOnWeakMons, MSGBOX_NPC)
+    end
+}
+
+script CeruleanCity_Mart_EventScript_Woman {
+    msgbox(CeruleanCity_Mart_Text_DoYouKnowAboutRareCandy, MSGBOX_NPC)
+    end
+}
+
+script CeruleanCity_Mart_EventScript_Clerk {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(CeruleanCity_Mart_Items)
+    msgbox(gText_PleaseComeAgain)
+    release
+    end
+}
+
+script CeruleanCity_Mart_Items {
+    release
+    end
+}
+
+text CeruleanCity_Mart_Text_RepelWorksOnWeakMons {
+    "REPEL not only keeps bugs away,\n"
+    "it also works on weak POKéMON.\p"
+    "Put your strongest POKéMON at the\n"
+    "left of the POKéMON LIST.\p"
+    "If your first POKéMON is strong,\n"
+    "REPEL's effect is boosted.$"
+}
+
+text CeruleanCity_Mart_Text_DoYouKnowAboutRareCandy {
+    "Do you know about RARE CANDY?\n"
+    "They don't sell it in shops.\p"
+    "I think it makes POKéMON grow\n"
+    "very quickly all of a sudden.$"
+}

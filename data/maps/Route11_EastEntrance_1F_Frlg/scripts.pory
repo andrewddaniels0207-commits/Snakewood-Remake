@@ -1,0 +1,34 @@
+mapscripts Route11_EastEntrance_1F_Frlg_MapScripts {}
+
+script Route11_EastEntrance_1F_EventScript_TopGuard {
+    msgbox(Route11_EastEntrance_1F_Text_ManInLavenderRatesNames, MSGBOX_NPC)
+    end
+}
+
+script Route11_EastEntrance_1F_EventScript_BottomGuard {
+    msgbox(Route11_EastEntrance_1F_Text_RockTunnelToReachLavender, MSGBOX_NPC)
+    end
+}
+
+text Route11_EastEntrance_1F_Text_BagIsFull {
+    "{PLAYER}{KUN}の　バッグ\n"
+    "いっぱい　みたい　だね$"
+}
+
+text Route11_EastEntrance_1F_Text_ManInLavenderRatesNames {
+    "Don't you think it's hard to think\n"
+    "up good names for POKéMON?\p"
+    "Especially if you've caught a\n"
+    "whole bunch?\p"
+    "In LAVENDER TOWN, there's a man\n"
+    "who rates POKéMON nicknames.\p"
+    "He can even help you rename your\n"
+    "POKéMON, too.$"
+}
+
+text Route11_EastEntrance_1F_Text_RockTunnelToReachLavender {
+    "If you're aiming to reach LAVENDER\n"
+    "TOWN, take ROCK TUNNEL.\p"
+    "You can get to ROCK TUNNEL from\n"
+    "CERULEAN CITY.$"
+}

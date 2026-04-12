@@ -1,0 +1,151 @@
+mapscripts Route11_EastEntrance_2F_Frlg_MapScripts {}
+
+script Route11_EastEntrance_2F_EventScript_LeftBinoculars {
+    lockall
+    if (flag(FLAG_WOKE_UP_ROUTE_12_SNORLAX)) goto(Route11_EastEntrance_2F_EventScript_LeftBinocularsSnorlaxGone)
+    msgbox(Route11_EastEntrance_2F_Text_BigMonAsleepOnRoad)
+    releaseall
+    end
+}
+
+script Route11_EastEntrance_2F_EventScript_LeftBinocularsSnorlaxGone {
+    msgbox(Route11_EastEntrance_2F_Text_WhatABreathtakingView)
+    releaseall
+    end
+}
+
+script Route11_EastEntrance_2F_EventScript_RightBinoculars {
+    msgbox(Route11_EastEntrance_2F_Text_RockTunnelGoodRouteToLavender, MSGBOX_SIGN)
+    end
+}
+
+script Route11_EastEntrance_2F_EventScript_Turner {
+    lock
+    faceplayer
+    setvar(VAR_0x8008, INGAME_TRADE_NIDORINOA)
+    call(EventScript_GetInGameTradeSpeciesInfo)
+    if (flag(FLAG_DID_NINA_TRADE)) goto(Route11_EastEntrance_2F_EventScript_AlreadyTraded)
+    msgbox(Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(Route11_EastEntrance_2F_EventScript_DeclineTrade)
+    call(EventScript_ChooseMonForInGameTrade)
+    if (var(VAR_0x8004) >= PARTY_SIZE) goto(Route11_EastEntrance_2F_EventScript_DeclineTrade)
+    call(EventScript_GetInGameTradeSpecies)
+    if (var(VAR_RESULT) != VAR_0x8009) goto(Route11_EastEntrance_2F_EventScript_NotRequestedMon)
+    call(EventScript_DoInGameTrade)
+    msgbox(Trade_Text_HeyThanks)
+    setflag(FLAG_DID_NINA_TRADE)
+    release
+    end
+}
+
+script Route11_EastEntrance_2F_EventScript_DeclineTrade {
+    msgbox(Trade_Text_AwwOhWell)
+    release
+    end
+}
+
+script Route11_EastEntrance_2F_EventScript_NotRequestedMon {
+    bufferspeciesname(STR_VAR_1, VAR_0x8009)
+    msgbox(Trade_Text_WhatThatsNoMon)
+    release
+    end
+}
+
+script Route11_EastEntrance_2F_EventScript_AlreadyTraded {
+    msgbox(Trade_Text_IsntMyOldMonGreat)
+    release
+    end
+}
+
+script Route11_EastEntrance_2F_EventScript_Aide {
+    lock
+    faceplayer
+    call(Route11_EastEntrance_2F_EventScript_GetAideRequestInfo)
+    if (flag(FLAG_GOT_ITEMFINDER)) goto(Route11_EastEntrance_2F_EventScript_AlreadyGotItemfinder)
+    msgbox(Route11_EastEntrance_2F_Text_GiveItemfinderIfCaught30, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(Aide_EventScript_DeclineCheckMons)
+    setvar(VAR_0x8004, 0)
+    specialvar(VAR_RESULT, GetFrlgPokedexCount)
+    buffernumberstring(STR_VAR_3, VAR_0x8006)
+    call(Route11_EastEntrance_2F_EventScript_GetAideRequestInfo)
+    if (var(VAR_0x8006) < REQUIRED_CAUGHT_MONS) goto(Aide_EventScript_HaventCaughtEnough)
+    msgbox(Route11_EastEntrance_2F_Text_GreatHereYouGo)
+    checkitemspace(ITEM_ITEMFINDER)
+    if (var(VAR_RESULT) == FALSE) goto(Aide_EventScript_NoRoomForItem)
+    giveitem_msg(Route11_EastEntrance_2F_Text_ReceivedItemfinderFromAide, ITEM_ITEMFINDER)
+    setflag(FLAG_GOT_ITEMFINDER)
+    msgbox(Route11_EastEntrance_2F_Text_ExplainItemfinder)
+    release
+    end
+}
+
+script Route11_EastEntrance_2F_EventScript_AlreadyGotItemfinder {
+    msgbox(Route11_EastEntrance_2F_Text_ExplainItemfinder)
+    release
+    end
+}
+
+script Route11_EastEntrance_2F_EventScript_GetAideRequestInfo {
+    buffernumberstring(STR_VAR_1, REQUIRED_CAUGHT_MONS)
+    bufferitemname(STR_VAR_2, ITEM_ITEMFINDER)
+    return
+}
+
+text Route11_EastEntrance_2F_Text_GiveItemfinderIfCaught30 {
+    "Hi! Remember me?\n"
+    "I'm one of PROF. OAK's AIDES.\p"
+    "If your POKéDEX has complete data\n"
+    "on {STR_VAR_1} species, I'm supposed to\l"
+    "give you a reward.\p"
+    "PROF. OAK entrusted me with the\n"
+    "{STR_VAR_2} for you.\p"
+    "So, {PLAYER}, let me ask you.\p"
+    "Have you gathered data on at least\n"
+    "{STR_VAR_1} kinds of POKéMON?$"
+}
+
+text Route11_EastEntrance_2F_Text_GreatHereYouGo {
+    "Great! You have caught or owned\n"
+    "{STR_VAR_3} kinds of POKéMON!\p"
+    "Congratulations!\n"
+    "Here you go!$"
+}
+
+text Route11_EastEntrance_2F_Text_ReceivedItemfinderFromAide {
+    "{PLAYER} received the {STR_VAR_2}\n"
+    "from the AIDE.$"
+}
+
+text Route11_EastEntrance_2F_Text_ExplainItemfinder {
+    "There are items on the ground that\n"
+    "may be hidden from view.\p"
+    "Use the ITEMFINDER to detect any\n"
+    "hidden items close to you.\p"
+    "The machine is a bit limited.\n"
+    "It can't pinpoint item locations.\p"
+    "What it does is show the direction\n"
+    "where the item is.\p"
+    "Use it to get your bearings, then\n"
+    "search the suspect area by hand.$"
+}
+
+text Route11_EastEntrance_2F_Text_BigMonAsleepOnRoad {
+    "Let's see what the binoculars have\n"
+    "to show…\p"
+    "A big POKéMON is asleep on a road!$"
+}
+
+text Route11_EastEntrance_2F_Text_WhatABreathtakingView {
+    "Let's see what the binoculars have\n"
+    "to show…\p"
+    "What a breathtaking view!$"
+}
+
+text Route11_EastEntrance_2F_Text_RockTunnelGoodRouteToLavender {
+    "Let's see what the binoculars have\n"
+    "to show…\p"
+    "To get to LAVENDER TOWN from\n"
+    "CERULEAN CITY…\p"
+    "ROCK TUNNEL appears to be a good\n"
+    "route to take.$"
+}

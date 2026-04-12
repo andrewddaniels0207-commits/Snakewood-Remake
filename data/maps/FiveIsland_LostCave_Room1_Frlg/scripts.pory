@@ -1,0 +1,25 @@
+mapscripts FiveIsland_LostCave_Room1_Frlg_MapScripts {}
+
+script FiveIsland_LostCave_Room1_EventScript_Lawson {
+    trainerbattle_single(TRAINER_RUIN_MANIAC_LAWSON, FiveIsland_LostCave_Room1_Text_LawsonIntro, FiveIsland_LostCave_Room1_Text_LawsonDefeat)
+    msgbox(FiveIsland_LostCave_Room1_Text_LawsonPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text FiveIsland_LostCave_Room1_Text_LawsonIntro {
+    "Aiyeeeeeh!\p"
+    "I thought this was an ancient ruin.\n"
+    "But it's teeming with ghosts!$"
+}
+
+text FiveIsland_LostCave_Room1_Text_LawsonDefeat {
+    "Aiyeeeeeh!\n"
+    "Mercy!$"
+}
+
+text FiveIsland_LostCave_Room1_Text_LawsonPostBattle {
+    "I'm trying to get out of here, but\n"
+    "I always end up at the same spot.\p"
+    "Maybe the number of boulders is\n"
+    "a hint…$"
+}

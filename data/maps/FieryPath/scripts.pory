@@ -1,0 +1,15 @@
+mapscripts FieryPath_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: FieryPath_OnTransition
+}
+
+script FieryPath_OnTransition {
+    if (!flag(FLAG_LANDMARK_FIERY_PATH)) call(FieryPath_EventScript_MoveScottToFallarbor)
+    setflag(FLAG_LANDMARK_FIERY_PATH)
+    end
+}
+
+script FieryPath_EventScript_MoveScottToFallarbor {
+    setflag(FLAG_HIDE_VERDANTURF_TOWN_SCOTT)
+    clearflag(FLAG_HIDE_FALLARBOR_TOWN_BATTLE_TENT_SCOTT)
+    return
+}

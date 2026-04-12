@@ -1,0 +1,45 @@
+mapscripts SlateportCity_PokemonCenter_1F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: SlateportCity_PokemonCenter_1F_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume
+}
+
+script SlateportCity_PokemonCenter_1F_OnTransition {
+    setrespawn(HEAL_LOCATION_SLATEPORT_CITY)
+    call(Common_EventScript_UpdateBrineyLocation)
+    end
+}
+
+script SlateportCity_PokemonCenter_1F_EventScript_Nurse {
+    setvar(VAR_0x800B, LOCALID_SLATEPORT_NURSE)
+    call(Common_EventScript_PkmnCenterNurse)
+    waitmessage()
+    waitbuttonpress()
+    release
+    end
+}
+
+script SlateportCity_PokemonCenter_1F_EventScript_Sailor {
+    msgbox(SlateportCity_PokemonCenter_1F_Text_RaiseDifferentTypesOfPokemon, MSGBOX_NPC)
+    end
+}
+
+script SlateportCity_PokemonCenter_1F_EventScript_Woman {
+    msgbox(SlateportCity_PokemonCenter_1F_Text_TradedMonWithFriend, MSGBOX_NPC)
+    end
+}
+
+text SlateportCity_PokemonCenter_1F_Text_RaiseDifferentTypesOfPokemon {
+    "Want a tip for battling?\p"
+    "I'd say it's raising different kinds\n"
+    "of POKéMON in a balanced manner.\p"
+    "It's no good to make just one\n"
+    "POKéMON strong.\p"
+    "If it has a type disadvantage,\n"
+    "it might not stand a chance.$"
+}
+
+text SlateportCity_PokemonCenter_1F_Text_TradedMonWithFriend {
+    "I trade POKéMON with my friends.\p"
+    "If a traded POKéMON is holding an\n"
+    "item, it makes me twice as happy!$"
+}

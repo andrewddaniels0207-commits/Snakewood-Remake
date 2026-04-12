@@ -1,0 +1,34 @@
+mapscripts ThreeIsland_House2_Frlg_MapScripts {}
+
+script ThreeIsland_House2_EventScript_Man {
+    lock
+    faceplayer
+    famechecker(FAMECHECKER_SABRINA, 1)
+    msgbox(ThreeIsland_House2_Text_IAdmireSabrina)
+    release
+    end
+}
+
+script ThreeIsland_House2_EventScript_Rocker {
+    msgbox(ThreeIsland_House2_Text_CantMakeThisSpoonBend, MSGBOX_NPC)
+    end
+}
+
+text ThreeIsland_House2_Text_CantMakeThisSpoonBend {
+    "Urrrrrrrrgggghhhh…\n"
+    "Kwaaaaah!\p"
+    "…It's useless! I can't make this\n"
+    "spoon bend with my mind.\p"
+    "Maybe I really don't have any\n"
+    "psychic powers.$"
+}
+
+text ThreeIsland_House2_Text_IAdmireSabrina {
+    "You know about a girl GYM LEADER\n"
+    "in SAFFRON CITY?\p"
+    "She uses PSYCHIC-type POKéMON,\n"
+    "right?\p"
+    "I admire her, I really do.\p"
+    "I've heard that she's one cool\n"
+    "customer and beautiful, too.$"
+}

@@ -1,0 +1,426 @@
+mapscripts BattleFrontier_BattlePikeThreePathRoom_MapScripts {
+    MAP_SCRIPT_ON_RESUME: BattleFrontier_BattlePikeRoom_OnResume
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_CHALLENGE_STATUS, 0: BattleFrontier_BattlePikeThreePathRoom_EventScript_GetChallengeStatus
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING: BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpToLobby
+        VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_PAUSED: BattleFrontier_BattlePikeThreePathRoom_EventScript_ResumeChallenge
+        VAR_TEMP_5, 0: BattleFrontier_BattlePikeThreePathRoom_EventScript_SetHintRoom
+        VAR_TEMP_5, 1: BattleFrontier_BattlePikeThreePathRoom_EventScript_GivePikeQueenHint
+    ]
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE: BattleFrontier_BattlePikeThreePathRoom_OnWarp
+}
+
+raw `
+BattleFrontier_BattlePikeThreePathRoom_OnWarp:
+	map_script_2 VAR_TEMP_4, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_TurnPlayerNorth
+	.2byte 0
+
+`
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_TurnPlayerNorth {
+    setvar(VAR_TEMP_4, 1)
+    turnobject(LOCALID_PLAYER, DIR_NORTH)
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_GetChallengeStatus {
+    frontier_getstatus()
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpToLobby {
+    warp(MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 5, 6)
+    waitstate
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_ResumeChallenge {
+    lockall
+    message(BattleFrontier_BattlePikeThreePathRoom_Text_AwaitingReturnSaveBeforeResume)
+    waitmessage()
+    pike_save(CHALLENGE_STATUS_SAVING)
+    playse(SE_SAVE)
+    waitse()
+    frontier_set(FRONTIER_DATA_PAUSED, FALSE)
+    setvar(VAR_TEMP_CHALLENGE_STATUS, 255)
+    special(SavePlayerParty)
+    frontier_setpartyorder(FRONTIER_PARTY_SIZE)
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_PleaseEnjoyChallenge, MSGBOX_DEFAULT)
+    closemessage
+    releaseall
+    frontier_settrainers()
+    frontier_set(FRONTIER_DATA_CHALLENGE_STATUS, 99)
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_Attendant {
+    frontier_get(FRONTIER_DATA_BATTLE_NUM)
+    switch(VAR_RESULT)
+    case(1, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom1)
+    case(3, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom3)
+    case(5, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom5)
+    case(7, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom7)
+    case(9, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom9)
+    case(11, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom11)
+    case(13, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom13)
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom1 {
+    lock
+    faceplayer
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom1, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AskContinueChallenge)
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom3 {
+    lock
+    faceplayer
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom3, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AskContinueChallenge)
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom5 {
+    lock
+    faceplayer
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom5, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AskContinueChallenge)
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom7 {
+    lock
+    faceplayer
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom7, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AskContinueChallenge)
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom9 {
+    lock
+    faceplayer
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom9, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AskContinueChallenge)
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom11 {
+    lock
+    faceplayer
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom11, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AskContinueChallenge)
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom13 {
+    lock
+    faceplayer
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom13, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_AskContinueChallenge)
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_AskContinueChallenge {
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_ContinueWithChallenge, MSGBOX_YESNO)
+    switch(VAR_RESULT)
+    case(NO, BattleFrontier_BattlePikeThreePathRoom_EventScript_AskSaveChallenge)
+    case(MULTI_B_PRESSED, BattleFrontier_BattlePikeThreePathRoom_EventScript_AskSaveChallenge)
+    release
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_PauseChallenge {
+    frontier_saveparty()
+    message(BattleFrontier_BattlePikeThreePathRoom_Text_SavingYourData)
+    waitmessage()
+    special(LoadPlayerParty)
+    pike_save(CHALLENGE_STATUS_PAUSED)
+    playse(SE_SAVE)
+    waitse()
+    fadescreen(FADE_TO_BLACK)
+    frontier_reset()
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_AskSaveChallenge {
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_SaveChallengeAndQuit, MSGBOX_YESNO)
+    switch(VAR_RESULT)
+    case(YES, BattleFrontier_BattlePikeThreePathRoom_EventScript_PauseChallenge)
+    case(NO, BattleFrontier_BattlePikeThreePathRoom_EventScript_AskRetireChallenge)
+    case(MULTI_B_PRESSED, BattleFrontier_BattlePikeThreePathRoom_EventScript_AskRetireChallenge)
+    release
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_AskRetireChallenge {
+    message(BattleFrontier_BattlePikeThreePathRoom_Text_RetireFromChallenge)
+    waitmessage()
+    multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
+    switch(VAR_RESULT)
+    case(0, BattleFrontier_BattlePike_EventScript_Retire)
+    release
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_SetHintRoom {
+    pike_sethintroom()
+    if (var(VAR_RESULT) == TRUE) goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_SetPikeQueenHint)
+    setvar(VAR_TEMP_5, 255)
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_SetPikeQueenHint {
+    setvar(VAR_TEMP_5, 1)
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_GivePikeQueenHint {
+    applymovement(LOCALID_PIKE_HINT_GIVER, BattleFrontier_BattlePikeThreePathRoom_Movement_HintGiverApproachPlayer)
+    waitmovement(0)
+    lockall
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_TerrifyingEvent, MSGBOX_DEFAULT)
+    releaseall
+    applymovement(LOCALID_PIKE_HINT_GIVER, BattleFrontier_BattlePikeThreePathRoom_Movement_HintGiverReturnToPos)
+    waitmovement(0)
+    setvar(VAR_TEMP_5, 255)
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_HintGiver {
+    pike_gethint()
+    if (var(VAR_RESULT) == PIKE_HINT_BRAIN) goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveBrainHint)
+    lock
+    faceplayer
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_FindingItDifficultToChoose, MSGBOX_YESNO)
+    switch(VAR_RESULT)
+    case(YES, BattleFrontier_BattlePikeThreePathRoom_EventScript_AcceptHint)
+    case(NO, BattleFrontier_BattlePikeThreePathRoom_EventScript_DeclineHint)
+    case(MULTI_B_PRESSED, BattleFrontier_BattlePikeThreePathRoom_EventScript_DeclineHint)
+    release
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_DeclineHint {
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_ApologizeForImpertinence, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_AcceptHint {
+    pike_gethintroomid()
+    switch(VAR_RESULT)
+    case(PIKE_ROOM_LEFT, BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveLeftRoomHint)
+    case(PIKE_ROOM_CENTER, BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveCenterRoomHint)
+    case(PIKE_ROOM_RIGHT, BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveRightRoomHint)
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveLeftRoomHint {
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_SomethingAboutLeftPath, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveHint)
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveCenterRoomHint {
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_SomethingAboutCenterPath, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveHint)
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveRightRoomHint {
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_SomethingAboutRightPath, MSGBOX_DEFAULT)
+    goto(BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveHint)
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveHint {
+    pike_gethint()
+    switch(VAR_RESULT)
+    case(PIKE_HINT_NOSTALGIA, BattleFrontier_BattlePikeThreePathRoom_EventScript_HintNostalgia)
+    case(PIKE_HINT_WHISPERING, BattleFrontier_BattlePikeThreePathRoom_EventScript_HintWhispering)
+    case(PIKE_HINT_POKEMON, BattleFrontier_BattlePikeThreePathRoom_EventScript_HintPokemon)
+    case(PIKE_HINT_PEOPLE, BattleFrontier_BattlePikeThreePathRoom_EventScript_HintPeople)
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_HintNostalgia {
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_WaveOfNostaliga, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_HintWhispering {
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_HeardWhispering, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_HintPokemon {
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_AromaOfPokemon, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_HintPeople {
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_PresenceOfPeople, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveBrainHint {
+    lock
+    faceplayer
+    msgbox(BattleFrontier_BattlePikeThreePathRoom_Text_DreadfulPresence, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+movement BattleFrontier_BattlePikeThreePathRoom_Movement_HintGiverApproachPlayer {
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end
+}
+
+movement BattleFrontier_BattlePikeThreePathRoom_Movement_HintGiverReturnToPos {
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_right
+    walk_right
+    face_down
+    step_end
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom1 {
+    "You are currently in\n"
+    "the 1st room…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom3 {
+    "You are currently in\n"
+    "the 3rd room…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom5 {
+    "You are currently in\n"
+    "the 5th room…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom7 {
+    "You are currently in\n"
+    "the 7th room…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom9 {
+    "You are currently in\n"
+    "the 9th room…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom11 {
+    "You are currently in\n"
+    "the 11th room…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom13 {
+    "You are currently in\n"
+    "the 13th room…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_ContinueWithChallenge {
+    "Will you continue with\n"
+    "your challenge?$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_SaveChallengeAndQuit {
+    "Would you like to save your challenge\n"
+    "and quit the game for now?$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_RetireFromChallenge {
+    "Do you wish to retire from your\n"
+    "Battle Choice challenge?$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_AwaitingReturnSaveBeforeResume {
+    "We've been awaiting your return…\p"
+    "Before resuming your Battle Choice\n"
+    "challenge, let me save the game…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_PleaseEnjoyChallenge {
+    "Please do enjoy your Battle Choice\n"
+    "challenge…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_SavingYourData {
+    "I am saving your data…\n"
+    "A little time, please…$"
+}
+
+text BattleFrontier_BattlePike_Text_PathBlockedNoTurningBack {
+    "The path is blocked!\n"
+    "And there is no turning back…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_FindingItDifficultToChoose {
+    "I beg your pardon, but…\p"
+    "Are you perhaps finding it difficult\n"
+    "to choose your path?$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_ApologizeForImpertinence {
+    "I see…\n"
+    "I apologize for my impertinence…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_SomethingAboutRightPath {
+    "Ah, let me see… There is something\n"
+    "about the path on the right…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_SomethingAboutCenterPath {
+    "Ah, let me see… There is something\n"
+    "about the path in the center…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_SomethingAboutLeftPath {
+    "Ah, let me see… There is something\n"
+    "about the path on the left…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_AromaOfPokemon {
+    "It seems to have the distinct aroma\n"
+    "of POKéMON wafting around it…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_PresenceOfPeople {
+    "Is it… A TRAINER?\n"
+    "I sense the presence of people…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_HeardWhispering {
+    "I seem to have heard something…\n"
+    "It may have been whispering…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_WaveOfNostaliga {
+    "For some odd reason, I felt a wave\n"
+    "of nostalgia coming from it…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_TerrifyingEvent {
+    "I am sorry to say…\p"
+    "A terrifying event, yes, a horrible one,\n"
+    "is about to befall you…\p"
+    "I urge you to pay the utmost care\n"
+    "and prepare for the worst…$"
+}
+
+text BattleFrontier_BattlePikeThreePathRoom_Text_DreadfulPresence {
+    "From every path I sense a dreadful\n"
+    "presence…$"
+}

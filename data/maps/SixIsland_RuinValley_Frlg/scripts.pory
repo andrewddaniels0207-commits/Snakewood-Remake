@@ -1,0 +1,157 @@
+mapscripts SixIsland_RuinValley_Frlg_MapScripts {
+    MAP_SCRIPT_ON_LOAD: SixIsland_RuinValley_OnLoad
+}
+
+script SixIsland_RuinValley_OnLoad {
+    if (flag(FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE)) call(SixIsland_RuinValley_EventScript_OpenDottedHoleDoor)
+    end
+}
+
+script SixIsland_RuinValley_EventScript_OpenDottedHoleDoor {
+    setmetatile(24, 24, METATILE_SeviiIslands67_DottedHoleDoor_Open, 0)
+    return
+}
+
+script SixIsland_RuinValley_EventScript_Scientist {
+    lock
+    msgbox(SixIsland_RuinValley_Text_CantFigureOutHowToGetInside)
+    applymovement(LOCALID_RUIN_VALLEY_SCIENTIST, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(SixIsland_RuinValley_Text_IFoundThisPlace)
+    applymovement(LOCALID_RUIN_VALLEY_SCIENTIST, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script SixIsland_RuinValley_EventScript_DottedHoleDoor {
+    lockall
+    if (flag(FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE)) goto(SixIsland_RuinValley_EventScript_DottedHoleDoorOpen)
+    msgbox(SixIsland_RuinValley_Text_CheckDoorMoreThoroughly, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(SixIsland_RuinValley_EventScript_IgnoreDottedHoleDoor)
+    msgbox(SixIsland_RuinValley_Text_SeveralDotsOnTheDoor)
+    braillemsgbox(Braille_Text_Cut)
+    releaseall
+    end
+}
+
+script SixIsland_RuinValley_EventScript_DottedHoleDoorOpen {
+    msgbox(SixIsland_RuinValley_Text_DoorIsOpen)
+    releaseall
+    end
+}
+
+script SixIsland_RuinValley_EventScript_IgnoreDottedHoleDoor {
+    msgbox(SixIsland_RuinValley_Text_LeftDoorAlone)
+    releaseall
+    end
+}
+
+text SixIsland_RuinValley_Text_CantFigureOutHowToGetInside {
+    "I can't figure out how I'm supposed\n"
+    "to get inside.$"
+}
+
+text SixIsland_RuinValley_Text_IFoundThisPlace {
+    "Let me tell you, I found this\n"
+    "place.\p"
+    "Don't look so envious, will you?$"
+}
+
+text SixIsland_RuinValley_Text_CheckDoorMoreThoroughly {
+    "The door doesn't budge at all.\n"
+    "Check it more thoroughly?$"
+}
+
+text SixIsland_RuinValley_Text_LeftDoorAlone {
+    "{PLAYER} left the door alone.$"
+}
+
+text SixIsland_RuinValley_Text_SeveralDotsOnTheDoor {
+    "On closer inspection, there are\n"
+    "several dots on the door…$"
+}
+
+text SixIsland_RuinValley_Text_DoorIsOpen {
+    "The door is open.$"
+}
+
+text SixIsland_RuinValley_Text_StanlyIntro {
+    "There appear to be many secrets\n"
+    "still unsolved in this world.$"
+}
+
+text SixIsland_RuinValley_Text_StanlyDefeat {
+    "Hmm…$"
+}
+
+text SixIsland_RuinValley_Text_StanlyPostBattle {
+    "I suggest to you that you, too,\n"
+    "give a thought to the secrets and\l"
+    "mysteries of our world once a day.$"
+}
+
+text SixIsland_RuinValley_Text_FosterIntro {
+    "I'm curious, what compelled you to\n"
+    "come here?$"
+}
+
+text SixIsland_RuinValley_Text_FosterDefeat {
+    "It's been so long since I battled,\n"
+    "my instincts are off.$"
+}
+
+text SixIsland_RuinValley_Text_FosterPostBattle {
+    "There are several ruins on the\n"
+    "SEVII ISLANDS.\p"
+    "The majority of them date back\n"
+    "a long way.$"
+}
+
+text SixIsland_RuinValley_Text_LarryIntro {
+    "It's been said that there are\n"
+    "mysterious stones on this island.\p"
+    "I suspect it has something to do\n"
+    "with the ruins here.$"
+}
+
+text SixIsland_RuinValley_Text_LarryDefeat {
+    "Oh, interesting.$"
+}
+
+text SixIsland_RuinValley_Text_LarryPostBattle {
+    "Those ruins over there…\p"
+    "I haven't had any luck in finding\n"
+    "how I can get inside.$"
+}
+
+text SixIsland_RuinValley_Text_DarylIntro {
+    "A battle with you, so high up!$"
+}
+
+text SixIsland_RuinValley_Text_DarylDefeat {
+    "Oh, the heartbreak of losing so\n"
+    "easily to you!$"
+}
+
+text SixIsland_RuinValley_Text_DarylPostBattle {
+    "Experience the joy of climbing!$"
+}
+
+text SixIsland_RuinValley_Text_HectorIntro {
+    "I'm pretty familiar with the land\n"
+    "around these parts.$"
+}
+
+text SixIsland_RuinValley_Text_HectorDefeat {
+    "You don't need to be so pushy.\n"
+    "I'll be happy to tell you.$"
+}
+
+text SixIsland_RuinValley_Text_HectorPostBattle {
+    "The door to the ruins…\n"
+    "It has these strange patterns\l"
+    "engraved on the outside.\p"
+    "I don't know what they mean,\n"
+    "though.$"
+}

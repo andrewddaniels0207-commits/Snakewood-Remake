@@ -1,0 +1,50 @@
+mapscripts FortreeCity_Mart_MapScripts {}
+
+script FortreeCity_Mart_EventScript_Clerk {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(FortreeCity_Mart_Pokemart)
+    msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script FortreeCity_Mart_Pokemart {
+    pokemartlistend()
+}
+
+script FortreeCity_Mart_EventScript_Woman {
+    msgbox(FortreeCity_Mart_Text_SuperRepelBetter, MSGBOX_NPC)
+    end
+}
+
+script FortreeCity_Mart_EventScript_Girl {
+    msgbox(FortreeCity_Mart_Text_StockUpOnItems, MSGBOX_NPC)
+    end
+}
+
+script FortreeCity_Mart_EventScript_Boy {
+    msgbox(FortreeCity_Mart_Text_RareCandyMakesMonGrow, MSGBOX_NPC)
+    end
+}
+
+text FortreeCity_Mart_Text_SuperRepelBetter {
+    "SUPER REPEL lasts a long time,\n"
+    "and it gets the job done.\p"
+    "It's much better than an ordinary\n"
+    "REPEL.$"
+}
+
+text FortreeCity_Mart_Text_StockUpOnItems {
+    "I always stock up on more items than\n"
+    "I'm sure I'll need.\p"
+    "You never know what might happen.\n"
+    "Better to be safe than sorry!$"
+}
+
+text FortreeCity_Mart_Text_RareCandyMakesMonGrow {
+    "A RARE CANDY makes a POKéMON grow\n"
+    "immediately by one level.$"
+}

@@ -1,0 +1,972 @@
+mapscripts MtChimney_MapScripts {
+    MAP_SCRIPT_ON_RESUME: MtChimney_OnResume
+    MAP_SCRIPT_ON_TRANSITION: MtChimney_OnTransition
+}
+
+script MtChimney_OnTransition {
+    setvar(VAR_JAGGED_PASS_ASH_WEATHER, 1)
+    end
+}
+
+script MtChimney_OnResume {
+    setstepcallback(STEP_CB_ASH)
+    end
+}
+
+script MtChimney_EventScript_Archie {
+    lock
+    faceplayer
+    if (!flag(FLAG_EVIL_LEADER_PLEASE_STOP)) call(MtChimney_EventScript_ArchieGoStopTeamMagma)
+    if (flag(FLAG_EVIL_LEADER_PLEASE_STOP)) call(MtChimney_EventScript_ArchieBusyFighting)
+    closemessage
+    applymovement(LOCALID_MT_CHIMNEY_ARCHIE, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    setflag(FLAG_EVIL_LEADER_PLEASE_STOP)
+    release
+    end
+}
+
+script MtChimney_EventScript_ArchieGoStopTeamMagma {
+    msgbox(MtChimney_Text_ArchieGoStopTeamMagma, MSGBOX_DEFAULT)
+    return
+}
+
+script MtChimney_EventScript_ArchieBusyFighting {
+    msgbox(MtChimney_Text_ArchieIHaveMyHandsFull, MSGBOX_DEFAULT)
+    return
+}
+
+script MtChimney_EventScript_Maxie {
+    lockall
+    playbgm(MUS_ENCOUNTER_MAGMA, FALSE)
+    msgbox(MtChimney_Text_MeteoriteWillActivateVolcano, MSGBOX_DEFAULT)
+    applymovement(LOCALID_MT_CHIMNEY_MAXIE, Common_Movement_FacePlayer)
+    waitmovement(0)
+    playse(SE_PIN)
+    applymovement(LOCALID_MT_CHIMNEY_MAXIE, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_MT_CHIMNEY_MAXIE, Common_Movement_Delay48)
+    waitmovement(0)
+    msgbox(MtChimney_Text_MaxieIntro, MSGBOX_DEFAULT)
+    trainerbattle_no_intro(TRAINER_MAXIE_MT_CHIMNEY, MtChimney_Text_MaxieDefeat)
+    msgbox(MtChimney_Text_MaxieYouHaventSeenLastOfMagma, MSGBOX_DEFAULT)
+    closemessage
+    delay(30)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_MT_CHIMNEY_MAXIE)
+    removeobject(LOCALID_MT_CHIMNEY_MAGMA_GRUNT_1)
+    removeobject(LOCALID_MT_CHIMNEY_TABITHA)
+    removeobject(LOCALID_MT_CHIMNEY_MAGMA_GRUNT_2)
+    setflag(FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    setobjectxyperm(LOCALID_MT_CHIMNEY_ARCHIE, 10, 12)
+    addobject(LOCALID_MT_CHIMNEY_ARCHIE)
+    if (var(VAR_FACING) == DIR_EAST) call(MtChimney_EventScript_ArchieApproachPlayerEast)
+    if (var(VAR_FACING) == DIR_NORTH) call(MtChimney_EventScript_ArchieApproachPlayerNorth)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    msgbox(MtChimney_Text_ArchieThankYou, MSGBOX_DEFAULT)
+    closemessage
+    if (var(VAR_FACING) == DIR_EAST) call(MtChimney_EventScript_ArchieExitEast)
+    if (var(VAR_FACING) == DIR_NORTH) call(MtChimney_EventScript_ArchieExitNorth)
+    removeobject(LOCALID_MT_CHIMNEY_ARCHIE)
+    setflag(FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA)
+    setflag(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY)
+    clearflag(FLAG_HIDE_FALLARBOR_HOUSE_PROF_COZMO)
+    setflag(FLAG_HIDE_METEOR_FALLS_1F_1R_COZMO)
+    clearflag(FLAG_HIDE_MT_CHIMNEY_LAVA_COOKIE_LADY)
+    releaseall
+    end
+}
+
+script MtChimney_EventScript_ArchieApproachPlayerEast {
+    applymovement(LOCALID_MT_CHIMNEY_ARCHIE, MtChimney_Movement_ArchieApproachPlayerEast)
+    waitmovement(0)
+    return
+}
+
+script MtChimney_EventScript_ArchieApproachPlayerNorth {
+    applymovement(LOCALID_MT_CHIMNEY_ARCHIE, MtChimney_Movement_ArchieApproachPlayerNorth)
+    waitmovement(0)
+    return
+}
+
+script MtChimney_EventScript_ArchieExitEast {
+    applymovement(LOCALID_MT_CHIMNEY_ARCHIE, MtChimney_Movement_ArchieExitEast)
+    waitmovement(0)
+    return
+}
+
+script MtChimney_EventScript_ArchieExitNorth {
+    applymovement(LOCALID_MT_CHIMNEY_ARCHIE, MtChimney_Movement_ArchieExitNorth)
+    waitmovement(0)
+    return
+}
+
+script MtChimney_EventScript_LavaCookieLady {
+    lock
+    faceplayer
+    showmoneybox(0, 0)
+    msgbox(MtChimney_Text_LavaCookiesJust200, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(MtChimney_EventScript_DeclineLavaCookie)
+    checkmoney(200)
+    if (var(VAR_RESULT) == FALSE) goto(MtChimney_EventScript_NotEnoughMoney)
+    msgbox(MtChimney_Text_ThankYouDear, MSGBOX_DEFAULT)
+    checkitemspace(ITEM_LAVA_COOKIE)
+    if (var(VAR_RESULT) == TRUE) call(MtChimney_EventScript_RemoveMoney)
+    giveitem(ITEM_LAVA_COOKIE)
+    if (var(VAR_RESULT) == FALSE) goto(MtChimney_EventScript_BagIsFull)
+    hidemoneybox()
+    release
+    end
+}
+
+script MtChimney_EventScript_BagIsFull {
+    msgbox(gText_TooBadBagIsFull, MSGBOX_DEFAULT)
+    hidemoneybox()
+    release
+    end
+    hidemoneybox()
+    giveitem(ITEM_LAVA_COOKIE)
+    if (var(VAR_RESULT) == FALSE) goto(MtChimney_EventScript_BagIsFull)
+    release
+    end
+}
+
+script MtChimney_EventScript_BagIsFull {
+    msgbox(gText_TooBadBagIsFull, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MtChimney_EventScript_RemoveMoney {
+    removemoney(200)
+    updatemoneybox()
+    return
+}
+
+script MtChimney_EventScript_DeclineLavaCookie {
+    msgbox(MtChimney_Text_OhFineThen, MSGBOX_DEFAULT)
+    hidemoneybox()
+    release
+    end
+}
+
+script MtChimney_EventScript_NotEnoughMoney {
+    msgbox(MtChimney_Text_YouveNotGotTheMoney, MSGBOX_DEFAULT)
+    hidemoneybox()
+    release
+    end
+}
+
+movement MtChimney_Movement_ArchieApproachPlayerEast {
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_right
+    step_end
+}
+
+movement MtChimney_Movement_ArchieExitEast {
+    walk_left
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end
+}
+
+movement MtChimney_Movement_ArchieApproachPlayerNorth {
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_right
+    walk_right
+    step_end
+}
+
+movement MtChimney_Movement_ArchieExitNorth {
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end
+}
+
+movement MtChimney_Movement_Unused1 {
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    step_end
+}
+
+movement MtChimney_Movement_Unused2 {
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    step_end
+}
+
+movement MtChimney_Movement_Unused3 {
+    walk_right
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end
+}
+
+movement MtChimney_Movement_Unused4 {
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    walk_down
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    step_end
+}
+
+movement MtChimney_Movement_Unused5 {
+    delay_16
+    delay_16
+    delay_16
+    walk_down
+    walk_down
+    walk_down
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    step_end
+}
+
+movement MtChimney_Movement_Unused6 {
+    delay_16
+    walk_left
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end
+}
+
+movement MtChimney_Movement_Unused7 {
+    delay_16
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    walk_down
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    step_end
+}
+
+movement MtChimney_Movement_Unused8 {
+    delay_16
+    walk_down
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_in_place_faster_down
+    step_end
+}
+
+movement MtChimney_Movement_Unused9 {
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end
+}
+
+movement MtChimney_Movement_Unused10 {
+    walk_down
+    step_end
+}
+
+movement MtChimney_Movement_Unused11 {
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end
+}
+
+movement MtChimney_Movement_Unused12 {
+    delay_16
+    delay_16
+    walk_in_place_faster_left
+    delay_16
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end
+}
+
+movement MtChimney_Movement_Unused13 {
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    delay_16
+    walk_in_place_faster_left
+    delay_16
+    walk_down
+    walk_down
+    step_end
+}
+
+script MtChimney_Movement_Unused14 {
+    lock_facing_direction()
+    walk_fast_left()
+    unlock_facing_direction()
+    face_right()
+    step_end()
+}
+
+movement MtChimney_Movement_Unused15 {
+    walk_left
+    walk_in_place_faster_right
+    delay_16
+    step_end
+}
+
+script MtChimney_EventScript_BusyAquaGrunt1 {
+    msgbox(MtChimney_Text_MagmaOutnumbersUs, MSGBOX_SIGN)
+    end
+}
+
+script MtChimney_EventScript_BusyAquaGrunt2 {
+    msgbox(MtChimney_Text_LessHabitatForWaterPokemon, MSGBOX_SIGN)
+    end
+}
+
+script MtChimney_EventScript_BusyAquaGrunt3 {
+    msgbox(MtChimney_Text_MagmasNameSimilar, MSGBOX_SIGN)
+    end
+}
+
+script MtChimney_EventScript_Tabitha {
+    trainerbattle_single(TRAINER_TABITHA_MT_CHIMNEY, MtChimney_Text_TabithaIntro, MtChimney_Text_TabithaDefeat)
+    msgbox(MtChimney_Text_TabithaPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtChimney_EventScript_Grunt2 {
+    trainerbattle_single(TRAINER_GRUNT_MT_CHIMNEY_2, MtChimney_Text_Grunt2Intro, MtChimney_Text_Grunt2Defeat)
+    msgbox(MtChimney_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtChimney_EventScript_BusyMagmaGrunt1 {
+    msgbox(MtChimney_Text_TeamAquaAlwaysMessingWithPlans, MSGBOX_SIGN)
+    end
+}
+
+script MtChimney_EventScript_BusyMagmaGrunt2 {
+    msgbox(MtChimney_Text_MeteoritesPackAmazingPower, MSGBOX_SIGN)
+    end
+}
+
+script MtChimney_EventScript_BusyMagmaGrunt3 {
+    msgbox(MtChimney_Text_YouBetterNotMessWithUs, MSGBOX_SIGN)
+    end
+}
+
+script MtChimney_EventScript_BusyMagmaGrunt4 {
+    msgbox(MtChimney_Text_AquasNameSimilar, MSGBOX_SIGN)
+    end
+}
+
+script MtChimney_EventScript_BusyMagmaGrunt5 {
+    msgbox(MtChimney_Text_DouseThemInFire, MSGBOX_SIGN)
+    end
+}
+
+script MtChimney_EventScript_BusyMagmaGrunt6 {
+    msgbox(MtChimney_Text_KeepMakingMoreLand, MSGBOX_SIGN)
+    end
+}
+
+script MtChimney_EventScript_MagmaPoochyena {
+    msgbox(MtChimney_Text_Bufoh, MSGBOX_SIGN)
+    end
+}
+
+script MtChimney_EventScript_AquaPoochyena {
+    msgbox(MtChimney_Text_Bushaa, MSGBOX_SIGN)
+    end
+}
+
+script MtChimney_EventScript_MeteoriteMachine {
+    lockall
+    if (!flag(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY)) goto(MtChimney_EventScript_MachineOn)
+    if (flag(FLAG_RECEIVED_METEORITE)) goto(MtChimney_EventScript_MachineOff)
+    msgbox(MtChimney_Text_RemoveTheMeteorite, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(MtChimney_EventScript_LeaveMeteoriteAlone)
+    msgbox(MtChimney_Text_PlayerRemovedMeteorite, MSGBOX_DEFAULT)
+    giveitem(ITEM_METEORITE)
+    if (var(VAR_RESULT) == FALSE) goto(Common_EventScript_ShowBagIsFull)
+    setflag(FLAG_RECEIVED_METEORITE)
+    releaseall
+    end
+}
+
+script MtChimney_EventScript_LeaveMeteoriteAlone {
+    msgbox(MtChimney_Text_PlayerLeftMeteorite, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script MtChimney_EventScript_MachineOff {
+    msgbox(MtChimney_Text_MachineMakesNoResponse, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script MtChimney_EventScript_MachineOn {
+    msgbox(MtChimney_Text_MetoriteFittedOnMachine, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script MtChimney_EventScript_RouteSign {
+    msgbox(MtChimney_Text_RouteSign, MSGBOX_SIGN)
+    end
+}
+
+script MtChimney_EventScript_Shelby {
+    trainerbattle_single(TRAINER_SHELBY_1, MtChimney_Text_ShelbyIntro, MtChimney_Text_ShelbyDefeat, MtChimney_EventScript_DefeatedShelby)
+    specialvar(VAR_RESULT, ShouldTryRematchBattle)
+    if (var(VAR_RESULT) == TRUE) goto(MtChimney_EventScript_RematchShelby)
+    msgbox(MtChimney_Text_ShelbyPostBattle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MtChimney_EventScript_DefeatedShelby {
+    special(PlayerFaceTrainerAfterBattle)
+    waitmovement(0)
+    msgbox(MtChimney_Text_ShelbyRegister, MSGBOX_DEFAULT)
+    register_matchcall(TRAINER_SHELBY_1)
+    release
+    end
+}
+
+script MtChimney_EventScript_RematchShelby {
+    trainerbattle_rematch(TRAINER_SHELBY_1, MtChimney_Text_ShelbyRematchIntro, MtChimney_Text_ShelbyRematchDefeat)
+    msgbox(MtChimney_Text_ShelbyPostRematch, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtChimney_EventScript_Melissa {
+    trainerbattle_single(TRAINER_MELISSA, MtChimney_Text_MelissaIntro, MtChimney_Text_MelissaDefeat)
+    msgbox(MtChimney_Text_MelissaPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtChimney_EventScript_Sheila {
+    trainerbattle_single(TRAINER_SHEILA, MtChimney_Text_SheilaIntro, MtChimney_Text_SheilaDefeat)
+    msgbox(MtChimney_Text_SheilaPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtChimney_EventScript_Shirley {
+    trainerbattle_single(TRAINER_SHIRLEY, MtChimney_Text_ShirleyIntro, MtChimney_Text_ShirleyDefeat)
+    msgbox(MtChimney_Text_ShirleyPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtChimney_EventScript_Grunt1 {
+    trainerbattle_single(TRAINER_GRUNT_MT_CHIMNEY_1, MtChimney_Text_Grunt1Intro, MtChimney_Text_Grunt1Defeat)
+    msgbox(MtChimney_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtChimney_EventScript_Sawyer {
+    trainerbattle_single(TRAINER_SAWYER_1, MtChimney_Text_SawyerIntro, MtChimney_Text_SawyerDefeat, MtChimney_EventScript_SawyerDefeated)
+    specialvar(VAR_RESULT, ShouldTryRematchBattle)
+    if (var(VAR_RESULT) == TRUE) goto(MtChimney_EventScript_SawyerRematch)
+    msgbox(MtChimney_Text_SawyerPostBattle, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script MtChimney_EventScript_SawyerDefeated {
+    special(PlayerFaceTrainerAfterBattle)
+    waitmovement(0)
+    msgbox(MtChimney_Text_SawyerRegister, MSGBOX_DEFAULT)
+    register_matchcall(TRAINER_SAWYER_1)
+    release
+    end
+}
+
+script MtChimney_EventScript_SawyerRematch {
+    trainerbattle_rematch(TRAINER_SAWYER_1, MtChimney_Text_SawyerRematchIntro, MtChimney_Text_SawyerRematchDefeat)
+    msgbox(MtChimney_Text_SawyerPostRematch, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text MtChimney_Text_MeteoriteWillActivateVolcano {
+    "The power contained in the METEORITE…\p"
+    "By amplifying its power with this\n"
+    "machine, MT. CHIMNEY's volcanic\l"
+    "activity will instantly intensify…\p"
+    "Its energy will grow deep inside\n"
+    "the crater and…\l"
+    "Fufufu…$"
+}
+
+text MtChimney_Text_MaxieIntro {
+    "MAXIE: Hm?\n"
+    "Who are you?\p"
+    "… … … … … …\n"
+    "… … … … … …\p"
+    "I'd heard ARCHIE bemoaning a child\n"
+    "who's been meddling in TEAM AQUA's\l"
+    "affairs.\p"
+    "It must be you he meant.\p"
+    "Humph! So you're thinking of\n"
+    "interfering with us, TEAM MAGMA?\p"
+    "Now you listen.\n"
+    "Long ago, living things used the\l"
+    "land to live and grow.\p"
+    "That is why land is all important!\n"
+    "It is the cradle of all!\p"
+    "That is why TEAM MAGMA is dedicated\n"
+    "to the expansion of the land mass.\p"
+    "It is for further advancement of\n"
+    "humankind and POKéMON!\p"
+    "And for that, we need the power of\n"
+    "what sleeps within this mountain…\p"
+    "Oh! There was no need for you to\n"
+    "learn that much.\p"
+    "But, no matter!\n"
+    "I'll teach you the consequences of\l"
+    "meddling in our grand design!$"
+}
+
+text MtChimney_Text_MaxieDefeat {
+    "What?!\p"
+    "I, MAXIE, was caught off guard?!$"
+}
+
+text MtChimney_Text_MaxieYouHaventSeenLastOfMagma {
+    "MAXIE: But, enough.\n"
+    "I will back off this time.\p"
+    "But don't think that this is the last\n"
+    "you've seen of TEAM MAGMA.\p"
+    "Fufufu…\p"
+    "Even without the METEORITE, if we\n"
+    "obtain that ORB… Fufufu…$"
+}
+
+text MtChimney_Text_TabithaIntro {
+    "Hehehe!\p"
+    "So you've come all the way here!\p"
+    "But you're too late!\n"
+    "I've already delivered the METEORITE\l"
+    "from METEOR FALLS to the BOSS!$"
+}
+
+text MtChimney_Text_TabithaDefeat {
+    "Hehehe…\p"
+    "Even though I've lost, if our leader\n"
+    "awakens that thing…$"
+}
+
+text MtChimney_Text_TabithaPostBattle {
+    "BOSS, hurry!\n"
+    "Give it the METEORITE's energy!\p"
+    "Hehehe…$"
+}
+
+text MtChimney_Text_Grunt2Intro {
+    "We of TEAM MAGMA are working hard for\n"
+    "everyone's sake.\p"
+    "Like, if that thing's power made more\n"
+    "land, there'd be more places to live.\p"
+    "Everyone'd be happy!$"
+}
+
+text MtChimney_Text_Grunt2Defeat {
+    "Hunh?\n"
+    "What do you mean I lost?$"
+}
+
+text MtChimney_Text_Grunt2PostBattle {
+    "Our BOSS says, “It will make everyone\n"
+    "happy.”\p"
+    "But why does everyone keep getting\n"
+    "in our way?$"
+}
+
+text MtChimney_Text_Grunt1Intro {
+    "If there were more land, I'd be able\n"
+    "to get a big house of my own!\p"
+    "I'm going to build it on hardened lava!$"
+}
+
+text MtChimney_Text_Grunt1Defeat {
+    "My dream of a big house…$"
+}
+
+text MtChimney_Text_Grunt1PostBattle {
+    "A kid like you, you ought to be\n"
+    "splashing about in the waves!$"
+}
+
+text MtChimney_Text_TeamAquaAlwaysMessingWithPlans {
+    "That annoying TEAM AQUA…\n"
+    "They always mess with our plans!$"
+}
+
+text MtChimney_Text_MeteoritesPackAmazingPower {
+    "METEORITES pack amazing power!$"
+}
+
+text MtChimney_Text_YouBetterNotMessWithUs {
+    "You'd better not mess with us!\p"
+    "We're trying to awaken that thing\n"
+    "for the benefit of everyone!$"
+}
+
+text MtChimney_Text_AquasNameSimilar {
+    "We're TEAM MAGMA!\p"
+    "They're TEAM AQUA!\p"
+    "It totally annoys me that they'd\n"
+    "use a name like ours!$"
+}
+
+text MtChimney_Text_DouseThemInFire {
+    "Yeah!\n"
+    "Douse them in fire!$"
+}
+
+text MtChimney_Text_KeepMakingMoreLand {
+    "We're going to keep making more land!$"
+}
+
+text MtChimney_Text_Bufoh {
+    "Bufoh!$"
+}
+
+text MtChimney_Text_ArchieGoStopTeamMagma {
+    "ARCHIE: Grr, {PLAYER}!\n"
+    "I should've guessed you'd show up!\p"
+    "See for yourself what the fanatics\n"
+    "of TEAM MAGMA are up to!\p"
+    "They're trying to inject the stolen\n"
+    "METEORITE's power into the volcano!\p"
+    "Doing something like that will cause\n"
+    "the volcano's eruption!$"
+}
+
+text MtChimney_Text_ArchieIHaveMyHandsFull {
+    "ARCHIE: Grrr…\p"
+    "I want to stop that MAXIE,\n"
+    "but I can't!\p"
+    "Not when I have my hands full battling\n"
+    "three opponents at once!$"
+}
+
+text MtChimney_Text_ArchieThankYou {
+    "ARCHIE: {PLAYER}!\n"
+    "Thank you!\p"
+    "With your help, we thwarted TEAM\n"
+    "MAGMA's destructive plan!\p"
+    "But… You…\n"
+    "Whose side are you on?\p"
+    "Ah, it doesn't matter.\p"
+    "We will remain vigilant and keep up\n"
+    "our pursuit of TEAM MAGMA.\p"
+    "{PLAYER}, we shall meet again!$"
+}
+
+text MtChimney_Text_MagmaOutnumbersUs {
+    "Darn… TEAM MAGMA outnumbers us!\n"
+    "We can't keep up with them!$"
+}
+
+text MtChimney_Text_LessHabitatForWaterPokemon {
+    "If they expand the land, there'll be\n"
+    "less habitats for WATER POKéMON!$"
+}
+
+text MtChimney_Text_MagmasNameSimilar {
+    "We're TEAM AQUA!\p"
+    "They're TEAM MAGMA!\p"
+    "It burns me up that they'd use such\n"
+    "a confusing name!$"
+}
+
+text MtChimney_Text_Bushaa {
+    "Bushaa!$"
+}
+
+text MtChimney_Text_LavaCookiesJust200 {
+    "LAVA COOKIES are MT. CHIMNEY's local\n"
+    "specialty.\p"
+    "Try one. It's just ¥200.$"
+}
+
+text MtChimney_Text_ThankYouDear {
+    "Thank you, dear!$"
+}
+
+text MtChimney_Text_YouveNotGotTheMoney {
+    "Oh, dear. You can't buy a thing if\n"
+    "you've not got the money.$"
+}
+
+text MtChimney_Text_OhFineThen {
+    "Oh, fine then.$"
+}
+
+text MtChimney_Text_MetoriteFittedOnMachine {
+    "A METEORITE is fitted on a mysterious\n"
+    "machine…\p"
+    "The machine seems to be storing\n"
+    "energy in the METEORITE.$"
+}
+
+text MtChimney_Text_RemoveTheMeteorite {
+    "A METEORITE is fitted on a mysterious\n"
+    "machine…\p"
+    "Do you want to remove the METEORITE?$"
+}
+
+text MtChimney_Text_PlayerRemovedMeteorite {
+    "{PLAYER} removed the METEORITE from\n"
+    "the mysterious machine.$"
+}
+
+text MtChimney_Text_PlayerLeftMeteorite {
+    "{PLAYER} left the METEORITE where\n"
+    "it was.$"
+}
+
+text MtChimney_Text_MachineMakesNoResponse {
+    "This mysterious machine…\n"
+    "It makes no response whatsoever.$"
+}
+
+text MtChimney_Text_RouteSign {
+    "{DOWN_ARROW} JAGGED PATH\n"
+    "LAVARIDGE TOWN AHEAD$"
+}
+
+text MtChimney_Text_ShelbyIntro {
+    "I've been to the hot springs and\n"
+    "refreshed my tired bones.\l"
+    "Right now I'm feeling strong!$"
+}
+
+text MtChimney_Text_ShelbyDefeat {
+    "Oh, my goodness.\n"
+    "Now, aren't you something!$"
+}
+
+text MtChimney_Text_ShelbyPostBattle {
+    "Well, well, I've lost. I can't call\n"
+    "myself an EXPERT now, can I?$"
+}
+
+text MtChimney_Text_ShelbyRegister {
+    "Thank you, child. It was fun, as if\n"
+    "I were battling my own grandchild.\p"
+    "Please, come see me again for\n"
+    "a rematch.$"
+}
+
+text MtChimney_Text_ShelbyRematchIntro {
+    "If you can mesh your heart with those\n"
+    "of your POKéMON, why, you should be\l"
+    "able to achieve great things.$"
+}
+
+text MtChimney_Text_ShelbyRematchDefeat {
+    "Oh, my goodness.\n"
+    "Now, aren't you something!$"
+}
+
+text MtChimney_Text_ShelbyPostRematch {
+    "Perhaps your heart has become one\n"
+    "with the hearts of your POKéMON.$"
+}
+
+text MtChimney_Text_MelissaIntro {
+    "I've got the fire in me, baby.\n"
+    "I can't stand it! I have to battle!$"
+}
+
+text MtChimney_Text_MelissaDefeat {
+    "Ooh, that was a scorching-hot match!$"
+}
+
+text MtChimney_Text_MelissaPostBattle {
+    "The heat of MT. CHIMNEY warms\n"
+    "me up, baby!$"
+}
+
+text MtChimney_Text_SheilaIntro {
+    "I've finally made it to MT. CHIMNEY.\n"
+    "I want to make my POKéMON battle!$"
+}
+
+text MtChimney_Text_SheilaDefeat {
+    "The way you battle…\n"
+    "It's like a MT. CHIMNEY eruption!$"
+}
+
+text MtChimney_Text_SheilaPostBattle {
+    "Like I said, I've finally made it to\n"
+    "MT. CHIMNEY. It would be a shame if\l"
+    "I only do a little sightseeing…\p"
+    "I want to get in some battles and buy\n"
+    "COOKIES as souvenirs.$"
+}
+
+text MtChimney_Text_ShirleyIntro {
+    "Since I bathed in the hot springs,\n"
+    "I've been feeling great!\l"
+    "I'm sure I'm going to win!$"
+}
+
+text MtChimney_Text_ShirleyDefeat {
+    "Yowch!\n"
+    "I'm getting a chill out of the water.$"
+}
+
+text MtChimney_Text_ShirleyPostBattle {
+    "I'll have to take another dip in the\n"
+    "hot springs. Want to join me?\p"
+    "Just joking!$"
+}
+
+text MtChimney_Text_SawyerIntro {
+    "This is one fine mountain! Plenty of\n"
+    "hot people around for company!$"
+}
+
+text MtChimney_Text_SawyerDefeat {
+    "Oh, you're a real firebrand, too!$"
+}
+
+text MtChimney_Text_SawyerPostBattle {
+    "I think I need a dip in LAVARIDGE\n"
+    "HOT SPRING with the locals!$"
+}
+
+text MtChimney_Text_SawyerRegister {
+    "I like little fireballs like you.\n"
+    "Let me register you in my POKéNAV.$"
+}
+
+text MtChimney_Text_SawyerRematchIntro {
+    "I'm happily surrounded by hot people\n"
+    "around these parts. I won't lose!$"
+}
+
+text MtChimney_Text_SawyerRematchDefeat {
+    "Gosh, you're still the same\n"
+    "firebrand as before!$"
+}
+
+text MtChimney_Text_SawyerPostRematch {
+    "Actually, it really is hot here.\n"
+    "I'm overdressed for these parts.$"
+}

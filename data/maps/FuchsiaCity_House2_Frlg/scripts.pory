@@ -1,0 +1,79 @@
+mapscripts FuchsiaCity_House2_Frlg_MapScripts {}
+
+script FuchsiaCity_House2_EventScript_FishingGurusBrother {
+    lock
+    faceplayer
+    if (flag(FLAG_GOT_GOOD_ROD)) goto(FuchsiaCity_House2_EventScript_AlreadyGotGoodRod)
+    msgbox(FuchsiaCity_House2_Text_DoYouLikeToFish, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) goto(FuchsiaCity_House2_EventScript_GiveGoodRod)
+    msgbox(FuchsiaCity_House2_Text_OhThatsDisappointing)
+    release
+    end
+}
+
+script FuchsiaCity_House2_EventScript_AlreadyGotGoodRod {
+    msgbox(FuchsiaCity_House2_Text_HowAreTheFishBiting)
+    release
+    end
+}
+
+script FuchsiaCity_House2_EventScript_GiveGoodRod {
+    msgbox(FuchsiaCity_House2_Text_LikeYourStyleTakeThis)
+    checkitemspace(ITEM_GOOD_ROD)
+    if (var(VAR_RESULT) == FALSE) goto(FuchsiaCity_House2_EventScript_NoRoomForGoodRod)
+    giveitem_msg(FuchsiaCity_House2_Text_ReceivedGoodRod, ITEM_GOOD_ROD)
+    msgbox(FuchsiaCity_House2_Text_GoodRodCanCatchBetterMons)
+    setflag(FLAG_GOT_GOOD_ROD)
+    release
+    end
+}
+
+script FuchsiaCity_House2_EventScript_NoRoomForGoodRod {
+    msgbox(FuchsiaCity_House2_Text_YouHaveNoRoomForGift)
+    release
+    end
+}
+
+text FuchsiaCity_House2_Text_DoYouLikeToFish {
+    "I'm the FISHING GURU's older\n"
+    "brother.\p"
+    "I simply looove fishing!\n"
+    "I can't bear to go without.\p"
+    "Tell me, do you like to fish?$"
+}
+
+text FuchsiaCity_House2_Text_LikeYourStyleTakeThis {
+    "Grand! I like your style.\n"
+    "I think we can be friends.\p"
+    "Take this and fish, young friend!$"
+}
+
+text FuchsiaCity_House2_Text_ReceivedGoodRod {
+    "{PLAYER} received a GOOD ROD from\n"
+    "the FISHING GURU's brother.$"
+}
+
+text FuchsiaCity_House2_Text_GoodRodCanCatchBetterMons {
+    "Fishing is a way of life!\n"
+    "It is like the finest poetry.\p"
+    "A crummy OLD ROD could only catch\n"
+    "MAGIKARP, yes?\p"
+    "But with a GOOD ROD, you can\n"
+    "catch much better POKéMON.$"
+}
+
+text FuchsiaCity_House2_Text_OhThatsDisappointing {
+    "Oh…\n"
+    "That's so disappointing…$"
+}
+
+text FuchsiaCity_House2_Text_HowAreTheFishBiting {
+    "Hello there, {PLAYER}!\p"
+    "How are the fish biting?$"
+}
+
+text FuchsiaCity_House2_Text_YouHaveNoRoomForGift {
+    "Oh, no!\p"
+    "I had a gift for you, but you have\n"
+    "no room for it!$"
+}

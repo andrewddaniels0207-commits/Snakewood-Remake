@@ -1,0 +1,27 @@
+mapscripts Underwater_SealedChamber_MapScripts {
+    MAP_SCRIPT_ON_DIVE_WARP: Underwater_SealedChamber_OnDive
+}
+
+script Underwater_SealedChamber_OnDive {
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8004) != 12) goto(Underwater_SealedChamber_EventScript_SurfaceRoute134)
+    if (var(VAR_0x8005) != 44) goto(Underwater_SealedChamber_EventScript_SurfaceRoute134)
+    goto(Underwater_SealedChamber_EventScript_SurfaceSealedChamber)
+}
+
+script Underwater_SealedChamber_EventScript_SurfaceRoute134 {
+    setdivewarp(MAP_ROUTE134, 60, 31)
+    end
+}
+
+script Underwater_SealedChamber_EventScript_SurfaceSealedChamber {
+    setdivewarp(MAP_SEALED_CHAMBER_OUTER_ROOM, 10, 19)
+    end
+}
+
+script Underwater_SealedChamber_EventScript_Braille {
+    lockall
+    braillemsgbox(Underwater_SealedChamber_Braille_GoUpHere)
+    releaseall
+    end
+}

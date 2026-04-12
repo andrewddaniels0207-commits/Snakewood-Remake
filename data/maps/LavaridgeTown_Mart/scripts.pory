@@ -1,0 +1,39 @@
+mapscripts LavaridgeTown_Mart_MapScripts {}
+
+script LavaridgeTown_Mart_EventScript_Clerk {
+    lock
+    faceplayer
+    message(gText_HowMayIServeYou)
+    waitmessage()
+    pokemart(LavaridgeTown_Mart_Pokemart)
+    msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script LavaridgeTown_Mart_Pokemart {
+    pokemartlistend()
+}
+
+script LavaridgeTown_Mart_EventScript_ExpertM {
+    msgbox(LavaridgeTown_Mart_Text_XSpeedFirstStrike, MSGBOX_NPC)
+    end
+}
+
+script LavaridgeTown_Mart_EventScript_OldWoman {
+    msgbox(LavaridgeTown_Mart_Text_LocalSpecialtyOnMtChimney, MSGBOX_NPC)
+    end
+}
+
+text LavaridgeTown_Mart_Text_XSpeedFirstStrike {
+    "Use X SPEED to add to a POKéMON's\n"
+    "SPEED in battle.\p"
+    "That will help it get in the first\n"
+    "strike--a decided advantage!$"
+}
+
+text LavaridgeTown_Mart_Text_LocalSpecialtyOnMtChimney {
+    "On MT. CHIMNEY's peak, there's a local\n"
+    "specialty that you can buy only there.\p"
+    "Give it to a POKéMON--it will be elated.$"
+}

@@ -1,0 +1,287 @@
+mapscripts MtEmber_Exterior_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: MtEmber_Exterior_OnTransition
+    MAP_SCRIPT_ON_LOAD: MtEmber_Exterior_OnLoad
+}
+
+script MtEmber_Exterior_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_MT_EMBER_EXTERIOR)
+    if (var(VAR_MAP_SCENE_MT_EMBER_EXTERIOR) == 2) call(MtEmber_Exterior_EventScript_RocketsFaceDown)
+    end
+}
+
+script MtEmber_Exterior_EventScript_RocketsFaceDown {
+    setobjectmovementtype(LOCALID_MT_EMBER_GRUNT1, MOVEMENT_TYPE_FACE_DOWN)
+    setobjectmovementtype(LOCALID_MT_EMBER_GRUNT2, MOVEMENT_TYPE_FACE_DOWN)
+    return
+}
+
+script MtEmber_Exterior_OnLoad {
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) >= 4) call(MtEmber_Exterior_EventScript_OpenCave)
+    end
+}
+
+script MtEmber_Exterior_EventScript_OpenCave {
+    setmetatile(42, 39, METATILE_MtEmber_CaveEntrance, 0)
+    return
+}
+
+script MtEmber_Exterior_EventScript_Grunt1 {
+    lock
+    goto_if_defeated(TRAINER_TEAM_ROCKET_GRUNT_43, MtEmber_Exterior_EventScript_Grunt1Defeated)
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 4) goto(MtEmber_Exterior_EventScript_BattleGrunt1)
+    msgbox(MtEmber_Exterior_Text_WellTryDiggingHere)
+    release
+    end
+}
+
+script MtEmber_Exterior_EventScript_Grunt1Defeated {
+    msgbox(MtEmber_Exterior_Text_Grunt1PostBattle)
+    release
+    end
+}
+
+script MtEmber_Exterior_EventScript_BattleGrunt1 {
+    applymovement(LOCALID_MT_EMBER_GRUNT1, Common_Movement_FacePlayer)
+    waitmovement(0)
+    playbgm(MUS_RG_ENCOUNTER_ROCKET, 0)
+    msgbox(MtEmber_Exterior_Text_Grunt1Intro)
+    trainerbattle_no_intro(TRAINER_TEAM_ROCKET_GRUNT_43, MtEmber_Exterior_Text_Grunt1Defeat)
+    msgbox(MtEmber_Exterior_Text_Grunt1PostBattle)
+    goto_if_defeated(TRAINER_TEAM_ROCKET_GRUNT_44, MtEmber_Exterior_EventScript_DefeatedBothGrunts)
+    release
+    end
+}
+
+script MtEmber_Exterior_EventScript_DefeatedBothGrunts {
+    msgbox(MtEmber_Exterior_Text_WellRegroupDontStepInsideThere)
+    closemessage
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_MT_EMBER_GRUNT1)
+    removeobject(LOCALID_MT_EMBER_GRUNT2)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script MtEmber_Exterior_EventScript_Grunt2 {
+    lock
+    faceplayer
+    goto_if_defeated(TRAINER_TEAM_ROCKET_GRUNT_44, MtEmber_Exterior_EventScript_DefeatedGrunt2)
+    if (var(VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F) == 4) goto(MtEmber_Exterior_EventScript_BattleGrunt2)
+    msgbox(MtEmber_Exterior_Text_YoureInTheWayGetLost)
+    closemessage
+    applymovement(LOCALID_MT_EMBER_GRUNT2, Common_Movement_FaceOriginalDirection)
+    waitmovement(0)
+    release
+    end
+}
+
+script MtEmber_Exterior_EventScript_DefeatedGrunt2 {
+    msgbox(MtEmber_Exterior_Text_Grunt2PostBattle)
+    release
+    end
+}
+
+script MtEmber_Exterior_EventScript_BattleGrunt2 {
+    playbgm(MUS_RG_ENCOUNTER_ROCKET, 0)
+    msgbox(MtEmber_Exterior_Text_Grunt2Intro)
+    trainerbattle_no_intro(TRAINER_TEAM_ROCKET_GRUNT_44, MtEmber_Exterior_Text_Grunt2Defeat)
+    msgbox(MtEmber_Exterior_Text_Grunt2PostBattle)
+    goto_if_defeated(TRAINER_TEAM_ROCKET_GRUNT_43, MtEmber_Exterior_EventScript_DefeatedBothGrunts)
+    release
+    end
+}
+
+script MtEmber_Exterior_EventScript_RocketPasswordScene {
+    lockall
+    textcolor(NPC_TEXT_COLOR_MALE)
+    msgbox(MtEmber_Exterior_Text_PunchedThroughAtLast)
+    message(MtEmber_Exterior_Text_WhatsPasswordAgain)
+    waitmessage()
+    playse(SE_PIN)
+    applymovement(LOCALID_MT_EMBER_GRUNT2, Common_Movement_QuestionMark)
+    waitmovement(0)
+    waitbuttonpress()
+    msgbox(MtEmber_Exterior_Text_FirstPasswordGoldeen)
+    applymovement(LOCALID_MT_EMBER_GRUNT1, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    playse(SE_PIN)
+    applymovement(LOCALID_MT_EMBER_GRUNT1, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_MT_EMBER_GRUNT1, Common_Movement_Delay48)
+    waitmovement(0)
+    applymovement(LOCALID_MT_EMBER_GRUNT2, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    call(MtEmber_Exterior_EventScript_RocketsFaceDown)
+    msgbox(MtEmber_Exterior_Text_SnoopsBeenListeningIn)
+    setvar(VAR_MAP_SCENE_MT_EMBER_EXTERIOR, 2)
+    releaseall
+    end
+}
+
+script MtEmber_Exterior_EventScript_Logan {
+    trainerbattle_single(TRAINER_PKMN_RANGER_LOGAN, MtEmber_Exterior_Text_LoganIntro, MtEmber_Exterior_Text_LoganDefeat)
+    msgbox(MtEmber_Exterior_Text_LoganPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtEmber_Exterior_EventScript_Beth {
+    trainerbattle_single(TRAINER_PKMN_RANGER_BETH, MtEmber_Exterior_Text_BethIntro, MtEmber_Exterior_Text_BethDefeat)
+    msgbox(MtEmber_Exterior_Text_BethPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+script MtEmber_Exterior_EventScript_Jocelyn {
+    trainerbattle_single(TRAINER_CRUSH_GIRL_JOCELYN, MtEmber_Exterior_Text_JocelynIntro, MtEmber_Exterior_Text_JocelynDefeat)
+    msgbox(MtEmber_Exterior_Text_JocelynPostBattle, MSGBOX_AUTOCLOSE)
+    end
+}
+
+text Text_ExplosionTeach {
+    "Can you imagine?\n"
+    "If this volcano were to erupt?\p"
+    "The explosion would be the end of\n"
+    "us. How terrifying is that?\p"
+    "While we're terrified, would you\n"
+    "like me to teach EXPLOSION?$"
+}
+
+text Text_ExplosionDeclined {
+    "Yeah, you're right.\n"
+    "It is too terrifying.$"
+}
+
+text Text_ExplosionWhichMon {
+    "You're terribly brave!\p"
+    "Which POKéMON should I teach\n"
+    "EXPLOSION?$"
+}
+
+text Text_ExplosionTaught {
+    "Using EXPLOSION while on this\n"
+    "volcano…\p"
+    "What a terrifying thrill!$"
+}
+
+text MtEmber_Exterior_Text_WellTryDiggingHere {
+    "Over here.\n"
+    "We'll try digging here.\p"
+    "That treasure the ADMINS've been\n"
+    "talking about should be here.$"
+}
+
+text MtEmber_Exterior_Text_YoureInTheWayGetLost {
+    "What the…?\n"
+    "You're in the way. Get lost.$"
+}
+
+text MtEmber_Exterior_Text_PunchedThroughAtLast {
+    "Whew, punched through at last.\n"
+    "Let's go treasure hunting!$"
+}
+
+text MtEmber_Exterior_Text_WhatsPasswordAgain {
+    "Any treasure we find, we haul back\n"
+    "to the WAREHOUSE, understood?\p"
+    "…Oh, and what're the passwords?\n"
+    "At the ROCKET WAREHOUSE, I mean.$"
+}
+
+text MtEmber_Exterior_Text_FirstPasswordGoldeen {
+    "What, you forgot the password?\n"
+    "There're actually two.\p"
+    "The first one's “GOLDEEN need\n"
+    "log.”\p"
+    "And the second one is…$"
+}
+
+text MtEmber_Exterior_Text_SnoopsBeenListeningIn {
+    "Hey!\n"
+    "This snoop's been listening in!$"
+}
+
+text MtEmber_Exterior_Text_Grunt1Intro {
+    "You've been eavesdropping on us,\n"
+    "haven't you?$"
+}
+
+text MtEmber_Exterior_Text_Grunt1Defeat {
+    "Huh, what?$"
+}
+
+text MtEmber_Exterior_Text_Grunt1PostBattle {
+    "Why'd you have to win?$"
+}
+
+text MtEmber_Exterior_Text_Grunt2Intro {
+    "Trying to horn in on our treasure?\n"
+    "Don't bet on it!$"
+}
+
+text MtEmber_Exterior_Text_Grunt2Defeat {
+    "Wait!\n"
+    "But how?$"
+}
+
+text MtEmber_Exterior_Text_Grunt2PostBattle {
+    "Develop amnesia conveniently and\n"
+    "forget everything you heard!$"
+}
+
+text MtEmber_Exterior_Text_WellRegroupDontStepInsideThere {
+    "What a setback…\n"
+    "We'll have to regroup.\p"
+    "You! Don't even think about taking\n"
+    "a step inside here!\p"
+    "If you know what's good for you,\n"
+    "don't even think about this!$"
+}
+
+text MtEmber_Exterior_Text_LoganIntro {
+    "An active volcano is one that's\n"
+    "erupting, or about to.$"
+}
+
+text MtEmber_Exterior_Text_LoganDefeat {
+    "Whew… That was hot!\n"
+    "Sweat's erupting from me!$"
+}
+
+text MtEmber_Exterior_Text_LoganPostBattle {
+    "They say there're over 1,500\n"
+    "active volcanoes in the world.\p"
+    "Just thinking about them makes me\n"
+    "feel all hot and gooey inside!$"
+}
+
+text MtEmber_Exterior_Text_BethIntro {
+    "Do you know how caves form inside\n"
+    "volcanoes?$"
+}
+
+text MtEmber_Exterior_Text_BethDefeat {
+    "Atchah!\n"
+    "You're shockingly good!$"
+}
+
+text MtEmber_Exterior_Text_BethPostBattle {
+    "When lava at the surface of magma\n"
+    "hardens, and the magma inside flows\l"
+    "out, caverns are left behind.$"
+}
+
+text MtEmber_Exterior_Text_JocelynIntro {
+    "I've been in training so I can mend\n"
+    "my broken heart…\p"
+    "It toughened me up physically at\n"
+    "least! Hi-yah!$"
+}
+
+text MtEmber_Exterior_Text_JocelynDefeat {
+    "I think I tried to overdo it…$"
+}
+
+text MtEmber_Exterior_Text_JocelynPostBattle {
+    "The way you battle, it reminds me\n"
+    "of the guy who dumped me…$"
+}

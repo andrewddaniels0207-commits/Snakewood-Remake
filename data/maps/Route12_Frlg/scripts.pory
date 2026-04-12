@@ -1,0 +1,246 @@
+mapscripts Route12_Frlg_MapScripts {
+    MAP_SCRIPT_ON_RESUME: Route12_OnResume
+}
+
+script Route12_OnResume {
+    if (flag(FLAG_SYS_CTRL_OBJ_DELETE)) call(Route12_EventScript_TryRemoveSnorlax)
+    end
+}
+
+script Route12_EventScript_TryRemoveSnorlax {
+    removeobject(VAR_LAST_TALKED)
+    return
+}
+
+script Route12_EventScript_Snorlax {
+    lock
+    faceplayer
+    if (!flag(FLAG_GOT_POKE_FLUTE)) goto(Route12_EventScript_SnorlaxNoPokeFlute)
+    msgbox(Text_WantToUsePokeFlute, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) goto(Route12_EventScript_DontUsePokeFlute)
+    call(EventScript_AwakenSnorlax)
+    setwildbattle(SPECIES_SNORLAX, 30)
+    waitse()
+    playmoncry(SPECIES_SNORLAX, CRY_MODE_ENCOUNTER)
+    delay(40)
+    waitmoncry()
+    setflag(FLAG_HIDE_ROUTE_12_SNORLAX)
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    setflag(FLAG_WOKE_UP_ROUTE_12_SNORLAX)
+    dowildbattle()
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) goto(Route12_EventScript_FoughtSnorlax)
+    if (var(VAR_RESULT) == B_OUTCOME_RAN) goto(Route12_EventScript_FoughtSnorlax)
+    if (var(VAR_RESULT) == B_OUTCOME_PLAYER_TELEPORTED) goto(Route12_EventScript_FoughtSnorlax)
+    release
+    end
+}
+
+script Route12_EventScript_DontUsePokeFlute {
+    release
+    end
+}
+
+script Route12_EventScript_FoughtSnorlax {
+    msgbox(Text_SnorlaxReturnedToMountains)
+    release
+    end
+}
+
+script Route12_EventScript_SnorlaxNoPokeFlute {
+    msgbox(Route12_Text_MonSprawledOutInSlumber)
+    release
+    end
+}
+
+script Route12_EventScript_RouteSign {
+    msgbox(Route12_Text_RouteSign, MSGBOX_SIGN)
+    end
+}
+
+script Route12_EventScript_FishingSign {
+    msgbox(Route12_Text_SportfishingArea, MSGBOX_SIGN)
+    end
+}
+
+text Route12_Text_MonSprawledOutInSlumber {
+    "A POKéMON is sprawled out in\n"
+    "a deep and comfortable slumber.$"
+}
+
+text Text_SnorlaxWokeUp {
+    "SNORLAX woke up!\p"
+    "It attacked in a grumpy rage!$"
+}
+
+text Text_SnorlaxReturnedToMountains {
+    "SNORLAX calmed down.\n"
+    "It gave a huge yawn…\l"
+    "And returned to the mountains.$"
+}
+
+text Text_WantToUsePokeFlute {
+    "Want to use the POKé FLUTE?$"
+}
+
+text Text_PlayedPokeFlute {
+    "{PLAYER} played the POKé FLUTE.$"
+}
+
+text Route12_Text_NedIntro {
+    "Yeah!\n"
+    "I got a bite here!$"
+}
+
+text Route12_Text_NedDefeat {
+    "Tch!\n"
+    "Just a small fry…$"
+}
+
+text Route12_Text_NedPostBattle {
+    "Hang on!\n"
+    "My line's snagged!$"
+}
+
+text Route12_Text_ChipIntro {
+    "Be patient.\n"
+    "Fishing is a waiting game.$"
+}
+
+text Route12_Text_ChipDefeat {
+    "That one got away!$"
+}
+
+text Route12_Text_ChipPostBattle {
+    "With a better ROD, I could catch\n"
+    "better POKéMON…$"
+}
+
+text Route12_Text_JustinIntro {
+    "I'm searching for a MOON STONE.\n"
+    "Have you found one?$"
+}
+
+text Route12_Text_JustinDefeat {
+    "Oww!$"
+}
+
+text Route12_Text_JustinPostBattle {
+    "I could have made my POKéMON\n"
+    "evolve with a MOON STONE.\p"
+    "I would have won then, I bet.$"
+}
+
+text Route12_Text_LucaIntro {
+    "Electricity is my specialty.\p"
+    "I don't know a thing about POKéMON\n"
+    "of the sea, though.$"
+}
+
+text Route12_Text_LucaDefeat {
+    "Unplugged!$"
+}
+
+text Route12_Text_LucaPostBattle {
+    "Water conducts electricity, so you\n"
+    "should zap sea POKéMON.$"
+}
+
+text Route12_Text_HankIntro {
+    "The FISHING FOOL versus POKéMON\n"
+    "KID!$"
+}
+
+text Route12_Text_HankDefeat {
+    "Touch too much!$"
+}
+
+text Route12_Text_HankPostBattle {
+    "I guess you get to be good at\n"
+    "what you like.\p"
+    "Well, you beat me at POKéMON,\n"
+    "but you can't top me at fishing.$"
+}
+
+text Route12_Text_ElliotIntro {
+    "I love fishing, don't get me wrong.\p"
+    "But it'd be best if I also had more\n"
+    "work.$"
+}
+
+text Route12_Text_ElliotDefeat {
+    "It's not easy…$"
+}
+
+text Route12_Text_ElliotPostBattle {
+    "It's all right.\n"
+    "Losing doesn't bug me anymore.$"
+}
+
+text Route12_Text_AndrewIntro {
+    "What's catching?\p"
+    "You never know what you could\n"
+    "catch!$"
+}
+
+text Route12_Text_AndrewDefeat {
+    "Lost it!$"
+}
+
+text Route12_Text_AndrewPostBattle {
+    "What, MAGIKARP?\p"
+    "I catch them all the time, sure.\n"
+    "But, boy are they wimpy.$"
+}
+
+text Route12_Text_RouteSign {
+    "ROUTE 12 \n"
+    "North to LAVENDER$"
+}
+
+text Route12_Text_SportfishingArea {
+    "SPORTFISHING AREA$"
+}
+
+text Route12_Text_JesIntro {
+    "JES: If I win, I'm going to\n"
+    "propose to GIA.$"
+}
+
+text Route12_Text_JesDefeat {
+    "JES: Oh, please, why couldn't you\n"
+    "let us win?$"
+}
+
+text Route12_Text_JesPostBattle {
+    "JES: Oh, GIA, forgive me,\n"
+    "my love!$"
+}
+
+text Route12_Text_JesNotEnoughMons {
+    "JES: GIA and I, we'll be\n"
+    "together forever.\p"
+    "We won't battle unless you have\n"
+    "two POKéMON of your own.$"
+}
+
+text Route12_Text_GiaIntro {
+    "GIA: Hey, JES…\p"
+    "If we win, I'll marry you!$"
+}
+
+text Route12_Text_GiaDefeat {
+    "GIA: Oh, but why?$"
+}
+
+text Route12_Text_GiaPostBattle {
+    "GIA: JES, you silly!\n"
+    "You ruined this!$"
+}
+
+text Route12_Text_GiaNotEnoughMons {
+    "GIA: I can't bear to battle\n"
+    "without my JES!\p"
+    "Don't you have one more POKéMON?$"
+}
