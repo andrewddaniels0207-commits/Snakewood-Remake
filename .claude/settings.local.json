@@ -68,7 +68,11 @@
       "Bash(git commit -m 'Delete .pory for poryscript-compiled maps, keep only hand-written:*)",
       "Bash(find \"D:/decomps/pokeemerald-expansion/.git\" -name \"*.lock\" -delete)",
       "Bash(python -c \"import os; os.remove\\('D:/decomps/pokeemerald-expansion/.git/worktrees/modest-boyd/index.lock'\\)\")",
-      "Bash(cmd //c \"del /f /q D:\\\\\\\\decomps\\\\\\\\pokeemerald-expansion\\\\\\\\.git\\\\\\\\worktrees\\\\\\\\modest-boyd\\\\\\\\index.lock\")"
+      "Bash(cmd //c \"del /f /q D:\\\\\\\\decomps\\\\\\\\pokeemerald-expansion\\\\\\\\.git\\\\\\\\worktrees\\\\\\\\modest-boyd\\\\\\\\index.lock\")",
+      "Bash(git diff:*)",
+      "Bash(xargs git:*)",
+      "Bash(git commit -m 'Restore original .inc files overwritten by previous make run:*)",
+      "Bash(git commit -m 'Remove 108 hand-written map .pory conversions:*)"
     ]
   }
 }
